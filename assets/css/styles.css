@@ -89,6 +89,19 @@ body {
     gap: 6px;
 }
 
+.pillar-clickable {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.pillar-clickable:hover {
+    transform: scale(1.05);
+}
+
+.pillar-clickable:active {
+    transform: scale(0.98);
+}
+
 .pillar:nth-child(1) {
     animation: fadeInUp 0.8s ease-out 0.4s both;
 }

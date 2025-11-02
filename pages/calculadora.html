@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Poupança vs Tesouro - Faça Seu Futuro</title>
+    <link rel="stylesheet" href="../assets/css/artigo.css">
+    <link rel="stylesheet" href="../assets/css/calculadora.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="article-header">
+            <button class="btn-back" onclick="window.location.href='aprenda.html'">
+                ← Voltar
+            </button>
+            <div class="article-meta-top">
+                <span class="article-category">🧮 Ferramenta Interativa</span>
+                <span class="article-time">⚡ Use quantas vezes quiser</span>
+            </div>
+        </header>
+
+        <!-- Article Content -->
+        <article class="article-content">
+            <!-- Title -->
+            <h1 class="article-title">Calculadora: Poupança vs Tesouro Direto</h1>
+            
+            <p class="article-lead">
+                Descubra QUANTO você está perdendo deixando seu dinheiro na poupança. Veja a diferença real em reais!
+            </p>
+
+            <!-- Calculator Form -->
+            <div class="calculator-card">
+                <h2>💰 Configure sua simulação</h2>
+                
+                <div class="input-group">
+                    <label for="valorInicial">Quanto você tem hoje?</label>
+                    <div class="input-wrapper">
+                        <span class="input-prefix">R$</span>
+                        <input type="number" id="valorInicial" value="10000" min="0" step="100">
+                    </div>
+                    <small>Valor que você já tem guardado</small>
+                </div>
+
+                <div class="input-group">
+                    <label for="aporteMensal">Quanto vai guardar por mês?</label>
+                    <div class="input-wrapper">
+                        <span class="input-prefix">R$</span>
+                        <input type="number" id="aporteMensal" value="500" min="0" step="50">
+                    </div>
+                    <small>Valor mensal que você vai investir</small>
+                </div>
+
+                <div class="input-group">
+                    <label for="prazo">Por quantos meses?</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="prazo" value="12" min="1" max="360" step="1">
+                        <span class="input-suffix">meses</span>
+                    </div>
+                    <div class="prazo-shortcuts">
+                        <button onclick="setPrazo(12)">1 ano</button>
+                        <button onclick="setPrazo(36)">3 anos</button>
+                        <button onclick="setPrazo(60)">5 anos</button>
+                        <button onclick="setPrazo(120)">10 anos</button>
+                    </div>
+                </div>
+
+                <button class="btn-calculate" onclick="calcular()">
+                    🔍 Calcular Diferença
+                </button>
+            </div>
+
+            <!-- Results -->
+            <div id="resultados" class="results-container" style="display: none;">
+                <h2>📊 Resultados da Simulação</h2>
+                
+                <div class="comparison-cards">
+                    <!-- Poupança Card -->
+                    <div class="result-card poupanca-card">
+                        <div class="card-header">
+                            <h3>💛 Poupança</h3>
+                            <span class="badge badge-warning">6,17% a.a.</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="result-item">
+                                <span class="label">Você investiu:</span>
+                                <span class="value" id="investidoPoupanca">R$ 0</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="label">Rendimento bruto:</span>
+                                <span class="value" id="rendimentoPoupanca">R$ 0</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="label">Imposto de Renda:</span>
+                                <span class="value green">R$ 0 (isento)</span>
+                            </div>
+                            <div class="result-total">
+                                <span class="label">Valor final:</span>
+                                <span class="value" id="finalPoupanca">R$ 0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tesouro Card -->
+                    <div class="result-card tesouro-card">
+                        <div class="card-header">
+                            <h3>💚 Tesouro Selic</h3>
+                            <span class="badge badge-success">13,75% a.a.</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="result-item">
+                                <span class="label">Você investiu:</span>
+                                <span class="value" id="investidoTesouro">R$ 0</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="label">Rendimento bruto:</span>
+                                <span class="value" id="rendimentoTesouro">R$ 0</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="label">Imposto de Renda:</span>
+                                <span class="value red" id="irTesouro">-R$ 0</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="label">Taxa de custódia:</span>
+                                <span class="value red" id="taxaTesouro">-R$ 0</span>
+                            </div>
+                            <div class="result-total">
+                                <span class="label">Valor final:</span>
+                                <span class="value" id="finalTesouro">R$ 0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Difference Highlight -->
+                <div class="difference-card">
+                    <div class="difference-icon">🎉</div>
+                    <div class="difference-content">
+                        <h3>Você ganha a MAIS no Tesouro Selic:</h3>
+                        <p class="difference-value" id="diferenca">R$ 0</p>
+                        <p class="difference-description" id="diferencaTexto"></p>
+                    </div>
+                </div>
+
+                <!-- Visual Bar Comparison -->
+                <div class="visual-comparison">
+                    <h3>Comparação Visual</h3>
+                    <div class="bar-container">
+                        <div class="bar-label">Poupança</div>
+                        <div class="bar-wrapper">
+                            <div class="bar bar-poupanca" id="barPoupanca" style="width: 0%">
+                                <span class="bar-value" id="barValuePoupanca"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bar-container">
+                        <div class="bar-label">Tesouro</div>
+                        <div class="bar-wrapper">
+                            <div class="bar bar-tesouro" id="barTesouro" style="width: 0%">
+                                <span class="bar-value" id="barValueTesouro"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Call -->
+                <div class="callout callout-success">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-content">
+                        <h3>Pronto para começar?</h3>
+                        <p>
+                            Abra uma conta em uma corretora (Nubank, XP, Rico, Inter) e comece a investir no Tesouro Selic hoje mesmo!
+                        </p>
+                        <p>
+                            <strong>Lembre-se:</strong> Quanto mais cedo começar, mais seu dinheiro vai crescer! ⏰
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <section class="article-section">
+                <h2>ℹ️ Sobre os cálculos</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h3>📊 Poupança</h3>
+                        <p><strong>Taxa:</strong> 0,5% ao mês + TR (consideramos TR = 0)</p>
+                        <p><strong>IR:</strong> Isento</p>
+                        <p><strong>Liquidez:</strong> Diária</p>
+                    </div>
+
+                    <div class="info-item">
+                        <h3>🏛️ Tesouro Selic</h3>
+                        <p><strong>Taxa:</strong> 13,75% ao ano (Selic atual)</p>
+                        <p><strong>IR:</strong> Tabela regressiva (22,5% a 15%)</p>
+                        <p><strong>Taxa custódia:</strong> 0,20% ao ano</p>
+                        <p><strong>Liquidez:</strong> Diária (D+1)</p>
+                    </div>
+                </div>
+
+                <div class="callout callout-info">
+                    <div class="callout-icon">📝</div>
+                    <div class="callout-content">
+                        <h3>Observações importantes:</h3>
+                        <ul style="margin: 12px 0 0 20px; line-height: 1.8;">
+                            <li>Os valores são simulações baseadas nas taxas atuais (novembro/2024)</li>
+                            <li>A Taxa Selic pode mudar ao longo do tempo</li>
+                            <li>O cálculo do IR considera a tabela regressiva média do período</li>
+                            <li>Não consideramos IOF (zerado após 30 dias)</li>
+                            <li>Esta é uma ferramenta educativa, não uma recomendação de investimento</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Complete Button -->
+            <div class="article-footer">
+                <button class="btn-complete" onclick="completeArticle()">
+                    ✓ Marcar Ferramenta como Usada
+                </button>
+                <button class="btn-next" onclick="window.location.href='aprenda.html'">
+                    ← Voltar ao Hub
+                </button>
+            </div>
+        </article>
+    </div>
+
+    <script src="../assets/js/aprenda.js"></script>
+    <script src="../assets/js/artigo.js"></script>
+    <script src="../assets/js/calculadora.js"></script>
+</body>
+</html>
+
