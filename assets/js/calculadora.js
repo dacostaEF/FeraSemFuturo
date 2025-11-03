@@ -135,7 +135,7 @@ function calcularJuros() {
     
     const totalInvestido = valorInicial + (aporteMensal * prazoMeses);
     const ganhoJuros = saldo - totalInvestido;
-    const rentabilidade = ((saldo / totalInvestido) - 1) * 100;
+    const rentabilidade = (ganhoJuros / totalInvestido) * 100;
     
     // Exibir resultados
     document.getElementById('juros-final').textContent = formatarMoeda(saldo);
