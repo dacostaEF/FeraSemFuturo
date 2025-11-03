@@ -43,7 +43,8 @@ function calcularComparacao() {
     // Taxas (estimadas)
     const taxaPoupanca = 0.005; // ~0.5% ao mês (~6% ao ano)
     const taxaSelic = 0.0107; // ~1.07% ao mês (~13.65% ao ano)
-    const taxaCustodiaTesouro = 0.0025; // 0.25% ao ano sobre valor total
+    const taxaCustodiaTesouro = 0.002; // 0.2% ao ano (B3)
+    const limiteIsencaoCustodia = 10000; // Isenção até R$ 10.000 por CPF
     
     // Cálculo Poupança
     let saldoPoupanca = valorInicial;
@@ -75,7 +76,11 @@ function calcularComparacao() {
     }
     
     const impostoRenda = rendimentoBrutoTesouro * aliquotaIR;
-    const custodiaAnual = saldoTesouro * taxaCustodiaTesouro * (prazoMeses / 12);
+    
+    // Custódia: cobrada apenas sobre o valor excedente a R$ 10.000
+    const valorExcedente = Math.max(0, saldoTesouro - limiteIsencaoCustodia);
+    const custodiaAnual = valorExcedente * taxaCustodiaTesouro * (prazoMeses / 12);
+    
     const totalImpostos = impostoRenda + custodiaAnual;
     const rendimentoLiquidoTesouro = rendimentoBrutoTesouro - totalImpostos;
     const saldoFinalTesouro = totalInvestidoTesouro + rendimentoLiquidoTesouro;
