@@ -249,3 +249,180 @@ function calcularMeta() {
     document.getElementById('resultado-meta').style.display = 'block';
     document.getElementById('resultado-meta').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
+
+// ==========================================
+// TAB 4: COMPARADOR RENDA FIXA
+// ==========================================
+
+function calcularRendaFixa() {
+    const valorInicial = parseFloat(document.getElementById('valorInicialRF').value) || 0;
+    const aporteMensal = parseFloat(document.getElementById('aporteMensalRF').value) || 0;
+    const prazoMeses = parseInt(document.getElementById('prazoRF').value) || 12;
+    const taxaCDBPercent = parseFloat(document.getElementById('taxaCDB').value) || 100;
+    const taxaLCIPercent = parseFloat(document.getElementById('taxaLCI').value) || 90;
+    
+    // Taxas base
+    const taxaPoupancaMensal = 0.005; // 0,5% ao mês
+    const taxaCDIAnual = 0.1365; // 13,65% ao ano
+    const taxaCDIMensal = Math.pow(1 + taxaCDIAnual, 1/12) - 1;
+    
+    // Cálculo 1: POUPANÇA
+    let saldoPoupanca = valorInicial;
+    for (let i = 0; i < prazoMeses; i++) {
+        saldoPoupanca = saldoPoupanca * (1 + taxaPoupancaMensal) + aporteMensal;
+    }
+    const totalInvestidoPoupanca = valorInicial + (aporteMensal * prazoMeses);
+    const rendimentoPoupanca = saldoPoupanca - totalInvestidoPoupanca;
+    
+    // Cálculo 2: CDB (com IR)
+    const taxaCDBMensal = ((taxaCDBPercent / 100) * taxaCDIMensal);
+    let saldoCDB = valorInicial;
+    for (let i = 0; i < prazoMeses; i++) {
+        saldoCDB = saldoCDB * (1 + taxaCDBMensal) + aporteMensal;
+    }
+    const totalInvestidoCDB = valorInicial + (aporteMensal * prazoMeses);
+    const rendimentoBrutoCDB = saldoCDB - totalInvestidoCDB;
+    
+    // IR regressivo no CDB
+    let aliquotaIR;
+    if (prazoMeses <= 6) {
+        aliquotaIR = 0.225;
+    } else if (prazoMeses <= 12) {
+        aliquotaIR = 0.20;
+    } else if (prazoMeses <= 24) {
+        aliquotaIR = 0.175;
+    } else {
+        aliquotaIR = 0.15;
+    }
+    const IRCDB = rendimentoBrutoCDB * aliquotaIR;
+    const rendimentoLiquidoCDB = rendimentoBrutoCDB - IRCDB;
+    const saldoFinalCDB = totalInvestidoCDB + rendimentoLiquidoCDB;
+    
+    // Cálculo 3: LCI/LCA (isento de IR)
+    const taxaLCIMensal = ((taxaLCIPercent / 100) * taxaCDIMensal);
+    let saldoLCI = valorInicial;
+    for (let i = 0; i < prazoMeses; i++) {
+        saldoLCI = saldoLCI * (1 + taxaLCIMensal) + aporteMensal;
+    }
+    const totalInvestidoLCI = valorInicial + (aporteMensal * prazoMeses);
+    const rendimentoLCI = saldoLCI - totalInvestidoLCI;
+    
+    // Exibir resultados
+    document.getElementById('rf-poupanca-final').textContent = formatarMoeda(saldoPoupanca);
+    document.getElementById('rf-poupanca-investido').textContent = formatarMoeda(totalInvestidoPoupanca);
+    document.getElementById('rf-poupanca-rendimento').textContent = formatarMoeda(rendimentoPoupanca);
+    
+    document.getElementById('rf-cdb-final').textContent = formatarMoeda(saldoFinalCDB);
+    document.getElementById('rf-cdb-investido').textContent = formatarMoeda(totalInvestidoCDB);
+    document.getElementById('rf-cdb-bruto').textContent = formatarMoeda(rendimentoBrutoCDB);
+    document.getElementById('rf-cdb-ir').textContent = formatarMoeda(IRCDB);
+    document.getElementById('rf-cdb-liquido').textContent = formatarMoeda(rendimentoLiquidoCDB);
+    
+    document.getElementById('rf-lci-final').textContent = formatarMoeda(saldoLCI);
+    document.getElementById('rf-lci-investido').textContent = formatarMoeda(totalInvestidoLCI);
+    document.getElementById('rf-lci-rendimento').textContent = formatarMoeda(rendimentoLCI);
+    
+    // Criar ranking
+    const investimentos = [
+        { nome: 'CDB', valor: saldoFinalCDB },
+        { nome: 'LCI/LCA', valor: saldoLCI },
+        { nome: 'Poupança', valor: saldoPoupanca }
+    ];
+    
+    investimentos.sort((a, b) => b.valor - a.valor);
+    
+    let rankingHTML = '';
+    investimentos.forEach((inv, index) => {
+        const emoji = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
+        const classe = index === 0 ? 'first' : '';
+        rankingHTML += `
+            <div class="ranking-item ${classe}">
+                <span class="ranking-position">${emoji}</span>
+                <span class="ranking-name">${inv.nome}</span>
+                <span class="ranking-value">${formatarMoeda(inv.valor)}</span>
+            </div>
+        `;
+    });
+    
+    document.getElementById('rf-ranking').innerHTML = rankingHTML;
+    
+    // Mostrar resultados
+    document.getElementById('resultado-rendafixa').style.display = 'block';
+    document.getElementById('resultado-rendafixa').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ==========================================
+// TAB 5: SIMULADOR DE APOSENTADORIA
+// ==========================================
+
+function calcularAposentadoria() {
+    const idadeAtual = parseInt(document.getElementById('idadeAtual').value) || 30;
+    const idadeAlvo = parseInt(document.getElementById('idadeAlvo').value) || 60;
+    const rendaMensal = parseFloat(document.getElementById('rendaMensal').value) || 8000;
+    const patrimonioAtual = parseFloat(document.getElementById('patrimonioAtual').value) || 0;
+    const retornoAnual = parseFloat(document.getElementById('retornoEsperado').value) || 10;
+    
+    // Validações
+    if (idadeAlvo <= idadeAtual) {
+        alert('A idade de aposentadoria deve ser maior que sua idade atual!');
+        return;
+    }
+    
+    // Cálculos
+    const anosAteAposentadoria = idadeAlvo - idadeAtual;
+    const mesesAteAposentadoria = anosAteAposentadoria * 12;
+    
+    // Regra dos 4% (FIRE): Patrimônio = Renda Anual / 0.04
+    const rendaAnual = rendaMensal * 12;
+    const patrimonioNecessario = rendaAnual / 0.04;
+    
+    // Converter taxa anual para mensal
+    const taxaMensal = Math.pow(1 + (retornoAnual / 100), 1 / 12) - 1;
+    
+    // Calcular valor futuro do patrimônio atual
+    const valorFuturoPatrimonioAtual = patrimonioAtual * Math.pow(1 + taxaMensal, mesesAteAposentadoria);
+    
+    // Calcular quanto falta acumular
+    const valorRestante = patrimonioNecessario - valorFuturoPatrimonioAtual;
+    
+    // Calcular aporte mensal necessário (PMT)
+    let aporteMensal;
+    if (valorRestante <= 0) {
+        aporteMensal = 0;
+    } else {
+        const fatorJuros = Math.pow(1 + taxaMensal, mesesAteAposentadoria);
+        aporteMensal = valorRestante / ((fatorJuros - 1) / taxaMensal);
+    }
+    
+    const totalInvestido = patrimonioAtual + (aporteMensal * mesesAteAposentadoria);
+    const ganhoJuros = patrimonioNecessario - totalInvestido;
+    
+    // Exibir resultados
+    document.getElementById('apos-patrimonio').textContent = formatarMoeda(patrimonioNecessario);
+    document.getElementById('apos-tempo').textContent = `${anosAteAposentadoria} anos`;
+    document.getElementById('apos-tem').textContent = formatarMoeda(patrimonioAtual);
+    document.getElementById('apos-aporte').textContent = formatarMoeda(aporteMensal);
+    document.getElementById('apos-total').textContent = formatarMoeda(totalInvestido);
+    document.getElementById('apos-juros').textContent = formatarMoeda(Math.max(0, ganhoJuros));
+    
+    // Insight: começar 5 anos antes
+    const idadeAlvoMais5 = idadeAlvo + 5;
+    const anosMais5 = idadeAlvoMais5 - idadeAtual;
+    const mesesMais5 = anosMais5 * 12;
+    const valorFuturoMais5 = patrimonioAtual * Math.pow(1 + taxaMensal, mesesMais5);
+    const valorRestanteMais5 = patrimonioNecessario - valorFuturoMais5;
+    const fatorJurosMais5 = Math.pow(1 + taxaMensal, mesesMais5);
+    const aporteMensalMais5 = valorRestanteMais5 <= 0 ? 0 : valorRestanteMais5 / ((fatorJurosMais5 - 1) / taxaMensal);
+    
+    const economia = aporteMensal - aporteMensalMais5;
+    
+    document.getElementById('apos-insight').textContent = 
+        aporteMensal === 0 
+        ? `Parabéns! Seu patrimônio atual já é suficiente para se aposentar com ${formatarMoeda(rendaMensal)}/mês usando a regra dos 4%! 🎉`
+        : `Se você começasse a investir 5 anos DEPOIS (aos ${idadeAtual + 5} anos), precisaria investir ${formatarMoeda(aporteMensalMais5)}/mês. ` +
+          `Começando agora, você economiza ${formatarMoeda(Math.abs(economia))}/mês! O tempo é seu maior aliado! ⏰`;
+    
+    // Mostrar resultados
+    document.getElementById('resultado-aposentadoria').style.display = 'block';
+    document.getElementById('resultado-aposentadoria').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}

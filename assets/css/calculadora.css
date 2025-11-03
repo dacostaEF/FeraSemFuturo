@@ -191,6 +191,13 @@
     margin-bottom: 24px;
 }
 
+.comparison-cards-triple {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
 .result-card {
     background: white;
     border-radius: 16px;
@@ -204,6 +211,14 @@
 
 .result-card.tesouro {
     border-left: 4px solid #10B981;
+}
+
+.result-card.cdb {
+    border-left: 4px solid #3B82F6;
+}
+
+.result-card.lci {
+    border-left: 4px solid #A855F7;
 }
 
 .result-header {
@@ -348,6 +363,69 @@
 
 .breakdown-item.success strong {
     color: #059669;
+}
+
+/* Result Ranking */
+.result-ranking {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.result-ranking h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1F2937;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.ranking-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    background: #F9FAFB;
+}
+
+.ranking-item.first {
+    background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+    border: 2px solid #F59E0B;
+}
+
+.ranking-position {
+    font-size: 24px;
+    font-weight: 700;
+    margin-right: 12px;
+}
+
+.ranking-name {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1F2937;
+}
+
+.ranking-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #10B981;
+}
+
+/* Badge Success */
+.badge-success {
+    display: inline-block;
+    background: #D1FAE5;
+    color: #047857;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 8px;
 }
 
 .poupanca-card {
@@ -596,7 +674,8 @@
         font-size: 12px;
     }
     
-    .comparison-cards {
+    .comparison-cards,
+    .comparison-cards-triple {
         grid-template-columns: 1fr;
     }
 
