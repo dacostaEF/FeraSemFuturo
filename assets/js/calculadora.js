@@ -200,6 +200,7 @@ function calcularMeta() {
     
     const totalInvestido = metaInicial + (aporteMensal * metaPrazo);
     const ganhoJuros = metaValor - totalInvestido;
+    const ganhoJurosExibicao = Math.max(0, ganhoJuros); // Nunca mostra negativo
     
     // Exibir resultados
     document.getElementById('meta-aporte').textContent = formatarMoeda(aporteMensal);
@@ -207,7 +208,7 @@ function calcularMeta() {
     document.getElementById('meta-tem').textContent = formatarMoeda(metaInicial);
     document.getElementById('meta-tempo').textContent = `${metaPrazo} meses`;
     document.getElementById('meta-total-investido').textContent = formatarMoeda(totalInvestido);
-    document.getElementById('meta-ganho').textContent = formatarMoeda(ganhoJuros);
+    document.getElementById('meta-ganho').textContent = formatarMoeda(ganhoJurosExibicao);
     
     // Mensagem motivacional
     const anos = Math.floor(metaPrazo / 12);
@@ -217,7 +218,7 @@ function calcularMeta() {
     document.getElementById('meta-motivacao').textContent = 
         `Investindo ${formatarMoeda(aporteMensal)} por mês durante ${periodo}, ` +
         `você alcançará sua meta de ${formatarMoeda(metaValor)}! ` +
-        `Os juros compostos farão ${formatarMoeda(ganhoJuros)} do trabalho por você. ` +
+        `Os juros compostos farão ${formatarMoeda(ganhoJurosExibicao)} do trabalho por você. ` +
         `Comece hoje mesmo! 🚀`;
     
     // Mostrar resultados
