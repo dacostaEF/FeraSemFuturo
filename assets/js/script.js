@@ -38,6 +38,11 @@ function switchTab(tabId) {
         activeButton.classList.add('active');
         activeContent.classList.add('active');
         
+        // Reinicializa os tab links (para botões dentro das abas)
+        setTimeout(() => {
+            reinitTabLinks();
+        }, 100);
+        
         // Scroll suave para o topo
         window.scrollTo({
             top: 0,
@@ -52,6 +57,23 @@ function initTabLinks() {
     
     tabLinks.forEach(link => {
         link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetTab = this.getAttribute('data-tab-link');
+            switchTab(targetTab);
+        });
+    });
+}
+
+// Reinicializa os tab links após trocar de aba (para botões criados dinamicamente)
+function reinitTabLinks() {
+    const tabLinks = document.querySelectorAll('[data-tab-link]');
+    
+    tabLinks.forEach(link => {
+        // Remove listener antigo (se houver) e adiciona novo
+        const newLink = link.cloneNode(true);
+        link.parentNode.replaceChild(newLink, link);
+        
+        newLink.addEventListener('click', function(e) {
             e.preventDefault();
             const targetTab = this.getAttribute('data-tab-link');
             switchTab(targetTab);

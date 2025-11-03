@@ -174,61 +174,255 @@
         <!-- ABA: PRIMEIROS PASSOS -->
         <div class="tab-content" id="primeiros-passos">
             <div class="content-wrapper">
-                <div class="coming-soon">
-                    <h2>🌱 Primeiros Passos</h2>
-                    <p>Módulo Bancos e Fundamentos</p>
-                    <p class="coming-soon-subtitle">(Vamos linkar com aprenda.html em breve)</p>
-                    <button class="btn-primary" onclick="window.location.href='pages/aprenda.html'">
-                        Ir para Aprenda (temp)
-                    </button>
-                </div>
+                <section class="section">
+                    <h2 class="section-title">🌱 Primeiros Passos</h2>
+                    <p class="section-subtitle">Para quem nunca investiu - Fundamentos da Educação Financeira</p>
+                    
+                    <!-- Cards dos Artigos Fundamentos -->
+                    <div class="learning-grid">
+                        <div class="learning-card" onclick="window.location.href='pages/artigo-gerente.html'">
+                            <div class="learning-badge fundamentos">💡 Fundamentos</div>
+                            <div class="learning-number">1</div>
+                            <h3>Seu gerente ganha comissão</h3>
+                            <p>Descubra o conflito de interesse que ninguém te conta e proteja seu dinheiro</p>
+                            <div class="learning-footer">
+                                <span class="learning-time">⏱️ 5 min</span>
+                                <span class="learning-status incomplete">Começar →</span>
+                            </div>
+                        </div>
+
+                        <div class="learning-card" onclick="window.location.href='pages/artigo-poupanca.html'">
+                            <div class="learning-badge fundamentos">💡 Fundamentos</div>
+                            <div class="learning-number">2</div>
+                            <h3>Poupança vs Tesouro Direto</h3>
+                            <p>A verdade sobre rendimento e quanto você está perdendo</p>
+                            <div class="learning-footer">
+                                <span class="learning-time">⏱️ 6 min</span>
+                                <span class="learning-status incomplete">Começar →</span>
+                            </div>
+                        </div>
+
+                        <div class="learning-card" onclick="window.location.href='pages/artigo-reserva.html'">
+                            <div class="learning-badge fundamentos">💡 Fundamentos</div>
+                            <div class="learning-number">3</div>
+                            <h3>Reserva de Emergência</h3>
+                            <p>Quanto guardar, onde aplicar e como se proteger</p>
+                            <div class="learning-footer">
+                                <span class="learning-time">⏱️ 5 min</span>
+                                <span class="learning-status incomplete">Começar →</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA para ver todos os módulos -->
+                    <div class="cta-box">
+                        <h3>📚 Ver todos os módulos de aprendizado</h3>
+                        <p>Acesse Renda Fixa, Renda Variável e Criptomoedas</p>
+                        <button class="btn-primary" onclick="window.location.href='pages/aprenda.html'">
+                            Ver Trilha Completa
+                        </button>
+                    </div>
+                </section>
             </div>
         </div>
 
         <!-- ABA: CRESCER DINHEIRO -->
         <div class="tab-content" id="crescer">
             <div class="content-wrapper">
-                <div class="coming-soon">
-                    <h2>💰 Crescer Dinheiro</h2>
-                    <p>Renda Fixa Avançada e Diversificação</p>
-                    <p class="coming-soon-subtitle">(Conteúdo em desenvolvimento)</p>
-                </div>
+                <section class="section">
+                    <h2 class="section-title">💰 Crescer Dinheiro</h2>
+                    <p class="section-subtitle">Para quem já tem uma base - Renda Fixa Avançada e Diversificação</p>
+                    
+                    <!-- Card em Breve -->
+                    <div class="coming-soon-card">
+                        <div class="coming-icon">🚧</div>
+                        <h3>Conteúdo em Desenvolvimento</h3>
+                        <p>Em breve você terá acesso a:</p>
+                        <ul class="coming-list">
+                            <li>✅ CDB: Como escolher e comparar</li>
+                            <li>✅ LCI e LCA: Isentos de IR</li>
+                            <li>✅ Tesouro IPCA+: Proteção contra inflação</li>
+                            <li>✅ Diversificação inteligente</li>
+                            <li>✅ Como montar uma carteira balanceada</li>
+                        </ul>
+                        <p class="coming-soon-subtitle">Enquanto isso, explore as Ferramentas!</p>
+                        <button class="btn-primary" data-tab-link="ferramentas">
+                            Ver Calculadoras
+                        </button>
+                    </div>
+                    
+                    <!-- Link para módulo completo -->
+                    <div class="cta-box">
+                        <h3>📚 Ver módulo Renda Fixa completo</h3>
+                        <p>Acesse o hub de aprendizado</p>
+                        <button class="btn-secondary" onclick="window.location.href='pages/aprenda.html'">
+                            Ir para Aprenda
+                        </button>
+                    </div>
+                </section>
             </div>
         </div>
 
         <!-- ABA: ESPECIALIZAR-SE -->
         <div class="tab-content" id="especializar">
             <div class="content-wrapper">
-                <div class="coming-soon">
-                    <h2>🚀 Especializar-se</h2>
-                    <p>Renda Variável, Ações, FIIs e Criptomoedas</p>
-                    <p class="coming-soon-subtitle">(Conteúdo em desenvolvimento)</p>
-                </div>
+                <section class="section">
+                    <h2 class="section-title">🚀 Especializar-se</h2>
+                    <p class="section-subtitle">Bolsa, Cripto e Estratégias Avançadas</p>
+                    
+                    <!-- Card em Breve -->
+                    <div class="coming-soon-card">
+                        <div class="coming-icon">🔒</div>
+                        <h3>Conteúdo Avançado em Desenvolvimento</h3>
+                        <p>Você precisará completar os módulos anteriores para desbloquear:</p>
+                        <ul class="coming-list">
+                            <li>📈 Ações: Como ser sócio de empresas</li>
+                            <li>🏢 FIIs: Renda mensal com imóveis</li>
+                            <li>🪙 Criptomoedas: Bitcoin e Blockchain</li>
+                            <li>💼 Estratégias de longo prazo</li>
+                            <li>⚠️ Gestão de risco avançada</li>
+                        </ul>
+                        <p class="coming-soon-subtitle">Complete os Primeiros Passos primeiro!</p>
+                        <button class="btn-primary" data-tab-link="primeiros-passos">
+                            Voltar aos Fundamentos
+                        </button>
+                    </div>
+                    
+                    <!-- Link para módulo completo -->
+                    <div class="cta-box">
+                        <h3>📚 Ver módulos Renda Variável e Cripto</h3>
+                        <p>Acesse o hub de aprendizado completo</p>
+                        <button class="btn-secondary" onclick="window.location.href='pages/aprenda.html'">
+                            Ir para Aprenda
+                        </button>
+                    </div>
+                </section>
             </div>
         </div>
 
         <!-- ABA: FERRAMENTAS -->
         <div class="tab-content" id="ferramentas">
             <div class="content-wrapper">
-                <div class="coming-soon">
-                    <h2>🧮 Ferramentas</h2>
-                    <p>Calculadoras, Comparadores e Simuladores</p>
-                    <p class="coming-soon-subtitle">(Vamos linkar calculadora.html em breve)</p>
-                    <button class="btn-primary" onclick="window.location.href='pages/calculadora.html'">
-                        Ir para Calculadora (temp)
-                    </button>
-                </div>
+                <section class="section">
+                    <h2 class="section-title">🧮 Ferramentas Práticas</h2>
+                    <p class="section-subtitle">Calculadoras, Comparadores e Simuladores para suas decisões</p>
+                    
+                    <!-- Cards das Ferramentas -->
+                    <div class="tools-grid">
+                        <div class="tool-card" onclick="window.location.href='pages/calculadora.html'">
+                            <div class="tool-icon">💰</div>
+                            <h3>Comparador de Investimentos</h3>
+                            <p>Poupança vs Tesouro Selic</p>
+                            <span class="tool-tag">Gratuita</span>
+                        </div>
+
+                        <div class="tool-card" onclick="window.location.href='pages/calculadora.html'">
+                            <div class="tool-icon">📈</div>
+                            <h3>Juros Compostos</h3>
+                            <p>Veja seu dinheiro crescer ao longo do tempo</p>
+                            <span class="tool-tag">Gratuita</span>
+                        </div>
+
+                        <div class="tool-card" onclick="window.location.href='pages/calculadora.html'">
+                            <div class="tool-icon">🎯</div>
+                            <h3>Simulador de Metas</h3>
+                            <p>Quanto investir para atingir um objetivo</p>
+                            <span class="tool-tag">Gratuita</span>
+                        </div>
+
+                        <div class="tool-card" onclick="window.location.href='pages/calculadora.html'">
+                            <div class="tool-icon">💎</div>
+                            <h3>Comparador Renda Fixa</h3>
+                            <p>Poupança, CDB, LCI/LCA lado a lado</p>
+                            <span class="tool-tag">Gratuita</span>
+                        </div>
+
+                        <div class="tool-card" onclick="window.location.href='pages/calculadora.html'">
+                            <div class="tool-icon">🏖️</div>
+                            <h3>Simulador de Aposentadoria</h3>
+                            <p>Planeje sua liberdade financeira</p>
+                            <span class="tool-tag">Gratuita</span>
+                        </div>
+
+                        <div class="tool-card coming-tool">
+                            <div class="tool-icon">📊</div>
+                            <h3>Glossário Financeiro</h3>
+                            <p>Termos técnicos explicados</p>
+                            <span class="tool-tag coming">Em breve</span>
+                        </div>
+                    </div>
+
+                    <!-- CTA Principal -->
+                    <div class="cta-box highlight">
+                        <h3>💡 Todas as ferramentas em um só lugar</h3>
+                        <p>Acesse todas as 5 calculadoras interativas agora</p>
+                        <button class="btn-primary" onclick="window.location.href='pages/calculadora.html'">
+                            Abrir Calculadoras
+                        </button>
+                    </div>
+                </section>
             </div>
         </div>
 
         <!-- ABA: DICAS RÁPIDAS -->
         <div class="tab-content" id="dicas">
             <div class="content-wrapper">
-                <div class="coming-soon">
-                    <h2>💡 Dicas Rápidas</h2>
-                    <p>Conteúdo leve e rápido para o dia a dia</p>
-                    <p class="coming-soon-subtitle">(Conteúdo em desenvolvimento)</p>
-                </div>
+                <section class="section">
+                    <h2 class="section-title">💡 Dicas Rápidas</h2>
+                    <p class="section-subtitle">Conteúdo leve para o dia a dia - 1 a 2 minutos de leitura</p>
+                    
+                    <!-- Cards de Dicas -->
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <div class="tip-badge">💰 Economia</div>
+                            <h3>Você sabia?</h3>
+                            <p>R$ 100 investidos a 1% ao mês viram R$ 313 em 10 anos. Na poupança (0,5%), viram apenas R$ 164.</p>
+                            <span class="tip-time">⚡ 30 seg</span>
+                        </div>
+
+                        <div class="tip-card">
+                            <div class="tip-badge">🎯 Estratégia</div>
+                            <h3>Regra de Ouro</h3>
+                            <p>Sempre mantenha 6 meses de despesas em Reserva de Emergência antes de investir em Renda Variável.</p>
+                            <span class="tip-time">⚡ 30 seg</span>
+                        </div>
+
+                        <div class="tip-card">
+                            <div class="tip-badge">⚠️ Alerta</div>
+                            <h3>Cuidado!</h3>
+                            <p>Gerentes de banco ganham comissão vendendo produtos. A melhor escolha para você pode não ser a melhor para ele.</p>
+                            <span class="tip-time">⚡ 30 seg</span>
+                        </div>
+
+                        <div class="tip-card">
+                            <div class="tip-badge">💎 Investimento</div>
+                            <h3>Tesouro Direto</h3>
+                            <p>É o investimento mais seguro do Brasil. Literalmente: você empresta para o Governo Federal.</p>
+                            <span class="tip-time">⚡ 30 seg</span>
+                        </div>
+
+                        <div class="tip-card">
+                            <div class="tip-badge">📊 Mito vs Verdade</div>
+                            <h3>MITO: Investir é só para ricos</h3>
+                            <p>VERDADE: Você pode começar com R$ 30 no Tesouro Direto. Riqueza se constrói aos poucos.</p>
+                            <span class="tip-time">⚡ 40 seg</span>
+                        </div>
+
+                        <div class="tip-card">
+                            <div class="tip-badge">🏆 Motivação</div>
+                            <h3>Consistência > Valor</h3>
+                            <p>R$ 100/mês por 30 anos a 10% a.a. = R$ 227 mil. Comece pequeno, mas comece hoje!</p>
+                            <span class="tip-time">⚡ 30 seg</span>
+                        </div>
+                    </div>
+
+                    <!-- Em breve -->
+                    <div class="coming-soon-card small">
+                        <h3>🔜 Em breve: Dicas semanais por email</h3>
+                        <p>Cadastre-se para receber dicas rápidas toda semana</p>
+                        <p class="coming-soon-subtitle">(Funcionalidade em desenvolvimento)</p>
+                    </div>
+                </section>
             </div>
         </div>
     </main>
