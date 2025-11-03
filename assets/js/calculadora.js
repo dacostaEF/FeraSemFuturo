@@ -1,189 +1,221 @@
-// Taxas atuais (novembro 2024)
-const TAXA_POUPANCA_MENSAL = 0.005; // 0,5% ao mês
-const TAXA_SELIC_ANUAL = 0.1375; // 13,75% ao ano
-const TAXA_CUSTODIA = 0.002; // 0,20% ao ano
+// ==========================================
+// GESTÃO DE TABS
+// ==========================================
 
-// Tabela regressiva de IR
-function calcularIR(meses) {
-    if (meses <= 6) return 0.225; // 22,5%
-    if (meses <= 12) return 0.20; // 20%
-    if (meses <= 24) return 0.175; // 17,5%
-    return 0.15; // 15%
+function switchTab(tabName) {
+    // Remover active de todas as tabs
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    
+    // Ativar tab clicada
+    event.target.classList.add('active');
+    document.getElementById('tab-' + tabName).classList.add('active');
 }
 
-// Formata número para moeda
-function formatMoney(value) {
-    return new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-    }).format(value);
-}
+// ==========================================
+// FUNÇÕES AUXILIARES
+// ==========================================
 
-// Define prazo rápido
-function setPrazo(meses) {
-    document.getElementById('prazo').value = meses;
-}
-
-// Cálculo da Poupança
-function calcularPoupanca(valorInicial, aporteMensal, meses) {
-    let saldo = valorInicial;
-    let totalInvestido = valorInicial;
-    
-    for (let i = 0; i < meses; i++) {
-        // Aplica rendimento
-        saldo = saldo * (1 + TAXA_POUPANCA_MENSAL);
-        
-        // Adiciona aporte
-        if (i < meses) {
-            saldo += aporteMensal;
-            totalInvestido += aporteMensal;
-        }
-    }
-    
-    return {
-        investido: totalInvestido,
-        rendimento: saldo - totalInvestido,
-        valorFinal: saldo,
-        ir: 0
-    };
-}
-
-// Cálculo do Tesouro Selic
-function calcularTesouro(valorInicial, aporteMensal, meses) {
-    const taxaMensal = Math.pow(1 + TAXA_SELIC_ANUAL, 1/12) - 1;
-    let saldo = valorInicial;
-    let totalInvestido = valorInicial;
-    
-    for (let i = 0; i < meses; i++) {
-        // Aplica rendimento
-        saldo = saldo * (1 + taxaMensal);
-        
-        // Adiciona aporte
-        if (i < meses) {
-            saldo += aporteMensal;
-            totalInvestido += aporteMensal;
-        }
-    }
-    
-    const rendimentoBruto = saldo - totalInvestido;
-    
-    // Calcula IR
-    const aliquotaIR = calcularIR(meses);
-    const ir = rendimentoBruto * aliquotaIR;
-    
-    // Calcula taxa de custódia (0,20% ao ano sobre o saldo final)
-    const anos = meses / 12;
-    const taxaCustodia = saldo * TAXA_CUSTODIA * anos;
-    
-    const valorFinal = saldo - ir - taxaCustodia;
-    
-    return {
-        investido: totalInvestido,
-        rendimento: rendimentoBruto,
-        valorFinal: valorFinal,
-        ir: ir,
-        taxaCustodia: taxaCustodia
-    };
-}
-
-// Função principal de cálculo
-function calcular() {
-    // Pega os valores
-    const valorInicial = parseFloat(document.getElementById('valorInicial').value) || 0;
-    const aporteMensal = parseFloat(document.getElementById('aporteMensal').value) || 0;
-    const prazo = parseInt(document.getElementById('prazo').value) || 1;
-    
-    // Valida
-    if (valorInicial <= 0 && aporteMensal <= 0) {
-        alert('Por favor, insira um valor inicial ou aporte mensal!');
-        return;
-    }
-    
-    if (prazo <= 0) {
-        alert('Por favor, insira um prazo válido!');
-        return;
-    }
-    
-    // Calcula
-    const poupanca = calcularPoupanca(valorInicial, aporteMensal, prazo);
-    const tesouro = calcularTesouro(valorInicial, aporteMensal, prazo);
-    
-    // Mostra resultados
-    mostrarResultados(poupanca, tesouro, prazo);
-    
-    // Scroll suave até os resultados
-    document.getElementById('resultados').scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
+function formatarMoeda(valor) {
+    return valor.toLocaleString('pt-BR', { 
+        style: 'currency', 
+        currency: 'BRL' 
     });
 }
 
-// Mostra os resultados na tela
-function mostrarResultados(poupanca, tesouro, meses) {
-    // Mostra a seção
-    const resultados = document.getElementById('resultados');
-    resultados.style.display = 'block';
+function formatarPorcentagem(valor) {
+    return valor.toFixed(2) + '%';
+}
+
+// ==========================================
+// TAB 1: COMPARAÇÃO POUPANÇA VS TESOURO
+// ==========================================
+
+function calcularComparacao() {
+    const valorInicial = parseFloat(document.getElementById('valorInicial1').value) || 0;
+    const aporteMensal = parseFloat(document.getElementById('aporteMensal1').value) || 0;
+    const prazoMeses = parseInt(document.getElementById('prazo1').value) || 12;
     
-    // Poupança
-    document.getElementById('investidoPoupanca').textContent = formatMoney(poupanca.investido);
-    document.getElementById('rendimentoPoupanca').textContent = formatMoney(poupanca.rendimento);
-    document.getElementById('finalPoupanca').textContent = formatMoney(poupanca.valorFinal);
+    // Taxas (estimadas)
+    const taxaPoupanca = 0.005; // ~0.5% ao mês (~6% ao ano)
+    const taxaSelic = 0.0107; // ~1.07% ao mês (~13.65% ao ano)
+    const taxaCustodiaTesouro = 0.0025; // 0.25% ao ano sobre valor total
     
-    // Tesouro
-    document.getElementById('investidoTesouro').textContent = formatMoney(tesouro.investido);
-    document.getElementById('rendimentoTesouro').textContent = formatMoney(tesouro.rendimento);
-    document.getElementById('irTesouro').textContent = '-' + formatMoney(tesouro.ir);
-    document.getElementById('taxaTesouro').textContent = '-' + formatMoney(tesouro.taxaCustodia);
-    document.getElementById('finalTesouro').textContent = formatMoney(tesouro.valorFinal);
+    // Cálculo Poupança
+    let saldoPoupanca = valorInicial;
+    for (let i = 0; i < prazoMeses; i++) {
+        saldoPoupanca = saldoPoupanca * (1 + taxaPoupanca) + aporteMensal;
+    }
+    const totalInvestidoPoupanca = valorInicial + (aporteMensal * prazoMeses);
+    const rendimentoPoupanca = saldoPoupanca - totalInvestidoPoupanca;
+    
+    // Cálculo Tesouro Selic (com IR e custódia)
+    let saldoTesouro = valorInicial;
+    for (let i = 0; i < prazoMeses; i++) {
+        saldoTesouro = saldoTesouro * (1 + taxaSelic) + aporteMensal;
+    }
+    
+    const totalInvestidoTesouro = valorInicial + (aporteMensal * prazoMeses);
+    const rendimentoBrutoTesouro = saldoTesouro - totalInvestidoTesouro;
+    
+    // Calcular IR (22.5% para até 6 meses, 20% para 6-12 meses, 17.5% para 12-24 meses, 15% acima de 24 meses)
+    let aliquotaIR;
+    if (prazoMeses <= 6) {
+        aliquotaIR = 0.225;
+    } else if (prazoMeses <= 12) {
+        aliquotaIR = 0.20;
+    } else if (prazoMeses <= 24) {
+        aliquotaIR = 0.175;
+    } else {
+        aliquotaIR = 0.15;
+    }
+    
+    const impostoRenda = rendimentoBrutoTesouro * aliquotaIR;
+    const custodiaAnual = saldoTesouro * taxaCustodiaTesouro * (prazoMeses / 12);
+    const totalImpostos = impostoRenda + custodiaAnual;
+    const rendimentoLiquidoTesouro = rendimentoBrutoTesouro - totalImpostos;
+    const saldoFinalTesouro = totalInvestidoTesouro + rendimentoLiquidoTesouro;
     
     // Diferença
-    const diferenca = tesouro.valorFinal - poupanca.valorFinal;
-    document.getElementById('diferenca').textContent = formatMoney(diferenca);
+    const diferenca = saldoFinalTesouro - saldoPoupanca;
     
-    // Texto da diferença
-    const anos = Math.floor(meses / 12);
-    const mesesRestantes = meses % 12;
-    let periodoTexto = '';
+    // Exibir resultados
+    document.getElementById('poupanca-final').textContent = formatarMoeda(saldoPoupanca);
+    document.getElementById('poupanca-investido').textContent = formatarMoeda(totalInvestidoPoupanca);
+    document.getElementById('poupanca-rendimento').textContent = formatarMoeda(rendimentoPoupanca);
     
-    if (anos > 0) {
-        periodoTexto = `${anos} ano${anos > 1 ? 's' : ''}`;
-        if (mesesRestantes > 0) {
-            periodoTexto += ` e ${mesesRestantes} ${mesesRestantes > 1 ? 'meses' : 'mês'}`;
-        }
+    document.getElementById('tesouro-final').textContent = formatarMoeda(saldoFinalTesouro);
+    document.getElementById('tesouro-investido').textContent = formatarMoeda(totalInvestidoTesouro);
+    document.getElementById('tesouro-bruto').textContent = formatarMoeda(rendimentoBrutoTesouro);
+    document.getElementById('tesouro-impostos').textContent = formatarMoeda(totalImpostos);
+    document.getElementById('tesouro-liquido').textContent = formatarMoeda(rendimentoLiquidoTesouro);
+    
+    document.getElementById('diferenca-valor').textContent = formatarMoeda(diferenca);
+    
+    if (diferenca > 0) {
+        document.getElementById('diferenca-texto').textContent = 
+            `Você ganharia R$ ${diferenca.toFixed(2)} a mais no Tesouro Selic em ${prazoMeses} meses!`;
     } else {
-        periodoTexto = `${meses} ${meses > 1 ? 'meses' : 'mês'}`;
+        document.getElementById('diferenca-texto').textContent = 
+            `Neste cenário, a poupança seria mais vantajosa em R$ ${Math.abs(diferenca).toFixed(2)}.`;
     }
     
-    const percentualGanho = ((diferenca / poupanca.valorFinal) * 100).toFixed(1);
-    document.getElementById('diferencaTexto').textContent = 
-        `Em ${periodoTexto}, você ganha ${percentualGanho}% a mais no Tesouro Direto!`;
-    
-    // Barras visuais
-    const maxValor = Math.max(poupanca.valorFinal, tesouro.valorFinal);
-    const poupancaPercent = (poupanca.valorFinal / maxValor) * 100;
-    const tesouroPercent = (tesouro.valorFinal / maxValor) * 100;
-    
-    setTimeout(() => {
-        document.getElementById('barPoupanca').style.width = poupancaPercent + '%';
-        document.getElementById('barTesouro').style.width = tesouroPercent + '%';
-        document.getElementById('barValuePoupanca').textContent = formatMoney(poupanca.valorFinal);
-        document.getElementById('barValueTesouro').textContent = formatMoney(tesouro.valorFinal);
-    }, 100);
+    // Mostrar resultados
+    document.getElementById('resultado-comparacao').style.display = 'block';
+    document.getElementById('resultado-comparacao').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-// Inicializa
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('Calculadora carregada!');
-    
-    // Calcula automaticamente ao mudar inputs (opcional)
-    /*
-    ['valorInicial', 'aporteMensal', 'prazo'].forEach(id => {
-        document.getElementById(id).addEventListener('input', () => {
-            if (document.getElementById('resultados').style.display === 'block') {
-                calcular();
-            }
-        });
-    });
-    */
-});
+// ==========================================
+// TAB 2: JUROS COMPOSTOS
+// ==========================================
 
+function calcularJuros() {
+    const valorInicial = parseFloat(document.getElementById('valorInicial2').value) || 0;
+    const aporteMensal = parseFloat(document.getElementById('aporteMensal2').value) || 0;
+    const taxaAnual = parseFloat(document.getElementById('taxaAnual').value) || 0;
+    const prazoMeses = parseInt(document.getElementById('prazo2').value) || 12;
+    
+    // Converter taxa anual para mensal
+    const taxaMensal = Math.pow(1 + (taxaAnual / 100), 1 / 12) - 1;
+    
+    // Cálculo dos juros compostos
+    let saldo = valorInicial;
+    for (let i = 0; i < prazoMeses; i++) {
+        saldo = saldo * (1 + taxaMensal) + aporteMensal;
+    }
+    
+    const totalInvestido = valorInicial + (aporteMensal * prazoMeses);
+    const ganhoJuros = saldo - totalInvestido;
+    const rentabilidade = ((saldo / totalInvestido) - 1) * 100;
+    
+    // Exibir resultados
+    document.getElementById('juros-final').textContent = formatarMoeda(saldo);
+    document.getElementById('juros-investido').textContent = formatarMoeda(totalInvestido);
+    document.getElementById('juros-ganho').textContent = formatarMoeda(ganhoJuros);
+    document.getElementById('juros-percent').textContent = formatarPorcentagem(rentabilidade);
+    
+    // Explicação motivacional
+    const anos = Math.floor(prazoMeses / 12);
+    const meses = prazoMeses % 12;
+    const periodo = anos > 0 ? `${anos} ano${anos > 1 ? 's' : ''}${meses > 0 ? ` e ${meses} meses` : ''}` : `${meses} meses`;
+    
+    document.getElementById('juros-explicacao').textContent = 
+        `Em ${periodo}, investindo ${formatarMoeda(aporteMensal)} por mês a ${taxaAnual}% ao ano, ` +
+        `você transformaria ${formatarMoeda(totalInvestido)} em ${formatarMoeda(saldo)}. ` +
+        `Isso significa que ${formatarMoeda(ganhoJuros)} vieram dos juros compostos trabalhando para você!`;
+    
+    // Mostrar resultados
+    document.getElementById('resultado-juros').style.display = 'block';
+    document.getElementById('resultado-juros').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ==========================================
+// TAB 3: SIMULADOR DE METAS
+// ==========================================
+
+function calcularMeta() {
+    const metaValor = parseFloat(document.getElementById('metaValor').value) || 0;
+    const metaInicial = parseFloat(document.getElementById('metaInicial').value) || 0;
+    const metaPrazo = parseInt(document.getElementById('metaPrazo').value) || 12;
+    const metaTaxa = parseFloat(document.getElementById('metaTaxa').value) || 0;
+    
+    if (metaValor <= metaInicial) {
+        alert('Você já tem mais do que sua meta! 🎉');
+        return;
+    }
+    
+    // Converter taxa anual para mensal
+    const taxaMensal = Math.pow(1 + (metaTaxa / 100), 1 / 12) - 1;
+    
+    // Fórmula para calcular PMT (aporte necessário)
+    // FV = PV * (1+r)^n + PMT * [((1+r)^n - 1) / r]
+    // PMT = (FV - PV * (1+r)^n) / (((1+r)^n - 1) / r)
+    
+    const fatorJuros = Math.pow(1 + taxaMensal, metaPrazo);
+    const valorFuturoInicial = metaInicial * fatorJuros;
+    const valorRestante = metaValor - valorFuturoInicial;
+    
+    let aporteMensal;
+    if (taxaMensal === 0) {
+        // Se taxa for 0, é uma divisão simples
+        aporteMensal = valorRestante / metaPrazo;
+    } else {
+        aporteMensal = valorRestante / ((fatorJuros - 1) / taxaMensal);
+    }
+    
+    // Verificar se é viável
+    if (aporteMensal < 0) {
+        alert('Seu valor inicial já é suficiente para atingir a meta com os juros! 🎉');
+        return;
+    }
+    
+    const totalInvestido = metaInicial + (aporteMensal * metaPrazo);
+    const ganhoJuros = metaValor - totalInvestido;
+    
+    // Exibir resultados
+    document.getElementById('meta-aporte').textContent = formatarMoeda(aporteMensal);
+    document.getElementById('meta-objetivo').textContent = formatarMoeda(metaValor);
+    document.getElementById('meta-tem').textContent = formatarMoeda(metaInicial);
+    document.getElementById('meta-tempo').textContent = `${metaPrazo} meses`;
+    document.getElementById('meta-total-investido').textContent = formatarMoeda(totalInvestido);
+    document.getElementById('meta-ganho').textContent = formatarMoeda(ganhoJuros);
+    
+    // Mensagem motivacional
+    const anos = Math.floor(metaPrazo / 12);
+    const meses = metaPrazo % 12;
+    const periodo = anos > 0 ? `${anos} ano${anos > 1 ? 's' : ''}${meses > 0 ? ` e ${meses} meses` : ''}` : `${meses} meses`;
+    
+    document.getElementById('meta-motivacao').textContent = 
+        `Investindo ${formatarMoeda(aporteMensal)} por mês durante ${periodo}, ` +
+        `você alcançará sua meta de ${formatarMoeda(metaValor)}! ` +
+        `Os juros compostos farão ${formatarMoeda(ganhoJuros)} do trabalho por você. ` +
+        `Comece hoje mesmo! 🚀`;
+    
+    // Mostrar resultados
+    document.getElementById('resultado-meta').style.display = 'block';
+    document.getElementById('resultado-meta').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
