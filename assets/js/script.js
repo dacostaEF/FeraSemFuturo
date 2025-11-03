@@ -5,6 +5,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     initTabs();
     initTabLinks();
+    checkURLHash(); // Verifica se há uma aba especificada na URL
 });
 
 // Inicializa o sistema de abas
@@ -79,6 +80,18 @@ function reinitTabLinks() {
             switchTab(targetTab);
         });
     });
+}
+
+// Verifica hash na URL e abre a aba correspondente
+function checkURLHash() {
+    const hash = window.location.hash.substring(1); // Remove o '#'
+    
+    if (hash) {
+        const targetTab = document.getElementById(hash);
+        if (targetTab) {
+            switchTab(hash);
+        }
+    }
 }
 
 // Função para trocar aba via JavaScript (para uso futuro)

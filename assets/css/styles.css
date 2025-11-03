@@ -611,6 +611,55 @@ body {
     color: rgba(255, 255, 255, 0.5);
 }
 
+/* Benefits (Diferenciais) */
+.benefits {
+    margin: 48px 0;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.benefit-card {
+    background: rgba(93, 15, 90, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.benefit-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+    background: rgba(93, 15, 90, 0.5);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.benefit-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.benefit-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 12px;
+}
+
+.benefit-card p {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+    margin: 0;
+}
+
 /* Next Level (Gamificado) */
 .next-level-card {
     background: linear-gradient(135deg, var(--acai-dark) 0%, var(--acai-medium) 100%);
@@ -771,6 +820,27 @@ body {
 @media (max-width: 480px) {
     .container {
         padding: 30px 24px;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .benefit-card {
+        padding: 24px 20px;
+    }
+    
+    .benefit-icon {
+        font-size: 40px;
+    }
+    
+    .benefit-card h3 {
+        font-size: 18px;
+    }
+    
+    .benefit-card p {
+        font-size: 14px;
     }
     
     .title {
@@ -998,6 +1068,21 @@ body {
 
 .learning-badge.fundamentos {
     background: rgba(56, 189, 248, 0.15);
+    color: #38BDF8;
+}
+
+.learning-badge.alerta {
+    background: rgba(245, 158, 11, 0.2);
+    color: #F59E0B;
+}
+
+.learning-badge.investimentos {
+    background: rgba(0, 184, 148, 0.2);
+    color: var(--mint-light);
+}
+
+.learning-badge.protecao {
+    background: rgba(56, 189, 248, 0.2);
     color: #38BDF8;
 }
 
@@ -1254,6 +1339,10 @@ body {
 
 /* Responsividade dos novos cards */
 @media (max-width: 768px) {
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
     .learning-grid,
     .tools-grid,
     .tips-grid {
