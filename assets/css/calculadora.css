@@ -528,6 +528,14 @@
     background: linear-gradient(90deg, #6EE7B7, #10B981);
 }
 
+.bar-investido {
+    background: linear-gradient(90deg, #9CA3AF, #6B7280);
+}
+
+.bar-ganho {
+    background: linear-gradient(90deg, #6EE7B7, #10B981);
+}
+
 .bar-value {
     font-size: 14px;
     font-weight: 700;

@@ -97,7 +97,12 @@ function calcularComparacao() {
     document.getElementById('tesouro-investido').textContent = formatarMoeda(totalInvestidoTesouro);
     document.getElementById('tesouro-bruto').textContent = formatarMoeda(rendimentoBrutoTesouro);
     document.getElementById('tesouro-impostos').textContent = formatarMoeda(totalImpostos);
-    document.getElementById('tesouro-liquido').textContent = formatarMoeda(rendimentoLiquidoTesouro);
+    
+    // Rendimento líquido em VERDE (destaque positivo)
+    const liquidoElement = document.getElementById('tesouro-liquido');
+    liquidoElement.textContent = formatarMoeda(rendimentoLiquidoTesouro);
+    liquidoElement.style.color = '#10B981';
+    liquidoElement.style.fontWeight = '700';
     
     document.getElementById('diferenca-valor').textContent = formatarMoeda(diferenca);
     
@@ -152,6 +157,16 @@ function calcularJuros() {
         `Em ${periodo}, investindo ${formatarMoeda(aporteMensal)} por mês a ${taxaAnual}% ao ano, ` +
         `você transformaria ${formatarMoeda(totalInvestido)} em ${formatarMoeda(saldo)}. ` +
         `Isso significa que ${formatarMoeda(ganhoJuros)} vieram dos juros compostos trabalhando para você!`;
+    
+    // Atualizar barras visuais
+    const totalGeral = totalInvestido + ganhoJuros;
+    const percentInvestido = (totalInvestido / totalGeral) * 100;
+    const percentGanho = (ganhoJuros / totalGeral) * 100;
+    
+    document.getElementById('bar-juros-investido').style.width = percentInvestido + '%';
+    document.getElementById('bar-juros-investido-valor').textContent = formatarMoeda(totalInvestido);
+    document.getElementById('bar-juros-ganho').style.width = percentGanho + '%';
+    document.getElementById('bar-juros-ganho-valor').textContent = formatarMoeda(ganhoJuros);
     
     // Mostrar resultados
     document.getElementById('resultado-juros').style.display = 'block';
@@ -220,6 +235,15 @@ function calcularMeta() {
         `você alcançará sua meta de ${formatarMoeda(metaValor)}! ` +
         `Os juros compostos farão ${formatarMoeda(ganhoJurosExibicao)} do trabalho por você. ` +
         `Comece hoje mesmo! 🚀`;
+    
+    // Atualizar barras visuais
+    const percentInvestido = (totalInvestido / metaValor) * 100;
+    const percentGanho = (ganhoJurosExibicao / metaValor) * 100;
+    
+    document.getElementById('bar-meta-investido').style.width = percentInvestido + '%';
+    document.getElementById('bar-meta-investido-valor').textContent = formatarMoeda(totalInvestido);
+    document.getElementById('bar-meta-ganho').style.width = percentGanho + '%';
+    document.getElementById('bar-meta-ganho-valor').textContent = formatarMoeda(ganhoJurosExibicao);
     
     // Mostrar resultados
     document.getElementById('resultado-meta').style.display = 'block';
