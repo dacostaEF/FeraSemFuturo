@@ -212,6 +212,124 @@ body {
     transform: translateY(-1px);
 }
 
+/* Sections */
+.section {
+    padding: 40px 30px;
+    animation: fadeIn 1.2s ease-out;
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.section-subtitle {
+    font-size: 16px;
+    color: #6B7280;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+/* Action Cards (Como Funciona) */
+.action-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.action-card {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.action-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(118, 104, 248, 0.2);
+    border-color: #7668F8;
+}
+
+.action-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.action-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1F2937;
+    margin-bottom: 8px;
+}
+
+.action-card p {
+    font-size: 15px;
+    color: #6B7280;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Topic Cards */
+.topic-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.topic-card {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-left: 4px solid #7668F8;
+}
+
+.topic-card:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.topic-badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #7668F8;
+    background: #EEF2FF;
+    padding: 4px 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.topic-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1F2937;
+    margin-bottom: 8px;
+}
+
+.topic-card p {
+    font-size: 14px;
+    color: #6B7280;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.topic-time {
+    font-size: 13px;
+    color: #9CA3AF;
+    font-weight: 500;
+}
+
 /* Footer */
 .footer {
     margin-top: 0;
@@ -294,6 +412,34 @@ body {
     
     .btn-primary,
     .btn-secondary {
+        font-size: 16px;
+    }
+    
+    .section {
+        padding: 32px 20px;
+    }
+    
+    .section-title {
+        font-size: 24px;
+    }
+    
+    .section-subtitle {
+        font-size: 14px;
+    }
+    
+    .action-card {
+        padding: 20px;
+    }
+    
+    .action-icon {
+        font-size: 40px;
+    }
+    
+    .action-card h3 {
+        font-size: 18px;
+    }
+    
+    .topic-card h3 {
         font-size: 16px;
     }
 }
