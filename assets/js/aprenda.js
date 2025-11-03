@@ -9,7 +9,47 @@ const articlesConfig = [
 document.addEventListener('DOMContentLoaded', () => {
     updateProgress();
     updateArticleStatuses();
+    initializeModules();
 });
+
+// Inicializar estados dos módulos (primeiro aberto, outros fechados)
+function initializeModules() {
+    const moduleHeaders = document.querySelectorAll('.module-header');
+    
+    moduleHeaders.forEach((header, index) => {
+        const articles = header.nextElementSibling;
+        
+        if (index === 0) {
+            // Primeiro módulo (Fundamentos) começa aberto
+            header.classList.add('open');
+            articles.classList.remove('collapsed');
+        } else {
+            // Outros módulos começam fechados
+            header.classList.add('closed');
+            if (!articles.classList.contains('collapsed')) {
+                articles.classList.add('collapsed');
+            }
+        }
+    });
+}
+
+// Toggle (abrir/fechar) módulo
+function toggleModule(headerElement) {
+    const articles = headerElement.nextElementSibling;
+    const isOpen = headerElement.classList.contains('open');
+    
+    if (isOpen) {
+        // Fechar
+        headerElement.classList.remove('open');
+        headerElement.classList.add('closed');
+        articles.classList.add('collapsed');
+    } else {
+        // Abrir
+        headerElement.classList.remove('closed');
+        headerElement.classList.add('open');
+        articles.classList.remove('collapsed');
+    }
+}
 
 // Atualizar progresso geral
 function updateProgress() {

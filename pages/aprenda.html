@@ -35,13 +35,14 @@
         <div class="modules">
             <!-- Módulo 1: Fundamentos -->
             <div class="module">
-                <div class="module-header fundamentos">
+                <div class="module-header fundamentos" onclick="toggleModule(this)">
                     <div class="module-icon">🎓</div>
                     <div class="module-info">
                         <h2 class="module-title">Fundamentos</h2>
                         <p class="module-subtitle">Comece por aqui</p>
                     </div>
                     <span class="module-badge">3 artigos</span>
+                    <span class="module-toggle">▼</span>
                 </div>
                 <div class="module-articles">
                     <div class="article-item" onclick="window.location.href='artigo-gerente.html'">
@@ -79,15 +80,16 @@
 
             <!-- Módulo 2: Renda Fixa -->
             <div class="module">
-                <div class="module-header renda-fixa">
+                <div class="module-header renda-fixa" onclick="toggleModule(this)">
                     <div class="module-icon">📊</div>
                     <div class="module-info">
                         <h2 class="module-title">Renda Fixa</h2>
                         <p class="module-subtitle">Investimentos seguros</p>
                     </div>
                     <span class="module-badge">4 artigos</span>
+                    <span class="module-toggle">▼</span>
                 </div>
-                <div class="module-articles">
+                <div class="module-articles collapsed">
                     <div class="article-item" onclick="window.location.href='artigo-poupanca.html'">
                         <div class="article-left">
                             <span class="article-number">1</span>
@@ -133,13 +135,14 @@
 
             <!-- Módulo 3: Renda Variável -->
             <div class="module">
-                <div class="module-header renda-variavel">
+                <div class="module-header renda-variavel" onclick="toggleModule(this)">
                     <div class="module-icon">📈</div>
                     <div class="module-info">
                         <h2 class="module-title">Renda Variável</h2>
                         <p class="module-subtitle">Ações, FIIs e ETFs</p>
                     </div>
                     <span class="module-badge">Em breve</span>
+                    <span class="module-toggle">▶</span>
                 </div>
                 <div class="module-articles collapsed">
                     <div class="article-item coming-soon">
@@ -177,13 +180,14 @@
 
             <!-- Módulo 4: Criptomoedas -->
             <div class="module">
-                <div class="module-header cripto">
+                <div class="module-header cripto" onclick="toggleModule(this)">
                     <div class="module-icon">₿</div>
                     <div class="module-info">
                         <h2 class="module-title">Criptomoedas</h2>
                         <p class="module-subtitle">Blockchain e ativos digitais</p>
                     </div>
                     <span class="module-badge">Em breve</span>
+                    <span class="module-toggle">▶</span>
                 </div>
                 <div class="module-articles collapsed">
                     <div class="article-item coming-soon">

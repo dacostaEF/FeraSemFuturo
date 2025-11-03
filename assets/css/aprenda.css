@@ -134,6 +134,14 @@ body {
     align-items: center;
     gap: 16px;
     border-left: 6px solid;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.module-header:hover {
+    opacity: 0.9;
+    transform: translateX(2px);
 }
 
 .module-header.fundamentos {
@@ -188,13 +196,35 @@ body {
     color: #4B5563;
 }
 
+.module-toggle {
+    font-size: 18px;
+    color: #6B7280;
+    transition: transform 0.3s ease;
+    margin-left: auto;
+}
+
+.module-header.open .module-toggle {
+    transform: rotate(0deg);
+}
+
+.module-header.closed .module-toggle {
+    transform: rotate(-90deg);
+}
+
 /* Module Articles */
 .module-articles {
     padding: 16px 20px;
+    max-height: 2000px;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.3s ease;
+    opacity: 1;
 }
 
 .module-articles.collapsed {
-    display: none;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
 }
 
 .article-item {
