@@ -1,11 +1,23 @@
 /* Calculator Specific Styles */
 
-/* Typography System */
+/* Typography System & Paleta de Cores */
 :root {
+    /* Typography */
     --fs-base: 15px;
     --fs-sm: 13.5px;
     --fs-lg: 18px;
     --lh: 1.5;
+    
+    /* Paleta de Cores Açaí */
+    --acai-dark: #4B014A;
+    --acai-medium: #5D0F5A;
+    --acai-light: #8B2D88;
+    --mint: #00B894;
+    --mint-light: #55EFC4;
+    --sand: #F5F5F0;
+    --white: #FFFFFF;
+    --charcoal: #2D3436;
+    --gray: #636E72;
 }
 
 html {
@@ -76,7 +88,7 @@ small, .hint {
 .input-group input:focus,
 .input-group select:focus {
     outline: none;
-    border-color: #7668F8;
+    border-color: var(--acai-medium);
     box-shadow: 0 0 0 3px rgba(118, 104, 248, 0.1);
 }
 
@@ -122,11 +134,11 @@ small, .hint {
 
 .tab-btn:hover {
     background: #F3F4F6;
-    color: #7668F8;
+    color: var(--acai-medium);
 }
 
 .tab-btn.active {
-    background: linear-gradient(90deg, #7668F8, #A855F7);
+    background: linear-gradient(90deg, var(--acai-medium), var(--acai-light));
     color: white;
     box-shadow: 0 4px 12px rgba(118, 104, 248, 0.3);
 }
@@ -187,7 +199,7 @@ small, .hint {
 }
 
 .input-wrapper:focus-within {
-    border-color: #7668F8;
+    border-color: var(--acai-medium);
 }
 
 .input-prefix,
@@ -241,14 +253,14 @@ small, .hint {
 }
 
 .prazo-shortcuts button:hover {
-    border-color: #7668F8;
-    color: #7668F8;
+    border-color: var(--acai-medium);
+    color: var(--acai-medium);
 }
 
 .btn-calculate {
     width: 100%;
     padding: 16px;
-    background: linear-gradient(90deg, #7668F8, #A855F7);
+    background: linear-gradient(90deg, var(--acai-medium), var(--acai-light));
     color: white;
     border: none;
     border-radius: 12px;
@@ -305,7 +317,7 @@ small, .hint {
 }
 
 .result-card.tesouro {
-    border-left: 4px solid #10B981;
+    border-left: 4px solid var(--mint);
 }
 
 .result-card.cdb {
@@ -313,7 +325,7 @@ small, .hint {
 }
 
 .result-card.lci {
-    border-left: 4px solid #A855F7;
+    border-left: 4px solid var(--acai-light);
 }
 
 .result-header {
@@ -339,7 +351,7 @@ small, .hint {
 .result-value {
     font-size: 28px;
     font-weight: 700;
-    color: #7668F8;
+    color: var(--acai-medium);
     margin-bottom: 16px;
 }
 
@@ -412,13 +424,13 @@ small, .hint {
 .result-big-value {
     font-size: 48px;
     font-weight: 700;
-    color: #7668F8;
+    color: var(--acai-medium);
     margin: 0;
     line-height: 1;
 }
 
 .result-big-value.primary {
-    color: #10B981;
+    color: var(--mint);
 }
 
 .result-sublabel {
@@ -508,7 +520,7 @@ small, .hint {
 .ranking-value {
     font-size: 18px;
     font-weight: 700;
-    color: #10B981;
+    color: var(--mint);
 }
 
 /* Badge Success */
@@ -528,7 +540,7 @@ small, .hint {
 }
 
 .tesouro-card {
-    border-left: 4px solid #10B981;
+    border-left: 4px solid var(--mint);
 }
 
 .card-header {
@@ -582,7 +594,7 @@ small, .hint {
 }
 
 .result-item .value.green {
-    color: #10B981;
+    color: var(--mint);
 }
 
 .result-item .value.red {
@@ -607,7 +619,7 @@ small, .hint {
 .result-total .value {
     font-size: 22px;
     font-weight: 700;
-    color: #7668F8;
+    color: var(--acai-medium);
 }
 
 /* Difference Card */
@@ -698,7 +710,7 @@ small, .hint {
 }
 
 .bar-tesouro {
-    background: linear-gradient(90deg, #6EE7B7, #10B981);
+    background: linear-gradient(90deg, var(--mint-light), var(--mint));
 }
 
 .bar-investido {
@@ -706,7 +718,7 @@ small, .hint {
 }
 
 .bar-ganho {
-    background: linear-gradient(90deg, #6EE7B7, #10B981);
+    background: linear-gradient(90deg, var(--mint-light), var(--mint));
 }
 
 .bar-value {

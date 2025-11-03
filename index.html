@@ -7,73 +7,232 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Logo -->
-        <div class="logo-container">
-            <img src="assets/images/Logo_tutorfinanceiro.png" alt="Tutor Financeiro" class="logo">
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo">
+                <img src="assets/images/Logo_tutorfinanceiro.png" alt="Tutor Financeiro">
+                <span class="logo-text">Faça Seu Futuro</span>
+            </div>
+            
+            <!-- Sistema de Abas -->
+            <nav class="tabs-nav">
+                <button class="tab-btn active" data-tab="inicio" style="background-color: rgba(75, 1, 74, 0.15);">
+                    🏠 INÍCIO
+                </button>
+                <button class="tab-btn" data-tab="primeiros-passos" style="background-color: rgba(93, 15, 90, 0.15);">
+                    🌱 PRIMEIROS PASSOS
+                </button>
+                <button class="tab-btn" data-tab="crescer" style="background-color: rgba(107, 26, 106, 0.15);">
+                    💰 CRESCER DINHEIRO
+                </button>
+                <button class="tab-btn" data-tab="especializar" style="background-color: rgba(122, 41, 121, 0.15);">
+                    🚀 ESPECIALIZAR-SE
+                </button>
+                <button class="tab-btn" data-tab="ferramentas" style="background-color: rgba(139, 45, 136, 0.15);">
+                    🧮 FERRAMENTAS
+                </button>
+                <button class="tab-btn" data-tab="dicas" style="background-color: rgba(0, 184, 148, 0.15);">
+                    💡 DICAS RÁPIDAS
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+        <!-- ABA: INÍCIO -->
+        <div class="tab-content active" id="inicio">
+            <div class="content-wrapper">
+                <!-- Hero Section -->
+                <div class="hero-section">
+                    <h1 class="hero-title">Comece hoje a construir<br>um futuro financeiro<br>seguro</h1>
+                    
+                    <p class="hero-description">
+                        Seu guia amigo para construir um futuro financeiro seguro.
+                    </p>
+                    
+                    <p class="hero-description secondary">
+                        Sem comissões, sem jargão. Só o essencial para sua segurança e crescimento.
+                    </p>
+
+                    <!-- Botão CTA Principal -->
+                    <button class="btn-primary" data-tab-link="primeiros-passos">
+                        Começar a Aprender Grátis
+                    </button>
+                </div>
+
+                <!-- Seção: Dor Urgente (Cards Categorizados) -->
+                <section class="section urgent-topics">
+                    <h2 class="section-title">🔥 Comece por aqui</h2>
+                    <p class="section-subtitle">Onde você está perdendo dinheiro agora</p>
+                    
+                    <div class="topic-cards">
+                        <div class="topic-card" onclick="window.location.href='pages/artigo-gerente.html'">
+                            <span class="topic-badge">💡 Fundamentos</span>
+                            <h3>Seu gerente ganha comissão</h3>
+                            <p>O conflito de interesse que ninguém te conta</p>
+                            <span class="topic-time">⏱️ 5 min</span>
+                        </div>
+
+                        <div class="topic-card" onclick="window.location.href='pages/artigo-reserva.html'">
+                            <span class="topic-badge">🛡️ Proteção</span>
+                            <h3>Reserva de Emergência</h3>
+                            <p>Quanto guardar e onde aplicar com segurança</p>
+                            <span class="topic-time">⏱️ 5 min</span>
+                        </div>
+
+                        <div class="topic-card" onclick="window.location.href='pages/artigo-poupanca.html'">
+                            <span class="topic-badge">💰 Investimentos</span>
+                            <h3>Poupança vs Tesouro Direto</h3>
+                            <p>Descubra quanto você está perdendo na poupança</p>
+                            <span class="topic-time">⏱️ 6 min</span>
+                        </div>
+
+                        <div class="topic-card" onclick="window.location.href='pages/calculadora.html'">
+                            <span class="topic-badge">💰 Investimentos</span>
+                            <h3>Calculadora Interativa</h3>
+                            <p>Compare investimentos na prática</p>
+                            <span class="topic-time">⚡ Gratuita</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção: Como o Tutor te Guia (Timeline) -->
+                <section class="section methodology">
+                    <h2 class="section-title">Como o Tutor te guia</h2>
+                    <p class="section-subtitle">Seu caminho estruturado para a liberdade financeira</p>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item active">
+                            <div class="timeline-icon">📚</div>
+                            <div class="timeline-content">
+                                <h3>Aprenda o Básico</h3>
+                                <p>Entenda conceitos fundamentais sem jargões</p>
+                                <span class="timeline-status">👉 Você está aqui</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-icon">💰</div>
+                            <div class="timeline-content">
+                                <h3>Conheça os Investimentos</h3>
+                                <p>Descubra Tesouro, CDBs, Ações e mais</p>
+                                <span class="timeline-status">→ Próximo passo</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item locked">
+                            <div class="timeline-icon">🧮</div>
+                            <div class="timeline-content">
+                                <h3>Simule e Planeje</h3>
+                                <p>Use ferramentas para ver seu futuro</p>
+                                <span class="timeline-status">🔒 Em breve</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-secondary" data-tab-link="primeiros-passos">
+                        Ver Trilha Completa
+                    </button>
+                </section>
+
+                <!-- Seção: Próximo Nível (Gamificado) -->
+                <section class="section next-level">
+                    <div class="next-level-card">
+                        <div class="level-badge">🚀 Próximo Nível Desbloqueado!</div>
+                        <h2>Pronto para o Crescimento?</h2>
+                        <p>Você dominou os fundamentos. Agora é hora de aprender sobre Renda Variável com segurança.</p>
+                        
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 40%"></div>
+                            <span class="progress-text">Seu progresso: 40%</span>
+                        </div>
+                        
+                        <div class="unlocked-content">
+                            <div class="unlock-icon">✨</div>
+                            <div>
+                                <h3>📈 Seja Sócio de Grandes Empresas</h3>
+                                <p>Aprenda a investir em Ações e FIIs com método de longo prazo</p>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-primary" data-tab-link="crescer">
+                            Continuar Aprendendo
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Footer -->
+                <footer class="footer">
+                    <p>Conteúdo Educativo Gratuito. Explore!</p>
+                </footer>
+            </div>
         </div>
 
-        <!-- Hero Section -->
-        <div class="content">
-            <h1 class="title">Comece hoje a construir<br>um futuro financeiro<br>seguro</h1>
-            
-            <p class="description">
-                Um guia amigo e transparente para construir sua aposentadoria e qualidade de vida com tranquilidade.
-            </p>
-
-            <!-- Botão CTA Principal -->
-            <button class="btn-primary" onclick="window.location.href='pages/aprenda.html'">
-                Começar a Aprender Grátis
-            </button>
-        </div>
-
-        <!-- Seção: Tópicos Populares -->
-        <div class="section topics">
-            <h2 class="section-title">Comece por aqui</h2>
-            <p class="section-subtitle">Os temas mais buscados por quem está começando</p>
-            
-            <div class="topic-cards">
-                <div class="topic-card" onclick="window.location.href='pages/artigo-poupanca.html'">
-                    <span class="topic-badge">📊 Renda Fixa</span>
-                    <h3>Poupança vs Tesouro Direto</h3>
-                    <p>Descubra quanto você está perdendo na poupança</p>
-                    <span class="topic-time">⏱️ 6 min</span>
-                </div>
-
-                <div class="topic-card" onclick="window.location.href='pages/artigo-reserva.html'">
-                    <span class="topic-badge">🛡️ Proteção</span>
-                    <h3>Reserva de Emergência</h3>
-                    <p>Quanto guardar e onde aplicar com segurança</p>
-                    <span class="topic-time">⏱️ 5 min</span>
-                </div>
-
-                <div class="topic-card" onclick="window.location.href='pages/artigo-gerente.html'">
-                    <span class="topic-badge">💡 Fundamentos</span>
-                    <h3>Seu gerente ganha comissão</h3>
-                    <p>O conflito de interesse que ninguém te conta</p>
-                    <span class="topic-time">⏱️ 5 min</span>
-                </div>
-
-                <div class="topic-card" onclick="window.location.href='pages/calculadora.html'">
-                    <span class="topic-badge">🧮 Ferramenta</span>
-                    <h3>Calculadora Interativa</h3>
-                    <p>Compare investimentos na prática</p>
-                    <span class="topic-time">⚡ Gratuita</span>
+        <!-- ABA: PRIMEIROS PASSOS -->
+        <div class="tab-content" id="primeiros-passos">
+            <div class="content-wrapper">
+                <div class="coming-soon">
+                    <h2>🌱 Primeiros Passos</h2>
+                    <p>Módulo Bancos e Fundamentos</p>
+                    <p class="coming-soon-subtitle">(Vamos linkar com aprenda.html em breve)</p>
+                    <button class="btn-primary" onclick="window.location.href='pages/aprenda.html'">
+                        Ir para Aprenda (temp)
+                    </button>
                 </div>
             </div>
-
-            <button class="btn-secondary" onclick="window.location.href='pages/aprenda.html'">
-                Ver Todos os Conteúdos
-            </button>
         </div>
 
-        <!-- Footer -->
-        <div class="footer">
-            <p>Conteúdo Educativo Gratuito. Explore!</p>
+        <!-- ABA: CRESCER DINHEIRO -->
+        <div class="tab-content" id="crescer">
+            <div class="content-wrapper">
+                <div class="coming-soon">
+                    <h2>💰 Crescer Dinheiro</h2>
+                    <p>Renda Fixa Avançada e Diversificação</p>
+                    <p class="coming-soon-subtitle">(Conteúdo em desenvolvimento)</p>
+                </div>
+            </div>
         </div>
-    </div>
+
+        <!-- ABA: ESPECIALIZAR-SE -->
+        <div class="tab-content" id="especializar">
+            <div class="content-wrapper">
+                <div class="coming-soon">
+                    <h2>🚀 Especializar-se</h2>
+                    <p>Renda Variável, Ações, FIIs e Criptomoedas</p>
+                    <p class="coming-soon-subtitle">(Conteúdo em desenvolvimento)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA: FERRAMENTAS -->
+        <div class="tab-content" id="ferramentas">
+            <div class="content-wrapper">
+                <div class="coming-soon">
+                    <h2>🧮 Ferramentas</h2>
+                    <p>Calculadoras, Comparadores e Simuladores</p>
+                    <p class="coming-soon-subtitle">(Vamos linkar calculadora.html em breve)</p>
+                    <button class="btn-primary" onclick="window.location.href='pages/calculadora.html'">
+                        Ir para Calculadora (temp)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA: DICAS RÁPIDAS -->
+        <div class="tab-content" id="dicas">
+            <div class="content-wrapper">
+                <div class="coming-soon">
+                    <h2>💡 Dicas Rápidas</h2>
+                    <p>Conteúdo leve e rápido para o dia a dia</p>
+                    <p class="coming-soon-subtitle">(Conteúdo em desenvolvimento)</p>
+                </div>
+            </div>
+        </div>
+    </main>
 
     <script src="assets/js/script.js"></script>
 </body>
 </html>
-

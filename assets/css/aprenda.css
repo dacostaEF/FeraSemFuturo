@@ -1,3 +1,21 @@
+/* Paleta de Cores Açaí */
+:root {
+    /* Primárias - Açaí */
+    --acai-dark: #4B014A;
+    --acai-medium: #5D0F5A;
+    --acai-light: #8B2D88;
+    
+    /* Secundárias - Verde Menta */
+    --mint: #00B894;
+    --mint-light: #55EFC4;
+    
+    /* Neutras */
+    --sand: #F5F5F0;
+    --white: #FFFFFF;
+    --charcoal: #2D3436;
+    --gray: #636E72;
+}
+
 /* Reset & Base */
 * {
     margin: 0;
@@ -7,7 +25,7 @@
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-    background: #F5F5F5;
+    background: var(--acai-dark);
     min-height: 100vh;
     padding-bottom: 40px;
 }
@@ -27,39 +45,40 @@ body {
 }
 
 .btn-back {
-    background: white;
-    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 10px 16px;
     border-radius: 12px;
     font-size: 15px;
     font-weight: 600;
-    color: #6B7280;
+    color: #FFFFFF;
     cursor: pointer;
     transition: all 0.2s;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .btn-back:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    color: #7668F8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--mint-light);
 }
 
 .header-title {
     font-size: 24px;
     font-weight: 700;
-    color: #1F2937;
+    color: #FFFFFF;
     margin-bottom: 4px;
 }
 
 .header-subtitle {
     font-size: 14px;
-    color: #6B7280;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 /* Progress Global */
 .progress-global {
-    background: white;
+    background: rgba(255, 255, 255, 0.08);
     padding: 20px;
     border-radius: 16px;
     margin-bottom: 24px;
@@ -76,7 +95,7 @@ body {
 .progress-label {
     font-size: 14px;
     font-weight: 600;
-    color: #6B7280;
+    color: rgba(255, 255, 255, 0.8);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -84,7 +103,7 @@ body {
 .progress-percentage {
     font-size: 24px;
     font-weight: 700;
-    color: #7668F8;
+    color: var(--acai-medium);
 }
 
 .progress-bar {
@@ -97,7 +116,7 @@ body {
 
 .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #7668F8, #4ADE80);
+    background: linear-gradient(90deg, var(--acai-medium), var(--mint));
     border-radius: 8px;
     transition: width 0.5s ease;
 }
@@ -116,7 +135,7 @@ body {
 }
 
 .module {
-    background: white;
+    background: rgba(255, 255, 255, 0.08);
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -156,7 +175,7 @@ body {
 
 .module-header.renda-variavel {
     background: linear-gradient(135deg, #FAF5FF 0%, #F3E8FF 100%);
-    border-left-color: #A855F7;
+    border-left-color: var(--acai-light);
 }
 
 .module-header.cripto {
@@ -178,13 +197,13 @@ body {
 .module-title {
     font-size: 20px;
     font-weight: 700;
-    color: #1F2937;
+    color: #FFFFFF;
     margin-bottom: 4px;
 }
 
 .module-subtitle {
     font-size: 13px;
-    color: #6B7280;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .module-badge {
@@ -198,7 +217,7 @@ body {
 
 .module-toggle {
     font-size: 18px;
-    color: #6B7280;
+    color: rgba(255, 255, 255, 0.8);
     transition: transform 0.3s ease;
     margin-left: auto;
 }
@@ -272,14 +291,14 @@ body {
 .article-number {
     width: 32px;
     height: 32px;
-    background: white;
+    background: rgba(255, 255, 255, 0.08);
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 14px;
     font-weight: 700;
-    color: #7668F8;
+    color: var(--acai-medium);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
@@ -290,13 +309,13 @@ body {
 .article-item h3 {
     font-size: 16px;
     font-weight: 600;
-    color: #1F2937;
+    color: #FFFFFF;
     margin-bottom: 4px;
 }
 
 .article-item p {
     font-size: 13px;
-    color: #6B7280;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .article-status {
@@ -324,11 +343,11 @@ body {
 
 /* Footer Message */
 .footer-message {
-    background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%);
+    background: linear-gradient(135deg, #FAF5FF 0%, #F3E8FF 100%);
     padding: 20px;
     border-radius: 16px;
     margin-top: 24px;
-    border-left: 4px solid #7668F8;
+    border-left: 4px solid var(--acai-medium);
 }
 
 .footer-message p {
@@ -338,7 +357,7 @@ body {
 }
 
 .footer-message strong {
-    color: #7668F8;
+    color: var(--acai-medium);
 }
 
 /* Responsividade */

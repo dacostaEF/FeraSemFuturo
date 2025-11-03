@@ -1,3 +1,21 @@
+/* Paleta de Cores Açaí */
+:root {
+    /* Primárias - Açaí */
+    --acai-dark: #4B014A;
+    --acai-medium: #5D0F5A;
+    --acai-light: #8B2D88;
+    
+    /* Secundárias - Verde Menta */
+    --mint: #00B894;
+    --mint-light: #55EFC4;
+    
+    /* Neutras */
+    --sand: #F5F5F0;
+    --white: #FFFFFF;
+    --charcoal: #2D3436;
+    --gray: #636E72;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,20 +24,21 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: #F5F5F5;
+    background: var(--acai-dark);
     line-height: 1.6;
 }
 
 .container {
     max-width: 680px;
     margin: 0 auto;
-    background: white;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     min-height: 100vh;
 }
 
 /* Header */
 .article-header {
-    background: linear-gradient(135deg, #7668F8 0%, #A855F7 100%);
+    background: linear-gradient(135deg, var(--acai-dark) 0%, var(--acai-medium) 100%);
     padding: 20px;
     color: white;
 }
@@ -56,7 +75,7 @@ body {
 .article-title {
     font-size: 32px;
     font-weight: 700;
-    color: #1F2937;
+    color: #FFFFFF;
     margin-bottom: 16px;
     line-height: 1.2;
 }
@@ -97,13 +116,13 @@ body {
 .article-section h2 {
     font-size: 24px;
     font-weight: 700;
-    color: #1F2937;
+    color: #FFFFFF;
     margin-bottom: 16px;
 }
 
 .article-section p {
     font-size: 16px;
-    color: #374151;
+    color: rgba(255, 255, 255, 0.85);
     margin-bottom: 16px;
     line-height: 1.7;
 }
@@ -114,19 +133,19 @@ body {
 
 .article-section li {
     font-size: 16px;
-    color: #374151;
+    color: rgba(255, 255, 255, 0.85);
     margin-bottom: 8px;
     line-height: 1.6;
 }
 
 .article-section em {
     font-style: italic;
-    color: #7668F8;
+    color: var(--acai-medium);
 }
 
 .article-section strong {
     font-weight: 600;
-    color: #1F2937;
+    color: #FFFFFF;
 }
 
 /* Callout Boxes */
@@ -145,7 +164,7 @@ body {
 
 .callout-success {
     background: #D1FAE5;
-    border-left: 4px solid #10B981;
+    border-left: 4px solid var(--mint);
 }
 
 .callout-info {
@@ -161,13 +180,13 @@ body {
 .callout-content h3 {
     font-size: 18px;
     font-weight: 600;
-    color: #1F2937;
+    color: #FFFFFF;
     margin-bottom: 8px;
 }
 
 .callout-content p {
     font-size: 15px;
-    color: #374151;
+    color: rgba(255, 255, 255, 0.85);
     margin-bottom: 8px;
     line-height: 1.6;
 }
@@ -228,7 +247,7 @@ body {
 .tip-number {
     width: 40px;
     height: 40px;
-    background: linear-gradient(135deg, #7668F8 0%, #A855F7 100%);
+    background: linear-gradient(135deg, var(--acai-medium) 0%, var(--acai-light) 100%);
     color: white;
     border-radius: 50%;
     display: flex;
@@ -242,7 +261,7 @@ body {
 .tip-content h3 {
     font-size: 16px;
     font-weight: 600;
-    color: #1F2937;
+    color: #FFFFFF;
     margin-bottom: 6px;
 }
 
@@ -264,7 +283,7 @@ body {
 .quiz-section h2 {
     font-size: 22px;
     font-weight: 700;
-    color: #1F2937;
+    color: #FFFFFF;
     margin-bottom: 8px;
 }
 
@@ -275,7 +294,7 @@ body {
 }
 
 .quiz-question {
-    background: white;
+    background: rgba(255, 255, 255, 0.05);
     padding: 20px;
     border-radius: 12px;
     margin-bottom: 16px;
@@ -284,7 +303,7 @@ body {
 .question-text {
     font-size: 16px;
     font-weight: 600;
-    color: #1F2937;
+    color: #FFFFFF;
     margin-bottom: 12px;
 }
 
@@ -307,7 +326,7 @@ body {
 
 .quiz-option:hover {
     background: #F3F4F6;
-    border-color: #7668F8;
+    border-color: var(--acai-medium);
 }
 
 .quiz-option input[type="radio"] {
@@ -317,13 +336,13 @@ body {
 
 .quiz-option span {
     font-size: 15px;
-    color: #374151;
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .btn-quiz {
     width: 100%;
     padding: 14px;
-    background: linear-gradient(90deg, #A855F7, #7668F8);
+    background: linear-gradient(90deg, var(--acai-medium), var(--mint));
     color: white;
     border: none;
     border-radius: 10px;
@@ -375,7 +394,7 @@ body {
 .btn-complete {
     width: 100%;
     padding: 16px;
-    background: linear-gradient(90deg, #10B981, #4ADE80);
+    background: linear-gradient(90deg, var(--mint), var(--mint-light));
     color: white;
     border: none;
     border-radius: 12px;
@@ -398,9 +417,9 @@ body {
 .btn-next {
     width: 100%;
     padding: 16px;
-    background: white;
-    color: #7668F8;
-    border: 2px solid #7668F8;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--acai-medium);
+    border: 2px solid var(--acai-medium);
     border-radius: 12px;
     font-size: 17px;
     font-weight: 600;
