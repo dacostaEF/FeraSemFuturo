@@ -31,6 +31,18 @@ function formatarPorcentagem(valor) {
     return valor.toFixed(2) + '%';
 }
 
+function scrollToResults(resultadoId) {
+    setTimeout(() => {
+        const elemento = document.getElementById(resultadoId);
+        if (elemento) {
+            elemento.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }
+    }, 100);
+}
+
 // ==========================================
 // TAB 1: COMPARAÇÃO POUPANÇA VS TESOURO
 // ==========================================
@@ -95,8 +107,6 @@ function calcularComparacao() {
     
     document.getElementById('tesouro-final').textContent = formatarMoeda(saldoFinalTesouro);
     document.getElementById('tesouro-investido').textContent = formatarMoeda(totalInvestidoTesouro);
-    document.getElementById('tesouro-bruto').textContent = formatarMoeda(rendimentoBrutoTesouro);
-    document.getElementById('tesouro-impostos').textContent = formatarMoeda(totalImpostos);
     
     // Rendimento líquido em VERDE (destaque positivo)
     const liquidoElement = document.getElementById('tesouro-liquido');
