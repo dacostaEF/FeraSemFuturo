@@ -1,37 +1,37 @@
-# Arquivos do sistema operacional
-.DS_Store
-Thumbs.db
-desktop.ini
+# Dependencies
+node_modules/
+package-lock.json
 
-# Editores
+# Environment variables
+.env
+.env.local
+
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
 # Logs
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Dependências (futuro)
-node_modules/
-package-lock.json
-
-# Ambientes virtuais Python (futuro)
-venv/
-env/
-*.pyc
-
-# Arquivos temporários
+# Temporary files
 *.tmp
 *.temp
 .cache/
 
-# Builds (futuro)
+# Build outputs
 dist/
 build/
-*.min.js
-*.min.css
 
-
+# Railway
+.railway/

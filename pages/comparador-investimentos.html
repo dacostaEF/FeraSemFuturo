@@ -24,6 +24,30 @@
             margin: 0 auto;
         }
 
+        /* Botão Voltar */
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #00B894;
+            color: #00B894;
+            transform: translateX(-5px);
+        }
+
         .header {
             text-align: center;
             margin-bottom: 30px;
@@ -554,6 +578,11 @@
                 padding: 15px;
             }
 
+            .btn-back {
+                font-size: 14px;
+                padding: 10px 16px;
+            }
+
             .header h1 {
                 font-size: 1.8rem;
             }
@@ -571,6 +600,7 @@
                 gap: 8px;
                 padding: 5px 10px;
                 margin-bottom: 20px;
+                position: relative;
                 
                 /* Smooth scroll */
                 scroll-behavior: smooth;
@@ -579,6 +609,58 @@
                 /* Esconder scrollbar mas manter funcionalidade */
                 scrollbar-width: thin;
                 scrollbar-color: rgba(255,255,255,0.3) transparent;
+                
+                /* Efeito 3D - Sombra interna forte */
+                box-shadow: 
+                    inset 20px 0 20px -10px rgba(0, 0, 0, 0.6),
+                    inset -20px 0 20px -10px rgba(0, 0, 0, 0.6),
+                    0 4px 15px rgba(0, 0, 0, 0.3);
+            }
+            
+            /* Gradient Fade - Esquerda */
+            .tabs-nav::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 40px;
+                background: linear-gradient(to right, rgba(75, 1, 74, 1), transparent);
+                pointer-events: none;
+                z-index: 10;
+            }
+            
+            /* Gradient Fade + Setas - Direita */
+            .tabs-nav::after {
+                content: '→→→';
+                position: absolute;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                width: 60px;
+                background: linear-gradient(to left, rgba(75, 1, 74, 1) 0%, rgba(75, 1, 74, 0.8) 50%, transparent 100%);
+                pointer-events: none;
+                z-index: 10;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                padding-right: 10px;
+                color: rgba(255, 255, 255, 0.7);
+                font-size: 18px;
+                font-weight: bold;
+                text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+                animation: pulseArrow 2s infinite;
+            }
+            
+            @keyframes pulseArrow {
+                0%, 100% { 
+                    opacity: 0.7; 
+                    transform: translateX(0);
+                }
+                50% { 
+                    opacity: 1; 
+                    transform: translateX(3px);
+                }
             }
 
             .tabs-nav::-webkit-scrollbar {
@@ -744,6 +826,11 @@
 </head>
 <body>
     <div class="container">
+        <!-- Botão Voltar -->
+        <a href="../index.html#ferramentas" class="btn-back">
+            ← Voltar para Ferramentas
+        </a>
+        
         <div class="header">
             <h1>🧠 Comparador Inteligente de Investimentos</h1>
             <p>Análise completa de Renda Fixa - Compare, simule e invista com inteligência</p>

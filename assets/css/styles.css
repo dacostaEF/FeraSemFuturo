@@ -1368,6 +1368,50 @@ body {
         scroll-behavior: smooth;
         scrollbar-width: thin;
         scrollbar-color: rgba(255,255,255,0.3) transparent;
+        position: relative;
+        
+        /* Efeito 3D - Sombra interna */
+        box-shadow: 
+            inset 15px 0 15px -10px rgba(0, 0, 0, 0.5),
+            inset -15px 0 15px -10px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* Gradient Fade - Esquerda */
+    .tabs-nav::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 30px;
+        background: linear-gradient(to right, rgba(75, 1, 74, 0.95), transparent);
+        pointer-events: none;
+        z-index: 2;
+    }
+    
+    /* Gradient Fade - Direita (mais forte) */
+    .tabs-nav::after {
+        content: '→→';
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 50px;
+        background: linear-gradient(to left, rgba(75, 1, 74, 0.95), transparent);
+        pointer-events: none;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 8px;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 16px;
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0%, 100% { opacity: 0.6; }
+        50% { opacity: 1; }
     }
 
     .tabs-nav::-webkit-scrollbar {
@@ -1457,11 +1501,15 @@ body {
 
 @media (max-width: 480px) {
     body {
-        padding-top: 110px;
+        padding-top: 100px; /* Reduzido de 110px */
     }
 
     .header-container {
-        padding: 10px 15px;
+        padding: 8px 15px; /* Reduzido de 10px */
+    }
+
+    .header-logo {
+        margin-bottom: 8px; /* Reduzido */
     }
 
     .header-logo img {
@@ -1479,60 +1527,130 @@ body {
     }
 
     .main-content {
-        padding: 0 15px 30px;
+        padding: 0 15px 20px; /* Reduzido de 30px */
+    }
+
+    /* HERO SECTION - Ultra Compactado */
+    .hero-section {
+        padding: 20px 15px 8px; /* Bottom: 15px → 8px (ultra compacto) */
     }
 
     .hero-title {
         font-size: 24px;
+        margin-bottom: 10px; /* Reduzido de 12px para 10px */
+        line-height: 1.1; /* Mais compacto */
     }
 
     .hero-description {
         font-size: 14px;
+        margin-bottom: 8px; /* Reduzido de 10px para 8px */
+    }
+
+    .hero-description.secondary {
+        margin-bottom: 15px; /* Reduzido de 18px para 15px */
     }
 
     .btn-primary {
         padding: 14px 24px;
         font-size: 15px;
         min-height: 48px;
+        margin-bottom: 5px; /* Ajustado para 5px conforme solicitado */
     }
 
+    /* SECTIONS - Espaçamento ultra compacto */
+    .section {
+        padding: 12px 0; /* Reduzido de 15px para 12px */
+    }
+    
+    /* Primeira seção após hero - mínimo possível */
+    .benefits {
+        padding-top: 5px; /* Reduzido de 10px para 5px */
+    }
+
+    .section-title {
+        font-size: 20px;
+        margin-bottom: 8px; /* Reduzido */
+    }
+
+    .section-subtitle {
+        font-size: 14px;
+        margin-bottom: 15px; /* Reduzido */
+    }
+
+    /* GRIDS - Gaps menores */
     .benefits-grid {
         grid-template-columns: 1fr;
         gap: 12px;
+        margin-bottom: 20px; /* Reduzido */
     }
 
+    .learning-grid,
+    .tools-grid,
+    .tips-grid {
+        gap: 12px;
+        margin-bottom: 20px; /* Reduzido */
+    }
+
+    /* CARDS - Padding interno reduzido */
     .benefit-card {
-        padding: 20px;
+        padding: 16px; /* Reduzido de 20px */
     }
 
     .benefit-icon {
         font-size: 36px;
+        margin-bottom: 8px; /* Reduzido */
+    }
+
+    .benefit-card h3 {
+        font-size: 16px;
+        margin-bottom: 6px; /* Reduzido */
+    }
+
+    .benefit-card p {
+        font-size: 13px;
     }
 
     .learning-card,
     .tool-card,
     .tip-card {
-        padding: 20px;
+        padding: 16px; /* Reduzido de 20px */
     }
 
-    .section-title {
-        font-size: 20px;
+    /* CTA BOX - Compactado */
+    .cta-box {
+        padding: 16px; /* Reduzido de 24px */
+        margin: 20px 0; /* Reduzido */
     }
 
-    .section-subtitle {
-        font-size: 14px;
+    .cta-box h3 {
+        font-size: 16px;
+        margin-bottom: 8px;
     }
 
+    /* COMING SOON - Compactado */
     .coming-soon {
-        padding: 60px 20px;
+        padding: 30px 20px; /* Reduzido de 60px */
+        margin: 20px 0; /* Reduzido */
     }
 
     .coming-soon h2 {
-        font-size: 24px;
+        font-size: 20px; /* Reduzido de 24px */
+        margin-bottom: 10px;
     }
 
     .coming-soon p {
-        font-size: 16px;
+        font-size: 14px; /* Reduzido de 16px */
+        margin-bottom: 8px;
+    }
+
+    .coming-soon-card {
+        padding: 16px; /* Reduzido de 24px */
+    }
+
+    /* FOOTER */
+    .footer {
+        padding: 15px 0; /* Reduzido */
+        margin-top: 20px;
     }
 }
 
