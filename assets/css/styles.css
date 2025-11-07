@@ -1339,8 +1339,89 @@ body {
 
 /* Responsividade dos novos cards */
 @media (max-width: 768px) {
+    body {
+        padding-top: 120px;
+    }
+
+    .header-container {
+        padding: 12px 20px;
+    }
+
+    .header-logo {
+        margin-bottom: 12px;
+    }
+
+    .header-logo img {
+        height: 32px;
+    }
+
+    .logo-text {
+        font-size: 16px;
+    }
+
+    /* TABS - Horizontal Scroll Mobile */
+    .tabs-nav {
+        gap: 6px;
+        padding: 4px 0;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255,255,255,0.3) transparent;
+    }
+
+    .tabs-nav::-webkit-scrollbar {
+        height: 3px;
+        display: block;
+    }
+
+    .tabs-nav::-webkit-scrollbar-track {
+        background: rgba(255,255,255,0.05);
+        border-radius: 10px;
+    }
+
+    .tabs-nav::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.3);
+        border-radius: 10px;
+    }
+
+    .tab-btn {
+        flex: 0 0 auto; /* Não expandir */
+        min-width: auto;
+        padding: 10px 16px;
+        font-size: 11px;
+        border-radius: 6px;
+        border-right: none;
+    }
+
+    .tab-btn:first-child,
+    .tab-btn:last-child {
+        border-radius: 6px;
+    }
+
+    .main-content {
+        padding: 0 20px 40px;
+    }
+
+    .content-wrapper {
+        padding: 0 4px;
+    }
+
+    .hero-section {
+        padding: 30px 15px 40px;
+    }
+
+    .hero-title {
+        font-size: 28px;
+    }
+
+    .hero-description {
+        font-size: 16px;
+    }
+
     .benefits-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
     }
     
     .learning-grid,
@@ -1359,6 +1440,99 @@ body {
     
     .coming-icon {
         font-size: 48px;
+    }
+
+    .section {
+        padding: 30px 0;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    .section-subtitle {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 110px;
+    }
+
+    .header-container {
+        padding: 10px 15px;
+    }
+
+    .header-logo img {
+        height: 28px;
+    }
+
+    .logo-text {
+        font-size: 14px;
+    }
+
+    .tab-btn {
+        padding: 8px 12px;
+        font-size: 10px;
+        min-height: 44px; /* Touch-friendly */
+    }
+
+    .main-content {
+        padding: 0 15px 30px;
+    }
+
+    .hero-title {
+        font-size: 24px;
+    }
+
+    .hero-description {
+        font-size: 14px;
+    }
+
+    .btn-primary {
+        padding: 14px 24px;
+        font-size: 15px;
+        min-height: 48px;
+    }
+
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .benefit-card {
+        padding: 20px;
+    }
+
+    .benefit-icon {
+        font-size: 36px;
+    }
+
+    .learning-card,
+    .tool-card,
+    .tip-card {
+        padding: 20px;
+    }
+
+    .section-title {
+        font-size: 20px;
+    }
+
+    .section-subtitle {
+        font-size: 14px;
+    }
+
+    .coming-soon {
+        padding: 60px 20px;
+    }
+
+    .coming-soon h2 {
+        font-size: 24px;
+    }
+
+    .coming-soon p {
+        font-size: 16px;
     }
 }
 

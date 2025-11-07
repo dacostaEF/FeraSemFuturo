@@ -1,0 +1,2262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparador Inteligente de Investimentos - Faça Seu Futuro</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #4B014A 0%, #5D0F5A 50%, #8B2D88 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            color: #FFFFFF;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            color: #FFFFFF;
+        }
+
+        /* Sistema de Abas */
+        .tabs-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            flex-shrink: 0; /* Importante para scroll horizontal */
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: #00B894;
+            color: #FFFFFF;
+            border-color: #00B894;
+            box-shadow: 0 5px 15px rgba(0, 184, 148, 0.3);
+        }
+
+        /* Esconder texto completo em mobile */
+        .tab-btn .tab-text-full {
+            display: inline;
+        }
+
+        .tab-btn .tab-text-short {
+            display: none;
+        }
+
+        /* Conteúdo das Abas */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        /* Callouts */
+        .callout {
+            display: flex;
+            gap: 15px;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border-left: 4px solid;
+        }
+
+        .callout-info {
+            background: rgba(59, 130, 246, 0.1);
+            border-left-color: #3B82F6;
+        }
+
+        .callout-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-left-color: #F59E0B;
+        }
+
+        .callout-success {
+            background: rgba(0, 184, 148, 0.1);
+            border-left-color: #00B894;
+        }
+
+        .callout-icon {
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        .callout-content h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .callout-content p {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Form Styles */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 15px;
+        }
+
+        .input-group select,
+        .input-group input {
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            color: #333;
+            background: white;
+        }
+
+        .input-group select:focus,
+        .input-group input:focus {
+            outline: none;
+            border-color: #4B014A;
+            box-shadow: 0 0 0 3px rgba(75, 1, 74, 0.1);
+        }
+
+        .input-group small {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4B014A, #8B2D88);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(75, 1, 74, 0.3);
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            height: 500px;
+        }
+
+        /* Results Grid */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .result-card {
+            border: 2px solid #e1e5e9;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .result-card.best {
+            border-color: #00B894;
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+        }
+
+        .result-card.poupanca {
+            border-color: #F59E0B;
+            background: linear-gradient(135deg, #fffbf0, #fff3e0);
+        }
+
+        .result-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .result-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #00B894;
+            margin-bottom: 5px;
+        }
+
+        .result-difference {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        /* Insight Box */
+        .insight-box {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 2px solid #F59E0B;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .insight-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .insight-text {
+            color: #856404;
+            line-height: 1.6;
+        }
+
+        /* Ranking Table */
+        .ranking-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .ranking-table th,
+        .ranking-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e1e5e9;
+        }
+
+        .ranking-table th {
+            background: #f8f9fa;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .ranking-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .rank-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .rank-1 { background: #FFD700; color: #333; }
+        .rank-2 { background: #C0C0C0; color: #333; }
+        .rank-3 { background: #CD7F32; color: white; }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4B014A;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Botão Histórico */
+        .btn-history {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #00B894, #55EFC4);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 184, 148, 0.4);
+            transition: all 0.3s ease;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-history:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 184, 148, 0.6);
+        }
+
+        .history-badge {
+            background: #EF4444;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            display: none;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #4B014A, #8B2D88);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .btn-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 30px;
+            max-height: calc(80vh - 80px);
+            overflow-y: auto;
+        }
+
+        .history-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 2px solid #e1e5e9;
+            transition: all 0.3s ease;
+        }
+
+        .history-item:hover {
+            border-color: #00B894;
+            box-shadow: 0 5px 15px rgba(0, 184, 148, 0.2);
+        }
+
+        .history-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e1e5e9;
+        }
+
+        .history-date {
+            font-size: 14px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .btn-load-history {
+            background: #00B894;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-load-history:hover {
+            background: #008f73;
+            transform: translateY(-2px);
+        }
+
+        .history-item-details p {
+            margin: 8px 0;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .btn-clear-history {
+            background: #EF4444;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-clear-history:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        /* Responsividade */
+        /* ============================================
+           MOBILE-FIRST RESPONSIVE
+           ============================================ */
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+            
+            /* TABS - Horizontal Scroll */
+            .tabs-nav {
+                flex-wrap: nowrap; /* Não quebrar linha */
+                justify-content: flex-start; /* Alinhar à esquerda */
+                overflow-x: auto; /* Scroll horizontal */
+                overflow-y: hidden;
+                gap: 8px;
+                padding: 5px 10px;
+                margin-bottom: 20px;
+                
+                /* Smooth scroll */
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+                
+                /* Esconder scrollbar mas manter funcionalidade */
+                scrollbar-width: thin;
+                scrollbar-color: rgba(255,255,255,0.3) transparent;
+            }
+
+            .tabs-nav::-webkit-scrollbar {
+                height: 4px;
+            }
+
+            .tabs-nav::-webkit-scrollbar-track {
+                background: rgba(255,255,255,0.1);
+                border-radius: 10px;
+            }
+
+            .tabs-nav::-webkit-scrollbar-thumb {
+                background: rgba(255,255,255,0.3);
+                border-radius: 10px;
+            }
+
+            .tabs-nav::-webkit-scrollbar-thumb:hover {
+                background: rgba(255,255,255,0.5);
+            }
+            
+            .tab-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+                min-height: 44px; /* Touch-friendly */
+                border-radius: 8px;
+            }
+
+            /* Mostrar texto abreviado */
+            .tab-btn .tab-text-full {
+                display: none;
+            }
+
+            .tab-btn .tab-text-short {
+                display: inline;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-card {
+                padding: 20px;
+            }
+            
+            .chart-container {
+                height: 400px;
+            }
+
+            .btn-history {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+
+            .modal-content {
+                width: 95%;
+                max-height: 90vh;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .history-item-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .btn-load-history {
+                width: 100%;
+            }
+        }
+
+        /* Mobile Portrait Extra (< 480px) */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .header p {
+                font-size: 0.9rem;
+            }
+
+            .content-card {
+                padding: 15px;
+                border-radius: 15px;
+            }
+
+            .tab-btn {
+                padding: 10px 14px;
+                font-size: 12px;
+                min-height: 44px;
+            }
+
+            .input-group label {
+                font-size: 14px;
+            }
+
+            .input-group select,
+            .input-group input {
+                padding: 10px 12px;
+                font-size: 16px; /* Evita zoom iOS */
+            }
+
+            .btn-primary {
+                padding: 12px 20px;
+                font-size: 16px;
+                min-height: 48px;
+            }
+
+            .chart-container {
+                height: 250px;
+                padding: 10px;
+            }
+
+            .result-card {
+                padding: 15px;
+            }
+
+            .result-title {
+                font-size: 1rem;
+            }
+
+            .result-value {
+                font-size: 1.5rem;
+            }
+
+            .callout {
+                padding: 15px;
+                gap: 10px;
+            }
+
+            .callout-icon {
+                font-size: 20px;
+            }
+
+            .callout-content h3 {
+                font-size: 14px;
+            }
+
+            .callout-content p {
+                font-size: 13px;
+            }
+
+            .btn-history {
+                bottom: 15px;
+                right: 15px;
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 Comparador Inteligente de Investimentos</h1>
+            <p>Análise completa de Renda Fixa - Compare, simule e invista com inteligência</p>
+        </div>
+
+        <!-- Botão Flutuante de Histórico -->
+        <button class="btn-history" onclick="showHistoryModal()">
+            📚 Histórico
+            <span class="history-badge">0</span>
+        </button>
+
+        <!-- Sistema de Abas -->
+        <div class="tabs-nav">
+            <button class="tab-btn active" onclick="switchTab('comparar')">
+                📊 <span class="tab-text-full">Comparar</span><span class="tab-text-short">Comparar</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('simular')">
+                📈 <span class="tab-text-full">Simulador Evolutivo</span><span class="tab-text-short">Simulador</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('ranking')">
+                🏆 <span class="tab-text-full">Ranking</span><span class="tab-text-short">Ranking</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('cenario')">
+                💰 <span class="tab-text-full">Meu Cenário</span><span class="tab-text-short">Cenário</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('educacao')">
+                📚 <span class="tab-text-full">Educação</span><span class="tab-text-short">Educação</span>
+            </button>
+        </div>
+
+        <!-- ABA 1: COMPARAR -->
+        <div id="tab-comparar" class="tab-content active">
+            <div class="content-card">
+                <div class="callout callout-info">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-content">
+                        <h3>Por que este comparador é diferente?</h3>
+                        <p>
+                            Ele considera <strong>TODOS</strong> os custos ocultos: Imposto de Renda regressivo, 
+                            taxa de custódia, taxa de administração e isenções. Assim você vê o <strong>rendimento 
+                            líquido REAL</strong> que vai para o seu bolso.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="compareAmount">💰 Valor do Investimento (R$)</label>
+                        <input type="number" id="compareAmount" value="10000" min="1000" step="1000">
+                        <small>Valor mínimo: R$ 1.000</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="compareTime">⏱️ Prazo (meses)</label>
+                        <input type="number" id="compareTime" value="12" min="1" max="360">
+                        <small>De 1 a 360 meses</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="compareProduct">🏦 Produto para Comparar</label>
+                        <select id="compareProduct">
+                            <option value="">Carregando produtos...</option>
+                        </select>
+                        <small>Dados atualizados do CSV</small>
+                    </div>
+                </div>
+
+                <button class="btn-primary" onclick="runComparison()">
+                    🔍 Comparar Agora
+                </button>
+
+                <div id="compareResults"></div>
+
+                <div class="callout callout-info" style="margin-top: 25px;">
+                    <div class="callout-icon">ℹ️</div>
+                    <div class="callout-content">
+                        <h3>Premissas dos cálculos (Jan/2025):</h3>
+                        <p>
+                            <strong>CDI:</strong> 13,65% a.a. | 
+                            <strong>Selic:</strong> 13,75% a.a. | 
+                            <strong>IPCA:</strong> 4,5% a.a. (estimado)<br>
+                            <strong>Poupança:</strong> 0,5% a.m. (Selic > 8,5%)<br>
+                            <strong>IR:</strong> Tabela regressiva (22,5% até 6m → 15% acima de 24m)<br>
+                            <strong>FGC:</strong> Protege até R$ 250 mil por CPF/instituição
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA 2: SIMULADOR EVOLUTIVO -->
+        <div id="tab-simular" class="tab-content">
+            <div class="content-card">
+                <div class="callout callout-success">
+                    <div class="callout-icon">📈</div>
+                    <div class="callout-content">
+                        <h3>Veja seu dinheiro crescendo ao longo do tempo!</h3>
+                        <p>
+                            Este simulador mostra a <strong>evolução mês a mês</strong> do seu capital, 
+                            incluindo aportes mensais. Compare visualmente CDB vs Poupança e descubra 
+                            quanto você está perdendo!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="initialAmount">💰 Capital Inicial (R$)</label>
+                        <input type="number" id="initialAmount" value="10000" min="1000" step="1000">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="monthlyInvestment">📅 Aporte Mensal (R$)</label>
+                        <input type="number" id="monthlyInvestment" value="500" min="0" step="100">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="timePeriod">⏱️ Período (anos)</label>
+                        <input type="number" id="timePeriod" value="5" min="1" max="30">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="cdbOption">🏦 CDB para Comparar</label>
+                        <select id="cdbOption">
+                            <option value="150">Banco XP - 150% CDI</option>
+                            <option value="130">PagBank - 130% CDI</option>
+                            <option value="115">Banco Master - 115% CDI</option>
+                            <option value="113">Banco Neon - 113% CDI</option>
+                            <option value="110">Banco Pine - 110% CDI</option>
+                            <option value="106">BMG - 106% CDI</option>
+                            <option value="105">Daycoval - 105% CDI</option>
+                            <option value="104">Pan - 104% CDI</option>
+                            <option value="102">C6 - 102% CDI</option>
+                            <option value="100">Bancões - 100% CDI</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="btn-primary" onclick="runSimulation()">
+                    🚀 Simular Evolução do Capital
+                </button>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="evolutionChart"></canvas>
+            </div>
+
+            <div class="content-card">
+                <div class="results-grid" id="simulationResults"></div>
+
+                <div class="insight-box" id="insightBox">
+                    <div class="insight-title">💡 Insight do Especialista</div>
+                    <div class="insight-text" id="insightText">
+                        Clique em "Simular" para ver análise personalizada do seu investimento...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA 3: RANKING -->
+        <div id="tab-ranking" class="tab-content">
+            <div class="content-card">
+                <h2 style="color: #333; margin-bottom: 20px;">🏆 Ranking dos Melhores CDBs (Jan/2025)</h2>
+                
+                <div class="callout callout-success">
+                    <div class="callout-icon">💎</div>
+                    <div class="callout-content">
+                        <h3>TOP CDBs do mercado</h3>
+                        <p>
+                            Dados <strong>reais e atualizados</strong> dos melhores CDBs disponíveis no mercado. 
+                            Ranking baseado em rentabilidade líquida (após IR) para liquidez diária.
+                        </p>
+                    </div>
+                </div>
+
+                <table class="ranking-table">
+                    <thead>
+                        <tr>
+                            <th>Ranking</th>
+                            <th>Banco</th>
+                            <th>Taxa</th>
+                            <th>Liquidez</th>
+                            <th>Valor Mínimo</th>
+                            <th>FGC</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rankingTableBody">
+                        <tr>
+                            <td><span class="rank-badge rank-1">🥇 1º</span></td>
+                            <td><strong>Banco XP</strong></td>
+                            <td>150% CDI</td>
+                            <td>Diária</td>
+                            <td>Consultar</td>
+                            <td>✓ Sim</td>
+                        </tr>
+                        <tr>
+                            <td><span class="rank-badge rank-2">🥈 2º</span></td>
+                            <td><strong>PagBank</strong></td>
+                            <td>130% CDI</td>
+                            <td>Diária</td>
+                            <td>Consultar</td>
+                            <td>✓ Sim</td>
+                        </tr>
+                        <tr>
+                            <td><span class="rank-badge rank-3">🥉 3º</span></td>
+                            <td><strong>Banco Master</strong></td>
+                            <td>115% CDI</td>
+                            <td>Diária</td>
+                            <td>Consultar</td>
+                            <td>✓ Sim</td>
+                        </tr>
+                        <tr>
+                            <td>4º</td>
+                            <td><strong>Banco Neon</strong></td>
+                            <td>113% CDI</td>
+                            <td>Diária</td>
+                            <td>Consultar</td>
+                            <td>✓ Sim</td>
+                        </tr>
+                        <tr>
+                            <td>5º</td>
+                            <td><strong>Banco Pine</strong></td>
+                            <td>110% CDI</td>
+                            <td>Diária</td>
+                            <td>Consultar</td>
+                            <td>✓ Sim</td>
+                        </tr>
+                        <tr>
+                            <td>6º</td>
+                            <td><strong>BMG</strong></td>
+                            <td>106% CDI</td>
+                            <td>Diária</td>
+                            <td>R$ 50</td>
+                            <td>✓ Sim</td>
+                        </tr>
+                        <tr>
+                            <td>7º</td>
+                            <td><strong>Paraná Banco</strong></td>
+                            <td>106% CDI</td>
+                            <td>Diária</td>
+                            <td>Consultar</td>
+                            <td>✓ Sim</td>
+                        </tr>
+                        <tr>
+                            <td>8º</td>
+                            <td><strong>Daycoval</strong></td>
+                            <td>105% CDI</td>
+                            <td>Diária</td>
+                            <td>R$ 1.000</td>
+                            <td>✓ Sim</td>
+                        </tr>
+                        <tr>
+                            <td>9º</td>
+                            <td><strong>Sofisa</strong></td>
+                            <td>105% CDI</td>
+                            <td>Diária</td>
+                            <td>R$ 1</td>
+                            <td>✓ Sim</td>
+                        </tr>
+                        <tr>
+                            <td>10º</td>
+                            <td><strong>C6</strong></td>
+                            <td>102% CDI</td>
+                            <td>Diária</td>
+                            <td>R$ 20</td>
+                            <td>✓ Sim</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="callout callout-warning" style="margin-top: 25px;">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-content">
+                        <h3>Atenção!</h3>
+                        <p>
+                            <strong>Taxas promocionais</strong> podem mudar a qualquer momento. Sempre consulte 
+                            o site/app oficial do banco antes de investir. Dados atualizados em <strong>Nov/2025</strong>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA 4: MEU CENÁRIO -->
+        <div id="tab-cenario" class="tab-content">
+            <div class="content-card">
+                <h2 style="color: #333; margin-bottom: 20px;">💰 Comparação Múltipla de Produtos</h2>
+                
+                <div class="callout callout-info">
+                    <div class="callout-icon">🎯</div>
+                    <div class="callout-content">
+                        <h3>Veja todos os produtos lado a lado!</h3>
+                        <p>
+                            Compare até <strong>5 produtos diferentes</strong> simultaneamente com gráfico evolutivo 
+                            e tabela de resultados. Dados <strong>carregados do CSV real</strong>!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="cenarioAmount">💰 Capital Inicial (R$)</label>
+                        <input type="number" id="cenarioAmount" value="5000" min="100" step="100">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="cenarioMonthly">📅 Aporte Mensal (R$)</label>
+                        <input type="number" id="cenarioMonthly" value="200" min="0" step="50">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="cenarioYears">⏱️ Por quantos anos?</label>
+                        <input type="number" id="cenarioYears" value="3" min="1" max="30">
+                    </div>
+                </div>
+
+                <!-- Container de Seleção Múltipla (preenchido pelo JS) -->
+                <div id="multiSelectContainer"></div>
+
+                <button class="btn-primary" onclick="runCenario()">
+                    🚀 Gerar Comparação Completa
+                </button>
+            </div>
+
+            <!-- Gráfico Múltiplo -->
+            <div class="chart-container" id="multiChartContainer" style="display: none;">
+                <canvas id="multiComparisonChart"></canvas>
+            </div>
+
+            <!-- Tabela de Resultados -->
+            <div class="content-card" id="multiResultsCard" style="display: none;">
+                <h2 style="color: #333; margin-bottom: 20px;">📊 Resultados Comparativos</h2>
+                <div id="multiResultsTable"></div>
+                
+                <div class="insight-box" style="margin-top: 20px;">
+                    <div class="insight-title">💡 Análise Comparativa</div>
+                    <div class="insight-text" id="multiInsight"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA 5: EDUCAÇÃO -->
+        <div id="tab-educacao" class="tab-content">
+            <div class="content-card">
+                <h2 style="color: #333; margin-bottom: 20px;">📚 Educação Financeira</h2>
+
+                <div class="callout callout-success">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-content">
+                        <h3>Entenda os conceitos básicos</h3>
+                        <p>Conhecimento é poder! Aprenda os termos mais importantes para investir com segurança.</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <h3 style="color: #4B014A; margin-bottom: 15px;">📊 O que é CDI?</h3>
+                    <p style="color: #333; line-height: 1.8; margin-bottom: 25px;">
+                        <strong>CDI (Certificado de Depósito Interbancário)</strong> é a taxa de juros usada nos 
+                        empréstimos entre bancos. Ela acompanha muito de perto a Taxa Selic e serve de referência 
+                        para a maioria dos investimentos de renda fixa. Quando você vê "CDB 110% do CDI", significa 
+                        que o investimento rende 10% a mais que a taxa CDI.
+                    </p>
+
+                    <h3 style="color: #4B014A; margin-bottom: 15px;">💰 O que é CDB?</h3>
+                    <p style="color: #333; line-height: 1.8; margin-bottom: 25px;">
+                        <strong>CDB (Certificado de Depósito Bancário)</strong> é um título emitido por bancos para 
+                        captar recursos. Quando você investe em CDB, está "emprestando" seu dinheiro ao banco, que te 
+                        devolve com juros. É protegido pelo FGC até R$ 250 mil por CPF/banco.
+                    </p>
+
+                    <h3 style="color: #4B014A; margin-bottom: 15px;">📉 O que é IR Regressivo?</h3>
+                    <p style="color: #333; line-height: 1.8; margin-bottom: 25px;">
+                        O <strong>Imposto de Renda Regressivo</strong> incentiva investimentos de longo prazo. 
+                        Quanto mais tempo você deixa o dinheiro investido, menor o imposto:
+                    </p>
+                    <ul style="color: #333; line-height: 1.8; margin-left: 30px; margin-bottom: 25px;">
+                        <li>Até 6 meses: <strong>22,5%</strong></li>
+                        <li>6 a 12 meses: <strong>20%</strong></li>
+                        <li>12 a 24 meses: <strong>17,5%</strong></li>
+                        <li>Acima de 24 meses: <strong>15%</strong></li>
+                    </ul>
+
+                    <h3 style="color: #4B014A; margin-bottom: 15px;">🏦 O que é Liquidez?</h3>
+                    <p style="color: #333; line-height: 1.8; margin-bottom: 25px;">
+                        <strong>Liquidez</strong> é a facilidade de resgatar seu dinheiro:
+                    </p>
+                    <ul style="color: #333; line-height: 1.8; margin-left: 30px; margin-bottom: 25px;">
+                        <li><strong>D+0 (Diária):</strong> Você resgata no mesmo dia</li>
+                        <li><strong>D+1:</strong> Resgata no próximo dia útil</li>
+                        <li><strong>D+30:</strong> Precisa esperar 30 dias</li>
+                        <li><strong>No vencimento:</strong> Só pode resgatar na data final</li>
+                    </ul>
+
+                    <h3 style="color: #4B014A; margin-bottom: 15px;">🛡️ O que é FGC?</h3>
+                    <p style="color: #333; line-height: 1.8; margin-bottom: 25px;">
+                        <strong>FGC (Fundo Garantidor de Créditos)</strong> é uma proteção para seu dinheiro. 
+                        Se o banco quebrar, o FGC garante até <strong>R$ 250 mil por CPF e por instituição</strong>. 
+                        É como um seguro automático e gratuito!
+                    </p>
+
+                    <h3 style="color: #4B014A; margin-bottom: 15px;">🎯 LCI e LCA - Investimentos Isentos</h3>
+                    <p style="color: #333; line-height: 1.8; margin-bottom: 25px;">
+                        <strong>LCI (Letra de Crédito Imobiliário)</strong> e <strong>LCA (Letra de Crédito do Agronegócio)</strong> 
+                        são investimentos <strong>isentos de Imposto de Renda</strong>. Por isso, mesmo com taxas 
+                        menores que CDB (ex: 95% do CDI), podem render mais no bolso!
+                    </p>
+                </div>
+
+                <div class="callout callout-warning" style="margin-top: 30px;">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-content">
+                        <h3>Dica de Ouro!</h3>
+                        <p>
+                            Sempre compare o <strong>rendimento líquido</strong> (depois do IR), não apenas a taxa 
+                            bruta. Use nosso Comparador para ver os valores reais que vão para seu bolso!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ============================================
+           PREPARAÇÃO PARA API FUTURA
+           ============================================
+           
+           Quando migrar para backend, substituir loadCSV() por:
+           
+           ENDPOINT 1: /api/products
+           GET - Retorna lista atualizada de produtos
+           Response: {
+             "products": [
+               {
+                 "id": 1,
+                 "banco": "Banco XP",
+                 "tipo": "Pós-fixado",
+                 "tipoTaxa": "CDI%",
+                 "taxaBase": 1.50,
+                 "liquidez": "Diária",
+                 "valorMinimo": "Consultar",
+                 "fgc": true
+               }
+             ],
+             "metadata": {
+               "lastUpdate": "2025-01-15T10:00:00Z",
+               "source": "Banco Central API"
+             }
+           }
+           
+           ENDPOINT 2: /api/simulate
+           POST - Recebe parâmetros e retorna cálculos
+           Body: {
+             "productId": 1,
+             "amount": 10000,
+             "monthly": 500,
+             "years": 5
+           }
+           Response: {
+             "finalValue": 15420.50,
+             "profit": 4420.50,
+             "evolution": [...],
+             "ir": 450.20
+           }
+           
+           ENDPOINT 3: /api/history
+           GET - Histórico do usuário (requer auth)
+           POST - Salvar simulação no servidor
+           DELETE - Limpar histórico
+           
+           ENDPOINT 4: /api/share
+           POST - Gera link compartilhável único
+           GET /api/share/:id - Carrega simulação compartilhada
+           
+           Tecnologias sugeridas:
+           - Backend: Node.js + Express
+           - Banco: MongoDB ou PostgreSQL  
+           - Cache: Redis (para cálculos frequentes)
+           - Auth: JWT (para histórico do usuário)
+           - Deploy: Vercel/Railway/Heroku
+           
+           ============================================ */
+
+        // CONSTANTES
+        const CDI_ANUAL = 13.65;
+        const SELIC_ANUAL = 13.75;
+        const POUPANCA_MENSAL = 0.5;
+        
+        let evolutionChart = null;
+        let investmentDatabase = []; // Dados carregados do CSV (futuramente: API)
+
+        // CORES PARA GRÁFICO MÚLTIPLO
+        const CHART_COLORS = [
+            { border: '#00B894', bg: 'rgba(0, 184, 148, 0.1)' },    // Verde Menta
+            { border: '#4B014A', bg: 'rgba(75, 1, 74, 0.1)' },      // Açaí Escuro
+            { border: '#8B2D88', bg: 'rgba(139, 45, 136, 0.1)' },   // Açaí Médio
+            { border: '#3B82F6', bg: 'rgba(59, 130, 246, 0.1)' },   // Azul
+            { border: '#F59E0B', bg: 'rgba(245, 158, 11, 0.1)' },   // Laranja
+            { border: '#EF4444', bg: 'rgba(239, 68, 68, 0.1)' },    // Vermelho
+            { border: '#8B5CF6', bg: 'rgba(139, 92, 246, 0.1)' },   // Roxo
+        ];
+
+        /* ============================================
+           LOCAL STORAGE - HISTÓRICO DE SIMULAÇÕES
+           ============================================ */
+        
+        const STORAGE_KEY = 'comparadorInvestimentos_history';
+        const MAX_HISTORY = 10; // Manter últimas 10 simulações
+
+        // Salvar simulação no localStorage
+        function saveSimulation(data) {
+            try {
+                let history = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+                
+                const simulation = {
+                    id: Date.now(),
+                    timestamp: new Date().toISOString(),
+                    dateFormatted: new Date().toLocaleString('pt-BR'),
+                    ...data
+                };
+                
+                history.unshift(simulation);
+                history = history.slice(0, MAX_HISTORY);
+                
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+                console.log('💾 Simulação salva no histórico');
+                
+                updateHistoryBadge();
+                return true;
+            } catch (error) {
+                console.error('❌ Erro ao salvar simulação:', error);
+                return false;
+            }
+        }
+
+        // Carregar histórico
+        function loadHistory() {
+            try {
+                return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            } catch (error) {
+                console.error('❌ Erro ao carregar histórico:', error);
+                return [];
+            }
+        }
+
+        // Limpar histórico
+        function clearHistory() {
+            if (confirm('🗑️ Deseja realmente limpar todo o histórico de simulações?')) {
+                localStorage.removeItem(STORAGE_KEY);
+                updateHistoryBadge();
+                alert('✅ Histórico limpo com sucesso!');
+                closeHistoryModal();
+            }
+        }
+
+        // Atualizar badge de contagem
+        function updateHistoryBadge() {
+            const history = loadHistory();
+            const badges = document.querySelectorAll('.history-badge');
+            badges.forEach(badge => {
+                badge.textContent = history.length;
+                badge.style.display = history.length > 0 ? 'inline-block' : 'none';
+            });
+        }
+
+        // Mostrar modal de histórico
+        function showHistoryModal() {
+            const history = loadHistory();
+            
+            let modalHTML = `
+                <div class="modal-overlay" onclick="closeHistoryModal()">
+                    <div class="modal-content" onclick="event.stopPropagation()">
+                        <div class="modal-header">
+                            <h2>📚 Histórico de Simulações</h2>
+                            <button class="btn-close" onclick="closeHistoryModal()">✕</button>
+                        </div>
+                        <div class="modal-body">
+            `;
+            
+            if (history.length === 0) {
+                modalHTML += `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <h3>Nenhuma simulação salva ainda</h3>
+                        <p>Suas simulações aparecerão aqui automaticamente</p>
+                    </div>
+                `;
+            } else {
+                history.forEach((sim, index) => {
+                    const productsText = sim.products ? sim.products.join(', ') : sim.productName || 'N/A';
+                    
+                    modalHTML += `
+                        <div class="history-item">
+                            <div class="history-item-header">
+                                <span class="history-date">🕐 ${sim.dateFormatted}</span>
+                                <button class="btn-load-history" onclick="loadSimulation(${index})">
+                                    📥 Carregar
+                                </button>
+                            </div>
+                            <div class="history-item-details">
+                                <p><strong>Produto(s):</strong> ${productsText}</p>
+                                <p><strong>Capital Inicial:</strong> R$ ${(sim.initial || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
+                                <p><strong>Aporte Mensal:</strong> R$ ${(sim.monthly || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
+                                <p><strong>Prazo:</strong> ${sim.years} ano${sim.years > 1 ? 's' : ''}</p>
+                                ${sim.finalValue ? `<p><strong>Resultado:</strong> R$ ${sim.finalValue.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>` : ''}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                modalHTML += `
+                    <button class="btn-clear-history" onclick="clearHistory()">
+                        🗑️ Limpar Histórico
+                    </button>
+                `;
+            }
+            
+            modalHTML += `
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+        }
+
+        // Fechar modal
+        function closeHistoryModal() {
+            const modal = document.querySelector('.modal-overlay');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        // Carregar simulação específica
+        function loadSimulation(index) {
+            const history = loadHistory();
+            const sim = history[index];
+            
+            if (!sim) {
+                alert('❌ Simulação não encontrada!');
+                return;
+            }
+            
+            // Preencher formulário baseado no tipo de simulação
+            if (sim.type === 'multi') {
+                // Aba Meu Cenário
+                switchTab('cenario');
+                document.getElementById('cenarioAmount').value = sim.initial || 0;
+                document.getElementById('cenarioMonthly').value = sim.monthly || 0;
+                document.getElementById('cenarioYears').value = sim.years || 1;
+                
+                setTimeout(() => {
+                    alert('✅ Simulação carregada! Configure os produtos e clique em "Gerar Comparação"');
+                }, 100);
+            } else {
+                // Aba Simulador
+                switchTab('simular');
+                document.getElementById('initialAmount').value = sim.initial || 0;
+                document.getElementById('monthlyInvestment').value = sim.monthly || 0;
+                document.getElementById('timePeriod').value = sim.years || 1;
+                
+                setTimeout(() => {
+                    runSimulation();
+                    alert('✅ Simulação carregada e executada!');
+                }, 100);
+            }
+            
+            closeHistoryModal();
+        }
+
+        // CARREGAR CSV
+        async function loadCSV() {
+            try {
+                const response = await fetch('../ROBOS_Codigos_Financeiros/CDB_Bancos_Completo.csv');
+                const text = await response.text();
+                
+                const lines = text.split('\n');
+                const headers = lines[0].split(',');
+                
+                investmentDatabase = [];
+                
+                for (let i = 1; i < lines.length; i++) {
+                    if (!lines[i].trim()) continue;
+                    
+                    const values = lines[i].split(',');
+                    
+                    const product = {
+                        banco: values[0]?.trim() || '',
+                        tipo: values[1]?.trim() || '',
+                        tipoTaxa: values[2]?.trim() || '',
+                        taxaBase: parseFloat(values[3]) || 0,
+                        prazoDias: values[4]?.trim() || '',
+                        liquidez: values[5]?.trim() || '',
+                        valorMinimo: values[6]?.trim() || '',
+                        fgc: values[7]?.trim() || '',
+                        observacoes: values[8]?.trim() || ''
+                    };
+                    
+                    // Filtrar produtos válidos
+                    if (product.banco && product.taxaBase > 0) {
+                        investmentDatabase.push(product);
+                    }
+                }
+                
+                console.log(`✅ ${investmentDatabase.length} produtos carregados do CSV`);
+                populateProductSelectors();
+                
+            } catch (error) {
+                console.error('Erro ao carregar CSV:', error);
+                // Usar dados fallback se CSV não carregar
+                useFallbackData();
+            }
+        }
+
+        // DADOS FALLBACK (caso CSV não carregue)
+        function useFallbackData() {
+            investmentDatabase = [
+                { banco: 'Banco XP', tipo: 'Pós-fixado', tipoTaxa: 'CDI%', taxaBase: 1.50, liquidez: 'Diária', valorMinimo: 'Consultar', fgc: 'Sim' },
+                { banco: 'PagBank', tipo: 'Pós-fixado', tipoTaxa: 'CDI%', taxaBase: 1.30, liquidez: 'Diária', valorMinimo: 'Consultar', fgc: 'Sim' },
+                { banco: 'Banco Master', tipo: 'Pós-fixado', tipoTaxa: 'CDI%', taxaBase: 1.15, liquidez: 'Diária', valorMinimo: 'Consultar', fgc: 'Sim' },
+                { banco: 'Banco Neon', tipo: 'Pós-fixado', tipoTaxa: 'CDI%', taxaBase: 1.13, liquidez: 'Diária', valorMinimo: 'Consultar', fgc: 'Sim' },
+                { banco: 'Banco Pine', tipo: 'Pós-fixado', tipoTaxa: 'CDI%', taxaBase: 1.10, liquidez: 'Diária', valorMinimo: 'Consultar', fgc: 'Sim' },
+                { banco: 'BMG', tipo: 'Pós-fixado', tipoTaxa: 'CDI%', taxaBase: 1.06, liquidez: 'Diária', valorMinimo: '50', fgc: 'Sim' },
+                { banco: 'Daycoval', tipo: 'Pós-fixado', tipoTaxa: 'CDI%', taxaBase: 1.05, liquidez: 'Diária', valorMinimo: '1000', fgc: 'Sim' },
+                { banco: 'Sofisa', tipo: 'Pós-fixado', tipoTaxa: 'CDI%', taxaBase: 1.05, liquidez: 'Diária', valorMinimo: '1', fgc: 'Sim' },
+                { banco: 'C6', tipo: 'Pós-fixado', tipoTaxa: 'CDI%', taxaBase: 1.02, liquidez: 'Diária', valorMinimo: '20', fgc: 'Sim' },
+                { banco: 'Inter', tipo: 'Pós-fixado', tipoTaxa: 'CDI%', taxaBase: 1.00, liquidez: 'Diária', valorMinimo: '1', fgc: 'Sim' }
+            ];
+            console.log('⚠️ Usando dados fallback');
+            populateProductSelectors();
+        }
+
+        // POPULAR SELETORES COM DADOS DO CSV
+        function populateProductSelectors() {
+            // Aba 1: Comparar (select)
+            const compareSelect = document.getElementById('compareProduct');
+            if (compareSelect) {
+                compareSelect.innerHTML = '<option value="">Selecione um produto</option>';
+                
+                investmentDatabase.forEach((product, index) => {
+                    if (product.tipoTaxa.includes('CDI')) {
+                        const option = document.createElement('option');
+                        const percentCDI = (product.taxaBase * 100).toFixed(0);
+                        option.value = index;
+                        option.textContent = `${product.banco} - ${percentCDI}% CDI`;
+                        compareSelect.appendChild(option);
+                    }
+                });
+            }
+            
+            // Aba 2: Simulador Evolutivo (select)
+            const cdbSelect = document.getElementById('cdbOption');
+            if (cdbSelect) {
+                cdbSelect.innerHTML = '';
+                
+                investmentDatabase.forEach((product, index) => {
+                    if (product.tipoTaxa.includes('CDI')) {
+                        const option = document.createElement('option');
+                        const percentCDI = (product.taxaBase * 100).toFixed(0);
+                        option.value = index;
+                        option.textContent = `${product.banco} - ${percentCDI}% CDI`;
+                        cdbSelect.appendChild(option);
+                    }
+                });
+            }
+            
+            // Aba 4: Meu Cenário (checkboxes múltiplos)
+            populateMultiSelect();
+            
+            console.log('✅ Todos os seletores populados com dados do CSV');
+        }
+
+        // POPULAR MULTI-SELECT (Aba Meu Cenário)
+        function populateMultiSelect() {
+            const container = document.getElementById('multiSelectContainer');
+            if (!container) return;
+            
+            container.innerHTML = '<h3 style="color: #333; margin-bottom: 15px;">Selecione até 5 produtos para comparar:</h3>';
+            
+            const grid = document.createElement('div');
+            grid.style.display = 'grid';
+            grid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(250px, 1fr))';
+            grid.style.gap = '10px';
+            grid.style.marginBottom = '20px';
+            
+            // Adicionar Poupança sempre
+            const poupItem = document.createElement('label');
+            poupItem.style.display = 'flex';
+            poupItem.style.alignItems = 'center';
+            poupItem.style.padding = '10px';
+            poupItem.style.border = '2px solid #e1e5e9';
+            poupItem.style.borderRadius = '8px';
+            poupItem.style.cursor = 'pointer';
+            poupItem.innerHTML = `
+                <input type="checkbox" class="product-checkbox" value="poupanca" checked 
+                       style="margin-right: 10px; width: 18px; height: 18px;">
+                <span style="color: #333; font-weight: 500;">🐷 Poupança (0,5% a.m.)</span>
+            `;
+            grid.appendChild(poupItem);
+            
+            // Adicionar produtos do CSV
+            investmentDatabase.slice(0, 10).forEach((product, index) => {
+                if (product.tipoTaxa.includes('CDI')) {
+                    const item = document.createElement('label');
+                    item.style.display = 'flex';
+                    item.style.alignItems = 'center';
+                    item.style.padding = '10px';
+                    item.style.border = '2px solid #e1e5e9';
+                    item.style.borderRadius = '8px';
+                    item.style.cursor = 'pointer';
+                    item.style.transition = 'all 0.3s ease';
+                    
+                    const percentCDI = (product.taxaBase * 100).toFixed(0);
+                    const isTopThree = index < 3;
+                    
+                    item.innerHTML = `
+                        <input type="checkbox" class="product-checkbox" value="${index}" 
+                               ${isTopThree ? 'checked' : ''}
+                               style="margin-right: 10px; width: 18px; height: 18px;">
+                        <span style="color: #333; font-weight: 500;">
+                            ${isTopThree ? '⭐ ' : ''}${product.banco} (${percentCDI}% CDI)
+                        </span>
+                    `;
+                    
+                    item.addEventListener('mouseenter', function() {
+                        this.style.borderColor = '#00B894';
+                        this.style.backgroundColor = 'rgba(0, 184, 148, 0.05)';
+                    });
+                    
+                    item.addEventListener('mouseleave', function() {
+                        this.style.borderColor = '#e1e5e9';
+                        this.style.backgroundColor = 'transparent';
+                    });
+                    
+                    grid.appendChild(item);
+                }
+            });
+            
+            container.appendChild(grid);
+            
+            // Contador de selecionados
+            const counter = document.createElement('p');
+            counter.id = 'selectionCounter';
+            counter.style.color = '#666';
+            counter.style.fontSize = '14px';
+            counter.style.marginTop = '10px';
+            container.appendChild(counter);
+            
+            updateSelectionCounter();
+            
+            // Event listener para limitar a 5
+            document.querySelectorAll('.product-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const checked = document.querySelectorAll('.product-checkbox:checked');
+                    if (checked.length > 5) {
+                        this.checked = false;
+                        alert('⚠️ Você pode selecionar no máximo 5 produtos por vez!');
+                    }
+                    updateSelectionCounter();
+                });
+            });
+        }
+
+        function updateSelectionCounter() {
+            const counter = document.getElementById('selectionCounter');
+            if (counter) {
+                const checked = document.querySelectorAll('.product-checkbox:checked').length;
+                counter.textContent = `✓ ${checked} produto${checked !== 1 ? 's' : ''} selecionado${checked !== 1 ? 's' : ''} (máximo: 5)`;
+                counter.style.color = checked > 5 ? '#EF4444' : '#00B894';
+                counter.style.fontWeight = '600';
+            }
+        }
+
+        // SISTEMA DE ABAS
+        function switchTab(tabName) {
+            // Remover active de todos os botões e conteúdos
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Adicionar active ao botão e conteúdo clicado
+            event.target.classList.add('active');
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+        }
+
+        // CÁLCULOS
+        function calculateIR(months) {
+            if (months <= 6) return 0.225;
+            if (months <= 12) return 0.20;
+            if (months <= 24) return 0.175;
+            return 0.15;
+        }
+
+        function calculateCDB(initial, monthly, years, cdiPercent, withIR = true) {
+            const months = years * 12;
+            const monthlyCDI = Math.pow(1 + CDI_ANUAL/100, 1/12) - 1;
+            const monthlyRate = monthlyCDI * (cdiPercent / 100);
+            
+            let total = initial;
+            const evolution = [initial];
+            
+            for (let i = 0; i < months; i++) {
+                total = total * (1 + monthlyRate) + monthly;
+                evolution.push(total);
+            }
+            
+            // Aplicar IR no final se necessário
+            if (withIR) {
+                const invested = initial + (monthly * months);
+                const profit = evolution[evolution.length - 1] - invested;
+                const irRate = calculateIR(months);
+                const tax = profit * irRate;
+                evolution[evolution.length - 1] -= tax;
+            }
+            
+            return evolution;
+        }
+
+        function calculatePoupanca(initial, monthly, years) {
+            const months = years * 12;
+            const monthlyRate = POUPANCA_MENSAL / 100;
+            
+            let total = initial;
+            const evolution = [initial];
+            
+            for (let i = 0; i < months; i++) {
+                total = total * (1 + monthlyRate) + monthly;
+                evolution.push(total);
+            }
+            
+            return evolution;
+        }
+
+        // ABA 1: COMPARAR
+        function runComparison() {
+            const amount = parseFloat(document.getElementById('compareAmount').value);
+            const months = parseInt(document.getElementById('compareTime').value);
+            const productIndex = parseInt(document.getElementById('compareProduct').value);
+            
+            if (isNaN(productIndex)) {
+                alert('⚠️ Por favor, selecione um produto para comparar!');
+                return;
+            }
+            
+            // Buscar produto do banco de dados CSV
+            const product = investmentDatabase[productIndex];
+            if (!product) {
+                alert('⚠️ Produto não encontrado!');
+                return;
+            }
+            
+            const cdiPercent = product.taxaBase * 100;
+            const percentLabel = (product.taxaBase * 100).toFixed(0);
+            const productName = `${product.banco} (${percentLabel}% CDI)`;
+            
+            // Calcular
+            const cdbEvol = calculateCDB(amount, 0, months/12, cdiPercent);
+            const poupEvol = calculatePoupanca(amount, 0, months/12);
+            
+            const cdbFinal = cdbEvol[cdbEvol.length - 1];
+            const poupFinal = poupEvol[poupEvol.length - 1];
+            const difference = cdbFinal - poupFinal;
+            
+            // Mostrar resultados
+            const resultsDiv = document.getElementById('compareResults');
+            resultsDiv.innerHTML = `
+                <div class="results-grid" style="margin-top: 30px;">
+                    <div class="result-card best">
+                        <div class="result-icon">🏆</div>
+                        <div class="result-title">${productName}</div>
+                        <div class="result-value">R$ ${cdbFinal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                        <div class="result-difference">Valor Final (após IR)</div>
+                    </div>
+                    
+                    <div class="result-card poupanca">
+                        <div class="result-icon">🐷</div>
+                        <div class="result-title">Poupança</div>
+                        <div class="result-value" style="color: #F59E0B;">R$ ${poupFinal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                        <div class="result-difference">Valor Final (isento IR)</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div class="result-icon">💰</div>
+                        <div class="result-title">Você GANHA com CDB</div>
+                        <div class="result-value">+ R$ ${difference.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                        <div class="result-difference">A mais em ${months} meses</div>
+                    </div>
+                </div>
+                
+                <div class="insight-box" style="margin-top: 20px;">
+                    <div class="insight-title">💡 Análise Personalizada</div>
+                    <div class="insight-text">
+                        🎯 Investindo <strong>R$ ${amount.toLocaleString('pt-BR')}</strong> por <strong>${months} meses</strong>, 
+                        o ${productName} rende <strong>R$ ${difference.toLocaleString('pt-BR', {minimumFractionDigits: 2})} A MAIS</strong> 
+                        que a poupança (já descontado o IR de ${(calculateIR(months)*100).toFixed(1)}%).<br><br>
+                        💰 Isso representa uma diferença de <strong>${((difference/poupFinal)*100).toFixed(1)}%</strong> 
+                        no seu patrimônio final. É dinheiro trabalhando mais inteligente para você!
+                    </div>
+                </div>
+            `;
+        }
+
+        // ABA 2: SIMULADOR EVOLUTIVO
+        function runSimulation() {
+            const initial = parseFloat(document.getElementById('initialAmount').value);
+            const monthly = parseFloat(document.getElementById('monthlyInvestment').value);
+            const years = parseInt(document.getElementById('timePeriod').value);
+            const cdiPercent = parseFloat(document.getElementById('cdbOption').value);
+            
+            const cdbEvolution = calculateCDB(initial, monthly, years, cdiPercent);
+            const poupancaEvolution = calculatePoupanca(initial, monthly, years);
+            
+            // Gerar labels
+            const labels = [];
+            for (let i = 0; i <= years * 12; i++) {
+                const anos = Math.floor(i / 12);
+                const meses = i % 12;
+                if (meses === 0 || i === years * 12) {
+                    labels.push(`${anos} ano${anos !== 1 ? 's' : ''}`);
+                } else {
+                    labels.push('');
+                }
+            }
+            
+            updateChart(labels, cdbEvolution, poupancaEvolution, cdiPercent);
+            showSimulationResults(cdbEvolution, poupancaEvolution, cdiPercent, years);
+            generateInsights(cdbEvolution, poupancaEvolution, initial, monthly, years, cdiPercent);
+        }
+
+        function updateChart(labels, cdbData, poupancaData, cdiPercent) {
+            const ctx = document.getElementById('evolutionChart').getContext('2d');
+            
+            if (evolutionChart) {
+                evolutionChart.destroy();
+            }
+            
+            evolutionChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: `CDB ${cdiPercent}% CDI`,
+                            data: cdbData,
+                            borderColor: '#00B894',
+                            backgroundColor: 'rgba(0, 184, 148, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Poupança',
+                            data: poupancaData,
+                            borderColor: '#F59E0B',
+                            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Evolução do Capital ao Longo do Tempo',
+                            font: { size: 18 }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': R$ ' + 
+                                           context.parsed.y.toLocaleString('pt-BR', {
+                                               minimumFractionDigits: 2,
+                                               maximumFractionDigits: 2
+                                           });
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: function(value) {
+                                    return 'R$ ' + value.toLocaleString('pt-BR', {
+                                        minimumFractionDigits: 0,
+                                        maximumFractionDigits: 0
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function showSimulationResults(cdbEvolution, poupancaEvolution, cdiPercent, years) {
+            const finalCDB = cdbEvolution[cdbEvolution.length - 1];
+            const finalPoupanca = poupancaEvolution[poupancaEvolution.length - 1];
+            const difference = finalCDB - finalPoupanca;
+            
+            document.getElementById('simulationResults').innerHTML = `
+                <div class="result-card best">
+                    <div class="result-icon">🏆</div>
+                    <div class="result-title">CDB ${cdiPercent}% CDI</div>
+                    <div class="result-value">R$ ${finalCDB.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                    <div class="result-difference">Valor Final</div>
+                </div>
+                
+                <div class="result-card poupanca">
+                    <div class="result-icon">🐷</div>
+                    <div class="result-title">Poupança</div>
+                    <div class="result-value" style="color: #F59E0B;">R$ ${finalPoupanca.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                    <div class="result-difference">Valor Final</div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-icon">💰</div>
+                    <div class="result-title">Diferença</div>
+                    <div class="result-value">+ R$ ${difference.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                    <div class="result-difference">Em ${years} ano${years > 1 ? 's' : ''}</div>
+                </div>
+            `;
+        }
+
+        function generateInsights(cdbEvolution, poupancaEvolution, initial, monthly, years, cdiPercent) {
+            const finalCDB = cdbEvolution[cdbEvolution.length - 1];
+            const finalPoupanca = poupancaEvolution[poupancaEvolution.length - 1];
+            const difference = finalCDB - finalPoupanca;
+            
+            let insight = '';
+            
+            if (difference > 10000) {
+                insight = `🔥 <strong>INCRÍVEL!</strong> Em ${years} ano${years > 1 ? 's' : ''}, o CDB renderá <strong>R$ ${difference.toLocaleString('pt-BR', {minimumFractionDigits: 2})} A MAIS</strong> que a poupança. Isso é como ganhar um <strong>carro popular de graça</strong> só por escolher o investimento certo!`;
+            } else if (difference > 5000) {
+                insight = `💪 <strong>EXCELENTE!</strong> A diferença de <strong>R$ ${difference.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong> em ${years} ano${years > 1 ? 's' : ''} paga <strong>viagens em família</strong> ou <strong>móveis novos</strong> para sua casa. Tudo isso só mudando da poupança para CDB!`;
+            } else {
+                insight = `📈 <strong>VALE A PENA!</strong> Mesmo com aportes menores, o CDB rende <strong>R$ ${difference.toLocaleString('pt-BR', {minimumFractionDigits: 2})} a mais</strong>. Isso mostra como <strong>pequenas decisões inteligentes</strong> criam grandes resultados no longo prazo!`;
+            }
+            
+            insight += `<br><br>💡 <strong>Dica do Expert:</strong> O CDB ${cdiPercent}% CDI faz seu dinheiro trabalhar <strong>${(cdiPercent/70).toFixed(1)}x mais rápido</strong> que a poupança!`;
+            
+            document.getElementById('insightText').innerHTML = insight;
+        }
+
+        // ABA 4: MEU CENÁRIO - COMPARAÇÃO MÚLTIPLA
+        let multiChart = null;
+
+        function runCenario() {
+            const initial = parseFloat(document.getElementById('cenarioAmount').value);
+            const monthly = parseFloat(document.getElementById('cenarioMonthly').value);
+            const years = parseInt(document.getElementById('cenarioYears').value);
+            
+            // Pegar produtos selecionados
+            const checkboxes = document.querySelectorAll('.product-checkbox:checked');
+            if (checkboxes.length === 0) {
+                alert('⚠️ Selecione pelo menos 1 produto para comparar!');
+                return;
+            }
+            
+            if (checkboxes.length > 5) {
+                alert('⚠️ Máximo de 5 produtos por vez!');
+                return;
+            }
+            
+            // Calcular evolução de cada produto
+            const results = [];
+            const datasets = [];
+            
+            checkboxes.forEach((checkbox, index) => {
+                const value = checkbox.value;
+                let evolution, name, percentCDI;
+                
+                if (value === 'poupanca') {
+                    evolution = calculatePoupanca(initial, monthly, years);
+                    name = 'Poupança';
+                    percentCDI = 'N/A';
+                } else {
+                    const productIndex = parseInt(value);
+                    const product = investmentDatabase[productIndex];
+                    percentCDI = (product.taxaBase * 100).toFixed(0);
+                    name = `${product.banco} (${percentCDI}% CDI)`;
+                    evolution = calculateCDB(initial, monthly, years, product.taxaBase * 100);
+                }
+                
+                const finalValue = evolution[evolution.length - 1];
+                const invested = initial + (monthly * years * 12);
+                const profit = finalValue - invested;
+                const rentability = ((finalValue - invested) / invested) * 100;
+                
+                results.push({
+                    name,
+                    percentCDI,
+                    finalValue,
+                    invested,
+                    profit,
+                    rentability,
+                    evolution
+                });
+                
+                // Dataset para o gráfico
+                const color = CHART_COLORS[index % CHART_COLORS.length];
+                datasets.push({
+                    label: name,
+                    data: evolution,
+                    borderColor: color.border,
+                    backgroundColor: color.bg,
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                });
+            });
+            
+            // Gerar labels
+            const labels = [];
+            for (let i = 0; i <= years * 12; i++) {
+                const anos = Math.floor(i / 12);
+                const meses = i % 12;
+                if (meses === 0 || i === years * 12) {
+                    labels.push(`${anos}a`);
+                } else {
+                    labels.push('');
+                }
+            }
+            
+            // Mostrar gráfico
+            updateMultiChart(labels, datasets);
+            
+            // Mostrar tabela de resultados
+            showMultiResults(results, years);
+            
+            // Gerar insights
+            generateMultiInsights(results, years);
+            
+            // Mostrar containers
+            document.getElementById('multiChartContainer').style.display = 'block';
+            document.getElementById('multiResultsCard').style.display = 'block';
+            
+            // Scroll suave até o gráfico
+            document.getElementById('multiChartContainer').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Salvar simulação automaticamente
+            const productsNames = [];
+            checkboxes.forEach(checkbox => {
+                if (checkbox.value === 'poupanca') {
+                    productsNames.push('Poupança');
+                } else {
+                    const idx = parseInt(checkbox.value);
+                    if (investmentDatabase[idx]) {
+                        const percentCDI = (investmentDatabase[idx].taxaBase * 100).toFixed(0);
+                        productsNames.push(`${investmentDatabase[idx].banco} (${percentCDI}% CDI)`);
+                    }
+                }
+            });
+            
+            saveSimulation({
+                type: 'multi',
+                products: productsNames,
+                initial: initial,
+                monthly: monthly,
+                years: years,
+                finalValue: results[0].finalValue
+            });
+        }
+
+        function updateMultiChart(labels, datasets) {
+            const ctx = document.getElementById('multiComparisonChart').getContext('2d');
+            
+            if (multiChart) {
+                multiChart.destroy();
+            }
+            
+            multiChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Comparação de Evolução do Capital',
+                            font: { size: 18, weight: 'bold' }
+                        },
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: {
+                                padding: 15,
+                                font: { size: 12 },
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': R$ ' + 
+                                           context.parsed.y.toLocaleString('pt-BR', {
+                                               minimumFractionDigits: 2,
+                                               maximumFractionDigits: 2
+                                           });
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Valor Acumulado (R$)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return 'R$ ' + value.toLocaleString('pt-BR', {
+                                        minimumFractionDigits: 0,
+                                        maximumFractionDigits: 0
+                                    });
+                                }
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Tempo'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function showMultiResults(results, years) {
+            // Ordenar por melhor rentabilidade
+            results.sort((a, b) => b.finalValue - a.finalValue);
+            
+            let tableHTML = `
+                <table class="ranking-table">
+                    <thead>
+                        <tr>
+                            <th>Posição</th>
+                            <th>Produto</th>
+                            <th>Valor Final</th>
+                            <th>Investido</th>
+                            <th>Lucro Líquido</th>
+                            <th>Rentabilidade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            results.forEach((result, index) => {
+                const badge = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}º`;
+                
+                tableHTML += `
+                    <tr style="${index === 0 ? 'background: rgba(0, 184, 148, 0.1); font-weight: 600;' : ''}">
+                        <td>${badge}</td>
+                        <td>${result.name}</td>
+                        <td style="color: #00B894; font-weight: 700;">R$ ${result.finalValue.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
+                        <td>R$ ${result.invested.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
+                        <td style="color: #00B894;">+ R$ ${result.profit.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
+                        <td style="color: #4B014A; font-weight: 600;">${result.rentability.toFixed(2)}%</td>
+                    </tr>
+                `;
+            });
+            
+            tableHTML += `
+                    </tbody>
+                </table>
+            `;
+            
+            document.getElementById('multiResultsTable').innerHTML = tableHTML;
+        }
+
+        function generateMultiInsights(results, years) {
+            const best = results[0];
+            const worst = results[results.length - 1];
+            const difference = best.finalValue - worst.finalValue;
+            
+            let insight = `
+                🏆 <strong>Melhor Opção:</strong> ${best.name} com <strong>R$ ${best.finalValue.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong><br><br>
+            `;
+            
+            if (results.length > 1) {
+                const percentDiff = ((difference / worst.finalValue) * 100).toFixed(1);
+                
+                insight += `
+                    💰 <strong>Diferença entre melhor e pior:</strong> R$ ${difference.toLocaleString('pt-BR', {minimumFractionDigits: 2})} 
+                    (${percentDiff}% a mais!)<br><br>
+                `;
+                
+                if (difference > 5000) {
+                    insight += `
+                        🔥 <strong>IMPRESSIONANTE!</strong> A diferença de R$ ${difference.toLocaleString('pt-BR', {minimumFractionDigits: 2})} 
+                        em ${years} ano${years > 1 ? 's' : ''} pode pagar:
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>🚗 Entrada de um carro</li>
+                            <li>✈️ Viagem internacional</li>
+                            <li>🏠 Reforma completa da casa</li>
+                        </ul>
+                    `;
+                } else {
+                    insight += `
+                        📈 Escolher o produto certo faz <strong>toda a diferença</strong>! 
+                        Mesmo com valores menores, a escolha inteligente multiplica seus resultados.
+                    `;
+                }
+            } else {
+                insight += `
+                    💡 Selecione mais produtos para ver comparações mais ricas!
+                `;
+            }
+            
+            document.getElementById('multiInsight').innerHTML = insight;
+        }
+
+        // ATUALIZAR SIMULADOR PARA USAR DADOS DO CSV
+        function runSimulation() {
+            const initial = parseFloat(document.getElementById('initialAmount').value);
+            const monthly = parseFloat(document.getElementById('monthlyInvestment').value);
+            const years = parseInt(document.getElementById('timePeriod').value);
+            const productIndex = parseInt(document.getElementById('cdbOption').value);
+            
+            let cdiPercent, productName;
+            
+            if (investmentDatabase[productIndex]) {
+                const product = investmentDatabase[productIndex];
+                cdiPercent = product.taxaBase * 100;
+                const percentLabel = (product.taxaBase * 100).toFixed(0);
+                productName = `${product.banco} (${percentLabel}% CDI)`;
+            } else {
+                // Fallback
+                cdiPercent = 150;
+                productName = 'CDB 150% CDI';
+            }
+            
+            const cdbEvolution = calculateCDB(initial, monthly, years, cdiPercent);
+            const poupancaEvolution = calculatePoupanca(initial, monthly, years);
+            
+            // Gerar labels
+            const labels = [];
+            for (let i = 0; i <= years * 12; i++) {
+                const anos = Math.floor(i / 12);
+                const meses = i % 12;
+                if (meses === 0 || i === years * 12) {
+                    labels.push(`${anos} ano${anos !== 1 ? 's' : ''}`);
+                } else {
+                    labels.push('');
+                }
+            }
+            
+            updateChart(labels, cdbEvolution, poupancaEvolution, cdiPercent);
+            showSimulationResults(cdbEvolution, poupancaEvolution, cdiPercent, years, productName);
+            generateInsights(cdbEvolution, poupancaEvolution, initial, monthly, years, cdiPercent);
+            
+            // Salvar simulação automaticamente
+            const finalCDB = cdbEvolution[cdbEvolution.length - 1];
+            saveSimulation({
+                type: 'simulator',
+                productName: productName,
+                initial: initial,
+                monthly: monthly,
+                years: years,
+                finalValue: finalCDB
+            });
+        }
+
+        function showSimulationResults(cdbEvolution, poupancaEvolution, cdiPercent, years, productName) {
+            const finalCDB = cdbEvolution[cdbEvolution.length - 1];
+            const finalPoupanca = poupancaEvolution[poupancaEvolution.length - 1];
+            const difference = finalCDB - finalPoupanca;
+            
+            document.getElementById('simulationResults').innerHTML = `
+                <div class="result-card best">
+                    <div class="result-icon">🏆</div>
+                    <div class="result-title">${productName || `CDB ${cdiPercent}% CDI`}</div>
+                    <div class="result-value">R$ ${finalCDB.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                    <div class="result-difference">Valor Final</div>
+                </div>
+                
+                <div class="result-card poupanca">
+                    <div class="result-icon">🐷</div>
+                    <div class="result-title">Poupança</div>
+                    <div class="result-value" style="color: #F59E0B;">R$ ${finalPoupanca.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                    <div class="result-difference">Valor Final</div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-icon">💰</div>
+                    <div class="result-title">Diferença</div>
+                    <div class="result-value">+ R$ ${difference.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                    <div class="result-difference">Em ${years} ano${years > 1 ? 's' : ''}</div>
+                </div>
+            `;
+        }
+
+        // INICIALIZAR PÁGINA
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('🚀 Carregando Comparador Inteligente...');
+            await loadCSV();
+            updateHistoryBadge(); // Atualizar badge do histórico
+            runSimulation();
+            
+            console.log(`💾 Histórico: ${loadHistory().length} simulações salvas`);
+        });
+    </script>
+</body>
+</html>

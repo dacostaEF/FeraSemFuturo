@@ -1,0 +1,26 @@
+Banco/Emissor,Tipo,Tipo_Taxa,Taxa_Base,Prazo_dias,Liquidez,Valor_Minimo_R$,FGC,Observacoes/Fontes
+Banco XP,Pós-fixado,CDI%,1.50,Consultar,Diária,Consultar,Sim,"Taxa promocional, uma das mais altas do mercado para LD (Nov/2025)"
+PagBank,Pós-fixado,CDI%,1.30,Consultar,Diária,Consultar,Sim,"Alta rentabilidade, 130% CDI (Out/2025)"
+Banco Master,Pós-fixado,CDI%,1.15,Consultar,Diária,Consultar,Sim,"Alta rentabilidade, 115% CDI (Out/2025)"
+Banco Neon,Pós-fixado,CDI%,1.13,Consultar,Diária,Consultar,Sim,"Alta rentabilidade, 113% CDI (Out/2025)"
+Banco Pine,Pós-fixado,CDI%,1.10,Consultar,Diária,Consultar,Sim,"Alta rentabilidade, 110% CDI (Out/2025)"
+BMG,Pós-fixado,CDI%,1.06,Consultar,Diária,50,Sim,Atualizado: 106% CDI LD (Nov/2025)
+Paraná Banco,Pós-fixado,CDI%,1.06,Consultar,Diária,Consultar,Sim,Taxa de LD 106% CDI (Out/2025)
+Daycoval,Pós-fixado,CDI%,1.05,Consultar,Diária,1000,Sim,LD anunciado entre 103% e 105% do CDI (Nov/2025)
+Sofisa,Pós-fixado,CDI%,1.05,Consultar,Diária,1,Sim,CDB LD atualmente 105% do CDI; mínimo R$1
+Pan,Pós-fixado,CDI%,1.04,Consultar,Diária,Consultar,Sim,Exemplo de oferta de LD 104% CDI
+C6,Pós-fixado,CDI%,1.02,Consultar,Diária,20,Sim,CDB LD divulgado como 102% do CDI (Nov/2025)
+Santander,Pós-fixado,CDI%,1.00,Consultar,Diária,Consultar,Sim,Informado 100% do CDI para CDB DI (valor de mercado)
+Bradesco,Pós-fixado,CDI%,1.00,Consultar,Diária,100,Sim,100% do CDI LD (valor de mercado)
+Inter,Pós-fixado,CDI%,1.00,Consultar,Diária,1,Sim,"Inter destaca CDB com liquidez diária, 100% CDI"
+BTG Pactual,Pós-fixado,CDI%,1.00,Consultar,Diária,50,Sim,"CDB Essencial com LD, 100% CDI (valor de mercado)"
+Banco do Brasil,Pós-fixado,CDI%,*Varia*,Consultar,Diária,Consultar,Sim,Taxa não divulgada publicamente; geralmente 100% CDI ou mais
+Itaú,Pós-fixado,CDI%,*Varia*,Consultar,Diária,1,Sim,Taxa depende do prazo/relacionamento; a partir de R$1
+Caixa,Pós-fixado,CDI%,*Varia*,Consultar,Diária,Consultar,Sim,Taxa não divulgada publicamente; produto atrelado ao DI
+Original,Pós-fixado,CDI%,1.24,365,No vencimento,1000,Sim,"Exemplo de CDB NV distribuído via XP, 124% CDI"
+Modal,Pós-fixado,CDI%,1.10,380,No vencimento,1000,Sim,"Exemplo de CDB NV distribuído via XP, 110% CDI"
+Bari,Pós-fixado,CDI%,1.07,730,No vencimento,50,Sim,Exemplo de CDB NV via distribuidoras
+C6 Bank,Prefixado,Prefixado,0.1415,Até 2030,No vencimento,Consultar,Sim,"Taxa de 14,15% ao ano para longo prazo (Out/2025)"
+Caixa (Prefixado),Prefixado,Prefixado,*Varia*,Consultar,No vencimento,Consultar,Sim,Disponibilidade de prefixados; taxa via app
+Bradesco (Prefixado),Prefixado,Prefixado,*Varia*,Consultar,No vencimento,Consultar,Sim,Disponibilidade de prefixados; taxa via app
+Santander (Prefixado),Prefixado,Prefixado,*Varia*,Consultar,No vencimento,Consultar,Sim,Disponibilidade de prefixados; taxa via app

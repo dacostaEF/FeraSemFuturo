@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparador Inteligente - Feras Sem Futuro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .comparator-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        /* FORM STYLES */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .input-group select,
+        .input-group input {
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .input-group select:focus,
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-compare {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn-compare:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        /* RESULTS STYLES */
+        .results-container {
+            display: none;
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .investment-card {
+            border: 2px solid #e1e5e9;
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .investment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .investment-card.best {
+            border-color: #4CAF50;
+            background: linear-gradient(135deg, #f8fff8, #e8f5e8);
+        }
+
+        .investment-card.good {
+            border-color: #FF9800;
+            background: linear-gradient(135deg, #fffbf0, #fff3e0);
+        }
+
+        .investment-card.average {
+            border-color: #2196F3;
+            background: linear-gradient(135deg, #f0f8ff, #e3f2fd);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .card-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .card-details {
+            margin-top: 15px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .detail-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .detail-value.positive {
+            color: #4CAF50;
+        }
+
+        .detail-value.negative {
+            color: #f44336;
+        }
+
+        .final-value {
+            text-align: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #e1e5e9;
+        }
+
+        .final-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .rentability {
+            font-size: 1.1rem;
+            color: #4CAF50;
+            font-weight: 600;
+        }
+
+        /* LOADING */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ============================================
+           MOBILE-FIRST RESPONSIVE
+           ============================================ */
+        
+        /* Tablets e Mobile Landscape (< 768px) */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .comparator-card {
+                padding: 20px;
+            }
+
+            /* Grid → 1 coluna */
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            /* Cards responsivos */
+            .results-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .btn-compare {
+                padding: 14px 24px;
+                font-size: 16px;
+            }
+
+            .card-title {
+                font-size: 1.1rem;
+            }
+
+            .final-amount {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Mobile Portrait (< 480px) */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .header p {
+                font-size: 0.9rem;
+            }
+
+            .comparator-card {
+                padding: 15px;
+                border-radius: 15px;
+            }
+
+            .input-group label {
+                font-size: 14px;
+            }
+
+            .input-group select,
+            .input-group input {
+                padding: 10px 12px;
+                font-size: 16px; /* Mantém 16px para evitar zoom iOS */
+            }
+
+            .btn-compare {
+                padding: 12px 20px;
+                font-size: 15px;
+                min-height: 48px; /* Touch-friendly */
+            }
+
+            .investment-card {
+                padding: 15px;
+            }
+
+            .card-icon {
+                font-size: 1.5rem;
+            }
+
+            .card-title {
+                font-size: 1rem;
+            }
+
+            .card-subtitle {
+                font-size: 0.85rem;
+            }
+
+            .detail-item {
+                font-size: 14px;
+            }
+
+            .final-amount {
+                font-size: 1.2rem;
+            }
+
+            .rentability {
+                font-size: 1rem;
+            }
+
+            .card-badge {
+                font-size: 0.7rem;
+                padding: 4px 8px;
+            }
+        }
+
+        /* Mobile Muito Pequeno (< 360px) */
+        @media (max-width: 360px) {
+            .header h1 {
+                font-size: 1.3rem;
+            }
+
+            .comparator-card {
+                padding: 12px;
+            }
+
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .card-icon {
+                margin-bottom: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 Comparador Inteligente</h1>
+            <p>Compare investimentos de verdade - veja além da taxa bruta!</p>
+        </div>
+
+        <div class="comparator-card">
+            <!-- FORMULÁRIO -->
+            <div class="form-grid">
+                <div class="input-group">
+                    <label for="investmentType">📊 Tipo de Investimento</label>
+                    <select id="investmentType" onchange="loadSubOptions()">
+                        <option value="">Selecione uma categoria</option>
+                        <option value="cdb">CDB (Banco)</option>
+                        <option value="lci">LCI/LCA (Isento IR)</option>
+                        <option value="tesouro">Tesouro Direto</option>
+                        <option value="fundo">Fundos de Investimento</option>
+                        <option value="poupanca">Poupança</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="investmentSubtype">🏦 Instituição/Produto</label>
+                    <select id="investmentSubtype">
+                        <option value="">Primeiro selecione o tipo</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="investmentAmount">💰 Valor do Investimento (R$)</label>
+                    <input type="number" id="investmentAmount" value="10000" min="1000" step="1000">
+                </div>
+
+                <div class="input-group">
+                    <label for="investmentTime">⏱️ Prazo (meses)</label>
+                    <input type="number" id="investmentTime" value="12" min="1" max="360">
+                </div>
+            </div>
+
+            <button class="btn-compare" onclick="compareInvestments()">
+                🔍 Comparar Investimentos
+            </button>
+
+            <!-- LOADING -->
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Analisando melhores oportunidades...</p>
+            </div>
+
+            <!-- RESULTADOS -->
+            <div class="results-container" id="resultsContainer">
+                <h2 style="text-align: center; margin-bottom: 20px;">🎯 Resultado da Análise</h2>
+                <div class="results-grid" id="resultsGrid">
+                    <!-- Os cards serão inseridos aqui pelo JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DADOS SIMULADOS DE INVESTIMENTOS (na prática viria de API)
+        const investmentData = {
+            cdb: [
+                { 
+                    id: 'nubank-cdb', 
+                    name: 'Nubank', 
+                    subtitle: 'CDB 100% CDI',
+                    rate: 100, 
+                    rateType: 'cdi',
+                    tax: 'IR regressivo',
+                    liquidity: 'D+0',
+                    minValue: 1,
+                    adminTax: 0,
+                    insurance: 'FGC',
+                    icon: '🏦'
+                },
+                { 
+                    id: 'inter-cdb', 
+                    name: 'Inter', 
+                    subtitle: 'CDB 110% CDI',
+                    rate: 110, 
+                    rateType: 'cdi',
+                    tax: 'IR regressivo',
+                    liquidity: 'D+1',
+                    minValue: 1,
+                    adminTax: 0,
+                    insurance: 'FGC',
+                    icon: '💳'
+                },
+                { 
+                    id: 'xp-cdb', 
+                    name: 'XP Investimentos', 
+                    subtitle: 'CDB 115% CDI',
+                    rate: 115, 
+                    rateType: 'cdi',
+                    tax: 'IR regressivo',
+                    liquidity: 'D+30',
+                    minValue: 1000,
+                    adminTax: 0,
+                    insurance: 'FGC',
+                    icon: '📈'
+                }
+            ],
+            lci: [
+                { 
+                    id: 'safra-lci', 
+                    name: 'Banco Safra', 
+                    subtitle: 'LCI 95% CDI',
+                    rate: 95, 
+                    rateType: 'cdi',
+                    tax: 'Isento IR',
+                    liquidity: 'D+90',
+                    minValue: 1000,
+                    adminTax: 0,
+                    insurance: 'FGC',
+                    icon: '🏛️'
+                },
+                { 
+                    id: 'daycoval-lci', 
+                    name: 'Daycoval', 
+                    subtitle: 'LCA 92% CDI',
+                    rate: 92, 
+                    rateType: 'cdi',
+                    tax: 'Isento IR',
+                    liquidity: 'D+0',
+                    minValue: 1000,
+                    adminTax: 0,
+                    insurance: 'FGC',
+                    icon: '💰'
+                }
+            ],
+            tesouro: [
+                { 
+                    id: 'tesouro-selic', 
+                    name: 'Tesouro Selic', 
+                    subtitle: '100% Selic',
+                    rate: 100, 
+                    rateType: 'selic',
+                    tax: 'IR regressivo',
+                    liquidity: 'D+1',
+                    minValue: 30,
+                    adminTax: 0.20,
+                    insurance: 'Governo',
+                    icon: '🇧🇷'
+                },
+                { 
+                    id: 'tesouro-ipca', 
+                    name: 'Tesouro IPCA+', 
+                    subtitle: 'IPCA + 5,5%',
+                    rate: 5.5, 
+                    rateType: 'ipca',
+                    tax: 'IR regressivo',
+                    liquidity: 'D+1',
+                    minValue: 30,
+                    adminTax: 0.20,
+                    insurance: 'Governo',
+                    icon: '📊'
+                }
+            ],
+            poupanca: [
+                { 
+                    id: 'poupanca', 
+                    name: 'Poupança', 
+                    subtitle: 'Rendimento tradicional',
+                    rate: 0.5, 
+                    rateType: 'mes',
+                    tax: 'Isento IR',
+                    liquidity: 'D+0',
+                    minValue: 1,
+                    adminTax: 0,
+                    insurance: 'FGC',
+                    icon: '🐷'
+                }
+            ]
+        };
+
+        // CARREGAR OPÇÕES ESPECÍFICAS
+        function loadSubOptions() {
+            const type = document.getElementById('investmentType').value;
+            const subtypeSelect = document.getElementById('investmentSubtype');
+            
+            subtypeSelect.innerHTML = '<option value="">Selecione um produto</option>';
+            
+            if (type && investmentData[type]) {
+                investmentData[type].forEach(investment => {
+                    const option = document.createElement('option');
+                    option.value = investment.id;
+                    option.textContent = `${investment.name} - ${investment.subtitle}`;
+                    subtypeSelect.appendChild(option);
+                });
+            }
+        }
+
+        // CALCULAR INVESTIMENTO
+        function calculateInvestment(investment, amount, months) {
+            const cdiRate = 13.65; // CDI anual
+            const selicRate = 13.75; // Selic anual
+            const ipcaRate = 4.5; // IPCA anual estimado
+            
+            let annualRate;
+            
+            switch(investment.rateType) {
+                case 'cdi':
+                    annualRate = (cdiRate * investment.rate) / 100;
+                    break;
+                case 'selic':
+                    annualRate = (selicRate * investment.rate) / 100;
+                    break;
+                case 'ipca':
+                    annualRate = ipcaRate + investment.rate;
+                    break;
+                case 'mes':
+                    annualRate = Math.pow(1 + investment.rate/100, 12) - 1;
+                    annualRate = annualRate * 100;
+                    break;
+                default:
+                    annualRate = investment.rate;
+            }
+            
+            // Converter para mensal
+            const monthlyRate = Math.pow(1 + annualRate/100, 1/12) - 1;
+            
+            // Calcular valor futuro
+            let futureValue = amount * Math.pow(1 + monthlyRate, months);
+            
+            // Aplicar impostos
+            let taxRate = 0;
+            if (investment.tax === 'IR regressivo') {
+                if (months <= 6) taxRate = 0.225;
+                else if (months <= 12) taxRate = 0.20;
+                else if (months <= 24) taxRate = 0.175;
+                else taxRate = 0.15;
+                
+                const profit = futureValue - amount;
+                const tax = profit * taxRate;
+                futureValue -= tax;
+            }
+            
+            // Taxa de administração
+            if (investment.adminTax > 0) {
+                const adminFee = futureValue * (investment.adminTax / 100);
+                futureValue -= adminFee;
+            }
+            
+            return {
+                finalValue: futureValue,
+                profit: futureValue - amount,
+                rentability: ((futureValue - amount) / amount) * 100,
+                monthlyRate: monthlyRate * 100
+            };
+        }
+
+        // COMPARAR INVESTIMENTOS
+        function compareInvestments() {
+            const type = document.getElementById('investmentType').value;
+            const amount = parseFloat(document.getElementById('investmentAmount').value);
+            const months = parseInt(document.getElementById('investmentTime').value);
+            
+            if (!type || !amount || !months) {
+                alert('Por favor, preencha todos os campos!');
+                return;
+            }
+            
+            // Mostrar loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('resultsContainer').style.display = 'none';
+            
+            // Simular processamento
+            setTimeout(() => {
+                const investments = investmentData[type];
+                const results = [];
+                
+                // Calcular cada investimento
+                investments.forEach(investment => {
+                    const calculation = calculateInvestment(investment, amount, months);
+                    results.push({
+                        ...investment,
+                        ...calculation
+                    });
+                });
+                
+                // Ordenar por melhor rentabilidade
+                results.sort((a, b) => b.rentability - a.rentability);
+                
+                // Mostrar resultados
+                displayResults(results, amount, months);
+                
+                // Esconder loading
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('resultsContainer').style.display = 'block';
+            }, 1500);
+        }
+
+        // MOSTRAR RESULTADOS
+        function displayResults(results, amount, months) {
+            const resultsGrid = document.getElementById('resultsGrid');
+            resultsGrid.innerHTML = '';
+            
+            results.forEach((investment, index) => {
+                const card = document.createElement('div');
+                card.className = `investment-card ${index === 0 ? 'best' : index === 1 ? 'good' : 'average'}`;
+                
+                let badge = '';
+                if (index === 0) {
+                    badge = '<div class="card-badge">🥇 MELHOR</div>';
+                } else if (index === 1) {
+                    badge = '<div class="card-badge">🥈 ALTERNATIVA</div>';
+                }
+                
+                card.innerHTML = `
+                    ${badge}
+                    <div class="card-header">
+                        <div class="card-icon">${investment.icon}</div>
+                        <div>
+                            <div class="card-title">${investment.name}</div>
+                            <div class="card-subtitle">${investment.subtitle}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Rentabilidade:</span>
+                            <span class="detail-value positive">${investment.rentability.toFixed(2)}%</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Taxa:</span>
+                            <span class="detail-value">${investment.rate}% ${investment.rateType.toUpperCase()}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Impostos:</span>
+                            <span class="detail-value">${investment.tax}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Liquidez:</span>
+                            <span class="detail-value">${investment.liquidity}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Seguro:</span>
+                            <span class="detail-value">${investment.insurance}</span>
+                        </div>
+                        ${investment.adminTax > 0 ? `
+                        <div class="detail-item">
+                            <span class="detail-label">Taxa Admin:</span>
+                            <span class="detail-value">${investment.adminTax}% a.a.</span>
+                        </div>
+                        ` : ''}
+                    </div>
+                    
+                    <div class="final-value">
+                        <div class="final-amount">R$ ${investment.finalValue.toFixed(2).replace('.', ',')}</div>
+                        <div class="rentability">+ R$ ${investment.profit.toFixed(2).replace('.', ',')} em ${months} meses</div>
+                    </div>
+                `;
+                
+                resultsGrid.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
