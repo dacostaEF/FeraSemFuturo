@@ -944,11 +944,11 @@ body {
     }
     
     .header-logo img {
-        height: 32px;
+        height: 48px; /* Aumentado para mobile */
     }
     
     .logo-text {
-        font-size: 15px;
+        display: none; /* Esconde o texto em mobile */
     }
     
     .tab-btn {
@@ -1529,11 +1529,11 @@ body {
     }
 
     .header-logo img {
-        height: 28px;
+        height: 45px; /* Maior para smartphones */
     }
 
     .logo-text {
-        font-size: 14px;
+        display: none; /* Esconde o texto em smartphones */
     }
 
     .tab-btn {
