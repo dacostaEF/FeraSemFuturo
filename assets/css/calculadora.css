@@ -1,5 +1,36 @@
 /* Calculator Specific Styles */
 
+/* Botão Voltar - Estilo do Comparador Inteligente */
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.btn-back:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #00B894;
+    color: #00B894;
+    transform: translateX(-5px);
+}
+
+@media (max-width: 768px) {
+    .btn-back {
+        font-size: 14px;
+        padding: 10px 16px;
+    }
+}
+
 /* Typography System & Paleta de Cores */
 :root {
     /* Typography */
