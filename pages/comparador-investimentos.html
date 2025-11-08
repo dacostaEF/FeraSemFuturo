@@ -643,29 +643,40 @@
                 right: 0;
                 top: 0;
                 bottom: 0;
-                width: 60px;
-                background: linear-gradient(to left, rgba(75, 1, 74, 1) 0%, rgba(75, 1, 74, 0.8) 50%, transparent 100%);
+                width: 80px;
+                background: linear-gradient(to left, 
+                    rgba(75, 1, 74, 1) 0%, 
+                    rgba(75, 1, 74, 0.98) 35%, 
+                    rgba(75, 1, 74, 0.85) 65%, 
+                    transparent 100%);
                 pointer-events: none;
                 z-index: 10;
                 display: flex;
                 align-items: center;
                 justify-content: flex-end;
-                padding-right: 10px;
-                color: #00FF88; /* 💚 VERDE NEON! */
-                font-size: 20px;
-                font-weight: bold;
-                text-shadow: 0 0 12px #00FF88, 0 0 24px #00FF88; /* Brilho neon */
-                animation: pulseArrow 2s infinite;
+                padding-right: 12px;
+                color: #FF6B00; /* 🔥 LARANJA NEON BRILHANTE! */
+                font-size: 28px;
+                font-weight: 900;
+                letter-spacing: -3px;
+                text-shadow: 
+                    0 0 10px rgba(255, 107, 0, 1),
+                    0 0 20px rgba(255, 107, 0, 0.8),
+                    0 0 30px rgba(255, 107, 0, 0.6),
+                    0 0 40px rgba(255, 107, 0, 0.4),
+                    3px 3px 6px rgba(0, 0, 0, 0.9);
+                animation: pulseArrow 1.5s ease-in-out infinite;
+                filter: drop-shadow(0 0 8px rgba(255, 107, 0, 0.9));
             }
             
             @keyframes pulseArrow {
                 0%, 100% { 
-                    opacity: 0.7; 
-                    transform: translateX(0);
+                    opacity: 0.95; 
+                    transform: translateX(0) scale(1);
                 }
                 50% { 
                     opacity: 1; 
-                    transform: translateX(3px);
+                    transform: translateX(5px) scale(1.15);
                 }
             }
 

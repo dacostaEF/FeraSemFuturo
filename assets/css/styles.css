@@ -1391,29 +1391,46 @@ body {
     
     /* Gradient Fade - Direita (mais forte) */
     .tabs-nav::after {
-        content: '→→';
+        content: '→→→';
         position: absolute;
         right: 0;
         top: 0;
         bottom: 0;
-        width: 50px;
-        background: linear-gradient(to left, rgba(75, 1, 74, 0.95), transparent);
+        width: 70px;
+        background: linear-gradient(to left, 
+            rgba(75, 1, 74, 1) 0%, 
+            rgba(75, 1, 74, 0.98) 40%, 
+            rgba(75, 1, 74, 0.8) 70%, 
+            transparent 100%);
         pointer-events: none;
         z-index: 2;
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        padding-right: 8px;
-        color: #00FF88; /* 💚 VERDE NEON! */
-        font-size: 18px;
-        font-weight: bold;
-        text-shadow: 0 0 10px #00FF88, 0 0 20px #00FF88; /* Brilho neon */
-        animation: pulse 2s infinite;
+        padding-right: 10px;
+        color: #FF6B00; /* 🔥 LARANJA NEON BRILHANTE! */
+        font-size: 26px;
+        font-weight: 900;
+        letter-spacing: -2px;
+        text-shadow: 
+            0 0 8px rgba(255, 107, 0, 1),
+            0 0 16px rgba(255, 107, 0, 0.8),
+            0 0 24px rgba(255, 107, 0, 0.6),
+            0 0 32px rgba(255, 107, 0, 0.4),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        animation: pulse 1.5s ease-in-out infinite;
+        filter: drop-shadow(0 0 6px rgba(255, 107, 0, 0.9));
     }
     
     @keyframes pulse {
-        0%, 100% { opacity: 0.8; }
-        50% { opacity: 1; }
+        0%, 100% { 
+            opacity: 0.95; 
+            transform: translateX(0) scale(1);
+        }
+        50% { 
+            opacity: 1; 
+            transform: translateX(4px) scale(1.1);
+        }
     }
 
     .tabs-nav::-webkit-scrollbar {
