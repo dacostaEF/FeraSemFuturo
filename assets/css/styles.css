@@ -1393,14 +1393,12 @@ body {
     .tabs-nav::after {
         content: '→';
         position: absolute;
-        right: 0;
+        right: -12px;
         top: 0;
         bottom: 0;
-        width: 70px;
+        width: 25px;
         background: linear-gradient(to left, 
-            rgba(75, 1, 74, 1) 0%, 
-            rgba(75, 1, 74, 0.98) 40%, 
-            rgba(75, 1, 74, 0.8) 70%, 
+            rgba(75, 1, 74, 0.95) 0%, 
             transparent 100%);
         pointer-events: none;
         z-index: 2;
