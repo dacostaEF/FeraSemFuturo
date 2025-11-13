@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comparador Inteligente de Investimentos - Faça Seu Futuro</title>
+    <title>Comparador Inteligente - INVLAB Laboratório de Investimentos</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
     
-    <!-- Theme Color - Barra do navegador mobile -->
-    <meta name="theme-color" content="#4B014A">
-    <meta name="msapplication-TileColor" content="#4B014A">
+    <!-- Theme Color - Barra do navegador mobile (Azul Corporativo) -->
+    <meta name="theme-color" content="#0A2540">
+    <meta name="msapplication-TileColor" content="#0A2540">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -25,7 +25,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #4B014A 0%, #5D0F5A 50%, #8B2D88 100%);
+            background: linear-gradient(135deg, #0A2540 0%, #1a3a5c 50%, #2d5278 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -54,8 +54,8 @@
 
         .btn-back:hover {
             background: rgba(255, 255, 255, 0.2);
-            border-color: #00B894;
-            color: #00B894;
+            border-color: #00D924;
+            color: #00D924;
             transform: translateX(-5px);
         }
 
@@ -109,10 +109,10 @@
         }
 
         .tab-btn.active {
-            background: #00B894;
+            background: #00D924;
             color: #FFFFFF;
-            border-color: #00B894;
-            box-shadow: 0 5px 15px rgba(0, 184, 148, 0.3);
+            border-color: #00D924;
+            box-shadow: 0 5px 15px rgba(0, 217, 36, 0.3);
         }
 
         /* Esconder texto completo em mobile */
@@ -168,8 +168,8 @@
         }
 
         .callout-success {
-            background: rgba(0, 184, 148, 0.1);
-            border-left-color: #00B894;
+            background: rgba(0, 217, 36, 0.1);
+            border-left-color: #00D924;
         }
 
         .callout-icon {
@@ -224,8 +224,8 @@
         .input-group select:focus,
         .input-group input:focus {
             outline: none;
-            border-color: #4B014A;
-            box-shadow: 0 0 0 3px rgba(75, 1, 74, 0.1);
+            border-color: #635BFF;
+            box-shadow: 0 0 0 3px rgba(99, 91, 255, 0.1);
         }
 
         .input-group small {
@@ -235,7 +235,7 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #4B014A, #8B2D88);
+            background: linear-gradient(135deg, #635BFF, #00D924);
             color: white;
             border: none;
             padding: 15px 30px;
@@ -249,7 +249,7 @@
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(75, 1, 74, 0.3);
+            box-shadow: 0 10px 25px rgba(99, 91, 255, 0.4);
         }
 
         /* Chart Container */
@@ -285,7 +285,7 @@
         }
 
         .result-card.best {
-            border-color: #00B894;
+            border-color: #00D924;
             background: linear-gradient(135deg, #f0fdf4, #dcfce7);
         }
 
@@ -309,7 +309,7 @@
         .result-value {
             font-size: 1.8rem;
             font-weight: 700;
-            color: #00B894;
+            color: #00D924;
             margin-bottom: 5px;
         }
 
@@ -385,7 +385,7 @@
 
         .spinner {
             border: 4px solid #f3f3f3;
-            border-top: 4px solid #4B014A;
+            border-top: 4px solid #635BFF;
             border-radius: 50%;
             width: 40px;
             height: 40px;
@@ -403,7 +403,7 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: linear-gradient(135deg, #00B894, #55EFC4);
+            background: linear-gradient(135deg, #00D924, #00FFA3);
             color: white;
             border: none;
             padding: 15px 25px;
@@ -411,7 +411,7 @@
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(0, 184, 148, 0.4);
+            box-shadow: 0 8px 20px rgba(0, 217, 36, 0.4);
             transition: all 0.3s ease;
             z-index: 999;
             display: flex;
@@ -421,7 +421,7 @@
 
         .btn-history:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(0, 184, 148, 0.6);
+            box-shadow: 0 12px 30px rgba(0, 217, 36, 0.6);
         }
 
         .history-badge {
@@ -472,7 +472,7 @@
         }
 
         .modal-header {
-            background: linear-gradient(135deg, #4B014A, #8B2D88);
+            background: linear-gradient(135deg, #0A2540, #635BFF);
             color: white;
             padding: 20px 30px;
             display: flex;
@@ -518,8 +518,8 @@
         }
 
         .history-item:hover {
-            border-color: #00B894;
-            box-shadow: 0 5px 15px rgba(0, 184, 148, 0.2);
+            border-color: #00D924;
+            box-shadow: 0 5px 15px rgba(0, 217, 36, 0.2);
         }
 
         .history-item-header {
@@ -538,7 +538,7 @@
         }
 
         .btn-load-history {
-            background: #00B894;
+            background: #00D924;
             color: white;
             border: none;
             padding: 8px 16px;
@@ -550,7 +550,7 @@
         }
 
         .btn-load-history:hover {
-            background: #008f73;
+            background: #00B01C;
             transform: translateY(-2px);
         }
 
@@ -636,7 +636,7 @@
                 top: 0;
                 bottom: 0;
                 width: 40px;
-                background: linear-gradient(to right, rgba(75, 1, 74, 1), transparent);
+                background: linear-gradient(to right, rgba(10, 37, 64, 1), transparent);
                 pointer-events: none;
                 z-index: 10;
             }
@@ -650,7 +650,7 @@
                 bottom: 0;
                 width: 30px;
                 background: linear-gradient(to left, 
-                    rgba(75, 1, 74, 0.95) 0%, 
+                    rgba(10, 37, 64, 0.95) 0%, 
                     transparent 100%);
                 pointer-events: none;
                 z-index: 10;
@@ -852,7 +852,7 @@
         
         <div class="header">
             <h1>🧠 Comparador Inteligente de Investimentos</h1>
-            <p>Análise completa de Renda Fixa - Compare, simule e invista com inteligência</p>
+            <p>INVLAB - Análise profissional de Renda Fixa com dados reais de mercado</p>
         </div>
 
         <!-- Botão Flutuante de Histórico -->
