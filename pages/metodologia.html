@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metodologia - INVLAB Laboratório de Investimentos</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0A2540">
+    
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    
+    <style>
+        body {
+            background: var(--blue-corporate);
+            padding: 20px;
+        }
+        
+        .metodologia-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 12px 48px rgba(10, 37, 64, 0.24);
+        }
+        
+        .back-button {
+            display: inline-block;
+            color: #635BFF;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 30px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            color: #00D924;
+            transform: translateX(-5px);
+        }
+        
+        h1 {
+            font-size: 36px;
+            color: var(--blue-corporate);
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: var(--gray-medium);
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #F5F5F5;
+        }
+        
+        h2 {
+            font-size: 24px;
+            color: var(--blue-tech);
+            margin-top: 40px;
+            margin-bottom: 16px;
+        }
+        
+        h3 {
+            font-size: 18px;
+            color: var(--blue-corporate);
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+        
+        p, li {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--gray-graphite);
+            margin-bottom: 16px;
+        }
+        
+        ul {
+            margin-left: 24px;
+            margin-bottom: 24px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box {
+            background: rgba(99, 91, 255, 0.08);
+            border-left: 4px solid #635BFF;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 24px 0;
+        }
+        
+        .highlight-box strong {
+            color: #635BFF;
+        }
+        
+        .warning-box {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #FFC107;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 24px 0;
+        }
+        
+        .warning-box strong {
+            color: #F57C00;
+        }
+        
+        .formula {
+            background: #F5F5F5;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 16px 0;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        
+        th {
+            background: #F5F5F5;
+            font-weight: 700;
+            color: var(--blue-corporate);
+        }
+        
+        @media (max-width: 768px) {
+            .metodologia-container {
+                padding: 24px 20px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            h2 {
+                font-size: 20px;
+            }
+            
+            p, li {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="metodologia-container">
+        <a href="../index.html" class="back-button">← Voltar para Início</a>
+        
+        <h1>🔬 Metodologia</h1>
+        <p class="subtitle">Transparência total sobre nossas fontes, cálculos e premissas</p>
+        
+        <h2>📊 1. Fontes de Dados</h2>
+        
+        <h3>1.1 Taxa CDI e Selic</h3>
+        <p>
+            As taxas CDI e Selic utilizadas em nossas simulações são baseadas em valores médios históricos e projeções de mercado. 
+            <strong>Fonte:</strong> Banco Central do Brasil (BCB) e ANBIMA.
+        </p>
+        <p><strong>Taxas de referência (Jan/2025):</strong></p>
+        <ul>
+            <li>CDI: 13,65% a.a.</li>
+            <li>Selic: 13,75% a.a.</li>
+            <li>IPCA: 4,5% a.a. (projetado)</li>
+        </ul>
+        
+        <h3>1.2 Produtos de Investimento (CDBs, LCI/LCA)</h3>
+        <p>
+            Os dados de taxas de CDBs e outros produtos de renda fixa são coletados de:
+        </p>
+        <ul>
+            <li>Sites oficiais de corretoras (XP, Rico, BTG, Inter, etc.)</li>
+            <li>Plataformas de comparação de investimentos</li>
+            <li>Comunicações públicas de instituições financeiras</li>
+        </ul>
+        
+        <div class="warning-box">
+            <p><strong>⚠️ IMPORTANTE:</strong> Taxas promocionais podem mudar sem aviso prévio. Sempre confirme a taxa atual no site/app oficial da instituição antes de investir.</p>
+        </div>
+        
+        <h2>🧮 2. Fórmulas e Cálculos</h2>
+        
+        <h3>2.1 Juros Compostos</h3>
+        <p>Fórmula básica utilizada em todas as simulações:</p>
+        <div class="formula">
+            VF = VP × (1 + i)^n + PMT × [((1 + i)^n - 1) / i]
+            <br><br>
+            Onde:
+            <br>VF = Valor Futuro
+            <br>VP = Valor Presente (capital inicial)
+            <br>i = Taxa de juros mensal
+            <br>n = Número de períodos (meses)
+            <br>PMT = Pagamento/Aporte mensal
+        </div>
+        
+        <h3>2.2 Imposto de Renda Regressivo (Renda Fixa)</h3>
+        <p>Aplicado sobre o <strong>lucro</strong>, não sobre o valor total:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Prazo de Aplicação</th>
+                    <th>Alíquota de IR</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Até 6 meses</td>
+                    <td>22,5%</td>
+                </tr>
+                <tr>
+                    <td>6 a 12 meses</td>
+                    <td>20%</td>
+                </tr>
+                <tr>
+                    <td>12 a 24 meses</td>
+                    <td>17,5%</td>
+                </tr>
+                <tr>
+                    <td>Acima de 24 meses</td>
+                    <td>15%</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="highlight-box">
+            <p><strong>💡 OBSERVAÇÃO:</strong> LCI e LCA são <strong>isentas de IR</strong> para pessoa física.</p>
+        </div>
+        
+        <h3>2.3 Poupança</h3>
+        <p>Cálculo diferenciado conforme a Taxa Selic:</p>
+        <ul>
+            <li><strong>Se Selic > 8,5% a.a.:</strong> Rendimento = 0,5% ao mês + TR</li>
+            <li><strong>Se Selic ≤ 8,5% a.a.:</strong> Rendimento = 70% da Selic + TR</li>
+        </ul>
+        <p><strong>TR (Taxa Referencial):</strong> Considerada como 0% (desprezível) em nossas simulações devido ao seu valor histórico próximo a zero desde 2017.</p>
+        
+        <h3>2.4 CDB Pós-fixado (% do CDI)</h3>
+        <p>Cálculo mensal:</p>
+        <div class="formula">
+            Taxa Mensal = [(1 + CDI Anual)^(1/12) - 1] × (% do CDI / 100)
+            <br><br>
+            Exemplo: CDB 110% do CDI
+            <br>CDI Anual = 13,65% → CDI Mensal = 1,07%
+            <br>Taxa do CDB = 1,07% × 1,10 = 1,177% ao mês
+        </div>
+        
+        <h2>🛡️ 3. Premissas e Limitações</h2>
+        
+        <h3>3.1 Premissas Adotadas</h3>
+        <ul>
+            <li>Reinvestimento automático dos rendimentos</li>
+            <li>Aportes mensais realizados sempre no mesmo dia do mês</li>
+            <li>Taxas de CDI/Selic constantes ao longo do período simulado</li>
+            <li>Não consideramos taxa de custódia (maioria dos CDBs modernos não cobra)</li>
+            <li>Não consideramos taxa de administração para investimentos diretos</li>
+            <li>FGC protege até R$ 250 mil por CPF/instituição (CDB, LCI, LCA, Poupança)</li>
+        </ul>
+        
+        <h3>3.2 Limitações do Modelo</h3>
+        <div class="warning-box">
+            <p><strong>⚠️ ATENÇÃO às Limitações:</strong></p>
+            <ul style="margin-bottom: 0;">
+                <li>Taxas de juros variam no mundo real (Selic/CDI não são fixas)</li>
+                <li>Inflação pode corroer o poder de compra (considere sempre a taxa real)</li>
+                <li>Liquidez pode ter carência (D+30, D+60, D+90) não considerada</li>
+                <li>Eventos macroeconômicos imprevistos podem alterar cenários</li>
+                <li>Tributação pode mudar (reformas tributárias)</li>
+                <li>Custos de oportunidade não são modelados</li>
+            </ul>
+        </div>
+        
+        <h2>📚 4. Metodologia de Atualização</h2>
+        
+        <p><strong>Frequência de Atualização:</strong></p>
+        <ul>
+            <li><strong>Taxas CDI/Selic:</strong> Mensalmente ou quando houver mudança significativa pelo COPOM</li>
+            <li><strong>Produtos (CDBs):</strong> Revisão trimestral ou quando notificados de mudanças</li>
+            <li><strong>Inflação (IPCA):</strong> Anualmente com base nas projeções do BCB</li>
+        </ul>
+        
+        <p><strong>Última Atualização:</strong> Janeiro de 2025</p>
+        
+        <h2>⚖️ 5. Disclaimer Legal</h2>
+        
+        <div class="warning-box">
+            <p style="margin-bottom: 0;"><strong>AVISO IMPORTANTE:</strong></p>
+            <p>
+                Esta plataforma é exclusivamente <strong>educacional e de simulação</strong>. Os resultados apresentados são projeções baseadas nas premissas descritas nesta metodologia e <strong>não garantem rentabilidade futura</strong>.
+                <br><br>
+                <strong>NÃO somos:</strong>
+            </p>
+            <ul>
+                <li>Assessores de investimentos</li>
+                <li>Consultores financeiros certificados</li>
+                <li>Distribuidores de produtos financeiros</li>
+                <li>Corretoras ou instituições financeiras</li>
+            </ul>
+            <p>
+                <strong>Sempre consulte um profissional certificado (CEA, CFP, CNPI) antes de tomar decisões de investimento.</strong>
+            </p>
+        </div>
+        
+        <h2>📧 6. Contato e Sugestões</h2>
+        
+        <p>
+            Identificou algum erro na metodologia? Tem sugestões de melhorias?
+            <br>Entre em contato: <strong>contato@invlab.com.br</strong> (em desenvolvimento)
+        </p>
+        
+        <div class="highlight-box">
+            <p style="margin-bottom: 0;">
+                <strong>💡 Nosso Compromisso:</strong> Manter a transparência total sobre nossas fontes, cálculos e limitações. Acreditamos que investidores bem-informados tomam melhores decisões.
+            </p>
+        </div>
+        
+        <br>
+        <a href="../index.html" class="back-button">← Voltar para Início</a>
+    </div>
+</body>
+</html>
+

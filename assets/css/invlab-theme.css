@@ -1,0 +1,213 @@
+/* ============================================
+   INVLAB - LABORATÓRIO DE INVESTIMENTOS
+   PALETA FINTECH PROFISSIONAL
+   ============================================ */
+
+:root {
+    /* PALETA FINTECH - Azul Corporativo + Verde Data */
+    --blue-corporate: #0A2540;    /* Azul escuro - Confiança */
+    --blue-tech: #635BFF;         /* Azul tech - Inovação */
+    --green-data: #00D924;        /* Verde - Positivo/Sucesso */
+    --gray-graphite: #1A1A1A;     /* Grafite - Texto principal */
+    --gray-light: #F5F5F5;        /* Background claro */
+    --gray-medium: #666666;       /* Texto secundário */
+    
+    /* Gradientes Profissionais */
+    --gradient-primary: linear-gradient(135deg, #0A2540 0%, #635BFF 100%);
+    --gradient-success: linear-gradient(135deg, #00D924 0%, #00B894 100%);
+    --gradient-dark: linear-gradient(135deg, #1A1A1A 0%, #0A2540 100%);
+    
+    /* Sombras Profissionais */
+    --shadow-sm: 0 2px 8px rgba(10, 37, 64, 0.08);
+    --shadow-md: 0 4px 16px rgba(10, 37, 64, 0.12);
+    --shadow-lg: 0 8px 32px rgba(10, 37, 64, 0.16);
+    --shadow-xl: 0 12px 48px rgba(10, 37, 64, 0.24);
+    
+    /* Estados */
+    --hover-overlay: rgba(99, 91, 255, 0.08);
+    --active-overlay: rgba(0, 217, 36, 0.12);
+}
+
+/* Aplicação Global */
+body {
+    background: var(--blue-corporate);
+    color: var(--gray-graphite);
+}
+
+/* Textos Profissionais */
+.text-primary {
+    color: var(--blue-corporate);
+}
+
+.text-tech {
+    color: var(--blue-tech);
+}
+
+.text-success {
+    color: var(--green-data);
+}
+
+.text-muted {
+    color: var(--gray-medium);
+}
+
+/* Backgrounds */
+.bg-corporate {
+    background: var(--blue-corporate);
+}
+
+.bg-tech {
+    background: var(--blue-tech);
+}
+
+.bg-success {
+    background: var(--green-data);
+}
+
+.bg-light {
+    background: var(--gray-light);
+}
+
+/* Gradientes */
+.gradient-primary {
+    background: var(--gradient-primary);
+}
+
+.gradient-success {
+    background: var(--gradient-success);
+}
+
+.gradient-dark {
+    background: var(--gradient-dark);
+}
+
+/* Botões Profissionais */
+.btn-invlab-primary {
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-invlab-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-invlab-secondary {
+    background: transparent;
+    color: var(--blue-tech);
+    border: 2px solid var(--blue-tech);
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-invlab-secondary:hover {
+    background: var(--hover-overlay);
+    transform: translateY(-1px);
+}
+
+/* Cards Profissionais */
+.card-invlab {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(10, 37, 64, 0.1);
+    transition: all 0.3s ease;
+}
+
+.card-invlab:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
+/* Header Profissional */
+.header-invlab {
+    background: rgba(10, 37, 64, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(99, 91, 255, 0.2);
+}
+
+/* Badges Profissionais */
+.badge-invlab {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-invlab.success {
+    background: rgba(0, 217, 36, 0.15);
+    color: var(--green-data);
+}
+
+.badge-invlab.tech {
+    background: rgba(99, 91, 255, 0.15);
+    color: var(--blue-tech);
+}
+
+.badge-invlab.corporate {
+    background: rgba(10, 37, 64, 0.15);
+    color: var(--blue-corporate);
+}
+
+/* Disclaimer Profissional */
+.disclaimer-invlab {
+    background: rgba(255, 193, 7, 0.1);
+    border-left: 4px solid #FFC107;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--gray-graphite);
+}
+
+.disclaimer-invlab strong {
+    color: #F57C00;
+    font-weight: 700;
+}
+
+/* Animações Profissionais */
+@keyframes fadeInPro {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeInPro 0.6s ease-out;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .btn-invlab-primary,
+    .btn-invlab-secondary {
+        width: 100%;
+        padding: 16px 24px;
+        font-size: 15px;
+    }
+    
+    .card-invlab {
+        padding: 20px;
+    }
+}
+
