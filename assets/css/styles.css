@@ -1,19 +1,26 @@
-/* Paleta de Cores Açaí */
+/* Paleta de Cores INVLAB - Fintech Profissional */
 :root {
-    /* Primárias - Açaí */
-    --acai-dark: #4B014A;
-    --acai-medium: #5D0F5A;
-    --acai-light: #8B2D88;
+    /* Primárias - Azul Corporativo */
+    --blue-corporate: #0A2540;    /* Substituiu acai-dark */
+    --blue-tech: #635BFF;         /* Substituiu acai-medium */
+    --blue-light: #4A90E2;        /* Substituiu acai-light */
     
-    /* Secundárias - Verde Menta */
-    --mint: #00B894;
-    --mint-light: #55EFC4;
+    /* Secundárias - Verde Data */
+    --green-data: #00D924;        /* Substituiu mint */
+    --green-light: #00FFA3;       /* Substituiu mint-light */
     
     /* Neutras */
     --sand: #F5F5F0;
     --white: #FFFFFF;
     --charcoal: #2D3436;
     --gray: #636E72;
+    
+    /* Compatibilidade (manter nomes antigos temporariamente) */
+    --acai-dark: #0A2540;
+    --acai-medium: #635BFF;
+    --acai-light: #4A90E2;
+    --mint: #00D924;
+    --mint-light: #00FFA3;
 }
 
 * {
@@ -24,7 +31,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: var(--acai-dark);
+    background: var(--blue-corporate);
     min-height: 100vh;
     margin: 0;
     padding: 0;
@@ -40,9 +47,9 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(75, 1, 74, 0.95);
+    background: rgba(10, 37, 64, 0.95);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(99, 91, 255, 0.2);
     z-index: 1000;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
 }
@@ -122,8 +129,8 @@ body {
 
 .tab-btn.active {
     background: rgba(255, 255, 255, 0.15);
-    color: var(--mint-light);
-    border-bottom: 3px solid var(--mint);
+    color: var(--green-light);
+    border-bottom: 3px solid var(--green-data);
     transform: translateY(0);
 }
 
@@ -325,13 +332,13 @@ body {
 .pillar-icon {
     width: 56px;
     height: 56px;
-    background: linear-gradient(135deg, var(--acai-medium) 0%, var(--acai-light) 100%);
+    background: linear-gradient(135deg, var(--blue-tech) 0%, var(--blue-light) 100%);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 26px;
-    box-shadow: 0 4px 12px rgba(75, 1, 74, 0.3);
+    box-shadow: 0 4px 12px rgba(10, 37, 64, 0.3);
     transition: transform 0.3s ease;
 }
 
@@ -360,7 +367,7 @@ body {
     width: 100%;
     height: 56px;
     padding: 0 24px;
-    background: linear-gradient(90deg, var(--acai-medium), var(--mint));
+    background: linear-gradient(90deg, var(--blue-tech), var(--green-data));
     color: white;
     border: none;
     border-radius: 12px;
@@ -368,7 +375,7 @@ body {
     font-weight: 600;
     cursor: pointer;
     margin-bottom: 12px;
-    box-shadow: 0 4px 16px rgba(75, 1, 74, 0.35);
+    box-shadow: 0 4px 16px rgba(99, 91, 255, 0.35);
     transition: transform 0.2s, box-shadow 0.2s;
     animation: fadeInSlide 1.2s ease-out;
     position: relative;
@@ -392,7 +399,7 @@ body {
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(75, 1, 74, 0.5);
+    box-shadow: 0 6px 20px rgba(99, 91, 255, 0.5);
 }
 
 .btn-primary:active {
@@ -404,8 +411,8 @@ body {
     height: 56px;
     padding: 0 24px;
     background: transparent;
-    color: var(--acai-medium);
-    border: 1.2px solid var(--acai-medium);
+    color: var(--blue-tech);
+    border: 1.2px solid var(--blue-tech);
     border-radius: 12px;
     font-size: 17px;
     font-weight: 600;
@@ -416,9 +423,9 @@ body {
 }
 
 .btn-secondary:hover {
-    background: rgba(75, 1, 74, 0.05);
+    background: rgba(99, 91, 255, 0.08);
     transform: translateY(-1px);
-    border-color: var(--acai-dark);
+    border-color: var(--blue-corporate);
 }
 
 /* Sections */
@@ -501,9 +508,9 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: all 0.3s ease;
-    border-left: 4px solid var(--mint);
+    border-left: 4px solid var(--green-data);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-left: 4px solid var(--mint);
+    border-left: 4px solid var(--green-data);
 }
 
 .topic-card:hover {
@@ -511,15 +518,15 @@ body {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     background: rgba(255, 255, 255, 0.08);
     border-color: rgba(255, 255, 255, 0.2);
-    border-left-color: var(--mint-light);
+    border-left-color: var(--green-light);
 }
 
 .topic-badge {
     display: inline-block;
     font-size: 12px;
     font-weight: 600;
-    color: var(--acai-medium);
-    background: rgba(75, 1, 74, 0.08);
+    color: var(--blue-tech);
+    background: rgba(99, 91, 255, 0.12);
     padding: 4px 12px;
     border-radius: 6px;
     margin-bottom: 12px;
@@ -568,8 +575,8 @@ body {
 }
 
 .timeline-item.active {
-    border-left-color: var(--mint);
-    box-shadow: 0 4px 16px rgba(0, 184, 148, 0.3);
+    border-left-color: var(--green-data);
+    box-shadow: 0 4px 16px rgba(0, 217, 36, 0.3);
     background: rgba(255, 255, 255, 0.08);
 }
 
@@ -604,7 +611,7 @@ body {
 .timeline-status {
     font-size: 13px;
     font-weight: 600;
-    color: var(--mint);
+    color: var(--green-data);
 }
 
 .timeline-item.locked .timeline-status {
@@ -624,7 +631,7 @@ body {
 }
 
 .benefit-card {
-    background: rgba(93, 15, 90, 0.35);
+    background: rgba(99, 91, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 16px;
     padding: 32px 24px;
@@ -636,8 +643,8 @@ body {
 .benefit-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
-    background: rgba(93, 15, 90, 0.5);
-    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(99, 91, 255, 0.25);
+    border-color: rgba(0, 217, 36, 0.4);
 }
 
 .benefit-icon {
@@ -662,12 +669,12 @@ body {
 
 /* Next Level (Gamificado) */
 .next-level-card {
-    background: linear-gradient(135deg, var(--acai-dark) 0%, var(--acai-medium) 100%);
+    background: linear-gradient(135deg, var(--blue-corporate) 0%, var(--blue-tech) 100%);
     padding: 32px;
     border-radius: 20px;
     color: white;
     text-align: center;
-    box-shadow: 0 8px 24px rgba(75, 1, 74, 0.3);
+    box-shadow: 0 8px 24px rgba(10, 37, 64, 0.3);
     animation: fadeInUp 0.8s ease-out;
 }
 
@@ -706,7 +713,7 @@ body {
 }
 
 .progress-fill {
-    background: linear-gradient(90deg, var(--mint-light) 0%, var(--mint) 100%);
+    background: linear-gradient(90deg, var(--green-light) 0%, var(--green-data) 100%);
     height: 100%;
     border-radius: 12px;
     transition: width 1s ease-out;
@@ -760,7 +767,7 @@ body {
 
 .next-level-card .btn-primary {
     background: white;
-    color: var(--acai-medium);
+    color: var(--blue-tech);
     margin-bottom: 0;
 }
 
@@ -778,7 +785,7 @@ body {
 
 .footer p {
     font-size: 14px;
-    color: var(--mint-light);
+    color: var(--green-light);
     font-weight: 600;
     text-align: center;
     letter-spacing: 0.3px;
@@ -1054,7 +1061,7 @@ body {
     transform: translateY(-4px);
     background: rgba(255, 255, 255, 0.08);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    border-color: var(--mint);
+    border-color: var(--green-data);
 }
 
 .learning-badge {
@@ -1077,8 +1084,8 @@ body {
 }
 
 .learning-badge.investimentos {
-    background: rgba(0, 184, 148, 0.2);
-    color: var(--mint-light);
+    background: rgba(0, 217, 36, 0.2);
+    color: var(--green-light);
 }
 
 .learning-badge.protecao {
@@ -1130,7 +1137,7 @@ body {
 .learning-status {
     font-size: 13px;
     font-weight: 600;
-    color: var(--mint);
+    color: var(--green-data);
 }
 
 .learning-status.incomplete {
@@ -1160,8 +1167,8 @@ body {
 }
 
 .cta-box.highlight {
-    background: linear-gradient(135deg, rgba(93, 15, 90, 0.3), rgba(0, 184, 148, 0.2));
-    border-color: var(--mint);
+    background: linear-gradient(135deg, rgba(99, 91, 255, 0.2), rgba(0, 217, 36, 0.15));
+    border-color: var(--green-data);
 }
 
 /* Coming Soon Card */
@@ -1235,7 +1242,7 @@ body {
     transform: translateY(-6px);
     background: rgba(255, 255, 255, 0.08);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
-    border-color: var(--mint);
+    border-color: var(--green-data);
 }
 
 .tool-card.coming-tool {
@@ -1273,8 +1280,8 @@ body {
     font-weight: 700;
     padding: 4px 12px;
     border-radius: 12px;
-    background: rgba(0, 184, 148, 0.2);
-    color: var(--mint-light);
+    background: rgba(0, 217, 36, 0.2);
+    color: var(--green-light);
     text-transform: uppercase;
 }
 
@@ -1294,7 +1301,7 @@ body {
 .tip-card {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-left: 4px solid var(--mint);
+    border-left: 4px solid var(--green-data);
     border-radius: 12px;
     padding: 20px;
     transition: all 0.3s ease;
@@ -1312,8 +1319,8 @@ body {
     font-weight: 700;
     padding: 4px 10px;
     border-radius: 10px;
-    background: rgba(0, 184, 148, 0.15);
-    color: var(--mint-light);
+    background: rgba(0, 217, 36, 0.2);
+    color: var(--green-light);
     margin-bottom: 12px;
 }
 
@@ -1384,7 +1391,7 @@ body {
         top: 0;
         bottom: 0;
         width: 30px;
-        background: linear-gradient(to right, rgba(75, 1, 74, 0.95), transparent);
+        background: linear-gradient(to right, rgba(10, 37, 64, 0.95), transparent);
         pointer-events: none;
         z-index: 2;
     }
@@ -1398,7 +1405,7 @@ body {
         bottom: 0;
         width: 25px;
         background: linear-gradient(to left, 
-            rgba(75, 1, 74, 0.95) 0%, 
+            rgba(10, 37, 64, 0.95) 0%, 
             transparent 100%);
         pointer-events: none;
         z-index: 2;
