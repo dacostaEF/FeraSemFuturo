@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comparador de Investimentos - Renda Fixa | INVLAB</title>
+    <title>Simulador de CDBs - Compare com Poupança | INVLAB</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
@@ -456,6 +456,268 @@
             max-height: calc(80vh - 80px);
             overflow-y: auto;
         }
+        /* ============================================
+           BOTÃO MINIMALISTA "SOBRE CDBs"
+           ============================================ */
+        .btn-about-cdb {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            background: white;
+            border: 1px solid #e1e5e9;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 12px;
+        }
+
+        .btn-about-cdb:hover {
+            border-color: #00B894;
+            box-shadow: 0 4px 12px rgba(0, 184, 148, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .btn-about-icon {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .btn-about-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        /* ============================================
+           MODAL MINIMALISTA
+           ============================================ */
+        .modal-overlay-minimalist {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content-minimalist {
+            background: white;
+            border-radius: 16px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 85vh;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-header-minimalist {
+            padding: 24px 30px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header-minimalist h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .btn-close-minimalist {
+            background: transparent;
+            border: none;
+            font-size: 32px;
+            color: #999;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            line-height: 1;
+        }
+
+        .btn-close-minimalist:hover {
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .modal-body-minimalist {
+            padding: 30px;
+            max-height: calc(85vh - 80px);
+            overflow-y: auto;
+        }
+
+        .modal-section {
+            margin-bottom: 32px;
+        }
+
+        .modal-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .modal-section h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .modal-section h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #00B894;
+            margin-bottom: 8px;
+        }
+
+        .modal-section p {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .modal-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .modal-list li {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 10px;
+            padding-left: 0;
+        }
+
+        .modal-list-ordered {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .modal-list-ordered li {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .modal-type-card {
+            background: #f8f9fa;
+            border-left: 3px solid #00B894;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .modal-type-card p {
+            margin-bottom: 6px;
+        }
+
+        .modal-example {
+            font-size: 14px !important;
+            color: #666 !important;
+            font-style: italic;
+        }
+
+        .ir-table {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .ir-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e1e5e9;
+        }
+
+        .ir-row:last-child {
+            border-bottom: none;
+        }
+
+        .ir-row.highlight {
+            background: rgba(0, 184, 148, 0.1);
+            padding: 10px 12px;
+            border-radius: 6px;
+            border-bottom: none;
+            margin-top: 4px;
+        }
+
+        .ir-row span {
+            color: #555;
+            font-size: 15px;
+        }
+
+        .ir-row strong {
+            color: #00B894;
+            font-size: 16px;
+        }
+
+        .modal-tip {
+            background: #e3f9f3;
+            border-left: 3px solid #00B894;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 14px !important;
+            color: #333 !important;
+            margin-top: 12px;
+        }
+
+        .modal-warning {
+            background: #fff3cd;
+            border-left: 3px solid #F59E0B;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 14px !important;
+            color: #856404 !important;
+            margin-top: 12px;
+        }
+
+        .fgc-box {
+            background: #e7f3ff;
+            border: 1px solid #90caf9;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 12px 0;
+            font-size: 14px;
+            color: #1565c0;
+            line-height: 1.6;
+        }
+
+        .modal-cta {
+            background: linear-gradient(135deg, rgba(0, 184, 148, 0.1), rgba(99, 91, 255, 0.1));
+            border: 2px solid #00B894;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            margin-top: 32px;
+        }
+
+        .modal-cta p {
+            margin-bottom: 8px;
+            color: #333;
+        }
+
         /* Responsividade */
         /* ============================================
            MOBILE-FIRST RESPONSIVE
@@ -472,6 +734,51 @@
 
             .header p {
                 font-size: 1rem;
+            }
+
+            /* Ajuste header com botão em mobile */
+            .header {
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
+
+            .btn-about-cdb {
+                width: 100%;
+                height: 70px;
+                flex-direction: row;
+                justify-content: center;
+                gap: 12px;
+            }
+
+            .btn-about-icon {
+                font-size: 24px;
+                margin-bottom: 0;
+            }
+
+            .btn-about-text {
+                font-size: 14px;
+            }
+
+            /* Modal mobile */
+            .modal-content-minimalist {
+                width: 95%;
+                max-height: 90vh;
+            }
+
+            .modal-header-minimalist {
+                padding: 20px;
+            }
+
+            .modal-header-minimalist h2 {
+                font-size: 20px;
+            }
+
+            .modal-body-minimalist {
+                padding: 20px;
+            }
+
+            .modal-section h3 {
+                font-size: 16px;
             }
             
             /* TABS - Horizontal Scroll */
@@ -725,14 +1032,22 @@
             <span style="color: rgba(255, 255, 255, 0.3);">›</span>
             <a href="../index.html#renda-fixa" style="color: rgba(255, 255, 255, 0.6); text-decoration: none; transition: color 0.3s;">📊 Renda Fixa</a>
             <span style="color: rgba(255, 255, 255, 0.3);">›</span>
-            <span style="color: #00D924; font-weight: 600;">💰 Comparador de Investimentos</span>
+            <span style="color: #00D924; font-weight: 600;">🏦 Simulador de CDBs</span>
         </nav>
     </div>
 
     <div class="container" style="margin-top: 0;">
-        <div class="header">
-            <h1>💰 Comparador Inteligente de Investimentos</h1>
-            <p>Compare CDBs, Poupança, Tesouro Direto e LCI/LCA com dados reais e cálculos precisos</p>
+        <div class="header" style="display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center;">
+            <div>
+                <h1>💰 Simulador de CDBs vs Poupança</h1>
+                <p>Compare diferentes CDBs do mercado e veja quanto rende mais que a poupança com dados reais</p>
+            </div>
+            
+            <!-- Botão Minimalista "Sobre CDBs" -->
+            <button class="btn-about-cdb" onclick="openCDBModal()" aria-label="Conheça os CDBs">
+                <div class="btn-about-icon">📚</div>
+                <div class="btn-about-text">Sobre<br>CDBs</div>
+            </button>
         </div>
 
 
@@ -1147,6 +1462,130 @@
         </div>
     </div>
 
+    <!-- Modal Minimalista: Sobre CDBs -->
+    <div id="cdbModal" class="modal-overlay-minimalist" onclick="closeCDBModal()" style="display: none;">
+        <div class="modal-content-minimalist" onclick="event.stopPropagation()">
+            <div class="modal-header-minimalist">
+                <h2>📚 Conheça os CDBs</h2>
+                <button class="btn-close-minimalist" onclick="closeCDBModal()" aria-label="Fechar">×</button>
+            </div>
+            
+            <div class="modal-body-minimalist">
+                <!-- O que é -->
+                <section class="modal-section">
+                    <h3>🏦 O que é CDB?</h3>
+                    <p>
+                        <strong>CDB (Certificado de Depósito Bancário)</strong> é um título emitido por bancos para captar recursos. 
+                        Na prática, você <strong>empresta dinheiro ao banco</strong> e ele te devolve com juros.
+                    </p>
+                </section>
+
+                <!-- Por que investir -->
+                <section class="modal-section">
+                    <h3>💡 Por que investir em CDBs?</h3>
+                    <ul class="modal-list">
+                        <li><strong>✅ Rende mais que a poupança</strong> - Geralmente 100% a 150% do CDI</li>
+                        <li><strong>✅ Seguro</strong> - Protegido pelo FGC até R$ 250 mil por CPF/banco</li>
+                        <li><strong>✅ Previsível</strong> - Você sabe quanto vai render</li>
+                        <li><strong>✅ Flexível</strong> - Pode ter liquidez diária ou no vencimento</li>
+                    </ul>
+                </section>
+
+                <!-- Tipos de CDB -->
+                <section class="modal-section">
+                    <h3>📊 Tipos de CDB</h3>
+                    
+                    <div class="modal-type-card">
+                        <h4>🔹 Pós-fixado (mais comum)</h4>
+                        <p>Rentabilidade acompanha o <strong>CDI</strong>. Ex: 110% do CDI</p>
+                        <p class="modal-example">👉 Se CDI está em 13,65% ao ano, seu CDB rende 15% ao ano</p>
+                    </div>
+
+                    <div class="modal-type-card">
+                        <h4>🔹 Prefixado</h4>
+                        <p>Taxa <strong>fixa</strong> conhecida no momento da aplicação. Ex: 12% ao ano</p>
+                        <p class="modal-example">👉 Bom quando espera-se queda dos juros</p>
+                    </div>
+
+                    <div class="modal-type-card">
+                        <h4>🔹 Híbrido</h4>
+                        <p>Combina <strong>IPCA + taxa fixa</strong>. Ex: IPCA + 6% ao ano</p>
+                        <p class="modal-example">👉 Protege contra inflação no longo prazo</p>
+                    </div>
+                </section>
+
+                <!-- Imposto de Renda -->
+                <section class="modal-section">
+                    <h3>🧾 Imposto de Renda (IR Regressivo)</h3>
+                    <p>Quanto <strong>mais tempo</strong> você deixa investido, <strong>menos imposto</strong> paga:</p>
+                    <div class="ir-table">
+                        <div class="ir-row">
+                            <span>Até 6 meses:</span>
+                            <strong>22,5%</strong>
+                        </div>
+                        <div class="ir-row">
+                            <span>6 a 12 meses:</span>
+                            <strong>20%</strong>
+                        </div>
+                        <div class="ir-row">
+                            <span>12 a 24 meses:</span>
+                            <strong>17,5%</strong>
+                        </div>
+                        <div class="ir-row highlight">
+                            <span>Acima de 24 meses:</span>
+                            <strong>15%</strong>
+                        </div>
+                    </div>
+                    <p class="modal-tip">💡 O IR só é descontado sobre o <strong>lucro</strong>, não sobre o total investido</p>
+                </section>
+
+                <!-- Liquidez -->
+                <section class="modal-section">
+                    <h3>💧 Liquidez - Quando posso resgatar?</h3>
+                    <ul class="modal-list">
+                        <li><strong>Liquidez Diária (D+0):</strong> Resgata no mesmo dia - ideal para reserva de emergência</li>
+                        <li><strong>No vencimento:</strong> Só pode resgatar na data final - geralmente paga mais</li>
+                    </ul>
+                    <p class="modal-warning">⚠️ Se resgatar antes do vencimento (em CDB sem liquidez), pode perder rentabilidade</p>
+                </section>
+
+                <!-- FGC -->
+                <section class="modal-section">
+                    <h3>🛡️ FGC - Sua Proteção</h3>
+                    <p>
+                        O <strong>Fundo Garantidor de Créditos (FGC)</strong> protege seu investimento caso o banco quebre.
+                    </p>
+                    <div class="fgc-box">
+                        <strong>Cobertura:</strong> Até R$ 250 mil por CPF por instituição<br>
+                        <strong>Limite total:</strong> R$ 1 milhão a cada 4 anos
+                    </div>
+                    <p class="modal-tip">💡 Para valores maiores, diversifique entre vários bancos</p>
+                </section>
+
+                <!-- Como escolher -->
+                <section class="modal-section">
+                    <h3>🎯 Como escolher um bom CDB?</h3>
+                    <ol class="modal-list-ordered">
+                        <li>Compare a <strong>rentabilidade líquida</strong> (após IR)</li>
+                        <li>Verifique se tem <strong>FGC</strong></li>
+                        <li>Analise a <strong>liquidez</strong> (consegue resgatar quando precisar?)</li>
+                        <li>Confira o <strong>valor mínimo</strong> de aplicação</li>
+                        <li>Pesquise a <strong>reputação do banco</strong></li>
+                    </ol>
+                </section>
+
+                <!-- CTA -->
+                <div class="modal-cta">
+                    <p><strong>✨ Pronto para simular?</strong></p>
+                    <p>Use nossa ferramenta para comparar diferentes CDBs e ver quanto você pode ganhar!</p>
+                    <button class="btn-primary" onclick="closeCDBModal()" style="margin-top: 15px;">
+                        Começar a Simular →
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         /* ============================================
            PREPARAÇÃO PARA API FUTURA
@@ -1207,6 +1646,26 @@
            - Deploy: Vercel/Railway/Heroku
            
            ============================================ */
+
+        // ============================================
+        // MODAL "SOBRE CDBs"
+        // ============================================
+        function openCDBModal() {
+            document.getElementById('cdbModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Previne scroll da página
+        }
+
+        function closeCDBModal() {
+            document.getElementById('cdbModal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restaura scroll
+        }
+
+        // Fechar modal com tecla ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeCDBModal();
+            }
+        });
 
         // CONSTANTES
         const CDI_ANUAL = 13.65;
