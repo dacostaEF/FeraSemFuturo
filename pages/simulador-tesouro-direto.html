@@ -20,6 +20,9 @@
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="stylesheet" href="../assets/css/invlab-theme.css">
     
+    <!-- Chart.js para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <style>
         /* ======================================
            ESTILOS ESPECÍFICOS DO SIMULADOR
@@ -492,8 +495,28 @@
             color: #0A2540;
         }
 
+        /* Gráfico de Evolução */
+        .chart-container {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border: 2px solid #dee2e6;
+        }
+
+        .chart-container canvas {
+            max-height: 400px;
+        }
+
         /* Responsividade */
         @media (max-width: 768px) {
+            .chart-container {
+                padding: 15px;
+            }
+
+            .chart-container canvas {
+                max-height: 300px;
+            }
             body {
                 padding: 15px;
                 padding-top: 140px;
@@ -772,6 +795,17 @@
                     <!-- Resultados serão inseridos aqui via JavaScript -->
                 </tbody>
             </table>
+
+            <!-- Gráfico de Evolução -->
+            <div class="chart-container" id="chartContainer" style="display: none; margin-top: 40px;">
+                <h3 style="color: #0A2540; font-size: 1.4rem; margin-bottom: 20px; text-align: center;">
+                    📈 Evolução do Investimento ao Longo do Tempo
+                </h3>
+                <canvas id="evolutionChart"></canvas>
+                <p style="text-align: center; color: #6b7280; font-size: 0.9rem; margin-top: 15px;">
+                    Gráfico mostra a evolução mensal do investimento escolhido comparado com a Poupança
+                </p>
+            </div>
         </div>
 
         <!-- Caixa de Aviso: Resgate Antecipado -->
@@ -1134,6 +1168,226 @@
         }
 
         // ============================================
+        // CÁLCULOS MÊS A MÊS PARA GRÁFICO
+        // ============================================
+
+        /**
+         * Calcula evolução mês a mês do Tesouro Selic
+         */
+        function calculateMonthlyTesouroSelic(principal, months) {
+            const monthlyFactor = Math.pow(1 + SELIC_RATE / 100, 1 / 12);
+            const values = [principal];
+            
+            for (let month = 1; month <= months; month++) {
+                values.push(principal * Math.pow(monthlyFactor, month));
+            }
+            
+            return values;
+        }
+
+        /**
+         * Calcula evolução mês a mês do Tesouro IPCA+
+         */
+        function calculateMonthlyTesouroIPCA(principal, months) {
+            const ipca_factor = 1 + IPCA_RATE / 100;
+            const real_factor = 1 + TESOURO_IPCA_PLUS / 100;
+            const effective_rate = ipca_factor * real_factor - 1;
+            const monthlyFactor = Math.pow(1 + effective_rate, 1 / 12);
+            const values = [principal];
+            
+            for (let month = 1; month <= months; month++) {
+                values.push(principal * Math.pow(monthlyFactor, month));
+            }
+            
+            return values;
+        }
+
+        /**
+         * Calcula evolução mês a mês do Tesouro Prefixado
+         */
+        function calculateMonthlyTesouroPrefixado(principal, months) {
+            const monthlyFactor = Math.pow(1 + TESOURO_PREFIXADO_RATE / 100, 1 / 12);
+            const values = [principal];
+            
+            for (let month = 1; month <= months; month++) {
+                values.push(principal * Math.pow(monthlyFactor, month));
+            }
+            
+            return values;
+        }
+
+        /**
+         * Calcula evolução mês a mês da Poupança
+         */
+        function calculateMonthlyPoupanca(principal, months) {
+            const monthlyRate = getPoupancaRate() / 100;
+            const values = [principal];
+            
+            for (let month = 1; month <= months; month++) {
+                values.push(principal * Math.pow(1 + monthlyRate, month));
+            }
+            
+            return values;
+        }
+
+        // ============================================
+        // RENDERIZAÇÃO DO GRÁFICO
+        // ============================================
+
+        let evolutionChart = null; // Variável global para o gráfico
+
+        /**
+         * Renderiza o gráfico de evolução
+         * @param {string} tesouroType - Tipo de tesouro ('selic', 'ipca', 'prefixado')
+         * @param {number} principal - Valor investido
+         * @param {number} months - Prazo em meses
+         */
+        function renderEvolutionChart(tesouroType, principal, months) {
+            const ctx = document.getElementById('evolutionChart').getContext('2d');
+            
+            // Dados para o eixo X (meses)
+            const labels = [];
+            for (let i = 0; i <= months; i++) {
+                labels.push(i === 0 ? 'Início' : `${i}m`);
+            }
+            
+            // Calcula valores mês a mês
+            let tesouroValues, tesouroLabel, tesouroColor;
+            
+            switch(tesouroType) {
+                case 'selic':
+                    tesouroValues = calculateMonthlyTesouroSelic(principal, months);
+                    tesouroLabel = 'Tesouro Selic';
+                    tesouroColor = '#00B894'; // Verde
+                    break;
+                case 'ipca':
+                    tesouroValues = calculateMonthlyTesouroIPCA(principal, months);
+                    tesouroLabel = 'Tesouro IPCA+';
+                    tesouroColor = '#0A2540'; // Azul escuro
+                    break;
+                case 'prefixado':
+                    tesouroValues = calculateMonthlyTesouroPrefixado(principal, months);
+                    tesouroLabel = 'Tesouro Prefixado';
+                    tesouroColor = '#1a73e8'; // Azul
+                    break;
+                default:
+                    // Default para Selic
+                    tesouroValues = calculateMonthlyTesouroSelic(principal, months);
+                    tesouroLabel = 'Tesouro Selic';
+                    tesouroColor = '#00B894';
+            }
+            
+            const poupancaValues = calculateMonthlyPoupanca(principal, months);
+            
+            // Destrói gráfico anterior se existir
+            if (evolutionChart) {
+                evolutionChart.destroy();
+            }
+            
+            // Cria novo gráfico
+            evolutionChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: tesouroLabel,
+                            data: tesouroValues,
+                            borderColor: tesouroColor,
+                            backgroundColor: tesouroColor + '20',
+                            borderWidth: 3,
+                            tension: 0.4,
+                            pointRadius: 0,
+                            pointHoverRadius: 6
+                        },
+                        {
+                            label: 'Poupança',
+                            data: poupancaValues,
+                            borderColor: '#9CA3AF',
+                            backgroundColor: '#9CA3AF20',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            tension: 0.4,
+                            pointRadius: 0,
+                            pointHoverRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 14,
+                                    family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                                },
+                                padding: 15,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: 12,
+                            titleFont: {
+                                size: 14
+                            },
+                            bodyFont: {
+                                size: 13
+                            },
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + 
+                                           formatCurrency(context.parsed.y);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                callback: function(value) {
+                                    return 'R$ ' + value.toLocaleString('pt-BR', {
+                                        minimumFractionDigits: 0,
+                                        maximumFractionDigits: 0
+                                    });
+                                },
+                                font: {
+                                    size: 12
+                                }
+                            },
+                            grid: {
+                                color: '#e5e7eb'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: 11
+                                },
+                                maxRotation: 45,
+                                minRotation: 0
+                            },
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Mostra o container do gráfico
+            document.getElementById('chartContainer').style.display = 'block';
+        }
+
+        // ============================================
         // PROCESSAMENTO DO FORMULÁRIO
         // ============================================
 
@@ -1163,6 +1417,14 @@
             
             // Renderizar resultados
             renderResults(investments, best, poupanca.netReturn);
+            
+            // Renderizar gráfico (usa o melhor investimento)
+            let chartType = 'selic'; // Default
+            if (best.name === 'Tesouro IPCA+') chartType = 'ipca';
+            else if (best.name === 'Tesouro Prefixado') chartType = 'prefixado';
+            else if (best.name === 'Tesouro Selic') chartType = 'selic';
+            
+            renderEvolutionChart(chartType, principal, months);
             
             // Exibir seção de resultados
             document.getElementById('resultsSection').style.display = 'block';
