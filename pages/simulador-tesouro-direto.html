@@ -203,6 +203,8 @@
             padding: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             margin-bottom: 20px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .input-section h2 {
@@ -250,6 +252,38 @@
             gap: 20px;
         }
 
+        .input-section-intro {
+            color: #4b5563;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .field-hint {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.85rem;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        .input-section-note {
+            margin-top: 20px;
+            font-size: 0.95rem;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .input-section-note a {
+            color: #1a73e8;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        .input-section-note a:hover {
+            color: #0A2540;
+        }
+
         .btn-calculate {
             width: 100%;
             background: linear-gradient(135deg, #1a73e8 0%, #0A2540 100%);
@@ -278,6 +312,8 @@
             padding: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             margin-bottom: 20px;
+            width: 100%;
+            box-sizing: border-box;
             display: none;
         }
 
@@ -357,6 +393,9 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             margin-bottom: 20px;
             border-left: 5px solid #ff6b6b;
+            text-align: left;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .warning-box h3 {
@@ -370,14 +409,22 @@
 
         .warning-box p {
             color: #555;
-            line-height: 1.7;
-            margin-bottom: 10px;
+            line-height: 1.4;
+            margin-bottom: 6px;
+            text-align: left;
         }
 
         .warning-box ul {
             color: #555;
-            line-height: 1.8;
+            line-height: 1.4;
             margin-left: 20px;
+            text-align: left;
+            list-style-position: outside;
+        }
+
+        .warning-box li {
+            margin-bottom: 2px;
+            text-align: left;
         }
 
         /* Premissas do Simulador */
@@ -388,6 +435,9 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             margin-bottom: 20px;
             border-left: 5px solid #1a73e8;
+            text-align: left;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .assumptions-box h3 {
@@ -401,12 +451,15 @@
 
         .assumptions-box ul {
             color: #555;
-            line-height: 1.8;
+            line-height: 1.4;
             margin-left: 20px;
+            text-align: left;
+            list-style-position: outside;
         }
 
         .assumptions-box li {
-            margin-bottom: 8px;
+            margin-bottom: 2px;
+            text-align: left;
         }
 
         .assumptions-box strong {
@@ -540,45 +593,120 @@
 
         <!-- Formulário de Entrada -->
         <div class="input-section">
-            <h2>💰 Dados da Simulação</h2>
-            
+            <h2>💰 Dados da simulação</h2>
+            <p class="input-section-intro">
+                Preencha os campos abaixo para estimar quanto seu dinheiro pode render no Tesouro Direto
+                e comparar com a poupança. Os valores são educativos, usando premissas simplificadas.
+            </p>
+
             <form id="simulatorForm">
+                <!-- Linha 1: título, ano, datas -->
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="investmentValue">
-                            💵 Valor do Investimento (R$)
-                        </label>
-                        <input 
-                            type="number" 
-                            id="investmentValue" 
-                            name="investmentValue" 
-                            placeholder="Ex: 10.000" 
-                            min="100" 
-                            step="100"
-                            required
-                        >
+                        <label for="bondType">🎯 Título do Tesouro</label>
+                        <select id="bondType" name="bondType">
+                            <option value="">Selecione o título</option>
+                            <option value="selic">Tesouro Selic</option>
+                            <option value="ipca">Tesouro IPCA+</option>
+                            <option value="ipca-juros">Tesouro IPCA+ com Juros Semestrais</option>
+                            <option value="prefixado">Tesouro Prefixado</option>
+                            <option value="prefixado-juros">Tesouro Prefixado com Juros Semestrais</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="investmentPeriod">
-                            📅 Prazo do Investimento (meses)
-                        </label>
-                        <input 
-                            type="number" 
-                            id="investmentPeriod" 
-                            name="investmentPeriod" 
-                            placeholder="Ex: 24" 
-                            min="1" 
-                            max="360"
+                        <label for="bondYear">📆 Ano de vencimento</label>
+                        <select id="bondYear" name="bondYear">
+                            <option value="">Selecione o ano</option>
+                            <option>2027</option>
+                            <option>2029</option>
+                            <option>2031</option>
+                            <option>2035</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="startDate">📅 Data do investimento (opcional)</label>
+                        <input type="date" id="startDate" name="startDate">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="endDate">🏁 Data de vencimento (opcional)</label>
+                        <input type="date" id="endDate" name="endDate">
+                    </div>
+                </div>
+
+                <!-- Linha 2: valor, prazo e taxas -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="investmentValue">💵 Valor do investimento (R$)</label>
+                        <input
+                            type="number"
+                            id="investmentValue"
+                            name="investmentValue"
+                            min="100"
+                            step="100"
+                            placeholder="Ex: 10000"
                             required
                         >
+                        <small class="field-hint">Valor mínimo sugerido: R$ 100</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="investmentPeriod">⏱️ Prazo do investimento (meses)</label>
+                        <input
+                            type="number"
+                            id="investmentPeriod"
+                            name="investmentPeriod"
+                            min="1"
+                            max="360"
+                            placeholder="Ex: 24"
+                            required
+                        >
+                        <small class="field-hint">
+                            Use um número de meses aproximado do tempo que pretende ficar investido.
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="institutionFee">🏦 Taxa da instituição (opcional)</label>
+                        <input
+                            type="number"
+                            id="institutionFee"
+                            name="institutionFee"
+                            step="0.01"
+                            placeholder="Ex: 0,20"
+                        >
+                        <small class="field-hint">% ao ano de taxa de administração/custódia</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="investorProfile">👤 Seu objetivo</label>
+                        <select id="investorProfile" name="investorProfile">
+                            <option value="">Selecione</option>
+                            <option value="reserva">Reserva de emergência</option>
+                            <option value="medio-prazo">Projeto de médio prazo (2–5 anos)</option>
+                            <option value="longo-prazo">Aposentadoria/objetivo de longo prazo</option>
+                        </select>
+                        <small class="field-hint">
+                            Apenas para te ajudar a refletir sobre prazo e risco.
+                        </small>
                     </div>
                 </div>
 
                 <button type="submit" class="btn-calculate">
-                    🧮 Calcular Rentabilidade
+                    🧮 Calcular rentabilidade
                 </button>
             </form>
+
+            <p class="input-section-note">
+                🔍 Para simulações completas, com todos os títulos disponíveis, taxas oficiais atualizadas,
+                datas exatas de vencimento e cenários de resgate antecipado, utilize também o simulador oficial
+                do Tesouro Direto:&nbsp;
+                <a href="https://www.tesourodireto.com.br/simuladores/calculadora-avancada" target="_blank">
+                    Calculadora Avançada do Tesouro
+                </a>.
+            </p>
         </div>
 
         <!-- Resultados -->
