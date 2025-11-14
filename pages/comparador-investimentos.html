@@ -1446,6 +1446,38 @@
             return evolution;
         }
 
+        // Função auxiliar para calcular CDB com detalhes completos
+        function calculateCDBDetails(initial, monthly, years, cdiPercent) {
+            const months = years * 12;
+            const monthlyCDI = Math.pow(1 + CDI_ANUAL/100, 1/12) - 1;
+            const monthlyRate = monthlyCDI * (cdiPercent / 100);
+            
+            let total = initial;
+            const evolution = [initial];
+            
+            for (let i = 0; i < months; i++) {
+                total = total * (1 + monthlyRate) + monthly;
+                evolution.push(total);
+            }
+            
+            const invested = initial + (monthly * months);
+            const valorBruto = evolution[evolution.length - 1];
+            const profit = valorBruto - invested;
+            const irRate = calculateIR(months);
+            const irDescontado = profit * irRate;
+            const valorLiquido = valorBruto - irDescontado;
+            
+            return {
+                evolution: evolution,
+                invested: invested,
+                valorBruto: valorBruto,
+                irDescontado: irDescontado,
+                irRate: irRate,
+                valorLiquido: valorLiquido,
+                profit: valorLiquido - invested
+            };
+        }
+
         function calculatePoupanca(initial, monthly, years) {
             const months = years * 12;
             const monthlyRate = POUPANCA_MENSAL / 100;
@@ -1483,13 +1515,13 @@
             const percentLabel = (product.taxaBase * 100).toFixed(0);
             const productName = `${product.banco} (${percentLabel}% CDI)`;
             
-            // Calcular
-            const cdbEvol = calculateCDB(amount, 0, months/12, cdiPercent);
+            // Calcular com detalhes completos
+            const cdbDetails = calculateCDBDetails(amount, 0, months/12, cdiPercent);
             const poupEvol = calculatePoupanca(amount, 0, months/12);
             
-            const cdbFinal = cdbEvol[cdbEvol.length - 1];
             const poupFinal = poupEvol[poupEvol.length - 1];
-            const difference = cdbFinal - poupFinal;
+            const poupProfit = poupFinal - amount;
+            const difference = cdbDetails.valorLiquido - poupFinal;
             
             // Mostrar resultados
             const resultsDiv = document.getElementById('compareResults');
@@ -1498,22 +1530,50 @@
                     <div class="result-card best">
                         <div class="result-icon">🏆</div>
                         <div class="result-title">${productName}</div>
-                        <div class="result-value">R$ ${cdbFinal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
-                        <div class="result-difference">Valor Final (após IR)</div>
+                        <div class="result-value" style="font-size: 1.8rem; color: #00D924;">R$ ${cdbDetails.valorLiquido.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                        <div class="result-difference" style="color: #666; font-size: 0.9rem; margin-top: 8px;">✅ Valor Líquido (após IR)</div>
+                        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.1); font-size: 0.85rem; color: #666;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                <span>💵 Investido:</span>
+                                <strong>R$ ${cdbDetails.invested.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                <span>📊 Valor Bruto:</span>
+                                <strong>R$ ${cdbDetails.valorBruto.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                <span>🧾 IR (${(cdbDetails.irRate * 100).toFixed(1)}%):</span>
+                                <strong style="color: #dc2626;">- R$ ${cdbDetails.irDescontado.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(0,0,0,0.1);">
+                                <span>💰 Lucro Líquido:</span>
+                                <strong style="color: #00D924;">R$ ${cdbDetails.profit.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong>
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="result-card poupanca">
                         <div class="result-icon">🐷</div>
                         <div class="result-title">Poupança</div>
-                        <div class="result-value" style="color: #F59E0B;">R$ ${poupFinal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
-                        <div class="result-difference">Valor Final (isento IR)</div>
+                        <div class="result-value" style="font-size: 1.8rem; color: #6b7280;">R$ ${poupFinal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                        <div class="result-difference" style="color: #666; font-size: 0.9rem; margin-top: 8px;">✅ Valor Final (isento IR)</div>
+                        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.1); font-size: 0.85rem; color: #666;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                <span>💵 Investido:</span>
+                                <strong>R$ ${amount.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(0,0,0,0.1);">
+                                <span>💰 Lucro Líquido:</span>
+                                <strong style="color: #6b7280;">R$ ${poupProfit.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong>
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="result-card">
                         <div class="result-icon">💰</div>
                         <div class="result-title">Você GANHA com CDB</div>
-                        <div class="result-value">+ R$ ${difference.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
-                        <div class="result-difference">A mais em ${months} meses</div>
+                        <div class="result-value" style="font-size: 1.8rem;">+ R$ ${difference.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                        <div class="result-difference" style="color: #666; font-size: 0.9rem; margin-top: 8px;">A mais em ${months} meses</div>
                     </div>
                 </div>
                 
@@ -1537,7 +1597,7 @@
             const years = parseInt(document.getElementById('timePeriod').value);
             const cdiPercent = parseFloat(document.getElementById('cdbOption').value);
             
-            const cdbEvolution = calculateCDB(initial, monthly, years, cdiPercent);
+            const cdbDetails = calculateCDBDetails(initial, monthly, years, cdiPercent);
             const poupancaEvolution = calculatePoupanca(initial, monthly, years);
             
             // Gerar labels
@@ -1552,9 +1612,9 @@
                 }
             }
             
-            updateChart(labels, cdbEvolution, poupancaEvolution, cdiPercent);
-            showSimulationResults(cdbEvolution, poupancaEvolution, cdiPercent, years);
-            generateInsights(cdbEvolution, poupancaEvolution, initial, monthly, years, cdiPercent);
+            updateChart(labels, cdbDetails.evolution, poupancaEvolution, cdiPercent);
+            showSimulationResults(cdbDetails, poupancaEvolution, cdiPercent, years);
+            generateInsights(cdbDetails, poupancaEvolution, initial, monthly, years, cdiPercent);
         }
 
         function updateChart(labels, cdbData, poupancaData, cdiPercent) {
@@ -1628,37 +1688,65 @@
             });
         }
 
-        function showSimulationResults(cdbEvolution, poupancaEvolution, cdiPercent, years) {
-            const finalCDB = cdbEvolution[cdbEvolution.length - 1];
+        function showSimulationResults(cdbDetails, poupancaEvolution, cdiPercent, years) {
             const finalPoupanca = poupancaEvolution[poupancaEvolution.length - 1];
-            const difference = finalCDB - finalPoupanca;
+            const poupProfit = finalPoupanca - cdbDetails.invested;
+            const difference = cdbDetails.valorLiquido - finalPoupanca;
             
             document.getElementById('simulationResults').innerHTML = `
                 <div class="result-card best">
                     <div class="result-icon">🏆</div>
                     <div class="result-title">CDB ${cdiPercent}% CDI</div>
-                    <div class="result-value">R$ ${finalCDB.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
-                    <div class="result-difference">Valor Final</div>
+                    <div class="result-value" style="font-size: 1.8rem; color: #00D924;">R$ ${cdbDetails.valorLiquido.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                    <div class="result-difference" style="color: #666; font-size: 0.9rem; margin-top: 8px;">✅ Valor Líquido (após IR)</div>
+                    <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.1); font-size: 0.85rem; color: #666;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span>💵 Investido:</span>
+                            <strong>R$ ${cdbDetails.invested.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span>📊 Valor Bruto:</span>
+                            <strong>R$ ${cdbDetails.valorBruto.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span>🧾 IR (${(cdbDetails.irRate * 100).toFixed(1)}%):</span>
+                            <strong style="color: #dc2626;">- R$ ${cdbDetails.irDescontado.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(0,0,0,0.1);">
+                            <span>💰 Lucro Líquido:</span>
+                            <strong style="color: #00D924;">R$ ${cdbDetails.profit.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="result-card poupanca">
                     <div class="result-icon">🐷</div>
                     <div class="result-title">Poupança</div>
-                    <div class="result-value" style="color: #F59E0B;">R$ ${finalPoupanca.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
-                    <div class="result-difference">Valor Final</div>
+                    <div class="result-value" style="font-size: 1.8rem; color: #6b7280;">R$ ${finalPoupanca.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                    <div class="result-difference" style="color: #666; font-size: 0.9rem; margin-top: 8px;">✅ Valor Final (isento IR)</div>
+                    <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.1); font-size: 0.85rem; color: #666;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span>💵 Investido:</span>
+                            <strong>R$ ${cdbDetails.invested.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(0,0,0,0.1);">
+                            <span>💰 Lucro Líquido:</span>
+                            <strong style="color: #6b7280;">R$ ${poupProfit.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="result-card">
                     <div class="result-icon">💰</div>
                     <div class="result-title">Diferença</div>
-                    <div class="result-value">+ R$ ${difference.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
-                    <div class="result-difference">Em ${years} ano${years > 1 ? 's' : ''}</div>
+                    <div class="result-value" style="font-size: 1.8rem;">+ R$ ${difference.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                    <div class="result-difference" style="color: #666; font-size: 0.9rem; margin-top: 8px;">Em ${years} ano${years > 1 ? 's' : ''}</div>
                 </div>
             `;
         }
 
-        function generateInsights(cdbEvolution, poupancaEvolution, initial, monthly, years, cdiPercent) {
-            const finalCDB = cdbEvolution[cdbEvolution.length - 1];
+        function generateInsights(cdbDetails, poupancaEvolution, initial, monthly, years, cdiPercent) {
+            const finalCDB = cdbDetails.valorLiquido;
             const finalPoupanca = poupancaEvolution[poupancaEvolution.length - 1];
             const difference = finalCDB - finalPoupanca;
             
@@ -1703,24 +1791,34 @@
             
             checkboxes.forEach((checkbox, index) => {
                 const value = checkbox.value;
-                let evolution, name, percentCDI;
+                let evolution, name, percentCDI, valorBruto, irDescontado, irRate, finalValue, invested, profit;
                 
                 if (value === 'poupanca') {
                     evolution = calculatePoupanca(initial, monthly, years);
                     name = 'Poupança';
                     percentCDI = 'N/A';
+                    finalValue = evolution[evolution.length - 1];
+                    invested = initial + (monthly * years * 12);
+                    profit = finalValue - invested;
+                    valorBruto = finalValue;
+                    irDescontado = 0;
+                    irRate = 0;
                 } else {
                     const productIndex = parseInt(value);
                     const product = investmentDatabase[productIndex];
                     percentCDI = (product.taxaBase * 100).toFixed(0);
                     name = `${product.banco} (${percentCDI}% CDI)`;
-                    evolution = calculateCDB(initial, monthly, years, product.taxaBase * 100);
+                    const cdbDetails = calculateCDBDetails(initial, monthly, years, product.taxaBase * 100);
+                    evolution = cdbDetails.evolution;
+                    valorBruto = cdbDetails.valorBruto;
+                    irDescontado = cdbDetails.irDescontado;
+                    irRate = cdbDetails.irRate;
+                    finalValue = cdbDetails.valorLiquido;
+                    invested = cdbDetails.invested;
+                    profit = cdbDetails.profit;
                 }
                 
-                const finalValue = evolution[evolution.length - 1];
-                const invested = initial + (monthly * years * 12);
-                const profit = finalValue - invested;
-                const rentability = ((finalValue - invested) / invested) * 100;
+                const rentability = (profit / invested) * 100;
                 
                 results.push({
                     name,
@@ -1729,7 +1827,10 @@
                     invested,
                     profit,
                     rentability,
-                    evolution
+                    evolution,
+                    valorBruto,
+                    irDescontado,
+                    irRate
                 });
                 
                 // Dataset para o gráfico
@@ -1869,8 +1970,10 @@
                         <tr>
                             <th>Posição</th>
                             <th>Produto</th>
-                            <th>Valor Final</th>
                             <th>Investido</th>
+                            <th>Valor Bruto</th>
+                            <th>IR Descontado</th>
+                            <th>Valor Líquido</th>
                             <th>Lucro Líquido</th>
                             <th>Rentabilidade</th>
                         </tr>
@@ -1880,15 +1983,20 @@
             
             results.forEach((result, index) => {
                 const badge = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}º`;
+                const irDisplay = result.irDescontado > 0 
+                    ? `<span style="color: #dc2626;">- R$ ${result.irDescontado.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br><small style="color: #666;">(${(result.irRate * 100).toFixed(1)}%)</small>` 
+                    : '<span style="color: #666;">Isento</span>';
                 
                 tableHTML += `
-                    <tr style="${index === 0 ? 'background: rgba(0, 184, 148, 0.1); font-weight: 600;' : ''}">
+                    <tr style="${index === 0 ? 'background: rgba(0, 217, 36, 0.05); font-weight: 600;' : ''}">
                         <td>${badge}</td>
-                        <td>${result.name}</td>
-                        <td style="color: #00B894; font-weight: 700;">R$ ${result.finalValue.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
+                        <td style="text-align: left;">${result.name}</td>
                         <td>R$ ${result.invested.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
-                        <td style="color: #00B894;">+ R$ ${result.profit.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
-                        <td style="color: #4B014A; font-weight: 600;">${result.rentability.toFixed(2)}%</td>
+                        <td style="color: #666;">R$ ${result.valorBruto.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
+                        <td>${irDisplay}</td>
+                        <td style="color: #00D924; font-weight: 700;">R$ ${result.finalValue.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
+                        <td style="color: #00D924;">+ R$ ${result.profit.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
+                        <td style="color: #00D924; font-weight: 600;">${result.rentability.toFixed(2)}%</td>
                     </tr>
                 `;
             });
