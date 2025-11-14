@@ -97,26 +97,7 @@ function checkURLHash() {
 // Função para trocar aba via JavaScript (para uso futuro)
 window.changeTab = switchTab;
 
-// ============================================
-// DEBUG: Verifica se cards são clicáveis
-// ============================================
-document.addEventListener('DOMContentLoaded', function() {
-    const allCards = document.querySelectorAll('.learning-card, .tool-card');
-    
-    console.log('🔍 Total de cards encontrados:', allCards.length);
-    
-    allCards.forEach((card, index) => {
-        const onclick = card.getAttribute('onclick');
-        console.log(`📦 Card ${index + 1}: onclick =`, onclick ? 'SIM' : 'NÃO');
-        
-        // Testa se clique funciona
-        card.addEventListener('click', function(e) {
-            console.log('🖱️ CLIQUE DETECTADO no card:', this);
-            console.log('🎯 Target:', e.target);
-            console.log('📍 Onclick:', this.getAttribute('onclick'));
-        }, true); // useCapture = true para capturar primeiro
-    });
-});
+// Cards são clicáveis via onclick inline no HTML
 
 // ============================================
 // DROPDOWNS NAS ABAS (Clique + Hover)
