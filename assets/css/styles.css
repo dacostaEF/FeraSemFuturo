@@ -2030,6 +2030,484 @@ body {
 }
 
 /* ============================================
+   SEÇÃO EDUCACIONAL - RENDA FIXA
+   ============================================ */
+
+/* Container mais largo para conteúdo educacional */
+.content-wrapper-wide {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Seção Educacional */
+.section-educational {
+    padding: 40px 0;
+}
+
+/* Header Educacional */
+.educational-header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.educational-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 24px;
+    line-height: 1.2;
+}
+
+.educational-intro {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.8;
+    margin-bottom: 16px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.educational-intro.secondary {
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.85);
+    font-style: italic;
+}
+
+/* Info Section */
+.info-section {
+    margin-bottom: 56px;
+}
+
+.info-section.highlight-section {
+    background: rgba(99, 91, 255, 0.08);
+    border-radius: 20px;
+    padding: 32px;
+    border: 1px solid rgba(99, 91, 255, 0.2);
+}
+
+.info-section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+/* Grid de Remuneração */
+.remuneration-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.remuneration-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 28px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.remuneration-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--blue-tech), var(--green-data));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.remuneration-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    border-color: var(--green-data);
+}
+
+.remuneration-card:hover::before {
+    opacity: 1;
+}
+
+.remuneration-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.remuneration-card h3 {
+    font-size: 22px;
+    color: #FFFFFF;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.remuneration-desc {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.remuneration-example {
+    background: rgba(0, 217, 36, 0.1);
+    border-left: 3px solid var(--green-data);
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-top: 16px;
+}
+
+.example-label {
+    display: block;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.example-value {
+    font-size: 16px;
+    color: var(--green-light);
+    font-weight: 700;
+}
+
+.remuneration-benefit {
+    font-size: 14px;
+    color: var(--green-light);
+    margin-top: 12px;
+    font-weight: 600;
+}
+
+/* Investment Types */
+.investment-types {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.investment-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 28px;
+    transition: all 0.3s ease;
+}
+
+.investment-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    border-color: var(--green-data);
+}
+
+.investment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.investment-badge {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--green-light);
+}
+
+.investment-security,
+.investment-highlight,
+.investment-level {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 12px;
+    background: rgba(0, 217, 36, 0.2);
+    color: var(--green-light);
+}
+
+.investment-level {
+    background: rgba(245, 158, 11, 0.2);
+    color: #FFA500;
+}
+
+.investment-tag {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+}
+
+.investment-description {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.investment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.investment-list li {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.7;
+    padding: 8px 0;
+    padding-left: 24px;
+    position: relative;
+}
+
+.investment-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--green-data);
+    font-weight: 700;
+}
+
+/* Platforms Grid */
+.platforms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.platform-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 28px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.platform-card.featured {
+    background: rgba(99, 91, 255, 0.1);
+    border-color: var(--blue-tech);
+}
+
+.platform-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    border-color: var(--green-data);
+}
+
+.platform-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.platform-card h3 {
+    font-size: 20px;
+    color: #FFFFFF;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.platform-card p {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+}
+
+/* Steps List */
+.steps-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.step-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--green-data);
+    transform: translateX(4px);
+}
+
+.step-number {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--blue-tech), var(--green-data));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.step-content h4 {
+    font-size: 17px;
+    color: #FFFFFF;
+    margin-bottom: 4px;
+    font-weight: 700;
+}
+
+.step-content p {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+/* Beginner Tip */
+.beginner-tip {
+    background: rgba(0, 217, 36, 0.1);
+    border: 2px solid var(--green-data);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.tip-icon {
+    font-size: 40px;
+    flex-shrink: 0;
+}
+
+.tip-content h4 {
+    font-size: 18px;
+    color: #FFFFFF;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.tip-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 12px 0;
+}
+
+.tip-content ul li {
+    font-size: 16px;
+    color: var(--green-light);
+    padding: 6px 0;
+    font-weight: 600;
+}
+
+.tip-content p {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Final Message */
+.final-message {
+    background: linear-gradient(135deg, rgba(99, 91, 255, 0.15), rgba(0, 217, 36, 0.1));
+    border: 2px solid rgba(0, 217, 36, 0.3);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.final-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+}
+
+.final-message h3 {
+    font-size: 26px;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.final-message p {
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.8;
+    margin-bottom: 16px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.invlab-message {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    font-style: italic;
+}
+
+/* Responsividade - Seção Educacional */
+@media (max-width: 768px) {
+    .content-wrapper-wide {
+        padding: 0 16px;
+    }
+
+    .educational-title {
+        font-size: 28px;
+    }
+
+    .educational-intro {
+        font-size: 16px;
+    }
+
+    .info-section-title {
+        font-size: 22px;
+    }
+
+    .remuneration-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .platforms-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .beginner-tip {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .final-message {
+        padding: 24px;
+    }
+
+    .final-icon {
+        font-size: 48px;
+    }
+
+    .final-message h3 {
+        font-size: 20px;
+    }
+
+    .final-message p {
+        font-size: 15px;
+    }
+}
+
+/* ============================================
    NOVO MENU PROFISSIONAL - FASE 4
    (Em preparação - CSS base adicionado)
    ============================================ */

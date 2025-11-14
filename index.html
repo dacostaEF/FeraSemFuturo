@@ -492,26 +492,229 @@
 
         <!-- ABA: RENDA FIXA (NOVA) -->
         <div class="tab-content" id="renda-fixa">
-            <div class="content-wrapper">
-                <section class="section">
-                    <h2 class="section-title">📊 Renda Fixa</h2>
-                    <p class="section-subtitle">Investimentos de renda fixa: CDBs, Tesouro Direto, LCI/LCA e mais</p>
-                    
-                    <!-- Conteúdo Temporário -->
-                    <div class="coming-soon-card">
-                        <div class="coming-icon">🚧</div>
-                        <h3>Conteúdo em Migração</h3>
-                        <p>Estamos organizando todo o conteúdo de Renda Fixa aqui:</p>
-                        <ul class="coming-list">
-                            <li>✅ Comparador Inteligente de Investimentos</li>
-                            <li>✅ CDB: Como escolher e comparar</li>
-                            <li>✅ Tesouro Direto: Tipos e estratégias</li>
-                            <li>✅ LCI e LCA: Isentos de IR</li>
-                            <li>✅ Poupança vs Outros investimentos</li>
-                        </ul>
-                        <p class="coming-soon-subtitle">Por enquanto, acesse via Ferramentas!</p>
-                        <button class="btn-primary" data-tab-link="ferramentas">
-                            Acessar Ferramentas
+            <div class="content-wrapper-wide">
+                <section class="section-educational">
+                    <div class="educational-header">
+                        <h1 class="educational-title">📘 O que é Renda Fixa?</h1>
+                        <p class="educational-intro">
+                            A renda fixa reúne investimentos em que as <strong>regras de remuneração são definidas no momento da aplicação</strong>. 
+                            Isso permite que você tenha uma boa previsão do retorno ao longo do tempo, tornando essa classe ideal para quem 
+                            está começando ou busca mais estabilidade.
+                        </p>
+                        <p class="educational-intro secondary">
+                            Em termos simples: <strong>você empresta dinheiro</strong> para uma instituição (governo, banco ou empresa) e 
+                            <strong>recebe juros em troca</strong>.
+                        </p>
+                    </div>
+
+                    <!-- Formas de Remuneração -->
+                    <div class="info-section">
+                        <h2 class="info-section-title">💰 Existem três formas principais de remuneração</h2>
+                        
+                        <div class="remuneration-grid">
+                            <!-- Prefixada -->
+                            <div class="remuneration-card prefixada">
+                                <div class="remuneration-icon">🔹</div>
+                                <h3>Prefixada</h3>
+                                <p class="remuneration-desc">A taxa é conhecida desde o início.</p>
+                                <div class="remuneration-example">
+                                    <span class="example-label">Exemplo:</span>
+                                    <span class="example-value">10% ao ano até o vencimento</span>
+                                </div>
+                            </div>
+
+                            <!-- Pós-fixada -->
+                            <div class="remuneration-card posfixada">
+                                <div class="remuneration-icon">🔹</div>
+                                <h3>Pós-fixada</h3>
+                                <p class="remuneration-desc">A rentabilidade acompanha um indicador econômico, como Selic ou CDI.</p>
+                                <div class="remuneration-example">
+                                    <span class="example-label">Exemplo:</span>
+                                    <span class="example-value">100% do CDI</span>
+                                </div>
+                            </div>
+
+                            <!-- Híbrida -->
+                            <div class="remuneration-card hibrida">
+                                <div class="remuneration-icon">🔹</div>
+                                <h3>Híbrida</h3>
+                                <p class="remuneration-desc">Combina uma taxa fixa + inflação (IPCA).</p>
+                                <div class="remuneration-example">
+                                    <span class="example-label">Exemplo:</span>
+                                    <span class="example-value">IPCA + 5% ao ano</span>
+                                </div>
+                                <p class="remuneration-benefit">✨ Protege o poder de compra no longo prazo</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Principais Tipos -->
+                    <div class="info-section">
+                        <h2 class="info-section-title">🟦 Principais tipos de investimentos em Renda Fixa</h2>
+                        
+                        <div class="investment-types">
+                            <!-- Tesouro Direto -->
+                            <div class="investment-card tesouro">
+                                <div class="investment-header">
+                                    <span class="investment-badge">🟩 Tesouro Direto</span>
+                                    <span class="investment-security">🛡️ Mais Seguro</span>
+                                </div>
+                                <p class="investment-description">
+                                    Títulos emitidos pelo <strong>Governo Federal</strong> — considerados os mais seguros do Brasil.
+                                </p>
+                                <ul class="investment-list">
+                                    <li><strong>Tesouro Selic:</strong> pós-fixado, ideal para reserva de emergência.</li>
+                                    <li><strong>Tesouro IPCA+:</strong> híbrido, protege da inflação; bom para longo prazo.</li>
+                                    <li><strong>Tesouro Prefixado:</strong> taxa fixa conhecida na compra.</li>
+                                </ul>
+                            </div>
+
+                            <!-- CDBs -->
+                            <div class="investment-card cdb">
+                                <div class="investment-header">
+                                    <span class="investment-badge">🟩 CDBs</span>
+                                    <span class="investment-tag">Certificado de Depósito Bancário</span>
+                                </div>
+                                <p class="investment-description">
+                                    Empréstimo que você faz ao banco. A remuneração costuma seguir o CDI.
+                                </p>
+                                <ul class="investment-list">
+                                    <li>Pode ter liquidez diária ou no vencimento</li>
+                                    <li>Incide IR regressivo</li>
+                                    <li>Garantia do FGC até R$ 250 mil por CPF por instituição</li>
+                                    <li>Excelente opção para objetivos de curto e médio prazo</li>
+                                </ul>
+                            </div>
+
+                            <!-- LCI/LCA -->
+                            <div class="investment-card lci">
+                                <div class="investment-header">
+                                    <span class="investment-badge">🟩 LCIs e LCAs</span>
+                                    <span class="investment-highlight">✨ Isentos de IR</span>
+                                </div>
+                                <p class="investment-description">
+                                    Títulos emitidos por bancos para financiar setores <strong>imobiliário</strong> e do <strong>agronegócio</strong>.
+                                </p>
+                                <ul class="investment-list">
+                                    <li><strong>Isentos de IR</strong> para pessoa física</li>
+                                    <li>Proteção do FGC</li>
+                                    <li>Geralmente oferecem boa rentabilidade líquida</li>
+                                </ul>
+                            </div>
+
+                            <!-- CRI/CRA e Debêntures -->
+                            <div class="investment-card avancado">
+                                <div class="investment-header">
+                                    <span class="investment-badge">🟩 CRI/CRA e Debêntures</span>
+                                    <span class="investment-level">⚠️ Intermediário</span>
+                                </div>
+                                <p class="investment-description">
+                                    Títulos emitidos por empresas para captar recursos.
+                                </p>
+                                <ul class="investment-list">
+                                    <li>Podem oferecer rentabilidades maiores</li>
+                                    <li><strong>Não contam com FGC</strong></li>
+                                    <li>Exigem análise da saúde financeira da empresa emissora</li>
+                                    <li>Mais indicados para investidores intermediários</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onde Investir -->
+                    <div class="info-section highlight-section">
+                        <h2 class="info-section-title">🟧 Onde investir?</h2>
+                        
+                        <div class="platforms-grid">
+                            <div class="platform-card">
+                                <div class="platform-icon">🏦</div>
+                                <h3>Bancos</h3>
+                                <p>Oferecem CDBs e algumas letras (LCI/LCA).</p>
+                            </div>
+                            <div class="platform-card featured">
+                                <div class="platform-icon">💼</div>
+                                <h3>Corretoras de Investimento</h3>
+                                <p>Plataformas como <strong>XP, Rico, Clear, BTG Pactual</strong> etc. oferecem uma variedade maior de 
+                                   emissores e taxas, permitindo comparar e escolher com mais eficiência.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Como Investir -->
+                    <div class="info-section">
+                        <h2 class="info-section-title">🟩 Como investir (Passo a Passo simples)</h2>
+                        
+                        <div class="steps-list">
+                            <div class="step-item">
+                                <span class="step-number">1</span>
+                                <div class="step-content">
+                                    <h4>Abra uma conta em uma corretora</h4>
+                                    <p>Processo rápido e gratuito</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-number">2</span>
+                                <div class="step-content">
+                                    <h4>Transfira dinheiro</h4>
+                                    <p>Para sua conta na plataforma</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-number">3</span>
+                                <div class="step-content">
+                                    <h4>Acesse a área de Renda Fixa</h4>
+                                    <p>Use filtros (prazo, liquidez, garantia)</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-number">4</span>
+                                <div class="step-content">
+                                    <h4>Escolha o título</h4>
+                                    <p>Que combina com seu objetivo</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-number">5</span>
+                                <div class="step-content">
+                                    <h4>Invista e acompanhe</h4>
+                                    <p>Pela plataforma</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="beginner-tip">
+                            <div class="tip-icon">💡</div>
+                            <div class="tip-content">
+                                <h4>Para iniciantes, as opções mais práticas são:</h4>
+                                <ul>
+                                    <li><strong>Tesouro Selic</strong></li>
+                                    <li><strong>CDB com liquidez diária e FGC</strong></li>
+                                </ul>
+                                <p>Ambos são seguros, simples e costumam render mais que a poupança.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mensagem Final -->
+                    <div class="final-message">
+                        <div class="final-icon">⭐</div>
+                        <h3>A renda fixa é a base de uma carteira equilibrada</h3>
+                        <p>
+                            Ela oferece <strong>previsibilidade</strong>, <strong>reduz riscos</strong> e ajuda você a construir 
+                            objetivos reais — desde sua reserva de emergência até metas de longo prazo.
+                        </p>
+                        <p class="invlab-message">
+                            No <strong>INVLAB</strong>, você pode estudar, comparar e simular cada produto com dados atualizados 
+                            e explicações claras.
+                        </p>
+                    </div>
+
+                    <!-- CTA para Ferramentas -->
+                    <div class="cta-box highlight">
+                        <h3>🛠️ Pronto para começar?</h3>
+                        <p>Use nosso Comparador Inteligente de Investimentos</p>
+                        <button class="btn-primary" onclick="window.location.href='pages/comparador-investimentos.html'">
+                            Acessar Comparador
                         </button>
                     </div>
                 </section>
