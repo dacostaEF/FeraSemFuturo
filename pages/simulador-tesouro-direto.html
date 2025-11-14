@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Tesouro Direto - Compare com Poupança | INVLAB</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0A2540">
+    <meta name="msapplication-TileColor" content="#0A2540">
+    
+    <!-- Meta Description -->
+    <meta name="description" content="Simule e compare rentabilidade do Tesouro Selic, IPCA+ e Prefixado com a Poupança. Dados atualizados e cálculo real de impostos.">
+    
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    
+    <style>
+        /* ======================================
+           ESTILOS ESPECÍFICOS DO SIMULADOR
+        ====================================== */
+        
+        body {
+            background: #0A2540;
+            min-height: 100vh;
+            padding: 20px;
+            padding-top: 120px; /* Espaço para header fixo */
+            margin: 0;
+        }
+
+        /* Breadcrumb Hover */
+        a[href*="index.html"]:hover {
+            color: #00D924 !important;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            color: #FFFFFF;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            color: #FFFFFF;
+        }
+
+        /* Botão Minimalista "Sobre Tesouro Direto" */
+        .btn-about-tesouro {
+            background: linear-gradient(135deg, #1a73e8 0%, #0A2540 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3);
+            transition: all 0.3s ease;
+            min-width: 140px;
+            justify-self: end;
+        }
+
+        .btn-about-tesouro:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 115, 232, 0.4);
+        }
+
+        .btn-about-icon {
+            font-size: 1.8rem;
+        }
+
+        .btn-about-text {
+            text-align: left;
+            line-height: 1.3;
+        }
+
+        /* Modal Minimalista */
+        .modal-overlay-minimalist {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            padding: 20px;
+        }
+
+        .modal-content-minimalist {
+            background: white;
+            border-radius: 20px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header-minimalist {
+            background: linear-gradient(135deg, #1a73e8 0%, #0A2540 100%);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .modal-header-minimalist h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .btn-close-minimalist {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            font-size: 2rem;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            line-height: 1;
+        }
+
+        .btn-close-minimalist:hover {
+            background: white;
+            color: #0A2540;
+            transform: rotate(90deg);
+        }
+
+        .modal-body-minimalist {
+            padding: 35px;
+        }
+
+        .modal-section {
+            margin-bottom: 30px;
+        }
+
+        .modal-section h3 {
+            color: #0A2540;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-section p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        /* Formulário de Entrada */
+        .input-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        .input-section h2 {
+            color: #0A2540;
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #0A2540;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #1a73e8;
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .btn-calculate {
+            width: 100%;
+            background: linear-gradient(135deg, #1a73e8 0%, #0A2540 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3);
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 115, 232, 0.4);
+        }
+
+        /* Resultados */
+        .results-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .results-section h2 {
+            color: #0A2540;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, #0A2540 0%, #1a3a5c 100%);
+            color: white;
+        }
+
+        .comparison-table th {
+            padding: 18px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .comparison-table td {
+            padding: 18px;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 1rem;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: #f8f9fa;
+            transition: background 0.3s;
+        }
+
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Destaque para melhor opção */
+        .best-option {
+            background: #d4edda !important;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .best-option::before {
+            content: "🏆";
+            position: absolute;
+            left: 5px;
+            font-size: 1.2rem;
+        }
+
+        /* Valor positivo/negativo */
+        .positive {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .negative {
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        /* Caixa de Aviso sobre Resgate Antecipado */
+        .warning-box {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            border-left: 5px solid #ff6b6b;
+        }
+
+        .warning-box h3 {
+            color: #d63031;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-box p {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .warning-box ul {
+            color: #555;
+            line-height: 1.8;
+            margin-left: 20px;
+        }
+
+        /* Premissas do Simulador */
+        .assumptions-box {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            border-left: 5px solid #1a73e8;
+        }
+
+        .assumptions-box h3 {
+            color: #0A2540;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .assumptions-box ul {
+            color: #555;
+            line-height: 1.8;
+            margin-left: 20px;
+        }
+
+        .assumptions-box li {
+            margin-bottom: 8px;
+        }
+
+        .assumptions-box strong {
+            color: #0A2540;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+                padding-top: 140px;
+            }
+
+            .header {
+                display: block !important;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .btn-about-tesouro {
+                margin: 20px auto 0;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-table {
+                font-size: 0.85rem;
+                display: block;
+                overflow-x: auto;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 10px 6px;
+                font-size: 0.85rem;
+            }
+
+            .modal-content-minimalist {
+                max-height: 95vh;
+                border-radius: 15px;
+            }
+
+            .modal-header-minimalist {
+                padding: 20px;
+                border-radius: 15px 15px 0 0;
+            }
+
+            .modal-header-minimalist h2 {
+                font-size: 1.4rem;
+            }
+
+            .modal-body-minimalist {
+                padding: 20px;
+            }
+
+            .warning-box,
+            .assumptions-box,
+            .input-section,
+            .results-section {
+                padding: 20px;
+            }
+
+            .warning-box h3,
+            .assumptions-box h3 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;">
+                    <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                    <span class="logo-text">INVLAB</span>
+                </a>
+            </div>
+            
+            <!-- Sistema de Abas INVLAB (apenas links, sem dropdowns interativos) -->
+            <div class="tabs-nav-wrapper" style="overflow-x: auto; overflow-y: visible; -webkit-overflow-scrolling: touch; scrollbar-width: none;">
+            <nav class="tabs-nav" id="tabsNav" style="overflow: visible !important;">
+                <a href="../index.html" class="tab-btn">🏠 INÍCIO</a>
+                <a href="../index.html#primeiros-passos" class="tab-btn">📚 PRIMEIROS PASSOS</a>
+                <a href="../index.html#renda-fixa" class="tab-btn active">📊 RENDA FIXA</a>
+                <a href="../index.html#renda-variavel" class="tab-btn">📈 RENDA VARIÁVEL</a>
+                <a href="../index.html#criptomoedas" class="tab-btn">🔐 CRIPTOMOEDAS</a>
+                <a href="../index.html#ferramentas" class="tab-btn">🛠️ FERRAMENTAS</a>
+                <a href="../pages/metodologia.html" class="tab-btn">📖 METODOLOGIA</a>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div style="max-width: 1200px; margin: 140px auto 20px auto; padding: 0 20px;">
+        <nav style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.6);">
+            <a href="../index.html" style="color: rgba(255, 255, 255, 0.6); text-decoration: none; transition: color 0.3s;">🏠 Início</a>
+            <span style="color: rgba(255, 255, 255, 0.3);">›</span>
+            <a href="../index.html#renda-fixa" style="color: rgba(255, 255, 255, 0.6); text-decoration: none; transition: color 0.3s;">📊 Renda Fixa</a>
+            <span style="color: rgba(255, 255, 255, 0.3);">›</span>
+            <span style="color: #00D924; font-weight: 600;">🇧🇷 Simulador de Tesouro Direto</span>
+        </nav>
+    </div>
+
+    <div class="container" style="margin-top: 0;">
+        <div class="header" style="display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center;">
+            <div>
+                <h1>🇧🇷 Simulador de Tesouro Direto vs Poupança</h1>
+                <p>Compare Tesouro Selic, IPCA+ e Prefixado com a Poupança e veja a rentabilidade real com dados atualizados</p>
+            </div>
+            
+            <!-- Botão Minimalista "Sobre Tesouro Direto" -->
+            <button class="btn-about-tesouro" onclick="openTesouroModal()" aria-label="Conheça o Tesouro Direto">
+                <div class="btn-about-icon">📚</div>
+                <div class="btn-about-text">Sobre<br>Tesouro Direto</div>
+            </button>
+        </div>
+
+        <!-- Formulário de Entrada -->
+        <div class="input-section">
+            <h2>💰 Dados da Simulação</h2>
+            
+            <form id="simulatorForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="investmentValue">
+                            💵 Valor do Investimento (R$)
+                        </label>
+                        <input 
+                            type="number" 
+                            id="investmentValue" 
+                            name="investmentValue" 
+                            placeholder="Ex: 10.000" 
+                            min="100" 
+                            step="100"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="investmentPeriod">
+                            📅 Prazo do Investimento (meses)
+                        </label>
+                        <input 
+                            type="number" 
+                            id="investmentPeriod" 
+                            name="investmentPeriod" 
+                            placeholder="Ex: 24" 
+                            min="1" 
+                            max="360"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-calculate">
+                    🧮 Calcular Rentabilidade
+                </button>
+            </form>
+        </div>
+
+        <!-- Resultados -->
+        <div class="results-section" id="resultsSection">
+            <h2>📊 Resultados da Comparação</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Investimento</th>
+                        <th>Rentabilidade Bruta</th>
+                        <th>Imposto de Renda</th>
+                        <th>Rentabilidade Líquida</th>
+                        <th>Valor Final</th>
+                        <th>% Melhor que Poupança</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsTableBody">
+                    <!-- Resultados serão inseridos aqui via JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Caixa de Aviso: Resgate Antecipado -->
+        <div class="warning-box">
+            <h3>⚠️ Atenção: Resgate Antecipado e Marcação a Mercado</h3>
+            <p>
+                <strong>Este simulador calcula o rendimento até o vencimento.</strong> Porém, é fundamental entender que:
+            </p>
+            <ul>
+                <li>
+                    <strong>Tesouro Selic:</strong> Possui liquidez diária e baixo risco de perda no resgate antecipado. 
+                    Ideal para reserva de emergência.
+                </li>
+                <li>
+                    <strong>Tesouro IPCA+ e Prefixado:</strong> Sofrem <strong>marcação a mercado</strong>. 
+                    Isso significa que, se você precisar resgatar antes do vencimento, o preço será calculado de acordo com as 
+                    taxas de juros do mercado naquele momento, podendo resultar em <strong>lucro ou prejuízo</strong>.
+                </li>
+                <li>
+                    <strong>Recomendação:</strong> Invista nesses títulos apenas se tiver certeza de que poderá manter 
+                    o investimento até o vencimento.
+                </li>
+                <li>
+                    Para mais detalhes, consulte o site oficial: 
+                    <a href="https://www.tesourodireto.com.br" target="_blank" style="color: #1a73e8;">
+                        www.tesourodireto.com.br
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Premissas do Simulador -->
+        <div class="assumptions-box">
+            <h3>📋 Premissas do Simulador</h3>
+            <ul>
+                <li>
+                    <strong>Tesouro Selic (2029):</strong> 100% da taxa Selic (atualmente: 11,25% a.a.)
+                </li>
+                <li>
+                    <strong>Tesouro IPCA+ (2029):</strong> IPCA + 6,50% a.a. (taxa exemplificativa)
+                </li>
+                <li>
+                    <strong>Tesouro Prefixado (2027):</strong> 12,50% a.a. (taxa exemplificativa)
+                </li>
+                <li>
+                    <strong>Poupança:</strong> 0,5% a.m. quando Selic > 8,5% a.a. ou 70% da Selic quando ≤ 8,5% a.a.
+                </li>
+                <li>
+                    <strong>Imposto de Renda (Tesouro):</strong> 
+                    22,5% (até 180 dias), 20% (181-360 dias), 17,5% (361-720 dias), 15% (acima de 720 dias)
+                </li>
+                <li>
+                    <strong>Poupança:</strong> Isenta de IR
+                </li>
+                <li>
+                    <strong>IOF:</strong> Não aplicado (investimentos superiores a 30 dias)
+                </li>
+                <li>
+                    <strong>Taxas de custódia:</strong> Não incluídas (0,20% a.a. sobre o valor investido)
+                </li>
+                <li>
+                    <strong>IPCA projetado:</strong> 4,5% a.a. (para cálculo do Tesouro IPCA+)
+                </li>
+                <li>
+                    <strong>Fontes:</strong> Banco Central (Selic), Tesouro Direto (taxas exemplificativas), 
+                    IBGE (IPCA projetado)
+                </li>
+                <li>
+                    <strong>Data de atualização:</strong> Novembro de 2024
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal Minimalista: Sobre Tesouro Direto -->
+    <div id="tesouroModal" class="modal-overlay-minimalist" onclick="closeTesouroModal()" style="display: none;">
+        <div class="modal-content-minimalist" onclick="event.stopPropagation()">
+            <div class="modal-header-minimalist">
+                <h2>📚 Conheça o Tesouro Direto</h2>
+                <button class="btn-close-minimalist" onclick="closeTesouroModal()" aria-label="Fechar">×</button>
+            </div>
+            
+            <div class="modal-body-minimalist">
+                <!-- ============================================
+                     CONTEÚDO PLACEHOLDER - SUBSTITUIR DEPOIS
+                ============================================ -->
+                
+                <div class="modal-section">
+                    <h3>🇧🇷 O que é o Tesouro Direto?</h3>
+                    <p>
+                        O Tesouro Direto é um programa do Tesouro Nacional que permite a compra de títulos públicos 
+                        federais por pessoas físicas, de forma 100% online. É considerado o investimento mais seguro 
+                        do Brasil, pois é garantido pelo Governo Federal.
+                    </p>
+                    <p>
+                        <em>(Conteúdo completo será adicionado em breve)</em>
+                    </p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>💡 Por que investir no Tesouro Direto?</h3>
+                    <p>
+                        • <strong>Segurança máxima:</strong> Garantido pelo Governo Federal<br>
+                        • <strong>Acessibilidade:</strong> Investimento inicial a partir de R$ 30<br>
+                        • <strong>Liquidez:</strong> Possibilidade de resgate antecipado (com ressalvas)<br>
+                        • <strong>Rentabilidade:</strong> Geralmente supera a poupança<br>
+                        • <strong>Diversidade:</strong> Vários tipos de títulos para diferentes objetivos
+                    </p>
+                    <p>
+                        <em>(Conteúdo completo será adicionado em breve)</em>
+                    </p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>📊 Tipos de Tesouro Direto</h3>
+                    <p>
+                        <strong>1. Tesouro Selic:</strong> Rentabilidade acompanha a taxa Selic. Ideal para reserva de emergência.<br><br>
+                        <strong>2. Tesouro IPCA+:</strong> Protege da inflação (IPCA) + taxa prefixada. Ideal para objetivos de longo prazo.<br><br>
+                        <strong>3. Tesouro Prefixado:</strong> Rentabilidade definida no momento da compra. Ideal para quem quer previsibilidade.
+                    </p>
+                    <p>
+                        <em>(Conteúdo completo será adicionado em breve)</em>
+                    </p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>📈 Como escolher o melhor título?</h3>
+                    <p>
+                        A escolha depende do seu objetivo financeiro, prazo de investimento e perfil de risco. 
+                        Em geral: curto prazo = Tesouro Selic; longo prazo com proteção inflacionária = Tesouro IPCA+; 
+                        rentabilidade garantida = Tesouro Prefixado.
+                    </p>
+                    <p>
+                        <em>(Conteúdo completo será adicionado em breve)</em>
+                    </p>
+                </div>
+
+                <div class="modal-section">
+                    <p style="text-align: center; color: #999; font-style: italic;">
+                        📝 Este conteúdo será expandido em breve com informações detalhadas sobre impostos, 
+                        custos, estratégias e muito mais!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // CONSTANTES E PARÂMETROS
+        // ============================================
+        
+        const SELIC_RATE = 11.25; // Taxa Selic anual (%)
+        const IPCA_RATE = 4.5; // IPCA projetado anual (%)
+        const TESOURO_IPCA_PLUS = 6.5; // Taxa adicional do Tesouro IPCA+ (%)
+        const TESOURO_PREFIXADO_RATE = 12.5; // Taxa do Tesouro Prefixado (%)
+        
+        // Tabela de IR regressivo (dias -> alíquota %)
+        const IR_TABLE = {
+            180: 22.5,
+            360: 20,
+            720: 17.5,
+            9999: 15
+        };
+
+        // Regra da Poupança
+        function getPoupancaRate() {
+            if (SELIC_RATE > 8.5) {
+                return 0.5; // 0,5% a.m.
+            } else {
+                return (SELIC_RATE * 0.7) / 12; // 70% da Selic ao mês
+            }
+        }
+
+        // ============================================
+        // FUNÇÕES DE CÁLCULO
+        // ============================================
+
+        function calculateIR(days) {
+            for (let threshold in IR_TABLE) {
+                if (days <= threshold) {
+                    return IR_TABLE[threshold];
+                }
+            }
+            return 15; // Padrão
+        }
+
+        function calculateTesouroSelic(principal, months) {
+            const days = months * 30;
+            const rate = SELIC_RATE / 100;
+            const grossReturn = principal * Math.pow(1 + rate, months / 12);
+            const profit = grossReturn - principal;
+            const irRate = calculateIR(days);
+            const irAmount = profit * (irRate / 100);
+            const netReturn = grossReturn - irAmount;
+            
+            return {
+                name: 'Tesouro Selic',
+                grossReturn: grossReturn,
+                irAmount: irAmount,
+                irRate: irRate,
+                netReturn: netReturn,
+                profit: netReturn - principal
+            };
+        }
+
+        function calculateTesouroIPCA(principal, months) {
+            const days = months * 30;
+            const totalRate = (IPCA_RATE + TESOURO_IPCA_PLUS) / 100;
+            const grossReturn = principal * Math.pow(1 + totalRate, months / 12);
+            const profit = grossReturn - principal;
+            const irRate = calculateIR(days);
+            const irAmount = profit * (irRate / 100);
+            const netReturn = grossReturn - irAmount;
+            
+            return {
+                name: 'Tesouro IPCA+',
+                grossReturn: grossReturn,
+                irAmount: irAmount,
+                irRate: irRate,
+                netReturn: netReturn,
+                profit: netReturn - principal
+            };
+        }
+
+        function calculateTesouroPrefixado(principal, months) {
+            const days = months * 30;
+            const rate = TESOURO_PREFIXADO_RATE / 100;
+            const grossReturn = principal * Math.pow(1 + rate, months / 12);
+            const profit = grossReturn - principal;
+            const irRate = calculateIR(days);
+            const irAmount = profit * (irRate / 100);
+            const netReturn = grossReturn - irAmount;
+            
+            return {
+                name: 'Tesouro Prefixado',
+                grossReturn: grossReturn,
+                irAmount: irAmount,
+                irRate: irRate,
+                netReturn: netReturn,
+                profit: netReturn - principal
+            };
+        }
+
+        function calculatePoupanca(principal, months) {
+            const monthlyRate = getPoupancaRate() / 100;
+            const netReturn = principal * Math.pow(1 + monthlyRate, months);
+            
+            return {
+                name: 'Poupança',
+                grossReturn: netReturn,
+                irAmount: 0,
+                irRate: 0,
+                netReturn: netReturn,
+                profit: netReturn - principal
+            };
+        }
+
+        // ============================================
+        // FORMATAÇÃO
+        // ============================================
+
+        function formatCurrency(value) {
+            return value.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+        }
+
+        function formatPercentage(value) {
+            return value.toFixed(2) + '%';
+        }
+
+        // ============================================
+        // PROCESSAMENTO DO FORMULÁRIO
+        // ============================================
+
+        document.getElementById('simulatorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const principal = parseFloat(document.getElementById('investmentValue').value);
+            const months = parseInt(document.getElementById('investmentPeriod').value);
+            
+            if (!principal || !months || principal < 100 || months < 1) {
+                alert('Por favor, preencha todos os campos corretamente.');
+                return;
+            }
+            
+            // Calcular todos os investimentos
+            const tesouroSelic = calculateTesouroSelic(principal, months);
+            const tesouroIPCA = calculateTesouroIPCA(principal, months);
+            const tesouroPrefixado = calculateTesouroPrefixado(principal, months);
+            const poupanca = calculatePoupanca(principal, months);
+            
+            const investments = [tesouroSelic, tesouroIPCA, tesouroPrefixado, poupanca];
+            
+            // Encontrar o melhor investimento
+            const best = investments.reduce((prev, current) => 
+                current.netReturn > prev.netReturn ? current : prev
+            );
+            
+            // Renderizar resultados
+            renderResults(investments, best, poupanca.netReturn);
+            
+            // Exibir seção de resultados
+            document.getElementById('resultsSection').style.display = 'block';
+            
+            // Scroll suave até os resultados
+            document.getElementById('resultsSection').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+
+        function renderResults(investments, best, poupancaValue) {
+            const tbody = document.getElementById('resultsTableBody');
+            tbody.innerHTML = '';
+            
+            investments.forEach(inv => {
+                const row = document.createElement('tr');
+                const isBest = inv.name === best.name;
+                const percentBetter = ((inv.netReturn - poupancaValue) / poupancaValue * 100);
+                
+                if (isBest) {
+                    row.classList.add('best-option');
+                }
+                
+                row.innerHTML = `
+                    <td>${inv.name}</td>
+                    <td>${formatCurrency(inv.grossReturn)}</td>
+                    <td>${inv.irAmount > 0 ? formatCurrency(inv.irAmount) + ' (' + formatPercentage(inv.irRate) + ')' : 'Isento'}</td>
+                    <td><strong>${formatCurrency(inv.netReturn)}</strong></td>
+                    <td><strong>${formatCurrency(inv.netReturn)}</strong></td>
+                    <td class="${percentBetter >= 0 ? 'positive' : 'negative'}">
+                        ${percentBetter >= 0 ? '+' : ''}${formatPercentage(percentBetter)}
+                    </td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+        }
+
+        // ============================================
+        // MODAL "SOBRE TESOURO DIRETO"
+        // ============================================
+        
+        function openTesouroModal() {
+            document.getElementById('tesouroModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeTesouroModal() {
+            document.getElementById('tesouroModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Fechar modal com tecla ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeTesouroModal();
+            }
+        });
+    </script>
+</body>
+</html>
+
