@@ -15,6 +15,9 @@
     <meta name="msapplication-TileColor" content="#0A2540">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
+    <!-- Estilos do Menu Principal (APENAS CSS, sem JS) -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
@@ -28,6 +31,12 @@
             background: #0A2540;
             min-height: 100vh;
             padding: 20px;
+            padding-top: 120px; /* Espaço para header fixo */
+        }
+        
+        /* Breadcrumb Hover */
+        a[href*="index.html"]:hover {
+            color: #00D924 !important;
         }
 
         .container {
@@ -683,7 +692,44 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;">
+                    <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                    <span class="logo-text">INVLAB</span>
+                </a>
+            </div>
+            
+            <!-- Sistema de Abas INVLAB (apenas links, sem dropdowns interativos) -->
+            <div class="tabs-nav-wrapper" style="overflow-x: auto; overflow-y: visible; -webkit-overflow-scrolling: touch; scrollbar-width: none;">
+            <nav class="tabs-nav" id="tabsNav" style="overflow: visible !important;">
+                <a href="../index.html" class="tab-btn">🏠 INÍCIO</a>
+                <a href="../index.html#primeiros-passos" class="tab-btn">📚 PRIMEIROS PASSOS</a>
+                <a href="../index.html#renda-fixa" class="tab-btn active">📊 RENDA FIXA</a>
+                <a href="../index.html#renda-variavel" class="tab-btn">📈 RENDA VARIÁVEL</a>
+                <a href="../index.html#criptomoedas" class="tab-btn">🔐 CRIPTOMOEDAS</a>
+                <a href="../index.html#ferramentas" class="tab-btn">🛠️ FERRAMENTAS</a>
+                <a href="../pages/metodologia.html" class="tab-btn">📖 METODOLOGIA</a>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div style="max-width: 1200px; margin: 140px auto 20px auto; padding: 0 20px;">
+        <nav style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.6);">
+            <a href="../index.html" style="color: rgba(255, 255, 255, 0.6); text-decoration: none; transition: color 0.3s;">🏠 Início</a>
+            <span style="color: rgba(255, 255, 255, 0.3);">›</span>
+            <a href="../index.html#renda-fixa" style="color: rgba(255, 255, 255, 0.6); text-decoration: none; transition: color 0.3s;">📊 Renda Fixa</a>
+            <span style="color: rgba(255, 255, 255, 0.3);">›</span>
+            <span style="color: #00D924; font-weight: 600;">🏦 CDBs</span>
+        </nav>
+    </div>
+
+    <div class="container" style="margin-top: 0;">
         <div class="header">
             <h1>💰 Simulador de Rentabilidade: CDBs vs Poupança</h1>
             <p>INVLAB - Plataforma educacional de simulação de Renda Fixa com dados reais</p>
