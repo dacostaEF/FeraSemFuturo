@@ -98,27 +98,127 @@
                 </button>
             </nav>
             
-            <!-- Sistema de Abas ATUAL (mantido funcionando) -->
-            <nav class="tabs-nav">
+            <!-- Sistema de Abas INVLAB (COMPLETO - novo + antigo preservado) -->
+            <div class="tabs-nav-wrapper" style="overflow-x: auto; overflow-y: visible; -webkit-overflow-scrolling: touch; scrollbar-width: none;">
+            <nav class="tabs-nav" id="tabsNav" style="overflow: visible !important;">
+                <!-- NOVAS ABAS INVLAB -->
                 <button class="tab-btn active" data-tab="inicio">
                     🏠 INÍCIO
                 </button>
                 <button class="tab-btn" data-tab="primeiros-passos">
-                    🌱 PRIMEIROS PASSOS
+                    📚 PRIMEIROS PASSOS
                 </button>
-                <button class="tab-btn" data-tab="crescer">
-                    💰 CRESCER DINHEIRO
+                
+                <!-- ABA COM DROPDOWN: RENDA FIXA (Estrutura do Menu Oculto) -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" data-tab="renda-fixa">
+                        📊 RENDA FIXA <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="pages/comparador-investimentos.html">📈 Comparador Inteligente</a></li>
+                        <li><a href="#">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="#">🏦 CDBs</a></li>
+                        <li><a href="#">🏛️ LCI/LCA</a></li>
+                        <li><a href="#">💰 Poupança</a></li>
+                    </ul>
+                </div>
+                
+                <!-- ABA COM DROPDOWN: RENDA VARIÁVEL (Estilo limpo e elegante) -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" data-tab="renda-variavel">
+                        📈 RENDA VARIÁVEL <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <!-- SEÇÃO: FIIs (sempre visível) -->
+                        <li class="dropdown-section">
+                            <strong>🏢 FUNDOS IMOBILIÁRIOS (FIIs)</strong>
+                        </li>
+                        <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                        <li><a href="#">🏘️ FIIs de Tijolo</a></li>
+                        <li><a href="#">📋 FIIs de Papel</a></li>
+                        <li><a href="#">🔄 FIIs Híbridos</a></li>
+                        <li><a href="#">🎯 Como Escolher FIIs</a></li>
+                        
+                        <li class="dropdown-divider"></li>
+                        
+                        <!-- SEÇÃO: Ações (sempre visível) -->
+                        <li class="dropdown-section">
+                            <strong>📈 AÇÕES</strong>
+                        </li>
+                        <li><a href="#">📊 Simulador de Dividendos</a></li>
+                        <li><a href="#">💰 Valuation (P/L, P/VP)</a></li>
+                        <li><a href="#">🏭 Análise Setorial</a></li>
+                        <li><a href="#">📉 Day Trade vs Buy&Hold</a></li>
+                        
+                        <li class="dropdown-divider"></li>
+                        
+                        <!-- SEÇÃO: ETFs (sempre visível) -->
+                        <li class="dropdown-section">
+                            <strong>💵 ETFS</strong>
+                        </li>
+                        <li><a href="#">📊 Simulador de Indexação</a></li>
+                        <li><a href="#">📈 ETFs Nacionais</a></li>
+                        <li><a href="#">🌎 ETFs Internacionais</a></li>
+                    </ul>
+                </div>
+                
+                <!-- ABA COM DROPDOWN: CRIPTOMOEDAS (Nova estrutura) -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" data-tab="criptomoedas">
+                        🔐 CRIPTOMOEDAS <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">₿ Bitcoin</a></li>
+                        <li><a href="#">⧫ Ethereum</a></li>
+                        <li><a href="#">🪙 Altcoins</a></li>
+                        <li><a href="#">💵 Stablecoins</a></li>
+                        <li><a href="#">🔄 DeFi</a></li>
+                    </ul>
+                </div>
+                
+                <!-- ABAS ANTIGAS PRESERVADAS (para migração gradual) -->
+                <button class="tab-btn" data-tab="crescer" title="Conteúdo antigo - será migrado">
+                    💰 CRESCER
                 </button>
-                <button class="tab-btn" data-tab="especializar">
-                    🚀 ESPECIALIZAR-SE
+                <button class="tab-btn" data-tab="especializar" title="Conteúdo antigo - será migrado">
+                    🚀 ESPECIALIZAR
                 </button>
-                <button class="tab-btn" data-tab="ferramentas">
-                    🧮 FERRAMENTAS
+                
+                <!-- ABA COM DROPDOWN: FERRAMENTAS (Estilo limpo e elegante) -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" data-tab="ferramentas">
+                        🛠️ FERRAMENTAS <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="pages/comparador-investimentos.html">📊 Comparador de Investimentos</a></li>
+                        <li><a href="#">🎯 Alocador de Ativos</a></li>
+                        <li><a href="#">📊 Simulador de Carteira</a></li>
+                        <li><a href="#">📈 Projetor de Patrimônio</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li class="dropdown-section">
+                            <strong>🧮 CALCULADORAS TÉCNICAS</strong>
+                        </li>
+                        <li><a href="pages/calculadora.html">Juros Compostos</a></li>
+                        <li><a href="#">Imposto de Renda</a></li>
+                        <li><a href="#">Taxa Real vs Nominal</a></li>
+                        <li><a href="#">Custo de Oportunidade</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a href="#">📋 Comparador Cruzado</a></li>
+                        <li><a href="#">📚 Glossário Financeiro</a></li>
+                    </ul>
+                </div>
+                
+                <button class="tab-btn" data-tab="dicas" title="Conteúdo antigo - será migrado">
+                    💡 DICAS
                 </button>
-                <button class="tab-btn" data-tab="dicas">
-                    💡 DICAS RÁPIDAS
+                <button class="tab-btn" data-tab="metodologia">
+                    📖 METODOLOGIA
                 </button>
             </nav>
+            </div>
+            
+            <!-- Botão de Scroll (Seta Verde Neon) -->
+            <button class="scroll-arrow-btn" id="scrollArrowBtn" aria-label="Rolar menu" title="Clique para ver mais abas">→</button>
         </div>
     </header>
 
@@ -391,7 +491,139 @@
             </div>
         </div>
 
-        <!-- ABA: DICAS RÁPIDAS -->
+        <!-- ABA: RENDA FIXA (NOVA) -->
+        <div class="tab-content" id="renda-fixa">
+            <div class="content-wrapper">
+                <section class="section">
+                    <h2 class="section-title">📊 Renda Fixa</h2>
+                    <p class="section-subtitle">Investimentos de renda fixa: CDBs, Tesouro Direto, LCI/LCA e mais</p>
+                    
+                    <!-- Conteúdo Temporário -->
+                    <div class="coming-soon-card">
+                        <div class="coming-icon">🚧</div>
+                        <h3>Conteúdo em Migração</h3>
+                        <p>Estamos organizando todo o conteúdo de Renda Fixa aqui:</p>
+                        <ul class="coming-list">
+                            <li>✅ Comparador Inteligente de Investimentos</li>
+                            <li>✅ CDB: Como escolher e comparar</li>
+                            <li>✅ Tesouro Direto: Tipos e estratégias</li>
+                            <li>✅ LCI e LCA: Isentos de IR</li>
+                            <li>✅ Poupança vs Outros investimentos</li>
+                        </ul>
+                        <p class="coming-soon-subtitle">Por enquanto, acesse via Ferramentas!</p>
+                        <button class="btn-primary" data-tab-link="ferramentas">
+                            Acessar Ferramentas
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- ABA: RENDA VARIÁVEL (NOVA) -->
+        <div class="tab-content" id="renda-variavel">
+            <div class="content-wrapper">
+                <section class="section">
+                    <h2 class="section-title">📈 Renda Variável</h2>
+                    <p class="section-subtitle">Ações, FIIs, ETFs e estratégias avançadas</p>
+                    
+                    <!-- Conteúdo Temporário -->
+                    <div class="coming-soon-card">
+                        <div class="coming-icon">🔒</div>
+                        <h3>Conteúdo Avançado em Preparação</h3>
+                        <p>Em breve você terá acesso a:</p>
+                        <ul class="coming-list">
+                            <li>🏢 FIIs: Fundos Imobiliários completos</li>
+                            <li>📈 Ações: Análise fundamentalista</li>
+                            <li>💵 ETFs: Diversificação inteligente</li>
+                            <li>📊 Simuladores de dividendos</li>
+                            <li>💰 Valuation e análise técnica</li>
+                        </ul>
+                        <p class="coming-soon-subtitle">Complete os Primeiros Passos enquanto isso!</p>
+                        <button class="btn-primary" data-tab-link="primeiros-passos">
+                            Ir para Primeiros Passos
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- ABA: CRIPTOMOEDAS (NOVA) -->
+        <div class="tab-content" id="criptomoedas">
+            <div class="content-wrapper">
+                <section class="section">
+                    <h2 class="section-title">🔐 Criptomoedas</h2>
+                    <p class="section-subtitle">Bitcoin, Ethereum, DeFi e o futuro das finanças digitais</p>
+                    
+                    <!-- Conteúdo Temporário -->
+                    <div class="coming-soon-card">
+                        <div class="coming-icon">⚠️</div>
+                        <h3>Módulo em Desenvolvimento</h3>
+                        <p>Conteúdo planejado para criptomoedas:</p>
+                        <ul class="coming-list">
+                            <li>₿ Bitcoin: O que é e como funciona</li>
+                            <li>⧫ Ethereum: Contratos inteligentes</li>
+                            <li>🪙 Altcoins: Diversificação cripto</li>
+                            <li>💵 Stablecoins: Proteção e liquidez</li>
+                            <li>🔄 DeFi: Finanças descentralizadas</li>
+                        </ul>
+                        <p class="coming-soon-subtitle">⚠️ Alto risco! Estude Renda Fixa primeiro.</p>
+                        <button class="btn-primary" data-tab-link="primeiros-passos">
+                            Começar pelos Fundamentos
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- ABA: METODOLOGIA (NOVA) -->
+        <div class="tab-content" id="metodologia">
+            <div class="content-wrapper">
+                <section class="section">
+                    <h2 class="section-title">📖 Metodologia</h2>
+                    <p class="section-subtitle">Transparência total sobre fontes, cálculos e premissas</p>
+                    
+                    <!-- CTA para página completa -->
+                    <div class="cta-box highlight">
+                        <h3>🔬 Nossa Metodologia Completa</h3>
+                        <p>Entenda como calculamos, quais fontes usamos e nossas premissas</p>
+                        <button class="btn-primary" onclick="window.location.href='pages/metodologia.html'">
+                            Ver Metodologia Completa
+                        </button>
+                    </div>
+                    
+                    <!-- Preview -->
+                    <div style="margin-top: 40px;">
+                        <h3 style="color: var(--blue-tech); margin-bottom: 20px;">📊 O que você vai encontrar:</h3>
+                        <div class="benefits-grid">
+                            <div class="benefit-card">
+                                <div class="benefit-icon">📈</div>
+                                <h3>Fontes de Dados</h3>
+                                <p>BCB, ANBIMA, corretoras e instituições oficiais</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">🧮</div>
+                                <h3>Fórmulas</h3>
+                                <p>Juros compostos, IR regressivo, taxas administrativas</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">⚠️</div>
+                                <h3>Limitações</h3>
+                                <p>Premissas adotadas e avisos legais</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">💡</div>
+                                <h3>Transparência</h3>
+                                <p>100% aberto sobre nossos cálculos</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- ABAS ANTIGAS (mantidas temporariamente - podem ser acessadas via URL) -->
+        
+        <!-- ABA: DICAS RÁPIDAS (ANTIGA - mantida) -->
         <div class="tab-content" id="dicas">
             <div class="content-wrapper">
                 <section class="section">

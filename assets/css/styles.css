@@ -35,7 +35,7 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    padding-top: 140px; /* Espaço para o header fixo */
+    padding-top: 180px; /* AUMENTADO PARA ACOMODAR DROPDOWNS */
 }
 
 /* ============================================
@@ -52,12 +52,16 @@ body {
     border-bottom: 1px solid rgba(99, 91, 255, 0.2);
     z-index: 1000;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    overflow: visible !important; /* PERMITE DROPDOWNS APARECEREM */
 }
 
 .header-container {
+    position: relative;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 16px 32px;
+    padding: 16px 32px 16px; /* Padding normal */
+    overflow: visible !important;
+    min-height: 120px; /* Espaço mínimo para dropdowns */
 }
 
 /* Logo no Header */
@@ -80,45 +84,284 @@ body {
     letter-spacing: -0.5px;
 }
 
-/* Sistema de Abas */
+/* Sistema de Abas - AGORA SEM OVERFLOW (scroll no wrapper) */
 .tabs-nav {
+    position: relative;
     display: flex;
+    flex-wrap: nowrap;
     gap: 0;
-    overflow-x: auto;
-    scrollbar-width: none;
+    padding: 0 2px 0 0;
+    width: 100%;
 }
 
-.tabs-nav::-webkit-scrollbar {
+/* Wrapper para controlar o scroll sem cortar dropdowns */
+.tabs-nav-wrapper {
+    position: relative;
+    overflow-x: auto; /* Permite scroll horizontal apenas quando necessário */
+    overflow-y: visible !important; /* NUNCA corta dropdowns verticalmente */
+    scrollbar-width: none; /* Esconde scrollbar */
+    scroll-behavior: smooth; /* Scroll suave se necessário */
+    
+    /* Previne scroll acidental */
+    overscroll-behavior-x: contain; /* Não propaga scroll para página */
+    
+    /* SEM padding-bottom gigante que bloqueia cliques! */
+    /* Os dropdowns aparecem com position: absolute, não precisam de espaço físico */
+}
+
+.tabs-nav-wrapper::-webkit-scrollbar {
     display: none;
 }
 
+/* Gradientes indicadores de scroll (esquerda e direita) */
+.tabs-nav::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    background: linear-gradient(to right, rgba(10, 37, 64, 0.9) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Botão de Scroll (Seta Verde Neon Real - CLICÁVEL) */
+.scroll-arrow-btn {
+    position: absolute;
+    right: 18px;
+    bottom: 0;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #00FF00;
+    text-shadow: 
+        0 0 10px #00FF00,
+        0 0 20px #00FF00,
+        0 0 30px #00FFB3,
+        0 0 40px #00FFB3;
+    filter: drop-shadow(0 0 15px #00FF00);
+    cursor: pointer;
+    z-index: 1001;
+    animation: pulseArrow 2s ease-in-out infinite;
+    background: linear-gradient(to right, transparent 0%, rgba(10, 37, 64, 0.95) 15%, rgba(10, 37, 64, 0.95) 100%);
+    padding: 0 20px 0 16px;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    transition: all 0.3s ease;
+}
+
+.scroll-arrow-btn:hover {
+    color: #00FFB3;
+    transform: scale(1.15);
+    text-shadow: 
+        0 0 15px #00FF00,
+        0 0 25px #00FF00,
+        0 0 35px #00FFB3,
+        0 0 50px #00FFB3;
+}
+
+.scroll-arrow-btn:active {
+    transform: scale(1.05);
+}
+
+/* Esconde seta quando não há scroll necessário */
+.scroll-arrow-btn.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Seta apontando para ESQUERDA (voltar ao início) */
+.scroll-arrow-btn.arrow-left {
+    background: linear-gradient(to left, transparent 0%, rgba(10, 37, 64, 0.95) 15%, rgba(10, 37, 64, 0.95) 100%);
+    border-radius: 8px 0 0 8px;
+    left: 18px;
+    right: auto;
+}
+
+/* Seta apontando para DIREITA (ir para frente) */
+.scroll-arrow-btn.arrow-right {
+    background: linear-gradient(to right, transparent 0%, rgba(10, 37, 64, 0.95) 15%, rgba(10, 37, 64, 0.95) 100%);
+    border-radius: 0 8px 8px 0;
+    right: 18px;
+    left: auto;
+}
+
+@keyframes pulseArrow {
+    0%, 100% {
+        opacity: 0.8;
+        transform: translateX(0);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(3px);
+    }
+}
+
+/* ============================================
+   DROPDOWNS SIMPLES (CSS PURO)
+   ============================================ */
+
+/* =====================================================
+   DROPDOWNS DAS TABS (Nova Estrutura Elegante)
+   ===================================================== */
+
+/* Container do Dropdown nas Tabs */
+.tab-with-dropdown {
+    position: relative;
+    display: inline-block;
+    flex: 0 0 auto;
+}
+
+/* Seta do Dropdown */
+.tab-with-dropdown .arrow {
+    font-size: 0.8em;
+    margin-left: 4px;
+    transition: transform 0.3s ease;
+}
+
+.tab-with-dropdown:hover .arrow {
+    transform: rotate(180deg);
+}
+
+/* Menu Dropdown (Estilo Minimalista Elegante) */
+.tab-with-dropdown .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 300px;
+    max-height: none !important; /* FORÇA sem limite de altura */
+    overflow-y: visible !important; /* FORÇA sem scroll */
+    background: rgba(10, 37, 64, 0.96);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 12px 8px;
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.5),
+        0 2px 8px rgba(0, 217, 36, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    z-index: 999999;
+    margin-top: 10px;
+    list-style: none;
+    
+    /* Escondido por padrão */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+/* Aparece no hover (desktop) OU quando a aba está "open" (mobile/JS) */
+.tab-with-dropdown:hover .dropdown-menu,
+.tab-with-dropdown.open .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.5),
+        0 2px 12px rgba(0, 217, 36, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Scrollbar removida - Dropdown cresce naturalmente sem scroll */
+
+/* Links do dropdown - Estilo limpo e elegante */
+.tab-with-dropdown .dropdown-menu li {
+    margin: 0;
+    list-style: none;
+}
+
+.tab-with-dropdown .dropdown-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.tab-with-dropdown .dropdown-menu a:hover {
+    background: rgba(99, 91, 255, 0.15);
+    color: var(--green-light);
+    padding-left: 24px;
+}
+
+/* Seções do Dropdown - Estilo limpo e elegante */
+.tab-with-dropdown .dropdown-section {
+    padding: 12px 20px 6px;
+    margin-top: 8px;
+    list-style: none;
+}
+
+.tab-with-dropdown .dropdown-section:first-child {
+    margin-top: 0;
+}
+
+.tab-with-dropdown .dropdown-section strong {
+    color: rgba(0, 255, 163, 0.7);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+}
+
+/* Divisórias do Dropdown - Muito sutil */
+.tab-with-dropdown .dropdown-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 6px 16px;
+    list-style: none;
+}
+
+/* ============================================
+   SUB-DROPDOWNS - REMOVIDO (Agora usa estrutura simples)
+   ============================================ */
+
+/* Código removido - Sub-dropdowns laterais não são mais necessários.
+   Agora todos os itens são sempre visíveis em estrutura simples. */
+
+
 .tab-btn {
     position: relative;
-    flex: 1;
-    min-width: 140px;
+    flex: 0 0 auto; /* NÃO CRESCE, NÃO ENCOLHE */
+    min-width: 120px;
+    width: auto; /* Largura automática baseada no conteúdo */
     padding: 12px 16px;
     background: rgba(255, 255, 255, 0.05);
     border: none;
     border-right: 1px solid rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.7);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     cursor: pointer;
     transition: all 0.3s ease;
-    white-space: nowrap;
+    white-space: nowrap; /* NUNCA QUEBRA LINHA */
 }
 
 .tab-btn:first-child {
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
+    margin-left: 40px; /* ESPAÇO PARA SETA ESQUERDA */
 }
 
 .tab-btn:last-child {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     border-right: none;
+    margin-right: 40px; /* ESPAÇO PARA SETA DIREITA */
 }
 
 .tab-btn:hover {
@@ -1052,9 +1295,10 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
     padding: 24px;
-    cursor: pointer;
+    cursor: pointer !important;
     transition: all 0.3s ease;
     position: relative;
+    pointer-events: auto !important;
 }
 
 .learning-card:hover {
@@ -1234,8 +1478,9 @@ body {
     border-radius: 16px;
     padding: 32px 24px;
     text-align: center;
-    cursor: pointer;
+    cursor: pointer !important;
     transition: all 0.3s ease;
+    pointer-events: auto !important;
 }
 
 .tool-card:hover {
@@ -1462,8 +1707,57 @@ body {
     }
 
     .tab-btn:first-child,
+    .tab-btn {
+        min-width: 110px; /* Reduzido para tablets */
+        font-size: 11px;
+    }
+    
+    /* ============================================
+       DROPDOWNS MOBILE - Elegantes e Centralizados
+       ============================================ */
+    
+    /* Dropdown centralizado mas SEM limite de altura */
+    .tab-with-dropdown .dropdown-menu {
+        position: fixed;
+        top: 120px; /* Altura do header no tablet */
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 32px);
+        max-width: 480px;
+        max-height: none !important; /* FORÇA sem limite */
+        overflow-y: visible !important; /* FORÇA sem scroll */
+        margin-top: 0;
+        border-radius: 14px;
+    }
+    
+    .tab-with-dropdown.open .dropdown-menu {
+        transform: translateX(-50%) translateY(0);
+    }
+    
+    /* Scrollbar removida - Dropdown cresce naturalmente */
+    
+    /* Seções e links mais compactos no mobile */
+    .tab-with-dropdown .dropdown-section {
+        padding: 10px 16px 4px;
+        margin-top: 6px;
+    }
+    
+    .tab-with-dropdown .dropdown-section strong {
+        font-size: 11px;
+    }
+    
+    .tab-with-dropdown .dropdown-menu a {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+    
+    .tab-btn:first-child {
+        margin-left: 35px; /* Espaço para seta esquerda em tablets */
+    }
+    
     .tab-btn:last-child {
         border-radius: 6px;
+        margin-right: 35px; /* Espaço para seta direita em tablets */
     }
 
     .main-content {
@@ -1544,10 +1838,63 @@ body {
     }
 
     .tab-btn {
-        padding: 8px 12px;
+        padding: 8px 10px;
         font-size: 10px;
+        min-width: 95px; /* Reduzido para caber mais abas */
         min-height: 44px; /* Touch-friendly */
     }
+    
+    .tab-btn:first-child {
+        margin-left: 30px; /* Espaço para seta esquerda em mobile */
+    }
+    
+    .tab-btn:last-child {
+        margin-right: 30px; /* Espaço para seta direita em mobile */
+    }
+    
+    /* Seta scroll - ajustes mobile */
+    .scroll-arrow-btn {
+        font-size: 20px;
+        height: 44px;
+        padding: 0 16px 0 12px;
+    }
+    
+    .scroll-arrow-btn.arrow-right {
+        right: 10px;
+    }
+    
+    .scroll-arrow-btn.arrow-left {
+        left: 10px;
+    }
+    
+    /* Dropdowns em Mobile - Usa configuração do @media (max-width: 768px) */
+    /* Bloco removido - estava limitando altura em 60vh */
+    
+    /* Dropdowns em Mobile - DESABILITADO PARA TESTE */
+    /* .tab-submenu {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        min-width: 100%;
+        max-height: 60vh;
+        overflow-y: auto;
+        border-radius: 16px 16px 0 0;
+        border: none;
+        border-top: 2px solid var(--green-data);
+        transform: translateY(100%);
+    }
+    
+    .tab-dropdown.active .tab-submenu {
+        transform: translateY(0);
+    }
+    
+    .submenu-item {
+        font-size: 14px;
+        padding: 14px 20px;
+        min-height: 48px;
+    } */
 
     .main-content {
         padding: 0 15px 20px; /* Reduzido de 30px */
