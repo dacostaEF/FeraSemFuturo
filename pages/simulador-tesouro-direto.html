@@ -217,15 +217,22 @@
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 0;
+            display: grid;
+            grid-template-rows: 54px 54px 44px;
+            align-items: start;
         }
 
         .form-group label {
-            display: block;
+            display: flex;
+            align-items: center;
             color: #0A2540;
             font-weight: 600;
-            margin-bottom: 10px;
             font-size: 1.05rem;
+            height: 54px;
+            line-height: 1.3;
+            margin: 0;
+            padding: 0;
         }
 
         .form-group input,
@@ -237,6 +244,13 @@
             font-size: 1.1rem;
             transition: all 0.3s;
             background: white;
+            height: 54px;
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        .form-group input[type="date"] {
+            padding: 13px 15px;
         }
 
         .form-group input:focus,
@@ -248,8 +262,10 @@
 
         .form-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
+            align-items: start;
+            margin-bottom: 25px;
         }
 
         .input-section-intro {
@@ -260,11 +276,21 @@
         }
 
         .field-hint {
-            display: block;
-            margin-top: 6px;
+            display: flex;
+            align-items: flex-start;
             font-size: 0.85rem;
             color: #6b7280;
             line-height: 1.4;
+            height: 44px;
+            margin: 0;
+            padding-top: 6px;
+            text-align: left;
+        }
+
+        /* Hints curtos (opcional) alinhados à direita */
+        .field-hint-right {
+            justify-content: flex-end;
+            text-align: right;
         }
 
         .input-section-note {
@@ -495,6 +521,20 @@
                 grid-template-columns: 1fr;
             }
 
+            .form-group {
+                grid-template-rows: auto auto auto;
+            }
+
+            .form-group label {
+                height: auto;
+                min-height: 44px;
+            }
+
+            .field-hint {
+                height: auto;
+                min-height: 30px;
+            }
+
             .comparison-table {
                 font-size: 0.85rem;
                 display: block;
@@ -612,6 +652,7 @@
                             <option value="prefixado">Tesouro Prefixado</option>
                             <option value="prefixado-juros">Tesouro Prefixado com Juros Semestrais</option>
                         </select>
+                        <small class="field-hint">&nbsp;</small>
                     </div>
 
                     <div class="form-group">
@@ -623,16 +664,19 @@
                             <option>2031</option>
                             <option>2035</option>
                         </select>
+                        <small class="field-hint">&nbsp;</small>
                     </div>
 
                     <div class="form-group">
-                        <label for="startDate">📅 Data do investimento (opcional)</label>
+                        <label for="startDate">📅 Data do investimento</label>
                         <input type="date" id="startDate" name="startDate">
+                        <small class="field-hint field-hint-right">(opcional)</small>
                     </div>
 
                     <div class="form-group">
-                        <label for="endDate">🏁 Data de vencimento (opcional)</label>
+                        <label for="endDate">🏁 Data de vencimento</label>
                         <input type="date" id="endDate" name="endDate">
+                        <small class="field-hint field-hint-right">(opcional)</small>
                     </div>
                 </div>
 
@@ -669,7 +713,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="institutionFee">🏦 Taxa da instituição (opcional)</label>
+                        <label for="institutionFee">🏦 Taxa da instituição</label>
                         <input
                             type="number"
                             id="institutionFee"
@@ -677,7 +721,7 @@
                             step="0.01"
                             placeholder="Ex: 0,20"
                         >
-                        <small class="field-hint">% ao ano de taxa de administração/custódia</small>
+                        <small class="field-hint field-hint-right">(opcional) % ao ano</small>
                     </div>
 
                     <div class="form-group">
@@ -877,23 +921,47 @@
 
     <script>
         // ============================================
-        // CONSTANTES E PARÂMETROS
+        // CONSTANTES E PARÂMETROS ATUALIZADOS
         // ============================================
         
-        const SELIC_RATE = 11.25; // Taxa Selic anual (%)
-        const IPCA_RATE = 4.5; // IPCA projetado anual (%)
-        const TESOURO_IPCA_PLUS = 6.5; // Taxa adicional do Tesouro IPCA+ (%)
-        const TESOURO_PREFIXADO_RATE = 12.5; // Taxa do Tesouro Prefixado (%)
+        const SELIC_RATE = 11.25; // Taxa Selic anual (%) - Fonte: Banco Central
+        const IPCA_RATE = 4.5; // IPCA projetado anual (%) - Fonte: IBGE/Focus
+        const TESOURO_IPCA_PLUS = 6.5; // Taxa REAL adicional do Tesouro IPCA+ (% a.a.)
+        const TESOURO_PREFIXADO_RATE = 12.5; // Taxa nominal do Tesouro Prefixado (% a.a.)
         
-        // Tabela de IR regressivo (dias -> alíquota %)
-        const IR_TABLE = {
-            180: 22.5,
-            360: 20,
-            720: 17.5,
-            9999: 15
-        };
+        // Tabela de IR regressivo PRECISA - Aplicada sobre o LUCRO
+        // Fonte: Receita Federal - Lei 11.033/2004
+        const IR_TABLE = [
+            { days: 180, rate: 22.5 },   // Até 180 dias
+            { days: 360, rate: 20.0 },   // 181 a 360 dias
+            { days: 720, rate: 17.5 },   // 361 a 720 dias
+            { days: Infinity, rate: 15.0 } // Acima de 720 dias
+        ];
 
-        // Regra da Poupança
+        // ============================================
+        // FUNÇÕES AUXILIARES
+        // ============================================
+
+        /**
+         * Calcula a alíquota de IR com base no número EXATO de dias
+         * @param {number} days - Número de dias do investimento
+         * @returns {number} - Alíquota de IR (%)
+         */
+        function calculateIR(days) {
+            for (let tier of IR_TABLE) {
+                if (days <= tier.days) {
+                    return tier.rate;
+                }
+            }
+            return 15; // Fallback (nunca deve acontecer)
+        }
+
+        /**
+         * Retorna a taxa mensal da Poupança conforme regra atual
+         * Regra: Se Selic > 8,5% a.a. → 0,5% a.m.
+         *        Se Selic ≤ 8,5% a.a. → 70% da Selic / 12
+         * @returns {number} - Taxa mensal (%)
+         */
         function getPoupancaRate() {
             if (SELIC_RATE > 8.5) {
                 return 0.5; // 0,5% a.m.
@@ -902,27 +970,43 @@
             }
         }
 
-        // ============================================
-        // FUNÇÕES DE CÁLCULO
-        // ============================================
-
-        function calculateIR(days) {
-            for (let threshold in IR_TABLE) {
-                if (days <= threshold) {
-                    return IR_TABLE[threshold];
-                }
-            }
-            return 15; // Padrão
+        /**
+         * Converte taxa anual para fator de crescimento mensal
+         * Usa fórmula de juros compostos: (1 + taxa_anual)^(1/12) - 1
+         * @param {number} annualRate - Taxa anual em %
+         * @returns {number} - Fator mensal
+         */
+        function annualToMonthlyFactor(annualRate) {
+            return Math.pow(1 + annualRate / 100, 1 / 12) - 1;
         }
 
+        // ============================================
+        // FUNÇÕES DE CÁLCULO DOS INVESTIMENTOS
+        // ============================================
+
+        /**
+         * Calcula rendimento do Tesouro Selic
+         * Rentabilidade: 100% da taxa Selic (pós-fixado)
+         * Fórmula: VF = VP × (1 + Selic)^(meses/12)
+         * @param {number} principal - Valor investido (R$)
+         * @param {number} months - Prazo em meses
+         * @returns {object} - Dados do investimento
+         */
         function calculateTesouroSelic(principal, months) {
-            const days = months * 30;
-            const rate = SELIC_RATE / 100;
-            const grossReturn = principal * Math.pow(1 + rate, months / 12);
-            const profit = grossReturn - principal;
+            const days = months * 30; // Simplificação: 30 dias por mês
+            const years = months / 12;
+            
+            // Cálculo do valor bruto com juros compostos
+            const grossReturn = principal * Math.pow(1 + SELIC_RATE / 100, years);
+            const grossProfit = grossReturn - principal;
+            
+            // Cálculo do IR sobre o LUCRO
             const irRate = calculateIR(days);
-            const irAmount = profit * (irRate / 100);
+            const irAmount = grossProfit * (irRate / 100);
+            
+            // Valor líquido final
             const netReturn = grossReturn - irAmount;
+            const netProfit = netReturn - principal;
             
             return {
                 name: 'Tesouro Selic',
@@ -930,18 +1014,40 @@
                 irAmount: irAmount,
                 irRate: irRate,
                 netReturn: netReturn,
-                profit: netReturn - principal
+                profit: netProfit
             };
         }
 
+        /**
+         * Calcula rendimento do Tesouro IPCA+
+         * Rentabilidade: IPCA + taxa real (híbrido)
+         * Fórmula correta: (1 + IPCA) × (1 + Taxa Real) - 1
+         * Não é simplesmente IPCA + Taxa!
+         * @param {number} principal - Valor investido (R$)
+         * @param {number} months - Prazo em meses
+         * @returns {object} - Dados do investimento
+         */
         function calculateTesouroIPCA(principal, months) {
             const days = months * 30;
-            const totalRate = (IPCA_RATE + TESOURO_IPCA_PLUS) / 100;
-            const grossReturn = principal * Math.pow(1 + totalRate, months / 12);
-            const profit = grossReturn - principal;
+            const years = months / 12;
+            
+            // Fórmula CORRETA do IPCA+: composição das taxas
+            // Taxa efetiva = (1 + IPCA) × (1 + Taxa Real) - 1
+            const ipca_factor = 1 + IPCA_RATE / 100;
+            const real_factor = 1 + TESOURO_IPCA_PLUS / 100;
+            const effective_rate = ipca_factor * real_factor - 1;
+            
+            // Cálculo do valor bruto
+            const grossReturn = principal * Math.pow(1 + effective_rate, years);
+            const grossProfit = grossReturn - principal;
+            
+            // IR sobre o lucro
             const irRate = calculateIR(days);
-            const irAmount = profit * (irRate / 100);
+            const irAmount = grossProfit * (irRate / 100);
+            
+            // Valor líquido
             const netReturn = grossReturn - irAmount;
+            const netProfit = netReturn - principal;
             
             return {
                 name: 'Tesouro IPCA+',
@@ -949,18 +1055,33 @@
                 irAmount: irAmount,
                 irRate: irRate,
                 netReturn: netReturn,
-                profit: netReturn - principal
+                profit: netProfit
             };
         }
 
+        /**
+         * Calcula rendimento do Tesouro Prefixado
+         * Rentabilidade: Taxa fixa definida no momento da compra
+         * Fórmula: VF = VP × (1 + taxa)^(meses/12)
+         * @param {number} principal - Valor investido (R$)
+         * @param {number} months - Prazo em meses
+         * @returns {object} - Dados do investimento
+         */
         function calculateTesouroPrefixado(principal, months) {
             const days = months * 30;
-            const rate = TESOURO_PREFIXADO_RATE / 100;
-            const grossReturn = principal * Math.pow(1 + rate, months / 12);
-            const profit = grossReturn - principal;
+            const years = months / 12;
+            
+            // Cálculo do valor bruto
+            const grossReturn = principal * Math.pow(1 + TESOURO_PREFIXADO_RATE / 100, years);
+            const grossProfit = grossReturn - principal;
+            
+            // IR sobre o lucro
             const irRate = calculateIR(days);
-            const irAmount = profit * (irRate / 100);
+            const irAmount = grossProfit * (irRate / 100);
+            
+            // Valor líquido
             const netReturn = grossReturn - irAmount;
+            const netProfit = netReturn - principal;
             
             return {
                 name: 'Tesouro Prefixado',
@@ -968,21 +1089,32 @@
                 irAmount: irAmount,
                 irRate: irRate,
                 netReturn: netReturn,
-                profit: netReturn - principal
+                profit: netProfit
             };
         }
 
+        /**
+         * Calcula rendimento da Poupança
+         * Rentabilidade: 0,5% a.m. (Selic > 8,5%) ou 70% Selic/12
+         * Isenta de IR
+         * @param {number} principal - Valor investido (R$)
+         * @param {number} months - Prazo em meses
+         * @returns {object} - Dados do investimento
+         */
         function calculatePoupanca(principal, months) {
             const monthlyRate = getPoupancaRate() / 100;
+            
+            // Cálculo com juros compostos mensais
             const netReturn = principal * Math.pow(1 + monthlyRate, months);
+            const netProfit = netReturn - principal;
             
             return {
                 name: 'Poupança',
-                grossReturn: netReturn,
+                grossReturn: netReturn, // Não tem IR
                 irAmount: 0,
                 irRate: 0,
                 netReturn: netReturn,
-                profit: netReturn - principal
+                profit: netProfit
             };
         }
 
