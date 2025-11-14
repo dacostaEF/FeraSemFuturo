@@ -738,19 +738,19 @@
 
         <!-- Sistema de Abas -->
         <div class="tabs-nav">
-            <button class="tab-btn active" onclick="switchTab('comparar')">
+            <button class="tab-btn active" onclick="switchTab(this, 'comparar')">
                 📊 <span class="tab-text-full">Comparar</span><span class="tab-text-short">Comparar</span>
             </button>
-            <button class="tab-btn" onclick="switchTab('simular')">
+            <button class="tab-btn" onclick="switchTab(this, 'simular')">
                 📈 <span class="tab-text-full">Simulador Evolutivo</span><span class="tab-text-short">Simulador</span>
             </button>
-            <button class="tab-btn" onclick="switchTab('ranking')">
+            <button class="tab-btn" onclick="switchTab(this, 'ranking')">
                 🏆 <span class="tab-text-full">Ranking</span><span class="tab-text-short">Ranking</span>
             </button>
-            <button class="tab-btn" onclick="switchTab('cenario')">
+            <button class="tab-btn" onclick="switchTab(this, 'cenario')">
                 💰 <span class="tab-text-full">Meu Cenário</span><span class="tab-text-short">Cenário</span>
             </button>
-            <button class="tab-btn" onclick="switchTab('educacao')">
+            <button class="tab-btn" onclick="switchTab(this, 'educacao')">
                 📚 <span class="tab-text-full">Educação</span><span class="tab-text-short">Educação</span>
             </button>
         </div>
@@ -1403,13 +1403,13 @@
         }
 
         // SISTEMA DE ABAS
-        function switchTab(tabName) {
+        function switchTab(button, tabName) {
             // Remover active de todos os botões e conteúdos
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             
-            // Adicionar active ao botão e conteúdo clicado
-            event.target.classList.add('active');
+            // Adicionar active ao botão clicado e ao conteúdo correspondente
+            button.classList.add('active');
             document.getElementById(`tab-${tabName}`).classList.add('active');
         }
 
