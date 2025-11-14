@@ -35,30 +35,6 @@
             margin: 0 auto;
         }
 
-        /* Botão Voltar */
-        .btn-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 600;
-            padding: 10px 20px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            margin-bottom: 20px;
-        }
-
-        .btn-back:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: #00B894;
-            color: #00B894;
-            transform: translateX(-5px);
-        }
-
         .header {
             text-align: center;
             margin-bottom: 30px;
@@ -398,43 +374,7 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Botão Histórico */
-        .btn-history {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, #00B894, #55EFC4);
-            color: white;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(0, 184, 148, 0.4);
-            transition: all 0.3s ease;
-            z-index: 999;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-history:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(0, 184, 148, 0.6);
-        }
-
-        .history-badge {
-            background: #EF4444;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            display: none;
-        }
-
-        /* Modal */
+        /* Modal (Genérico) */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -507,78 +447,6 @@
             max-height: calc(80vh - 80px);
             overflow-y: auto;
         }
-
-        .history-item {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border: 2px solid #e1e5e9;
-            transition: all 0.3s ease;
-        }
-
-        .history-item:hover {
-            border-color: #00B894;
-            box-shadow: 0 5px 15px rgba(0, 184, 148, 0.2);
-        }
-
-        .history-item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e1e5e9;
-        }
-
-        .history-date {
-            font-size: 14px;
-            color: #666;
-            font-weight: 600;
-        }
-
-        .btn-load-history {
-            background: #00B894;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-load-history:hover {
-            background: #008f73;
-            transform: translateY(-2px);
-        }
-
-        .history-item-details p {
-            margin: 8px 0;
-            color: #333;
-            font-size: 14px;
-        }
-
-        .btn-clear-history {
-            background: #EF4444;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-clear-history:hover {
-            background: #dc2626;
-            transform: translateY(-2px);
-        }
-
         /* Responsividade */
         /* ============================================
            MOBILE-FIRST RESPONSIVE
@@ -587,11 +455,6 @@
         @media (max-width: 768px) {
             body {
                 padding: 15px;
-            }
-
-            .btn-back {
-                font-size: 14px;
-                padding: 10px 16px;
             }
 
             .header h1 {
@@ -732,13 +595,6 @@
                 height: 400px;
             }
 
-            .btn-history {
-                bottom: 20px;
-                right: 20px;
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-
             .modal-content {
                 width: 95%;
                 max-height: 90vh;
@@ -746,16 +602,6 @@
 
             .modal-body {
                 padding: 20px;
-            }
-
-            .history-item-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-
-            .btn-load-history {
-                width: 100%;
             }
         }
 
@@ -833,33 +679,16 @@
             .callout-content p {
                 font-size: 13px;
             }
-
-            .btn-history {
-                bottom: 15px;
-                right: 15px;
-                padding: 10px 16px;
-                font-size: 13px;
-            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Botão Voltar -->
-        <a href="../index.html#ferramentas" class="btn-back">
-            ← Voltar para Ferramentas
-        </a>
-        
         <div class="header">
-            <h1>🧠 Comparador Inteligente de Investimentos</h1>
-            <p>Análise completa de Renda Fixa - Compare, simule e invista com inteligência</p>
+            <h1>💰 Simulador de Rentabilidade: CDBs vs Poupança</h1>
+            <p>INVLAB - Plataforma educacional de simulação de Renda Fixa com dados reais</p>
         </div>
 
-        <!-- Botão Flutuante de Histórico -->
-        <button class="btn-history" onclick="showHistoryModal()">
-            📚 Histórico
-            <span class="history-badge">0</span>
-        </button>
 
         <!-- Sistema de Abas -->
         <div class="tabs-nav">
@@ -1351,175 +1180,6 @@
             { border: '#EF4444', bg: 'rgba(239, 68, 68, 0.1)' },    // Vermelho
             { border: '#8B5CF6', bg: 'rgba(139, 92, 246, 0.1)' },   // Roxo
         ];
-
-        /* ============================================
-           LOCAL STORAGE - HISTÓRICO DE SIMULAÇÕES
-           ============================================ */
-        
-        const STORAGE_KEY = 'comparadorInvestimentos_history';
-        const MAX_HISTORY = 10; // Manter últimas 10 simulações
-
-        // Salvar simulação no localStorage
-        function saveSimulation(data) {
-            try {
-                let history = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-                
-                const simulation = {
-                    id: Date.now(),
-                    timestamp: new Date().toISOString(),
-                    dateFormatted: new Date().toLocaleString('pt-BR'),
-                    ...data
-                };
-                
-                history.unshift(simulation);
-                history = history.slice(0, MAX_HISTORY);
-                
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
-                console.log('💾 Simulação salva no histórico');
-                
-                updateHistoryBadge();
-                return true;
-            } catch (error) {
-                console.error('❌ Erro ao salvar simulação:', error);
-                return false;
-            }
-        }
-
-        // Carregar histórico
-        function loadHistory() {
-            try {
-                return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-            } catch (error) {
-                console.error('❌ Erro ao carregar histórico:', error);
-                return [];
-            }
-        }
-
-        // Limpar histórico
-        function clearHistory() {
-            if (confirm('🗑️ Deseja realmente limpar todo o histórico de simulações?')) {
-                localStorage.removeItem(STORAGE_KEY);
-                updateHistoryBadge();
-                alert('✅ Histórico limpo com sucesso!');
-                closeHistoryModal();
-            }
-        }
-
-        // Atualizar badge de contagem
-        function updateHistoryBadge() {
-            const history = loadHistory();
-            const badges = document.querySelectorAll('.history-badge');
-            badges.forEach(badge => {
-                badge.textContent = history.length;
-                badge.style.display = history.length > 0 ? 'inline-block' : 'none';
-            });
-        }
-
-        // Mostrar modal de histórico
-        function showHistoryModal() {
-            const history = loadHistory();
-            
-            let modalHTML = `
-                <div class="modal-overlay" onclick="closeHistoryModal()">
-                    <div class="modal-content" onclick="event.stopPropagation()">
-                        <div class="modal-header">
-                            <h2>📚 Histórico de Simulações</h2>
-                            <button class="btn-close" onclick="closeHistoryModal()">✕</button>
-                        </div>
-                        <div class="modal-body">
-            `;
-            
-            if (history.length === 0) {
-                modalHTML += `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📭</div>
-                        <h3>Nenhuma simulação salva ainda</h3>
-                        <p>Suas simulações aparecerão aqui automaticamente</p>
-                    </div>
-                `;
-            } else {
-                history.forEach((sim, index) => {
-                    const productsText = sim.products ? sim.products.join(', ') : sim.productName || 'N/A';
-                    
-                    modalHTML += `
-                        <div class="history-item">
-                            <div class="history-item-header">
-                                <span class="history-date">🕐 ${sim.dateFormatted}</span>
-                                <button class="btn-load-history" onclick="loadSimulation(${index})">
-                                    📥 Carregar
-                                </button>
-                            </div>
-                            <div class="history-item-details">
-                                <p><strong>Produto(s):</strong> ${productsText}</p>
-                                <p><strong>Capital Inicial:</strong> R$ ${(sim.initial || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
-                                <p><strong>Aporte Mensal:</strong> R$ ${(sim.monthly || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
-                                <p><strong>Prazo:</strong> ${sim.years} ano${sim.years > 1 ? 's' : ''}</p>
-                                ${sim.finalValue ? `<p><strong>Resultado:</strong> R$ ${sim.finalValue.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>` : ''}
-                            </div>
-                        </div>
-                    `;
-                });
-                
-                modalHTML += `
-                    <button class="btn-clear-history" onclick="clearHistory()">
-                        🗑️ Limpar Histórico
-                    </button>
-                `;
-            }
-            
-            modalHTML += `
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            document.body.insertAdjacentHTML('beforeend', modalHTML);
-        }
-
-        // Fechar modal
-        function closeHistoryModal() {
-            const modal = document.querySelector('.modal-overlay');
-            if (modal) {
-                modal.remove();
-            }
-        }
-
-        // Carregar simulação específica
-        function loadSimulation(index) {
-            const history = loadHistory();
-            const sim = history[index];
-            
-            if (!sim) {
-                alert('❌ Simulação não encontrada!');
-                return;
-            }
-            
-            // Preencher formulário baseado no tipo de simulação
-            if (sim.type === 'multi') {
-                // Aba Meu Cenário
-                switchTab('cenario');
-                document.getElementById('cenarioAmount').value = sim.initial || 0;
-                document.getElementById('cenarioMonthly').value = sim.monthly || 0;
-                document.getElementById('cenarioYears').value = sim.years || 1;
-                
-                setTimeout(() => {
-                    alert('✅ Simulação carregada! Configure os produtos e clique em "Gerar Comparação"');
-                }, 100);
-            } else {
-                // Aba Simulador
-                switchTab('simular');
-                document.getElementById('initialAmount').value = sim.initial || 0;
-                document.getElementById('monthlyInvestment').value = sim.monthly || 0;
-                document.getElementById('timePeriod').value = sim.years || 1;
-                
-                setTimeout(() => {
-                    runSimulation();
-                    alert('✅ Simulação carregada e executada!');
-                }, 100);
-            }
-            
-            closeHistoryModal();
-        }
 
         // CARREGAR CSV
         // CARREGAR DADOS (modo offline - sem fetch)
@@ -2080,15 +1740,6 @@
                     }
                 }
             });
-            
-            saveSimulation({
-                type: 'multi',
-                products: productsNames,
-                initial: initial,
-                monthly: monthly,
-                years: years,
-                finalValue: results[0].finalValue
-            });
         }
 
         function updateMultiChart(labels, datasets) {
@@ -2284,17 +1935,6 @@
             updateChart(labels, cdbEvolution, poupancaEvolution, cdiPercent);
             showSimulationResults(cdbEvolution, poupancaEvolution, cdiPercent, years, productName);
             generateInsights(cdbEvolution, poupancaEvolution, initial, monthly, years, cdiPercent);
-            
-            // Salvar simulação automaticamente
-            const finalCDB = cdbEvolution[cdbEvolution.length - 1];
-            saveSimulation({
-                type: 'simulator',
-                productName: productName,
-                initial: initial,
-                monthly: monthly,
-                years: years,
-                finalValue: finalCDB
-            });
         }
 
         function showSimulationResults(cdbEvolution, poupancaEvolution, cdiPercent, years, productName) {
@@ -2330,10 +1970,7 @@
         document.addEventListener('DOMContentLoaded', async function() {
             console.log('🚀 Carregando Comparador Inteligente...');
             await loadCSV();
-            updateHistoryBadge(); // Atualizar badge do histórico
             runSimulation();
-            
-            console.log(`💾 Histórico: ${loadHistory().length} simulações salvas`);
         });
     </script>
 </body>
