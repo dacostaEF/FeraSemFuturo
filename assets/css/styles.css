@@ -69,20 +69,40 @@ body {
     margin: 0 auto;
     padding: 16px 32px 16px; /* Padding normal */
     overflow: visible !important;
-    min-height: 120px; /* Espaço mínimo para dropdowns */
+    min-height: 80px; /* Altura reduzida - agora é 1 linha */
+    display: flex;
+    flex-direction: column;
+    gap: 0;
 }
 
 /* Logo no Header */
 .header-logo {
+    position: absolute;
+    left: 32px;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 0;
+    z-index: 10;
 }
 
 .header-logo img {
-    height: 40px;
-    filter: drop-shadow(0 2px 6px rgba(255, 255, 255, 0.15));
+    height: 37px; /* Reduzido ~7.5% */
+    filter: 
+        brightness(1.15)
+        drop-shadow(0 2px 8px rgba(255, 215, 0, 0.35))
+        drop-shadow(0 0 12px rgba(255, 215, 0, 0.15));
+    transition: all 0.3s ease;
+}
+
+.header-logo:hover img {
+    filter: 
+        brightness(1.25)
+        drop-shadow(0 2px 10px rgba(255, 215, 0, 0.5))
+        drop-shadow(0 0 16px rgba(255, 215, 0, 0.25));
+    transform: scale(1.02);
 }
 
 .logo-text {
@@ -97,24 +117,19 @@ body {
     position: relative;
     display: flex;
     flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
     gap: 0;
-    padding: 0 2px 0 0;
+    padding: 0;
     width: 100%;
+    overflow: visible !important;
 }
 
 /* Wrapper para controlar o scroll sem cortar dropdowns */
 .tabs-nav-wrapper {
     position: relative;
-    overflow-x: auto; /* Permite scroll horizontal apenas quando necessário */
-    overflow-y: visible !important; /* NUNCA corta dropdowns verticalmente */
-    scrollbar-width: none; /* Esconde scrollbar */
-    scroll-behavior: smooth; /* Scroll suave se necessário */
-    
-    /* Previne scroll acidental */
-    overscroll-behavior-x: contain; /* Não propaga scroll para página */
-    
-    /* SEM padding-bottom gigante que bloqueia cliques! */
-    /* Os dropdowns aparecem com position: absolute, não precisam de espaço físico */
+    overflow: visible !important;
+    scrollbar-width: none;
 }
 
 .tabs-nav-wrapper::-webkit-scrollbar {
@@ -136,13 +151,9 @@ body {
     transition: opacity 0.3s ease;
 }
 
-/* Botão de Scroll (Seta Verde Neon Real - CLICÁVEL) */
+/* Botão de Scroll (Seta Verde Neon Real - CLICÁVEL) - DESATIVADO */
 .scroll-arrow-btn {
-    position: absolute;
-    right: 18px;
-    bottom: 0;
-    height: 50px;
-    display: flex;
+    display: none !important;
     align-items: center;
     justify-content: center;
     font-size: 24px;
@@ -229,41 +240,41 @@ body {
 
 /* Seta do Dropdown */
 .tab-with-dropdown .arrow {
-    font-size: 0.8em;
+    font-size: 10px;
     margin-left: 4px;
-    transition: transform 0.3s ease;
+    opacity: 0.6;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s ease;
 }
 
 .tab-with-dropdown:hover .arrow {
+    opacity: 1.0;
     transform: rotate(180deg);
 }
 
 /* Menu Dropdown (Estilo Minimalista Elegante) */
 .tab-with-dropdown .dropdown-menu {
-    position: fixed !important;
-    top: 140px !important;
-    left: 50% !important;
-    transform: translateX(-50%) translateY(-8px) !important;
-    min-width: 300px;
-    max-width: 450px;
-    max-height: none !important;
-    overflow-y: visible !important;
-    background: rgba(26, 26, 26, 0.96);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(42, 127, 255, 0.15);
-    border-radius: 16px;
-    padding: 12px 8px;
-    box-shadow: 
-        0 10px 40px rgba(0, 0, 0, 0.7),
-        0 2px 8px rgba(42, 127, 255, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    z-index: 999999;
+    position: absolute !important;
+    left: 0 !important;
+    top: 100% !important;
+    min-width: 220px;
+    margin-top: 8px;
+    background: rgba(14, 14, 14, 0.98);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(42, 127, 255, 0.3);
+    border-radius: 8px;
+    padding: 8px 0;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    z-index: 999999 !important;
     list-style: none;
+    text-align: left;
     
     /* Escondido por padrão */
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
     pointer-events: none;
 }
 
@@ -272,13 +283,9 @@ body {
 .tab-with-dropdown.open .dropdown-menu {
     opacity: 1 !important;
     visibility: visible !important;
-    transform: translateX(-50%) translateY(0) !important;
     pointer-events: auto !important;
     display: block !important;
-    box-shadow: 
-        0 10px 40px rgba(0, 0, 0, 0.5),
-        0 2px 12px rgba(0, 217, 36, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transform: translateY(0) !important;
 }
 
 /* Scrollbar removida - Dropdown cresce naturalmente sem scroll */
@@ -287,23 +294,27 @@ body {
 .tab-with-dropdown .dropdown-menu li {
     margin: 0;
     list-style: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tab-with-dropdown .dropdown-menu li:last-child {
+    border-bottom: none;
 }
 
 .tab-with-dropdown .dropdown-menu a {
     display: block;
-    padding: 10px 20px;
-    color: rgba(255, 255, 255, 0.85);
+    padding: 12px 16px;
+    color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
-    border-radius: 8px;
     transition: all 0.2s ease;
 }
 
 .tab-with-dropdown .dropdown-menu a:hover {
-    background: rgba(42, 127, 255, 0.15);
+    background: rgba(42, 127, 255, 0.12);
     color: var(--blue-action);
-    padding-left: 24px;
+    padding-left: 20px;
 }
 
 /* Seções do Dropdown - Estilo limpo e elegante */
@@ -343,47 +354,46 @@ body {
 
 .tab-btn {
     position: relative;
-    flex: 0 0 auto; /* NÃO CRESCE, NÃO ENCOLHE */
-    min-width: 120px;
-    width: auto; /* Largura automática baseada no conteúdo */
-    padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.05);
+    flex: 0 0 auto;
+    min-width: 130px;
+    max-width: 130px;
+    width: 130px;
+    padding: 10px 12px;
+    background: transparent;
     border: none;
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
     color: rgba(255, 255, 255, 0.7);
     font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0.3px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap; /* NUNCA QUEBRA LINHA */
+    transition: all 0.2s ease;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.4;
+    display: inline-block;
 }
 
 .tab-btn:first-child {
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
-    margin-left: 40px; /* ESPAÇO PARA SETA ESQUERDA */
 }
 
 .tab-btn:last-child {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     border-right: none;
-    margin-right: 40px; /* ESPAÇO PARA SETA DIREITA */
 }
 
 .tab-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
     color: #FFFFFF;
-    transform: translateY(-2px);
 }
 
 .tab-btn.active {
-    background: rgba(255, 255, 255, 0.15);
-    color: var(--green-light);
-    border-bottom: 3px solid var(--green-data);
-    transform: translateY(0);
+    background: rgba(42, 127, 255, 0.15);
+    color: var(--blue-action);
 }
 
 /* Conteúdo Principal */
@@ -1195,15 +1205,21 @@ body {
     
     .header-container {
         padding: 12px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-height: auto;
     }
     
     .header-logo {
+        position: static;
+        transform: none;
         justify-content: center;
-        margin-bottom: 12px;
+        margin-bottom: 0;
     }
     
     .header-logo img {
-        height: 48px; /* Aumentado para mobile */
+        height: 44px; /* Reduzido ~7.5% de 48px */
     }
     
     .logo-text {
@@ -1211,7 +1227,7 @@ body {
     }
     
     .tab-btn {
-        font-size: 10px;
+        font-size: 9px;
         padding: 8px 6px;
         min-width: 80px;
     }
@@ -1258,10 +1274,19 @@ body {
     
     .header-container {
         padding: 12px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-height: auto;
+    }
+    
+    .header-logo {
+        position: static;
+        transform: none;
     }
     
     .header-logo img {
-        height: 36px;
+        height: 34px; /* Reduzido ~7.5% de 36px */
     }
     
     .logo-text {
@@ -1269,7 +1294,7 @@ body {
     }
     
     .tab-btn {
-        font-size: 11px;
+        font-size: 10px;
         padding: 10px 10px;
         min-width: 100px;
     }
@@ -1708,14 +1733,20 @@ body {
 
     .header-container {
         padding: 12px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-height: auto;
     }
 
     .header-logo {
-        margin-bottom: 12px;
+        position: static;
+        transform: none;
+        margin-bottom: 0;
     }
 
     .header-logo img {
-        height: 32px;
+        height: 30px; /* Reduzido ~7.5% de 32px */
     }
 
     .logo-text {
@@ -1812,7 +1843,7 @@ body {
         flex: 0 0 auto; /* Não expandir */
         min-width: auto;
         padding: 10px 16px;
-        font-size: 11px;
+        font-size: 10px;
         border-radius: 6px;
         border-right: none;
     }
@@ -1820,7 +1851,7 @@ body {
     .tab-btn:first-child,
     .tab-btn {
         min-width: 110px; /* Reduzido para tablets */
-        font-size: 11px;
+        font-size: 10px;
     }
     
     /* ============================================
@@ -1858,12 +1889,12 @@ body {
     }
     
     .tab-with-dropdown .dropdown-section strong {
-        font-size: 11px;
+        font-size: 10px;
     }
     
     .tab-with-dropdown .dropdown-menu a {
         padding: 10px 16px;
-        font-size: 13px;
+        font-size: 12px;
     }
     
     .tab-btn:first-child {
@@ -1938,14 +1969,20 @@ body {
 
     .header-container {
         padding: 8px 15px; /* Reduzido de 10px */
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        min-height: auto;
     }
 
     .header-logo {
-        margin-bottom: 8px; /* Reduzido */
+        position: static;
+        transform: none;
+        margin-bottom: 0;
     }
 
     .header-logo img {
-        height: 45px; /* Maior para smartphones */
+        height: 42px; /* Reduzido ~7.5% de 45px */
     }
 
     .logo-text {
@@ -1954,7 +1991,7 @@ body {
 
     .tab-btn {
         padding: 8px 10px;
-        font-size: 10px;
+        font-size: 9px;
         min-width: 95px; /* Reduzido para caber mais abas */
         min-height: 44px; /* Touch-friendly */
     }
@@ -2708,7 +2745,7 @@ body {
     padding: 10px 20px;
     color: rgba(255, 255, 255, 0.85);
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     transition: all 0.2s ease;
 }
 
