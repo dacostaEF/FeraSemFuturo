@@ -461,40 +461,47 @@
             overflow-y: auto;
         }
         /* ============================================
-           BOTÃO MINIMALISTA "SOBRE CDBs"
+           BOTÃO MINIMALISTA "SOBRE CDBs" - Verde Neon Sutil
            ============================================ */
         .btn-about-cdb {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100px;
-            height: 100px;
-            background: white;
-            border: 1px solid #e1e5e9;
+            background: rgba(0, 217, 36, 0.25);
+            color: white;
+            border: 1px solid #00D924;
             border-radius: 12px;
+            padding: 15px 20px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            box-shadow: 0 0 8px rgba(0, 217, 36, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            min-width: 140px;
+            justify-self: end;
+            backdrop-filter: blur(10px);
         }
 
         .btn-about-cdb:hover {
-            border-color: #00B894;
-            box-shadow: 0 4px 12px rgba(0, 184, 148, 0.15);
-            transform: translateY(-2px);
+            background: rgba(0, 217, 36, 0.45);
+            border-color: #00FF44;
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 
+                0 8px 25px rgba(0, 217, 36, 0.4),
+                0 0 20px rgba(0, 217, 36, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
         .btn-about-icon {
-            font-size: 28px;
-            margin-bottom: 6px;
+            font-size: 1.8rem;
+            margin-bottom: 0;
         }
 
         .btn-about-text {
-            font-size: 13px;
-            font-weight: 600;
-            color: #333;
-            text-align: center;
-            line-height: 1.2;
+            text-align: left;
+            line-height: 1.3;
+            color: white;
+            font-size: 0.95rem;
         }
 
         /* ============================================
@@ -747,20 +754,8 @@
             }
 
             .btn-about-cdb {
-                width: 100%;
-                height: 70px;
-                flex-direction: row;
-                justify-content: center;
-                gap: 12px;
-            }
-
-            .btn-about-icon {
-                font-size: 24px;
-                margin-bottom: 0;
-            }
-
-            .btn-about-text {
-                font-size: 14px;
+                justify-self: center;
+                margin-top: 15px;
             }
 
             /* Modal mobile */
@@ -1049,8 +1044,11 @@
             
             <!-- Botão Minimalista "Sobre CDBs" -->
             <button class="btn-about-cdb" onclick="openCDBModal()" aria-label="Conheça os CDBs">
-                <div class="btn-about-icon">📚</div>
-                <div class="btn-about-text">Sobre<br>CDBs</div>
+                <span class="btn-about-icon">📖</span>
+                <div class="btn-about-text">
+                    <div style="font-size: 0.75rem; opacity: 0.9;">Conheça</div>
+                    <div style="font-weight: 700;">Sobre CDBs</div>
+                </div>
             </button>
         </div>
 
