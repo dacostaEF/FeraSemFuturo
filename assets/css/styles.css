@@ -442,7 +442,7 @@ body {
 /* Hero Section (dentro da aba INÍCIO) */
 .hero-section {
     text-align: center;
-    padding: 40px 20px 60px;
+    padding: 40px 20px 20px;
     max-width: 700px;
     margin: 0 auto;
 }
@@ -467,7 +467,7 @@ body {
 .hero-description.secondary {
     font-size: 16px;
     color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 32px;
+    margin-bottom: 0;
     font-weight: 500;
 }
 
@@ -872,7 +872,7 @@ body {
 
 /* Benefits (Diferenciais) */
 .benefits {
-    margin: 48px 0;
+    margin: 24px 0;
 }
 
 .benefits-grid {
@@ -2696,6 +2696,18 @@ body {
         border-left: 2px solid var(--green-data);
         background: rgba(0, 0, 0, 0.2);
         margin-left: 16px;
+    }
+}
+
+/* ============================================
+   RESPONSIVIDADE - GRID 2x2 (INVLAB Box)
+   ============================================ */
+
+@media (max-width: 768px) {
+    .invlab-grid-2x2 {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+        text-align: center !important;
     }
 }
 
