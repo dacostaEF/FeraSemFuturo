@@ -343,50 +343,111 @@
         <div class="header-container">
             <!-- Logo -->
             <div class="header-logo">
-                <a href="../index.html">
-                    <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
-                    <span class="logo-text">INVLAB</span>
-                </a>
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                <span class="logo-text">INVLAB</span>
             </div>
             
-            <!-- Menu Principal -->
-            <nav class="main-nav">
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="../index.html#inicio" class="nav-link">🏠 INÍCIO</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="../index.html#primeiros-passos" class="nav-link">📚 PRIMEIROS PASSOS</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle">
-                            📊 RENDA FIXA <span class="arrow">▼</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="../index.html#poupanca">💰 Poupança</a></li>
-                            <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
-                            <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
-                            <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle">
-                            📈 RENDA VARIÁVEL <span class="arrow">▼</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">📊 FIIs</a></li>
-                            <li><a href="#">📈 Ações</a></li>
-                            <li><a href="#">💵 ETFs</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">🔐 CRIPTOMOEDAS</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="../index.html#ferramentas" class="nav-link">🛠️ FERRAMENTAS</a>
-                    </li>
-                </ul>
+            <!-- Sistema de Abas INVLAB -->
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html#inicio'">
+                    🏠 Início
+                </button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">
+                    📚 Primeiros<br>Passos
+                </button>
+                
+                <!-- ABA COM DROPDOWN: RENDA FIXA -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle active">
+                        📊 Renda<br>Fixa <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="../index.html#renda-fixa">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                
+                <!-- ABA COM DROPDOWN: RENDA VARIÁVEL -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">
+                        📈 Renda<br>Variável <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-section">
+                            <strong>🏢 Fundos Imobiliários (FIIs)</strong>
+                        </li>
+                        <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                        <li><a href="#">🏘️ FIIs de Tijolo</a></li>
+                        <li><a href="#">📋 FIIs de Papel</a></li>
+                        <li><a href="#">🔄 FIIs Híbridos</a></li>
+                        <li><a href="#">🎯 Como Escolher FIIs</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li class="dropdown-section">
+                            <strong>📈 Ações</strong>
+                        </li>
+                        <li><a href="#">📊 Simulador de Dividendos</a></li>
+                        <li><a href="#">💰 Valuation (P/L, P/VP)</a></li>
+                        <li><a href="#">🏭 Análise Setorial</a></li>
+                        <li><a href="#">📉 Day Trade vs Buy&Hold</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li class="dropdown-section">
+                            <strong>💵 ETFs</strong>
+                        </li>
+                        <li><a href="#">📊 Simulador de Indexação</a></li>
+                        <li><a href="#">📈 ETFs Nacionais</a></li>
+                        <li><a href="#">🌎 ETFs Internacionais</a></li>
+                    </ul>
+                </div>
+                
+                <!-- ABA COM DROPDOWN: CRIPTOATIVOS -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">
+                        🔐 Cripto<br>ativos <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">₿ Bitcoin</a></li>
+                        <li><a href="#">⧫ Ethereum</a></li>
+                        <li><a href="#">🪙 Altcoins</a></li>
+                        <li><a href="#">💵 Stablecoins</a></li>
+                        <li><a href="#">🔄 DeFi</a></li>
+                        <li><a href="#">🖼️ NFTs</a></li>
+                        <li><a href="#">🔗 Tokenização</a></li>
+                    </ul>
+                </div>
+                
+                <!-- ABA COM DROPDOWN: FERRAMENTAS -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">
+                        🛠️ Ferramentas <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="simulador-cdbs.html">🏦 Simulador de CDBs</a></li>
+                        <li><a href="#">🎯 Alocador de Ativos</a></li>
+                        <li><a href="#">📊 Simulador de Carteira</a></li>
+                        <li><a href="#">📈 Projetor de Patrimônio</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li class="dropdown-section">
+                            <strong>🧮 Calculadoras Técnicas</strong>
+                        </li>
+                        <li><a href="#">Juros Compostos</a></li>
+                        <li><a href="#">Imposto de Renda</a></li>
+                        <li><a href="#">Taxa Real vs Nominal</a></li>
+                        <li><a href="#">Custo de Oportunidade</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a href="#">📋 Comparador Cruzado</a></li>
+                        <li><a href="#">📚 Glossário Financeiro</a></li>
+                        <li><a href="metodologia.html">🔬 Metodologia</a></li>
+                    </ul>
+                </div>
+                
+                <button class="tab-btn" onclick="window.location.href='../index.html#outros-investimentos'">
+                    💎 Outros<br>Investimentos
+                </button>
             </nav>
+            </div>
         </div>
     </header>
 

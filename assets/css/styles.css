@@ -387,12 +387,12 @@ body {
 }
 
 .tab-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
-    color: #FFFFFF;
+    background: transparent;
+    color: var(--blue-action);
 }
 
 .tab-btn.active {
-    background: rgba(42, 127, 255, 0.15);
+    background: transparent;
     color: var(--blue-action);
 }
 
