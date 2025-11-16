@@ -4,27 +4,27 @@
    ============================================ */
 
 :root {
-    /* PALETA FINTECH - Azul Corporativo + Verde Data */
-    --blue-corporate: #0A2540;    /* Azul escuro - Confiança */
-    --blue-tech: #635BFF;         /* Azul tech - Inovação */
+    /* PALETA TRADING PLATFORM - Preto Profissional + Azul Ação */
+    --blue-corporate: #0D0D0D;    /* Preto - Profissionalismo */
+    --blue-tech: #2A7FFF;         /* Azul ação - Confiança */
     --green-data: #00D924;        /* Verde - Positivo/Sucesso */
-    --gray-graphite: #1A1A1A;     /* Grafite - Texto principal */
-    --gray-light: #F5F5F5;        /* Background claro */
-    --gray-medium: #666666;       /* Texto secundário */
+    --gray-graphite: #FFFFFF;     /* Branco - Texto principal */
+    --gray-light: #1A1A1A;        /* Background cards */
+    --gray-medium: #B4B4B4;       /* Texto secundário */
     
     /* Gradientes Profissionais */
-    --gradient-primary: linear-gradient(135deg, #0A2540 0%, #635BFF 100%);
+    --gradient-primary: linear-gradient(135deg, #1A1A1A 0%, #2A7FFF 100%);
     --gradient-success: linear-gradient(135deg, #00D924 0%, #00B894 100%);
-    --gradient-dark: linear-gradient(135deg, #1A1A1A 0%, #0A2540 100%);
+    --gradient-dark: linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 100%);
     
     /* Sombras Profissionais */
-    --shadow-sm: 0 2px 8px rgba(10, 37, 64, 0.08);
-    --shadow-md: 0 4px 16px rgba(10, 37, 64, 0.12);
-    --shadow-lg: 0 8px 32px rgba(10, 37, 64, 0.16);
-    --shadow-xl: 0 12px 48px rgba(10, 37, 64, 0.24);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.6);
     
     /* Estados */
-    --hover-overlay: rgba(99, 91, 255, 0.08);
+    --hover-overlay: rgba(42, 127, 255, 0.12);
     --active-overlay: rgba(0, 217, 36, 0.12);
 }
 
@@ -119,11 +119,11 @@ body {
 
 /* Cards Profissionais */
 .card-invlab {
-    background: white;
+    background: var(--gray-light);
     border-radius: 12px;
     padding: 24px;
     box-shadow: var(--shadow-md);
-    border: 1px solid rgba(10, 37, 64, 0.1);
+    border: 1px solid rgba(42, 127, 255, 0.2);
     transition: all 0.3s ease;
 }
 
@@ -134,9 +134,9 @@ body {
 
 /* Header Profissional */
 .header-invlab {
-    background: rgba(10, 37, 64, 0.95);
+    background: rgba(13, 13, 13, 0.95);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(99, 91, 255, 0.2);
+    border-bottom: 1px solid rgba(42, 127, 255, 0.2);
 }
 
 /* Badges Profissionais */
@@ -156,13 +156,13 @@ body {
 }
 
 .badge-invlab.tech {
-    background: rgba(99, 91, 255, 0.15);
+    background: rgba(42, 127, 255, 0.15);
     color: var(--blue-tech);
 }
 
 .badge-invlab.corporate {
-    background: rgba(10, 37, 64, 0.15);
-    color: var(--blue-corporate);
+    background: rgba(26, 26, 26, 0.8);
+    color: var(--blue-tech);
 }
 
 /* Disclaimer Profissional */
@@ -173,7 +173,7 @@ body {
     border-radius: 8px;
     font-size: 14px;
     line-height: 1.6;
-    color: var(--gray-graphite);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .disclaimer-invlab strong {
