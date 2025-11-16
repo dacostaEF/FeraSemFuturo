@@ -167,10 +167,11 @@ body {
 
 /* Disclaimer Profissional */
 .disclaimer-invlab {
-    background: rgba(255, 193, 7, 0.1);
+    background: transparent;
+    border: none;
     border-left: 4px solid #FFC107;
     padding: 16px;
-    border-radius: 8px;
+    padding-left: 20px;
     font-size: 14px;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.9);
