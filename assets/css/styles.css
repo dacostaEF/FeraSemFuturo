@@ -65,7 +65,7 @@ body {
 
 .header-container {
     position: relative;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 16px 32px 16px; /* Padding normal */
     overflow: visible !important;
@@ -89,7 +89,7 @@ body {
 }
 
 .header-logo img {
-    height: 37px; /* Reduzido ~7.5% */
+    height: 33px; /* Reduzido mais 10% (37px → 33px) */
     filter: 
         brightness(1.15)
         drop-shadow(0 2px 8px rgba(255, 215, 0, 0.35))
@@ -398,7 +398,7 @@ body {
 
 /* Conteúdo Principal */
 .main-content {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 32px 40px;
 }
@@ -1219,7 +1219,7 @@ body {
     }
     
     .header-logo img {
-        height: 44px; /* Reduzido ~7.5% de 48px */
+        height: 40px; /* Reduzido mais 10% (44px → 40px) */
     }
     
     .logo-text {
@@ -1286,7 +1286,7 @@ body {
     }
     
     .header-logo img {
-        height: 34px; /* Reduzido ~7.5% de 36px */
+        height: 31px; /* Reduzido mais 10% (34px → 31px) */
     }
     
     .logo-text {
@@ -1746,7 +1746,7 @@ body {
     }
 
     .header-logo img {
-        height: 30px; /* Reduzido ~7.5% de 32px */
+        height: 27px; /* Reduzido mais 10% (30px → 27px) */
     }
 
     .logo-text {
@@ -1982,7 +1982,7 @@ body {
     }
 
     .header-logo img {
-        height: 42px; /* Reduzido ~7.5% de 45px */
+        height: 38px; /* Reduzido mais 10% (42px → 38px) */
     }
 
     .logo-text {
@@ -2655,190 +2655,6 @@ body {
 }
 
 /* ============================================
-   NOVO MENU PROFISSIONAL - FASE 4
-   (Em preparação - CSS base adicionado)
-   ============================================ */
-
-/* Menu Principal */
-.main-nav {
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 4px;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-item {
-    position: relative;
-}
-
-.nav-link {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 10px 16px;
-    color: rgba(255, 255, 255, 0.85);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-}
-
-.nav-link:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--green-light);
-}
-
-.nav-link.active {
-    background: rgba(42, 127, 255, 0.2);
-    color: var(--blue-action);
-    border-bottom: 2px solid var(--blue-action);
-}
-
-.arrow {
-    font-size: 10px;
-    transition: transform 0.3s ease;
-}
-
-/* Dropdown Menu */
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: rgba(26, 26, 26, 0.98);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(42, 127, 255, 0.3);
-    border-radius: 12px;
-    padding: 12px 0;
-    min-width: 280px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    z-index: 1001;
-    list-style: none;
-    margin: 0;
-}
-
-.dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.dropdown-menu li {
-    margin: 0;
-}
-
-.dropdown-menu a {
-    display: block;
-    padding: 10px 20px;
-    color: rgba(255, 255, 255, 0.85);
-    text-decoration: none;
-    font-size: 13px;
-    transition: all 0.2s ease;
-}
-
-.dropdown-menu a:hover {
-    background: rgba(42, 127, 255, 0.15);
-    color: var(--blue-action);
-    padding-left: 24px;
-}
-
-.dropdown-section {
-    padding: 12px 20px 6px;
-    margin-top: 8px;
-}
-
-.dropdown-section:first-child {
-    margin-top: 0;
-}
-
-.dropdown-section strong {
-    color: var(--blue-action);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.dropdown-divider {
-    height: 1px;
-    background: rgba(255, 255, 255, 0.1);
-    margin: 8px 16px;
-}
-
-/* Botão Hamburger (Mobile) */
-.hamburger-btn {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-}
-
-.hamburger-btn span {
-    width: 25px;
-    height: 3px;
-    background: var(--green-light);
-    border-radius: 2px;
-    transition: all 0.3s ease;
-}
-
-/* Responsivo - Mobile */
-@media (max-width: 968px) {
-    .main-nav .nav-menu {
-        display: none; /* Esconde menu desktop */
-    }
-    
-    .hamburger-btn {
-        display: flex; /* Mostra hamburger */
-    }
-    
-    /* Menu Mobile (será implementado depois) */
-    .main-nav.mobile-open .nav-menu {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 140px;
-        right: 0;
-        width: 100%;
-        max-width: 320px;
-        background: rgba(26, 26, 26, 0.98);
-        backdrop-filter: blur(10px);
-        border-left: 1px solid rgba(42, 127, 255, 0.3);
-        box-shadow: -4px 0 32px rgba(0, 0, 0, 0.6);
-        padding: 20px;
-        height: calc(100vh - 140px);
-        overflow-y: auto;
-        gap: 8px;
-    }
-    
-    .main-nav.mobile-open .dropdown-menu {
-        position: static;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        box-shadow: none;
-        border: none;
-        border-left: 2px solid var(--green-data);
-        background: rgba(0, 0, 0, 0.2);
-        margin-left: 16px;
-    }
-}
-
-/* ============================================
    RESPONSIVIDADE - GRID 2x2 (INVLAB Box)
    ============================================ */
 
@@ -2847,6 +2663,174 @@ body {
         grid-template-columns: 1fr !important;
         gap: 16px !important;
         text-align: center !important;
+    }
+}
+
+/* ============================================
+   OUTROS INVESTIMENTOS - Página de Cards
+   ============================================ */
+
+.outros-category {
+    margin-bottom: 60px;
+}
+
+.outros-category-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid rgba(42, 127, 255, 0.2);
+}
+
+.outros-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.outro-card {
+    background: rgba(26, 26, 26, 0.8);
+    border: 1px solid;
+    border-radius: 12px;
+    padding: 24px;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.outro-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Cores por Categoria */
+.outro-card.fundos {
+    border-color: rgba(42, 127, 255, 0.3);
+}
+
+.outro-card.fundos:hover {
+    border-color: var(--blue-action);
+    box-shadow: 0 8px 24px rgba(42, 127, 255, 0.3);
+}
+
+.outro-card.alternativos {
+    border-color: rgba(138, 43, 226, 0.3);
+}
+
+.outro-card.alternativos:hover {
+    border-color: #8A2BE2;
+    box-shadow: 0 8px 24px rgba(138, 43, 226, 0.3);
+}
+
+.outro-card.ativos-reais {
+    border-color: rgba(0, 217, 36, 0.3);
+}
+
+.outro-card.ativos-reais:hover {
+    border-color: var(--green-data);
+    box-shadow: 0 8px 24px rgba(0, 217, 36, 0.3);
+}
+
+.outro-card.previdencia {
+    border-color: rgba(25, 82, 138, 0.3);
+}
+
+.outro-card.previdencia:hover {
+    border-color: #19528A;
+    box-shadow: 0 8px 24px rgba(25, 82, 138, 0.3);
+}
+
+.outro-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.outro-card h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.outro-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Card de Aviso Importante */
+.outro-aviso-box {
+    background: rgba(255, 193, 7, 0.1);
+    border: 2px solid #FFC107;
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.outro-aviso-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+}
+
+.outro-aviso-box h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #FFC107;
+    margin-bottom: 16px;
+}
+
+.outro-aviso-box p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .outros-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .outros-category {
+        margin-bottom: 40px;
+    }
+    
+    .outros-category-title {
+        font-size: 18px;
+    }
+    
+    .outro-icon {
+        font-size: 40px;
+    }
+    
+    .outro-card h4 {
+        font-size: 16px;
+    }
+    
+    .outro-card p {
+        font-size: 13px;
+    }
+    
+    .outro-aviso-box {
+        padding: 24px;
+    }
+    
+    .outro-aviso-icon {
+        font-size: 48px;
+    }
+    
+    .outro-aviso-box h3 {
+        font-size: 20px;
+    }
+    
+    .outro-aviso-box p {
+        font-size: 14px;
     }
 }
 

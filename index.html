@@ -31,72 +31,6 @@
                 <span class="logo-text">INVLAB</span>
             </div>
             
-            <!-- NOVO MENU PROFISSIONAL (em preparação - escondido por enquanto) -->
-            <nav class="main-nav" style="display: none;">
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="#inicio" class="nav-link active">🏠 INÍCIO</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#primeiros-passos" class="nav-link">📚 PRIMEIROS PASSOS</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle">
-                            📊 RENDA FIXA <span class="arrow">▼</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">💰 Poupança</a></li>
-                            <li><a href="pages/simulador-cdbs.html">🏦 CDBs</a></li>
-                            <li><a href="pages/simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
-                            <li><a href="pages/simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle">
-                            📈 RENDA VARIÁVEL <span class="arrow">▼</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-section">
-                                <strong>🏢 Fundos Imobiliários (FIIs)</strong>
-                            </li>
-                            <li><a href="#">📊 Simulador de Renda Passiva</a></li>
-                            <li><a href="#">🏘️ FIIs de Tijolo</a></li>
-                            <li><a href="#">📋 FIIs de Papel</a></li>
-                            <li><a href="#">🔄 FIIs Híbridos</a></li>
-                            <li class="dropdown-divider"></li>
-                            <li class="dropdown-section">
-                                <strong>📈 Ações</strong>
-                            </li>
-                            <li><a href="#">📊 Simulador de Dividendos</a></li>
-                            <li><a href="#">💰 Valuation (P/L, P/VP)</a></li>
-                            <li class="dropdown-divider"></li>
-                            <li class="dropdown-section">
-                                <strong>💵 ETFs</strong>
-                            </li>
-                            <li><a href="#">📊 Simulador de Indexação</a></li>
-                            <li><a href="#">📈 ETFs Nacionais</a></li>
-                            <li><a href="#">🌎 ETFs Internacionais</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">🔐 CRIPTOMOEDAS</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#ferramentas" class="nav-link">🛠️ FERRAMENTAS</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="pages/metodologia.html" class="nav-link">📖 METODOLOGIA</a>
-                    </li>
-                </ul>
-                
-                <!-- Botão Hamburger (Mobile) -->
-                <button class="hamburger-btn" aria-label="Menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </nav>
-            
             <!-- Sistema de Abas INVLAB (COMPLETO - novo + antigo preservado) -->
             <div class="tabs-nav-wrapper">
             <nav class="tabs-nav" id="tabsNav">
@@ -171,6 +105,8 @@
                         <li><a href="#">🪙 Altcoins</a></li>
                         <li><a href="#">💵 Stablecoins</a></li>
                         <li><a href="#">🔄 DeFi</a></li>
+                        <li><a href="#">🖼️ NFTs</a></li>
+                        <li><a href="#">🔗 Tokenização</a></li>
                     </ul>
                 </div>
                 
@@ -198,11 +134,8 @@
                     </ul>
                 </div>
                 
-                <button class="tab-btn" data-tab="dicas" title="Conteúdo antigo - será migrado">
-                    💡 Dicas
-                </button>
-                <button class="tab-btn" data-tab="metodologia">
-                    📖 Metodologia
+                <button class="tab-btn" data-tab="outros-investimentos">
+                    💎 Outros<br>Investimentos
                 </button>
             </nav>
             </div>
@@ -501,6 +434,13 @@
                             <div class="tool-icon">🏖️</div>
                             <h3>Simulador de Aposentadoria</h3>
                             <p>Planeje sua liberdade financeira</p>
+                            <span class="tool-tag">Gratuita</span>
+                        </div>
+
+                        <div class="tool-card" onclick="window.location.href='pages/metodologia.html'">
+                            <div class="tool-icon">🔬</div>
+                            <h3>Metodologia</h3>
+                            <p>Transparência total sobre fontes, cálculos e premissas</p>
                             <span class="tool-tag">Gratuita</span>
                         </div>
 
@@ -825,112 +765,142 @@
             </div>
         </div>
 
-        <!-- ABA: METODOLOGIA (NOVA) -->
-        <div class="tab-content" id="metodologia">
+        <!-- ABA: OUTROS INVESTIMENTOS -->
+        <div class="tab-content" id="outros-investimentos">
             <div class="content-wrapper">
                 <section class="section">
-                    <h2 class="section-title">📖 Metodologia</h2>
-                    <p class="section-subtitle">Transparência total sobre fontes, cálculos e premissas</p>
-                    
-                    <!-- CTA para página completa -->
-                    <div class="cta-box highlight">
-                        <h3>🔬 Nossa Metodologia Completa</h3>
-                        <p>Entenda como calculamos, quais fontes usamos e nossas premissas</p>
-                        <button class="btn-primary" onclick="window.location.href='pages/metodologia.html'">
-                            Ver Metodologia Completa
-                        </button>
-                    </div>
-                    
-                    <!-- Preview -->
-                    <div style="margin-top: 40px;">
-                        <h3 style="color: var(--blue-tech); margin-bottom: 20px;">📊 O que você vai encontrar:</h3>
-                        <div class="benefits-grid">
-                            <div class="benefit-card">
-                                <div class="benefit-icon">📈</div>
-                                <h3>Fontes de Dados</h3>
-                                <p>BCB, ANBIMA, corretoras e instituições oficiais</p>
+                    <h2 class="section-title">💎 Outros Investimentos</h2>
+                    <p class="section-subtitle">Conheça as outras formas de investir que existem no mercado</p>
+                    <p style="text-align: center; color: var(--text-secondary); margin-bottom: 40px;">
+                        Conteúdo rápido. Apenas conceito. Sem simulação. Sem recomendação.
+                    </p>
+
+                    <!-- CATEGORIA 1: Fundos e Produtos Estruturados -->
+                    <div class="outros-category">
+                        <h3 class="outros-category-title">📦 Fundos e Produtos Estruturados</h3>
+                        <div class="outros-grid">
+                            <div class="outro-card fundos">
+                                <div class="outro-icon">💼</div>
+                                <h4>Fundos Multimercado</h4>
+                                <p>Investem em várias classes de ativos simultaneamente. Flexibilidade total para o gestor.</p>
                             </div>
-                            <div class="benefit-card">
-                                <div class="benefit-icon">🧮</div>
-                                <h3>Fórmulas</h3>
-                                <p>Juros compostos, IR regressivo, taxas administrativas</p>
+                            <div class="outro-card fundos">
+                                <div class="outro-icon">🏢</div>
+                                <h4>Fundos Imobiliários (FIIs)</h4>
+                                <p>Investimento coletivo em imóveis. Renda passiva através de aluguéis distribuídos mensalmente.</p>
                             </div>
-                            <div class="benefit-card">
-                                <div class="benefit-icon">⚠️</div>
-                                <h3>Limitações</h3>
-                                <p>Premissas adotadas e avisos legais</p>
+                            <div class="outro-card fundos">
+                                <div class="outro-icon">📊</div>
+                                <h4>ETFs</h4>
+                                <p>Fundos de índice negociados em bolsa. Diversificação instantânea com baixo custo.</p>
                             </div>
-                            <div class="benefit-card">
-                                <div class="benefit-icon">💡</div>
-                                <h3>Transparência</h3>
-                                <p>100% aberto sobre nossos cálculos</p>
+                            <div class="outro-card fundos">
+                                <div class="outro-icon">🌍</div>
+                                <h4>BDRs</h4>
+                                <p>Brazilian Depositary Receipts. Acesso a ações internacionais pela B3.</p>
                             </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-
-        <!-- ABAS ANTIGAS (mantidas temporariamente - podem ser acessadas via URL) -->
-        
-        <!-- ABA: DICAS RÁPIDAS (ANTIGA - mantida) -->
-        <div class="tab-content" id="dicas">
-            <div class="content-wrapper">
-                <section class="section">
-                    <h2 class="section-title">💡 Dicas Rápidas</h2>
-                    <p class="section-subtitle">Conteúdo leve para o dia a dia - 1 a 2 minutos de leitura</p>
-                    
-                    <!-- Cards de Dicas -->
-                    <div class="tips-grid">
-                        <div class="tip-card">
-                            <div class="tip-badge">💰 Economia</div>
-                            <h3>Você sabia?</h3>
-                            <p>R$ 100 investidos a 1% ao mês viram R$ 313 em 10 anos. Na poupança (0,5%), viram apenas R$ 164.</p>
-                            <span class="tip-time">⚡ 30 seg</span>
-                        </div>
-
-                        <div class="tip-card">
-                            <div class="tip-badge">🎯 Estratégia</div>
-                            <h3>Regra de Ouro</h3>
-                            <p>Sempre mantenha 6 meses de despesas em Reserva de Emergência antes de investir em Renda Variável.</p>
-                            <span class="tip-time">⚡ 30 seg</span>
-                        </div>
-
-                        <div class="tip-card">
-                            <div class="tip-badge">⚠️ Alerta</div>
-                            <h3>Cuidado!</h3>
-                            <p>Gerentes de banco ganham comissão vendendo produtos. A melhor escolha para você pode não ser a melhor para ele.</p>
-                            <span class="tip-time">⚡ 30 seg</span>
-                        </div>
-
-                        <div class="tip-card">
-                            <div class="tip-badge">💎 Investimento</div>
-                            <h3>Tesouro Direto</h3>
-                            <p>É o investimento mais seguro do Brasil. Literalmente: você empresta para o Governo Federal.</p>
-                            <span class="tip-time">⚡ 30 seg</span>
-                        </div>
-
-                        <div class="tip-card">
-                            <div class="tip-badge">📊 Mito vs Verdade</div>
-                            <h3>MITO: Investir é só para ricos</h3>
-                            <p>VERDADE: Você pode começar com R$ 30 no Tesouro Direto. Riqueza se constrói aos poucos.</p>
-                            <span class="tip-time">⚡ 40 seg</span>
-                        </div>
-
-                        <div class="tip-card">
-                            <div class="tip-badge">🏆 Motivação</div>
-                            <h3>Consistência > Valor</h3>
-                            <p>R$ 100/mês por 30 anos a 10% a.a. = R$ 227 mil. Comece pequeno, mas comece hoje!</p>
-                            <span class="tip-time">⚡ 30 seg</span>
+                            <div class="outro-card fundos">
+                                <div class="outro-icon">🔌</div>
+                                <h4>Fundos de Infraestrutura</h4>
+                                <p>Investem em rodovias, portos, energia. Contratos de longo prazo com fluxo previsível.</p>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Em breve -->
-                    <div class="coming-soon-card small">
-                        <h3>🔜 Em breve: Dicas semanais por email</h3>
-                        <p>Cadastre-se para receber dicas rápidas toda semana</p>
-                        <p class="coming-soon-subtitle">(Funcionalidade em desenvolvimento)</p>
+                    <!-- CATEGORIA 2: Investimentos Alternativos -->
+                    <div class="outros-category">
+                        <h3 class="outros-category-title">🚀 Investimentos Alternativos</h3>
+                        <div class="outros-grid">
+                            <div class="outro-card alternativos">
+                                <div class="outro-icon">🚀</div>
+                                <h4>Venture Capital</h4>
+                                <p>Investimento em startups de alto potencial. Alto risco, alto retorno. Longo prazo.</p>
+                            </div>
+                            <div class="outro-card alternativos">
+                                <div class="outro-icon">🏭</div>
+                                <h4>Private Equity</h4>
+                                <p>Aquisição de participações em empresas estabelecidas. Reestruturação e crescimento.</p>
+                            </div>
+                            <div class="outro-card alternativos">
+                                <div class="outro-icon">🤝</div>
+                                <h4>Peer-to-Peer Lending</h4>
+                                <p>Empréstimos diretos entre pessoas via plataformas. Intermediação reduzida.</p>
+                            </div>
+                            <div class="outro-card alternativos">
+                                <div class="outro-icon">📦</div>
+                                <h4>Fundos Estruturados</h4>
+                                <p>Estratégias complexas combinando derivativos. Proteção e alavancagem simultâneas.</p>
+                            </div>
+                            <div class="outro-card alternativos">
+                                <div class="outro-icon">🛢️</div>
+                                <h4>Commodities</h4>
+                                <p>Ouro, petróleo, café, soja. Proteção contra inflação e diversificação geográfica.</p>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- CATEGORIA 3: Ativos Reais -->
+                    <div class="outros-category">
+                        <h3 class="outros-category-title">🏠 Ativos Reais</h3>
+                        <div class="outros-grid">
+                            <div class="outro-card ativos-reais">
+                                <div class="outro-icon">🏠</div>
+                                <h4>Imóveis</h4>
+                                <p>Compra direta de imóveis para aluguel ou revenda. Proteção contra inflação.</p>
+                            </div>
+                            <div class="outro-card ativos-reais">
+                                <div class="outro-icon">🏗️</div>
+                                <h4>Terrenos e Loteamentos</h4>
+                                <p>Aquisição de terrenos para valorização. Loteamentos urbanos e rurais.</p>
+                            </div>
+                            <div class="outro-card ativos-reais">
+                                <div class="outro-icon">🎨</div>
+                                <h4>Colecionáveis</h4>
+                                <p>Arte, relógios, vinhos raros. Mercado de nicho com alta especialização.</p>
+                            </div>
+                            <div class="outro-card ativos-reais">
+                                <div class="outro-icon">📦</div>
+                                <h4>Aluguel Logístico</h4>
+                                <p>Galpões, armazéns e centros de distribuição. Renda passiva com contratos longos.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CATEGORIA 4: Previdência -->
+                    <div class="outros-category">
+                        <h3 class="outros-category-title">🕐 Previdência</h3>
+                        <div class="outros-grid">
+                            <div class="outro-card previdencia">
+                                <div class="outro-icon">🧾</div>
+                                <h4>PGBL</h4>
+                                <p>Plano Gerador de Benefício Livre. Dedução de até 12% da renda bruta no IR.</p>
+                            </div>
+                            <div class="outro-card previdencia">
+                                <div class="outro-icon">🧾</div>
+                                <h4>VGBL</h4>
+                                <p>Vida Gerador de Benefício Livre. IR apenas sobre o rendimento. Ideal para não declarantes.</p>
+                            </div>
+                            <div class="outro-card previdencia">
+                                <div class="outro-icon">🕐</div>
+                                <h4>Foco no Longo Prazo</h4>
+                                <p>Planejamento de aposentadoria. Benefícios fiscais aumentam com o tempo.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD DE AVISO IMPORTANTE -->
+                    <div class="outro-aviso-box">
+                        <div class="outro-aviso-icon">⚠️</div>
+                        <h3>Atenção</h3>
+                        <p>
+                            Estes investimentos <strong>não possuem simuladores no INVLAB</strong>. 
+                            São produtos mais complexos, com regras, prazos e riscos que fogem do escopo principal da plataforma.
+                        </p>
+                        <p style="margin-bottom: 0;">
+                            Nosso objetivo é apenas <strong>apresentar um panorama geral</strong> para ampliar sua visão sobre as possibilidades do mercado financeiro.
+                        </p>
+                    </div>
+
                 </section>
             </div>
         </div>
