@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETFs: Diversificação Inteligente - INVLAB Laboratório de Investimentos</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    
+    <!-- Theme Color - Barra do navegador mobile (Preto Profissional) -->
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="msapplication-TileColor" content="#0D0D0D">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Meta Description -->
+    <meta name="description" content="Entenda ETFs: diversificação inteligente, custos baixos e o primeiro passo na renda variável. Aprenda no INVLAB.">
+    
+    <!-- INVLAB Design System (Universal Cards) -->
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+</head>
+<body>
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                <span class="logo-text">INVLAB</span>
+            </div>
+            
+            <!-- Sistema de Abas INVLAB -->
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">
+                    🏠 Início
+                </button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">
+                    📚 Primeiros<br>Passos
+                </button>
+                
+                <!-- ABA COM DROPDOWN: RENDA FIXA -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">
+                        📊 Renda<br>Fixa <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                
+                <!-- ABA COM DROPDOWN: RENDA VARIÁVEL (Menu colapsável interativo) -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle active">
+                        📈 Renda<br>Variável <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <!-- CATEGORIA 1: ETFs (Iniciante - Diversificação) -->
+                        <li class="dropdown-category">
+                            <div class="category-header" data-category="etfs">
+                                <span class="category-name">💵 ETFs</span>
+                                <span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-etfs">
+                                <li><a href="#">📊 Simulador de Indexação</a></li>
+                                <li><a href="#">📈 ETFs Nacionais</a></li>
+                                <li><a href="#">🌎 ETFs Internacionais</a></li>
+                            </ul>
+                        </li>
+                        
+                        <!-- CATEGORIA 2: FIIs (Intermediário - Renda Passiva) -->
+                        <li class="dropdown-category">
+                            <div class="category-header" data-category="fiis">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span>
+                                <span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-fiis">
+                                <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                                <li><a href="#">🏘️ FIIs de Tijolo</a></li>
+                                <li><a href="#">📋 FIIs de Papel</a></li>
+                                <li><a href="#">🔄 FIIs Híbridos</a></li>
+                                <li><a href="#">🎯 Como Escolher FIIs</a></li>
+                            </ul>
+                        </li>
+                        
+                        <!-- CATEGORIA 3: Ações (Avançado - Análise Individual) -->
+                        <li class="dropdown-category">
+                            <div class="category-header" data-category="acoes">
+                                <span class="category-name">📈 Ações</span>
+                                <span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-acoes">
+                                <li><a href="#">📊 Simulador de Dividendos</a></li>
+                                <li><a href="#">💰 Valuation (P/L, P/VP)</a></li>
+                                <li><a href="#">🏭 Análise Setorial</a></li>
+                                <li><a href="#">📉 Day Trade vs Buy&Hold</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- ABA COM DROPDOWN: CRIPTOATIVOS -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">
+                        🔐 Cripto<br>ativos <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">₿ Bitcoin</a></li>
+                        <li><a href="#">⧫ Ethereum</a></li>
+                        <li><a href="#">🪙 Altcoins</a></li>
+                        <li><a href="#">🖼️ NFTs</a></li>
+                        <li><a href="#">🔗 Tokenização</a></li>
+                    </ul>
+                </div>
+                
+                <!-- ABA: FERRAMENTAS -->
+                <button class="tab-btn" onclick="window.location.href='../index.html#ferramentas'">
+                    🛠️ Ferramentas
+                </button>
+                
+                <!-- ABA: OUTROS INVESTIMENTOS -->
+                <button class="tab-btn" onclick="window.location.href='../index.html#outros-investimentos'">
+                    💎 Outros
+                </button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <div class="content-wrapper-wide">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../index.html">🏠 Início</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../index.html#renda-variavel">📈 Renda Variável</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">💵 ETFs</span>
+            </nav>
+
+            <!-- Meta do Artigo -->
+            <div class="article-meta">
+                <span class="article-badge">💵 Módulo: ETFs</span>
+                <span class="article-time">⏱️ 8 min</span>
+            </div>
+
+            <!-- Seção Educacional -->
+            <section class="section-educational">
+            <article class="article-content">
+                <!-- Título Principal -->
+                <h1 class="article-title">ETFs – Diversificação Inteligente</h1>
+                
+                <p class="article-lead">
+                    O jeito mais simples, seguro e inteligente de começar na renda variável. Entenda por que os ETFs são o primeiro degrau da sua trilha de investimentos.
+                </p>
+
+                <!-- Hero -->
+                <div class="article-hero">
+                    <div class="hero-emoji">📈💵</div>
+                    <p class="hero-caption">Seu ponto de partida na renda variável</p>
+                </div>
+
+            <!-- Seção 1: O que são ETFs? -->
+            <section class="article-section">
+                <h2>🎓 O que são ETFs?</h2>
+                
+                <p><strong>ETFs (Exchange Traded Funds)</strong> são fundos que replicam um índice de mercado.</p>
+                
+                <p>Em vez de comprar ações individuais, você compra uma <strong>cesta completa de ativos</strong> com um único investimento.</p>
+
+                <p>Isso significa:</p>
+                <ul>
+                    <li>Você <strong>não escolhe empresas uma por uma</strong></li>
+                    <li>A composição já vem pronta</li>
+                    <li>Você acompanha exatamente o desempenho do índice</li>
+                </ul>
+            </section>
+
+            <!-- Callout Info -->
+            <div class="callout callout-info">
+                <div class="callout-icon">💡</div>
+                <div class="callout-content">
+                    <h3>No INVLAB, ETFs são o ponto de partida da renda variável</h3>
+                    <p>São seguros, didáticos e ideais para começar.</p>
+                </div>
+            </div>
+
+            <!-- Seção 2: Características Principais -->
+            <section class="article-section">
+                <h2>💡 Características Principais</h2>
+
+                <!-- Vantagens -->
+                <div class="example-card">
+                    <h3>✔ Vantagens dos ETFs</h3>
+                    <ul>
+                        <li><strong>Diversificação automática</strong></li>
+                        <li>Taxas muito mais baixas que fundos tradicionais</li>
+                        <li>Fácil de entender e simular</li>
+                        <li>Ideal para aportes mensais</li>
+                        <li>Perfeito para iniciantes que não querem escolher dezenas de ações</li>
+                    </ul>
+                </div>
+
+                <!-- Riscos -->
+                <div class="example-card">
+                    <h3>⚠ Riscos (honestos e transparentes)</h3>
+                    <ul>
+                        <li>Acompanham o mercado: quando cai, eles caem junto</li>
+                        <li>Não servem para ganhos rápidos</li>
+                        <li>Em crises prolongadas, podem ficar laterais por anos</li>
+                    </ul>
+                </div>
+
+                <!-- Perfil Ideal -->
+                <div class="example-card">
+                    <h3>👤 Perfil ideal</h3>
+                    <ul>
+                        <li>Iniciante em renda variável</li>
+                        <li>Investidor focado em longo prazo</li>
+                        <li>Quem quer investir sem escolher empresa individual</li>
+                        <li>Quem busca simples, sólido e previsível</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Seção 3: Como Funciona na Prática -->
+            <section class="article-section">
+                <h2>🧮 Como os ETFs funcionam na prática</h2>
+
+                <ol>
+                    <li>Existe um <strong>índice</strong> (ex: Ibovespa, S&P500, Nasdaq)</li>
+                    <li>O ETF compra uma <strong>carteira semelhante</strong> a esse índice</li>
+                    <li>Você compra <strong>cotas desse ETF</strong> em vez das ações separadas</li>
+                    <li>O desempenho do ETF <strong>segue o índice automaticamente</strong></li>
+                </ol>
+
+                <h3>Exemplos reais:</h3>
+                
+                <div class="example-card">
+                    <h3>🇧🇷 BOVA11</h3>
+                    <p>Replica o <strong>Ibovespa</strong></p>
+                </div>
+                
+                <div class="example-card">
+                    <h3>🇺🇸 IVVB11</h3>
+                    <p>Replica o <strong>S&P 500</strong> (EUA)</p>
+                </div>
+                
+                <div class="example-card">
+                    <h3>📈 SMAL11</h3>
+                    <p>Replica <strong>Small Caps</strong> (empresas pequenas com potencial)</p>
+                </div>
+
+                <p><strong>Você investe como se estivesse comprando dezenas ou centenas de empresas — mas com um clique.</strong></p>
+            </section>
+
+            <!-- Seção 4: Tipos de ETFs -->
+            <section class="article-section">
+                <h2>🏗️ Tipos de ETFs</h2>
+
+                <!-- ETFs de Ações -->
+                <div class="example-card">
+                    <h3>🟦 ETFs de Ações</h3>
+                    <ul>
+                        <li><strong>BOVA11</strong> → Ibovespa</li>
+                        <li><strong>SMAL11</strong> → Small Caps</li>
+                        <li><strong>IVVB11</strong> → S&P 500</li>
+                        <li><strong>TECH ETFs</strong> → empresas de tecnologia</li>
+                    </ul>
+                </div>
+
+                <!-- ETFs de Renda Fixa -->
+                <div class="example-card">
+                    <h3>🟩 ETFs de Renda Fixa</h3>
+                    <ul>
+                        <li><strong>IMAB11</strong> → títulos indexados à inflação</li>
+                        <li><strong>IRFM11</strong> → juros prefixados</li>
+                    </ul>
+                </div>
+
+                <!-- ETFs Temáticos -->
+                <div class="example-card">
+                    <h3>🟨 ETFs Temáticos</h3>
+                    <ul>
+                        <li>ESG</li>
+                        <li>Energia</li>
+                        <li>Inteligência Artificial</li>
+                        <li>Tecnologia global</li>
+                    </ul>
+                </div>
+
+                <p><strong>👉 Cada tipo tem lógica própria, mas todos seguem o mesmo conceito: replicar índices.</strong></p>
+            </section>
+
+            <!-- Seção 5: Comparações -->
+            <section class="article-section">
+                <h2>📊 Comparações que ajudam o investidor</h2>
+
+                <p>Comparação educativa (sem promessas):</p>
+                
+                <ul>
+                    <li>ETF Brasil × ETF Estados Unidos</li>
+                    <li>ETF × CDI</li>
+                    <li>ETF × Poupança</li>
+                    <li>ETF × Ações individuais</li>
+                </ul>
+            </section>
+
+            <!-- Callout Success -->
+            <div class="callout callout-success">
+                <div class="callout-icon">📊</div>
+                <div class="callout-content">
+                    <h3>Exemplo simples do INVLAB</h3>
+                    <p><em>"Se você investisse R$ 500/mês em ETFs durante 5 anos, quanto teria hoje?"</em></p>
+                    <p><strong>👉 Use nosso simulador para ver cenários realistas.</strong></p>
+                </div>
+            </div>
+
+            <!-- Seção 6: Alertas Importantes -->
+            <section class="article-section">
+                <h2>⚠️ Alertas importantes – O que ninguém te conta</h2>
+
+                <ul>
+                    <li><strong>ETFs não garantem proteção total</strong> — eles seguem o mercado</li>
+                    <li>Comprar IVVB11 não significa ficar rico porque o dólar subiu</li>
+                    <li><strong>Diversificação não elimina volatilidade</strong></li>
+                    <li>ETF não é atalho para "ganhos rápidos"</li>
+                    <li>É normal cair semanas ou meses — faz parte da renda variável</li>
+                </ul>
+            </section>
+
+            <!-- Callout Warning -->
+            <div class="callout callout-warning">
+                <div class="callout-icon">⚠️</div>
+                <div class="callout-content">
+                    <h3>No INVLAB, você aprende a investir sem ilusões</h3>
+                    <p>Transparência e honestidade são os pilares da educação financeira que oferecemos.</p>
+                </div>
+            </div>
+
+            <!-- Seção 7: Como Começar -->
+            <section class="article-section">
+                <h2>🎯 Como começar com ETFs (simples e direto)</h2>
+
+                <div class="tips-list">
+                    <div class="tip-item">
+                        <div class="tip-number">1</div>
+                        <div class="tip-content">
+                            <h3>Abra conta em uma corretora</h3>
+                            <p>Diferente de bancos, corretoras têm acesso à bolsa de valores</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-item">
+                        <div class="tip-number">2</div>
+                        <div class="tip-content">
+                            <h3>Pesquise o ticker</h3>
+                            <p>Use códigos como BOVA11, SMAL11, IVVB11 etc.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-item">
+                        <div class="tip-number">3</div>
+                        <div class="tip-content">
+                            <h3>Escolha quanto quer investir</h3>
+                            <p>Pode começar com valores pequenos</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-item">
+                        <div class="tip-number">4</div>
+                        <div class="tip-content">
+                            <h3>Compre cotas</h3>
+                            <p>Pode ser fracionado (não precisa comprar cotas inteiras)</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-item">
+                        <div class="tip-number">5</div>
+                        <div class="tip-content">
+                            <h3>Aporte mensalmente</h3>
+                            <p>Como se estivesse "preenchendo seu futuro"</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-item">
+                        <div class="tip-number">6</div>
+                        <div class="tip-content">
+                            <h3>Acompanhe no longo prazo</h3>
+                            <p>Não no dia a dia — foco em 5+ anos</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Callout Info -->
+            <div class="callout callout-info">
+                <div class="callout-icon">💡</div>
+                <div class="callout-content">
+                    <h3>DICA INVLAB</h3>
+                    <p>ETFs são perfeitos para quem quer aprender renda variável sem se expor ao estresse de escolher ações.</p>
+                </div>
+            </div>
+
+            <!-- Seção 8: Mensagem Final -->
+            <section class="article-section">
+                <h2>⭐ Mensagem Final</h2>
+
+                <p>Os ETFs são o jeito mais <strong>inteligente, seguro e didático</strong> de começar na renda variável.</p>
+                
+                <p>Eles te dão:</p>
+                <ul>
+                    <li>diversificação</li>
+                    <li>simplicidade</li>
+                    <li>custo baixo</li>
+                    <li>e um caminho claro para investir no longo prazo</li>
+                </ul>
+
+                <p><strong>👉 Por isso, no INVLAB eles são o Degrau 1 da sua jornada na renda variável.</strong></p>
+            </section>
+
+            <!-- Seção 9: Explore Mais sobre ETFs -->
+            <section class="article-section">
+                <h2>🔍 Explore mais sobre ETFs</h2>
+                <p style="text-align: center; color: rgba(255, 255, 255, 0.7); margin-bottom: 40px;">
+                    Ferramentas e conteúdos em desenvolvimento
+                </p>
+
+                <!-- CATEGORIA 1: Simuladores e Ferramentas -->
+                <div class="inv-category">
+                    <h3 class="inv-category-title">📊 Simuladores e Ferramentas</h3>
+                    <div class="inv-grid">
+                        <div class="inv-card fundos">
+                            <div class="inv-card-icon">📊</div>
+                            <h4 class="inv-card-title">Simulador de ETF</h4>
+                            <p class="inv-card-description">Veja como cresceria seu dinheiro investindo em ETFs mês a mês</p>
+                        </div>
+
+                        <div class="inv-card fundos">
+                            <div class="inv-card-icon">⚖️</div>
+                            <h4 class="inv-card-title">Comparador de ETFs</h4>
+                            <p class="inv-card-description">Compare ETF vs Poupança, ETF vs CDI e ETF Brasil × EUA</p>
+                        </div>
+
+                        <div class="inv-card fundos">
+                            <div class="inv-card-icon">📈</div>
+                            <h4 class="inv-card-title">Analisador de Rentabilidade</h4>
+                            <p class="inv-card-description">Histórico de performance e projeções realistas por ETF</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CATEGORIA 2: Conteúdos Educativos -->
+                <div class="inv-category">
+                    <h3 class="inv-category-title">🎓 Conteúdos Educativos</h3>
+                    <div class="inv-grid">
+                        <div class="inv-card alternativos">
+                            <div class="inv-card-icon">🇧🇷</div>
+                            <h4 class="inv-card-title">ETFs Nacionais</h4>
+                            <p class="inv-card-description">Guia completo: BOVA11, SMAL11, TECH ETFs e como escolher</p>
+                        </div>
+
+                        <div class="inv-card alternativos">
+                            <div class="inv-card-icon">🌎</div>
+                            <h4 class="inv-card-title">ETFs Internacionais</h4>
+                            <p class="inv-card-description">Investimentos globais: IVVB11, NASD11, ACWI11 explicados</p>
+                        </div>
+
+                        <div class="inv-card alternativos">
+                            <div class="inv-card-icon">🎯</div>
+                            <h4 class="inv-card-title">Estratégias com ETFs</h4>
+                            <p class="inv-card-description">Buy and Hold, rebalanceamento e alocação inteligente</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Callout Final Info -->
+            <div class="callout callout-info">
+                <div class="callout-icon">🚀</div>
+                <div class="callout-content">
+                    <h3>Pronto para avançar?</h3>
+                    <p>Depois de dominar os ETFs, o próximo passo é aprender sobre <strong>FIIs (Fundos Imobiliários)</strong> e começar a receber renda passiva mensal.</p>
+                </div>
+            </div>
+
+            </article>
+            </section>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>
+
