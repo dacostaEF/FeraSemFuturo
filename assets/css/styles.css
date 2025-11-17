@@ -2510,8 +2510,15 @@ body {
 
 .invlab-message {
     font-size: 16px;
-    color: rgba(255, 255, 255, 0.8);
-    font-style: italic;
+    color: rgba(255, 255, 255, 0.9);
+    font-style: normal;
+    text-align: center;
+    margin-top: 32px;
+    padding: 24px;
+    background: rgba(42, 127, 255, 0.1);
+    border-left: 4px solid var(--blue-primary);
+    border-radius: 12px;
+    line-height: 1.6;
 }
 
 /* Responsividade - Seção Educacional */
