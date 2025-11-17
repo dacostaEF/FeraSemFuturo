@@ -98,10 +98,40 @@
 .invlab-slide-value {
     font-size: 24px; /* AUMENTADO: 14px → 24px (destaque premium) */
     font-weight: 700; /* Bold mantido */
-    color: #FFFFFF;
+    color: #FFFFFF; /* Cor padrão (será sobrescrita pelas cores inteligentes) */
     text-align: center;
     line-height: 1.2;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   CORES INTELIGENTES POR CATEGORIA
+   Sistema de cores premium baseado em função
+   ============================================ */
+
+/* SELIC - Verde (rendimento positivo) */
+.invlab-carousel-slide.selic .invlab-slide-value {
+    color: #00e887; /* Verde lima suave */
+}
+
+/* IPCA - Azul (inflação/frio) */
+.invlab-carousel-slide.ipca .invlab-slide-value {
+    color: #4aa8ff; /* Azul claro */
+}
+
+/* CDI - Verde (rendimento positivo) */
+.invlab-carousel-slide.cdi .invlab-slide-value {
+    color: #00e887; /* Verde lima suave */
+}
+
+/* POUPANÇA - Amarelo (alerta/tradicional) */
+.invlab-carousel-slide.poupanca .invlab-slide-value {
+    color: #ffdb4d; /* Amarelo suave */
+}
+
+/* DÓLAR - Roxo (internacional/premium) */
+.invlab-carousel-slide.dolar .invlab-slide-value {
+    color: #c084fc; /* Roxo suave */
 }
 
 /* Botão de ação - REMOVIDO (carrossel meramente informativo) */
