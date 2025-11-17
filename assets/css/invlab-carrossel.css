@@ -96,7 +96,7 @@
 
 /* Valor - ESTILO PREMIUM */
 .invlab-slide-value {
-    font-size: 24px; /* AUMENTADO: 14px → 24px (destaque premium) */
+    font-size: 14px; /* REDUZIDO: 24px → 14px (equilibrio com cores + barra) */
     font-weight: 700; /* Bold mantido */
     color: #FFFFFF; /* Cor padrão (será sobrescrita pelas cores inteligentes) */
     text-align: center;
@@ -193,7 +193,7 @@
     }
     
     .invlab-slide-value {
-        font-size: 20px; /* Tablet: 24px → 20px (ainda destaque) */
+        font-size: 13px; /* Tablet: proporção mantida (14px → 13px) */
     }
 }
 
@@ -214,7 +214,7 @@
     }
     
     .invlab-slide-value {
-        font-size: 16px; /* Mobile: 24px → 16px (ainda destaque sem exagero) */
+        font-size: 12px; /* Mobile: proporção mantida (14px → 12px) */
     }
 }
 
@@ -235,7 +235,7 @@
     }
     
     .invlab-slide-value {
-        font-size: 14px; /* Mobile pequeno: 24px → 14px (legível em telas pequenas) */
+        font-size: 11px; /* Mobile pequeno: proporção mantida (14px → 11px) */
     }
 }
 
