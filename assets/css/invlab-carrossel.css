@@ -85,19 +85,19 @@
 
 /* Label (nome do indicador) */
 .invlab-slide-label {
-    font-size: 10px; /* AUMENTADO +30%: 8px → 10px (8 * 1.3 = 10.4) */
+    font-size: 11px; /* AUMENTADO: 10px → 11px (proporção com valor) */
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.6); /* Levemente mais suave para não competir com valor */
     text-align: center;
     line-height: 1.2;
     text-transform: uppercase;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.5px; /* Mais espaçamento para elegância */
 }
 
-/* Valor */
+/* Valor - ESTILO PREMIUM */
 .invlab-slide-value {
-    font-size: 14px; /* AUMENTADO +30%: 11px → 14px (11 * 1.3 = 14.3) */
-    font-weight: 700;
+    font-size: 24px; /* AUMENTADO: 14px → 24px (destaque premium) */
+    font-weight: 700; /* Bold mantido */
     color: #FFFFFF;
     text-align: center;
     line-height: 1.2;
@@ -129,11 +129,11 @@
     }
     
     .invlab-slide-label {
-        font-size: 9px; /* AUMENTADO +30%: 7px → 9px (7 * 1.3 = 9.1) */
+        font-size: 10px; /* Tablet: proporção mantida */
     }
     
     .invlab-slide-value {
-        font-size: 13px; /* AUMENTADO +30%: 10px → 13px (10 * 1.3 = 13) */
+        font-size: 20px; /* Tablet: 24px → 20px (ainda destaque) */
     }
 }
 
@@ -150,11 +150,11 @@
     }
     
     .invlab-slide-label {
-        font-size: 8px; /* AUMENTADO +30%: 6px → 8px (6 * 1.3 = 7.8) */
+        font-size: 9px; /* Mobile: legível mas compacto */
     }
     
     .invlab-slide-value {
-        font-size: 10px; /* AUMENTADO +30%: 8px → 10px (8 * 1.3 = 10.4) */
+        font-size: 16px; /* Mobile: 24px → 16px (ainda destaque sem exagero) */
     }
 }
 
@@ -171,11 +171,11 @@
     }
     
     .invlab-slide-label {
-        font-size: 8px; /* AUMENTADO +30%: 6px → 8px (6 * 1.3 = 7.8) */
+        font-size: 8px; /* Mobile pequeno: compacto */
     }
     
     .invlab-slide-value {
-        font-size: 9px; /* AUMENTADO +30%: 7px → 9px (7 * 1.3 = 9.1) */
+        font-size: 14px; /* Mobile pequeno: 24px → 14px (legível em telas pequenas) */
     }
 }
 
