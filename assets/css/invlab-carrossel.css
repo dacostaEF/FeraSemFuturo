@@ -134,6 +134,36 @@
     color: #c084fc; /* Roxo suave */
 }
 
+/* ============================================
+   BARRA LUMINOSA INFERIOR - ESTILO PREMIUM
+   Linha sutil de 3px que diferencia cada indicador
+   ============================================ */
+
+/* SELIC - Barra verde suave */
+.invlab-carousel-slide.selic {
+    border-bottom: 3px solid #00e88733; /* Verde com 20% opacidade */
+}
+
+/* IPCA - Barra azul suave */
+.invlab-carousel-slide.ipca {
+    border-bottom: 3px solid #4aa8ff33; /* Azul com 20% opacidade */
+}
+
+/* CDI - Barra verde suave */
+.invlab-carousel-slide.cdi {
+    border-bottom: 3px solid #00e88733; /* Verde com 20% opacidade */
+}
+
+/* POUPANÇA - Barra amarela suave */
+.invlab-carousel-slide.poupanca {
+    border-bottom: 3px solid #ffdb4d33; /* Amarelo com 20% opacidade */
+}
+
+/* DÓLAR - Barra roxa suave */
+.invlab-carousel-slide.dolar {
+    border-bottom: 3px solid #c084fc33; /* Roxo com 20% opacidade */
+}
+
 /* Botão de ação - REMOVIDO (carrossel meramente informativo) */
 
 /* Cores específicas por slide - REMOVIDAS (sem bordas) */
