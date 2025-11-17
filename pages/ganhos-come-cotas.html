@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Come-cotas: Quanto você perde (e ganha evitando) | INVLAB</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    
+    <!-- Theme Color - Barra do navegador mobile (Preto Profissional) -->
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="msapplication-TileColor" content="#0D0D0D">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Meta Description -->
+    <meta name="description" content="Descubra quanto o Come-cotas tira do seu rendimento e quanto você ganha escolhendo investimentos sem essa mordida.">
+    
+    <!-- INVLAB Design System (Universal Cards) -->
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+</head>
+<body>
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                <span class="logo-text">INVLAB</span>
+            </div>
+            
+            <!-- Sistema de Abas INVLAB -->
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">
+                    🏠 Início
+                </button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">
+                    📚 Primeiros<br>Passos
+                </button>
+                
+                <!-- ABA COM DROPDOWN: RENDA FIXA -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">
+                        📊 Renda<br>Fixa <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                
+                <!-- ABA COM DROPDOWN: RENDA VARIÁVEL -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">
+                        📈 Renda<br>Variável <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <!-- CATEGORIA 1: ETFs (Iniciante - Diversificação) -->
+                        <li class="dropdown-category">
+                            <div class="category-header" data-category="etfs" onclick="window.location.href='etfs.html'" style="cursor: pointer;">
+                                <span class="category-name">💵 ETFs</span>
+                                <span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-etfs">
+                                <li><a href="#">📊 Simulador de Indexação</a></li>
+                                <li><a href="#">📈 ETFs Nacionais</a></li>
+                                <li><a href="#">🌎 ETFs Internacionais</a></li>
+                            </ul>
+                        </li>
+                        
+                        <!-- CATEGORIA 2: FIIs (Intermediário - Renda Passiva) -->
+                        <li class="dropdown-category">
+                            <div class="category-header" data-category="fiis" onclick="window.location.href='fiis.html'" style="cursor: pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span>
+                                <span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-fiis">
+                                <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                                <li><a href="#">🏘️ FIIs de Tijolo</a></li>
+                                <li><a href="#">📋 FIIs de Papel</a></li>
+                                <li><a href="#">🔄 FIIs Híbridos</a></li>
+                                <li><a href="#">🎯 Como Escolher FIIs</a></li>
+                            </ul>
+                        </li>
+                        
+                        <!-- CATEGORIA 3: Ações (Avançado - Análise Individual) -->
+                        <li class="dropdown-category">
+                            <div class="category-header" data-category="acoes" onclick="window.location.href='acoes.html'" style="cursor: pointer;">
+                                <span class="category-name">📈 Ações</span>
+                                <span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-acoes">
+                                <li><a href="#">📊 Simulador de Dividendos</a></li>
+                                <li><a href="#">💰 Valuation (P/L, P/VP)</a></li>
+                                <li><a href="#">🏭 Análise Setorial</a></li>
+                                <li><a href="#">📉 Day Trade vs Buy&Hold</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- ABA COM DROPDOWN: CRIPTOATIVOS -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">
+                        🔐 Cripto<br>ativos <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">₿ Bitcoin</a></li>
+                        <li><a href="#">⧫ Ethereum</a></li>
+                        <li><a href="#">🪙 Altcoins</a></li>
+                        <li><a href="#">🖼️ NFTs</a></li>
+                        <li><a href="#">🔗 Tokenização</a></li>
+                    </ul>
+                </div>
+                
+                <!-- ABA: FERRAMENTAS -->
+                <button class="tab-btn" onclick="window.location.href='../index.html#ferramentas'">
+                    🛠️ Ferramentas
+                </button>
+                
+                <!-- ABA: OUTROS INVESTIMENTOS -->
+                <button class="tab-btn active" onclick="window.location.href='../index.html#outros-investimentos'">
+                    💎 Outros
+                </button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <div class="content-wrapper-wide">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../index.html">🏠 Início</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../index.html#outros-investimentos">💎 Outros Investimentos</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../index.html#ganhos-invisiveis">💰 Ganhos Invisíveis</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">🍽️ Come-cotas</span>
+            </nav>
+
+            <!-- Meta do Artigo -->
+            <div class="article-meta">
+                <span class="article-badge">🍽️ Imposto</span>
+                <span class="article-time">⏱️ 8 min</span>
+            </div>
+
+            <!-- Seção Educacional -->
+            <section class="section-educational">
+            <article class="article-content">
+                <!-- Título Principal -->
+                <h1 class="article-title">Come-cotas: Quanto você perde (e ganha evitando)</h1>
+                
+                <p class="article-lead">
+                    Descubra o imposto que morde seu rendimento sem você perceber – e quanto dinheiro você pode economizar escolhendo investimentos sem essa mordida.
+                </p>
+
+                <!-- Hero -->
+                <div class="article-hero">
+                    <div class="hero-emoji">🍽️💸</div>
+                    <p class="hero-caption">O imposto que come suas cotas em silêncio</p>
+                </div>
+
+            <!-- Seção 1: O que é o Come-cotas? -->
+            <section class="article-section">
+                <h2>🎓 O que é o Come-cotas?</h2>
+                
+                <p>O <strong>Come-cotas</strong> é um mecanismo de antecipação do Imposto de Renda que acontece <strong>duas vezes por ano</strong> (último dia útil de maio e novembro) em fundos de investimento.</p>
+                
+                <p>Em vez de você pagar o IR só no resgate (como acontece em CDBs e Tesouro), o governo "come" uma parte das suas cotas automaticamente.</p>
+
+                <p><strong>Resultado:</strong> Seu saldo de cotas diminui, você perde juros compostos sobre esse valor "mordido", e não vê o dinheiro saindo da conta.</p>
+            </section>
+
+            <!-- Callout Info -->
+            <div class="callout callout-info">
+                <div class="callout-icon">💡</div>
+                <div class="callout-content">
+                    <h3>Como funciona na prática</h3>
+                    <p>Você tem 1.000 cotas de um fundo. Em maio, o governo antecipa 15% do IR sobre o rendimento acumulado. Resultado: você passa a ter 985 cotas. As 15 cotas "comidas" nunca mais rendem juros.</p>
+                </div>
+            </div>
+
+            <!-- Seção 2: Como ele te morde -->
+            <section class="article-section">
+                <h2>💸 Como o Come-cotas te morde na prática</h2>
+
+                <h3>Exemplo numérico real:</h3>
+                
+                <div class="example-card">
+                    <h4>Investimento: R$ 50.000 em fundo de Renda Fixa</h4>
+                    <ul>
+                        <li><strong>Prazo:</strong> 5 anos</li>
+                        <li><strong>Rentabilidade:</strong> 12% ao ano</li>
+                        <li><strong>Com come-cotas:</strong> Mordida semestral de IR antecipado</li>
+                    </ul>
+                    <p><strong>Resultado:</strong> Você perde aproximadamente <strong>R$ 3.200</strong> em juros compostos ao longo dos 5 anos, comparado a um CDB com a mesma rentabilidade (que só tributa no resgate).</p>
+                </div>
+
+                <p>Isso acontece porque:</p>
+                <ol>
+                    <li>O governo "come" parte do rendimento duas vezes por ano</li>
+                    <li>Esse dinheiro "comido" não rende mais juros compostos</li>
+                    <li>No longo prazo, a diferença se acumula exponencialmente</li>
+                </ol>
+            </section>
+
+            <!-- Seção 3: Impacto no longo prazo -->
+            <section class="article-section">
+                <h2>📊 Impacto no longo prazo</h2>
+
+                <p>Quanto mais tempo você deixa o dinheiro investido, maior o impacto do come-cotas:</p>
+
+                <div class="example-card">
+                    <h4>Comparação: Fundo com come-cotas vs CDB (mesma rentabilidade 12% a.a.)</h4>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                        <tr style="background: rgba(255, 255, 255, 0.05);">
+                            <th style="padding: 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1);">Prazo</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.1);">Fundo (com come-cotas)</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.1);">CDB (sem come-cotas)</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.1);">Diferença</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05);">5 anos</td>
+                            <td style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.05);">R$ 85.300</td>
+                            <td style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.05);">R$ 88.500</td>
+                            <td style="padding: 12px; text-align: right; color: #ef4444; border-bottom: 1px solid rgba(255,255,255,0.05);"><strong>-R$ 3.200</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05);">10 anos</td>
+                            <td style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.05);">R$ 150.800</td>
+                            <td style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.05);">R$ 156.200</td>
+                            <td style="padding: 12px; text-align: right; color: #ef4444; border-bottom: 1px solid rgba(255,255,255,0.05);"><strong>-R$ 5.400</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px;">15 anos</td>
+                            <td style="padding: 12px; text-align: right;">R$ 265.100</td>
+                            <td style="padding: 12px; text-align: right;">R$ 273.900</td>
+                            <td style="padding: 12px; text-align: right; color: #ef4444;"><strong>-R$ 8.800</strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Callout Warning -->
+            <div class="callout callout-warning">
+                <div class="callout-icon">⚠️</div>
+                <div class="callout-content">
+                    <h3>Importante</h3>
+                    <p>O Come-cotas afeta <strong>fundos de Renda Fixa e Multimercado</strong>. Não afeta: CDBs, Tesouro Direto, LCI/LCA, Poupança e Ações/FIIs.</p>
+                </div>
+            </div>
+
+            <!-- Seção 4: Como evitar ou reduzir -->
+            <section class="article-section">
+                <h2>✅ Como evitar o Come-cotas</h2>
+
+                <div class="tips-list">
+                    <div class="tip-item">
+                        <div class="tip-number">1</div>
+                        <div class="tip-content">
+                            <h3>Prefira CDBs em vez de fundos de Renda Fixa</h3>
+                            <p>CDBs têm tributação regressiva (quanto mais tempo, menor o IR) e só cobram imposto no resgate.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-item">
+                        <div class="tip-number">2</div>
+                        <div class="tip-content">
+                            <h3>Use Tesouro Direto</h3>
+                            <p>Mesma lógica dos CDBs: IR regressivo e cobrança só no resgate.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-item">
+                        <div class="tip-number">3</div>
+                        <div class="tip-content">
+                            <h3>LCI/LCA (se disponíveis)</h3>
+                            <p>Isentos de IR para pessoa física. Zero come-cotas, zero imposto final.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-item">
+                        <div class="tip-number">4</div>
+                        <div class="tip-content">
+                            <h3>Se usar fundos, escolha os de prazo curto</h3>
+                            <p>Em fundos com objetivo de curto prazo (reserva de emergência), o come-cotas impacta menos.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 5: Ganho por conhecer -->
+            <section class="article-section">
+                <h2>💰 Quanto você GANHA conhecendo o Come-cotas</h2>
+
+                <p>Ao escolher CDBs ou Tesouro Direto em vez de fundos com come-cotas, você:</p>
+
+                <div class="example-card">
+                    <h4>Cenário: R$ 50.000 investidos a 12% a.a. por 10 anos</h4>
+                    <ul>
+                        <li><strong>Fundo com come-cotas:</strong> R$ 150.800</li>
+                        <li><strong>CDB sem come-cotas:</strong> R$ 156.200</li>
+                        <li><strong>Ganho por conhecer:</strong> <span style="color: #10b981; font-weight: 700;">+R$ 5.400</span></li>
+                    </ul>
+                </div>
+
+                <p><strong>Isso é um investimento invisível:</strong> você "ganha" R$ 5.400 só por saber onde NÃO colocar seu dinheiro.</p>
+            </section>
+
+            <!-- Callout Success -->
+            <div class="callout callout-success">
+                <div class="callout-icon">🎯</div>
+                <div class="callout-content">
+                    <h3>Regra de ouro INVLAB</h3>
+                    <p>Para longo prazo (5+ anos), evite fundos com come-cotas. Prefira CDBs, Tesouro Direto ou LCI/LCA. Você ganha mais sem fazer nada além de escolher melhor.</p>
+                </div>
+            </div>
+
+            <!-- Seção 6: Explore mais -->
+            <section class="article-section">
+                <h2>🔍 Explore mais sobre ganhos invisíveis</h2>
+
+                <div class="inv-category">
+                    <h3 class="inv-category-title">💰 Outros ganhos por evitar perdas</h3>
+                    <div class="inv-grid">
+                        <div class="inv-card ganho" onclick="window.location.href='ganhos-iof-regressivo.html'" style="cursor: pointer;">
+                            <div class="inv-card-badge ganho">⏳ Imposto</div>
+                            <h4 class="inv-card-title">IOF regressivo</h4>
+                            <p class="inv-card-description">Quanto você perde em resgates antes de 30 dias</p>
+                        </div>
+
+                        <div class="inv-card ganho" onclick="window.location.href='ganhos-taxas-fundos.html'" style="cursor: pointer;">
+                            <div class="inv-card-badge ganho">💳 Taxas</div>
+                            <h4 class="inv-card-title">Taxas de fundos</h4>
+                            <p class="inv-card-description">O custo real da administração e performance</p>
+                        </div>
+
+                        <div class="inv-card ganho" onclick="window.location.href='ganhos-inflacao.html'" style="cursor: pointer;">
+                            <div class="inv-card-badge ganho">🔥 Inflação</div>
+                            <h4 class="inv-card-title">Inflação</h4>
+                            <p class="inv-card-description">Quanto você perde deixando dinheiro parado</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Callout Final -->
+            <div class="callout callout-info">
+                <div class="callout-icon">🏠</div>
+                <div class="callout-content">
+                    <h3>Voltar para Ganhos Invisíveis</h3>
+                    <p><a href="../index.html#ganhos-invisiveis" style="color: #3b82f6; text-decoration: underline;">Ver todos os ganhos invisíveis</a></p>
+                </div>
+            </div>
+
+            </article>
+            </section>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>
+
