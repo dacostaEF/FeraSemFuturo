@@ -769,29 +769,301 @@
             </div>
         </div>
 
-        <!-- ABA: RENDA VARIÁVEL (NOVA) -->
+        <!-- ABA: RENDA VARIÁVEL (NOVA ESTRUTURA EDUCACIONAL) -->
         <div class="tab-content" id="renda-variavel">
-            <div class="content-wrapper">
-                <section class="section">
-                    <h2 class="section-title">📈 Renda Variável</h2>
-                    <p class="section-subtitle">Ações, FIIs, ETFs e estratégias avançadas</p>
-                    
-                    <!-- Conteúdo Temporário -->
-                    <div class="coming-soon-card">
-                        <div class="coming-icon">🔒</div>
-                        <h3>Conteúdo Avançado em Preparação</h3>
-                        <p>Em breve você terá acesso a:</p>
-                        <ul class="coming-list">
-                            <li>🏢 FIIs: Fundos Imobiliários completos</li>
-                            <li>📈 Ações: Análise fundamentalista</li>
-                            <li>💵 ETFs: Diversificação inteligente</li>
-                            <li>📊 Simuladores de dividendos</li>
-                            <li>💰 Valuation e análise técnica</li>
-                        </ul>
-                        <p class="coming-soon-subtitle">Complete os Primeiros Passos enquanto isso!</p>
-                        <button class="btn-primary" data-tab-link="primeiros-passos">
-                            Ir para Primeiros Passos
-                        </button>
+            <div class="content-wrapper-wide">
+                <section class="section-educational">
+                    <!-- HEADER EDUCACIONAL -->
+                    <div class="educational-header">
+                        <h1 class="educational-title">📈 O que é Renda Variável?</h1>
+                        <p class="educational-intro">
+                            A renda variável reúne investimentos em que a <strong>rentabilidade NÃO É CONHECIDA ANTECIPADAMENTE</strong>. 
+                            Diferente da renda fixa, aqui os retornos dependem do desempenho de empresas, fundos ou índices de mercado.
+                        </p>
+                        <p class="educational-intro secondary">
+                            Em termos simples: <strong>você se torna sócio</strong> de empresas ou fundos e participa dos seus resultados — 
+                            tanto nos lucros quanto nos prejuízos.
+                        </p>
+                    </div>
+
+                    <!-- CARACTERÍSTICAS PRINCIPAIS -->
+                    <div class="info-section">
+                        <h2 class="info-section-title">🎯 Características da Renda Variável</h2>
+                        
+                        <div class="remuneration-grid">
+                            <!-- Potencial de Retorno -->
+                            <div class="remuneration-card prefixada">
+                                <div class="remuneration-icon">📊</div>
+                                <h3>Potencial de Retorno</h3>
+                                <p class="remuneration-desc">Possibilidade de ganhos acima da inflação e da renda fixa.</p>
+                                <div class="remuneration-example">
+                                    <span class="example-label">Exemplo:</span>
+                                    <span class="example-value">Ações podem valorizar 20%+ ao ano</span>
+                                </div>
+                            </div>
+
+                            <!-- Volatilidade -->
+                            <div class="remuneration-card posfixada">
+                                <div class="remuneration-icon">⚡</div>
+                                <h3>Volatilidade</h3>
+                                <p class="remuneration-desc">Preços oscilam diariamente conforme oferta e demanda.</p>
+                                <div class="remuneration-example">
+                                    <span class="example-label">Exemplo:</span>
+                                    <span class="example-value">+5% em um dia, -3% no outro</span>
+                                </div>
+                            </div>
+
+                            <!-- Renda Passiva -->
+                            <div class="remuneration-card hibrida">
+                                <div class="remuneration-icon">💸</div>
+                                <h3>Renda Passiva</h3>
+                                <p class="remuneration-desc">Algumas modalidades pagam dividendos ou aluguéis mensais.</p>
+                                <div class="remuneration-example">
+                                    <span class="example-label">Exemplo:</span>
+                                    <span class="example-value">FIIs pagam aluguéis todo mês</span>
+                                </div>
+                                <p class="remuneration-benefit">✨ Gera fluxo de caixa recorrente</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TIPOS PRINCIPAIS -->
+                    <div class="info-section">
+                        <h2 class="info-section-title">🟦 Principais tipos de Renda Variável</h2>
+                        
+                        <div class="investment-types">
+                            <!-- ETFs -->
+                            <div class="investment-card tesouro">
+                                <div class="investment-header">
+                                    <span class="investment-badge">🟩 ETFs</span>
+                                    <span class="investment-security">🎯 Para Iniciantes</span>
+                                </div>
+                                <p class="investment-description">
+                                    Fundos de Índice que replicam carteiras teóricas.
+                                </p>
+                                <ul class="investment-list">
+                                    <li><strong>BOVA11:</strong> acompanha o Ibovespa (maiores empresas)</li>
+                                    <li><strong>IVVB11:</strong> investe no S&P 500 (EUA)</li>
+                                    <li>Diversificação automática com um único investimento</li>
+                                </ul>
+                            </div>
+
+                            <!-- FIIs -->
+                            <div class="investment-card cdb">
+                                <div class="investment-header">
+                                    <span class="investment-badge">🟩 Fundos Imobiliários (FIIs)</span>
+                                    <span class="investment-tag">Renda Passiva Mensal</span>
+                                </div>
+                                <p class="investment-description">
+                                    Você investe em carteiras de imóveis e recebe parte dos aluguéis.
+                                </p>
+                                <ul class="investment-list">
+                                    <li>Dividendos mensais (em média a cada 30 dias)</li>
+                                    <li>Diversificação em vários imóveis</li>
+                                    <li>Gestão profissional</li>
+                                    <li>Isenção de IR para pessoa física nos dividendos</li>
+                                </ul>
+                            </div>
+
+                            <!-- Ações -->
+                            <div class="investment-card lci">
+                                <div class="investment-header">
+                                    <span class="investment-badge">🟩 Ações</span>
+                                    <span class="investment-highlight">✨ Maior Potencial</span>
+                                </div>
+                                <p class="investment-description">
+                                    Você compra "pedacinhos" de empresas e participa dos resultados.
+                                </p>
+                                <ul class="investment-list">
+                                    <li><strong>Valorização:</strong> ação sobe de preço</li>
+                                    <li><strong>Dividendos:</strong> parte do lucro distribuída</li>
+                                    <li><strong>Direitos:</strong> preferência em novas emissões</li>
+                                </ul>
+                            </div>
+
+                            <!-- BDRs -->
+                            <div class="investment-card avancado">
+                                <div class="investment-header">
+                                    <span class="investment-badge">🟩 BDRs</span>
+                                    <span class="investment-level">🌎 Internacional</span>
+                                </div>
+                                <p class="investment-description">
+                                    Brazilian Depositary Receipts — empresas estrangeiras na B3.
+                                </p>
+                                <ul class="investment-list">
+                                    <li>Acesso a Apple, Google, Amazon direto do Brasil</li>
+                                    <li>Negociado em reais, sem conta no exterior</li>
+                                    <li>Liquidez diária</li>
+                                    <li>Custos e tributação específicos</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- POR ONDE COMEÇAR -->
+                    <div class="info-section highlight-section">
+                        <h2 class="info-section-title">🟧 Por onde começar? (Recomendação INVLAB)</h2>
+                        
+                        <div class="investment-types">
+                            <!-- ETFs - Primeiro -->
+                            <div class="investment-card tesouro">
+                                <div class="investment-header">
+                                    <span class="investment-badge">💵 1. ETFs</span>
+                                    <span class="investment-security">Diversificação Inteligente</span>
+                                </div>
+                                <p class="investment-description">
+                                    <strong>Comece aqui!</strong> Expõe sua carteira a dezenas de empresas de uma vez, 
+                                    reduzindo risco sem precisar analisar cada ação individualmente.
+                                </p>
+                            </div>
+
+                            <!-- FIIs - Segundo -->
+                            <div class="investment-card cdb">
+                                <div class="investment-header">
+                                    <span class="investment-badge">🏢 2. FIIs</span>
+                                    <span class="investment-tag">Renda Passiva</span>
+                                </div>
+                                <p class="investment-description">
+                                    <strong>Segundo passo!</strong> Gere renda mensal com aluguéis enquanto acompanha 
+                                    a valorização dos imóveis na carteira do fundo.
+                                </p>
+                            </div>
+
+                            <!-- Ações - Terceiro -->
+                            <div class="investment-card lci">
+                                <div class="investment-header">
+                                    <span class="investment-badge">📈 3. Ações</span>
+                                    <span class="investment-highlight">Análise Individual</span>
+                                </div>
+                                <p class="investment-description">
+                                    <strong>Terceiro nível!</strong> Escolha empresas específicas após dominar ETFs e FIIs. 
+                                    Exige mais estudo, mas oferece maior potencial.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="invlab-message">
+                            <strong>💡 No INVLAB, seguimos a progressão: ETFs → FIIs → Ações. Menos risco, mais aprendizado.</strong>
+                        </div>
+                    </div>
+
+                    <!-- COMO INVESTIR -->
+                    <div class="info-section">
+                        <h2 class="info-section-title">🟩 Como investir em Renda Variável</h2>
+                        
+                        <div class="steps-list">
+                            <div class="step-item">
+                                <span class="step-number">1</span>
+                                <div class="step-content">
+                                    <h4>Abra conta em corretora de valores</h4>
+                                    <p>Diferente de bancos, corretoras têm acesso à bolsa de valores</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-number">2</span>
+                                <div class="step-content">
+                                    <h4>Transfira recursos</h4>
+                                    <p>Envie dinheiro para sua conta na corretora</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-number">3</span>
+                                <div class="step-content">
+                                    <h4>Acesse o Home Broker</h4>
+                                    <p>Plataforma de negociação da corretora</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-number">4</span>
+                                <div class="step-content">
+                                    <h4>Pesquise o ativo</h4>
+                                    <p>Use códigos como BOVA11 (ETF), MXRF11 (FII), PETR4 (Ação)</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-number">5</span>
+                                <div class="step-content">
+                                    <h4>Faça sua ordem de compra</h4>
+                                    <p>Defina quantidade e preço máximo</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="beginner-tip">
+                            <div class="tip-icon">💡</div>
+                            <div class="tip-content">
+                                <h4>Para primeiras aplicações, recomendamos:</h4>
+                                <ul>
+                                    <li><strong>Ordem à mercado:</strong> compra pelo preço atual (mais simples)</li>
+                                    <li><strong>Valores pequenos:</strong> R$ 100-500 para testar o processo</li>
+                                    <li><strong>ETFs ou FIIs consagrados:</strong> menor risco inicial</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AVISOS IMPORTANTES -->
+                    <div class="info-section highlight-section">
+                        <h2 class="info-section-title">⚠️ Atenção: Renda Variável tem riscos</h2>
+                        
+                        <div class="investment-types">
+                            <div class="investment-card avancado">
+                                <div class="investment-header">
+                                    <span class="investment-badge">📉 Volatilidade</span>
+                                </div>
+                                <p class="investment-description">
+                                    Preços sobem e descem diariamente. Não entre em pânico com quedas temporárias.
+                                </p>
+                            </div>
+
+                            <div class="investment-card avancado">
+                                <div class="investment-header">
+                                    <span class="investment-badge">⏳ Longo Prazo</span>
+                                </div>
+                                <p class="investment-description">
+                                    Renda variável funciona melhor com prazos longos (5+ anos). Não é para dinheiro curto.
+                                </p>
+                            </div>
+
+                            <div class="investment-card avancado">
+                                <div class="investment-header">
+                                    <span class="investment-badge">🧠 Conhecimento</span>
+                                </div>
+                                <p class="investment-description">
+                                    Estude antes de investir. Não compre apenas por indicação.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MENSAGEM FINAL -->
+                    <div class="final-message">
+                        <div class="final-icon">⭐</div>
+                        <h3>A renda variável potencializa sua carteira no longo prazo</h3>
+                        <p>
+                            Ela oferece <strong>exposição ao crescimento das empresas</strong>, <strong>proteção contra inflação</strong> 
+                            e possibilidade de <strong>ganhos superiores</strong> — mas exige paciência e estudo.
+                        </p>
+                        <p class="invlab-message">
+                            No <strong>INVLAB</strong>, você simula, compara e aprende sobre cada modalidade antes de investir.
+                        </p>
+                    </div>
+
+                    <!-- CTA -->
+                    <div class="cta-box highlight">
+                        <h3>🛠️ Pronto para simular?</h3>
+                        <p>Use nossos simuladores e veja projeções realistas para cada tipo de investimento</p>
+                        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 24px;">
+                            <button class="btn-primary" onclick="alert('Simulador de ETFs em desenvolvimento')">
+                                📊 Simular ETFs
+                            </button>
+                            <button class="btn-primary" onclick="alert('Simulador de FIIs em desenvolvimento')">
+                                🏢 Simular FIIs
+                            </button>
+                            <button class="btn-primary" onclick="alert('Simulador de Ações em desenvolvimento')">
+                                📈 Simular Ações
+                            </button>
+                        </div>
                     </div>
                 </section>
             </div>
