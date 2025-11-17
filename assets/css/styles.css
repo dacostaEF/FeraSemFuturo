@@ -417,35 +417,53 @@ body {
     list-style: none;
     padding: 0;
     margin: 0;
+    background: rgba(0, 0, 0, 0.3); /* Background MAIS escuro para diferenciar */
+    border-left: 4px solid rgba(42, 127, 255, 0.4); /* Barra vertical azul MAIS grossa */
+    margin-left: 20px; /* AUMENTADO: 12px → 20px - Afasta MUITO mais da borda */
 }
 
 .category-submenu.open {
     max-height: 500px; /* Altura máxima quando aberto */
+    padding: 6px 0; /* Respiro vertical quando aberto */
 }
 
 .category-submenu li {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
 }
 
 .category-submenu li:last-child {
     border-bottom: none;
 }
 
+/* Linha conectora visual - MAIS VISÍVEL */
+.category-submenu li::before {
+    content: '└─';
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 10px;
+}
+
 .category-submenu a {
     display: block;
-    padding: 10px 16px 10px 32px; /* Indent para mostrar hierarquia */
-    color: rgba(255, 255, 255, 0.7);
+    padding: 10px 16px 10px 40px; /* IDENTAÇÃO GIGANTE: 24px → 40px */
+    color: rgba(255, 255, 255, 0.65); /* Cor mais suave */
     text-decoration: none;
-    font-size: 12px;
+    font-size: 11px; /* Fonte menor para diferenciar */
     transition: all 0.2s ease;
+    position: relative;
 }
 
 /* Hover nos sub-itens - Também mais específico */
 .tab-with-dropdown .dropdown-menu .category-submenu a:hover {
-    background: rgba(42, 127, 255, 0.12) !important;
+    background: rgba(42, 127, 255, 0.18) !important;
     color: rgba(255, 255, 255, 0.95) !important;
-    padding-left: 36px !important; /* Leve shift no hover */
+    padding-left: 44px !important; /* Leve shift no hover (40px → 44px) */
     transform: translateX(2px);
+    border-left: 3px solid var(--blue-primary); /* Barra azul GROSSA no hover */
 }
 
 /* ============================================
