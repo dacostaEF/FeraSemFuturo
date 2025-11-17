@@ -59,42 +59,53 @@
                     </ul>
                 </div>
                 
-                <!-- ABA COM DROPDOWN: RENDA VARIÁVEL (Estilo limpo e elegante) -->
+                <!-- ABA COM DROPDOWN: RENDA VARIÁVEL (Menu colapsável interativo) -->
                 <div class="tab-with-dropdown">
                     <button class="tab-btn dropdown-toggle" data-tab="renda-variavel">
                         📈 Renda<br>Variável <span class="arrow">▼</span>
                     </button>
                     <ul class="dropdown-menu">
-                        <!-- SEÇÃO: FIIs (sempre visível) -->
-                        <li class="dropdown-section">
-                            <strong>🏢 Fundos Imobiliários (FIIs)</strong>
+                        <!-- CATEGORIA: FIIs (colapsável) -->
+                        <li class="dropdown-category">
+                            <div class="category-header" data-category="fiis">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span>
+                                <span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-fiis">
+                                <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                                <li><a href="#">🏘️ FIIs de Tijolo</a></li>
+                                <li><a href="#">📋 FIIs de Papel</a></li>
+                                <li><a href="#">🔄 FIIs Híbridos</a></li>
+                                <li><a href="#">🎯 Como Escolher FIIs</a></li>
+                            </ul>
                         </li>
-                        <li><a href="#">📊 Simulador de Renda Passiva</a></li>
-                        <li><a href="#">🏘️ FIIs de Tijolo</a></li>
-                        <li><a href="#">📋 FIIs de Papel</a></li>
-                        <li><a href="#">🔄 FIIs Híbridos</a></li>
-                        <li><a href="#">🎯 Como Escolher FIIs</a></li>
                         
-                        <li class="dropdown-divider"></li>
-                        
-                        <!-- SEÇÃO: Ações (sempre visível) -->
-                        <li class="dropdown-section">
-                            <strong>📈 Ações</strong>
+                        <!-- CATEGORIA: Ações (colapsável) -->
+                        <li class="dropdown-category">
+                            <div class="category-header" data-category="acoes">
+                                <span class="category-name">📈 Ações</span>
+                                <span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-acoes">
+                                <li><a href="#">📊 Simulador de Dividendos</a></li>
+                                <li><a href="#">💰 Valuation (P/L, P/VP)</a></li>
+                                <li><a href="#">🏭 Análise Setorial</a></li>
+                                <li><a href="#">📉 Day Trade vs Buy&Hold</a></li>
+                            </ul>
                         </li>
-                        <li><a href="#">📊 Simulador de Dividendos</a></li>
-                        <li><a href="#">💰 Valuation (P/L, P/VP)</a></li>
-                        <li><a href="#">🏭 Análise Setorial</a></li>
-                        <li><a href="#">📉 Day Trade vs Buy&Hold</a></li>
                         
-                        <li class="dropdown-divider"></li>
-                        
-                        <!-- SEÇÃO: ETFs (sempre visível) -->
-                        <li class="dropdown-section">
-                            <strong>💵 ETFs</strong>
+                        <!-- CATEGORIA: ETFs (colapsável) -->
+                        <li class="dropdown-category">
+                            <div class="category-header" data-category="etfs">
+                                <span class="category-name">💵 ETFs</span>
+                                <span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-etfs">
+                                <li><a href="#">📊 Simulador de Indexação</a></li>
+                                <li><a href="#">📈 ETFs Nacionais</a></li>
+                                <li><a href="#">🌎 ETFs Internacionais</a></li>
+                            </ul>
                         </li>
-                        <li><a href="#">📊 Simulador de Indexação</a></li>
-                        <li><a href="#">📈 ETFs Nacionais</a></li>
-                        <li><a href="#">🌎 ETFs Internacionais</a></li>
                     </ul>
                 </div>
                 

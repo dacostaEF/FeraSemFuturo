@@ -105,6 +105,7 @@ window.changeTab = switchTab;
 
 document.addEventListener('DOMContentLoaded', function() {
     initTabDropdowns();
+    initCollapsibleCategories(); // NOVO: Menu colapsável Renda Variável
 });
 
 function initTabDropdowns() {
@@ -140,6 +141,38 @@ function initTabDropdowns() {
                 d.classList.remove('open');
             });
         }
+    });
+}
+
+// ============================================
+// MENU COLAPSÁVEL - Renda Variável (FIIs, Ações, ETFs)
+// ============================================
+
+function initCollapsibleCategories() {
+    const categoryHeaders = document.querySelectorAll('.category-header');
+    
+    categoryHeaders.forEach(header => {
+        header.addEventListener('click', function(e) {
+            e.stopPropagation(); // Não fecha o dropdown pai
+            
+            const category = this.getAttribute('data-category');
+            const submenu = document.getElementById(`submenu-${category}`);
+            
+            if (!submenu) return;
+            
+            // Toggle da classe 'open'
+            const isOpen = this.classList.contains('open');
+            
+            if (isOpen) {
+                // Fechar
+                this.classList.remove('open');
+                submenu.classList.remove('open');
+            } else {
+                // Abrir
+                this.classList.add('open');
+                submenu.classList.add('open');
+            }
+        });
     });
 }
 

@@ -352,7 +352,104 @@ body {
 }
 
 /* ============================================
-   SUB-DROPDOWNS - REMOVIDO (Agora usa estrutura simples)
+   MENU COLAPSÁVEL - Renda Variável (FIIs, Ações, ETFs)
+   ============================================ */
+
+/* Categoria colapsável */
+.dropdown-category {
+    list-style: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dropdown-category:last-child {
+    border-bottom: none;
+}
+
+/* Header da categoria (clicável) */
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+    background: transparent;
+}
+
+/* HOVER AZUL - Mais específico para garantir funcionamento */
+.tab-with-dropdown .dropdown-menu .category-header:hover {
+    background: rgba(42, 127, 255, 0.15) !important; /* Hover azul mais visível */
+}
+
+.tab-with-dropdown .dropdown-menu .category-header:hover .category-name {
+    color: #2A7FFF !important; /* Azul INVLAB no hover */
+}
+
+.tab-with-dropdown .dropdown-menu .category-header:hover .category-arrow {
+    color: #2A7FFF !important; /* Seta azul no hover */
+}
+
+.category-name {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.category-arrow {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 10px;
+    transition: transform 0.3s ease, color 0.2s ease;
+}
+
+/* Seta rotaciona quando categoria está aberta */
+.category-header.open .category-arrow {
+    transform: rotate(90deg);
+    color: var(--blue-primary);
+}
+
+/* Submenu (oculto por padrão) */
+.category-submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.category-submenu.open {
+    max-height: 500px; /* Altura máxima quando aberto */
+}
+
+.category-submenu li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.category-submenu li:last-child {
+    border-bottom: none;
+}
+
+.category-submenu a {
+    display: block;
+    padding: 10px 16px 10px 32px; /* Indent para mostrar hierarquia */
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+
+/* Hover nos sub-itens - Também mais específico */
+.tab-with-dropdown .dropdown-menu .category-submenu a:hover {
+    background: rgba(42, 127, 255, 0.12) !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    padding-left: 36px !important; /* Leve shift no hover */
+    transform: translateX(2px);
+}
+
+/* ============================================
+   SUB-DROPDOWNS - REMOVIDO (Agora usa estrutura colapsável)
    ============================================ */
 
 /* Código removido - Sub-dropdowns laterais não são mais necessários.
