@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IOF Regressivo: Quanto você perde (e ganha esperando) | INVLAB</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="msapplication-TileColor" content="#0D0D0D">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Meta Description -->
+    <meta name="description" content="Descubra quanto o IOF regressivo pode tirar do seu rendimento e quanto você economiza esperando 30 dias.">
+    
+    <!-- INVLAB Design System -->
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+</head>
+<body>
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB">
+                <span class="logo-text">INVLAB</span>
+            </div>
+            
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Início</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">📚 Primeiros<br>Passos</button>
+                
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">📊 Renda<br>Fixa <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">📈 Renda<br>Variável <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-category">
+                            <div class="category-header" data-category="etfs" onclick="window.location.href='etfs.html'" style="cursor: pointer;">
+                                <span class="category-name">💵 ETFs</span>
+                                <span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-etfs">
+                                <li><a href="#">📊 Simulador de Indexação</a></li>
+                                <li><a href="#">📈 ETFs Nacionais</a></li>
+                                <li><a href="#">🌎 ETFs Internacionais</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" data-category="fiis" onclick="window.location.href='fiis.html'" style="cursor: pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span>
+                                <span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-fiis">
+                                <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                                <li><a href="#">🏘️ FIIs de Tijolo</a></li>
+                                <li><a href="#">📋 FIIs de Papel</a></li>
+                                <li><a href="#">🔄 FIIs Híbridos</a></li>
+                                <li><a href="#">🎯 Como Escolher FIIs</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" data-category="acoes" onclick="window.location.href='acoes.html'" style="cursor: pointer;">
+                                <span class="category-name">📈 Ações</span>
+                                <span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-acoes">
+                                <li><a href="#">📊 Simulador de Dividendos</a></li>
+                                <li><a href="#">💰 Valuation (P/L, P/VP)</a></li>
+                                <li><a href="#">🏭 Análise Setorial</a></li>
+                                <li><a href="#">📉 Day Trade vs Buy&Hold</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">🔐 Cripto<br>ativos <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">₿ Bitcoin</a></li>
+                        <li><a href="#">⧫ Ethereum</a></li>
+                        <li><a href="#">🪙 Altcoins</a></li>
+                        <li><a href="#">🖼️ NFTs</a></li>
+                        <li><a href="#">🔗 Tokenização</a></li>
+                    </ul>
+                </div>
+                
+                <button class="tab-btn" onclick="window.location.href='../index.html#ferramentas'">🛠️ Ferramentas</button>
+                <button class="tab-btn active" onclick="window.location.href='../index.html#outros-investimentos'">💎 Outros</button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="content-wrapper-wide">
+            <nav class="breadcrumb">
+                <a href="../index.html">🏠 Início</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../index.html#outros-investimentos">💎 Outros Investimentos</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../index.html#ganhos-invisiveis">💰 Ganhos Invisíveis</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">⏳ IOF Regressivo</span>
+            </nav>
+
+            <div class="article-meta">
+                <span class="article-badge">⏳ Imposto</span>
+                <span class="article-time">⏱️ 7 min</span>
+            </div>
+
+            <section class="section-educational">
+            <article class="article-content">
+                <h1 class="article-title">IOF Regressivo: Quanto você perde (e ganha esperando)</h1>
+                
+                <p class="article-lead">
+                    Descubra o imposto que pode devorar até 96% do seu rendimento – e quanto dinheiro você economiza só esperando 30 dias.
+                </p>
+
+                <div class="article-hero">
+                    <div class="hero-emoji">⏳💸</div>
+                    <p class="hero-caption">O imposto da pressa</p>
+                </div>
+
+            <section class="article-section">
+                <h2>🎓 O que é o IOF Regressivo?</h2>
+                
+                <p>O <strong>IOF (Imposto sobre Operações Financeiras)</strong> regressivo é um imposto que incide sobre resgates de investimentos em <strong>menos de 30 dias</strong>.</p>
+                
+                <p>Quanto mais rápido você resgata, maior o imposto:</p>
+                <ul>
+                    <li><strong>1º dia:</strong> 96% do rendimento vai para o IOF</li>
+                    <li><strong>15º dia:</strong> 50% do rendimento</li>
+                    <li><strong>29º dia:</strong> 3% do rendimento</li>
+                    <li><strong>30º dia ou mais:</strong> 0% (isento)</li>
+                </ul>
+
+                <p><strong>Afeta:</strong> CDBs, LCI/LCA, Tesouro Direto, Fundos de Investimento</p>
+                <p><strong>Não afeta:</strong> Poupança, Ações, FIIs</p>
+            </section>
+
+            <div class="callout callout-info">
+                <div class="callout-icon">💡</div>
+                <div class="callout-content">
+                    <h3>Por que esse imposto existe?</h3>
+                    <p>O governo criou o IOF regressivo para desestimular a especulação de curto prazo e evitar que investidores fiquem entrando e saindo de aplicações rapidamente.</p>
+                </div>
+            </div>
+
+            <section class="article-section">
+                <h2>💸 Como o IOF te morde na prática</h2>
+
+                <h3>Exemplo real devastador:</h3>
+                
+                <div class="example-card">
+                    <h4>Situação: Você aplicou R$ 10.000 em um CDB</h4>
+                    <ul>
+                        <li><strong>Rentabilidade:</strong> 1% no período</li>
+                        <li><strong>Rendimento bruto:</strong> R$ 100</li>
+                        <li><strong>Prazo da aplicação:</strong> 15 dias</li>
+                    </ul>
+                    <p><strong>Se você resgatar no 15º dia:</strong></p>
+                    <ul>
+                        <li>IOF de 15 dias = <strong>50% do rendimento</strong></li>
+                        <li>IOF cobra: R$ 50</li>
+                        <li>Ainda tem IR (22,5% sobre o que sobrou): R$ 11,25</li>
+                        <li><strong>Rendimento líquido: R$ 38,75</strong> (perdeu 61% do ganho!)</li>
+                    </ul>
+                    <p><strong>Se esperasse até o 30º dia:</strong></p>
+                    <ul>
+                        <li>IOF: R$ 0</li>
+                        <li>IR (22,5%): R$ 22,50</li>
+                        <li><strong>Rendimento líquido: R$ 77,50</strong></li>
+                        <li><strong>Ganho por esperar: +R$ 38,75</strong> (100% a mais!)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>📊 Tabela Completa do IOF Regressivo</h2>
+
+                <div class="example-card">
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                        <tr style="background: rgba(255, 255, 255, 0.05);">
+                            <th style="padding: 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1);">Dias</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.1);">% IOF</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.1);">R$ 100 rendidos</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.1);">Sobra p/ você</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05);">1 dia</td>
+                            <td style="padding: 12px; text-align: right; color: #ef4444; border-bottom: 1px solid rgba(255,255,255,0.05);">96%</td>
+                            <td style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.05);">R$ 96 de IOF</td>
+                            <td style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.05);">R$ 4</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05);">7 dias</td>
+                            <td style="padding: 12px; text-align: right; color: #f97316; border-bottom: 1px solid rgba(255,255,255,0.05);">73%</td>
+                            <td style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.05);">R$ 73 de IOF</td>
+                            <td style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.05);">R$ 27</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05);">15 dias</td>
+                            <td style="padding: 12px; text-align: right; color: #eab308; border-bottom: 1px solid rgba(255,255,255,0.05);">50%</td>
+                            <td style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.05);">R$ 50 de IOF</td>
+                            <td style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.05);">R$ 50</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05);">22 dias</td>
+                            <td style="padding: 12px; text-align: right; color: #3b82f6; border-bottom: 1px solid rgba(255,255,255,0.05);">26%</td>
+                            <td style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.05);">R$ 26 de IOF</td>
+                            <td style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.05);">R$ 74</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px;">30+ dias</td>
+                            <td style="padding: 12px; text-align: right; color: #10b981;"><strong>0%</strong></td>
+                            <td style="padding: 12px; text-align: right;">R$ 0 de IOF</td>
+                            <td style="padding: 12px; text-align: right; color: #10b981;"><strong>R$ 100</strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <div class="callout callout-warning">
+                <div class="callout-icon">⚠️</div>
+                <div class="callout-content">
+                    <h3>Atenção: IOF + IR</h3>
+                    <p>Além do IOF, você ainda paga Imposto de Renda sobre o que sobrar! A mordida dupla pode reduzir drasticamente seu ganho real.</p>
+                </div>
+            </div>
+
+            <section class="article-section">
+                <h2>✅ Como evitar o IOF</h2>
+
+                <div class="tips-list">
+                    <div class="tip-item">
+                        <div class="tip-number">1</div>
+                        <div class="tip-content">
+                            <h3>Planeje seus investimentos</h3>
+                            <p>Só invista dinheiro que você NÃO vai precisar nos próximos 30 dias.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-item">
+                        <div class="tip-number">2</div>
+                        <div class="tip-content">
+                            <h3>Tenha uma Reserva de Emergência</h3>
+                            <p>Mantenha 6 meses de despesas na poupança ou em fundos de liquidez imediata. Assim, você não precisa resgatar investimentos às pressas.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-item">
+                        <div class="tip-number">3</div>
+                        <div class="tip-content">
+                            <h3>Use a Poupança para curto prazo</h3>
+                            <p>Poupança é isenta de IOF. Para valores que você pode precisar em menos de 30 dias, ela pode ser melhor que CDBs.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-item">
+                        <div class="tip-number">4</div>
+                        <div class="tip-content">
+                            <h3>Espere sempre 30 dias</h3>
+                            <p>Se possível, aguarde o prazo mínimo. A diferença no seu bolso é brutal.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>💰 Quanto você GANHA conhecendo o IOF</h2>
+
+                <p>Vamos ver o impacto real em diferentes cenários:</p>
+
+                <div class="example-card">
+                    <h4>Cenário 1: R$ 5.000 aplicados por 15 dias (1% de rendimento)</h4>
+                    <ul>
+                        <li><strong>Rendimento bruto:</strong> R$ 50</li>
+                        <li><strong>Resgatar em 15 dias:</strong> IOF R$ 25 + IR R$ 5,60 = <strong>Líquido R$ 19,40</strong></li>
+                        <li><strong>Esperar 30 dias:</strong> IOF R$ 0 + IR R$ 11,25 = <strong>Líquido R$ 38,75</strong></li>
+                        <li><strong>Ganho por conhecer: +R$ 19,35</strong> (100% a mais!)</li>
+                    </ul>
+                </div>
+
+                <div class="example-card">
+                    <h4>Cenário 2: R$ 20.000 aplicados por 7 dias (0,5% de rendimento)</h4>
+                    <ul>
+                        <li><strong>Rendimento bruto:</strong> R$ 100</li>
+                        <li><strong>Resgatar em 7 dias:</strong> IOF R$ 73 + IR R$ 6 = <strong>Líquido R$ 21</strong></li>
+                        <li><strong>Esperar 30 dias:</strong> IOF R$ 0 + IR R$ 22,50 = <strong>Líquido R$ 77,50</strong></li>
+                        <li><strong>Ganho por conhecer: +R$ 56,50</strong> (269% a mais!)</li>
+                    </ul>
+                </div>
+
+                <p><strong>Conclusão:</strong> Quanto mais cedo você resgata, mais você perde. Paciência de 30 dias = ganho invisível garantido.</p>
+            </section>
+
+            <div class="callout callout-success">
+                <div class="callout-icon">🎯</div>
+                <div class="callout-content">
+                    <h3>Regra de ouro INVLAB</h3>
+                    <p>Nunca invista em CDB, Tesouro ou fundos com dinheiro que você vai precisar em menos de 30 dias. Use a poupança ou deixe em conta corrente.</p>
+                </div>
+            </div>
+
+            <section class="article-section">
+                <h2>🔍 Explore mais sobre ganhos invisíveis</h2>
+
+                <div class="inv-category">
+                    <h3 class="inv-category-title">💰 Outros ganhos por evitar perdas</h3>
+                    <div class="inv-grid">
+                        <div class="inv-card ganho" onclick="window.location.href='ganhos-come-cotas.html'" style="cursor: pointer;">
+                            <div class="inv-card-badge ganho">🍽️ Imposto</div>
+                            <h4 class="inv-card-title">Come-cotas</h4>
+                            <p class="inv-card-description">Quanto você perde em fundos com antecipação de IR</p>
+                        </div>
+
+                        <div class="inv-card ganho" onclick="window.location.href='ganhos-taxas-fundos.html'" style="cursor: pointer;">
+                            <div class="inv-card-badge ganho">💳 Taxas</div>
+                            <h4 class="inv-card-title">Taxas de fundos</h4>
+                            <p class="inv-card-description">O custo real da administração e performance</p>
+                        </div>
+
+                        <div class="inv-card ganho" onclick="window.location.href='ganhos-inflacao.html'" style="cursor: pointer;">
+                            <div class="inv-card-badge ganho">🔥 Inflação</div>
+                            <h4 class="inv-card-title">Inflação</h4>
+                            <p class="inv-card-description">Quanto você perde deixando dinheiro parado</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="callout callout-info">
+                <div class="callout-icon">🏠</div>
+                <div class="callout-content">
+                    <h3>Voltar para Ganhos Invisíveis</h3>
+                    <p><a href="../index.html#ganhos-invisiveis" style="color: #3b82f6; text-decoration: underline;">Ver todos os ganhos invisíveis</a></p>
+                </div>
+            </div>
+
+            </article>
+            </section>
+        </div>
+    </main>
+
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>
+

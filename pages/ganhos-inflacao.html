@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inflação: O Imposto Invisível | INVLAB</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="msapplication-TileColor" content="#0D0D0D">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Meta Description -->
+    <meta name="description" content="Entenda como a inflação corrói seu poder de compra e quanto você ganha protegendo seu dinheiro.">
+    
+    <!-- INVLAB Design System -->
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+</head>
+<body>
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB">
+                <span class="logo-text">INVLAB</span>
+            </div>
+            
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Início</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">📚 Primeiros<br>Passos</button>
+                
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">📊 Renda<br>Fixa <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">📈 Renda<br>Variável <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-category">
+                            <div class="category-header" data-category="etfs" onclick="window.location.href='etfs.html'" style="cursor: pointer;">
+                                <span class="category-name">💵 ETFs</span>
+                                <span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-etfs">
+                                <li><a href="#">📊 Simulador de Indexação</a></li>
+                                <li><a href="#">📈 ETFs Nacionais</a></li>
+                                <li><a href="#">🌎 ETFs Internacionais</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" data-category="fiis" onclick="window.location.href='fiis.html'" style="cursor: pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span>
+                                <span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-fiis">
+                                <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                                <li><a href="#">🏘️ FIIs de Tijolo</a></li>
+                                <li><a href="#">📋 FIIs de Papel</a></li>
+                                <li><a href="#">🔄 FIIs Híbridos</a></li>
+                                <li><a href="#">🎯 Como Escolher FIIs</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" data-category="acoes" onclick="window.location.href='acoes.html'" style="cursor: pointer;">
+                                <span class="category-name">📈 Ações</span>
+                                <span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-acoes">
+                                <li><a href="#">📊 Simulador de Dividendos</a></li>
+                                <li><a href="#">💰 Valuation (P/L, P/VP)</a></li>
+                                <li><a href="#">🏭 Análise Setorial</a></li>
+                                <li><a href="#">📉 Day Trade vs Buy&Hold</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">🔐 Cripto<br>ativos <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">₿ Bitcoin</a></li>
+                        <li><a href="#">⧫ Ethereum</a></li>
+                        <li><a href="#">🪙 Altcoins</a></li>
+                        <li><a href="#">🖼️ NFTs</a></li>
+                        <li><a href="#">🔗 Tokenização</a></li>
+                    </ul>
+                </div>
+                
+                <button class="tab-btn" onclick="window.location.href='../index.html#ferramentas'">🛠️ Ferramentas</button>
+                <button class="tab-btn active" onclick="window.location.href='../index.html#outros-investimentos'">💎 Outros</button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="content-wrapper-wide">
+            <nav class="breadcrumb">
+                <a href="../index.html">🏠 Início</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../index.html#outros-investimentos">💎 Outros Investimentos</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../index.html#ganhos-invisiveis">💰 Ganhos Invisíveis</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">🔥 Inflação</span>
+            </nav>
+
+            <div class="article-meta">
+                <span class="article-badge">🔥 Inflação</span>
+                <span class="article-time">⏱️ 9 min</span>
+            </div>
+
+            <section class="section-educational">
+            <article class="article-content">
+                <h1 class="article-title">Inflação: O imposto invisível que rouba seu futuro</h1>
+                
+                <p class="article-lead">
+                    Descubra como a inflação corrói seu poder de compra silenciosamente – e quanto você ganha protegendo seu dinheiro contra ela.
+                </p>
+
+                <div class="article-hero">
+                    <div class="hero-emoji">🔥💸</div>
+                    <p class="hero-caption">O ladrão silencioso do seu dinheiro</p>
+                </div>
+
+            <section class="article-section">
+                <h2>🎓 O que é a Inflação?</h2>
+                
+                <p><strong>Inflação</strong> é o aumento generalizado dos preços ao longo do tempo.</p>
+                
+                <p>Isso significa que o mesmo dinheiro compra <strong>menos coisas</strong> no futuro.</p>
+
+                <div class="example-card">
+                    <h4>Exemplo prático:</h4>
+                    <ul>
+                        <li><strong>2023:</strong> R$ 100 compravam 20 kg de arroz</li>
+                        <li><strong>2024:</strong> R$ 100 compram apenas 18 kg de arroz (inflação de 10%)</li>
+                    </ul>
+                    <p>Seu dinheiro não mudou, mas ele <strong>perdeu 10% do poder de compra</strong>.</p>
+                </div>
+
+                <p><strong>No Brasil:</strong> A inflação média histórica é de 4-6% ao ano (medida pelo IPCA).</p>
+            </section>
+
+            <div class="callout callout-info">
+                <div class="callout-icon">💡</div>
+                <div class="callout-content">
+                    <h3>Por que chamamos de "imposto invisível"?</h3>
+                    <p>Porque você não vê saindo da conta, mas o governo não precisa aumentar impostos diretos. A inflação faz o trabalho: seu dinheiro perde valor automaticamente.</p>
+                </div>
+            </div>
+
+            <section class="article-section">
+                <h2>💸 Como a inflação te morde na prática</h2>
+
+                <h3>A armadilha da rentabilidade NOMINAL vs REAL:</h3>
+                
+                <div class="example-card">
+                    <h4>Situação: Poupança rendendo 6% ao ano</h4>
+                    <p>Parece bom, certo? <strong>ERRADO.</strong></p>
+                    <ul>
+                        <li><strong>Rentabilidade nominal:</strong> 6% ao ano</li>
+                        <li><strong>Inflação:</strong> 5% ao ano</li>
+                        <li><strong>Rentabilidade REAL:</strong> 1% ao ano (6% - 5%)</li>
+                    </ul>
+                    <p style="color: #ef4444; font-weight: 700; margin-top: 15px;">
+                        Seu dinheiro cresceu 6%, mas os preços subiram 5%. Ganho real: apenas 1%.
+                    </p>
+                </div>
+
+                <p><strong>Resultado prático:</strong></p>
+                <ul>
+                    <li>Você acha que está ganhando 6%</li>
+                    <li>Mas seu poder de compra cresceu apenas 1%</li>
+                    <li>A inflação "comeu" 83% do seu ganho!</li>
+                </ul>
+            </section>
+
+            <section class="article-section">
+                <h2>📊 Impacto no longo prazo (devastador)</h2>
+
+                <p>A inflação acumulada destrói patrimônio ao longo dos anos:</p>
+
+                <div class="example-card">
+                    <h4>Comparação: R$ 50.000 investidos por 10 anos</h4>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                        <tr style="background: rgba(255, 255, 255, 0.05);">
+                            <th style="padding: 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1);">Investimento</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.1);">Rent. Nominal</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.1);">Valor Final</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.1);">Poder de Compra Real</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05);">Poupança</td>
+                            <td style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.05);">6% a.a.</td>
+                            <td style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.05);">R$ 89.500</td>
+                            <td style="padding: 12px; text-align: right; color: #ef4444; border-bottom: 1px solid rgba(255,255,255,0.05);"><strong>~R$ 55.000</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05);">CDB 100% CDI</td>
+                            <td style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.05);">10% a.a.</td>
+                            <td style="padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.05);">R$ 129.600</td>
+                            <td style="padding: 12px; text-align: right; color: #eab308; border-bottom: 1px solid rgba(255,255,255,0.05);"><strong>~R$ 79.800</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px;">Tesouro IPCA+ 5%</td>
+                            <td style="padding: 12px; text-align: right;">IPCA + 5%</td>
+                            <td style="padding: 12px; text-align: right;">R$ 81.400</td>
+                            <td style="padding: 12px; text-align: right; color: #10b981; font-weight: 700;"><strong>R$ 81.400</strong></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p style="margin-top: 20px;"><strong>Observe:</strong></p>
+                <ul>
+                    <li>Poupança tem o maior valor nominal (R$ 89.500), mas o <strong>menor poder de compra real</strong> (R$ 55.000)</li>
+                    <li>Tesouro IPCA+ tem menor valor nominal (R$ 81.400), mas <strong>protege 100% contra inflação</strong></li>
+                    <li>A diferença em poder de compra: <strong>+R$ 26.400</strong> a favor do Tesouro IPCA+!</li>
+                </ul>
+            </section>
+
+            <div class="callout callout-warning">
+                <div class="callout-icon">⚠️</div>
+                <div class="callout-content">
+                    <h3>A armadilha da poupança</h3>
+                    <p>Poupança rende "bem" no papel (6%), mas mal protege da inflação. Você está "ganhando para perder".</p>
+                </div>
+            </div>
+
+            <section class="article-section">
+                <h2>✅ Como se proteger da inflação</h2>
+
+                <div class="tips-list">
+                    <div class="tip-item">
+                        <div class="tip-number">1</div>
+                        <div class="tip-content">
+                            <h3>Tesouro IPCA+ (proteção total)</h3>
+                            <p>Paga IPCA + taxa fixa (ex: IPCA + 5%). Seu ganho REAL está garantido, independente da inflação.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-item">
+                        <div class="tip-number">2</div>
+                        <div class="tip-content">
+                            <h3>CDBs e LCI/LCA (proteção parcial)</h3>
+                            <p>Geralmente rendem acima da inflação (CDI costuma superar IPCA), mas não têm garantia explícita.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-item">
+                        <div class="tip-number">3</div>
+                        <div class="tip-content">
+                            <h3>Renda variável (proteção no longo prazo)</h3>
+                            <p>Ações, FIIs e ETFs tendem a acompanhar ou superar a inflação em períodos longos (10+ anos).</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-item">
+                        <div class="tip-number">4</div>
+                        <div class="tip-content">
+                            <h3>Ativos reais (proteção física)</h3>
+                            <p>Imóveis, ouro, commodities sobem de preço junto com a inflação.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-item">
+                        <div class="tip-number">5</div>
+                        <div class="tip-content">
+                            <h3>FUJA da poupança para longo prazo</h3>
+                            <p>Use apenas para reserva de emergência (liquidez). Para investimentos de médio/longo prazo, escolha alternativas melhores.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>💰 Quanto você GANHA se protegendo da inflação</h2>
+
+                <p>Veja cenários práticos do ganho invisível:</p>
+
+                <div class="example-card">
+                    <h4>Cenário 1: R$ 50.000 por 10 anos (inflação média 5% a.a.)</h4>
+                    <ul>
+                        <li><strong>Poupança (6% nominal):</strong> Valor final R$ 89.500 → Poder de compra: <strong>R$ 55.000</strong></li>
+                        <li><strong>Tesouro IPCA+ 5%:</strong> Valor final R$ 81.400 → Poder de compra: <strong>R$ 81.400</strong></li>
+                        <li style="color: #10b981; font-weight: 700; font-size: 18px; margin-top: 10px;">
+                            <strong>GANHO POR SE PROTEGER: +R$ 26.400 em poder de compra real</strong> 🎯
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="example-card">
+                    <h4>Cenário 2: Aportes mensais R$ 1.000 por 20 anos</h4>
+                    <ul>
+                        <li><strong>Poupança (6% nominal):</strong> R$ 462.000 → Poder de compra: <strong>~R$ 285.000</strong></li>
+                        <li><strong>Tesouro IPCA+ 5%:</strong> R$ 411.000 → Poder de compra: <strong>R$ 411.000</strong></li>
+                        <li style="color: #10b981; font-weight: 700; font-size: 18px; margin-top: 10px;">
+                            <strong>GANHO POR SE PROTEGER: +R$ 126.000 em poder de compra real</strong> 🚀
+                        </li>
+                    </ul>
+                    <p>Você teria <strong>44% a mais</strong> de poder de compra!</p>
+                </div>
+
+                <p><strong>Conclusão:</strong> Investir sem proteção contra inflação é como correr em esteira: você se cansa, mas não sai do lugar.</p>
+            </section>
+
+            <div class="callout callout-success">
+                <div class="callout-icon">🎯</div>
+                <div class="callout-content">
+                    <h3>Regra de ouro INVLAB</h3>
+                    <p>Sempre pense em rentabilidade REAL (acima da inflação), não apenas nominal. Para longo prazo: Tesouro IPCA+, ações e ativos reais. Poupança só para emergências.</p>
+                </div>
+            </div>
+
+            <section class="article-section">
+                <h2>🔍 Explore mais sobre ganhos invisíveis</h2>
+
+                <div class="inv-category">
+                    <h3 class="inv-category-title">💰 Outros ganhos por evitar perdas</h3>
+                    <div class="inv-grid">
+                        <div class="inv-card ganho" onclick="window.location.href='ganhos-come-cotas.html'" style="cursor: pointer;">
+                            <div class="inv-card-badge ganho">🍽️ Imposto</div>
+                            <h4 class="inv-card-title">Come-cotas</h4>
+                            <p class="inv-card-description">Quanto você perde em fundos com antecipação de IR</p>
+                        </div>
+
+                        <div class="inv-card ganho" onclick="window.location.href='ganhos-iof-regressivo.html'" style="cursor: pointer;">
+                            <div class="inv-card-badge ganho">⏳ Imposto</div>
+                            <h4 class="inv-card-title">IOF regressivo</h4>
+                            <p class="inv-card-description">O imposto que pode devorar 96% do seu rendimento</p>
+                        </div>
+
+                        <div class="inv-card ganho" onclick="window.location.href='ganhos-taxas-fundos.html'" style="cursor: pointer;">
+                            <div class="inv-card-badge ganho">💳 Taxas</div>
+                            <h4 class="inv-card-title">Taxas de fundos</h4>
+                            <p class="inv-card-description">Como 2% ao ano pode roubar R$ 200 mil do seu futuro</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="callout callout-info">
+                <div class="callout-icon">🏠</div>
+                <div class="callout-content">
+                    <h3>Voltar para Ganhos Invisíveis</h3>
+                    <p><a href="../index.html#ganhos-invisiveis" style="color: #3b82f6; text-decoration: underline;">Ver todos os ganhos invisíveis</a></p>
+                </div>
+            </div>
+
+            </article>
+            </section>
+        </div>
+    </main>
+
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>
+
