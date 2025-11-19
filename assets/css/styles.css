@@ -55,8 +55,7 @@ body {
     top: 64px; /* REDUZIDO: aproxima o menu do carrossel */
     left: 0;
     right: 0;
-    background: rgba(13, 13, 13, 0.95);
-    backdrop-filter: blur(10px);
+    background: #0D0D0D; /* 100% OPACO - evita vazamento de conteúdo */
     border-bottom: 1px solid rgba(42, 127, 255, 0.2);
     z-index: 1000;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
