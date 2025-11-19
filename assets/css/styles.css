@@ -284,8 +284,7 @@ body {
     pointer-events: none;
 }
 
-/* Aparece no hover (desktop) OU quando a aba está "open" (mobile/JS) */
-.tab-with-dropdown:hover .dropdown-menu,
+/* Aparece APENAS quando tem classe "open" (clique) - melhor usabilidade */
 .tab-with-dropdown.open .dropdown-menu {
     opacity: 1 !important;
     visibility: visible !important;

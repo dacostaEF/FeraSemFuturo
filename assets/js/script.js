@@ -113,28 +113,68 @@ function initTabDropdowns() {
     
     tabDropdowns.forEach(dropdown => {
         const tabBtn = dropdown.querySelector('.tab-btn');
+        const arrow = tabBtn ? tabBtn.querySelector('.arrow') : null;
         if (!tabBtn) return;
         
-        // Clique no botão abre/fecha
-        tabBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const isOpen = dropdown.classList.contains('open');
-            
-            // Fecha todos os outros dropdowns
-            document.querySelectorAll('.tab-with-dropdown').forEach(d => {
-                d.classList.remove('open');
-            });
-            
-            // Alterna o atual
-            if (!isOpen) {
-                dropdown.classList.add('open');
+        // Se o botão tem onclick (navega para página), só a SETINHA abre o dropdown
+        if (tabBtn.hasAttribute('onclick')) {
+            // Clique na SETINHA abre/fecha dropdown
+            if (arrow) {
+                arrow.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const isOpen = dropdown.classList.contains('open');
+                    
+                    // Fecha todos os outros dropdowns
+                    document.querySelectorAll('.tab-with-dropdown').forEach(d => {
+                        if (d !== dropdown) {
+                            d.classList.remove('open');
+                        }
+                    });
+                    
+                    // Alterna o atual (toggle)
+                    if (isOpen) {
+                        dropdown.classList.remove('open');
+                    } else {
+                        dropdown.classList.add('open');
+                    }
+                });
             }
+        } else {
+            // Botão SEM onclick: clique em qualquer lugar abre/fecha
+            tabBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const isOpen = dropdown.classList.contains('open');
+                
+                // Fecha todos os outros dropdowns
+                document.querySelectorAll('.tab-with-dropdown').forEach(d => {
+                    if (d !== dropdown) {
+                        d.classList.remove('open');
+                    }
+                });
+                
+                // Alterna o atual (toggle)
+                if (isOpen) {
+                    dropdown.classList.remove('open');
+                } else {
+                    dropdown.classList.add('open');
+                }
+            });
+        }
+        
+        // Fecha dropdown ao clicar em um link dentro dele
+        const dropdownLinks = dropdown.querySelectorAll('.dropdown-menu a');
+        dropdownLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                dropdown.classList.remove('open');
+            });
         });
     });
     
-    // Fecha dropdown ao clicar fora
+    // Fecha dropdowns ao clicar FORA de qualquer dropdown
     document.addEventListener('click', function(e) {
         if (!e.target.closest('.tab-with-dropdown')) {
             document.querySelectorAll('.tab-with-dropdown').forEach(d => {
