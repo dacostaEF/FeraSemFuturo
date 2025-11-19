@@ -10,7 +10,7 @@
     width: 100%;
     max-width: 100%;
     margin: 0;
-    padding: 12px 0 4px !important; /* Mais respiro no topo (12px), menos embaixo (4px) */
+    padding: 12px 0 28px !important; /* CORRIGIDO: padding-bottom de 28px para cobertura total do gap */
     background: #0D0D0D; /* 100% OPACO - evita vazamento de conteúdo */
     position: fixed;
     top: 0;
@@ -234,7 +234,7 @@
 /* Responsividade - Tablet */
 @media (max-width: 1024px) {
     #invlab-carousel-container {
-        padding: 10px 0 3px !important; /* Mais topo, menos embaixo */
+        padding: 10px 0 24px !important; /* CORRIGIDO: padding-bottom para cobertura total */
     }
     
     .invlab-carousel-wrapper {
@@ -257,7 +257,7 @@
 /* Responsividade - Mobile */
 @media (max-width: 768px) {
     #invlab-carousel-container {
-        padding: 8px 0 3px !important; /* Mais topo, menos embaixo */
+        padding: 8px 0 22px !important; /* CORRIGIDO: padding-bottom para cobertura total */
     }
     
     .invlab-carousel-wrapper {
@@ -282,7 +282,7 @@
 /* Responsividade - Mobile Pequeno */
 @media (max-width: 480px) {
     #invlab-carousel-container {
-        padding: 6px 0 2px !important; /* Mais topo, menos embaixo */
+        padding: 6px 0 20px !important; /* CORRIGIDO: padding-bottom para cobertura total */
     }
     
     .invlab-carousel-wrapper {

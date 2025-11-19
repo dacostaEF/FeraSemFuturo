@@ -52,7 +52,7 @@ body {
 
 .main-header {
     position: fixed;
-    top: 64px; /* REDUZIDO: aproxima o menu do carrossel */
+    top: 60px; /* REDUZIDO: 64px → 60px para eliminar gap visual com carrossel */
     left: 0;
     right: 0;
     background: #0D0D0D; /* 100% OPACO - evita vazamento de conteúdo */
@@ -522,7 +522,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 32px 40px;
-    margin-top: 110px; /* REDUZIDO: aproxima o conteúdo do menu */
+    margin-top: 106px; /* REDUZIDO: 110px → 106px (compensação do menu mais próximo) */
 }
 
 .content-wrapper {
@@ -1754,11 +1754,11 @@ body {
     }
     
     .main-header {
-        top: 54px; /* REDUZIDO: aproxima menu do carrossel em tablet */
+        top: 50px; /* REDUZIDO: 54px → 50px para eliminar gap em tablet */
     }
     
     .main-content {
-        margin-top: 100px; /* REDUZIDO para tablet */
+        margin-top: 96px; /* REDUZIDO: 100px → 96px (compensação) */
     }
 
     .header-container {
@@ -1999,11 +1999,11 @@ body {
     }
     
     .main-header {
-        top: 50px; /* REDUZIDO: aproxima menu do carrossel em mobile */
+        top: 46px; /* REDUZIDO: 50px → 46px para eliminar gap em mobile */
     }
     
     .main-content {
-        margin-top: 95px; /* REDUZIDO para mobile */
+        margin-top: 91px; /* REDUZIDO: 95px → 91px (compensação) */
     }
 
     .header-container {
