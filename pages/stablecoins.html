@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stablecoins: O que São, Tipos e Riscos | INVLAB</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="msapplication-TileColor" content="#0D0D0D">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Meta Description -->
+    <meta name="description" content="Entenda o que são stablecoins, como funcionam, os diferentes tipos (centralizadas, algorítmicas), principais ativos (USDT, USDC, DAI) e seus riscos específicos.">
+    
+    <!-- INVLAB Design System -->
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+</head>
+<body>
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                <span class="logo-text">INVLAB</span>
+            </div>
+            
+            <!-- Sistema de Abas INVLAB -->
+            <div class="tabs-nav-wrapper">
+                <nav class="tabs-nav" id="tabsNav">
+                    <button class="tab-btn" onclick="window.location.href='../index.html'">
+                        🏠 Início
+                    </button>
+                    <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">
+                        📚 Primeiros<br>Passos
+                    </button>
+                    
+                    <!-- Renda Fixa -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📊 Renda<br>Fixa <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="poupanca.html">💰 Poupança</a></li>
+                            <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                            <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                            <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Renda Variável -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📈 Renda<br>Variável <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="etfs" onclick="window.location.href='etfs.html'" style="cursor: pointer;">
+                                    <span class="category-name">💵 ETFs</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                                <ul class="category-submenu" id="submenu-etfs">
+                                    <li><a href="#">📊 Simulador de Indexação</a></li>
+                                    <li><a href="#">📈 ETFs Nacionais</a></li>
+                                    <li><a href="#">🌎 ETFs Internacionais</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="fiis" onclick="window.location.href='fiis.html'" style="cursor: pointer;">
+                                    <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                                <ul class="category-submenu" id="submenu-fiis">
+                                    <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                                    <li><a href="#">🏘️ FIIs de Tijolo</a></li>
+                                    <li><a href="#">📋 FIIs de Papel</a></li>
+                                    <li><a href="#">🔄 FIIs Híbridos</a></li>
+                                    <li><a href="#">🎯 Como Escolher FIIs</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="acoes" onclick="window.location.href='acoes.html'" style="cursor: pointer;">
+                                    <span class="category-name">📈 Ações</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                                <ul class="category-submenu" id="submenu-acoes">
+                                    <li><a href="#">📊 Simulador de Dividendos</a></li>
+                                    <li><a href="#">💰 Valuation (P/L, P/VP)</a></li>
+                                    <li><a href="#">🏭 Análise Setorial</a></li>
+                                    <li><a href="#">📉 Day Trade vs Buy&Hold</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Criptoativos -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle active" onclick="window.location.href='criptoativos.html'" style="cursor: pointer;">
+                            🔐 Cripto<br>ativos <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="bitcoin.html">₿ Bitcoin</a></li>
+                            <li><a href="#">⧫ Ethereum</a></li>
+                            <li><a href="stablecoins.html">💵 Stablecoins</a></li>
+                            <li><a href="#">🪙 Altcoins</a></li>
+                            <li><a href="#">🖼️ NFTs</a></li>
+                            <li><a href="#">🔗 Tokenização</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Ferramentas -->
+                    <button class="tab-btn" onclick="window.location.href='../index.html#ferramentas'">
+                        🛠️ Ferramentas
+                    </button>
+                    
+                    <!-- Outros -->
+                    <button class="tab-btn" onclick="window.location.href='../index.html#outros-investimentos'">
+                        💎 Outros
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <div class="content-wrapper-wide">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../index.html">🏠 Início</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="criptoativos.html">🔐 Criptoativos</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">💵 Stablecoins</span>
+            </nav>
+
+            <!-- Meta do Artigo -->
+            <div class="article-meta">
+                <span class="article-badge">💵 Stablecoins</span>
+                <span class="article-time">⏱️ 8 min</span>
+            </div>
+
+            <section class="section-educational">
+            <article class="article-content">
+                <!-- Título Principal -->
+                <h1 class="article-title">Stablecoins: A Ponte entre Fiat e Cripto</h1>
+
+                <p class="article-lead">
+                    Entenda o que são stablecoins, como funcionam os diferentes tipos (centralizadas, algorítmicas, lastreadas em cripto), 
+                    conheça os principais ativos do mercado e seus riscos específicos.
+                </p>
+
+                <!-- Hero -->
+                <div class="article-hero">
+                    <div class="hero-emoji">💵</div>
+                    <p class="hero-caption">Criptoativos projetados para manter paridade com moedas tradicionais.</p>
+                </div>
+
+                <!-- Disclaimer Educacional -->
+                <div class="callout callout-info" style="margin: 24px 0;">
+                    <div class="callout-icon" style="font-size: 24px;">📘</div>
+                    <div class="callout-content">
+                        <h3>Conteúdo 100% educacional</h3>
+                        <p style="margin-bottom: 0;">Este material não é recomendação de investimento. 
+                        O objetivo é apresentar os conceitos sobre stablecoins para que você possa tomar decisões informadas.</p>
+                    </div>
+                </div>
+
+                <!-- Seção 1: O que são stablecoins -->
+                <section class="article-section">
+                    <h2>💡 O que são stablecoins?</h2>
+
+                    <p>Stablecoins são criptoativos projetados para <strong>manter um valor estável</strong>, 
+                    geralmente atrelado a uma moeda tradicional como o dólar americano (USD), euro (EUR) ou real (BRL).</p>
+
+                    <p style="margin-top: 12px;">
+                        Diferentemente do Bitcoin ou Ethereum, que têm alta volatilidade, as stablecoins buscam 
+                        oferecer <strong>previsibilidade de preço</strong>, funcionando como uma "ponte" entre 
+                        o mundo das moedas tradicionais (fiat) e o universo cripto.
+                    </p>
+
+                    <div class="example-card" style="margin-top: 20px;">
+                        <h3>Exemplo prático</h3>
+                        <p>1 USDT (Tether) busca sempre valer ≈ US$ 1,00<br>
+                        1 USDC (USD Coin) busca sempre valer ≈ US$ 1,00<br>
+                        1 DAI busca sempre valer ≈ US$ 1,00</p>
+                        <p style="margin-top: 10px;"><strong>Objetivo:</strong> Manter paridade 1:1 com o dólar.</p>
+                    </div>
+                </section>
+
+                <!-- Seção 2: Para que servem -->
+                <section class="article-section">
+                    <h2>🎯 Para que servem as stablecoins?</h2>
+
+                    <div class="inv-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 20px;">
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">🔄</div>
+                            <h4 class="inv-card-title">Meio de troca</h4>
+                            <p class="inv-card-description">
+                                Facilitam transações no universo cripto sem precisar voltar para moeda tradicional.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">🏦</div>
+                            <h4 class="inv-card-title">Reserva de valor temporária</h4>
+                            <p class="inv-card-description">
+                                Permitem "estacionar" recursos em dólar digital enquanto aguarda uma oportunidade.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">🌐</div>
+                            <h4 class="inv-card-title">Remessas internacionais</h4>
+                            <p class="inv-card-description">
+                                Podem ser usadas para enviar valor entre países de forma mais rápida que o sistema bancário tradicional.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">🔐</div>
+                            <h4 class="inv-card-title">Porta de entrada para DeFi</h4>
+                            <p class="inv-card-description">
+                                São amplamente usadas em aplicações de finanças descentralizadas (DeFi), como empréstimos e yield farming.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 3: Tipos de stablecoins -->
+                <section class="article-section">
+                    <h2>🔍 Tipos de stablecoins</h2>
+
+                    <p>Existem diferentes mecanismos para tentar manter a paridade. Os principais tipos são:</p>
+
+                    <div class="tips-list" style="margin-top: 20px;">
+                        <div class="tip-item">
+                            <div class="tip-number">1</div>
+                            <div class="tip-content">
+                                <h3>Stablecoins lastreadas em fiat (centralizadas)</h3>
+                                <p>Para cada unidade emitida, o emissor alega manter um valor equivalente em moeda tradicional 
+                                (dólar, euro) depositado em contas bancárias ou títulos de curto prazo.</p>
+                                <p style="margin-top: 8px;"><strong>Exemplos:</strong> USDT (Tether), USDC (USD Coin), USDB (Binance USD)</p>
+                                <p style="margin-top: 8px;"><strong>Risco:</strong> Depende da confiança no emissor e na auditoria das reservas.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">2</div>
+                            <div class="tip-content">
+                                <h3>Stablecoins lastreadas em criptoativos (descentralizadas)</h3>
+                                <p>São lastreadas por outros criptoativos (como Ethereum) em contratos inteligentes. 
+                                Para compensar a volatilidade do lastro, exigem supercolateralização 
+                                (você deposita mais valor do que a stablecoin emitida).</p>
+                                <p style="margin-top: 8px;"><strong>Exemplo:</strong> DAI (MakerDAO)</p>
+                                <p style="margin-top: 8px;"><strong>Risco:</strong> Complexidade técnica, risco de liquidação forçada se o colateral cair muito.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">3</div>
+                            <div class="tip-content">
+                                <h3>Stablecoins algorítmicas (sem lastro)</h3>
+                                <p>Tentam manter a paridade através de algoritmos que ajustam automaticamente a oferta. 
+                                Não têm lastro tradicional — dependem de mecanismos de incentivo econômico.</p>
+                                <p style="margin-top: 8px;"><strong>Exemplo histórico:</strong> TerraUSD (UST) — que perdeu a paridade em 2022</p>
+                                <p style="margin-top: 8px;"><strong>Risco:</strong> Extremamente alto. Mecanismo pode falhar em momentos de estresse no mercado.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 4: Principais stablecoins do mercado -->
+                <section class="article-section">
+                    <h2>📊 Principais stablecoins do mercado</h2>
+
+                    <div class="inv-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 20px;">
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-badge">💵 Fiat-backed</div>
+                            <h4 class="inv-card-title">USDT (Tether)</h4>
+                            <p class="inv-card-description">
+                                A stablecoin mais negociada do mundo. Emitida pela Tether Limited. 
+                                Alegadamente lastreada em dólar e outros ativos de curto prazo.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-badge">💵 Fiat-backed</div>
+                            <h4 class="inv-card-title">USDC (USD Coin)</h4>
+                            <p class="inv-card-description">
+                                Emitida pela Circle e Coinbase. Possui auditorias mais transparentes e regulares. 
+                                Considerada mais "confiável" por parte do mercado.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-badge">🔐 Crypto-backed</div>
+                            <h4 class="inv-card-title">DAI (MakerDAO)</h4>
+                            <p class="inv-card-description">
+                                Stablecoin descentralizada lastreada em criptoativos. 
+                                Mais complexa, mas não depende de uma empresa centralizada.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-badge">💵 Fiat-backed</div>
+                            <h4 class="inv-card-title">BUSD (Binance USD)</h4>
+                            <p class="inv-card-description">
+                                Emitida pela Paxos em parceria com a Binance. 
+                                Regulada nos EUA. Nota: Emissão foi descontinuada em 2023.
+                            </p>
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 20px;">
+                        <strong>Importante:</strong> O mercado de stablecoins é dinâmico. Novos projetos surgem, 
+                        outros são descontinuados. Sempre verifique a origem e as auditorias antes de usar.
+                    </p>
+                </section>
+
+                <!-- Seção 5: Riscos específicos -->
+                <section class="article-section">
+                    <h2>⚠️ Principais riscos das stablecoins</h2>
+
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <div class="tip-number">1</div>
+                            <div class="tip-content">
+                                <h3>Risco de lastro</h3>
+                                <p>O emissor realmente possui as reservas que alega? 
+                                Há casos históricos de falta de transparência e dúvidas sobre a real composição das reservas.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">2</div>
+                            <div class="tip-content">
+                                <h3>Risco de contraparte</h3>
+                                <p>Se o emissor tiver problemas financeiros, regulatórios ou operacionais, 
+                                a stablecoin pode perder a paridade ou até se tornar ilíquida.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">3</div>
+                            <div class="tip-content">
+                                <h3>Risco regulatório</h3>
+                                <p>Governos ao redor do mundo estão debatendo como regular stablecoins. 
+                                Mudanças nas regras podem afetar o funcionamento ou a disponibilidade.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">4</div>
+                            <div class="tip-content">
+                                <h3>Risco de despeg (de-pegging)</h3>
+                                <p>Em momentos de estresse no mercado, stablecoins podem perder temporariamente a paridade. 
+                                Stablecoins algorítmicas são especialmente vulneráveis (ex: colapso do TerraUSD em 2022).</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">5</div>
+                            <div class="tip-content">
+                                <h3>Risco de custódia e segurança</h3>
+                                <p>Como qualquer criptoativo, stablecoins exigem cuidado com chaves privadas, 
+                                carteiras digitais e escolha de plataformas de negociação.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="callout callout-warning" style="margin-top: 24px;">
+                        <div class="callout-icon" style="font-size: 24px;">📌</div>
+                        <div class="callout-content">
+                            <h3>Resumo</h3>
+                            <p style="margin-bottom: 0;">Embora stablecoins busquem reduzir a volatilidade típica de criptoativos, 
+                            elas trazem riscos próprios que precisam ser compreendidos antes de qualquer uso.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 6: Quando usar stablecoins -->
+                <section class="article-section">
+                    <h2>🤔 Quando usar stablecoins faz sentido?</h2>
+
+                    <ul style="list-style: none; padding: 0; margin-top: 16px;">
+                        <li style="padding: 10px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #10B981; border-radius: 4px; margin-bottom: 8px;">
+                            ✅ Para <strong>estacionar valor temporariamente</strong> enquanto negocia entre criptoativos.
+                        </li>
+                        <li style="padding: 10px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #3B82F6; border-radius: 4px; margin-bottom: 8px;">
+                            ✅ Para <strong>proteger-se da volatilidade</strong> sem sair completamente do ecossistema cripto.
+                        </li>
+                        <li style="padding: 10px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #F59E0B; border-radius: 4px; margin-bottom: 8px;">
+                            ✅ Para <strong>participar de aplicações DeFi</strong> que exigem stablecoins como colateral.
+                        </li>
+                        <li style="padding: 10px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #8B5CF6; border-radius: 4px; margin-bottom: 8px;">
+                            ✅ Para <strong>remessas internacionais</strong> em contextos onde o custo/tempo bancário é proibitivo.
+                        </li>
+                    </ul>
+
+                    <p style="margin-top: 20px;">
+                        <strong>Não use stablecoins como:</strong> Substituto completo para sua reserva de emergência em conta corrente, 
+                        ou como único local para guardar recursos que você não pode perder. 
+                        Sempre avalie o emissor e os riscos envolvidos.
+                    </p>
+                </section>
+
+                <!-- Seção 7: Stablecoins no Brasil -->
+                <section class="article-section">
+                    <h2>🇧🇷 Stablecoins no Brasil</h2>
+
+                    <p>No Brasil, stablecoins lastreadas em dólar (USDT, USDC) são amplamente usadas em exchanges brasileiras. 
+                    Projetos de stablecoins em real (BRL) também têm surgido, mas ainda com menor adoção.</p>
+
+                    <div class="example-card" style="margin-top: 16px;">
+                        <h3>Considerações importantes</h3>
+                        <ul style="margin-top: 10px; padding-left: 18px;">
+                            <li><strong>Tributação:</strong> Ganhos com criptoativos (incluindo stablecoins) estão sujeitos a IR. 
+                            Conversões entre cripto e fiat podem ser tributáveis.</li>
+                            <li><strong>Declaração:</strong> Stablecoins devem ser declaradas em Bens e Direitos na sua declaração de IR.</li>
+                            <li><strong>Regulação:</strong> O Banco Central e a CVM estão acompanhando o mercado de stablecoins. 
+                            Regulamentações podem mudar.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Seção 8: Próximos passos -->
+                <section class="article-section">
+                    <h2>🔍 Próximos passos</h2>
+
+                    <p>Agora que você entendeu stablecoins, explore outros conteúdos do módulo Criptoativos:</p>
+
+                    <div class="inv-grid" style="margin-top: 20px;">
+                        <div class="inv-card" style="cursor: pointer;" onclick="window.location.href='bitcoin.html';">
+                            <div class="inv-card-badge">₿ Fundamentos</div>
+                            <h4 class="inv-card-title">Bitcoin</h4>
+                            <p class="inv-card-description">Entenda o primeiro e maior criptoativo em valor de mercado.</p>
+                        </div>
+
+                        <div class="inv-card" style="cursor: pointer;" onclick="window.location.href='#';">
+                            <div class="inv-card-badge">⧫ Plataformas</div>
+                            <h4 class="inv-card-title">Ethereum</h4>
+                            <p class="inv-card-description">Conheça a rede que possibilita contratos inteligentes e DeFi.</p>
+                        </div>
+
+                        <div class="inv-card" style="cursor: pointer;" onclick="window.location.href='criptoativos.html';">
+                            <div class="inv-card-badge">🔐 Visão geral</div>
+                            <h4 class="inv-card-title">Introdução aos Criptoativos</h4>
+                            <p class="inv-card-description">Revise a visão ampla sobre cripto e seu papel na carteira.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Callout Voltar -->
+                <div class="callout callout-info">
+                    <div class="callout-icon" style="font-size: 24px;">🏠</div>
+                    <div class="callout-content">
+                        <h3>Voltar para o início</h3>
+                        <p style="margin-bottom: 0;"><a href="../index.html" style="color: #3B82F6; text-decoration: underline;">Ver todas as seções do INVLAB</a></p>
+                    </div>
+                </div>
+
+            </article>
+            </section>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>
+
