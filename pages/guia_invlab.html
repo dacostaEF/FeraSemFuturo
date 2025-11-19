@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia do INVLAB – Mapa de Navegação e Trilhas de Estudo</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="msapplication-TileColor" content="#0D0D0D">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Meta Description -->
+    <meta name="description" content="Guia de navegação do INVLAB: veja a estrutura completa do site, as trilhas de estudo e descubra onde você está no laboratório de investimentos.">
+    
+    <!-- INVLAB Design System -->
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+</head>
+<body>
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                <span class="logo-text">INVLAB</span>
+            </div>
+            
+            <!-- Sistema de Abas INVLAB -->
+            <div class="tabs-nav-wrapper">
+                <nav class="tabs-nav" id="tabsNav">
+                    <button class="tab-btn" onclick="window.location.href='../index.html'">
+                        🏠 Início
+                    </button>
+                    <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">
+                        📚 Primeiros<br>Passos
+                    </button>
+                    
+                    <!-- Renda Fixa -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📊 Renda<br>Fixa <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="poupanca.html">💰 Poupança</a></li>
+                            <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                            <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                            <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Renda Variável -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📈 Renda<br>Variável <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="etfs" onclick="window.location.href='etfs.html'" style="cursor: pointer;">
+                                    <span class="category-name">💵 ETFs</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                            </li>
+                            
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="fiis" onclick="window.location.href='fiis.html'" style="cursor: pointer;">
+                                    <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                            </li>
+                            
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="acoes" onclick="window.location.href='acoes.html'" style="cursor: pointer;">
+                                    <span class="category-name">📈 Ações</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Criptoativos -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle" onclick="window.location.href='criptoativos.html'">
+                            🔐 Cripto<br>ativos <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="bitcoin.html">₿ Bitcoin</a></li>
+                            <li><a href="#">⧫ Ethereum</a></li>
+                            <li><a href="stablecoins.html">💵 Stablecoins</a></li>
+                            <li><a href="blockchain.html">⛓️ Blockchain</a></li>
+                            <li><a href="cbdc.html">🏛️ CBDCs</a></li>
+                            <li><a href="#">🪙 Altcoins</a></li>
+                            <li><a href="#">🖼️ NFTs</a></li>
+                            <li><a href="#">🔗 Tokenização</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Ferramentas -->
+                    <button class="tab-btn" onclick="window.location.href='../index.html#ferramentas'">
+                        🛠️ Ferramentas
+                    </button>
+                    
+                    <!-- Outros -->
+                    <button class="tab-btn" onclick="window.location.href='../index.html#outros-investimentos'">
+                        💎 Outros
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <div class="content-wrapper-wide">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../index.html">🏠 Início</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">🧭 Guia do INVLAB</span>
+            </nav>
+
+            <section class="section-educational">
+            <article class="article-content">
+                <!-- Título -->
+                <h1 class="article-title">🧭 Guia do INVLAB – Onde Você Está e Para Onde Pode Ir</h1>
+                
+                <p class="article-lead">
+                    Este guia existe para ajudar você (e qualquer pessoa) a entender rapidamente 
+                    <strong>como o INVLAB está organizado</strong>, onde você está agora 
+                    e quais são os próximos passos mais naturais na sua jornada de aprendizado.
+                </p>
+
+                <!-- Visão Geral em Cards -->
+                <section class="article-section">
+                    <h2>🗺️ Visão geral da estrutura do INVLAB</h2>
+                    
+                    <p>
+                        O site está organizado em grandes blocos temáticos. 
+                        Pense no INVLAB como um laboratório com várias "salas":
+                    </p>
+
+                    <div class="inv-grid" style="margin-top: 20px;">
+                        <div class="inv-card" onclick="window.location.href='../index.html#primeiros-passos';" style="cursor: pointer;">
+                            <div class="inv-card-badge">🧪 Comece por aqui</div>
+                            <h3 class="inv-card-title">Primeiros Passos</h3>
+                            <p class="inv-card-description">
+                                Conceitos básicos de juros, inflação, classes de ativos e como começar a investir com segurança.
+                            </p>
+                        </div>
+
+                        <div class="inv-card" onclick="window.location.href='poupanca.html';" style="cursor: pointer;">
+                            <div class="inv-card-badge">📊 Base segura</div>
+                            <h3 class="inv-card-title">Renda Fixa</h3>
+                            <p class="inv-card-description">
+                                Poupança, CDBs, Tesouro Direto, LCI/LCA e simuladores para comparar rentabilidades.
+                            </p>
+                        </div>
+
+                        <div class="inv-card" style="cursor: pointer;">
+                            <div class="inv-card-badge">📈 Crescimento</div>
+                            <h3 class="inv-card-title">Renda Variável</h3>
+                            <p class="inv-card-description">
+                                Ações, FIIs, ETFs e conteúdos para entender risco, volatilidade e oportunidades de longo prazo.
+                            </p>
+                        </div>
+
+                        <div class="inv-card" onclick="window.location.href='criptoativos.html';" style="cursor: pointer;">
+                            <div class="inv-card-badge">🔐 Mundo digital</div>
+                            <h3 class="inv-card-title">Criptoativos</h3>
+                            <p class="inv-card-description">
+                                Bitcoin, Stablecoins, Blockchain, CBDCs e outros temas ligados à nova economia digital.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Trilhas de estudo -->
+                <section class="article-section">
+                    <h2>🎯 Trilhas de estudo recomendadas</h2>
+                    
+                    <p>Para não se perder, você pode seguir uma destas trilhas sugeridas:</p>
+
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <div class="tip-number">1</div>
+                            <div class="tip-content">
+                                <h3>Trilha Iniciante</h3>
+                                <p>
+                                    <strong>Objetivo:</strong> entender o básico e fugir dos principais erros.
+                                </p>
+                                <ul style="margin-top: 8px; padding-left: 18px;">
+                                    <li>1️⃣ Início & Primeiros Passos (página inicial)</li>
+                                    <li>2️⃣ <a href="poupanca.html" style="color: #3B82F6;">Poupança</a> – entender por que quase não faz mais sentido</li>
+                                    <li>3️⃣ <a href="simulador-cdbs.html" style="color: #3B82F6;">CDBs</a> e <a href="simulador-tesouro-direto.html" style="color: #3B82F6;">Tesouro Direto</a> – conhecer as alternativas</li>
+                                    <li>4️⃣ Simuladores de Renda Fixa – comparar na prática</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">2</div>
+                            <div class="tip-content">
+                                <h3>Trilha de Crescimento</h3>
+                                <p>
+                                    <strong>Objetivo:</strong> começar a entender Renda Variável com responsabilidade.
+                                </p>
+                                <ul style="margin-top: 8px; padding-left: 18px;">
+                                    <li>1️⃣ Revisar Renda Fixa (base de segurança)</li>
+                                    <li>2️⃣ Introdução a Ações, FIIs e ETFs</li>
+                                    <li>3️⃣ Conteúdos específicos de FIIs e ETFs</li>
+                                    <li>4️⃣ Ferramentas e simuladores de Renda Variável (quando disponíveis)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">3</div>
+                            <div class="tip-content">
+                                <h3>Trilha Cripto com Pé no Chão</h3>
+                                <p>
+                                    <strong>Objetivo:</strong> entender cripto como tecnologia e classe de ativo, não como aposta.
+                                </p>
+                                <ul style="margin-top: 8px; padding-left: 18px;">
+                                    <li>1️⃣ <a href="criptoativos.html" style="color: #3B82F6;">Introdução aos Criptoativos</a></li>
+                                    <li>2️⃣ <a href="bitcoin.html" style="color: #3B82F6;">Bitcoin</a> (visão geral)</li>
+                                    <li>3️⃣ <a href="stablecoins.html" style="color: #3B82F6;">Stablecoins</a></li>
+                                    <li>4️⃣ <a href="blockchain.html" style="color: #3B82F6;">Blockchain</a></li>
+                                    <li>5️⃣ <a href="cbdc.html" style="color: #3B82F6;">CBDCs</a> (Real Digital / DREX)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recursos por Tipo -->
+                <section class="article-section">
+                    <h2>🔍 Encontre conteúdo por tipo</h2>
+                    
+                    <p>Se você está procurando um tipo específico de conteúdo, use este índice:</p>
+
+                    <div class="example-card" style="margin-top: 20px;">
+                        <h3>📅 Linhas do Tempo (Timelines)</h3>
+                        <ul style="margin-top: 10px; padding-left: 18px; line-height: 1.8;">
+                            <li><a href="bitcoin.html" style="color: #3B82F6;">História do Bitcoin</a> – origem e marcos principais (2008-2024)</li>
+                            <li><a href="stablecoins.html" style="color: #3B82F6;">Evolução das Stablecoins</a> – de 2014 até o colapso da UST</li>
+                        </ul>
+                    </div>
+
+                    <div class="example-card" style="margin-top: 16px;">
+                        <h3>📊 Tabelas Comparativas</h3>
+                        <ul style="margin-top: 10px; padding-left: 18px; line-height: 1.8;">
+                            <li><a href="blockchain.html" style="color: #3B82F6;">Blockchain x Banco de Dados Tradicional</a></li>
+                            <li><a href="cbdc.html" style="color: #3B82F6;">CBDCs x Stablecoins x Criptomoedas</a></li>
+                            <li><a href="criptoativos.html" style="color: #3B82F6;">Renda Fixa x Renda Variável x Criptoativos</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="example-card" style="margin-top: 16px;">
+                        <h3>⚖️ Marcos Legais e Regulamentações</h3>
+                        <ul style="margin-top: 10px; padding-left: 18px; line-height: 1.8;">
+                            <li><a href="poupanca.html" style="color: #3B82F6;">Mudança nas regras da Poupança</a> – MP 567/2012 e Lei 12.703/2012</li>
+                            <li><a href="ganhos-come-cotas.html" style="color: #3B82F6;">Come-Cotas em Fundos</a> – Lei 11.033/2004 e Decreto 9.580/2018</li>
+                            <li><a href="ganhos-iof-regressivo.html" style="color: #3B82F6;">IOF Regressivo</a> – Lei 5.143/1966 e Decreto 6.306/2007</li>
+                        </ul>
+                    </div>
+
+                    <div class="example-card" style="margin-top: 16px;">
+                        <h3>🧮 Simuladores Práticos</h3>
+                        <ul style="margin-top: 10px; padding-left: 18px; line-height: 1.8;">
+                            <li><a href="simulador-cdbs.html" style="color: #3B82F6;">Simulador de CDBs</a></li>
+                            <li><a href="simulador-tesouro-direto.html" style="color: #3B82F6;">Simulador de Tesouro Direto</a></li>
+                            <li><a href="simulador-lci-lca.html" style="color: #3B82F6;">Simulador de LCI/LCA</a></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Onde estou agora? -->
+                <section class="article-section">
+                    <h2>📍 Como saber onde você está no site</h2>
+                    
+                    <p>
+                        Em cada página do INVLAB, você pode usar três elementos para se localizar:
+                    </p>
+
+                    <ul style="margin-top: 8px; padding-left: 20px; line-height: 1.8; color: #CBD5E1;">
+                        <li><strong>1. Breadcrumb (trilha de navegação)</strong> — logo abaixo do cabeçalho, 
+                            mostrando algo como: <em>Início / Criptoativos / Bitcoin</em>.</li>
+                        <li><strong>2. Aba ativa no menu superior</strong> — a área em que você está (Renda Fixa, 
+                            Renda Variável, Cripto, etc.) aparece destacada.</li>
+                        <li><strong>3. Título e "badge" do artigo</strong> — cada página traz um selo como 
+                            <em>₿ Bitcoin</em>, <em>💵 Stablecoins</em>, <em>🏛️ CBDCs</em>, indicando o tema central.</li>
+                    </ul>
+
+                    <div class="callout callout-info" style="margin-top: 16px;">
+                        <div class="callout-icon">💡</div>
+                        <div class="callout-content">
+                            <h3>Dica</h3>
+                            <p>Se em algum momento você se sentir perdido, volte para este <strong>Guia do INVLAB</strong> 
+                            ou para a <a href="../index.html" style="color: #3B82F6;">página inicial</a>. 
+                            A partir daqui, você sempre encontra um próximo passo claro.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Lista mais "seca" de páginas -->
+                <section class="article-section">
+                    <h2>🧩 Índice completo de páginas</h2>
+
+                    <div class="inv-grid" style="margin-top: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+                        <div class="inv-card">
+                            <div class="inv-card-badge">📊 Renda Fixa</div>
+                            <ul style="margin-top: 8px; padding-left: 18px; line-height: 1.7; color: #CBD5E1;">
+                                <li><a href="poupanca.html" style="color: #3B82F6;">💰 Poupança</a></li>
+                                <li><a href="simulador-cdbs.html" style="color: #3B82F6;">🏦 CDBs (simulador)</a></li>
+                                <li><a href="simulador-tesouro-direto.html" style="color: #3B82F6;">🇧🇷 Tesouro Direto (simulador)</a></li>
+                                <li><a href="simulador-lci-lca.html" style="color: #3B82F6;">🏛️ LCI/LCA (simulador)</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="inv-card">
+                            <div class="inv-card-badge">📈 Renda Variável</div>
+                            <ul style="margin-top: 8px; padding-left: 18px; line-height: 1.7; color: #CBD5E1;">
+                                <li>📈 Ações (em breve)</li>
+                                <li>🏢 Fundos Imobiliários - FIIs (em breve)</li>
+                                <li>💵 ETFs (em breve)</li>
+                            </ul>
+                        </div>
+
+                        <div class="inv-card">
+                            <div class="inv-card-badge">🔐 Criptoativos</div>
+                            <ul style="margin-top: 8px; padding-left: 18px; line-height: 1.7; color: #CBD5E1;">
+                                <li><a href="criptoativos.html" style="color: #3B82F6;">🔐 Introdução aos Criptoativos</a></li>
+                                <li><a href="bitcoin.html" style="color: #3B82F6;">₿ Bitcoin</a></li>
+                                <li><a href="stablecoins.html" style="color: #3B82F6;">💵 Stablecoins</a></li>
+                                <li><a href="blockchain.html" style="color: #3B82F6;">⛓️ Blockchain</a></li>
+                                <li><a href="cbdc.html" style="color: #3B82F6;">🏛️ CBDCs</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="inv-card">
+                            <div class="inv-card-badge">📚 Outros Conteúdos</div>
+                            <ul style="margin-top: 8px; padding-left: 18px; line-height: 1.7; color: #CBD5E1;">
+                                <li><a href="ganhos-come-cotas.html" style="color: #3B82F6;">Come-Cotas em Fundos</a></li>
+                                <li><a href="ganhos-iof-regressivo.html" style="color: #3B82F6;">IOF Regressivo</a></li>
+                                <li><a href="ganhos-taxas-fundos.html" style="color: #3B82F6;">Taxas de Fundos</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Status do site -->
+                <section class="article-section">
+                    <div class="callout callout-success">
+                        <div class="callout-icon">📊</div>
+                        <div class="callout-content">
+                            <h3>Status do INVLAB</h3>
+                            <p style="color: #CBD5E1; font-size: 0.95rem; line-height: 1.6;">
+                                <strong>Última atualização:</strong> Novembro 2024<br>
+                                <strong>Páginas ativas:</strong> 15 páginas educacionais<br>
+                                <strong>Em desenvolvimento:</strong> 20+ páginas planejadas (Ethereum, Ações, FIIs, ETFs e mais)<br>
+                                <strong>Recursos:</strong> Simuladores, timelines, tabelas comparativas e marcos legais
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Callout Voltar -->
+                <div class="callout callout-info">
+                    <div class="callout-icon">🏠</div>
+                    <div class="callout-content">
+                        <h3>Voltar para o início</h3>
+                        <p><a href="../index.html" style="color: #3B82F6; text-decoration: underline;">Ver página inicial do INVLAB</a></p>
+                    </div>
+                </div>
+
+            </article>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: rgba(15, 23, 42, 0.9); border-top: 1px solid rgba(59, 130, 246, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+        <div class="content-wrapper-wide">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px;">
+                <!-- Coluna 1: Sobre -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">
+                        Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.
+                    </p>
+                    <a href="guia_invlab.html" style="color: #3B82F6; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
+                        🧭 Guia do Site →
+                    </a>
+                </div>
+
+                <!-- Coluna 2: Renda Fixa -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="poupanca.html" style="color: #CBD5E1; text-decoration: none;">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 3: Criptoativos -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Criptoativos</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="criptoativos.html" style="color: #CBD5E1; text-decoration: none;">🔐 Introdução</a></li>
+                        <li><a href="bitcoin.html" style="color: #CBD5E1; text-decoration: none;">₿ Bitcoin</a></li>
+                        <li><a href="stablecoins.html" style="color: #CBD5E1; text-decoration: none;">💵 Stablecoins</a></li>
+                        <li><a href="blockchain.html" style="color: #CBD5E1; text-decoration: none;">⛓️ Blockchain</a></li>
+                        <li><a href="cbdc.html" style="color: #CBD5E1; text-decoration: none;">🏛️ CBDCs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 4: Navegação -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Navegação</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="../index.html" style="color: #CBD5E1; text-decoration: none;">🏠 Início</a></li>
+                        <li><a href="../index.html#primeiros-passos" style="color: #CBD5E1; text-decoration: none;">📚 Primeiros Passos</a></li>
+                        <li><a href="guia_invlab.html" style="color: #10B981; text-decoration: none; font-weight: 600;">🧭 Guia do INVLAB</a></li>
+                        <li><a href="../index.html#ferramentas" style="color: #CBD5E1; text-decoration: none;">🛠️ Ferramentas</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Disclaimers -->
+            <div style="border-top: 1px solid rgba(59, 130, 246, 0.1); padding-top: 20px; margin-top: 20px;">
+                <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 8px;">
+                    ⚠️ Conteúdo 100% educacional. Não somos corretora, não vendemos produtos, não recebemos comissões.
+                </p>
+                <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                    © 2025 INVLAB - Laboratório de Investimentos | Plataforma Educacional
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>
+

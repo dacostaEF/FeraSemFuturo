@@ -322,6 +322,14 @@ body {
     padding-left: 20px;
 }
 
+/* Item ativo no dropdown - destaque visual */
+.tab-with-dropdown .dropdown-menu a.active {
+    background: rgba(42, 127, 255, 0.18);
+    color: var(--blue-action);
+    border-left: 3px solid var(--blue-action);
+    font-weight: 600;
+}
+
 /* Seções do Dropdown - Estilo limpo e elegante */
 .tab-with-dropdown .dropdown-section {
     padding: 12px 20px 6px;
