@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poupança: Como Funciona e Quando Vale a Pena | INVLAB</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    
+    <!-- Theme Color - Barra do navegador mobile (Preto Profissional) -->
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="msapplication-TileColor" content="#0D0D0D">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Meta Description -->
+    <meta name="description" content="Entenda como funciona a Poupança, suas regras, rendimento e quando ela realmente vale a pena comparada a outros investimentos.">
+    
+    <!-- INVLAB Design System (Universal Cards) -->
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+</head>
+<body>
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                <span class="logo-text">INVLAB</span>
+            </div>
+            
+            <!-- Sistema de Abas INVLAB -->
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">
+                    🏠 Início
+                </button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">
+                    📚 Primeiros<br>Passos
+                </button>
+                
+                <!-- ABA COM DROPDOWN: RENDA FIXA -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle active">
+                        📊 Renda<br>Fixa <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="poupanca.html">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                
+                <!-- ABA COM DROPDOWN: RENDA VARIÁVEL -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">
+                        📈 Renda<br>Variável <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <!-- CATEGORIA 1: ETFs (Iniciante - Diversificação) -->
+                        <li class="dropdown-category">
+                            <div class="category-header" data-category="etfs" onclick="window.location.href='etfs.html'" style="cursor: pointer;">
+                                <span class="category-name">💵 ETFs</span>
+                                <span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-etfs">
+                                <li><a href="#">📊 Simulador de Indexação</a></li>
+                                <li><a href="#">📈 ETFs Nacionais</a></li>
+                                <li><a href="#">🌎 ETFs Internacionais</a></li>
+                            </ul>
+                        </li>
+                        
+                        <!-- CATEGORIA 2: FIIs (Intermediário - Renda Passiva) -->
+                        <li class="dropdown-category">
+                            <div class="category-header" data-category="fiis" onclick="window.location.href='fiis.html'" style="cursor: pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span>
+                                <span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-fiis">
+                                <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                                <li><a href="#">🏘️ FIIs de Tijolo</a></li>
+                                <li><a href="#">📋 FIIs de Papel</a></li>
+                                <li><a href="#">🔄 FIIs Híbridos</a></li>
+                                <li><a href="#">🎯 Como Escolher FIIs</a></li>
+                            </ul>
+                        </li>
+                        
+                        <!-- CATEGORIA 3: Ações (Avançado - Análise Individual) -->
+                        <li class="dropdown-category">
+                            <div class="category-header" data-category="acoes" onclick="window.location.href='acoes.html'" style="cursor: pointer;">
+                                <span class="category-name">📈 Ações</span>
+                                <span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-acoes">
+                                <li><a href="#">📊 Simulador de Dividendos</a></li>
+                                <li><a href="#">💰 Valuation (P/L, P/VP)</a></li>
+                                <li><a href="#">🏭 Análise Setorial</a></li>
+                                <li><a href="#">📉 Day Trade vs Buy&Hold</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- ABA COM DROPDOWN: CRIPTOATIVOS -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">
+                        🔐 Cripto<br>ativos <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">₿ Bitcoin</a></li>
+                        <li><a href="#">⧫ Ethereum</a></li>
+                        <li><a href="#">🪙 Altcoins</a></li>
+                        <li><a href="#">🖼️ NFTs</a></li>
+                        <li><a href="#">🔗 Tokenização</a></li>
+                    </ul>
+                </div>
+                
+                <!-- ABA: FERRAMENTAS -->
+                <button class="tab-btn" onclick="window.location.href='../index.html#ferramentas'">
+                    🛠️ Ferramentas
+                </button>
+                
+                <!-- ABA: OUTROS INVESTIMENTOS -->
+                <button class="tab-btn" onclick="window.location.href='../index.html#outros-investimentos'">
+                    💎 Outros
+                </button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <div class="content-wrapper-wide">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../index.html">🏠 Início</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../index.html#renda-fixa">📊 Renda Fixa</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">💰 Poupança</span>
+            </nav>
+
+            <!-- Meta do Artigo -->
+            <div class="article-meta">
+                <span class="article-badge">💰 Renda Fixa</span>
+                <span class="article-time">⏱️ 7 min</span>
+            </div>
+
+            <!-- Seção Educacional -->
+            <section class="section-educational">
+            <article class="article-content">
+                <!-- Título Principal -->
+                <h1 class="article-title">Poupança: Como Funciona e Quando Vale a Pena</h1>
+                
+                <p class="article-lead">
+                    Entenda como funciona a Poupança, suas regras, rendimento e quando ela realmente vale a pena comparada a outros investimentos.
+                </p>
+
+                <!-- Micro-disclaimer educacional -->
+                <div style="text-align: center; margin: 24px 0; padding: 16px 24px; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 12px;">
+                    <p style="margin: 0; font-size: 14px; line-height: 1.6; color: rgba(255, 255, 255, 0.9);">
+                        🔍 <strong>Conteúdo 100% educacional.</strong> Não é recomendação de investimento. Use os simuladores do INVLAB para comparar opções na prática.
+                    </p>
+                </div>
+
+                <!-- Hero -->
+                <div class="article-hero">
+                    <div class="hero-emoji">💰📊</div>
+                    <p class="hero-caption">O investimento mais tradicional do Brasil</p>
+                </div>
+
+            <!-- Seção 1: Entendendo a Poupança -->
+            <section class="article-section">
+                <h2>🟦 Entendendo a Poupança</h2>
+                
+                <p>A <strong>Poupança</strong> é um dos investimentos mais tradicionais do Brasil.</p>
+                
+                <p>Ela é:</p>
+                
+                <div class="inv-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-top: 24px;">
+                    <div class="inv-card fundamentos">
+                        <div class="inv-card-icon" style="font-size: 32px;">✅</div>
+                        <h4 class="inv-card-title">Simples</h4>
+                        <p class="inv-card-description">Disponível em qualquer banco, sem burocracia</p>
+                    </div>
+                    
+                    <div class="inv-card fundamentos">
+                        <div class="inv-card-icon" style="font-size: 32px;">🎯</div>
+                        <h4 class="inv-card-title">Isenta de IR</h4>
+                        <p class="inv-card-description">Não paga Imposto de Renda para pessoa física</p>
+                    </div>
+                    
+                    <div class="inv-card fundamentos">
+                        <div class="inv-card-icon" style="font-size: 32px;">🛡️</div>
+                        <h4 class="inv-card-title">Garantida</h4>
+                        <p class="inv-card-description">FGC garante até R$ 250 mil por CPF por banco</p>
+                    </div>
+                    
+                    <div class="inv-card fundamentos">
+                        <div class="inv-card-icon" style="font-size: 32px;">⚡</div>
+                        <h4 class="inv-card-title">Liquidez Diária</h4>
+                        <p class="inv-card-description">Disponível para saque a qualquer momento</p>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Seção 2: Poupança Antiga vs Nova -->
+            <section class="article-section">
+                <h2>🟩 Poupança Antiga vs Poupança Nova</h2>
+
+                <!-- Callout com informações legais -->
+                <div class="callout callout-warning">
+                    <div class="callout-icon" style="font-size: 24px;">📋</div>
+                    <div class="callout-content">
+                        <h3>Marco Legal</h3>
+                        <p>A regra atual da poupança foi criada em <strong>maio de 2012</strong>, pela <strong>MP 567/2012</strong>, depois convertida na <strong>Lei 12.703/2012</strong>.</p>
+                        <p style="margin-bottom: 0;">Desde então, existem duas modalidades: <strong>poupança antiga</strong> (até 03/05/2012) e <strong>poupança nova</strong> (a partir de 04/05/2012), cada uma com regras diferentes de rendimento.</p>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <h4>📅 Poupança Antiga (depósitos até 03/05/2012)</h4>
+                    <p style="font-size: 18px; font-weight: 600; margin: 16px 0;">Rende <strong>0,5% ao mês + TR</strong>, independentemente da Selic.</p>
+                    <p style="margin: 0; color: rgba(255, 255, 255, 0.8);">Essa regra continua valendo para depósitos feitos antes de maio de 2012.</p>
+                </div>
+
+                <div class="example-card">
+                    <h4>📅 Poupança Nova (depósitos após 04/05/2012)</h4>
+                    <p style="margin: 16px 0 8px;">O rendimento <strong>depende da Selic:</strong></p>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="padding: 12px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #10B981; border-radius: 4px; margin-bottom: 8px;">
+                            ✅ <strong>Selic > 8,5% ao ano:</strong> rende <strong>0,5% ao mês + TR</strong>
+                        </li>
+                        <li style="padding: 12px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #EF4444; border-radius: 4px;">
+                            ⚠️ <strong>Selic ≤ 8,5% ao ano:</strong> rende <strong>70% da Selic + TR</strong>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="callout callout-warning" style="margin-top: 24px;">
+                    <div class="callout-icon">📌</div>
+                    <div class="callout-content">
+                        <h3>Sobre a TR (Taxa Referencial)</h3>
+                        <p>Como a TR está próxima de zero desde 2017, ela praticamente não influencia o resultado final.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 3: Por que parece render menos -->
+            <section class="article-section">
+                <h2>📉 Por que a Poupança parece render menos hoje?</h2>
+
+                <p>De forma simples:</p>
+
+                <div class="tips-list">
+                    <div class="tip-item">
+                        <div class="tip-number">1</div>
+                        <div class="tip-content">
+                            <h3>Mudança na regra</h3>
+                            <p>Quando a Selic caiu, a regra nova reduziu automaticamente o rendimento da poupança.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-item">
+                        <div class="tip-number">2</div>
+                        <div class="tip-content">
+                            <h3>Mais opções disponíveis</h3>
+                            <p>Com a expansão das corretoras digitais, produtos como CDB, LCI/LCA e Tesouro Selic ficaram muito acessíveis.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-item">
+                        <div class="tip-number">3</div>
+                        <div class="tip-content">
+                            <h3>Inflação alta</h3>
+                            <p>A inflação passou vários anos acima da poupança, gerando ganho real baixo.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="margin-top: 24px;"><strong>Isso não torna a poupança "ruim", mas sim limitada.</strong></p>
+            </section>
+
+            <!-- Seção 4: Comparação Direta -->
+            <section class="article-section">
+                <h2>📊 Comparação Direta (didática e neutra)</h2>
+
+                <div class="example-card">
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                        <thead>
+                            <tr style="background: rgba(255, 255, 255, 0.05);">
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1);">Produto</th>
+                                <th style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1);">Garantia</th>
+                                <th style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1);">IR</th>
+                                <th style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1);">Rendimento Típico</th>
+                                <th style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1);">Liquidez</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); font-weight: 600;">Poupança</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);">FGC</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);">Não</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); color: #F59E0B;">Baixo</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);">Diária</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); font-weight: 600;">Tesouro Selic</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);">Governo</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);">Sim</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); color: #10B981;">Alto × segurança</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);">D+1</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); font-weight: 600;">CDB (100% CDI)</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);">FGC</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);">Sim</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); color: #3B82F6;">Médio/Alto</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);">Diária</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; font-weight: 600;">LCI/LCA</td>
+                                <td style="padding: 12px; text-align: center;">FGC</td>
+                                <td style="padding: 12px; text-align: center;">Não</td>
+                                <td style="padding: 12px; text-align: center; color: #10B981;">Alto (líquido)</td>
+                                <td style="padding: 12px; text-align: center;">Carência</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Seção 5: Quando faz sentido -->
+            <section class="article-section">
+                <h2>🧠 Quando a Poupança Ainda Faz Sentido?</h2>
+
+                <p style="margin-bottom: 24px;">Sendo honesto e sem demonização, a poupança ainda pode fazer sentido em situações específicas:</p>
+
+                <div class="inv-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                    <div class="inv-card fundamentos">
+                        <div class="inv-card-icon" style="font-size: 28px;">🌱</div>
+                        <h4 class="inv-card-title">Usuário aprendendo</h4>
+                        <p class="inv-card-description">Primeiro contato com investimentos, ainda está migrando aos poucos</p>
+                    </div>
+
+                    <div class="inv-card fundamentos">
+                        <div class="inv-card-icon" style="font-size: 28px;">💵</div>
+                        <h4 class="inv-card-title">Valores muito pequenos</h4>
+                        <p class="inv-card-description">Quantias mínimas só para organizar o dia a dia</p>
+                    </div>
+
+                    <div class="inv-card fundamentos">
+                        <div class="inv-card-icon" style="font-size: 28px;">⏱️</div>
+                        <h4 class="inv-card-title">Poucos dias parado</h4>
+                        <p class="inv-card-description">Dinheiro que vai ficar aplicado por período muito curto</p>
+                    </div>
+
+                    <div class="inv-card fundamentos">
+                        <div class="inv-card-icon" style="font-size: 28px;">✨</div>
+                        <h4 class="inv-card-title">Simplicidade total</h4>
+                        <p class="inv-card-description">Para quem prioriza facilidade acima de rentabilidade</p>
+                    </div>
+                </div>
+
+                <div class="callout callout-info" style="margin-top: 32px;">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-content">
+                        <h3>Contexto, não demonização</h3>
+                        <p style="margin-bottom: 0;">Para quem busca rentabilidade ou tem objetivos de médio/longo prazo, existem opções igualmente simples e seguras, mas com retornos maiores — e é exatamente isso que o INVLAB mostra para você.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 6: Educação Financeira -->
+            <section class="article-section">
+                <h2>💡 Educação Financeira: o ponto principal</h2>
+
+                <p>A poupança existe há décadas e foi fundamental em uma época em que não havia:</p>
+
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 12px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #3B82F6; margin-bottom: 8px; border-radius: 4px;">
+                        🖥️ Plataforma digital acessível
+                    </li>
+                    <li style="padding: 12px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #3B82F6; margin-bottom: 8px; border-radius: 4px;">
+                        🇧🇷 Tesouro Direto para pessoa física
+                    </li>
+                    <li style="padding: 12px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #3B82F6; margin-bottom: 8px; border-radius: 4px;">
+                        🏦 CDBs com liquidez diária
+                    </li>
+                    <li style="padding: 12px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #3B82F6; margin-bottom: 8px; border-radius: 4px;">
+                        🔄 Concorrência entre bancos e corretoras
+                    </li>
+                </ul>
+
+                <p style="margin-top: 24px; font-size: 18px; line-height: 1.8;">
+                    <strong>Hoje, com mais opções no mercado, faz sentido comparar antes de investir</strong> — e é exatamente isso que o INVLAB faz por você.
+                </p>
+            </section>
+
+            <!-- Callout Final -->
+            <div class="callout callout-success">
+                <div class="callout-icon">🎯</div>
+                <div class="callout-content">
+                    <h3>Mensagem final</h3>
+                    <p>A Poupança continua sendo segura e acessível, mas suas regras atuais limitam o retorno.</p>
+                    <p style="margin-bottom: 0;">Com mais alternativas disponíveis no mercado, entender as diferenças entre os produtos é essencial para fazer seu dinheiro render mais.</p>
+                </div>
+            </div>
+
+            <!-- Observação Final - Convite aos Simuladores -->
+            <div class="callout callout-success" style="margin-top: 48px;">
+                <div class="callout-icon">💡</div>
+                <div class="callout-content">
+                    <h3>Observação importante</h3>
+                    <p>Antes de decidir manter seu dinheiro na poupança, vale comparar na prática como ela se comporta frente a outros investimentos simples, como CDBs, Tesouro Selic ou LCI/LCA.</p>
+                    <p style="margin-bottom: 0;">Nos <strong>simuladores do INVLAB</strong> você consegue ver, em poucos cliques, a diferença de rendimento ao longo do tempo.</p>
+                </div>
+            </div>
+
+            <!-- Seção 7: Explore mais -->
+            <section class="article-section">
+                <h2>🔍 Compare na prática com os simuladores</h2>
+
+                <div class="inv-category">
+                    <h3 class="inv-category-title">📊 Veja a diferença nos números</h3>
+                    <div class="inv-grid">
+                        <div class="inv-card" onclick="window.location.href='simulador-tesouro-direto.html'" style="cursor: pointer;">
+                            <div class="inv-card-badge">🇧🇷 Simulador</div>
+                            <h4 class="inv-card-title">Tesouro Selic vs Poupança</h4>
+                            <p class="inv-card-description">Compare o rendimento ao longo do tempo</p>
+                        </div>
+
+                        <div class="inv-card" onclick="window.location.href='simulador-cdbs.html'" style="cursor: pointer;">
+                            <div class="inv-card-badge">🏦 Simulador</div>
+                            <h4 class="inv-card-title">CDBs vs Poupança</h4>
+                            <p class="inv-card-description">Veja a diferença na prática com valores reais</p>
+                        </div>
+
+                        <div class="inv-card" onclick="window.location.href='simulador-lci-lca.html'" style="cursor: pointer;">
+                            <div class="inv-card-badge">🏛️ Simulador</div>
+                            <h4 class="inv-card-title">LCI/LCA vs Poupança</h4>
+                            <p class="inv-card-description">Simule e compare: isenção de IR faz diferença?</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Link para artigo relacionado -->
+            <div class="callout callout-info" style="margin-top: 32px;">
+                <div class="callout-icon">📖</div>
+                <div class="callout-content">
+                    <h3>Quer ver uma comparação direta?</h3>
+                    <p style="margin-bottom: 0;">Leia também: <a href="artigo-poupanca.html" style="color: #3b82f6; text-decoration: underline; font-weight: 600;">Poupança vs Tesouro Direto</a> na aba <a href="../index.html#primeiros-passos" style="color: #3b82f6; text-decoration: underline;">Primeiros Passos</a>.</p>
+                </div>
+            </div>
+
+            <!-- Callout Voltar -->
+            <div class="callout callout-info">
+                <div class="callout-icon">🏠</div>
+                <div class="callout-content">
+                    <h3>Voltar para Renda Fixa</h3>
+                    <p style="margin-bottom: 0;"><a href="../index.html#renda-fixa" style="color: #3b82f6; text-decoration: underline;">Ver todos os produtos de Renda Fixa</a></p>
+                </div>
+            </div>
+
+            </article>
+            </section>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>
+
