@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBDCs e o Real Digital (DREX) | INVLAB</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="msapplication-TileColor" content="#0D0D0D">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Meta Description -->
+    <meta name="description" content="Entenda o que são CBDCs (Moedas Digitais de Bancos Centrais), como funciona o Real Digital (DREX) do Brasil, suas diferenças para stablecoins privadas e seu impacto no sistema financeiro.">
+    
+    <!-- INVLAB Design System -->
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+</head>
+<body>
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                <span class="logo-text">INVLAB</span>
+            </div>
+            
+            <!-- Sistema de Abas INVLAB -->
+            <div class="tabs-nav-wrapper">
+                <nav class="tabs-nav" id="tabsNav">
+                    <button class="tab-btn" onclick="window.location.href='../index.html'">
+                        🏠 Início
+                    </button>
+                    <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">
+                        📚 Primeiros<br>Passos
+                    </button>
+                    
+                    <!-- Renda Fixa -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📊 Renda<br>Fixa <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="poupanca.html">💰 Poupança</a></li>
+                            <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                            <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                            <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Renda Variável -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📈 Renda<br>Variável <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="etfs" onclick="window.location.href='etfs.html'" style="cursor: pointer;">
+                                    <span class="category-name">💵 ETFs</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                                <ul class="category-submenu" id="submenu-etfs">
+                                    <li><a href="#">📊 Simulador de Indexação</a></li>
+                                    <li><a href="#">📈 ETFs Nacionais</a></li>
+                                    <li><a href="#">🌎 ETFs Internacionais</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="fiis" onclick="window.location.href='fiis.html'" style="cursor: pointer;">
+                                    <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                                <ul class="category-submenu" id="submenu-fiis">
+                                    <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                                    <li><a href="#">🏘️ FIIs de Tijolo</a></li>
+                                    <li><a href="#">📋 FIIs de Papel</a></li>
+                                    <li><a href="#">🔄 FIIs Híbridos</a></li>
+                                    <li><a href="#">🎯 Como Escolher FIIs</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="acoes" onclick="window.location.href='acoes.html'" style="cursor: pointer;">
+                                    <span class="category-name">📈 Ações</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                                <ul class="category-submenu" id="submenu-acoes">
+                                    <li><a href="#">📊 Simulador de Dividendos</a></li>
+                                    <li><a href="#">💰 Valuation (P/L, P/VP)</a></li>
+                                    <li><a href="#">🏭 Análise Setorial</a></li>
+                                    <li><a href="#">📉 Day Trade vs Buy&Hold</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Criptoativos -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle active" onclick="window.location.href='criptoativos.html'">
+                            🔐 Cripto<br>ativos <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="bitcoin.html">₿ Bitcoin</a></li>
+                            <li><a href="#">⧫ Ethereum</a></li>
+                            <li><a href="stablecoins.html">💵 Stablecoins</a></li>
+                            <li><a href="blockchain.html">⛓️ Blockchain</a></li>
+                            <li><a href="cbdc.html">🏛️ CBDCs</a></li>
+                            <li><a href="#">🪙 Altcoins</a></li>
+                            <li><a href="#">🖼️ NFTs</a></li>
+                            <li><a href="#">🔗 Tokenização</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Ferramentas -->
+                    <button class="tab-btn" onclick="window.location.href='../index.html#ferramentas'">
+                        🛠️ Ferramentas
+                    </button>
+                    
+                    <!-- Outros -->
+                    <button class="tab-btn" onclick="window.location.href='../index.html#outros-investimentos'">
+                        💎 Outros
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <div class="content-wrapper-wide">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../index.html">🏠 Início</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="criptoativos.html">🔐 Criptoativos</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="stablecoins.html">💵 Stablecoins</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">🏛️ CBDCs</span>
+            </nav>
+
+            <!-- Meta do Artigo -->
+            <div class="article-meta">
+                <span class="article-badge">🏛️ CBDCs</span>
+                <span class="article-time">⏱️ 7 min</span>
+            </div>
+
+            <section class="section-educational">
+            <article class="article-content">
+                <!-- Título Principal -->
+                <h1 class="article-title">CBDCs: Moedas Digitais de Bancos Centrais</h1>
+
+                <p class="article-lead">
+                    Entenda o que são CBDCs, como funciona o Real Digital (DREX) do Brasil, 
+                    suas diferenças para stablecoins privadas e criptomoedas, e o impacto no sistema financeiro.
+                </p>
+
+                <!-- Hero -->
+                <div class="article-hero">
+                    <div class="hero-emoji">🏛️</div>
+                    <p class="hero-caption">O futuro do dinheiro: moedas digitais emitidas por governos.</p>
+                </div>
+
+                <!-- Disclaimer Educacional -->
+                <div class="callout callout-info" style="margin: 24px 0;">
+                    <div class="callout-icon" style="font-size: 24px;">📘</div>
+                    <div class="callout-content">
+                        <h3>Conteúdo 100% educacional</h3>
+                        <p style="margin-bottom: 0;">Este material não é recomendação de investimento. 
+                        O objetivo é apresentar os conceitos sobre CBDCs e seu papel no futuro do sistema financeiro.</p>
+                    </div>
+                </div>
+
+                <!-- Seção 1: O que são CBDCs -->
+                <section class="article-section">
+                    <h2>💡 O que são CBDCs?</h2>
+
+                    <p><strong>CBDC</strong> significa <strong>Central Bank Digital Currency</strong> 
+                    (Moeda Digital de Banco Central, em português).</p>
+
+                    <p style="margin-top: 12px;">
+                        É uma forma <strong>digital de dinheiro emitido diretamente por um Banco Central</strong>, 
+                        representando a moeda oficial do país (real, dólar, euro, etc.) em formato 100% eletrônico.
+                    </p>
+
+                    <div class="example-card" style="margin-top: 20px;">
+                        <h3>Exemplo prático</h3>
+                        <p><strong>Real tradicional:</strong> Cédulas físicas + depósitos bancários<br>
+                        <strong>Real Digital (DREX):</strong> Versão 100% digital do real, emitida pelo Banco Central do Brasil</p>
+                        <p style="margin-top: 10px;"><strong>Diferença chave:</strong> É dinheiro público digital, não cripto privado.</p>
+                    </div>
+                </section>
+
+                <!-- Seção 2: CBDCs vs Stablecoins vs Criptomoedas -->
+                <section class="article-section">
+                    <h2>🔍 CBDCs vs Stablecoins vs Criptomoedas</h2>
+
+                    <p>Embora todos sejam digitais, há diferenças fundamentais:</p>
+
+                    <div class="inv-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 20px;">
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-badge">🏛️ CBDCs</div>
+                            <h4 class="inv-card-title">Moedas oficiais digitais</h4>
+                            <p class="inv-card-description">
+                                Emitidas por Bancos Centrais. Representam a moeda oficial do país. 
+                                Garantidas pelo governo. Regulamentadas por lei.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-badge">💵 Stablecoins</div>
+                            <h4 class="inv-card-title">Moedas privadas lastreadas</h4>
+                            <p class="inv-card-description">
+                                Emitidas por empresas privadas. Atreladas a moedas tradicionais. 
+                                Sem garantia governamental. Dependem de auditoria externa.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-badge">₿ Criptomoedas</div>
+                            <h4 class="inv-card-title">Ativos digitais descentralizados</h4>
+                            <p class="inv-card-description">
+                                Sem emissor central. Não atreladas a fiat. 
+                                Alta volatilidade. Protocolos blockchain públicos.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 3: O Real Digital (DREX) -->
+                <section class="article-section">
+                    <h2>🇧🇷 O Real Digital (DREX) no Brasil</h2>
+
+                    <p>O <strong>DREX</strong> é o nome do projeto de Real Digital do Banco Central do Brasil, 
+                    que está em fase de desenvolvimento e testes.</p>
+
+                    <div class="tips-list" style="margin-top: 20px;">
+                        <div class="tip-item">
+                            <div class="tip-number">1</div>
+                            <div class="tip-content">
+                                <h3>Objetivo</h3>
+                                <p>Modernizar o sistema financeiro brasileiro, permitindo transações instantâneas, 
+                                programáveis e rastreáveis em ambiente digital.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">2</div>
+                            <div class="tip-content">
+                                <h3>Tecnologia</h3>
+                                <p>Utiliza tecnologia blockchain permissionada (não é pública como Bitcoin), 
+                                controlada pelo Banco Central e instituições autorizadas.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">3</div>
+                            <div class="tip-content">
+                                <h3>Casos de uso</h3>
+                                <p>Contratos inteligentes (pagamentos automáticos), tokenização de ativos, 
+                                transferências internacionais mais rápidas, e inclusão financeira.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">4</div>
+                            <div class="tip-content">
+                                <h3>Status atual</h3>
+                                <p>Em fase de piloto com instituições financeiras selecionadas. 
+                                Previsão de disponibilidade ampla ainda em definição pelo BCB.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="callout callout-info" style="margin-top: 24px;">
+                        <div class="callout-icon" style="font-size: 24px;">📌</div>
+                        <div class="callout-content">
+                            <h3>Importante</h3>
+                            <p style="margin-bottom: 0;">O DREX não substitui o real físico ou os depósitos bancários. 
+                            Ele será uma <strong>forma adicional</strong> de usar a moeda oficial brasileira.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 4: Vantagens potenciais -->
+                <section class="article-section">
+                    <h2>✅ Vantagens potenciais das CBDCs</h2>
+
+                    <ul style="list-style: none; padding: 0; margin-top: 16px;">
+                        <li style="padding: 10px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #10B981; border-radius: 4px; margin-bottom: 8px;">
+                            ✅ <strong>Transações instantâneas</strong> 24/7, sem intermediários tradicionais
+                        </li>
+                        <li style="padding: 10px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #10B981; border-radius: 4px; margin-bottom: 8px;">
+                            ✅ <strong>Custos reduzidos</strong> em transferências e operações financeiras
+                        </li>
+                        <li style="padding: 10px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #10B981; border-radius: 4px; margin-bottom: 8px;">
+                            ✅ <strong>Inclusão financeira</strong> facilitada para populações sem acesso a bancos
+                        </li>
+                        <li style="padding: 10px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #10B981; border-radius: 4px; margin-bottom: 8px;">
+                            ✅ <strong>Transparência</strong> e rastreabilidade de transações (combate à fraude)
+                        </li>
+                        <li style="padding: 10px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #10B981; border-radius: 4px; margin-bottom: 8px;">
+                            ✅ <strong>Contratos inteligentes</strong> integrados (pagamentos programáveis)
+                        </li>
+                        <li style="padding: 10px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #10B981; border-radius: 4px; margin-bottom: 0;">
+                            ✅ <strong>Integração internacional</strong> facilitada entre países
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Seção 5: Preocupações e desafios -->
+                <section class="article-section">
+                    <h2>⚠️ Preocupações e desafios</h2>
+
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <div class="tip-number">1</div>
+                            <div class="tip-content">
+                                <h3>Privacidade</h3>
+                                <p>CBDCs permitem rastreamento completo de transações. 
+                                Como equilibrar transparência e privacidade dos cidadãos?</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">2</div>
+                            <div class="tip-content">
+                                <h3>Controle governamental</h3>
+                                <p>Governos terão poder sem precedentes sobre transações financeiras. 
+                                Isso pode gerar preocupações sobre liberdade econômica.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">3</div>
+                            <div class="tip-content">
+                                <h3>Impacto nos bancos</h3>
+                                <p>Se as pessoas guardarem dinheiro diretamente no Banco Central (via CBDC), 
+                                isso pode afetar o modelo tradicional de depósitos bancários.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">4</div>
+                            <div class="tip-content">
+                                <h3>Segurança cibernética</h3>
+                                <p>Um sistema financeiro totalmente digital exige proteção robusta contra ataques hackers 
+                                e falhas tecnológicas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 6: CBDCs pelo mundo -->
+                <section class="article-section">
+                    <h2>🌍 CBDCs pelo mundo</h2>
+
+                    <p>Vários países estão desenvolvendo ou já lançaram suas moedas digitais oficiais:</p>
+
+                    <div class="example-card" style="margin-top: 16px;">
+                        <h3>Status global</h3>
+                        <ul style="margin-top: 10px; padding-left: 18px;">
+                            <li><strong>China (e-CNY):</strong> Yuan digital já em uso experimental em várias cidades.</li>
+                            <li><strong>Bahamas (Sand Dollar):</strong> Primeira CBDC plenamente operacional.</li>
+                            <li><strong>União Europeia (Euro Digital):</strong> Em fase de pesquisa e testes.</li>
+                            <li><strong>Estados Unidos:</strong> FED estuda um dólar digital, mas ainda sem definição.</li>
+                            <li><strong>Brasil (DREX):</strong> Fase piloto em andamento, com previsão de expansão gradual.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Seção 7: O que isso significa para você -->
+                <section class="article-section">
+                    <h2>🤔 O que isso significa para você?</h2>
+
+                    <p>No curto prazo, CBDCs ainda estão em desenvolvimento e não afetam diretamente seu dia a dia financeiro.</p>
+
+                    <p style="margin-top: 12px;">
+                        No <strong>médio/longo prazo</strong>, elas podem:
+                    </p>
+
+                    <ul style="margin-top: 16px; padding-left: 20px;">
+                        <li>Mudar a forma como você faz pagamentos e transferências</li>
+                        <li>Permitir novos serviços financeiros programáveis</li>
+                        <li>Coexistir com dinheiro físico, PIX, e outros meios de pagamento</li>
+                        <li>Exigir adaptação de empresas, bancos e fintechs</li>
+                    </ul>
+
+                    <div class="callout callout-success" style="margin-top: 24px;">
+                        <div class="callout-icon" style="font-size: 24px;">💡</div>
+                        <div class="callout-content">
+                            <h3>Acompanhe a evolução</h3>
+                            <p style="margin-bottom: 0;">O INVLAB continuará acompanhando o desenvolvimento das CBDCs 
+                            e atualizando este conteúdo conforme o DREX e outras moedas digitais oficiais evoluem.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Callout Voltar -->
+                <div class="callout callout-info">
+                    <div class="callout-icon" style="font-size: 24px;">🏠</div>
+                    <div class="callout-content">
+                        <h3>Voltar para Stablecoins</h3>
+                        <p style="margin-bottom: 0;"><a href="stablecoins.html" style="color: #3B82F6; text-decoration: underline;">Comparar CBDCs com Stablecoins privadas</a></p>
+                    </div>
+                </div>
+
+            </article>
+            </section>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>
+

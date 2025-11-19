@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain: Como Funciona e Onde se Aplica | INVLAB</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="msapplication-TileColor" content="#0D0D0D">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Meta Description -->
+    <meta name="description" content="Entenda o que é blockchain, como funciona, quais são seus principais componentes, usos possíveis, limites e relação com o mundo dos criptoativos. Conteúdo 100% educacional.">
+    
+    <!-- INVLAB Design System -->
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+</head>
+<body>
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                <span class="logo-text">INVLAB</span>
+            </div>
+            
+            <!-- Sistema de Abas INVLAB -->
+            <div class="tabs-nav-wrapper">
+                <nav class="tabs-nav" id="tabsNav">
+                    <button class="tab-btn" onclick="window.location.href='../index.html'">
+                        🏠 Início
+                    </button>
+                    <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">
+                        📚 Primeiros<br>Passos
+                    </button>
+                    
+                    <!-- Renda Fixa -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📊 Renda<br>Fixa <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="poupanca.html">💰 Poupança</a></li>
+                            <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                            <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                            <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Renda Variável -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📈 Renda<br>Variável <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="etfs" onclick="window.location.href='etfs.html'" style="cursor: pointer;">
+                                    <span class="category-name">💵 ETFs</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                                <ul class="category-submenu" id="submenu-etfs">
+                                    <li><a href="#">📊 Simulador de Indexação</a></li>
+                                    <li><a href="#">📈 ETFs Nacionais</a></li>
+                                    <li><a href="#">🌎 ETFs Internacionais</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="fiis" onclick="window.location.href='fiis.html'" style="cursor: pointer;">
+                                    <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                                <ul class="category-submenu" id="submenu-fiis">
+                                    <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                                    <li><a href="#">🏘️ FIIs de Tijolo</a></li>
+                                    <li><a href="#">📋 FIIs de Papel</a></li>
+                                    <li><a href="#">🔄 FIIs Híbridos</a></li>
+                                    <li><a href="#">🎯 Como Escolher FIIs</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="acoes" onclick="window.location.href='acoes.html'" style="cursor: pointer;">
+                                    <span class="category-name">📈 Ações</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                                <ul class="category-submenu" id="submenu-acoes">
+                                    <li><a href="#">📊 Simulador de Dividendos</a></li>
+                                    <li><a href="#">💰 Valuation (P/L, P/VP)</a></li>
+                                    <li><a href="#">🏭 Análise Setorial</a></li>
+                                    <li><a href="#">📉 Day Trade vs Buy&Hold</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Criptoativos -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle active" onclick="window.location.href='criptoativos.html'">
+                            🔐 Cripto<br>ativos <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="bitcoin.html">₿ Bitcoin</a></li>
+                            <li><a href="#">⧫ Ethereum</a></li>
+                            <li><a href="stablecoins.html">💵 Stablecoins</a></li>
+                            <li><a href="blockchain.html">⛓️ Blockchain</a></li>
+                            <li><a href="cbdc.html">🏛️ CBDCs</a></li>
+                            <li><a href="#">🪙 Altcoins</a></li>
+                            <li><a href="#">🖼️ NFTs</a></li>
+                            <li><a href="#">🔗 Tokenização</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Ferramentas -->
+                    <button class="tab-btn" onclick="window.location.href='../index.html#ferramentas'">
+                        🛠️ Ferramentas
+                    </button>
+                    
+                    <!-- Outros -->
+                    <button class="tab-btn" onclick="window.location.href='../index.html#outros-investimentos'">
+                        💎 Outros
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <div class="content-wrapper-wide">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../index.html">🏠 Início</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="criptoativos.html">🔐 Criptoativos</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">⛓️ Blockchain</span>
+            </nav>
+
+            <!-- Meta do Artigo -->
+            <div class="article-meta">
+                <span class="article-badge">⛓️ Blockchain</span>
+                <span class="article-time">⏱️ 9 min</span>
+            </div>
+
+            <section class="section-educational">
+            <article class="article-content">
+                <!-- Título Principal -->
+                <h1 class="article-title">Blockchain: o "Livro-Caixa" Distribuído por Trás dos Criptoativos</h1>
+
+                <p class="article-lead">
+                    Antes de falar de moedas digitais, é importante entender a tecnologia que torna tudo possível. 
+                    Nesta página, você vai ver o que é blockchain, como funciona, quais são suas características 
+                    e por que ela é relevante no mundo dos investimentos e dos criptoativos.
+                </p>
+
+                <!-- Hero -->
+                <div class="article-hero">
+                    <div class="hero-emoji">⛓️</div>
+                    <p class="hero-caption">Um registro distribuído, auditável e difícil de alterar — mas não mágico nem perfeito.</p>
+                </div>
+
+                <!-- Callout Educacional -->
+                <div class="callout callout-info">
+                    <div class="callout-icon">📘</div>
+                    <div class="callout-content">
+                        <h3>Blockchain não é sinônimo de "ficar rico"</h3>
+                        <p>Blockchain é, antes de tudo, uma forma diferente de organizar e registrar informações. 
+                        Ela pode ser usada em moedas digitais, mas também em outros tipos de aplicações. 
+                        O foco aqui é explicar a tecnologia, não prometer resultados financeiros.</p>
+                    </div>
+                </div>
+
+                <!-- Seção 1: Conceito -->
+                <section class="article-section">
+                    <h2>🧩 O que é uma blockchain?</h2>
+
+                    <p>De forma simples, uma blockchain é um <strong>registro digital distribuído</strong>, 
+                    organizado em blocos encadeados em ordem cronológica. Ela funciona como um 
+                    "livro-caixa" coletivo, no qual diversas pessoas (ou computadores) guardam 
+                    e validam a mesma cópia da informação.</p>
+
+                    <p style="margin-top: 12px;">
+                        Cada bloco contém um conjunto de transações ou registros, uma "assinatura" 
+                        criptográfica e uma referência ao bloco anterior. Esse encadeamento é o que 
+                        dá o nome de "cadeia de blocos" (block-chain).
+                    </p>
+
+                    <div class="example-card" style="margin-top: 20px;">
+                        <h3>Resumo em uma frase</h3>
+                        <p>
+                            <strong>Blockchain é um banco de dados que não fica em um único lugar</strong>, 
+                            mas é mantido em conjunto por vários participantes, seguindo regras 
+                            definidas em um protocolo.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Seção 2: Estrutura de um bloco -->
+                <section class="article-section">
+                    <h2>🧱 O que existe dentro de um bloco?</h2>
+
+                    <p>Cada bloco de uma blockchain costuma conter:</p>
+
+                    <div class="inv-grid" style="grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); margin-top: 20px;">
+                        <div class="inv-card">
+                            <div class="inv-card-badge">🧾 Registros</div>
+                            <h4 class="inv-card-title">Transações</h4>
+                            <p class="inv-card-description">
+                                Lista de transações ou eventos que serão adicionados ao histórico da rede.
+                            </p>
+                        </div>
+
+                        <div class="inv-card">
+                            <div class="inv-card-badge">🔢 Hash</div>
+                            <h4 class="inv-card-title">"Assinatura" do bloco</h4>
+                            <p class="inv-card-description">
+                                Um código gerado por função criptográfica que representa o conteúdo do bloco.
+                            </p>
+                        </div>
+
+                        <div class="inv-card">
+                            <div class="inv-card-badge">🔗 Referência</div>
+                            <h4 class="inv-card-title">Hash do bloco anterior</h4>
+                            <p class="inv-card-description">
+                                É o elo que conecta um bloco ao outro, formando a cadeia (chain).
+                            </p>
+                        </div>
+
+                        <div class="inv-card">
+                            <div class="inv-card-badge">⏱️ Tempo</div>
+                            <h4 class="inv-card-title">Timestamp</h4>
+                            <p class="inv-card-description">
+                                Registro do momento em que aquele bloco foi adicionado à cadeia.
+                            </p>
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 18px;">
+                        Alterar um bloco passado significaria alterar sua "assinatura" (hash) e 
+                        quebrar o encadeamento com todos os blocos seguintes — o que torna a 
+                        manipulação do histórico algo muito difícil em blockchains bem estruturadas.
+                    </p>
+                </section>
+
+                <!-- Seção 3: Características principais -->
+                <section class="article-section">
+                    <h2>🔑 Características principais de uma blockchain</h2>
+
+                    <div class="inv-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 20px;">
+                        <div class="inv-card">
+                            <div class="inv-card-icon" style="font-size: 28px;">🌐</div>
+                            <h4 class="inv-card-title">Registro distribuído</h4>
+                            <p class="inv-card-description">
+                                Vários participantes mantêm cópias sincronizadas do mesmo histórico, 
+                                em vez de um servidor central único.
+                            </p>
+                        </div>
+
+                        <div class="inv-card">
+                            <div class="inv-card-icon" style="font-size: 28px;">✔️</div>
+                            <h4 class="inv-card-title">Imutabilidade prática</h4>
+                            <p class="inv-card-description">
+                                Alterar um registro antigo é muito difícil, pois exigiria refazer 
+                                o trabalho de vários blocos e convencer a rede a aceitar essa mudança.
+                            </p>
+                        </div>
+
+                        <div class="inv-card">
+                            <div class="inv-card-icon" style="font-size: 28px;">🔍</div>
+                            <h4 class="inv-card-title">Transparência</h4>
+                            <p class="inv-card-description">
+                                Em blockchains públicas, qualquer pessoa pode consultar o histórico 
+                                de transações e conferir o estado atual do registro.
+                            </p>
+                        </div>
+
+                        <div class="inv-card">
+                            <div class="inv-card-icon" style="font-size: 28px;">🤝</div>
+                            <h4 class="inv-card-title">Consenso</h4>
+                            <p class="inv-card-description">
+                                A rede segue um conjunto de regras para decidir quais blocos são 
+                                válidos e como o histórico é atualizado.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 4: Tipos de blockchain -->
+                <section class="article-section">
+                    <h2>🧭 Tipos de blockchain</h2>
+
+                    <p>Nem toda blockchain funciona da mesma forma. Em linhas gerais, podemos separar em:</p>
+
+                    <div class="inv-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 20px;">
+                        <div class="inv-card">
+                            <div class="inv-card-badge">Pública</div>
+                            <h4 class="inv-card-title">Aberta a qualquer participante</h4>
+                            <p class="inv-card-description">
+                                Qualquer pessoa pode participar da rede, validar transações e consultar o histórico 
+                                (ex.: Bitcoin, Ethereum).
+                            </p>
+                        </div>
+
+                        <div class="inv-card">
+                            <div class="inv-card-badge">Privada</div>
+                            <h4 class="inv-card-title">Controle centralizado</h4>
+                            <p class="inv-card-description">
+                                Operada por uma única organização, que define quem pode participar 
+                                e quais regras serão utilizadas.
+                            </p>
+                        </div>
+
+                        <div class="inv-card">
+                            <div class="inv-card-badge">Consórcio</div>
+                            <h4 class="inv-card-title">Governança compartilhada</h4>
+                            <p class="inv-card-description">
+                                Mantida por um grupo de empresas ou instituições que cooperam entre si, 
+                                com regras pré-estabelecidas.
+                            </p>
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 18px;">
+                        A escolha do tipo de blockchain depende do objetivo do projeto, 
+                        do nível de abertura desejado e dos requisitos de governança.
+                    </p>
+                </section>
+
+                <!-- Seção 5: Blockchain além das criptos -->
+                <section class="article-section">
+                    <h2>🌍 Blockchain além do Bitcoin</h2>
+
+                    <p>Embora tenha ficado conhecida por causa das criptomoedas, a tecnologia de blockchain 
+                    também vem sendo estudada em outros contextos, como:</p>
+
+                    <ul style="margin-top: 12px; padding-left: 20px; color: #CBD5E1; line-height: 1.7;">
+                        <li>📦 Rastreamento de cadeias de suprimento (supply chain).</li>
+                        <li>📄 Registro de documentos e certificados em formato digital.</li>
+                        <li>🎨 Propriedade de ativos digitais (como NFTs).</li>
+                        <li>🏦 Infraestrutura para serviços financeiros descentralizados (DeFi).</li>
+                    </ul>
+
+                    <div class="callout callout-info" style="margin-top: 20px;">
+                        <div class="callout-icon">💡</div>
+                        <div class="callout-content">
+                            <h3>Importante</h3>
+                            <p>Nem todo problema precisa de uma blockchain. Em muitos casos, 
+                            um banco de dados tradicional resolve melhor. A tecnologia faz sentido 
+                            quando a descentralização, a transparência e a auditabilidade são realmente necessárias.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 6: Desafios e limitações -->
+                <section class="article-section">
+                    <h2>⚠️ Desafios e limitações</h2>
+
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <div class="tip-number">1</div>
+                            <div class="tip-content">
+                                <h3>Escalabilidade</h3>
+                                <p>Algumas blockchains públicas têm limitações de quantidade de transações por segundo, 
+                                o que pode gerar filas e aumento de taxas em momentos de uso intenso.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">2</div>
+                            <div class="tip-content">
+                                <h3>Custo e energia</h3>
+                                <p>Mecanismos como o Proof of Work podem consumir muita energia e elevar o custo 
+                                para participar da rede como validador.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">3</div>
+                            <div class="tip-content">
+                                <h3>Complexidade</h3>
+                                <p>Projetos baseados em blockchain exigem conhecimento técnico específico 
+                                e boa modelagem de incentivos, o que não é trivial.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">4</div>
+                            <div class="tip-content">
+                                <h3>Regulação em evolução</h3>
+                                <p>Leis e normas relacionadas a ativos digitais, privacidade e dados 
+                                ainda estão em construção em vários países.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 7: Blockchain x banco de dados tradicional -->
+                <section class="article-section">
+                    <h2>📊 Blockchain x banco de dados tradicional</h2>
+
+                    <p>Uma forma simples de enxergar a tecnologia é compará-la, em linhas gerais, 
+                    com um banco de dados tradicional:</p>
+
+                    <div class="example-card" style="margin-top: 16px;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: rgba(15, 23, 42, 0.9); color: #e5e7eb;">
+                                    <th style="padding: 10px; text-align: left;">Característica</th>
+                                    <th style="padding: 10px; text-align: center;">Banco de dados tradicional</th>
+                                    <th style="padding: 10px; text-align: center;">Blockchain</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 10px;">Controle</td>
+                                    <td style="padding: 10px; text-align: center;">Centralizado em uma instituição</td>
+                                    <td style="padding: 10px; text-align: center;">Distribuído entre vários participantes</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px;">Alteração de registros</td>
+                                    <td style="padding: 10px; text-align: center;">Edição e exclusão permitidas</td>
+                                    <td style="padding: 10px; text-align: center;">Registros anteriores são difíceis de alterar</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px;">Transparência</td>
+                                    <td style="padding: 10px; text-align: center;">Geralmente não é público</td>
+                                    <td style="padding: 10px; text-align: center;">Pode ser público (blockchains abertas)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px;">Complexidade de implementação</td>
+                                    <td style="padding: 10px; text-align: center;">Mais simples e consolidado</td>
+                                    <td style="padding: 10px; text-align: center;">Maior complexidade técnica e de governança</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p style="margin-top: 16px;">
+                        A escolha entre um modelo e outro depende do problema a ser resolvido. 
+                        Blockchain é uma ferramenta a mais — não uma solução automática para tudo.
+                    </p>
+                </section>
+
+                <!-- Seção 8: Relação com Bitcoin, Stablecoins e CBDCs -->
+                <section class="article-section">
+                    <h2>🧭 Como blockchain se conecta com Bitcoin, Stablecoins e CBDCs</h2>
+
+                    <p>Dentro do INVLAB, blockchain é vista como a <strong>infraestrutura</strong> que permite o funcionamento de:</p>
+
+                    <div class="inv-grid" style="margin-top: 20px;">
+                        <div class="inv-card" style="cursor: pointer;" onclick="window.location.href='bitcoin.html';">
+                            <div class="inv-card-badge">₿ Bitcoin</div>
+                            <h4 class="inv-card-title">Primeira aplicação em larga escala</h4>
+                            <p class="inv-card-description">
+                                Usa blockchain para registrar transações de forma pública e descentralizada.
+                            </p>
+                        </div>
+
+                        <div class="inv-card" style="cursor: pointer;" onclick="window.location.href='stablecoins.html';">
+                            <div class="inv-card-badge">💵 Stablecoins</div>
+                            <h4 class="inv-card-title">Moedas com foco em paridade</h4>
+                            <p class="inv-card-description">
+                                Utilizam blockchains para emitir e transferir ativos com valor atrelado a moedas tradicionais.
+                            </p>
+                        </div>
+
+                        <div class="inv-card" style="cursor: pointer;" onclick="window.location.href='cbdc.html';">
+                            <div class="inv-card-badge">🏛️ CBDCs</div>
+                            <h4 class="inv-card-title">Moedas digitais oficiais</h4>
+                            <p class="inv-card-description">
+                                Projetos de bancos centrais que, em alguns modelos, usam tecnologias inspiradas em blockchain.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Callout Voltar -->
+                <div class="callout callout-info">
+                    <div class="callout-icon">🏠</div>
+                    <div class="callout-content">
+                        <h3>Voltar para o início</h3>
+                        <p><a href="../index.html" style="color: #3B82F6; text-decoration: underline;">Ver todas as seções do INVLAB</a></p>
+                    </div>
+                </div>
+
+            </article>
+            </section>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>
+

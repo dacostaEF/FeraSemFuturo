@@ -106,13 +106,15 @@
                     
                     <!-- Criptoativos -->
                     <div class="tab-with-dropdown">
-                        <button class="tab-btn dropdown-toggle active" onclick="window.location.href='criptoativos.html'" style="cursor: pointer;">
+                        <button class="tab-btn dropdown-toggle active" onclick="window.location.href='criptoativos.html'">
                             🔐 Cripto<br>ativos <span class="arrow">▼</span>
                         </button>
                         <ul class="dropdown-menu">
                             <li><a href="bitcoin.html">₿ Bitcoin</a></li>
                             <li><a href="#">⧫ Ethereum</a></li>
                             <li><a href="stablecoins.html">💵 Stablecoins</a></li>
+                            <li><a href="blockchain.html">⛓️ Blockchain</a></li>
+                            <li><a href="cbdc.html">🏛️ CBDCs</a></li>
                             <li><a href="#">🪙 Altcoins</a></li>
                             <li><a href="#">🖼️ NFTs</a></li>
                             <li><a href="#">🔗 Tokenização</a></li>
@@ -234,7 +236,7 @@
                     controlando tudo, a rede é mantida por milhares de computadores independentes.</p>
 
                     <div class="inv-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 20px;">
-                        <div class="inv-card fundamentos">
+                        <div class="inv-card fundamentos" style="cursor: pointer;" onclick="window.location.href='blockchain.html';">
                             <div class="inv-card-badge">⛓️ Blockchain</div>
                             <h4 class="inv-card-title">Cadeia de blocos</h4>
                             <p class="inv-card-description">
@@ -262,11 +264,20 @@
                         </div>
 
                         <div class="inv-card fundamentos">
-                            <div class="inv-card-badge">⛏️ Mining (PoW)</div>
+                            <div class="inv-card-badge">⛏️ Mining (Proof of Work)</div>
                             <h4 class="inv-card-title">Prova de trabalho</h4>
                             <p class="inv-card-description">
                                 Mineradores utilizam poder computacional para resolver desafios matemáticos. 
                                 Como recompensa, recebem novos bitcoins e taxas de transação.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-badge">⏰ Halving</div>
+                            <h4 class="inv-card-title">Redução programada</h4>
+                            <p class="inv-card-description">
+                                A cada ~4 anos (210.000 blocos), a recompensa por bloco minerado é reduzida pela metade. 
+                                Esse mecanismo, programado no código, controla a emissão de novos bitcoins até atingir o limite de 21 milhões.
                             </p>
                         </div>
                     </div>
