@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin: Origem, Funcionamento e Riscos | INVLAB</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="msapplication-TileColor" content="#0D0D0D">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Meta Description -->
+    <meta name="description" content="Entenda a origem do Bitcoin, como funciona a tecnologia por trás, seus princípios, principais riscos e o papel possível dentro de uma carteira de investimentos. Conteúdo 100% educacional.">
+    
+    <!-- INVLAB Design System -->
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+</head>
+<body>
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                <span class="logo-text">INVLAB</span>
+            </div>
+            
+            <!-- Sistema de Abas INVLAB -->
+            <div class="tabs-nav-wrapper">
+                <nav class="tabs-nav" id="tabsNav">
+                    <button class="tab-btn" onclick="window.location.href='../index.html'">
+                        🏠 Início
+                    </button>
+                    <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">
+                        📚 Primeiros<br>Passos
+                    </button>
+                    
+                    <!-- Renda Fixa -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📊 Renda<br>Fixa <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="poupanca.html">💰 Poupança</a></li>
+                            <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                            <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                            <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Renda Variável -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📈 Renda<br>Variável <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="etfs" onclick="window.location.href='etfs.html'" style="cursor: pointer;">
+                                    <span class="category-name">💵 ETFs</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                                <ul class="category-submenu" id="submenu-etfs">
+                                    <li><a href="#">📊 Simulador de Indexação</a></li>
+                                    <li><a href="#">📈 ETFs Nacionais</a></li>
+                                    <li><a href="#">🌎 ETFs Internacionais</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="fiis" onclick="window.location.href='fiis.html'" style="cursor: pointer;">
+                                    <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                                <ul class="category-submenu" id="submenu-fiis">
+                                    <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                                    <li><a href="#">🏘️ FIIs de Tijolo</a></li>
+                                    <li><a href="#">📋 FIIs de Papel</a></li>
+                                    <li><a href="#">🔄 FIIs Híbridos</a></li>
+                                    <li><a href="#">🎯 Como Escolher FIIs</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="acoes" onclick="window.location.href='acoes.html'" style="cursor: pointer;">
+                                    <span class="category-name">📈 Ações</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                                <ul class="category-submenu" id="submenu-acoes">
+                                    <li><a href="#">📊 Simulador de Dividendos</a></li>
+                                    <li><a href="#">💰 Valuation (P/L, P/VP)</a></li>
+                                    <li><a href="#">🏭 Análise Setorial</a></li>
+                                    <li><a href="#">📉 Day Trade vs Buy&Hold</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Criptoativos -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle active" onclick="window.location.href='criptoativos.html'" style="cursor: pointer;">
+                            🔐 Cripto<br>ativos <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="bitcoin.html">₿ Bitcoin</a></li>
+                            <li><a href="#">⧫ Ethereum</a></li>
+                            <li><a href="#">🪙 Altcoins</a></li>
+                            <li><a href="#">🖼️ NFTs</a></li>
+                            <li><a href="#">🔗 Tokenização</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Ferramentas -->
+                    <button class="tab-btn" onclick="window.location.href='../index.html#ferramentas'">
+                        🛠️ Ferramentas
+                    </button>
+                    
+                    <!-- Outros -->
+                    <button class="tab-btn" onclick="window.location.href='../index.html#outros-investimentos'">
+                        💎 Outros
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <div class="content-wrapper-wide">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../index.html">🏠 Início</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="criptoativos.html">🔐 Criptoativos</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">₿ Bitcoin</span>
+            </nav>
+
+            <!-- Meta do Artigo -->
+            <div class="article-meta">
+                <span class="article-badge">₿ Bitcoin</span>
+                <span class="article-time">⏱️ 10 min</span>
+            </div>
+
+            <section class="section-educational">
+            <article class="article-content">
+                <!-- Título Principal -->
+                <h1 class="article-title">Bitcoin: Origem, Funcionamento e Papel na sua Carteira</h1>
+
+                <p class="article-lead">
+                    Nesta página, você vai entender de forma estruturada como o Bitcoin surgiu, 
+                    como funciona a tecnologia por trás da rede, quais são seus princípios, 
+                    principais riscos e o possível papel dentro de uma carteira de investimentos.
+                </p>
+
+                <!-- Hero -->
+                <div class="article-hero">
+                    <div class="hero-emoji">₿</div>
+                    <p class="hero-caption">O primeiro criptoativo de grande escala — e ainda o mais relevante em valor de mercado.</p>
+                </div>
+
+                <!-- Disclaimer Educacional -->
+                <div class="callout callout-info" style="margin: 24px 0;">
+                    <div class="callout-icon" style="font-size: 24px;">📘</div>
+                    <div class="callout-content">
+                        <h3>Conteúdo 100% educacional</h3>
+                        <p style="margin-bottom: 0;">Este material não é recomendação de compra ou venda. 
+                        O objetivo é apresentar os conceitos centrais sobre Bitcoin para apoiar suas decisões de forma consciente.</p>
+                    </div>
+                </div>
+
+                <!-- Seção 1: Antes de investir em Bitcoin -->
+                <section class="article-section">
+                    <h2>🧱 Antes de pensar em Bitcoin</h2>
+
+                    <p>Bitcoin é um ativo com <strong>alta volatilidade</strong> e <strong>risco elevado</strong>. 
+                    Por isso, no INVLAB ele é tratado como parte de uma camada avançada da carteira, 
+                    que só faz sentido depois que:</p>
+
+                    <ul style="list-style: none; padding: 0; margin-top: 16px;">
+                        <li style="padding: 10px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #10B981; border-radius: 4px; margin-bottom: 8px;">
+                            ✅ Sua <strong>reserva de emergência</strong> já está montada.
+                        </li>
+                        <li style="padding: 10px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #3B82F6; border-radius: 4px; margin-bottom: 8px;">
+                            ✅ Você entende os fundamentos de <strong>Renda Fixa</strong> e <strong>Renda Variável</strong>.
+                        </li>
+                        <li style="padding: 10px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #F59E0B; border-radius: 4px; margin-bottom: 8px;">
+                            ✅ Você não está usando dinheiro que pode precisar no curto prazo.
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Seção 2: Origem e contexto histórico -->
+                <section class="article-section">
+                    <h2>📜 Origem do Bitcoin e contexto histórico</h2>
+
+                    <p>O Bitcoin surgiu em um contexto de questionamento do sistema financeiro tradicional, 
+                    especialmente após a crise de 2008. Em 2008, um autor (ou grupo) sob o pseudônimo 
+                    <strong>Satoshi Nakamoto</strong> publicou um documento técnico (whitepaper) descrevendo 
+                    "um sistema de dinheiro eletrônico peer-to-peer".</p>
+
+                    <p style="margin-top: 12px;">
+                        Em 2009, a rede Bitcoin entrou em funcionamento com o registro do <strong>primeiro bloco da blockchain</strong> — 
+                        o chamado "bloco gênesis". A partir daí, pessoas ao redor do mundo passaram a validar transações e 
+                        a "minerar" novos blocos, formando a rede descentralizada que existe até hoje.
+                    </p>
+
+                    <div class="example-card" style="margin-top: 20px;">
+                        <h3>Linha do tempo simplificada</h3>
+                        <ul style="margin-top: 10px; padding-left: 18px;">
+                            <li><strong>2008:</strong> Publicação do whitepaper do Bitcoin.</li>
+                            <li><strong>2009:</strong> Início da rede e mineração do bloco gênesis.</li>
+                            <li><strong>A partir de 2010:</strong> Primeiras negociações em mercados abertos.</li>
+                            <li><strong>Anos seguintes:</strong> Ciclos de alta e baixa, adoção crescente e aumento do interesse global.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Seção 3: Como o Bitcoin funciona -->
+                <section class="article-section">
+                    <h2>⚙️ Como o Bitcoin funciona em termos gerais</h2>
+
+                    <p>O Bitcoin é uma combinação de tecnologias já existentes (criptografia, redes peer-to-peer, 
+                    prova de trabalho) organizada de forma inovadora. Em vez de haver uma instituição central 
+                    controlando tudo, a rede é mantida por milhares de computadores independentes.</p>
+
+                    <div class="inv-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 20px;">
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-badge">⛓️ Blockchain</div>
+                            <h4 class="inv-card-title">Cadeia de blocos</h4>
+                            <p class="inv-card-description">
+                                As transações são agrupadas em blocos. Cada bloco referencia o bloco anterior, 
+                                formando uma cadeia cronológica que registra o histórico da rede.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-badge">🔐 Criptografia</div>
+                            <h4 class="inv-card-title">Chaves públicas e privadas</h4>
+                            <p class="inv-card-description">
+                                Cada usuário possui um endereço (chave pública) e uma chave privada, 
+                                que funciona como uma senha para autorizar transações.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-badge">💻 Rede distribuída</div>
+                            <h4 class="inv-card-title">Nós (nodes) da rede</h4>
+                            <p class="inv-card-description">
+                                Vários computadores independentes armazenam e validam a mesma cópia do registro. 
+                                Isso torna a rede mais resistente a falhas isoladas.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-badge">⛏️ Mineração</div>
+                            <h4 class="inv-card-title">Prova de trabalho</h4>
+                            <p class="inv-card-description">
+                                Mineradores utilizam poder computacional para resolver desafios matemáticos. 
+                                Como recompensa, recebem novos bitcoins e taxas de transação.
+                            </p>
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 20px;">
+                        A combinação desses elementos permite, em termos gerais, que a rede funcione sem 
+                        uma autoridade central — com as regras codificadas no próprio protocolo.
+                    </p>
+                </section>
+
+                <!-- Seção 4: Princípios fundamentais do Bitcoin -->
+                <section class="article-section">
+                    <h2>🔑 Princípios fundamentais do Bitcoin</h2>
+
+                    <p>Ao longo do tempo, a comunidade em torno do Bitcoin consolidou alguns princípios que ajudam a entender seu posicionamento:</p>
+
+                    <div class="inv-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 20px;">
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">🌐</div>
+                            <h4 class="inv-card-title">Descentralização</h4>
+                            <p class="inv-card-description">
+                                Não há uma entidade única controlando a rede. 
+                                Regras são definidas pelo protocolo e adotadas pelos participantes.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">📉</div>
+                            <h4 class="inv-card-title">Oferta limitada</h4>
+                            <p class="inv-card-description">
+                                O protocolo define um limite máximo de 21 milhões de unidades que podem ser emitidas ao longo do tempo.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">🔍</div>
+                            <h4 class="inv-card-title">Transparência</h4>
+                            <p class="inv-card-description">
+                                Qualquer pessoa pode verificar transações na blockchain, 
+                                o que aumenta a auditabilidade da rede.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">🚫</div>
+                            <h4 class="inv-card-title">Resistência a censura</h4>
+                            <p class="inv-card-description">
+                                Uma vez confirmadas, transações são difíceis de reverter, 
+                                o que limita interferências externas no registro histórico.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 5: Volatilidade e ciclos de preço -->
+                <section class="article-section">
+                    <h2>🎢 Volatilidade e ciclos de preço</h2>
+
+                    <p>O histórico de preço do Bitcoin é marcado por <strong>ciclos de fortes altas e quedas expressivas</strong>. 
+                    Em diferentes momentos, o ativo já passou por valorizações muito rápidas, seguidas por correções acentuadas.</p>
+
+                    <div class="example-card" style="margin-top: 16px;">
+                        <h3>O que isso significa na prática?</h3>
+                        <ul style="margin-top: 10px; padding-left: 18px;">
+                            <li>Períodos com valorizações acumuladas muito acima de outros ativos tradicionais.</li>
+                            <li>Quedas que, em alguns ciclos, ultrapassaram 70-80% a partir de máximas históricas.</li>
+                            <li>Oscilações relevantes em horizontes de tempo curtos (dias ou semanas).</li>
+                        </ul>
+                    </div>
+
+                    <p style="margin-top: 16px;">
+                        Essa dinâmica reforça que Bitcoin <strong>não é adequado para objetivos de curtíssimo prazo</strong> 
+                        e exige tolerância a volatilidade.
+                    </p>
+                </section>
+
+                <!-- Seção 6: Bitcoin x outros criptoativos -->
+                <section class="article-section">
+                    <h2>🧭 Bitcoin não é sinônimo de "todas as criptos"</h2>
+
+                    <p>Embora muitas vezes sejam agrupados sob o termo "criptomoedas", 
+                    <strong>Bitcoin e outros criptoativos podem ter propostas bem diferentes</strong>:</p>
+
+                    <div class="inv-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 20px;">
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-badge">₿ Bitcoin</div>
+                            <h4 class="inv-card-title">Foco em segurança e escassez</h4>
+                            <p class="inv-card-description">
+                                Tem como foco principal ser um ativo digital com oferta limitada, 
+                                cuja segurança da rede é priorizada.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-badge">⧫ Plataformas</div>
+                            <h4 class="inv-card-title">Contratos e aplicações</h4>
+                            <p class="inv-card-description">
+                                Redes como Ethereum são voltadas à criação de contratos inteligentes 
+                                e aplicações descentralizadas (DeFi, NFTs etc.).
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-badge">🪙 Stablecoins</div>
+                            <h4 class="inv-card-title">Paridade com moedas tradicionais</h4>
+                            <p class="inv-card-description">
+                                Ativos projetados para acompanhar moedas como o dólar, 
+                                reduzindo a volatilidade de preço.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-badge">Altcoins</div>
+                            <h4 class="inv-card-title">Propostas diversas</h4>
+                            <p class="inv-card-description">
+                                Projetos com diferentes objetivos e níveis de risco. 
+                                Nem todos têm a mesma robustez ou tempo de existência.
+                            </p>
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 18px;">
+                        Entender essas diferenças é essencial antes de considerar qualquer exposição mais ampla ao universo cripto.
+                    </p>
+                </section>
+
+                <!-- Seção 7: Riscos específicos -->
+                <section class="article-section">
+                    <h2>⚠️ Principais riscos ao lidar com Bitcoin</h2>
+
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <div class="tip-number">1</div>
+                            <div class="tip-content">
+                                <h3>Volatilidade</h3>
+                                <p>Oscilações acentuadas podem levar a ganhos rápidos, 
+                                mas também a perdas significativas em pouco tempo.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">2</div>
+                            <div class="tip-content">
+                                <h3>Custódia e segurança</h3>
+                                <p>Proteger chaves privadas, evitar golpes e escolher bem 
+                                as plataformas de negociação são etapas fundamentais.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">3</div>
+                            <div class="tip-content">
+                                <h3>Risco regulatório</h3>
+                                <p>As regras relacionadas a cripto ainda estão em evolução. 
+                                Mudanças regulatórias podem afetar o ambiente de negociação e uso.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">4</div>
+                            <div class="tip-content">
+                                <h3>Risco de contraparte</h3>
+                                <p>Ao utilizar corretoras ou plataformas centralizadas, 
+                                o investidor assume o risco de essas instituições 
+                                terem problemas operacionais ou financeiros.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="callout callout-warning" style="margin-top: 24px;">
+                        <div class="callout-icon" style="font-size: 24px;">📌</div>
+                        <div class="callout-content">
+                            <h3>Resumo</h3>
+                            <p style="margin-bottom: 0;">O Bitcoin combina um conjunto de inovações tecnológicas 
+                            com um nível elevado de risco. Estudo, planejamento e 
+                            estratégia são essenciais antes de qualquer decisão.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 8: Papel possível na carteira -->
+                <section class="article-section">
+                    <h2>📊 Qual pode ser o papel do Bitcoin em uma carteira?</h2>
+
+                    <p>Para alguns investidores, o Bitcoin é visto como uma 
+                    <strong>aposta de alto risco com horizonte de longo prazo</strong> — 
+                    potencialmente interessante como pequena parcela de uma carteira diversificada.</p>
+
+                    <div class="example-card" style="margin-top: 16px;">
+                        <h3>Pontos a considerar</h3>
+                        <ul style="margin-top: 10px; padding-left: 18px;">
+                            <li>Usar apenas uma parte pequena do patrimônio total.</li>
+                            <li>Ter clareza de que o valor pode oscilar bastante ao longo do caminho.</li>
+                            <li>Enxergar a posição com horizonte de longo prazo, se fizer sentido para sua estratégia.</li>
+                        </ul>
+                    </div>
+
+                    <p style="margin-top: 16px;">
+                        Não existe uma "percentual mágico" que sirva para todos. 
+                        O mais importante é que a decisão esteja alinhada com seu 
+                        perfil de risco, objetivos e compreensão dos fatores envolvidos.
+                    </p>
+                </section>
+
+                <!-- Seção 9: Próximos passos -->
+                <section class="article-section">
+                    <h2>🔍 Próximos passos</h2>
+
+                    <p>Se você quiser se aprofundar ainda mais, os próximos passos naturais dentro do INVLAB são:</p>
+
+                    <div class="inv-grid" style="margin-top: 20px;">
+                        <div class="inv-card" style="cursor: pointer;" onclick="window.location.href='criptoativos.html';">
+                            <div class="inv-card-badge">🔐 Visão geral</div>
+                            <h4 class="inv-card-title">Introdução aos Criptoativos</h4>
+                            <p class="inv-card-description">Revise a visão mais ampla sobre cripto dentro da sua carteira.</p>
+                        </div>
+
+                        <div class="inv-card" style="cursor: pointer;" onclick="window.location.href='#';">
+                            <div class="inv-card-badge">⧫ Tecnologia</div>
+                            <h4 class="inv-card-title">Ethereum e contratos inteligentes</h4>
+                            <p class="inv-card-description">Entenda como funcionam redes voltadas a aplicações descentralizadas.</p>
+                        </div>
+
+                        <div class="inv-card" style="cursor: pointer;" onclick="window.location.href='#';">
+                            <div class="inv-card-badge">🛡️ Segurança</div>
+                            <h4 class="inv-card-title">Boas práticas de custódia</h4>
+                            <p class="inv-card-description">Conheça princípios básicos para proteger suas chaves e acessos.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Callout Voltar -->
+                <div class="callout callout-info">
+                    <div class="callout-icon" style="font-size: 24px;">🏠</div>
+                    <div class="callout-content">
+                        <h3>Voltar para o início</h3>
+                        <p style="margin-bottom: 0;"><a href="../index.html" style="color: #3B82F6; text-decoration: underline;">Ver todas as seções do INVLAB</a></p>
+                    </div>
+                </div>
+
+            </article>
+            </section>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>
+
