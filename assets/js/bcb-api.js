@@ -15,9 +15,12 @@ class BCBApiClient {
         this.series = {
             SELIC: 432,        // Meta Selic
             IPCA: 433,         // IPCA (inflação)
+            IPCA15: 7478,      // IPCA-15 (prévia inflação)
+            IGPM: 189,         // IGP-M (inflação contratos)
             CDI: 12,           // CDI
             POUPANCA: 195,     // Poupança
-            DOLAR_PTAX: 1      // Dólar PTAX (compra)
+            DOLAR_PTAX: 1,     // Dólar PTAX (compra)
+            EURO_PTAX: 21619   // Euro PTAX (compra)
         };
     }
 
@@ -64,20 +67,26 @@ class BCBApiClient {
             console.log('📡 Buscando dados da API BCB...');
 
             // Busca todos os dados em paralelo
-            const [selic, ipca, cdi, poupanca, dolar] = await Promise.all([
+            const [selic, ipca, ipca15, igpm, cdi, poupanca, dolar, euro] = await Promise.all([
                 this.getLatestValue(this.series.SELIC),
                 this.getLatestValue(this.series.IPCA),
+                this.getLatestValue(this.series.IPCA15),
+                this.getLatestValue(this.series.IGPM),
                 this.getLatestValue(this.series.CDI),
                 this.getLatestValue(this.series.POUPANCA),
-                this.getLatestValue(this.series.DOLAR_PTAX)
+                this.getLatestValue(this.series.DOLAR_PTAX),
+                this.getLatestValue(this.series.EURO_PTAX)
             ]);
 
             const data = {
                 selic: selic || 13.75,       // Fallback para 13.75%
                 ipca: ipca || 4.5,           // Fallback para 4.5%
+                ipca15: ipca15 || 4.3,       // Fallback para 4.3%
+                igpm: igpm || 3.8,           // Fallback para 3.8%
                 cdi: cdi || 13.65,           // Fallback para 13.65%
                 poupanca: poupanca || 0.5,   // Fallback para 0.5% a.m.
-                dolar: dolar || 4.95,        // Fallback para R$ 4,95
+                dolar: dolar || 5.85,        // Fallback para R$ 5,85
+                euro: euro || 6.20,          // Fallback para R$ 6,20
                 timestamp: Date.now()
             };
 
@@ -94,9 +103,12 @@ class BCBApiClient {
             return {
                 selic: 13.75,
                 ipca: 4.5,
+                ipca15: 4.3,
+                igpm: 3.8,
                 cdi: 13.65,
                 poupanca: 0.5,
-                dolar: 4.95,
+                dolar: 5.85,
+                euro: 6.20,
                 timestamp: Date.now()
             };
         }
@@ -178,6 +190,11 @@ class BCBApiClient {
      * @returns {string} - Valor formatado
      */
     formatCurrency(value, decimals = 2) {
+        // Validação: se valor for null, undefined ou NaN, retorna 0
+        if (value === null || value === undefined || isNaN(value)) {
+            console.warn('⚠️ Valor inválido para formatCurrency:', value);
+            return `0,${'0'.repeat(decimals)}`;
+        }
         return value.toFixed(decimals).replace('.', ',');
     }
 
@@ -188,6 +205,11 @@ class BCBApiClient {
      * @returns {string} - Valor formatado com %
      */
     formatPercent(value, decimals = 2) {
+        // Validação: se valor for null, undefined ou NaN, retorna 0
+        if (value === null || value === undefined || isNaN(value)) {
+            console.warn('⚠️ Valor inválido para formatPercent:', value);
+            return `0,${'0'.repeat(decimals)}%`;
+        }
         return `${value.toFixed(decimals).replace('.', ',')}%`;
     }
 }

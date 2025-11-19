@@ -138,6 +138,31 @@
     color: #c084fc; /* Roxo suave */
 }
 
+/* EURO - Roxo Claro (câmbio europeu) */
+.invlab-carousel-slide.euro .invlab-slide-value {
+    color: #a78bfa; /* Roxo claro */
+}
+
+/* IGP-M - Laranja (inflação contratos) */
+.invlab-carousel-slide.igpm .invlab-slide-value {
+    color: #fb923c; /* Laranja suave */
+}
+
+/* IBOVESPA - Teal (bolsa de valores) */
+.invlab-carousel-slide.ibovespa .invlab-slide-value {
+    color: #2dd4bf; /* Teal suave */
+}
+
+/* BITCOIN - Laranja Bitcoin */
+.invlab-carousel-slide.bitcoin .invlab-slide-value {
+    color: #f7931a; /* Laranja Bitcoin oficial */
+}
+
+/* ETHEREUM - Azul Ethereum */
+.invlab-carousel-slide.ethereum .invlab-slide-value {
+    color: #627eea; /* Azul Ethereum oficial */
+}
+
 /* ============================================
    BARRA LUMINOSA INFERIOR - ESTILO PREMIUM
    Linha sutil de 3px que diferencia cada indicador
@@ -166,6 +191,31 @@
 /* DÓLAR - Barra roxa suave */
 .invlab-carousel-slide.dolar {
     border-bottom: 3px solid #c084fc33; /* Roxo com 20% opacidade */
+}
+
+/* EURO - Barra roxa clara */
+.invlab-carousel-slide.euro {
+    border-bottom: 3px solid #a78bfa33; /* Roxo claro com 20% opacidade */
+}
+
+/* IGP-M - Barra laranja */
+.invlab-carousel-slide.igpm {
+    border-bottom: 3px solid #fb923c33; /* Laranja com 20% opacidade */
+}
+
+/* IBOVESPA - Barra teal */
+.invlab-carousel-slide.ibovespa {
+    border-bottom: 3px solid #2dd4bf33; /* Teal com 20% opacidade */
+}
+
+/* BITCOIN - Barra laranja Bitcoin */
+.invlab-carousel-slide.bitcoin {
+    border-bottom: 3px solid #f7931a33; /* Laranja Bitcoin com 20% opacidade */
+}
+
+/* ETHEREUM - Barra azul Ethereum */
+.invlab-carousel-slide.ethereum {
+    border-bottom: 3px solid #627eea33; /* Azul Ethereum com 20% opacidade */
 }
 
 /* Botão de ação - REMOVIDO (carrossel meramente informativo) */
