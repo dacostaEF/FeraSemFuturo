@@ -8,21 +8,25 @@
 /* Container principal do carrossel */
 #invlab-carousel-container {
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-top: -10px !important; /* MARGIN NEGATIVO AUMENTADO: sobe MUITO para colar no menu */
-    padding: 0 !important; /* ZERO PADDING: colado no menu */
-    background: transparent;
-    position: relative;
-    z-index: 998;
+    max-width: 100%;
+    margin: 0;
+    padding: 12px 0 4px !important; /* Mais respiro no topo (12px), menos embaixo (4px) */
+    background: rgba(13, 13, 13, 0.95);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001; /* Acima do header (1000) */
     overflow: hidden;
+    border-bottom: 1px solid rgba(42, 127, 255, 0.15);
 }
 
 .invlab-carousel-wrapper {
     width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
     background: transparent;
     position: relative;
     overflow: hidden;
@@ -181,7 +185,11 @@
 /* Responsividade - Tablet */
 @media (max-width: 1024px) {
     #invlab-carousel-container {
-        padding: 0; /* ZERO PADDING: colado no menu */
+        padding: 10px 0 3px !important; /* Mais topo, menos embaixo */
+    }
+    
+    .invlab-carousel-wrapper {
+        padding: 0 24px;
     }
     
     .invlab-carousel-slides {
@@ -200,7 +208,11 @@
 /* Responsividade - Mobile */
 @media (max-width: 768px) {
     #invlab-carousel-container {
-        padding: 0; /* ZERO PADDING: colado no menu */
+        padding: 8px 0 3px !important; /* Mais topo, menos embaixo */
+    }
+    
+    .invlab-carousel-wrapper {
+        padding: 0 20px;
     }
     
     .invlab-carousel-slides {
@@ -221,7 +233,11 @@
 /* Responsividade - Mobile Pequeno */
 @media (max-width: 480px) {
     #invlab-carousel-container {
-        padding: 0; /* ZERO PADDING: colado no menu */
+        padding: 6px 0 2px !important; /* Mais topo, menos embaixo */
+    }
+    
+    .invlab-carousel-wrapper {
+        padding: 0 15px;
     }
     
     .invlab-carousel-slides {

@@ -52,7 +52,7 @@ body {
 
 .main-header {
     position: fixed;
-    top: 0;
+    top: 64px; /* REDUZIDO: aproxima o menu do carrossel */
     left: 0;
     right: 0;
     background: rgba(13, 13, 13, 0.95);
@@ -523,6 +523,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 32px 40px;
+    margin-top: 110px; /* REDUZIDO: aproxima o conteúdo do menu */
 }
 
 .content-wrapper {
@@ -1750,7 +1751,15 @@ body {
 /* Responsividade dos novos cards */
 @media (max-width: 768px) {
     body {
-        padding-top: 65px; /* REDUZIDO: 120px → 65px (menu mais compacto) */
+        padding-top: 0;
+    }
+    
+    .main-header {
+        top: 54px; /* REDUZIDO: aproxima menu do carrossel em tablet */
+    }
+    
+    .main-content {
+        margin-top: 100px; /* REDUZIDO para tablet */
     }
 
     .header-container {
@@ -1987,7 +1996,15 @@ body {
 
 @media (max-width: 480px) {
     body {
-        padding-top: 60px; /* REDUZIDO: 100px → 60px (menu mais compacto) */
+        padding-top: 0;
+    }
+    
+    .main-header {
+        top: 50px; /* REDUZIDO: aproxima menu do carrossel em mobile */
+    }
+    
+    .main-content {
+        margin-top: 95px; /* REDUZIDO para mobile */
     }
 
     .header-container {
