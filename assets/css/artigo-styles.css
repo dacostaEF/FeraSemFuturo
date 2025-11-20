@@ -5,7 +5,7 @@
 
 /* Container do Artigo */
 .article-wrapper {
-    max-width: 800px;
+    max-width: 1200px; /* PADRONIZADO: 800px → 1200px (consistente com todo o site) */
     margin: 0 auto;
     padding: 8px 20px 40px; /* ULTRA COMPACTO: 40px top → 8px (consistente com index) */
 }

@@ -36,7 +36,7 @@ body {
 }
 
 .container {
-    max-width: 960px;
+    max-width: 1200px; /* PADRONIZADO: 960px → 1200px (consistente com todo o site) */
     margin: 0 auto;
     background: transparent;
     min-height: 100vh;
