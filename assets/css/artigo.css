@@ -76,7 +76,7 @@ body {
 
 /* Article Content */
 .article-content {
-    padding: 40px 32px;
+    padding: 8px 32px 40px; /* ULTRA COMPACTO: 40px top → 8px (consistente) */
     background: rgba(255, 255, 255, 0.05);
     border-radius: 0 0 16px 16px;
     border: 1px solid rgba(255, 255, 255, 0.08);
