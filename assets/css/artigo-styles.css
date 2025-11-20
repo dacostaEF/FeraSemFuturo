@@ -10,16 +10,26 @@
     padding: 8px 20px 40px; /* ULTRA COMPACTO: 40px top → 8px (consistente com index) */
 }
 
-/* Breadcrumb */
+/* Breadcrumb - STICKY (gruda no menu ao rolar) */
 .breadcrumb {
     display: flex;
     align-items: center;
     gap: 8px;
     margin-bottom: 32px; /* AUMENTADO: 16px → 32px (respiro e destaque do breadcrumb) */
-    padding-bottom: 16px; /* ADICIONADO: espaço extra abaixo */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* ADICIONADO: linha sutil de separação */
+    padding: 12px 20px 16px; /* ADICIONADO: padding completo para destaque */
+    background: rgba(13, 13, 13, 0.95); /* ADICIONADO: fundo escuro semi-transparente */
+    backdrop-filter: blur(10px); /* ADICIONADO: efeito glassmorphism */
+    border-bottom: 1px solid rgba(42, 127, 255, 0.2); /* MELHORADO: azul mais visível */
     font-size: 14px;
     color: rgba(255, 255, 255, 0.6);
+    
+    /* STICKY - Cola no header ao rolar */
+    position: sticky;
+    top: 130px; /* Para logo abaixo do header fixo (carrossel 60px + header 70px) */
+    z-index: 999; /* Abaixo do header (1000) mas acima do conteúdo */
+    
+    /* Transição suave ao grudar */
+    transition: all 0.3s ease;
 }
 
 .breadcrumb a {
@@ -311,6 +321,12 @@
         padding: 24px 16px;
     }
 
+    .breadcrumb {
+        top: 110px; /* AJUSTADO: sticky para altura do header em tablet (110px) */
+        padding: 10px 16px 12px;
+        font-size: 13px;
+    }
+
     .article-title {
         font-size: 28px;
     }
@@ -344,6 +360,13 @@
 @media (max-width: 480px) {
     .article-wrapper {
         padding: 20px 12px;
+    }
+
+    .breadcrumb {
+        top: 100px; /* AJUSTADO: sticky para altura do header em mobile (100px) */
+        padding: 8px 12px 10px;
+        font-size: 12px;
+        gap: 6px;
     }
 
     .article-title {
