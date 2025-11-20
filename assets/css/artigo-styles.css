@@ -15,7 +15,9 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 16px; /* REDUZIDO: 32px → 16px (menos espaço abaixo do breadcrumb) */
+    margin-bottom: 32px; /* AUMENTADO: 16px → 32px (respiro e destaque do breadcrumb) */
+    padding-bottom: 16px; /* ADICIONADO: espaço extra abaixo */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* ADICIONADO: linha sutil de separação */
     font-size: 14px;
     color: rgba(255, 255, 255, 0.6);
 }
