@@ -826,7 +826,7 @@ body {
 }
 
 .section-title {
-    font-size: 28px;
+    font-size: 36px; /* IGUALADO: 28px → 36px (consistente com .hero-title) */
     font-weight: 700;
     color: #FFFFFF;
     text-align: center;
