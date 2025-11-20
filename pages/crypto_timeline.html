@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronologia dos Criptoativos | INVLAB</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="msapplication-TileColor" content="#0D0D0D">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Meta Description -->
+    <meta name="description" content="Cronologia completa dos criptoativos: da criptografia de 1976 ao Bitcoin, Ethereum, DeFi e o universo cripto atual. História educacional.">
+    
+    <!-- INVLAB Design System -->
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    
+    <style>
+        /* Timeline específica - mantém visual original adaptado ao tema INVLAB */
+        .timeline-header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            margin-bottom: 40px;
+        }
+
+        .timeline-title {
+            font-size: 3em;
+            background: linear-gradient(135deg, #F7931A 0%, #3B82F6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .timeline-subtitle {
+            font-size: 1.3em;
+            color: #94A3B8;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #F7931A 0%, #3B82F6 100%);
+            z-index: 0;
+        }
+
+        .era {
+            margin-bottom: 80px;
+        }
+
+        .era-title {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 40px;
+        }
+
+        .era-title h2 {
+            display: inline-block;
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.8em;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+            color: white;
+        }
+
+        .era-subtitle {
+            color: #94A3B8;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+
+        .event {
+            position: relative;
+            width: 45%;
+            padding: 25px;
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 15px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .event:hover {
+            transform: scale(1.03);
+            border-color: #F7931A;
+            box-shadow: 0 15px 40px rgba(247, 147, 26, 0.3);
+        }
+
+        .event-left {
+            margin-right: auto;
+            margin-left: 0;
+        }
+
+        .event-right {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .event::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: #F7931A;
+            border-radius: 50%;
+            border: 4px solid #0D0D0D;
+            z-index: 2;
+        }
+
+        .event-left::before {
+            right: -62px;
+        }
+
+        .event-right::before {
+            left: -62px;
+        }
+
+        .event::after {
+            content: '';
+            position: absolute;
+            top: 35px;
+            width: 40px;
+            height: 2px;
+            background: rgba(247, 147, 26, 0.5);
+        }
+
+        .event-left::after {
+            right: -42px;
+        }
+
+        .event-right::after {
+            left: -42px;
+        }
+
+        .year {
+            display: inline-block;
+            background: linear-gradient(135deg, #F7931A 0%, #FF6B35 100%);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .event-title {
+            font-size: 1.6em;
+            color: #3B82F6;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .event-description {
+            color: #CBD5E1;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.2);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            margin-top: 10px;
+            margin-right: 8px;
+            color: #93C5FD;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+        }
+
+        .genesis {
+            background: linear-gradient(135deg, rgba(247, 147, 26, 0.15) 0%, rgba(255, 107, 53, 0.15) 100%);
+            border: 3px solid #F7931A;
+            box-shadow: 0 0 40px rgba(247, 147, 26, 0.3);
+        }
+
+        .genesis .event-title {
+            color: #F7931A;
+            font-size: 2em;
+        }
+
+        .milestone {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(37, 99, 235, 0.15) 100%);
+            border: 2px solid #3B82F6;
+        }
+
+        .milestone .event-title {
+            color: #60A5FA;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+
+            .event {
+                width: calc(100% - 60px);
+                margin-left: 50px !important;
+                margin-right: 0 !important;
+            }
+
+            .event::before {
+                left: -45px !important;
+            }
+
+            .event::after {
+                left: -25px !important;
+            }
+
+            .timeline-title {
+                font-size: 2.2em;
+            }
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-box {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            border: 2px solid;
+        }
+
+        .legend-genesis {
+            background: rgba(247, 147, 26, 0.3);
+            border-color: #F7931A;
+        }
+
+        .legend-milestone {
+            background: rgba(59, 130, 246, 0.3);
+            border-color: #3B82F6;
+        }
+
+        .legend-normal {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                <span class="logo-text">INVLAB</span>
+            </div>
+            
+            <!-- Sistema de Abas INVLAB -->
+            <div class="tabs-nav-wrapper">
+                <nav class="tabs-nav" id="tabsNav">
+                    <button class="tab-btn" onclick="window.location.href='../index.html'">
+                        🏠 Início
+                    </button>
+                    <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">
+                        📚 Primeiros<br>Passos
+                    </button>
+                    
+                    <!-- Renda Fixa -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📊 Renda<br>Fixa <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="poupanca.html">💰 Poupança</a></li>
+                            <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                            <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                            <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Renda Variável -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📈 Renda<br>Variável <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="etfs" onclick="window.location.href='etfs.html'" style="cursor: pointer;">
+                                    <span class="category-name">💵 ETFs</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                            </li>
+                            
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="fiis" onclick="window.location.href='fiis.html'" style="cursor: pointer;">
+                                    <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                            </li>
+                            
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="acoes" onclick="window.location.href='acoes.html'" style="cursor: pointer;">
+                                    <span class="category-name">📈 Ações</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Criptoativos -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle active" onclick="window.location.href='criptoativos.html'">
+                            🔐 Cripto<br>ativos <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="bitcoin.html">₿ Bitcoin</a></li>
+                            <li><a href="#">⧫ Ethereum</a></li>
+                            <li><a href="stablecoins.html">💵 Stablecoins</a></li>
+                            <li><a href="blockchain.html">⛓️ Blockchain</a></li>
+                            <li><a href="cbdc.html">🏛️ CBDCs</a></li>
+                            <li><a href="#">🪙 Altcoins</a></li>
+                            <li><a href="#">🖼️ NFTs</a></li>
+                            <li><a href="#">🔗 Tokenização</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Ferramentas -->
+                    <button class="tab-btn" onclick="window.location.href='../index.html#ferramentas'">
+                        🛠️ Ferramentas
+                    </button>
+                    
+                    <!-- Outros -->
+                    <button class="tab-btn" onclick="window.location.href='../index.html#outros-investimentos'">
+                        💎 Outros
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <div class="content-wrapper-wide">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../index.html">🏠 Início</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="criptoativos.html">🔐 Criptoativos</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">📜 Cronologia</span>
+            </nav>
+
+            <!-- Timeline Header -->
+            <div class="timeline-header">
+                <h1 class="timeline-title">📜 Cronologia dos Criptoativos</h1>
+                <p class="timeline-subtitle">Da Criptografia aos Ativos Digitais Descentralizados (1976-2020)</p>
+            </div>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-box legend-genesis"></div>
+                    <span>Evento Genesis</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box legend-milestone"></div>
+                    <span>Marco Revolucionário</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box legend-normal"></div>
+                    <span>Evento Importante</span>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <!-- ERA 1: PRECURSORES -->
+                <div class="era">
+                    <div class="era-title">
+                        <h2>🌱 Era dos Precursores</h2>
+                        <p class="era-subtitle">1976-2008 | As Sementes da Revolução</p>
+                    </div>
+
+                    <div class="event event-left">
+                        <span class="year">1976</span>
+                        <div class="event-title">Criptografia de Chave Pública</div>
+                        <div class="event-description">
+                            Whitfield Diffie e Martin Hellman publicam o conceito de criptografia assimétrica, base fundamental para todas as criptomoedas.
+                        </div>
+                        <span class="tag">Fundação</span>
+                    </div>
+
+                    <div class="event event-right">
+                        <span class="year">1982</span>
+                        <div class="event-title">E-Cash Concept</div>
+                        <div class="event-description">
+                            David Chaum propõe o conceito de dinheiro eletrônico anônimo usando criptografia.
+                        </div>
+                        <span class="tag">Teoria</span>
+                    </div>
+
+                    <div class="event event-left">
+                        <span class="year">1989</span>
+                        <div class="event-title">DigiCash</div>
+                        <div class="event-description">
+                            David Chaum funda a DigiCash, primeira tentativa de dinheiro digital criptografado. Fracassou por depender de bancos centralizados.
+                        </div>
+                        <span class="tag">Primeira Tentativa</span>
+                    </div>
+
+                    <div class="event event-right">
+                        <span class="year">1992</span>
+                        <div class="event-title">Movimento Cypherpunk</div>
+                        <div class="event-description">
+                            Criação da lista de emails Cypherpunks, defendendo privacidade através de criptografia. Membros incluem: Hal Finney, Nick Szabo, Wei Dai.
+                        </div>
+                        <span class="tag">Movimento</span>
+                    </div>
+
+                    <div class="event event-left">
+                        <span class="year">1997</span>
+                        <div class="event-title">HashCash</div>
+                        <div class="event-description">
+                            Adam Back cria HashCash, sistema de Proof-of-Work para combater spam. Posteriormente usado no Bitcoin.
+                        </div>
+                        <span class="tag">Proof-of-Work</span>
+                    </div>
+
+                    <div class="event event-right">
+                        <span class="year">1998</span>
+                        <div class="event-title">B-Money</div>
+                        <div class="event-description">
+                            Wei Dai propõe B-Money, conceito de dinheiro digital distribuído anônimo. Influenciou diretamente o Bitcoin.
+                        </div>
+                        <span class="tag">Conceito</span>
+                    </div>
+
+                    <div class="event event-left">
+                        <span class="year">1998</span>
+                        <div class="event-title">Bit Gold</div>
+                        <div class="event-description">
+                            Nick Szabo descreve Bit Gold, precursor conceitual do Bitcoin com proof-of-work e registro descentralizado. Nunca implementado.
+                        </div>
+                        <span class="tag">Conceito</span>
+                    </div>
+
+                    <div class="event event-right">
+                        <span class="year">2008</span>
+                        <div class="event-title">Crise Financeira Global</div>
+                        <div class="event-description">
+                            Colapso do Lehman Brothers e resgate massivo de bancos. Motivação para criar sistema financeiro alternativo.
+                        </div>
+                        <span class="tag">Contexto Histórico</span>
+                    </div>
+                </div>
+
+                <!-- ERA 2: GENESIS -->
+                <div class="era">
+                    <div class="era-title">
+                        <h2>⚡ Era Genesis</h2>
+                        <p class="era-subtitle">2008-2010 | O Nascimento do Bitcoin</p>
+                    </div>
+
+                    <div class="event event-left genesis">
+                        <span class="year">31 Out 2008</span>
+                        <div class="event-title">₿ Bitcoin White Paper</div>
+                        <div class="event-description">
+                            Satoshi Nakamoto publica "Bitcoin: A Peer-to-Peer Electronic Cash System" na lista Cypherpunks. Solução definitiva para o problema do gasto duplo.
+                        </div>
+                        <span class="tag">White Paper</span>
+                        <span class="tag">Satoshi Nakamoto</span>
+                    </div>
+
+                    <div class="event event-right genesis">
+                        <span class="year">3 Jan 2009</span>
+                        <div class="event-title">Genesis Block</div>
+                        <div class="event-description">
+                            Bloco 0 minerado por Satoshi com mensagem: "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks". Bitcoin está vivo.
+                        </div>
+                        <span class="tag">Bloco 0</span>
+                        <span class="tag">Blockchain</span>
+                    </div>
+
+                    <div class="event event-left">
+                        <span class="year">12 Jan 2009</span>
+                        <div class="event-title">Primeira Transação Bitcoin</div>
+                        <div class="event-description">
+                            Satoshi envia 10 BTC para Hal Finney, primeira transação peer-to-peer da história entre duas pessoas.
+                        </div>
+                        <span class="tag">Transação</span>
+                    </div>
+
+                    <div class="event event-right">
+                        <span class="year">5 Out 2009</span>
+                        <div class="event-title">Primeiro Valor em Dólar</div>
+                        <div class="event-description">
+                            New Liberty Standard publica taxa de câmbio: $1 = 1,309.03 BTC (baseado em custo de eletricidade para minerar).
+                        </div>
+                        <span class="tag">Preço</span>
+                    </div>
+
+                    <div class="event event-left milestone">
+                        <span class="year">22 Mai 2010</span>
+                        <div class="event-title">🍕 Bitcoin Pizza Day</div>
+                        <div class="event-description">
+                            Laszlo Hanyecz paga 10.000 BTC por 2 pizzas. Primeira transação comercial real do Bitcoin. (Hoje valeria ~$690 milhões!)
+                        </div>
+                        <span class="tag">Primeira Compra</span>
+                        <span class="tag">História</span>
+                    </div>
+
+                    <div class="event event-right">
+                        <span class="year">Jul 2010</span>
+                        <div class="event-title">Mt.Gox Exchange</div>
+                        <div class="event-description">
+                            Jed McCaleb lança Mt.Gox, primeira grande exchange de Bitcoin. Posteriormente se tornaria a maior... e causaria o maior hack.
+                        </div>
+                        <span class="tag">Exchange</span>
+                    </div>
+                </div>
+
+                <!-- ERA 3: PRIMEIRAS ALTERNATIVAS -->
+                <div class="era">
+                    <div class="era-title">
+                        <h2>🌿 Era das Primeiras Alternativas</h2>
+                        <p class="era-subtitle">2011-2013 | Nascimento das Altcoins</p>
+                    </div>
+
+                    <div class="event event-left">
+                        <span class="year">Abr 2011</span>
+                        <div class="event-title">Namecoin</div>
+                        <div class="event-description">
+                            Primeiro fork do Bitcoin. Focado em DNS descentralizado e registro de domínios resistente à censura.
+                        </div>
+                        <span class="tag">Primeiro Fork</span>
+                        <span class="tag">Utilidade</span>
+                    </div>
+
+                    <div class="event event-right milestone">
+                        <span class="year">Out 2011</span>
+                        <div class="event-title">Litecoin (LTC)</div>
+                        <div class="event-description">
+                            Charlie Lee cria Litecoin, "prata para o ouro do Bitcoin". Blocos mais rápidos (2.5 min) e algoritmo Scrypt. Primeira altcoin de sucesso duradouro.
+                        </div>
+                        <span class="tag">Altcoin</span>
+                        <span class="tag">Scrypt</span>
+                    </div>
+
+                    <div class="event event-left">
+                        <span class="year">2012</span>
+                        <div class="event-title">Ripple (XRP)</div>
+                        <div class="event-description">
+                            Sistema de pagamento focado em bancos e instituições financeiras. Consenso diferente de mining. Controverso por ser centralizado.
+                        </div>
+                        <span class="tag">Pagamentos</span>
+                        <span class="tag">Bancos</span>
+                    </div>
+
+                    <div class="event event-right">
+                        <span class="year">Ago 2012</span>
+                        <div class="event-title">Peercoin</div>
+                        <div class="event-description">
+                            Primeiro a implementar Proof-of-Stake junto com Proof-of-Work. Inovação no consenso energeticamente eficiente.
+                        </div>
+                        <span class="tag">Proof-of-Stake</span>
+                        <span class="tag">Híbrido</span>
+                    </div>
+
+                    <div class="event event-left">
+                        <span class="year">Nov 2013</span>
+                        <div class="event-title">Dogecoin (DOGE)</div>
+                        <div class="event-description">
+                            Criado como piada baseado no meme "Doge". Surpreendentemente, ganhou comunidade massiva e ainda existe. Meme virou realidade!
+                        </div>
+                        <span class="tag">Meme Coin</span>
+                        <span class="tag">Comunidade</span>
+                    </div>
+
+                    <div class="event event-right">
+                        <span class="year">2013</span>
+                        <div class="event-title">Primeira Bolha e Crash</div>
+                        <div class="event-description">
+                            Bitcoin sobe de $13 para $1,150 e depois cai para $200. Mt.Gox anuncia que perdeu 850 mil BTC em hack (2014).
+                        </div>
+                        <span class="tag">Crash</span>
+                        <span class="tag">Mt.Gox</span>
+                    </div>
+                </div>
+
+                <!-- ERA 4: REVOLUÇÃO DOS SMART CONTRACTS -->
+                <div class="era">
+                    <div class="era-title">
+                        <h2>🔮 Revolução dos Smart Contracts</h2>
+                        <p class="era-subtitle">2014-2016 | Além do Dinheiro Digital</p>
+                    </div>
+
+                    <div class="event event-left">
+                        <span class="year">Abr 2014</span>
+                        <div class="event-title">Monero (XMR)</div>
+                        <div class="event-description">
+                            Fork do Bytecoin focado em privacidade total. Usa tecnologia Ring Signatures e Stealth Addresses. Totalmente anônimo e fungível.
+                        </div>
+                        <span class="tag">Privacidade</span>
+                        <span class="tag">Anônimo</span>
+                    </div>
+
+                    <div class="event event-right">
+                        <span class="year">Jul 2014</span>
+                        <div class="event-title">Stellar (XLM)</div>
+                        <div class="event-description">
+                            Jed McCaleb (co-fundador do Ripple) cria Stellar para inclusão financeira e pagamentos transfronteiriços rápidos e baratos.
+                        </div>
+                        <span class="tag">Pagamentos</span>
+                        <span class="tag">Inclusão</span>
+                    </div>
+
+                    <div class="event event-left milestone">
+                        <span class="year">30 Jul 2015</span>
+                        <div class="event-title">Ethereum (ETH) - Launch</div>
+                        <div class="event-description">
+                            Vitalik Buterin lança Ethereum: blockchain programável com smart contracts. Paradigma totalmente novo - "computador mundial descentralizado". Revolução!
+                        </div>
+                        <span class="tag">Smart Contracts</span>
+                        <span class="tag">EVM</span>
+                        <span class="tag">Game Changer</span>
+                    </div>
+
+                    <div class="event event-right">
+                        <span class="year">2016</span>
+                        <div class="event-title">The DAO Hack</div>
+                        <div class="event-description">
+                            Organização autônoma descentralizada perde $60M em hack. Ethereum faz hard fork controverso, criando Ethereum Classic (ETC). Debate filosófico: código é lei?
+                        </div>
+                        <span class="tag">Hack</span>
+                        <span class="tag">Hard Fork</span>
+                    </div>
+
+                    <div class="event event-left">
+                        <span class="year">Out 2016</span>
+                        <div class="event-title">Zcash (ZEC)</div>
+                        <div class="event-description">
+                            Lançamento de Zcash com tecnologia zk-SNARKs (zero-knowledge proofs). Privacidade opcional - transações podem ser transparentes ou blindadas.
+                        </div>
+                        <span class="tag">Zero-Knowledge</span>
+                        <span class="tag">Privacidade</span>
+                    </div>
+                </div>
+
+                <!-- ERA 5: ICO BOOM -->
+                <div class="era">
+                    <div class="era-title">
+                        <h2>🚀 Era do ICO Boom</h2>
+                        <p class="era-subtitle">2017-2018 | Explosão e Bolha</p>
+                    </div>
+
+                    <div class="event event-right">
+                        <span class="year">2017</span>
+                        <div class="event-title">ICO Mania</div>
+                        <div class="event-description">
+                            Explosão de ICOs (Initial Coin Offerings) em Ethereum. Bilhões arrecadados, mas 90%+ eram scams ou projetos falhos. Reguladores começam a investigar.
+                        </div>
+                        <span class="tag">ICOs</span>
+                        <span class="tag">Tokens ERC-20</span>
+                    </div>
+
+                    <div class="event event-left">
+                        <span class="year">Ago 2017</span>
+                        <div class="event-title">Bitcoin Cash (BCH)</div>
+                        <div class="event-description">
+                            Hard fork do Bitcoin sobre debate de escalabilidade. BCH aumenta tamanho do bloco para 8MB. Guerra civil na comunidade Bitcoin.
+                        </div>
+                        <span class="tag">Fork</span>
+                        <span class="tag">Escalabilidade</span>
+                    </div>
+
+                    <div class="event event-right">
+                        <span class="year">Dez 2017</span>
+                        <div class="event-title">Bitcoin $20k ATH</div>
+                        <div class="event-description">
+                            Bitcoin atinge $19,783 - máxima histórica. Cobertura midiática global. Milhões entram no mercado. Início da correção brutal.
+                        </div>
+                        <span class="tag">ATH</span>
+                        <span class="tag">Bolha</span>
+                    </div>
+
+                    <div class="event event-left">
+                        <span class="year">2017</span>
+                        <div class="event-title">Cardano (ADA)</div>
+                        <div class="event-description">
+                            Charles Hoskinson (co-fundador Ethereum) lança Cardano. Abordagem acadêmica peer-reviewed. Proof-of-Stake desde o início.
+                        </div>
+                        <span class="tag">PoS</span>
+                        <span class="tag">Acadêmico</span>
+                    </div>
+
+                    <div class="event event-right">
+                        <span class="year">2018</span>
+                        <div class="event-title">Crypto Winter -84%</div>
+                        <div class="event-description">
+                            Bitcoin cai de $20k para $3,200. Ethereum de $1,400 para $80. Milhares de projetos morrem. "Bitcoin is dead" notícia #300+.
+                        </div>
+                        <span class="tag">Bear Market</span>
+                        <span class="tag">Crash</span>
+                    </div>
+
+                    <div class="event event-left">
+                        <span class="year">Nov 2018</span>
+                        <div class="event-title">Bitcoin SV (BSV)</div>
+                        <div class="event-description">
+                            Craig Wright (que se diz Satoshi) causa outro fork do BCH criando Bitcoin SV. Mais drama e divisão na comunidade.
+                        </div>
+                        <span class="tag">Fork</span>
+                        <span class="tag">Controvérsia</span>
+                    </div>
+                </div>
+
+                <!-- ERA 6: MATURIDADE E DEFI -->
+                <div class="era">
+                    <div class="era-title">
+                        <h2>💎 Era da Maturidade</h2>
+                        <p class="era-subtitle">2019-2020 | DeFi Summer & Institucionalização</p>
+                    </div>
+
+                    <div class="event event-right">
+                        <span class="year">Mai 2019</span>
+                        <div class="event-title">Binance Chain & BNB</div>
+                        <div class="event-description">
+                            Maior exchange do mundo lança sua própria blockchain. BNB se torna token de utilidade massiva. Centralizado, mas funcional.
+                        </div>
+                        <span class="tag">Exchange Chain</span>
+                    </div>
+
+                    <div class="event event-left milestone">
+                        <span class="year">Nov 2019</span>
+                        <div class="event-title">Uniswap & DeFi</div>
+                        <div class="event-description">
+                            Uniswap populariza AMM (Automated Market Maker). Início do DeFi (Finanças Descentralizadas). Qualquer um pode criar mercado de liquidez.
+                        </div>
+                        <span class="tag">DeFi</span>
+                        <span class="tag">DEX</span>
+                    </div>
+
+                    <div class="event event-right">
+                        <span class="year">Mar 2020</span>
+                        <div class="event-title">COVID-19 Crash</div>
+                        <div class="event-description">
+                            Pandemia global causa crash. Bitcoin cai 50% em um dia. Mas recuperação é rápida - impressão de dinheiro massiva pelos governos.
+                        </div>
+                        <span class="tag">Pandemia</span>
+                    </div>
+
+                    <div class="event event-left">
+                        <span class="year">Mai 2020</span>
+                        <div class="event-title">Bitcoin Halving #3</div>
+                        <div class="event-description">
+                            Recompensa de mineração cai de 12.5 para 6.25 BTC. Oferta nova reduzida pela metade. Historicamente precede bull markets.
+                        </div>
+                        <span class="tag">Halving</span>
+                    </div>
+
+                    <div class="event event-right milestone">
+                        <span class="year">Ago 2020</span>
+                        <div class="event-title">DeFi Summer</div>
+                        <div class="event-description">
+                            Explosão de protocolos DeFi: Aave, Compound, Yearn Finance, SushiSwap. "Yield Farming" e "Liquidity Mining" viram febre. TVL ultrapassa $10B.
+                        </div>
+                        <span class="tag">DeFi</span>
+                        <span class="tag">Yield Farming</span>
+                    </div>
+
+                    <div class="event event-left">
+                        <span class="year">Ago 2020</span>
+                        <div class="event-title">MicroStrategy Compra BTC</div>
+                        <div class="event-description">
+                            Empresa pública (Michael Saylor) coloca Bitcoin no balanço como reserva de valor. Primeira de muitas empresas. Mudança de narrativa institucional.
+                        </div>
+                        <span class="tag">Institucional</span>
+                    </div>
+
+                    <div class="event event-right">
+                        <span class="year">Dez 2020</span>
+                        <div class="event-title">Ethereum 2.0 Beacon Chain</div>
+                        <div class="event-description">
+                            Launch da Beacon Chain - primeiro passo para Ethereum Proof-of-Stake. Transição de anos começa oficialmente.
+                        </div>
+                        <span class="tag">ETH 2.0</span>
+                        <span class="tag">Proof-of-Stake</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Callout Final -->
+            <div class="callout callout-info" style="margin-top: 60px;">
+                <div class="callout-icon">📚</div>
+                <div class="callout-content">
+                    <h3>Continuação da História</h3>
+                    <p>Esta cronologia cobre até 2020. Os anos seguintes (2021-2024) incluem eventos como o boom de NFTs, 
+                    crash da Terra/Luna, colapso da FTX, aprovação de ETFs de Bitcoin e muito mais. 
+                    A história dos criptoativos continua sendo escrita!</p>
+                </div>
+            </div>
+
+            <!-- Navegação -->
+            <div class="callout callout-success" style="margin-top: 20px;">
+                <div class="callout-icon">🔗</div>
+                <div class="callout-content">
+                    <h3>Continue explorando</h3>
+                    <p>
+                        <a href="bitcoin.html" style="color: #10B981; font-weight: 600;">₿ Entenda o Bitcoin</a> · 
+                        <a href="blockchain.html" style="color: #10B981; font-weight: 600;">⛓️ Como funciona a Blockchain</a> · 
+                        <a href="criptoativos.html" style="color: #10B981; font-weight: 600;">🔐 Visão geral dos Criptoativos</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: rgba(15, 23, 42, 0.9); border-top: 1px solid rgba(59, 130, 246, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+        <div class="content-wrapper-wide">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px;">
+                <!-- Coluna 1: Sobre -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">
+                        Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.
+                    </p>
+                    <a href="guia_invlab.html" style="color: #3B82F6; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
+                        🧭 Guia do Site →
+                    </a>
+                </div>
+
+                <!-- Coluna 2: Renda Fixa -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="poupanca.html" style="color: #CBD5E1; text-decoration: none;">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 3: Criptoativos -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Criptoativos</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="criptoativos.html" style="color: #CBD5E1; text-decoration: none;">🔐 Introdução</a></li>
+                        <li><a href="bitcoin.html" style="color: #CBD5E1; text-decoration: none;">₿ Bitcoin</a></li>
+                        <li><a href="stablecoins.html" style="color: #CBD5E1; text-decoration: none;">💵 Stablecoins</a></li>
+                        <li><a href="blockchain.html" style="color: #CBD5E1; text-decoration: none;">⛓️ Blockchain</a></li>
+                        <li><a href="cbdc.html" style="color: #CBD5E1; text-decoration: none;">🏛️ CBDCs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 4: Navegação -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Navegação</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="../index.html" style="color: #CBD5E1; text-decoration: none;">🏠 Início</a></li>
+                        <li><a href="../index.html#primeiros-passos" style="color: #CBD5E1; text-decoration: none;">📚 Primeiros Passos</a></li>
+                        <li><a href="guia_invlab.html" style="color: #10B981; text-decoration: none; font-weight: 600;">🧭 Guia do INVLAB</a></li>
+                        <li><a href="../index.html#ferramentas" style="color: #CBD5E1; text-decoration: none;">🛠️ Ferramentas</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Disclaimers -->
+            <div style="border-top: 1px solid rgba(59, 130, 246, 0.1); padding-top: 20px; margin-top: 20px;">
+                <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 8px;">
+                    ⚠️ Conteúdo 100% educacional. Não somos corretora, não vendemos produtos, não recebemos comissões.
+                </p>
+                <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                    © 2025 INVLAB - Laboratório de Investimentos | Plataforma Educacional
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>

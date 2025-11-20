@@ -23,6 +23,36 @@
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="stylesheet" href="../assets/css/invlab-theme.css">
     <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    
+    <!-- Estilos para o botão de Linha do Tempo -->
+    <style>
+        .timeline-header-with-button {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .timeline-button {
+            background: rgba(16, 185, 129, 0.05);
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: rgba(16, 185, 129, 0.9);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .timeline-button:hover {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.6);
+            color: rgba(16, 185, 129, 1);
+        }
+    </style>
 </head>
 <body>
     <!-- Header Fixo -->
@@ -217,7 +247,12 @@
                     </p>
 
                     <div class="example-card" style="margin-top: 20px;">
-                        <h3>Linha do tempo simplificada</h3>
+                        <div class="timeline-header-with-button">
+                            <h3 style="margin: 0;">Linha do tempo simplificada</h3>
+                            <a href="crypto_timeline.html" class="timeline-button">
+                                📜 Ver timeline completa
+                            </a>
+                        </div>
                         <ul style="margin-top: 10px; padding-left: 18px;">
                             <li><strong>2008:</strong> Publicação do whitepaper do Bitcoin.</li>
                             <li><strong>2009:</strong> Início da rede e mineração do bloco gênesis.</li>
