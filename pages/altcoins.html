@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Altcoins: O Universo Além do Bitcoin | INVLAB</title>
+    
+    <!-- Favicon, Theme Color, Meta Description -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="msapplication-TileColor" content="#0D0D0D">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Conheça as Altcoins: criptomoedas alternativas ao Bitcoin. Entenda categorias, casos de uso, riscos e como avaliar projetos.">
+    
+    <!-- INVLAB Design System (Universal Cards) -->
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+</head>
+<body>
+
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                <span class="logo-text">INVLAB</span>
+            </div>
+
+            <!-- Sistema de Abas INVLAB -->
+            <div class="tabs-nav-wrapper">
+                <nav class="tabs-nav" id="tabsNav">
+                    <button class="tab-btn" onclick="window.location.href='../index.html'">
+                        🏠 Início
+                    </button>
+
+                    <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">
+                        📚 Primeiros<br>Passos
+                    </button>
+
+                    <!-- ABA COM DROPDOWN: RENDA FIXA -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📊 Renda<br>Fixa <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="poupanca.html">💰 Poupança</a></li>
+                            <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                            <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                            <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- ABA COM DROPDOWN: RENDA VARIÁVEL -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📈 Renda<br>Variável <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="etfs" onclick="window.location.href='etfs.html'" style="cursor: pointer;">
+                                    <span class="category-name">💵 ETFs</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                                <ul class="category-submenu" id="submenu-etfs">
+                                    <li><a href="#">📊 Simulador de Indexação</a></li>
+                                    <li><a href="#">📈 ETFs Nacionais</a></li>
+                                    <li><a href="#">🌎 ETFs Internacionais</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="fiis" onclick="window.location.href='fiis.html'" style="cursor: pointer;">
+                                    <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                                <ul class="category-submenu" id="submenu-fiis">
+                                    <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                                    <li><a href="#">🏘️ FIIs de Tijolo</a></li>
+                                    <li><a href="#">📋 FIIs de Papel</a></li>
+                                    <li><a href="#">🔄 FIIs Híbridos</a></li>
+                                    <li><a href="#">🎯 Como Escolher FIIs</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="acoes" onclick="window.location.href='acoes.html'" style="cursor: pointer;">
+                                    <span class="category-name">📈 Ações</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                                <ul class="category-submenu" id="submenu-acoes">
+                                    <li><a href="#">📊 Análise Fundamentalista</a></li>
+                                    <li><a href="#">📈 Dividendos</a></li>
+                                    <li><a href="#">⚡ Day Trade / Swing Trade</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- ABA COM DROPDOWN: CRIPTOATIVOS -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle active">
+                            🔐 Cripto<br>ativos <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="bitcoin.html">₿ Bitcoin</a></li>
+                            <li><a href="ethereum.html">⧫ Ethereum</a></li>
+                            <li><a href="stablecoins.html">💵 Stablecoins</a></li>
+                            <li><a href="blockchain.html">⛓️ Blockchain</a></li>
+                            <li><a href="cbdc.html">🏛️ CBDCs</a></li>
+                            <li><a href="altcoins.html">🪙 Altcoins</a></li>
+                            <li><a href="nfts.html">🖼️ NFTs</a></li>
+                            <li><a href="#">🔗 Tokenização</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- ABA COM DROPDOWN: FERRAMENTAS -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            🛠️ Ferra<br>mentas <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="simulador-cdbs.html">🏦 Simulador de CDBs</a></li>
+                            <li><a href="#">🎯 Alocador de Ativos</a></li>
+                            <li><a href="#">📊 Simulador de Carteira</a></li>
+                            <li><a href="#">📈 Projetor de Patrimônio</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-section">
+                                <strong>🧮 Calculadoras Técnicas</strong>
+                            </li>
+                            <li><a href="calculadora.html">Juros Compostos</a></li>
+                            <li><a href="#">Imposto de Renda</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- Botão de Menu Mobile -->
+            <button class="menu-toggle" id="menuToggle">
+                <span class="menu-icon"></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <article class="article-wrapper">
+            
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb" aria-label="breadcrumb">
+                <div class="content-wrapper-wide">
+                    <a href="../index.html" class="breadcrumb-item">🏠 Início</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <a href="../index.html#criptoativos" class="breadcrumb-item">🔐 Criptoativos</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span class="breadcrumb-current">🪙 Altcoins</span>
+                </div>
+            </nav>
+
+            <!-- Conteúdo Principal do Artigo -->
+            <div class="article-content content-wrapper-wide">
+                
+                <!-- Título Principal -->
+                <h1 class="article-title">Altcoins: O Universo de Criptomoedas Além do Bitcoin</h1>
+
+                <p class="article-lead">
+                    Explore o vasto ecossistema das altcoins – criptomoedas alternativas ao Bitcoin que oferecem diferentes 
+                    funcionalidades, tecnologias e propostas de valor no mundo cripto.
+                </p>
+
+                <!-- Hero -->
+                <div class="article-hero">
+                    <div class="hero-emoji">🪙🌐</div>
+                    <p class="hero-caption">Milhares de projetos, diferentes propósitos: conheça o universo além do Bitcoin.</p>
+                </div>
+
+                <!-- Disclaimer Educacional -->
+                <div class="callout callout-info" style="margin: 24px 0;">
+                    <div class="callout-icon" style="font-size: 24px;">📘</div>
+                    <div class="callout-content">
+                        <h3>Conteúdo 100% educacional</h3>
+                        <p style="margin-bottom: 0;">Este material tem caráter exclusivamente educativo e não constitui recomendação de compra ou venda de ativos. 
+                        O objetivo é ajudar você a entender o ecossistema das altcoins e suas diferentes categorias.</p>
+                    </div>
+                </div>
+
+                <!-- Seção 1: O que são Altcoins -->
+                <section class="article-section">
+                    <h2>🪙 O que são Altcoins?</h2>
+                    
+                    <p>
+                        <strong>Altcoin</strong> é um termo que vem de "alternative coin" (moeda alternativa) e se refere a 
+                        <strong>qualquer criptomoeda que não seja o Bitcoin</strong>. Desde a criação do Bitcoin em 2009, 
+                        milhares de projetos surgiram propondo melhorias, novas funcionalidades ou casos de uso diferentes.
+                    </p>
+
+                    <p style="margin-top: 12px;">
+                        Algumas altcoins foram criadas para resolver limitações técnicas do Bitcoin (velocidade, escalabilidade), 
+                        enquanto outras exploraram aplicações totalmente novas, como contratos inteligentes, privacidade, 
+                        interoperabilidade entre blockchains e muito mais.
+                    </p>
+
+                    <div class="callout callout-info" style="margin-top: 24px;">
+                        <div class="callout-icon" style="font-size: 24px;">📊</div>
+                        <div class="callout-content">
+                            <h3>Números do mercado</h3>
+                            <p style="margin-bottom: 0;">Existem mais de 20.000 criptomoedas registradas em plataformas como CoinMarketCap e CoinGecko, 
+                            mas apenas algumas centenas têm projetos sólidos, liquidez e adoção real.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 2: Principais Categorias -->
+                <section class="article-section">
+                    <h2>📂 Principais Categorias de Altcoins</h2>
+                    
+                    <p>As altcoins podem ser classificadas em diferentes categorias conforme sua funcionalidade e proposta:</p>
+
+                    <div class="inv-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-top: 20px;">
+                        
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">⧫</div>
+                            <h4 class="inv-card-title">Plataformas de Smart Contracts</h4>
+                            <p class="inv-card-description">
+                                Permitem criação de aplicações descentralizadas (dApps). 
+                                <strong>Exemplos:</strong> Ethereum, Cardano, Solana, Polkadot, Avalanche, NEAR.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">💳</div>
+                            <h4 class="inv-card-title">Payment Tokens (Pagamentos)</h4>
+                            <p class="inv-card-description">
+                                Focadas em transações rápidas e eficientes. 
+                                <strong>Exemplos:</strong> Litecoin (LTC), Ripple (XRP), Bitcoin Cash (BCH).
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">💵</div>
+                            <h4 class="inv-card-title">Stablecoins</h4>
+                            <p class="inv-card-description">
+                                Atreladas a ativos estáveis (dólar, euro). 
+                                <strong>Exemplos:</strong> USDT (Tether), USDC, DAI, BUSD.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">🏦</div>
+                            <h4 class="inv-card-title">DeFi (Finanças Descentralizadas)</h4>
+                            <p class="inv-card-description">
+                                Focadas em serviços financeiros sem intermediários. 
+                                <strong>Exemplos:</strong> Uniswap (UNI), Aave (AAVE), Compound (COMP).
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">🔒</div>
+                            <h4 class="inv-card-title">Privacy Coins (Privacidade)</h4>
+                            <p class="inv-card-description">
+                                Priorizam anonimato e privacidade nas transações. 
+                                <strong>Exemplos:</strong> Monero (XMR), Zcash (ZEC).
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">🎮</div>
+                            <h4 class="inv-card-title">Gaming & Metaverso</h4>
+                            <p class="inv-card-description">
+                                Criptomoedas de jogos e mundos virtuais. 
+                                <strong>Exemplos:</strong> Axie Infinity (AXS), The Sandbox (SAND), Decentraland (MANA).
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">🐕</div>
+                            <h4 class="inv-card-title">Memecoins</h4>
+                            <p class="inv-card-description">
+                                Criadas como meme ou brincadeira, mas ganharam comunidades. 
+                                <strong>Exemplos:</strong> Dogecoin (DOGE), Shiba Inu (SHIB).
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">🌉</div>
+                            <h4 class="inv-card-title">Interoperabilidade</h4>
+                            <p class="inv-card-description">
+                                Conectam diferentes blockchains. 
+                                <strong>Exemplos:</strong> Polkadot (DOT), Cosmos (ATOM), Chainlink (LINK).
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">⚡</div>
+                            <h4 class="inv-card-title">Layer 2 (Escalabilidade)</h4>
+                            <p class="inv-card-description">
+                                Soluções para aumentar velocidade e reduzir custos. 
+                                <strong>Exemplos:</strong> Polygon (MATIC), Optimism (OP), Arbitrum (ARB).
+                            </p>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Seção 3: Exemplos Relevantes -->
+                <section class="article-section">
+                    <h2>🏆 Altcoins Mais Relevantes por Capitalização</h2>
+                    
+                    <p>Algumas altcoins se destacam por tamanho de mercado, adoção, inovação tecnológica ou ecossistema desenvolvido:</p>
+
+                    <div class="example-card">
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 16px; table-layout: fixed;">
+                            <thead>
+                                <tr style="background: rgba(255, 255, 255, 0.05);">
+                                    <th style="padding: 10px; text-align: left; width: 25%;">Criptomoeda</th>
+                                    <th style="padding: 10px; text-align: left; width: 25%;">Categoria</th>
+                                    <th style="padding: 10px; text-align: left; width: 50%;">Proposta Principal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 10px; font-weight: 600;">Ethereum (ETH)</td>
+                                    <td style="padding: 10px;">Smart Contracts</td>
+                                    <td style="padding: 10px;">Plataforma líder para dApps, DeFi e NFTs</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; font-weight: 600;">BNB (Binance Coin)</td>
+                                    <td style="padding: 10px;">Exchange Token</td>
+                                    <td style="padding: 10px;">Token da Binance, usado para taxas e DeFi na BSC</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; font-weight: 600;">Litecoin (LTC)</td>
+                                    <td style="padding: 10px;">Payment Token</td>
+                                    <td style="padding: 10px;">"A prata do Bitcoin" - transações rápidas desde 2011</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; font-weight: 600;">Cardano (ADA)</td>
+                                    <td style="padding: 10px;">Smart Contracts</td>
+                                    <td style="padding: 10px;">Foco em pesquisa acadêmica e sustentabilidade</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; font-weight: 600;">Solana (SOL)</td>
+                                    <td style="padding: 10px;">Smart Contracts</td>
+                                    <td style="padding: 10px;">Alta velocidade e baixo custo de transação</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; font-weight: 600;">NEAR Protocol (NEAR)</td>
+                                    <td style="padding: 10px;">Smart Contracts / IA</td>
+                                    <td style="padding: 10px;">Plataforma escalável focada em IA e desenvolvimento simplificado</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; font-weight: 600;">Ripple (XRP)</td>
+                                    <td style="padding: 10px;">Payment Token</td>
+                                    <td style="padding: 10px;">Transferências internacionais rápidas para bancos</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; font-weight: 600;">Polkadot (DOT)</td>
+                                    <td style="padding: 10px;">Interoperabilidade</td>
+                                    <td style="padding: 10px;">Conecta diferentes blockchains em uma rede</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="callout callout-info" style="margin-top: 24px;">
+                        <div class="callout-icon" style="font-size: 24px;">💳</div>
+                        <div class="callout-content">
+                            <h3>Destaque: Litecoin (LTC)</h3>
+                            <p style="margin-bottom: 0;">
+                                Conhecido como "a prata do ouro do Bitcoin", o Litecoin foi um dos primeiros altcoins, 
+                                criado em 2011 por Charlie Lee. Ele oferece tempos de confirmação de transação mais rápidos 
+                                (2,5 minutos vs 10 minutos do Bitcoin) e utiliza o algoritmo de hashing Scrypt, 
+                                tornando-o mais acessível para mineração.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="callout callout-warning" style="margin-top: 24px;">
+                        <div class="callout-icon" style="font-size: 24px;">⚠️</div>
+                        <div class="callout-content">
+                            <h3>Atenção</h3>
+                            <p style="margin-bottom: 0;">Capitalização de mercado não é sinônimo de qualidade ou segurança. 
+                            Sempre faça sua própria pesquisa (DYOR - Do Your Own Research).</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 4: Como Avaliar Altcoins -->
+                <section class="article-section">
+                    <h2>🔍 Como Avaliar uma Altcoin</h2>
+                    
+                    <p>Antes de considerar qualquer altcoin, é importante analisar diversos aspectos:</p>
+
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <div class="tip-number">1</div>
+                            <div class="tip-content">
+                                <h3>Proposta de Valor (Whitepaper)</h3>
+                                <p>Qual problema o projeto resolve? A tecnologia é realmente inovadora ou necessária?</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">2</div>
+                            <div class="tip-content">
+                                <h3>Equipe e Transparência</h3>
+                                <p>Quem está por trás do projeto? A equipe é identificável, experiente e ativa?</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">3</div>
+                            <div class="tip-content">
+                                <h3>Comunidade e Adoção</h3>
+                                <p>O projeto tem usuários reais? Existe desenvolvimento ativo no GitHub? A comunidade é engajada?</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">4</div>
+                            <div class="tip-content">
+                                <h3>Tokenomics (Economia do Token)</h3>
+                                <p>Como os tokens são distribuídos? Há inflação? Existe utilidade real para o token?</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">5</div>
+                            <div class="tip-content">
+                                <h3>Segurança e Auditorias</h3>
+                                <p>O código foi auditado por empresas de segurança? Já houve hacks ou vulnerabilidades?</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">6</div>
+                            <div class="tip-content">
+                                <h3>Liquidez e Exchanges</h3>
+                                <p>A moeda está listada em exchanges confiáveis? Há liquidez suficiente para comprar/vender?</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 5: Riscos das Altcoins -->
+                <section class="article-section">
+                    <h2>⚠️ Riscos ao Investir em Altcoins</h2>
+                    
+                    <p>Altcoins carregam riscos significativamente maiores que Bitcoin e Ethereum:</p>
+
+                    <div class="example-card" style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #EF4444;">
+                        <h3 style="color: #FCA5A5; margin-bottom: 16px;">⛔ Principais Riscos</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                <strong>1. Volatilidade Extrema:</strong> Altcoins podem variar 50% ou mais em um único dia.
+                            </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                <strong>2. Projetos Falsos (Scams):</strong> Muitas altcoins são criadas apenas para enriquecer criadores (rug pulls).
+                            </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                <strong>3. Baixa Liquidez:</strong> Dificuldade para vender sem afetar o preço drasticamente.
+                            </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                <strong>4. Abandono de Projeto:</strong> Muitos projetos param de ser desenvolvidos após arrecadar fundos.
+                            </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                <strong>5. Risco Regulatório:</strong> Muitas altcoins podem ser consideradas "securities" e enfrentar problemas legais.
+                            </li>
+                            <li style="padding: 8px 0;">
+                                <strong>6. Concorrência Feroz:</strong> Projetos similares competem, e nem todos sobreviverão.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="callout callout-warning" style="margin-top: 24px;">
+                        <div class="callout-icon" style="font-size: 24px;">🎯</div>
+                        <div class="callout-content">
+                            <h3>Regra de Ouro</h3>
+                            <p style="margin-bottom: 0;">
+                                <strong>Nunca invista mais do que pode perder.</strong> Se você é iniciante, comece entendendo 
+                                Bitcoin e Ethereum antes de explorar altcoins. Altcoins devem representar uma pequena porção 
+                                de uma carteira cripto já diversificada.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 6: Memecoins -->
+                <section class="article-section">
+                    <h2>🐕 O Fenômeno das Memecoins</h2>
+                    
+                    <p>
+                        As <strong>memecoins</strong> merecem atenção especial. São criptomoedas criadas como piada ou baseadas em 
+                        memes da internet, mas algumas ganharam valor e comunidades enormes.
+                    </p>
+
+                    <p style="margin-top: 12px;">
+                        <strong>Exemplos:</strong> Dogecoin (DOGE), criado em 2013 como sátira, hoje tem bilhões em capitalização 
+                        e apoio de figuras públicas. Shiba Inu (SHIB) surgiu como "Dogecoin Killer" e também atraiu milhões de investidores.
+                    </p>
+
+                    <div class="callout callout-info" style="margin-top: 24px;">
+                        <div class="callout-icon" style="font-size: 24px;">🎲</div>
+                        <div class="callout-content">
+                            <h3>Especulação Pura</h3>
+                            <p style="margin-bottom: 0;">
+                                Memecoins são altamente especulativas e movidas por hype de redes sociais. 
+                                Não possuem fundamentação técnica ou casos de uso sólidos. Trate-as como apostas, não investimentos.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 7: Onde Comprar -->
+                <section class="article-section">
+                    <h2>💼 Onde Comprar Altcoins</h2>
+                    
+                    <p>Altcoins podem ser adquiridas em:</p>
+
+                    <ul style="list-style: none; padding: 0; margin-top: 16px;">
+                        <li style="padding: 10px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #3B82F6; border-radius: 4px; margin-bottom: 8px;">
+                            <strong>Exchanges Centralizadas:</strong> Binance, Coinbase, Kraken, Mercado Bitcoin, Foxbit.
+                        </li>
+                        <li style="padding: 10px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #10B981; border-radius: 4px; margin-bottom: 8px;">
+                            <strong>Exchanges Descentralizadas (DEXs):</strong> Uniswap, PancakeSwap, SushiSwap (exigem carteira própria).
+                        </li>
+                    </ul>
+
+                    <p style="margin-top: 18px;">
+                        <strong>Atenção:</strong> Nem todas as altcoins estão disponíveis em todas as plataformas. 
+                        Sempre verifique se a exchange é confiável antes de depositar fundos.
+                    </p>
+                </section>
+
+                <!-- Seção 8: Continue Explorando -->
+                <section class="article-section">
+                    <h2>🔍 Continue explorando</h2>
+
+                    <p>Aprofunde seu conhecimento no universo cripto:</p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px;">
+                        
+                        <!-- Card 1: Ethereum -->
+                        <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%); 
+                                    border: 1px solid rgba(139, 92, 246, 0.3); 
+                                    border-radius: 12px; 
+                                    padding: 24px; 
+                                    position: relative; 
+                                    cursor: pointer;
+                                    transition: all 0.3s ease;"
+                             onclick="window.location.href='ethereum.html';"
+                             onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 24px rgba(139, 92, 246, 0.2)';"
+                             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                                <span style="background: rgba(139, 92, 246, 0.2); 
+                                             color: #A78BFA; 
+                                             padding: 6px 12px; 
+                                             border-radius: 6px; 
+                                             font-size: 0.75rem; 
+                                             font-weight: 600;">
+                                    ⧫ PLATAFORMA
+                                </span>
+                                <span style="background: rgba(255, 255, 255, 0.1); 
+                                             color: #94A3B8; 
+                                             width: 32px; 
+                                             height: 32px; 
+                                             border-radius: 50%; 
+                                             display: flex; 
+                                             align-items: center; 
+                                             justify-content: center; 
+                                             font-weight: 600;
+                                             font-size: 0.9rem;">
+                                    1
+                                </span>
+                            </div>
+                            
+                            <h3 style="color: #E0E7FF; font-size: 1.25rem; margin-bottom: 12px; font-weight: 600;">
+                                Ethereum e Smart Contracts
+                            </h3>
+                            
+                            <p style="color: #94A3B8; font-size: 0.9rem; line-height: 1.6;">
+                                A altcoin mais importante: entenda a plataforma que deu origem a DeFi e NFTs.
+                            </p>
+                        </div>
+
+                        <!-- Card 2: Stablecoins -->
+                        <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.05) 100%); 
+                                    border: 1px solid rgba(16, 185, 129, 0.3); 
+                                    border-radius: 12px; 
+                                    padding: 24px; 
+                                    position: relative; 
+                                    cursor: pointer;
+                                    transition: all 0.3s ease;"
+                             onclick="window.location.href='stablecoins.html';"
+                             onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 24px rgba(16, 185, 129, 0.2)';"
+                             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                                <span style="background: rgba(16, 185, 129, 0.2); 
+                                             color: #6EE7B7; 
+                                             padding: 6px 12px; 
+                                             border-radius: 6px; 
+                                             font-size: 0.75rem; 
+                                             font-weight: 600;">
+                                    💵 ESTABILIDADE
+                                </span>
+                                <span style="background: rgba(255, 255, 255, 0.1); 
+                                             color: #94A3B8; 
+                                             width: 32px; 
+                                             height: 32px; 
+                                             border-radius: 50%; 
+                                             display: flex; 
+                                             align-items: center; 
+                                             justify-content: center; 
+                                             font-weight: 600;
+                                             font-size: 0.9rem;">
+                                    2
+                                </span>
+                            </div>
+                            
+                            <h3 style="color: #E0E7FF; font-size: 1.25rem; margin-bottom: 12px; font-weight: 600;">
+                                Stablecoins e Paridade
+                            </h3>
+                            
+                            <p style="color: #94A3B8; font-size: 0.9rem; line-height: 1.6;">
+                                Criptomoedas atreladas ao dólar: entenda como funcionam e seus riscos.
+                            </p>
+                        </div>
+
+                        <!-- Card 3: Bitcoin -->
+                        <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%); 
+                                    border: 1px solid rgba(245, 158, 11, 0.3); 
+                                    border-radius: 12px; 
+                                    padding: 24px; 
+                                    position: relative; 
+                                    cursor: pointer;
+                                    transition: all 0.3s ease;"
+                             onclick="window.location.href='bitcoin.html';"
+                             onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 24px rgba(245, 158, 11, 0.2)';"
+                             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                                <span style="background: rgba(245, 158, 11, 0.2); 
+                                             color: #FBBF24; 
+                                             padding: 6px 12px; 
+                                             border-radius: 6px; 
+                                             font-size: 0.75rem; 
+                                             font-weight: 600;">
+                                    ₿ ORIGEM
+                                </span>
+                                <span style="background: rgba(255, 255, 255, 0.1); 
+                                             color: #94A3B8; 
+                                             width: 32px; 
+                                             height: 32px; 
+                                             border-radius: 50%; 
+                                             display: flex; 
+                                             align-items: center; 
+                                             justify-content: center; 
+                                             font-weight: 600;
+                                             font-size: 0.9rem;">
+                                    3
+                                </span>
+                            </div>
+                            
+                            <h3 style="color: #E0E7FF; font-size: 1.25rem; margin-bottom: 12px; font-weight: 600;">
+                                Bitcoin em detalhes
+                            </h3>
+                            
+                            <p style="color: #94A3B8; font-size: 0.9rem; line-height: 1.6;">
+                                Conheça a criptomoeda original e entenda por que não é uma altcoin.
+                            </p>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Callout Voltar -->
+                <div class="callout callout-info">
+                    <div class="callout-icon" style="font-size: 24px;">🏠</div>
+                    <div class="callout-content">
+                        <h3>Voltar para o início</h3>
+                        <p style="margin-bottom: 0;"><a href="../index.html#inicio" data-tab-link="inicio" style="color: #3B82F6; text-decoration: underline;">Ver todas as seções do INVLAB</a></p>
+                    </div>
+                </div>
+
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: rgba(15, 23, 42, 0.9); border-top: 1px solid rgba(59, 130, 246, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+        <div class="content-wrapper-wide">
+            <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+                
+                <!-- Coluna 1: INVLAB -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">
+                        Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.
+                    </p>
+                    <a href="guia_invlab.html" style="color: #3B82F6; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
+                        🧭 Guia do INVLAB →
+                    </a>
+                </div>
+
+                <!-- Coluna 2: Renda Fixa -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="poupanca.html" style="color: #CBD5E1; text-decoration: none;">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 3: Renda Variável -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="../index.html#renda-variavel" style="color: #CBD5E1; text-decoration: none;">📈 Introdução</a></li>
+                        <li><a href="acoes.html" style="color: #CBD5E1; text-decoration: none;">📊 Ações</a></li>
+                        <li><a href="etfs.html" style="color: #CBD5E1; text-decoration: none;">🎯 ETFs</a></li>
+                        <li><a href="fiis.html" style="color: #CBD5E1; text-decoration: none;">🏢 FIIs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 4: Criptoativos -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Criptoativos</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="../index.html#criptoativos" style="color: #CBD5E1; text-decoration: none;">🔐 Introdução</a></li>
+                        <li><a href="bitcoin.html" style="color: #CBD5E1; text-decoration: none;">₿ Bitcoin</a></li>
+                        <li><a href="ethereum.html" style="color: #CBD5E1; text-decoration: none;">⧫ Ethereum</a></li>
+                        <li><a href="stablecoins.html" style="color: #CBD5E1; text-decoration: none;">💵 Stablecoins</a></li>
+                        <li><a href="blockchain.html" style="color: #CBD5E1; text-decoration: none;">⛓️ Blockchain</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 5: Outros Investimentos -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Outros Investimentos</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="../index.html#outros-investimentos" style="color: #CBD5E1; text-decoration: none;">💎 Introdução</a></li>
+                        <li><a href="ganhos-come-cotas.html" style="color: #CBD5E1; text-decoration: none;">🍽️ Come-cotas</a></li>
+                        <li><a href="ganhos-iof-regressivo.html" style="color: #CBD5E1; text-decoration: none;">📉 IOF Regressivo</a></li>
+                        <li><a href="ganhos-inflacao.html" style="color: #CBD5E1; text-decoration: none;">📊 Inflação</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 6: Ferramentas -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Ferramentas</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 Simulador CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Simulador Tesouro</a></li>
+                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ Simulador LCI/LCA</a></li>
+                        <li><a href="calculadora.html" style="color: #CBD5E1; text-decoration: none;">🧮 Juros Compostos</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Disclaimers -->
+            <div style="border-top: 1px solid rgba(59, 130, 246, 0.1); padding-top: 20px; margin-top: 20px;">
+                <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 8px;">
+                    ⚠️ Conteúdo 100% educacional. Não somos corretora, não vendemos produtos, não recebemos comissões.
+                </p>
+                <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                    © 2025 INVLAB - Laboratório de Investimentos | Plataforma Educacional
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INVLAB Scripts - Carregamento Otimizado -->
+    <script src="../assets/js/script.js"></script>
+
+</body>
+</html>

@@ -12,11 +12,8 @@
 
 /* Breadcrumb - STICKY (gruda no menu ao rolar) */
 .breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 8px;
     margin-bottom: 32px; /* AUMENTADO: 16px → 32px (respiro e destaque do breadcrumb) */
-    padding: 12px 20px 16px; /* ADICIONADO: padding completo para destaque */
+    padding: 12px 0 16px; /* AJUSTADO: padding lateral 0 para alinhar com conteúdo */
     background: rgba(13, 13, 13, 0.95); /* ADICIONADO: fundo escuro semi-transparente */
     backdrop-filter: blur(10px); /* ADICIONADO: efeito glassmorphism */
     border-bottom: 1px solid rgba(42, 127, 255, 0.2); /* MELHORADO: azul mais visível */
@@ -30,6 +27,12 @@
     
     /* Transição suave ao grudar */
     transition: all 0.3s ease;
+}
+
+.breadcrumb .content-wrapper-wide {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .breadcrumb a {
