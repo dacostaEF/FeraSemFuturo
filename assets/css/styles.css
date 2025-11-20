@@ -581,7 +581,7 @@ body {
 /* Hero Section (dentro da aba INÍCIO) */
 .hero-section {
     text-align: center;
-    padding: 40px 20px 20px;
+    padding: 8px 20px 20px; /* ULTRA COMPACTO: 15px → 8px (50% redução extra) */
     max-width: 700px;
     margin: 0 auto;
 }
@@ -2230,12 +2230,12 @@ body {
 .content-wrapper-wide {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 8px 20px 0; /* ULTRA COMPACTO: 15px → 8px (50% redução extra) */
 }
 
 /* Seção Educacional */
 .section-educational {
-    padding: 40px 0;
+    padding: 8px 0; /* ULTRA COMPACTO: 15px → 8px (50% redução extra) */
 }
 
 /* Header Educacional */
