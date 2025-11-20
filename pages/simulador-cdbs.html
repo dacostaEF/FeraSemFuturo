@@ -17,6 +17,8 @@
     
     <!-- Estilos do Menu Principal (APENAS CSS, sem JS) -->
     <link rel="stylesheet" href="../assets/css/styles.css">
+    <!-- INVLAB Carrossel - Indicadores Renda Fixa -->
+    <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -838,6 +840,9 @@
     </style>
 </head>
 <body>
+    <!-- CARROSSEL: Indicadores Renda Fixa -->
+    <section id="invlab-carousel-container"></section>
+
     <!-- Header Fixo -->
     <header class="main-header">
         <div class="header-container">
@@ -2612,5 +2617,9 @@
             </div>
         </div>
     </footer>
+
+    <!-- APIs para o Carrossel -->
+    <script defer src="../assets/js/bcb-api.js"></script>
+    <script defer src="../assets/js/invlab-carrossel-renda-fixa.js"></script>
 </body>
 </html>
