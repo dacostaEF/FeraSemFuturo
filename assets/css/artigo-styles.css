@@ -21,22 +21,28 @@
 }
 
 .breadcrumb a {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.7); /* MELHORADO: 0.6 → 0.7 (mais visível) */
     text-decoration: none;
-    transition: color 0.2s;
+    transition: all 0.2s;
 }
 
 .breadcrumb a:hover {
     color: var(--blue-action);
+    text-decoration: underline; /* ADICIONADO: sublinhado no hover para feedback claro */
 }
 
 .breadcrumb-separator {
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.4); /* MELHORADO: 0.3 → 0.4 (mais legível) */
+    user-select: none; /* ADICIONADO: não seleciona o separador */
 }
 
 .breadcrumb-current {
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 500;
+    color: #FFFFFF; /* MELHORADO: 0.9 → 100% branco (destaque total) */
+    font-weight: 600; /* MELHORADO: 500 → 600 (mais destaque) */
+    background: rgba(42, 127, 255, 0.15); /* ADICIONADO: fundo sutil para destaque */
+    padding: 4px 10px; /* ADICIONADO: espaçamento interno */
+    border-radius: 6px; /* ADICIONADO: bordas arredondadas */
+    border-left: 3px solid var(--blue-action); /* ADICIONADO: barra azul indicando "você está aqui" */
 }
 
 /* Meta do Artigo */
