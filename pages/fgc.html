@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FGC – Fundo Garantidor de Créditos | INVLAB</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="msapplication-TileColor" content="#0D0D0D">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Meta Description -->
+    <meta name="description" content="Entenda o FGC (Fundo Garantidor de Créditos), a proteção automática que salva seu dinheiro quando bancos quebram. Limites, estratégias e casos reais.">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    <!-- INVLAB Carrossel - Indicadores Renda Fixa -->
+    <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+    
+    <style>
+        /* Estilo específico da página FGC */
+        .section {
+            margin: 40px auto;
+            max-width: 1200px;
+            padding: 25px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .section h2 {
+            font-size: 1.9rem;
+            margin-bottom: 15px;
+            color: #f1f5f9;
+        }
+
+        .section p, .section li {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background: rgba(16, 185, 129, 0.08);
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+
+        .highlight-box span {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #10B981;
+        }
+
+        .highlight-box p {
+            color: var(--text-secondary);
+            margin: 10px 0 0 0;
+        }
+        
+        .highlight-box p strong {
+            color: #10B981;
+        }
+
+        .info-grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            margin-top: 20px;
+        }
+
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 20px;
+            border-radius: 14px;
+        }
+
+        .info-card h3 {
+            color: #93c5fd;
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0 0;
+        }
+
+        .info-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .info-card li:last-child {
+            border-bottom: none;
+        }
+
+        .alert-box {
+            background: rgba(239,68,68,0.15);
+            border-left: 5px solid #ef4444;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .alert-box strong {
+            color: #fca5a5;
+        }
+
+        .success-box {
+            background: rgba(16,185,129,0.15);
+            border-left: 5px solid #10b981;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .success-box strong {
+            color: #6ee7b7;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- CARROSSEL: Indicadores Renda Fixa -->
+    <section id="invlab-carousel-container"></section>
+
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                <span class="logo-text">INVLAB</span>
+            </div>
+            
+            <!-- Sistema de Abas INVLAB -->
+            <div class="tabs-nav-wrapper">
+                <nav class="tabs-nav" id="tabsNav">
+                    <button class="tab-btn" onclick="window.location.href='../index.html'">
+                        🏠 Início
+                    </button>
+                    <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">
+                        📚 Primeiros<br>Passos
+                    </button>
+                    
+                    <!-- Renda Fixa -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle active">
+                            📊 Renda<br>Fixa <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="poupanca.html">💰 Poupança</a></li>
+                            <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                            <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                            <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                            <li><a href="fgc.html" class="active">🛡️ FGC - Proteção</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Renda Variável -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📈 Renda<br>Variável <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="etfs.html">💵 ETFs</a></li>
+                            <li><a href="fiis.html">🏢 FIIs</a></li>
+                            <li><a href="acoes.html">📈 Ações</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Criptoativos -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#criptoativos'">
+                            🔐 Cripto<br>ativos <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="bitcoin.html">₿ Bitcoin</a></li>
+                            <li><a href="ethereum.html">⧫ Ethereum</a></li>
+                            <li><a href="nfts.html">🖼️ NFTs</a></li>
+                            <li><a href="altcoins.html">🪙 Altcoins</a></li>
+                            <li><a href="stablecoins.html">💵 Stablecoins</a></li>
+                            <li><a href="cbdc.html">🏛️ CBDCs</a></li>
+                            <li><a href="tokenizacao.html">🔗 Tokenização</a></li>
+                            <li><a href="blockchain.html">⛓️ Blockchain</a></li>
+                            <li><a href="crypto_timeline.html">📜 Timeline</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Ferramentas -->
+                    <button class="tab-btn" onclick="window.location.href='calculadora.html'">
+                        🧮 Ferra<br>mentas
+                    </button>
+                    
+                    <!-- Guia -->
+                    <button class="tab-btn" onclick="window.location.href='guia_invlab.html'">
+                        📖 Guia
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <div class="content-wrapper-wide">
+            <a href="../index.html">🏠 Início</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="../index.html#primeiros-passos">📚 Primeiros Passos</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">🛡️ FGC</span>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <div class="section">
+        <h2>🛡️ FGC – Fundo Garantidor de Créditos</h2>
+        <p>O FGC é uma proteção automática criada para garantir o seu dinheiro caso um banco ou financeira QUEBRE. 
+        Ele já salvou milhões de investidores no Brasil – e entender como funciona é parte essencial da educação financeira.</p>
+    </div>
+
+    <!-- Quanto protege -->
+    <div class="section">
+        <h2>💰 Quanto o FGC protege?</h2>
+        <p>A proteção segue regras simples e importantes para sua segurança:</p>
+
+        <div class="highlight-box">
+            <span>R$ 250.000</span>
+            <p>por CPF, por instituição financeira</p>
+            <p><strong>Limite total:</strong> R$ 1 milhão a cada 4 anos</p>
+        </div>
+
+        <p>Isso significa que, se você possui vários produtos (CDB, LCI, poupança) no MESMO banco, tudo soma para o mesmo limite.</p>
+    </div>
+
+    <!-- O que cobre -->
+    <div class="section">
+        <h2>📘 O que o FGC cobre?</h2>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>🟢 Protegidos</h3>
+                <ul>
+                    <li>CDB</li>
+                    <li>LCI e LCA</li>
+                    <li>RDB</li>
+                    <li>Poupança</li>
+                    <li>Conta corrente e depósitos à vista</li>
+                    <li>Letras de câmbio</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>🔴 Não protegidos</h3>
+                <ul>
+                    <li>Ações</li>
+                    <li>Fundos (FIIs, multimercados, ETFs)</li>
+                    <li>Debêntures e CRIs/CRAs</li>
+                    <li>Previdência privada</li>
+                    <li>COEs</li>
+                    <li>Criptomoedas</li>
+                    <li>Corretoras e fintechs não bancárias</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Instituições -->
+    <div class="section">
+        <h2>🏦 Quem é protegido pelo FGC?</h2>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>🟢 Instituições cobertas pelo FGC</h3>
+                <ul>
+                    <li><strong>Bancos comerciais</strong> (Itaú, Bradesco, Santander)</li>
+                    <li><strong>Bancos múltiplos</strong> (Nubank, Inter, C6, Original)</li>
+                    <li><strong>Caixas econômicas</strong> (Caixa Econômica Federal)</li>
+                    <li><strong>Financeiras e sociedades de crédito</strong></li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>🔴 Não cobertas pelo FGC</h3>
+                <ul>
+                    <li><strong>Cooperativas de crédito</strong> (protegidas pelo FGCoop*)</li>
+                    <li><strong>Corretoras e distribuidoras</strong> (XP, Rico, Clear)</li>
+                    <li><strong>Instituições de pagamento</strong> (Mercado Pago, PicPay, Pic Pay Banco antes de 2023)</li>
+                    <li><strong>Fintechs sem licença bancária</strong></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="alert-box" style="padding: 20px 24px;">
+            <p style="margin: 0 0 16px 0;"><strong>⚠️ ATENÇÃO - Diferença entre Banco e Instituição de Pagamento:</strong></p>
+            
+            <p style="margin: 12px 0;"><strong>✅ TÊM FGC (são bancos):</strong><br>
+            Nubank, Inter, C6 Bank, Original, Neon (todos são bancos múltiplos autorizados pelo Banco Central)</p>
+            
+            <p style="margin: 12px 0;"><strong>❌ NÃO TÊM FGC (são instituições de pagamento):</strong><br>
+            Mercado Pago, PicPay (conta de pagamento), carteiras digitais sem licença bancária</p>
+            
+            <p style="margin: 12px 0 0 0;"><strong>💡 Como saber?</strong> Se a instituição oferece CDB, LCI ou LCA, ela é banco e tem FGC. Se oferece apenas conta digital e cartão, pode ser instituição de pagamento (sem FGC).</p>
+        </div>
+
+        <div class="success-box" style="padding: 20px 24px;">
+            <p style="margin: 0;"><strong>* FGCoop - Cooperativas têm proteção própria</strong><br>
+            Cooperativas de crédito não são cobertas pelo FGC, mas têm proteção equivalente via <strong>FGCoop</strong> (Fundo Garantidor do Cooperativismo de Crédito), com limites similares: R$ 250 mil por CPF.</p>
+        </div>
+    </div>
+
+    <!-- Conglomerado -->
+    <div class="section">
+        <h2>📚 Entenda o Conglomerado Bancário</h2>
+        <p>Se dois bancos fazem parte do mesmo grupo econômico (conglomerado), o FGC considera como UMA única instituição. <span style="color: #3B82F6; cursor: help;" title="Conglomerado = empresas diferentes, mas pertencentes ao mesmo grupo econômico. O limite do FGC é compartilhado.">ℹ️</span></p>
+
+        <div class="success-box" style="padding: 20px 24px;">
+            <strong>Exemplos de conglomerados (limite compartilhado):</strong>
+            <ul style="padding-left: 24px; margin-top: 12px; list-style: disc;">
+                <li style="margin-bottom: 8px;"><strong>BTG Pactual + BTG+ Bank</strong> = R$ 250 mil total (não R$ 250 mil em cada)</li>
+                <li style="margin-bottom: 8px;"><strong>Itaú Unibanco + Banco Itaucard</strong> = R$ 250 mil total</li>
+                <li style="margin-bottom: 16px;"><strong>Bradesco + Banco BBI + Finasa</strong> = R$ 250 mil total</li>
+            </ul>
+            
+            <p style="margin: 16px 0 0 0; padding-top: 16px; border-top: 1px solid rgba(16, 185, 129, 0.2);">
+                💡 <strong>Na prática:</strong> Se você tem R$ 150 mil no BTG e R$ 150 mil no BTG+, apenas R$ 250 mil estão protegidos (não R$ 300 mil).
+            </p>
+        </div>
+    </div>
+
+    <!-- DPGE - Garantia Especial (Accordion) -->
+    <div class="section">
+        <details style="background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 12px; padding: 20px; cursor: pointer;">
+            <summary style="font-size: 1.3rem; font-weight: 600; color: #A78BFA; list-style: none; cursor: pointer;">
+                💎 DPGE — Garantia Especial (para valores altos) ▼
+            </summary>
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(139, 92, 246, 0.2);">
+                <p><strong>DPGE (Depósito a Prazo com Garantia Especial)</strong> é um tipo de investimento criado especificamente para ter proteção FGC maior.</p>
+                
+                <h4 style="color: #A78BFA; margin-top: 16px;">🔹 Limites diferenciados:</h4>
+                <ul style="padding-left: 24px; margin-top: 12px;">
+                    <li style="margin-bottom: 8px;">Proteção de até <strong>R$ 40 milhões</strong> por CPF (vs R$ 250 mil dos outros investimentos)</li>
+                    <li>Mas com limite global de R$ 1 milhão a cada 4 anos (igual aos demais)</li>
+                </ul>
+
+                <div class="alert-box" style="margin-top: 16px;">
+                    <strong>⚠️ Restrições do DPGE:</strong>
+                    <ul style="padding-left: 24px; margin-top: 12px; list-style: disc;">
+                        <li style="margin-bottom: 6px;">Prazo mínimo: 6 meses</li>
+                        <li style="margin-bottom: 6px;">Prazo máximo: 24 meses</li>
+                        <li style="margin-bottom: 6px;">Não pode resgatar antes do vencimento</li>
+                        <li style="margin-bottom: 6px;">Geralmente oferecido por bancos menores</li>
+                        <li>Rentabilidade costuma ser menor que CDBs normais do mesmo banco</li>
+                    </ul>
+                </div>
+
+                <p style="margin-top: 16px;"><strong>💡 Quando vale a pena?</strong> Se você tem valores muito altos (acima de R$ 1 milhão) e quer proteção FGC, o DPGE pode fazer sentido como complemento à estratégia de diversificação entre bancos.</p>
+            </div>
+        </details>
+    </div>
+
+    <!-- Como verificar -->
+    <div class="section">
+        <h2>🔍 Como verificar se uma instituição tem FGC?</h2>
+        
+        <div class="success-box" style="background: rgba(16, 185, 129, 0.15); border-left: 5px solid #10b981; padding: 20px 24px;">
+            <h4 style="margin-top: 0; color: #10B981;">🟩 Verifique em 10 segundos se o seu banco tem FGC</h4>
+            <p style="margin: 12px 0 8px 0;"><strong>1. Acesse o site oficial:</strong> <a href="https://www.fgc.org.br/associados/" target="_blank" rel="noopener" style="color: #10B981; text-decoration: underline;">www.fgc.org.br/associados</a></p>
+            <p style="margin: 8px 0;"><strong>2. Procure o nome da instituição</strong> na lista de associados</p>
+            <p style="margin: 8px 0 0 0;"><strong>3. Se estiver na lista = tem FGC</strong> ✅</p>
+        </div>
+
+        <div class="alert-box" style="margin-top: 20px; padding: 20px 24px;">
+            <p style="margin: 0;"><strong>⚠️ Dica importante:</strong> Sempre verifique ANTES de investir. Se o banco não estiver na lista do FGC, só invista se tiver certeza absoluta da solidez da instituição (e mesmo assim, com cautela).</p>
+        </div>
+    </div>
+
+    <!-- Prazo de ressarcimento -->
+    <div class="section">
+        <h2>⏱️ Quanto tempo o FGC leva para pagar?</h2>
+        
+        <div class="info-grid">
+            <div class="info-card">
+                <h3 style="color: #10B981;">✅ Na prática</h3>
+                <p><strong>30 a 60 dias</strong> é o prazo mais comum para ressarcimento</p>
+                <p style="margin-top: 12px; font-size: 0.9rem;">No caso do Banco Master (2023), a maioria dos clientes foi ressarcida em menos de 45 dias.</p>
+            </div>
+
+            <div class="info-card">
+                <h3 style="color: #3B82F6;">📋 Prazo legal</h3>
+                <p><strong>Até 3 meses</strong> após a liquidação</p>
+                <p style="margin-top: 12px; font-size: 0.9rem;">Prorrogável por mais 3 meses em casos excepcionais.</p>
+            </div>
+        </div>
+
+        <p style="margin-top: 20px;"><strong>💡 O que fazer?</strong> Fique atento aos canais oficiais do FGC. Eles entrarão em contato e você precisará apresentar documentos para comprovar o saldo.</p>
+    </div>
+
+    <!-- Caso Real Atual -->
+    <div class="section">
+        <h2>📈 Caso Real: Banco Master (Novembro de 2025)</h2>
+        <p>Em <strong>18 de novembro de 2025</strong>, o Banco Central decretou a liquidação extrajudicial do Banco Master, após identificar irregularidades na emissão de títulos. Este é o maior acionamento do FGC já registrado.</p>
+
+        <div class="highlight-box" style="background: rgba(239,68,68,0.08); border: 2px solid rgba(239,68,68,0.3); padding: 30px; text-align: center; margin: 25px 0;">
+            <span style="font-size: 2.5rem; font-weight: bold; color: #ef4444;">R$ 41 bilhões</span>
+            <p style="color: var(--text-secondary); margin: 10px 0 0 0;">Valor estimado sob garantia do FGC</p>
+            <p style="margin: 10px 0 0 0;"><strong style="color: #ef4444;">Aproximadamente 1,6 milhão de credores envolvidos</strong></p>
+        </div>
+
+        <div class="success-box" style="padding: 20px 24px; margin: 20px 0;">
+            <p style="margin: 0 0 16px 0;"><strong>Como o FGC está atuando:</strong></p>
+            <ul style="padding-left: 24px; margin: 0; list-style: disc;">
+                <li style="margin-bottom: 8px;">Clientes com até <strong>R$ 250 mil</strong> têm direito a ressarcimento integral</li>
+                <li style="margin-bottom: 8px;">Pagamentos devem ocorrer entre <strong>20 e 60 dias úteis</strong></li>
+                <li style="margin-bottom: 8px;">O processo está sendo organizado por meio do aplicativo oficial do FGC</li>
+                <li>Corretoras e bancos parceiros já iniciaram a notificação aos clientes</li>
+            </ul>
+        </div>
+
+        <div class="success-box" style="padding: 20px 24px; margin: 20px 0;">
+            <p style="margin: 0 0 16px 0;"><strong>📱 O que o investidor deve fazer:</strong></p>
+            <ol style="padding-left: 24px; margin: 0;">
+                <li style="margin-bottom: 8px;">Baixar o <strong>aplicativo oficial do FGC</strong> (Android/iOS)</li>
+                <li style="margin-bottom: 8px;">Realizar o cadastro com CPF</li>
+                <li style="margin-bottom: 8px;">Aguardar a lista oficial de credores (enviada pelo liquidante)</li>
+                <li style="margin-bottom: 8px;">Solicitar o pagamento quando o procedimento for liberado</li>
+                <li>Receber o valor diretamente na conta bancária informada</li>
+            </ol>
+            <p style="margin: 16px 0 0 0; padding-top: 16px; border-top: 1px solid rgba(16, 185, 129, 0.2);">
+                🔗 <a href="https://www.fgc.org.br/" target="_blank" rel="noopener" style="color: #10B981; text-decoration: underline;">Site oficial do FGC</a>
+            </p>
+        </div>
+
+        <p style="margin-top: 20px; font-size: 0.95rem; color: #94a3b8; padding: 20px; background: rgba(255,255,255,0.02); border-radius: 12px; border-left: 4px solid #3B82F6;">
+            <strong style="color: #3B82F6;">💡 Moral da história:</strong> O FGC está operando em tempo real e cumprindo sua função de proteger o pequeno e médio investidor. A lição prática é clara: respeitar o limite de <strong>R$ 250 mil por instituição</strong> é essencial para evitar perdas em situações de liquidação.
+        </p>
+    </div>
+
+    <!-- Tabela rápida de instituições -->
+    <div class="section">
+        <h2>🏦 Tabela rápida: Tem FGC?</h2>
+        
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                <thead>
+                    <tr style="background: rgba(59, 130, 246, 0.1); border-bottom: 2px solid rgba(59, 130, 246, 0.3);">
+                        <th style="padding: 12px; text-align: left; color: #3B82F6;">Instituição</th>
+                        <th style="padding: 12px; text-align: center; color: #3B82F6;">Tipo</th>
+                        <th style="padding: 12px; text-align: center; color: #3B82F6;">FGC?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <td style="padding: 12px;">Nubank, Inter, C6</td>
+                        <td style="padding: 12px; text-align: center;">Banco Múltiplo</td>
+                        <td style="padding: 12px; text-align: center; color: #10B981; font-weight: bold;">✅ SIM</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <td style="padding: 12px;">Itaú, Bradesco, Santander</td>
+                        <td style="padding: 12px; text-align: center;">Banco Comercial</td>
+                        <td style="padding: 12px; text-align: center; color: #10B981; font-weight: bold;">✅ SIM</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <td style="padding: 12px;">Mercado Pago, PicPay</td>
+                        <td style="padding: 12px; text-align: center;">Inst. Pagamento</td>
+                        <td style="padding: 12px; text-align: center; color: #EF4444; font-weight: bold;">❌ NÃO</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <td style="padding: 12px;">Sicoob, Sicredi</td>
+                        <td style="padding: 12px; text-align: center;">Cooperativa</td>
+                        <td style="padding: 12px; text-align: center; color: #F59E0B; font-weight: bold;">⚠️ FGCoop</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px;">Tesouro Direto</td>
+                        <td style="padding: 12px; text-align: center;">Governo Federal</td>
+                        <td style="padding: 12px; text-align: center; color: #10B981; font-weight: bold;">✅ Melhor que FGC*</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <p style="font-size: 0.85rem; color: #94A3B8; margin-top: 12px;">* Tesouro Direto não precisa de FGC porque é garantido pelo Governo Federal (risco zero de calote, só hiperinflação)</p>
+    </div>
+
+    <!-- E as Corretoras? -->
+    <div class="section">
+        <h2>🏢 E as Corretoras? XP, Rico, Clear têm FGC?</h2>
+        
+        <div class="alert-box" style="padding: 20px 24px;">
+            <p style="margin: 0 0 16px 0;"><strong>⚠️ Atenção: Corretoras NÃO têm FGC!</strong></p>
+            <p style="margin: 0;">XP, Rico, Clear, BTG Digital, Inter Invest são <strong>corretoras de valores</strong>, não bancos. Por isso, não são cobertas pelo FGC diretamente.</p>
+        </div>
+
+        <div class="success-box" style="padding: 20px 24px; margin: 20px 0;">
+            <p style="margin: 0 0 16px 0;"><strong>✅ MAS você está protegido de outras formas:</strong></p>
+            
+            <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(16, 185, 129, 0.2);">
+                <p style="margin: 0 0 8px 0;"><strong>1. Investimentos em Renda Variável (ações, FIIs, ETFs):</strong></p>
+                <ul style="padding-left: 24px; margin: 8px 0 0 0; list-style: disc;">
+                    <li style="margin-bottom: 6px;">Ficam custodiados na B3 em <strong>SEU nome</strong>, não da corretora</li>
+                    <li style="margin-bottom: 6px;">Se a corretora quebrar, você simplesmente transfere para outra corretora</li>
+                    <li>Proteção adicional: <strong>MRP</strong> (Mecanismo de Ressarcimento de Prejuízos) da B3 para casos de fraude ou má execução, sujeito a regras específicas</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(16, 185, 129, 0.2);">
+                <p style="margin: 0 0 8px 0;"><strong>2. Fundos de Investimento:</strong></p>
+                <ul style="padding-left: 24px; margin: 8px 0 0 0; list-style: disc;">
+                    <li style="margin-bottom: 6px;">Têm CNPJ próprio, separado da corretora</li>
+                    <li style="margin-bottom: 6px;">Se a corretora quebrar, basta escolher outra administradora</li>
+                    <li>Seu patrimônio continua intacto</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(16, 185, 129, 0.2);">
+                <p style="margin: 0 0 8px 0;"><strong>3. Tesouro Direto:</strong></p>
+                <ul style="padding-left: 24px; margin: 8px 0 0 0; list-style: disc;">
+                    <li style="margin-bottom: 6px;">Fica custodiado no Selic (sistema do Governo)</li>
+                    <li style="margin-bottom: 6px;">Separado da corretora</li>
+                    <li>Garantia do Tesouro Nacional (melhor que FGC!)</li>
+                </ul>
+            </div>
+
+            <div>
+                <p style="margin: 0 0 8px 0;"><strong>4. Renda Fixa Privada (CDB, LCI, LCA, LC):</strong></p>
+                <ul style="padding-left: 24px; margin: 8px 0 0 0; list-style: disc;">
+                    <li style="margin-bottom: 6px;">✅ <strong>TEM FGC!</strong> Mas a garantia é do <strong>banco EMISSOR</strong>, não da corretora</li>
+                    <li style="margin-bottom: 6px;"><strong>Exemplo:</strong> Se você compra um CDB do Banco ABC pela XP, e o ABC quebra, o FGC te paga (até R$ 250 mil)</li>
+                    <li>Se a XP quebrar mas o Banco ABC está ok, seu dinheiro está seguro</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="info-card" style="background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.2); padding: 20px; border-radius: 14px; margin-top: 20px;">
+            <h3 style="color: #3B82F6; margin: 0 0 12px 0;">💡 Resumo Prático:</h3>
+            <p style="margin: 8px 0;"><strong>Se a corretora quebrar:</strong> Seus investimentos estão seguros porque ficam custodiados em instituições separadas (B3, Selic, administradoras).</p>
+            <p style="margin: 8px 0 0 0;"><strong>Se o banco emissor quebrar:</strong> O FGC cobre seus CDBs, LCIs, LCAs até R$ 250 mil por banco.</p>
+        </div>
+
+        <div style="margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.02); border-radius: 12px; border-left: 4px solid #10B981;">
+            <h4 style="color: #10B981; margin: 0 0 16px 0;">🔐 Resumo: O que acontece se quebrar?</h4>
+            <table style="width: 100%; font-size: 0.9rem; border-collapse: collapse;">
+                <thead>
+                    <tr style="border-bottom: 2px solid rgba(16, 185, 129, 0.3);">
+                        <th style="padding: 12px 8px; text-align: left; color: #10B981;">Situação</th>
+                        <th style="padding: 12px 8px; text-align: left; color: #10B981;">Proteção</th>
+                        <th style="padding: 12px 8px; text-align: left; color: #10B981;">Quem garante?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <td style="padding: 12px 8px;"><strong>Corretora quebra</strong><br><small style="color: #94A3B8;">(XP, Rico, Clear)</small></td>
+                        <td style="padding: 12px 8px;">✅ Seus ativos continuam em seu nome</td>
+                        <td style="padding: 12px 8px;">Custódia segregada na B3/Selic</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <td style="padding: 12px 8px;"><strong>Banco emissor do CDB quebra</strong></td>
+                        <td style="padding: 12px 8px;">✅ Até R$ 250 mil por CPF/instituição</td>
+                        <td style="padding: 12px 8px;"><strong>FGC</strong></td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <td style="padding: 12px 8px;"><strong>Ações/FIIs via corretora</strong></td>
+                        <td style="padding: 12px 8px;">✅ Registrados em seu nome<br>⚠️ MRP em casos específicos*</td>
+                        <td style="padding: 12px 8px;">B3 (custódia) + MRP (fraude/má execução)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px 8px;"><strong>Tesouro Direto via corretora</strong></td>
+                        <td style="padding: 12px 8px;">✅ Custodiado no Selic</td>
+                        <td style="padding: 12px 8px;"><strong>Governo Federal</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="margin: 16px 0 0 0; padding-top: 16px; border-top: 1px solid rgba(16, 185, 129, 0.2); font-size: 0.85rem; color: #94A3B8;">
+                <strong>* MRP (Mecanismo de Ressarcimento de Prejuízos):</strong> Ressarce prejuízos causados por fraude, não repasse de recursos ou má execução de ordens. Sujeito a regras e limites específicos da B3.
+            </p>
+        </div>
+
+        <div style="margin-top: 20px; padding: 20px; background: rgba(59, 130, 246, 0.08); border-radius: 12px; border-left: 4px solid #3B82F6;">
+            <p style="margin: 0;">
+                <strong style="color: #3B82F6;">💡 Resumo INVLAB:</strong> Corretoras não têm FGC, mas isso <strong>não significa que você fica sem proteção</strong>. O FGC protege produtos bancários (CDB, LCI, LCA). A B3 protege o registro dos seus ativos (ações, FIIs, ETFs) através da custódia segregada. Em casos específicos de fraude ou má execução, o MRP pode ressarcir parte do prejuízo.
+            </p>
+        </div>
+    </div>
+
+    <!-- Estratégia -->
+    <div class="section">
+        <h2>🎯 Estratégia INVLAB</h2>
+        <ul style="padding-left: 24px; margin-top: 16px; list-style: none;">
+            <li style="margin-bottom: 12px;">✔ Coloque até R$ 250 mil por instituição</li>
+            <li style="margin-bottom: 12px;">✔ Para valores maiores, use vários bancos</li>
+            <li style="margin-bottom: 12px;">✔ Sempre verifique se há FGC antes de investir (<a href="https://www.fgc.org.br/associados/" target="_blank" style="color: #3B82F6;">www.fgc.org.br/associados</a>)</li>
+            <li>✔ Bancos pequenos pagam mais juros — e o FGC é o seu escudo</li>
+        </ul>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section">
+        <h2>❓ Perguntas Frequentes (FAQ)</h2>
+        
+        <details style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; margin-bottom: 12px; cursor: pointer;">
+            <summary style="font-weight: 600; color: #CBD5E1; cursor: pointer; list-style: none;">
+                1. Se eu tiver R$ 200 mil em CDB e R$ 100 mil em poupança no mesmo banco, estou protegido?
+            </summary>
+            <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.05); color: #94A3B8;">
+                ⚠️ <strong>NÃO totalmente.</strong> O limite de R$ 250 mil é por CPF, por banco, somando TODOS os produtos. No seu caso: R$ 200k + R$ 100k = R$ 300k. Apenas R$ 250 mil estariam protegidos, os outros R$ 50 mil ficariam descobertos.
+            </p>
+        </details>
+
+        <details style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; margin-bottom: 12px; cursor: pointer;">
+            <summary style="font-weight: 600; color: #CBD5E1; cursor: pointer; list-style: none;">
+                2. Posso ter R$ 250 mil em vários bancos e estar 100% protegido?
+            </summary>
+            <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.05); color: #94A3B8;">
+                ✅ <strong>SIM!</strong> Você pode ter R$ 250 mil no Itaú, R$ 250 mil no Bradesco, R$ 250 mil no Nubank... cada um é protegido separadamente. Porém, há um limite global de R$ 1 milhão a cada 4 anos.
+            </p>
+        </details>
+
+        <details style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; margin-bottom: 12px; cursor: pointer;">
+            <summary style="font-weight: 600; color: #CBD5E1; cursor: pointer; list-style: none;">
+                3. O que acontece se eu tiver R$ 500 mil no mesmo banco e ele quebrar?
+            </summary>
+            <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.05); color: #94A3B8;">
+                ⚠️ Você recebe R$ 250 mil do FGC e <strong>perde os outros R$ 250 mil</strong> (ou entra na fila de credores da massa falida, o que pode levar anos e render muito pouco).
+            </p>
+        </details>
+
+        <details style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; margin-bottom: 12px; cursor: pointer;">
+            <summary style="font-weight: 600; color: #CBD5E1; cursor: pointer; list-style: none;">
+                4. Meu dinheiro na corretora (XP, Rico, Clear) tem FGC?
+            </summary>
+            <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.05); color: #94A3B8;">
+                ⚠️ <strong>A corretora em si NÃO tem FGC</strong>, mas seus investimentos estão protegidos:<br><br>
+                • <strong>CDB, LCI, LCA:</strong> ✅ TÊM FGC do banco emissor (não da corretora)<br>
+                • <strong>Ações, FIIs:</strong> Registrados na B3 em seu nome + MRP para casos de fraude/má execução<br>
+                • <strong>Fundos:</strong> CNPJ próprio, separado da corretora<br>
+                • <strong>Tesouro Direto:</strong> Custodiado no Selic (Governo)<br>
+                • <strong>Dinheiro parado na conta:</strong> ❌ NÃO tem proteção (transfira para CDB ou Tesouro)<br><br>
+                
+                <strong>💡 Conclusão:</strong> Se a corretora quebrar, você NÃO perde seus investimentos (apenas transfere para outra). Se o banco emissor do CDB quebrar, o FGC te paga.
+            </p>
+        </details>
+
+        <details style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; margin-bottom: 12px; cursor: pointer;">
+            <summary style="font-weight: 600; color: #CBD5E1; cursor: pointer; list-style: none;">
+                5. Vale a pena investir em bancos pequenos por causa do FGC?
+            </summary>
+            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.05); color: #94A3B8;">
+                <p style="margin: 0 0 12px 0;">✅ <strong>Sim!</strong></p>
+                <p style="margin: 0 0 12px 0;">Bancos pequenos costumam pagar juros mais altos justamente para atrair investidores — e, dentro do limite de R$ 250 mil por CPF, você está protegido pelo FGC.</p>
+                
+                <div style="background: rgba(245, 158, 11, 0.08); border-left: 3px solid #F59E0B; padding: 12px; border-radius: 6px; margin: 12px 0;">
+                    <p style="margin: 0 0 8px 0; color: #F59E0B;"><strong>⚠️ Dica INVLAB:</strong></p>
+                    <p style="margin: 0;">Rentabilidades <strong>muito fora da curva</strong> geralmente sinalizam risco elevado. Aproveite os juros melhores dos bancos menores, mas sempre com <strong>bom senso</strong> e dentro do limite de R$ 250 mil.</p>
+                </div>
+                
+                <p style="margin: 12px 0 0 0; font-size: 0.9rem;">
+                    <strong>💡 Regra de ouro:</strong> O FGC é proteção, não autorização para agir sem critério. Se a taxa está "boa demais para ser verdade", pode ser sinal de dificuldade de captação ou risco maior.
+                </p>
+            </div>
+        </details>
+
+        <details style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; cursor: pointer;">
+            <summary style="font-weight: 600; color: #CBD5E1; cursor: pointer; list-style: none;">
+                6. Como sei se dois bancos são do mesmo conglomerado?
+            </summary>
+            <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.05); color: #94A3B8;">
+                🔍 Consulte o site do Banco Central ou do próprio FGC. Exemplos: BTG + BTG+, Itaú + Itaucard, Bradesco + Finasa. Se você não tiver certeza, trate como conglomerado (limite compartilhado).
+            </p>
+        </details>
+    </div>
+
+    <!-- Voltar ao início -->
+    <div class="callout callout-success" style="margin: 40px auto; max-width: 1200px;">
+        <div class="callout-icon">🏠</div>
+        <div class="callout-content">
+            <h3>Voltar para o início</h3>
+            <p>Continue sua jornada de aprendizado!</p>
+            <button class="btn-primary" onclick="window.location.href='../index.html#primeiros-passos'">
+                📚 Voltar para Primeiros Passos
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: rgba(15, 23, 42, 0.9); border-top: 1px solid rgba(59, 130, 246, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+        <div class="content-wrapper-wide">
+            <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+                <!-- Coluna 1: INVLAB -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">
+                        Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.
+                    </p>
+                    <a href="guia_invlab.html" style="color: #3B82F6; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
+                        🧭 Guia do INVLAB →
+                    </a>
+                </div>
+
+                <!-- Coluna 2: Renda Fixa -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="poupanca.html" style="color: #CBD5E1; text-decoration: none;">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ LCI/LCA</a></li>
+                        <li><a href="fgc.html" style="color: #CBD5E1; text-decoration: none;">🛡️ FGC - Proteção</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 3: Renda Variável -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="../index.html#renda-variavel" style="color: #CBD5E1; text-decoration: none;">📈 Introdução</a></li>
+                        <li><a href="acoes.html" style="color: #CBD5E1; text-decoration: none;">📊 Ações</a></li>
+                        <li><a href="etfs.html" style="color: #CBD5E1; text-decoration: none;">🎯 ETFs</a></li>
+                        <li><a href="fiis.html" style="color: #CBD5E1; text-decoration: none;">🏢 FIIs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 4: Criptoativos -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Criptoativos</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="../index.html#criptoativos" style="color: #CBD5E1; text-decoration: none;">🔐 Introdução</a></li>
+                        <li><a href="bitcoin.html" style="color: #CBD5E1; text-decoration: none;">₿ Bitcoin</a></li>
+                        <li><a href="stablecoins.html" style="color: #CBD5E1; text-decoration: none;">💵 Stablecoins</a></li>
+                        <li><a href="blockchain.html" style="color: #CBD5E1; text-decoration: none;">⛓️ Blockchain</a></li>
+                        <li><a href="cbdc.html" style="color: #CBD5E1; text-decoration: none;">🏛️ CBDCs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 5: Outros Investimentos -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Outros Investimentos</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="../index.html#outros-investimentos" style="color: #CBD5E1; text-decoration: none;">💎 Introdução</a></li>
+                        <li><a href="ganhos-come-cotas.html" style="color: #CBD5E1; text-decoration: none;">🍽️ Come-cotas</a></li>
+                        <li><a href="ganhos-iof-regressivo.html" style="color: #CBD5E1; text-decoration: none;">📉 IOF Regressivo</a></li>
+                        <li><a href="ganhos-inflacao.html" style="color: #CBD5E1; text-decoration: none;">📊 Inflação</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 6: Ferramentas -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Ferramentas</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 Simulador CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Simulador Tesouro</a></li>
+                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ Simulador LCI/LCA</a></li>
+                        <li><a href="calculadora.html" style="color: #CBD5E1; text-decoration: none;">🧮 Juros Compostos</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Disclaimers -->
+            <div style="border-top: 1px solid rgba(59, 130, 246, 0.1); padding-top: 20px; margin-top: 20px;">
+                <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                    ⚠️ Conteúdo 100% educacional. Não somos corretora, não vendemos produtos, não recebemos comissões.
+                </p>
+                <p style="font-size: 0.78rem; color: #64748B; text-align: center; line-height: 1.7; margin-bottom: 12px; max-width: 900px; margin-left: auto; margin-right: auto;">
+                    Conteúdo educacional desenvolvido por especialistas em mercado financeiro tradicional, tecnologia blockchain e tokenização de ativos reais. 
+                    O INVLAB é um laboratório de pesquisa independente dedicado a unir educação, tecnologia e inovação nos mercados de capitais.
+                </p>
+                <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                    © 2025 INVLAB - Laboratório de Investimentos | Plataforma Educacional
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/script.js"></script>
+    <!-- APIs para o Carrossel -->
+    <script defer src="../assets/js/bcb-api.js"></script>
+    <script defer src="../assets/js/invlab-carrossel-renda-fixa.js"></script>
+</body>
+</html>
+

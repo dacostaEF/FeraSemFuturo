@@ -1500,6 +1500,11 @@ body {
     color: #38BDF8;
 }
 
+.learning-badge.estrategia {
+    background: rgba(139, 92, 246, 0.2);
+    color: #A78BFA;
+}
+
 .learning-number {
     position: absolute;
     top: 20px;
