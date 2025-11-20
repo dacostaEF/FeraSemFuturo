@@ -3,9 +3,14 @@
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Inicializa tudo de uma vez para melhor performance
     initTabs();
     initTabLinks();
     checkURLHash(); // Verifica se há uma aba especificada na URL
+    initTabDropdowns();
+    initCollapsibleCategories();
+    preventMenuScroll();
+    initScrollArrow();
 });
 
 // Inicializa o sistema de abas
@@ -102,11 +107,6 @@ window.changeTab = switchTab;
 // ============================================
 // DROPDOWNS NAS ABAS (Clique + Hover)
 // ============================================
-
-document.addEventListener('DOMContentLoaded', function() {
-    initTabDropdowns();
-    initCollapsibleCategories(); // NOVO: Menu colapsável Renda Variável
-});
 
 function initTabDropdowns() {
     const tabDropdowns = document.querySelectorAll('.tab-with-dropdown');
@@ -251,10 +251,7 @@ function preventMenuScroll() {
     });
 }
 
-// Inicializa prevenção de scroll
-document.addEventListener('DOMContentLoaded', function() {
-    preventMenuScroll();
-});
+// Prevenção de scroll inicializada no DOMContentLoaded principal
 
 // ============================================
 // SUB-DROPDOWNS - REMOVIDO (Agora usa estrutura simples)
@@ -266,10 +263,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // ============================================
 // SETA DE SCROLL HORIZONTAL (Menu de Abas)
 // ============================================
-
-document.addEventListener('DOMContentLoaded', function() {
-    initScrollArrow();
-});
 
 function initScrollArrow() {
     const tabsNavWrapper = document.querySelector('.tabs-nav-wrapper');

@@ -1311,11 +1311,14 @@
         </div>
     </main>
 
-    <!-- INVLAB Carrossel - Scripts -->
-    <script src="assets/js/bcb-api.js"></script>
-    <script src="assets/js/crypto-api.js"></script>
-    <script src="assets/js/stock-api.js"></script>
-    <script src="assets/js/invlab-carrossel.js"></script>
+    <!-- INVLAB Scripts - Carregamento Otimizado -->
+    <!-- Script principal carrega primeiro (menu e abas) -->
     <script src="assets/js/script.js"></script>
+    
+    <!-- Carrossel carrega de forma assíncrona (não bloqueia renderização) -->
+    <script defer src="assets/js/bcb-api.js"></script>
+    <script defer src="assets/js/crypto-api.js"></script>
+    <script defer src="assets/js/stock-api.js"></script>
+    <script defer src="assets/js/invlab-carrossel.js"></script>
 </body>
 </html>

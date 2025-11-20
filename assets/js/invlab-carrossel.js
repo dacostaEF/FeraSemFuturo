@@ -22,58 +22,84 @@ class InvlabCarousel {
                 return;
             }
 
-            this.showLoading();
-            
-            // Busca dados do BCB (obrigatório)
-            const bcbData = await this.bcbApi.getAllData().catch(error => {
-                console.warn('⚠️ Falha na API BCB, usando valores fallback:', error);
-                return {
-                    selic: 13.75, ipca: 4.5, ipca15: 4.3, igpm: 3.8,
-                    cdi: 13.65, poupanca: 0.5, dolar: 5.85, euro: 6.20
-                };
-            });
-            
-            // Busca dados de cripto (opcional)
-            let cryptoData = { bitcoin: 285000, ethereum: 15800 };
-            if (this.cryptoApi) {
-                cryptoData = await this.cryptoApi.getCryptoPrices().catch(error => {
-                    console.warn('⚠️ Falha na API Cripto, usando valores fallback:', error);
-                    return { bitcoin: 285000, ethereum: 15800 };
-                });
-            } else {
-                console.warn('⚠️ CryptoAPI não disponível, usando valores fallback');
-            }
-            
-            // Busca dados da bolsa (opcional)
-            let stockData = { ibovespa: 125000 };
-            if (this.stockApi) {
-                stockData = await this.stockApi.getIbovespa().catch(error => {
-                    console.warn('⚠️ Falha na API Bolsa, usando valores fallback:', error);
-                    return { ibovespa: 125000 };
-                });
-            } else {
-                console.warn('⚠️ StockAPI não disponível, usando valores fallback');
-            }
-            
-            // Combina todos os dados
+            // 🚀 OTIMIZAÇÃO: Renderiza IMEDIATAMENTE com dados de fallback
             this.data = {
-                ...bcbData,
-                ...cryptoData,
-                ...stockData
+                selic: 13.75, ipca: 4.5, ipca15: 4.3, igpm: 3.8,
+                cdi: 13.65, poupanca: 0.5, dolar: 5.85, euro: 6.20,
+                bitcoin: 285000, ethereum: 15800, ibovespa: 125000
             };
             
-            console.log('✅ Dados combinados:', this.data);
+            // Renderiza primeiro (instantâneo)
             this.render();
+            console.log('⚡ Carrossel renderizado instantaneamente com dados de fallback');
+            
+            // Atualiza dados reais em background (não bloqueia)
+            this.updateDataInBackground();
+            
         } catch (error) {
             console.error('❌ Erro ao inicializar carrossel:', error);
             this.showError();
         }
     }
 
-    showLoading() {
-        if (this.container) {
-            this.container.innerHTML = '<div class="invlab-carousel-loading">Carregando indicadores econômicos</div>';
+    async updateDataInBackground() {
+        try {
+            console.log('🔄 Atualizando dados em background...');
+            
+            // Busca dados do BCB (obrigatório)
+            const bcbData = await this.bcbApi.getAllData().catch(error => {
+                console.warn('⚠️ Falha na API BCB, mantendo valores fallback:', error);
+                return null;
+            });
+            
+            // Busca dados de cripto (opcional)
+            let cryptoData = null;
+            if (this.cryptoApi) {
+                cryptoData = await this.cryptoApi.getCryptoPrices().catch(error => {
+                    console.warn('⚠️ Falha na API Cripto, mantendo valores fallback:', error);
+                    return null;
+                });
+            }
+            
+            // Busca dados da bolsa (opcional)
+            let stockData = null;
+            if (this.stockApi) {
+                stockData = await this.stockApi.getIbovespa().catch(error => {
+                    console.warn('⚠️ Falha na API Bolsa, mantendo valores fallback:', error);
+                    return null;
+                });
+            }
+            
+            // Atualiza apenas se conseguiu dados novos
+            let hasUpdates = false;
+            if (bcbData) {
+                this.data = { ...this.data, ...bcbData };
+                hasUpdates = true;
+            }
+            if (cryptoData) {
+                this.data = { ...this.data, ...cryptoData };
+                hasUpdates = true;
+            }
+            if (stockData) {
+                this.data = { ...this.data, ...stockData };
+                hasUpdates = true;
+            }
+            
+            // Re-renderiza suavemente se houve atualizações
+            if (hasUpdates) {
+                console.log('✅ Dados atualizados, re-renderizando carrossel');
+                this.render();
+            }
+            
+        } catch (error) {
+            console.warn('⚠️ Erro ao atualizar dados em background:', error);
+            // Mantém os dados fallback
         }
+    }
+
+    showLoading() {
+        // Removido - não mostra loading, renderiza direto com fallback
+        // Para melhor performance percebida
     }
 
     showError() {
