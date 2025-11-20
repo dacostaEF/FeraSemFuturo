@@ -502,15 +502,16 @@
     <!-- Footer -->
     <footer style="background: rgba(15, 23, 42, 0.9); border-top: 1px solid rgba(59, 130, 246, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
         <div class="content-wrapper-wide">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px;">
-                <!-- Coluna 1: Sobre -->
-                <div>
+            <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+                <!-- LINHA 1 -->
+                <!-- Coluna 1: Sobre (ocupa 2 linhas) -->
+                <div style="grid-row: span 2;">
                     <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
                     <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">
                         Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.
                     </p>
                     <a href="guia_invlab.html" style="color: #3B82F6; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
-                        🧭 Guia do Site →
+                        🧭 Guia do INVLAB →
                     </a>
                 </div>
 
@@ -537,13 +538,49 @@
                     </ul>
                 </div>
 
-                <!-- Coluna 4: Navegação -->
+                <!-- Coluna 4: Renda Variável -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="../index.html#renda-variavel" style="color: #CBD5E1; text-decoration: none;">📈 Introdução</a></li>
+                        <li><a href="acoes.html" style="color: #CBD5E1; text-decoration: none;">📊 Ações</a></li>
+                        <li><a href="etfs.html" style="color: #CBD5E1; text-decoration: none;">🎯 ETFs</a></li>
+                        <li><a href="fiis.html" style="color: #CBD5E1; text-decoration: none;">🏢 FIIs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 5: Outros Investimentos -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Outros Investimentos</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="../index.html#outros-investimentos" style="color: #CBD5E1; text-decoration: none;">💎 Introdução</a></li>
+                        <li><a href="ganhos-come-cotas.html" style="color: #CBD5E1; text-decoration: none;">🍽️ Come-cotas</a></li>
+                        <li><a href="ganhos-iof-regressivo.html" style="color: #CBD5E1; text-decoration: none;">📉 IOF Regressivo</a></li>
+                        <li><a href="ganhos-inflacao.html" style="color: #CBD5E1; text-decoration: none;">📊 Inflação</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 6: Vazio na linha 1 (será preenchido na linha 2) -->
+                <div></div>
+
+                <!-- LINHA 2 (colunas continuam a partir da coluna 2) -->
+                <!-- Coluna 2: Ferramentas -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Ferramentas</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 Simulador CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Simulador Tesouro</a></li>
+                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ Simulador LCI/LCA</a></li>
+                        <li><a href="calculadora.html" style="color: #CBD5E1; text-decoration: none;">🧮 Juros Compostos</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 3: Navegação -->
                 <div>
                     <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Navegação</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
                         <li><a href="../index.html" style="color: #CBD5E1; text-decoration: none;">🏠 Início</a></li>
                         <li><a href="../index.html#primeiros-passos" style="color: #CBD5E1; text-decoration: none;">📚 Primeiros Passos</a></li>
-                        <li><a href="guia_invlab.html" style="color: #10B981; text-decoration: none; font-weight: 600;">🧭 Guia do INVLAB</a></li>
                         <li><a href="../index.html#ferramentas" style="color: #CBD5E1; text-decoration: none;">🛠️ Ferramentas</a></li>
                     </ul>
                 </div>
