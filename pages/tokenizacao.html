@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokenização: O Futuro dos Ativos Reais na Blockchain | INVLAB</title>
+    
+    <!-- Favicon, Theme Color, Meta Description -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="msapplication-TileColor" content="#0D0D0D">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Entenda a tokenização: como ativos reais (imóveis, ações, obras de arte) podem ser representados na blockchain. Benefícios, riscos e o futuro dos investimentos.">
+    
+    <!-- INVLAB Design System (Universal Cards) -->
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+</head>
+<body>
+
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                <span class="logo-text">INVLAB</span>
+            </div>
+
+            <!-- Sistema de Abas INVLAB -->
+            <div class="tabs-nav-wrapper">
+                <nav class="tabs-nav" id="tabsNav">
+                    <button class="tab-btn" onclick="window.location.href='../index.html'">
+                        🏠 Início
+                    </button>
+
+                    <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">
+                        📚 Primeiros<br>Passos
+                    </button>
+
+                    <!-- ABA COM DROPDOWN: RENDA FIXA -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📊 Renda<br>Fixa <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="poupanca.html">💰 Poupança</a></li>
+                            <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                            <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                            <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- ABA COM DROPDOWN: RENDA VARIÁVEL -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📈 Renda<br>Variável <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="etfs" onclick="window.location.href='etfs.html'" style="cursor: pointer;">
+                                    <span class="category-name">💵 ETFs</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                                <ul class="category-submenu" id="submenu-etfs">
+                                    <li><a href="#">📊 Simulador de Indexação</a></li>
+                                    <li><a href="#">📈 ETFs Nacionais</a></li>
+                                    <li><a href="#">🌎 ETFs Internacionais</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="fiis" onclick="window.location.href='fiis.html'" style="cursor: pointer;">
+                                    <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                                <ul class="category-submenu" id="submenu-fiis">
+                                    <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                                    <li><a href="#">🏘️ FIIs de Tijolo</a></li>
+                                    <li><a href="#">📋 FIIs de Papel</a></li>
+                                    <li><a href="#">🔄 FIIs Híbridos</a></li>
+                                    <li><a href="#">🎯 Como Escolher FIIs</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-category">
+                                <div class="category-header" data-category="acoes" onclick="window.location.href='acoes.html'" style="cursor: pointer;">
+                                    <span class="category-name">📈 Ações</span>
+                                    <span class="category-arrow">▶</span>
+                                </div>
+                                <ul class="category-submenu" id="submenu-acoes">
+                                    <li><a href="#">📊 Análise Fundamentalista</a></li>
+                                    <li><a href="#">📈 Dividendos</a></li>
+                                    <li><a href="#">⚡ Day Trade / Swing Trade</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- ABA COM DROPDOWN: CRIPTOATIVOS -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle active">
+                            🔐 Cripto<br>ativos <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="bitcoin.html">₿ Bitcoin</a></li>
+                            <li><a href="ethereum.html">⧫ Ethereum</a></li>
+                            <li><a href="stablecoins.html">💵 Stablecoins</a></li>
+                            <li><a href="blockchain.html">⛓️ Blockchain</a></li>
+                            <li><a href="cbdc.html">🏛️ CBDCs</a></li>
+                            <li><a href="altcoins.html">🪙 Altcoins</a></li>
+                            <li><a href="nfts.html">🖼️ NFTs</a></li>
+                            <li><a href="tokenizacao.html">🔗 Tokenização</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- ABA COM DROPDOWN: FERRAMENTAS -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            🛠️ Ferra<br>mentas <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="simulador-cdbs.html">🏦 Simulador de CDBs</a></li>
+                            <li><a href="#">🎯 Alocador de Ativos</a></li>
+                            <li><a href="#">📊 Simulador de Carteira</a></li>
+                            <li><a href="#">📈 Projetor de Patrimônio</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-section">
+                                <strong>🧮 Calculadoras Técnicas</strong>
+                            </li>
+                            <li><a href="calculadora.html">Juros Compostos</a></li>
+                            <li><a href="#">Imposto de Renda</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- Botão de Menu Mobile -->
+            <button class="menu-toggle" id="menuToggle">
+                <span class="menu-icon"></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <article class="article-wrapper">
+            
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb" aria-label="breadcrumb">
+                <div class="content-wrapper-wide">
+                    <a href="../index.html" class="breadcrumb-item">🏠 Início</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <a href="../index.html#criptoativos" class="breadcrumb-item">🔐 Criptoativos</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span class="breadcrumb-current">🔗 Tokenização</span>
+                </div>
+            </nav>
+
+            <!-- Conteúdo Principal do Artigo -->
+            <div class="article-content content-wrapper-wide">
+                
+                <!-- Título Principal -->
+                <h1 class="article-title">Tokenização: Transformando Ativos Reais em Tokens Digitais</h1>
+
+                <p class="article-lead">
+                    Entenda como a tokenização está revolucionando o mercado financeiro ao permitir que ativos do mundo real 
+                    (imóveis, ações, obras de arte) sejam representados digitalmente na blockchain.
+                </p>
+
+                <!-- Hero -->
+                <div class="article-hero">
+                    <div class="hero-emoji">🔗🏢</div>
+                    <p class="hero-caption">Do físico ao digital: democratizando o acesso a investimentos antes inacessíveis.</p>
+                </div>
+
+                <!-- Disclaimer Educacional -->
+                <div class="callout callout-info" style="margin: 24px 0;">
+                    <div class="callout-icon" style="font-size: 24px;">📘</div>
+                    <div class="callout-content">
+                        <h3>Conteúdo 100% educacional</h3>
+                        <p style="margin-bottom: 0;">Este material tem caráter exclusivamente educativo e não constitui recomendação de compra ou venda de ativos. 
+                        O objetivo é ajudar você a entender o conceito de tokenização e suas aplicações.</p>
+                    </div>
+                </div>
+
+                <!-- Seção 1: O que é Tokenização -->
+                <section class="article-section">
+                    <h2>🔗 O que é Tokenização?</h2>
+                    
+                    <p>
+                        <strong>Tokenização</strong> é o processo de converter direitos de propriedade de um ativo real 
+                        (tangível ou intangível) em tokens digitais que podem ser armazenados, transferidos e negociados 
+                        em uma blockchain.
+                    </p>
+
+                    <p style="margin-top: 12px;">
+                        Imagine dividir um imóvel de R$ 1 milhão em 1 milhão de tokens de R$ 1 cada. Cada token representa 
+                        uma fração da propriedade. Investidores podem comprar quantos tokens quiserem, tornando-se 
+                        co-proprietários proporcionais do imóvel.
+                    </p>
+
+                    <div class="callout callout-info" style="margin-top: 24px;">
+                        <div class="callout-icon" style="font-size: 24px;">🎯</div>
+                        <div class="callout-content">
+                            <h3>Conceito-chave</h3>
+                            <p style="margin-bottom: 0;">
+                                Tokenização = Representação digital de ativos reais + Fracionamento + Blockchain + Smart Contracts
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 2: Como Funciona -->
+                <section class="article-section">
+                    <h2>⚙️ Como Funciona a Tokenização?</h2>
+                    
+                    <p>O processo de tokenização envolve várias etapas técnicas e jurídicas:</p>
+
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <div class="tip-number">1</div>
+                            <div class="tip-content">
+                                <h3>Identificação do Ativo</h3>
+                                <p>Define-se qual ativo será tokenizado (imóvel, obra de arte, ação de empresa, etc).</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">2</div>
+                            <div class="tip-content">
+                                <h3>Estruturação Jurídica</h3>
+                                <p>Criação de uma estrutura legal que garanta os direitos dos detentores de tokens (geralmente via SPE - Sociedade de Propósito Específico).</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">3</div>
+                            <div class="tip-content">
+                                <h3>Emissão dos Tokens</h3>
+                                <p>Criação dos tokens em uma blockchain (geralmente Ethereum) por meio de smart contracts.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">4</div>
+                            <div class="tip-content">
+                                <h3>Distribuição/Venda</h3>
+                                <p>Os tokens são oferecidos a investidores através de plataformas especializadas.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">5</div>
+                            <div class="tip-content">
+                                <h3>Negociação Secundária</h3>
+                                <p>Após a emissão, tokens podem ser comprados e vendidos entre investidores (se houver mercado secundário).</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">6</div>
+                            <div class="tip-content">
+                                <h3>Gestão e Governança</h3>
+                                <p>Smart contracts gerenciam automaticamente distribuição de lucros, votações e outras regras.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 3: Tipos de Ativos Tokenizáveis -->
+                <section class="article-section">
+                    <h2>🏗️ Que Tipos de Ativos Podem Ser Tokenizados?</h2>
+                    
+                    <p>Praticamente qualquer ativo que tenha valor econômico pode ser tokenizado:</p>
+
+                    <div class="inv-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-top: 20px;">
+                        
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">🏢</div>
+                            <h4 class="inv-card-title">Imóveis</h4>
+                            <p class="inv-card-description">
+                                Residenciais, comerciais, galpões logísticos, lajes corporativas. 
+                                Fracionamento permite investir com menos capital.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">🎨</div>
+                            <h4 class="inv-card-title">Obras de Arte</h4>
+                            <p class="inv-card-description">
+                                Pinturas, esculturas, colecionáveis raros. 
+                                Democratiza acesso a investimentos de alto valor.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">📊</div>
+                            <h4 class="inv-card-title">Ações e Títulos</h4>
+                            <p class="inv-card-description">
+                                Participações em empresas (equity tokens), 
+                                debêntures, CRIs, CRAs podem ser tokenizados.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">💎</div>
+                            <h4 class="inv-card-title">Commodities</h4>
+                            <p class="inv-card-description">
+                                Ouro, prata, petróleo, soja, gado. 
+                                Tokens representam propriedade física armazenada.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">🎵</div>
+                            <h4 class="inv-card-title">Propriedade Intelectual</h4>
+                            <p class="inv-card-description">
+                                Royalties de músicas, patentes, direitos autorais. 
+                                Artistas podem vender frações de seus trabalhos.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">⚡</div>
+                            <h4 class="inv-card-title">Energia</h4>
+                            <p class="inv-card-description">
+                                Créditos de energia solar, certificados de carbono, 
+                                projetos de energia renovável.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">🏎️</div>
+                            <h4 class="inv-card-title">Veículos e Bens de Luxo</h4>
+                            <p class="inv-card-description">
+                                Carros clássicos, iates, aviões. 
+                                Fracionamento de ativos de alto valor.
+                            </p>
+                        </div>
+
+                        <div class="inv-card fundamentos">
+                            <div class="inv-card-icon" style="font-size: 28px;">🌾</div>
+                            <h4 class="inv-card-title">Agronegócio</h4>
+                            <p class="inv-card-description">
+                                Safras futuras, cabeças de gado, 
+                                máquinas agrícolas, terras produtivas.
+                            </p>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Seção 4: Benefícios da Tokenização -->
+                <section class="article-section">
+                    <h2>✨ Benefícios da Tokenização</h2>
+                    
+                    <p>A tokenização traz vantagens significativas para investidores e emissores:</p>
+
+                    <div class="example-card" style="background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10B981;">
+                        <h3 style="color: #6EE7B7; margin-bottom: 16px;">🎯 Principais Vantagens</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                <strong>1. Democratização:</strong> Permite investir com valores menores em ativos antes inacessíveis (ex: R$ 100 em vez de R$ 1 milhão).
+                            </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                <strong>2. Liquidez:</strong> Ativos tradicionalmente ilíquidos (como imóveis) podem ser negociados mais facilmente.
+                            </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                <strong>3. Transparência:</strong> Todas as transações ficam registradas na blockchain, garantindo rastreabilidade.
+                            </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                <strong>4. Automação:</strong> Smart contracts automatizam distribuição de lucros, dividendos e aluguéis.
+                            </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                <strong>5. Acesso Global:</strong> Investidores de qualquer lugar podem participar (dentro das regras regulatórias).
+                            </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                <strong>6. Redução de Custos:</strong> Menos intermediários significam taxas menores.
+                            </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                <strong>7. Segurança:</strong> A blockchain garante que não haja duplicação ou fraude nos registros de propriedade.
+                            </li>
+                            <li style="padding: 8px 0;">
+                                <strong>8. Diversificação:</strong> Possibilidade de investir pequenas quantias em vários ativos diferentes.
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Seção 5: Casos de Uso Reais -->
+                <section class="article-section">
+                    <h2>🌍 Casos de Uso Reais no Brasil e no Mundo</h2>
+                    
+                    <p>A tokenização já é realidade em diversos mercados:</p>
+
+                    <div class="example-card">
+                        <h3 style="margin-bottom: 16px;">📍 Exemplos Práticos</h3>
+                        
+                        <div style="margin-top: 16px;">
+                            <h4 style="color: #3B82F6; margin-bottom: 8px;">🇧🇷 Brasil</h4>
+                            <ul style="padding-left: 20px; line-height: 1.8;">
+                                <li><strong>Imóveis:</strong> Empresas como Blockchain.Rio, Liqi Digital Assets e Vortx tokenizam imóveis comerciais e residenciais.</li>
+                                <li><strong>Agronegócio:</strong> Tokenização de safras futuras, cabeças de gado e créditos de carbono.</li>
+                                <li><strong>Recebíveis:</strong> Duplicatas e contratos de fornecimento transformados em tokens.</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-top: 20px;">
+                            <h4 style="color: #3B82F6; margin-bottom: 8px;">🌍 Internacional</h4>
+                            <ul style="padding-left: 20px; line-height: 1.8;">
+                                <li><strong>Imóveis de luxo:</strong> Plataformas como RealT (EUA) e Reental (Europa) tokenizam propriedades.</li>
+                                <li><strong>Arte:</strong> Obras famosas foram fracionadas permitindo investimento coletivo.</li>
+                                <li><strong>Ações:</strong> tZERO e outras plataformas permitem negociar ações tokenizadas 24/7.</li>
+                                <li><strong>Ouro:</strong> Tokens lastreados em ouro físico armazenado em cofres auditados.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="callout callout-info" style="margin-top: 24px;">
+                        <div class="callout-icon" style="font-size: 24px;">🏛️</div>
+                        <div class="callout-content">
+                            <h3>Regulação no Brasil</h3>
+                            <p style="margin-bottom: 0;">
+                                A CVM (Comissão de Valores Mobiliários) tem trabalhado para regulamentar a tokenização de ativos. 
+                                Já existem frameworks jurídicos que permitem a emissão de tokens de valores mobiliários no país.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 6: Tokenização vs NFTs -->
+                <section class="article-section">
+                    <h2>🤔 Tokenização vs NFTs: Qual a Diferença?</h2>
+                    
+                    <p>Embora ambos usem blockchain e tokens, há diferenças importantes:</p>
+
+                    <div class="example-card">
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 16px; table-layout: fixed;">
+                            <thead>
+                                <tr style="background: rgba(255, 255, 255, 0.05);">
+                                    <th style="padding: 10px; text-align: left; width: 25%;">Aspecto</th>
+                                    <th style="padding: 10px; text-align: center; width: 37.5%;">Tokenização de Ativos</th>
+                                    <th style="padding: 10px; text-align: center; width: 37.5%;">NFTs</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 10px; font-weight: 600;">Fungibilidade</td>
+                                    <td style="padding: 10px; text-align: center;">Fungível (1 token = outro token)</td>
+                                    <td style="padding: 10px; text-align: center;">Não-fungível (único)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; font-weight: 600;">Objetivo Principal</td>
+                                    <td style="padding: 10px; text-align: center;">Investimento, propriedade fracionada</td>
+                                    <td style="padding: 10px; text-align: center;">Colecionáveis, arte digital, identidade</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; font-weight: 600;">Regulação</td>
+                                    <td style="padding: 10px; text-align: center;">Fortemente regulado (valores mobiliários)</td>
+                                    <td style="padding: 10px; text-align: center;">Regulação ainda em desenvolvimento</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; font-weight: 600;">Divisibilidade</td>
+                                    <td style="padding: 10px; text-align: center;">Alta (tokens fracionados)</td>
+                                    <td style="padding: 10px; text-align: center;">Geralmente indivisível</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; font-weight: 600;">Exemplo</td>
+                                    <td style="padding: 10px; text-align: center;">1000 tokens de um imóvel de R$ 1 milhão</td>
+                                    <td style="padding: 10px; text-align: center;">1 NFT único de uma arte digital</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Seção 7: Riscos e Desafios -->
+                <section class="article-section">
+                    <h2>⚠️ Riscos e Desafios da Tokenização</h2>
+                    
+                    <p>Apesar do potencial, a tokenização ainda enfrenta obstáculos:</p>
+
+                    <div class="example-card" style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #EF4444;">
+                        <h3 style="color: #FCA5A5; margin-bottom: 16px;">⛔ Principais Riscos</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                <strong>1. Regulação Incipiente:</strong> Falta de clareza jurídica em muitos países pode gerar insegurança.
+                            </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                <strong>2. Baixa Liquidez (ainda):</strong> Mercado secundário ainda pequeno para muitos tokens.
+                            </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                <strong>3. Riscos Tecnológicos:</strong> Bugs em smart contracts, hacks, perda de chaves privadas.
+                            </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                <strong>4. Falta de Padronização:</strong> Cada plataforma usa padrões diferentes (ERC-20, ERC-1400, etc).
+                            </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                <strong>5. Complexidade para o Investidor:</strong> Requer conhecimento técnico e compreensão de blockchain.
+                            </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                <strong>6. Custódia:</strong> Quem guarda os tokens? Autocustódia ou custódia de terceiros têm prós e contras.
+                            </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                <strong>7. Risco do Ativo Subjacente:</strong> O token herda todos os riscos do ativo real (ex: imóvel pode desvalorizar).
+                            </li>
+                            <li style="padding: 8px 0;">
+                                <strong>8. Fraudes e Projetos Duvidosos:</strong> Como em qualquer mercado novo, existem projetos fraudulentos.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="callout callout-warning" style="margin-top: 24px;">
+                        <div class="callout-icon" style="font-size: 24px;">🛡️</div>
+                        <div class="callout-content">
+                            <h3>Due Diligence é Essencial</h3>
+                            <p style="margin-bottom: 0;">
+                                Antes de investir em tokens de ativos, verifique: a estrutura jurídica, os direitos que o token confere, 
+                                a reputação da plataforma emissora, auditorias de smart contracts e a liquidez do mercado secundário.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 8: O Futuro da Tokenização -->
+                <section class="article-section">
+                    <h2>🚀 O Futuro da Tokenização</h2>
+                    
+                    <p>A tokenização tem potencial para transformar o sistema financeiro global:</p>
+
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <div class="tip-number">1</div>
+                            <div class="tip-content">
+                                <h3>Mercado de Trilhões</h3>
+                                <p>Estudos estimam que trilhões de dólares em ativos poderão ser tokenizados até 2030.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">2</div>
+                            <div class="tip-content">
+                                <h3>Instituições Financeiras Adotando</h3>
+                                <p>Grandes bancos (JP Morgan, Goldman Sachs) já experimentam com tokenização de títulos e fundos.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">3</div>
+                            <div class="tip-content">
+                                <h3>Regulação Amadurecendo</h3>
+                                <p>Governos estão criando frameworks claros para dar segurança jurídica ao mercado.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">4</div>
+                            <div class="tip-content">
+                                <h3>Integração com CBDCs</h3>
+                                <p>Moedas digitais de bancos centrais podem facilitar liquidação instantânea de tokens.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">5</div>
+                            <div class="tip-content">
+                                <h3>Novos Modelos de Negócio</h3>
+                                <p>Tokenização pode permitir crowdfunding para startups, projetos criativos e infraestrutura.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="callout callout-info" style="margin-top: 24px;">
+                        <div class="callout-icon" style="font-size: 24px;">🌟</div>
+                        <div class="callout-content">
+                            <h3>A Promessa da Tokenização</h3>
+                            <p style="margin-bottom: 0;">
+                                Democratizar o acesso a investimentos de qualidade, aumentar a liquidez de ativos ilíquidos, 
+                                reduzir custos operacionais e criar um mercado financeiro mais transparente e eficiente.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 9: Continue Explorando -->
+                <section class="article-section">
+                    <h2>🔍 Continue explorando</h2>
+
+                    <p>Aprofunde seu conhecimento nas tecnologias que possibilitam a tokenização:</p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px;">
+                        
+                        <!-- Card 1: Blockchain -->
+                        <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%); 
+                                    border: 1px solid rgba(59, 130, 246, 0.3); 
+                                    border-radius: 12px; 
+                                    padding: 24px; 
+                                    position: relative; 
+                                    cursor: pointer;
+                                    transition: all 0.3s ease;"
+                             onclick="window.location.href='blockchain.html';"
+                             onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 24px rgba(59, 130, 246, 0.2)';"
+                             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                                <span style="background: rgba(59, 130, 246, 0.2); 
+                                             color: #60A5FA; 
+                                             padding: 6px 12px; 
+                                             border-radius: 6px; 
+                                             font-size: 0.75rem; 
+                                             font-weight: 600;">
+                                    ⛓️ FUNDAMENTO
+                                </span>
+                                <span style="background: rgba(255, 255, 255, 0.1); 
+                                             color: #94A3B8; 
+                                             width: 32px; 
+                                             height: 32px; 
+                                             border-radius: 50%; 
+                                             display: flex; 
+                                             align-items: center; 
+                                             justify-content: center; 
+                                             font-weight: 600;
+                                             font-size: 0.9rem;">
+                                    1
+                                </span>
+                            </div>
+                            
+                            <h3 style="color: #E0E7FF; font-size: 1.25rem; margin-bottom: 12px; font-weight: 600;">
+                                Como funciona a Blockchain
+                            </h3>
+                            
+                            <p style="color: #94A3B8; font-size: 0.9rem; line-height: 1.6;">
+                                A tecnologia que torna a tokenização segura e transparente.
+                            </p>
+                        </div>
+
+                        <!-- Card 2: Ethereum -->
+                        <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%); 
+                                    border: 1px solid rgba(139, 92, 246, 0.3); 
+                                    border-radius: 12px; 
+                                    padding: 24px; 
+                                    position: relative; 
+                                    cursor: pointer;
+                                    transition: all 0.3s ease;"
+                             onclick="window.location.href='ethereum.html';"
+                             onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 24px rgba(139, 92, 246, 0.2)';"
+                             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                                <span style="background: rgba(139, 92, 246, 0.2); 
+                                             color: #A78BFA; 
+                                             padding: 6px 12px; 
+                                             border-radius: 6px; 
+                                             font-size: 0.75rem; 
+                                             font-weight: 600;">
+                                    ⧫ PLATAFORMA
+                                </span>
+                                <span style="background: rgba(255, 255, 255, 0.1); 
+                                             color: #94A3B8; 
+                                             width: 32px; 
+                                             height: 32px; 
+                                             border-radius: 50%; 
+                                             display: flex; 
+                                             align-items: center; 
+                                             justify-content: center; 
+                                             font-weight: 600;
+                                             font-size: 0.9rem;">
+                                    2
+                                </span>
+                            </div>
+                            
+                            <h3 style="color: #E0E7FF; font-size: 1.25rem; margin-bottom: 12px; font-weight: 600;">
+                                Ethereum e Smart Contracts
+                            </h3>
+                            
+                            <p style="color: #94A3B8; font-size: 0.9rem; line-height: 1.6;">
+                                A plataforma mais usada para criar tokens de ativos reais.
+                            </p>
+                        </div>
+
+                        <!-- Card 3: NFTs -->
+                        <div style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%); 
+                                    border: 1px solid rgba(236, 72, 153, 0.3); 
+                                    border-radius: 12px; 
+                                    padding: 24px; 
+                                    position: relative; 
+                                    cursor: pointer;
+                                    transition: all 0.3s ease;"
+                             onclick="window.location.href='nfts.html';"
+                             onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 24px rgba(236, 72, 153, 0.2)';"
+                             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                                <span style="background: rgba(236, 72, 153, 0.2); 
+                                             color: #F9A8D4; 
+                                             padding: 6px 12px; 
+                                             border-radius: 6px; 
+                                             font-size: 0.75rem; 
+                                             font-weight: 600;">
+                                    🖼️ ÚNICO
+                                </span>
+                                <span style="background: rgba(255, 255, 255, 0.1); 
+                                             color: #94A3B8; 
+                                             width: 32px; 
+                                             height: 32px; 
+                                             border-radius: 50%; 
+                                             display: flex; 
+                                             align-items: center; 
+                                             justify-content: center; 
+                                             font-weight: 600;
+                                             font-size: 0.9rem;">
+                                    3
+                                </span>
+                            </div>
+                            
+                            <h3 style="color: #E0E7FF; font-size: 1.25rem; margin-bottom: 12px; font-weight: 600;">
+                                NFTs: Tokens Não Fungíveis
+                            </h3>
+                            
+                            <p style="color: #94A3B8; font-size: 0.9rem; line-height: 1.6;">
+                                Compare NFTs com tokenização de ativos e entenda as diferenças.
+                            </p>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Callout Voltar -->
+                <div class="callout callout-info">
+                    <div class="callout-icon" style="font-size: 24px;">🏠</div>
+                    <div class="callout-content">
+                        <h3>Voltar para o início</h3>
+                        <p style="margin-bottom: 0;"><a href="../index.html#inicio" data-tab-link="inicio" style="color: #3B82F6; text-decoration: underline;">Ver todas as seções do INVLAB</a></p>
+                    </div>
+                </div>
+
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: rgba(15, 23, 42, 0.9); border-top: 1px solid rgba(59, 130, 246, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+        <div class="content-wrapper-wide">
+            <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+                
+                <!-- Coluna 1: INVLAB -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">
+                        Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.
+                    </p>
+                    <a href="guia_invlab.html" style="color: #3B82F6; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
+                        🧭 Guia do INVLAB →
+                    </a>
+                </div>
+
+                <!-- Coluna 2: Renda Fixa -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="poupanca.html" style="color: #CBD5E1; text-decoration: none;">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 3: Renda Variável -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="../index.html#renda-variavel" style="color: #CBD5E1; text-decoration: none;">📈 Introdução</a></li>
+                        <li><a href="acoes.html" style="color: #CBD5E1; text-decoration: none;">📊 Ações</a></li>
+                        <li><a href="etfs.html" style="color: #CBD5E1; text-decoration: none;">🎯 ETFs</a></li>
+                        <li><a href="fiis.html" style="color: #CBD5E1; text-decoration: none;">🏢 FIIs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 4: Criptoativos -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Criptoativos</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="../index.html#criptoativos" style="color: #CBD5E1; text-decoration: none;">🔐 Introdução</a></li>
+                        <li><a href="bitcoin.html" style="color: #CBD5E1; text-decoration: none;">₿ Bitcoin</a></li>
+                        <li><a href="ethereum.html" style="color: #CBD5E1; text-decoration: none;">⧫ Ethereum</a></li>
+                        <li><a href="stablecoins.html" style="color: #CBD5E1; text-decoration: none;">💵 Stablecoins</a></li>
+                        <li><a href="blockchain.html" style="color: #CBD5E1; text-decoration: none;">⛓️ Blockchain</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 5: Outros Investimentos -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Outros Investimentos</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="../index.html#outros-investimentos" style="color: #CBD5E1; text-decoration: none;">💎 Introdução</a></li>
+                        <li><a href="ganhos-come-cotas.html" style="color: #CBD5E1; text-decoration: none;">🍽️ Come-cotas</a></li>
+                        <li><a href="ganhos-iof-regressivo.html" style="color: #CBD5E1; text-decoration: none;">📉 IOF Regressivo</a></li>
+                        <li><a href="ganhos-inflacao.html" style="color: #CBD5E1; text-decoration: none;">📊 Inflação</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 6: Ferramentas -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Ferramentas</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 Simulador CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Simulador Tesouro</a></li>
+                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ Simulador LCI/LCA</a></li>
+                        <li><a href="calculadora.html" style="color: #CBD5E1; text-decoration: none;">🧮 Juros Compostos</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Disclaimers -->
+            <div style="border-top: 1px solid rgba(59, 130, 246, 0.1); padding-top: 20px; margin-top: 20px;">
+                <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 8px;">
+                    ⚠️ Conteúdo 100% educacional. Não somos corretora, não vendemos produtos, não recebemos comissões.
+                </p>
+                <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                    © 2025 INVLAB - Laboratório de Investimentos | Plataforma Educacional
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INVLAB Scripts - Carregamento Otimizado -->
+    <script src="../assets/js/script.js"></script>
+
+</body>
+</html>
