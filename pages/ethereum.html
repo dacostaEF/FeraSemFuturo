@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethereum: Contratos Inteligentes e Descentralização | INVLAB</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="msapplication-TileColor" content="#0D0D0D">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Meta Description -->
+    <meta name="description" content="Entenda o Ethereum, contratos inteligentes, diferenças com Bitcoin, casos de uso em DeFi, NFTs e DAOs. Conteúdo educacional sobre a segunda maior criptomoeda do mundo.">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+</head>
+<body>
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                <span class="logo-text">INVLAB</span>
+            </div>
+            
+            <!-- Menu de Navegação -->
+            <div class="tabs-nav-wrapper">
+                <nav class="tabs-nav" id="tabsNav">
+                    <button class="tab-btn" onclick="window.location.href='../index.html'">
+                        🏠 Início
+                    </button>
+                    <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">
+                        📚 Primeiros<br>Passos
+                    </button>
+                    
+                    <!-- Renda Fixa -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📊 Renda<br>Fixa <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="poupanca.html">💰 Poupança</a></li>
+                            <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                            <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                            <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Renda Variável -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📈 Renda<br>Variável <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="acoes.html">📊 Ações</a></li>
+                            <li><a href="etfs.html">🎯 ETFs</a></li>
+                            <li><a href="fiis.html">🏢 FIIs</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Criptoativos -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle active" onclick="window.location.href='../index.html#criptoativos'">
+                            🔐 Cripto<br>ativos <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="bitcoin.html">₿ Bitcoin</a></li>
+                            <li><a href="ethereum.html">⧫ Ethereum</a></li>
+                            <li><a href="stablecoins.html">💵 Stablecoins</a></li>
+                            <li><a href="blockchain.html">⛓️ Blockchain</a></li>
+                            <li><a href="cbdc.html">🏛️ CBDCs</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Outros Investimentos -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#outros-investimentos'">
+                            💎 Outros<br>Investimentos <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">🚀 Venture Capital</a></li>
+                            <li><a href="#">🏠 Imóveis</a></li>
+                            <li><a href="#">🎨 Colecionáveis</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Ferramentas -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#ferramentas'">
+                            🛠️ Ferramentas <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="simulador-cdbs.html">🏦 Simulador CDBs</a></li>
+                            <li><a href="simulador-tesouro-direto.html">🇧🇷 Simulador Tesouro</a></li>
+                            <li><a href="calculadora.html">🧮 Juros Compostos</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="article-wrapper">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../index.html">🏠 Início</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../index.html#criptoativos">🔐 Criptoativos</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">⧫ Ethereum</span>
+            </nav>
+
+            <!-- Artigo Principal -->
+            <article class="article-content">
+                <!-- Título -->
+                <h1 class="article-title">Ethereum: Além da Moeda Digital</h1>
+                
+                <p class="article-lead">
+                    Entenda como o Ethereum revolucionou o mundo dos criptoativos ao introduzir contratos inteligentes 
+                    e aplicações descentralizadas, expandindo as possibilidades da tecnologia blockchain.
+                </p>
+
+                <!-- Hero -->
+                <div class="article-hero">
+                    <div class="hero-emoji">⧫💻</div>
+                    <p class="hero-caption">Mais do que uma criptomoeda — uma plataforma programável</p>
+                </div>
+
+                <!-- Disclaimer Educacional -->
+                <div class="callout callout-info">
+                    <div class="callout-icon">📘</div>
+                    <div class="callout-content">
+                        <h3>Conteúdo 100% educacional</h3>
+                        <p style="margin-bottom: 0;">Este material tem caráter exclusivamente educativo e não constitui recomendação de compra ou venda de ativos. 
+                        O objetivo é ajudar você a entender melhor o Ethereum e seu papel no ecossistema cripto.</p>
+                    </div>
+                </div>
+
+                <!-- Seção 1: O que é Ethereum -->
+                <section class="article-section">
+                    <h2>⧫ O que é Ethereum?</h2>
+
+                    <p>O Ethereum é uma <strong>plataforma blockchain descentralizada</strong> lançada em 2015 por Vitalik Buterin e outros co-fundadores. 
+                    Diferentemente do Bitcoin, que foi criado primariamente como uma moeda digital, o Ethereum foi desenvolvido como 
+                    uma <strong>plataforma programável</strong> onde desenvolvedores podem criar aplicações descentralizadas (dApps).</p>
+
+                    <p>A grande inovação do Ethereum está nos <strong>contratos inteligentes</strong> (smart contracts) — 
+                    programas de computador que executam automaticamente quando certas condições são atendidas, 
+                    sem necessidade de intermediários.</p>
+
+                    <div class="example-card">
+                        <h4 style="color: #3B82F6; margin-bottom: 12px;">💡 Analogia simples</h4>
+                        <p style="margin-bottom: 8px;">Se o Bitcoin é como <strong>ouro digital</strong> (uma reserva de valor), 
+                        o Ethereum é como um <strong>computador global</strong> onde qualquer pessoa pode criar aplicações que funcionam 
+                        sem controle central.</p>
+                        <p style="margin-bottom: 0; font-size: 0.9rem; color: #94A3B8;">
+                            Pense no Ethereum como uma "App Store descentralizada" onde os apps rodam em milhares de computadores simultaneamente.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Seção 2: Bitcoin vs Ethereum -->
+                <section class="article-section">
+                    <h2>⚖️ Bitcoin vs Ethereum: Principais diferenças</h2>
+
+                    <p>Embora ambos usem tecnologia blockchain, Bitcoin e Ethereum têm propostas e funcionalidades bem diferentes:</p>
+
+                    <div class="example-card">
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 16px;">
+                            <thead>
+                                <tr style="background: rgba(255, 255, 255, 0.05);">
+                                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid rgba(59, 130, 246, 0.3);">Característica</th>
+                                    <th style="padding: 12px; text-align: center; border-bottom: 2px solid rgba(59, 130, 246, 0.3);">₿ Bitcoin</th>
+                                    <th style="padding: 12px; text-align: center; border-bottom: 2px solid rgba(59, 130, 246, 0.3);">⧫ Ethereum</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.05);"><strong>Objetivo principal</strong></td>
+                                    <td style="padding: 10px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">Moeda digital / Reserva de valor</td>
+                                    <td style="padding: 10px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">Plataforma de aplicações descentralizadas</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.05);"><strong>Lançamento</strong></td>
+                                    <td style="padding: 10px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">2009</td>
+                                    <td style="padding: 10px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">2015</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.05);"><strong>Criador</strong></td>
+                                    <td style="padding: 10px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">Satoshi Nakamoto (anônimo)</td>
+                                    <td style="padding: 10px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">Vitalik Buterin e equipe</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.05);"><strong>Contratos inteligentes</strong></td>
+                                    <td style="padding: 10px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">Limitados</td>
+                                    <td style="padding: 10px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); color: #10B981;">✓ Sim (completos)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.05);"><strong>Mecanismo de consenso</strong></td>
+                                    <td style="padding: 10px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">Proof of Work (PoW)</td>
+                                    <td style="padding: 10px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">Proof of Stake (PoS) desde 2022</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.05);"><strong>Tempo de bloco</strong></td>
+                                    <td style="padding: 10px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">~10 minutos</td>
+                                    <td style="padding: 10px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">~12 segundos</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px;"><strong>Oferta máxima</strong></td>
+                                    <td style="padding: 10px; text-align: center;">21 milhões de BTC (limitado)</td>
+                                    <td style="padding: 10px; text-align: center;">Sem limite fixo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="callout callout-info" style="margin-top: 20px;">
+                        <div class="callout-icon">🎯</div>
+                        <div class="callout-content">
+                            <h3>Resumo da diferença</h3>
+                            <p style="margin-bottom: 0;">Bitcoin é especializado em ser uma <strong>moeda digital segura</strong>. 
+                            Ethereum é generalista em ser uma <strong>plataforma de computação descentralizada</strong> onde moedas são apenas uma das aplicações possíveis.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 3: Contratos Inteligentes -->
+                <section class="article-section">
+                    <h2>📜 Contratos Inteligentes: O diferencial do Ethereum</h2>
+
+                    <p>Os <strong>contratos inteligentes</strong> (smart contracts) são a principal inovação do Ethereum. 
+                    Eles são programas de computador que executam automaticamente quando condições pré-definidas são atendidas.</p>
+
+                    <div class="example-card">
+                        <h4 style="color: #3B82F6; margin-bottom: 12px;">🔧 Como funcionam?</h4>
+                        <div style="background: rgba(255, 255, 255, 0.03); padding: 16px; border-radius: 8px; border-left: 3px solid #3B82F6;">
+                            <p style="margin: 0; font-weight: 600; margin-bottom: 8px;">Exemplo prático: Seguro de viagem automático</p>
+                            <ol style="margin: 8px 0 0 20px; line-height: 1.8;">
+                                <li><strong>Condição:</strong> "Se o voo atrasar mais de 2 horas..."</li>
+                                <li><strong>Ação:</strong> "...então pague automaticamente R$ 500 ao passageiro"</li>
+                                <li><strong>Execução:</strong> O contrato verifica dados do voo e executa o pagamento sem intervenção humana</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <h3 style="color: #3B82F6; margin-top: 32px; margin-bottom: 16px;">✨ Vantagens dos contratos inteligentes</h3>
+
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <div class="tip-number">1</div>
+                            <div class="tip-content">
+                                <h3>Automação total</h3>
+                                <p>Execução automática sem necessidade de intermediários ou burocracia.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">2</div>
+                            <div class="tip-content">
+                                <h3>Transparência</h3>
+                                <p>O código é público e auditável. Qualquer pessoa pode verificar o que o contrato faz.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">3</div>
+                            <div class="tip-content">
+                                <h3>Imutabilidade</h3>
+                                <p>Uma vez implantado, o contrato não pode ser alterado arbitrariamente, garantindo confiança.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">4</div>
+                            <div class="tip-content">
+                                <h3>Redução de custos</h3>
+                                <p>Elimina intermediários tradicionais, reduzindo custos operacionais.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="callout callout-warning" style="margin-top: 24px;">
+                        <div class="callout-icon">⚠️</div>
+                        <div class="callout-content">
+                            <h3>Atenção: Código é lei</h3>
+                            <p style="margin-bottom: 0;">Contratos inteligentes executam exatamente o que está programado. 
+                            Se houver um bug no código, ele pode ser explorado. Por isso, auditorias de segurança são essenciais.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 4: Casos de Uso -->
+                <section class="article-section">
+                    <h2>🎯 Principais casos de uso do Ethereum</h2>
+
+                    <p>A flexibilidade do Ethereum permite uma ampla gama de aplicações. Conheça as principais:</p>
+
+                    <h3 style="color: #3B82F6; margin-top: 28px; margin-bottom: 16px;">1. 💰 DeFi (Finanças Descentralizadas)</h3>
+                    <p>Aplicações financeiras que funcionam sem bancos ou instituições tradicionais:</p>
+                    <ul style="list-style: none; padding: 0; margin-top: 12px;">
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #10B981;">
+                            <strong>Empréstimos e empréstimos:</strong> Plataformas como Aave e Compound permitem emprestar/pedir emprestado cripto sem intermediários
+                        </li>
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #10B981;">
+                            <strong>Exchanges descentralizadas (DEX):</strong> Uniswap e SushiSwap permitem trocar criptoativos sem custódia centralizada
+                        </li>
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #10B981;">
+                            <strong>Stablecoins:</strong> Moedas estáveis como USDC e DAI rodam no Ethereum
+                        </li>
+                    </ul>
+
+                    <h3 style="color: #3B82F6; margin-top: 28px; margin-bottom: 16px;">2. 🖼️ NFTs (Tokens Não Fungíveis)</h3>
+                    <p>Representação digital única de propriedade de ativos:</p>
+                    <ul style="list-style: none; padding: 0; margin-top: 12px;">
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #8B5CF6;">
+                            <strong>Arte digital:</strong> Criadores podem vender obras digitais com autenticidade comprovada
+                        </li>
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #8B5CF6;">
+                            <strong>Colecionáveis:</strong> Itens únicos em jogos, músicas, ingressos
+                        </li>
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #8B5CF6;">
+                            <strong>Certificados:</strong> Diplomas, documentos, registros imutáveis
+                        </li>
+                    </ul>
+
+                    <h3 style="color: #3B82F6; margin-top: 28px; margin-bottom: 16px;">3. 🏛️ DAOs (Organizações Autônomas Descentralizadas)</h3>
+                    <p>Organizações governadas por código e votação comunitária:</p>
+                    <ul style="list-style: none; padding: 0; margin-top: 12px;">
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #F59E0B;">
+                            <strong>Governança descentralizada:</strong> Membros votam em decisões importantes
+                        </li>
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #F59E0B;">
+                            <strong>Fundos de investimento coletivos:</strong> Gestão transparente de recursos
+                        </li>
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #F59E0B;">
+                            <strong>Comunidades criativas:</strong> Decisões tomadas pelos membros, não por diretores
+                        </li>
+                    </ul>
+
+                    <h3 style="color: #3B82F6; margin-top: 28px; margin-bottom: 16px;">4. 🎮 Games e Metaverso</h3>
+                    <p>Jogos onde itens têm valor real e podem ser negociados:</p>
+                    <ul style="list-style: none; padding: 0; margin-top: 12px;">
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #EF4444;">
+                            <strong>Play-to-Earn:</strong> Jogadores ganham tokens jogando
+                        </li>
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #EF4444;">
+                            <strong>Mundos virtuais:</strong> Terrenos e construções no metaverso
+                        </li>
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #EF4444;">
+                            <strong>Itens colecionáveis:</strong> Skins, armas e personagens como NFTs
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Seção 5: The Merge e Proof of Stake -->
+                <section class="article-section">
+                    <h2>🔄 The Merge: A transição histórica</h2>
+
+                    <p>Em setembro de 2022, o Ethereum passou pela sua maior atualização: <strong>The Merge</strong> (A Fusão). 
+                    A rede migrou do mecanismo Proof of Work (PoW) para <strong>Proof of Stake (PoS)</strong>.</p>
+
+                    <div class="example-card">
+                        <h4 style="color: #3B82F6; margin-bottom: 16px;">⚡ O que mudou?</h4>
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: rgba(255, 255, 255, 0.05);">
+                                    <th style="padding: 10px; text-align: left;">Aspecto</th>
+                                    <th style="padding: 10px; text-align: center;">Antes (PoW)</th>
+                                    <th style="padding: 10px; text-align: center;">Depois (PoS)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 10px;"><strong>Consumo de energia</strong></td>
+                                    <td style="padding: 10px; text-align: center;">~112 TWh/ano</td>
+                                    <td style="padding: 10px; text-align: center; color: #10B981;">~0.01 TWh/ano (-99.95%)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px;"><strong>Validadores</strong></td>
+                                    <td style="padding: 10px; text-align: center;">Mineradores com GPUs</td>
+                                    <td style="padding: 10px; text-align: center;">Stakers com 32 ETH</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px;"><strong>Emissão de novos ETH</strong></td>
+                                    <td style="padding: 10px; text-align: center;">~13.000 ETH/dia</td>
+                                    <td style="padding: 10px; text-align: center; color: #10B981;">~1.700 ETH/dia (-87%)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px;"><strong>Impacto ambiental</strong></td>
+                                    <td style="padding: 10px; text-align: center;">Alto</td>
+                                    <td style="padding: 10px; text-align: center; color: #10B981;">Muito baixo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="callout callout-success" style="margin-top: 20px;">
+                        <div class="callout-icon">✨</div>
+                        <div class="callout-content">
+                            <h3>Benefícios do Proof of Stake</h3>
+                            <ul style="margin: 8px 0 0 20px; line-height: 1.8;">
+                                <li><strong>Sustentabilidade:</strong> Redução drástica no consumo de energia</li>
+                                <li><strong>Segurança:</strong> Ataques ficam economicamente inviáveis</li>
+                                <li><strong>Descentralização:</strong> Mais pessoas podem participar da validação</li>
+                                <li><strong>Escalabilidade:</strong> Prepara terreno para futuras melhorias</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 6: Riscos -->
+                <section class="article-section">
+                    <h2>⚠️ Riscos e considerações sobre Ethereum</h2>
+
+                    <p>Assim como qualquer criptoativo, o Ethereum apresenta riscos significativos que precisam ser compreendidos:</p>
+
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <div class="tip-number">1</div>
+                            <div class="tip-content">
+                                <h3>Volatilidade extrema</h3>
+                                <p>O preço do ETH pode variar 10%, 20% ou mais em um único dia. 
+                                Períodos de euforia alternam com quedas acentuadas.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">2</div>
+                            <div class="tip-content">
+                                <h3>Complexidade técnica</h3>
+                                <p>Interagir com contratos inteligentes requer conhecimento técnico. 
+                                Erros podem resultar em perda permanente de fundos.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">3</div>
+                            <div class="tip-content">
+                                <h3>Riscos de smart contracts</h3>
+                                <p>Bugs no código podem ser explorados. Mesmo contratos auditados podem ter vulnerabilidades não detectadas.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">4</div>
+                            <div class="tip-content">
+                                <h3>Competição acirrada</h3>
+                                <p>Outras blockchains (Solana, Cardano, BNB Chain) competem pelo mesmo espaço, 
+                                oferecendo transações mais rápidas e baratas.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">5</div>
+                            <div class="tip-content">
+                                <h3>Taxas de transação (Gas)</h3>
+                                <p>Durante períodos de alta demanda, as taxas podem ser extremamente altas, 
+                                tornando pequenas transações inviáveis economicamente.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">6</div>
+                            <div class="tip-content">
+                                <h3>Regulamentação incerta</h3>
+                                <p>Governos ao redor do mundo ainda estão definindo como regular DeFi, NFTs e staking. 
+                                Mudanças regulatórias podem impactar significativamente o ecossistema.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="callout callout-warning" style="margin-top: 24px;">
+                        <div class="callout-icon">🚨</div>
+                        <div class="callout-content">
+                            <h3>Lembre-se</h3>
+                            <p style="margin-bottom: 0;">Ethereum é um ativo de <strong>altíssimo risco</strong>. 
+                            Nunca invista mais do que você pode perder. Tenha sua reserva de emergência, 
+                            renda fixa e renda variável organizadas antes de considerar criptoativos.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 7: ETH na prática -->
+                <section class="article-section">
+                    <h2>💼 Como obter e armazenar ETH</h2>
+
+                    <h3 style="color: #3B82F6; margin-bottom: 16px;">📱 Onde comprar Ethereum no Brasil</h3>
+                    <ul style="line-height: 1.8;">
+                        <li><strong>Exchanges locais:</strong> Mercado Bitcoin, Foxbit, NovaDAX, BitcoinTrade</li>
+                        <li><strong>Exchanges internacionais:</strong> Binance, Coinbase, Kraken</li>
+                        <li><strong>Corretoras tradicionais:</strong> Algumas corretoras de valores já oferecem acesso a ETH</li>
+                    </ul>
+
+                    <h3 style="color: #3B82F6; margin-top: 28px; margin-bottom: 16px;">🔐 Como armazenar com segurança</h3>
+                    <div class="example-card">
+                        <div style="display: grid; gap: 16px;">
+                            <div style="padding: 12px; background: rgba(59, 130, 246, 0.1); border-left: 3px solid #3B82F6; border-radius: 4px;">
+                                <h4 style="color: #3B82F6; margin-bottom: 8px;">🏦 Hot Wallets (Carteiras quentes)</h4>
+                                <p style="margin: 0; font-size: 0.9rem;"><strong>Exemplos:</strong> MetaMask, Trust Wallet, Coinbase Wallet</p>
+                                <p style="margin: 8px 0 0 0; font-size: 0.85rem; color: #94A3B8;">✓ Convenientes para uso diário | ✗ Menos seguras (conectadas à internet)</p>
+                            </div>
+
+                            <div style="padding: 12px; background: rgba(16, 185, 129, 0.1); border-left: 3px solid #10B981; border-radius: 4px;">
+                                <h4 style="color: #10B981; margin-bottom: 8px;">❄️ Cold Wallets (Carteiras frias)</h4>
+                                <p style="margin: 0; font-size: 0.9rem;"><strong>Exemplos:</strong> Ledger, Trezor (hardware wallets)</p>
+                                <p style="margin: 8px 0 0 0; font-size: 0.85rem; color: #94A3B8;">✓ Muito seguras (offline) | ✗ Menos convenientes para uso frequente</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="callout callout-warning" style="margin-top: 20px;">
+                        <div class="callout-icon">🔑</div>
+                        <div class="callout-content">
+                            <h3>Segurança é fundamental</h3>
+                            <ul style="margin: 8px 0 0 20px; line-height: 1.8;">
+                                <li>Nunca compartilhe sua seed phrase (frase semente) com ninguém</li>
+                                <li>Desconfie de promessas de retorno garantido ou "ganho fácil"</li>
+                                <li>Use autenticação de dois fatores (2FA) sempre que possível</li>
+                                <li>Verifique cuidadosamente endereços antes de enviar transações</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 8: Próximos passos -->
+                <section class="article-section">
+                    <h2>🔍 Continue explorando</h2>
+
+                    <p>Agora que você entende o Ethereum, explore outros tópicos relacionados ao universo cripto:</p>
+
+                    <div class="inv-grid" style="margin-top: 20px;">
+                        <div class="inv-card" style="cursor: pointer;" onclick="window.location.href='bitcoin.html';">
+                            <div class="inv-card-badge">₿ Conceitos</div>
+                            <h4 class="inv-card-title">Bitcoin em detalhes</h4>
+                            <p class="inv-card-description">Compare com o Ethereum e entenda a primeira criptomoeda.</p>
+                        </div>
+
+                        <div class="inv-card" style="cursor: pointer;" onclick="window.location.href='stablecoins.html';">
+                            <div class="inv-card-badge">💵 Conceitos</div>
+                            <h4 class="inv-card-title">Stablecoins</h4>
+                            <p class="inv-card-description">Criptoativos com paridade ao dólar que rodam no Ethereum.</p>
+                        </div>
+
+                        <div class="inv-card" style="cursor: pointer;" onclick="window.location.href='blockchain.html';">
+                            <div class="inv-card-badge">⛓️ Tecnologia</div>
+                            <h4 class="inv-card-title">Como funciona a Blockchain</h4>
+                            <p class="inv-card-description">A tecnologia por trás do Ethereum e Bitcoin.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Callout Final -->
+                <div class="callout callout-info">
+                    <div class="callout-icon">🏠</div>
+                    <div class="callout-content">
+                        <h3>Voltar para o início</h3>
+                        <p style="margin-bottom: 0;">
+                            <a href="../index.html#criptoativos" style="color: #3B82F6; text-decoration: underline;">
+                                Ver todas as seções do INVLAB
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer Padronizado -->
+    <footer style="background: rgba(15, 23, 42, 0.9); border-top: 1px solid rgba(59, 130, 246, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+        <div class="content-wrapper-wide">
+            <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+                <!-- Coluna 1: INVLAB -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">
+                        Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.
+                    </p>
+                    <a href="guia_invlab.html" style="color: #3B82F6; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
+                        🧭 Guia do INVLAB →
+                    </a>
+                </div>
+
+                <!-- Coluna 2: Renda Fixa -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="poupanca.html" style="color: #CBD5E1; text-decoration: none;">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 3: Renda Variável -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="../index.html#renda-variavel" style="color: #CBD5E1; text-decoration: none;">📈 Introdução</a></li>
+                        <li><a href="acoes.html" style="color: #CBD5E1; text-decoration: none;">📊 Ações</a></li>
+                        <li><a href="etfs.html" style="color: #CBD5E1; text-decoration: none;">🎯 ETFs</a></li>
+                        <li><a href="fiis.html" style="color: #CBD5E1; text-decoration: none;">🏢 FIIs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 4: Criptoativos -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Criptoativos</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="../index.html#criptoativos" style="color: #CBD5E1; text-decoration: none;">🔐 Introdução</a></li>
+                        <li><a href="bitcoin.html" style="color: #CBD5E1; text-decoration: none;">₿ Bitcoin</a></li>
+                        <li><a href="ethereum.html" style="color: #CBD5E1; text-decoration: none;">⧫ Ethereum</a></li>
+                        <li><a href="stablecoins.html" style="color: #CBD5E1; text-decoration: none;">💵 Stablecoins</a></li>
+                        <li><a href="blockchain.html" style="color: #CBD5E1; text-decoration: none;">⛓️ Blockchain</a></li>
+                        <li><a href="cbdc.html" style="color: #CBD5E1; text-decoration: none;">🏛️ CBDCs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 5: Outros Investimentos -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Outros Investimentos</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="../index.html#outros-investimentos" style="color: #CBD5E1; text-decoration: none;">💎 Introdução</a></li>
+                        <li><a href="ganhos-come-cotas.html" style="color: #CBD5E1; text-decoration: none;">🍽️ Come-cotas</a></li>
+                        <li><a href="ganhos-iof-regressivo.html" style="color: #CBD5E1; text-decoration: none;">📉 IOF Regressivo</a></li>
+                        <li><a href="ganhos-inflacao.html" style="color: #CBD5E1; text-decoration: none;">📊 Inflação</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 6: Ferramentas -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Ferramentas</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 Simulador CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Simulador Tesouro</a></li>
+                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ Simulador LCI/LCA</a></li>
+                        <li><a href="calculadora.html" style="color: #CBD5E1; text-decoration: none;">🧮 Juros Compostos</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Disclaimers -->
+            <div style="border-top: 1px solid rgba(59, 130, 246, 0.1); padding-top: 20px; margin-top: 20px;">
+                <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 8px;">
+                    ⚠️ Conteúdo 100% educacional. Não somos corretora, não vendemos produtos, não recebemos comissões.
+                </p>
+                <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                    © 2025 INVLAB - Laboratório de Investimentos | Plataforma Educacional
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>
+
