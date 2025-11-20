@@ -43,7 +43,7 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    padding-top: 80px; /* REDUZIDO: 180px → 80px (menu mais compacto, menos espaço reservado) */
+    padding-top: 130px; /* CORRIGIDO: 80px → 130px (carrossel 60px + header 70px = espaço suficiente) */
 }
 
 /* ============================================
@@ -1329,7 +1329,7 @@ body {
     
     /* Header e Abas - Mobile */
     body {
-        padding-top: 70px; /* REDUZIDO: 160px → 70px (menu mais compacto) */
+        padding-top: 120px; /* CORRIGIDO: 70px → 120px (compensar carrossel + header) */
     }
     
     .header-container {
@@ -1757,7 +1757,7 @@ body {
 /* Responsividade dos novos cards */
 @media (max-width: 768px) {
     body {
-        padding-top: 0;
+        padding-top: 110px; /* CORRIGIDO: 0 → 110px (compensar carrossel + header em tablet) */
     }
     
     .main-header {
@@ -1765,7 +1765,7 @@ body {
     }
     
     .main-content {
-        margin-top: 96px; /* REDUZIDO: 100px → 96px (compensação) */
+        margin-top: 0; /* CORRIGIDO: 96px → 0 (body padding-top já faz o trabalho) */
     }
 
     .header-container {
@@ -2002,7 +2002,7 @@ body {
 
 @media (max-width: 480px) {
     body {
-        padding-top: 0;
+        padding-top: 100px; /* CORRIGIDO: 0 → 100px (compensar carrossel + header em mobile) */
     }
     
     .main-header {
@@ -2010,7 +2010,7 @@ body {
     }
     
     .main-content {
-        margin-top: 91px; /* REDUZIDO: 95px → 91px (compensação) */
+        margin-top: 0; /* CORRIGIDO: 91px → 0 (body padding-top já faz o trabalho) */
     }
 
     .header-container {
