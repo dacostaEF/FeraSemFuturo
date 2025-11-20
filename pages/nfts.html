@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFTs: Tokens Não Fungíveis e Propriedade Digital | INVLAB</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="msapplication-TileColor" content="#0D0D0D">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Meta Description -->
+    <meta name="description" content="Entenda o que são NFTs, como funcionam, casos de uso reais, riscos de bolhas especulativas e como avaliar projetos com visão educacional e equilibrada.">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+</head>
+<body>
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                <span class="logo-text">INVLAB</span>
+            </div>
+            
+            <!-- Menu de Navegação -->
+            <div class="tabs-nav-wrapper">
+                <nav class="tabs-nav" id="tabsNav">
+                    <button class="tab-btn" onclick="window.location.href='../index.html'">
+                        🏠 Início
+                    </button>
+                    <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">
+                        📚 Primeiros<br>Passos
+                    </button>
+                    
+                    <!-- Renda Fixa -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📊 Renda<br>Fixa <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="poupanca.html">💰 Poupança</a></li>
+                            <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                            <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                            <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Renda Variável -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle">
+                            📈 Renda<br>Variável <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="acoes.html">📊 Ações</a></li>
+                            <li><a href="etfs.html">🎯 ETFs</a></li>
+                            <li><a href="fiis.html">🏢 FIIs</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Criptoativos -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle active" onclick="window.location.href='../index.html#criptoativos'">
+                            🔐 Cripto<br>ativos <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="bitcoin.html">₿ Bitcoin</a></li>
+                            <li><a href="ethereum.html">⧫ Ethereum</a></li>
+                            <li><a href="stablecoins.html">💵 Stablecoins</a></li>
+                            <li><a href="blockchain.html">⛓️ Blockchain</a></li>
+                            <li><a href="cbdc.html">🏛️ CBDCs</a></li>
+                            <li><a href="nfts.html">🖼️ NFTs</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Outros Investimentos -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#outros-investimentos'">
+                            💎 Outros<br>Investimentos <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">🚀 Venture Capital</a></li>
+                            <li><a href="#">🏠 Imóveis</a></li>
+                            <li><a href="#">🎨 Colecionáveis</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Ferramentas -->
+                    <div class="tab-with-dropdown">
+                        <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#ferramentas'">
+                            🛠️ Ferramentas <span class="arrow">▼</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="simulador-cdbs.html">🏦 Simulador CDBs</a></li>
+                            <li><a href="simulador-tesouro-direto.html">🇧🇷 Simulador Tesouro</a></li>
+                            <li><a href="calculadora.html">🧮 Juros Compostos</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="article-wrapper">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../index.html">🏠 Início</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../index.html#criptoativos">🔐 Criptoativos</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">🖼️ NFTs</span>
+            </nav>
+
+            <!-- Artigo Principal -->
+            <article class="article-content">
+                <!-- Título -->
+                <h1 class="article-title">NFTs: Tokens Não Fungíveis e Propriedade Digital</h1>
+                
+                <p class="article-lead">
+                    Entenda o que são NFTs, como funcionam na prática, seus casos de uso reais e os riscos de bolhas especulativas. 
+                    Uma visão equilibrada entre tecnologia promissora e exageros do mercado.
+                </p>
+
+                <!-- Hero -->
+                <div class="article-hero">
+                    <div class="hero-emoji">🖼️🔐</div>
+                    <p class="hero-caption">Certificados digitais únicos em blockchain — mas nem tudo que brilha é ouro</p>
+                </div>
+
+                <!-- Disclaimer Educacional -->
+                <div class="callout callout-info">
+                    <div class="callout-icon">📘</div>
+                    <div class="callout-content">
+                        <h3>Conteúdo 100% educacional</h3>
+                        <p style="margin-bottom: 0;">Este material tem caráter exclusivamente educativo e não constitui recomendação de compra ou venda de NFTs. 
+                        O objetivo é ajudar você a entender a tecnologia, separar fatos de hype e reconhecer riscos.</p>
+                    </div>
+                </div>
+
+                <!-- Seção 1: O que são NFTs -->
+                <section class="article-section">
+                    <h2>🖼️ O que são NFTs?</h2>
+
+                    <p><strong>NFT</strong> significa <strong>Non-Fungible Token</strong> (Token Não Fungível). 
+                    Para entender o conceito, primeiro precisamos saber o que significa "fungível":</p>
+
+                    <div class="example-card">
+                        <h4 style="color: #3B82F6; margin-bottom: 16px;">💡 Fungível vs Não-Fungível</h4>
+                        
+                        <div style="display: grid; gap: 16px; margin-top: 16px;">
+                            <div style="padding: 16px; background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10B981; border-radius: 6px;">
+                                <h4 style="color: #10B981; margin: 0 0 8px 0;">✓ Fungível (Intercambiável)</h4>
+                                <p style="margin: 0; font-size: 0.9rem;"><strong>Exemplos:</strong> Dinheiro, Bitcoin, ações</p>
+                                <p style="margin: 8px 0 0 0; font-size: 0.85rem; color: #94A3B8;">
+                                    Uma nota de R$ 100 tem o mesmo valor que qualquer outra nota de R$ 100. 
+                                    São intercambiáveis e idênticas em valor.
+                                </p>
+                            </div>
+
+                            <div style="padding: 16px; background: rgba(139, 92, 246, 0.1); border-left: 4px solid #8B5CF6; border-radius: 6px;">
+                                <h4 style="color: #8B5CF6; margin: 0 0 8px 0;">✓ Não-Fungível (Único)</h4>
+                                <p style="margin: 0; font-size: 0.9rem;"><strong>Exemplos:</strong> Obras de arte, imóveis, ingressos numerados</p>
+                                <p style="margin: 8px 0 0 0; font-size: 0.85rem; color: #94A3B8;">
+                                    Cada item é único e não pode ser substituído por outro idêntico. 
+                                    A Mona Lisa original não tem "cópia equivalente".
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 style="color: #3B82F6; margin-top: 32px; margin-bottom: 16px;">🔐 Como NFTs funcionam tecnicamente</h3>
+
+                    <p>Um NFT é um <strong>certificado digital único</strong> registrado em blockchain (principalmente Ethereum) que comprova:</p>
+
+                    <ul style="line-height: 1.8; margin-top: 16px;">
+                        <li><strong>Autenticidade:</strong> Garante que aquele item digital é o "original"</li>
+                        <li><strong>Propriedade:</strong> Registra quem é o dono atual</li>
+                        <li><strong>Histórico:</strong> Rastreia todas as transferências anteriores</li>
+                        <li><strong>Escassez:</strong> Define quantas unidades existem (geralmente única)</li>
+                    </ul>
+
+                    <div class="callout callout-warning" style="margin-top: 24px;">
+                        <div class="callout-icon">⚠️</div>
+                        <div class="callout-content">
+                            <h3>Atenção importante</h3>
+                            <p style="margin-bottom: 0;">Comprar um NFT <strong>NÃO significa</strong> comprar os direitos autorais da obra. 
+                            Você compra um certificado de propriedade digital, mas o criador original geralmente mantém os direitos de reprodução, 
+                            comercialização e uso da imagem.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 2: Casos de Uso Reais -->
+                <section class="article-section">
+                    <h2>🎯 Casos de uso reais dos NFTs</h2>
+
+                    <p>Além da especulação, NFTs têm aplicações práticas e interessantes. Veja algumas:</p>
+
+                    <h3 style="color: #3B82F6; margin-top: 28px; margin-bottom: 16px;">1. 🎨 Arte Digital</h3>
+                    <p>Artistas digitais podem vender obras com autenticidade comprovada:</p>
+                    <ul style="list-style: none; padding: 0; margin-top: 12px;">
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #8B5CF6;">
+                            <strong>Certificado de autenticidade:</strong> Comprova que a arte é do artista original
+                        </li>
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #8B5CF6;">
+                            <strong>Royalties automáticos:</strong> Artista recebe % em cada revenda futura
+                        </li>
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #8B5CF6;">
+                            <strong>Acesso direto:</strong> Elimina intermediários tradicionais (galerias, leiloeiros)
+                        </li>
+                    </ul>
+
+                    <h3 style="color: #3B82F6; margin-top: 28px; margin-bottom: 16px;">2. 🎮 Games e Itens Virtuais</h3>
+                    <p>Jogadores podem possuir verdadeiramente itens do jogo:</p>
+                    <ul style="list-style: none; padding: 0; margin-top: 12px;">
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #EF4444;">
+                            <strong>Propriedade real:</strong> Skins, armas e personagens que você realmente possui
+                        </li>
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #EF4444;">
+                            <strong>Transferibilidade:</strong> Pode vender ou trocar itens entre jogadores
+                        </li>
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #EF4444;">
+                            <strong>Interoperabilidade:</strong> (potencial) Usar itens em diferentes jogos
+                        </li>
+                    </ul>
+
+                    <h3 style="color: #3B82F6; margin-top: 28px; margin-bottom: 16px;">3. 🎵 Música e Royalties</h3>
+                    <p>Músicos podem tokenizar suas obras:</p>
+                    <ul style="list-style: none; padding: 0; margin-top: 12px;">
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #10B981;">
+                            <strong>Edições limitadas:</strong> Fãs compram versões exclusivas de músicas
+                        </li>
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #10B981;">
+                            <strong>Acesso VIP:</strong> NFTs que dão entrada a shows exclusivos
+                        </li>
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #10B981;">
+                            <strong>Participação nos lucros:</strong> Holders recebem parte dos royalties
+                        </li>
+                    </ul>
+
+                    <h3 style="color: #3B82F6; margin-top: 28px; margin-bottom: 16px;">4. 🎫 Ingressos e Eventos</h3>
+                    <p>Combate falsificações e melhora experiência:</p>
+                    <ul style="list-style: none; padding: 0; margin-top: 12px;">
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #F59E0B;">
+                            <strong>Autenticidade garantida:</strong> Impossível falsificar ingressos
+                        </li>
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #F59E0B;">
+                            <strong>Revenda controlada:</strong> Organizador pode limitar ou lucrar com revenda
+                        </li>
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #F59E0B;">
+                            <strong>Recordação digital:</strong> Ingresso vira colecionável permanente
+                        </li>
+                    </ul>
+
+                    <h3 style="color: #3B82F6; margin-top: 28px; margin-bottom: 16px;">5. 📜 Certificados e Documentos</h3>
+                    <p>Documentação imutável e verificável:</p>
+                    <ul style="list-style: none; padding: 0; margin-top: 12px;">
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #3B82F6;">
+                            <strong>Diplomas universitários:</strong> Impossível falsificar
+                        </li>
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #3B82F6;">
+                            <strong>Certificados profissionais:</strong> Verificação instantânea por empregadores
+                        </li>
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #3B82F6;">
+                            <strong>Históricos médicos:</strong> Registros seguros e portáteis
+                        </li>
+                    </ul>
+
+                    <h3 style="color: #3B82F6; margin-top: 28px; margin-bottom: 16px;">6. 🏠 Tokenização de Ativos Reais</h3>
+                    <p>Representação digital de ativos físicos:</p>
+                    <ul style="list-style: none; padding: 0; margin-top: 12px;">
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #06B6D4;">
+                            <strong>Imóveis fracionados:</strong> Propriedade parcial de imóveis via NFTs
+                        </li>
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #06B6D4;">
+                            <strong>Obras de arte físicas:</strong> Certificado digital vinculado à obra real
+                        </li>
+                        <li style="padding: 8px; background: rgba(255, 255, 255, 0.03); margin-bottom: 8px; border-radius: 4px; border-left: 3px solid #06B6D4;">
+                            <strong>Colecionáveis de luxo:</strong> Relógios, vinhos, carros raros
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Seção 3: O Mercado -->
+                <section class="article-section">
+                    <h2>💰 O mercado de NFTs: Como funciona</h2>
+
+                    <h3 style="color: #3B82F6; margin-bottom: 16px;">🏪 Principais marketplaces</h3>
+
+                    <div class="example-card">
+                        <div style="display: grid; gap: 12px;">
+                            <div style="padding: 12px; background: rgba(255, 255, 255, 0.03); border-radius: 6px;">
+                                <h4 style="color: #3B82F6; margin: 0 0 6px 0;">🌊 OpenSea</h4>
+                                <p style="margin: 0; font-size: 0.85rem; color: #94A3B8;">
+                                    O maior marketplace de NFTs. Variedade enorme, mas qualidade muito variável.
+                                </p>
+                            </div>
+                            <div style="padding: 12px; background: rgba(255, 255, 255, 0.03); border-radius: 6px;">
+                                <h4 style="color: #3B82F6; margin: 0 0 6px 0;">❎ Rarible</h4>
+                                <p style="margin: 0; font-size: 0.85rem; color: #94A3B8;">
+                                    Marketplace comunitário com token de governança (RARI).
+                                </p>
+                            </div>
+                            <div style="padding: 12px; background: rgba(255, 255, 255, 0.03); border-radius: 6px;">
+                                <h4 style="color: #3B82F6; margin: 0 0 6px 0;">🎨 SuperRare</h4>
+                                <p style="margin: 0; font-size: 0.85rem; color: #94A3B8;">
+                                    Focado em arte de alta qualidade. Artistas são selecionados.
+                                </p>
+                            </div>
+                            <div style="padding: 12px; background: rgba(255, 255, 255, 0.03); border-radius: 6px;">
+                                <h4 style="color: #3B82F6; margin: 0 0 6px 0;">🔷 Foundation</h4>
+                                <p style="margin: 0; font-size: 0.85rem; color: #94A3B8;">
+                                    Curadoria focada em artistas digitais emergentes.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 style="color: #3B82F6; margin-top: 32px; margin-bottom: 16px;">💸 Custos envolvidos</h3>
+
+                    <p>Comprar e vender NFTs tem custos que vão além do preço do item:</p>
+
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <div class="tip-number">1</div>
+                            <div class="tip-content">
+                                <h3>Gas fees (taxas de rede)</h3>
+                                <p>Taxas pagas aos validadores da blockchain. No Ethereum, podem variar de US$ 5 a US$ 100+ dependendo da congestão da rede.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">2</div>
+                            <div class="tip-content">
+                                <h3>Taxas do marketplace</h3>
+                                <p>Plataformas cobram 2-2.5% sobre cada venda. OpenSea cobra 2.5%, por exemplo.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">3</div>
+                            <div class="tip-content">
+                                <h3>Royalties do criador</h3>
+                                <p>10% em média vai para o criador original em cada revenda. Isso é automático via smart contract.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="example-card" style="margin-top: 20px;">
+                        <h4 style="color: #F59E0B; margin-bottom: 12px;">💡 Exemplo de custos reais</h4>
+                        <p style="margin: 0; font-size: 0.9rem;">
+                            Você compra um NFT por <strong>1 ETH (≈ US$ 2.000)</strong>:
+                        </p>
+                        <ul style="margin: 12px 0 0 20px; font-size: 0.85rem; line-height: 1.8;">
+                            <li>Preço do NFT: <strong>1 ETH</strong></li>
+                            <li>Gas fee: <strong>0.05 ETH</strong> (≈ US$ 100)</li>
+                            <li>Taxa do marketplace (2.5%): <strong>0.025 ETH</strong> (≈ US$ 50)</li>
+                            <li><strong style="color: #F59E0B;">Total: 1.075 ETH (≈ US$ 2.150)</strong></li>
+                        </ul>
+                        <p style="margin: 12px 0 0 0; font-size: 0.8rem; color: #94A3B8;">
+                            Ou seja, para você "empatar", o NFT precisa se valorizar pelo menos 7.5% só para cobrir os custos!
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Seção 4: Riscos e Realidade -->
+                <section class="article-section">
+                    <h2>⚠️ Riscos e a realidade do mercado de NFTs</h2>
+
+                    <p>É fundamental entender os riscos antes de considerar qualquer envolvimento com NFTs:</p>
+
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <div class="tip-number">1</div>
+                            <div class="tip-content">
+                                <h3>Bolha especulativa extrema</h3>
+                                <p>Em 2021-2022, NFTs viraram febre especulativa. Muitos projetos perderam 90-99% do valor. 
+                                A maioria das pessoas que comprou NFTs está no prejuízo.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">2</div>
+                            <div class="tip-content">
+                                <h3>Liquidez quase zero</h3>
+                                <p>Diferente de ações ou Bitcoin, NFTs são únicos e difíceis de vender. 
+                                Você pode não encontrar comprador quando quiser vender, mesmo reduzindo muito o preço.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">3</div>
+                            <div class="tip-content">
+                                <h3>Manipulação de preços (wash trading)</h3>
+                                <p>Pessoas compram e vendem para si mesmas para simular demanda e inflar preços artificialmente. 
+                                É muito comum e difícil de detectar.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">4</div>
+                            <div class="tip-content">
+                                <h3>Projetos abandonados</h3>
+                                <p>Equipes lançam coleções, arrecadam dinheiro e desaparecem ("rug pull"). 
+                                Roadmaps prometidos nunca são cumpridos.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">5</div>
+                            <div class="tip-content">
+                                <h3>Valor puramente subjetivo</h3>
+                                <p>Diferente de uma ação (que tem lucros da empresa) ou imóvel (que gera aluguel), 
+                                NFT não gera fluxo de caixa. Seu valor depende 100% de outra pessoa querer pagar por ele.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">6</div>
+                            <div class="tip-content">
+                                <h3>Questões técnicas e legais</h3>
+                                <p>Imagem pode sair do ar (se hospedada fora da blockchain), direitos autorais são confusos, 
+                                regulamentação é incerta.</p>
+                            </div>
+                        </div>
+
+                        <div class="tip-item">
+                            <div class="tip-number">7</div>
+                            <div class="tip-content">
+                                <h3>Golpes e fraudes</h3>
+                                <p>Sites falsos, links maliciosos, NFTs falsificados de artistas famosos, 
+                                esquemas de pump and dump são extremamente comuns.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="callout callout-warning" style="margin-top: 24px;">
+                        <div class="callout-icon">🚨</div>
+                        <div class="callout-content">
+                            <h3>A verdade inconveniente</h3>
+                            <p style="margin-bottom: 8px;">Dados de mercado mostram que:</p>
+                            <ul style="margin: 0 0 0 20px; line-height: 1.8;">
+                                <li>Mais de <strong>95% dos NFTs criados não têm compradores</strong></li>
+                                <li>Volume de transações caiu <strong>90%+ desde o pico de 2022</strong></li>
+                                <li>Maioria dos projetos "famosos" perdeu <strong>80-99% do valor</strong></li>
+                                <li>Menos de <strong>1% dos NFTs mantém valor estável</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 5: Como Avaliar -->
+                <section class="article-section">
+                    <h2>🔍 Como avaliar projetos de NFT (se você insistir)</h2>
+
+                    <p>Se mesmo assim você considerar NFTs, aqui estão critérios mínimos de avaliação:</p>
+
+                    <div class="steps-list">
+                        <div class="step-item">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <h4>Utilidade real vs especulação pura</h4>
+                                <p>O NFT dá acesso a algo concreto (eventos, produtos, comunidade) ou é apenas uma imagem para revender?</p>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <h4>Equipe identificada e com histórico</h4>
+                                <p>Equipes anônimas são red flag enorme. Pesquise o histórico dos criadores.</p>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <h4>Comunidade genuína vs hype artificial</h4>
+                                <p>Engajamento orgânico ou apenas "wen moon" e promessas de lucro rápido?</p>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <h4>Roadmap realista e transparente</h4>
+                                <p>Promessas vagas ("metaverso", "P2E", "land") são suspeitas. Roadmap deve ter entregas concretas e prazo.</p>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <span class="step-number">5</span>
+                            <div class="step-content">
+                                <h4>Volume real de negociação</h4>
+                                <p>Verifique se há compras de diferentes pessoas ou só wash trading (mesma pessoa comprando de si).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="callout callout-info" style="margin-top: 24px;">
+                        <div class="callout-icon">🎯</div>
+                        <div class="callout-content">
+                            <h3>Red flags para evitar</h3>
+                            <ul style="margin: 8px 0 0 20px; line-height: 1.8;">
+                                <li>🚩 Promessas de "retorno garantido" ou "ganho certo"</li>
+                                <li>🚩 Pressão para comprar rápido ("FOMO", "última chance")</li>
+                                <li>🚩 Equipe anônima sem histórico verificável</li>
+                                <li>🚩 Foco apenas em preço, não em utilidade</li>
+                                <li>🚩 Celebrity endorsement sem justificativa real</li>
+                                <li>🚩 Whitepaper vago ou inexistente</li>
+                                <li>🚩 Comunidade tóxica ou cult-like</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 6: NFTs Além do Hype -->
+                <section class="article-section">
+                    <h2>🌟 NFTs além do hype: O que pode ter valor real</h2>
+
+                    <p>Apesar da bolha especulativa, a tecnologia de NFTs tem aplicações legítimas que podem perdurar:</p>
+
+                    <div class="example-card">
+                        <h4 style="color: #10B981; margin-bottom: 16px;">✅ Aplicações com potencial real</h4>
+                        
+                        <div style="display: grid; gap: 12px;">
+                            <div style="padding: 12px; background: rgba(16, 185, 129, 0.05); border-left: 3px solid #10B981; border-radius: 4px;">
+                                <h4 style="color: #10B981; margin: 0 0 6px 0; font-size: 0.95rem;">📜 Certificação digital</h4>
+                                <p style="margin: 0; font-size: 0.85rem; color: #94A3B8;">
+                                    Diplomas, certificados profissionais, históricos médicos — casos onde autenticidade importa mais que especulação.
+                                </p>
+                            </div>
+
+                            <div style="padding: 12px; background: rgba(16, 185, 129, 0.05); border-left: 3px solid #10B981; border-radius: 4px;">
+                                <h4 style="color: #10B981; margin: 0 0 6px 0; font-size: 0.95rem;">🎫 Ingressos e passes de acesso</h4>
+                                <p style="margin: 0; font-size: 0.85rem; color: #94A3B8;">
+                                    Combate falsificação, permite revenda controlada, cria recordações permanentes.
+                                </p>
+                            </div>
+
+                            <div style="padding: 12px; background: rgba(16, 185, 129, 0.05); border-left: 3px solid #10B981; border-radius: 4px;">
+                                <h4 style="color: #10B981; margin: 0 0 6px 0; font-size: 0.95rem;">🎵 Royalties automáticos para criadores</h4>
+                                <p style="margin: 0; font-size: 0.85rem; color: #94A3B8;">
+                                    Artistas recebem automaticamente % de cada revenda, sem depender de intermediários.
+                                </p>
+                            </div>
+
+                            <div style="padding: 12px; background: rgba(16, 185, 129, 0.05); border-left: 3px solid #10B981; border-radius: 4px;">
+                                <h4 style="color: #10B981; margin: 0 0 6px 0; font-size: 0.95rem;">🏠 Tokenização de ativos reais</h4>
+                                <p style="margin: 0; font-size: 0.85rem; color: #94A3B8;">
+                                    Fracionamento de imóveis, obras de arte, commodities — democratização de investimentos caros.
+                                </p>
+                            </div>
+
+                            <div style="padding: 12px; background: rgba(16, 185, 129, 0.05); border-left: 3px solid #10B981; border-radius: 4px;">
+                                <h4 style="color: #10B981; margin: 0 0 6px 0; font-size: 0.95rem;">🎮 Propriedade real em jogos</h4>
+                                <p style="margin: 0; font-size: 0.85rem; color: #94A3B8;">
+                                    Quando bem implementado (não é a maioria), permite economia de verdade dentro dos games.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="callout callout-success" style="margin-top: 24px;">
+                        <div class="callout-icon">💡</div>
+                        <div class="callout-content">
+                            <h3>Diferença crucial</h3>
+                            <p style="margin-bottom: 0;">A tecnologia de NFTs é <strong>interessante e tem potencial</strong>. 
+                            O problema é o <strong>uso especulativo</strong> que dominou o mercado em 2021-2022. 
+                            Aplicações reais tendem a ser "chatas" (certificados, documentos) e não prometem lucro rápido — 
+                            por isso não ganham tanto hype.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 7: Mensagem Final -->
+                <section class="article-section">
+                    <h2>🎯 Mensagem final: Tecnologia ≠ Especulação</h2>
+
+                    <p>NFTs são um exemplo perfeito de como uma <strong>tecnologia promissora</strong> pode ser distorcida 
+                    por <strong>especulação desenfreada</strong>.</p>
+
+                    <p style="margin-top: 16px;">A tecnologia de tokens não-fungíveis tem valor real em:</p>
+                    <ul style="line-height: 1.8;">
+                        <li>Certificação digital</li>
+                        <li>Propriedade verificável</li>
+                        <li>Royalties automáticos</li>
+                        <li>Autenticidade de ativos digitais</li>
+                    </ul>
+
+                    <p style="margin-top: 16px;">Mas o mercado atual é dominado por:</p>
+                    <ul style="line-height: 1.8; color: #F59E0B;">
+                        <li>Especulação pura</li>
+                        <li>Promessas vazias</li>
+                        <li>Manipulação de preços</li>
+                        <li>Falta de utilidade real</li>
+                    </ul>
+
+                    <div class="callout callout-warning" style="margin-top: 24px;">
+                        <div class="callout-icon">⚠️</div>
+                        <div class="callout-content">
+                            <h3>Recomendação do INVLAB</h3>
+                            <p style="margin-bottom: 8px;">NFTs são <strong>ativos de risco extremo</strong> e devem ser tratados como:</p>
+                            <ul style="margin: 8px 0 0 20px; line-height: 1.8;">
+                                <li><strong>NÃO</strong> são investimento, são especulação</li>
+                                <li><strong>NÃO</strong> devem fazer parte de carteira equilibrada</li>
+                                <li><strong>NÃO</strong> são adequados para quem busca construir patrimônio</li>
+                                <li>Se você comprar, considere o dinheiro <strong>perdido</strong></li>
+                                <li>Nunca use dinheiro que você possa precisar</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção 8: Próximos passos -->
+                <section class="article-section">
+                    <h2>🔍 Continue explorando</h2>
+
+                    <p>Entenda melhor o ecossistema cripto e blockchain:</p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px;">
+                        <!-- Card 1: Ethereum -->
+                        <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%); 
+                                    border: 1px solid rgba(139, 92, 246, 0.3); 
+                                    border-radius: 12px; 
+                                    padding: 24px; 
+                                    position: relative; 
+                                    cursor: pointer;
+                                    transition: all 0.3s ease;"
+                             onclick="window.location.href='ethereum.html';"
+                             onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 24px rgba(139, 92, 246, 0.2)';"
+                             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                                <span style="background: rgba(139, 92, 246, 0.2); 
+                                             color: #A78BFA; 
+                                             padding: 6px 12px; 
+                                             border-radius: 6px; 
+                                             font-size: 0.75rem; 
+                                             font-weight: 600;">
+                                    ⧫ TECNOLOGIA
+                                </span>
+                                <span style="background: rgba(255, 255, 255, 0.1); 
+                                             color: #94A3B8; 
+                                             width: 32px; 
+                                             height: 32px; 
+                                             border-radius: 50%; 
+                                             display: flex; 
+                                             align-items: center; 
+                                             justify-content: center; 
+                                             font-weight: 600;
+                                             font-size: 0.9rem;">
+                                    1
+                                </span>
+                            </div>
+                            
+                            <h3 style="color: #E0E7FF; font-size: 1.25rem; margin-bottom: 12px; font-weight: 600;">
+                                Ethereum e Smart Contracts
+                            </h3>
+                            
+                            <p style="color: #94A3B8; font-size: 0.9rem; line-height: 1.6;">
+                                A plataforma onde a maioria dos NFTs funciona. Entenda contratos inteligentes e aplicações descentralizadas.
+                            </p>
+                        </div>
+
+                        <!-- Card 2: Blockchain -->
+                        <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%); 
+                                    border: 1px solid rgba(59, 130, 246, 0.3); 
+                                    border-radius: 12px; 
+                                    padding: 24px; 
+                                    position: relative; 
+                                    cursor: pointer;
+                                    transition: all 0.3s ease;"
+                             onclick="window.location.href='blockchain.html';"
+                             onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 24px rgba(59, 130, 246, 0.2)';"
+                             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                                <span style="background: rgba(59, 130, 246, 0.2); 
+                                             color: #60A5FA; 
+                                             padding: 6px 12px; 
+                                             border-radius: 6px; 
+                                             font-size: 0.75rem; 
+                                             font-weight: 600;">
+                                    ⛓️ FUNDAMENTOS
+                                </span>
+                                <span style="background: rgba(255, 255, 255, 0.1); 
+                                             color: #94A3B8; 
+                                             width: 32px; 
+                                             height: 32px; 
+                                             border-radius: 50%; 
+                                             display: flex; 
+                                             align-items: center; 
+                                             justify-content: center; 
+                                             font-weight: 600;
+                                             font-size: 0.9rem;">
+                                    2
+                                </span>
+                            </div>
+                            
+                            <h3 style="color: #E0E7FF; font-size: 1.25rem; margin-bottom: 12px; font-weight: 600;">
+                                Como funciona a Blockchain
+                            </h3>
+                            
+                            <p style="color: #94A3B8; font-size: 0.9rem; line-height: 1.6;">
+                                A tecnologia que torna NFTs possíveis. Entenda os fundamentos de segurança e descentralização.
+                            </p>
+                        </div>
+
+                        <!-- Card 3: Bitcoin -->
+                        <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%); 
+                                    border: 1px solid rgba(245, 158, 11, 0.3); 
+                                    border-radius: 12px; 
+                                    padding: 24px; 
+                                    position: relative; 
+                                    cursor: pointer;
+                                    transition: all 0.3s ease;"
+                             onclick="window.location.href='bitcoin.html';"
+                             onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 24px rgba(245, 158, 11, 0.2)';"
+                             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                                <span style="background: rgba(245, 158, 11, 0.2); 
+                                             color: #FBBF24; 
+                                             padding: 6px 12px; 
+                                             border-radius: 6px; 
+                                             font-size: 0.75rem; 
+                                             font-weight: 600;">
+                                    ₿ CONCEITOS
+                                </span>
+                                <span style="background: rgba(255, 255, 255, 0.1); 
+                                             color: #94A3B8; 
+                                             width: 32px; 
+                                             height: 32px; 
+                                             border-radius: 50%; 
+                                             display: flex; 
+                                             align-items: center; 
+                                             justify-content: center; 
+                                             font-weight: 600;
+                                             font-size: 0.9rem;">
+                                    3
+                                </span>
+                            </div>
+                            
+                            <h3 style="color: #E0E7FF; font-size: 1.25rem; margin-bottom: 12px; font-weight: 600;">
+                                Bitcoin em detalhes
+                            </h3>
+                            
+                            <p style="color: #94A3B8; font-size: 0.9rem; line-height: 1.6;">
+                                A primeira aplicação de blockchain. Compare com NFTs e entenda a evolução dos criptoativos.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Callout Final -->
+                <div class="callout callout-info">
+                    <div class="callout-icon">🏠</div>
+                    <div class="callout-content">
+                        <h3>Voltar para o início</h3>
+                        <p style="margin-bottom: 0;">
+                            <a href="../index.html#criptoativos" style="color: #3B82F6; text-decoration: underline;">
+                                Ver todas as seções do INVLAB
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer Padronizado -->
+    <footer style="background: rgba(15, 23, 42, 0.9); border-top: 1px solid rgba(59, 130, 246, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+        <div class="content-wrapper-wide">
+            <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+                <!-- Coluna 1: INVLAB -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">
+                        Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.
+                    </p>
+                    <a href="guia_invlab.html" style="color: #3B82F6; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
+                        🧭 Guia do INVLAB →
+                    </a>
+                </div>
+
+                <!-- Coluna 2: Renda Fixa -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="poupanca.html" style="color: #CBD5E1; text-decoration: none;">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 3: Renda Variável -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="../index.html#renda-variavel" style="color: #CBD5E1; text-decoration: none;">📈 Introdução</a></li>
+                        <li><a href="acoes.html" style="color: #CBD5E1; text-decoration: none;">📊 Ações</a></li>
+                        <li><a href="etfs.html" style="color: #CBD5E1; text-decoration: none;">🎯 ETFs</a></li>
+                        <li><a href="fiis.html" style="color: #CBD5E1; text-decoration: none;">🏢 FIIs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 4: Criptoativos -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Criptoativos</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="../index.html#criptoativos" style="color: #CBD5E1; text-decoration: none;">🔐 Introdução</a></li>
+                        <li><a href="bitcoin.html" style="color: #CBD5E1; text-decoration: none;">₿ Bitcoin</a></li>
+                        <li><a href="ethereum.html" style="color: #CBD5E1; text-decoration: none;">⧫ Ethereum</a></li>
+                        <li><a href="stablecoins.html" style="color: #CBD5E1; text-decoration: none;">💵 Stablecoins</a></li>
+                        <li><a href="blockchain.html" style="color: #CBD5E1; text-decoration: none;">⛓️ Blockchain</a></li>
+                        <li><a href="cbdc.html" style="color: #CBD5E1; text-decoration: none;">🏛️ CBDCs</a></li>
+                        <li><a href="nfts.html" style="color: #CBD5E1; text-decoration: none;">🖼️ NFTs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 5: Outros Investimentos -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Outros Investimentos</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="../index.html#outros-investimentos" style="color: #CBD5E1; text-decoration: none;">💎 Introdução</a></li>
+                        <li><a href="ganhos-come-cotas.html" style="color: #CBD5E1; text-decoration: none;">🍽️ Come-cotas</a></li>
+                        <li><a href="ganhos-iof-regressivo.html" style="color: #CBD5E1; text-decoration: none;">📉 IOF Regressivo</a></li>
+                        <li><a href="ganhos-inflacao.html" style="color: #CBD5E1; text-decoration: none;">📊 Inflação</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 6: Ferramentas -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Ferramentas</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 Simulador CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Simulador Tesouro</a></li>
+                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ Simulador LCI/LCA</a></li>
+                        <li><a href="calculadora.html" style="color: #CBD5E1; text-decoration: none;">🧮 Juros Compostos</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Disclaimers -->
+            <div style="border-top: 1px solid rgba(59, 130, 246, 0.1); padding-top: 20px; margin-top: 20px;">
+                <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 8px;">
+                    ⚠️ Conteúdo 100% educacional. Não somos corretora, não vendemos produtos, não recebemos comissões.
+                </p>
+                <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                    © 2025 INVLAB - Laboratório de Investimentos | Plataforma Educacional
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>
+
