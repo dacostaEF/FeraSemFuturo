@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="assets/css/inv-design-system.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="assets/css/artigo-styles.css">
     <!-- INVLAB Carrossel - Indicadores Econômicos -->
     <link rel="stylesheet" href="assets/css/invlab-carrossel.css">
 </head>
@@ -114,10 +115,11 @@
                 
                 <!-- ABA COM DROPDOWN: CRIPTOATIVOS -->
                 <div class="tab-with-dropdown">
-                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='pages/criptoativos.html'">
+                    <button class="tab-btn dropdown-toggle" data-tab="criptoativos">
                         🔐 Cripto<br>ativos <span class="arrow">▼</span>
                     </button>
                     <ul class="dropdown-menu">
+                        <li><a href="pages/criptoativos.html">🔐 Introdução aos Criptoativos</a></li>
                         <li><a href="pages/bitcoin.html">₿ Bitcoin</a></li>
                         <li><a href="#">⧫ Ethereum</a></li>
                         <li><a href="pages/stablecoins.html">💵 Stablecoins</a></li>
@@ -244,11 +246,6 @@
                     </p>
                 </div>
 
-                <!-- Footer -->
-                <footer class="footer">
-                    <p style="font-size: 13px; opacity: 0.8;">© 2025 INVLAB - Laboratório de Investimentos | Plataforma Educacional</p>
-                    <p style="font-size: 12px; opacity: 0.6; margin-top: 8px;">Não somos corretora. Não vendemos produtos. Não recebemos comissões.</p>
-                </footer>
             </div>
         </div>
 
@@ -1309,7 +1306,386 @@
                 </section>
             </div>
         </div>
+
+        <!-- ABA: CRIPTOATIVOS -->
+        <div class="tab-content" id="criptoativos">
+            <div class="content-wrapper-wide">
+                <section class="section-educational">
+                <article class="article-content">
+                    <!-- Título Principal -->
+                    <h1 class="article-title">Criptoativos: O que São, Riscos e Onde Entram na sua Carteira</h1>
+                    
+                    <p class="article-lead">
+                        Entenda o que são criptoativos, como funcionam, quais são seus principais riscos e por que, no INVLAB, 
+                        eles são tratados como uma camada avançada da carteira — e não como ponto de partida.
+                    </p>
+
+                    <!-- Hero -->
+                    <div class="article-hero">
+                        <div class="hero-emoji">🔐🪙</div>
+                        <p class="hero-caption">Tecnologia, finanças e comportamento — muito além do "dinheiro digital".</p>
+                    </div>
+
+                    <!-- Disclaimer Educacional -->
+                    <div class="callout callout-info" style="margin: 24px 0;">
+                        <div class="callout-icon" style="font-size: 24px;">📘</div>
+                        <div class="callout-content">
+                            <h3>Conteúdo 100% educacional</h3>
+                            <p style="margin-bottom: 0;">Este material tem caráter exclusivamente educativo e não constitui recomendação de compra ou venda de ativos. 
+                            O objetivo é ajudar você a entender melhor o papel dos criptoativos dentro de uma carteira de investimentos.</p>
+                        </div>
+                    </div>
+
+                    <!-- Seção 1: Antes de falar de cripto -->
+                    <section class="article-section">
+                        <h2>🧱 Antes de falar de cripto: a base da casa</h2>
+
+                        <p>Criptoativos podem ser interessantes, mas <strong>não são o começo da jornada</strong>. 
+                        Antes de pensar em Bitcoin, Ethereum ou qualquer outro ativo digital, é importante que você:</p>
+
+                        <ul style="list-style: none; padding: 0; margin-top: 16px;">
+                            <li style="padding: 10px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #10B981; border-radius: 4px; margin-bottom: 8px;">
+                                ✅ Tenha uma <strong>reserva de emergência</strong> bem estruturada.
+                            </li>
+                            <li style="padding: 10px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #3B82F6; border-radius: 4px; margin-bottom: 8px;">
+                                ✅ Entenda os fundamentos de <strong>Renda Fixa</strong> e <strong>Renda Variável</strong>.
+                            </li>
+                            <li style="padding: 10px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #F59E0B; border-radius: 4px; margin-bottom: 8px;">
+                                ✅ Não esteja usando dinheiro que pode fazer falta no curto prazo.
+                            </li>
+                        </ul>
+
+                        <div class="callout callout-info" style="margin-top: 24px;">
+                            <div class="callout-icon" style="font-size: 24px;">💡</div>
+                            <div class="callout-content">
+                                <h3>Ponto de partida</h3>
+                                <p style="margin-bottom: 0;">No INVLAB, cripto surge como uma <strong>camada avançada</strong> da carteira, 
+                                depois que a base de segurança já está construída.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Seção 2: O que são criptoativos -->
+                    <section class="article-section">
+                        <h2>🔐 O que são criptoativos?</h2>
+
+                        <p>Criptoativos são <strong>ativos digitais</strong> que utilizam tecnologias como 
+                        <strong>blockchain</strong> e <strong>criptografia</strong> para registrar, validar e 
+                        proteger transações em uma rede distribuída.</p>
+
+                        <p>Dentro desse universo, existem diferentes tipos de ativos:</p>
+
+                        <div class="inv-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 20px;">
+                            <div class="inv-card fundamentos">
+                                <div class="inv-card-icon" style="font-size: 28px;">₿</div>
+                                <h4 class="inv-card-title">Moedas digitais</h4>
+                                <p class="inv-card-description">Ativos como o Bitcoin, usados como reserva de valor ou meio de troca em alguns contextos.</p>
+                            </div>
+
+                            <div class="inv-card fundamentos">
+                                <div class="inv-card-icon" style="font-size: 28px;">⧫</div>
+                                <h4 class="inv-card-title">Plataformas e contratos</h4>
+                                <p class="inv-card-description">Projetos como o Ethereum, que permitem a criação de contratos inteligentes e aplicações descentralizadas.</p>
+                            </div>
+
+                            <div class="inv-card fundamentos">
+                                <div class="inv-card-icon" style="font-size: 28px;">💵</div>
+                                <h4 class="inv-card-title">Stablecoins</h4>
+                                <p class="inv-card-description">Criptoativos atrelados a moedas tradicionais (como o dólar), buscando reduzir a volatilidade.</p>
+                            </div>
+
+                            <div class="inv-card fundamentos">
+                                <div class="inv-card-icon" style="font-size: 28px;">🧩</div>
+                                <h4 class="inv-card-title">Outros ativos digitais</h4>
+                                <p class="inv-card-description">Tokens diversos, NFTs e iniciativas de tokenização de ativos do mundo real.</p>
+                            </div>
+                        </div>
+
+                        <p style="margin-top: 24px;">
+                            Em resumo: cripto combina <strong>tecnologia, finanças e comportamento de mercado</strong>.
+                        </p>
+                    </section>
+
+                    <!-- Seção 3: Onde cripto entra na carteira -->
+                    <section class="article-section">
+                        <h2>🗺️ Onde cripto entra na carteira?</h2>
+
+                        <p>Dentro do INVLAB, os criptoativos são vistos como uma <strong>camada adicional de risco</strong>, 
+                        com potencial de retorno elevado, mas também sujeita a grandes oscilações.</p>
+
+                        <div class="example-card">
+                            <table style="width: 100%; border-collapse: collapse; margin-top: 16px;">
+                                <thead>
+                                    <tr style="background: rgba(255, 255, 255, 0.05);">
+                                        <th style="padding: 10px; text-align: left;">Classe</th>
+                                        <th style="padding: 10px; text-align: center;">Previsibilidade</th>
+                                        <th style="padding: 10px; text-align: center;">Volatilidade</th>
+                                        <th style="padding: 10px; text-align: center;">Objetivo principal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: 10px;">Renda Fixa</td>
+                                        <td style="padding: 10px; text-align: center;">Alta</td>
+                                        <td style="padding: 10px; text-align: center;">Baixa</td>
+                                        <td style="padding: 10px; text-align: center;">Proteção, reserva, estabilidade</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 10px;">Renda Variável</td>
+                                        <td style="padding: 10px; text-align: center;">Média</td>
+                                        <td style="padding: 10px; text-align: center;">Média/Alta</td>
+                                        <td style="padding: 10px; text-align: center;">Crescimento patrimonial</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 10px; font-weight: 600;">Criptoativos</td>
+                                        <td style="padding: 10px; text-align: center;">Baixa</td>
+                                        <td style="padding: 10px; text-align: center; color: #F97316;">Muito alta</td>
+                                        <td style="padding: 10px; text-align: center;">Aposta de alto risco / inovação</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p style="margin-top: 18px;">
+                            Por isso, cripto costuma ocupar <strong>uma fatia pequena da carteira</strong> de quem já 
+                            está organizado financeiramente — e nunca substitui a base em renda fixa.
+                        </p>
+                    </section>
+
+                    <!-- Seção 4: Principais riscos -->
+                    <section class="article-section">
+                        <h2>⚠️ Principais riscos dos criptoativos</h2>
+
+                        <div class="tips-list">
+                            <div class="tip-item">
+                                <div class="tip-number">1</div>
+                                <div class="tip-content">
+                                    <h3>Volatilidade extrema</h3>
+                                    <p>Oscilações diárias de 5%, 10% ou mais não são raras. 
+                                    O mesmo ativo pode subir muito em um período e cair fortemente em outro.</p>
+                                </div>
+                            </div>
+
+                            <div class="tip-item">
+                                <div class="tip-number">2</div>
+                                <div class="tip-content">
+                                    <h3>Ausência de garantias como FGC</h3>
+                                    <p>Criptoativos não contam com proteção do FGC. Em caso de fraude, falha de custódia 
+                                    ou perda de acesso às chaves, o risco é do investidor.</p>
+                                </div>
+                            </div>
+
+                            <div class="tip-item">
+                                <div class="tip-number">3</div>
+                                <div class="tip-content">
+                                    <h3>Riscos de segurança digital</h3>
+                                    <p>Golpes, sites falsos, links maliciosos e roubo de chaves de acesso são riscos reais. 
+                                    Segurança é parte central do investimento em cripto.</p>
+                                </div>
+                            </div>
+
+                            <div class="tip-item">
+                                <div class="tip-number">4</div>
+                                <div class="tip-content">
+                                    <h3>Ambiente regulatório em evolução</h3>
+                                    <p>Leis e regulamentações ainda estão em construção em vários países. 
+                                    Mudanças nas regras podem afetar a forma de usar e negociar esses ativos.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="callout callout-warning" style="margin-top: 24px;">
+                            <div class="callout-icon" style="font-size: 24px;">📌</div>
+                            <div class="callout-content">
+                                <h3>Resumo</h3>
+                                <p style="margin-bottom: 0;">Criptoativos combinam <strong>potencial de retorno elevado</strong> com 
+                                <strong>riscos igualmente elevados</strong>. 
+                                Por isso, exigem estudo, cautela e uma boa estratégia.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Seção 5: Como começar com responsabilidade -->
+                    <section class="article-section">
+                        <h2>🟩 Como começar em cripto com responsabilidade</h2>
+
+                        <div class="steps-list">
+                            <div class="step-item">
+                                <span class="step-number">1</span>
+                                <div class="step-content">
+                                    <h4>Organize a base primeiro</h4>
+                                    <p>Monte sua reserva de emergência e defina sua estratégia em renda fixa e renda variável 
+                                    antes de incluir cripto na carteira.</p>
+                                </div>
+                            </div>
+
+                            <div class="step-item">
+                                <span class="step-number">2</span>
+                                <div class="step-content">
+                                    <h4>Estude os principais ativos</h4>
+                                    <p>Comece entendendo Bitcoin, Ethereum e stablecoins antes de olhar projetos menores ou mais especulativos.</p>
+                                </div>
+                            </div>
+
+                            <div class="step-item">
+                                <span class="step-number">3</span>
+                                <div class="step-content">
+                                    <h4>Escolha uma corretora/exchange confiável</h4>
+                                    <p>Verifique histórico, segurança, taxas e conformidade regulatória. 
+                                    Prefira instituições reconhecidas e com boa reputação.</p>
+                                </div>
+                            </div>
+
+                            <div class="step-item">
+                                <span class="step-number">4</span>
+                                <div class="step-content">
+                                    <h4>Comece pequeno</h4>
+                                    <p>Use apenas uma <strong>pequena parcela</strong> do patrimônio e nunca 
+                                    dinheiro que você possa precisar no curto prazo.</p>
+                                </div>
+                            </div>
+
+                            <div class="step-item">
+                                <span class="step-number">5</span>
+                                <div class="step-content">
+                                    <h4>Cuide da segurança</h4>
+                                    <p>Ative autenticação em duas etapas, desconfie de promessas de retorno fácil 
+                                    e nunca compartilhe suas chaves privadas ou códigos de acesso.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Seção 6: Educação financeira e mensagem final -->
+                    <section class="article-section">
+                        <h2>💡 Educação financeira: o ponto principal</h2>
+
+                        <p>Os criptoativos surgiram em um contexto de evolução tecnológica e de busca por novas formas de transacionar e armazenar valor. 
+                        Eles trouxeram inovações importantes, mas também adicionaram novos tipos de riscos.</p>
+
+                        <p style="margin-top: 12px;">
+                            <strong>Hoje, com mais opções disponíveis no mercado, entender o papel de cada classe de ativo é essencial</strong>. 
+                            Cripto pode ser uma parte da estratégia, mas não substitui a importância de uma base sólida em investimentos mais previsíveis.
+                        </p>
+
+                        <div class="callout callout-success" style="margin-top: 24px;">
+                            <div class="callout-icon" style="font-size: 24px;">🎯</div>
+                            <div class="callout-content">
+                                <h3>Mensagem final</h3>
+                                <p style="margin-bottom: 0;">Criptoativos podem fazer parte de uma carteira diversificada, mas não são uma solução mágica. 
+                                No <strong>INVLAB</strong>, nosso foco é ajudar você a entender onde cada peça entra — 
+                                para que decisões sobre cripto sejam conscientes, e não impulsivas.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Seção 7: Próximos passos -->
+                    <section class="article-section">
+                        <h2>🔍 Próximos passos</h2>
+
+                        <p>Nas próximas páginas, você poderá estudar com mais profundidade alguns dos principais criptoativos 
+                        e temas relacionados, sempre dentro de uma visão de carteira completa e equilibrada.</p>
+
+                        <div class="inv-category" style="margin-top: 20px;">
+                            <h3 class="inv-category-title">📚 Explore conteúdos sobre cripto</h3>
+                            <div class="inv-grid">
+                                <div class="inv-card" style="cursor: pointer;" onclick="window.location.href='pages/bitcoin.html';">
+                                    <div class="inv-card-badge">₿ Conceitos</div>
+                                    <h4 class="inv-card-title">Bitcoin em detalhes</h4>
+                                    <p class="inv-card-description">Entenda a proposta, funcionamento e riscos do Bitcoin.</p>
+                                </div>
+
+                                <div class="inv-card" style="cursor: pointer;" onclick="window.location.href='#';">
+                                    <div class="inv-card-badge">⧫ Conceitos</div>
+                                    <h4 class="inv-card-title">Ethereum e contratos inteligentes</h4>
+                                    <p class="inv-card-description">Veja como o Ethereum ampliou o uso da tecnologia blockchain.</p>
+                                </div>
+
+                                <div class="inv-card" style="cursor: pointer;" onclick="window.location.href='pages/stablecoins.html';">
+                                    <div class="inv-card-badge">🪙 Conceitos</div>
+                                    <h4 class="inv-card-title">Stablecoins e paridade</h4>
+                                    <p class="inv-card-description">Conheça os criptoativos que buscam acompanhar moedas tradicionais.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Callout Voltar -->
+                    <div class="callout callout-info">
+                        <div class="callout-icon" style="font-size: 24px;">🏠</div>
+                        <div class="callout-content">
+                            <h3>Voltar para o início</h3>
+                            <p style="margin-bottom: 0;"><a href="#inicio" data-tab-link="inicio" style="color: #3B82F6; text-decoration: underline;">Ver todas as seções do INVLAB</a></p>
+                        </div>
+                    </div>
+
+                </article>
+                </section>
+            </div>
+        </div>
     </main>
+
+    <!-- Footer -->
+    <footer style="background: rgba(15, 23, 42, 0.9); border-top: 1px solid rgba(59, 130, 246, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+        <div class="content-wrapper-wide">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px;">
+                <!-- Coluna 1: Sobre -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">
+                        Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.
+                    </p>
+                    <a href="#inicio" data-tab-link="inicio" style="color: #3B82F6; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
+                        🧭 Guia do Site →
+                    </a>
+                </div>
+
+                <!-- Coluna 2: Renda Fixa -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="pages/poupanca.html" style="color: #CBD5E1; text-decoration: none;">💰 Poupança</a></li>
+                        <li><a href="pages/simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 CDBs</a></li>
+                        <li><a href="pages/simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="pages/simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 3: Criptoativos -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Criptoativos</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="#criptoativos" data-tab-link="criptoativos" style="color: #CBD5E1; text-decoration: none;">🔐 Introdução</a></li>
+                        <li><a href="pages/bitcoin.html" style="color: #CBD5E1; text-decoration: none;">₿ Bitcoin</a></li>
+                        <li><a href="pages/stablecoins.html" style="color: #CBD5E1; text-decoration: none;">💵 Stablecoins</a></li>
+                        <li><a href="pages/blockchain.html" style="color: #CBD5E1; text-decoration: none;">⛓️ Blockchain</a></li>
+                        <li><a href="pages/cbdc.html" style="color: #CBD5E1; text-decoration: none;">🏛️ CBDCs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 4: Navegação -->
+                <div>
+                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Navegação</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="#inicio" data-tab-link="inicio" style="color: #CBD5E1; text-decoration: none;">🏠 Início</a></li>
+                        <li><a href="#primeiros-passos" data-tab-link="primeiros-passos" style="color: #CBD5E1; text-decoration: none;">📚 Primeiros Passos</a></li>
+                        <li><a href="#inicio" data-tab-link="inicio" style="color: #10B981; text-decoration: none; font-weight: 600;">🧭 Guia do INVLAB</a></li>
+                        <li><a href="#ferramentas" data-tab-link="ferramentas" style="color: #CBD5E1; text-decoration: none;">🛠️ Ferramentas</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Disclaimers -->
+            <div style="border-top: 1px solid rgba(59, 130, 246, 0.1); padding-top: 20px; margin-top: 20px;">
+                <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 8px;">
+                    ⚠️ Conteúdo 100% educacional. Não somos corretora, não vendemos produtos, não recebemos comissões.
+                </p>
+                <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                    © 2025 INVLAB - Laboratório de Investimentos | Plataforma Educacional
+                </p>
+            </div>
+        </div>
+    </footer>
 
     <!-- INVLAB Scripts - Carregamento Otimizado -->
     <!-- Script principal carrega primeiro (menu e abas) -->
