@@ -43,7 +43,7 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    padding-top: 130px; /* CORRIGIDO: 80px → 130px (carrossel 60px + header 70px = espaço suficiente) */
+    padding-top: 65px; /* REDUZIDO: 130px → 65px (50% de redução para aproveitar melhor o espaço vertical) */
 }
 
 /* ============================================
@@ -1398,7 +1398,7 @@ body {
 /* Responsividade Tablet */
 @media (max-width: 1024px) and (min-width: 681px) {
     body {
-        padding-top: 75px; /* REDUZIDO: 130px → 75px (menu mais compacto) */
+        padding-top: 38px; /* REDUZIDO: 75px → 38px (50% de redução - melhor aproveitamento vertical) */
     }
     
     .header-container {
@@ -1757,7 +1757,7 @@ body {
 /* Responsividade dos novos cards */
 @media (max-width: 768px) {
     body {
-        padding-top: 110px; /* CORRIGIDO: 0 → 110px (compensar carrossel + header em tablet) */
+        padding-top: 55px; /* REDUZIDO: 110px → 55px (50% de redução - melhor aproveitamento vertical) */
     }
     
     .main-header {
