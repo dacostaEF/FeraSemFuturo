@@ -119,17 +119,17 @@
             background: rgba(16, 185, 129, 0.15); /* Verde INVLAB sutil */
             color: #10b981; /* Verde INVLAB */
             border: 1px solid rgba(16, 185, 129, 0.4);
-            border-radius: 10px; /* REDUZIDO: 12px → 10px */
-            padding: 10px 14px; /* REDUZIDO: 15px 20px → 10px 14px */
+            border-radius: 8px; /* REDUZIDO MAIS 20%: 10px → 8px */
+            padding: 8px 11px; /* REDUZIDO MAIS 20%: 10px 14px → 8px 11px */
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px; /* REDUZIDO: 12px → 8px */
-            font-size: 0.85rem; /* REDUZIDO: 0.95rem → 0.85rem (-30%) */
-            font-weight: 600;
+            gap: 6px; /* REDUZIDO MAIS 20%: 8px → 6px */
+            font-size: 0.68rem; /* REDUZIDO MAIS 20%: 0.85rem → 0.68rem */
+            font-weight: 400; /* SEM BOLD: 600 → 400 */
             box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            min-width: 98px; /* REDUZIDO: 140px → 98px (-30%) */
+            min-width: 78px; /* REDUZIDO MAIS 20%: 98px → 78px */
             justify-self: end;
             backdrop-filter: blur(10px);
         }
@@ -143,7 +143,7 @@
         }
 
         .btn-about-icon {
-            font-size: 1.8rem;
+            font-size: 1.44rem; /* REDUZIDO 20%: 1.8rem → 1.44rem */
         }
 
         .btn-about-text {
@@ -721,8 +721,15 @@
                 font-size: 1rem;
             }
 
+            .header {
+                padding-top: 0 !important; /* Remove espaço no mobile */
+                padding-right: 0 !important; /* Remove padding lateral no mobile */
+            }
+
             .btn-about-tesouro {
-                margin: 20px auto 0;
+                position: static !important; /* Remove absolute no mobile */
+                margin: 20px auto 0 !important; /* Centraliza abaixo do texto */
+                display: flex !important;
                 width: 100%;
                 justify-content: center;
             }
@@ -974,17 +981,17 @@
             <span class="brand-name">Simulador Oficial • INVLAB</span>
         </div>
         
-        <div class="header" style="display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center;">
-            <div>
-                <h1>🇧🇷 Simulador de Tesouro Direto vs Poupança</h1>
-                <p>Compare Tesouro Selic, IPCA+ e Prefixado com a Poupança e veja a rentabilidade real com dados atualizados</p>
-            </div>
-            
-            <!-- Botão Minimalista "Sobre Tesouro Direto" -->
-            <button class="btn-about-tesouro" onclick="openTesouroModal()" aria-label="Conheça o Tesouro Direto">
+        <!-- Header com Título Centralizado + Botão Absolute -->
+        <div class="header" style="position: relative; text-align: center; padding-right: 120px;">
+            <!-- Botão "Sobre Tesouro Direto" - ABSOLUTE no canto superior direito -->
+            <button class="btn-about-tesouro" onclick="openTesouroModal()" aria-label="Conheça o Tesouro Direto" style="position: absolute; top: 0; right: 0;">
                 <div class="btn-about-icon">📚</div>
-                <div class="btn-about-text">Sobre<br>Tesouro Direto</div>
+                <div class="btn-about-text" style="font-weight: 400;">Sobre<br>Tesouro Direto</div>
             </button>
+            
+            <!-- Título e Descrição (centralizados, respeitando espaço do botão) -->
+            <h1>🇧🇷 Simulador de Tesouro Direto vs Poupança</h1>
+            <p>Compare Tesouro Selic, IPCA+ e Prefixado com a Poupança e veja a rentabilidade real com dados atualizados</p>
         </div>
 
         <!-- Formulário de Entrada -->

@@ -93,9 +93,13 @@
         
         /* RODAPÉ EDUCACIONAL INVLAB (Premium Footer) */
         .sim-signature {
-            margin-top: 42px; /* REDUZIDO: 60px → 42px (-30%) */
-            padding-top: 17px; /* REDUZIDO: 24px → 17px (-30%) */
+            margin-top: 28px; /* IGUAL AO TESOURO */
+            padding-top: 21px; /* IGUAL AO TESOURO */
             text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1); /* Linha sutil */
+            font-size: 0.7rem; /* Texto discreto */
+            color: rgba(255, 255, 255, 0.5); /* Cinza claro */
+            letter-spacing: 0.5px;
         }
         
         .sim-signature-divider {
@@ -550,43 +554,39 @@
            BOTÃO MINIMALISTA "SOBRE CDBs" - Verde INVLAB
            ============================================ */
         .btn-about-cdb {
-            background: rgba(16, 185, 129, 0.15); /* INVLAB verde sutil */
-            color: white;
+            background: rgba(16, 185, 129, 0.15); /* Verde INVLAB sutil */
+            color: #10b981; /* Verde INVLAB - IGUAL AO TESOURO */
             border: 1px solid rgba(16, 185, 129, 0.4);
-            border-radius: 10px; /* REDUZIDO: 12px → 10px (-30%) */
-            padding: 10px 14px; /* REDUZIDO: 15px 20px → 10px 14px (-30%) */
+            border-radius: 8px; /* REDUZIDO MAIS 20%: 10px → 8px */
+            padding: 8px 11px; /* REDUZIDO MAIS 20%: 10px 14px → 8px 11px */
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px; /* REDUZIDO: 12px → 8px (-30%) */
-            font-size: 0.9rem; /* REDUZIDO */
-            font-weight: 600;
-            box-shadow: 0 0 8px rgba(16, 185, 129, 0.2); /* INVLAB verde */
+            gap: 6px; /* REDUZIDO MAIS 20%: 8px → 6px */
+            font-size: 0.68rem; /* IGUAL AO TESOURO */
+            font-weight: 400; /* SEM BOLD: 600 → 400 */
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2); /* IGUAL AO TESOURO */
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            min-width: 120px; /* REDUZIDO: 140px → 120px */
+            min-width: 78px; /* IGUAL AO TESOURO */
             justify-self: end;
             backdrop-filter: blur(10px);
         }
 
         .btn-about-cdb:hover {
-            background: rgba(16, 185, 129, 0.3); /* INVLAB verde */
-            border-color: #10b981;
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 
-                0 8px 25px rgba(16, 185, 129, 0.4),
-                0 0 20px rgba(16, 185, 129, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            background: rgba(16, 185, 129, 0.25); /* IGUAL AO TESOURO */
+            border-color: rgba(16, 185, 129, 0.6);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); /* IGUAL AO TESOURO */
+            color: #FFFFFF; /* IGUAL AO TESOURO: branco no hover */
         }
 
         .btn-about-icon {
-            font-size: 1.4rem; /* REDUZIDO: 1.8rem → 1.4rem (-30%) */
-            margin-bottom: 0;
+            font-size: 1.44rem; /* IGUAL AO TESOURO */
         }
 
         .btn-about-text {
             text-align: left;
-            line-height: 1.2;
-            color: white;
+            line-height: 1.3; /* IGUAL AO TESOURO */
             font-size: 0.95rem;
         }
 
@@ -949,12 +949,14 @@
 
             /* Ajuste header com botão em mobile */
             .header {
-                grid-template-columns: 1fr !important;
-                gap: 20px !important;
+                padding-top: 0 !important; /* Remove espaço no mobile */
+                padding-right: 0 !important; /* Remove padding lateral no mobile */
             }
 
             .btn-about-cdb {
-                justify-self: center;
+                position: static !important; /* Remove absolute no mobile */
+                margin: 20px auto 0 !important; /* Centraliza abaixo do texto */
+                display: flex !important;
                 margin-top: 15px;
             }
 
@@ -1268,20 +1270,17 @@
             <span class="brand-name">Simulador Oficial • INVLAB</span>
         </div>
         
-        <div class="header" style="display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center;">
-            <div>
-                <h1>💰 Simulador de CDBs vs Poupança</h1>
-                <p>Compare diferentes CDBs do mercado e veja quanto rende mais que a poupança com dados reais</p>
-            </div>
-            
-            <!-- Botão Minimalista "Sobre CDBs" -->
-            <button class="btn-about-cdb" onclick="openCDBModal()" aria-label="Conheça os CDBs">
-                <span class="btn-about-icon">📖</span>
-                <div class="btn-about-text">
-                    <div style="font-size: 0.75rem; opacity: 0.9;">Conheça</div>
-                    <div style="font-weight: 700;">Sobre CDBs</div>
-                </div>
+        <!-- Header com Título Centralizado + Botão Absolute -->
+        <div class="header" style="position: relative; text-align: center; padding-right: 120px;">
+            <!-- Botão "Sobre CDBs" - ABSOLUTE no canto superior direito -->
+            <button class="btn-about-cdb" onclick="openCDBModal()" aria-label="Conheça os CDBs" style="position: absolute; top: 0; right: 0;">
+                <div class="btn-about-icon">📚</div>
+                <div class="btn-about-text">Sobre<br>CDBs</div>
             </button>
+            
+            <!-- Título e Descrição (centralizados, respeitando espaço do botão) -->
+            <h1>💰 Simulador de CDBs vs Poupança</h1>
+            <p>Compare diferentes CDBs do mercado e veja quanto rende mais que a poupança com dados reais</p>
         </div>
 
 
@@ -1366,6 +1365,11 @@
                             Aqui você vê o que <strong>realmente recebe</strong>, não o que aparece na propaganda do banco.
                         </p>
                     </div>
+                </div>
+
+                <!-- ASSINATURA INVLAB (Premium Footer dentro do simulador) -->
+                <div class="sim-signature">
+                    Conteúdo 100% educacional • INVLAB © 2025
                 </div>
             </div>
         </div>
