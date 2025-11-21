@@ -13,7 +13,7 @@
 /* Breadcrumb - STICKY (gruda no menu ao rolar) */
 .breadcrumb {
     margin-bottom: 32px; /* AUMENTADO: 16px → 32px (respiro e destaque do breadcrumb) */
-    padding: 0 0 16px; /* AJUSTADO: padding-top ZERO para colar perfeitamente no menu */
+    padding: 12px 0 16px; /* AJUSTADO: 12px padding-top para folga interna entre texto e borda superior */
     background: rgba(13, 13, 13, 0.95); /* ADICIONADO: fundo escuro semi-transparente */
     backdrop-filter: blur(10px); /* ADICIONADO: efeito glassmorphism */
     /* border-bottom REMOVIDO: linha desnecessária, menu já tem bordas */
@@ -22,7 +22,7 @@
     
     /* STICKY - Cola no header ao rolar */
     position: sticky;
-    top: 110px; /* AJUSTADO: 130px → 110px para colar perfeitamente na base do menu */
+    top: 110px; /* Mantido: posição do container permanece perfeita */
     z-index: 999; /* Abaixo do header (1000) mas acima do conteúdo */
     
     /* Transição suave ao grudar */
@@ -333,7 +333,7 @@
 
     .breadcrumb {
         top: 90px; /* AJUSTADO: para colar na base do menu em tablet */
-        padding: 0 16px 12px; /* padding-top ZERO */
+        padding: 10px 16px 12px; /* 10px padding-top para folga interna */
         font-size: 13px;
     }
 
@@ -375,7 +375,7 @@
 
     .breadcrumb {
         top: 96px; /* AJUSTADO: para colar na base do menu em mobile */
-        padding: 0 12px 10px; /* padding-top ZERO */
+        padding: 8px 12px 10px; /* 8px padding-top para folga interna */
         font-size: 12px;
         gap: 6px;
     }
