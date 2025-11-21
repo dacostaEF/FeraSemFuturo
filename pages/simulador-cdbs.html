@@ -291,23 +291,24 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #10b981, #059669); /* INVLAB verde */
-            color: white;
-            border: none;
-            padding: 10px 21px; /* REDUZIDO: 15px 30px → 10px 21px (-30%) */
-            border-radius: 8px; /* REDUZIDO: 10px → 8px (-30%) */
-            font-size: 1rem; /* REDUZIDO: 18px → 1rem (-30%) */
+            background: linear-gradient(135deg, #047857, #065f46); /* Verde discreto e profissional */
+            color: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(16, 185, 129, 0.3); /* Borda sutil */
+            padding: 10px 21px;
+            border-radius: 8px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             width: 100%;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 2px 8px rgba(4, 120, 87, 0.2); /* Sombra SUAVE */
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.5); /* Sombra verde INVLAB */
+            box-shadow: 0 6px 16px rgba(4, 120, 87, 0.3); /* Sombra discreta no hover */
             background: linear-gradient(135deg, #059669, #047857);
+            border-color: rgba(16, 185, 129, 0.5);
         }
 
         /* Chart Container */
@@ -590,13 +591,16 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7); /* Escurecido para melhor contraste */
             display: flex;
+            flex-direction: column; /* Coluna: disclaimer em cima, modal embaixo */
             align-items: center;
             justify-content: center;
             z-index: 10000;
             animation: fadeIn 0.3s ease;
             backdrop-filter: blur(4px);
+            padding: 20px; /* Padding para não colar nas bordas em telas pequenas */
+            gap: 0; /* Sem gap, o disclaimer tem margin-bottom */
         }
 
         .modal-content-minimalist {
@@ -604,11 +608,13 @@
             border-radius: 16px;
             max-width: 900px; /* LARGO: era 490px, agora 900px */
             width: 92%;
-            max-height: 90vh;
+            max-height: 80vh; /* Reduzido para dar espaço ao disclaimer */
             overflow: hidden;
             box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8);
             animation: slideUp 0.3s ease;
-            border: 1px solid rgba(16, 185, 129, 0.4); /* Borda verde INVLAB mais visível */
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            position: relative; /* Para animação funcionar corretamente */
+            flex-shrink: 0; /* Não encolhe */
         }
 
         .modal-header-minimalist {
@@ -653,9 +659,30 @@
             padding: 32px 40px 40px; /* Padding generoso para modal largo */
             max-height: calc(90vh - 100px);
             overflow-y: auto;
+            overflow-x: hidden; /* Evita scroll horizontal */
             display: grid;
             grid-template-columns: 1fr 1fr; /* 2 COLUNAS para aproveitar largura */
             gap: 24px 32px;
+            scroll-behavior: smooth; /* Scroll suave */
+        }
+        
+        /* Scrollbar customizada para o modal (estilo INVLAB) */
+        .modal-body-minimalist::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .modal-body-minimalist::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+        
+        .modal-body-minimalist::-webkit-scrollbar-thumb {
+            background: rgba(16, 185, 129, 0.3);
+            border-radius: 4px;
+        }
+        
+        .modal-body-minimalist::-webkit-scrollbar-thumb:hover {
+            background: rgba(16, 185, 129, 0.5);
         }
 
         .modal-section {
@@ -833,6 +860,28 @@
             color: #10b981;
         }
 
+        /* DISCLAIMER ACIMA DO MODAL */
+        .modal-disclaimer {
+            text-align: center;
+            margin-bottom: 12px;
+            padding: 8px 16px;
+            animation: fadeIn 0.4s ease 0.2s both; /* Aparece depois do modal */
+        }
+
+        .modal-disclaimer-text {
+            font-size: 0.85rem;
+            color: #10b981;
+            font-weight: 600;
+            margin-bottom: 4px;
+            letter-spacing: 0.3px;
+        }
+
+        .modal-disclaimer-subtext {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
+        }
+
         /* Responsividade */
         /* ============================================
            MOBILE-FIRST RESPONSIVE
@@ -903,7 +952,20 @@
             .modal-content-minimalist {
                 max-width: 95%;
                 width: 95%;
-                max-height: 95vh;
+                max-height: 85vh; /* Mais espaço para disclaimer */
+            }
+
+            .modal-disclaimer {
+                margin-bottom: 8px;
+                padding: 6px 12px;
+            }
+
+            .modal-disclaimer-text {
+                font-size: 0.75rem;
+            }
+
+            .modal-disclaimer-subtext {
+                font-size: 0.7rem;
             }
 
             .modal-header-minimalist {
@@ -1178,8 +1240,8 @@
         </div>
     </header>
 
-    <!-- Breadcrumb (fixo acima de tudo, fundo escuro) -->
-    <div style="position: sticky; top: 110px; z-index: 1001; background: #0D0D0D; width: 100%; padding: 12px 20px 12px; margin-bottom: 0 !important;">
+    <!-- Breadcrumb (fixo, abaixo do menu) -->
+    <div style="position: sticky; top: 110px; z-index: 100; background: #0D0D0D; width: 100%; padding: 12px 20px 12px; margin-bottom: 0 !important;">
         <nav style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 8px; font-size: 14px; color: rgba(255, 255, 255, 0.6);">
             <a href="../index.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s;">🏠 Início</a>
             <span style="color: rgba(255, 255, 255, 0.4);">/</span>
@@ -1550,6 +1612,12 @@
 
     <!-- Modal Minimalista: Sobre CDBs -->
     <div id="cdbModal" class="modal-overlay-minimalist" onclick="closeCDBModal()" style="display: none;">
+        <!-- Disclaimer acima do modal -->
+        <div class="modal-disclaimer">
+            <p class="modal-disclaimer-text">Conteúdo 100% educacional • INVLAB © 2025</p>
+            <p class="modal-disclaimer-subtext">Laboratório de Investimentos • Plataforma Profissional</p>
+        </div>
+        
         <div class="modal-content-minimalist" onclick="event.stopPropagation()">
             <div class="modal-header-minimalist">
                 <h2>📚 Conheça os CDBs</h2>
