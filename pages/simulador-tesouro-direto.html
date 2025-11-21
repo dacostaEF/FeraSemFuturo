@@ -247,15 +247,17 @@
             max-height: calc(90vh - 100px);
             overflow-y: auto;
             overflow-x: hidden; /* Evita scroll horizontal */
-            display: grid;
-            grid-template-columns: 1fr 1fr; /* 2 COLUNAS para aproveitar largura */
-            gap: 24px 32px;
+            display: block; /* 1 COLUNA ÚNICA - melhor distribuição do conteúdo */
             scroll-behavior: smooth; /* Scroll suave */
         }
 
-        /* Seções do modal ocupam 1 coluna cada (desktop 2 colunas) */
+        /* Seções do modal com espaçamento vertical */
         .modal-section {
-            margin-bottom: 0; /* Grid gap controla o espaçamento */
+            margin-bottom: 24px; /* Espaçamento entre seções */
+        }
+        
+        .modal-section:last-child {
+            margin-bottom: 0; /* Remove margem da última seção */
         }
 
         .modal-section h3 {
@@ -495,7 +497,7 @@
         }
 
         .input-section-note a:hover {
-            color: #2A7FFF;
+            color: #3B82F6;
         }
 
         .btn-calculate {
@@ -1138,7 +1140,7 @@
 
             <!-- Gráfico de Evolução -->
             <div class="chart-container" id="chartContainer" style="display: none; margin-top: 40px;">
-                <h3 style="color: #2A7FFF; font-size: 1.4rem; margin-bottom: 20px; text-align: center;">
+                <h3 style="color: #3B82F6; font-size: 1.4rem; margin-bottom: 20px; text-align: center;">
                     📈 Evolução do Investimento ao Longo do Tempo
                 </h3>
                 <canvas id="evolutionChart"></canvas>
@@ -1293,8 +1295,8 @@
                         Não é tudo a mesma coisa — são como sabores de sorvete: cada um para um gosto e um objetivo.
                     </p>
 
-                    <div style="background: #e7f3ff; border-left: 4px solid #00B894; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                        <h4 style="color: #00B894; margin: 0 0 10px 0; font-size: 1.1rem;">
+                    <div style="background: rgba(16, 185, 129, 0.1); border-left: 3px solid #10b981; padding: 12px; border-radius: 8px; margin-bottom: 14px;">
+                        <h4 style="color: #10b981; margin: 0 0 10px 0; font-size: 0.95rem;">
                             1️⃣ Tesouro Selic (LFT) — Pós-fixado
                         </h4>
                         <p style="margin-bottom: 8px;">
@@ -1311,7 +1313,7 @@
                             <li>✅ Praticamente sem risco de volatilidade no curto prazo</li>
                             <li>✅ Não sofre perda relevante no resgate antecipado</li>
                         </ul>
-                        <p style="margin-top: 10px; font-style: italic; color: #2A7FFF;">
+                        <p style="margin-top: 10px; font-style: italic; color: #10b981;">
                             💡 É o único título onde você pode dormir tranquilo sabendo que pode resgatar amanhã sem perdas.
                         </p>
                     </div>
@@ -1334,7 +1336,7 @@
                             <li>⚠️ Tem volatilidade — pode subir ou cair antes do vencimento</li>
                             <li>✅ Pode ter cupons semestrais (NTN-F) — recebe "juros" a cada 6 meses</li>
                         </ul>
-                        <p style="margin-top: 10px; font-style: italic; color: #2A7FFF;">
+                        <p style="margin-top: 10px; font-style: italic; color: #3B82F6;">
                             ⚠️ Se vender antes do vencimento e os juros subiram, pode ter prejuízo. É decisão mais tática.
                         </p>
                     </div>
@@ -1360,7 +1362,7 @@
                             <li>✅ Pode ter cupons semestrais — "aposentadoria" em vida</li>
                             <li>⚠️ Tem volatilidade no curto prazo (marcação a mercado)</li>
                         </ul>
-                        <p style="margin-top: 10px; font-style: italic; color: #2A7FFF;">
+                        <p style="margin-top: 10px; font-style: italic; color: #10b981;">
                             🏆 É o melhor amigo do planejamento de aposentadoria e metas acima de 5 anos.
                         </p>
                     </div>
@@ -1399,7 +1401,7 @@
                 <div class="modal-section">
                     <h3>💰 Tributação e Custos</h3>
                     
-                    <h4 style="color: #2A7FFF; margin: 15px 0 10px 0; font-size: 1.05rem;">📉 Imposto de Renda (Tabela Regressiva)</h4>
+                    <h4 style="color: #3B82F6; margin: 15px 0 10px 0; font-size: 1.05rem;">📉 Imposto de Renda (Tabela Regressiva)</h4>
                     <p style="margin-bottom: 10px;">
                         Quanto mais tempo você segura, <strong>menos imposto paga</strong>:
                     </p>
@@ -1413,7 +1415,7 @@
                         💡 <strong>Moral da história:</strong> Tesouro Direto é para segurar. De preferência, por mais de 2 anos.
                     </p>
 
-                    <h4 style="color: #2A7FFF; margin: 15px 0 10px 0; font-size: 1.05rem;">💸 Taxas</h4>
+                    <h4 style="color: #3B82F6; margin: 15px 0 10px 0; font-size: 1.05rem;">💸 Taxas</h4>
                     <ul style="margin: 8px 0 8px 20px;">
                         <li>✅ <strong>0%</strong> de taxa da B3 (desde 2023)</li>
                         <li>✅ <strong>0,20% ao ano</strong> de taxa de custódia (irrisória)</li>
@@ -1461,14 +1463,14 @@
                 </div>
 
                 <div class="modal-section" style="background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(0, 217, 36, 0.1)); border: 2px solid #00D924; border-radius: 12px; padding: 20px;">
-                    <h3 style="color: #00B894; margin-top: 0;">💎 Dicas de Ouro</h3>
+                    <h3 style="color: #10b981; margin-top: 0;">💎 Dicas de Ouro</h3>
                     <ul style="margin: 10px 0 0 20px; line-height: 1.8;">
                         <li>🏆 <strong>Todo mundo precisa de Tesouro Selic</strong> — nem que seja para a Reserva de Emergência</li>
                         <li>📅 <strong>Tenha objetivos claros:</strong> curto prazo = Selic | longo prazo = IPCA+ | médio prazo = Prefixado</li>
                         <li>⏰ <strong>Segure por mais de 2 anos</strong> para pagar menos IR (15% em vez de 22,5%)</li>
                         <li>🔄 <strong>Diversifique:</strong> não coloque tudo em um tipo só</li>
                         <li>📚 <strong>Estude antes de investir:</strong> conheça seu perfil e objetivos</li>
-                        <li>🌐 <strong>Site oficial:</strong> <a href="https://www.tesourodireto.com.br" target="_blank" style="color: #00B894;">www.tesourodireto.com.br</a></li>
+                        <li>🌐 <strong>Site oficial:</strong> <a href="https://www.tesourodireto.com.br" target="_blank" style="color: #10b981;">www.tesourodireto.com.br</a></li>
                     </ul>
                 </div>
 
