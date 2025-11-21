@@ -46,6 +46,52 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            margin-top: 80px !important; /* Espaço após breadcrumb */
+            position: relative;
+            padding: 28px; /* REDUZIDO: 40px → 28px (-30%) */
+            background: rgba(17, 24, 39, 0.6); /* ESCURO PREMIUM: cinza escuro com transparência */
+            border-radius: 16px; /* REDUZIDO: 18px → 16px */
+            border: 1px solid rgba(59, 130, 246, 0.2); /* Borda sutil azul */
+            border-left: 3px solid #10b981; /* Faixa verde premium INVLAB */
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); /* Sombra premium */
+            z-index: 1;
+        }
+        
+        /* MARCA D'ÁGUA removida do container externo - agora está no input-section */
+
+        /* BRANDING INVLAB HEADER (Premium Style) */
+        .sim-header-brand {
+            font-weight: 600;
+            font-size: 0.85rem; /* REDUZIDO: 0.95rem → 0.85rem (-30%) */
+            color: #10b981;
+            margin-bottom: 17px; /* REDUZIDO: 24px → 17px (-30%) */
+            display: flex;
+            align-items: center;
+            gap: 6px; /* REDUZIDO: 8px → 6px (-30%) */
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+        }
+
+        .brand-icon {
+            font-size: 1.1rem;
+        }
+
+        .brand-name {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        /* ASSINATURA INVLAB (Premium Footer) */
+        .sim-signature {
+            text-align: center;
+            margin-top: 28px; /* REDUZIDO: 40px → 28px (-30%) */
+            padding-top: 21px; /* REDUZIDO: 30px → 21px (-30%) */
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.7rem; /* REDUZIDO: 0.8rem → 0.7rem (-30%) */
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.5px;
         }
 
         .header {
@@ -67,34 +113,32 @@
             color: #FFFFFF;
         }
 
-        /* Botão Minimalista "Sobre Tesouro Direto" - Verde Neon Sutil */
+        /* Botão Minimalista "Sobre Tesouro Direto" - Verde INVLAB Discreto */
         .btn-about-tesouro {
-            background: rgba(0, 217, 36, 0.25);
-            color: white;
-            border: 1px solid #00D924;
-            border-radius: 12px;
-            padding: 15px 20px;
+            background: rgba(16, 185, 129, 0.15); /* Verde INVLAB sutil */
+            color: #10b981; /* Verde INVLAB */
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            border-radius: 10px; /* REDUZIDO: 12px → 10px */
+            padding: 10px 14px; /* REDUZIDO: 15px 20px → 10px 14px */
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 0.95rem;
+            gap: 8px; /* REDUZIDO: 12px → 8px */
+            font-size: 0.85rem; /* REDUZIDO: 0.95rem → 0.85rem (-30%) */
             font-weight: 600;
-            box-shadow: 0 0 8px rgba(0, 217, 36, 0.2);
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            min-width: 140px;
+            min-width: 98px; /* REDUZIDO: 140px → 98px (-30%) */
             justify-self: end;
             backdrop-filter: blur(10px);
         }
 
         .btn-about-tesouro:hover {
-            background: rgba(0, 217, 36, 0.45);
-            border-color: #00FF44;
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 
-                0 8px 25px rgba(0, 217, 36, 0.4),
-                0 0 20px rgba(0, 217, 36, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            background: rgba(16, 185, 129, 0.25);
+            border-color: rgba(16, 185, 129, 0.6);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            color: #FFFFFF;
         }
 
         .btn-about-icon {
@@ -106,37 +150,43 @@
             line-height: 1.3;
         }
 
-        /* Modal Minimalista */
+        /* Modal Minimalista INVLAB */
         .modal-overlay-minimalist {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7); /* Escurecido para melhor contraste */
             display: none;
-            justify-content: center;
+            flex-direction: column; /* Coluna: disclaimer em cima, modal embaixo */
             align-items: center;
+            justify-content: center;
             z-index: 10000;
-            padding: 20px;
+            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(4px);
+            padding: 20px; /* Padding para não colar nas bordas em telas pequenas */
+            gap: 0; /* Sem gap, o disclaimer tem margin-bottom */
         }
 
         .modal-content-minimalist {
-            background: white;
-            border-radius: 20px;
-            max-width: 900px;
-            width: 100%;
-            max-height: 85vh;
-            overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-            animation: slideDown 0.3s ease;
+            background: #0f1419; /* ESCURO INVLAB: mais próximo do site */
+            border-radius: 16px;
+            max-width: 900px; /* LARGO: mantido 900px */
+            width: 92%;
+            max-height: 80vh; /* Reduzido para dar espaço ao disclaimer */
+            overflow: hidden;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8);
+            animation: slideUp 0.3s ease;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            position: relative; /* Para animação funcionar corretamente */
+            flex-shrink: 0; /* Não encolhe */
         }
 
-        @keyframes slideDown {
+        @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(-30px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -144,87 +194,204 @@
             }
         }
 
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
         .modal-header-minimalist {
-            background: linear-gradient(135deg, #1a73e8 0%, #2A7FFF 100%);
-            color: white;
-            padding: 25px 30px;
-            border-radius: 20px 20px 0 0;
+            padding: 24px 32px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(59, 130, 246, 0.1)); /* Gradiente INVLAB */
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 10;
         }
 
         .modal-header-minimalist h2 {
             margin: 0;
-            font-size: 1.8rem;
+            font-size: 1.8rem; /* Maior para modal largo */
+            color: #FFFFFF;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .btn-close-minimalist {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid white;
-            color: white;
-            font-size: 2rem;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
+            background: transparent;
+            border: none;
+            font-size: 32px;
+            color: #999;
             cursor: pointer;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s;
+            border-radius: 8px;
+            transition: all 0.2s ease;
             line-height: 1;
         }
 
         .btn-close-minimalist:hover {
-            background: white;
-            color: #2A7FFF;
-            transform: rotate(90deg);
+            background: rgba(255, 255, 255, 0.15); /* ESCURO */
+            color: #FFFFFF;
         }
 
         .modal-body-minimalist {
-            padding: 35px;
+            padding: 32px 40px 40px; /* Padding generoso para modal largo */
+            max-height: calc(90vh - 100px);
+            overflow-y: auto;
+            overflow-x: hidden; /* Evita scroll horizontal */
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2 COLUNAS para aproveitar largura */
+            gap: 24px 32px;
+            scroll-behavior: smooth; /* Scroll suave */
         }
 
+        /* Seções do modal ocupam 1 coluna cada (desktop 2 colunas) */
         .modal-section {
-            margin-bottom: 30px;
+            margin-bottom: 0; /* Grid gap controla o espaçamento */
         }
 
         .modal-section h3 {
-            color: #2A7FFF;
-            font-size: 1.4rem;
-            margin-bottom: 15px;
+            color: #10b981; /* Verde INVLAB */
+            font-size: 1.3rem; /* REDUZIDO: 1.4rem → 1.3rem */
+            margin-bottom: 12px; /* REDUZIDO: 15px → 12px */
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px; /* REDUZIDO: 10px → 8px */
+            font-weight: 700;
         }
 
         .modal-section p {
-            color: #555;
-            line-height: 1.8;
-            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.85); /* Texto claro INVLAB */
+            line-height: 1.7; /* REDUZIDO: 1.8 → 1.7 */
+            margin-bottom: 12px; /* REDUZIDO: 15px → 12px */
+            font-size: 0.95rem;
+        }
+
+        .modal-section ul {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+            margin: 8px 0 12px 20px;
+        }
+
+        .modal-section li {
+            margin-bottom: 6px;
+        }
+
+        .modal-section strong {
+            color: #10b981; /* Verde INVLAB para destaques */
+            font-weight: 600;
+        }
+
+        /* Caixas de destaque dentro do modal */
+        .modal-section p[style*="background"] {
+            background: rgba(16, 185, 129, 0.1) !important; /* Verde INVLAB sutil */
+            border-left: 3px solid #10b981;
+            padding: 12px !important;
+            border-radius: 8px !important;
+            color: rgba(255, 255, 255, 0.9) !important;
+        }
+
+        /* Títulos h4 dentro do modal */
+        .modal-section h4 {
+            color: #3B82F6 !important; /* Azul INVLAB */
+            font-size: 1.05rem;
+            margin: 15px 0 10px 0;
+            font-weight: 600;
+        }
+
+        /* Scrollbar customizada no modal - Verde INVLAB */
+        .modal-body-minimalist::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-body-minimalist::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .modal-body-minimalist::-webkit-scrollbar-thumb {
+            background: rgba(16, 185, 129, 0.3); /* Verde INVLAB */
+            border-radius: 10px;
+        }
+
+        .modal-body-minimalist::-webkit-scrollbar-thumb:hover {
+            background: rgba(16, 185, 129, 0.5);
+        }
+
+        /* DISCLAIMER ACIMA DO MODAL */
+        .modal-disclaimer {
+            text-align: center;
+            margin-bottom: 12px;
+            padding: 8px 16px;
+            animation: fadeIn 0.4s ease 0.2s both; /* Aparece depois do modal */
+        }
+
+        .modal-disclaimer-text {
+            font-size: 0.85rem;
+            color: #10b981;
+            font-weight: 600;
+            margin-bottom: 4px;
+            letter-spacing: 0.3px;
+        }
+
+        .modal-disclaimer-subtext {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
         }
 
         /* Formulário de Entrada */
         .input-section {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03); /* ESCURO PREMIUM */
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px; /* REDUZIDO: 20px → 14px (-30%) */
+            padding: 21px; /* REDUZIDO: 30px → 21px (-30%) */
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            margin-bottom: 14px; /* REDUZIDO: 20px → 14px (-30%) */
             width: 100%;
             box-sizing: border-box;
+            position: relative; /* Para a marca d'água funcionar */
+            overflow: hidden; /* Esconde o que sair da borda arredondada */
+        }
+
+        /* MARCA D'ÁGUA INVLAB no formulário (Premium Style) */
+        .input-section::before {
+            content: "";
+            position: absolute;
+            top: 50%; /* Centralizado verticalmente */
+            left: 50%; /* Centralizado horizontalmente */
+            transform: translate(-50%, -50%); /* Ajuste fino para centralizar */
+            width: 420px; /* Tamanho da marca d'água */
+            height: 420px;
+            background-image: url('../assets/images/Logo_tutorfinanceiro.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.06; /* Bem sutil */
+            pointer-events: none; /* Não interfere nos cliques */
+            z-index: 0; /* Atrás do conteúdo */
+        }
+        
+        /* Garante que conteúdo do formulário fique acima da marca d'água */
+        .input-section > * {
+            position: relative;
+            z-index: 1;
         }
 
         .input-section h2 {
-            color: #2A7FFF;
-            font-size: 1.6rem;
-            margin-bottom: 25px;
+            color: rgba(255, 255, 255, 0.95); /* Texto claro INVLAB */
+            font-size: 1.12rem; /* REDUZIDO: 1.6rem → 1.12rem (-30%) */
+            margin-bottom: 17.5px; /* REDUZIDO: 25px → 17.5px (-30%) */
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 7px; /* REDUZIDO: 10px → 7px (-30%) */
         }
 
         .form-group {
@@ -237,10 +404,10 @@
         .form-group label {
             display: flex;
             align-items: center;
-            color: #2A7FFF;
+            color: #10b981; /* Verde INVLAB */
             font-weight: 600;
-            font-size: 1.05rem;
-            height: 54px;
+            font-size: 0.735rem; /* REDUZIDO: 1.05rem → 0.735rem (-30%) */
+            height: 37.8px; /* REDUZIDO: 54px → 37.8px (-30%) */
             line-height: 1.3;
             margin: 0;
             padding: 0;
@@ -249,13 +416,14 @@
         .form-group input,
         .form-group select {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #dee2e6;
-            border-radius: 10px;
-            font-size: 1.1rem;
+            padding: 10.5px; /* REDUZIDO: 15px → 10.5px (-30%) */
+            border: 1px solid rgba(255, 255, 255, 0.15); /* Borda sutil INVLAB */
+            border-radius: 7px; /* REDUZIDO: 10px → 7px (-30%) */
+            font-size: 0.77rem; /* REDUZIDO: 1.1rem → 0.77rem (-30%) */
             transition: all 0.3s;
-            background: white;
-            height: 54px;
+            background: rgba(255, 255, 255, 0.05); /* Fundo escuro sutil */
+            color: rgba(255, 255, 255, 0.9); /* Texto claro */
+            height: 37.8px; /* REDUZIDO: 54px → 37.8px (-30%) */
             box-sizing: border-box;
             margin: 0;
         }
@@ -267,8 +435,19 @@
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #1a73e8;
-            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+            border-color: #10b981; /* Verde INVLAB */
+            box-shadow: 0 0 0 2.1px rgba(16, 185, 129, 0.15); /* REDUZIDO: 3px → 2.1px (-30%) */
+        }
+
+        /* Dropdown options - Fundo escuro */
+        .form-group select option {
+            background: #1f2937; /* Fundo escuro */
+            color: #FFFFFF; /* Texto branco */
+        }
+
+        .form-group select option:hover,
+        .form-group select option:checked {
+            background: #10b981; /* Verde INVLAB no hover/seleção */
         }
 
         .form-row {
@@ -323,73 +502,78 @@
 
         .btn-calculate {
             width: 100%;
-            background: linear-gradient(135deg, #1a73e8 0%, #2A7FFF 100%);
-            color: white;
-            border: none;
-            padding: 18px 40px;
-            font-size: 1.2rem;
+            background: linear-gradient(135deg, #047857, #065f46); /* Verde discreto e profissional INVLAB */
+            color: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(16, 185, 129, 0.3); /* Borda sutil */
+            padding: 13px 28px; /* REDUZIDO: 18px 40px → 13px 28px (-30%) */
+            font-size: 0.84rem; /* REDUZIDO: 1.2rem → 0.84rem (-30%) */
             font-weight: 700;
-            border-radius: 12px;
+            border-radius: 8px; /* REDUZIDO: 12px → 8px (-30%) */
             cursor: pointer;
             transition: all 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3);
+            box-shadow: 0 2px 8px rgba(4, 120, 87, 0.2); /* Sombra SUAVE */
         }
 
         .btn-calculate:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(26, 115, 232, 0.4);
+            box-shadow: 0 6px 16px rgba(4, 120, 87, 0.3); /* Sombra discreta no hover */
+            background: linear-gradient(135deg, #059669, #047857);
+            border-color: rgba(16, 185, 129, 0.5);
         }
 
         /* Resultados */
         .results-section {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03); /* ESCURO PREMIUM */
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px; /* REDUZIDO: 20px → 14px (-30%) */
+            padding: 21px; /* REDUZIDO: 30px → 21px (-30%) */
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            margin-bottom: 14px; /* REDUZIDO: 20px → 14px (-30%) */
             width: 100%;
             box-sizing: border-box;
             display: none;
         }
 
         .results-section h2 {
-            color: #2A7FFF;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
+            color: rgba(255, 255, 255, 0.95); /* Texto claro INVLAB */
+            font-size: 1.26rem; /* REDUZIDO: 1.8rem → 1.26rem (-30%) */
+            margin-bottom: 17.5px; /* REDUZIDO: 25px → 17.5px (-30%) */
             text-align: center;
         }
 
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-top: 14px; /* REDUZIDO: 20px → 14px (-30%) */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
             border-radius: 10px;
             overflow: hidden;
         }
 
         .comparison-table thead {
-            background: linear-gradient(135deg, #2A7FFF 0%, #1a3a5c 100%);
-            color: white;
+            background: rgba(255, 255, 255, 0.05); /* ESCURO PREMIUM */
+            color: rgba(255, 255, 255, 0.95);
         }
 
         .comparison-table th {
-            padding: 18px;
+            padding: 12.6px; /* REDUZIDO: 18px → 12.6px (-30%) */
             text-align: left;
             font-weight: 600;
-            font-size: 1.05rem;
+            font-size: 0.735rem; /* REDUZIDO: 1.05rem → 0.735rem (-30%) */
+            color: rgba(255, 255, 255, 0.95);
         }
 
         .comparison-table td {
-            padding: 18px;
-            border-bottom: 1px solid #dee2e6;
-            font-size: 1rem;
+            padding: 12.6px; /* REDUZIDO: 18px → 12.6px (-30%) */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* SUTIL */
+            font-size: 0.7rem; /* REDUZIDO: 1rem → 0.7rem (-30%) */
+            color: rgba(255, 255, 255, 0.85);
         }
 
         .comparison-table tbody tr:hover {
-            background: #f8f9fa;
+            background: rgba(16, 185, 129, 0.08); /* Verde INVLAB sutil */
             transition: background 0.3s;
         }
 
@@ -399,16 +583,17 @@
 
         /* Destaque para melhor opção */
         .best-option {
-            background: #d4edda !important;
+            background: rgba(16, 185, 129, 0.15) !important; /* Verde INVLAB */
             font-weight: 600;
             position: relative;
+            color: #10b981 !important;
         }
 
         .best-option::before {
             content: "🏆";
             position: absolute;
             left: 5px;
-            font-size: 1.2rem;
+            font-size: 0.84rem; /* REDUZIDO: 1.2rem → 0.84rem (-30%) */
         }
 
         /* Valor positivo/negativo */
@@ -424,35 +609,37 @@
 
         /* Caixa de Aviso sobre Resgate Antecipado */
         .warning-box {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            margin-bottom: 20px;
-            border-left: 5px solid #ff6b6b;
+            background: rgba(239, 68, 68, 0.08); /* ESCURO PREMIUM: vermelho sutil */
+            border-radius: 14px; /* REDUZIDO: 20px → 14px (-30%) */
+            padding: 21px; /* REDUZIDO: 30px → 21px (-30%) */
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            margin-bottom: 14px; /* REDUZIDO: 20px → 14px (-30%) */
+            border-left: 3.5px solid #ef4444; /* REDUZIDO: 5px → 3.5px (-30%) */
             text-align: left;
             width: 100%;
             box-sizing: border-box;
+            border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
         .warning-box h3 {
-            color: #d63031;
-            font-size: 1.4rem;
-            margin-bottom: 15px;
+            color: #ef4444; /* Vermelho INVLAB */
+            font-size: 0.98rem; /* REDUZIDO: 1.4rem → 0.98rem (-30%) */
+            margin-bottom: 10.5px; /* REDUZIDO: 15px → 10.5px (-30%) */
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 7px; /* REDUZIDO: 10px → 7px (-30%) */
+            font-weight: 700;
         }
 
         .warning-box p {
-            color: #555;
+            color: rgba(255, 255, 255, 0.85); /* Texto claro INVLAB */
             line-height: 1.4;
             margin-bottom: 6px;
             text-align: left;
         }
 
         .warning-box ul {
-            color: #555;
+            color: rgba(255, 255, 255, 0.85); /* Texto claro INVLAB */
             line-height: 1.4;
             margin-left: 20px;
             text-align: left;
@@ -464,30 +651,36 @@
             text-align: left;
         }
 
+        .warning-box strong {
+            color: #ef4444; /* Vermelho INVLAB para destaques */
+        }
+
         /* Premissas do Simulador */
         .assumptions-box {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            margin-bottom: 20px;
-            border-left: 5px solid #1a73e8;
+            background: rgba(59, 130, 246, 0.08); /* ESCURO PREMIUM: azul sutil */
+            border-radius: 14px; /* REDUZIDO: 20px → 14px (-30%) */
+            padding: 21px; /* REDUZIDO: 30px → 21px (-30%) */
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            margin-bottom: 14px; /* REDUZIDO: 20px → 14px (-30%) */
+            border-left: 3.5px solid #3B82F6; /* REDUZIDO: 5px → 3.5px (-30%) */
             text-align: left;
             width: 100%;
             box-sizing: border-box;
+            border: 1px solid rgba(59, 130, 246, 0.3);
         }
 
         .assumptions-box h3 {
-            color: #2A7FFF;
-            font-size: 1.3rem;
-            margin-bottom: 15px;
+            color: #3B82F6; /* Azul INVLAB */
+            font-size: 0.91rem; /* REDUZIDO: 1.3rem → 0.91rem (-30%) */
+            margin-bottom: 10.5px; /* REDUZIDO: 15px → 10.5px (-30%) */
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 7px; /* REDUZIDO: 10px → 7px (-30%) */
+            font-weight: 700;
         }
 
         .assumptions-box ul {
-            color: #555;
+            color: rgba(255, 255, 255, 0.85); /* Texto claro INVLAB */
             line-height: 1.4;
             margin-left: 20px;
             text-align: left;
@@ -500,20 +693,20 @@
         }
 
         .assumptions-box strong {
-            color: #2A7FFF;
+            color: #3B82F6; /* Azul INVLAB para destaques */
         }
 
         /* Gráfico de Evolução */
         .chart-container {
-            margin-top: 40px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            border: 2px solid #dee2e6;
+            margin-top: 28px; /* REDUZIDO: 40px → 28px (-30%) */
+            padding: 14px; /* REDUZIDO: 20px → 14px (-30%) */
+            background: rgba(255, 255, 255, 0.03); /* ESCURO PREMIUM */
+            border-radius: 10.5px; /* REDUZIDO: 15px → 10.5px (-30%) */
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .chart-container canvas {
-            max-height: 400px;
+            max-height: 280px; /* REDUZIDO: 400px → 280px (-30%) */
         }
 
         /* Responsividade */
@@ -585,7 +778,6 @@
 
             .modal-header-minimalist {
                 padding: 20px;
-                border-radius: 15px 15px 0 0;
             }
 
             .modal-header-minimalist h2 {
@@ -593,7 +785,23 @@
             }
 
             .modal-body-minimalist {
-                padding: 20px;
+                grid-template-columns: 1fr; /* 1 COLUNA no mobile */
+                padding: 24px 20px; /* Reduzido para mobile */
+                gap: 20px;
+            }
+
+            .modal-disclaimer-text {
+                font-size: 0.75rem;
+            }
+
+            .modal-disclaimer-subtext {
+                font-size: 0.7rem;
+            }
+
+            .input-section::before {
+                width: 280px; /* Marca d'água menor no mobile */
+                height: 280px;
+                opacity: 0.04; /* Mais sutil no mobile */
             }
 
             .warning-box,
@@ -756,7 +964,13 @@
         </nav>
     </div>
 
-    <div class="container" style="margin-top: 30px;">
+    <div class="container">
+        <!-- BRANDING INVLAB (Premium Header) -->
+        <div class="sim-header-brand">
+            <span class="brand-icon">🔰</span>
+            <span class="brand-name">Simulador Oficial • INVLAB</span>
+        </div>
+        
         <div class="header" style="display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center;">
             <div>
                 <h1>🇧🇷 Simulador de Tesouro Direto vs Poupança</h1>
@@ -994,10 +1208,21 @@
                 </li>
             </ul>
         </div>
+        
+        <!-- ASSINATURA INVLAB (Premium Footer) -->
+        <div class="sim-signature">
+            Conteúdo 100% educacional • INVLAB © 2025
+        </div>
     </div>
 
     <!-- Modal Minimalista: Sobre Tesouro Direto -->
     <div id="tesouroModal" class="modal-overlay-minimalist" onclick="closeTesouroModal()" style="display: none;">
+        <!-- Disclaimer acima do modal -->
+        <div class="modal-disclaimer">
+            <p class="modal-disclaimer-text">Conteúdo 100% educacional • INVLAB © 2025</p>
+            <p class="modal-disclaimer-subtext">Laboratório de Investimentos • Plataforma Profissional</p>
+        </div>
+        
         <div class="modal-content-minimalist" onclick="event.stopPropagation()">
             <div class="modal-header-minimalist">
                 <h2>📚 Conheça o Tesouro Direto</h2>
@@ -1075,8 +1300,8 @@
                         </p>
                     </div>
 
-                    <div style="background: #fff3e0; border-left: 4px solid #1a73e8; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                        <h4 style="color: #1a73e8; margin: 0 0 10px 0; font-size: 1.1rem;">
+                    <div style="background: rgba(59, 130, 246, 0.1); border-left: 3px solid #3B82F6; padding: 12px; border-radius: 8px; margin-bottom: 14px;">
+                        <h4 style="color: #3B82F6; margin: 0 0 10px 0; font-size: 0.95rem;">
                             2️⃣ Tesouro Prefixado (LTN e NTN-F) — Taxa fixa
                         </h4>
                         <p style="margin-bottom: 8px;">
@@ -1098,8 +1323,8 @@
                         </p>
                     </div>
 
-                    <div style="background: #f3e5f5; border-left: 4px solid #2A7FFF; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                        <h4 style="color: #2A7FFF; margin: 0 0 10px 0; font-size: 1.1rem;">
+                    <div style="background: rgba(16, 185, 129, 0.1); border-left: 3px solid #10b981; padding: 12px; border-radius: 8px; margin-bottom: 14px;">
+                        <h4 style="color: #10b981; margin: 0 0 10px 0; font-size: 0.95rem;">
                             3️⃣ Tesouro IPCA+ (NTN-B) — Híbrido
                         </h4>
                         <p style="margin-bottom: 8px;">
@@ -1136,9 +1361,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr style="background: #f8f9fa;">
-                                <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>Tesouro Selic</strong></td>
-                                <td style="padding: 10px; border: 1px solid #dee2e6;">Pós-fixado</td>
+                            <tr style="background: rgba(255, 255, 255, 0.03);">
+                                <td style="padding: 10px; border: 1px solid rgba(255, 255, 255, 0.1);"><strong>Tesouro Selic</strong></td>
+                                <td style="padding: 10px; border: 1px solid rgba(255, 255, 255, 0.1);">Pós-fixado</td>
                                 <td style="padding: 10px; border: 1px solid #dee2e6;">Reserva de emergência, baixa volatilidade</td>
                             </tr>
                             <tr>
@@ -1146,9 +1371,9 @@
                                 <td style="padding: 10px; border: 1px solid #dee2e6;">Taxa fixa</td>
                                 <td style="padding: 10px; border: 1px solid #dee2e6;">Rentabilidade travada, objetivos de médio prazo</td>
                             </tr>
-                            <tr style="background: #f8f9fa;">
-                                <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>Tesouro IPCA+</strong></td>
-                                <td style="padding: 10px; border: 1px solid #dee2e6;">Híbrido</td>
+                            <tr style="background: rgba(255, 255, 255, 0.03);">
+                                <td style="padding: 10px; border: 1px solid rgba(255, 255, 255, 0.1);"><strong>Tesouro IPCA+</strong></td>
+                                <td style="padding: 10px; border: 1px solid rgba(255, 255, 255, 0.1);">Híbrido</td>
                                 <td style="padding: 10px; border: 1px solid #dee2e6;">Metas longas e proteção contra inflação</td>
                             </tr>
                         </tbody>
@@ -1168,7 +1393,7 @@
                         <li><strong>17,5%</strong> — de 361 a 720 dias</li>
                         <li><strong>15%</strong> — acima de 720 dias (2 anos)</li>
                     </ul>
-                    <p style="background: #fff3cd; padding: 12px; border-radius: 8px; margin: 15px 0;">
+                    <p style="background: rgba(16, 185, 129, 0.1); border-left: 3px solid #10b981; padding: 12px; border-radius: 8px; margin: 15px 0; color: rgba(255, 255, 255, 0.9);">
                         💡 <strong>Moral da história:</strong> Tesouro Direto é para segurar. De preferência, por mais de 2 anos.
                     </p>
 
@@ -1187,8 +1412,8 @@
                         O Tesouro Direto é seguro, mas possui riscos técnicos que você precisa conhecer:
                     </p>
 
-                    <div style="background: #fff3cd; border-left: 4px solid #ff6b6b; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-                        <h4 style="color: #d63031; margin: 0 0 10px 0; font-size: 1.05rem;">
+                    <div style="background: rgba(239, 68, 68, 0.1); border-left: 3px solid #ef4444; padding: 12px; border-radius: 8px; margin-bottom: 14px;">
+                        <h4 style="color: #ef4444; margin: 0 0 10px 0; font-size: 0.95rem;">
                             1. Marcação a Mercado (Volatilidade)
                         </h4>
                         <p style="margin-bottom: 8px;">
@@ -1231,8 +1456,8 @@
                     </ul>
                 </div>
 
-                <div class="modal-section" style="text-align: center; background: #f8f9fa; padding: 20px; border-radius: 12px;">
-                    <p style="font-size: 1.1rem; color: #2A7FFF; font-weight: 600; margin: 0;">
+                <div class="modal-section" style="text-align: center; background: rgba(16, 185, 129, 0.1); padding: 14px; border-radius: 12px;">
+                    <p style="font-size: 0.95rem; color: #10b981; font-weight: 600; margin: 0;">
                         🚀 O Tesouro Direto é o alicerce da sua independência financeira!
                     </p>
                     <p style="margin: 10px 0 0 0; color: #6b7280;">
