@@ -101,14 +101,15 @@
         }
 
         .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 1.75rem; /* IGUAL AO CDB: 1.75rem */
+            margin-bottom: 7px; /* IGUAL AO CDB: 7px */
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
             color: #FFFFFF;
+            font-weight: 700; /* IGUAL AO CDB */
         }
 
         .header p {
-            font-size: 1.1rem;
+            font-size: 0.95rem; /* IGUAL AO CDB: 0.95rem */
             opacity: 0.9;
             color: #FFFFFF;
         }
@@ -653,6 +654,7 @@
 
         .warning-box strong {
             color: #ef4444; /* Vermelho INVLAB para destaques */
+            font-weight: normal; /* Sem negrito - cor já destaca */
         }
 
         /* Premissas do Simulador */
@@ -694,6 +696,7 @@
 
         .assumptions-box strong {
             color: #3B82F6; /* Azul INVLAB para destaques */
+            font-weight: normal; /* Sem negrito - cor já destaca */
         }
 
         /* Gráfico de Evolução */
@@ -725,6 +728,11 @@
 
             .header {
                 display: block !important;
+            }
+
+            .sim-header-brand {
+                font-size: 0.8rem; /* IGUAL AO CDB: 0.8rem */
+                margin-bottom: 16px; /* IGUAL AO CDB: 16px */
             }
 
             .header h1 {
@@ -814,6 +822,17 @@
             .warning-box h3,
             .assumptions-box h3 {
                 font-size: 1.2rem;
+            }
+        }
+
+        /* MOBILE: max-width 480px - IGUAL AO CDB */
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5rem; /* IGUAL AO CDB: 1.5rem */
+            }
+
+            .header p {
+                font-size: 0.9rem; /* IGUAL AO CDB: 0.9rem */
             }
         }
     </style>
