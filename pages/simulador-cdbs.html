@@ -38,6 +38,15 @@
             padding-top: 65px; /* AJUSTADO: igual à poupança para breadcrumb sticky funcionar */
         }
         
+        /* CONTROLE DE VISIBILIDADE DAS ABAS */
+        .tab-text-short {
+            display: none; /* Esconde texto curto no desktop */
+        }
+        
+        .tab-text-full {
+            display: inline; /* Mostra texto completo no desktop */
+        }
+        
         /* Breadcrumb Hover */
         a[href*="index.html"]:hover {
             color: #00D924 !important;
@@ -277,7 +286,7 @@
 
         .input-group small {
             font-size: 12px;
-            color: #666;
+            color: rgba(255, 255, 255, 0.6); /* INVLAB: texto secundário claro */
             margin-top: 4px;
         }
 
@@ -402,17 +411,21 @@
         .ranking-table td {
             padding: 12px;
             text-align: left;
-            border-bottom: 1px solid #e1e5e9;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* INVLAB: linha cinza SUTIL */
         }
 
         .ranking-table th {
-            background: #f8f9fa;
+            background: rgba(255, 255, 255, 0.05); /* INVLAB: fundo sutil */
             font-weight: 700;
-            color: #333;
+            color: rgba(255, 255, 255, 0.95); /* INVLAB: texto claro */
+        }
+
+        .ranking-table td {
+            color: rgba(255, 255, 255, 0.85); /* INVLAB: texto claro nas células */
         }
 
         .ranking-table tr:hover {
-            background: #f8f9fa;
+            background: rgba(16, 185, 129, 0.08); /* INVLAB: hover verde sutil */
         }
 
         .rank-badge {
@@ -424,8 +437,8 @@
             color: white;
         }
 
-        .rank-1 { background: #FFD700; color: #333; }
-        .rank-2 { background: #C0C0C0; color: #333; }
+        .rank-1 { background: #FFD700; color: #000000; font-weight: 700; } /* Ouro com texto preto forte */
+        .rank-2 { background: #C0C0C0; color: #000000; font-weight: 700; } /* Prata com texto preto forte */
         .rank-3 { background: #CD7F32; color: white; }
 
         /* Loading */
@@ -703,7 +716,7 @@
 
         .modal-list-ordered li {
             font-size: 15px;
-            color: #555;
+            color: rgba(255, 255, 255, 0.85); /* INVLAB: texto claro */
             line-height: 1.7;
             margin-bottom: 10px;
         }
@@ -828,6 +841,15 @@
         @media (max-width: 768px) {
             body {
                 padding: 15px;
+            }
+            
+            /* MOBILE: Inverte visibilidade das abas */
+            .tab-text-full {
+                display: none; /* Esconde texto completo no mobile */
+            }
+            
+            .tab-text-short {
+                display: inline; /* Mostra texto curto no mobile */
             }
             
             /* Responsivo: Branding INVLAB */
@@ -1197,16 +1219,13 @@
                 📊 <span class="tab-text-full">Comparar</span><span class="tab-text-short">Comparar</span>
             </button>
             <button class="tab-btn" onclick="switchTab(this, 'simular')">
-                📈 <span class="tab-text-full">Simulador Evolutivo</span><span class="tab-text-short">Simulador</span>
+                📈 <span class="tab-text-full">Projeção</span><span class="tab-text-short">Projeção</span>
             </button>
             <button class="tab-btn" onclick="switchTab(this, 'ranking')">
                 🏆 <span class="tab-text-full">Ranking</span><span class="tab-text-short">Ranking</span>
             </button>
             <button class="tab-btn" onclick="switchTab(this, 'cenario')">
-                💰 <span class="tab-text-full">Meu Cenário</span><span class="tab-text-short">Cenário</span>
-            </button>
-            <button class="tab-btn" onclick="switchTab(this, 'educacao')">
-                📚 <span class="tab-text-full">Educação</span><span class="tab-text-short">Educação</span>
+                💰 <span class="tab-text-full">Minha Carteira</span><span class="tab-text-short">Carteira</span>
             </button>
         </div>
 
@@ -1276,7 +1295,7 @@
             </div>
         </div>
 
-        <!-- ABA 2: SIMULADOR EVOLUTIVO -->
+        <!-- ABA 2: PROJEÇÃO -->
         <div id="tab-simular" class="tab-content">
             <div class="content-card">
                 <div class="callout callout-success">
@@ -1348,7 +1367,7 @@
         <!-- ABA 3: RANKING -->
         <div id="tab-ranking" class="tab-content">
             <div class="content-card">
-                <h2 style="color: #333; margin-bottom: 20px;">🏆 Ranking dos Melhores CDBs (Jan/2025)</h2>
+                <h2 style="color: rgba(255, 255, 255, 0.95); margin-bottom: 20px;">🏆 Ranking dos Melhores CDBs (Jan/2025)</h2>
                 
                 <div class="callout callout-success">
                     <div class="callout-icon">💎</div>
@@ -1469,10 +1488,10 @@
             </div>
         </div>
 
-        <!-- ABA 4: MEU CENÁRIO -->
+        <!-- ABA 4: MINHA CARTEIRA -->
         <div id="tab-cenario" class="tab-content">
             <div class="content-card">
-                <h2 style="color: #333; margin-bottom: 20px;">💰 Comparação Múltipla de Produtos</h2>
+                <h2 style="color: rgba(255, 255, 255, 0.95); margin-bottom: 20px;">💰 Comparação Múltipla de Produtos</h2>
                 
                 <div class="callout callout-info">
                     <div class="callout-icon">🎯</div>
@@ -1517,7 +1536,7 @@
 
             <!-- Tabela de Resultados -->
             <div class="content-card" id="multiResultsCard" style="display: none;">
-                <h2 style="color: #333; margin-bottom: 20px;">📊 Resultados Comparativos</h2>
+                <h2 style="color: rgba(255, 255, 255, 0.95); margin-bottom: 20px;">📊 Resultados Comparativos</h2>
                 <div id="multiResultsTable"></div>
                 
                 <div class="insight-box" style="margin-top: 20px;">
@@ -1527,85 +1546,6 @@
             </div>
         </div>
 
-        <!-- ABA 5: EDUCAÇÃO -->
-        <div id="tab-educacao" class="tab-content">
-            <div class="content-card">
-                <h2 style="color: #333; margin-bottom: 20px;">📚 Educação Financeira</h2>
-
-                <div class="callout callout-success">
-                    <div class="callout-icon">💡</div>
-                    <div class="callout-content">
-                        <h3>Entenda os conceitos básicos</h3>
-                        <p>Conhecimento é poder! Aprenda os termos mais importantes para investir com segurança.</p>
-                    </div>
-                </div>
-
-                <div style="margin-top: 30px;">
-                    <h3 style="color: #00D924; margin-bottom: 15px;">📊 O que é CDI?</h3>
-                    <p style="color: #333; line-height: 1.8; margin-bottom: 25px;">
-                        <strong>CDI (Certificado de Depósito Interbancário)</strong> é a taxa de juros usada nos 
-                        empréstimos entre bancos. Ela acompanha muito de perto a Taxa Selic e serve de referência 
-                        para a maioria dos investimentos de renda fixa. Quando você vê "CDB 110% do CDI", significa 
-                        que o investimento rende 10% a mais que a taxa CDI.
-                    </p>
-
-                    <h3 style="color: #00D924; margin-bottom: 15px;">💰 O que é CDB?</h3>
-                    <p style="color: #333; line-height: 1.8; margin-bottom: 25px;">
-                        <strong>CDB (Certificado de Depósito Bancário)</strong> é um título emitido por bancos para 
-                        captar recursos. Quando você investe em CDB, está "emprestando" seu dinheiro ao banco, que te 
-                        devolve com juros. É protegido pelo FGC até R$ 250 mil por CPF/banco.
-                    </p>
-
-                    <h3 style="color: #00D924; margin-bottom: 15px;">📉 O que é IR Regressivo?</h3>
-                    <p style="color: #333; line-height: 1.8; margin-bottom: 25px;">
-                        O <strong>Imposto de Renda Regressivo</strong> incentiva investimentos de longo prazo. 
-                        Quanto mais tempo você deixa o dinheiro investido, menor o imposto:
-                    </p>
-                    <ul style="color: #333; line-height: 1.8; margin-left: 30px; margin-bottom: 25px;">
-                        <li>Até 6 meses: <strong>22,5%</strong></li>
-                        <li>6 a 12 meses: <strong>20%</strong></li>
-                        <li>12 a 24 meses: <strong>17,5%</strong></li>
-                        <li>Acima de 24 meses: <strong>15%</strong></li>
-                    </ul>
-
-                    <h3 style="color: #00D924; margin-bottom: 15px;">🏦 O que é Liquidez?</h3>
-                    <p style="color: #333; line-height: 1.8; margin-bottom: 25px;">
-                        <strong>Liquidez</strong> é a facilidade de resgatar seu dinheiro:
-                    </p>
-                    <ul style="color: #333; line-height: 1.8; margin-left: 30px; margin-bottom: 25px;">
-                        <li><strong>D+0 (Diária):</strong> Você resgata no mesmo dia</li>
-                        <li><strong>D+1:</strong> Resgata no próximo dia útil</li>
-                        <li><strong>D+30:</strong> Precisa esperar 30 dias</li>
-                        <li><strong>No vencimento:</strong> Só pode resgatar na data final</li>
-                    </ul>
-
-                    <h3 style="color: #00D924; margin-bottom: 15px;">🛡️ O que é FGC?</h3>
-                    <p style="color: #333; line-height: 1.8; margin-bottom: 25px;">
-                        <strong>FGC (Fundo Garantidor de Créditos)</strong> é uma proteção para seu dinheiro. 
-                        Se o banco quebrar, o FGC garante até <strong>R$ 250 mil por CPF e por instituição</strong>. 
-                        É como um seguro automático e gratuito!
-                    </p>
-
-                    <h3 style="color: #00D924; margin-bottom: 15px;">🎯 LCI e LCA - Investimentos Isentos</h3>
-                    <p style="color: #333; line-height: 1.8; margin-bottom: 25px;">
-                        <strong>LCI (Letra de Crédito Imobiliário)</strong> e <strong>LCA (Letra de Crédito do Agronegócio)</strong> 
-                        são investimentos <strong>isentos de Imposto de Renda</strong>. Por isso, mesmo com taxas 
-                        menores que CDB (ex: 95% do CDI), podem render mais no bolso!
-                    </p>
-                </div>
-
-                <div class="callout callout-warning" style="margin-top: 30px;">
-                    <div class="callout-icon">⚠️</div>
-                    <div class="callout-content">
-                        <h3>Dica de Ouro!</h3>
-                        <p>
-                            Sempre compare o <strong>rendimento líquido</strong> (depois do IR), não apenas a taxa 
-                            bruta. Use nosso Comparador para ver os valores reais que vão para seu bolso!
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- Modal Minimalista: Sobre CDBs -->
@@ -1956,7 +1896,7 @@
             const container = document.getElementById('multiSelectContainer');
             if (!container) return;
             
-            container.innerHTML = '<h3 style="color: #333; margin-bottom: 15px;">Selecione até 5 produtos para comparar:</h3>';
+            container.innerHTML = '<h3 style="color: rgba(255, 255, 255, 0.9); margin-bottom: 15px;">Selecione até 5 produtos para comparar:</h3>';
             
             const grid = document.createElement('div');
             grid.style.display = 'grid';
@@ -1975,7 +1915,7 @@
             poupItem.innerHTML = `
                 <input type="checkbox" class="product-checkbox" value="poupanca" checked 
                        style="margin-right: 10px; width: 18px; height: 18px;">
-                <span style="color: #333; font-weight: 500;">🐷 Poupança (0,5% a.m.)</span>
+                <span style="color: rgba(255, 255, 255, 0.9); font-weight: 500;">🐷 Poupança (0,5% a.m.)</span>
             `;
             grid.appendChild(poupItem);
             
@@ -1998,7 +1938,7 @@
                         <input type="checkbox" class="product-checkbox" value="${index}" 
                                ${isTopThree ? 'checked' : ''}
                                style="margin-right: 10px; width: 18px; height: 18px;">
-                        <span style="color: #333; font-weight: 500;">
+                        <span style="color: rgba(255, 255, 255, 0.9); font-weight: 500;">
                             ${isTopThree ? '⭐ ' : ''}${product.banco} (${percentCDI}% CDI)
                         </span>
                     `;
@@ -2181,8 +2121,8 @@
                         <div class="result-icon">🏆</div>
                         <div class="result-title">${productName}</div>
                         <div class="result-value" style="font-size: 1.8rem; color: #00D924;">R$ ${cdbDetails.valorLiquido.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
-                        <div class="result-difference" style="color: #666; font-size: 0.9rem; margin-top: 8px;">✅ Valor Líquido (após IR)</div>
-                        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.1); font-size: 0.85rem; color: #666;">
+                        <div class="result-difference" style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin-top: 8px;">✅ Valor Líquido (após IR)</div>
+                        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; color: rgba(255, 255, 255, 0.7);">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
                                 <span>💵 Investido:</span>
                                 <strong>R$ ${cdbDetails.invested.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong>
@@ -2206,8 +2146,8 @@
                         <div class="result-icon">🐷</div>
                         <div class="result-title">Poupança</div>
                         <div class="result-value" style="font-size: 1.8rem; color: #6b7280;">R$ ${poupFinal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
-                        <div class="result-difference" style="color: #666; font-size: 0.9rem; margin-top: 8px;">✅ Valor Final (isento IR)</div>
-                        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.1); font-size: 0.85rem; color: #666;">
+                        <div class="result-difference" style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin-top: 8px;">✅ Valor Final (isento IR)</div>
+                        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; color: rgba(255, 255, 255, 0.7);">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
                                 <span>💵 Investido:</span>
                                 <strong>R$ ${amount.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong>
@@ -2223,7 +2163,7 @@
                         <div class="result-icon">💰</div>
                         <div class="result-title">Você GANHA com CDB</div>
                         <div class="result-value" style="font-size: 1.8rem;">+ R$ ${difference.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
-                        <div class="result-difference" style="color: #666; font-size: 0.9rem; margin-top: 8px;">A mais em ${months} meses</div>
+                        <div class="result-difference" style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin-top: 8px;">A mais em ${months} meses</div>
                     </div>
                 </div>
                 
@@ -2240,7 +2180,7 @@
             `;
         }
 
-        // ABA 2: SIMULADOR EVOLUTIVO
+        // ABA 2: PROJEÇÃO
         function runSimulation() {
             const initial = parseFloat(document.getElementById('initialAmount').value);
             const monthly = parseFloat(document.getElementById('monthlyInvestment').value);
@@ -2348,8 +2288,8 @@
                     <div class="result-icon">🏆</div>
                     <div class="result-title">CDB ${cdiPercent}% CDI</div>
                     <div class="result-value" style="font-size: 1.8rem; color: #00D924;">R$ ${cdbDetails.valorLiquido.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
-                    <div class="result-difference" style="color: #666; font-size: 0.9rem; margin-top: 8px;">✅ Valor Líquido (após IR)</div>
-                    <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.1); font-size: 0.85rem; color: #666;">
+                    <div class="result-difference" style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin-top: 8px;">✅ Valor Líquido (após IR)</div>
+                    <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; color: rgba(255, 255, 255, 0.7);">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
                             <span>💵 Investido:</span>
                             <strong>R$ ${cdbDetails.invested.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong>
@@ -2373,8 +2313,8 @@
                     <div class="result-icon">🐷</div>
                     <div class="result-title">Poupança</div>
                     <div class="result-value" style="font-size: 1.8rem; color: #6b7280;">R$ ${finalPoupanca.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
-                    <div class="result-difference" style="color: #666; font-size: 0.9rem; margin-top: 8px;">✅ Valor Final (isento IR)</div>
-                    <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.1); font-size: 0.85rem; color: #666;">
+                    <div class="result-difference" style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin-top: 8px;">✅ Valor Final (isento IR)</div>
+                    <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; color: rgba(255, 255, 255, 0.7);">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
                             <span>💵 Investido:</span>
                             <strong>R$ ${cdbDetails.invested.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong>
@@ -2390,7 +2330,7 @@
                     <div class="result-icon">💰</div>
                     <div class="result-title">Diferença</div>
                     <div class="result-value" style="font-size: 1.8rem;">+ R$ ${difference.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
-                    <div class="result-difference" style="color: #666; font-size: 0.9rem; margin-top: 8px;">Em ${years} ano${years > 1 ? 's' : ''}</div>
+                    <div class="result-difference" style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin-top: 8px;">Em ${years} ano${years > 1 ? 's' : ''}</div>
                 </div>
             `;
         }
@@ -2415,7 +2355,7 @@
             document.getElementById('insightText').innerHTML = insight;
         }
 
-        // ABA 4: MEU CENÁRIO - COMPARAÇÃO MÚLTIPLA
+        // ABA 4: MINHA CARTEIRA - COMPARAÇÃO MÚLTIPLA
         let multiChart = null;
 
         function runCenario() {
@@ -2634,15 +2574,15 @@
             results.forEach((result, index) => {
                 const badge = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}º`;
                 const irDisplay = result.irDescontado > 0 
-                    ? `<span style="color: #dc2626;">- R$ ${result.irDescontado.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br><small style="color: #666;">(${(result.irRate * 100).toFixed(1)}%)</small>` 
-                    : '<span style="color: #666;">Isento</span>';
+                    ? `<span style="color: #dc2626;">- R$ ${result.irDescontado.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br><small style="color: rgba(255, 255, 255, 0.6);">(${(result.irRate * 100).toFixed(1)}%)</small>` 
+                    : '<span style="color: rgba(255, 255, 255, 0.7);">Isento</span>';
                 
                 tableHTML += `
                     <tr style="${index === 0 ? 'background: rgba(0, 217, 36, 0.05); font-weight: 600;' : ''}">
                         <td>${badge}</td>
                         <td style="text-align: left;">${result.name}</td>
                         <td>R$ ${result.invested.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
-                        <td style="color: #666;">R$ ${result.valorBruto.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
+                        <td style="color: rgba(255, 255, 255, 0.7);">R$ ${result.valorBruto.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
                         <td>${irDisplay}</td>
                         <td style="color: #00D924; font-weight: 700;">R$ ${result.finalValue.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
                         <td style="color: #00D924;">+ R$ ${result.profit.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
