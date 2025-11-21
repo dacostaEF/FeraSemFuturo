@@ -606,95 +606,76 @@
         }
 
         /* Caixa de Aviso sobre Resgate Antecipado */
-        .warning-box {
-            background: rgba(239, 68, 68, 0.08); /* ESCURO PREMIUM: vermelho sutil */
-            border-radius: 14px; /* REDUZIDO: 20px → 14px (-30%) */
-            padding: 21px; /* REDUZIDO: 30px → 21px (-30%) */
-            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-            margin-bottom: 14px; /* REDUZIDO: 20px → 14px (-30%) */
-            border-left: 3.5px solid #ef4444; /* REDUZIDO: 5px → 3.5px (-30%) */
-            text-align: left;
-            width: 100%;
-            box-sizing: border-box;
-            border: 1px solid rgba(239, 68, 68, 0.3);
-        }
-
-        .warning-box h3 {
-            color: #ef4444; /* Vermelho INVLAB */
-            font-size: 0.98rem; /* REDUZIDO: 1.4rem → 0.98rem (-30%) */
-            margin-bottom: 10.5px; /* REDUZIDO: 15px → 10.5px (-30%) */
+        /* CALLOUTS - MODELO CDB (SUPERIOR) */
+        .callout {
             display: flex;
-            align-items: center;
-            gap: 7px; /* REDUZIDO: 10px → 7px (-30%) */
-            font-weight: 700;
-        }
-
-        .warning-box p {
-            color: rgba(255, 255, 255, 0.85); /* Texto claro INVLAB */
-            line-height: 1.4;
-            margin-bottom: 6px;
+            gap: 10px; /* IGUAL AO CDB */
+            padding: 14px; /* IGUAL AO CDB */
+            border-radius: 10px; /* IGUAL AO CDB */
+            margin-bottom: 18px; /* IGUAL AO CDB */
+            border-left: 3px solid; /* IGUAL AO CDB */
             text-align: left;
+            width: 100%; /* Garante mesma largura que outros containers */
+            box-sizing: border-box; /* Inclui padding e border na largura total */
+            /* SEM box-shadow pesada */
+            /* SEM border dupla */
         }
 
-        .warning-box ul {
-            color: rgba(255, 255, 255, 0.85); /* Texto claro INVLAB */
-            line-height: 1.4;
+        .callout-info {
+            background: rgba(59, 130, 246, 0.1); /* Azul INVLAB */
+            border-left-color: #3B82F6;
+        }
+
+        .callout-warning {
+            background: rgba(245, 158, 11, 0.1); /* Laranja suave (não vermelho!) */
+            border-left-color: #F59E0B;
+        }
+
+        .callout-success {
+            background: rgba(16, 185, 129, 0.1); /* Verde INVLAB */
+            border-left-color: #10b981;
+        }
+
+        .callout-icon {
+            font-size: 1.75rem; /* IGUAL AO CDB */
+            flex-shrink: 0;
+        }
+
+        .callout-content {
+            flex: 1;
+        }
+
+        .callout-content h3 {
+            color: rgba(255, 255, 255, 0.95); /* Branco legível */
+            font-size: 1rem; /* IGUAL AO CDB */
+            margin-bottom: 8px; /* IGUAL AO CDB */
+            font-weight: 600;
+        }
+
+        .callout-content p {
+            color: rgba(255, 255, 255, 0.85); /* Texto claro */
+            line-height: 1.6; /* IGUAL AO CDB */
+            margin-bottom: 8px;
+        }
+
+        .callout-content ul {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
             margin-left: 20px;
-            text-align: left;
             list-style-position: outside;
         }
 
-        .warning-box li {
-            margin-bottom: 2px;
-            text-align: left;
+        .callout-content li {
+            margin-bottom: 4px;
         }
 
-        .warning-box strong {
-            color: #ef4444; /* Vermelho INVLAB para destaques */
-            font-weight: normal; /* Sem negrito - cor já destaca */
+        .callout-content strong {
+            color: #10b981; /* Verde INVLAB para destaques */
+            font-weight: 600;
         }
 
         /* Premissas do Simulador */
-        .assumptions-box {
-            background: rgba(59, 130, 246, 0.08); /* ESCURO PREMIUM: azul sutil */
-            border-radius: 14px; /* REDUZIDO: 20px → 14px (-30%) */
-            padding: 21px; /* REDUZIDO: 30px → 21px (-30%) */
-            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-            margin-bottom: 14px; /* REDUZIDO: 20px → 14px (-30%) */
-            border-left: 3.5px solid #3B82F6; /* REDUZIDO: 5px → 3.5px (-30%) */
-            text-align: left;
-            width: 100%;
-            box-sizing: border-box;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-        }
-
-        .assumptions-box h3 {
-            color: #3B82F6; /* Azul INVLAB */
-            font-size: 0.91rem; /* REDUZIDO: 1.3rem → 0.91rem (-30%) */
-            margin-bottom: 10.5px; /* REDUZIDO: 15px → 10.5px (-30%) */
-            display: flex;
-            align-items: center;
-            gap: 7px; /* REDUZIDO: 10px → 7px (-30%) */
-            font-weight: 700;
-        }
-
-        .assumptions-box ul {
-            color: rgba(255, 255, 255, 0.85); /* Texto claro INVLAB */
-            line-height: 1.4;
-            margin-left: 20px;
-            text-align: left;
-            list-style-position: outside;
-        }
-
-        .assumptions-box li {
-            margin-bottom: 2px;
-            text-align: left;
-        }
-
-        .assumptions-box strong {
-            color: #3B82F6; /* Azul INVLAB para destaques */
-            font-weight: normal; /* Sem negrito - cor já destaca */
-        }
+        /* Backwards compatibility - classes antigas removidas (usar .callout agora) */
 
         /* Gráfico de Evolução */
         .chart-container {
@@ -805,16 +786,26 @@
                 opacity: 0.04; /* Mais sutil no mobile */
             }
 
-            .warning-box,
-            .assumptions-box,
             .input-section,
             .results-section {
                 padding: 20px;
             }
 
-            .warning-box h3,
-            .assumptions-box h3 {
-                font-size: 1.2rem;
+            .callout {
+                padding: 15px; /* IGUAL AO CDB */
+                gap: 10px;
+            }
+
+            .callout-icon {
+                font-size: 20px; /* IGUAL AO CDB */
+            }
+
+            .callout-content h3 {
+                font-size: 14px; /* IGUAL AO CDB */
+            }
+
+            .callout-content p {
+                font-size: 13px; /* IGUAL AO CDB */
             }
         }
 
@@ -1151,12 +1142,14 @@
         </div>
 
         <!-- Caixa de Aviso: Resgate Antecipado -->
-        <div class="warning-box">
-            <h3>⚠️ Atenção: Resgate Antecipado e Marcação a Mercado</h3>
-            <p>
-                <strong>Este simulador calcula o rendimento até o vencimento.</strong> Porém, é fundamental entender que:
-            </p>
-            <ul>
+        <div class="callout callout-warning">
+            <div class="callout-icon">⚠️</div>
+            <div class="callout-content">
+                <h3>Atenção: Resgate Antecipado e Marcação a Mercado</h3>
+                <p>
+                    <strong>Este simulador calcula o rendimento até o vencimento.</strong> Porém, é fundamental entender que:
+                </p>
+                <ul>
                 <li>
                     <strong>Tesouro Selic:</strong> Possui liquidez diária e baixo risco de perda no resgate antecipado. 
                     Ideal para reserva de emergência.
@@ -1176,13 +1169,16 @@
                         www.tesourodireto.com.br
                     </a>
                 </li>
-            </ul>
+                </ul>
+            </div>
         </div>
 
         <!-- Premissas do Simulador -->
-        <div class="assumptions-box">
-            <h3>📋 Premissas do Simulador</h3>
-            <ul>
+        <div class="callout callout-info">
+            <div class="callout-icon">ℹ️</div>
+            <div class="callout-content">
+                <h3>Premissas do Simulador</h3>
+                <ul>
                 <li>
                     <strong>Tesouro Selic (2029):</strong> 100% da taxa Selic (atualmente: 11,25% a.a.)
                 </li>
@@ -1218,7 +1214,8 @@
                 <li>
                     <strong>Data de atualização:</strong> Novembro de 2024
                 </li>
-            </ul>
+                </ul>
+            </div>
         </div>
         
         <!-- ASSINATURA INVLAB (Premium Footer) -->
