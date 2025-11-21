@@ -8,15 +8,19 @@
     max-width: 1200px; /* PADRONIZADO: 800px → 1200px (consistente com todo o site) */
     margin: 0 auto;
     padding: 8px 20px 40px; /* ULTRA COMPACTO: 40px top → 8px (consistente com index) */
+    border: none !important; /* FORÇADO: sem bordas */
+    outline: none !important; /* FORÇADO: sem outline */
+    box-shadow: none !important; /* FORÇADO: sem sombras */
 }
 
 /* Breadcrumb - STICKY (gruda no menu ao rolar) */
 .breadcrumb {
     margin-bottom: 32px; /* AUMENTADO: 16px → 32px (respiro e destaque do breadcrumb) */
     padding: 12px 0 16px; /* AJUSTADO: 12px padding-top para folga interna entre texto e borda superior */
-    background: rgba(13, 13, 13, 0.95); /* ADICIONADO: fundo escuro semi-transparente */
-    backdrop-filter: blur(10px); /* ADICIONADO: efeito glassmorphism */
-    /* border-bottom REMOVIDO: linha desnecessária, menu já tem bordas */
+    background: #0D0D0D; /* OPACO: fundo preto para evitar texto aparecer ao rolar */
+    border: none !important; /* FORÇADO: sem bordas */
+    outline: none !important; /* FORÇADO: sem outline */
+    box-shadow: none !important; /* FORÇADO: sem sombras */
     font-size: 14px;
     color: rgba(255, 255, 255, 0.6);
     
@@ -27,6 +31,12 @@
     
     /* Transição suave ao grudar */
     transition: all 0.3s ease;
+}
+
+/* Remove qualquer linha antes do breadcrumb */
+.breadcrumb::before {
+    content: none !important;
+    display: none !important;
 }
 
 .breadcrumb .content-wrapper-wide {

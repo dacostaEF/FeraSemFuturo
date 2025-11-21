@@ -21,6 +21,75 @@
     <link rel="stylesheet" href="../assets/css/artigo-styles.css">
     <!-- INVLAB Carrossel - Indicadores Criptoativos -->
     <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+    
+    <!-- FIX: Remove linha branca entre menu e breadcrumb -->
+    <style>
+        /* SOLUÇÃO DEFINITIVA: Combinação de 3 blocos que elimina a linha branca */
+        
+        /* BLOCO 1: Remove bordas/sombras de TODOS os filhos (EXCETO tabelas) */
+        .main-header *,
+        .header-container *,
+        .tabs-nav-wrapper *,
+        .tabs-nav *,
+        .tab-btn,
+        .tab-with-dropdown,
+        main,
+        main *:not(table):not(th):not(td):not(tr),
+        .content-wrapper-wide,
+        .breadcrumb,
+        body > * {
+            border-top: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+            outline: none !important;
+            text-decoration: none !important;
+        }
+        
+        /* BLOCO 2: Força fundo preto nos pseudo-elementos ::after */
+        .main-header::after,
+        .header-container::after,
+        .tabs-nav-wrapper::after,
+        .tabs-nav::after {
+            background: #0D0D0D !important;
+            border: none !important;
+        }
+        
+        /* BLOCO 3: Elimina gaps (padding e margin) */
+        .main-header {
+            padding-bottom: 0 !important;
+            margin-bottom: 0 !important;
+            background: #0D0D0D !important; /* Fundo 100% opaco */
+            z-index: 1000 !important; /* Sempre por cima do conteúdo */
+        }
+        
+        main {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+        
+        /* BLOCO 4: Protege contra vazamento de conteúdo com "sombra opaca" */
+        #invlab-carousel-container {
+            background: #0D0D0D !important;
+            z-index: 999 !important;
+            box-shadow: 0 3px 0 0 #0D0D0D !important; /* Sombra sólida preta de 3px abaixo */
+        }
+        
+        .main-header {
+            box-shadow: 0 3px 0 0 #0D0D0D !important; /* Sombra sólida preta de 3px abaixo */
+        }
+        
+        .breadcrumb {
+            background: #0D0D0D !important;
+            z-index: 998 !important;
+        }
+        
+        /* EXCEÇÃO: Restaura bordas das tabelas */
+        table,
+        table th,
+        table td {
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+    </style>
 </head>
 <body>
     <!-- CARROSSEL: Indicadores Criptoativos -->
@@ -116,9 +185,13 @@
                             <li><a href="cbdc.html">🏛️ CBDCs</a></li>
                             <li><a href="altcoins.html">🪙 Altcoins</a></li>
                             <li><a href="nfts.html">🖼️ NFTs</a></li>
-                            <li><a href="#">🔗 Tokenização</a></li>
+                            <li><a href="tokenizacao.html">🔗 Tokenização</a></li>
                         </ul>
                     </div>
+
+                    <button class="tab-btn" onclick="window.location.href='../index.html#outros-investimentos'">
+                        💎 Outros<br>Investimentos
+                    </button>
 
                     <!-- ABA COM DROPDOWN: FERRAMENTAS -->
                     <div class="tab-with-dropdown">
@@ -148,22 +221,21 @@
         </div>
     </header>
 
-    <main class="main-content">
-        <article class="article-wrapper">
-            
+    <!-- Conteúdo Principal -->
+    <main>
+        <div class="content-wrapper-wide">
             <!-- Breadcrumb -->
-            <nav class="breadcrumb" aria-label="breadcrumb">
-                <div class="content-wrapper-wide">
-                    <a href="../index.html" class="breadcrumb-item">🏠 Início</a>
-                    <span class="breadcrumb-separator">/</span>
-                    <a href="../index.html#criptoativos" class="breadcrumb-item">🔐 Criptoativos</a>
-                    <span class="breadcrumb-separator">/</span>
-                    <span class="breadcrumb-current">🪙 Altcoins</span>
-                </div>
+            <nav class="breadcrumb">
+                <a href="../index.html">🏠 Início</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../index.html#criptoativos">🔐 Criptoativos</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">🪙 Altcoins</span>
             </nav>
 
-            <!-- Conteúdo Principal do Artigo -->
-            <div class="article-content content-wrapper-wide">
+            <!-- Seção Educacional -->
+            <section class="section-educational">
+            <article class="article-content">
                 
                 <!-- Título Principal -->
                 <h1 class="article-title">Altcoins: O Universo de Criptomoedas Além do Bitcoin</h1>
@@ -689,8 +761,9 @@
                     </div>
                 </div>
 
-            </div>
-        </article>
+            </article>
+            </section>
+        </div>
     </main>
 
     <!-- Footer -->

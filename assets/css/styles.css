@@ -46,6 +46,24 @@ body {
     padding-top: 65px; /* REDUZIDO: 130px → 65px (50% de redução para aproveitar melhor o espaço vertical) */
 }
 
+/* Remove bordas superiores de elementos principais */
+main {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Remove qualquer linha entre o menu e o breadcrumb */
+main::before,
+main > *::before,
+.content-wrapper-wide::before,
+.breadcrumb::before {
+    content: none !important;
+    display: none !important;
+    border: none !important;
+    background: none !important;
+}
+
 /* ============================================
    HEADER FIXO & SISTEMA DE ABAS
    ============================================ */
@@ -58,7 +76,7 @@ body {
     background: #0D0D0D; /* 100% OPACO - evita vazamento de conteúdo */
     /* border-bottom REMOVIDO: visual mais limpo, sem linhas desnecessárias */
     z-index: 1000;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+    box-shadow: none; /* REMOVIDO: sem sombra para evitar linha visual */
     overflow: visible !important; /* PERMITE DROPDOWNS APARECEREM */
     padding: 0; /* ADICIONADO: zero padding no header principal */
     margin: 0; /* ADICIONADO: zero margin no header principal */
@@ -75,6 +93,18 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0 !important; /* FORÇADO: zero gap */
+    border: none !important; /* FORÇADO: sem bordas */
+    outline: none !important; /* FORÇADO: sem outline */
+    box-shadow: none !important; /* FORÇADO: sem sombras que criam linhas */
+}
+
+/* Remove qualquer linha após o header */
+.header-container::after,
+.main-header::after {
+    content: none !important;
+    display: none !important;
+    border: none !important;
+    background: none !important;
 }
 
 /* Logo no Header */
@@ -127,6 +157,8 @@ body {
     margin: 0; /* ADICIONADO: zero margin */
     width: 100%;
     overflow: visible !important;
+    border: none; /* REMOVIDO: sem bordas */
+    box-shadow: none; /* REMOVIDO: sem sombras que criam linhas */
 }
 
 /* Wrapper para controlar o scroll sem cortar dropdowns */
@@ -136,6 +168,8 @@ body {
     scrollbar-width: none;
     padding: 0; /* ADICIONADO: zero padding */
     margin: 0; /* ADICIONADO: zero margin */
+    border: none; /* REMOVIDO: sem bordas */
+    box-shadow: none; /* REMOVIDO: sem sombras que criam linhas */
 }
 
 .tabs-nav-wrapper::-webkit-scrollbar {
@@ -1816,10 +1850,8 @@ body {
         scrollbar-color: rgba(255,255,255,0.3) transparent;
         position: relative;
         
-        /* Efeito 3D - Sombra interna */
-        box-shadow: 
-            inset 15px 0 15px -10px rgba(0, 0, 0, 0.5),
-            inset -15px 0 15px -10px rgba(0, 0, 0, 0.5);
+        /* Efeito 3D - Sombra interna REMOVIDA para eliminar linha branca */
+        box-shadow: none;
     }
     
     /* Gradient Fade - Esquerda */
@@ -2245,11 +2277,17 @@ body {
     max-width: 1200px; /* PADRONIZADO: 1100px → 1200px (consistente com todo o site) */
     margin: 0 auto;
     padding: 8px 20px 0; /* ULTRA COMPACTO: 15px → 8px (50% redução extra) */
+    border: none !important; /* FORÇADO: sem bordas */
+    outline: none !important; /* FORÇADO: sem outline */
+    box-shadow: none !important; /* FORÇADO: sem sombras */
 }
 
 /* Seção Educacional */
 .section-educational {
     padding: 8px 0; /* ULTRA COMPACTO: 15px → 8px (50% redução extra) */
+    border: none !important; /* FORÇADO: sem bordas */
+    outline: none !important; /* FORÇADO: sem outline */
+    box-shadow: none !important; /* FORÇADO: sem sombras */
 }
 
 /* Header Educacional */
