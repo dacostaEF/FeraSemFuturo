@@ -67,25 +67,7 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); /* Sombra premium */
         }
         
-        /* MARCA D'ÁGUA INVLAB (Premium Style) */
-        .container::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image: url('../assets/images/Logo_tutorfinanceiro.png');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 360px;
-            opacity: 0.08;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        /* Garante que conteúdo fique acima da marca d'água */
-        .container > * {
-            position: relative;
-            z-index: 1;
-        }
+        /* MARCA D'ÁGUA removida do container externo - agora está no content-card */
 
         /* BRANDING INVLAB HEADER (Premium Style) */
         .sim-header-brand {
@@ -182,6 +164,32 @@
             box-shadow: 0 8px 24px rgba(0,0,0,0.4);
             margin-bottom: 14px; /* REDUZIDO: 20px → 14px (-30%) */
             border: 1px solid rgba(255, 255, 255, 0.08); /* Borda sutil */
+            position: relative; /* Para a marca d'água funcionar */
+            overflow: hidden; /* Esconde o que sair da borda arredondada */
+        }
+
+        /* MARCA D'ÁGUA INVLAB no content-card (Premium Style) */
+        .content-card::before {
+            content: "";
+            position: absolute;
+            top: 35%; /* Levantada para ficar mais centrada nos campos */
+            left: 50%; /* Centralizado horizontalmente */
+            transform: translate(-50%, -50%); /* Ajuste fino para centralizar */
+            width: 420px; /* Tamanho da marca d'água */
+            height: 420px;
+            background-image: url('../assets/images/Logo_tutorfinanceiro.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.06; /* Bem sutil */
+            pointer-events: none; /* Não interfere nos cliques */
+            z-index: 0; /* Atrás do conteúdo */
+        }
+        
+        /* Garante que conteúdo do card fique acima da marca d'água */
+        .content-card > * {
+            position: relative;
+            z-index: 1;
         }
 
         /* Callouts */
@@ -911,9 +919,11 @@
                 margin-bottom: 16px;
             }
             
-            .container::before {
-                background-size: 240px;
-                opacity: 0.05;
+            .content-card::before {
+                width: 280px; /* Marca d'água menor no mobile */
+                height: 280px;
+                opacity: 0.04; /* Mais sutil no mobile */
+                top: 30%; /* Ajustado para mobile */
             }
             
             .sim-signature {
