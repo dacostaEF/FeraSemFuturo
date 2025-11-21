@@ -13,16 +13,16 @@
 /* Breadcrumb - STICKY (gruda no menu ao rolar) */
 .breadcrumb {
     margin-bottom: 32px; /* AUMENTADO: 16px → 32px (respiro e destaque do breadcrumb) */
-    padding: 12px 0 16px; /* AJUSTADO: padding lateral 0 para alinhar com conteúdo */
+    padding: 0 0 16px; /* AJUSTADO: padding-top ZERO para colar perfeitamente no menu */
     background: rgba(13, 13, 13, 0.95); /* ADICIONADO: fundo escuro semi-transparente */
     backdrop-filter: blur(10px); /* ADICIONADO: efeito glassmorphism */
-    border-bottom: 1px solid rgba(42, 127, 255, 0.2); /* MELHORADO: azul mais visível */
+    /* border-bottom REMOVIDO: linha desnecessária, menu já tem bordas */
     font-size: 14px;
     color: rgba(255, 255, 255, 0.6);
     
     /* STICKY - Cola no header ao rolar */
     position: sticky;
-    top: 130px; /* Para logo abaixo do header fixo (carrossel 60px + header 70px) */
+    top: 110px; /* AJUSTADO: 130px → 110px para colar perfeitamente na base do menu */
     z-index: 999; /* Abaixo do header (1000) mas acima do conteúdo */
     
     /* Transição suave ao grudar */
@@ -60,11 +60,12 @@
     border-left: 3px solid var(--blue-action); /* ADICIONADO: barra azul indicando "você está aqui" */
 }
 
-/* Meta do Artigo */
+/* Meta do Artigo - REMOVIDO (poluição visual desnecessária) */
+/*
 .article-meta {
     display: flex;
     gap: 16px;
-    margin-bottom: 16px; /* REDUZIDO: 24px → 16px (compacto) */
+    margin-bottom: 16px;
     flex-wrap: wrap;
 }
 
@@ -88,6 +89,7 @@
     color: rgba(255, 255, 255, 0.7);
     background: rgba(255, 255, 255, 0.05);
 }
+*/ /* Espaço compensado em .article-title com margin-top: 41px */
 
 /* Título Principal */
 .article-title {
@@ -95,7 +97,9 @@
     font-weight: 700;
     color: #FFFFFF;
     line-height: 1.2;
+    margin-top: 41px; /* COMPENSAÇÃO: espaço das caixas removidas (article-meta ~25px + margin 16px) */
     margin-bottom: 16px; /* REDUZIDO: 20px → 16px (compacto) */
+    text-align: center; /* CENTRALIZADO: consistente com hero-title */
 }
 
 /* Lead (subtítulo) */
@@ -104,6 +108,7 @@
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.8);
     margin-bottom: 24px; /* REDUZIDO: 40px → 24px (compacto) */
+    text-align: center; /* CENTRALIZADO: consistente com section-subtitle */
 }
 
 /* Hero Section */
@@ -135,6 +140,7 @@
     font-weight: 700;
     color: #FFFFFF;
     margin-bottom: 20px;
+    text-align: center; /* CENTRALIZADO: consistência visual */
 }
 
 .article-section h3 {
@@ -143,6 +149,7 @@
     color: #FFFFFF;
     margin-bottom: 12px;
     margin-top: 24px;
+    text-align: center; /* CENTRALIZADO: consistência visual */
 }
 
 .article-section p {
@@ -325,13 +332,14 @@
     }
 
     .breadcrumb {
-        top: 110px; /* AJUSTADO: sticky para altura do header em tablet (110px) */
-        padding: 10px 16px 12px;
+        top: 90px; /* AJUSTADO: para colar na base do menu em tablet */
+        padding: 0 16px 12px; /* padding-top ZERO */
         font-size: 13px;
     }
 
     .article-title {
         font-size: 28px;
+        margin-top: 41px; /* COMPENSAÇÃO: mantém espaço mesmo em tablet */
     }
 
     .article-lead {
@@ -366,14 +374,15 @@
     }
 
     .breadcrumb {
-        top: 100px; /* AJUSTADO: sticky para altura do header em mobile (100px) */
-        padding: 8px 12px 10px;
+        top: 96px; /* AJUSTADO: para colar na base do menu em mobile */
+        padding: 0 12px 10px; /* padding-top ZERO */
         font-size: 12px;
         gap: 6px;
     }
 
     .article-title {
         font-size: 24px;
+        margin-top: 41px; /* COMPENSAÇÃO: mantém espaço mesmo em mobile */
     }
 
     .article-lead {
