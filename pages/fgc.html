@@ -608,6 +608,65 @@
         </ul>
     </div>
 
+    <!-- SIMULADOR FGC -->
+    <div class="section">
+        <h2>🧮 Simulador de Proteção FGC</h2>
+        <p style="margin-bottom: 20px; color: #CBD5E1;">Digite seus valores investidos em até 3 bancos diferentes e descubra quanto está protegido pelo FGC:</p>
+
+        <div style="display: grid; gap: 16px; margin-bottom: 20px;">
+            <div>
+                <label for="banco1" style="display: block; margin-bottom: 6px; color: #94A3B8; font-size: 0.9rem; font-weight: 600;">🏦 Banco 1 (R$)</label>
+                <input 
+                    id="banco1" 
+                    type="number" 
+                    placeholder="Ex: 200000" 
+                    style="width: 100%; padding: 14px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #E2E8F0; font-size: 1rem;"
+                >
+            </div>
+            <div>
+                <label for="banco2" style="display: block; margin-bottom: 6px; color: #94A3B8; font-size: 0.9rem; font-weight: 600;">🏦 Banco 2 (R$)</label>
+                <input 
+                    id="banco2" 
+                    type="number" 
+                    placeholder="Ex: 150000" 
+                    style="width: 100%; padding: 14px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #E2E8F0; font-size: 1rem;"
+                >
+            </div>
+            <div>
+                <label for="banco3" style="display: block; margin-bottom: 6px; color: #94A3B8; font-size: 0.9rem; font-weight: 600;">🏦 Banco 3 (R$)</label>
+                <input 
+                    id="banco3" 
+                    type="number" 
+                    placeholder="Ex: 100000" 
+                    style="width: 100%; padding: 14px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #E2E8F0; font-size: 1rem;"
+                >
+            </div>
+        </div>
+
+        <button 
+            onclick="simularFGC()" 
+            style="width: 100%; padding: 16px; border-radius: 10px; background: linear-gradient(135deg, #10b981, #059669); color: white; font-weight: 700; font-size: 1.05rem; cursor: pointer; border: none; transition: transform 0.2s; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);"
+            onmouseover="this.style.transform='translateY(-2px)'"
+            onmouseout="this.style.transform='translateY(0)'"
+        >
+            💰 Calcular Proteção FGC
+        </button>
+
+        <div 
+            id="resultadoFGC" 
+            style="margin-top: 24px; padding: 24px; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 12px; display: none;"
+        >
+            <h4 style="color: #3B82F6; margin: 0 0 16px 0; font-size: 1.2rem;">📊 Resultado da Simulação</h4>
+            <div id="resultadoConteudo"></div>
+        </div>
+
+        <div style="margin-top: 20px; padding: 16px; background: rgba(139, 92, 246, 0.08); border-left: 4px solid #8B5CF6; border-radius: 8px;">
+            <p style="margin: 0; font-size: 0.9rem; color: #CBD5E1;">
+                <strong style="color: #A78BFA;">💡 Dica:</strong> Diversificar entre bancos é a melhor estratégia para proteger grandes patrimônios. Cada instituição oferece R$ 250 mil de proteção FGC.
+            </p>
+        </div>
+    </div>
+
     <!-- FAQ -->
     <div class="section">
         <h2>❓ Perguntas Frequentes (FAQ)</h2>
@@ -674,13 +733,74 @@
             </div>
         </details>
 
-        <details style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; cursor: pointer;">
+        <details style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; margin-bottom: 12px; cursor: pointer;">
             <summary style="font-weight: 600; color: #CBD5E1; cursor: pointer; list-style: none;">
                 6. Como sei se dois bancos são do mesmo conglomerado?
             </summary>
             <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.05); color: #94A3B8;">
                 🔍 Consulte o site do Banco Central ou do próprio FGC. Exemplos: BTG + BTG+, Itaú + Itaucard, Bradesco + Finasa. Se você não tiver certeza, trate como conglomerado (limite compartilhado).
             </p>
+        </details>
+
+        <details style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; margin-bottom: 12px; cursor: pointer;">
+            <summary style="font-weight: 600; color: #CBD5E1; cursor: pointer; list-style: none;">
+                7. O DPGE é seguro?
+            </summary>
+            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.05); color: #94A3B8;">
+                <p style="margin: 0 0 12px 0;">✅ <strong>Sim, é muito seguro!</strong></p>
+                <p style="margin: 0 0 12px 0;">O DPGE (Depósito a Prazo com Garantia Especial) tem proteção FGC de até <strong>R$ 40 milhões por CPF</strong> (muito mais que os R$ 250 mil dos outros investimentos).</p>
+                
+                <div style="background: rgba(139, 92, 246, 0.08); border-left: 3px solid #8B5CF6; padding: 12px; border-radius: 6px; margin: 12px 0;">
+                    <p style="margin: 0 0 8px 0; color: #A78BFA;"><strong>💎 Características do DPGE:</strong></p>
+                    <ul style="padding-left: 20px; margin: 8px 0 0 0;">
+                        <li style="margin-bottom: 6px;">Prazo mínimo: 6 meses</li>
+                        <li style="margin-bottom: 6px;">Prazo máximo: 24 meses</li>
+                        <li style="margin-bottom: 6px;">Não pode resgatar antes do vencimento</li>
+                        <li>Geralmente oferecido por bancos menores</li>
+                    </ul>
+                </div>
+                
+                <p style="margin: 12px 0 0 0; font-size: 0.9rem;">
+                    <strong>💡 Quando vale a pena?</strong> Se você tem valores muito altos (acima de R$ 1 milhão) e quer proteção FGC estendida, o DPGE pode fazer sentido como parte da estratégia de diversificação.
+                </p>
+            </div>
+        </details>
+
+        <details style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; margin-bottom: 12px; cursor: pointer;">
+            <summary style="font-weight: 600; color: #CBD5E1; cursor: pointer; list-style: none;">
+                8. O FGC cobre contas em dólar?
+            </summary>
+            <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.05); color: #94A3B8;">
+                ❌ <strong>NÃO.</strong> O FGC cobre apenas depósitos e investimentos em <strong>reais (R$)</strong>.<br><br>
+                
+                Se você tem uma conta em dólar no Brasil (oferecida por alguns bancos) e a instituição quebrar, <strong>não há proteção FGC para essa moeda estrangeira</strong>.<br><br>
+                
+                <strong>💡 Alternativa:</strong> Para proteger valores em dólar, prefira investimentos diretamente no exterior ou em instituições de altíssima solidez (mas sempre com o risco cambial e político em mente).
+            </p>
+        </details>
+
+        <details style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; cursor: pointer;">
+            <summary style="font-weight: 600; color: #CBD5E1; cursor: pointer; list-style: none;">
+                9. O FGC cobre criptomoedas?
+            </summary>
+            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.05); color: #94A3B8;">
+                <p style="margin: 0 0 12px 0;">❌ <strong>NÃO.</strong></p>
+                <p style="margin: 0 0 12px 0;">Criptomoedas (Bitcoin, Ethereum, stablecoins, etc.) <strong>não fazem parte do sistema bancário regulado</strong> e, portanto, não têm proteção FGC.</p>
+                
+                <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #EF4444; padding: 12px; border-radius: 6px; margin: 12px 0;">
+                    <p style="margin: 0 0 8px 0; color: #FCA5A5;"><strong>⚠️ Risco Total:</strong></p>
+                    <p style="margin: 0;">Se a exchange quebrar, você pode perder TUDO. Não há fundo garantidor, não há Banco Central para intervir, não há processo de liquidação extrajudicial com ressarcimento.</p>
+                </div>
+                
+                <div style="background: rgba(59, 130, 246, 0.08); border-left: 3px solid #3B82F6; padding: 12px; border-radius: 6px; margin: 12px 0;">
+                    <p style="margin: 0 0 8px 0; color: #93C5FD;"><strong>💡 Proteção Mínima:</strong></p>
+                    <p style="margin: 0;">Para reduzir risco, transfira suas criptos para uma <strong>carteira própria (cold wallet)</strong> onde só você controla as chaves privadas. Mas lembre-se: mesmo assim, não há proteção contra hacks, perda de senha ou volatilidade extrema.</p>
+                </div>
+                
+                <p style="margin: 12px 0 0 0; font-size: 0.9rem;">
+                    <strong>🔐 Regra de ouro:</strong> "Not your keys, not your coins" — se você deixa suas criptos na exchange, está assumindo risco total de quebra da plataforma (e não é pequeno: Mt. Gox, FTX, Celsius são exemplos reais de bilhões perdidos).
+                </p>
+            </div>
         </details>
     </div>
 
@@ -790,6 +910,101 @@
     <!-- APIs para o Carrossel -->
     <script defer src="../assets/js/bcb-api.js"></script>
     <script defer src="../assets/js/invlab-carrossel-renda-fixa.js"></script>
+
+    <!-- Script do Simulador FGC -->
+    <script>
+    function simularFGC() {
+        const limite = 250000;
+        const valores = [
+            parseFloat(document.getElementById("banco1").value || 0),
+            parseFloat(document.getElementById("banco2").value || 0),
+            parseFloat(document.getElementById("banco3").value || 0),
+        ];
+        
+        let protegidoTotal = 0;
+        let descobertoTotal = 0;
+        let totalInvestido = 0;
+        let detalhes = '';
+
+        valores.forEach((valor, index) => {
+            if (valor > 0) {
+                totalInvestido += valor;
+                const protegido = Math.min(valor, limite);
+                const descoberto = Math.max(0, valor - limite);
+                
+                protegidoTotal += protegido;
+                descobertoTotal += descoberto;
+
+                detalhes += `
+                    <div style="padding: 12px; background: rgba(255,255,255,0.03); border-radius: 8px; margin-bottom: 10px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <span style="font-weight: 600; color: #E2E8F0;">🏦 Banco ${index + 1}</span>
+                            <span style="color: #94A3B8;">R$ ${valor.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+                            <span style="color: #10B981;">✅ Protegido: R$ ${protegido.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                            ${descoberto > 0 ? `<span style="color: #EF4444;">⚠️ Descoberto: R$ ${descoberto.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+        });
+
+        if (totalInvestido === 0) {
+            document.getElementById("resultadoFGC").style.display = 'none';
+            alert('⚠️ Digite pelo menos um valor para simular!');
+            return;
+        }
+
+        const percentualProtegido = ((protegidoTotal / totalInvestido) * 100).toFixed(1);
+
+        let mensagemFinal = '';
+        if (descobertoTotal === 0) {
+            mensagemFinal = `
+                <div style="background: rgba(16, 185, 129, 0.15); border-left: 4px solid #10B981; padding: 16px; border-radius: 8px; margin-top: 16px;">
+                    <p style="margin: 0; color: #6EE7B7; font-weight: 600;">🎉 Parabéns! 100% do seu patrimônio está protegido pelo FGC!</p>
+                    <p style="margin: 8px 0 0 0; color: #CBD5E1; font-size: 0.9rem;">Sua estratégia de diversificação está correta.</p>
+                </div>
+            `;
+        } else {
+            mensagemFinal = `
+                <div style="background: rgba(245, 158, 11, 0.15); border-left: 4px solid #F59E0B; padding: 16px; border-radius: 8px; margin-top: 16px;">
+                    <p style="margin: 0; color: #FDE047; font-weight: 600;">⚠️ Atenção: R$ ${descobertoTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})} estão SEM proteção FGC!</p>
+                    <p style="margin: 8px 0 0 0; color: #CBD5E1; font-size: 0.9rem;">Considere diversificar para mais bancos para proteger 100% do seu patrimônio.</p>
+                </div>
+            `;
+        }
+
+        document.getElementById("resultadoConteudo").innerHTML = `
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px;">
+                <div style="background: rgba(59, 130, 246, 0.1); padding: 16px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 6px;">Total Investido</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: #3B82F6;">R$ ${totalInvestido.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                </div>
+                <div style="background: rgba(16, 185, 129, 0.1); padding: 16px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 6px;">✅ Protegido FGC</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: #10B981;">R$ ${protegidoTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                </div>
+                <div style="background: rgba(239, 68, 68, 0.1); padding: 16px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 6px;">⚠️ Sem Proteção</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: #EF4444;">R$ ${descobertoTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                </div>
+            </div>
+
+            <div style="background: rgba(139, 92, 246, 0.1); padding: 16px; border-radius: 10px; text-align: center; margin-bottom: 20px;">
+                <div style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 6px;">Percentual Protegido</div>
+                <div style="font-size: 2rem; font-weight: bold; color: #A78BFA;">${percentualProtegido}%</div>
+            </div>
+
+            <h4 style="color: #E2E8F0; margin: 20px 0 12px 0; font-size: 1rem;">📋 Detalhamento por Banco:</h4>
+            ${detalhes}
+            ${mensagemFinal}
+        `;
+
+        document.getElementById("resultadoFGC").style.display = 'block';
+        document.getElementById("resultadoFGC").scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    </script>
 </body>
 </html>
 
