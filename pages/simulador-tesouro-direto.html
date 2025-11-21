@@ -396,37 +396,28 @@
         }
 
         .form-group {
-            margin-bottom: 0;
-            display: grid;
-            grid-template-rows: 54px 54px 44px;
-            align-items: start;
+            display: flex;
+            flex-direction: column; /* IGUAL AO CDB */
         }
 
         .form-group label {
-            display: flex;
-            align-items: center;
-            color: #10b981; /* Verde INVLAB */
             font-weight: 600;
-            font-size: 0.735rem; /* REDUZIDO: 1.05rem → 0.735rem (-30%) */
-            height: 37.8px; /* REDUZIDO: 54px → 37.8px (-30%) */
-            line-height: 1.3;
-            margin: 0;
-            padding: 0;
+            margin-bottom: 6px; /* IGUAL AO CDB */
+            color: rgba(255, 255, 255, 0.9); /* IGUAL AO CDB: texto claro e legível */
+            font-size: 0.95rem; /* IGUAL AO CDB: tamanho adequado */
         }
 
         .form-group input,
         .form-group select {
             width: 100%;
-            padding: 10.5px; /* REDUZIDO: 15px → 10.5px (-30%) */
-            border: 1px solid rgba(255, 255, 255, 0.15); /* Borda sutil INVLAB */
-            border-radius: 7px; /* REDUZIDO: 10px → 7px (-30%) */
-            font-size: 0.77rem; /* REDUZIDO: 1.1rem → 0.77rem (-30%) */
+            padding: 8px 11px; /* IGUAL AO CDB */
+            border: 1px solid rgba(59, 130, 246, 0.3); /* IGUAL AO CDB: borda azul sutil */
+            border-radius: 8px; /* IGUAL AO CDB */
+            font-size: 0.95rem; /* IGUAL AO CDB */
             transition: all 0.3s;
             background: rgba(255, 255, 255, 0.05); /* Fundo escuro sutil */
-            color: rgba(255, 255, 255, 0.9); /* Texto claro */
-            height: 37.8px; /* REDUZIDO: 54px → 37.8px (-30%) */
+            color: rgba(255, 255, 255, 0.95); /* IGUAL AO CDB: texto claro */
             box-sizing: border-box;
-            margin: 0;
         }
 
         .form-group input[type="date"] {
@@ -437,7 +428,14 @@
         .form-group select:focus {
             outline: none;
             border-color: #10b981; /* Verde INVLAB */
-            box-shadow: 0 0 0 2.1px rgba(16, 185, 129, 0.15); /* REDUZIDO: 3px → 2.1px (-30%) */
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15); /* IGUAL AO CDB */
+            background: rgba(255, 255, 255, 0.08); /* IGUAL AO CDB: leve destaque */
+        }
+
+        .form-group small {
+            font-size: 12px; /* IGUAL AO CDB */
+            color: rgba(255, 255, 255, 0.6); /* IGUAL AO CDB: texto secundário claro */
+            margin-top: 4px; /* IGUAL AO CDB */
         }
 
         /* Dropdown options - Fundo escuro */
@@ -454,9 +452,8 @@
         .form-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            align-items: start;
-            margin-bottom: 25px;
+            gap: 20px; /* IGUAL AO CDB */
+            margin-bottom: 30px; /* IGUAL AO CDB */
         }
 
         .input-section-intro {
@@ -753,18 +750,14 @@
                 grid-template-columns: 1fr;
             }
 
-            .form-group {
-                grid-template-rows: auto auto auto;
-            }
-
             .form-group label {
-                height: auto;
-                min-height: 44px;
+                font-size: 14px; /* IGUAL AO CDB mobile */
             }
 
-            .field-hint {
-                height: auto;
-                min-height: 30px;
+            .form-group input,
+            .form-group select {
+                padding: 10px 12px; /* IGUAL AO CDB mobile */
+                font-size: 16px; /* IGUAL AO CDB: evita zoom iOS */
             }
 
             .comparison-table {
