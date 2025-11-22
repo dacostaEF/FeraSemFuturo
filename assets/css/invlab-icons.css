@@ -1,0 +1,228 @@
+/* ============================================
+   INVLAB ICONS SYSTEM - Phosphor Premium
+   Dourado #D4AF37 + Verde #10b981
+   ============================================ */
+
+:root {
+    /* Dourado Premium - para títulos, ícones, destaques */
+    --gold-premium: #D4AF37;
+    --gold-soft: rgba(212, 175, 55, 0.85);
+    --gold-hover: rgba(212, 175, 55, 0.7);  /* 70% - mais iluminado */
+    
+    /* Verde INVLAB - uso estratégico por contexto */
+    --green-invlab: #10b981;                      /* Puro: apenas ícones, botões, detalhes */
+    --green-invlab-subtitle: rgba(16, 185, 129, 0.65);  /* Subtítulos curtos */
+    --green-invlab-text: rgba(16, 185, 129, 0.45);      /* Textos longos */
+    --green-invlab-light: rgba(16, 185, 129, 0.2);      /* Preenchimentos */
+    --green-invlab-hover: rgba(16, 185, 129, 0.3);      /* Estados hover */
+    
+    /* Textos - Hierarquia clara */
+    --text-white-soft: #E4E4E4;    /* Branco suave - títulos e textos importantes */
+    --text-gray: #9CA3AF;          /* Cinza - descrições e textos secundários */
+}
+
+/* ============================================
+   NÍVEL 1: PADRÃO (Duotone)
+   Linha dourada + preenchimento verde translúcido
+   ============================================ */
+.icon-invlab-padrao {
+    color: var(--gold-premium);
+    fill: var(--green-invlab-light);
+    width: 48px;
+    height: 48px;
+    transition: all 0.3s ease;
+}
+
+.icon-invlab-padrao:hover {
+    fill: var(--green-invlab-hover);
+    transform: translateY(-2px);
+    filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.3));
+}
+
+/* ============================================
+   NÍVEL 2: OUTLINE
+   Apenas linha dourada (sem preenchimento)
+   ============================================ */
+.icon-invlab-outline {
+    color: var(--gold-premium);
+    fill: none;
+    width: 40px;
+    height: 40px;
+    transition: all 0.3s ease;
+}
+
+.icon-invlab-outline:hover {
+    color: var(--gold-hover);  /* Dourado suave no hover */
+    transform: scale(1.05);
+    filter: drop-shadow(0 2px 6px rgba(212, 175, 55, 0.3));
+}
+
+/* ============================================
+   NÍVEL 3: SÓLIDO
+   Preenchimento verde INVLAB total
+   ============================================ */
+.icon-invlab-solid {
+    color: var(--green-invlab);
+    fill: var(--green-invlab);
+    width: 44px;
+    height: 44px;
+    transition: all 0.3s ease;
+}
+
+.icon-invlab-solid:hover {
+    color: var(--gold-premium);
+    fill: var(--gold-premium);
+    transform: rotate(-5deg) scale(1.1);
+}
+
+/* ============================================
+   NÍVEL 4: SUTIL (Translúcido)
+   Dourado suave para backgrounds
+   ============================================ */
+.icon-invlab-sutil {
+    color: var(--gold-premium);
+    fill: var(--gold-premium);
+    opacity: 0.2;
+    width: 32px;
+    height: 32px;
+    transition: all 0.3s ease;
+}
+
+.icon-invlab-sutil:hover {
+    opacity: 0.4;
+}
+
+/* ============================================
+   APLICAÇÃO NOS CARDS DE BENEFÍCIOS
+   ============================================ */
+.benefit-card {
+    position: relative;
+    background: rgba(26, 26, 26, 0.8);
+    border: 1px solid rgba(42, 127, 255, 0.2);
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.benefit-card:hover {
+    border-color: var(--gold-hover);  /* Dourado 70% - mais iluminado */
+    transform: translateY(-6px);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.2),
+                0 4px 12px rgba(16, 185, 129, 0.1);
+}
+
+/* Título do card (h3) */
+.benefit-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #E4E4E4;  /* Branco suave - legibilidade perfeita */
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+}
+
+/* Texto do card (p) */
+.benefit-card p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #9CA3AF;  /* Cinza para descrições - hierarquia clara */
+    line-height: 1.6;
+}
+
+.benefit-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.benefit-card:hover .benefit-icon {
+    transform: scale(1.1);
+}
+
+/* Ícone Phosphor dentro do benefit-icon */
+.benefit-icon .ph {
+    width: 56px;
+    height: 56px;
+}
+
+/* ============================================
+   TÍTULOS COM HIERARQUIA PREMIUM
+   Degradê Verde (presença forte + modernidade)
+   ============================================ */
+.section-title-premium {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2rem;
+    font-weight: 800;  /* Aumentado de 700 para 800 - mais peso e presença */
+    text-align: center;
+    margin-bottom: 12px;
+    /* Degradê verde premium - forte e iluminado */
+    background: linear-gradient(90deg, #10b981 0%, #34D399 50%, #10b981 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.02em;
+}
+
+/* ALTERNATIVA: Título com span para dourado + branco */
+.section-title-premium .gold {
+    color: var(--gold-premium);
+}
+
+.section-title-premium .white {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.section-subtitle-premium {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    text-align: center;
+    color: var(--green-invlab-subtitle);  /* Verde suave para subtítulos */
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+/* ============================================
+   MICROINTERAÇÕES PREMIUM
+   ============================================ */
+@keyframes glow-pulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3));
+    }
+    50% {
+        filter: drop-shadow(0 0 16px rgba(212, 175, 55, 0.5));
+    }
+}
+
+.benefit-card:hover .icon-invlab-padrao {
+    animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* ============================================
+   RESPONSIVO
+   ============================================ */
+@media (max-width: 768px) {
+    .icon-invlab-padrao {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .benefit-icon .ph {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .section-title-premium {
+        font-size: 1.5rem;
+    }
+    
+    .section-subtitle-premium {
+        font-size: 1rem;
+    }
+}
+
