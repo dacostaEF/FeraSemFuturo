@@ -18,11 +18,198 @@
     <!-- Meta Description -->
     <meta name="description" content="Guia de navegação do INVLAB: veja a estrutura completa do site, as trilhas de estudo e descubra onde você está no laboratório de investimentos.">
     
+    <!-- Google Fonts - INVLAB Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons - INVLAB Premium Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
     <!-- INVLAB Design System -->
     <link rel="stylesheet" href="../assets/css/inv-design-system.css">
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/invlab-icons.css">
     <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    
+    <style>
+        /* Back to Top Button - Premium INVLAB */
+        #backToTop {
+            display: none;
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 9999;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+            color: #0D0D0D;
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 50%;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 52px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease-in-out;
+            opacity: 0;
+        }
+        
+        #backToTop:hover {
+            background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.6);
+            border-color: rgba(16, 185, 129, 0.6);
+        }
+        
+        @media (max-width: 768px) {
+            #backToTop {
+                width: 48px;
+                height: 48px;
+                font-size: 24px;
+                line-height: 44px;
+                bottom: 24px;
+                right: 24px;
+            }
+        }
+        
+        /* Footer Premium INVLAB */
+        .footer {
+            border-top: 1px solid rgba(212, 175, 55, 0.25);
+            padding: 60px 20px 30px;
+            background: #0D0D0D;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo-section {
+            grid-column: span 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .footer-logo {
+            height: 42px;
+            filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.35));
+            transition: all 0.3s ease;
+        }
+        
+        .footer-logo:hover {
+            filter: brightness(1.2) drop-shadow(0 4px 12px rgba(212, 175, 55, 0.5));
+            transform: scale(1.02);
+        }
+        
+        .footer-logo-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.6;
+            margin-top: -8px;
+        }
+        
+        .footer-logo-link {
+            color: rgba(16, 185, 129, 0.85);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-logo-link:hover {
+            color: #D4AF37;
+        }
+        
+        .footer h4 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #D4AF37;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+        
+        .footer ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer li {
+            margin-bottom: 8px;
+        }
+        
+        .footer a {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(16, 185, 129, 0.85);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .footer a:hover {
+            color: #D4AF37;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            padding-top: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .footer-bottom p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        
+        .footer-bottom .copyright {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+            .footer-logo-section {
+                grid-column: span 2;
+                align-items: center;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .footer-logo-section {
+                grid-column: span 1;
+            }
+            .footer h4 {
+                text-align: center;
+            }
+            .footer ul {
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header Fixo -->
@@ -121,18 +308,21 @@
     <main>
         <div class="content-wrapper-wide">
             <!-- Breadcrumb -->
-            <nav class="breadcrumb">
+            <nav class="breadcrumb" style="margin-top: 20px; margin-bottom: 32px;">
                 <a href="../index.html">🏠 Início</a>
                 <span class="breadcrumb-separator">/</span>
                 <span class="breadcrumb-current">🧭 Guia do INVLAB</span>
             </nav>
 
-            <section class="section-educational">
+            <section class="section-educational" style="margin-top: 40px;">
             <article class="article-content">
-                <!-- Título -->
-                <h1 class="article-title">🧭 Guia do INVLAB – Onde Você Está e Para Onde Pode Ir</h1>
+                <!-- Título Premium INVLAB (emoji SEM cor) -->
+                <h1 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; font-weight: 800; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em; line-height: 1.2;">
+                    <span style="filter: none;">🧭</span> 
+                    <span style="background: linear-gradient(90deg, #10b981 0%, #34D399 50%, #10b981 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Guia do INVLAB – Onde Você Está e Para Onde Pode Ir</span>
+                </h1>
                 
-                <p class="article-lead">
+                <p class="article-lead" style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: rgba(16, 185, 129, 0.65); text-align: center; margin-bottom: 40px; line-height: 1.6;">
                     Este guia existe para ajudar você (e qualquer pessoa) a entender rapidamente 
                     <strong>como o INVLAB está organizado</strong>, onde você está agora 
                     e quais são os próximos passos mais naturais na sua jornada de aprendizado.
@@ -140,7 +330,7 @@
 
                 <!-- Visão Geral em Cards -->
                 <section class="article-section">
-                    <h2>🗺️ Visão geral da estrutura do INVLAB</h2>
+                    <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em;">🗺️ Visão geral da estrutura do INVLAB</h2>
                     
                     <p>
                         O site está organizado em grandes blocos temáticos. 
@@ -184,7 +374,7 @@
 
                 <!-- Trilhas de estudo -->
                 <section class="article-section">
-                    <h2>🎯 Trilhas de estudo recomendadas</h2>
+                    <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em;">🎯 Trilhas de estudo recomendadas</h2>
                     
                     <p>Para não se perder, você pode seguir uma destas trilhas sugeridas:</p>
 
@@ -198,8 +388,8 @@
                                 </p>
                                 <ul style="margin-top: 8px; padding-left: 18px;">
                                     <li>1️⃣ Início & Primeiros Passos (página inicial)</li>
-                                    <li>2️⃣ <a href="poupanca.html" style="color: #3B82F6;">Poupança</a> – entender por que quase não faz mais sentido</li>
-                                    <li>3️⃣ <a href="simulador-cdbs.html" style="color: #3B82F6;">CDBs</a> e <a href="simulador-tesouro-direto.html" style="color: #3B82F6;">Tesouro Direto</a> – conhecer as alternativas</li>
+                                    <li>2️⃣ <a href="poupanca.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">Poupança</a> – entender por que quase não faz mais sentido</li>
+                                    <li>3️⃣ <a href="simulador-cdbs.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">CDBs</a> e <a href="simulador-tesouro-direto.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">Tesouro Direto</a> – conhecer as alternativas</li>
                                     <li>4️⃣ Simuladores de Renda Fixa – comparar na prática</li>
                                 </ul>
                             </div>
@@ -229,11 +419,11 @@
                                     <strong>Objetivo:</strong> entender cripto como tecnologia e classe de ativo, não como aposta.
                                 </p>
                                 <ul style="margin-top: 8px; padding-left: 18px;">
-                                    <li>1️⃣ <a href="../index.html#criptoativos" style="color: #3B82F6;">Introdução aos Criptoativos</a></li>
-                                    <li>2️⃣ <a href="bitcoin.html" style="color: #3B82F6;">Bitcoin</a> (visão geral)</li>
-                                    <li>3️⃣ <a href="stablecoins.html" style="color: #3B82F6;">Stablecoins</a></li>
-                                    <li>4️⃣ <a href="blockchain.html" style="color: #3B82F6;">Blockchain</a></li>
-                                    <li>5️⃣ <a href="cbdc.html" style="color: #3B82F6;">CBDCs</a> (Real Digital / DREX)</li>
+                                    <li>1️⃣ <a href="../index.html#criptoativos" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">Introdução aos Criptoativos</a></li>
+                                    <li>2️⃣ <a href="bitcoin.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">Bitcoin</a> (visão geral)</li>
+                                    <li>3️⃣ <a href="stablecoins.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">Stablecoins</a></li>
+                                    <li>4️⃣ <a href="blockchain.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">Blockchain</a></li>
+                                    <li>5️⃣ <a href="cbdc.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">CBDCs</a> (Real Digital / DREX)</li>
                                 </ul>
                             </div>
                         </div>
@@ -242,49 +432,49 @@
 
                 <!-- Recursos por Tipo -->
                 <section class="article-section">
-                    <h2>🔍 Encontre conteúdo por tipo</h2>
+                    <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em;">🔍 Encontre conteúdo por tipo</h2>
                     
                     <p>Se você está procurando um tipo específico de conteúdo, use este índice:</p>
 
                     <div class="example-card" style="margin-top: 20px;">
                         <h3>📅 Linhas do Tempo (Timelines)</h3>
                         <ul style="margin-top: 10px; padding-left: 18px; line-height: 1.8;">
-                            <li><a href="bitcoin.html" style="color: #3B82F6;">História do Bitcoin</a> – origem e marcos principais (2008-2024)</li>
-                            <li><a href="stablecoins.html" style="color: #3B82F6;">Evolução das Stablecoins</a> – de 2014 até o colapso da UST</li>
+                            <li><a href="bitcoin.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">História do Bitcoin</a> – origem e marcos principais (2008-2024)</li>
+                            <li><a href="stablecoins.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">Evolução das Stablecoins</a> – de 2014 até o colapso da UST</li>
                         </ul>
                     </div>
 
                     <div class="example-card" style="margin-top: 16px;">
                         <h3>📊 Tabelas Comparativas</h3>
                         <ul style="margin-top: 10px; padding-left: 18px; line-height: 1.8;">
-                            <li><a href="blockchain.html" style="color: #3B82F6;">Blockchain x Banco de Dados Tradicional</a></li>
-                            <li><a href="cbdc.html" style="color: #3B82F6;">CBDCs x Stablecoins x Criptomoedas</a></li>
-                            <li><a href="../index.html#criptoativos" style="color: #3B82F6;">Renda Fixa x Renda Variável x Criptoativos</a></li>
+                            <li><a href="blockchain.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">Blockchain x Banco de Dados Tradicional</a></li>
+                            <li><a href="cbdc.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">CBDCs x Stablecoins x Criptomoedas</a></li>
+                            <li><a href="../index.html#criptoativos" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">Renda Fixa x Renda Variável x Criptoativos</a></li>
                         </ul>
                     </div>
 
                     <div class="example-card" style="margin-top: 16px;">
                         <h3>⚖️ Marcos Legais e Regulamentações</h3>
                         <ul style="margin-top: 10px; padding-left: 18px; line-height: 1.8;">
-                            <li><a href="poupanca.html" style="color: #3B82F6;">Mudança nas regras da Poupança</a> – MP 567/2012 e Lei 12.703/2012</li>
-                            <li><a href="ganhos-come-cotas.html" style="color: #3B82F6;">Come-Cotas em Fundos</a> – Lei 11.033/2004 e Decreto 9.580/2018</li>
-                            <li><a href="ganhos-iof-regressivo.html" style="color: #3B82F6;">IOF Regressivo</a> – Lei 5.143/1966 e Decreto 6.306/2007</li>
+                            <li><a href="poupanca.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">Mudança nas regras da Poupança</a> – MP 567/2012 e Lei 12.703/2012</li>
+                            <li><a href="ganhos-come-cotas.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">Come-Cotas em Fundos</a> – Lei 11.033/2004 e Decreto 9.580/2018</li>
+                            <li><a href="ganhos-iof-regressivo.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">IOF Regressivo</a> – Lei 5.143/1966 e Decreto 6.306/2007</li>
                         </ul>
                     </div>
 
                     <div class="example-card" style="margin-top: 16px;">
                         <h3>🧮 Simuladores Práticos</h3>
                         <ul style="margin-top: 10px; padding-left: 18px; line-height: 1.8;">
-                            <li><a href="simulador-cdbs.html" style="color: #3B82F6;">Simulador de CDBs</a></li>
-                            <li><a href="simulador-tesouro-direto.html" style="color: #3B82F6;">Simulador de Tesouro Direto</a></li>
-                            <li><a href="simulador-lci-lca.html" style="color: #3B82F6;">Simulador de LCI/LCA</a></li>
+                            <li><a href="simulador-cdbs.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">Simulador de CDBs</a></li>
+                            <li><a href="simulador-tesouro-direto.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">Simulador de Tesouro Direto</a></li>
+                            <li><a href="simulador-lci-lca.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">Simulador de LCI/LCA</a></li>
                         </ul>
                     </div>
                 </section>
 
                 <!-- Onde estou agora? -->
                 <section class="article-section">
-                    <h2>📍 Como saber onde você está no site</h2>
+                    <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em;">📍 Como saber onde você está no site</h2>
                     
                     <p>
                         Em cada página do INVLAB, você pode usar três elementos para se localizar:
@@ -304,7 +494,7 @@
                         <div class="callout-content">
                             <h3>Dica</h3>
                             <p>Se em algum momento você se sentir perdido, volte para este <strong>Guia do INVLAB</strong> 
-                            ou para a <a href="../index.html" style="color: #3B82F6;">página inicial</a>. 
+                            ou para a <a href="../index.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">página inicial</a>. 
                             A partir daqui, você sempre encontra um próximo passo claro.</p>
                         </div>
                     </div>
@@ -312,16 +502,16 @@
 
                 <!-- Lista mais "seca" de páginas -->
                 <section class="article-section">
-                    <h2>🧩 Índice completo de páginas</h2>
+                    <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em;">🧩 Índice completo de páginas</h2>
 
                     <div class="inv-grid" style="margin-top: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
                         <div class="inv-card">
                             <div class="inv-card-badge">📊 Renda Fixa</div>
                             <ul style="margin-top: 8px; padding-left: 18px; line-height: 1.7; color: #CBD5E1;">
-                                <li><a href="poupanca.html" style="color: #3B82F6;">💰 Poupança</a></li>
-                                <li><a href="simulador-cdbs.html" style="color: #3B82F6;">🏦 CDBs (simulador)</a></li>
-                                <li><a href="simulador-tesouro-direto.html" style="color: #3B82F6;">🇧🇷 Tesouro Direto (simulador)</a></li>
-                                <li><a href="simulador-lci-lca.html" style="color: #3B82F6;">🏛️ LCI/LCA (simulador)</a></li>
+                                <li><a href="poupanca.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">💰 Poupança</a></li>
+                                <li><a href="simulador-cdbs.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🏦 CDBs (simulador)</a></li>
+                                <li><a href="simulador-tesouro-direto.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🇧🇷 Tesouro Direto (simulador)</a></li>
+                                <li><a href="simulador-lci-lca.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🏛️ LCI/LCA (simulador)</a></li>
                             </ul>
                         </div>
 
@@ -337,19 +527,19 @@
                         <div class="inv-card">
                             <div class="inv-card-badge">🔐 Criptoativos</div>
                             <ul style="margin-top: 8px; padding-left: 18px; line-height: 1.7; color: #CBD5E1;">
-                                <li><a href="bitcoin.html" style="color: #3B82F6;">₿ Bitcoin</a></li>
-                                <li><a href="stablecoins.html" style="color: #3B82F6;">💵 Stablecoins</a></li>
-                                <li><a href="blockchain.html" style="color: #3B82F6;">⛓️ Blockchain</a></li>
-                                <li><a href="cbdc.html" style="color: #3B82F6;">🏛️ CBDCs</a></li>
+                                <li><a href="bitcoin.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">₿ Bitcoin</a></li>
+                                <li><a href="stablecoins.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">💵 Stablecoins</a></li>
+                                <li><a href="blockchain.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">⛓️ Blockchain</a></li>
+                                <li><a href="cbdc.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🏛️ CBDCs</a></li>
                             </ul>
                         </div>
 
                         <div class="inv-card">
                             <div class="inv-card-badge">📚 Outros Conteúdos</div>
                             <ul style="margin-top: 8px; padding-left: 18px; line-height: 1.7; color: #CBD5E1;">
-                                <li><a href="ganhos-come-cotas.html" style="color: #3B82F6;">Come-Cotas em Fundos</a></li>
-                                <li><a href="ganhos-iof-regressivo.html" style="color: #3B82F6;">IOF Regressivo</a></li>
-                                <li><a href="ganhos-taxas-fundos.html" style="color: #3B82F6;">Taxas de Fundos</a></li>
+                                <li><a href="ganhos-come-cotas.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">Come-Cotas em Fundos</a></li>
+                                <li><a href="ganhos-iof-regressivo.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">IOF Regressivo</a></li>
+                                <li><a href="ganhos-taxas-fundos.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">Taxas de Fundos</a></li>
                             </ul>
                         </div>
                     </div>
@@ -385,84 +575,87 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer style="background: rgba(15, 23, 42, 0.9); border-top: 1px solid rgba(59, 130, 246, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
-        <div class="content-wrapper-wide">
-            <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
-                <!-- Coluna 1: INVLAB -->
-                <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
-                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">
-                        Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.
-                    </p>
-                    <a href="guia_invlab.html" style="color: #3B82F6; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
-                        🧭 Guia do INVLAB →
-                    </a>
-                </div>
-
-                <!-- Coluna 2: Renda Fixa -->
-                <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="poupanca.html" style="color: #CBD5E1; text-decoration: none;">💰 Poupança</a></li>
-                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 CDBs</a></li>
-                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
-                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ LCI/LCA</a></li>
-                    </ul>
-                </div>
-
-                <!-- Coluna 3: Renda Variável -->
-                <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="../index.html#renda-variavel" style="color: #CBD5E1; text-decoration: none;">📈 Introdução</a></li>
-                        <li><a href="acoes.html" style="color: #CBD5E1; text-decoration: none;">📊 Ações</a></li>
-                        <li><a href="etfs.html" style="color: #CBD5E1; text-decoration: none;">🎯 ETFs</a></li>
-                        <li><a href="fiis.html" style="color: #CBD5E1; text-decoration: none;">🏢 FIIs</a></li>
-                    </ul>
-                </div>
-
-                <!-- Coluna 4: Criptoativos -->
-                <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Criptoativos</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="../index.html#criptoativos" style="color: #CBD5E1; text-decoration: none;">🔐 Introdução</a></li>
-                        <li><a href="bitcoin.html" style="color: #CBD5E1; text-decoration: none;">₿ Bitcoin</a></li>
-                        <li><a href="stablecoins.html" style="color: #CBD5E1; text-decoration: none;">💵 Stablecoins</a></li>
-                        <li><a href="blockchain.html" style="color: #CBD5E1; text-decoration: none;">⛓️ Blockchain</a></li>
-                        <li><a href="cbdc.html" style="color: #CBD5E1; text-decoration: none;">🏛️ CBDCs</a></li>
-                    </ul>
-                </div>
-
-                <!-- Coluna 5: Outros Investimentos -->
-                <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Outros Investimentos</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="../index.html#outros-investimentos" style="color: #CBD5E1; text-decoration: none;">💎 Introdução</a></li>
-                        <li><a href="ganhos-come-cotas.html" style="color: #CBD5E1; text-decoration: none;">🍽️ Come-cotas</a></li>
-                        <li><a href="ganhos-iof-regressivo.html" style="color: #CBD5E1; text-decoration: none;">📉 IOF Regressivo</a></li>
-                        <li><a href="ganhos-inflacao.html" style="color: #CBD5E1; text-decoration: none;">📊 Inflação</a></li>
-                    </ul>
-                </div>
-
-                <!-- Coluna 6: Ferramentas -->
-                <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Ferramentas</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 Simulador CDBs</a></li>
-                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Simulador Tesouro</a></li>
-                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ Simulador LCI/LCA</a></li>
-                        <li><a href="calculadora.html" style="color: #CBD5E1; text-decoration: none;">🧮 Juros Compostos</a></li>
-                    </ul>
-                </div>
+    <!-- Footer Premium INVLAB -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo-section">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos" class="footer-logo">
+                <p class="footer-logo-text">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
+                <a href="guia_invlab.html" class="footer-logo-link">🧭 Guia do INVLAB →</a>
             </div>
-            <div style="border-top: 1px solid rgba(59, 130, 246, 0.1); padding-top: 20px; margin-top: 20px;">
-                <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">⚠️ Conteúdo 100% educacional. Não somos corretora, não vendemos produtos, não recebemos comissões.</p>
-                <p style="font-size: 0.78rem; color: #64748B; text-align: center; line-height: 1.7; margin-bottom: 12px; max-width: 900px; margin-left: auto; margin-right: auto;">Conteúdo educacional desenvolvido por especialistas em mercado financeiro tradicional, tecnologia blockchain e tokenização de ativos reais. O INVLAB é um laboratório de pesquisa independente dedicado a unir educação, tecnologia e inovação nos mercados de capitais.</p>
-                <p style="font-size: 0.75rem; color: #475569; text-align: center;">© 2025 INVLAB - Laboratório de Investimentos | Plataforma Educacional</p>
+            <!-- Coluna 2: Renda Fixa -->
+            <div>
+                <h4>Renda Fixa</h4>
+                <ul>
+                    <li><a href="poupanca.html">💰 Poupança</a></li>
+                    <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                    <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                </ul>
+            </div>
+            <!-- Coluna 3: Renda Variável -->
+            <div>
+                <h4>Renda Variável</h4>
+                <ul>
+                    <li><a href="../index.html#renda-variavel">📈 Introdução</a></li>
+                    <li><a href="acoes.html">📊 Ações</a></li>
+                    <li><a href="etfs.html">🎯 ETFs</a></li>
+                    <li><a href="fiis.html">🏢 FIIs</a></li>
+                </ul>
+            </div>
+            <!-- Coluna 4: Criptoativos -->
+            <div>
+                <h4>Criptoativos</h4>
+                <ul>
+                    <li><a href="../index.html#criptoativos">🔐 Introdução</a></li>
+                    <li><a href="bitcoin.html">₿ Bitcoin</a></li>
+                    <li><a href="stablecoins.html">💵 Stablecoins</a></li>
+                    <li><a href="blockchain.html">⛓️ Blockchain</a></li>
+                    <li><a href="cbdc.html">🏛️ CBDCs</a></li>
+                </ul>
+            </div>
+            <!-- Coluna 5: Ferramentas -->
+            <div>
+                <h4>Ferramentas</h4>
+                <ul>
+                    <li><a href="simulador-cdbs.html">🏦 Simulador CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html">🇧🇷 Simulador Tesouro</a></li>
+                    <li><a href="simulador-lci-lca.html">🏛️ Simulador LCI/LCA</a></li>
+                    <li><a href="calculadora.html">🧮 Juros Compostos</a></li>
+                </ul>
             </div>
         </div>
+        <div class="footer-bottom">
+            <p>⚠️ Conteúdo 100% educacional. Não somos corretora, não vendemos produtos, não recebemos comissões.</p>
+            <p>Conteúdo educacional desenvolvido por especialistas em mercado financeiro tradicional, tecnologia blockchain e tokenização de ativos reais. O INVLAB é um laboratório de pesquisa independente dedicado a unir educação, tecnologia e inovação nos mercados de capitais.</p>
+            <p class="copyright">© 2025 INVLAB - Laboratório de Investimentos | Plataforma Educacional</p>
+        </div>
     </footer>
+
+    <!-- Botão Voltar ao Topo -->
+    <div id="backToTop">↑</div>
+
+    <script>
+        // JavaScript for Back to Top button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+                setTimeout(() => backToTopButton.style.opacity = '1', 10);
+            } else {
+                backToTopButton.style.opacity = '0';
+                setTimeout(() => backToTopButton.style.display = 'none', 300);
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 
     <!-- Scripts -->
     <script src="../assets/js/script.js"></script>
