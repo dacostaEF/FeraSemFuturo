@@ -974,7 +974,215 @@ backToTopBtn.addEventListener('click', function() {
 
 ---
 
-## 🚀 15. PRÓXIMOS PASSOS
+## 💬 15. TOOLTIPS PREMIUM (Popup Explicativo)
+
+### 15.1 Uso e Propósito
+
+**Quando usar tooltips:**
+- ✅ Termos técnicos em inglês
+- ✅ Siglas e abreviações (API, CVM, ANBIMA, etc.)
+- ✅ Jargão do mercado financeiro (churn, AUM, NPS, compliance)
+- ✅ Palavras pouco usuais ou desconhecidas pelo público leigo
+
+**Regra:** Toda palavra técnica, estrangeira ou incomum deve ter **itálico + tooltip explicativo**.
+
+### 15.2 Estrutura HTML
+
+```html
+<span class="tooltip-term" data-tooltip="Explicação clara e objetiva do termo">termo técnico</span>
+```
+
+**Exemplos reais:**
+
+```html
+<!-- Termo em inglês -->
+<span class="tooltip-term" data-tooltip="Suitability = Adequação. Processo regulatório obrigatório que verifica se um investimento é compatível com o perfil do investidor.">suitability</span>
+
+<!-- Sigla -->
+<span class="tooltip-term" data-tooltip="API = Análise de Perfil do Investidor. Processo obrigatório para classificar o investidor antes de oferecer produtos financeiros.">API</span>
+
+<!-- Jargão do mercado -->
+<span class="tooltip-term" data-tooltip="Churn = Taxa de cancelamento ou saída de clientes. Quanto menor o churn, mais clientes ficam na corretora.">churn</span>
+```
+
+### 15.3 CSS Premium INVLAB
+
+```css
+/* Termo com Tooltip - Estilo base */
+.tooltip-term {
+    position: relative;
+    font-style: italic;                              /* ⚠️ SEMPRE em itálico */
+    color: rgba(16, 185, 129, 0.95);                /* Verde INVLAB mais visível */
+    cursor: help;                                    /* Cursor muda para "?" */
+    border-bottom: 1px dotted rgba(16, 185, 129, 0.5); /* Linha pontilhada verde */
+    transition: all 0.2s ease;
+}
+
+/* Hover no termo */
+.tooltip-term:hover {
+    color: #D4AF37;                                  /* Dourado no hover */
+    border-bottom-color: rgba(212, 175, 55, 0.7);   /* Linha dourada */
+}
+
+/* Caixa do Tooltip (aparece no hover) */
+.tooltip-term::after {
+    content: attr(data-tooltip);                     /* Pega o texto do atributo */
+    position: absolute;
+    bottom: 125%;                                    /* Acima do termo */
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(26, 26, 26, 0.98);             /* Fundo escuro premium */
+    color: rgba(255, 255, 255, 0.95);               /* Texto branco */
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.875rem;                            /* 14px */
+    font-style: normal;                              /* Remove itálico do tooltip */
+    font-weight: 400;
+    line-height: 1.5;
+    white-space: normal;
+    width: 280px;                                    /* Largura fixa */
+    max-width: 90vw;                                /* Responsivo */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);     /* Sombra forte */
+    border: 1px solid rgba(212, 175, 55, 0.3);      /* Borda dourada suave */
+    opacity: 0;                                      /* Invisível por padrão */
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 1000;
+    text-align: left;
+}
+
+/* Seta do Tooltip (triângulo apontando para baixo) */
+.tooltip-term::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 8px solid transparent;
+    border-top-color: rgba(26, 26, 26, 0.98);       /* Cor igual ao fundo */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+/* Mostrar tooltip ao passar o mouse */
+.tooltip-term:hover::after,
+.tooltip-term:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Mobile: tooltip ativo ao tocar */
+.tooltip-term.tooltip-active::after,
+.tooltip-term.tooltip-active::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Responsivo Mobile */
+@media (max-width: 768px) {
+    .tooltip-term::after {
+        width: 240px;
+        font-size: 0.8rem;
+        padding: 10px 12px;
+    }
+}
+```
+
+### 15.4 JavaScript para Mobile (Touch)
+
+```javascript
+// JavaScript for Mobile Tooltips (touch support)
+if ('ontouchstart' in window) {
+    const tooltips = document.querySelectorAll('.tooltip-term');
+    
+    tooltips.forEach(tooltip => {
+        tooltip.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            // Remove active class from all other tooltips
+            tooltips.forEach(t => {
+                if (t !== this) t.classList.remove('tooltip-active');
+            });
+            // Toggle active class on clicked tooltip
+            this.classList.toggle('tooltip-active');
+        });
+    });
+    
+    // Close tooltip when touching outside
+    document.addEventListener('touchstart', function(e) {
+        if (!e.target.classList.contains('tooltip-term')) {
+            tooltips.forEach(t => t.classList.remove('tooltip-active'));
+        }
+    });
+}
+```
+
+### 15.5 Características Principais
+
+| Elemento | Propriedade | Valor | Motivo |
+|----------|-------------|-------|--------|
+| **Termo (texto)** | `font-style` | `italic` | Diferencia visualmente |
+| **Termo (cor)** | `color` | Verde INVLAB 95% | Destaque suave |
+| **Termo (hover)** | `color` | Dourado #D4AF37 | Interação premium |
+| **Linha inferior** | `border-bottom` | Pontilhada verde | Indica interatividade |
+| **Tooltip (fundo)** | `background` | `rgba(26, 26, 26, 0.98)` | Contraste escuro |
+| **Tooltip (borda)** | `border` | Dourado 30% | Premium sutil |
+| **Tooltip (largura)** | `width` | 280px (desktop) / 240px (mobile) | Legibilidade |
+| **Aparição** | `transition` | `0.3s ease` | Suave e fluido |
+| **Z-index** | `z-index` | 1000 | Sempre por cima |
+
+### 15.6 Termos Comuns que DEVEM ter Tooltip
+
+#### **Termos em Inglês:**
+- `suitability` → "Adequação (processo regulatório)"
+- `churn` → "Taxa de cancelamento de clientes"
+- `compliance` → "Conformidade regulatória"
+
+#### **Siglas do Mercado:**
+- `API` → "Análise de Perfil do Investidor"
+- `CVM` → "Comissão de Valores Mobiliários"
+- `ANBIMA` → "Associação do mercado financeiro"
+- `AUM` → "Assets Under Management (Patrimônio sob Gestão)"
+- `NPS` → "Net Promoter Score (Índice de Satisfação)"
+- `FGC` → "Fundo Garantidor de Créditos"
+- `IR` → "Imposto de Renda"
+
+#### **Termos Técnicos:**
+- `pós-fixado` → "Rentabilidade atrelada a um índice (CDI, Selic)"
+- `prefixado` → "Taxa de juros definida na hora da aplicação"
+- `liquidez` → "Facilidade de converter investimento em dinheiro"
+- `volatilidade` → "Oscilação do preço de um ativo"
+
+### 15.7 Exemplo Completo em Contexto
+
+```html
+<p>
+    A <strong>Análise de Perfil do Investidor 
+    (<span class="tooltip-term" data-tooltip="API = Análise de Perfil do Investidor. Processo obrigatório para classificar o investidor antes de oferecer produtos financeiros.">API</span>)</strong>, 
+    conhecida como 
+    <span class="tooltip-term" data-tooltip="Suitability = Adequação (do inglês 'suitable' = adequado). É o processo que verifica se um investimento é compatível com o perfil do investidor.">suitability</span>, 
+    é uma metodologia obrigatória regulamentada pela 
+    <span class="tooltip-term" data-tooltip="CVM = Comissão de Valores Mobiliários. Órgão que regula e fiscaliza o mercado de capitais no Brasil.">CVM</span>.
+</p>
+```
+
+### 15.8 Boas Práticas
+
+✅ **SEMPRE use itálico** para termos com tooltip  
+✅ **Explicações curtas** (máximo 2-3 linhas)  
+✅ **Linguagem simples** na explicação  
+✅ **Traduza termos em inglês** quando possível  
+✅ **Tooltip funciona no mobile** (toque para mostrar)  
+
+❌ **NÃO use tooltip** em termos óbvios  
+❌ **NÃO deixe explicações longas** (quebra o fluxo)  
+❌ **NÃO esqueça o itálico** (perde a identidade)  
+
+---
+
+## 🚀 16. PRÓXIMOS PASSOS
 
 Páginas que precisam receber a identidade visual:
 
