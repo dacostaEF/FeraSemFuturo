@@ -644,23 +644,27 @@ main > *::before,
 /* PADRÃO UNIFICADO: Títulos Principais (com ou sem emoji) */
 .hero-title,
 .section-title {
-    font-size: 36px;
+    font-family: 'Playfair Display', Georgia, serif;  /* Elegância INVLAB */
+    font-size: 2.25rem;  /* 36px */
     font-weight: 700;
-    color: #FFFFFF;
-    margin-bottom: 24px; /* UNIFICADO: agora todos usam 24px */
-    line-height: 1.2;
-    letter-spacing: -1px;
+    color: #D4AF37;  /* DOURADO INVLAB */
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);  /* Linha dourada suave */
+    letter-spacing: -0.01em;
     text-align: center;
+    line-height: 1.2;
 }
 
 /* PADRÃO UNIFICADO: Subtítulos/Descrições */
 .hero-description,
 .section-subtitle {
-    font-size: 18px;
+    font-family: 'Inter', sans-serif;  /* Legibilidade INVLAB */
+    font-size: 1.125rem;  /* 18px */
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(16, 185, 129, 0.65);  /* VERDE SUAVE INVLAB */
     line-height: 1.6;
-    margin-bottom: 8px;
+    margin-bottom: 32px;  /* Respiro antes do conteúdo */
     text-align: center;
 }
 
@@ -673,12 +677,6 @@ main > *::before,
 }
 
 /* Ajuste para subtítulo mais discreto */
-.section-subtitle {
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 32px; /* Mais espaço antes do conteúdo */
-}
-
 /* Card principal - Sombra difusa para profundidade e destaque moderno */
 .container {
     max-width: 480px;

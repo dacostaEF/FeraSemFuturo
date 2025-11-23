@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Investidor: O Que o Questionário Não Consegue Capturar - INVLAB</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0D0D0D">
+    
+    <!-- Meta Description -->
+    <meta name="description" content="Entenda as limitações do modelo tradicional de perfil de investidor e descubra uma abordagem mais completa para proteger seu patrimônio.">
+    
+    <!-- Google Fonts INVLAB -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-icons.css">
+    
+    <style>
+        /* Estilos específicos do artigo */
+        body {
+            background: #0D0D0D;
+            padding: 40px 20px 80px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .article-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(26, 26, 26, 0.95);
+            border-radius: 20px;
+            padding: 48px;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .back-button {
+            display: inline-block;
+            color: rgba(16, 185, 129, 0.85);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 30px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .back-button:hover {
+            color: #D4AF37;
+            transform: translateX(-5px);
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 16px;
+            background: linear-gradient(90deg, #10b981 0%, #34D399 50%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+        
+        .article-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            text-align: center;
+            color: rgba(16, 185, 129, 0.65);
+            margin-bottom: 40px;
+            line-height: 1.6;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #D4AF37;
+            margin-top: 48px;
+            margin-bottom: 20px;
+            letter-spacing: -0.01em;
+        }
+        
+        h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #E4E4E4;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+        
+        p, li {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 16px;
+        }
+        
+        ul, ol {
+            margin-left: 24px;
+            margin-bottom: 24px;
+        }
+        
+        li {
+            margin-bottom: 12px;
+        }
+        
+        strong {
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+        }
+        
+        .highlight-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 24px;
+            border-radius: 12px;
+            margin: 32px 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .highlight-box strong {
+            color: #10b981;
+        }
+        
+        .warning-box {
+            background: rgba(245, 158, 11, 0.08);
+            border-left: 4px solid #F59E0B;
+            padding: 24px;
+            border-radius: 12px;
+            margin: 32px 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .warning-box strong {
+            color: #F59E0B;
+        }
+        
+        .story-box {
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 28px;
+            border-radius: 16px;
+            margin: 32px 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .story-box h3 {
+            color: #D4AF37;
+            margin-top: 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 32px 0;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        th {
+            background: rgba(212, 175, 55, 0.1);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: #D4AF37;
+            font-size: 0.95rem;
+        }
+        
+        td {
+            font-family: 'Inter', sans-serif;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.95rem;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .checklist {
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            padding: 24px 32px;
+            margin: 32px 0;
+        }
+        
+        .checklist li {
+            list-style: none;
+            padding-left: 0;
+            position: relative;
+            padding-left: 32px;
+        }
+        
+        .checklist li:before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .invlab-philosophy {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 48px 0;
+            text-align: center;
+        }
+        
+        .invlab-philosophy h2 {
+            margin-top: 0;
+            color: #D4AF37;
+        }
+        
+        .final-message {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 48px 0 32px;
+            text-align: center;
+        }
+        
+        .final-message p {
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+        }
+        
+        /* Back to Top Button */
+        #backToTop {
+            display: none; /* Hidden by default */
+            position: fixed; /* Fixed position */
+            bottom: 40px; /* Distance from bottom */
+            right: 40px; /* Distance from right */
+            z-index: 9999; /* High z-index to be on top */
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%); /* Degradê dourado */
+            color: #0D0D0D; /* Cor do ícone/texto */
+            border: 2px solid rgba(16, 185, 129, 0.3); /* Borda verde translúcida */
+            border-radius: 50%; /* Circular */
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 52px; /* Center text vertically */
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4); /* Sombra dourada */
+            transition: all 0.3s ease-in-out;
+            opacity: 0;
+        }
+        
+        #backToTop:hover {
+            background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+            transform: translateY(-4px) scale(1.05); /* Elevação e leve escala */
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.6); /* Sombra mais forte */
+            border-color: rgba(16, 185, 129, 0.6); /* Borda verde mais visível */
+        }
+        
+        /* Tooltips Premium INVLAB */
+        .tooltip-term {
+            position: relative;
+            font-style: italic;
+            color: rgba(16, 185, 129, 0.95); /* Verde INVLAB mais visível */
+            cursor: help;
+            border-bottom: 1px dotted rgba(16, 185, 129, 0.5);
+            transition: all 0.2s ease;
+        }
+        
+        .tooltip-term:hover {
+            color: #D4AF37; /* Dourado no hover */
+            border-bottom-color: rgba(212, 175, 55, 0.7);
+        }
+        
+        .tooltip-term::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(26, 26, 26, 0.98);
+            color: rgba(255, 255, 255, 0.95);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.5;
+            white-space: normal;
+            width: 280px;
+            max-width: 90vw;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 1000;
+            text-align: left;
+        }
+        
+        .tooltip-term::before {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: rgba(26, 26, 26, 0.98);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .tooltip-term:hover::after,
+        .tooltip-term:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Mobile: tooltip ativo ao tocar */
+        .tooltip-term.tooltip-active::after,
+        .tooltip-term.tooltip-active::before {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Mobile: tooltip aparece ao tocar */
+        @media (max-width: 768px) {
+            .tooltip-term::after {
+                width: 240px;
+                font-size: 0.8rem;
+                padding: 10px 12px;
+            }
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 16px 60px;
+            }
+            
+            .article-container {
+                padding: 32px 24px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            h3 {
+                font-size: 1.1rem;
+            }
+            
+            p, li {
+                font-size: 0.95rem;
+            }
+            
+            table {
+                font-size: 0.85rem;
+            }
+            
+            th, td {
+                padding: 12px 8px;
+            }
+            
+            #backToTop {
+                width: 48px;
+                height: 48px;
+                font-size: 24px;
+                line-height: 44px;
+                bottom: 24px;
+                right: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="article-container">
+        <a href="../index.html#primeiros-passos" class="back-button">← Voltar para Primeiros Passos</a>
+        
+        <h1>⚖️ Perfil de Investidor: O Que o Questionário Não Consegue Capturar</h1>
+        
+        <p class="article-subtitle">Uma análise técnica e construtiva sobre as limitações do modelo tradicional de suitability — e uma abordagem complementar para proteger seu patrimônio</p>
+        
+        <div class="warning-box">
+            <p><strong>⚠️ Um alerta importante para investidores iniciantes:</strong></p>
+            <p>O questionário de perfil é um <strong>primeiro passo necessário e regulamentado</strong> — mas não é suficiente por si só.</p>
+            <p>Compreender suas limitações pode fazer a diferença entre manter ou perder patrimônio nos momentos de alta volatilidade.</p>
+            <p><strong>Não é culpa das instituições. Não é culpa sua. É a evolução natural da educação financeira.</strong></p>
+        </div>
+        
+        <h2>💔 A História Real (Que Acontece Todos os Dias)</h2>
+        
+        <div class="story-box">
+            <h3>O Ciclo Invisível da Perda</h3>
+            <ol>
+                <li>Você responde um questionário de 10 perguntas.</li>
+                <li>Marca "aceito risco" porque, teoricamente, acha que vai aguentar.</li>
+                <li>É classificado como <strong>"Arrojado"</strong>.</li>
+                <li>Coloca uma parte significativa do seu patrimônio em renda variável.</li>
+                <li>O mercado cai — <strong>forte</strong>.</li>
+                <li>Você vê 30-40% do que juntou em anos evaporar em semanas.</li>
+                <li>Entra em pânico.</li>
+                <li>Vende no fundo, cristalizando a perda.</li>
+            </ol>
+            <p style="margin-top: 24px; font-weight: 600; color: #D4AF37;">Seu perfil teórico dizia "arrojado". Sua realidade emocional, não.</p>
+        </div>
+        
+        <p>Esse cenário não é fictício. Acontece em todos os ciclos de mercado. E não é culpa de ninguém — é uma <strong>limitação estrutural do modelo tradicional</strong> de classificação de perfil.</p>
+        
+        <h2 id="limitacoes">🔍 As 4 Limitações Reconhecidas do Modelo Tradicional</h2>
+        
+        <h3>1) Generalização Necessária (Mas Insuficiente)</h3>
+        
+        <p>O questionário padrão tenta encaixar a complexidade da sua vida financeira em <strong>3 ou 4 categorias</strong>:</p>
+        
+        <ul>
+            <li><strong>Conservador</strong></li>
+            <li><strong>Moderado</strong></li>
+            <li><strong>Arrojado / Agressivo</strong></li>
+        </ul>
+        
+        <p>O problema não é a categorização em si — ela é <strong>necessária</strong> do ponto de vista regulatório e operacional. O problema é que <strong>a vida real é mais complexa</strong>:</p>
+        
+        <ul>
+            <li>Você pode ser <strong>conservador</strong> com sua reserva de emergência</li>
+            <li><strong>Moderado</strong> com o dinheiro da entrada da casa</li>
+            <li><strong>Arrojado</strong> com 5% do patrimônio destinado a especulação</li>
+        </ul>
+        
+        <p><strong>O questionário não captura essa nuance</strong> — e nem foi desenhado para isso.</p>
+        
+        <h3>2) Teoria vs Prática Emocional (O Maior Gap)</h3>
+        
+        <p>No papel, durante o preenchimento do questionário, <strong>todo mundo é racional</strong>.</p>
+        
+        <p>Perguntas típicas:</p>
+        <ul>
+            <li>"Você aguentaria uma queda de 20% no valor investido?"</li>
+            <li>"Prefere segurança ou maiores retornos?"</li>
+        </ul>
+        
+        <p>Mas essas respostas são dadas em um momento de <strong>calma emocional</strong>, sem dinheiro real em risco.</p>
+        
+        <div class="highlight-box">
+            <p><strong>💡 A realidade é diferente:</strong></p>
+            <p>Quando você VÊ seus R$ 50.000 virarem R$ 30.000 em 15 dias, a resposta que você deu no questionário não importa mais. O que importa é como você REALMENTE reage ao ver seu suor, seu sacrifício, sua poupança minguar no extrato.</p>
+            <p>Essa dor é real. É humana. E <strong>o questionário não mede isso</strong>.</p>
+        </div>
+        
+        <h3>3) Objetivos Múltiplos (A Vida Real É Complexa)</h3>
+        
+        <p>A maioria dos questionários pergunta:</p>
+        <ul>
+            <li>"Qual é seu objetivo de investimento?"</li>
+            <li>"Qual é seu prazo?"</li>
+        </ul>
+        
+        <p>Mas a realidade é que <strong>você tem múltiplos objetivos simultâneos</strong>:</p>
+        
+        <ul>
+            <li>Reserva de emergência (prazo: imediato, risco: zero)</li>
+            <li>Entrada da casa (prazo: 2 anos, risco: baixíssimo)</li>
+            <li>Aposentadoria (prazo: 30 anos, risco: moderado aceitável)</li>
+            <li>Especulação (prazo: flexível, risco: total)</li>
+        </ul>
+        
+        <p>O modelo tradicional tenta resumir isso em <strong>um único perfil</strong>. E aí mora o problema.</p>
+        
+        <h3>4) Contexto Temporal (O Que Falta Medir)</h3>
+        
+        <p>Seu perfil de risco não é fixo. Ele muda conforme:</p>
+        
+        <ul>
+            <li><strong>Momento de vida</strong> (recém-formado vs pré-aposentadoria)</li>
+            <li><strong>Situação financeira atual</strong> (emprego estável vs instabilidade)</li>
+            <li><strong>Reservas existentes</strong> (tem colchão vs vive no limite)</li>
+            <li><strong>Experiência de mercado</strong> (primeira crise vs veterano)</li>
+            <li><strong>Carga emocional</strong> (momento tranquilo vs estressado)</li>
+        </ul>
+        
+        <p>O questionário é uma <strong>fotografia de um momento</strong>. Mas seu perfil real é um <strong>filme em movimento</strong>.</p>
+        
+        <h2>🛡️ <span class="tooltip-term" data-tooltip="Suitability = Adequação. Processo regulatório obrigatório que verifica se um investimento é compatível com o perfil, objetivos e conhecimento do investidor.">Suitability</span>: O Que Funciona e O Que Precisa Evoluir</h2>
+        
+        <h3>O Que É Suitability?</h3>
+        
+        <p>A <strong>Análise de Perfil do Investidor (<span class="tooltip-term" data-tooltip="API = Análise de Perfil do Investidor. Processo obrigatório para classificar o investidor antes de oferecer produtos financeiros.">API</span>)</strong>, conhecida como <span class="tooltip-term" data-tooltip="Suitability = Adequação (do inglês 'suitable' = adequado). É o processo que verifica se um investimento é compatível com o perfil do investidor.">suitability</span>, é uma metodologia <strong>obrigatória e regulamentada</strong> pela <span class="tooltip-term" data-tooltip="CVM = Comissão de Valores Mobiliários. Órgão que regula e fiscaliza o mercado de capitais no Brasil.">CVM</span> (Comissão de Valores Mobiliários) e pela <span class="tooltip-term" data-tooltip="ANBIMA = Associação Brasileira das Entidades dos Mercados Financeiro e de Capitais. Autorregulação do mercado financeiro.">ANBIMA</span>.</p>
+        
+        <p><strong>Objetivo:</strong> Garantir que os produtos oferecidos sejam <strong>adequados</strong> aos objetivos, situação financeira e conhecimento do investidor.</p>
+        
+        <h3>O Que o Suitability Faz Bem</h3>
+        
+        <ul>
+            <li>✅ <strong>Protege o investidor iniciante</strong> de produtos extremamente complexos</li>
+            <li>✅ <strong>Cria uma barreira regulatória</strong> contra vendas inadequadas</li>
+            <li>✅ <strong>Documenta a adequação</strong> da recomendação</li>
+            <li>✅ <strong>Obriga as instituições</strong> a alertar sobre inadequações</li>
+        </ul>
+        
+        <h3>O Que o Suitability NÃO Consegue Medir</h3>
+        
+        <ul>
+            <li>❌ <strong>Estrutura financeira completa</strong> (reservas, dívidas, dependentes)</li>
+            <li>❌ <strong>Estabilidade emocional real</strong> (teoria vs prática)</li>
+            <li>❌ <strong>Complexidade da vida</strong> (múltiplos objetivos simultâneos)</li>
+            <li>❌ <strong>Maturidade financeira</strong> (conhecimento profundo vs superficial)</li>
+            <li>❌ <strong>Capacidade de aportar na crise</strong> (essencial para renda variável)</li>
+        </ul>
+        
+        <div class="highlight-box">
+            <p><strong>💡 Conclusão:</strong></p>
+            <p>O suitability é <strong>necessário, obrigatório e útil</strong> — mas <strong>insuficiente quando usado sozinho</strong>.</p>
+            <p>Ele é o primeiro passo. Não o último.</p>
+        </div>
+        
+        <h2 id="teste-real">🧪 O Teste REAL Que Deveria Complementar o Suitability</h2>
+        
+        <p>O INVLAB propõe uma <strong>análise complementar</strong> que investidores devem fazer <strong>por conta própria</strong> antes de aceitar qualquer classificação de perfil:</p>
+        
+        <div class="checklist">
+            <ul>
+                <li><strong>Estrutura financeira completa:</strong> Você tem reserva de emergência de 6-12 meses?</li>
+                <li><strong>Momentos de vida:</strong> Está em transição de carreira? Vai ter filho? Vai comprar imóvel?</li>
+                <li><strong>Reservas suficientes:</strong> O dinheiro que vai investir é "excedente" real?</li>
+                <li><strong>Objetivos claros:</strong> Para que é esse dinheiro? Quando vai precisar dele?</li>
+                <li><strong>Prazo realista:</strong> Consegue deixar investido por quanto tempo SEM mexer?</li>
+                <li><strong>Sustentabilidade emocional:</strong> Como você reage ao ver vermelho no extrato?</li>
+                <li><strong>Capacidade de aportar na crise:</strong> Se cair 40%, você tem dinheiro (e coragem) para comprar mais?</li>
+            </ul>
+        </div>
+        
+        <p><strong>Só quando todas essas respostas estão alinhadas</strong>, alguém tem estrutura real para assumir risco em renda variável.</p>
+        
+        <h2 id="objetivos">🎯 A Abordagem Complementar: Por Objetivos, Não Por Rótulos</h2>
+        
+        <p>Em vez de aceitar um perfil único, organize seus investimentos <strong>por objetivo</strong>:</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Objetivo</th>
+                    <th>Prazo</th>
+                    <th>Importância</th>
+                    <th>Classe de Risco Adequada</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Reserva de Emergência</td>
+                    <td>Imediato</td>
+                    <td>Crítica</td>
+                    <td><strong>Zero risco</strong> (Tesouro Selic, CDB liquidez diária)</td>
+                </tr>
+                <tr>
+                    <td>Entrada da Casa</td>
+                    <td>1-3 anos</td>
+                    <td>Crítica</td>
+                    <td><strong>Risco mínimo</strong> (Renda Fixa conservadora)</td>
+                </tr>
+                <tr>
+                    <td>Aposentadoria</td>
+                    <td>10-30 anos</td>
+                    <td>Alta</td>
+                    <td><strong>Risco moderado</strong> (Misto RF + RV)</td>
+                </tr>
+                <tr>
+                    <td>Especulação / Aprendizado</td>
+                    <td>Flexível</td>
+                    <td>Baixa</td>
+                    <td><strong>Risco total permitido</strong> (Ações, criptos, etc.)</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="highlight-box">
+            <p><strong>💡 Essa abordagem:</strong></p>
+            <ul>
+                <li>✅ Respeita a complexidade da sua vida</li>
+                <li>✅ Protege o que é crítico</li>
+                <li>✅ Permite experimentar com o que é opcional</li>
+                <li>✅ Reduz arrependimento e pânico</li>
+            </ul>
+        </div>
+        
+        <h2>🧭 A Filosofia INVLAB</h2>
+        
+        <div class="invlab-philosophy">
+            <h2>O Que o INVLAB Faz de Diferente</h2>
+            
+            <p>O INVLAB não substitui o suitability regulatório das corretoras.</p>
+            
+            <p><strong>O INVLAB complementa</strong> com camadas de análise que o investidor deve considerar <strong>antes</strong> de aceitar qualquer classificação.</p>
+            
+            <div style="margin-top: 32px; text-align: left; max-width: 700px; margin-left: auto; margin-right: auto;">
+                <p style="font-size: 1.05rem; margin-bottom: 12px;">❌ <strong>Não rotulamos investidores</strong></p>
+                <p style="font-size: 1.05rem; margin-bottom: 12px;">❌ <strong>Não oferecemos carteiras prontas</strong></p>
+                <p style="font-size: 1.05rem; margin-bottom: 12px;">❌ <strong>Não simplificamos sua vida em 3 categorias</strong></p>
+                <p style="font-size: 1.05rem; margin-bottom: 12px;">❌ <strong>Não assumimos que você "aguenta perda"</strong></p>
+                
+                <p style="font-size: 1.05rem; margin-top: 24px; margin-bottom: 12px;">✔ <strong>Nossa proposta é apresentar como os riscos do mercado se contextualizam e como podem impactar na avaliação do seu perfil</strong></p>
+                <p style="font-size: 1.05rem; margin-bottom: 12px;">✔ <strong>Objetivamos ajudar você a entender seu contexto completo</strong></p>
+                <p style="font-size: 1.05rem; margin-bottom: 12px;">✔ <strong>Procuramos envolver o fator emocional quando deparado com a volatilidade do mercado</strong></p>
+                <p style="font-size: 1.05rem; margin-bottom: 12px;">✔ <strong>Sinalizamos para você o impacto real dos prazos em sua avaliação de perfil</strong></p>
+                <p style="font-size: 1.05rem; margin-bottom: 12px;">✔ <strong>Buscamos apresentar sugestões e pontos a serem ponderados para tomar decisões conscientes</strong></p>
+            </div>
+        </div>
+        
+        <h2>🤝 Para Corretoras e Assessores</h2>
+        
+        <p>O INVLAB tem como proposta apresentar uma <strong>abordagem educacional complementar</strong> que pode ajudar investidores iniciantes a administrar suas reservas com mais tranquilidade, conhecimento e clareza sobre riscos, alternativas e possibilidades.</p>
+        
+        <h3>Possíveis Benefícios para Corretoras que Consideram o INVLAB:</h3>
+        
+        <ul>
+            <li>✅ <strong>Pode reduzir <span class="tooltip-term" data-tooltip="Churn = Taxa de cancelamento ou saída de clientes. Quanto menor o churn, mais clientes ficam na corretora.">churn</span>:</strong> Cliente educado tende a não sair na primeira queda</li>
+            <li>✅ <strong>Pode aumentar <span class="tooltip-term" data-tooltip="AUM = Assets Under Management (Patrimônio sob Gestão). Total de dinheiro que os clientes investem através da corretora.">AUM</span>:</strong> Cliente confiante tende a aportar mais ao longo do tempo</li>
+            <li>✅ <strong>Pode melhorar <span class="tooltip-term" data-tooltip="NPS = Net Promoter Score (Índice de Satisfação). Mede a probabilidade de um cliente recomendar a empresa para outras pessoas (de -100 a +100).">NPS</span>:</strong> Educação real pode gerar satisfação e recomendação</li>
+            <li>✅ <strong>Pode fortalecer <span class="tooltip-term" data-tooltip="Compliance = Conformidade regulatória. Conjunto de normas e processos para garantir que a empresa cumpre todas as regras do mercado.">compliance</span>:</strong> Cliente consciente tende a gerar menos reclamações</li>
+            <li>✅ <strong>Diferenciação de mercado:</strong> Educação complementar pode virar proposta de valor</li>
+        </ul>
+        
+        <div class="highlight-box">
+            <p><strong>💼 Quer oferecer o INVLAB como diferencial educacional para seus clientes?</strong></p>
+            <p>Entre em contato: <a href="mailto:parcerias@invlab.com.br" style="color: #10b981; font-weight: 600;">parcerias@invlab.com.br</a></p>
+        </div>
+        
+        <h2>📌 Mensagem Final</h2>
+        
+        <div class="final-message">
+            <p><strong>Se você foi classificado como "arrojado" e perdeu dinheiro em uma queda de mercado:</strong></p>
+            <p style="font-size: 1.25rem; color: #10b981; font-weight: 600; margin-top: 20px;">NÃO FOI CULPA SUA.</p>
+            <p style="margin-top: 20px;">Foi consequência de:</p>
+            <ul style="text-align: left; max-width: 600px; margin: 20px auto 0; list-style-position: inside;">
+                <li>Um modelo que simplifica demais a complexidade humana</li>
+                <li>A diferença entre risco teórico e emocional</li>
+                <li>Falta de preparação prévia para volatilidade real</li>
+                <li>Ausência de análise por objetivos e prazos</li>
+            </ul>
+            <p style="margin-top: 32px; font-size: 1.15rem; color: #D4AF37; font-weight: 600;">O INVLAB existe para mudar isso.</p>
+            <p style="margin-top: 12px;"><strong>Educação honesta. Análise completa. Proteção real.</strong></p>
+        </div>
+        
+        <a href="../index.html#primeiros-passos" class="back-button" style="margin-top: 32px; display: inline-block;">← Voltar para Primeiros Passos</a>
+    </div>
+    
+    <!-- Botão Voltar ao Topo -->
+    <div id="backToTop">↑</div>
+    
+    <script>
+        // JavaScript for Back to Top button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) { // Show button after scrolling 300px
+                backToTopButton.style.display = 'block';
+                setTimeout(() => backToTopButton.style.opacity = '1', 10); // Fade in
+            } else {
+                backToTopButton.style.opacity = '0'; // Fade out
+                setTimeout(() => backToTopButton.style.display = 'none', 300); // Hide after fade
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // Smooth scroll
+            });
+        });
+        
+        // JavaScript for Mobile Tooltips (touch support)
+        if ('ontouchstart' in window) {
+            const tooltips = document.querySelectorAll('.tooltip-term');
+            tooltips.forEach(tooltip => {
+                tooltip.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    // Remove active class from all other tooltips
+                    tooltips.forEach(t => {
+                        if (t !== this) t.classList.remove('tooltip-active');
+                    });
+                    // Toggle active class on clicked tooltip
+                    this.classList.toggle('tooltip-active');
+                });
+            });
+            
+            // Close tooltip when touching outside
+            document.addEventListener('touchstart', function(e) {
+                if (!e.target.classList.contains('tooltip-term')) {
+                    tooltips.forEach(t => t.classList.remove('tooltip-active'));
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+
