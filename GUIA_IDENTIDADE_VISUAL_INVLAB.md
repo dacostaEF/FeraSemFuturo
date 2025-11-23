@@ -819,7 +819,55 @@ Aqui está um exemplo completo de uma seção com cards:
 
 ---
 
-## 🚀 13. PRÓXIMOS PASSOS
+## 📄 13. PÁGINA METODOLOGIA (PÁGINA SEPARADA)
+
+### 13.1 Características
+
+A página `metodologia.html` usa a identidade visual INVLAB completa com fundo escuro:
+
+| Elemento | Propriedade | Valor |
+|----------|-------------|-------|
+| **Body** | `background` | `#0D0D0D` |
+| **Container** | `background` | `rgba(26, 26, 26, 0.95)` |
+| **Borda** | `border` | `1px solid rgba(212, 175, 55, 0.2)` |
+| **H1 (título)** | Degradê verde | `linear-gradient(90deg, #10b981...)` |
+| **H2 (seções)** | `color` | `#D4AF37` (Dourado) |
+| **H3 (subseções)** | `color` | `#E4E4E4` (Branco suave) |
+| **Textos** | `color` | `rgba(255, 255, 255, 0.85)` |
+| **Link voltar** | `color` | Verde 85% → Dourado hover |
+
+### 13.2 Boxes de Destaque
+
+```css
+/* Box Verde (Destaque) */
+.highlight-box {
+    background: rgba(16, 185, 129, 0.1);
+    border-left: 4px solid #10b981;
+}
+
+/* Box Laranja (Aviso) */
+.warning-box {
+    background: rgba(245, 158, 11, 0.08);
+    border-left: 4px solid #F59E0B;
+}
+```
+
+### 13.3 Tabelas Premium
+
+```css
+th {
+    background: rgba(212, 175, 55, 0.1);  /* Fundo dourado suave */
+    color: #D4AF37;                       /* Texto dourado */
+}
+
+td {
+    color: rgba(255, 255, 255, 0.85);
+}
+```
+
+---
+
+## 🚀 14. PRÓXIMOS PASSOS
 
 Páginas que precisam receber a identidade visual:
 

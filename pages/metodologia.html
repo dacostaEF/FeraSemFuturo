@@ -13,71 +13,90 @@
     <!-- Theme Color -->
     <meta name="theme-color" content="#0A2540">
     
+    <!-- Google Fonts INVLAB -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="../assets/css/styles.css">
-    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/invlab-icons.css">
     
     <style>
         body {
-            background: var(--blue-corporate);
-            padding: 20px;
+            background: #0D0D0D;  /* Fundo escuro INVLAB */
+            padding: 40px 20px;
+            font-family: 'Inter', sans-serif;
         }
         
         .metodologia-container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-            background: white;
+            background: rgba(26, 26, 26, 0.95);  /* Fundo escuro premium */
             border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 12px 48px rgba(10, 37, 64, 0.24);
+            padding: 48px;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.2);  /* Borda dourada suave */
         }
         
         .back-button {
             display: inline-block;
-            color: #635BFF;
+            color: rgba(16, 185, 129, 0.85);  /* Verde INVLAB */
             text-decoration: none;
             font-weight: 600;
             margin-bottom: 30px;
             font-size: 16px;
             transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
         }
         
         .back-button:hover {
-            color: #00D924;
+            color: #D4AF37;  /* Dourado no hover */
             transform: translateX(-5px);
         }
         
         h1 {
-            font-size: 36px;
-            color: var(--blue-corporate);
-            margin-bottom: 10px;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #10b981 0%, #34D399 50%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
         }
         
         .subtitle {
-            font-size: 18px;
-            color: var(--gray-medium);
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            color: rgba(16, 185, 129, 0.65);  /* Verde suave INVLAB */
             margin-bottom: 40px;
             padding-bottom: 20px;
-            border-bottom: 2px solid #F5F5F5;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
         
         h2 {
-            font-size: 24px;
-            color: var(--blue-tech);
-            margin-top: 40px;
-            margin-bottom: 16px;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #D4AF37;  /* Dourado INVLAB */
+            margin-top: 48px;
+            margin-bottom: 20px;
+            letter-spacing: -0.01em;
         }
         
         h3 {
-            font-size: 18px;
-            color: var(--blue-corporate);
-            margin-top: 24px;
-            margin-bottom: 12px;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #E4E4E4;  /* Branco suave */
+            margin-top: 32px;
+            margin-bottom: 16px;
         }
         
         p, li {
-            font-size: 16px;
-            line-height: 1.8;
-            color: var(--gray-graphite);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);  /* Texto claro */
             margin-bottom: 16px;
         }
         
@@ -87,76 +106,111 @@
         }
         
         li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         
+        strong {
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+        }
+        
+        /* Box de Destaque - Estilo INVLAB */
         .highlight-box {
-            background: rgba(99, 91, 255, 0.08);
-            border-left: 4px solid #635BFF;
-            padding: 20px;
-            border-radius: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;  /* Verde INVLAB */
+            padding: 24px;
+            border-radius: 12px;
             margin: 24px 0;
         }
         
         .highlight-box strong {
-            color: #635BFF;
+            color: #10b981;
         }
         
+        /* Box de Aviso - Estilo INVLAB */
         .warning-box {
-            background: rgba(255, 193, 7, 0.1);
-            border-left: 4px solid #FFC107;
-            padding: 20px;
-            border-radius: 8px;
+            background: rgba(245, 158, 11, 0.08);
+            border-left: 4px solid #F59E0B;  /* Laranja */
+            padding: 24px;
+            border-radius: 12px;
             margin: 24px 0;
         }
         
         .warning-box strong {
-            color: #F57C00;
+            color: #F59E0B;
         }
         
+        /* Fórmulas */
         .formula {
-            background: #F5F5F5;
-            padding: 16px;
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 12px;
             font-family: 'Courier New', monospace;
-            font-size: 14px;
-            margin: 16px 0;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 20px 0;
             overflow-x: auto;
+            line-height: 1.6;
         }
         
+        /* Tabelas */
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 24px 0;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            overflow: hidden;
         }
         
         th, td {
-            padding: 12px;
+            padding: 14px 16px;
             text-align: left;
-            border-bottom: 1px solid #E5E7EB;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
         
         th {
-            background: #F5F5F5;
-            font-weight: 700;
-            color: var(--blue-corporate);
+            background: rgba(212, 175, 55, 0.1);  /* Fundo dourado suave */
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: #D4AF37;  /* Dourado INVLAB */
+            font-size: 0.9rem;
+        }
+        
+        td {
+            font-family: 'Inter', sans-serif;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.9rem;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
         }
         
         @media (max-width: 768px) {
+            body {
+                padding: 20px 16px;
+            }
+            
             .metodologia-container {
-                padding: 24px 20px;
+                padding: 32px 24px;
             }
             
             h1 {
-                font-size: 28px;
+                font-size: 2rem;
             }
             
             h2 {
-                font-size: 20px;
+                font-size: 1.5rem;
+            }
+            
+            h3 {
+                font-size: 1.1rem;
             }
             
             p, li {
-                font-size: 15px;
+                font-size: 0.9rem;
             }
         }
     </style>
