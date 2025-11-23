@@ -219,254 +219,232 @@
     <div class="metodologia-container">
         <a href="../index.html" class="back-button">← Voltar para Início</a>
         
-        <h1>🔬 Metodologia</h1>
-        <p class="subtitle">Transparência total sobre nossas fontes, cálculos e premissas</p>
+        <h1>🧪 METODOLOGIA INVLAB</h1>
+        <p class="subtitle">Transparência nas fórmulas, nas premissas e nas fontes de dados</p>
         
-        <h2>📊 1. Fontes de Dados</h2>
-        
-        <h3>1.1 Taxa CDI e Selic</h3>
         <p>
-            As taxas CDI e Selic utilizadas em nossas simulações são baseadas em valores médios históricos e projeções de mercado. 
-            <strong>Fonte:</strong> Banco Central do Brasil (BCB) e ANBIMA.
+            O InvLab é um laboratório educacional dedicado à compreensão dos produtos financeiros, auxiliando o usuário a testar cenários, comparar alternativas e entender como as decisões impactam os resultados ao longo do tempo.
         </p>
-        <p><strong>Taxas de referência (Jan/2025):</strong></p>
+        <p>
+            Nossos simuladores utilizam matemática financeira real, indicadores oficiais e premissas explícitas, sempre com foco educacional.
+        </p>
+        <p>
+            A seguir apresentamos, de forma clara e estruturada, tudo que usamos para calcular, projetar e comparar investimentos.
+        </p>
+        
+        <h2>🧩 1. FONTES DE DADOS (Oficiais e Atualizadas)</h2>
+        
+        <p>Todos os indicadores utilizados no InvLab são provenientes de fontes públicas e confiáveis:</p>
+        
+        <h3>Banco Central do Brasil (BCB / API SGS)</h3>
         <ul>
-            <li>CDI: 13,65% a.a.</li>
-            <li>Selic: 13,75% a.a.</li>
-            <li>IPCA: 4,5% a.a. (projetado)</li>
+            <li>Taxa Selic</li>
+            <li>CDI</li>
+            <li>IPCA</li>
+            <li>TR</li>
+            <li>Taxa de Câmbio</li>
         </ul>
         
-        <h3>1.2 Produtos de Investimento (CDBs, LCI/LCA)</h3>
-        <p>
-            Os dados de taxas de CDBs e outros produtos de renda fixa são coletados de:
-        </p>
+        <h3>Tesouro Nacional</h3>
         <ul>
-            <li>Sites oficiais de corretoras (XP, Rico, BTG, Inter, etc.)</li>
-            <li>Plataformas de comparação de investimentos</li>
-            <li>Comunicações públicas de instituições financeiras</li>
+            <li>Taxas dos títulos públicos</li>
+            <li>Preços unitários (PU)</li>
+            <li>Histórico de remuneração</li>
         </ul>
         
-        <div class="warning-box">
-            <p><strong>⚠️ IMPORTANTE:</strong> Taxas promocionais podem mudar sem aviso prévio. Sempre confirme a taxa atual no site/app oficial da instituição antes de investir.</p>
-        </div>
+        <h3>B3 / Anbima</h3>
+        <ul>
+            <li>Curva DI</li>
+            <li>Índices de referência</li>
+            <li>Preços de mercado</li>
+        </ul>
         
-        <h2>🧮 2. Fórmulas e Cálculos</h2>
-        
-        <h3>2.1 Juros Compostos</h3>
-        <p>Fórmula básica utilizada em todas as simulações:</p>
-        <div class="formula">
-            VF = VP × (1 + i)^n + PMT × [((1 + i)^n - 1) / i]
-            <br><br>
-            Onde:
-            <br>VF = Valor Futuro
-            <br>VP = Valor Presente (capital inicial)
-            <br>i = Taxa de juros mensal
-            <br>n = Número de períodos (meses)
-            <br>PMT = Pagamento/Aporte mensal
-        </div>
-        
-        <h3>2.2 Imposto de Renda Regressivo (Renda Fixa)</h3>
-        <p>Aplicado sobre o <strong>lucro</strong>, não sobre o valor total:</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Prazo de Aplicação</th>
-                    <th>Alíquota de IR</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Até 6 meses</td>
-                    <td>22,5%</td>
-                </tr>
-                <tr>
-                    <td>6 a 12 meses</td>
-                    <td>20%</td>
-                </tr>
-                <tr>
-                    <td>12 a 24 meses</td>
-                    <td>17,5%</td>
-                </tr>
-                <tr>
-                    <td>Acima de 24 meses</td>
-                    <td>15%</td>
-                </tr>
-            </tbody>
-        </table>
+        <h3>Outras Fontes Técnicas</h3>
+        <ul>
+            <li>Estatísticas oficiais para FIIs</li>
+            <li>Dados de blockchain públicos (cripto)</li>
+            <li>Relatórios educacionais e normativos</li>
+        </ul>
         
         <div class="highlight-box">
-            <p><strong>💡 OBSERVAÇÃO:</strong> LCI e LCA são <strong>isentas de IR</strong> para pessoa física.</p>
+            <p><strong>💡 OBSERVAÇÃO:</strong> Todos os dados exibidos no site podem sofrer atraso de alguns minutos devido ao tempo de atualização das fontes oficiais.</p>
         </div>
+        
+        <h2>📐 2. MODELO DE CÁLCULO — COMO FUNCIONA CADA SIMULADOR</h2>
+        
+        <h3>2.1 CDBs, LCIs e LCAs</h3>
+        <p>Usamos juros compostos reais:</p>
+        
+        <div class="formula">
+Fórmula Geral:
+VF = Investimento × (1 + CDI × %CDB / 12)^meses
+
+Onde:
+• VF = Valor Final
+• Investimento = Capital inicial
+• CDI = Taxa CDI anual (em decimal)
+• %CDB = Percentual do CDI (ex: 110% = 1,10)
+• meses = Prazo da aplicação
+        </div>
+        
+        <p><strong>Imposto de Renda:</strong></p>
+        <p>Aplicado automaticamente para CDBs:</p>
+        <ul>
+            <li>22,5% (0–6 meses)</li>
+            <li>20% (6–12 meses)</li>
+            <li>17,5% (12–24 meses)</li>
+            <li>15% (+24 meses)</li>
+        </ul>
+        
+        <div class="highlight-box">
+            <p><strong>➡ LCI/LCA:</strong> isentos de Imposto de Renda.</p>
+        </div>
+        
+        <h3>2.2 Tesouro Direto</h3>
+        <p>Para cada título, usamos modelos reais:</p>
+        
+        <p><strong>Tesouro Prefixado:</strong></p>
+        <div class="formula">
+VF = VP × (1 + taxa anual)^anos
+
+Onde:
+• VF = Valor Final
+• VP = Valor Presente (investimento)
+• taxa anual = Taxa contratada (ex: 12% = 0,12)
+• anos = Prazo até o vencimento
+        </div>
+        
+        <p><strong>Tesouro IPCA+:</strong></p>
+        <div class="formula">
+VF = VP × (1 + IPCA projetado)^anos × (1 + taxa real)^anos
+
+Onde:
+• IPCA projetado = Inflação esperada
+• taxa real = Taxa real contratada
+• Resultado = Rentabilidade nominal (IPCA + real)
+        </div>
+        
+        <p><strong>Tesouro Selic:</strong></p>
+        <div class="formula">
+VF = VP × (1 + Selic diária)^dias úteis
+
+Onde:
+• Selic diária = Taxa Selic / 252 dias úteis
+• Acompanha a taxa Selic vigente
+        </div>
+        
+        <p><strong>Imposto e taxas:</strong></p>
+        <ul>
+            <li>IR regressivo (mesma tabela de CDBs)</li>
+            <li>Taxa da B3 (quando aplicável)</li>
+        </ul>
         
         <h3>2.3 Poupança</h3>
-        <p>Cálculo diferenciado conforme a Taxa Selic:</p>
-        <ul>
-            <li><strong>Se Selic > 8,5% a.a.:</strong> Rendimento = 0,5% ao mês + TR</li>
-            <li><strong>Se Selic ≤ 8,5% a.a.:</strong> Rendimento = 70% da Selic + TR</li>
-        </ul>
-        <p><strong>TR (Taxa Referencial):</strong> Considerada como 0% (desprezível) em nossas simulações devido ao seu valor histórico próximo a zero desde 2017.</p>
+        <p>Calculamos automaticamente de acordo com a regra vigente:</p>
         
-        <h3>2.4 CDB Pós-fixado (% do CDI)</h3>
-        <p>Cálculo mensal:</p>
+        <p><strong>Quando Selic > 8,5%:</strong></p>
         <div class="formula">
-            Taxa Mensal = [(1 + CDI Anual)^(1/12) - 1] × (% do CDI / 100)
-            <br><br>
-            Exemplo: CDB 110% do CDI
-            <br>CDI Anual = 13,65% → CDI Mensal = 1,07%
-            <br>Taxa do CDB = 1,07% × 1,10 = 1,177% ao mês
+Poupança = 0,5% ao mês + TR
         </div>
         
-        <h2>🛡️ 3. Premissas e Limitações</h2>
+        <p><strong>Quando Selic ≤ 8,5%:</strong></p>
+        <div class="formula">
+Poupança = 70% × Selic + TR
+        </div>
         
-        <h3>3.1 Premissas Adotadas</h3>
+        <h3>2.4 Comparadores (lado a lado)</h3>
+        <p>O módulo de comparação utiliza:</p>
         <ul>
-            <li>Reinvestimento automático dos rendimentos</li>
-            <li>Aportes mensais realizados sempre no mesmo dia do mês</li>
-            <li>Taxas de CDI/Selic constantes ao longo do período simulado</li>
-            <li>Não consideramos taxa de custódia (maioria dos CDBs modernos não cobra)</li>
-            <li>Não consideramos taxa de administração para investimentos diretos</li>
-            <li>FGC protege até R$ 250 mil por CPF/instituição (CDB, LCI, LCA, Poupança)</li>
+            <li>Equivalência temporal padronizada</li>
+            <li>Retorno líquido (já descontado IR quando aplicável)</li>
+            <li>Valor corrigido pela inflação (cenário opcional)</li>
+            <li>Apresentação gráfica</li>
+            <li>Análise percentual e absoluta</li>
         </ul>
         
-        <h3>3.2 Limitações do Modelo</h3>
+        <h2>🎯 3. PREMISSAS E HIPÓTESES (EXPLICADAS)</h2>
+        
+        <h3>3.1 Projeções não representam garantias</h3>
+        <p>As simulações utilizam valores atuais dos indicadores, e projetam o futuro assumindo:</p>
+        <ul>
+            <li>CDI constante</li>
+            <li>Selic constante</li>
+            <li>IPCA médio constante</li>
+            <li>Taxas dos títulos estáveis</li>
+        </ul>
+        
         <div class="warning-box">
-            <p><strong>⚠️ ATENÇÃO às Limitações:</strong></p>
+            <p><strong>Por isso:</strong></p>
             <ul style="margin-bottom: 0;">
-                <li>Taxas de juros variam no mundo real (Selic/CDI não são fixas)</li>
-                <li>Inflação pode corroer o poder de compra (considere sempre a taxa real)</li>
-                <li>Liquidez pode ter carência (D+30, D+60, D+90) não considerada</li>
-                <li>Eventos macroeconômicos imprevistos podem alterar cenários</li>
-                <li>Tributação pode mudar (reformas tributárias)</li>
-                <li>Custos de oportunidade não são modelados</li>
+                <li>👉 Os resultados NÃO refletem oscilações de mercado</li>
+                <li>👉 Os valores são hipotéticos</li>
+                <li>👉 O objetivo é educacional, não preditivo</li>
             </ul>
         </div>
         
-        <h2>📚 4. Metodologia de Atualização</h2>
+        <h2>⚠️ 4. LIMITAÇÕES (TRANSPARÊNCIA ABSOLUTA)</h2>
         
-        <p><strong>Frequência de Atualização:</strong></p>
+        <p>Para manter integridade educacional:</p>
         <ul>
-            <li><strong>Taxas CDI/Selic:</strong> Mensalmente ou quando houver mudança significativa pelo COPOM</li>
-            <li><strong>Produtos (CDBs):</strong> Revisão trimestral ou quando notificados de mudanças</li>
-            <li><strong>Inflação (IPCA):</strong> Anualmente com base nas projeções do BCB</li>
+            <li>Não incluímos risco de crédito (default do banco emissor)</li>
+            <li>Não incluímos liquidez ou carência</li>
+            <li>Não incluímos spread bancário</li>
+            <li>Não incluímos volatilidade de mercado (para TD e RV)</li>
+            <li>Não fazemos projeção de curva DI</li>
+            <li>Não interpretamos IA ou eventos futuros</li>
         </ul>
         
-        <p><strong>Última Atualização:</strong> Janeiro de 2025</p>
-        
-        <h2>⚖️ 5. Disclaimer Legal</h2>
-        
         <div class="warning-box">
-            <p style="margin-bottom: 0;"><strong>AVISO IMPORTANTE:</strong></p>
-            <p>
-                Esta plataforma é exclusivamente <strong>educacional e de simulação</strong>. Os resultados apresentados são projeções baseadas nas premissas descritas nesta metodologia e <strong>não garantem rentabilidade futura</strong>.
-                <br><br>
-                <strong>NÃO somos:</strong>
-            </p>
-            <ul>
-                <li>Assessores de investimentos</li>
-                <li>Consultores financeiros certificados</li>
-                <li>Distribuidores de produtos financeiros</li>
-                <li>Corretoras ou instituições financeiras</li>
-            </ul>
-            <p>
-                <strong>Sempre consulte um profissional certificado (CEA, CFP, CNPI) antes de tomar decisões de investimento.</strong>
-            </p>
+            <p style="margin-bottom: 0;"><strong>⚠️ IMPORTANTE:</strong> Essas variáveis não são consideradas porque o InvLab é uma plataforma educacional de simulação, e não um sistema financeiro de risco.</p>
         </div>
         
-        <h2>📧 6. Contato e Sugestões</h2>
-        
-        <p>
-            Identificou algum erro na metodologia? Tem sugestões de melhorias?
-            <br>Entre em contato: <strong>contato@invlab.com.br</strong> (em desenvolvimento)
-        </p>
+        <h2>🛡 5. O QUE O INVLAB NÃO FAZ (PILARES DE INDEPENDÊNCIA)</h2>
         
         <div class="highlight-box">
-            <p style="margin-bottom: 0;">
-                <strong>💡 Nosso Compromisso:</strong> Manter a transparência total sobre nossas fontes, cálculos e limitações. Acreditamos que investidores bem-informados tomam melhores decisões.
-            </p>
+            <p><strong>Nosso foco é 100% educação e análise imparcial:</strong></p>
+            <ul>
+                <li>✔ Não vendemos produtos financeiros</li>
+                <li>✔ Não recebemos comissão de ninguém</li>
+                <li>✔ Não recomendamos "o melhor investimento"</li>
+                <li>✔ Não fazemos propaganda de instituições</li>
+                <li>✔ Não atuamos como consultores de investimentos</li>
+            </ul>
         </div>
+        
+        <h2>🌐 6. OBJETIVO DA METODOLOGIA</h2>
+        
+        <p>Conduzir o usuário a compreender:</p>
+        <ul>
+            <li>como os juros compostos funcionam</li>
+            <li>como taxas influenciam resultados no tempo</li>
+            <li>como comparar produtos com critérios racionais</li>
+            <li>como simular cenários</li>
+            <li>como medir impacto da inflação</li>
+            <li>como visualizar o efeito do IR</li>
+        </ul>
+        
+        <p><strong>Tudo isso de forma clara, comparativa, honesta e transparente.</strong></p>
+        
+        <h2>🏁 7. CONCLUSÃO — A FILOSOFIA INVLAB</h2>
+        
+        <p>O InvLab existe para democratizar o entendimento sobre investimentos através de:</p>
+        
+        <div class="highlight-box">
+            <ul>
+                <li>⚡ Simuladores profissionais</li>
+                <li>📊 Comparações reais e imparciais</li>
+                <li>🧠 Educação financeira sem viés comercial</li>
+                <li>🔍 Metodologia técnica, clara e transparente</li>
+            </ul>
+        </div>
+        
+        <p style="text-align: center; font-size: 1.2rem; font-weight: 600; color: rgba(16, 185, 129, 0.85); margin: 32px 0;">
+            Aqui, o foco é simples:<br>
+            <strong>Simule antes de investir. Decida com dados, não com palpites.</strong>
+        </p>
         
         <br>
         <a href="../index.html" class="back-button">← Voltar para Início</a>
     </div>
-
-    <!-- Footer -->
-    <footer style="background: rgba(15, 23, 42, 0.9); border-top: 1px solid rgba(59, 130, 246, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
-        <div class="content-wrapper-wide">
-            <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
-                <!-- Coluna 1: INVLAB -->
-                <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
-                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">
-                        Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.
-                    </p>
-                    <a href="guia_invlab.html" style="color: #3B82F6; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
-                        🧭 Guia do INVLAB →
-                    </a>
-                </div>
-
-                <!-- Coluna 2: Renda Fixa -->
-                <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="poupanca.html" style="color: #CBD5E1; text-decoration: none;">💰 Poupança</a></li>
-                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 CDBs</a></li>
-                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
-                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ LCI/LCA</a></li>
-                    </ul>
-                </div>
-
-                <!-- Coluna 3: Renda Variável -->
-                <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="../index.html#renda-variavel" style="color: #CBD5E1; text-decoration: none;">📈 Introdução</a></li>
-                        <li><a href="acoes.html" style="color: #CBD5E1; text-decoration: none;">📊 Ações</a></li>
-                        <li><a href="etfs.html" style="color: #CBD5E1; text-decoration: none;">🎯 ETFs</a></li>
-                        <li><a href="fiis.html" style="color: #CBD5E1; text-decoration: none;">🏢 FIIs</a></li>
-                    </ul>
-                </div>
-
-                <!-- Coluna 4: Criptoativos -->
-                <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Criptoativos</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="../index.html#criptoativos" style="color: #CBD5E1; text-decoration: none;">🔐 Introdução</a></li>
-                        <li><a href="bitcoin.html" style="color: #CBD5E1; text-decoration: none;">₿ Bitcoin</a></li>
-                        <li><a href="stablecoins.html" style="color: #CBD5E1; text-decoration: none;">💵 Stablecoins</a></li>
-                        <li><a href="blockchain.html" style="color: #CBD5E1; text-decoration: none;">⛓️ Blockchain</a></li>
-                        <li><a href="cbdc.html" style="color: #CBD5E1; text-decoration: none;">🏛️ CBDCs</a></li>
-                    </ul>
-                </div>
-
-                <!-- Coluna 5: Outros Investimentos -->
-                <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Outros Investimentos</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="../index.html#outros-investimentos" style="color: #CBD5E1; text-decoration: none;">💎 Introdução</a></li>
-                        <li><a href="ganhos-come-cotas.html" style="color: #CBD5E1; text-decoration: none;">🍽️ Come-cotas</a></li>
-                        <li><a href="ganhos-iof-regressivo.html" style="color: #CBD5E1; text-decoration: none;">📉 IOF Regressivo</a></li>
-                        <li><a href="ganhos-inflacao.html" style="color: #CBD5E1; text-decoration: none;">📊 Inflação</a></li>
-                    </ul>
-                </div>
-
-                <!-- Coluna 6: Ferramentas -->
-                <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Ferramentas</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 Simulador CDBs</a></li>
-                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Simulador Tesouro</a></li>
-                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ Simulador LCI/LCA</a></li>
-                        <li><a href="calculadora.html" style="color: #CBD5E1; text-decoration: none;">🧮 Juros Compostos</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div style="border-top: 1px solid rgba(59, 130, 246, 0.1); padding-top: 20px; margin-top: 20px;">
-                <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">⚠️ Conteúdo 100% educacional. Não somos corretora, não vendemos produtos, não recebemos comissões.</p>
-                <p style="font-size: 0.78rem; color: #64748B; text-align: center; line-height: 1.7; margin-bottom: 12px; max-width: 900px; margin-left: auto; margin-right: auto;">Conteúdo educacional desenvolvido por especialistas em mercado financeiro tradicional, tecnologia blockchain e tokenização de ativos reais. O INVLAB é um laboratório de pesquisa independente dedicado a unir educação, tecnologia e inovação nos mercados de capitais.</p>
-                <p style="font-size: 0.75rem; color: #475569; text-align: center;">© 2025 INVLAB - Laboratório de Investimentos | Plataforma Educacional</p>
-            </div>
-        </div>
-    </footer>
 </body>
 </html>
-
