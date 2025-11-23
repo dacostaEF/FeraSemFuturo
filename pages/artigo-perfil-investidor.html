@@ -198,42 +198,25 @@
             }
         }
         
-        .article-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px; /* Padding horizontal apenas */
-            color: rgba(255, 255, 255, 0.85);
+        /* Removido: .article-container agora usa .article-wrapper padrão (max-width: 1200px do artigo-styles.css) */
+        
+        /* Override: article-badge e article-time com cores INVLAB */
+        .article-badge {
+            background: rgba(212, 175, 55, 0.15) !important; /* Fundo dourado suave */
+            color: #D4AF37 !important; /* Texto dourado */
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .article-time {
+            color: rgba(16, 185, 129, 0.85) !important; /* Verde INVLAB */
         }
         
         .back-button {
             display: none; /* Vamos usar breadcrumb ao invés de botão voltar */
         }
         
-        h1 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 2.5rem;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 16px;
-            background: linear-gradient(90deg, #10b981 0%, #34D399 50%, #10b981 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.02em;
-            line-height: 1.2;
-        }
-        
-        .article-subtitle {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 400;
-            text-align: center;
-            color: rgba(16, 185, 129, 0.65);
-            margin-bottom: 40px;
-            line-height: 1.6;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
+        /* Removido: CSS do h1 agora usa inline styles para consistência */
+        /* Removido: .article-subtitle agora usa .article-lead do artigo-styles.css */
         
         h2 {
             font-family: 'Playfair Display', Georgia, serif;
@@ -512,9 +495,7 @@
         
         /* Responsividade */
         @media (max-width: 768px) {
-            .article-container {
-                padding: 0 16px;
-            }
+            /* Removido: .article-container agora usa .article-wrapper padrão */
             
             h1 {
                 font-size: 2rem;
@@ -640,9 +621,20 @@
     <div class="article-container">
         <a href="../index.html#primeiros-passos" class="back-button">← Voltar para Primeiros Passos</a>
         
-        <h1>⚖️ Perfil de Investidor: O Que o Questionário Não Consegue Capturar</h1>
-        
-        <p class="article-subtitle">Uma análise técnica e construtiva sobre as limitações do modelo tradicional de suitability — e uma abordagem complementar para proteger seu patrimônio</p>
+        <!-- Article Meta -->
+        <div class="article-meta">
+            <span class="article-badge">⚖️ Módulo: Educação Financeira</span>
+            <span class="article-time">⏱️ 12 min</span>
+        </div>
+
+        <!-- Article Content -->
+        <article class="article-content">
+            <!-- Title -->
+            <h1 class="article-title" style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; font-weight: 800; text-align: center; margin-bottom: 16px; color: #D4AF37; letter-spacing: -0.02em; line-height: 1.2;">Perfil de Investidor: O Que o Questionário Não Consegue Capturar</h1>
+            
+            <p class="article-lead">
+                Uma análise técnica e construtiva sobre as limitações do modelo tradicional de suitability — e uma abordagem complementar para proteger seu patrimônio
+            </p>
         
         <div class="warning-box">
             <p><strong>⚠️ Um alerta importante para investidores iniciantes:</strong></p>
@@ -651,7 +643,8 @@
             <p><strong>Não é culpa das instituições. Não é culpa sua. É a evolução natural da educação financeira.</strong></p>
         </div>
         
-        <h2>💔 A História Real (Que Acontece Todos os Dias)</h2>
+        <section class="article-section">
+            <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em;">💔 A História Real (Que Acontece Todos os Dias)</h2>
         
         <div class="story-box">
             <h3>O Ciclo Invisível da Perda</h3>
@@ -742,8 +735,10 @@
         </ul>
         
         <p>O questionário é uma <strong>fotografia de um momento</strong>. Mas seu perfil real é um <strong>filme em movimento</strong>.</p>
-        
-        <h2>🛡️ <span class="tooltip-term" data-tooltip="Suitability = Adequação. Processo regulatório obrigatório que verifica se um investimento é compatível com o perfil, objetivos e conhecimento do investidor.">Suitability</span>: O Que Funciona e O Que Precisa Evoluir</h2>
+        </section>
+
+        <section class="article-section">
+            <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em;">🛡️ <span class="tooltip-term" data-tooltip="Suitability = Adequação. Processo regulatório obrigatório que verifica se um investimento é compatível com o perfil, objetivos e conhecimento do investidor.">Suitability</span>: O Que Funciona e O Que Precisa Evoluir</h2>
         
         <h3>O Que É Suitability?</h3>
         
@@ -844,11 +839,13 @@
                 <li>✅ Reduz arrependimento e pânico</li>
             </ul>
         </div>
-        
-        <h2>🧭 A Filosofia INVLAB</h2>
+        </section>
+
+        <section class="article-section">
+            <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em;">🧭 A Filosofia INVLAB</h2>
         
         <div class="invlab-philosophy">
-            <h2>O Que o INVLAB Faz de Diferente</h2>
+            <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em;">O Que o INVLAB Faz de Diferente</h2>
             
             <p>O INVLAB não substitui o suitability regulatório das corretoras.</p>
             
@@ -868,7 +865,10 @@
             </div>
         </div>
         
-        <h2>🤝 Para Corretoras e Assessores</h2>
+        </section>
+
+        <section class="article-section">
+            <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em;">🤝 Para Corretoras e Assessores</h2>
         
         <p>O INVLAB tem como proposta apresentar uma <strong>abordagem educacional complementar</strong> que pode ajudar investidores iniciantes a administrar suas reservas com mais tranquilidade, conhecimento e clareza sobre riscos, alternativas e possibilidades.</p>
         
@@ -887,7 +887,10 @@
             <p>Entre em contato: <a href="mailto:parcerias@invlab.com.br" style="color: #10b981; font-weight: 600;">parcerias@invlab.com.br</a></p>
         </div>
         
-        <h2>📌 Mensagem Final</h2>
+        </section>
+
+        <section class="article-section">
+            <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em;">📌 Mensagem Final</h2>
         
         <div class="final-message">
             <p><strong>Se você foi classificado como "arrojado" e perdeu dinheiro em uma queda de mercado:</strong></p>
@@ -902,6 +905,10 @@
             <p style="margin-top: 32px; font-size: 1.15rem; color: #D4AF37; font-weight: 600;">O INVLAB existe para mudar isso.</p>
             <p style="margin-top: 12px;"><strong>Educação honesta. Análise completa. Proteção real.</strong></p>
         </div>
+        
+        </section>
+        
+        </article>
     </div>
     
             </div>

@@ -1406,7 +1406,320 @@ Isso cria **hierarquia visual clara** e evita sensação de "elementos colados".
 
 ---
 
-## 🚀 19. PRÓXIMOS PASSOS
+## 🚀 19. PADRÃO DE PÁGINAS DE ARTIGOS (CHECKLIST COMPLETO)
+
+**Status:** ✅ TESTADO E APROVADO  
+**Páginas de Referência:** `artigo-perfil-investidor.html` e `artigo-gerente.html`
+
+---
+
+### 19.1 Estrutura HTML Obrigatória
+
+Toda página de artigo DEVE ter essa estrutura completa:
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0D0D0D">
+    
+    <!-- Google Fonts INVLAB -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-icons.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    
+    <style>
+        /* Override OBRIGATÓRIO: article-badge e article-time com cores INVLAB */
+        .article-badge {
+            background: rgba(212, 175, 55, 0.15) !important;
+            color: #D4AF37 !important;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .article-time {
+            color: rgba(16, 185, 129, 0.85) !important;
+        }
+        
+        /* Back to Top Button */
+        #backToTop {
+            display: none;
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 9999;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+            color: #0D0D0D;
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 50%;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 52px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease-in-out;
+            opacity: 0;
+        }
+        #backToTop:hover {
+            background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.6);
+            border-color: rgba(16, 185, 129, 0.6);
+        }
+        @media (max-width: 768px) {
+            #backToTop {
+                width: 48px;
+                height: 48px;
+                font-size: 24px;
+                line-height: 44px;
+                bottom: 24px;
+                right: 24px;
+            }
+        }
+        
+        /* Footer Premium CSS aqui (copiar do arquivo de referência) */
+    </style>
+</head>
+```
+
+---
+
+### 19.2 Body: Estrutura de Navegação
+
+```html
+<body>
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB">
+                <span class="logo-text">INVLAB</span>
+            </div>
+            
+            <!-- Sistema de Abas (copiar do arquivo de referência) -->
+            <div class="tabs-nav-wrapper">
+                <nav class="tabs-nav" id="tabsNav">
+                    <!-- ... tabs ... -->
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="article-wrapper">
+                
+                <!-- Breadcrumb (SEM margin-top inline!) -->
+                <nav class="breadcrumb">
+                    <a href="../index.html">🏠 Início</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <a href="../index.html#primeiros-passos">📚 Primeiros Passos</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span class="breadcrumb-current">Nome do Artigo</span>
+                </nav>
+
+                <!-- Article Meta (PADRÃO OBRIGATÓRIO) -->
+                <div class="article-meta">
+                    <span class="article-badge">🎯 Módulo: Nome do Módulo</span>
+                    <span class="article-time">⏱️ X min</span>
+                </div>
+
+                <!-- Article Content -->
+                <article class="article-content">
+                    
+                    <!-- Title (INLINE STYLES OBRIGATÓRIOS) -->
+                    <h1 class="article-title" style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; font-weight: 800; text-align: center; margin-bottom: 16px; color: #D4AF37; letter-spacing: -0.02em; line-height: 1.2;">
+                        Título do Artigo
+                    </h1>
+                    
+                    <!-- Lead -->
+                    <p class="article-lead">
+                        Subtítulo ou resumo do artigo
+                    </p>
+
+                    <!-- Sections -->
+                    <section class="article-section">
+                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em;">
+                            Título da Seção
+                        </h2>
+                        
+                        <p>Conteúdo...</p>
+                    </section>
+                    
+                </article>
+                
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer Premium (copiar estrutura completa do arquivo de referência) -->
+    <footer class="footer">
+        <!-- ... -->
+    </footer>
+    
+    <!-- Botão Voltar ao Topo -->
+    <div id="backToTop">↑</div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Back to Top (copiar do arquivo de referência)
+    </script>
+    
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>
+```
+
+---
+
+### 19.3 ⚠️ REGRAS CRÍTICAS (NÃO QUEBRE!)
+
+#### **1. Article Meta (Badge + Tempo)**
+✅ **SEMPRE use o override CSS:**
+```css
+.article-badge {
+    background: rgba(212, 175, 55, 0.15) !important;
+    color: #D4AF37 !important; /* Dourado INVLAB */
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.article-time {
+    color: rgba(16, 185, 129, 0.85) !important; /* Verde INVLAB */
+}
+```
+
+❌ **NUNCA deixe usar o azul padrão `var(--blue-action)`** - fica invisível no fundo escuro!
+
+---
+
+#### **2. Títulos H1**
+✅ **SEMPRE use inline styles:**
+```html
+<h1 class="article-title" style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; font-weight: 800; text-align: center; margin-bottom: 16px; color: #D4AF37; letter-spacing: -0.02em; line-height: 1.2;">
+    Título do Artigo
+</h1>
+```
+
+❌ **NUNCA use:**
+- Degradê verde no H1
+- CSS interno que sobrescreva o inline style
+- Emoji junto com o texto do título
+
+---
+
+#### **3. Títulos H2**
+✅ **SEMPRE use inline styles:**
+```html
+<h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em;">
+    Título da Seção
+</h2>
+```
+
+---
+
+#### **4. Largura do Conteúdo**
+✅ **SEMPRE use `.article-wrapper`** (max-width: 1200px do `artigo-styles.css`)
+
+❌ **NUNCA crie `.article-container`** com largura diferente (900px, 800px, etc.)
+
+---
+
+#### **5. Breadcrumb**
+✅ **NUNCA adicione `margin-top` inline!**
+```html
+<!-- CORRETO -->
+<nav class="breadcrumb">...</nav>
+
+<!-- ERRADO -->
+<nav class="breadcrumb" style="margin-top: 20px;">...</nav>
+```
+
+---
+
+### 19.4 Checklist de Implementação
+
+Ao criar uma nova página de artigo, siga esta ordem:
+
+- [ ] 1. Copiar estrutura HTML completa (head + body)
+- [ ] 2. Adicionar CSS override do article-badge/article-time no `<style>`
+- [ ] 3. Adicionar CSS do Footer Premium no `<style>`
+- [ ] 4. Adicionar CSS do Botão Back to Top no `<style>`
+- [ ] 5. Incluir Header fixo com navbar completa
+- [ ] 6. Incluir Breadcrumb (SEM margin-top inline)
+- [ ] 7. Adicionar Article Meta com badge e tempo
+- [ ] 8. Usar H1 com inline styles dourados
+- [ ] 9. Usar H2 com inline styles dourados em TODAS as seções
+- [ ] 10. Envolver conteúdo em `<section class="article-section">`
+- [ ] 11. Usar `.article-lead` (não `.article-subtitle`)
+- [ ] 12. Incluir Footer Premium completo
+- [ ] 13. Adicionar Botão Back to Top + JavaScript
+- [ ] 14. Adicionar `<script src="../assets/js/script.js"></script>`
+- [ ] 15. Testar no navegador (cores, espaçamento, responsividade)
+
+---
+
+### 19.5 Exemplos de Article Meta para Cada Categoria
+
+**Primeiros Passos:**
+```html
+<span class="article-badge">📚 Módulo: Primeiros Passos</span>
+```
+
+**Bancos:**
+```html
+<span class="article-badge">💰 Módulo: Bancos</span>
+```
+
+**Educação Financeira:**
+```html
+<span class="article-badge">⚖️ Módulo: Educação Financeira</span>
+```
+
+**Renda Fixa:**
+```html
+<span class="article-badge">🏦 Módulo: Renda Fixa</span>
+```
+
+**Renda Variável:**
+```html
+<span class="article-badge">📈 Módulo: Renda Variável</span>
+```
+
+**Criptoativos:**
+```html
+<span class="article-badge">🔐 Módulo: Criptoativos</span>
+```
+
+---
+
+### 19.6 Páginas de Referência (Templates Aprovados)
+
+**Use como modelo:**
+1. ✅ `pages/artigo-perfil-investidor.html` - PADRÃO OURO
+2. ✅ `pages/artigo-gerente.html` - PADRÃO OURO
+
+**Próximas a padronizar:**
+- [ ] `pages/artigo-poupanca.html`
+- [ ] `pages/artigo-reserva.html`
+- [ ] Demais artigos conforme necessário
+
+---
+
+## 🚀 20. PRÓXIMOS PASSOS
 
 ## 📝 NOTAS IMPORTANTES
 
