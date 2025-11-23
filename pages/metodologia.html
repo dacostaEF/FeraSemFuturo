@@ -213,6 +213,56 @@
                 font-size: 0.9rem;
             }
         }
+        
+        /* ============================================
+           BOTÃO VOLTAR AO TOPO - PREMIUM INVLAB
+           ============================================ */
+        #backToTop {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #D4AF37, rgba(212, 175, 55, 0.8));
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+            z-index: 9999;
+        }
+        
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        #backToTop:hover {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.9), #D4AF37);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.6);
+            border-color: rgba(16, 185, 129, 0.6);
+        }
+        
+        #backToTop:active {
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            #backToTop {
+                bottom: 24px;
+                right: 24px;
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -446,5 +496,30 @@ Poupança = 70% × Selic + TR
         <br>
         <a href="../index.html" class="back-button">← Voltar para Início</a>
     </div>
+    
+    <!-- Botão Voltar ao Topo -->
+    <div id="backToTop" title="Voltar ao topo">↑</div>
+    
+    <script>
+        // Botão Voltar ao Topo
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        // Mostrar/esconder botão baseado no scroll
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        
+        // Scroll suave ao topo quando clicar
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 </body>
 </html>

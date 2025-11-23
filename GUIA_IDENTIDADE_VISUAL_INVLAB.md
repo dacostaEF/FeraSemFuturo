@@ -610,6 +610,15 @@ Use esta lista ao aplicar a identidade visual em novas páginas:
 - [ ] Grid responsivo (5 → 2 → 1 colunas)
 - [ ] Testar em desktop/tablet/mobile
 
+### Fase 10: Botão Voltar ao Topo
+- [ ] Adicionar HTML: `<div id="backToTop" title="Voltar ao topo">↑</div>`
+- [ ] Adicionar CSS do botão (degradê dourado + borda verde)
+- [ ] Adicionar JavaScript (scroll > 300px)
+- [ ] Testar aparição/desaparecimento
+- [ ] Testar clique (scroll suave ao topo)
+- [ ] Verificar responsivo mobile (48px, bottom: 24px)
+- [ ] Z-index correto (9999)
+
 ---
 
 ## 🎯 11. EXEMPLO COMPLETO
@@ -867,7 +876,105 @@ td {
 
 ---
 
-## 🚀 14. PRÓXIMOS PASSOS
+## 🔝 14. BOTÃO VOLTAR AO TOPO (Back to Top)
+
+### 14.1 Estrutura
+
+```html
+<!-- Botão Voltar ao Topo -->
+<div id="backToTop" title="Voltar ao topo">↑</div>
+```
+
+### 14.2 CSS Premium INVLAB
+
+```css
+#backToTop {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #D4AF37, rgba(212, 175, 55, 0.8));
+    border: 2px solid rgba(16, 185, 129, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+    z-index: 9999;
+}
+
+#backToTop.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#backToTop:hover {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.9), #D4AF37);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.6);
+    border-color: rgba(16, 185, 129, 0.6);
+}
+```
+
+### 14.3 JavaScript
+
+```javascript
+// Botão Voltar ao Topo
+const backToTopBtn = document.getElementById('backToTop');
+
+// Mostrar/esconder botão baseado no scroll
+window.addEventListener('scroll', function() {
+    if (window.pageYOffset > 300) {
+        backToTopBtn.classList.add('show');
+    } else {
+        backToTopBtn.classList.remove('show');
+    }
+});
+
+// Scroll suave ao topo quando clicar
+backToTopBtn.addEventListener('click', function() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+```
+
+### 14.4 Características
+
+| Propriedade | Valor | Motivo |
+|-------------|-------|--------|
+| **Posição** | `fixed, bottom: 40px, right: 40px` | Sempre visível no canto |
+| **Background** | Degradê dourado | Identidade INVLAB |
+| **Borda** | Verde translúcido 30% | Toque premium |
+| **Aparece** | Após 300px scroll | Não incomoda no início |
+| **Hover** | Elevação -4px | Feedback visual |
+| **Sombra** | Dourada 0.4-0.6 | Destaque premium |
+| **Scroll** | `behavior: 'smooth'` | Animação suave |
+
+### 14.5 Responsivo
+
+```css
+@media (max-width: 768px) {
+    #backToTop {
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+    }
+}
+```
+
+---
+
+## 🚀 15. PRÓXIMOS PASSOS
 
 Páginas que precisam receber a identidade visual:
 
@@ -886,6 +993,12 @@ Páginas que precisam receber a identidade visual:
    - [ ] Modais informativos
    - [ ] Breadcrumbs
    - [ ] Botões de ação
+   - [ ] **Botão Voltar ao Topo (todas as páginas longas)**
+
+4. **Páginas Especiais**
+   - [x] `index.html` (✅ Completo)
+   - [x] `pages/metodologia.html` (✅ Completo)
+   - [ ] Outras páginas standalone
 
 ---
 
