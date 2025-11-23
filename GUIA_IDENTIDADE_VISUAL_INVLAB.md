@@ -1206,9 +1206,207 @@ Páginas que precisam receber a identidade visual:
 4. **Páginas Especiais**
    - [x] `index.html` (✅ Completo)
    - [x] `pages/metodologia.html` (✅ Completo)
+   - [x] `pages/guia_invlab.html` (✅ Completo)
+   - [x] `pages/artigo-perfil-investidor.html` (✅ Completo)
    - [ ] Outras páginas standalone
 
 ---
+
+## 😀 17. EMOJIS (Boas Práticas)
+
+### 17.1 Regra de Ouro
+
+⚠️ **NUNCA aplique propriedades de cor, gradiente ou filtros diretamente nos emojis!**
+
+Emojis devem manter sua aparência colorida original. Quando usados em títulos com gradiente ou cor especial, **separe o emoji do texto estilizado**.
+
+### 17.2 Exemplo ERRADO ❌
+
+```html
+<!-- ❌ ERRADO: Emoji dentro do elemento com gradiente -->
+<h1 style="background: linear-gradient(90deg, #10b981 0%, #34D399 50%, #10b981 100%); 
+           -webkit-background-clip: text; 
+           -webkit-text-fill-color: transparent;">
+    🧭 Guia do INVLAB
+</h1>
+```
+
+**Problema:** O emoji fica verde/transparente, perdendo sua identidade visual.
+
+### 17.3 Exemplo CORRETO ✅
+
+```html
+<!-- ✅ CORRETO: Emoji separado do texto com gradiente -->
+<h1>
+    <span style="filter: none;">🧭</span> 
+    <span style="background: linear-gradient(90deg, #10b981 0%, #34D399 50%, #10b981 100%); 
+                 -webkit-background-clip: text; 
+                 -webkit-text-fill-color: transparent;">
+        Guia do INVLAB
+    </span>
+</h1>
+```
+
+**Resultado:** Emoji mantém sua aparência original (colorida) e o texto tem o gradiente verde.
+
+### 17.4 Casos de Uso
+
+| Situação | Solução |
+|----------|---------|
+| **Título com degradê verde** | Emoji em `<span>` separado SEM estilo |
+| **Título dourado** | Emoji pode ficar junto (cor sólida não afeta) |
+| **Links com hover** | Emoji fora do `<a>` ou com `filter: none` |
+| **Badges/Pills** | Emoji pode ficar junto (background não afeta) |
+
+### 17.5 CSS Auxiliar
+
+```css
+/* Classe para forçar emoji sem filtros */
+.emoji-preserve {
+    filter: none !important;
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+}
+```
+
+**Uso:**
+```html
+<h1>
+    <span class="emoji-preserve">🧭</span> 
+    <span class="text-gradient">Guia do INVLAB</span>
+</h1>
+```
+
+---
+
+## 📏 18. ESPAÇAMENTO VERTICAL PADRÃO
+
+### 18.1 Respiro Entre Elementos
+
+Para manter consistência visual e evitar elementos "colados", use estes espaçamentos padrão:
+
+| Elemento | Propriedade | Valor | Motivo |
+|----------|-------------|-------|--------|
+| **Breadcrumb (topo)** | `margin-top` | `20px` | Respiro após header fixo |
+| **Breadcrumb (base)** | `margin-bottom` | `32px` | Separação do conteúdo |
+| **Section após breadcrumb** | `margin-top` | `40px` | Respiro visual generoso |
+| **H2 (Títulos de seção)** | `margin-top` | `48px` | Separação entre seções |
+| **H2 (Títulos de seção)** | `margin-bottom` | `20px` | Espaço antes do conteúdo |
+| **H3 (Subtítulos)** | `margin-top` | `32px` | Separação de subseções |
+| **H3 (Subtítulos)** | `margin-bottom` | `16px` | Espaço antes do texto |
+| **Parágrafos** | `margin-bottom` | `16px` | Espaço entre parágrafos |
+
+### 18.2 Exemplo Completo
+
+```html
+<!-- Breadcrumb -->
+<nav class="breadcrumb" style="margin-top: 20px; margin-bottom: 32px;">
+    <a href="../index.html">🏠 Início</a>
+    <span class="breadcrumb-separator">/</span>
+    <span class="breadcrumb-current">🧭 Guia</span>
+</nav>
+
+<!-- Section -->
+<section class="section-educational" style="margin-top: 40px;">
+    <!-- H1 - Título principal -->
+    <h1 style="margin-bottom: 16px;">Título Principal</h1>
+    
+    <!-- Subtítulo -->
+    <p class="subtitle" style="margin-bottom: 40px;">Subtítulo descritivo</p>
+    
+    <!-- H2 - Primeira seção -->
+    <h2 style="margin-top: 48px; margin-bottom: 20px;">Primeira Seção</h2>
+    <p style="margin-bottom: 16px;">Parágrafo de conteúdo.</p>
+    
+    <!-- H3 - Subseção -->
+    <h3 style="margin-top: 32px; margin-bottom: 16px;">Subseção</h3>
+    <p style="margin-bottom: 16px;">Parágrafo de conteúdo.</p>
+</section>
+```
+
+### 18.3 Classes Utilitárias (Opcional)
+
+```css
+/* Respiros padrão INVLAB */
+.invlab-spacing-top-sm { margin-top: 20px; }
+.invlab-spacing-top-md { margin-top: 32px; }
+.invlab-spacing-top-lg { margin-top: 40px; }
+.invlab-spacing-top-xl { margin-top: 48px; }
+
+.invlab-spacing-bottom-sm { margin-bottom: 16px; }
+.invlab-spacing-bottom-md { margin-bottom: 20px; }
+.invlab-spacing-bottom-lg { margin-bottom: 32px; }
+.invlab-spacing-bottom-xl { margin-bottom: 40px; }
+```
+
+### 18.4 Responsividade
+
+```css
+/* Mobile: reduzir espaçamentos em 20-30% */
+@media (max-width: 768px) {
+    .breadcrumb {
+        margin-top: 16px;
+        margin-bottom: 24px;
+    }
+    
+    .section-educational {
+        margin-top: 32px;
+    }
+    
+    h2 {
+        margin-top: 36px;
+        margin-bottom: 16px;
+    }
+    
+    h3 {
+        margin-top: 24px;
+        margin-bottom: 12px;
+    }
+}
+```
+
+### 18.5 Regra Geral
+
+**"Quanto maior o elemento, maior o respiro vertical."**
+
+- Títulos principais (H1, H2): `40-48px` de margem superior
+- Subtítulos (H3): `32px` de margem superior
+- Textos e parágrafos: `16px` de margem inferior
+- **Breadcrumb: NUNCA use `margin-top` inline! O breadcrumb deve estar `position: sticky` e colado na base do menu (top: 110px). Use apenas `margin-bottom: 32px` no CSS.**
+
+Isso cria **hierarquia visual clara** e evita sensação de "elementos colados".
+
+### 18.6 ⚠️ REGRA CRÍTICA DO BREADCRUMB
+
+**NUNCA adicione `margin-top` ou `padding-top` inline no breadcrumb!**
+
+✅ **CORRETO:**
+```html
+<nav class="breadcrumb">
+    <!-- conteúdo -->
+</nav>
+```
+
+❌ **ERRADO:**
+```html
+<nav class="breadcrumb" style="margin-top: 20px;">
+    <!-- conteúdo -->
+</nav>
+```
+
+**Por quê?**
+- O breadcrumb usa `position: sticky` e `top: 110px` (desktop) para colar na base do menu ao rolar
+- Qualquer `margin-top` inline quebra essa funcionalidade e cria gap visual
+- O espaçamento correto já está definido no `artigo-styles.css`
+
+**Valores de referência:**
+- Desktop: `top: 110px`
+- Tablet: `top: 90px`
+- Mobile: `top: 96px`
+
+---
+
+## 🚀 19. PRÓXIMOS PASSOS
 
 ## 📝 NOTAS IMPORTANTES
 
@@ -1227,6 +1425,7 @@ Páginas que precisam receber a identidade visual:
 ---
 
 **Última atualização:** 23 de Novembro de 2025  
-**Status:** ✅ Testado e aprovado na página Inicio (index.html)  
+**Status:** ✅ Testado e aprovado  
+**Páginas Completas:** `index.html`, `pages/metodologia.html`, `pages/guia_invlab.html`, `pages/artigo-perfil-investidor.html`  
 **Pronto para:** Expansão para todo o site
 

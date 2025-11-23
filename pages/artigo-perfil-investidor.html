@@ -24,40 +24,189 @@
     
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="stylesheet" href="../assets/css/invlab-icons.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
     
     <style>
+        /* Back to Top Button */
+        #backToTop {
+            display: none;
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 9999;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+            color: #0D0D0D;
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 50%;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 52px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease-in-out;
+            opacity: 0;
+        }
+        #backToTop:hover {
+            background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.6);
+            border-color: rgba(16, 185, 129, 0.6);
+        }
+        @media (max-width: 768px) {
+            #backToTop {
+                width: 48px;
+                height: 48px;
+                font-size: 24px;
+                line-height: 44px;
+                bottom: 24px;
+                right: 24px;
+            }
+        }
+
+        /* Footer Premium INVLAB */
+        .footer {
+            border-top: 1px solid rgba(212, 175, 55, 0.25);
+            padding: 60px 20px 30px;
+            background: #0D0D0D;
+            font-family: 'Inter', sans-serif;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-logo-section {
+            grid-column: span 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .footer-logo {
+            height: 42px;
+            filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.35));
+            transition: all 0.3s ease;
+        }
+        .footer-logo:hover {
+            filter: brightness(1.2) drop-shadow(0 4px 12px rgba(212, 175, 55, 0.5));
+            transform: scale(1.02);
+        }
+        .footer-logo-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.6;
+            margin-top: -8px;
+        }
+        .footer-logo-link {
+            color: rgba(16, 185, 129, 0.85);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+        .footer-logo-link:hover {
+            color: #D4AF37;
+        }
+        .footer h4 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #D4AF37;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+        .footer ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer li {
+            margin-bottom: 8px;
+        }
+        .footer a {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(16, 185, 129, 0.85);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .footer a:hover {
+            color: #D4AF37;
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            padding-top: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .footer-bottom p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        .footer-bottom .copyright {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+            .footer-logo-section {
+                grid-column: span 2;
+                align-items: center;
+                text-align: center;
+            }
+        }
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .footer-logo-section {
+                grid-column: span 1;
+            }
+            .footer h4 {
+                text-align: center;
+            }
+            .footer ul {
+                text-align: center;
+            }
+        }
+        
         /* Estilos específicos do artigo */
         body {
             background: #0D0D0D;
-            padding: 40px 20px 80px;
+            padding-top: 65px; /* Espaço para header fixo */
+            padding-bottom: 80px;
             font-family: 'Inter', sans-serif;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 55px; /* Ajuste para mobile */
+            }
         }
         
         .article-container {
             max-width: 900px;
             margin: 0 auto;
-            background: rgba(26, 26, 26, 0.95);
-            border-radius: 20px;
-            padding: 48px;
-            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 0 20px; /* Padding horizontal apenas */
             color: rgba(255, 255, 255, 0.85);
         }
         
         .back-button {
-            display: inline-block;
-            color: rgba(16, 185, 129, 0.85);
-            text-decoration: none;
-            font-weight: 600;
-            margin-bottom: 30px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .back-button:hover {
-            color: #D4AF37;
-            transform: translateX(-5px);
+            display: none; /* Vamos usar breadcrumb ao invés de botão voltar */
         }
         
         h1 {
@@ -363,12 +512,8 @@
         
         /* Responsividade */
         @media (max-width: 768px) {
-            body {
-                padding: 20px 16px 60px;
-            }
-            
             .article-container {
-                padding: 32px 24px;
+                padding: 0 16px;
             }
             
             h1 {
@@ -407,6 +552,91 @@
     </style>
 </head>
 <body>
+    <!-- Header Fixo -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                <span class="logo-text">INVLAB</span>
+            </div>
+            
+            <!-- Sistema de Abas INVLAB -->
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">
+                    🏠 Início
+                </button>
+                <button class="tab-btn active" onclick="window.location.href='../index.html#primeiros-passos'">
+                    📚 Primeiros<br>Passos
+                </button>
+                
+                <!-- ABA COM DROPDOWN: RENDA FIXA -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">
+                        📊 Renda<br>Fixa <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                
+                <!-- ABA COM DROPDOWN: RENDA VARIÁVEL -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">
+                        📈 Renda<br>Variável <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">💵 ETFs</a></li>
+                        <li><a href="#">🏢 FIIs</a></li>
+                        <li><a href="#">📈 Ações</a></li>
+                    </ul>
+                </div>
+                
+                <!-- ABA COM DROPDOWN: CRIPTOATIVOS -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">
+                        🔐 Cripto<br>ativos <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="bitcoin.html">₿ Bitcoin</a></li>
+                        <li><a href="ethereum.html">⧫ Ethereum</a></li>
+                        <li><a href="altcoins.html">🪙 Altcoins</a></li>
+                        <li><a href="nfts.html">🖼️ NFTs</a></li>
+                        <li><a href="tokenizacao.html">🔗 Tokenização</a></li>
+                    </ul>
+                </div>
+                
+                <!-- ABA: FERRAMENTAS -->
+                <button class="tab-btn" onclick="window.location.href='../index.html#ferramentas'">
+                    🛠️ Ferramentas
+                </button>
+                
+                <!-- ABA: OUTROS INVESTIMENTOS -->
+                <button class="tab-btn" onclick="window.location.href='../index.html#outros-investimentos'">
+                    💎 Outros
+                </button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="article-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb">
+                    <a href="../index.html">🏠 Início</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <a href="../index.html#primeiros-passos">📚 Primeiros Passos</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span class="breadcrumb-current">Perfil de Investidor</span>
+                </nav>
+
     <div class="article-container">
         <a href="../index.html#primeiros-passos" class="back-button">← Voltar para Primeiros Passos</a>
         
@@ -672,9 +902,68 @@
             <p style="margin-top: 32px; font-size: 1.15rem; color: #D4AF37; font-weight: 600;">O INVLAB existe para mudar isso.</p>
             <p style="margin-top: 12px;"><strong>Educação honesta. Análise completa. Proteção real.</strong></p>
         </div>
-        
-        <a href="../index.html#primeiros-passos" class="back-button" style="margin-top: 32px; display: inline-block;">← Voltar para Primeiros Passos</a>
     </div>
+    
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer Premium INVLAB -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo-section">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos" class="footer-logo">
+                <p class="footer-logo-text">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
+                <a href="guia_invlab.html" class="footer-logo-link">🧭 Guia do INVLAB →</a>
+            </div>
+            <!-- Coluna 2: Renda Fixa -->
+            <div>
+                <h4>Renda Fixa</h4>
+                <ul>
+                    <li><a href="poupanca.html">💰 Poupança</a></li>
+                    <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                    <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                </ul>
+            </div>
+            <!-- Coluna 3: Renda Variável -->
+            <div>
+                <h4>Renda Variável</h4>
+                <ul>
+                    <li><a href="#renda-variavel">📈 Introdução</a></li>
+                    <li><a href="acoes.html">📊 Ações</a></li>
+                    <li><a href="etfs.html">🎯 ETFs</a></li>
+                    <li><a href="fiis.html">🏢 FIIs</a></li>
+                </ul>
+            </div>
+            <!-- Coluna 4: Criptoativos -->
+            <div>
+                <h4>Criptoativos</h4>
+                <ul>
+                    <li><a href="#criptoativos">🔐 Introdução</a></li>
+                    <li><a href="bitcoin.html">₿ Bitcoin</a></li>
+                    <li><a href="stablecoins.html">💵 Stablecoins</a></li>
+                    <li><a href="blockchain.html">⛓️ Blockchain</a></li>
+                    <li><a href="cbdc.html">🏛️ CBDCs</a></li>
+                </ul>
+            </div>
+            <!-- Coluna 5: Ferramentas -->
+            <div>
+                <h4>Ferramentas</h4>
+                <ul>
+                    <li><a href="simulador-cdbs.html">🏦 Simulador CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html">🇧🇷 Simulador Tesouro</a></li>
+                    <li><a href="simulador-lci-lca.html">🏛️ Simulador LCI/LCA</a></li>
+                    <li><a href="calculadora.html">🧮 Juros Compostos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>⚠️ Conteúdo 100% educacional. Não somos corretora, não vendemos produtos, não recebemos comissões.</p>
+            <p>Conteúdo educacional desenvolvido por especialistas em mercado financeiro tradicional, tecnologia blockchain e tokenização de ativos reais. O INVLAB é um laboratório de pesquisa independente dedicado a unir educação, tecnologia e inovação nos mercados de capitais.</p>
+            <p class="copyright">© 2025 INVLAB - Laboratório de Investimentos | Plataforma Educacional</p>
+        </div>
+    </footer>
     
     <!-- Botão Voltar ao Topo -->
     <div id="backToTop">↑</div>
@@ -723,6 +1012,8 @@
             });
         }
     </script>
+
+    <script src="../assets/js/script.js"></script>
 </body>
 </html>
 
