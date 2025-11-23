@@ -18,13 +18,158 @@
     <!-- Meta Description -->
     <meta name="description" content="Entenda como funciona a Poupança, suas regras, rendimento e quando ela realmente vale a pena comparada a outros investimentos.">
     
+    <!-- Google Fonts INVLAB -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
     <!-- INVLAB Design System (Universal Cards) -->
     <link rel="stylesheet" href="../assets/css/inv-design-system.css">
     <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-icons.css">
     <link rel="stylesheet" href="../assets/css/invlab-theme.css">
     <link rel="stylesheet" href="../assets/css/artigo-styles.css">
     <!-- INVLAB Carrossel - Indicadores Renda Fixa -->
     <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+    
+    <style>
+        body {
+            padding-top: 65px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Breadcrumb Sticky */
+        .breadcrumb {
+            position: sticky;
+            top: 110px;
+            z-index: 100;
+            background: #0D0D0D;
+            padding: 12px 20px;
+            margin-bottom: 0 !important;
+        }
+        
+        /* Títulos INVLAB */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+        
+        /* Override: article-badge e article-time com cores INVLAB */
+        .article-badge {
+            background: rgba(212, 175, 55, 0.15) !important;
+            color: #D4AF37 !important;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .article-time {
+            color: rgba(16, 185, 129, 0.85) !important;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-left: 12px;
+        }
+        
+        .article-meta {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .article-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 16px;
+            color: #D4AF37;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+        
+        .article-lead {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+        
+        .article-section h2 {
+            font-family: 'Playfair Display', Georgia, serif !important;
+            font-size: 1.8rem !important;
+            font-weight: 700 !important;
+            color: #D4AF37 !important;
+            margin-top: 48px !important;
+            margin-bottom: 20px !important;
+            letter-spacing: -0.01em !important;
+            text-align: center !important;
+        }
+        
+        .article-section h3,
+        .inv-card-title,
+        h4 {
+            font-family: 'Playfair Display', Georgia, serif !important;
+            font-size: 1.25rem !important;
+            font-weight: 600 !important;
+            color: #E4E4E4 !important;
+            margin-top: 24px !important;
+            margin-bottom: 16px !important;
+            letter-spacing: -0.01em !important;
+        }
+        
+        /* Garantir que H2 dentro de article-content também use dourado */
+        .article-content h2 {
+            color: #D4AF37 !important;
+            text-align: center !important;
+        }
+        
+        .article-section p,
+        .article-section li,
+        .inv-card-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        /* Links INVLAB */
+        .article-section a,
+        .callout a {
+            color: rgba(16, 185, 129, 0.85);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+        
+        .article-section a:hover,
+        .callout a:hover {
+            color: #D4AF37;
+        }
+        
+        /* Hero */
+        .hero-caption {
+            color: rgba(16, 185, 129, 0.65);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 55px;
+            }
+            
+            .article-title {
+                font-size: 1.8rem;
+            }
+            
+            .article-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- CARROSSEL: Indicadores Renda Fixa -->
@@ -141,8 +286,9 @@
     </header>
 
     <!-- Conteúdo Principal -->
-    <main>
-        <div class="content-wrapper-wide">
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="article-wrapper">
             <!-- Breadcrumb -->
             <nav class="breadcrumb">
                 <a href="../index.html">🏠 Início</a>
@@ -152,8 +298,15 @@
                 <span class="breadcrumb-current">💰 Poupança</span>
             </nav>
 
+            <section style="margin-top: 40px;">
+
+            <!-- Article Meta -->
+            <div class="article-meta">
+                <span class="article-badge">💰 Módulo: Renda Fixa</span>
+                <span class="article-time">⏱️ 6 min</span>
+            </div>
+
             <!-- Seção Educacional -->
-            <section class="section-educational">
             <article class="article-content">
                 <!-- Título Principal -->
                 <h1 class="article-title">Poupança: Como Funciona e Quando Vale a Pena</h1>
@@ -163,7 +316,7 @@
                 </p>
 
                 <!-- Micro-disclaimer educacional -->
-                <div style="text-align: center; margin: 24px 0; padding: 16px 24px; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 12px;">
+                <div style="text-align: center; margin: 24px 0; padding: 16px 24px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px;">
                     <p style="margin: 0; font-size: 14px; line-height: 1.6; color: rgba(255, 255, 255, 0.9);">
                         🔍 <strong>Conteúdo 100% educacional.</strong> Não é recomendação de investimento. Use os simuladores do INVLAB para comparar opções na prática.
                     </p>
@@ -177,7 +330,7 @@
 
             <!-- Seção 1: Entendendo a Poupança -->
             <section class="article-section">
-                <h2>🟦 Entendendo a Poupança</h2>
+                <h2>Entendendo a Poupança</h2>
                 
                 <p>A <strong>Poupança</strong> é um dos investimentos mais tradicionais do Brasil.</p>
                 
@@ -213,7 +366,7 @@
 
             <!-- Seção 2: Poupança Antiga vs Nova -->
             <section class="article-section">
-                <h2>🟩 Poupança Antiga vs Poupança Nova</h2>
+                <h2>Poupança Antiga vs Poupança Nova</h2>
 
                 <!-- Callout com informações legais -->
                 <div class="callout callout-warning">
@@ -255,7 +408,7 @@
 
             <!-- Seção 3: Por que parece render menos -->
             <section class="article-section">
-                <h2>📉 Por que a Poupança parece render menos hoje?</h2>
+                <h2>Por que a Poupança parece render menos hoje?</h2>
 
                 <p>De forma simples:</p>
 
@@ -290,7 +443,7 @@
 
             <!-- Seção 4: Comparação Direta -->
             <section class="article-section">
-                <h2>📊 Comparação Direta (didática e neutra)</h2>
+                <h2>Comparação Direta (didática e neutra)</h2>
 
                 <div class="example-card">
                     <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
@@ -322,7 +475,7 @@
                                 <td style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); font-weight: 600;">CDB (100% CDI)</td>
                                 <td style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);">FGC</td>
                                 <td style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);">Sim</td>
-                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); color: #3B82F6;">Médio/Alto</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); color: #10B981;">Médio/Alto</td>
                                 <td style="padding: 12px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);">Diária</td>
                             </tr>
                             <tr>
@@ -339,7 +492,7 @@
 
             <!-- Seção 5: Quando faz sentido -->
             <section class="article-section">
-                <h2>🧠 Quando a Poupança Ainda Faz Sentido?</h2>
+                <h2>Quando a Poupança Ainda Faz Sentido?</h2>
 
                 <p style="margin-bottom: 24px;">Sendo honesto e sem demonização, a poupança ainda pode fazer sentido em situações específicas:</p>
 
@@ -380,21 +533,21 @@
 
             <!-- Seção 6: Educação Financeira -->
             <section class="article-section">
-                <h2>💡 Educação Financeira: o ponto principal</h2>
+                <h2>Educação Financeira: o ponto principal</h2>
 
                 <p>A poupança existe há décadas e foi fundamental em uma época em que não havia:</p>
 
                 <ul style="list-style: none; padding: 0;">
-                    <li style="padding: 12px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #3B82F6; margin-bottom: 8px; border-radius: 4px;">
+                    <li style="padding: 12px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #10B981; margin-bottom: 8px; border-radius: 4px;">
                         🖥️ Plataforma digital acessível
                     </li>
-                    <li style="padding: 12px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #3B82F6; margin-bottom: 8px; border-radius: 4px;">
+                    <li style="padding: 12px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #10B981; margin-bottom: 8px; border-radius: 4px;">
                         🇧🇷 Tesouro Direto para pessoa física
                     </li>
-                    <li style="padding: 12px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #3B82F6; margin-bottom: 8px; border-radius: 4px;">
+                    <li style="padding: 12px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #10B981; margin-bottom: 8px; border-radius: 4px;">
                         🏦 CDBs com liquidez diária
                     </li>
-                    <li style="padding: 12px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #3B82F6; margin-bottom: 8px; border-radius: 4px;">
+                    <li style="padding: 12px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #10B981; margin-bottom: 8px; border-radius: 4px;">
                         🔄 Concorrência entre bancos e corretoras
                     </li>
                 </ul>
@@ -426,7 +579,7 @@
 
             <!-- Seção 7: Explore mais -->
             <section class="article-section">
-                <h2>🔍 Compare na prática com os simuladores</h2>
+                <h2>Compare na prática com os simuladores</h2>
 
                 <div class="inv-category">
                     <h3 class="inv-category-title">📊 Veja a diferença nos números</h3>
@@ -457,7 +610,7 @@
                 <div class="callout-icon">📖</div>
                 <div class="callout-content">
                     <h3>Quer ver uma comparação direta?</h3>
-                    <p style="margin-bottom: 0;">Leia também: <a href="artigo-poupanca.html" style="color: #3b82f6; text-decoration: underline; font-weight: 600;">Poupança vs Tesouro Direto</a> na aba <a href="../index.html#primeiros-passos" style="color: #3b82f6; text-decoration: underline;">Primeiros Passos</a>.</p>
+                    <p style="margin-bottom: 0;">Leia também: <a href="artigo-poupanca.html">Poupança vs Tesouro Direto</a> na aba <a href="../index.html#primeiros-passos">Primeiros Passos</a>.</p>
                 </div>
             </div>
 
@@ -466,99 +619,118 @@
                 <div class="callout-icon">🏠</div>
                 <div class="callout-content">
                     <h3>Voltar para Renda Fixa</h3>
-                    <p style="margin-bottom: 0;"><a href="../index.html#renda-fixa" style="color: #3b82f6; text-decoration: underline;">Ver todos os produtos de Renda Fixa</a></p>
+                    <p style="margin-bottom: 0;"><a href="../index.html#renda-fixa">Ver todos os produtos de Renda Fixa</a></p>
                 </div>
             </div>
 
             </article>
             </section>
+            </div>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer style="background: rgba(15, 23, 42, 0.9); border-top: 1px solid rgba(59, 130, 246, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
-        <div class="content-wrapper-wide">
-            <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
-                <!-- Coluna 1: INVLAB -->
-                <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
-                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">
-                        Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.
-                    </p>
-                    <a href="guia_invlab.html" style="color: #3B82F6; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
-                        🧭 Guia do INVLAB →
-                    </a>
-                </div>
-
-                <!-- Coluna 2: Renda Fixa -->
-                <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="poupanca.html" style="color: #CBD5E1; text-decoration: none;">💰 Poupança</a></li>
-                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 CDBs</a></li>
-                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
-                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ LCI/LCA</a></li>
-                    </ul>
-                </div>
-
-                <!-- Coluna 3: Renda Variável -->
-                <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="../index.html#renda-variavel" style="color: #CBD5E1; text-decoration: none;">📈 Introdução</a></li>
-                        <li><a href="acoes.html" style="color: #CBD5E1; text-decoration: none;">📊 Ações</a></li>
-                        <li><a href="etfs.html" style="color: #CBD5E1; text-decoration: none;">🎯 ETFs</a></li>
-                        <li><a href="fiis.html" style="color: #CBD5E1; text-decoration: none;">🏢 FIIs</a></li>
-                    </ul>
-                </div>
-
-                <!-- Coluna 4: Criptoativos -->
-                <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Criptoativos</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="../index.html#criptoativos" style="color: #CBD5E1; text-decoration: none;">🔐 Introdução</a></li>
-                        <li><a href="bitcoin.html" style="color: #CBD5E1; text-decoration: none;">₿ Bitcoin</a></li>
-                        <li><a href="stablecoins.html" style="color: #CBD5E1; text-decoration: none;">💵 Stablecoins</a></li>
-                        <li><a href="blockchain.html" style="color: #CBD5E1; text-decoration: none;">⛓️ Blockchain</a></li>
-                        <li><a href="cbdc.html" style="color: #CBD5E1; text-decoration: none;">🏛️ CBDCs</a></li>
-                    </ul>
-                </div>
-
-                <!-- Coluna 5: Outros Investimentos -->
-                <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Outros Investimentos</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="../index.html#outros-investimentos" style="color: #CBD5E1; text-decoration: none;">💎 Introdução</a></li>
-                        <li><a href="ganhos-come-cotas.html" style="color: #CBD5E1; text-decoration: none;">🍽️ Come-cotas</a></li>
-                        <li><a href="ganhos-iof-regressivo.html" style="color: #CBD5E1; text-decoration: none;">📉 IOF Regressivo</a></li>
-                        <li><a href="ganhos-inflacao.html" style="color: #CBD5E1; text-decoration: none;">📊 Inflação</a></li>
-                    </ul>
-                </div>
-
-                <!-- Coluna 6: Ferramentas -->
-                <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Ferramentas</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 Simulador CDBs</a></li>
-                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Simulador Tesouro</a></li>
-                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ Simulador LCI/LCA</a></li>
-                        <li><a href="calculadora.html" style="color: #CBD5E1; text-decoration: none;">🧮 Juros Compostos</a></li>
-                    </ul>
-                </div>
+    <!-- Footer Premium INVLAB -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo-section">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos" class="footer-logo">
+                <p class="footer-logo-text">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
+                <a href="guia_invlab.html" class="footer-logo-link">🧭 Guia do INVLAB →</a>
             </div>
-            <div style="border-top: 1px solid rgba(59, 130, 246, 0.1); padding-top: 20px; margin-top: 20px;">
-                <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">⚠️ Conteúdo 100% educacional. Não somos corretora, não vendemos produtos, não recebemos comissões.</p>
-                <p style="font-size: 0.78rem; color: #64748B; text-align: center; line-height: 1.7; margin-bottom: 12px; max-width: 900px; margin-left: auto; margin-right: auto;">Conteúdo educacional desenvolvido por especialistas em mercado financeiro tradicional, tecnologia blockchain e tokenização de ativos reais. O INVLAB é um laboratório de pesquisa independente dedicado a unir educação, tecnologia e inovação nos mercados de capitais.</p>
-                <p style="font-size: 0.75rem; color: #475569; text-align: center;">© 2025 INVLAB - Laboratório de Investimentos | Plataforma Educacional</p>
+            <!-- Coluna 2: Renda Fixa -->
+            <div>
+                <h4>Renda Fixa</h4>
+                <ul>
+                    <li><a href="poupanca.html">💰 Poupança</a></li>
+                    <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                    <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                </ul>
+            </div>
+            <!-- Coluna 3: Renda Variável -->
+            <div>
+                <h4>Renda Variável</h4>
+                <ul>
+                    <li><a href="#renda-variavel" data-tab-link="renda-variavel">📈 Introdução</a></li>
+                    <li><a href="acoes.html">📊 Ações</a></li>
+                    <li><a href="etfs.html">🎯 ETFs</a></li>
+                    <li><a href="fiis.html">🏢 FIIs</a></li>
+                </ul>
+            </div>
+            <!-- Coluna 4: Criptoativos -->
+            <div>
+                <h4>Criptoativos</h4>
+                <ul>
+                    <li><a href="#criptoativos" data-tab-link="criptoativos">🔐 Introdução</a></li>
+                    <li><a href="bitcoin.html">₿ Bitcoin</a></li>
+                    <li><a href="stablecoins.html">💵 Stablecoins</a></li>
+                    <li><a href="blockchain.html">⛓️ Blockchain</a></li>
+                    <li><a href="cbdc.html">🏛️ CBDCs</a></li>
+                </ul>
+            </div>
+            <!-- Coluna 5: Ferramentas -->
+            <div>
+                <h4>Ferramentas</h4>
+                <ul>
+                    <li><a href="simulador-cdbs.html">🏦 Simulador CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html">🇧🇷 Simulador Tesouro</a></li>
+                    <li><a href="simulador-lci-lca.html">🏛️ Simulador LCI/LCA</a></li>
+                    <li><a href="calculadora.html">🧮 Juros Compostos</a></li>
+                </ul>
             </div>
         </div>
+        <div class="footer-bottom">
+            <p>⚠️ Conteúdo 100% educacional. Não somos corretora, não vendemos produtos, não recebemos comissões.</p>
+            <p>Conteúdo educacional desenvolvido por especialistas em mercado financeiro tradicional, tecnologia blockchain e tokenização de ativos reais. O INVLAB é um laboratório de pesquisa independente dedicado a unir educação, tecnologia e inovação nos mercados de capitais.</p>
+            <p class="copyright">© 2025 INVLAB - Laboratório de Investimentos | Plataforma Educacional</p>
+        </div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <div id="backToTop" style="display: none; position: fixed; bottom: 40px; right: 40px; z-index: 9999; width: 56px; height: 56px; background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%); color: #0D0D0D; border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 50%; font-size: 28px; font-weight: 700; text-align: center; line-height: 52px; cursor: pointer; box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4); transition: all 0.3s ease-in-out;">↑</div>
 
     <!-- Scripts -->
     <script src="../assets/js/script.js"></script>
     <!-- APIs para o Carrossel -->
     <script defer src="../assets/js/bcb-api.js"></script>
     <script defer src="../assets/js/invlab-carrossel-renda-fixa.js"></script>
+    
+    <!-- Back to Top Button Script -->
+    <script>
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+                setTimeout(() => backToTopButton.style.opacity = '1', 10);
+            } else {
+                backToTopButton.style.opacity = '0';
+                setTimeout(() => backToTopButton.style.display = 'none', 300);
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Hover effect
+        backToTopButton.addEventListener('mouseenter', () => {
+            backToTopButton.style.background = 'linear-gradient(135deg, #FFD700 0%, #D4AF37 100%)';
+            backToTopButton.style.transform = 'translateY(-4px) scale(1.05)';
+            backToTopButton.style.boxShadow = '0 8px 24px rgba(212, 175, 55, 0.6)';
+            backToTopButton.style.borderColor = 'rgba(16, 185, 129, 0.6)';
+        });
+        
+        backToTopButton.addEventListener('mouseleave', () => {
+            backToTopButton.style.background = 'linear-gradient(135deg, #D4AF37 0%, #FFD700 100%)';
+            backToTopButton.style.transform = 'translateY(0) scale(1)';
+            backToTopButton.style.boxShadow = '0 4px 16px rgba(212, 175, 55, 0.4)';
+            backToTopButton.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+        });
+    </script>
 </body>
 </html>
 
