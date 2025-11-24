@@ -1838,11 +1838,22 @@ function renderGrafico(datasets, meses) {
 function toggleChartView(type) {
     if (!window.graficoObj) return;
     
+    // Remove 'active' de todos os botões de escala
     const buttons = document.querySelectorAll('.chart-control-btn');
-    buttons.forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
+    buttons.forEach(btn => {
+        if (btn.textContent.includes('Linear') || btn.textContent.includes('Logarítmica')) {
+            btn.classList.remove('active');
+        }
+    });
     
-    window.graficoObj.options.scales.y.type = type;
+    // Adiciona 'active' no botão clicado
+    const clickedButton = event ? event.target : null;
+    if (clickedButton) {
+        clickedButton.classList.add('active');
+    }
+    
+    // Atualiza o tipo de escala do gráfico
+    window.graficoObj.options.scales.y.type = type === 'log' ? 'logarithmic' : 'linear';
     window.graficoObj.update();
 }
 
