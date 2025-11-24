@@ -41,7 +41,7 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             color: #e6e6e6;
             padding: 20px;
-            padding-top: 65px;
+            padding-top: 140px !important; /* AJUSTADO: Carrossel (55px) + Header (60px) + Respiro (25px) */
             min-height: 100vh;
         }
 
@@ -600,32 +600,105 @@
     </style>
 </head>
 <body>
-    <!-- CARROSSEL: Indicadores Renda Fixa -->
+    <!-- CARROSSEL: Indicadores Econômicos (FIXO NO TOPO) -->
     <section id="invlab-carousel-container"></section>
 
-    <!-- CABEÇALHO FIXO (idêntico aos outros simuladores) -->
-    <header style="position: fixed; top: 0; width: 100%; z-index: 1000; background: #0D0D0D; box-shadow: 0 2px 10px rgba(0,0,0,0.3);">
-        <div style="max-width: 1400px; margin: 0 auto; padding: 15px 20px;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <!-- Logo -->
-                <a href="../index.html" style="text-decoration: none;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB Logo" style="height: 45px; filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3));">
-                    </div>
+    <!-- Header Fixo INVLAB (COMPLETO) -->
+    <header class="main-header" style="top: 52px;">
+        <div class="header-container">
+         <!-- Logo -->
+            <div class="header-logo">
+                <a href="../index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                    <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                    <span class="logo-text">INVLAB</span>
                 </a>
-
-                <!-- Menu de Navegação -->
-                <nav style="display: flex; gap: 20px; align-items: center;">
-                    <a href="../index.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-weight: 500; transition: color 0.3s;">Início</a>
-                    <a href="../index.html#primeiros-passos" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-weight: 500; transition: color 0.3s;">Primeiros Passos</a>
-                    <a href="../index.html#renda-fixa" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-weight: 500; transition: color 0.3s;">Renda Fixa</a>
-                </nav>
             </div>
+            
+            <!-- Sistema de Abas INVLAB -->
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">
+                    🏠 Início
+                </button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">
+                    📚 Primeiros<br>Passos
+                </button>
+                
+                <!-- ABA COM DROPDOWN: RENDA FIXA -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">
+                        📊 Renda<br>Fixa <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="poupanca.html">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                
+                <!-- ABA COM DROPDOWN: RENDA VARIÁVEL -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">
+                        📈 Renda<br>Variável <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='etfs.html'" style="cursor: pointer;">
+                                <span class="category-name">💵 ETFs</span>
+                            </div>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='fiis.html'" style="cursor: pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span>
+                            </div>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='acoes.html'" style="cursor: pointer;">
+                                <span class="category-name">📈 Ações</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- ABA COM DROPDOWN: CRIPTOATIVOS -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">
+                        🔐 Cripto<br>ativos <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="bitcoin.html">₿ Bitcoin</a></li>
+                        <li><a href="ethereum.html">⧫ Ethereum</a></li>
+                        <li><a href="stablecoins.html">💵 Stablecoins</a></li>
+                        <li><a href="blockchain.html">⛓️ Blockchain</a></li>
+                    </ul>
+                </div>
+                
+                <button class="tab-btn" onclick="window.location.href='../index.html#outros-investimentos'">
+                    💎 Outros<br>Investimentos
+                </button>
+                
+                <!-- ABA COM DROPDOWN: FERRAMENTAS -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle active">
+                        🛠️ Ferramentas <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="simulador-invlab-plus.html" class="active">📈 INVLAB+ (Simulador Universal)</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 Simulador de CDBs</a></li>
+                        <li><a href="calculadora.html">🧮 Juros Compostos</a></li>
+                    </ul>
+                </div>
+            </nav>
+            </div>
+            
+            <!-- Botão de Scroll -->
+            <button class="scroll-arrow-btn" id="scrollArrowBtn" aria-label="Rolar menu" title="Clique para ver mais abas">→</button>
         </div>
     </header>
 
-    <!-- Breadcrumb (fixo, abaixo do menu) -->
-    <div style="position: sticky; top: 110px; z-index: 100; background: #0D0D0D; width: 100%; padding: 12px 20px 12px; margin-bottom: 0 !important;">
+    <!-- Breadcrumb (fixo, abaixo do header) -->
+    <div style="position: sticky; top: 112px; z-index: 100; background: #0D0D0D; width: 100%; padding: 12px 20px 12px; margin-bottom: 0 !important;">
         <nav style="max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 8px; font-size: 14px; color: rgba(255, 255, 255, 0.6);">
             <a href="../index.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s;">🏠 Início</a>
             <span style="color: rgba(255, 255, 255, 0.4);">/</span>
@@ -1414,6 +1487,52 @@ function exportarSimulacao() {
     link.click();
     document.body.removeChild(link);
 }
+    </script>
+
+    <!-- ============================================
+         INVLAB CARROSSEL - Indicadores Econômicos
+         ============================================ -->
+    <script src="../assets/js/bcb-api.js"></script>
+    <script src="../assets/js/crypto-api.js"></script>
+    <script src="../assets/js/stock-api.js"></script>
+    <script src="../assets/js/invlab-carrossel.js"></script>
+    <script>
+        // Inicializar carrossel INVLAB
+        document.addEventListener('DOMContentLoaded', () => {
+            const carrossel = new InvlabCarrossel('invlab-carousel-container');
+        });
+    </script>
+
+    <!-- ============================================
+         MENU DROPDOWN - JavaScript
+         ============================================ -->
+    <script>
+        // Dropdown Menu Toggle
+        document.querySelectorAll('.dropdown-toggle').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const dropdown = button.parentElement;
+                const isActive = dropdown.classList.contains('active');
+                
+                // Fechar todos os dropdowns
+                document.querySelectorAll('.tab-with-dropdown').forEach(d => d.classList.remove('active'));
+                
+                // Toggle do dropdown atual
+                if (!isActive) {
+                    dropdown.classList.add('active');
+                }
+            });
+        });
+        
+        // Fechar dropdown ao clicar fora
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.tab-with-dropdown').forEach(d => d.classList.remove('active'));
+        });
+        
+        // Prevenir fechamento ao clicar dentro do dropdown
+        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+            menu.addEventListener('click', (e) => e.stopPropagation());
+        });
     </script>
 
 </body>

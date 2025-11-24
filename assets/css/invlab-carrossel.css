@@ -162,6 +162,26 @@
     color: #627eea; /* Azul Ethereum oficial */
 }
 
+/* BOVA11 - Verde (Ibovespa) */
+.invlab-carousel-slide.bova11 .invlab-slide-value {
+    color: #10b981; /* Verde INVLAB */
+}
+
+/* IVVB11 - Azul (S&P 500) */
+.invlab-carousel-slide.ivvb11 .invlab-slide-value {
+    color: #3b82f6; /* Azul forte */
+}
+
+/* SMAL11 - Rosa (Small Caps) */
+.invlab-carousel-slide.smal11 .invlab-slide-value {
+    color: #ec4899; /* Rosa vibrante */
+}
+
+/* DIVO11 - Ciano (Dividendos) */
+.invlab-carousel-slide.divo11 .invlab-slide-value {
+    color: #14b8a6; /* Ciano */
+}
+
 /* ============================================
    BARRA LUMINOSA INFERIOR - ESTILO PREMIUM
    Linha sutil de 3px que diferencia cada indicador
@@ -215,6 +235,26 @@
 /* ETHEREUM - Barra azul Ethereum */
 .invlab-carousel-slide.ethereum {
     border-bottom: 3px solid #627eea33; /* Azul Ethereum com 20% opacidade */
+}
+
+/* BOVA11 - Barra verde */
+.invlab-carousel-slide.bova11 {
+    border-bottom: 3px solid #10b98133; /* Verde INVLAB com 20% opacidade */
+}
+
+/* IVVB11 - Barra azul */
+.invlab-carousel-slide.ivvb11 {
+    border-bottom: 3px solid #3b82f633; /* Azul com 20% opacidade */
+}
+
+/* SMAL11 - Barra rosa */
+.invlab-carousel-slide.smal11 {
+    border-bottom: 3px solid #ec489933; /* Rosa com 20% opacidade */
+}
+
+/* DIVO11 - Barra ciano */
+.invlab-carousel-slide.divo11 {
+    border-bottom: 3px solid #14b8a633; /* Ciano com 20% opacidade */
 }
 
 /* Botão de ação - REMOVIDO (carrossel meramente informativo) */

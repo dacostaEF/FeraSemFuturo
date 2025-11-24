@@ -24,9 +24,10 @@ class InvlabCarousel {
 
             // 🚀 OTIMIZAÇÃO: Renderiza IMEDIATAMENTE com dados de fallback
             this.data = {
-                selic: 13.75, ipca: 4.5, ipca15: 4.3, igpm: 3.8,
-                cdi: 13.65, poupanca: 0.5, dolar: 5.85, euro: 6.20,
-                bitcoin: 285000, ethereum: 15800, ibovespa: 125000
+                selic: 11.25, ipca: 4.5, ipca15: 4.3, igpm: 3.8,
+                cdi: 10.65, poupanca: 0.5, dolar: 4.95, euro: 5.35,
+                bitcoin: 285000, ethereum: 15800, ibovespa: 125000,
+                bova11: 11.2, ivvb11: 15.3, smal11: 13.5, divo11: 12.1
             };
             
             // Renderiza primeiro (instantâneo)
@@ -215,7 +216,35 @@ class InvlabCarousel {
             value: `${this.cryptoApi ? this.cryptoApi.formatCryptoPrice(ethereumValue) : 'R$ ' + Math.floor(ethereumValue/1000) + 'k'}`
         };
 
-        return [selicSlide, cdiSlide, ipcaSlide, igpmSlide, poupancaSlide, dolarSlide, euroSlide, ibovespaSlide, bitcoinSlide, ethereumSlide];
+        // SLIDE 11 - BOVA11 (ETF Ibovespa)
+        const bova11Slide = {
+            type: 'bova11',
+            label: 'BOVA11',
+            value: `${this.bcbApi.formatPercent(this.data.bova11 || 11.2, 1)} (12m)`
+        };
+
+        // SLIDE 12 - IVVB11 (ETF S&P 500)
+        const ivvb11Slide = {
+            type: 'ivvb11',
+            label: 'IVVB11',
+            value: `${this.bcbApi.formatPercent(this.data.ivvb11 || 15.3, 1)} (12m)`
+        };
+
+        // SLIDE 13 - SMAL11 (Small Caps)
+        const smal11Slide = {
+            type: 'smal11',
+            label: 'SMAL11',
+            value: `${this.bcbApi.formatPercent(this.data.smal11 || 13.5, 1)} (12m)`
+        };
+
+        // SLIDE 14 - DIVO11 (Dividendos)
+        const divo11Slide = {
+            type: 'divo11',
+            label: 'DIVO11',
+            value: `${this.bcbApi.formatPercent(this.data.divo11 || 12.1, 1)} (12m)`
+        };
+
+        return [selicSlide, cdiSlide, ipcaSlide, igpmSlide, poupancaSlide, dolarSlide, euroSlide, ibovespaSlide, bova11Slide, ivvb11Slide, smal11Slide, divo11Slide, bitcoinSlide, ethereumSlide];
     }
 
     createSlide(slideData) {
