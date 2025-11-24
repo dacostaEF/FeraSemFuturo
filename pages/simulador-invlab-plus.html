@@ -167,6 +167,13 @@
             border-bottom: 2px solid rgba(212, 175, 55, 0.2);
         }
 
+        /* Adiciona respiro acima dos títulos de seção (exceto o primeiro) */
+        .panel-title.with-spacing {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
         .input-row {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -841,7 +848,7 @@
                 </div>
             </div>
 
-            <div class="panel-title">📈 Cenário de Projeção</div>
+            <div class="panel-title with-spacing">📈 Cenário de Projeção</div>
             
             <!-- TIP 2 -->
             <div class="tip-box">
@@ -871,7 +878,7 @@
                 </div>
             </div>
 
-            <div class="panel-title">💼 Investimentos Selecionados</div>
+            <div class="panel-title with-spacing">💼 Investimentos Selecionados</div>
             
             <!-- TIP 3 -->
             <div class="tip-box">
