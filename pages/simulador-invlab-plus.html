@@ -352,14 +352,22 @@
         .btn-secondary {
             background: linear-gradient(135deg, #1e3a8a, #1e40af);
             font-size: 1rem;
-            padding: 14px;
+            padding: 12px 14px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             box-shadow: 0 4px 15px rgba(30, 58, 138, 0.4);
         }
 
         .btn-export {
             background: linear-gradient(135deg, #7c2d12, #9a3412);
             font-size: 1rem;
-            padding: 14px;
+            padding: 12px 14px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             box-shadow: 0 4px 15px rgba(124, 45, 18, 0.4);
         }
 
@@ -550,6 +558,44 @@
             line-height: 1.6;
         }
 
+        /* TIP BOX - ESTILO PREMIUM INVLAB */
+        .tip-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(212, 175, 55, 0.08));
+            border-left: 3px solid #10b981;
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin: 12px 0 20px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.88rem;
+            line-height: 1.5;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .tip-box:hover {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(212, 175, 55, 0.12));
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+        }
+
+        .tip-icon {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .tip-content {
+            color: #e6e6e6;
+            flex: 1;
+        }
+
+        .tip-content strong {
+            color: #10b981;
+            font-weight: 600;
+        }
+
         /* LOADING */
         .loading {
             display: none;
@@ -728,6 +774,12 @@
         <div class="input-panel">
             <div class="panel-title">⚙️ Configurações da Simulação</div>
             
+            <!-- TIP 1 -->
+            <div class="tip-box">
+                <span class="tip-icon">📌</span>
+                <div class="tip-content"><strong>Dica:</strong> Quanto maior o prazo, mais claro fica o efeito dos juros compostos e das diferenças entre ativos.</div>
+            </div>
+            
             <div class="input-row">
                 <div class="input-group">
                     <label>💰 Valor Inicial (R$)</label>
@@ -752,6 +804,12 @@
 
             <div class="panel-title">📈 Cenário de Projeção</div>
             
+            <!-- TIP 2 -->
+            <div class="tip-box">
+                <span class="tip-icon">📌</span>
+                <div class="tip-content"><strong>Dica:</strong> Use o Cenário <strong>Pessimista</strong> para entender o risco. Use o <strong>Base</strong> para ter uma visão realista. Use o <strong>Otimista</strong> para estudar o potencial.</div>
+            </div>
+            
             <div class="scenario-tabs">
                 <div class="tab" data-scenario="pessimista">😰 Pessimista</div>
                 <div class="tab active" data-scenario="base">📊 Base</div>
@@ -765,6 +823,12 @@
             </div>
 
             <div class="panel-title">💼 Investimentos Selecionados</div>
+            
+            <!-- TIP 3 -->
+            <div class="tip-box">
+                <span class="tip-icon">📌</span>
+                <div class="tip-content"><strong>Dica:</strong> Misture ativos estáveis (ex: Tesouro) com ativos mais arriscados (ex: ETFs) para entender como eles se comportam juntos.</div>
+            </div>
             
             <div id="investimentos-lista" class="investments-horizontal"></div>
 
@@ -1098,6 +1162,12 @@
                         
                         <em style="color: #10b981;">Use a ferramenta para aprender, comparar e tomar decisões mais conscientes.</em>
                     </p>
+                    
+                    <!-- TIP 8 -->
+                    <div class="tip-box" style="margin-top: 15px; background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(212, 175, 55, 0.08)); border-left: 3px solid #EF4444;">
+                        <span class="tip-icon">📌</span>
+                        <div class="tip-content"><strong>Dica:</strong> Este simulador é uma ferramenta de <strong>APRENDIZADO</strong>. Use os resultados para desenvolver sua visão estratégica, não como previsão.</div>
+                    </div>
                 </div>
 
                 <div style="text-align: center; margin-top: 30px;">
@@ -1511,9 +1581,31 @@ function renderResultados(resultados, totalAportado, resumo) {
     `;
     html += '</div>';
     
+    // TIP 5 - Antes dos cards de resultado
+    html += `
+        <div class="tip-box">
+            <span class="tip-icon">📌</span>
+            <div class="tip-content"><strong>Dica:</strong> O <strong>Valor Real</strong> é mais importante do que o Valor Final, porque mostra quanto dinheiro você realmente teria depois da inflação.</div>
+        </div>
+    `;
+    
     html += '<div class="result-grid">';
     
+    // TIP 6 - Aparece apenas uma vez antes dos cards individuais
+    let tip6Added = false;
+    
     resultados.forEach((res, index) => {
+        // Adicionar TIP 6 apenas no primeiro card
+        if (!tip6Added) {
+            html += `
+                <div class="tip-box" style="grid-column: 1 / -1;">
+                    <span class="tip-icon">📌</span>
+                    <div class="tip-content"><strong>Dica:</strong> O <strong>Drawdown</strong> ajuda a entender o risco real do ativo. Quanto maior, mais o investimento oscila no caminho.</div>
+                </div>
+            `;
+            tip6Added = true;
+        }
+        
         html += `
             <div class="result-card">
                 <div class="result-label">${index === 0 ? '🏆 ' : ''}${res.icon} ${res.nome}</div>
@@ -1529,6 +1621,14 @@ function renderResultados(resultados, totalAportado, resumo) {
     });
     
     html += '</div>';
+    
+    // TIP 7 - Antes da tabela comparativa
+    html += `
+        <div class="tip-box" style="margin-top: 30px;">
+            <span class="tip-icon">📌</span>
+            <div class="tip-content"><strong>Dica:</strong> Olhe sempre a relação entre <strong>Rentabilidade %</strong> e <strong>Drawdown %</strong>. Ativos que têm alto retorno com baixo drawdown são os "melhores comportamentos".</div>
+        </div>
+    `;
     
     // Tabela comparativa
     html += '<table class="comparison-table">';
@@ -1564,6 +1664,17 @@ function renderGrafico(datasets, meses) {
         chartDiv.className = 'chart-fullwidth';
         chartDiv.innerHTML = `
             <div class="panel-title">📈 Evolução dos Investimentos</div>
+            
+            <!-- TIP 4 -->
+            <div class="tip-box">
+                <span class="tip-icon">📌</span>
+                <div class="tip-content">
+                    <strong>Dica:</strong><br>
+                    • Gráfico <strong>Linear</strong> é melhor para comparar valores absolutos.<br>
+                    • Gráfico <strong>Logarítmico</strong> é melhor para comparar ritmo de crescimento entre ativos diferentes.
+                </div>
+            </div>
+            
             <div class="chart-controls">
                 <button class="chart-control-btn active" onclick="toggleChartView('linear')">Linear</button>
                 <button class="chart-control-btn" onclick="toggleChartView('log')">Logarítmica</button>
