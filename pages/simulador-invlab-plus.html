@@ -719,6 +719,9 @@
         <div class="header-main">
             <h1>⚡ INVLAB+ | Simulador Universal</h1>
             <div class="subtitle">Simule, compare e visualize o desempenho de até 6 investimentos com cenários realistas.</div>
+            <button onclick="abrirTutorial()" style="margin-top: 15px; padding: 12px 24px; background: linear-gradient(135deg, #d4af37 0%, #b48c2e 100%); color: #0D0D0D; border: none; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);">
+                📘 Como Usar este Simulador
+            </button>
         </div>
 
         <!-- PAINEL DE ENTRADA COMPACTO -->
@@ -863,6 +866,249 @@
             </div>
         </div>
     </footer>
+
+    <!-- ============================================
+         MODAL TUTORIAL - COMO USAR O SIMULADOR
+         ============================================ -->
+    <div id="modalTutorial" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 10000; overflow-y: auto; padding: 20px;">
+        <div style="max-width: 900px; margin: 40px auto; background: linear-gradient(145deg, #1a1a1a 0%, #0D0D0D 100%); border-radius: 16px; padding: 40px; border: 2px solid #d4af37; box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3); position: relative;">
+            
+            <!-- Botão Fechar -->
+            <button onclick="fecharTutorial()" style="position: absolute; top: 20px; right: 20px; background: rgba(212, 175, 55, 0.2); border: 1px solid #d4af37; color: #d4af37; width: 36px; height: 36px; border-radius: 50%; font-size: 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; font-weight: bold;">
+                ✕
+            </button>
+
+            <!-- Título do Modal -->
+            <h2 style="font-family: 'Playfair Display', Georgia, serif; color: #d4af37; font-size: 2rem; margin-bottom: 10px; text-align: center; font-weight: 800;">
+                📘 Guia Rápido — Como usar o Simulador INVLAB+
+            </h2>
+            <p style="text-align: center; color: #10b981; font-size: 1.05rem; margin-bottom: 30px; font-family: 'Inter', sans-serif;">
+                Aprenda a simular, comparar e interpretar seus investimentos com precisão profissional
+            </p>
+
+            <!-- Conteúdo do Tutorial -->
+            <div style="font-family: 'Inter', sans-serif; color: #e6e6e6; line-height: 1.8; font-size: 0.95rem;">
+                
+                <!-- Seção 1 -->
+                <div style="margin-bottom: 30px; padding: 20px; background: rgba(16, 185, 129, 0.05); border-left: 4px solid #10b981; border-radius: 8px;">
+                    <h3 style="color: #d4af37; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                        ⭐ 1) O que é o Simulador Universal?
+                    </h3>
+                    <p style="margin-bottom: 12px;">
+                        O Simulador Universal do INVLAB+ permite analisar, comparar e visualizar o desempenho de <strong>até 6 tipos diferentes de investimentos</strong> ao mesmo tempo, utilizando:
+                    </p>
+                    <ul style="margin-left: 20px; color: #9CA3AF;">
+                        <li>✔ Aportes mensais</li>
+                        <li>✔ Rentabilidades históricas</li>
+                        <li>✔ Projeções realistas</li>
+                        <li>✔ Inflação anual</li>
+                        <li>✔ Cenários pessimista, base e otimista</li>
+                        <li>✔ Volatilidade simulada</li>
+                        <li>✔ Gráficos avançados</li>
+                    </ul>
+                    <p style="margin-top: 12px; font-style: italic; color: #10b981;">
+                        💡 O objetivo é permitir que você entenda o comportamento real dos investimentos ao longo do tempo, mesmo com oscilações e fases de mercado.
+                    </p>
+                </div>
+
+                <!-- Seção 2 -->
+                <div style="margin-bottom: 30px; padding: 20px; background: rgba(16, 185, 129, 0.05); border-left: 4px solid #10b981; border-radius: 8px;">
+                    <h3 style="color: #d4af37; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                        ⭐ 2) Configurando sua Simulação
+                    </h3>
+                    <p style="margin-bottom: 12px;">No topo da ferramenta, você define:</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                        <div style="background: rgba(212, 175, 55, 0.1); padding: 12px; border-radius: 6px;">
+                            <strong style="color: #d4af37;">💰 Valor Inicial</strong><br>
+                            <span style="color: #9CA3AF; font-size: 0.9rem;">Quanto você tem hoje para começar a investir.</span>
+                        </div>
+                        <div style="background: rgba(212, 175, 55, 0.1); padding: 12px; border-radius: 6px;">
+                            <strong style="color: #d4af37;">📅 Aporte Mensal</strong><br>
+                            <span style="color: #9CA3AF; font-size: 0.9rem;">Quanto você pretende investir todos os meses.</span>
+                        </div>
+                        <div style="background: rgba(212, 175, 55, 0.1); padding: 12px; border-radius: 6px;">
+                            <strong style="color: #d4af37;">⏱️ Prazo (anos)</strong><br>
+                            <span style="color: #9CA3AF; font-size: 0.9rem;">Por quanto tempo deseja simular o crescimento.</span>
+                        </div>
+                        <div style="background: rgba(212, 175, 55, 0.1); padding: 12px; border-radius: 6px;">
+                            <strong style="color: #d4af37;">📊 Inflação Anual</strong><br>
+                            <span style="color: #9CA3AF; font-size: 0.9rem;">Taxa usada para calcular o valor real no futuro.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seção 3 -->
+                <div style="margin-bottom: 30px; padding: 20px; background: rgba(16, 185, 129, 0.05); border-left: 4px solid #10b981; border-radius: 8px;">
+                    <h3 style="color: #d4af37; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                        ⭐ 3) Cenário de Projeção
+                    </h3>
+                    <p style="margin-bottom: 15px;">Você pode alternar entre <strong>3 cenários prontos</strong>:</p>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <div style="background: rgba(239, 68, 68, 0.1); padding: 12px; border-radius: 6px; border-left: 3px solid #EF4444;">
+                            <strong style="color: #EF4444;">😟 Pessimista</strong><br>
+                            <span style="color: #9CA3AF; font-size: 0.9rem;">Retorno base – 30%, com volatilidade. Simula momentos ruins do mercado.</span>
+                        </div>
+                        <div style="background: rgba(16, 185, 129, 0.1); padding: 12px; border-radius: 6px; border-left: 3px solid #10b981;">
+                            <strong style="color: #10b981;">📊 Base</strong><br>
+                            <span style="color: #9CA3AF; font-size: 0.9rem;">Usa as rentabilidades históricas médias de cada ativo. É o cenário mais realista.</span>
+                        </div>
+                        <div style="background: rgba(34, 197, 94, 0.1); padding: 12px; border-radius: 6px; border-left: 3px solid #22c55e;">
+                            <strong style="color: #22c55e;">🚀 Otimista</strong><br>
+                            <span style="color: #9CA3AF; font-size: 0.9rem;">Retorno base + 20%. Simula um período muito favorável do mercado.</span>
+                        </div>
+                    </div>
+                    <p style="margin-top: 12px; font-style: italic; color: #10b981;">
+                        💡 <strong>Dica:</strong> O ideal é testar os 3 cenários para ter uma visão completa.
+                    </p>
+                </div>
+
+                <!-- Seção 4 -->
+                <div style="margin-bottom: 30px; padding: 20px; background: rgba(16, 185, 129, 0.05); border-left: 4px solid #10b981; border-radius: 8px;">
+                    <h3 style="color: #d4af37; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                        ⭐ 4) Investimentos Selecionados
+                    </h3>
+                    <p>Você pode simular <strong>até 6 investimentos</strong> diferentes ao mesmo tempo. Cada investimento tem:</p>
+                    <ul style="margin-left: 20px; color: #9CA3AF; margin-top: 10px;">
+                        <li>✔ Média histórica (%)</li>
+                        <li>✔ Volatilidade (%)</li>
+                        <li>✔ Cor fixa no gráfico</li>
+                        <li>✔ Nome e categoria</li>
+                        <li>✔ Botão para remover</li>
+                    </ul>
+                    <p style="margin-top: 12px; font-style: italic; color: #10b981;">
+                        💡 <strong>Dica:</strong> Misture ativos estáveis (como Tesouro) com ativos voláteis (como renda variável) para comparar os comportamentos.
+                    </p>
+                </div>
+
+                <!-- Seção 5 -->
+                <div style="margin-bottom: 30px; padding: 20px; background: rgba(16, 185, 129, 0.05); border-left: 4px solid #10b981; border-radius: 8px;">
+                    <h3 style="color: #d4af37; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                        ⭐ 5) Gráfico — Como interpretar
+                    </h3>
+                    <p>O gráfico mostra como cada investimento cresce ano a ano, considerando aportes mensais, retorno médio, volatilidade e inflação.</p>
+                    <div style="margin-top: 15px; display: grid; gap: 10px;">
+                        <div style="background: rgba(212, 175, 55, 0.1); padding: 10px; border-radius: 6px;">
+                            <strong style="color: #d4af37;">📊 Eixo X (horizontal):</strong> Representa cada ano da simulação
+                        </div>
+                        <div style="background: rgba(212, 175, 55, 0.1); padding: 10px; border-radius: 6px;">
+                            <strong style="color: #d4af37;">📈 Eixo Y (vertical):</strong> Mostra quanto você teria em reais ao longo do tempo
+                        </div>
+                        <div style="background: rgba(212, 175, 55, 0.1); padding: 10px; border-radius: 6px;">
+                            <strong style="color: #d4af37;">🎨 Cores:</strong> Cada ativo tem uma cor única para facilitar a leitura
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seção 6 -->
+                <div style="margin-bottom: 30px; padding: 20px; background: rgba(16, 185, 129, 0.05); border-left: 4px solid #10b981; border-radius: 8px;">
+                    <h3 style="color: #d4af37; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                        ⭐ 6) Cards — Interpretação dos Resultados
+                    </h3>
+                    <p>Depois do gráfico, você verá <strong>4 caixas importantes</strong>:</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
+                        <div style="background: rgba(34, 197, 94, 0.1); padding: 12px; border-radius: 6px;">
+                            <strong style="color: #22c55e;">🥇 Melhor Investimento</strong><br>
+                            <span style="color: #9CA3AF; font-size: 0.85rem;">Ativo que terminou com o maior valor final.</span>
+                        </div>
+                        <div style="background: rgba(239, 68, 68, 0.1); padding: 12px; border-radius: 6px;">
+                            <strong style="color: #EF4444;">🥈 Pior Investimento</strong><br>
+                            <span style="color: #9CA3AF; font-size: 0.85rem;">Ativo com o menor valor final.</span>
+                        </div>
+                        <div style="background: rgba(212, 175, 55, 0.1); padding: 12px; border-radius: 6px;">
+                            <strong style="color: #d4af37;">⚖️ Diferença Absoluta</strong><br>
+                            <span style="color: #9CA3AF; font-size: 0.85rem;">Quanto separa o melhor e o pior ativo.</span>
+                        </div>
+                        <div style="background: rgba(59, 130, 246, 0.1); padding: 12px; border-radius: 6px;">
+                            <strong style="color: #3b82f6;">📉 Taxa Média Real</strong><br>
+                            <span style="color: #9CA3AF; font-size: 0.85rem;">Média das rentabilidades já descontando a inflação.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seção 7 -->
+                <div style="margin-bottom: 30px; padding: 20px; background: rgba(16, 185, 129, 0.05); border-left: 4px solid #10b981; border-radius: 8px;">
+                    <h3 style="color: #d4af37; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                        ⭐ 7) Análise Individual de Cada Investimento
+                    </h3>
+                    <p>Cada card mostra:</p>
+                    <ul style="margin-left: 20px; color: #9CA3AF; margin-top: 10px;">
+                        <li><strong style="color: #10b981;">Valor Final:</strong> Quanto você teria no fim da simulação</li>
+                        <li><strong style="color: #10b981;">Lucro:</strong> Diferença entre valor final e total aportado</li>
+                        <li><strong style="color: #10b981;">Rentabilidade (%):</strong> Quanto o dinheiro cresceu em percentual</li>
+                        <li><strong style="color: #10b981;">Valor Real:</strong> Valor final corrigido pela inflação (poder de compra)</li>
+                        <li><strong style="color: #10b981;">Drawdown Máximo:</strong> Maior "queda" que o investimento enfrentou</li>
+                    </ul>
+                    <p style="margin-top: 12px; background: rgba(212, 175, 55, 0.1); padding: 10px; border-radius: 6px; font-size: 0.9rem;">
+                        <strong style="color: #d4af37;">📌 Exemplo:</strong><br>
+                        Tesouro Selic → drawdown 0%<br>
+                        ETF BOVA11 → drawdown –21,37%<br>
+                        <em style="color: #10b981;">Isso explica por que ativos voláteis crescem mais no longo prazo, mas "sofrem" no curto.</em>
+                    </p>
+                </div>
+
+                <!-- Seção 8 -->
+                <div style="margin-bottom: 30px; padding: 20px; background: rgba(16, 185, 129, 0.05); border-left: 4px solid #10b981; border-radius: 8px;">
+                    <h3 style="color: #d4af37; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                        ⭐ 8) Comparação Final — Tabela Completa
+                    </h3>
+                    <p>A tabela mostra um resumo completo com:</p>
+                    <ul style="margin-left: 20px; color: #9CA3AF;">
+                        <li>✔ Valor Final</li>
+                        <li>✔ Valor Real</li>
+                        <li>✔ Lucro</li>
+                        <li>✔ Rentabilidade (%)</li>
+                        <li>✔ Drawdown</li>
+                        <li>✔ Cores e ícones</li>
+                    </ul>
+                    <p style="margin-top: 12px; color: #10b981; font-style: italic;">
+                        💡 No final da tabela, aparece: Total aportado, Cenário usado, Ativo mais estável e Ativo mais volátil.
+                    </p>
+                </div>
+
+                <!-- Seção 9 -->
+                <div style="margin-bottom: 30px; padding: 20px; background: rgba(16, 185, 129, 0.05); border-left: 4px solid #10b981; border-radius: 8px;">
+                    <h3 style="color: #d4af37; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                        ⭐ 9) Dicas importantes para interpretar
+                    </h3>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="background: rgba(212, 175, 55, 0.1); padding: 10px; border-radius: 6px;">
+                            ✔ <strong style="color: #d4af37;">Ativos mais voláteis</strong> podem render mais, mas oscilam bastante
+                        </div>
+                        <div style="background: rgba(212, 175, 55, 0.1); padding: 10px; border-radius: 6px;">
+                            ✔ <strong style="color: #d4af37;">Renda fixa é estável</strong> e funciona como "linha base" para comparar
+                        </div>
+                        <div style="background: rgba(212, 175, 55, 0.1); padding: 10px; border-radius: 6px;">
+                            ✔ <strong style="color: #d4af37;">Valor Real</strong> é o mais importante — mostra quanto vale realmente o dinheiro no futuro
+                        </div>
+                        <div style="background: rgba(212, 175, 55, 0.1); padding: 10px; border-radius: 6px;">
+                            ✔ <strong style="color: #d4af37;">Cenários mudam tudo:</strong> Pessimista = educação sobre risco | Base = realidade | Otimista = potencial
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seção 10 -->
+                <div style="margin-bottom: 30px; padding: 20px; background: rgba(239, 68, 68, 0.1); border-left: 4px solid #EF4444; border-radius: 8px;">
+                    <h3 style="color: #EF4444; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                        ⚠️ 10) Aviso Educacional do INVLAB
+                    </h3>
+                    <p style="color: #e6e6e6; line-height: 1.8;">
+                        O simulador usa <strong>dados históricos</strong> e <strong>modelos estatísticos</strong> para ensinar como investimentos se comportam.<br><br>
+                        
+                        <strong style="color: #EF4444;">Ele NÃO faz previsão de futuro</strong> e <strong style="color: #EF4444;">NÃO recomenda nenhum ativo</strong>.<br><br>
+                        
+                        <em style="color: #10b981;">Use a ferramenta para aprender, comparar e tomar decisões mais conscientes.</em>
+                    </p>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <button onclick="fecharTutorial()" style="padding: 14px 32px; background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: #fff; border: none; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
+                        ✅ Entendi! Vamos Simular
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <!-- JAVASCRIPT DO SIMULADOR -->
     <script>
@@ -1438,6 +1684,27 @@ function resetZoom() {
         window.graficoObj.resetZoom();
     }
 }
+
+// ============================================
+// MODAL TUTORIAL - Funções
+// ============================================
+function abrirTutorial() {
+    document.getElementById('modalTutorial').style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Bloquear scroll da página
+}
+
+function fecharTutorial() {
+    document.getElementById('modalTutorial').style.display = 'none';
+    document.body.style.overflow = 'auto'; // Restaurar scroll da página
+}
+
+// Fechar modal ao clicar fora dele
+document.addEventListener('click', function(event) {
+    const modal = document.getElementById('modalTutorial');
+    if (event.target === modal) {
+        fecharTutorial();
+    }
+});
 
 function exportarSimulacao() {
     if (!ultimaSimulacao) {
