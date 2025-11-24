@@ -1754,18 +1754,16 @@ function renderGrafico(datasets, meses) {
     const canvas = document.getElementById('grafico');
     const ctx = canvas.getContext('2d');
     
-    // Criar labels mais legíveis (apenas anos)
+    // Criar labels com incremento anual claro
     const labels = [];
     for (let i = 0; i <= meses; i++) {
         if (i === 0) {
             labels.push('Início');
         } else if (i % 12 === 0) {
+            // Exibe "Ano 1", "Ano 2", "Ano 3"...
             labels.push(`Ano ${i/12}`);
-        } else if (meses <= 24 && i % 3 === 0) {
-            labels.push(`Mês ${i}`);
-        } else if (i === meses) {
-            labels.push('Final');
         } else {
+            // Labels vazios para meses intermediários (mantém escala mas não polui)
             labels.push('');
         }
     }
@@ -1807,7 +1805,10 @@ function renderGrafico(datasets, meses) {
                 x: { 
                     ticks: { 
                         color: '#999',
-                        maxTicksLimit: 20
+                        maxTicksLimit: 25,
+                        autoSkip: false,  // Não pula labels automaticamente
+                        maxRotation: 0,   // Labels na horizontal
+                        minRotation: 0
                     },
                     grid: { color: 'rgba(255,255,255,0.05)' }
                 },
