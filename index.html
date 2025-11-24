@@ -35,6 +35,162 @@
     <link rel="stylesheet" href="assets/css/artigo-styles.css">
     <!-- INVLAB Carrossel - Indicadores Econômicos -->
     <link rel="stylesheet" href="assets/css/invlab-carrossel.css">
+    
+    <style>
+        /* 🎨 INVLAB PREMIUM - Hovers e Animações para Cards */
+        
+        /* Cards de Remuneração - Hover Premium */
+        .remuneration-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .remuneration-card:hover {
+            border-color: rgba(212, 175, 55, 0.7) !important;
+            transform: translateY(-6px);
+            box-shadow: 
+                0 8px 24px rgba(212, 175, 55, 0.2),
+                0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+        
+        .remuneration-card:hover .remuneration-icon i {
+            transform: scale(1.1);
+            animation: glow-pulse 2s ease-in-out infinite;
+        }
+        
+        /* Cards de Investimentos - Hover Premium */
+        .investment-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .investment-card:hover {
+            border-color: rgba(212, 175, 55, 0.7) !important;
+            transform: translateY(-6px);
+            box-shadow: 
+                0 8px 24px rgba(212, 175, 55, 0.2),
+                0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+        
+        .investment-card:hover .investment-header i {
+            transform: scale(1.1);
+            animation: glow-pulse 2s ease-in-out infinite;
+        }
+        
+        .investment-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .investment-header i {
+            transition: all 0.3s ease;
+        }
+        
+        /* Cards de Plataformas - Hover Premium */
+        .platform-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .platform-card:hover {
+            border-color: rgba(212, 175, 55, 0.7) !important;
+            transform: translateY(-6px);
+            box-shadow: 
+                0 8px 24px rgba(212, 175, 55, 0.2),
+                0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+        
+        .platform-card:hover .platform-icon i {
+            transform: scale(1.1);
+            animation: glow-pulse 2s ease-in-out infinite;
+        }
+        
+        /* Animação Glow Pulse - INVLAB Premium */
+        @keyframes glow-pulse {
+            0%, 100% {
+                filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3));
+            }
+            50% {
+                filter: drop-shadow(0 0 16px rgba(212, 175, 55, 0.5));
+            }
+        }
+        
+        /* Ícones com transição suave */
+        .remuneration-icon i,
+        .platform-icon i {
+            transition: all 0.3s ease;
+        }
+        
+        /* Cards de Criptoativos - Hover Premium */
+        .inv-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .inv-card:hover {
+            border-color: rgba(212, 175, 55, 0.7) !important;
+            transform: translateY(-6px);
+            box-shadow: 
+                0 8px 24px rgba(212, 175, 55, 0.2),
+                0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+        
+        .inv-card:hover .inv-card-icon i {
+            transform: scale(1.1);
+            animation: glow-pulse 2s ease-in-out infinite;
+        }
+        
+        .inv-card-icon i {
+            transition: all 0.3s ease;
+        }
+        
+        /* Botão Back to Top - INVLAB Premium */
+        #backToTop {
+            display: none;
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 9999;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #D4AF37 0%, rgba(212, 175, 55, 0.8) 100%);
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 50%;
+            font-size: 24px;
+            color: #0D0D0D;
+            text-align: center;
+            line-height: 52px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+        }
+        
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        #backToTop:hover {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.9) 0%, #D4AF37 100%);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.6);
+            border-color: rgba(16, 185, 129, 0.6);
+        }
+        
+        @media (max-width: 768px) {
+            #backToTop {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                line-height: 44px;
+                bottom: 24px;
+                right: 24px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- CARROSSEL: Indicadores Econômicos (Dados do Banco Central) -->
@@ -662,28 +818,32 @@
             <div class="content-wrapper-wide">
                 <section class="section-educational">
                     <div class="educational-header">
-                        <h1 class="educational-title">📘 O que é Renda Fixa?</h1>
-                        <p class="educational-intro">
-                            A renda fixa reúne investimentos em que as <strong>regras de remuneração são definidas no momento da aplicação</strong>. 
+                        <h1 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; font-weight: 800; color: #D4AF37; text-align: center; margin-bottom: 24px; letter-spacing: -0.02em; line-height: 1.2;">
+                            📘 O que é Renda Fixa?
+                        </h1>
+                        <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(16, 185, 129, 0.65); text-align: center; line-height: 1.8; margin-bottom: 32px; max-width: 900px; margin-left: auto; margin-right: auto;">
+                            A renda fixa reúne investimentos em que as regras de remuneração são definidas no momento da aplicação. 
                             Isso permite que você tenha uma boa previsão do retorno ao longo do tempo, tornando essa classe ideal para quem 
                             está começando ou busca mais estabilidade.
                         </p>
-                        <p class="educational-intro secondary">
-                            Em termos simples: <strong>você empresta dinheiro</strong> para uma instituição (governo, banco ou empresa) e 
-                            <strong>recebe juros em troca</strong>.
+                        <p style="font-family: 'Inter', sans-serif; font-size: 1rem; color: rgba(16, 185, 129, 0.65); text-align: center; font-style: italic; line-height: 1.8; margin-bottom: 48px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                            Em termos simples: você empresta dinheiro para uma instituição (governo, banco ou empresa) e 
+                            recebe juros em troca.
                         </p>
                     </div>
 
                     <!-- Formas de Remuneração -->
                     <div class="info-section">
-                        <h2 class="info-section-title">💰 Existem três formas principais de remuneração</h2>
+                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 56px; margin-bottom: 36px; letter-spacing: -0.01em;">💰 Existem três formas principais de remuneração</h2>
                         
                         <div class="remuneration-grid">
                             <!-- Prefixada -->
                             <div class="remuneration-card prefixada">
-                                <div class="remuneration-icon">🔹</div>
-                                <h3>Prefixada</h3>
-                                <p class="remuneration-desc">A taxa é conhecida desde o início.</p>
+                                <div class="remuneration-icon">
+                                    <i class="ph-duotone ph-lock-key" style="font-size: 48px; color: #D4AF37; --ph-duotone-secondary-color: rgba(16, 185, 129, 0.2);"></i>
+                                </div>
+                                <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 600; color: #E4E4E4; margin-bottom: 12px; letter-spacing: -0.01em;">Prefixada</h3>
+                                <p class="remuneration-desc" style="color: #9CA3AF;">A taxa é conhecida desde o início.</p>
                                 <div class="remuneration-example">
                                     <span class="example-label">Exemplo:</span>
                                     <span class="example-value">10% ao ano até o vencimento</span>
@@ -692,9 +852,11 @@
 
                             <!-- Pós-fixada -->
                             <div class="remuneration-card posfixada">
-                                <div class="remuneration-icon">🔹</div>
-                                <h3>Pós-fixada</h3>
-                                <p class="remuneration-desc">A rentabilidade acompanha um indicador econômico, como Selic ou CDI.</p>
+                                <div class="remuneration-icon">
+                                    <i class="ph-duotone ph-chart-line-up" style="font-size: 48px; color: #D4AF37; --ph-duotone-secondary-color: rgba(16, 185, 129, 0.2);"></i>
+                                </div>
+                                <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 600; color: #E4E4E4; margin-bottom: 12px; letter-spacing: -0.01em;">Pós-fixada</h3>
+                                <p class="remuneration-desc" style="color: #9CA3AF;">A rentabilidade acompanha um indicador econômico, como Selic ou CDI.</p>
                                 <div class="remuneration-example">
                                     <span class="example-label">Exemplo:</span>
                                     <span class="example-value">100% do CDI</span>
@@ -703,9 +865,11 @@
 
                             <!-- Híbrida -->
                             <div class="remuneration-card hibrida">
-                                <div class="remuneration-icon">🔹</div>
-                                <h3>Híbrida</h3>
-                                <p class="remuneration-desc">Combina uma taxa fixa + inflação (IPCA).</p>
+                                <div class="remuneration-icon">
+                                    <i class="ph-duotone ph-shield-check" style="font-size: 48px; color: #D4AF37; --ph-duotone-secondary-color: rgba(16, 185, 129, 0.2);"></i>
+                                </div>
+                                <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 600; color: #E4E4E4; margin-bottom: 12px; letter-spacing: -0.01em;">Híbrida</h3>
+                                <p class="remuneration-desc" style="color: #9CA3AF;">Combina uma taxa fixa + inflação (IPCA).</p>
                                 <div class="remuneration-example">
                                     <span class="example-label">Exemplo:</span>
                                     <span class="example-value">IPCA + 5% ao ano</span>
@@ -717,7 +881,7 @@
 
                     <!-- Principais Tipos -->
                     <div class="info-section">
-                        <h2 class="info-section-title">🟦 Principais tipos de investimentos em Renda Fixa</h2>
+                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 56px; margin-bottom: 36px; letter-spacing: -0.01em;">🟦 Principais tipos de investimentos em Renda Fixa</h2>
                         
                         <div class="investment-types">
                             <!-- Tesouro Direto -->
@@ -790,41 +954,51 @@
 
                     <!-- Onde Investir -->
                     <div class="info-section highlight-section">
-                        <h2 class="info-section-title">🟧 Onde investir?</h2>
+                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 56px; margin-bottom: 36px; letter-spacing: -0.01em;">🟧 Onde investir?</h2>
                         
                         <div class="platforms-grid">
                             <div class="platform-card">
-                                <div class="platform-icon">🏦</div>
-                                <h3>Bancos</h3>
-                                <p>Instituições financeiras que oferecem CDBs e algumas Letras (LCI/LCA). 
+                                <div class="platform-icon">
+                                    <i class="ph-duotone ph-bank" style="font-size: 48px; color: #D4AF37; --ph-duotone-secondary-color: rgba(16, 185, 129, 0.2);"></i>
+                                </div>
+                                <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 600; color: #E4E4E4; margin-bottom: 12px; letter-spacing: -0.01em;">Bancos</h3>
+                                <p style="color: #9CA3AF;">Instituições financeiras que oferecem CDBs e algumas Letras (LCI/LCA). 
                                    Podem ter opções mais simples, mas com variedade limitada.</p>
                             </div>
                             
                             <div class="platform-card featured">
-                                <div class="platform-icon">💼</div>
-                                <h3>Corretoras de Investimento</h3>
-                                <p>Plataformas completas com grande variedade de títulos, permitindo comparar 
+                                <div class="platform-icon">
+                                    <i class="ph-duotone ph-chart-donut" style="font-size: 48px; color: #D4AF37; --ph-duotone-secondary-color: rgba(16, 185, 129, 0.2);"></i>
+                                </div>
+                                <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 600; color: #E4E4E4; margin-bottom: 12px; letter-spacing: -0.01em;">Corretoras de Investimento</h3>
+                                <p style="color: #9CA3AF;">Plataformas completas com grande variedade de títulos, permitindo comparar 
                                    emissores, taxas e prazos com maior eficiência.</p>
                             </div>
                             
                             <div class="platform-card">
-                                <div class="platform-icon">🧠</div>
-                                <h3>Assessores / Agentes Autônomos (AAI)</h3>
-                                <p>Profissionais que ajudam a entender produtos e montar estratégias. 
+                                <div class="platform-icon">
+                                    <i class="ph-duotone ph-user-focus" style="font-size: 48px; color: #D4AF37; --ph-duotone-secondary-color: rgba(16, 185, 129, 0.2);"></i>
+                                </div>
+                                <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 600; color: #E4E4E4; margin-bottom: 12px; letter-spacing: -0.01em;">Assessores / Agentes Autônomos (AAI)</h3>
+                                <p style="color: #9CA3AF;">Profissionais que ajudam a entender produtos e montar estratégias. 
                                    <strong>Importante:</strong> muitos são remunerados por comissão, então mantenha senso crítico.</p>
                             </div>
                             
                             <div class="platform-card">
-                                <div class="platform-icon">📱</div>
-                                <h3>Bancos Digitais</h3>
-                                <p>Aplicativos modernos com interface simples e acesso a CDBs de múltiplos emissores. 
+                                <div class="platform-icon">
+                                    <i class="ph-duotone ph-device-mobile" style="font-size: 48px; color: #D4AF37; --ph-duotone-secondary-color: rgba(16, 185, 129, 0.2);"></i>
+                                </div>
+                                <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 600; color: #E4E4E4; margin-bottom: 12px; letter-spacing: -0.01em;">Bancos Digitais</h3>
+                                <p style="color: #9CA3AF;">Aplicativos modernos com interface simples e acesso a CDBs de múltiplos emissores. 
                                    Boa opção para iniciantes, mas com opções mais limitadas.</p>
                             </div>
                             
                             <div class="platform-card">
-                                <div class="platform-icon">🧩</div>
-                                <h3>Plataformas Híbridas</h3>
-                                <p>Serviços que combinam corretora + sugestões automáticas de carteira. 
+                                <div class="platform-icon">
+                                    <i class="ph-duotone ph-cube" style="font-size: 48px; color: #D4AF37; --ph-duotone-secondary-color: rgba(16, 185, 129, 0.2);"></i>
+                                </div>
+                                <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 600; color: #E4E4E4; margin-bottom: 12px; letter-spacing: -0.01em;">Plataformas Híbridas</h3>
+                                <p style="color: #9CA3AF;">Serviços que combinam corretora + sugestões automáticas de carteira. 
                                    Fáceis de usar, mas podem ter custos embutidos ou carteiras padronizadas.</p>
                             </div>
                         </div>
@@ -836,7 +1010,7 @@
 
                     <!-- Como Investir -->
                     <div class="info-section">
-                        <h2 class="info-section-title">🟩 Como investir (Passo a Passo simples)</h2>
+                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 56px; margin-bottom: 36px; letter-spacing: -0.01em;">🟩 Como investir (Passo a Passo simples)</h2>
                         
                         <div class="steps-list">
                             <div class="step-item">
@@ -921,20 +1095,22 @@
                 <section class="section-educational">
                     <!-- HEADER EDUCACIONAL -->
                     <div class="educational-header">
-                        <h1 class="educational-title">📈 O que é Renda Variável?</h1>
-                        <p class="educational-intro">
-                            A renda variável reúne investimentos em que a <strong>rentabilidade NÃO É CONHECIDA ANTECIPADAMENTE</strong>. 
+                        <h1 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; font-weight: 800; color: #D4AF37; text-align: center; margin-bottom: 24px; letter-spacing: -0.02em; line-height: 1.2;">
+                            📈 O que é Renda Variável?
+                        </h1>
+                        <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(16, 185, 129, 0.65); text-align: center; line-height: 1.8; margin-bottom: 32px; max-width: 900px; margin-left: auto; margin-right: auto;">
+                            A renda variável reúne investimentos em que a rentabilidade NÃO É CONHECIDA ANTECIPADAMENTE. 
                             Diferente da renda fixa, aqui os retornos dependem do desempenho de empresas, fundos ou índices de mercado.
                         </p>
-                        <p class="educational-intro secondary">
-                            Em termos simples: <strong>você se torna sócio</strong> de empresas ou fundos e participa dos seus resultados — 
+                        <p style="font-family: 'Inter', sans-serif; font-size: 1rem; color: rgba(16, 185, 129, 0.65); text-align: center; font-style: italic; line-height: 1.8; margin-bottom: 48px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                            Em termos simples: você se torna sócio de empresas ou fundos e participa dos seus resultados — 
                             tanto nos lucros quanto nos prejuízos.
                         </p>
                     </div>
 
                     <!-- CARACTERÍSTICAS PRINCIPAIS -->
                     <div class="info-section">
-                        <h2 class="info-section-title">🎯 Características da Renda Variável</h2>
+                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 56px; margin-bottom: 36px; letter-spacing: -0.01em;">🎯 Características da Renda Variável</h2>
                         
                         <div class="remuneration-grid">
                             <!-- Potencial de Retorno -->
@@ -975,16 +1151,19 @@
 
                     <!-- TIPOS PRINCIPAIS -->
                     <div class="info-section">
-                        <h2 class="info-section-title">🟦 Principais tipos de Renda Variável</h2>
+                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 56px; margin-bottom: 36px; letter-spacing: -0.01em;">🟦 Principais tipos de Renda Variável</h2>
                         
                         <div class="investment-types">
                             <!-- ETFs -->
                             <div class="investment-card tesouro">
                                 <div class="investment-header">
-                                    <span class="investment-badge">🟩 ETFs</span>
-                                    <span class="investment-security">🎯 Para Iniciantes</span>
+                                    <i class="ph-duotone ph-chart-donut" style="font-size: 36px; color: #D4AF37; --ph-duotone-secondary-color: rgba(16, 185, 129, 0.2); margin-right: 12px;"></i>
+                                    <div>
+                                        <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 600; color: #E4E4E4; margin: 0; letter-spacing: -0.01em;">ETFs</h3>
+                                        <span class="investment-security">🎯 Para Iniciantes</span>
+                                    </div>
                                 </div>
-                                <p class="investment-description">
+                                <p class="investment-description" style="color: #9CA3AF;">
                                     Fundos de Índice que replicam carteiras teóricas.
                                 </p>
                                 <ul class="investment-list">
@@ -997,10 +1176,13 @@
                             <!-- FIIs -->
                             <div class="investment-card cdb">
                                 <div class="investment-header">
-                                    <span class="investment-badge">🟩 Fundos Imobiliários (FIIs)</span>
-                                    <span class="investment-tag">Renda Passiva Mensal</span>
+                                    <i class="ph-duotone ph-buildings" style="font-size: 36px; color: #D4AF37; --ph-duotone-secondary-color: rgba(16, 185, 129, 0.2); margin-right: 12px;"></i>
+                                    <div>
+                                        <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 600; color: #E4E4E4; margin: 0; letter-spacing: -0.01em;">Fundos Imobiliários (FIIs)</h3>
+                                        <span class="investment-tag">Renda Passiva Mensal</span>
+                                    </div>
                                 </div>
-                                <p class="investment-description">
+                                <p class="investment-description" style="color: #9CA3AF;">
                                     Você investe em carteiras de imóveis e recebe parte dos aluguéis.
                                 </p>
                                 <ul class="investment-list">
@@ -1014,10 +1196,13 @@
                             <!-- Ações -->
                             <div class="investment-card lci">
                                 <div class="investment-header">
-                                    <span class="investment-badge">🟩 Ações</span>
-                                    <span class="investment-highlight">✨ Maior Potencial</span>
+                                    <i class="ph-duotone ph-chart-line-up" style="font-size: 36px; color: #D4AF37; --ph-duotone-secondary-color: rgba(16, 185, 129, 0.2); margin-right: 12px;"></i>
+                                    <div>
+                                        <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 600; color: #E4E4E4; margin: 0; letter-spacing: -0.01em;">Ações</h3>
+                                        <span class="investment-highlight">✨ Maior Potencial</span>
+                                    </div>
                                 </div>
-                                <p class="investment-description">
+                                <p class="investment-description" style="color: #9CA3AF;">
                                     Você compra "pedacinhos" de empresas e participa dos resultados.
                                 </p>
                                 <ul class="investment-list">
@@ -1030,10 +1215,13 @@
                             <!-- BDRs -->
                             <div class="investment-card avancado">
                                 <div class="investment-header">
-                                    <span class="investment-badge">🟩 BDRs</span>
-                                    <span class="investment-level">🌎 Internacional</span>
+                                    <i class="ph-duotone ph-globe-hemisphere-west" style="font-size: 36px; color: #D4AF37; --ph-duotone-secondary-color: rgba(16, 185, 129, 0.2); margin-right: 12px;"></i>
+                                    <div>
+                                        <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 600; color: #E4E4E4; margin: 0; letter-spacing: -0.01em;">BDRs</h3>
+                                        <span class="investment-level">🌎 Internacional</span>
+                                    </div>
                                 </div>
-                                <p class="investment-description">
+                                <p class="investment-description" style="color: #9CA3AF;">
                                     Brazilian Depositary Receipts — empresas estrangeiras na B3.
                                 </p>
                                 <ul class="investment-list">
@@ -1048,7 +1236,7 @@
 
                     <!-- POR ONDE COMEÇAR -->
                     <div class="info-section highlight-section">
-                        <h2 class="info-section-title">🟧 Por onde começar? (Recomendação INVLAB)</h2>
+                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 56px; margin-bottom: 36px; letter-spacing: -0.01em;">🟧 Por onde começar? (Recomendação INVLAB)</h2>
                         
                         <div class="investment-types">
                             <!-- ETFs - Primeiro -->
@@ -1095,7 +1283,7 @@
 
                     <!-- COMO INVESTIR -->
                     <div class="info-section">
-                        <h2 class="info-section-title">🟩 Como investir em Renda Variável</h2>
+                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 56px; margin-bottom: 36px; letter-spacing: -0.01em;">🟩 Como investir em Renda Variável</h2>
                         
                         <div class="steps-list">
                             <div class="step-item">
@@ -1150,7 +1338,7 @@
 
                     <!-- AVISOS IMPORTANTES -->
                     <div class="info-section highlight-section">
-                        <h2 class="info-section-title">⚠️ Atenção: Renda Variável tem riscos</h2>
+                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 56px; margin-bottom: 36px; letter-spacing: -0.01em;">⚠️ Atenção: Renda Variável tem riscos</h2>
                         
                         <div class="investment-types">
                             <div class="investment-card avancado">
@@ -1425,9 +1613,11 @@
                 <section class="section-educational">
                 <article class="article-content">
                     <!-- Título Principal -->
-                    <h1 class="article-title">Criptoativos: O que São, Riscos e Onde Entram na sua Carteira</h1>
+                    <h1 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; font-weight: 800; color: #D4AF37; text-align: center; margin-bottom: 24px; letter-spacing: -0.02em; line-height: 1.2;">
+                        🔐 Criptoativos: O que São, Riscos e Onde Entram na sua Carteira
+                    </h1>
                     
-                    <p class="article-lead">
+                    <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(16, 185, 129, 0.65); text-align: center; line-height: 1.8; margin-bottom: 48px; max-width: 900px; margin-left: auto; margin-right: auto;">
                         Entenda o que são criptoativos, como funcionam, quais são seus principais riscos e por que, no INVLAB, 
                         eles são tratados como uma camada avançada da carteira — e não como ponto de partida.
                     </p>
@@ -1450,7 +1640,7 @@
 
                     <!-- Seção 1: Antes de falar de cripto -->
                     <section class="article-section">
-                        <h2>🧱 Antes de falar de cripto: a base da casa</h2>
+                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 56px; margin-bottom: 36px; letter-spacing: -0.01em;">🧱 Antes de falar de cripto: a base da casa</h2>
 
                         <p>Criptoativos podem ser interessantes, mas <strong>não são o começo da jornada</strong>. 
                         Antes de pensar em Bitcoin, Ethereum ou qualquer outro ativo digital, é importante que você:</p>
@@ -1479,7 +1669,7 @@
 
                     <!-- Seção 2: O que são criptoativos -->
                     <section class="article-section">
-                        <h2>🔐 O que são criptoativos?</h2>
+                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 56px; margin-bottom: 36px; letter-spacing: -0.01em;">🔐 O que são criptoativos?</h2>
 
                         <p>Criptoativos são <strong>ativos digitais</strong> que utilizam tecnologias como 
                         <strong>blockchain</strong> e <strong>criptografia</strong> para registrar, validar e 
@@ -1489,27 +1679,35 @@
 
                         <div class="inv-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 20px;">
                             <div class="inv-card fundamentos">
-                                <div class="inv-card-icon" style="font-size: 28px;">₿</div>
-                                <h4 class="inv-card-title">Moedas digitais</h4>
-                                <p class="inv-card-description">Ativos como o Bitcoin, usados como reserva de valor ou meio de troca em alguns contextos.</p>
+                                <div class="inv-card-icon">
+                                    <i class="ph-duotone ph-currency-btc" style="font-size: 48px; color: #D4AF37; --ph-duotone-secondary-color: rgba(16, 185, 129, 0.2);"></i>
+                                </div>
+                                <h4 class="inv-card-title" style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 600; color: #E4E4E4; letter-spacing: -0.01em;">Moedas digitais</h4>
+                                <p class="inv-card-description" style="color: #9CA3AF;">Ativos como o Bitcoin, usados como reserva de valor ou meio de troca em alguns contextos.</p>
                             </div>
 
                             <div class="inv-card fundamentos">
-                                <div class="inv-card-icon" style="font-size: 28px;">⧫</div>
-                                <h4 class="inv-card-title">Plataformas e contratos</h4>
-                                <p class="inv-card-description">Projetos como o Ethereum, que permitem a criação de contratos inteligentes e aplicações descentralizadas.</p>
+                                <div class="inv-card-icon">
+                                    <i class="ph-duotone ph-file-code" style="font-size: 48px; color: #D4AF37; --ph-duotone-secondary-color: rgba(16, 185, 129, 0.2);"></i>
+                                </div>
+                                <h4 class="inv-card-title" style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 600; color: #E4E4E4; letter-spacing: -0.01em;">Plataformas e contratos</h4>
+                                <p class="inv-card-description" style="color: #9CA3AF;">Projetos como o Ethereum, que permitem a criação de contratos inteligentes e aplicações descentralizadas.</p>
                             </div>
 
                             <div class="inv-card fundamentos">
-                                <div class="inv-card-icon" style="font-size: 28px;">💵</div>
-                                <h4 class="inv-card-title">Stablecoins</h4>
-                                <p class="inv-card-description">Criptoativos atrelados a moedas tradicionais (como o dólar), buscando reduzir a volatilidade.</p>
+                                <div class="inv-card-icon">
+                                    <i class="ph-duotone ph-coin" style="font-size: 48px; color: #D4AF37; --ph-duotone-secondary-color: rgba(16, 185, 129, 0.2);"></i>
+                                </div>
+                                <h4 class="inv-card-title" style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 600; color: #E4E4E4; letter-spacing: -0.01em;">Stablecoins</h4>
+                                <p class="inv-card-description" style="color: #9CA3AF;">Criptoativos atrelados a moedas tradicionais (como o dólar), buscando reduzir a volatilidade.</p>
                             </div>
 
                             <div class="inv-card fundamentos">
-                                <div class="inv-card-icon" style="font-size: 28px;">🧩</div>
-                                <h4 class="inv-card-title">Outros ativos digitais</h4>
-                                <p class="inv-card-description">Tokens diversos, NFTs e iniciativas de tokenização de ativos do mundo real.</p>
+                                <div class="inv-card-icon">
+                                    <i class="ph-duotone ph-puzzle-piece" style="font-size: 48px; color: #D4AF37; --ph-duotone-secondary-color: rgba(16, 185, 129, 0.2);"></i>
+                                </div>
+                                <h4 class="inv-card-title" style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem; font-weight: 600; color: #E4E4E4; letter-spacing: -0.01em;">Outros ativos digitais</h4>
+                                <p class="inv-card-description" style="color: #9CA3AF;">Tokens diversos, NFTs e iniciativas de tokenização de ativos do mundo real.</p>
                             </div>
                         </div>
 
@@ -1520,7 +1718,7 @@
 
                     <!-- Seção 3: Onde cripto entra na carteira -->
                     <section class="article-section">
-                        <h2>🗺️ Onde cripto entra na carteira?</h2>
+                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 56px; margin-bottom: 36px; letter-spacing: -0.01em;">🗺️ Onde cripto entra na carteira?</h2>
 
                         <p>Dentro do INVLAB, os criptoativos são vistos como uma <strong>camada adicional de risco</strong>, 
                         com potencial de retorno elevado, mas também sujeita a grandes oscilações.</p>
@@ -1566,7 +1764,7 @@
 
                     <!-- Seção 4: Principais riscos -->
                     <section class="article-section">
-                        <h2>⚠️ Principais riscos dos criptoativos</h2>
+                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 56px; margin-bottom: 36px; letter-spacing: -0.01em;">⚠️ Principais riscos dos criptoativos</h2>
 
                         <div class="tips-list">
                             <div class="tip-item">
@@ -1619,7 +1817,7 @@
 
                     <!-- Seção 5: Como começar com responsabilidade -->
                     <section class="article-section">
-                        <h2>🟩 Como começar em cripto com responsabilidade</h2>
+                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 56px; margin-bottom: 36px; letter-spacing: -0.01em;">🟩 Como começar em cripto com responsabilidade</h2>
 
                         <div class="steps-list">
                             <div class="step-item">
@@ -1833,5 +2031,30 @@
     <script defer src="assets/js/crypto-api.js"></script>
     <script defer src="assets/js/stock-api.js"></script>
     <script defer src="assets/js/invlab-carrossel-geral.js"></script>
+    
+    <!-- Botão Back to Top - INVLAB Premium -->
+    <button id="backToTop" aria-label="Voltar ao topo">
+        <i class="ph-bold ph-arrow-up"></i>
+    </button>
+    
+    <script>
+        // Back to Top - INVLAB Premium
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 </body>
 </html>

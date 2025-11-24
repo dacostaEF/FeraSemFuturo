@@ -37,8 +37,9 @@
 |----------|-----|---------|
 | **Ícones (linha)** | `#D4AF37` (Dourado) | Bordas dos ícones Phosphor |
 | **Ícones (preenchimento)** | `rgba(16, 185, 129, 0.2)` (Verde translúcido) | Interior dos ícones duotone |
-| **Títulos de Seção** | Degradê verde premium | "Por que o INVLAB é diferente?" |
+| **Títulos de Seção H1** | `#D4AF37` (Dourado) ⭐ PADRÃO ATUAL | "O que é Renda Fixa?" |
 | **Subtítulos** | `rgba(16, 185, 129, 0.65)` (Verde suave 65%) | "Seu laboratório para testar..." |
+| **Títulos H2** | `#D4AF37` (Dourado) | "Existem três formas principais" |
 | **Títulos de Cards (h3)** | `#E4E4E4` (Branco suave) | "Dados Reais do Mercado" |
 | **Descrições (p)** | `#9CA3AF` (Cinza) | Textos descritivos dos cards |
 | **Bordas de Cards (normal)** | `rgba(42, 127, 255, 0.2)` (Azul translúcido) | Borda padrão |
@@ -400,17 +401,46 @@ p, span, a, li, label, input, textarea, select, button {
 
 ## 📐 6. TÍTULOS E SUBTÍTULOS
 
-### 6.1 Título de Seção com Degradê Premium
+### 6.1 Título de Seção H1 - Padrão Atual (Dourado)
+
+⭐ **PADRÃO OFICIAL INVLAB (usar em todas as páginas):**
 
 ```html
-<h2 class="section-title-premium">💎 Por que o INVLAB é diferente?</h2>
+<h1 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; font-weight: 800; color: #D4AF37; text-align: center; margin-bottom: 24px; letter-spacing: -0.02em; line-height: 1.2;">
+    📘 O que é Renda Fixa?
+</h1>
 ```
 
 ```css
+.section-title-invlab {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #D4AF37;                                      /* ⭐ DOURADO - Padrão oficial */
+    text-align: center;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+```
+
+---
+
+### 6.1.1 Título com Degradê Verde (ALTERNATIVA - não usar agora)
+
+💡 **Degradê verde bonito para uso futuro (comentado por enquanto):**
+
+```html
+<!-- ❌ NÃO USAR AGORA - Apenas para referência futura -->
+<!-- <h2 class="section-title-premium">💎 Por que o INVLAB é diferente?</h2> -->
+```
+
+```css
+/* ❌ DEGRADÊ VERDE - NÃO USAR AGORA (apenas preservado para futuro)
 .section-title-premium {
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 2rem;
-    font-weight: 800;                                     /* Peso forte - presença */
+    font-weight: 800;
     text-align: center;
     margin-bottom: 12px;
     
@@ -420,25 +450,58 @@ p, span, a, li, label, input, textarea, select, button {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     
-    letter-spacing: -0.02em;                              /* Kerning apertado */
+    letter-spacing: -0.02em;
+}
+*/
+```
+
+---
+
+### 6.2 Título H2 (Subtítulos de Seção)
+
+⭐ **PADRÃO OFICIAL INVLAB:**
+
+```html
+<h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 56px; margin-bottom: 36px; letter-spacing: -0.01em;">
+    💰 Existem três formas principais de remuneração
+</h2>
+```
+
+```css
+.section-subtitle-invlab {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #D4AF37;                                      /* ⭐ DOURADO */
+    text-align: center;
+    margin-top: 56px;
+    margin-bottom: 36px;
+    letter-spacing: -0.01em;
 }
 ```
 
-### 6.2 Subtítulo Premium
+### 6.3 Subtítulo (Texto após H1)
+
+⭐ **PADRÃO OFICIAL INVLAB:**
 
 ```html
-<p class="section-subtitle-premium">Seu laboratório para testar estratégias antes de investir de verdade.</p>
+<p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(16, 185, 129, 0.65); text-align: center; line-height: 1.8; margin-bottom: 32px; max-width: 900px; margin-left: auto; margin-right: auto;">
+    A renda fixa reúne investimentos em que as regras de remuneração são definidas no momento da aplicação.
+</p>
 ```
 
 ```css
 .section-subtitle-premium {
     font-family: 'Inter', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 400;
     text-align: center;
     color: rgba(16, 185, 129, 0.65);                      /* Verde suave 65% */
-    margin-bottom: 40px;
-    line-height: 1.6;
+    margin-bottom: 32px;
+    line-height: 1.8;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
 ```
 
@@ -1737,8 +1800,68 @@ Ao criar uma nova página de artigo, siga esta ordem:
 
 ---
 
-**Última atualização:** 23 de Novembro de 2025  
+---
+
+## 💡 21. OPÇÕES FUTURAS (ALTERNATIVAS COMENTADAS)
+
+### 21.1 Degradê Verde Premium (não usar agora)
+
+💚 **Degradê verde bonito preservado para uso futuro:**
+
+```css
+/* ❌ DEGRADÊ VERDE - NÃO É O PADRÃO ATUAL INVLAB
+ * Preservado para possível uso futuro em páginas especiais
+ * ou campanhas específicas
+ */
+
+/* Exemplo de uso (COMENTADO): */
+/*
+.titulo-degrade-verde {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    
+    background: linear-gradient(90deg, #10b981 0%, #34D399 50%, #10b981 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+*/
+
+/* ⭐ PADRÃO ATUAL (usar sempre): */
+.titulo-dourado-invlab {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #D4AF37;                          /* DOURADO - Padrão oficial */
+    text-align: center;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+```
+
+**Por que o degradê verde não é usado agora:**
+- ✅ O dourado é mais elegante e premium
+- ✅ Melhor contraste e legibilidade
+- ✅ Consistente com toda a identidade INVLAB
+- ✅ Funciona melhor em todas as páginas
+
+**Quando poderia usar o degradê verde no futuro:**
+- 💡 Páginas de campanha especial
+- 💡 Landing pages promocionais
+- 💡 Seções de destaque específicas
+- 💡 Eventos ou lançamentos
+
+---
+
+**Última atualização:** 24 de Novembro de 2024  
 **Status:** ✅ Testado e aprovado  
+**Padrão Atual:** H1 e H2 em DOURADO (#D4AF37)  
 **Páginas Completas:** `index.html`, `pages/metodologia.html`, `pages/guia_invlab.html`, `pages/artigo-perfil-investidor.html`  
 **Pronto para:** Expansão para todo o site
 
