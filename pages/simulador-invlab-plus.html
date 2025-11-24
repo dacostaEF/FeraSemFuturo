@@ -718,7 +718,7 @@
         <!-- HEADER PRINCIPAL -->
         <div class="header-main">
             <h1>⚡ INVLAB+ | Simulador Universal</h1>
-            <div class="subtitle">Compare até 6 investimentos com cenários realistas e análise profunda</div>
+            <div class="subtitle">Simule, compare e visualize o desempenho de até 6 investimentos com cenários realistas.</div>
         </div>
 
         <!-- PAINEL DE ENTRADA COMPACTO -->
@@ -865,7 +865,6 @@
     </footer>
 
     <!-- JAVASCRIPT DO SIMULADOR -->
-    <script src="../assets/js/invlab-carrossel.js"></script>
     <script>
 let cenarioAtual = 'base';
 let investimentos = [
@@ -1220,8 +1219,11 @@ async function simular() {
             renderGrafico(datasets, meses);
             
         } catch (error) {
-            console.error('Erro na simulação:', error);
-            alert('Ocorreu um erro durante a simulação. Tente novamente.');
+            console.error('🚨 ERRO DETALHADO NA SIMULAÇÃO:', error);
+            console.error('Stack trace:', error.stack);
+            console.error('Investimentos atuais:', investimentos);
+            console.error('Cenário atual:', cenarioAtual);
+            alert(`Ocorreu um erro durante a simulação.\n\nDetalhes técnicos: ${error.message}\n\nVerifique o console para mais informações.`);
         } finally {
             // Esconder loading
             document.getElementById('loading').style.display = 'none';
@@ -1330,11 +1332,14 @@ function renderGrafico(datasets, meses) {
         container.insertBefore(chartDiv, resultadosEl);
     }
     
+    // Destruir gráfico anterior (se existir)
     if (window.graficoObj) {
         window.graficoObj.destroy();
+        window.graficoObj = null;
     }
     
-    const ctx = document.getElementById('grafico');
+    const canvas = document.getElementById('grafico');
+    const ctx = canvas.getContext('2d');
     
     // Criar labels mais legíveis (apenas anos)
     const labels = [];
@@ -1383,21 +1388,6 @@ function renderGrafico(datasets, meses) {
                                 context.parsed.y.toLocaleString('pt-BR', {minimumFractionDigits: 2});
                         }
                     }
-                },
-                zoom: {
-                    pan: {
-                        enabled: true,
-                        mode: 'x'
-                    },
-                    zoom: {
-                        wheel: {
-                            enabled: true,
-                        },
-                        pinch: {
-                            enabled: true
-                        },
-                        mode: 'x'
-                    }
                 }
             },
             scales: {
@@ -1428,8 +1418,7 @@ function renderGrafico(datasets, meses) {
                 intersect: false,
                 mode: 'index'
             }
-        },
-        plugins: [Chart.Zoom]
+        }
     });
 }
 
@@ -1497,10 +1486,14 @@ function exportarSimulacao() {
     <script src="../assets/js/stock-api.js"></script>
     <script src="../assets/js/invlab-carrossel.js"></script>
     <script>
-        // Inicializar carrossel INVLAB
-        document.addEventListener('DOMContentLoaded', () => {
-            const carrossel = new InvlabCarrossel('invlab-carousel-container');
-        });
+        // Inicializar carrossel INVLAB após garantir que todos os scripts foram carregados
+        setTimeout(() => {
+            if (typeof InvlabCarrossel !== 'undefined') {
+                const carrossel = new InvlabCarrossel('invlab-carousel-container');
+            } else {
+                console.warn('⚠️ InvlabCarrossel não foi carregado. Verifique se o arquivo invlab-carrossel.js está acessível.');
+            }
+        }, 100);
     </script>
 
     <!-- ============================================

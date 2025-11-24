@@ -22,12 +22,25 @@ class InvlabCarousel {
                 return;
             }
 
-            // 🚀 OTIMIZAÇÃO: Renderiza IMEDIATAMENTE com dados de fallback
+            // 🚀 OTIMIZAÇÃO: Renderiza IMEDIATAMENTE com dados de fallback (CURADORIA PROFISSIONAL)
             this.data = {
-                selic: 11.25, ipca: 4.5, ipca15: 4.3, igpm: 3.8,
-                cdi: 10.65, poupanca: 0.5, dolar: 4.95, euro: 5.35,
-                bitcoin: 285000, ethereum: 15800, ibovespa: 125000,
-                bova11: 11.2, ivvb11: 15.3, smal11: 13.5, divo11: 12.1
+                // Taxas e Indicadores Macro (anualizadas)
+                selic: 12.25,           // % a.a
+                cdi: 12.15,             // % a.a
+                ipca: 4.50,             // acumulado 12m
+                igpm: -0.20,            // acumulado 12m
+                poupanca: 8.00,         // % a.a simulado pela SELIC
+                dolar: 6.2,             // variação % 12m
+                
+                // Renda Variável (performance 12 meses)
+                ibovespa: 9.0,          // % 12m
+                ivvb11: 15.3,           // % 12m
+                smal11: 13.5,           // % 12m
+                divo11: 12.1,           // % 12m
+                
+                // Criptoativos (performance 12 meses)
+                bitcoin: 92,            // % 12m
+                ethereum: 54            // % 12m
             };
             
             // Renderiza primeiro (instantâneo)
@@ -142,109 +155,103 @@ class InvlabCarousel {
     createSlides() {
         // Formato simplificado: apenas "Nome: Valor"
         
-        // SLIDE 1 - SELIC
+        // ============================================
+        // 📊 MACROECONOMIA E RENDA FIXA (anualizadas)
+        // ============================================
+        
+        // SLIDE 1 - SELIC (a.a)
         const selicSlide = {
             type: 'selic',
             label: 'SELIC',
-            value: `${this.bcbApi.formatPercent(this.data.selic, 2)}`
+            value: `${this.bcbApi.formatPercent(this.data.selic, 2)} a.a`
         };
 
-        // SLIDE 2 - CDI
+        // SLIDE 2 - CDI (a.a)
         const cdiSlide = {
             type: 'cdi',
             label: 'CDI',
-            value: `${this.bcbApi.formatPercent(this.data.cdi, 2)}`
+            value: `${this.bcbApi.formatPercent(this.data.cdi, 2)} a.a`
         };
 
-        // SLIDE 3 - IPCA
+        // SLIDE 3 - IPCA (acumulado 12 meses)
         const ipcaSlide = {
             type: 'ipca',
             label: 'IPCA',
-            value: `${this.bcbApi.formatPercent(this.data.ipca, 2)}`
+            value: `${this.bcbApi.formatPercent(this.data.ipca, 2)} (12m)`
         };
 
-        // SLIDE 4 - IGP-M
+        // SLIDE 4 - IGP-M (acumulado 12 meses)
         const igpmSlide = {
             type: 'igpm',
             label: 'IGP-M',
-            value: `${this.bcbApi.formatPercent(this.data.igpm || 3.8, 2)}`
+            value: `${this.bcbApi.formatPercent(this.data.igpm, 2)} (12m)`
         };
 
-        // SLIDE 5 - POUPANÇA
-        const poupancaAnual = this.bcbApi.calcularPoupancaAnual(this.data.selic, this.data.poupanca);
+        // SLIDE 5 - POUPANÇA (a.a)
         const poupancaSlide = {
             type: 'poupanca',
             label: 'Poupança',
-            value: `${this.bcbApi.formatPercent(poupancaAnual, 2)}`
+            value: `${this.bcbApi.formatPercent(this.data.poupanca, 2)} a.a`
         };
 
-        // SLIDE 6 - DÓLAR
+        // SLIDE 6 - DÓLAR (variação 12 meses)
         const dolarSlide = {
             type: 'dolar',
             label: 'Dólar',
-            value: `R$ ${this.bcbApi.formatCurrency(this.data.dolar, 2)}`
+            value: `${this.data.dolar >= 0 ? '+' : ''}${this.bcbApi.formatPercent(this.data.dolar, 1)} (12m)`
         };
 
-        // SLIDE 7 - EURO
-        const euroSlide = {
-            type: 'euro',
-            label: 'Euro',
-            value: `R$ ${this.bcbApi.formatCurrency(this.data.euro || 6.20, 2)}`
-        };
-
-        // SLIDE 8 - IBOVESPA
-        const ibovespaValue = this.data.ibovespa || 125000;
+        // ============================================
+        // 📈 RENDA VARIÁVEL (performance 12 meses)
+        // ============================================
+        
+        // SLIDE 7 - IBOVESPA (12m)
         const ibovespaSlide = {
             type: 'ibovespa',
             label: 'IBOVESPA',
-            value: `${this.stockApi ? this.stockApi.formatIbovespa(ibovespaValue) : ibovespaValue.toLocaleString('pt-BR')} pts`
+            value: `+${this.bcbApi.formatPercent(this.data.ibovespa, 1)} (12m)`
         };
 
-        // SLIDE 9 - BITCOIN
-        const bitcoinValue = this.data.bitcoin || 285000;
-        const bitcoinSlide = {
-            type: 'bitcoin',
-            label: 'Bitcoin',
-            value: `${this.cryptoApi ? this.cryptoApi.formatCryptoPrice(bitcoinValue) : 'R$ ' + Math.floor(bitcoinValue/1000) + 'k'}`
-        };
-
-        // SLIDE 10 - ETHEREUM
-        const ethereumValue = this.data.ethereum || 15800;
-        const ethereumSlide = {
-            type: 'ethereum',
-            label: 'Ethereum',
-            value: `${this.cryptoApi ? this.cryptoApi.formatCryptoPrice(ethereumValue) : 'R$ ' + Math.floor(ethereumValue/1000) + 'k'}`
-        };
-
-        // SLIDE 11 - BOVA11 (ETF Ibovespa)
-        const bova11Slide = {
-            type: 'bova11',
-            label: 'BOVA11',
-            value: `${this.bcbApi.formatPercent(this.data.bova11 || 11.2, 1)} (12m)`
-        };
-
-        // SLIDE 12 - IVVB11 (ETF S&P 500)
+        // SLIDE 8 - IVVB11 (S&P 500 - 12m)
         const ivvb11Slide = {
             type: 'ivvb11',
             label: 'IVVB11',
-            value: `${this.bcbApi.formatPercent(this.data.ivvb11 || 15.3, 1)} (12m)`
+            value: `+${this.bcbApi.formatPercent(this.data.ivvb11, 1)} (12m)`
         };
 
-        // SLIDE 13 - SMAL11 (Small Caps)
+        // SLIDE 9 - SMAL11 (Small Caps - 12m)
         const smal11Slide = {
             type: 'smal11',
             label: 'SMAL11',
-            value: `${this.bcbApi.formatPercent(this.data.smal11 || 13.5, 1)} (12m)`
+            value: `+${this.bcbApi.formatPercent(this.data.smal11, 1)} (12m)`
         };
 
-        // SLIDE 14 - DIVO11 (Dividendos)
+        // SLIDE 10 - DIVO11 (Dividendos - 12m)
         const divo11Slide = {
             type: 'divo11',
             label: 'DIVO11',
-            value: `${this.bcbApi.formatPercent(this.data.divo11 || 12.1, 1)} (12m)`
+            value: `+${this.bcbApi.formatPercent(this.data.divo11, 1)} (12m)`
         };
 
-        return [selicSlide, cdiSlide, ipcaSlide, igpmSlide, poupancaSlide, dolarSlide, euroSlide, ibovespaSlide, bova11Slide, ivvb11Slide, smal11Slide, divo11Slide, bitcoinSlide, ethereumSlide];
+        // ============================================
+        // ₿ CRIPTOATIVOS (performance 12 meses)
+        // ============================================
+        
+        // SLIDE 11 - BITCOIN (12m)
+        const bitcoinSlide = {
+            type: 'bitcoin',
+            label: 'Bitcoin',
+            value: `+${this.bcbApi.formatPercent(this.data.bitcoin, 0)} (12m)`
+        };
+
+        // SLIDE 12 - ETHEREUM (12m)
+        const ethereumSlide = {
+            type: 'ethereum',
+            label: 'Ethereum',
+            value: `+${this.bcbApi.formatPercent(this.data.ethereum, 0)} (12m)`
+        };
+
+        return [selicSlide, cdiSlide, ipcaSlide, igpmSlide, poupancaSlide, dolarSlide, ibovespaSlide, ivvb11Slide, smal11Slide, divo11Slide, bitcoinSlide, ethereumSlide];
     }
 
     createSlide(slideData) {
