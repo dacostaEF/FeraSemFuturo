@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- Atualizado em 2024-11-24 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FGC – Fundo Garantidor de Créditos | INVLAB</title>
@@ -18,15 +19,98 @@
     <!-- Meta Description -->
     <meta name="description" content="Entenda o FGC (Fundo Garantidor de Créditos), a proteção automática que salva seu dinheiro quando bancos quebram. Limites, estratégias e casos reais.">
     
+    <!-- Google Fonts INVLAB -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../assets/css/inv-design-system.css">
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/invlab-icons.css">
     <link rel="stylesheet" href="../assets/css/artigo-styles.css">
     <!-- INVLAB Carrossel - Indicadores Renda Fixa -->
     <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
     
     <style>
+        /* Override INVLAB: Article Meta */
+        .article-badge {
+            background: rgba(212, 175, 55, 0.15) !important;
+            color: #D4AF37 !important;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .article-time {
+            color: rgba(16, 185, 129, 0.85) !important;
+        }
+        
+        /* Correção de sobreposição: Header fixo + breadcrumb + Article Meta */
+        .article-meta {
+            margin-top: 110px !important;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 1200px;
+            padding-left: 20px;
+            padding-right: 20px;
+            position: relative;
+            z-index: 5;
+        }
+        
+        /* Primeiro bloco da página (primeira .section) */
+        .section:first-of-type {
+            margin-top: 30px;
+        }
+        
+        /* Botão Voltar ao Topo Premium INVLAB */
+        #backToTop {
+            display: none;
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 9999;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+            color: #0D0D0D;
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 50%;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 52px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease-in-out;
+            opacity: 0;
+        }
+        
+        #backToTop.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+        
+        #backToTop:hover {
+            background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.6);
+            border-color: rgba(16, 185, 129, 0.6);
+        }
+        
+        @media (max-width: 768px) {
+            #backToTop {
+                width: 48px;
+                height: 48px;
+                font-size: 24px;
+                line-height: 44px;
+                bottom: 24px;
+                right: 24px;
+            }
+        }
+        
         /* Estilo específico da página FGC */
         .section {
             margin: 40px auto;
@@ -227,16 +311,22 @@
         </div>
     </nav>
 
+    <!-- Article Meta -->
+    <div class="article-meta" style="text-align: left; margin-bottom: 24px;">
+        <span class="article-badge">🛡️ Módulo: Primeiros Passos - FGC</span>
+        <span class="article-time">⏱️ 12 min</span>
+    </div>
+
     <!-- Conteúdo Principal -->
-    <div class="section">
-        <h2>🛡️ FGC – Fundo Garantidor de Créditos</h2>
+    <div class="section" style="margin-top: 40px;">
+        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em; text-align: center;">🛡️ FGC – Fundo Garantidor de Créditos</h2>
         <p>O FGC é uma proteção automática criada para garantir o seu dinheiro caso um banco ou financeira QUEBRE. 
         Ele já salvou milhões de investidores no Brasil – e entender como funciona é parte essencial da educação financeira.</p>
     </div>
 
     <!-- Quanto protege -->
     <div class="section">
-        <h2>💰 Quanto o FGC protege?</h2>
+        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em; text-align: center;">💰 Quanto o FGC protege?</h2>
         <p>A proteção segue regras simples e importantes para sua segurança:</p>
 
         <div class="highlight-box">
@@ -250,7 +340,7 @@
 
     <!-- O que cobre -->
     <div class="section">
-        <h2>📘 O que o FGC cobre?</h2>
+        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em; text-align: center;">📘 O que o FGC cobre?</h2>
 
         <div class="info-grid">
             <div class="info-card">
@@ -282,7 +372,7 @@
 
     <!-- Instituições -->
     <div class="section">
-        <h2>🏦 Quem é protegido pelo FGC?</h2>
+        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em; text-align: center;">🏦 Quem é protegido pelo FGC?</h2>
 
         <div class="info-grid">
             <div class="info-card">
@@ -326,7 +416,7 @@
 
     <!-- Conglomerado -->
     <div class="section">
-        <h2>📚 Entenda o Conglomerado Bancário</h2>
+        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em; text-align: center;">📚 Entenda o Conglomerado Bancário</h2>
         <p>Se dois bancos fazem parte do mesmo grupo econômico (conglomerado), o FGC considera como UMA única instituição. <span style="color: #3B82F6; cursor: help;" title="Conglomerado = empresas diferentes, mas pertencentes ao mesmo grupo econômico. O limite do FGC é compartilhado.">ℹ️</span></p>
 
         <div class="success-box" style="padding: 20px 24px;">
@@ -376,7 +466,7 @@
 
     <!-- Como verificar -->
     <div class="section">
-        <h2>🔍 Como verificar se uma instituição tem FGC?</h2>
+        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em; text-align: center;">🔍 Como verificar se uma instituição tem FGC?</h2>
         
         <div class="success-box" style="background: rgba(16, 185, 129, 0.15); border-left: 5px solid #10b981; padding: 20px 24px;">
             <h4 style="margin-top: 0; color: #10B981;">🟩 Verifique em 10 segundos se o seu banco tem FGC</h4>
@@ -392,7 +482,7 @@
 
     <!-- Prazo de ressarcimento -->
     <div class="section">
-        <h2>⏱️ Quanto tempo o FGC leva para pagar?</h2>
+        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em; text-align: center;">⏱️ Quanto tempo o FGC leva para pagar?</h2>
         
         <div class="info-grid">
             <div class="info-card">
@@ -413,7 +503,7 @@
 
     <!-- Caso Real Atual -->
     <div class="section">
-        <h2>📈 Caso Real: Banco Master (Novembro de 2025)</h2>
+        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em; text-align: center;">📈 Caso Real: Banco Master (Novembro de 2025)</h2>
         <p>Em <strong>18 de novembro de 2025</strong>, o Banco Central decretou a liquidação extrajudicial do Banco Master, após identificar irregularidades na emissão de títulos. Este é o maior acionamento do FGC já registrado.</p>
 
         <div class="highlight-box" style="background: rgba(239,68,68,0.08); border: 2px solid rgba(239,68,68,0.3); padding: 30px; text-align: center; margin: 25px 0;">
@@ -453,7 +543,7 @@
 
     <!-- Tabela rápida de instituições -->
     <div class="section">
-        <h2>🏦 Tabela rápida: Tem FGC?</h2>
+        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em; text-align: center;">🏦 Tabela rápida: Tem FGC?</h2>
         
         <div style="overflow-x: auto;">
             <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
@@ -499,7 +589,7 @@
 
     <!-- E as Corretoras? -->
     <div class="section">
-        <h2>🏢 E as Corretoras? XP, Rico, Clear têm FGC?</h2>
+        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em; text-align: center;">🏢 E as Corretoras? XP, Rico, Clear têm FGC?</h2>
         
         <div class="alert-box" style="padding: 20px 24px;">
             <p style="margin: 0 0 16px 0;"><strong>⚠️ Atenção: Corretoras NÃO têm FGC!</strong></p>
@@ -599,7 +689,7 @@
 
     <!-- Estratégia -->
     <div class="section">
-        <h2>🎯 Estratégia INVLAB</h2>
+        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em; text-align: center;">🎯 Estratégia INVLAB</h2>
         <ul style="padding-left: 24px; margin-top: 16px; list-style: none;">
             <li style="margin-bottom: 12px;">✔ Coloque até R$ 250 mil por instituição</li>
             <li style="margin-bottom: 12px;">✔ Para valores maiores, use vários bancos</li>
@@ -609,18 +699,24 @@
     </div>
 
     <!-- SIMULADOR FGC -->
-    <div class="section">
-        <h2>🧮 Simulador de Proteção FGC</h2>
-        <p style="margin-bottom: 20px; color: #CBD5E1;">Digite seus valores investidos em até 3 bancos diferentes e descubra quanto está protegido pelo FGC:</p>
+    <div class="section" style="position: relative; background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(16, 185, 129, 0.05)); border: 2px solid rgba(212, 175, 55, 0.3); border-radius: 16px; padding: 40px 30px; overflow: hidden;">
+        
+        <!-- Logo Marca D'água -->
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.03; z-index: 0; pointer-events: none;">
+            <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB" style="width: 400px; height: auto; filter: grayscale(1) brightness(1.5);">
+        </div>
+        
+        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em; text-align: center; position: relative; z-index: 1;">🧮 Simulador de Proteção FGC</h2>
+        <p style="margin-bottom: 20px; color: #CBD5E1; position: relative; z-index: 1;">Digite seus valores investidos em até 3 bancos diferentes e descubra quanto está protegido pelo FGC:</p>
 
-        <div style="display: grid; gap: 16px; margin-bottom: 20px;">
+        <div style="display: grid; gap: 16px; margin-bottom: 20px; position: relative; z-index: 1;">
             <div>
                 <label for="banco1" style="display: block; margin-bottom: 6px; color: #94A3B8; font-size: 0.9rem; font-weight: 600;">🏦 Banco 1 (R$)</label>
                 <input 
                     id="banco1" 
                     type="number" 
                     placeholder="Ex: 200000" 
-                    style="width: 100%; padding: 14px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #E2E8F0; font-size: 1rem;"
+                    style="width: 100%; padding: 14px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #E2E8F0; font-size: 1rem; position: relative; z-index: 2;"
                 >
             </div>
             <div>
@@ -629,7 +725,7 @@
                     id="banco2" 
                     type="number" 
                     placeholder="Ex: 150000" 
-                    style="width: 100%; padding: 14px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #E2E8F0; font-size: 1rem;"
+                    style="width: 100%; padding: 14px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #E2E8F0; font-size: 1rem; position: relative; z-index: 2;"
                 >
             </div>
             <div>
@@ -638,14 +734,14 @@
                     id="banco3" 
                     type="number" 
                     placeholder="Ex: 100000" 
-                    style="width: 100%; padding: 14px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #E2E8F0; font-size: 1rem;"
+                    style="width: 100%; padding: 14px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #E2E8F0; font-size: 1rem; position: relative; z-index: 2;"
                 >
             </div>
         </div>
 
         <button 
             onclick="simularFGC()" 
-            style="width: 100%; padding: 16px; border-radius: 10px; background: linear-gradient(135deg, #10b981, #059669); color: white; font-weight: 700; font-size: 1.05rem; cursor: pointer; border: none; transition: transform 0.2s; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);"
+            style="width: 100%; padding: 16px; border-radius: 10px; background: linear-gradient(135deg, #10b981, #059669); color: white; font-weight: 700; font-size: 1.05rem; cursor: pointer; border: none; transition: transform 0.2s; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); position: relative; z-index: 2;"
             onmouseover="this.style.transform='translateY(-2px)'"
             onmouseout="this.style.transform='translateY(0)'"
         >
@@ -654,13 +750,13 @@
 
         <div 
             id="resultadoFGC" 
-            style="margin-top: 24px; padding: 24px; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 12px; display: none;"
+            style="margin-top: 24px; padding: 24px; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 12px; display: none; position: relative; z-index: 2;"
         >
             <h4 style="color: #3B82F6; margin: 0 0 16px 0; font-size: 1.2rem;">📊 Resultado da Simulação</h4>
             <div id="resultadoConteudo"></div>
         </div>
 
-        <div style="margin-top: 20px; padding: 16px; background: rgba(139, 92, 246, 0.08); border-left: 4px solid #8B5CF6; border-radius: 8px;">
+        <div style="margin-top: 20px; padding: 16px; background: rgba(139, 92, 246, 0.08); border-left: 4px solid #8B5CF6; border-radius: 8px; position: relative; z-index: 1;">
             <p style="margin: 0; font-size: 0.9rem; color: #CBD5E1;">
                 <strong style="color: #A78BFA;">💡 Dica:</strong> Diversificar entre bancos é a melhor estratégia para proteger grandes patrimônios. Cada instituição oferece R$ 250 mil de proteção FGC.
             </p>
@@ -669,7 +765,7 @@
 
     <!-- FAQ -->
     <div class="section">
-        <h2>❓ Perguntas Frequentes (FAQ)</h2>
+        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; margin-top: 48px; margin-bottom: 20px; letter-spacing: -0.01em; text-align: center;">❓ Perguntas Frequentes (FAQ)</h2>
         
         <details style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; margin-bottom: 12px; cursor: pointer;">
             <summary style="font-weight: 600; color: #CBD5E1; cursor: pointer; list-style: none;">
@@ -804,112 +900,155 @@
         </details>
     </div>
 
-    <!-- Voltar ao início -->
-    <div class="callout callout-success" style="margin: 40px auto; max-width: 1200px;">
-        <div class="callout-icon">🏠</div>
-        <div class="callout-content">
-            <h3>Voltar para o início</h3>
-            <p>Continue sua jornada de aprendizado!</p>
-            <button class="btn-primary" onclick="window.location.href='../index.html#primeiros-passos'">
-                📚 Voltar para Primeiros Passos
-            </button>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer style="background: rgba(15, 23, 42, 0.9); border-top: 1px solid rgba(59, 130, 246, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+    <!-- Footer Premium INVLAB -->
+    <footer style="background: #0D0D0D; border-top: 1px solid rgba(212, 175, 55, 0.25); margin-top: 60px; padding: 60px 20px 30px;">
         <div class="content-wrapper-wide">
-            <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
-                <!-- Coluna 1: INVLAB -->
+            
+            <!-- Logo e Descrição -->
+            <div style="text-align: center; margin-bottom: 50px;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB" style="height: 42px; margin-bottom: 16px; filter: brightness(1.15) drop-shadow(0 2px 8px rgba(212, 175, 55, 0.35)) drop-shadow(0 0 12px rgba(212, 175, 55, 0.15));">
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: rgba(255, 255, 255, 0.7); max-width: 600px; margin: 0 auto;">
+                    Laboratório educacional de investimentos.<br>
+                    Sem venda de produtos, sem comissões, sem viés comercial.
+                </p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px; margin-bottom: 40px;">
+                
+                <!-- Coluna 1: Renda Fixa -->
                 <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
-                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">
-                        Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.
-                    </p>
-                    <a href="guia_invlab.html" style="color: #3B82F6; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
-                        🧭 Guia do INVLAB →
-                    </a>
-                </div>
-
-                <!-- Coluna 2: Renda Fixa -->
-                <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="poupanca.html" style="color: #CBD5E1; text-decoration: none;">💰 Poupança</a></li>
-                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 CDBs</a></li>
-                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
-                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ LCI/LCA</a></li>
-                        <li><a href="fgc.html" style="color: #CBD5E1; text-decoration: none;">🛡️ FGC - Proteção</a></li>
+                    <h4 style="font-family: 'Playfair Display', Georgia, serif; color: #D4AF37; margin-bottom: 16px; font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em;">Renda Fixa</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.875rem; line-height: 2;">
+                        <li><a href="poupanca.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🏛️ LCI/LCA</a></li>
+                        <li><a href="fgc.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🛡️ FGC</a></li>
                     </ul>
                 </div>
 
-                <!-- Coluna 3: Renda Variável -->
+                <!-- Coluna 2: Renda Variável -->
                 <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="../index.html#renda-variavel" style="color: #CBD5E1; text-decoration: none;">📈 Introdução</a></li>
-                        <li><a href="acoes.html" style="color: #CBD5E1; text-decoration: none;">📊 Ações</a></li>
-                        <li><a href="etfs.html" style="color: #CBD5E1; text-decoration: none;">🎯 ETFs</a></li>
-                        <li><a href="fiis.html" style="color: #CBD5E1; text-decoration: none;">🏢 FIIs</a></li>
+                    <h4 style="font-family: 'Playfair Display', Georgia, serif; color: #D4AF37; margin-bottom: 16px; font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em;">Renda Variável</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.875rem; line-height: 2;">
+                        <li><a href="../index.html#renda-variavel" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">📈 Introdução</a></li>
+                        <li><a href="acoes.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">📊 Ações</a></li>
+                        <li><a href="etfs.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">💵 ETFs</a></li>
+                        <li><a href="fiis.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🏢 FIIs</a></li>
                     </ul>
                 </div>
 
-                <!-- Coluna 4: Criptoativos -->
+                <!-- Coluna 3: Criptoativos -->
                 <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Criptoativos</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="../index.html#criptoativos" style="color: #CBD5E1; text-decoration: none;">🔐 Introdução</a></li>
-                        <li><a href="bitcoin.html" style="color: #CBD5E1; text-decoration: none;">₿ Bitcoin</a></li>
-                        <li><a href="stablecoins.html" style="color: #CBD5E1; text-decoration: none;">💵 Stablecoins</a></li>
-                        <li><a href="blockchain.html" style="color: #CBD5E1; text-decoration: none;">⛓️ Blockchain</a></li>
-                        <li><a href="cbdc.html" style="color: #CBD5E1; text-decoration: none;">🏛️ CBDCs</a></li>
+                    <h4 style="font-family: 'Playfair Display', Georgia, serif; color: #D4AF37; margin-bottom: 16px; font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em;">Criptoativos</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.875rem; line-height: 2;">
+                        <li><a href="../index.html#criptoativos" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🔐 Introdução</a></li>
+                        <li><a href="bitcoin.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">₿ Bitcoin</a></li>
+                        <li><a href="ethereum.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">⧫ Ethereum</a></li>
+                        <li><a href="stablecoins.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">💵 Stablecoins</a></li>
+                        <li><a href="blockchain.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">⛓️ Blockchain</a></li>
                     </ul>
                 </div>
 
-                <!-- Coluna 5: Outros Investimentos -->
+                <!-- Coluna 4: Ferramentas -->
                 <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Outros Investimentos</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="../index.html#outros-investimentos" style="color: #CBD5E1; text-decoration: none;">💎 Introdução</a></li>
-                        <li><a href="ganhos-come-cotas.html" style="color: #CBD5E1; text-decoration: none;">🍽️ Come-cotas</a></li>
-                        <li><a href="ganhos-iof-regressivo.html" style="color: #CBD5E1; text-decoration: none;">📉 IOF Regressivo</a></li>
-                        <li><a href="ganhos-inflacao.html" style="color: #CBD5E1; text-decoration: none;">📊 Inflação</a></li>
+                    <h4 style="font-family: 'Playfair Display', Georgia, serif; color: #D4AF37; margin-bottom: 16px; font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em;">Ferramentas</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.875rem; line-height: 2;">
+                        <li><a href="simulador-cdbs.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🏦 Simulador CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🇧🇷 Simulador Tesouro</a></li>
+                        <li><a href="simulador-lci-lca.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🏛️ Simulador LCI/LCA</a></li>
+                        <li><a href="calculadora.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🧮 Calculadora</a></li>
                     </ul>
                 </div>
 
-                <!-- Coluna 6: Ferramentas -->
+                <!-- Coluna 5: Guia -->
                 <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Ferramentas</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 Simulador CDBs</a></li>
-                        <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Simulador Tesouro</a></li>
-                        <li><a href="simulador-lci-lca.html" style="color: #CBD5E1; text-decoration: none;">🏛️ Simulador LCI/LCA</a></li>
-                        <li><a href="calculadora.html" style="color: #CBD5E1; text-decoration: none;">🧮 Juros Compostos</a></li>
+                    <h4 style="font-family: 'Playfair Display', Georgia, serif; color: #D4AF37; margin-bottom: 16px; font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em;">Guia</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.875rem; line-height: 2;">
+                        <li><a href="guia_invlab.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🧭 Guia do INVLAB</a></li>
+                        <li><a href="metodologia.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">📋 Metodologia</a></li>
+                        <li><a href="../index.html#primeiros-passos" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">📚 Primeiros Passos</a></li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Disclaimers -->
-            <div style="border-top: 1px solid rgba(59, 130, 246, 0.1); padding-top: 20px; margin-top: 20px;">
-                <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+            <!-- Disclaimers Finais -->
+            <div style="border-top: 1px solid rgba(212, 175, 55, 0.1); padding-top: 30px; margin-top: 30px;">
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.8rem; color: rgba(255, 255, 255, 0.6); text-align: center; line-height: 1.6; margin-bottom: 12px;">
                     ⚠️ Conteúdo 100% educacional. Não somos corretora, não vendemos produtos, não recebemos comissões.
                 </p>
-                <p style="font-size: 0.78rem; color: #64748B; text-align: center; line-height: 1.7; margin-bottom: 12px; max-width: 900px; margin-left: auto; margin-right: auto;">
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.78rem; color: rgba(255, 255, 255, 0.5); text-align: center; line-height: 1.7; margin-bottom: 16px; max-width: 900px; margin-left: auto; margin-right: auto;">
                     Conteúdo educacional desenvolvido por especialistas em mercado financeiro tradicional, tecnologia blockchain e tokenização de ativos reais. 
                     O INVLAB é um laboratório de pesquisa independente dedicado a unir educação, tecnologia e inovação nos mercados de capitais.
                 </p>
-                <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.75rem; color: rgba(255, 255, 255, 0.4); text-align: center;">
                     © 2025 INVLAB - Laboratório de Investimentos | Plataforma Educacional
                 </p>
             </div>
         </div>
     </footer>
+    
+    <style>
+        /* Footer Premium: Hover nos Links */
+        footer a:hover {
+            color: #D4AF37 !important;
+        }
+        
+        /* Footer Premium: Hover no Logo */
+        footer img:hover {
+            filter: brightness(1.25) drop-shadow(0 2px 10px rgba(212, 175, 55, 0.5)) drop-shadow(0 0 16px rgba(212, 175, 55, 0.25)) !important;
+            transform: scale(1.02);
+        }
+        
+        /* Footer Premium: Responsivo */
+        @media (max-width: 768px) {
+            footer > div > div:nth-child(2) {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 32px 24px !important;
+            }
+            
+            footer img {
+                height: 32px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            footer > div > div:nth-child(2) {
+                grid-template-columns: 1fr !important;
+                gap: 28px !important;
+            }
+        }
+    </style>
+
+    <!-- Botão Voltar ao Topo -->
+    <div id="backToTop">↑</div>
 
     <!-- Scripts -->
     <script src="../assets/js/script.js"></script>
     <!-- APIs para o Carrossel -->
     <script defer src="../assets/js/bcb-api.js"></script>
     <script defer src="../assets/js/invlab-carrossel-renda-fixa.js"></script>
+
+    <!-- JavaScript: Botão Voltar ao Topo -->
+    <script>
+    // Back to Top Button
+    const backToTopBtn = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    });
+
+    backToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    </script>
 
     <!-- Script do Simulador FGC -->
     <script>
