@@ -15,23 +15,43 @@
     <meta name="msapplication-TileColor" content="#0D0D0D">
     
     <!-- Meta Description -->
-    <meta name="description" content="INVLAB+ - Simulador Universal: Simule, compare e domine seus investimentos com precisão matemática e visão estratégica.">
+    <meta name="description" content="INVLAB+ - Simulador Universal: Compare até 6 investimentos simultaneamente com precisão matemática e visão estratégica.">
     
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <!-- INVLAB Carrossel - Indicadores Renda Fixa -->
+    <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js com Zoom Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@1.2.1/dist/chartjs-plugin-zoom.min.js"></script>
     
     <style>
-        /* Estilos específicos do INVLAB+ serão adicionados aqui */
+        /* ======================================
+           ESTILOS INVLAB+ PREMIUM
+        ====================================== */
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body {
             background: #0D0D0D;
-            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #e6e6e6;
             padding: 20px;
             padding-top: 65px;
-            margin: 0;
+            min-height: 100vh;
+        }
+
+        /* Breadcrumb Hover */
+        a[href*="index.html"]:hover {
+            color: #00D924 !important;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             margin-top: 80px !important;
             position: relative;
@@ -44,27 +64,1357 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             z-index: 1;
         }
+
+        /* MARCA D'ÁGUA INVLAB */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 420px;
+            height: 420px;
+            background-image: url('../assets/images/logo_TutorFinanceiro.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* BRANDING INVLAB HEADER */
+        .sim-header-brand {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #10b981;
+            margin-bottom: 17px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+        }
+
+        .brand-icon {
+            font-size: 1.1rem;
+        }
+
+        .brand-name {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        /* ASSINATURA INVLAB */
+        .sim-signature {
+            text-align: center;
+            margin-top: 28px;
+            padding-top: 21px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.5px;
+        }
+
+        /* HEADER PRINCIPAL */
+        .header-main {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.2);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: #d4af37;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: rgba(16, 185, 129, 0.85);
+            font-size: 1.05rem;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* PAINEL DE ENTRADA */
+        .input-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            margin-bottom: 30px;
+        }
+
+        .panel-title {
+            color: #d4af37;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+            color: #e6e6e6;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #d4af37;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        /* Corrigir opções do select (dropdown) */
+        select option {
+            background: #1a1a1a;
+            color: #e6e6e6;
+            padding: 10px;
+        }
+
+        select option:hover,
+        select option:focus,
+        select option:checked {
+            background: #2a2a2a;
+            color: #10b981;
+        }
+
+        /* INVESTIMENTOS HORIZONTAIS */
+        .investments-horizontal {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .investment-card {
+            flex: 1;
+            min-width: 280px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 18px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .investment-card:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+        }
+
+        .investment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .investment-name {
+            color: #10B981;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .investment-icon {
+            font-size: 1.2rem;
+        }
+
+        .investment-stats {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .investment-color {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .remove-btn {
+            background: #7f1d1d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+
+        .remove-btn:hover {
+            background: #991b1b;
+        }
+
+        /* TABS DE CENÁRIO */
+        .scenario-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.03);
+            color: rgba(255, 255, 255, 0.6);
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #059669, #047857);
+            color: white;
+            border-color: #10b981;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        /* BOTÕES */
+        .btn {
+            width: 100%;
+            padding: 18px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #059669, #047857);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(4, 120, 87, 0.4);
+            margin-top: 10px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(4, 120, 87, 0.6);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #1e3a8a, #1e40af);
+            font-size: 1rem;
+            padding: 14px;
+            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.4);
+        }
+
+        .btn-export {
+            background: linear-gradient(135deg, #7c2d12, #9a3412);
+            font-size: 1rem;
+            padding: 14px;
+            box-shadow: 0 4px 15px rgba(124, 45, 18, 0.4);
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        /* RESULTADOS */
+        .results {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        .result-card:hover {
+            border-color: #d4af37;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+        }
+
+        .result-label {
+            color: #d4af37;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .result-value {
+            color: #10B981;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .result-subtitle {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* RESUMO PREMIUM */
+        .premium-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .summary-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .summary-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .summary-title {
+            color: #d4af37;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .summary-value {
+            color: #10B981;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .summary-subtitle {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+        }
+
+        /* GRÁFICO */
+        .chart-fullwidth {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto 30px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 550px;
+            margin-top: 20px;
+        }
+
+        .chart-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .chart-control-btn {
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #e6e6e6;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .chart-control-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #d4af37;
+        }
+
+        .chart-control-btn.active {
+            background: linear-gradient(135deg, #059669, #047857);
+            border-color: #10b981;
+        }
+
+        /* TABELA COMPARATIVA */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        .comparison-table th {
+            background: rgba(255, 255, 255, 0.05);
+            color: #d4af37;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #d4af37;
+        }
+
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .gain {
+            color: #10B981;
+            font-weight: 600;
+        }
+
+        .loss {
+            color: #ef4444;
+            font-weight: 600;
+        }
+
+        /* INFO BOX */
+        .info-box {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid #d4af37;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* LOADING */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #d4af37;
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #d4af37;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 1024px) {
+            .investments-horizontal {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+
+            .input-row {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .container::before {
+                width: 280px;
+                height: 280px;
+                opacity: 0.04;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Conteúdo será adicionado aqui -->
-    
+    <!-- CARROSSEL: Indicadores Renda Fixa -->
+    <section id="invlab-carousel-container"></section>
+
+    <!-- CABEÇALHO FIXO (idêntico aos outros simuladores) -->
+    <header style="position: fixed; top: 0; width: 100%; z-index: 1000; background: #0D0D0D; box-shadow: 0 2px 10px rgba(0,0,0,0.3);">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 15px 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <!-- Logo -->
+                <a href="../index.html" style="text-decoration: none;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB Logo" style="height: 45px; filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3));">
+                    </div>
+                </a>
+
+                <!-- Menu de Navegação -->
+                <nav style="display: flex; gap: 20px; align-items: center;">
+                    <a href="../index.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-weight: 500; transition: color 0.3s;">Início</a>
+                    <a href="../index.html#primeiros-passos" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-weight: 500; transition: color 0.3s;">Primeiros Passos</a>
+                    <a href="../index.html#renda-fixa" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-weight: 500; transition: color 0.3s;">Renda Fixa</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb (fixo, abaixo do menu) -->
+    <div style="position: sticky; top: 110px; z-index: 100; background: #0D0D0D; width: 100%; padding: 12px 20px 12px; margin-bottom: 0 !important;">
+        <nav style="max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 8px; font-size: 14px; color: rgba(255, 255, 255, 0.6);">
+            <a href="../index.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s;">🏠 Início</a>
+            <span style="color: rgba(255, 255, 255, 0.4);">/</span>
+            <a href="../index.html#ferramentas" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s;">🛠️ Ferramentas</a>
+            <span style="color: rgba(255, 255, 255, 0.4);">/</span>
+            <span style="color: #FFFFFF; font-weight: 600; background: rgba(212, 175, 55, 0.15); padding: 4px 10px; border-radius: 6px; border-left: 3px solid #d4af37;">📈 INVLAB+ Simulador Universal</span>
+        </nav>
+    </div>
+
     <div class="container">
-        <h1 style="color: #D4AF37; font-family: 'Playfair Display', Georgia, serif; text-align: center; font-size: 2.5rem; margin-bottom: 20px;">
-            📈 INVLAB+ | Simulador Universal
-        </h1>
-        
-        <p style="color: rgba(255, 255, 255, 0.75); text-align: center; font-size: 1.1rem; max-width: 800px; margin: 0 auto 40px;">
-            Simule, compare e domine seus investimentos com precisão matemática e visão estratégica.
-        </p>
-        
-        <div style="text-align: center; padding: 60px 20px; color: rgba(255, 255, 255, 0.5);">
-            <p style="font-size: 1.2rem; margin-bottom: 10px;">🚧 Em Desenvolvimento</p>
-            <p style="font-size: 0.9rem;">Esta página está sendo construída. Em breve você terá acesso ao simulador mais completo do INVLAB.</p>
+        <!-- BRANDING INVLAB HEADER -->
+        <div class="sim-header-brand">
+            <span class="brand-icon">🔰</span>
+            <span class="brand-name">Simulador Oficial • INVLAB+</span>
+        </div>
+
+        <!-- HEADER PRINCIPAL -->
+        <div class="header-main">
+            <h1>⚡ INVLAB+ | Simulador Universal</h1>
+            <div class="subtitle">Compare até 6 investimentos com cenários realistas e análise profunda</div>
+        </div>
+
+        <!-- PAINEL DE ENTRADA COMPACTO -->
+        <div class="input-panel">
+            <div class="panel-title">⚙️ Configurações da Simulação</div>
+            
+            <div class="input-row">
+                <div class="input-group">
+                    <label>💰 Valor Inicial (R$)</label>
+                    <input type="number" id="valorInicial" value="10000" step="1000" min="0">
+                </div>
+
+                <div class="input-group">
+                    <label>📅 Aporte Mensal (R$)</label>
+                    <input type="number" id="aporteMensal" value="500" step="100" min="0">
+                </div>
+
+                <div class="input-group">
+                    <label>⏱️ Prazo (anos)</label>
+                    <input type="number" id="anos" value="10" min="1" max="40">
+                </div>
+
+                <div class="input-group">
+                    <label>📊 Inflação Anual (%)</label>
+                    <input type="number" id="inflacao" value="4.5" step="0.1" min="0" max="20">
+                </div>
+            </div>
+
+            <div class="panel-title">📈 Cenário de Projeção</div>
+            
+            <div class="scenario-tabs">
+                <div class="tab" data-scenario="pessimista">😰 Pessimista</div>
+                <div class="tab active" data-scenario="base">📊 Base</div>
+                <div class="tab" data-scenario="otimista">🚀 Otimista</div>
+            </div>
+
+            <div class="info-box">
+                <strong>Cenário Base:</strong> Utiliza rentabilidades históricas médias.<br>
+                <strong>Pessimista:</strong> -30% de retorno com volatilidade.<br>
+                <strong>Otimista:</strong> +20% de retorno.
+            </div>
+
+            <div class="panel-title">💼 Investimentos Selecionados</div>
+            
+            <div id="investimentos-lista" class="investments-horizontal"></div>
+
+            <div class="action-buttons">
+                <button class="btn-secondary btn" onclick="addInvestimento()">➕ Adicionar Investimento</button>
+                <button class="btn-export btn" onclick="exportarSimulacao()">💾 Exportar Simulação</button>
+            </div>
+
+            <button class="btn" onclick="simular()">🔥 SIMULAR AGORA</button>
+        </div>
+
+        <!-- LOADING -->
+        <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+            <p>Calculando simulação...</p>
+        </div>
+
+        <!-- ÁREA DE RESULTADOS -->
+        <div id="resultados"></div>
+
+        <!-- ASSINATURA INVLAB -->
+        <div class="sim-signature">
+            <p style="margin: 0;">🔰 <strong>INVLAB+</strong> | Simulador Universal de Investimentos</p>
+            <p style="margin: 5px 0 0 0; opacity: 0.7;">Análise matemática precisa | Sem viés comercial | Código aberto</p>
         </div>
     </div>
 
-    <!-- Scripts serão adicionados aqui -->
+    <!-- Footer Premium INVLAB -->
+    <footer style="background: #0D0D0D; border-top: 1px solid rgba(212, 175, 55, 0.25); margin-top: 60px; padding: 60px 20px 30px;">
+        <div class="content-wrapper-wide">
+            
+            <!-- Logo Centralizada -->
+            <div style="text-align: center; margin-bottom: 50px;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB" style="height: 60px; filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));">
+                <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.9rem; margin-top: 15px; font-family: 'Inter', sans-serif;">
+                    Educação financeira de qualidade, sem enrolação.
+                </p>
+            </div>
+
+            <!-- 5 Colunas -->
+            <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto 40px; font-family: 'Inter', sans-serif;">
+                
+                <!-- Coluna 1: Primeiros Passos -->
+                <div class="footer-column">
+                    <h4 style="color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Primeiros Passos</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 12px;"><a href="../pages/artigo-reserva.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">🛡️ Reserva de Emergência</a></li>
+                        <li style="margin-bottom: 12px;"><a href="../pages/artigo-perfil-investidor.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">🎯 Perfil de Investidor</a></li>
+                        <li style="margin-bottom: 12px;"><a href="../pages/artigo-poupanca-vs-tesouro-direto.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">💰 Poupança vs Tesouro</a></li>
+                        <li style="margin-bottom: 12px;"><a href="../pages/fgc.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">🛡️ FGC</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 2: Renda Fixa -->
+                <div class="footer-column">
+                    <h4 style="color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Renda Fixa</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 12px;"><a href="../pages/poupanca.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">💰 Poupança</a></li>
+                        <li style="margin-bottom: 12px;"><a href="../pages/simulador-cdbs.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">🏦 CDBs</a></li>
+                        <li style="margin-bottom: 12px;"><a href="../pages/simulador-tesouro-direto.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">🇧🇷 Tesouro Direto</a></li>
+                        <li style="margin-bottom: 12px;"><a href="../pages/simulador-lci-lca.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 3: Renda Variável -->
+                <div class="footer-column">
+                    <h4 style="color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Renda Variável</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255, 255, 255, 0.5); text-decoration: none; font-size: 0.9rem;">📊 ETFs (em breve)</a></li>
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255, 255, 255, 0.5); text-decoration: none; font-size: 0.9rem;">🏢 FIIs (em breve)</a></li>
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255, 255, 255, 0.5); text-decoration: none; font-size: 0.9rem;">📈 Ações (em breve)</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 4: Criptoativos -->
+                <div class="footer-column">
+                    <h4 style="color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Criptoativos</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255, 255, 255, 0.5); text-decoration: none; font-size: 0.9rem;">₿ Bitcoin (em breve)</a></li>
+                        <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255, 255, 255, 0.5); text-decoration: none; font-size: 0.9rem;">⧫ Ethereum (em breve)</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 5: Ferramentas -->
+                <div class="footer-column">
+                    <h4 style="color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Ferramentas</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 12px;"><a href="simulador-invlab-plus.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">📈 INVLAB+</a></li>
+                        <li style="margin-bottom: 12px;"><a href="../pages/simulador-cdbs.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">🏦 Simulador CDBs</a></li>
+                        <li style="margin-bottom: 12px;"><a href="../pages/simulador-tesouro-direto.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">🇧🇷 Simulador Tesouro</a></li>
+                        <li style="margin-bottom: 12px;"><a href="../pages/simulador-lci-lca.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">🏛️ Simulador LCI/LCA</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div style="text-align: center; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.5); font-size: 0.85rem; font-family: 'Inter', sans-serif;">
+                <p style="margin: 0;">&copy; 2024 INVLAB. Todos os direitos reservados. | Educação financeira sem viés comercial.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT DO SIMULADOR -->
+    <script src="../assets/js/invlab-carrossel.js"></script>
+    <script>
+let cenarioAtual = 'base';
+let investimentos = [
+    { id: 1, tipo: 'selic', nome: 'Tesouro Selic' },
+    { id: 2, tipo: 'cdb', nome: 'CDB 110% CDI' }
+];
+let nextId = 3;
+let ultimaSimulacao = null;
+
+const investimentosDisponiveis = {
+    selic: { 
+        nome: 'Tesouro Selic', 
+        taxaBase: 10.5, 
+        volatilidade: 0.5, 
+        cor: '#d4af37',
+        icon: '🏦'
+    },
+    cdb: { 
+        nome: 'CDB 110% CDI', 
+        taxaBase: 12, 
+        volatilidade: 0.8, 
+        cor: '#10B981',
+        icon: '💳'
+    },
+    ipca: { 
+        nome: 'Tesouro IPCA+ 2029', 
+        taxaBase: 9.3, 
+        volatilidade: 2, 
+        cor: '#3B82F6',
+        icon: '📈'
+    },
+    lci: { 
+        nome: 'LCI/LCA Isenta IR', 
+        taxaBase: 10, 
+        volatilidade: 0.6, 
+        cor: '#8B5CF6',
+        icon: '🏠'
+    },
+    bova: { 
+        nome: 'ETF BOVA11 (Ibovespa)', 
+        taxaBase: 11, 
+        volatilidade: 18, 
+        cor: '#F59E0B',
+        icon: '📊'
+    },
+    ivvb: { 
+        nome: 'ETF IVVB11 (S&P 500)', 
+        taxaBase: 15, 
+        volatilidade: 16, 
+        cor: '#EF4444',
+        icon: '🇺🇸'
+    },
+    small: { 
+        nome: 'SMAL11 (Small Caps)', 
+        taxaBase: 13, 
+        volatilidade: 22, 
+        cor: '#EC4899',
+        icon: '🚀'
+    },
+    divo: { 
+        nome: 'DIVO11 (Dividendos)', 
+        taxaBase: 12, 
+        volatilidade: 15, 
+        cor: '#14B8A6',
+        icon: '💰'
+    },
+    fiis: { 
+        nome: 'Fundos Imobiliários', 
+        taxaBase: 9, 
+        volatilidade: 12, 
+        cor: '#F97316',
+        icon: '🏢'
+    },
+    acoes: { 
+        nome: 'Ações Individuais', 
+        taxaBase: 14, 
+        volatilidade: 25, 
+        cor: '#A855F7',
+        icon: '📋'
+    }
+};
+
+// Inicialização
+document.addEventListener('DOMContentLoaded', function() {
+    renderInvestimentos();
+    setupScenarioTabs();
+});
+
+function setupScenarioTabs() {
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const scenario = this.getAttribute('data-scenario');
+            setScenario(scenario);
+        });
+    });
+}
+
+function setScenario(scenario) {
+    cenarioAtual = scenario;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelector(`.tab[data-scenario="${scenario}"]`).classList.add('active');
+}
+
+function renderInvestimentos() {
+    const container = document.getElementById('investimentos-lista');
+    container.innerHTML = '';
+    
+    investimentos.forEach(inv => {
+        const dados = investimentosDisponiveis[inv.tipo];
+        const div = document.createElement('div');
+        div.className = 'investment-card';
+        div.innerHTML = `
+            <div class="investment-header">
+                <span class="investment-name">
+                    <span class="investment-icon">${dados.icon}</span>
+                    ${dados.nome}
+                </span>
+                ${investimentos.length > 1 ? `<button class="remove-btn" onclick="removeInvestimento(${inv.id})">✕</button>` : ''}
+            </div>
+            <div class="investment-stats">
+                <span class="investment-color" style="background-color: ${dados.cor}"></span>
+                Média: <strong>${dados.taxaBase}%</strong> | Volatilidade: <strong>${dados.volatilidade}%</strong>
+            </div>
+            <select id="inv-${inv.id}" onchange="updateInvestimento(${inv.id})">
+                ${Object.keys(investimentosDisponiveis).map(key => 
+                    `<option value="${key}" ${inv.tipo === key ? 'selected' : ''}>${investimentosDisponiveis[key].nome}</option>`
+                ).join('')}
+            </select>
+        `;
+        container.appendChild(div);
+    });
+}
+
+function addInvestimento() {
+    if (investimentos.length >= 6) {
+        alert('Máximo de 6 investimentos permitidos');
+        return;
+    }
+    investimentos.push({ 
+        id: nextId++, 
+        tipo: 'selic', 
+        nome: investimentosDisponiveis.selic.nome 
+    });
+    renderInvestimentos();
+}
+
+function removeInvestimento(id) {
+    investimentos = investimentos.filter(i => i.id !== id);
+    renderInvestimentos();
+}
+
+function updateInvestimento(id) {
+    const select = document.getElementById(`inv-${id}`);
+    const tipo = select.value;
+    const inv = investimentos.find(i => i.id === id);
+    inv.tipo = tipo;
+    inv.nome = investimentosDisponiveis[tipo].nome;
+    renderInvestimentos();
+}
+
+function validarEntradas() {
+    const valorInicial = Number(document.getElementById('valorInicial').value);
+    const aporteMensal = Number(document.getElementById('aporteMensal').value);
+    const anos = Number(document.getElementById('anos').value);
+    
+    if (valorInicial < 0) {
+        alert('O valor inicial não pode ser negativo');
+        return false;
+    }
+    
+    if (aporteMensal < 0) {
+        alert('O aporte mensal não pode ser negativo');
+        return false;
+    }
+    
+    if (anos < 1 || anos > 40) {
+        alert('O prazo deve estar entre 1 e 40 anos');
+        return false;
+    }
+    
+    if (investimentos.length === 0) {
+        alert('Adicione pelo menos um investimento');
+        return false;
+    }
+    
+    return true;
+}
+
+function calcularRetorno(tipo, cenario) {
+    const dados = investimentosDisponiveis[tipo];
+    let taxa = dados.taxaBase;
+    
+    if (cenario === 'pessimista') {
+        taxa = taxa * 0.7;
+    } else if (cenario === 'otimista') {
+        taxa = taxa * 1.2;
+    }
+    
+    return { taxa: taxa / 100, volatilidade: dados.volatilidade, cor: dados.cor, icon: dados.icon };
+}
+
+// Função para gerar números com distribuição normal (Box-Muller)
+function randomNormal(mean = 0, std = 1) {
+    let u = 0, v = 0;
+    while(u === 0) u = Math.random();
+    while(v === 0) v = Math.random();
+    return mean + std * Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+}
+
+// Função otimizada para simulação com distribuição normal
+function simularInvestimento(valorInicial, aporteMensal, anos, taxaAnual, volatilidade) {
+    const meses = anos * 12;
+    let valores = [valorInicial];
+    let saldo = valorInicial;
+    let maxValor = valorInicial;
+    let drawdown = 0;
+    
+    for (let m = 1; m <= meses; m++) {
+        // Usar distribuição normal para simulação mais realista
+        const retornoMensal = (taxaAnual / 12) + randomNormal(0, volatilidade / 100 / 3);
+        saldo = saldo * (1 + retornoMensal) + aporteMensal;
+        valores.push(saldo);
+        
+        // Calcular drawdown
+        if (saldo > maxValor) {
+            maxValor = saldo;
+        } else {
+            const currentDrawdown = (maxValor - saldo) / maxValor;
+            if (currentDrawdown > drawdown) {
+                drawdown = currentDrawdown;
+            }
+        }
+    }
+    
+    return { valores, drawdown };
+}
+
+async function simular() {
+    if (!validarEntradas()) return;
+    
+    // Mostrar loading
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('resultados').innerHTML = '';
+    
+    // Usar setTimeout para permitir que a UI atualize antes do cálculo pesado
+    setTimeout(() => {
+        try {
+            const valorInicial = Number(document.getElementById('valorInicial').value);
+            const aporteMensal = Number(document.getElementById('aporteMensal').value);
+            const anos = Number(document.getElementById('anos').value);
+            const inflacao = Number(document.getElementById('inflacao').value) / 100;
+            
+            const meses = anos * 12;
+            const totalAportado = valorInicial + (aporteMensal * meses);
+            
+            const resultados = [];
+            const datasets = [];
+            let melhorInvestimento = null;
+            let piorInvestimento = null;
+            let maisEstavel = null;
+            let maisVolatil = null;
+            
+            investimentos.forEach(inv => {
+                const { taxa, volatilidade, cor, icon } = calcularRetorno(inv.tipo, cenarioAtual);
+                const { valores, drawdown } = simularInvestimento(valorInicial, aporteMensal, anos, taxa, volatilidade);
+                const valorFinal = valores[valores.length - 1];
+                const lucro = valorFinal - totalAportado;
+                const rentabilidadeTotal = ((valorFinal / totalAportado) - 1) * 100;
+                
+                // Valor real (descontando inflação)
+                const valorReal = valorFinal / Math.pow(1 + inflacao, anos);
+                
+                const resultado = {
+                    nome: investimentosDisponiveis[inv.tipo].nome,
+                    valorFinal,
+                    valorReal,
+                    lucro,
+                    rentabilidadeTotal,
+                    valores,
+                    drawdown,
+                    volatilidade,
+                    icon
+                };
+                
+                resultados.push(resultado);
+                
+                datasets.push({
+                    label: investimentosDisponiveis[inv.tipo].nome,
+                    data: valores,
+                    borderColor: cor,
+                    backgroundColor: cor + '20',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: false
+                });
+                
+                // Determinar melhor/pior investimento
+                if (!melhorInvestimento || valorFinal > melhorInvestimento.valorFinal) {
+                    melhorInvestimento = resultado;
+                }
+                if (!piorInvestimento || valorFinal < piorInvestimento.valorFinal) {
+                    piorInvestimento = resultado;
+                }
+                
+                // Determinar mais estável/volátil
+                if (!maisEstavel || volatilidade < maisEstavel.volatilidade) {
+                    maisEstavel = resultado;
+                }
+                if (!maisVolatil || volatilidade > maisVolatil.volatilidade) {
+                    maisVolatil = resultado;
+                }
+            });
+            
+            // Ordenar por melhor retorno
+            resultados.sort((a, b) => b.valorFinal - a.valorFinal);
+            
+            // Calcular diferença absoluta
+            const diferencaAbsoluta = melhorInvestimento.valorFinal - piorInvestimento.valorFinal;
+            
+            // Calcular taxa média real
+            const taxaMediaReal = resultados.reduce((sum, res) => sum + res.rentabilidadeTotal, 0) / resultados.length;
+            
+            // Salvar dados da simulação para exportação
+            ultimaSimulacao = {
+                resultados,
+                totalAportado,
+                cenarioAtual,
+                valorInicial,
+                aporteMensal,
+                anos,
+                inflacao,
+                melhorInvestimento,
+                piorInvestimento,
+                diferencaAbsoluta,
+                taxaMediaReal,
+                maisEstavel,
+                maisVolatil
+            };
+            
+            // Renderizar resultados
+            renderResultados(resultados, totalAportado, {
+                melhorInvestimento,
+                piorInvestimento,
+                diferencaAbsoluta,
+                taxaMediaReal,
+                maisEstavel,
+                maisVolatil
+            });
+            
+            // Renderizar gráfico
+            renderGrafico(datasets, meses);
+            
+        } catch (error) {
+            console.error('Erro na simulação:', error);
+            alert('Ocorreu um erro durante a simulação. Tente novamente.');
+        } finally {
+            // Esconder loading
+            document.getElementById('loading').style.display = 'none';
+        }
+    }, 100);
+}
+
+function renderResultados(resultados, totalAportado, resumo) {
+    let html = '<div class="results">';
+    html += '<div class="panel-title">💎 Resultados da Simulação</div>';
+    
+    // RESUMO PREMIUM
+    html += '<div class="premium-summary">';
+    html += `
+        <div class="summary-card">
+            <div class="summary-icon">🏆</div>
+            <div class="summary-title">Melhor Investimento</div>
+            <div class="summary-value">${resumo.melhorInvestimento.nome}</div>
+            <div class="summary-subtitle">R$ ${resumo.melhorInvestimento.valorFinal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+        </div>
+        <div class="summary-card">
+            <div class="summary-icon">📉</div>
+            <div class="summary-title">Pior Investimento</div>
+            <div class="summary-value">${resumo.piorInvestimento.nome}</div>
+            <div class="summary-subtitle">R$ ${resumo.piorInvestimento.valorFinal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+        </div>
+        <div class="summary-card">
+            <div class="summary-icon">📊</div>
+            <div class="summary-title">Diferença Absoluta</div>
+            <div class="summary-value">R$ ${resumo.diferencaAbsoluta.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+            <div class="summary-subtitle">Entre melhor e pior</div>
+        </div>
+        <div class="summary-card">
+            <div class="summary-icon">📈</div>
+            <div class="summary-title">Taxa Média Real</div>
+            <div class="summary-value">${resumo.taxaMediaReal.toFixed(2)}%</div>
+            <div class="summary-subtitle">Média das rentabilidades</div>
+        </div>
+    `;
+    html += '</div>';
+    
+    html += '<div class="result-grid">';
+    
+    resultados.forEach((res, index) => {
+        html += `
+            <div class="result-card">
+                <div class="result-label">${index === 0 ? '🏆 ' : ''}${res.icon} ${res.nome}</div>
+                <div class="result-value">R$ ${res.valorFinal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                <div class="result-subtitle">
+                    Lucro: <span class="${res.lucro > 0 ? 'gain' : 'loss'}">R$ ${res.lucro.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br>
+                    Rentabilidade: <span class="gain">${res.rentabilidadeTotal.toFixed(2)}%</span><br>
+                    Real: R$ ${res.valorReal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}<br>
+                    Drawdown Máximo: <span class="${res.drawdown > 0.1 ? 'loss' : 'gain'}">${(res.drawdown * 100).toFixed(2)}%</span>
+                </div>
+            </div>
+        `;
+    });
+    
+    html += '</div>';
+    
+    // Tabela comparativa
+    html += '<table class="comparison-table">';
+    html += '<tr><th>Investimento</th><th>Valor Final</th><th>Valor Real</th><th>Lucro</th><th>Rent. %</th><th>Drawdown</th></tr>';
+    
+    resultados.forEach(res => {
+        html += `
+            <tr>
+                <td><strong>${res.icon} ${res.nome}</strong></td>
+                <td>R$ ${res.valorFinal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
+                <td>R$ ${res.valorReal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
+                <td class="${res.lucro > 0 ? 'gain' : 'loss'}">R$ ${res.lucro.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
+                <td class="gain">${res.rentabilidadeTotal.toFixed(2)}%</td>
+                <td class="${res.drawdown > 0.1 ? 'loss' : 'gain'}">${(res.drawdown * 100).toFixed(2)}%</td>
+            </tr>
+        `;
+    });
+    
+    html += '</table>';
+    html += `<div class="info-box">💡 <strong>Total Aportado:</strong> R$ ${totalAportado.toLocaleString('pt-BR', {minimumFractionDigits: 2})} | <strong>Cenário:</strong> ${cenarioAtual.toUpperCase()} | <strong>Mais Estável:</strong> ${resumo.maisEstavel.nome} | <strong>Mais Volátil:</strong> ${resumo.maisVolatil.nome}</div>`;
+    html += '</div>';
+    
+    document.getElementById('resultados').innerHTML = html;
+}
+
+function renderGrafico(datasets, meses) {
+    const container = document.querySelector('.container');
+    let chartDiv = document.getElementById('chart-wrapper');
+    
+    if (!chartDiv) {
+        chartDiv = document.createElement('div');
+        chartDiv.id = 'chart-wrapper';
+        chartDiv.className = 'chart-fullwidth';
+        chartDiv.innerHTML = `
+            <div class="panel-title">📈 Evolução dos Investimentos</div>
+            <div class="chart-controls">
+                <button class="chart-control-btn active" onclick="toggleChartView('linear')">Linear</button>
+                <button class="chart-control-btn" onclick="toggleChartView('log')">Logarítmica</button>
+                <button class="chart-control-btn" onclick="resetZoom()">Resetar Zoom</button>
+            </div>
+            <div class="chart-container">
+                <canvas id="grafico"></canvas>
+            </div>
+        `;
+        // Inserir antes do elemento resultados
+        const resultadosEl = document.getElementById('resultados');
+        container.insertBefore(chartDiv, resultadosEl);
+    }
+    
+    if (window.graficoObj) {
+        window.graficoObj.destroy();
+    }
+    
+    const ctx = document.getElementById('grafico');
+    
+    // Criar labels mais legíveis (apenas anos)
+    const labels = [];
+    for (let i = 0; i <= meses; i++) {
+        if (i === 0) {
+            labels.push('Início');
+        } else if (i % 12 === 0) {
+            labels.push(`Ano ${i/12}`);
+        } else if (meses <= 24 && i % 3 === 0) {
+            labels.push(`Mês ${i}`);
+        } else if (i === meses) {
+            labels.push('Final');
+        } else {
+            labels.push('');
+        }
+    }
+    
+    window.graficoObj = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: { 
+                        color: '#fff',
+                        font: { size: 13, weight: 'bold' },
+                        padding: 15
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(0,0,0,0.8)',
+                    titleColor: '#d4af37',
+                    bodyColor: '#fff',
+                    borderColor: '#d4af37',
+                    borderWidth: 1,
+                    padding: 12,
+                    displayColors: true,
+                    callbacks: {
+                        label: function(context) {
+                            return context.dataset.label + ': R$ ' + 
+                                context.parsed.y.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+                        }
+                    }
+                },
+                zoom: {
+                    pan: {
+                        enabled: true,
+                        mode: 'x'
+                    },
+                    zoom: {
+                        wheel: {
+                            enabled: true,
+                        },
+                        pinch: {
+                            enabled: true
+                        },
+                        mode: 'x'
+                    }
+                }
+            },
+            scales: {
+                x: { 
+                    ticks: { 
+                        color: '#999',
+                        maxTicksLimit: 20
+                    },
+                    grid: { color: 'rgba(255,255,255,0.05)' }
+                },
+                y: { 
+                    type: 'linear',
+                    ticks: { 
+                        color: '#999',
+                        callback: function(value) {
+                            if (value >= 1000000) {
+                                return 'R$ ' + (value/1000000).toFixed(1) + 'M';
+                            } else if (value >= 1000) {
+                                return 'R$ ' + (value/1000).toFixed(0) + 'k';
+                            }
+                            return 'R$ ' + value.toLocaleString('pt-BR');
+                        }
+                    },
+                    grid: { color: 'rgba(255,255,255,0.05)' }
+                }
+            },
+            interaction: {
+                intersect: false,
+                mode: 'index'
+            }
+        },
+        plugins: [Chart.Zoom]
+    });
+}
+
+function toggleChartView(type) {
+    if (!window.graficoObj) return;
+    
+    const buttons = document.querySelectorAll('.chart-control-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    window.graficoObj.options.scales.y.type = type;
+    window.graficoObj.update();
+}
+
+function resetZoom() {
+    if (window.graficoObj) {
+        window.graficoObj.resetZoom();
+    }
+}
+
+function exportarSimulacao() {
+    if (!ultimaSimulacao) {
+        alert('Execute uma simulação primeiro para exportar os resultados.');
+        return;
+    }
+    
+    const { resultados, totalAportado, cenarioAtual, valorInicial, aporteMensal, anos, inflacao } = ultimaSimulacao;
+    
+    // Criar conteúdo CSV
+    let csvContent = "INVLAB+ Simulador Universal - Relatorio de Simulacao\n\n";
+    csvContent += `Data da Simulacao: ${new Date().toLocaleString('pt-BR')}\n`;
+    csvContent += `Cenario: ${cenarioAtual.toUpperCase()}\n`;
+    csvContent += `Valor Inicial: R$ ${valorInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n`;
+    csvContent += `Aporte Mensal: R$ ${aporteMensal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n`;
+    csvContent += `Prazo: ${anos} anos\n`;
+    csvContent += `Inflacao Anual: ${(inflacao * 100).toFixed(2)}%\n`;
+    csvContent += `Total Aportado: R$ ${totalAportado.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n\n`;
+    
+    // Adicionar cabeçalho da tabela
+    csvContent += "Investimento,Valor Final,Valor Real,Lucro,Rentabilidade (%),Drawdown\n";
+    
+    // Adicionar dados
+    resultados.forEach(res => {
+        csvContent += `"${res.nome}",${res.valorFinal.toFixed(2)},${res.valorReal.toFixed(2)},${res.lucro.toFixed(2)},${res.rentabilidadeTotal.toFixed(2)},${(res.drawdown * 100).toFixed(2)}\n`;
+    });
+    
+    // Criar e baixar arquivo
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", `invlab_plus_simulacao_${new Date().toISOString().slice(0,10)}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+    </script>
+
 </body>
 </html>
-
