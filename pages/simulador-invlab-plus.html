@@ -325,6 +325,45 @@
             box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
 
+        /* CARDS DE CENÁRIO INDIVIDUAIS */
+        .scenario-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .scenario-card {
+            background: rgba(212, 175, 55, 0.08);
+            border-left: 3px solid #d4af37;
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #e6e6e6;
+            transition: all 0.3s ease;
+        }
+
+        .scenario-card:hover {
+            background: rgba(212, 175, 55, 0.12);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+        }
+
+        .scenario-card strong {
+            color: #d4af37;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        /* Responsivo para cards de cenário */
+        @media (max-width: 768px) {
+            .scenario-cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* BOTÕES */
         .btn {
             width: 100%;
@@ -816,10 +855,20 @@
                 <div class="tab" data-scenario="otimista">🚀 Otimista</div>
             </div>
 
-            <div class="info-box">
-                <strong>Cenário Base:</strong> Utiliza rentabilidades históricas médias.<br>
-                <strong>Pessimista:</strong> -30% de retorno com volatilidade.<br>
-                <strong>Otimista:</strong> +20% de retorno.
+            <!-- Cards individuais para cada cenário -->
+            <div class="scenario-cards-grid">
+                <div class="scenario-card">
+                    <strong>😰 Cenário Pessimista</strong>
+                    -30% de retorno com volatilidade elevada
+                </div>
+                <div class="scenario-card">
+                    <strong>📊 Cenário Base</strong>
+                    Rentabilidades históricas médias realistas
+                </div>
+                <div class="scenario-card">
+                    <strong>🚀 Cenário Otimista</strong>
+                    +20% de retorno acima da média
+                </div>
             </div>
 
             <div class="panel-title">💼 Investimentos Selecionados</div>
