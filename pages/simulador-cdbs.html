@@ -949,6 +949,125 @@
            MOBILE-FIRST RESPONSIVE
            ============================================ */
         
+        /* ======================================
+           💡 POPUPS INFORMATIVOS PREMIUM INVLAB
+        ====================================== */
+
+        /* Linha dos ícones informativos */
+        .info-row {
+            display: flex;
+            gap: 24px;
+            margin: 28px 0 0 0;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .info-trigger {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            color: #8ACC66;
+            transition: all 0.2s ease;
+            padding: 6px 12px;
+            border-radius: 6px;
+            background: rgba(138, 204, 166, 0.05);
+            border: 1px solid rgba(138, 204, 166, 0.15);
+            min-width: 200px;
+        }
+
+        .info-trigger:hover {
+            color: #CCAA66;
+            background: rgba(204, 170, 102, 0.1);
+            border-color: rgba(204, 170, 102, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .info-trigger i {
+            font-size: 18px;
+        }
+
+        /* Tooltip/Popup Premium */
+        .inv-tooltip {
+            position: fixed;
+            background: rgba(13, 22, 32, 0.98);
+            border: 1px solid rgba(204, 170, 102, 0.25);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            padding: 20px 24px;
+            max-width: 420px;
+            width: 90%;
+            display: none;
+            z-index: 9999;
+            color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+        }
+
+        .inv-tooltip h4 {
+            font-size: 18px;
+            color: #FFFFFF;
+            margin: 0 0 14px 0;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .inv-tooltip ul {
+            margin: 0;
+            padding-left: 20px;
+            line-height: 1.7;
+        }
+
+        .inv-tooltip li {
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .inv-tooltip li strong {
+            color: #8ACC66;
+            font-weight: 600;
+        }
+
+        .inv-tooltip p {
+            margin: 12px 0 0 0;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .tooltip-footer {
+            margin-top: 14px;
+            font-size: 13px;
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        /* Responsivo mobile - Popups */
+        @media (max-width: 768px) {
+            .info-row {
+                gap: 12px;
+            }
+
+            .info-trigger {
+                font-size: 0.85rem;
+                padding: 5px 10px;
+            }
+
+            .inv-tooltip {
+                max-width: 90%;
+                padding: 16px 18px;
+            }
+
+            .inv-tooltip h4 {
+                font-size: 16px;
+            }
+
+            .inv-tooltip li {
+                font-size: 0.85rem;
+            }
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 15px;
@@ -1381,6 +1500,17 @@
                 <button class="btn-primary" onclick="runComparison()">
                     🧮 Simular Rentabilidade
                 </button>
+
+                <!-- Linha de Informações (Popups) - Abaixo do botão -->
+                <div class="info-row">
+                    <span class="info-trigger" data-tooltip="premissas">
+                        ℹ️ Premissas do Simulador
+                    </span>
+
+                    <span class="info-trigger" data-tooltip="rendimento">
+                        📊 Rendimento & IR
+                    </span>
+                </div>
 
                 <div id="compareResults"></div>
 
@@ -1850,7 +1980,70 @@
         </div>
     </div>
 
+    <!-- POPUPS INFORMATIVOS PREMIUM - FORA DO CONTAINER -->
+    <!-- Tooltip Premissas -->
+    <div id="tooltip-premissas" class="inv-tooltip">
+        <h4>📊 Premissas do Simulador</h4>
+        <ul>
+            <li><strong>CDI Atual:</strong> 13,65% a.a. (janeiro/2025)</li>
+            <li><strong>Selic:</strong> 13,75% a.a.</li>
+            <li><strong>IPCA:</strong> 4,5% a.a. (estimado)</li>
+            <li><strong>Poupança:</strong> 0,5% a.m. quando Selic > 8,5% a.a.</li>
+            <li><strong>Rentabilidade CDB:</strong> Baseada no % do CDI escolhido</li>
+            <li><strong>Aportes mensais:</strong> Aplicados no início de cada mês</li>
+            <li><strong>IOF:</strong> Não aplicado (investimentos superiores a 30 dias)</li>
+        </ul>
+        <p class="tooltip-footer">Fontes: Banco Central (CDI, Selic), IBGE (IPCA) | Atualizado: Jan/2025</p>
+    </div>
+
+    <!-- Tooltip Rendimento -->
+    <div id="tooltip-rendimento" class="inv-tooltip">
+        <h4>📊 Rendimento & Imposto de Renda</h4>
+        <p style="margin-top: 0; margin-bottom: 12px; color: rgba(255, 255, 255, 0.9);">
+            <strong>O simulador calcula o rendimento líquido REAL</strong>, considerando tudo que afeta seu bolso:
+        </p>
+        <ul>
+            <li><strong>Imposto de Renda regressivo:</strong> 22,5% (até 180 dias) → 15% (acima de 720 dias)</li>
+            <li><strong>Liquidez:</strong> Maioria dos CDBs tem liquidez diária (resgate a qualquer momento)</li>
+            <li><strong>FGC:</strong> Garantia de até R$ 250 mil por CPF e instituição</li>
+            <li><strong>Come-cotas:</strong> Não se aplica (apenas para fundos)</li>
+        </ul>
+        <p class="tooltip-footer">Rendimento mostrado já é líquido (após IR). Poupança é isenta de IR.</p>
+    </div>
+
     <script>
+        // ============================================
+        // POPUPS INFORMATIVOS (Premissas + Rendimento)
+        // ============================================
+        
+        document.querySelectorAll('.info-trigger').forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                const type = trigger.getAttribute('data-tooltip');
+                const tooltip = document.getElementById(`tooltip-${type}`);
+
+                // Fecha todos os outros popups antes de abrir
+                document.querySelectorAll('.inv-tooltip').forEach(t => t.style.display = 'none');
+
+                // Posiciona e abre o popup
+                const rect = trigger.getBoundingClientRect();
+                tooltip.style.left = (rect.left + window.scrollX) + 'px';
+                tooltip.style.top = (rect.bottom + window.scrollY + 8) + 'px';
+                tooltip.style.display = 'block';
+
+                e.stopPropagation();
+            });
+        });
+
+        // Fecha popups ao clicar fora
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.inv-tooltip').forEach(t => t.style.display = 'none');
+        });
+
+        // Fecha popups ao scrollar
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.inv-tooltip').forEach(t => t.style.display = 'none');
+        });
+
         /* ============================================
            PREPARAÇÃO PARA API FUTURA
            ============================================
