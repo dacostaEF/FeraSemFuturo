@@ -371,6 +371,41 @@
             }
         }
 
+        /* ======================================
+           FOOTER PREMIUM - HOVERS E RESPONSIVO
+        ====================================== */
+        
+        /* Footer Premium: Hover nos Links */
+        footer a:hover {
+            color: #D4AF37 !important;
+        }
+        
+        /* Footer Premium: Hover no Logo */
+        footer img:hover {
+            filter: brightness(1.25) drop-shadow(0 2px 10px rgba(212, 175, 55, 0.5)) drop-shadow(0 0 16px rgba(212, 175, 55, 0.25)) !important;
+            transform: scale(1.02);
+        }
+
+        /* Responsivo Footer */
+        @media (max-width: 1024px) {
+            footer > div > div[style*="grid-template-columns"] {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            footer > div > div[style*="grid-template-columns"] {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 30px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            footer > div > div[style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
         /* BOTÕES */
         .btn {
             width: 100%;
@@ -642,6 +677,90 @@
             font-weight: 600;
         }
 
+        /* ======================================
+           TOOLTIPS PREMIUM INVLAB (VERSÃO SIMPLIFICADA)
+        ====================================== */
+        
+        /* Ícone de ajuda (?) */
+        .help-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-left: 5px;
+            background: rgba(212, 175, 55, 0.25);
+            color: #d4af37;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 16px;
+            cursor: help;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .help-icon:hover {
+            background: rgba(212, 175, 55, 0.4);
+            border-color: #d4af37;
+            transform: scale(1.2);
+        }
+
+        /* Tooltip usando atributo data-tooltip */
+        [data-tooltip] {
+            position: relative;
+            cursor: help;
+        }
+
+        [data-tooltip]::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-8px);
+            background: rgba(13, 13, 13, 0.95);
+            color: #e6e6e6;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #d4af37;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            white-space: nowrap;
+            max-width: 250px;
+            white-space: normal;
+            z-index: 99999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+        }
+
+        [data-tooltip]::after {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(2px);
+            border: 5px solid transparent;
+            border-top-color: #d4af37;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99999;
+        }
+
+        [data-tooltip]:hover::before,
+        [data-tooltip]:hover::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(-10px);
+        }
+
+        [data-tooltip]:hover::after {
+            transform: translateX(-50%) translateY(0);
+        }
+
         /* LOADING */
         .loading {
             display: none;
@@ -833,7 +952,10 @@
                 </div>
 
                 <div class="input-group">
-                    <label>📅 Aporte Mensal (R$)</label>
+                    <label>
+                        📅 Aporte Mensal (R$)
+                        <span class="help-icon" data-tooltip="Valor que você adiciona todo mês ao investimento">?</span>
+                    </label>
                     <input type="number" id="aporteMensal" value="500" step="100" min="0">
                 </div>
 
@@ -843,7 +965,10 @@
                 </div>
 
                 <div class="input-group">
-                    <label>📊 Inflação Anual (%)</label>
+                    <label>
+                        📊 Inflação Anual (%)
+                        <span class="help-icon" data-tooltip="Taxa de desvalorização da moeda. Usada para calcular o valor real">?</span>
+                    </label>
                     <input type="number" id="inflacao" value="4.5" step="0.1" min="0" max="20">
                 </div>
             </div>
@@ -916,73 +1041,87 @@
     <footer style="background: #0D0D0D; border-top: 1px solid rgba(212, 175, 55, 0.25); margin-top: 60px; padding: 60px 20px 30px;">
         <div class="content-wrapper-wide">
             
-            <!-- Logo Centralizada -->
+            <!-- Logo e Descrição -->
             <div style="text-align: center; margin-bottom: 50px;">
-                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB" style="height: 60px; filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));">
-                <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.9rem; margin-top: 15px; font-family: 'Inter', sans-serif;">
-                    Educação financeira de qualidade, sem enrolação.
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB" style="height: 42px; margin-bottom: 16px; filter: brightness(1.15) drop-shadow(0 2px 8px rgba(212, 175, 55, 0.35)) drop-shadow(0 0 12px rgba(212, 175, 55, 0.15));">
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: rgba(255, 255, 255, 0.7); max-width: 600px; margin: 0 auto;">
+                    Laboratório educacional de investimentos.<br>
+                    Sem venda de produtos, sem comissões, sem viés comercial.
                 </p>
             </div>
-
-            <!-- 5 Colunas -->
-            <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto 40px; font-family: 'Inter', sans-serif;">
+            
+            <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px; margin-bottom: 40px;">
                 
-                <!-- Coluna 1: Primeiros Passos -->
-                <div class="footer-column">
-                    <h4 style="color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Primeiros Passos</h4>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="margin-bottom: 12px;"><a href="../pages/artigo-reserva.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">🛡️ Reserva de Emergência</a></li>
-                        <li style="margin-bottom: 12px;"><a href="../pages/artigo-perfil-investidor.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">🎯 Perfil de Investidor</a></li>
-                        <li style="margin-bottom: 12px;"><a href="../pages/artigo-poupanca-vs-tesouro-direto.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">💰 Poupança vs Tesouro</a></li>
-                        <li style="margin-bottom: 12px;"><a href="../pages/fgc.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">🛡️ FGC</a></li>
+                <!-- Coluna 1: Renda Fixa -->
+                <div>
+                    <h4 style="font-family: 'Playfair Display', Georgia, serif; color: #D4AF37; margin-bottom: 16px; font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em;">Renda Fixa</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.875rem; line-height: 2;">
+                        <li><a href="poupanca.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🏛️ LCI/LCA</a></li>
+                        <li><a href="fgc.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🛡️ FGC</a></li>
                     </ul>
                 </div>
 
-                <!-- Coluna 2: Renda Fixa -->
-                <div class="footer-column">
-                    <h4 style="color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Renda Fixa</h4>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="margin-bottom: 12px;"><a href="../pages/poupanca.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">💰 Poupança</a></li>
-                        <li style="margin-bottom: 12px;"><a href="../pages/simulador-cdbs.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">🏦 CDBs</a></li>
-                        <li style="margin-bottom: 12px;"><a href="../pages/simulador-tesouro-direto.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">🇧🇷 Tesouro Direto</a></li>
-                        <li style="margin-bottom: 12px;"><a href="../pages/simulador-lci-lca.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">🏛️ LCI/LCA</a></li>
+                <!-- Coluna 2: Renda Variável -->
+                <div>
+                    <h4 style="font-family: 'Playfair Display', Georgia, serif; color: #D4AF37; margin-bottom: 16px; font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em;">Renda Variável</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.875rem; line-height: 2;">
+                        <li><a href="../index.html#renda-variavel" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">📈 Introdução</a></li>
+                        <li><a href="acoes.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">📊 Ações</a></li>
+                        <li><a href="etfs.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">💵 ETFs</a></li>
+                        <li><a href="fiis.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🏢 FIIs</a></li>
                     </ul>
                 </div>
 
-                <!-- Coluna 3: Renda Variável -->
-                <div class="footer-column">
-                    <h4 style="color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Renda Variável</h4>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255, 255, 255, 0.5); text-decoration: none; font-size: 0.9rem;">📊 ETFs (em breve)</a></li>
-                        <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255, 255, 255, 0.5); text-decoration: none; font-size: 0.9rem;">🏢 FIIs (em breve)</a></li>
-                        <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255, 255, 255, 0.5); text-decoration: none; font-size: 0.9rem;">📈 Ações (em breve)</a></li>
+                <!-- Coluna 3: Criptoativos -->
+                <div>
+                    <h4 style="font-family: 'Playfair Display', Georgia, serif; color: #D4AF37; margin-bottom: 16px; font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em;">Criptoativos</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.875rem; line-height: 2;">
+                        <li><a href="../index.html#criptoativos" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🔐 Introdução</a></li>
+                        <li><a href="bitcoin.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">₿ Bitcoin</a></li>
+                        <li><a href="ethereum.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">⧫ Ethereum</a></li>
+                        <li><a href="stablecoins.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">💵 Stablecoins</a></li>
+                        <li><a href="blockchain.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">⛓️ Blockchain</a></li>
                     </ul>
                 </div>
 
-                <!-- Coluna 4: Criptoativos -->
-                <div class="footer-column">
-                    <h4 style="color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Criptoativos</h4>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255, 255, 255, 0.5); text-decoration: none; font-size: 0.9rem;">₿ Bitcoin (em breve)</a></li>
-                        <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255, 255, 255, 0.5); text-decoration: none; font-size: 0.9rem;">⧫ Ethereum (em breve)</a></li>
+                <!-- Coluna 4: Ferramentas -->
+                <div>
+                    <h4 style="font-family: 'Playfair Display', Georgia, serif; color: #D4AF37; margin-bottom: 16px; font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em;">Ferramentas</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.875rem; line-height: 2;">
+                        <li><a href="simulador-invlab-plus.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">📈 INVLAB+</a></li>
+                        <li><a href="simulador-cdbs.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🏦 Simulador CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🇧🇷 Simulador Tesouro</a></li>
+                        <li><a href="simulador-lci-lca.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🏛️ Simulador LCI/LCA</a></li>
+                        <li><a href="calculadora.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🧮 Calculadora</a></li>
                     </ul>
                 </div>
 
-                <!-- Coluna 5: Ferramentas -->
-                <div class="footer-column">
-                    <h4 style="color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 20px;">Ferramentas</h4>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="margin-bottom: 12px;"><a href="simulador-invlab-plus.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">📈 INVLAB+</a></li>
-                        <li style="margin-bottom: 12px;"><a href="../pages/simulador-cdbs.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">🏦 Simulador CDBs</a></li>
-                        <li style="margin-bottom: 12px;"><a href="../pages/simulador-tesouro-direto.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">🇧🇷 Simulador Tesouro</a></li>
-                        <li style="margin-bottom: 12px;"><a href="../pages/simulador-lci-lca.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; font-size: 0.9rem;">🏛️ Simulador LCI/LCA</a></li>
+                <!-- Coluna 5: Guia -->
+                <div>
+                    <h4 style="font-family: 'Playfair Display', Georgia, serif; color: #D4AF37; margin-bottom: 16px; font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em;">Guia</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.875rem; line-height: 2;">
+                        <li><a href="guia_invlab.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🧭 Guia do INVLAB</a></li>
+                        <li><a href="metodologia.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">📋 Metodologia</a></li>
+                        <li><a href="../index.html#primeiros-passos" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">📚 Primeiros Passos</a></li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Copyright -->
-            <div style="text-align: center; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.5); font-size: 0.85rem; font-family: 'Inter', sans-serif;">
-                <p style="margin: 0;">&copy; 2024 INVLAB. Todos os direitos reservados. | Educação financeira sem viés comercial.</p>
+            <!-- Disclaimers Finais -->
+            <div style="border-top: 1px solid rgba(212, 175, 55, 0.1); padding-top: 30px; margin-top: 30px;">
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.8rem; color: rgba(255, 255, 255, 0.6); text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                    ⚠️ Conteúdo 100% educacional. Não somos corretora, não vendemos produtos, não recebemos comissões.
+                </p>
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.78rem; color: rgba(255, 255, 255, 0.5); text-align: center; line-height: 1.7; margin-bottom: 16px; max-width: 900px; margin-left: auto; margin-right: auto;">
+                    Conteúdo educacional desenvolvido por especialistas em mercado financeiro tradicional, tecnologia blockchain e tokenização de ativos reais. 
+                    O INVLAB é um laboratório de pesquisa independente dedicado a unir educação, tecnologia e inovação nos mercados de capitais.
+                </p>
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.75rem; color: rgba(255, 255, 255, 0.4); text-align: center;">
+                    © 2025 INVLAB - Laboratório de Investimentos | Plataforma Educacional
+                </p>
             </div>
         </div>
     </footer>
@@ -1207,9 +1346,32 @@
                 </div>
 
                 <!-- Seção 10 -->
+                <div style="margin-bottom: 30px; padding: 20px; background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; border-radius: 8px;">
+                    <h3 style="color: #10b981; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                        🔬 10) Como o simulador cria o futuro dos investimentos
+                    </h3>
+                    <p style="color: #e6e6e6; line-height: 1.8;">
+                        O INVLAB+ <strong>não replica o gráfico real do passado</strong>. Ele usa:<br><br>
+                        
+                        <div style="margin-left: 20px; color: #e6e6e6;">
+                            ✔ <strong style="color: #10b981;">Rentabilidade média histórica</strong><br>
+                            ✔ <strong style="color: #10b981;">Volatilidade histórica</strong><br>
+                            ✔ <strong style="color: #10b981;">Distribuição normal</strong><br>
+                            ✔ <strong style="color: #10b981;">Aportes mensais</strong><br>
+                            ✔ <strong style="color: #10b981;">Inflação</strong><br>
+                            ✔ <strong style="color: #10b981;">Cenários (pessimista/base/otimista)</strong>
+                        </div>
+                        <br>
+                        E gera um <strong style="color: #d4af37;">futuro plausível a partir do Ano 0 (hoje)</strong>.<br><br>
+                        
+                        <em style="color: rgba(255, 255, 255, 0.7);">Isso permite comparar investimentos de forma justa e educativa, mostrando como eles se comportariam sob as mesmas condições.</em>
+                    </p>
+                </div>
+
+                <!-- Seção 11 -->
                 <div style="margin-bottom: 30px; padding: 20px; background: rgba(239, 68, 68, 0.1); border-left: 4px solid #EF4444; border-radius: 8px;">
                     <h3 style="color: #EF4444; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
-                        ⚠️ 10) Aviso Educacional do INVLAB
+                        ⚠️ 11) Aviso Educacional do INVLAB
                     </h3>
                     <p style="color: #e6e6e6; line-height: 1.8;">
                         O simulador usa <strong>dados históricos</strong> e <strong>modelos estatísticos</strong> para ensinar como investimentos se comportam.<br><br>
@@ -1226,13 +1388,218 @@
                     </div>
                 </div>
 
-                <div style="text-align: center; margin-top: 30px;">
+                <!-- Mensagem Final Educacional -->
+                <div style="text-align: center; padding: 25px; background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(16, 185, 129, 0.08)); border-radius: 12px; border: 1px solid rgba(212, 175, 55, 0.3); margin-bottom: 30px;">
+                    <p style="font-family: 'Inter', sans-serif; font-size: 1rem; color: #e6e6e6; line-height: 1.8; margin: 0;">
+                        💎 Este simulador foi desenvolvido pelo <strong style="color: #d4af37;">INVLAB</strong> para fins educacionais.<br>
+                        Ele não prevê o futuro, mas sim mostra como diferentes tipos de investimento <strong style="color: #10b981;">se comportam ao longo do tempo</strong>.<br>
+                        Use-o como ferramenta de aprendizado para tomar decisões cada vez mais conscientes.
+                    </p>
+                </div>
+
+                <div style="text-align: center;">
                     <button onclick="fecharTutorial()" style="padding: 14px 32px; background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: #fff; border: none; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
                         ✅ Entendi! Vamos Simular
                     </button>
                 </div>
 
             </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MODAL TÉCNICO - COMO FUNCIONA A SIMULAÇÃO
+         ============================================ -->
+    <div id="modalTecnico" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10001; overflow-y: auto; padding: 20px;">
+        <div style="max-width: 1000px; margin: 40px auto; background: linear-gradient(145deg, #0f172a 0%, #0D0D0D 100%); border-radius: 16px; padding: 40px; border: 2px solid #3b82f6; box-shadow: 0 20px 60px rgba(59, 130, 246, 0.4); position: relative;">
+            
+            <!-- Botão Fechar -->
+            <button onclick="fecharModalTecnico()" style="position: absolute; top: 20px; right: 20px; background: rgba(59, 130, 246, 0.2); border: 1px solid #3b82f6; color: #3b82f6; width: 36px; height: 36px; border-radius: 50%; font-size: 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; font-weight: bold;">
+                ✕
+            </button>
+
+            <!-- Título do Modal -->
+            <h2 style="font-family: 'Playfair Display', Georgia, serif; color: #3b82f6; font-size: 2rem; margin-bottom: 10px; text-align: center; font-weight: 800;">
+                🔬 Como o INVLAB+ simula índices e ETFs
+            </h2>
+            <p style="text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 0.95rem; margin-bottom: 35px; font-family: 'Inter', sans-serif;">
+                Entenda a técnica acadêmica por trás da simulação
+            </p>
+
+            <!-- Explicação Curta Inicial -->
+            <div style="background: rgba(59, 130, 246, 0.1); border-left: 4px solid #3b82f6; padding: 20px; border-radius: 8px; margin-bottom: 35px;">
+                <p style="font-family: 'Inter', sans-serif; color: #e6e6e6; line-height: 1.8; margin: 0; font-size: 1rem;">
+                    <strong style="color: #3b82f6;">Este simulador NÃO usa o gráfico real do passado.</strong><br><br>
+                    Ele usa a <strong>rentabilidade média</strong> e a <strong>volatilidade histórica</strong> do ativo para gerar um possível comportamento futuro.<br><br>
+                    O objetivo não é prever, e sim ajudar você a entender como cada tipo de investimento se comporta ao longo do tempo.
+                </p>
+            </div>
+
+            <!-- Seção 1 -->
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: #3b82f6; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                    👁️ 1. Interpretação do gráfico • O que NÃO usamos
+                </h3>
+                <p style="color: #e6e6e6; line-height: 1.8; font-family: 'Inter', sans-serif;">
+                    O INVLAB+ não replica dias específicos do passado. Ou seja:<br><br>
+                    
+                    <span style="color: rgba(255, 255, 255, 0.7); margin-left: 20px; display: block; line-height: 2;">
+                        ❌ não usa preços históricos reais<br>
+                        ❌ não usa datas reais<br>
+                        ❌ não usa os "anos bons" ou "anos ruins" do IBOVESPA
+                    </span><br>
+                    
+                    Isso <strong style="color: #3b82f6;">evita distorções</strong> e garante uma simulação limpa, educacional e consistente.
+                </p>
+            </div>
+
+            <!-- Seção 2 -->
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: #3b82f6; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                    📈 2. O que USAMOS do passado • Dados estatísticos
+                </h3>
+                <p style="color: #e6e6e6; line-height: 1.8; font-family: 'Inter', sans-serif;">
+                    Apenas <strong>duas características estatísticas reais</strong>, que realmente importam:<br><br>
+                    
+                    <div style="background: rgba(16, 185, 129, 0.1); border-left: 3px solid #10b981; padding: 15px; border-radius: 6px; margin: 15px 0;">
+                        <strong style="color: #10b981;">✔ Rentabilidade média histórica (retorno)</strong><br>
+                        <span style="color: rgba(255, 255, 255, 0.7);">Representa a "velocidade média" do investimento ao longo dos anos.</span>
+                    </div>
+                    
+                    <div style="background: rgba(16, 185, 129, 0.1); border-left: 3px solid #10b981; padding: 15px; border-radius: 6px;">
+                        <strong style="color: #10b981;">✔ Volatilidade histórica</strong><br>
+                        <span style="color: rgba(255, 255, 255, 0.7);">Representa o "quanto balança" para cima e para baixo.</span>
+                    </div><br>
+                    
+                    Esses dois números são suficientes para simular o comportamento típico daquele ativo.<br><br>
+                    <em style="color: #3b82f6;">É a mesma técnica usada em modelos financeiros acadêmicos e educacionais.</em>
+                </p>
+            </div>
+
+            <!-- Seção 3 -->
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: #3b82f6; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                    🎯 3. Marco Zero = Hoje • Futuro plausível
+                </h3>
+                <p style="color: #e6e6e6; line-height: 1.8; font-family: 'Inter', sans-serif;">
+                    O ponto inicial é sempre:<br><br>
+                    
+                    <div style="text-align: center; background: rgba(212, 175, 55, 0.15); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong style="color: #d4af37; font-size: 1.2rem;">🟨 Marco Zero = Hoje</strong>
+                    </div>
+                    
+                    A simulação caminha para <strong>FRENTE</strong>:<br><br>
+                    
+                    <div style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.1rem; line-height: 2;">
+                        → Ano 1<br>
+                        → Ano 2<br>
+                        → Ano 3<br>
+                        → …<br>
+                        → Ano X
+                    </div><br>
+                    
+                    <strong style="color: #3b82f6;">Nunca para trás.</strong>
+                </p>
+            </div>
+
+            <!-- Seção 4 -->
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: #3b82f6; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                    ⚙️ 4. Como o gráfico é desenhado • Processo mensal
+                </h3>
+                <p style="color: #e6e6e6; line-height: 1.8; font-family: 'Inter', sans-serif;">
+                    A cada mês, o simulador aplica:<br><br>
+                    
+                    <div style="margin-left: 20px; color: rgba(255, 255, 255, 0.8); line-height: 2.2;">
+                        ✔ A rentabilidade média anual convertida em mensal<br>
+                        ✔ Um ruído aleatório baseado na volatilidade (distribuição normal)<br>
+                        ✔ Seu aporte mensal<br>
+                        ✔ Correção pelo cenário (pessimista/base/otimista)
+                    </div><br>
+                    
+                    Isso gera:<br><br>
+                    
+                    <div style="background: rgba(59, 130, 246, 0.08); padding: 15px; border-radius: 6px; color: rgba(255, 255, 255, 0.8); line-height: 2;">
+                        → subidas e descidas naturais<br>
+                        → efeitos de mercado realistas<br>
+                        → trajetória coerente com o comportamento típico do ETF
+                    </div><br>
+                    
+                    É exatamente por isso que:<br><br>
+                    
+                    <div style="margin-left: 20px; color: #10b981; line-height: 2;">
+                        ✔ BOVA11 oscila bastante<br>
+                        ✔ SMAL11 oscila mais ainda<br>
+                        ✔ CDB é estável<br>
+                        ✔ Tesouro Selic vira linha reta<br>
+                        ✔ IPCA+ sobe suave e consistente
+                    </div>
+                </p>
+            </div>
+
+            <!-- Seção 5 -->
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: #3b82f6; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                    💡 5. Por que isso é melhor • Vantagens do método
+                </h3>
+                <p style="color: #e6e6e6; line-height: 1.8; font-family: 'Inter', sans-serif;">
+                    Porque:<br><br>
+                    
+                    <div style="margin-left: 20px; color: #10b981; line-height: 2.2;">
+                        ✔ Evita simular períodos que não representam o futuro<br>
+                        ✔ Não depende de "janeiros bons" ou "marços ruins"<br>
+                        ✔ Não contamina a simulação com eventos históricos específicos<br>
+                        ✔ O aprendizado fica mais limpo<br>
+                        ✔ Permite comparar ativos de forma justa<br>
+                        ✔ Deixa o usuário ver como a volatilidade se comportaria EM QUALQUER ano
+                    </div><br>
+                    
+                    <strong style="color: #d4af37; font-size: 1.1rem;">O objetivo é EDUCAR, não prever.</strong>
+                </p>
+            </div>
+
+            <!-- Seção 6 -->
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: #3b82f6; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                    📊 6. Como interpretar os resultados • Leitura correta
+                </h3>
+                <p style="color: #e6e6e6; line-height: 1.8; font-family: 'Inter', sans-serif;">
+                    A linha mostra:<br><br>
+                    
+                    <div style="background: rgba(212, 175, 55, 0.1); border-left: 3px solid #d4af37; padding: 15px; border-radius: 6px; margin: 15px 0;">
+                        👉 como seu patrimônio <strong style="color: #d4af37;">evoluiria</strong> se aquele ativo mantivesse suas características típicas ao longo do tempo<br><br>
+                        <span style="color: rgba(255, 255, 255, 0.6);">e não um replay do passado.</span>
+                    </div>
+                    
+                    Por isso você vê:<br><br>
+                    
+                    <div style="margin-left: 20px; color: rgba(255, 255, 255, 0.8); line-height: 2;">
+                        → ondulações típicas de renda variável<br>
+                        → picos que imitam bull markets<br>
+                        → quedas que imitam crises<br>
+                        → tendência geral que reflete a média histórica
+                    </div>
+                </p>
+            </div>
+
+            <!-- Seção 7 - Conclusão -->
+            <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.1)); border: 1px solid rgba(59, 130, 246, 0.3); padding: 25px; border-radius: 12px; text-align: center;">
+                <h3 style="color: #3b82f6; font-size: 1.3rem; margin-bottom: 15px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                    🎓 Conclusão Técnica
+                </h3>
+                <p style="font-family: 'Inter', sans-serif; color: #e6e6e6; line-height: 1.8; margin: 0;">
+                    O INVLAB+ utiliza <strong style="color: #3b82f6;">simulação estocástica</strong> baseada em parâmetros históricos reais.<br>
+                    Essa abordagem é padrão em finanças quantitativas e educação financeira acadêmica.<br><br>
+                    <em style="color: #10b981;">Você está usando uma ferramenta de nível profissional, com propósito 100% educacional.</em>
+                </p>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <button onclick="fecharModalTecnico()" style="padding: 14px 32px; background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%); color: #fff; border: none; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);">
+                    ✅ Entendi a Metodologia
+                </button>
+            </div>
+
         </div>
     </div>
 
@@ -1668,9 +2035,9 @@ function renderResultados(resultados, totalAportado, resumo) {
                 <div class="result-value">R$ ${res.valorFinal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
                 <div class="result-subtitle">
                     Lucro: <span class="${res.lucro > 0 ? 'gain' : 'loss'}">R$ ${res.lucro.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span><br>
-                    Rentabilidade: <span class="gain">${res.rentabilidadeTotal.toFixed(2)}%</span><br>
-                    Real: R$ ${res.valorReal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}<br>
-                    Drawdown Máximo: <span class="${res.drawdown > 0.1 ? 'loss' : 'gain'}">${(res.drawdown * 100).toFixed(2)}%</span>
+                    Rentabilidade<span class="help-icon" data-tooltip="Percentual de crescimento sobre o valor aportado">?</span>: <span class="gain">${res.rentabilidadeTotal.toFixed(2)}%</span><br>
+                    Real<span class="help-icon" data-tooltip="Valor corrigido pela inflação. Poder de compra real">?</span>: R$ ${res.valorReal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}<br>
+                    Drawdown<span class="help-icon" data-tooltip="Maior queda do pico ao vale. Quanto maior, mais oscila">?</span>: <span class="${res.drawdown > 0.1 ? 'loss' : 'gain'}">${(res.drawdown * 100).toFixed(2)}%</span>
                 </div>
             </div>
         `;
@@ -1719,7 +2086,10 @@ function renderGrafico(datasets, meses) {
         chartDiv.id = 'chart-wrapper';
         chartDiv.className = 'chart-fullwidth';
         chartDiv.innerHTML = `
-            <div class="panel-title">📈 Evolução dos Investimentos</div>
+            <div class="panel-title" style="display: flex; align-items: center;">
+                📈 Evolução dos Investimentos
+                <span class="help-icon" data-tooltip="Eixo X: anos | Eixo Y: valor (R$) | Inflação e aportes já incluídos" style="margin-left: 10px; width: 20px; height: 20px; line-height: 20px; font-size: 12px;">ℹ️</span>
+            </div>
             
             <!-- TIP 4 -->
             <div class="tip-box">
@@ -1735,6 +2105,7 @@ function renderGrafico(datasets, meses) {
                 <button class="chart-control-btn active" onclick="toggleChartView('linear')">Linear</button>
                 <button class="chart-control-btn" onclick="toggleChartView('log')">Logarítmica</button>
                 <button class="chart-control-btn" onclick="resetZoom()">Resetar Zoom</button>
+                <button class="chart-control-btn" onclick="abrirModalTecnico()" style="background: linear-gradient(135deg, #1e40af, #3b82f6); margin-left: 10px;">ℹ️ Como funciona a simulação</button>
             </div>
             <div class="chart-container">
                 <canvas id="grafico"></canvas>
@@ -1874,6 +2245,19 @@ function abrirTutorial() {
 
 function fecharTutorial() {
     document.getElementById('modalTutorial').style.display = 'none';
+    document.body.style.overflow = 'auto'; // Restaurar scroll da página
+}
+
+// ============================================
+// MODAL TÉCNICO - Funções
+// ============================================
+function abrirModalTecnico() {
+    document.getElementById('modalTecnico').style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Bloquear scroll da página
+}
+
+function fecharModalTecnico() {
+    document.getElementById('modalTecnico').style.display = 'none';
     document.body.style.overflow = 'auto'; // Restaurar scroll da página
 }
 
