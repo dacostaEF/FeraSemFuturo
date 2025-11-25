@@ -647,77 +647,6 @@
             font-weight: 600;
         }
 
-        /* Caixa de Aviso sobre Resgate Antecipado */
-        /* CALLOUTS - MODELO CDB (SUPERIOR) */
-        .callout {
-            display: flex;
-            gap: 10px; /* IGUAL AO CDB */
-            padding: 14px; /* IGUAL AO CDB */
-            border-radius: 10px; /* IGUAL AO CDB */
-            margin-bottom: 18px; /* IGUAL AO CDB */
-            border-left: 3px solid; /* IGUAL AO CDB */
-            text-align: left;
-            width: 100%; /* Garante mesma largura que outros containers */
-            box-sizing: border-box; /* Inclui padding e border na largura total */
-            /* SEM box-shadow pesada */
-            /* SEM border dupla */
-        }
-
-        .callout-info {
-            background: rgba(59, 130, 246, 0.1); /* Azul INVLAB */
-            border-left-color: #3B82F6;
-        }
-
-        .callout-warning {
-            background: rgba(245, 158, 11, 0.1); /* Laranja suave (não vermelho!) */
-            border-left-color: #F59E0B;
-        }
-
-        .callout-success {
-            background: rgba(16, 185, 129, 0.1); /* Verde INVLAB */
-            border-left-color: #10b981;
-        }
-
-        .callout-icon {
-            font-size: 1.75rem; /* IGUAL AO CDB */
-            flex-shrink: 0;
-        }
-
-        .callout-content {
-            flex: 1;
-        }
-
-        .callout-content h3 {
-            color: rgba(255, 255, 255, 0.95); /* Branco legível */
-            font-size: 1rem; /* IGUAL AO CDB */
-            margin-bottom: 8px; /* IGUAL AO CDB */
-            font-weight: 600;
-        }
-
-        .callout-content p {
-            color: rgba(255, 255, 255, 0.85); /* Texto claro */
-            line-height: 1.6; /* IGUAL AO CDB */
-            margin-bottom: 8px;
-        }
-
-        .callout-content ul {
-            color: rgba(255, 255, 255, 0.85);
-            line-height: 1.6;
-            margin-left: 20px;
-            list-style-position: outside;
-        }
-
-        .callout-content li {
-            margin-bottom: 4px;
-        }
-
-        .callout-content strong {
-            color: #10b981; /* Verde INVLAB para destaques */
-            font-weight: 600;
-        }
-
-        /* Premissas do Simulador */
-        /* Backwards compatibility - classes antigas removidas (usar .callout agora) */
 
         /* Gráfico de Evolução */
         .chart-container {
@@ -730,6 +659,121 @@
 
         .chart-container canvas {
             max-height: 280px; /* REDUZIDO: 400px → 280px (-30%) */
+        }
+
+        /* ======================================
+           💡 POPUPS INFORMATIVOS PREMIUM INVLAB
+        ====================================== */
+
+        /* Linha dos ícones informativos */
+        .info-row {
+            display: flex;
+            gap: 24px;
+            margin: 28px 0 0 0; /* (1) +8px de respiro em relação ao botão Simular */
+            flex-wrap: wrap;
+            justify-content: center; /* Centraliza os botões */
+            align-items: center;
+        }
+
+        .info-trigger {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* (4) Centraliza conteúdo interno */
+            gap: 6px;
+            font-size: 16px; /* (2) Fonte 1px maior para elegância */
+            cursor: pointer;
+            color: #8ACC66; /* Verde oliva INVLAB */
+            transition: all 0.2s ease;
+            padding: 6px 12px;
+            border-radius: 6px;
+            background: rgba(138, 204, 166, 0.05);
+            border: 1px solid rgba(138, 204, 166, 0.15);
+            min-width: 200px; /* (4) Garante tamanhos proporcionais entre os botões */
+        }
+
+        .info-trigger:hover {
+            color: #CCAA66; /* Dourado INVLAB no hover */
+            background: rgba(204, 170, 102, 0.1);
+            border-color: rgba(204, 170, 102, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .info-trigger i {
+            font-size: 18px;
+        }
+
+        /* Tooltip/Popup Premium */
+        .inv-tooltip {
+            position: fixed;
+            background: rgba(13, 22, 32, 0.98); /* Fundo escuro INVLAB */
+            border: 1px solid rgba(204, 170, 102, 0.25); /* Borda dourada */
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            padding: 20px 24px;
+            max-width: 420px;
+            width: 90%;
+            display: none;
+            z-index: 9999;
+            color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+        }
+
+        .inv-tooltip h4 {
+            font-size: 18px;
+            color: #FFFFFF;
+            margin: 0 0 14px 0;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .inv-tooltip ul {
+            margin: 0;
+            padding-left: 20px;
+            line-height: 1.7;
+        }
+
+        .inv-tooltip li {
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .inv-tooltip li strong {
+            color: #8ACC66; /* Verde oliva para destaques */
+            font-weight: 600;
+        }
+
+        .inv-tooltip p {
+            margin: 12px 0 0 0;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .tooltip-footer {
+            margin-top: 14px;
+            font-size: 13px;
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        /* Responsivo mobile - Popups */
+        @media (max-width: 768px) {
+            .info-row {
+                gap: 12px;
+            }
+
+            .info-trigger {
+                font-size: 0.85rem;
+                padding: 5px 10px;
+            }
+
+            .inv-tooltip {
+                max-width: 90%;
+                padding: 16px 18px;
+            }
+
+            .inv-tooltip h4 {
+                font-size: 16px;
+            }
         }
 
         /* Responsividade */
@@ -1182,6 +1226,17 @@
                 </button>
             </form>
 
+            <!-- Linha de Informações (Popups) - Abaixo do botão -->
+            <div class="info-row">
+                <span class="info-trigger" data-tooltip="premissas">
+                    ℹ️ Premissas do Simulador
+                </span>
+
+                <span class="info-trigger" data-tooltip="resgate">
+                    ⚠️ Resgate & Marcação a Mercado
+                </span>
+            </div>
+
             <p class="input-section-note">
                 🔍 Para simulações completas, com todos os títulos disponíveis, taxas oficiais atualizadas,
                 datas exatas de vencimento e cenários de resgate antecipado, utilize também o simulador oficial
@@ -1224,87 +1279,41 @@
             </div>
         </div>
 
-        <!-- Caixa de Aviso: Resgate Antecipado -->
-        <div class="callout callout-warning">
-            <div class="callout-icon">⚠️</div>
-            <div class="callout-content">
-                <h3>Atenção: Resgate Antecipado e Marcação a Mercado</h3>
-                <p>
-                    <strong>Este simulador calcula o rendimento até o vencimento.</strong> Porém, é fundamental entender que:
-                </p>
-                <ul>
-                <li>
-                    <strong>Tesouro Selic:</strong> Possui liquidez diária e baixo risco de perda no resgate antecipado. 
-                    Ideal para reserva de emergência.
-                </li>
-                <li>
-                    <strong>Tesouro IPCA+ e Prefixado:</strong> Sofrem <strong>marcação a mercado</strong>. 
-                    Isso significa que, se você precisar resgatar antes do vencimento, o preço será calculado de acordo com as 
-                    taxas de juros do mercado naquele momento, podendo resultar em <strong>lucro ou prejuízo</strong>.
-                </li>
-                <li>
-                    <strong>Recomendação:</strong> Invista nesses títulos apenas se tiver certeza de que poderá manter 
-                    o investimento até o vencimento.
-                </li>
-                <li>
-                    Para mais detalhes, consulte o site oficial: 
-                    <a href="https://www.tesourodireto.com.br" target="_blank" style="color: #1a73e8;">
-                        www.tesourodireto.com.br
-                    </a>
-                </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Premissas do Simulador -->
-        <div class="callout callout-info">
-            <div class="callout-icon">ℹ️</div>
-            <div class="callout-content">
-                <h3>Premissas do Simulador</h3>
-                <ul>
-                <li>
-                    <strong>Tesouro Selic (2029):</strong> 100% da taxa Selic (atualmente: 11,25% a.a.)
-                </li>
-                <li>
-                    <strong>Tesouro IPCA+ (2029):</strong> IPCA + 6,50% a.a. (taxa exemplificativa)
-                </li>
-                <li>
-                    <strong>Tesouro Prefixado (2027):</strong> 12,50% a.a. (taxa exemplificativa)
-                </li>
-                <li>
-                    <strong>Poupança:</strong> 0,5% a.m. quando Selic > 8,5% a.a. ou 70% da Selic quando ≤ 8,5% a.a.
-                </li>
-                <li>
-                    <strong>Imposto de Renda (Tesouro):</strong> 
-                    22,5% (até 180 dias), 20% (181-360 dias), 17,5% (361-720 dias), 15% (acima de 720 dias)
-                </li>
-                <li>
-                    <strong>Poupança:</strong> Isenta de IR
-                </li>
-                <li>
-                    <strong>IOF:</strong> Não aplicado (investimentos superiores a 30 dias)
-                </li>
-                <li>
-                    <strong>Taxas de custódia:</strong> Não incluídas (0,20% a.a. sobre o valor investido)
-                </li>
-                <li>
-                    <strong>IPCA projetado:</strong> 4,5% a.a. (para cálculo do Tesouro IPCA+)
-                </li>
-                <li>
-                    <strong>Fontes:</strong> Banco Central (Selic), Tesouro Direto (taxas exemplificativas), 
-                    IBGE (IPCA projetado)
-                </li>
-                <li>
-                    <strong>Data de atualização:</strong> Novembro de 2024
-                </li>
-                </ul>
-            </div>
-        </div>
-        
         <!-- ASSINATURA INVLAB (Premium Footer) -->
         <div class="sim-signature">
             Conteúdo 100% educacional • INVLAB © 2025
         </div>
+    </div>
+
+    <!-- POPUPS INFORMATIVOS PREMIUM - FORA DO CONTAINER -->
+    <!-- Tooltip Premissas -->
+    <div id="tooltip-premissas" class="inv-tooltip">
+        <h4>📊 Premissas do Simulador</h4>
+        <ul>
+            <li><strong>Tesouro Selic (2029):</strong> 100% da taxa Selic (atualmente: 11,25% a.a.)</li>
+            <li><strong>Tesouro IPCA+ (2029):</strong> IPCA + 6,50% a.a. (taxa exemplificativa)</li>
+            <li><strong>Tesouro Prefixado (2027):</strong> 12,50% a.a. (taxa exemplificativa)</li>
+            <li><strong>Poupança:</strong> 0,5% a.m. quando Selic > 8,5% a.a. ou 70% da Selic quando ≤ 8,5%</li>
+            <li><strong>Imposto de Renda (Tesouro):</strong> 22,5% (até 180 dias) a 15% (acima de 720 dias)</li>
+            <li><strong>IOF:</strong> Não aplicado (investimentos superiores a 30 dias)</li>
+            <li><strong>Taxas de custódia:</strong> 0,20% a.a. sobre o valor investido (não incluídas)</li>
+            <li><strong>IPCA projetado:</strong> 4,5% a.a. (para cálculo do Tesouro IPCA+)</li>
+        </ul>
+        <p class="tooltip-footer">Fontes: Banco Central (Selic), Tesouro Direto, IBGE | Atualizado: Nov/2024</p>
+    </div>
+
+    <!-- Tooltip Resgate e Marcação -->
+    <div id="tooltip-resgate" class="inv-tooltip">
+        <h4>⚠️ Resgate Antecipado & Marcação a Mercado</h4>
+        <p style="margin-top: 0; margin-bottom: 12px; color: rgba(255, 255, 255, 0.9);">
+            <strong>Este simulador calcula o rendimento até o vencimento.</strong> É fundamental entender:
+        </p>
+        <ul>
+            <li><strong>Tesouro Selic:</strong> Liquidez diária e baixo risco no resgate antecipado. Ideal para reserva de emergência.</li>
+            <li><strong>Tesouro IPCA+ e Prefixado:</strong> Sofrem marcação a mercado. Se resgatar antes do vencimento, o preço será calculado pelas taxas atuais, podendo resultar em lucro ou prejuízo.</li>
+            <li><strong>Recomendação:</strong> Invista nesses títulos apenas se puder manter até o vencimento.</li>
+        </ul>
+        <p class="tooltip-footer">Mais informações: <a href="https://www.tesourodireto.com.br" target="_blank" style="color: #CCAA66;">tesourodireto.com.br</a></p>
     </div>
 
     <!-- Modal Minimalista: Sobre Tesouro Direto -->
@@ -1564,6 +1573,38 @@
     </div>
 
     <script>
+        // ============================================
+        // POPUPS INFORMATIVOS (Premissas + Resgate)
+        // ============================================
+        
+        document.querySelectorAll('.info-trigger').forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                const type = trigger.getAttribute('data-tooltip');
+                const tooltip = document.getElementById(`tooltip-${type}`);
+
+                // Fecha todos os outros popups antes de abrir
+                document.querySelectorAll('.inv-tooltip').forEach(t => t.style.display = 'none');
+
+                // Posiciona e abre o popup
+                const rect = trigger.getBoundingClientRect();
+                tooltip.style.left = (rect.left + window.scrollX) + 'px';
+                tooltip.style.top = (rect.bottom + window.scrollY + 8) + 'px';
+                tooltip.style.display = 'block';
+
+                e.stopPropagation();
+            });
+        });
+
+        // Fecha popups ao clicar fora
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.inv-tooltip').forEach(t => t.style.display = 'none');
+        });
+
+        // Fecha popups ao scrollar
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.inv-tooltip').forEach(t => t.style.display = 'none');
+        });
+
         // ============================================
         // CONSTANTES E PARÂMETROS ATUALIZADOS
         // ============================================
