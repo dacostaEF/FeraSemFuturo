@@ -23,6 +23,9 @@
     <!-- Chart.js para gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
+    <!-- jsPDF para geração de relatórios PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
     <style>
         /* ============================= */
         /*      INVLAB SIMULADOR CSS     */
@@ -410,6 +413,78 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* 12. Comparador PRO + PDF */
+        .comparador-container {
+            margin-top:40px;
+            background:#1e293b;
+            padding:25px;
+            border-radius:15px;
+            border:1px solid #334155;
+        }
+
+        .comparador-title {
+            font-size:1.5rem;
+            font-weight:700;
+            color:#f8fafc;
+            margin-bottom:20px;
+        }
+
+        .comparador-table {
+            width:100%;
+            border-collapse:collapse;
+            margin-top:20px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: block;
+        }
+
+        .comparador-table thead {
+            position: sticky;
+            top: 0;
+            background: #1e293b;
+        }
+
+        .comparador-table th,
+        .comparador-table td {
+            padding:8px 10px;
+            text-align:center;
+            border-bottom:1px solid #334155;
+            color:#e2e8f0;
+            font-size:0.9rem;
+        }
+
+        .comparador-table th {
+            color:#8b5cf6;
+            font-weight:700;
+        }
+
+        .btn-pdf {
+            margin-top:20px;
+            padding:14px 26px;
+            background:linear-gradient(135deg,#8b5cf6,#06b6d4);
+            font-size:1.1rem;
+            border:none;
+            border-radius:10px;
+            color:white;
+            font-weight:600;
+            cursor:pointer;
+            width:100%;
+            transition: 0.3s ease;
+        }
+
+        .btn-pdf:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(139, 92, 246, 0.35);
+        }
+
+        @media (max-width: 768px) {
+            .comparador-table th,
+            .comparador-table td {
+                font-size: 0.75rem;
+                padding: 6px 4px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -518,6 +593,19 @@
                         </div>
                     </div>
                 </section>
+            </div>
+
+            <!-- ===================================================== -->
+            <!-- 🔥 MÓDULO 7 — COMPARADOR PRO + RELATÓRIO PDF INVLAB -->
+            <!-- ===================================================== -->
+            
+            <div class="comparador-container" id="comparadorContainer" style="display:none;">
+                <div class="comparador-title">📊 Comparador PRO — Evolução do Patrimônio</div>
+                <canvas id="comparadorProChart" height="110"></canvas>
+
+                <table class="comparador-table" id="comparadorTable"></table>
+
+                <button class="btn-pdf" onclick="gerarPDF_INVLAB()">📄 Baixar Relatório Premium (PDF)</button>
             </div>
 
             <!-- ===================================================== -->
@@ -1123,8 +1211,269 @@
             oldCalculoFinal();
         };
 
+        // =====================================================
+        // 🔥 MÓDULO 7 — COMPARADOR PRO + RELATÓRIO PDF
+        // =====================================================
+
+        let comparadorChart = null;
+
+        // Hook para executar comparador após simulação
+        const oldFinal2 = calcularSimulacao_UI_Upgrade_final;
+        calcularSimulacao_UI_Upgrade_final = function () {
+            oldFinal2();
+            setTimeout(rodarComparadorPRO, 300);
+        };
+
+        // =======================================
+        // COMPARADOR — GRÁFICO + TABELA
+        // =======================================
+        function rodarComparadorPRO() {
+
+            const patrimonio = parseFloat(
+                document.getElementById("resultOwn").textContent.replace(/[R$\s\.]/g,"").replace(",",".")
+            );
+            const rendaSimples = parseFloat(
+                document.getElementById("resultPensionSimple").textContent.replace(/[R$\s\.]/g,"").replace(",",".")
+            );
+            const rendaReversivel = parseFloat(
+                document.getElementById("resultPensionRev").textContent.replace(/[R$\s\.]/g,"").replace(",",".")
+            );
+
+            const idadeAtual = parseInt(document.getElementById("currentAge").value);
+            const idadeApos = parseInt(document.getElementById("retirementAge").value);
+
+            const anosProjecao = 25;
+            const dados = gerarEvolucaoProjecao(idadeApos, anosProjecao, patrimonio, rendaSimples, rendaReversivel);
+
+            montarTabelaComparador(dados);
+            montarGraficoComparador(dados);
+
+            // Mostrar container do comparador
+            document.getElementById("comparadorContainer").style.display = "block";
+        }
+
+        // =======================================
+        // PROJEÇÃO ANO A ANO
+        // =======================================
+        function gerarEvolucaoProjecao(idadeInicio, anos, patrimonio, rendaSimples, rendaReversivel) {
+
+            let dados = [];
+
+            let invest = patrimonio;
+            let prevSimples = rendaSimples * 12; // Anualizar
+            let prevRev = rendaReversivel * 12; // Anualizar
+
+            for (let i=0; i<=anos; i++) {
+                dados.push({
+                    idade: idadeInicio + i,
+                    invest: invest,
+                    simples: prevSimples,
+                    reversivel: prevRev,
+                    dif1: invest - prevSimples,
+                    dif2: invest - prevRev
+                });
+
+                // Crescimento anual
+                invest *= 1.07; // 7% a.a.
+                prevSimples *= 1.02; // 2% a.a.
+                prevRev *= 1.025; // 2.5% a.a.
+            }
+
+            return dados;
+        }
+
+        // =======================================
+        // TABELA PRO
+        // =======================================
+        function montarTabelaComparador(dados) {
+
+            const tabela = document.getElementById("comparadorTable");
+
+            tabela.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Idade</th>
+                        <th>Investimento Próprio</th>
+                        <th>Previd. Simples</th>
+                        <th>Previd. Reversível</th>
+                        <th>Dif. vs Simples</th>
+                        <th>Dif. vs Reversível</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            `;
+
+            const tbody = tabela.querySelector('tbody');
+
+            dados.forEach(row => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${row.idade}</td>
+                        <td>R$ ${row.invest.toLocaleString("pt-BR", {maximumFractionDigits: 0})}</td>
+                        <td>R$ ${row.simples.toLocaleString("pt-BR", {maximumFractionDigits: 0})}</td>
+                        <td>R$ ${row.reversivel.toLocaleString("pt-BR", {maximumFractionDigits: 0})}</td>
+                        <td style="color:#10b981;">+R$ ${row.dif1.toLocaleString("pt-BR", {maximumFractionDigits: 0})}</td>
+                        <td style="color:#38bdf8;">+R$ ${row.dif2.toLocaleString("pt-BR", {maximumFractionDigits: 0})}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        // =======================================
+        // GRÁFICO PRO
+        // =======================================
+        function montarGraficoComparador(dados) {
+
+            const ctx = document.getElementById("comparadorProChart").getContext("2d");
+
+            if (comparadorChart) comparadorChart.destroy();
+
+            comparadorChart = new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: dados.map(d => d.idade),
+                    datasets: [
+                        {
+                            label:"Investimento Próprio",
+                            data: dados.map(d => d.invest),
+                            borderColor:"#10b981",
+                            borderWidth:3,
+                            fill:false,
+                            tension: 0.1
+                        },
+                        {
+                            label:"Previdência Simples",
+                            data: dados.map(d => d.simples),
+                            borderColor:"#ef4444",
+                            borderWidth:2,
+                            fill:false,
+                            tension: 0.1
+                        },
+                        {
+                            label:"Previdência Reversível",
+                            data: dados.map(d => d.reversivel),
+                            borderColor:"#3b82f6",
+                            borderWidth:2,
+                            fill:false,
+                            tension: 0.1
+                        }
+                    ]
+                },
+                options: {
+                    responsive:true,
+                    maintainAspectRatio: true,
+                    scales:{
+                        y:{
+                            ticks:{color:"#e2e8f0"}, 
+                            grid:{color:"#334155"}
+                        },
+                        x:{
+                            ticks:{color:"#e2e8f0"}, 
+                            grid:{color:"#334155"}
+                        }
+                    },
+                    plugins:{
+                        legend:{
+                            labels:{color:"#e2e8f0"}
+                        },
+                        title: {
+                            display: true,
+                            text: "Evolução do Patrimônio - Comparação de 25 anos",
+                            color: "#f8fafc",
+                            font: { size: 16 }
+                        }
+                    }
+                }
+            });
+        }
+
+        // =======================================
+        // GERAR PDF PREMIUM INVLAB
+        // =======================================
+        async function gerarPDF_INVLAB() {
+            const { jsPDF } = window.jspdf;
+
+            const pdf = new jsPDF("p","pt","a4");
+            let y = 40;
+
+            // Cabeçalho
+            pdf.setFont("Helvetica","bold");
+            pdf.setFontSize(20);
+            pdf.setTextColor(0, 0, 0);
+            pdf.text("INVLAB+ — Relatório Premium de Aposentadoria", 40, y);
+            y += 30;
+
+            pdf.setFontSize(12);
+            pdf.setFont("Helvetica","normal");
+            pdf.text("Este relatório foi gerado automaticamente pelo Simulador Anti-Pegadinha INVLAB+", 40, y);
+            y += 20;
+
+            const dataAtual = new Date().toLocaleDateString("pt-BR");
+            pdf.setFontSize(10);
+            pdf.text(`Data: ${dataAtual}`, 40, y);
+            y += 40;
+
+            // Parâmetros da simulação
+            pdf.setFontSize(14);
+            pdf.setFont("Helvetica","bold");
+            pdf.text("Parâmetros da Simulação:", 40, y);
+            y += 20;
+
+            pdf.setFontSize(11);
+            pdf.setFont("Helvetica","normal");
+            const idadeAtual = document.getElementById("currentAge").value;
+            const idadeApos = document.getElementById("retirementAge").value;
+            const aporte = document.getElementById("monthlyInvestment").value;
+            const rendaDesejada = document.getElementById("desiredIncome").value;
+
+            pdf.text(`• Idade Atual: ${idadeAtual} anos`, 40, y); y+=16;
+            pdf.text(`• Idade de Aposentadoria: ${idadeApos} anos`, 40, y); y+=16;
+            pdf.text(`• Aporte Mensal: R$ ${parseFloat(aporte).toLocaleString("pt-BR")}`, 40, y); y+=16;
+            pdf.text(`• Renda Desejada: R$ ${parseFloat(rendaDesejada).toLocaleString("pt-BR")}`, 40, y); y+=16;
+            pdf.text(`• Cenário: ${currentScenario.charAt(0).toUpperCase() + currentScenario.slice(1)}`, 40, y); y+=30;
+
+            // Gráfico
+            const canvas = document.getElementById("comparadorProChart");
+            const img = canvas.toDataURL("image/png", 1.0);
+            pdf.addImage(img,"PNG",40,y,520,260);
+            y += 280;
+
+            // Análise
+            pdf.setFontSize(14);
+            pdf.setFont("Helvetica","bold");
+            pdf.text("Comparação Estratégica (Resumo):",40,y); 
+            y+=20;
+
+            pdf.setFontSize(11);
+            pdf.setFont("Helvetica","normal");
+            pdf.text("• Investimento Próprio preserva herança e vence no longo prazo.",40,y); y+=16;
+            pdf.text("• Previdência Simples: potencial destruidor de patrimônio.",40,y); y+=16;
+            pdf.text("• Previdência Reversível: mais segura, porém menos rentável.",40,y); y+=30;
+
+            // Recomendação INVLAB
+            pdf.setFontSize(12);
+            pdf.setFont("Helvetica","bold");
+            pdf.setTextColor(16, 185, 129); // Verde
+            pdf.text("⭐ Recomendação INVLAB: Investimento Próprio", 40, y);
+            y+=20;
+
+            pdf.setFontSize(10);
+            pdf.setFont("Helvetica","normal");
+            pdf.setTextColor(0, 0, 0);
+            pdf.text("Maior rentabilidade, preservação de herança e total controle do patrimônio.", 40, y);
+
+            // Rodapé
+            pdf.setFontSize(10);
+            pdf.setTextColor(100, 100, 100);
+            pdf.text("INVLAB+ — Educação Financeira Sem Vendas • www.invlab.com.br", 40, 820);
+            
+            pdf.save("Relatorio_INVLAB_Aposentadoria.pdf");
+
+            console.log('📄 PDF gerado com sucesso!');
+        }
+
         // Log inicial
-        console.log('🏖️ Simulador Anti-Pegadinha INVLAB+ - TODOS OS 6 MÓDULOS INTEGRADOS ✅');
+        console.log('🏖️ Simulador Anti-Pegadinha INVLAB+ - TODOS OS 7 MÓDULOS INTEGRADOS ✅');
     </script>
 </body>
 </html>
