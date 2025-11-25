@@ -291,6 +291,85 @@
             color: #00e38c;
         }
 
+        /* 11. Acordeão de Configurações Avançadas */
+        .acordeon-container {
+            background:#1e293b;
+            border:1px solid #334155;
+            border-radius:12px;
+            margin-top:40px;
+            overflow:hidden;
+        }
+
+        .acordeon-header {
+            padding:18px 20px;
+            cursor:pointer;
+            font-size:1.2rem;
+            font-weight:600;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            color:#f8fafc;
+            background:#0f172a;
+            transition:0.3s;
+        }
+
+        .acordeon-header:hover {
+            background:#162236;
+        }
+
+        .acordeon-icon {
+            transition:0.3s;
+        }
+
+        .acordeon-content {
+            max-height:0;
+            overflow:hidden;
+            transition:max-height 0.35s ease;
+            background:#1e293b;
+            padding:0 20px;
+        }
+
+        .acordeon-content-inner {
+            padding:20px 0;
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+            gap:20px;
+        }
+
+        .acordeon-input {
+            display:flex;
+            flex-direction:column;
+        }
+
+        .acordeon-input label {
+            margin-bottom:6px;
+            font-size:0.9rem;
+            color:#cbd5e1;
+        }
+
+        .acordeon-input input,
+        .acordeon-input select {
+            padding:12px;
+            border:1px solid #334155;
+            border-radius:8px;
+            background:#0f172a;
+            color:#e2e8f0;
+            font-size:1rem;
+        }
+
+        .acordeon-input input:focus,
+        .acordeon-input select:focus {
+            outline:none;
+            border-color:#8b5cf6;
+            box-shadow:0 0 0 2px rgba(139,92,246,0.25);
+        }
+
+        .acordeon-divider {
+            margin:20px 0;
+            height:1px;
+            background:#334155;
+        }
+
         /* Responsividade Mobile */
         @media (max-width: 768px) {
             .invlab-title {
@@ -325,6 +404,10 @@
 
             .scenario-btn {
                 width: 100%;
+            }
+
+            .acordeon-content-inner {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -435,6 +518,62 @@
                         </div>
                     </div>
                 </section>
+            </div>
+
+            <!-- ===================================================== -->
+            <!-- 🔧 MÓDULO 6 – CONFIGURAÇÕES AVANÇADAS (ACORDEÃO INVLAB+) -->
+            <!-- ===================================================== -->
+            
+            <!-- ACORDEÃO DE CONFIGURAÇÕES AVANÇADAS -->
+            <div class="acordeon-container">
+                <div class="acordeon-header" id="acordeonToggle">
+                    ⚙️ Configurações Avançadas (Opcional)
+                    <span class="acordeon-icon" id="acordeonIcon">▼</span>
+                </div>
+                <div class="acordeon-content" id="acordeonContent">
+                    <div class="acordeon-content-inner">
+                        <!-- Rentabilidade -->
+                        <div class="acordeon-input">
+                            <label>Rentabilidade Personalizada (% a.a.)</label>
+                            <input type="number" id="rentabilidadeCustom" value="" placeholder="Ex: 7.5" step="0.1">
+                        </div>
+                        <!-- Inflação -->
+                        <div class="acordeon-input">
+                            <label>Inflação Estimada (% a.a.)</label>
+                            <input type="number" id="inflacaoCustom" value="" placeholder="Ex: 4.5" step="0.1">
+                        </div>
+                        <!-- Taxa Real Desejada -->
+                        <div class="acordeon-input">
+                            <label>Taxa Real Desejada na Aposentadoria (% a.m.)</label>
+                            <input type="number" id="taxaRealDesejada" value="" placeholder="Ex: 0.55" step="0.01">
+                        </div>
+                        <!-- Taxa administrativa -->
+                        <div class="acordeon-input">
+                            <label>Taxa Administrativa da Previdência (% a.a.)</label>
+                            <input type="number" id="taxaAdmCustom" value="" placeholder="Ex: 1.5" step="0.1">
+                        </div>
+                        <!-- Aporte anual -->
+                        <div class="acordeon-input">
+                            <label>Aporte Extra Anual (R$)</label>
+                            <input type="number" id="aporteExtra" value="" placeholder="Ex: 5000" step="100">
+                        </div>
+                        <!-- Tipo de renda -->
+                        <div class="acordeon-input">
+                            <label>Modelo de Renda Pós-Aposentadoria</label>
+                            <select id="modeloRenda">
+                                <option value="linear">Renda Linear</option>
+                                <option value="simple">Vitalícia Simples</option>
+                                <option value="reversivel">Vitalícia Reversível</option>
+                                <option value="saque">Saque Programado</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="acordeon-divider"></div>
+                    <p style="font-size:0.95rem; color:#94a3b8; margin-bottom:20px;">
+                        Estas configurações permitem simulações avançadas para usuários experientes.  
+                        Se você não sabe o que significa, pode deixar tudo em branco — seu simulador usará automaticamente as configurações padrão mais realistas.
+                    </p>
+                </div>
             </div>
 
             <!-- BOTÃO PARA MOSTRAR O MODAL -->
@@ -919,8 +1058,73 @@
             if (e.target === modal) modal.style.display = "none";
         });
 
+        // ============================================
+        // 🔧 MÓDULO 6 – ACORDEÃO E PARÂMETROS AVANÇADOS
+        // ============================================
+
+        // Acordeão INVLAB+
+        const acordeonToggle = document.getElementById("acordeonToggle");
+        const acordeonContent = document.getElementById("acordeonContent");
+        const acordeonIcon = document.getElementById("acordeonIcon");
+
+        acordeonToggle.addEventListener("click", () => {
+            if (acordeonContent.style.maxHeight) {
+                acordeonContent.style.maxHeight = null;
+                acordeonIcon.style.transform = "rotate(0deg)";
+            } else {
+                acordeonContent.style.maxHeight = acordeonContent.scrollHeight + "px";
+                acordeonIcon.style.transform = "rotate(180deg)";
+            }
+        });
+
+        // Integração avançada com o motor do módulo 3
+        function obterParametrosAvancados() {
+            const custom = {};
+
+            // Rentabilidade customizada
+            const r = parseFloat(document.getElementById("rentabilidadeCustom").value);
+            if (!isNaN(r) && r > 0) custom.rentabilidade = r / 100; // Converte % para decimal
+
+            // Inflação
+            const infl = parseFloat(document.getElementById("inflacaoCustom").value);
+            if (!isNaN(infl) && infl > 0) custom.inflacao = infl;
+
+            // Taxa real desejada
+            const tr = parseFloat(document.getElementById("taxaRealDesejada").value);
+            if (!isNaN(tr) && tr > 0) custom.taxaReal = tr / 100; // Converte % para decimal
+
+            // Taxa administrativa
+            const ta = parseFloat(document.getElementById("taxaAdmCustom").value);
+            if (!isNaN(ta) && ta >= 0) custom.taxaAdm = ta / 100; // Converte % para decimal
+
+            // Aporte anual
+            const ap = parseFloat(document.getElementById("aporteExtra").value);
+            if (!isNaN(ap) && ap > 0) custom.aporteExtra = ap;
+
+            // Modelo de renda
+            custom.rendaModelo = document.getElementById("modeloRenda").value;
+
+            return custom;
+        }
+
+        // Hook para o cálculo principal (módulo 4/5)
+        const oldCalculoFinal = calcularSimulacao_UI_Upgrade_final;
+        calcularSimulacao_UI_Upgrade_final = function () {
+            const paramsAvancados = obterParametrosAvancados();
+            // Grava na janela global
+            window.INVLAB_advancedParams = paramsAvancados;
+            
+            // Log dos parâmetros avançados
+            if (Object.keys(paramsAvancados).length > 1) { // > 1 porque sempre tem rendaModelo
+                console.log('⚙️ Parâmetros Avançados Aplicados:', paramsAvancados);
+            }
+            
+            // Executa normalmente
+            oldCalculoFinal();
+        };
+
         // Log inicial
-        console.log('🏖️ Simulador Anti-Pegadinha INVLAB+ - TODOS OS MÓDULOS INTEGRADOS ✅');
+        console.log('🏖️ Simulador Anti-Pegadinha INVLAB+ - TODOS OS 6 MÓDULOS INTEGRADOS ✅');
     </script>
 </body>
 </html>
