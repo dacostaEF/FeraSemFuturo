@@ -114,32 +114,33 @@
             color: #FFFFFF;
         }
 
-        /* Botão Minimalista "Sobre Tesouro Direto" - Verde INVLAB Discreto */
+        /* Botão Gold Touch "Sobre Tesouro Direto" - Padrão INVLAB Premium */
         .btn-about-tesouro {
-            background: rgba(16, 185, 129, 0.15); /* Verde INVLAB sutil */
-            color: #10b981; /* Verde INVLAB */
-            border: 1px solid rgba(16, 185, 129, 0.4);
-            border-radius: 8px; /* REDUZIDO MAIS 20%: 10px → 8px */
-            padding: 8px 11px; /* REDUZIDO MAIS 20%: 10px 14px → 8px 11px */
+            background: linear-gradient(135deg, #355E3B 0%, #CCAA66 100%); /* Gold Touch INVLAB */
+            color: #E4E4E4; /* Branco suave */
+            border: 1px solid rgba(204, 170, 102, 0.3); /* Dourado translúcido */
+            border-radius: 8px;
+            padding: 8px 11px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 6px; /* REDUZIDO MAIS 20%: 8px → 6px */
-            font-size: 0.68rem; /* REDUZIDO MAIS 20%: 0.85rem → 0.68rem */
-            font-weight: 400; /* SEM BOLD: 600 → 400 */
-            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+            gap: 6px;
+            font-size: 0.68rem;
+            font-weight: 500; /* Peso médio para legibilidade */
+            box-shadow: 0 2px 8px rgba(53, 94, 59, 0.2); /* Sombra verde oliva */
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            min-width: 78px; /* REDUZIDO MAIS 20%: 98px → 78px */
+            min-width: 78px;
             justify-self: end;
             backdrop-filter: blur(10px);
         }
 
         .btn-about-tesouro:hover {
-            background: rgba(16, 185, 129, 0.25);
-            border-color: rgba(16, 185, 129, 0.6);
+            border-color: #D4AF37; /* Dourado premium INVLAB */
             transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-            color: #FFFFFF;
+            box-shadow: 
+                0 4px 12px rgba(53, 94, 59, 0.3),      /* Sombra verde oliva */
+                0 2px 8px rgba(204, 170, 102, 0.2);    /* Sombra dourada */
+            color: #FFFFFF; /* Branco puro no hover */
         }
 
         .btn-about-icon {
@@ -502,25 +503,25 @@
 
         .btn-calculate {
             width: 100%;
-            background: linear-gradient(135deg, #047857, #065f46); /* Verde discreto e profissional INVLAB */
-            color: rgba(255, 255, 255, 0.95);
-            border: 1px solid rgba(16, 185, 129, 0.3); /* Borda sutil */
-            padding: 13px 28px; /* REDUZIDO: 18px 40px → 13px 28px (-30%) */
-            font-size: 0.84rem; /* REDUZIDO: 1.2rem → 0.84rem (-30%) */
+            background: linear-gradient(135deg, #355E3B 0%, #CCAA66 100%); /* Gold Touch INVLAB */
+            color: #E4E4E4; /* Branco suave */
+            border: 1px solid rgba(204, 170, 102, 0.3); /* Dourado translúcido */
+            padding: 13px 28px;
+            font-size: 0.84rem;
             font-weight: 700;
-            border-radius: 8px; /* REDUZIDO: 12px → 8px (-30%) */
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 2px 8px rgba(4, 120, 87, 0.2); /* Sombra SUAVE */
+            box-shadow: 0 2px 8px rgba(53, 94, 59, 0.2); /* Sombra verde oliva */
         }
 
         .btn-calculate:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(4, 120, 87, 0.3); /* Sombra discreta no hover */
-            background: linear-gradient(135deg, #059669, #047857);
-            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: 0 6px 16px rgba(53, 94, 59, 0.3); /* Sombra verde oliva no hover */
+            background: linear-gradient(135deg, #355E3B 0%, #CCAA66 100%); /* Mantém o mesmo degradê */
+            border-color: #D4AF37; /* Dourado premium no hover */
         }
 
         /* Resultados */
