@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renda Complementar Inteligente | INVLAB</title>
+    <meta name="description" content="Educação financeira real para construir sua renda complementar com disciplina e decisões inteligentes. INVLAB - Sem venda, sem pegadinhas.">
+    
+    <!-- Fontes INVLAB -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web/src/duotone/style.css">
+    
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="../assets/css/invlab-master.css">
+    <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+    
+    <style>
+        /* ===================================== */
+        /* LANDING PAGE PREMIUM INVLAB MASTER */
+        /* ===================================== */
+        
+        body {
+            background: #0D0D0D;
+            color: #E4E4E4;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Container Principal */
+        .landing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            position: relative;
+        }
+
+        /* Marca d'água INVLAB */
+        .landing-container::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: url('../assets/images/invlab-logo.png') no-repeat center;
+            background-size: contain;
+            opacity: 0.03;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: #D4AF37;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: rgba(16, 185, 129, 0.85);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: #D4AF37;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        /* Disclaimer Box Premium */
+        .disclaimer-box {
+            background: rgba(9, 32, 21, 0.75);
+            border: 1px solid rgba(138, 204, 166, 0.15);
+            border-left: 6px solid #10b981;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.1);
+        }
+
+        .disclaimer-icon {
+            font-size: 3rem;
+            color: #10b981;
+            margin-bottom: 16px;
+        }
+
+        .disclaimer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 16px;
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .disclaimer-text {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .disclaimer-text strong {
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        .disclaimer-link {
+            display: inline-block;
+            margin-top: 16px;
+            color: #D4AF37;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .disclaimer-link:hover {
+            color: rgba(212, 175, 55, 0.7);
+            transform: translateX(4px);
+        }
+
+        /* Section Title */
+        .section-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #D4AF37;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card {
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid rgba(138, 204, 166, 0.1);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #10b981, #D4AF37);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            transform: translateY(-6px);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.15);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #D4AF37;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #E4E4E4;
+            margin-bottom: 12px;
+        }
+
+        .feature-description {
+            font-size: 0.95rem;
+            color: #9CA3AF;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(9, 32, 21, 0.5);
+            border-radius: 20px;
+            border: 1px solid rgba(138, 204, 166, 0.15);
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #D4AF37;
+            margin-bottom: 20px;
+        }
+
+        .cta-subtitle {
+            font-size: 1.1rem;
+            color: rgba(16, 185, 129, 0.85);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-cta-primary {
+            display: inline-block;
+            padding: 18px 48px;
+            background: linear-gradient(90deg, #355E3B, #CCAA66);
+            color: #0c0e13;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-cta-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Footer Educacional */
+        .footer-educacional {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(13, 13, 13, 0.95);
+            border-top: 1px solid rgba(138, 204, 166, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-educacional p {
+            font-size: 1rem;
+            color: #9CA3AF;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .footer-educacional strong {
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        .footer-link {
+            color: #D4AF37;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .footer-link:hover {
+            color: rgba(212, 175, 55, 0.7);
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.05rem;
+            }
+
+            .disclaimer-box {
+                padding: 24px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-title {
+                font-size: 1.8rem;
+            }
+
+            .btn-cta-primary {
+                padding: 16px 36px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Carrossel de Indicadores -->
+    <section id="invlab-carousel-container"></section>
+
+    <!-- Menu Principal Master -->
+    <header class="main-header" style="background: rgba(13, 13, 13, 0.95); padding: 20px 0; border-bottom: 1px solid rgba(138, 204, 166, 0.1); position: sticky; top: 0; z-index: 1000;">
+        <div class="header-container" style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 20px;">
+            <a href="../index.html" style="text-decoration: none;">
+                <img src="../assets/images/invlab-logo.png" alt="INVLAB Logo" style="height: 50px;">
+            </a>
+            <nav style="display: flex; gap: 24px; align-items: center;">
+                <a href="../index.html" style="color: #E4E4E4; text-decoration: none; font-weight: 600; transition: 0.3s;">Home</a>
+                <a href="../index.html#ferramentas" style="color: #E4E4E4; text-decoration: none; font-weight: 600; transition: 0.3s;">Ferramentas</a>
+                <a href="../index.html#educacao" style="color: #E4E4E4; text-decoration: none; font-weight: 600; transition: 0.3s;">Educação</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Container Principal -->
+    <div class="landing-container">
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-badge">🔰 INVLAB+ • Educação Financeira</div>
+            <h1 class="hero-title">Renda Complementar Inteligente</h1>
+            <p class="hero-subtitle">
+                Educação financeira real para te ajudar a construir liberdade financeira, 
+                com disciplina, aportes mensais e decisões inteligentes.
+            </p>
+        </section>
+
+        <!-- Disclaimer Box -->
+        <div class="disclaimer-box">
+            <i class="ph-duotone ph-info disclaimer-icon"></i>
+            <h2 class="disclaimer-title">⚠️ Importante: Este NÃO é um Simulador de INSS</h2>
+            <p class="disclaimer-text">
+                Este simulador <strong>NÃO calcula a sua aposentadoria pelo INSS</strong>. 
+                Para cálculos oficiais de aposentadoria pública, utilize o 
+                <a href="https://meu.inss.gov.br/" target="_blank" class="footer-link">Meu INSS (gov.br)</a>.
+            </p>
+            <p class="disclaimer-text">
+                O objetivo do <strong>INVLAB+</strong> é ajudar você a construir sua 
+                <strong>RENDA COMPLEMENTAR</strong>, através de investimentos próprios, 
+                com disciplina, aportes mensais constantes e decisões financeiras inteligentes.
+            </p>
+            <p class="disclaimer-text" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(16, 185, 129, 0.2);">
+                <strong>Premissa:</strong> Você já terá o INSS como base. Aqui, vamos calcular 
+                quanto você precisa investir mensalmente para complementar sua renda e viver 
+                com tranquilidade na aposentadoria.
+            </p>
+        </div>
+
+        <!-- O que o Simulador Faz -->
+        <section>
+            <h2 class="section-title">O que este Simulador REALMENTE faz?</h2>
+            <div class="features-grid">
+                
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <i class="ph-duotone ph-piggy-bank feature-icon"></i>
+                    <h3 class="feature-title">Mostra Como Aportes Constroem Patrimônio</h3>
+                    <p class="feature-description">
+                        Descubra como investimentos mensais pequenos podem se transformar em 
+                        um patrimônio significativo ao longo dos anos.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <i class="ph-duotone ph-scales feature-icon"></i>
+                    <h3 class="feature-title">Compara Previdência vs Investimento Próprio</h3>
+                    <p class="feature-description">
+                        Análise realista comparando previdência privada, investimentos próprios 
+                        (Tesouro, CDBs) e seus impactos financeiros.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <i class="ph-duotone ph-warning feature-icon"></i>
+                    <h3 class="feature-title">Ensina as Pegadinhas e Como Evitá-las</h3>
+                    <p class="feature-description">
+                        Explicamos as 6 grandes pegadinhas da previdência privada que os bancos 
+                        não contam, com exemplos práticos e impacto real.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card">
+                    <i class="ph-duotone ph-chart-line-up feature-icon"></i>
+                    <h3 class="feature-title">Simula Renda Futura Complementar</h3>
+                    <p class="feature-description">
+                        Calcule quanto você pode ter de renda mensal complementar ao INSS, 
+                        com base em aportes realistas e rentabilidade conservadora.
+                    </p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card">
+                    <i class="ph-duotone ph-shield-check feature-icon"></i>
+                    <h3 class="feature-title">Ajuda a Criar Independência Financeira</h3>
+                    <p class="feature-description">
+                        Planeje hoje para ter liberdade amanhã. Construa um futuro sem 
+                        depender apenas do INSS ou de produtos financeiros duvidosos.
+                    </p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-card">
+                    <i class="ph-duotone ph-graduation-cap feature-icon"></i>
+                    <h3 class="feature-title">100% Educacional e Transparente</h3>
+                    <p class="feature-description">
+                        Sem venda de produtos, sem comissões, sem pegadinhas. 
+                        Apenas educação financeira de verdade para proteger você.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2 class="cta-title">Pronto para Planejar Seu Futuro?</h2>
+            <p class="cta-subtitle">
+                Com disciplina, conhecimento e as ferramentas certas, você pode construir 
+                uma aposentadoria tranquila e independente.
+            </p>
+            <a href="simulador-aposentadoria.html" class="btn-cta-primary">
+                🚀 Começar Simulação de Renda Complementar
+            </a>
+        </section>
+
+    </div>
+
+    <!-- Footer Educacional -->
+    <footer class="footer-educacional">
+        <p>
+            <strong>INVLAB+</strong> — Educação financeira para pessoas reais.<br>
+            Sem venda de produtos. Sem pegadinhas. Apenas conhecimento.
+        </p>
+        <p style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(138, 204, 166, 0.1); font-size: 0.9rem;">
+            Para cálculos oficiais de aposentadoria pelo INSS: 
+            <a href="https://meu.inss.gov.br/" target="_blank" class="footer-link">Meu INSS (gov.br)</a>
+        </p>
+        <p style="margin-top: 20px; font-size: 0.85rem; opacity: 0.7;">
+            © 2025 INVLAB - Laboratório de Investimentos | Plataforma Educacional
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script defer src="../assets/js/bcb-api.js"></script>
+    <script defer src="../assets/js/invlab-carrossel-renda-fixa.js"></script>
+
+</body>
+</html>
+
