@@ -522,62 +522,6 @@
             font-size: 0.84rem;
         }
 
-        /* CALLOUTS */
-        .callout {
-            display: flex;
-            gap: 10px;
-            padding: 14px;
-            border-radius: 10px;
-            margin-bottom: 18px;
-            border-left: 3px solid;
-            text-align: left;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .callout-info {
-            background: rgba(59, 130, 246, 0.1);
-            border-left-color: #3B82F6;
-        }
-
-        .callout-warning {
-            background: rgba(245, 158, 11, 0.1);
-            border-left-color: #F59E0B;
-        }
-
-        .callout-success {
-            background: rgba(16, 185, 129, 0.1);
-            border-left-color: #10b981;
-        }
-
-        .callout-icon {
-            font-size: 1.75rem;
-            flex-shrink: 0;
-        }
-
-        .callout-content {
-            flex: 1;
-        }
-
-        .callout-content h3 {
-            color: rgba(255, 255, 255, 0.95);
-            font-size: 1rem;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .callout-content p {
-            color: rgba(255, 255, 255, 0.85);
-            line-height: 1.6;
-            margin-bottom: 8px;
-        }
-
-        .callout-content ul {
-            color: rgba(255, 255, 255, 0.85);
-            line-height: 1.6;
-            margin-left: 20px;
-            list-style-position: outside;
-        }
 
         /* Responsivo */
         @media (max-width: 768px) {
@@ -925,8 +869,10 @@
         .info-row {
             display: flex;
             gap: 24px;
-            margin: 16px 0 20px 0;
+            margin: 20px 0 0 0;
             flex-wrap: wrap;
+            justify-content: center; /* Centraliza os botões */
+            align-items: center;
         }
 
         .info-trigger {
@@ -1218,17 +1164,6 @@
                 Preencha os campos abaixo para estimar quanto seu dinheiro pode render em LCI ou LCA, <strong>100% isentos de IR</strong>, e comparar com CDB e Poupança.
             </p>
 
-            <!-- Linha de Informações (Popups) -->
-            <div class="info-row">
-                <span class="info-trigger" data-tooltip="premissas">
-                    ℹ️ Premissas do Simulador
-                </span>
-
-                <span class="info-trigger" data-tooltip="carencia">
-                    ⚠️ Carência & Liquidez
-                </span>
-            </div>
-
             <form id="simulatorForm">
                 <!-- Linha 1: Tipo + Valor + Aporte -->
                 <div class="form-row">
@@ -1280,29 +1215,18 @@
                     📊 SIMULAR RENTABILIDADE
                 </button>
             </form>
-        </div>
 
-        <!-- Callout: LCI vs LCA -->
-        <div class="callout callout-info">
-            <div class="callout-icon">💡</div>
-            <div class="callout-content">
-                <h3>LCI e LCA são idênticos no cálculo!</h3>
-                <p>
-                    Não existe diferença matemática entre LCI e LCA. Uma LCI de 95% do CDI rende <strong>exatamente igual</strong> a uma LCA de 95% do CDI.
-                </p>
-                <p>
-                    <strong>A única diferença é:</strong>
-                </p>
-                <ul>
-                    <li>🏢 <strong>LCI:</strong> Financia o setor <strong>imobiliário</strong> (construção, shopping centers)</li>
-                    <li>🌾 <strong>LCA:</strong> Financia o <strong>agronegócio</strong> (agricultura, pecuária, alimentos)</li>
-                </ul>
-                <p>
-                    <strong>💰 Na prática:</strong> Escolha baseado na <strong>disponibilidade e melhor taxa</strong> oferecida pelo seu banco!
-                </p>
+            <!-- Linha de Informações (Popups) - Abaixo do botão -->
+            <div class="info-row">
+                <span class="info-trigger" data-tooltip="premissas">
+                    ℹ️ Premissas do Simulador
+                </span>
+
+                <span class="info-trigger" data-tooltip="carencia">
+                    ⚠️ Carência & Liquidez
+                </span>
             </div>
         </div>
-
         <!-- Resultados -->
         <div class="results-section" id="resultsSection" style="display: none;">
             <h2>📊 Resultados da Comparação</h2>
@@ -1331,81 +1255,6 @@
                 <canvas id="evolutionChart"></canvas>
                 <p style="text-align: center; color: #6b7280; font-size: 0.9rem; margin-top: 15px;">
                     Gráfico mostra a evolução mensal do investimento escolhido comparado com a Poupança
-                </p>
-            </div>
-        </div>
-
-        <!-- Callout: Carência e Liquidez -->
-        <div class="callout callout-warning">
-            <div class="callout-icon">⚠️</div>
-            <div class="callout-content">
-                <h3>Atenção: Carência e Liquidez Limitada</h3>
-                <p>
-                    <strong>Este simulador calcula o rendimento até o vencimento.</strong> Porém, é fundamental entender:
-                </p>
-                <ul>
-                    <li>
-                        <strong>LCI/LCA têm carência:</strong> Geralmente entre 90 e 180 dias. Durante esse período, você NÃO pode resgatar o dinheiro.
-                    </li>
-                    <li>
-                        <strong>Liquidez limitada:</strong> Mesmo após a carência, a maioria das LCI/LCA só pode ser resgatada no vencimento.
-                    </li>
-                    <li>
-                        <strong>Não é para Reserva de Emergência:</strong> Por causa da carência e liquidez limitada, prefira Tesouro Selic ou CDB com liquidez diária para emergências.
-                    </li>
-                    <li>
-                        <strong>Recomendação:</strong> Invista em LCI/LCA apenas com dinheiro que você tem certeza que não vai precisar até o vencimento.
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Callout: Premissas -->
-        <div class="callout callout-info">
-            <div class="callout-icon">ℹ️</div>
-            <div class="callout-content">
-                <h3>Premissas do Simulador</h3>
-                <ul>
-                    <li><strong>LCI/LCA:</strong> Rentabilidade baseada no % do CDI escolhido (isento de IR)</li>
-                    <li><strong>CDB 100% CDI:</strong> Comparação considerando IR de 17,5% (prazo 361-720 dias)</li>
-                    <li><strong>Poupança:</strong> 0,5% a.m. quando Selic > 8,5% a.a. ou 70% da Selic quando ≤ 8,5% a.a. (isenta de IR)</li>
-                    <li><strong>CDI Atual:</strong> 10,65% a.a. (novembro/2024)</li>
-                    <li><strong>Aportes mensais:</strong> Aplicados no início de cada mês</li>
-                    <li><strong>Taxas:</strong> Não incluem taxas de custódia ou administração (geralmente zero em LCI/LCA)</li>
-                    <li><strong>IOF:</strong> Não aplicado (investimentos superiores a 30 dias)</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Callout: Vantagens -->
-        <div class="callout callout-success">
-            <div class="callout-icon">✨</div>
-            <div class="callout-content">
-                <h3>Vantagens de LCI e LCA</h3>
-                <ul>
-                    <li><strong>🎯 Isenção de IR:</strong> Todo o rendimento é seu. Não paga Imposto de Renda!</li>
-                    <li><strong>🛡️ Garantia FGC:</strong> Proteção de até R$ 250 mil por CPF e instituição.</li>
-                    <li><strong>📈 Rentabilidade atrativa:</strong> Geralmente entre 85% e 95% do CDI (livre de IR!).</li>
-                    <li><strong>🏦 Renda Fixa:</strong> Previsibilidade e segurança para seu planejamento financeiro.</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Callout: Premissas -->
-        <div class="callout callout-info">
-            <div class="callout-icon">📋</div>
-            <div class="callout-content">
-                <h3>Premissas dos Cálculos</h3>
-                <ul>
-                    <li><strong>CDI:</strong> 10,65% a.a. (novembro/2024)</li>
-                    <li><strong>Poupança:</strong> 6,17% a.a. (rendimento atual baseado na Selic)</li>
-                    <li><strong>Imposto de Renda CDB:</strong> Tabela regressiva (22,5% até 15%)</li>
-                    <li><strong>Imposto de Renda LCI/LCA:</strong> <span style="color: #10b981; font-weight: bold;">ISENTO</span></li>
-                    <li><strong>Prazo de carência típico:</strong> 90 dias (varia por instituição)</li>
-                </ul>
-                <p style="margin-top: 10px; margin-bottom: 0;">
-                    <strong>Fontes:</strong> Banco Central (CDI e Selic), Receita Federal (IR)<br>
-                    <strong>Data de atualização:</strong> Novembro de 2024
                 </p>
             </div>
         </div>
@@ -1512,6 +1361,52 @@
                         porque <strong>não pagam imposto de renda</strong>.  
                     </p>
                     <p>Por isso é essencial usar o <strong>Simulador INVLAB</strong> para comparar.</p>
+                </div>
+
+                <!-- Vantagens -->
+                <div class="modal-section">
+                    <h3>🎁 Principais Vantagens</h3>
+                    <ul>
+                        <li><strong>Isenção de IR:</strong> Todo o rendimento líquido é seu. Não há desconto de Imposto de Renda, diferente dos CDBs.</li>
+                        <li><strong>Garantia FGC:</strong> Proteção de até R$ 250 mil por CPF e por instituição financeira (mesma cobertura de CDBs e poupança).</li>
+                        <li><strong>Rentabilidade atrativa:</strong> Geralmente oferecem entre 85% e 95% do CDI, mas como são isentas de IR, podem superar CDBs com taxas maiores.</li>
+                        <li><strong>Renda fixa previsível:</strong> Segurança e previsibilidade para seu planejamento financeiro de médio e longo prazo.</li>
+                        <li><strong>Diversificação setorial:</strong> LCI financia o setor imobiliário e LCA o agronegócio — ambos estratégicos para a economia.</li>
+                    </ul>
+                </div>
+
+                <!-- Riscos e Cuidados -->
+                <div class="modal-section">
+                    <h3>⚠️ Riscos e Cuidados</h3>
+                    <ul>
+                        <li><strong>Carência obrigatória:</strong> A maioria das LCI/LCA tem carência de 90 a 180 dias. Durante esse período, você <strong>não pode resgatar</strong> o dinheiro.</li>
+                        <li><strong>Liquidez limitada:</strong> Mesmo após a carência, muitas LCI/LCA só permitem resgate no vencimento. Verifique antes de aplicar.</li>
+                        <li><strong>Não é para emergência:</strong> Por causa da carência e falta de liquidez, LCI/LCA <strong>NÃO devem ser usadas como reserva de emergência</strong>. Para isso, prefira Tesouro Selic ou CDB com liquidez diária.</li>
+                        <li><strong>Risco de crédito:</strong> Embora protegidas pelo FGC até R$ 250 mil, há risco caso o banco emissor quebre e você tenha valores superiores ao limite.</li>
+                        <li><strong>Disponibilidade limitada:</strong> Nem sempre há boas ofertas de LCI/LCA disponíveis. As melhores taxas costumam esgotar rapidamente.</li>
+                    </ul>
+                    <p style="margin-top: 12px; color: rgba(255, 255, 255, 0.7);">
+                        <strong>Recomendação INVLAB:</strong> Invista em LCI/LCA apenas com recursos que você tem certeza absoluta de que não precisará até o vencimento.
+                    </p>
+                </div>
+
+                <!-- Diferença LCI vs LCA -->
+                <div class="modal-section">
+                    <h3>🏦 LCI vs LCA: Qual a diferença?</h3>
+                    <p>
+                        No cálculo e na rentabilidade, <strong>LCI e LCA são idênticas</strong>. Uma LCI de 95% do CDI 
+                        rende exatamente igual a uma LCA de 95% do CDI.
+                    </p>
+                    <p>
+                        A diferença está apenas no <strong>destino dos recursos</strong>:
+                    </p>
+                    <ul>
+                        <li><strong>LCI (Letra de Crédito Imobiliário):</strong> O banco usa os recursos captados para financiar o setor imobiliário (compra, construção, reforma de imóveis).</li>
+                        <li><strong>LCA (Letra de Crédito do Agronegócio):</strong> Os recursos vão para financiar o agronegócio (produção agrícola, pecuária, máquinas, insumos).</li>
+                    </ul>
+                    <p>
+                        Ambos são <strong>isentos de IR</strong> porque financiam setores estratégicos da economia brasileira.
+                    </p>
                 </div>
 
             </div>
