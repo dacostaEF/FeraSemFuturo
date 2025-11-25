@@ -116,6 +116,33 @@
             }
         }
         
+        /* 🔥 BOTÃO SIMULADOR INVLAB - Degradê Premium Gold Touch */
+        .btn-simulador-invlab {
+            background: linear-gradient(135deg, #355E3B 0%, #CCAA66 100%);
+            border: 1px solid rgba(204, 170, 102, 0.3);
+            color: #E4E4E4;
+            padding: 14px 32px;
+            font-size: 1rem;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(53, 94, 59, 0.2);
+        }
+        
+        .btn-simulador-invlab:hover {
+            border-color: #D4AF37;
+            transform: translateY(-4px);
+            box-shadow: 
+                0 8px 24px rgba(53, 94, 59, 0.3),
+                0 4px 12px rgba(204, 170, 102, 0.2);
+        }
+        
+        .btn-simulador-invlab:active {
+            transform: translateY(-2px);
+        }
+        
         /* Ícones com transição suave */
         .remuneration-icon i,
         .platform-icon i {
@@ -147,10 +174,12 @@
         
         /* Botão Back to Top - INVLAB Premium */
         #backToTop {
-            display: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: fixed;
             bottom: 40px;
-            right: 40px;
+            right: calc((100vw - 1200px) / 2 + 20px);  /* Alinha com container + 20px de margem */
             z-index: 9999;
             width: 56px;
             height: 56px;
@@ -159,11 +188,10 @@
             border-radius: 50%;
             font-size: 24px;
             color: #0D0D0D;
-            text-align: center;
-            line-height: 52px;
             cursor: pointer;
             opacity: 0;
             visibility: hidden;
+            pointer-events: none;
             transition: all 0.3s ease;
             box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
         }
@@ -171,6 +199,7 @@
         #backToTop.show {
             opacity: 1;
             visibility: visible;
+            pointer-events: auto;
         }
         
         #backToTop:hover {
@@ -180,12 +209,18 @@
             border-color: rgba(16, 185, 129, 0.6);
         }
         
+        /* Responsivo: volta para borda do navegador em telas menores */
+        @media (max-width: 1280px) {
+            #backToTop {
+                right: 40px;  /* Volta para borda em telas médias/pequenas */
+            }
+        }
+        
         @media (max-width: 768px) {
             #backToTop {
                 width: 48px;
                 height: 48px;
                 font-size: 20px;
-                line-height: 44px;
                 bottom: 24px;
                 right: 24px;
             }
@@ -1395,13 +1430,13 @@
                         <h3>🛠️ Pronto para simular?</h3>
                         <p>Use nossos simuladores e veja projeções realistas para cada tipo de investimento</p>
                         <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 24px;">
-                            <button class="btn-primary" onclick="alert('Simulador de ETFs em desenvolvimento')">
+                            <button class="btn-simulador-invlab" onclick="alert('Simulador de ETFs em desenvolvimento')">
                                 📊 Simular ETFs
                             </button>
-                            <button class="btn-primary" onclick="alert('Simulador de FIIs em desenvolvimento')">
+                            <button class="btn-simulador-invlab" onclick="alert('Simulador de FIIs em desenvolvimento')">
                                 🏢 Simular FIIs
                             </button>
-                            <button class="btn-primary" onclick="alert('Simulador de Ações em desenvolvimento')">
+                            <button class="btn-simulador-invlab" onclick="alert('Simulador de Ações em desenvolvimento')">
                                 📈 Simular Ações
                         </button>
                         </div>
