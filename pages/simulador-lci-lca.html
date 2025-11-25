@@ -916,6 +916,127 @@
                 padding: 20px;
             }
         }
+
+        /* ======================================
+           💡 POPUPS INFORMATIVOS PREMIUM INVLAB
+        ====================================== */
+
+        /* Linha dos ícones informativos */
+        .info-row {
+            display: flex;
+            gap: 24px;
+            margin: 16px 0 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .info-trigger {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: #8ACC66; /* Verde oliva INVLAB */
+            transition: all 0.2s ease;
+            padding: 6px 12px;
+            border-radius: 6px;
+            background: rgba(138, 204, 166, 0.05);
+            border: 1px solid rgba(138, 204, 166, 0.15);
+        }
+
+        .info-trigger:hover {
+            color: #CCAA66; /* Dourado INVLAB no hover */
+            background: rgba(204, 170, 102, 0.1);
+            border-color: rgba(204, 170, 102, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .info-trigger i {
+            font-size: 18px;
+        }
+
+        /* Tooltip/Popup Premium */
+        .inv-tooltip {
+            position: fixed;
+            background: rgba(13, 22, 32, 0.98); /* Fundo escuro INVLAB */
+            border: 1px solid rgba(204, 170, 102, 0.25); /* Borda dourada */
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            padding: 20px 24px;
+            max-width: 420px;
+            width: 90%;
+            display: none;
+            z-index: 9999;
+            color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+        }
+
+        .inv-tooltip h4 {
+            font-size: 1.1rem;
+            color: #CCAA66; /* Dourado INVLAB */
+            margin: 0 0 14px 0;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .inv-tooltip ul {
+            margin: 0;
+            padding-left: 20px;
+            list-style: none;
+        }
+
+        .inv-tooltip li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+            font-size: 0.9rem;
+            position: relative;
+            padding-left: 8px;
+        }
+
+        .inv-tooltip li::before {
+            content: "▸";
+            position: absolute;
+            left: -12px;
+            color: #8ACC66; /* Verde oliva */
+        }
+
+        .inv-tooltip strong {
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+        }
+
+        .tooltip-footer {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.8rem;
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        /* Responsivo mobile */
+        @media (max-width: 768px) {
+            .info-row {
+                gap: 12px;
+            }
+
+            .info-trigger {
+                font-size: 0.85rem;
+                padding: 5px 10px;
+            }
+
+            .inv-tooltip {
+                max-width: 90%;
+                padding: 16px 18px;
+            }
+
+            .inv-tooltip h4 {
+                font-size: 1rem;
+            }
+
+            .inv-tooltip li {
+                font-size: 0.85rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1096,6 +1217,17 @@
             <p class="input-section-intro">
                 Preencha os campos abaixo para estimar quanto seu dinheiro pode render em LCI ou LCA, <strong>100% isentos de IR</strong>, e comparar com CDB e Poupança.
             </p>
+
+            <!-- Linha de Informações (Popups) -->
+            <div class="info-row">
+                <span class="info-trigger" data-tooltip="premissas">
+                    ℹ️ Premissas do Simulador
+                </span>
+
+                <span class="info-trigger" data-tooltip="carencia">
+                    ⚠️ Carência & Liquidez
+                </span>
+            </div>
 
             <form id="simulatorForm">
                 <!-- Linha 1: Tipo + Valor + Aporte -->
@@ -1280,6 +1412,34 @@
 
     </div>
 
+    <!-- POPUPS INFORMATIVOS PREMIUM -->
+    <!-- Tooltip Premissas -->
+    <div id="tooltip-premissas" class="inv-tooltip">
+        <h4>📊 Premissas do Simulador</h4>
+        <ul>
+            <li><strong>CDI Atual:</strong> 10,65% a.a. (novembro/2024)</li>
+            <li><strong>Rentabilidade LCI/LCA:</strong> % do CDI informado (100% isento de IR)</li>
+            <li><strong>CDB 100% CDI:</strong> utilizado para comparação (IR regressivo: 22,5% a 15%)</li>
+            <li><strong>Poupança:</strong> 0,5% a.m. quando Selic > 8,5% a.a.</li>
+            <li><strong>Aportes mensais:</strong> aplicados no início de cada mês</li>
+            <li><strong>Taxas:</strong> não incluímos custos (geralmente zero em LCI/LCA)</li>
+            <li><strong>IOF:</strong> não aplicado (investimentos superiores a 30 dias)</li>
+        </ul>
+        <p class="tooltip-footer">Fontes: Banco Central (CDI), Tesouro Direto, Receita Federal | Atualizado: Nov/2024</p>
+    </div>
+
+    <!-- Tooltip Carência -->
+    <div id="tooltip-carencia" class="inv-tooltip">
+        <h4>⚠️ Carência & Liquidez Limitada</h4>
+        <ul>
+            <li><strong>Carência obrigatória:</strong> 90 a 180 dias (sem resgate permitido neste período)</li>
+            <li><strong>Liquidez:</strong> muitas LCI/LCA só permitem resgate no vencimento</li>
+            <li><strong>Uso inadequado:</strong> NÃO utilizar para reserva de emergência</li>
+            <li><strong>Recomendação:</strong> invista apenas valores que você tem certeza que não precisará</li>
+        </ul>
+        <p class="tooltip-footer">Para emergências, prefira Tesouro Selic ou CDB com liquidez diária</p>
+    </div>
+
     <!-- MODAL INVLAB PREMIUM: Sobre LCI/LCA -->
     <div id="lciModal" class="modal-overlay-minimalist" onclick="closeLCIModal()" style="display: none;">
         <!-- Disclaimer acima do modal -->
@@ -1362,6 +1522,38 @@
     </div>
 
     <script>
+        // ============================================
+        // POPUPS INFORMATIVOS (Premissas + Carência)
+        // ============================================
+        
+        document.querySelectorAll('.info-trigger').forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                const type = trigger.getAttribute('data-tooltip');
+                const tooltip = document.getElementById(`tooltip-${type}`);
+
+                // Fecha todos os outros popups antes de abrir
+                document.querySelectorAll('.inv-tooltip').forEach(t => t.style.display = 'none');
+
+                // Posiciona e abre o popup
+                const rect = trigger.getBoundingClientRect();
+                tooltip.style.left = (rect.left + window.scrollX) + 'px';
+                tooltip.style.top = (rect.bottom + window.scrollY + 8) + 'px';
+                tooltip.style.display = 'block';
+
+                e.stopPropagation();
+            });
+        });
+
+        // Fecha popups ao clicar fora
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.inv-tooltip').forEach(t => t.style.display = 'none');
+        });
+
+        // Fecha popups ao scrollar
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.inv-tooltip').forEach(t => t.style.display = 'none');
+        });
+
         // ============================================
         // MODAL "SOBRE LCI/LCA"
         // ============================================
