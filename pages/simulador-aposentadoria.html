@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Aposentadoria: Planeje seu Futuro | INVLAB</title>
+    <title>Simulador Anti-Pegadinha: Aposentadoria INVLAB+</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
@@ -15,10 +15,13 @@
     <meta name="msapplication-TileColor" content="#0D0D0D">
     
     <!-- Meta Description -->
-    <meta name="description" content="Planeje sua aposentadoria com o simulador INVLAB. Descubra quanto investir, quando começar e quanto você precisa acumular para ter uma aposentadoria tranquila.">
+    <meta name="description" content="Descubra as pegadinhas da previdência privada com o Simulador Anti-Pegadinha INVLAB+. Compare previdência, INSS e investimento próprio de forma transparente.">
     
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    
+    <!-- Chart.js para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <style>
         /* ============================= */
@@ -130,7 +133,8 @@
 
         /* 6. Botões */
         .btn-next,
-        .btn-calc {
+        .btn-calc,
+        .btn-primary {
             padding: 15px 26px;
             border-radius: 12px;
             font-size: 1.1rem;
@@ -144,7 +148,8 @@
         }
 
         .btn-next:hover,
-        .btn-calc:hover {
+        .btn-calc:hover,
+        .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 22px rgba(0, 227, 140, 0.35);
         }
@@ -156,6 +161,10 @@
         }
 
         /* 7. Resultados */
+        #resultsSection {
+            display: none;
+        }
+
         .invlab-results {
             background: rgba(20, 24, 33, 0.88);
             padding: 32px;
@@ -164,10 +173,6 @@
             margin-bottom: 32px;
             box-shadow: 0 0 25px rgba(0,0,0,0.28);
             backdrop-filter: blur(4px);
-        }
-
-        .invlab-results.hidden {
-            display: none;
         }
 
         .results-grid {
@@ -213,10 +218,6 @@
             backdrop-filter: blur(4px);
         }
 
-        .invlab-heritage.hidden {
-            display: none;
-        }
-
         .heritage-grid {
             display: grid;
             gap: 22px;
@@ -250,6 +251,46 @@
             color: #c4a24a;
         }
 
+        /* 9. Gráfico */
+        .chart-container {
+            margin-top: 30px;
+            background: #0d121b;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+
+        /* 10. Seletor de Cenário */
+        .scenario-selector {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .scenario-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 2px solid rgba(255,255,255,0.2);
+            background: rgba(20, 24, 33, 0.5);
+            color: #dce7f3;
+            cursor: pointer;
+            transition: 0.25s ease;
+            font-weight: 600;
+        }
+
+        .scenario-btn:hover {
+            border-color: #00e38c;
+            background: rgba(0, 227, 140, 0.1);
+        }
+
+        .scenario-btn.active {
+            border-color: #00e38c;
+            background: rgba(0, 227, 140, 0.2);
+            color: #00e38c;
+        }
+
         /* Responsividade Mobile */
         @media (max-width: 768px) {
             .invlab-title {
@@ -273,15 +314,22 @@
             }
 
             .btn-next,
-            .btn-calc {
+            .btn-calc,
+            .btn-primary {
+                width: 100%;
+            }
+
+            .scenario-selector {
+                flex-direction: column;
+            }
+
+            .scenario-btn {
                 width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- HEADER INVLAB (será adicionado no desenvolvimento) -->
-    
     <!-- Breadcrumb -->
     <div style="position: sticky; top: 110px; z-index: 100; background: #0D0D0D; width: 100%; padding: 12px 20px 12px; margin-bottom: 0 !important;">
         <nav style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 8px; font-size: 14px; color: rgba(255, 255, 255, 0.6);">
@@ -289,14 +337,11 @@
             <span style="color: rgba(255, 255, 255, 0.4);">/</span>
             <a href="../index.html#ferramentas" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s;">🛠️ Ferramentas</a>
             <span style="color: rgba(255, 255, 255, 0.4);">/</span>
-            <span style="color: #FFFFFF; font-weight: 600; background: rgba(42, 127, 255, 0.15); padding: 4px 10px; border-radius: 6px; border-left: 3px solid #3B82F6;">🏖️ Simulador de Aposentadoria</span>
+            <span style="color: #FFFFFF; font-weight: 600; background: rgba(42, 127, 255, 0.15); padding: 4px 10px; border-radius: 6px; border-left: 3px solid #3B82F6;">🏖️ Simulador Anti-Pegadinha</span>
         </nav>
     </div>
 
     <div class="container">
-        <!-- ========================== -->
-        <!--  SIMULADOR INVLAB+ – BASE  -->
-        <!-- ========================== -->
         <div class="invlab-simulator-container">
 
             <!-- Header do Simulador -->
@@ -305,127 +350,108 @@
                 <p class="invlab-subtitle">Aposentadoria, Previdência, Investimentos & Herança — sem mentiras.</p>
             </header>
 
-            <!-- ========================== -->
+            <!-- Seletor de Cenário -->
+            <div class="scenario-selector">
+                <button class="scenario-btn" data-scenario="conservador">📊 Conservador (6% a.a.)</button>
+                <button class="scenario-btn active" data-scenario="moderado">📈 Moderado (8% a.a.)</button>
+                <button class="scenario-btn" data-scenario="arrojado">🚀 Arrojado (10% a.a.)</button>
+            </div>
+
             <!-- MÓDULO 1 — SIMULAÇÃO BÁSICA -->
-            <!-- ========================== -->
             <section class="invlab-module" id="module-basic">
                 <h2 class="module-title">Passo 1 – Informações Básicas</h2>
                 <div class="module-grid">
                     <div class="input-group">
                         <label>Idade Atual</label>
-                        <input type="number" id="idade_atual" placeholder="Ex: 30">
+                        <input type="number" id="currentAge" placeholder="Ex: 30">
                     </div>
 
                     <div class="input-group">
                         <label>Idade de Aposentadoria</label>
-                        <input type="number" id="idade_aposentadoria" placeholder="Ex: 65">
+                        <input type="number" id="retirementAge" placeholder="Ex: 65">
                     </div>
 
                     <div class="input-group">
                         <label>Aporte Mensal (R$)</label>
-                        <input type="number" id="aporte_mensal" placeholder="Ex: 800">
+                        <input type="number" id="monthlyInvestment" placeholder="Ex: 800">
                     </div>
 
                     <div class="input-group">
-                        <label>Renda Mensal Desejada na Aposentadoria</label>
-                        <input type="number" id="renda_desejada" placeholder="Ex: 6000">
+                        <label>Renda Mensal Desejada na Aposentadoria (R$)</label>
+                        <input type="number" id="desiredIncome" placeholder="Ex: 6000">
                     </div>
                 </div>
 
                 <div class="module-actions">
-                    <button class="btn-next" id="btn-show-advanced">Configurações Avançadas</button>
+                    <button class="btn-primary">🚀 Calcular Simulação Completa</button>
                 </div>
             </section>
 
-            <!-- ============================== -->
-            <!-- MÓDULO 2 — CONFIGURAÇÕES AVANÇADAS -->
-            <!-- ============================== -->
-            <section class="invlab-module hidden" id="module-advanced">
-                <h2 class="module-title">Passo 2 – Configurações Avançadas</h2>
-                <div class="module-grid">
-                    <div class="input-group">
-                        <label>Inflação Estimada (%)</label>
-                        <input type="number" id="inflacao" placeholder="Ex: 4.5" step="0.1">
+            <!-- SEÇÃO DE RESULTADOS -->
+            <div id="resultsSection">
+                <!-- Resultados Principais -->
+                <section class="invlab-results">
+                    <h2 class="module-title">📊 Resultados da Simulação</h2>
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <h3>💰 Investimento Próprio</h3>
+                            <p id="resultOwn">—</p>
+                        </div>
+
+                        <div class="result-card">
+                            <h3>🏦 Vitalícia Simples</h3>
+                            <p id="resultPensionSimple">—</p>
+                        </div>
+
+                        <div class="result-card">
+                            <h3>🔄 Com Reversão</h3>
+                            <p id="resultPensionRev">—</p>
+                        </div>
                     </div>
 
-                    <div class="input-group">
-                        <label>Taxa de Administração da Previdência (%)</label>
-                        <input type="number" id="taxa_adm" placeholder="Ex: 2.0" step="0.1">
+                    <!-- Gráfico -->
+                    <div class="chart-container">
+                        <canvas id="comparisonChart"></canvas>
                     </div>
+                </section>
 
-                    <div class="input-group">
-                        <label>Taxa de Carregamento (%)</label>
-                        <input type="number" id="taxa_carregamento" placeholder="Ex: 1.5" step="0.1">
+                <!-- Herança -->
+                <section class="invlab-heritage">
+                    <h2 class="module-title">💎 Herança – O que sobra para os herdeiros</h2>
+                    <div class="heritage-grid">
+                        <div class="heritage-card">
+                            <h3>💰 Investimento Próprio</h3>
+                            <p id="heritageOwnValue">—</p>
+                        </div>
+
+                        <div class="heritage-card">
+                            <h3>🔄 Vitalícia Reversível</h3>
+                            <p id="heritageRevValue">—</p>
+                        </div>
+
+                        <div class="heritage-card">
+                            <h3>⚠️ Vitalícia Simples</h3>
+                            <p id="heritageSimpleValue" style="color: #ef4444;">R$ 0</p>
+                        </div>
                     </div>
+                </section>
+            </div>
 
-                    <div class="input-group">
-                        <label>Tipo de Previdência</label>
-                        <select id="tipo_previdencia">
-                            <option value="pgbl">PGBL</option>
-                            <option value="vgbl">VGBL</option>
-                        </select>
-                    </div>
-
-                    <div class="input-group">
-                        <label>Tipo de Benefício</label>
-                        <select id="tipo_beneficio">
-                            <option value="vitalicia_simples">Vitalícia Simples</option>
-                            <option value="vitalicia_reversivel">Vitalícia Reversível</option>
-                            <option value="temporaria">Temporária</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="module-actions">
-                    <button class="btn-calc" id="btn-calcular">Calcular tudo</button>
-                </div>
-            </section>
-
-            <!-- ============================== -->
-            <!-- MÓDULO 3 — RESULTADOS (placeholder) -->
-            <!-- ============================== -->
-            <section class="invlab-results hidden" id="module-results">
-                <h2 class="module-title">Resultados da Simulação</h2>
-                <div class="results-grid">
-                    <div class="result-card" id="result-inss">
-                        <h3>🏛️ Resultado – INSS</h3>
-                        <p id="valor-inss">—</p>
-                    </div>
-
-                    <div class="result-card" id="result-previdencia">
-                        <h3>🏦 Resultado – Previdência Privada</h3>
-                        <p id="valor-previdencia">—</p>
-                    </div>
-
-                    <div class="result-card" id="result-investimentos">
-                        <h3>💰 Resultado – Investimento Próprio</h3>
-                        <p id="valor-investimentos">—</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ============================== -->
-            <!-- MÓDULO 4 — HERANÇA -->
-            <!-- ============================== -->
-            <section class="invlab-heritage hidden" id="module-heritage">
-                <h2 class="module-title">💎 Herança – O impacto real</h2>
-                <div class="heritage-grid">
-                    <div class="heritage-card">
-                        <h3>💰 Investimento Próprio</h3>
-                        <p id="heritage-invest">—</p>
-                    </div>
-
-                    <div class="heritage-card">
-                        <h3>🔄 Vitalícia Reversível</h3>
-                        <p id="heritage-rev">—</p>
-                    </div>
-
-                    <div class="heritage-card">
-                        <h3>⚠️ Vitalícia Simples</h3>
-                        <p id="heritage-simples" style="color: #ff4444;">R$ 0,00 — (Perde tudo)</p>
-                    </div>
-                </div>
-            </section>
+            <!-- BOTÃO PARA MOSTRAR O MODAL -->
+            <div style="text-align:center; margin-top:40px;">
+                <button id="btnPegadinhas" style="
+                    padding:14px 25px;
+                    background:linear-gradient(135deg, #dc2626, #b91c1c);
+                    color:#fff;
+                    border:none;
+                    border-radius:10px;
+                    font-size:1.1rem;
+                    cursor:pointer;
+                    font-weight:600;
+                    transition:0.3s;">
+                    ⚠️ Ver Pegadinhas da Previdência Privada
+                </button>
+            </div>
 
             <!-- Footer Assinatura -->
             <div style="text-align: center; margin-top: 60px; padding: 20px; color: rgba(255, 255, 255, 0.5); font-size: 0.9rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
@@ -435,114 +461,466 @@
         </div>
     </div>
 
-    <!-- FOOTER INVLAB (será adicionado no desenvolvimento) -->
-
-    <script>
-        /* ============================= */
-        /*   INVLAB SIMULADOR JS - v1.0  */
-        /* ============================= */
-
-        // Botão "Configurações Avançadas"
-        document.getElementById('btn-show-advanced').addEventListener('click', function() {
-            const moduleAdvanced = document.getElementById('module-advanced');
+    <!-- MODAL COMPLETO -->
+    <div id="modalPegadinhas" class="modal-overlay" style="
+        display:none;
+        position:fixed;
+        top:0; left:0;
+        width:100%; height:100%;
+        background:rgba(0,0,0,0.75);
+        backdrop-filter:blur(4px);
+        justify-content:center;
+        align-items:center;
+        z-index:9999;">
+        
+        <div class="modal-content" style="
+            background:#1e293b;
+            padding:30px;
+            border-radius:15px;
+            max-width:900px;
+            width:90%;
+            border:1px solid #334155;
+            max-height:90vh;
+            overflow-y:auto;">
             
-            if (moduleAdvanced.classList.contains('hidden')) {
-                moduleAdvanced.classList.remove('hidden');
-                this.textContent = 'Ocultar Configurações Avançadas';
-                
-                // Scroll suave até o módulo avançado
-                setTimeout(() => {
-                    moduleAdvanced.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 100);
-            } else {
-                moduleAdvanced.classList.add('hidden');
-                this.textContent = 'Configurações Avançadas';
-            }
+            <h2 style="margin-bottom:20px; color:#f8fafc; font-size:1.8rem;">
+                ⚠️ As 6 Grandes Pegadinhas da Previdência Privada
+            </h2>
+
+            <p style="color:#cbd5e1; margin-bottom:20px;">
+                Este guia explica, de forma clara e sem enrolação, os pontos que os bancos evitam te contar.
+            </p>
+
+            <!-- PEGADINHA 1 -->
+            <div style="border-left:6px solid #ef4444; padding-left:15px; margin-bottom:20px;">
+                <h3 style="color:#ef4444;">1. Vitalícia Simples – A Armadilha Mortal</h3>
+                <p style="color:#cbd5e1;">Se você morrer cedo, seus herdeiros NÃO recebem nada. O patrimônio fica integralmente com a seguradora.</p>
+            </div>
+
+            <!-- PEGADINHA 2 -->
+            <div style="border-left:6px solid #f59e0b; padding-left:15px; margin-bottom:20px;">
+                <h3 style="color:#f59e0b;">2. Taxas de Administração Altíssimas</h3>
+                <p style="color:#cbd5e1;">Fundos com 2% ao ano e taxa de carregamento podem destruir até 40% do seu patrimônio ao longo de 30 anos.</p>
+            </div>
+
+            <!-- PEGADINHA 3 -->
+            <div style="border-left:6px solid #3b82f6; padding-left:15px; margin-bottom:20px;">
+                <h3 style="color:#3b82f6;">3. Sem FGC – Você Pode Perder Tudo</h3>
+                <p style="color:#cbd5e1;">Previdência privada NÃO tem garantia do FGC. Se a seguradora quebrar, acabou.</p>
+            </div>
+
+            <!-- PEGADINHA 4 -->
+            <div style="border-left:6px solid #10b981; padding-left:15px; margin-bottom:20px;">
+                <h3 style="color:#10b981;">4. Tributação Confusa – Progressiva x Regressiva</h3>
+                <p style="color:#cbd5e1;">Escolher a tributação errada pode fazer você pagar 15% a mais de imposto no resgate.</p>
+            </div>
+
+            <!-- PEGADINHA 5 -->
+            <div style="border-left:6px solid #8b5cf6; padding-left:15px; margin-bottom:20px;">
+                <h3 style="color:#8b5cf6;">5. Rentabilidade Fictícia</h3>
+                <p style="color:#cbd5e1;">A maioria das simulações usa rentabilidades irreais para te convencer a contratar.</p>
+            </div>
+
+            <!-- PEGADINHA 6 -->
+            <div style="border-left:6px solid #ec4899; padding-left:15px; margin-bottom:20px;">
+                <h3 style="color:#ec4899;">6. Conversão Obrigatória em Renda</h3>
+                <p style="color:#cbd5e1;">Depois de acumular por anos, você é obrigado a converter em renda com regras desfavoráveis.</p>
+            </div>
+
+            <button id="closeModalPeg" style="
+                margin-top:30px;
+                padding:12px 20px;
+                background:#334155;
+                border:none;
+                border-radius:10px;
+                color:white;
+                font-size:1rem;
+                cursor:pointer;">
+                Fechar
+            </button>
+        </div>
+    </div>
+
+    <!-- ====================================== -->
+    <!-- JAVASCRIPT COMPLETO - TODOS OS MÓDULOS -->
+    <!-- ====================================== -->
+    <script>
+        // ============================
+        //  🔥 ENGINE REAL INVLAB 🔥
+        // ============================
+
+        // Valores de referência realistas
+        const INFLACAO_MEDIA = 4.5;      
+        const TETO_INSS = 7750;          
+        const CONTRIB_INSS = 0.11;       
+
+        // Cenários de rentabilidade
+        const rentabilidades = {
+            conservador: 0.06,
+            moderado: 0.08,
+            arrojado: 0.10
+        };
+
+        // Cenário atual (padrão: moderado)
+        let currentScenario = "moderado";
+
+        // Seletor de cenário
+        document.querySelectorAll('.scenario-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentScenario = this.getAttribute('data-scenario');
+                console.log('Cenário alterado para:', currentScenario);
+            });
         });
 
-        // Botão "Calcular tudo"
-        document.getElementById('btn-calcular').addEventListener('click', function() {
-            // Capturar valores dos inputs
-            const idadeAtual = parseFloat(document.getElementById('idade_atual').value) || 0;
-            const idadeAposentadoria = parseFloat(document.getElementById('idade_aposentadoria').value) || 0;
-            const aporteMensal = parseFloat(document.getElementById('aporte_mensal').value) || 0;
-            const rendaDesejada = parseFloat(document.getElementById('renda_desejada').value) || 0;
+        // -----------------------------------------
+        // Função: converte taxa anual → mensal
+        // -----------------------------------------
+        function taxaMensal(taxaAnual) {
+            return Math.pow(1 + taxaAnual, 1/12) - 1;
+        }
 
-            // Valores avançados (com valores padrão)
-            const inflacao = parseFloat(document.getElementById('inflacao').value) || 4.5;
-            const taxaAdm = parseFloat(document.getElementById('taxa_adm').value) || 2.0;
-            const taxaCarregamento = parseFloat(document.getElementById('taxa_carregamento').value) || 1.5;
-            const tipoPrevidencia = document.getElementById('tipo_previdencia').value;
-            const tipoBeneficio = document.getElementById('tipo_beneficio').value;
+        // -----------------------------------------
+        // Função: calcula acumulação REAL
+        // -----------------------------------------
+        function acumulacaoReal(aporte, anos, retornoAnual) {
+            const i = taxaMensal(retornoAnual);         
+            const inf = taxaMensal(INFLACAO_MEDIA / 100); 
+            const meses = anos * 12;
 
-            // Validação básica
-            if (idadeAtual <= 0 || idadeAposentadoria <= 0 || aporteMensal <= 0 || rendaDesejada <= 0) {
-                alert('⚠️ Por favor, preencha todos os campos básicos com valores válidos!');
+            let valorNominal = 0;
+
+            for (let m = 0; m < meses; m++) {
+                valorNominal = valorNominal * (1 + i) + aporte;
+            }
+
+            const valorReal = valorNominal / Math.pow(1 + inf, meses);
+
+            return { nominal: valorNominal, real: valorReal };
+        }
+
+        // -----------------------------------------
+        // Função: estimativa de benefício INSS
+        // -----------------------------------------
+        function calcularINSS(rendaDesejada) {
+            const beneficio = Math.min(rendaDesejada * 0.40, TETO_INSS);
+            return beneficio;
+        }
+
+        // -----------------------------------------
+        // Função: simula previdência privada
+        // -----------------------------------------
+        function acumulacaoPrevidencia(aporte, anos, retornoAnual) {
+            const taxaLiquida = retornoAnual - 0.02; 
+            return acumulacaoReal(aporte, anos, taxaLiquida);
+        }
+
+        // -----------------------------------------
+        // Função: renda vitalícia
+        // -----------------------------------------
+        function rendaVitalicia(patrimonio, retornoAnual, tipo) {
+            const taxaMensal = retornoAnual / 12;
+            let fator = tipo === "simples" ? 1.20 : 0.80;
+
+            return patrimonio * taxaMensal * fator;
+        }
+
+        // -----------------------------------------
+        // Função principal de simulação
+        // -----------------------------------------
+        function calcularSimulacao() {
+
+            const idadeAtual = parseInt(document.getElementById("currentAge").value);
+            const idadeApos = parseInt(document.getElementById("retirementAge").value);
+            const aporte = parseFloat(document.getElementById("monthlyInvestment").value);
+            const rendaDesejada = parseFloat(document.getElementById("desiredIncome").value);
+
+            // Validação
+            if (!idadeAtual || !idadeApos || !aporte || !rendaDesejada) {
+                alert('⚠️ Preencha todos os campos!');
                 return;
             }
 
-            if (idadeAposentadoria <= idadeAtual) {
+            if (idadeApos <= idadeAtual) {
                 alert('⚠️ A idade de aposentadoria deve ser maior que a idade atual!');
                 return;
             }
 
-            // Cálculos simplificados (PLACEHOLDER - serão refinados nos próximos módulos)
-            const anos = idadeAposentadoria - idadeAtual;
-            const meses = anos * 12;
+            const anos = idadeApos - idadeAtual;
+            const retornoAnual = rentabilidades[currentScenario];
 
-            // INSS estimado (cálculo simplificado)
-            const valorINSS = Math.min(rendaDesejada * 0.5, 7507.49); // Teto INSS 2025
-
-            // Previdência Privada (com taxas)
-            const taxaMensal = (6 / 100) / 12; // 6% a.a. rentabilidade exemplo
-            const fatorCarregamento = 1 - (taxaCarregamento / 100);
-            const aporteReal = aporteMensal * fatorCarregamento;
+            // 1) INVESTIMENTO PRÓPRIO
+            const investProprio = acumulacaoReal(aporte, anos, retornoAnual);
             
-            // Montante acumulado (fórmula de juros compostos)
-            const montantePrevidencia = aporteReal * (Math.pow(1 + taxaMensal, meses) - 1) / taxaMensal;
-            const montanteComTaxaAdm = montantePrevidencia * (1 - (taxaAdm / 100) * anos);
-            const rendaPrevidencia = montanteComTaxaAdm * 0.005; // 0.5% ao mês na conversão
+            // 2) PREVIDÊNCIA PRIVADA
+            const prev = acumulacaoPrevidencia(aporte, anos, retornoAnual);
 
-            // Investimento Próprio (sem taxas abusivas)
-            const montanteInvestimento = aporteMensal * (Math.pow(1 + taxaMensal, meses) - 1) / taxaMensal;
-            const rendaInvestimento = montanteInvestimento * 0.005;
+            // 3) RENDAS
+            const rendaInvestProprio = investProprio.real * (retornoAnual / 12);
+            const rendaPrevSimples = rendaVitalicia(prev.real, retornoAnual, "simples");
+            const rendaPrevRev = rendaVitalicia(prev.real, retornoAnual, "reversivel");
+
+            // 4) INSS (estimado real)
+            const beneficioINSS = calcularINSS(rendaDesejada);
+
+            // Atualiza DOM
+            document.getElementById("resultOwn").textContent =
+                "R$ " + investProprio.real.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
+
+            document.getElementById("resultPensionSimple").textContent =
+                "R$ " + rendaPrevSimples.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
+
+            document.getElementById("resultPensionRev").textContent =
+                "R$ " + rendaPrevRev.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
 
             // Herança
-            const herancaInvest = montanteInvestimento;
-            const herancaRev = montanteComTaxaAdm * 0.6; // 60% reversível
+            document.getElementById("heritageOwnValue").textContent =
+                "R$ " + investProprio.real.toLocaleString("pt-BR");
 
-            // Exibir resultados
-            document.getElementById('valor-inss').textContent = `R$ ${valorINSS.toFixed(2).replace('.', ',')}`;
-            document.getElementById('valor-previdencia').textContent = `R$ ${rendaPrevidencia.toFixed(2).replace('.', ',')} / mês`;
-            document.getElementById('valor-investimentos').textContent = `R$ ${rendaInvestimento.toFixed(2).replace('.', ',')} / mês`;
+            document.getElementById("heritageRevValue").textContent =
+                "R$ " + (prev.real * 0.8).toLocaleString("pt-BR");
 
-            document.getElementById('heritage-invest').textContent = `R$ ${herancaInvest.toFixed(2).replace('.', ',')}`;
-            document.getElementById('heritage-rev').textContent = `R$ ${herancaRev.toFixed(2).replace('.', ',')}`;
+            document.getElementById("heritageSimpleValue").textContent = "R$ 0";
 
-            // Mostrar módulos de resultados
-            document.getElementById('module-results').classList.remove('hidden');
-            document.getElementById('module-heritage').classList.remove('hidden');
+            // Mostra seção de resultados
+            document.getElementById("resultsSection").style.display = "block";
 
-            // Scroll suave até os resultados
-            setTimeout(() => {
-                document.getElementById('module-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
+            // Atualiza gráfico
+            atualizarGrafico(
+                investProprio.real,
+                rendaPrevSimples,
+                rendaPrevRev
+            );
 
-            // Log para debug
-            console.log('✅ Cálculo realizado!', {
-                anos,
-                meses,
-                valorINSS,
-                rendaPrevidencia,
-                rendaInvestimento,
-                herancaInvest,
-                herancaRev
+            // Retorna dados para módulos seguintes
+            return {
+                patrimonio: investProprio.real,
+                rendaSimples: rendaPrevSimples,
+                rendaReversivel: rendaPrevRev,
+                rendaDesejada: rendaDesejada,
+                inss: beneficioINSS
+            };
+        }
+
+        // ----------------------------------------------------------
+        // 📊 GRÁFICO
+        // ----------------------------------------------------------
+        let grafico = null;
+
+        function atualizarGrafico(own, simples, rev) {
+            const ctx = document.getElementById("comparisonChart");
+
+            if (grafico) grafico.destroy();
+
+            grafico = new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: ["Investimento Próprio", "Vitalícia Simples", "Com Reversão"],
+                    datasets: [{
+                        label: "Patrimônio Acumulado (R$)",
+                        data: [own, simples, rev],
+                        backgroundColor: [
+                            "rgba(16, 185, 129, .8)",
+                            "rgba(239, 68, 68, .8)",
+                            "rgba(59, 130, 246, .8)"
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { labels: { color: "#fff" } },
+                        title: {
+                            display: true,
+                            text: "Comparação de Cenários de Aposentadoria",
+                            color: "#fff",
+                            font: { size: 18 }
+                        }
+                    },
+                    scales: {
+                        x: { ticks: { color: "#ddd" } },
+                        y: { ticks: { color: "#ddd" } }
+                    }
+                }
             });
+        }
+
+        // ================================
+        // 🔵 MÓDULO 4: INTERFACE PREMIUM
+        // ================================
+
+        function gerarInsights(patrimonioReal, rendaSimples, rendaReversivel, rendaDesejada, inss) {
+            
+            let insights = [];
+
+            const rendaInvestProprio = patrimonioReal * 0.01; 
+
+            if (rendaInvestProprio >= rendaDesejada) {
+                insights.push({
+                    tipo: "bom",
+                    texto: "✅ Seu investimento próprio é suficiente para atingir a renda desejada com segurança."
+                });
+            } else {
+                insights.push({
+                    tipo: "atencao",
+                    texto: "⚠️ O investimento próprio ainda não cobre a renda desejada — ajuste aporte, prazo ou perfil."
+                });
+            }
+
+            if (rendaSimples < rendaReversivel) {
+                insights.push({
+                    tipo: "péssimo",
+                    texto: "🔴 A renda vitalícia simples é a PIOR opção: paga pouco e não deixa herança."
+                });
+            }
+
+            if (rendaReversivel < rendaInvestProprio) {
+                insights.push({
+                    tipo: "atencao",
+                    texto: "📊 Mesmo a previdência reversível rende menos que investir por conta própria."
+                });
+            }
+
+            if (inss > 0) {
+                insights.push({
+                    tipo: "informacao",
+                    texto: `ℹ️ Seu INSS estimado deve ser em torno de R$ ${inss.toLocaleString("pt-BR")}.`
+                });
+            }
+
+            return insights;
+        }
+
+        function exibirInsights(lista) {
+
+            const box = document.createElement("div");
+            box.className = "insights-box";
+
+            let html = `<h3 style="margin-bottom:15px; font-size:1.3rem; color:#f4f7fa;">🔍 Principais Conclusões</h3>`;
+
+            lista.forEach(item => {
+
+                let cor = "#38bdf8"; // info
+                if (item.tipo === "bom") cor = "#10b981";
+                if (item.tipo === "atencao") cor = "#facc15";
+                if (item.tipo === "péssimo") cor = "#ef4444";
+
+                html += `
+                    <div class="insight-item" style="
+                        padding:12px;
+                        margin-bottom:10px;
+                        background:#0f172a;
+                        border-left:6px solid ${cor};
+                        border-radius:8px;
+                    ">
+                        <p style="font-size:1rem; margin:0; color:#e2e8f0;">${item.texto}</p>
+                    </div>
+                `;
+            });
+
+            box.innerHTML = html;
+
+            document.getElementById("resultsSection").appendChild(box);
+        }
+
+        // ===================================================
+        // 🔥 MÓDULO 5 – CARDS FINAIS
+        // ===================================================
+
+        function exibirCardsFinais(patrimonio, rendaSimples, rendaReversivel, inss, rendaDesejada) {
+
+            const container = document.createElement("div");
+            container.style.marginTop = "40px";
+            container.className = "cards-finais";
+
+            let melhorOpcao = "Investimento Próprio";
+            if (rendaReversivel > patrimonio * 0.01) {
+                melhorOpcao = "Previdência Reversível";
+            }
+
+            const gap = Math.max(0, rendaDesejada - (patrimonio * 0.01 + inss));
+
+            container.innerHTML = `
+                <h3 style="font-size:1.4rem; margin-bottom:15px; color:#f4f7fa;">📌 Conclusão Final</h3>
+
+                <div style="
+                    display:grid;
+                    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+                    gap:20px;
+                ">
+                    <div style="background:#0f172a; border-left:6px solid #10b981; padding:20px; border-radius:10px;">
+                        <h4 style="color:#10b981; margin-bottom:10px;">⭐ Melhor Caminho</h4>
+                        <p style="margin-top:10px; color:#cbd5e1;">Com base nos cálculos, a opção mais eficiente é:</p>
+                        <p style="font-weight:700; font-size:1.2rem; color:#10b981;">${melhorOpcao}</p>
+                    </div>
+
+                    <div style="background:#0f172a; border-left:6px solid #38bdf8; padding:20px; border-radius:10px;">
+                        <h4 style="color:#38bdf8; margin-bottom:10px;">📘 INSS Estimado</h4>
+                        <p style="margin-top:10px; color:#cbd5e1;">Renda estimada pelo INSS:</p>
+                        <strong style="color:#38bdf8; font-size:1.2rem;">R$ ${inss.toLocaleString("pt-BR")}</strong>
+                    </div>
+
+                    <div style="background:#0f172a; border-left:6px solid #facc15; padding:20px; border-radius:10px;">
+                        <h4 style="color:#facc15; margin-bottom:10px;">📉 Gap da Meta</h4>
+                        <p style="margin-top:10px; color:#cbd5e1;">Para atingir a renda desejada de  
+                        <strong style="color:#facc15;">R$ ${rendaDesejada.toLocaleString("pt-BR")}</strong>, falta ainda:</p>
+                        <strong style="color:#facc15; font-size:1.2rem;">R$ ${gap.toLocaleString("pt-BR")}</strong>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById("resultsSection").appendChild(container);
+        }
+
+        function calcularSimulacao_UI_Upgrade_final() {
+
+            // Remove resultados antigos
+            document.querySelectorAll(".insights-box, .cards-finais").forEach(e => e.remove());
+
+            // Executa cálculo
+            const dados = calcularSimulacao();
+
+            if (!dados) return; // Se validação falhar
+
+            // Gera insights
+            const insights = gerarInsights(
+                dados.patrimonio,
+                dados.rendaSimples,
+                dados.rendaReversivel,
+                dados.rendaDesejada,
+                dados.inss
+            );
+
+            // Exibe
+            exibirInsights(insights);
+            exibirCardsFinais(dados.patrimonio, dados.rendaSimples, dados.rendaReversivel, dados.inss, dados.rendaDesejada);
+
+            // Scroll suave
+            setTimeout(() => {
+                document.getElementById("resultsSection").scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 200);
+        }
+
+        // Botão principal
+        document.querySelector(".btn-primary").addEventListener("click", calcularSimulacao_UI_Upgrade_final);
+
+        // ====================================
+        // JS DO MODAL
+        // ====================================
+        const modal = document.getElementById("modalPegadinhas");
+        const btn = document.getElementById("btnPegadinhas");
+        const close = document.getElementById("closeModalPeg");
+
+        btn.addEventListener("click", () => modal.style.display = "flex");
+        close.addEventListener("click", () => modal.style.display = "none");
+
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) modal.style.display = "none";
         });
 
         // Log inicial
-        console.log('🏖️ Simulador Anti-Pegadinha INVLAB+ v1.0 - ATIVO');
+        console.log('🏖️ Simulador Anti-Pegadinha INVLAB+ - TODOS OS MÓDULOS INTEGRADOS ✅');
     </script>
 </body>
 </html>
-
