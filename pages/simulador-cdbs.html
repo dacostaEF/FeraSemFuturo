@@ -592,7 +592,7 @@
         }
 
         /* ============================================
-           MODAL MINIMALISTA
+           MODAL PREMIUM INVLAB MASTER - Padrão Oficial
            ============================================ */
         .modal-overlay-minimalist {
             position: fixed;
@@ -600,45 +600,57 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.7); /* Escurecido para melhor contraste */
+            background: rgba(0, 0, 0, 0.7);
             display: flex;
-            flex-direction: column; /* Coluna: disclaimer em cima, modal embaixo */
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 10000;
             animation: fadeIn 0.3s ease;
             backdrop-filter: blur(4px);
-            padding: 20px; /* Padding para não colar nas bordas em telas pequenas */
-            gap: 0; /* Sem gap, o disclaimer tem margin-bottom */
+            padding: 20px;
+            gap: 0;
         }
 
         .modal-content-minimalist {
-            background: #0f1419; /* ESCURO INVLAB: mais próximo do site */
+            background: #0D1620; /* 1️⃣ PADRÃO MASTER: quase preto com verde-azulado */
             border-radius: 16px;
-            max-width: 900px; /* LARGO: era 490px, agora 900px */
+            max-width: 900px;
             width: 92%;
-            max-height: 80vh; /* Reduzido para dar espaço ao disclaimer */
+            max-height: 80vh;
             overflow: hidden;
-            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8);
-            animation: slideUp 0.3s ease;
-            border: 1px solid rgba(16, 185, 129, 0.4);
-            position: relative; /* Para animação funcionar corretamente */
-            flex-shrink: 0; /* Não encolhe */
+            box-shadow: 0 0 18px rgba(0, 0, 0, 0.65); /* 3️⃣ Sombra profissional */
+            animation: modalFadeIn 0.3s ease;
+            border: 1px solid rgba(204, 170, 102, 0.15); /* 2️⃣ Borda dourada suave */
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        /* Animação suave de abertura */
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .modal-header-minimalist {
-            padding: 24px 32px;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(59, 130, 246, 0.1)); /* Gradiente INVLAB */
-            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 24px 32px; /* 7️⃣ Espaçamento padrão */
+            background: rgba(30, 45, 45, 0.75); /* 4️⃣ Verde musgo translúcido */
+            border-bottom: 1px solid rgba(204, 170, 102, 0.1); /* Dourado sutil */
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .modal-header-minimalist h2 {
-            margin: 0;
-            font-size: 1.8rem; /* Maior para modal largo */
-            color: #FFFFFF;
+            margin: 0; /* 7️⃣ Margem superior do título: 0 */
+            font-size: 1.8rem;
+            color: #FFFFFF; /* 4️⃣ Título branco elegante */
             font-weight: 700;
             letter-spacing: -0.5px;
         }
@@ -646,8 +658,8 @@
         .btn-close-minimalist {
             background: transparent;
             border: none;
-            font-size: 32px;
-            color: #999;
+            font-size: 24px; /* 5️⃣ Tamanho padrão: 24px */
+            color: #CCAA66; /* 5️⃣ Dourado INVLAB */
             cursor: pointer;
             width: 36px;
             height: 36px;
@@ -660,17 +672,55 @@
         }
 
         .btn-close-minimalist:hover {
-            background: rgba(255, 255, 255, 0.15); /* ESCURO */
-            color: #FFFFFF;
+            background: rgba(204, 170, 102, 0.15); /* 5️⃣ Dourado claro no hover */
+            color: #D4AF37; /* Dourado mais claro */
         }
 
         .modal-body-minimalist {
-            padding: 32px 40px 40px; /* Padding generoso para modal largo */
+            padding: 32px; /* 7️⃣ Padding interno modal: 32px */
             max-height: calc(90vh - 100px);
             overflow-y: auto;
-            overflow-x: hidden; /* Evita scroll horizontal */
-            display: block; /* 1 COLUNA ÚNICA - melhor distribuição do conteúdo */
+            overflow-x: hidden;
+            display: block;
             scroll-behavior: smooth; /* Scroll suave */
+            position: relative;
+        }
+
+        /* Botão Voltar ao Topo do Modal - Gold Touch */
+        .modal-back-to-top {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #355E3B 0%, #CCAA66 100%); /* Gold Touch */
+            border: 1px solid rgba(204, 170, 102, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(53, 94, 59, 0.4);
+            color: #E4E4E4;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .modal-back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .modal-back-to-top:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(53, 94, 59, 0.6);
+            border-color: #D4AF37;
         }
         
         /* Scrollbar customizada para o modal (estilo INVLAB) */
@@ -692,27 +742,28 @@
             background: rgba(16, 185, 129, 0.5);
         }
 
+        /* 6️⃣ Cards internos - Padrão INVLAB Master */
         .modal-section {
-            margin-bottom: 24px; /* Espaçamento entre seções */
+            margin-bottom: 24px; /* 7️⃣ Espaçamento entre seções: 24px */
+            padding: 20px; /* 7️⃣ Padding dos cards internos: 20px */
+            background: rgba(9, 32, 21, 0.75); /* 6️⃣ Verde profundo translúcido */
+            border: 1px solid rgba(138, 204, 166, 0.10); /* 6️⃣ Verde menta suave */
+            border-radius: 12px;
         }
         
-        .modal-section:last-child {
-            margin-bottom: 0; /* Remove margem da última seção */
-        }
-
-        .modal-section.full-width {
-            grid-column: 1 / -1; /* Ocupa as 2 colunas quando necessário */
-        }
-
         .modal-section:last-child {
             margin-bottom: 0;
         }
 
+        .modal-section.full-width {
+            grid-column: 1 / -1;
+        }
+
         .modal-section h3 {
-            font-size: 1.2rem; /* Maior para modal largo */
+            font-size: 1.2rem;
             font-weight: 700;
-            color: #10b981; /* Verde INVLAB nos títulos */
-            margin-bottom: 12px;
+            color: #8ACC66; /* 6️⃣ Verde oliva - títulos dos cards */
+            margin: 0 0 18px 0; /* 7️⃣ Margem inferior do título: 18px */
             display: flex;
             align-items: center;
             gap: 8px;
@@ -721,13 +772,13 @@
         .modal-section h4 {
             font-size: 1.05rem;
             font-weight: 600;
-            color: rgba(255, 255, 255, 0.95);
+            color: rgba(255, 255, 255, 0.95); /* 6️⃣ Corpo branco */
             margin-bottom: 8px;
         }
 
         .modal-section p {
-            font-size: 0.95rem; /* Maior para modal largo */
-            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.85); /* 6️⃣ Corpo branco */
             line-height: 1.7;
             margin-bottom: 12px;
         }
@@ -1793,6 +1844,9 @@
                     </button>
                 </div>
             </div>
+            
+            <!-- Botão Voltar ao Topo do Modal -->
+            <button class="modal-back-to-top" id="modalBackToTop" aria-label="Voltar ao topo">↑</button>
         </div>
         
         <!-- RODAPÉ EDUCACIONAL INVLAB (Premium Footer) -->
@@ -1875,6 +1929,29 @@
         function closeCDBModal() {
             document.getElementById('cdbModal').style.display = 'none';
             document.body.style.overflow = 'auto'; // Restaura scroll
+        }
+
+        // Botão Voltar ao Topo do Modal
+        const modalBody = document.querySelector('.modal-body-minimalist');
+        const modalBackToTop = document.getElementById('modalBackToTop');
+
+        if (modalBody && modalBackToTop) {
+            // Mostra/esconde botão baseado no scroll do modal
+            modalBody.addEventListener('scroll', function() {
+                if (modalBody.scrollTop > 200) {
+                    modalBackToTop.classList.add('show');
+                } else {
+                    modalBackToTop.classList.remove('show');
+                }
+            });
+
+            // Volta ao topo do modal quando clicar
+            modalBackToTop.addEventListener('click', function() {
+                modalBody.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
         }
 
         // Fechar modal com tecla ESC

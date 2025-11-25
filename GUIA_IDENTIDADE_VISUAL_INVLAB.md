@@ -2201,9 +2201,588 @@ Ao adicionar um container CTA em uma nova página:
 
 ---
 
+## 🎭 23. INVLAB MODAL PREMIUM - PADRÃO OFICIAL
+
+### 23.1 Propósito
+
+Template master para **TODOS os modais educacionais** do INVLAB. Design system completo que garante consistência, profissionalismo e identidade visual única.
+
+**Onde usar:**
+- ✅ Modais educacionais ("Sobre CDBs", "Sobre Tesouro", etc.)
+- ✅ Popups informativos
+- ✅ Janelas de tutorial
+- ✅ Avisos importantes
+
+---
+
+### 23.2 Cores e Fundos (Padrão Oficial)
+
+**1️⃣ Fundo do Modal (Container Principal):**
+```css
+background: #0D1620; /* Quase preto com verde-azulado sutil */
+```
+
+**Por quê:**
+- ✅ Profissional e clean
+- ✅ Combina com o restante do site
+- ✅ Melhora foco e leitura
+- ✅ Não é preto chapado (mais sofisticado)
+
+---
+
+**2️⃣ Borda Externa do Modal:**
+```css
+border: 1px solid rgba(204, 170, 102, 0.15); /* Dourado suave 15% */
+```
+
+**Por quê:**
+- ✅ Discreto mas premium
+- ✅ Combina com logo e footer
+- ✅ Cria profundidade elegante
+- ✅ Identidade INVLAB (dourado)
+
+---
+
+**3️⃣ Sombra Profissional:**
+```css
+box-shadow: 0 0 18px rgba(0, 0, 0, 0.65);
+```
+
+**Por quê:**
+- ✅ Modal "flutua" sobre a página
+- ✅ Profundidade bem calibrada
+- ✅ Não é exagerado
+
+---
+
+**4️⃣ Cabeçalho do Modal:**
+```css
+.modal-header {
+    background: rgba(30, 45, 45, 0.75); /* Verde musgo translúcido */
+    padding: 24px 32px;
+    border-bottom: 1px solid rgba(204, 170, 102, 0.1);
+}
+
+.modal-header h2 {
+    color: #FFFFFF; /* Título branco elegante */
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+}
+```
+
+**Por quê:**
+- ✅ Diferenciação clara do conteúdo
+- ✅ Verde musgo = identidade INVLAB
+- ✅ Título branco destaca-se perfeitamente
+
+---
+
+**5️⃣ Botão de Fechar (X):**
+```css
+.btn-close {
+    color: #CCAA66; /* Dourado INVLAB */
+    font-size: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-close:hover {
+    color: #D4AF37; /* Dourado mais claro */
+    background: rgba(204, 170, 102, 0.15);
+}
+```
+
+**Por quê:**
+- ✅ Visível e elegante
+- ✅ 24px = padrão accessibility
+- ✅ Dourado = identidade INVLAB
+
+---
+
+**6️⃣ Cards Internos (Blocos de Conteúdo):**
+```css
+.modal-section {
+    background: rgba(9, 32, 21, 0.75); /* Verde profundo translúcido */
+    border: 1px solid rgba(138, 204, 166, 0.10); /* Verde menta suave */
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+.modal-section h3 {
+    color: #8ACC66; /* Verde oliva - títulos */
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 18px 0;
+}
+
+.modal-section p {
+    color: rgba(255, 255, 255, 0.85); /* Branco para corpo do texto */
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+```
+
+**Por quê:**
+- ✅ Identidade INVLAB inconfundível
+- ✅ Contraste perfeito
+- ✅ Hierarquia visual clara
+- ✅ Verde profundo = marca registrada
+
+---
+
+### 23.3 Espaçamentos Padronizados
+
+**7️⃣ Sistema de Espaçamento:**
+
+| Elemento | Valor | Uso |
+|----------|-------|-----|
+| **Padding interno modal** | `32px` | `.modal-body` |
+| **Espaçamento entre seções** | `24px` | `margin-bottom` dos cards |
+| **Padding dos cards internos** | `20px` | `.modal-section` |
+| **Margem superior do título** | `0` | Sem espaço acima |
+| **Margem inferior do título** | `18px` | Respiro antes do conteúdo |
+
+---
+
+### 23.4 Animação de Abertura
+
+```css
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-content {
+    animation: modalFadeIn 0.3s ease;
+}
+```
+
+**Por quê:**
+- ✅ Abertura suave e profissional
+- ✅ Não é abrupto
+- ✅ Scale 0.95 → 1 = elegância
+
+---
+
+### 23.5 Botão Voltar ao Topo (Dentro do Modal)
+
+**8️⃣ Botão Gold Touch no Modal:**
+
+```css
+.modal-back-to-top {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #355E3B 0%, #CCAA66 100%); /* Gold Touch */
+    border: 1px solid rgba(204, 170, 102, 0.3);
+    border-radius: 50%;
+    color: #E4E4E4;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(53, 94, 59, 0.4);
+}
+
+.modal-back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.modal-back-to-top:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(53, 94, 59, 0.6);
+    border-color: #D4AF37;
+}
+```
+
+**JavaScript necessário:**
+```javascript
+const modalBody = document.querySelector('.modal-body');
+const modalBackToTop = document.getElementById('modalBackToTop');
+
+if (modalBody && modalBackToTop) {
+    // Mostra/esconde baseado no scroll
+    modalBody.addEventListener('scroll', function() {
+        if (modalBody.scrollTop > 200) {
+            modalBackToTop.classList.add('show');
+        } else {
+            modalBackToTop.classList.remove('show');
+        }
+    });
+
+    // Volta ao topo ao clicar
+    modalBackToTop.addEventListener('click', function() {
+        modalBody.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+```
+
+---
+
+### 23.6 Estrutura HTML Completa
+
+```html
+<!-- Modal Premium INVLAB -->
+<div id="modalId" class="modal-overlay" onclick="closeModal()" style="display: none;">
+    <!-- Disclaimer acima do modal (opcional) -->
+    <div class="modal-disclaimer">
+        <p>Conteúdo 100% educacional • INVLAB © 2025</p>
+        <p>Laboratório de Investimentos • Plataforma Profissional</p>
+    </div>
+    
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <!-- Cabeçalho -->
+        <div class="modal-header">
+            <h2>📚 Título do Modal</h2>
+            <button class="btn-close" onclick="closeModal()" aria-label="Fechar">×</button>
+        </div>
+        
+        <!-- Corpo com scroll -->
+        <div class="modal-body">
+            <!-- Card interno 1 -->
+            <div class="modal-section">
+                <h3>🏦 Seção 1</h3>
+                <p>Conteúdo da seção...</p>
+            </div>
+            
+            <!-- Card interno 2 -->
+            <div class="modal-section">
+                <h3>💰 Seção 2</h3>
+                <p>Conteúdo da seção...</p>
+            </div>
+            
+            <!-- CTA Final (opcional) -->
+            <div class="modal-cta">
+                <p><strong>✨ Pronto para começar?</strong></p>
+                <button class="btn-gold-touch" onclick="closeModal()">
+                    Começar Agora →
+                </button>
+            </div>
+        </div>
+        
+        <!-- Botão Voltar ao Topo -->
+        <button class="modal-back-to-top" id="modalBackToTop" aria-label="Voltar ao topo">↑</button>
+    </div>
+</div>
+```
+
+---
+
+### 23.7 CSS Completo do Modal Premium
+
+```css
+/* Overlay (fundo escuro) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+    backdrop-filter: blur(4px);
+    padding: 20px;
+}
+
+/* Container do Modal */
+.modal-content {
+    background: #0D1620; /* 1️⃣ Fundo premium */
+    border-radius: 16px;
+    max-width: 900px;
+    width: 92%;
+    max-height: 80vh;
+    overflow: hidden;
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.65); /* 3️⃣ Sombra profissional */
+    animation: modalFadeIn 0.3s ease;
+    border: 1px solid rgba(204, 170, 102, 0.15); /* 2️⃣ Borda dourada */
+    position: relative;
+}
+
+/* Animação de abertura */
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Cabeçalho */
+.modal-header {
+    padding: 24px 32px;
+    background: rgba(30, 45, 45, 0.75); /* 4️⃣ Verde musgo */
+    border-bottom: 1px solid rgba(204, 170, 102, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #FFFFFF; /* 4️⃣ Título branco */
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* Botão Fechar */
+.btn-close {
+    background: transparent;
+    border: none;
+    font-size: 24px; /* 5️⃣ 24px padrão */
+    color: #CCAA66; /* 5️⃣ Dourado */
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-close:hover {
+    background: rgba(204, 170, 102, 0.15);
+    color: #D4AF37; /* Dourado claro */
+}
+
+/* Corpo do Modal */
+.modal-body {
+    padding: 32px; /* 7️⃣ Padding 32px */
+    max-height: calc(90vh - 100px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    position: relative;
+}
+
+/* Scrollbar customizada */
+.modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: rgba(204, 170, 102, 0.3);
+    border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(204, 170, 102, 0.5);
+}
+
+/* Cards Internos */
+.modal-section {
+    margin-bottom: 24px; /* 7️⃣ 24px entre seções */
+    padding: 20px; /* 7️⃣ Padding 20px */
+    background: rgba(9, 32, 21, 0.75); /* 6️⃣ Verde profundo */
+    border: 1px solid rgba(138, 204, 166, 0.10); /* 6️⃣ Verde menta */
+    border-radius: 12px;
+}
+
+.modal-section h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #8ACC66; /* 6️⃣ Verde oliva */
+    margin: 0 0 18px 0; /* 7️⃣ 18px margem inferior */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.modal-section p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85); /* 6️⃣ Branco */
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+
+/* Botão Voltar ao Topo do Modal */
+.modal-back-to-top {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #355E3B 0%, #CCAA66 100%);
+    border: 1px solid rgba(204, 170, 102, 0.3);
+    border-radius: 50%;
+    color: #E4E4E4;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(53, 94, 59, 0.4);
+}
+
+.modal-back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.modal-back-to-top:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(53, 94, 59, 0.6);
+    border-color: #D4AF37;
+}
+```
+
+---
+
+### 23.8 Responsividade
+
+```css
+/* Tablet */
+@media (max-width: 768px) {
+    .modal-content {
+        max-width: 95%;
+        width: 95%;
+        max-height: 85vh;
+    }
+    
+    .modal-header {
+        padding: 20px 24px;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .modal-body {
+        padding: 24px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .modal-content {
+        width: 95%;
+        max-height: 90vh;
+    }
+    
+    .modal-header {
+        padding: 16px 20px;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .modal-body {
+        padding: 20px;
+    }
+    
+    .modal-section {
+        padding: 16px;
+    }
+    
+    .modal-back-to-top {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        bottom: 16px;
+        right: 16px;
+    }
+}
+```
+
+---
+
+### 23.9 Checklist de Implementação
+
+Ao criar um novo modal, siga esta ordem:
+
+- [ ] 1. Copiar estrutura HTML completa
+- [ ] 2. Copiar CSS completo (overlay + content + header + body + sections)
+- [ ] 3. Aplicar fundo #0D1620
+- [ ] 4. Aplicar borda dourada rgba(204,170,102,0.15)
+- [ ] 5. Aplicar sombra 0 0 18px rgba(0,0,0,0.65)
+- [ ] 6. Cabeçalho verde musgo rgba(30,45,45,0.75)
+- [ ] 7. Botão fechar dourado #CCAA66 (24px)
+- [ ] 8. Cards verde profundo rgba(9,32,21,0.75)
+- [ ] 9. Espaçamentos (32px/24px/20px)
+- [ ] 10. Adicionar botão "Voltar ao Topo"
+- [ ] 11. Adicionar JavaScript do scroll
+- [ ] 12. Testar animação de abertura
+- [ ] 13. Testar responsividade (desktop/tablet/mobile)
+- [ ] 14. Validar cores e contraste
+
+---
+
+### 23.10 Resultado Final
+
+Com esse padrão, TODOS os modais do INVLAB terão:
+
+✔ Mesma cor (#0D1620)  
+✔ Mesma profundidade (sombra)  
+✔ Mesma borda (dourado 15%)  
+✔ Mesma tipografia  
+✔ Mesmo tamanho  
+✔ Mesma sensação institucional  
+✔ Mesma hierarquia visual  
+✔ Mesmo "ar premium e sério"  
+
+**Inspiração profissional:**
+- Banco Central do Brasil
+- B3 (Bolsa de Valores)
+- Nubank Explore
+- Fintechs educacionais premium
+
+---
+
+### 23.11 Modais que Devem Usar Este Padrão
+
+**Implementados:**
+- ✅ `pages/simulador-cdbs.html` - Modal "Sobre CDBs"
+
+**A implementar:**
+- [ ] `pages/simulador-tesouro-direto.html` - Modal "Sobre Tesouro"
+- [ ] `pages/simulador-lci-lca.html` - Modal "Sobre LCI/LCA"
+- [ ] Outros modais educacionais do site
+
+---
+
+### 23.12 Status
+
+**Status:** ✅ Testado e aprovado  
+**Página de referência:** `pages/simulador-cdbs.html`  
+**Aprovado:** 25 de Novembro de 2024  
+**Template master:** Pronto para replicação em todos os modais
+
+---
+
 **Última atualização:** 25 de Novembro de 2024  
 **Status:** ✅ Testado e aprovado  
-**Padrão Atual:** H1 e H2 em DOURADO (#D4AF37) | Botões CTA em Gold Touch (#355E3B → #CCAA66)  
+**Padrão Atual:** H1 e H2 em DOURADO (#D4AF37) | Botões CTA em Gold Touch (#355E3B → #CCAA66) | Modais em INVLAB Premium (#0D1620)  
 **Páginas Completas:** `index.html`, `pages/metodologia.html`, `pages/guia_invlab.html`, `pages/artigo-perfil-investidor.html`  
 **Pronto para:** Expansão para todo o site
 
