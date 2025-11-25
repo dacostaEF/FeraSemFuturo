@@ -116,32 +116,32 @@
             background: linear-gradient(135deg, #355E3B 0%, #CCAA66 100%); /* Gold Touch INVLAB */
             color: #E4E4E4; /* Branco suave */
             border: 1px solid rgba(204, 170, 102, 0.3); /* Dourado translúcido */
-            border-radius: 12px;
-            padding: 15px 20px;
+            border-radius: 8px;
+            padding: 8px 11px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            box-shadow: 0 0 8px rgba(0, 217, 36, 0.2);
+            gap: 6px;
+            font-size: 0.68rem;
+            font-weight: 500; /* Peso médio para legibilidade */
+            box-shadow: 0 2px 8px rgba(53, 94, 59, 0.2); /* Sombra verde oliva */
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            min-width: 140px;
+            min-width: 78px;
             justify-self: end;
             backdrop-filter: blur(10px);
         }
 
         .btn-about-lci:hover {
             border-color: #D4AF37; /* Dourado premium INVLAB */
-            transform: translateY(-4px) scale(1.02);
+            transform: translateY(-2px) scale(1.02);
             box-shadow: 
-                0 8px 25px rgba(0, 217, 36, 0.4),
-                0 0 20px rgba(0, 217, 36, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+                0 4px 12px rgba(53, 94, 59, 0.3),      /* Sombra verde oliva */
+                0 2px 8px rgba(204, 170, 102, 0.2);    /* Sombra dourada */
+            color: #FFFFFF; /* Branco puro no hover */
         }
 
         .btn-about-icon {
-            font-size: 1.8rem;
+            font-size: 1.44rem; /* REDUZIDO 20%: 1.8rem → 1.44rem */
         }
 
         .btn-about-text {
@@ -623,6 +623,299 @@
                 padding: 10px !important;
             }
         }
+
+        /* ====================================== 
+           🎭 INVLAB MODAL PREMIUM - PADRÃO OFICIAL
+           Seção 23 do Guia de Identidade Visual
+        ====================================== */
+
+        /* MODAL OVERLAY - Fundo escuro com blur */
+        .modal-overlay-minimalist {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85); /* Mais escuro para foco total */
+            backdrop-filter: blur(8px); /* Blur mais intenso */
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: modalFadeIn 0.3s ease forwards;
+            padding: 20px;
+            gap: 0;
+        }
+
+        /* MODAL CONTAINER PRINCIPAL */
+        .modal-content-minimalist {
+            background: #0D1620; /* Fundo quase preto com verde-azulado sutil */
+            border: 1px solid rgba(204, 170, 102, 0.15); /* Borda dourada suave */
+            box-shadow: 0 0 18px rgba(0, 0, 0, 0.65); /* Sombra profissional */
+            border-radius: 16px;
+            max-width: 900px;
+            width: 92%;
+            max-height: 80vh;
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        /* ANIMAÇÃO DE ABERTURA */
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* CABEÇALHO DO MODAL */
+        .modal-header-minimalist {
+            padding: 24px 32px; /* 7️⃣ Espaçamento padrão */
+            background: rgba(30, 45, 45, 0.75); /* 4️⃣ Verde musgo translúcido */
+            border-bottom: 1px solid rgba(204, 170, 102, 0.1); /* Dourado sutil */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header-minimalist h2 {
+            margin: 0; /* 7️⃣ Margem superior do título: 0 */
+            font-size: 1.8rem;
+            color: #E4E4E4; /* 4️⃣ Título branco elegante */
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        /* BOTÃO DE FECHAR (X) */
+        .btn-close-minimalist {
+            background: transparent;
+            border: none;
+            font-size: 24px; /* 5️⃣ Tamanho padronizado: 24px */
+            color: #CCAA66; /* 5️⃣ Dourado INVLAB */
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            line-height: 1;
+        }
+
+        .btn-close-minimalist:hover {
+            background: rgba(204, 170, 102, 0.15); /* 5️⃣ Fundo sutil no hover */
+            color: #D4AF37; /* 5️⃣ Dourado mais claro */
+        }
+
+        /* CORPO DO MODAL */
+        .modal-body-minimalist {
+            padding: 32px; /* 7️⃣ Padding interno modal: 32px */
+            max-height: calc(90vh - 100px);
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: block;
+            scroll-behavior: smooth; /* Scroll suave */
+            position: relative;
+        }
+
+        /* CARDS INTERNOS (blocos de conteúdo) */
+        .modal-section {
+            margin-bottom: 24px; /* 7️⃣ Espaçamento entre seções: 24px */
+            padding: 20px; /* 7️⃣ Padding dos cards internos: 20px */
+            background: rgba(9, 32, 21, 0.75); /* 6️⃣ Verde profundo translúcido */
+            border: 1px solid rgba(138, 204, 166, 0.10); /* 6️⃣ Verde menta suave */
+            border-radius: 12px;
+        }
+        
+        .modal-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .modal-section h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #8ACC66; /* 6️⃣ Verde oliva - títulos dos cards */
+            margin: 0 0 18px 0; /* 7️⃣ Margem inferior do título: 18px */
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-section h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.95); /* 6️⃣ Corpo branco */
+            margin-bottom: 8px;
+        }
+
+        .modal-section p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.85); /* 6️⃣ Corpo branco */
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .modal-section ul {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+            margin: 8px 0 12px 20px;
+        }
+
+        .modal-section li {
+            margin-bottom: 6px;
+        }
+
+        /* IMPORTANTE: <strong> usa o bold padrão do navegador (700) */
+        /* NÃO adicionar regra CSS para .modal-section strong {} */
+
+        /* SCROLLBAR CUSTOMIZADA - Dourado INVLAB */
+        .modal-body-minimalist::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-body-minimalist::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        .modal-body-minimalist::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.4); /* Dourado INVLAB (#D4AF37) com 40% opacidade */
+            border-radius: 4px;
+        }
+
+        .modal-body-minimalist::-webkit-scrollbar-thumb:hover {
+            background: rgba(212, 175, 55, 0.6); /* Dourado mais intenso no hover */
+        }
+
+        /* DISCLAIMER ACIMA DO MODAL */
+        .modal-disclaimer {
+            text-align: center;
+            margin-bottom: 12px;
+            padding: 8px 16px;
+            animation: fadeIn 0.4s ease 0.2s both;
+        }
+
+        .modal-disclaimer-text {
+            font-size: 0.85rem;
+            color: #10b981; /* Verde INVLAB */
+            font-weight: 600;
+            margin-bottom: 4px;
+            letter-spacing: 0.3px;
+        }
+
+        .modal-disclaimer-subtext {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
+        }
+
+        /* BOTÃO VOLTAR AO TOPO DENTRO DO MODAL */
+        #modalBackToTop {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #355E3B 0%, #CCAA66 100%);
+            border: 1px solid rgba(204, 170, 102, 0.3);
+            border-radius: 50%;
+            color: #E4E4E4;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(53, 94, 59, 0.4);
+        }
+
+        #modalBackToTop.show {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        #modalBackToTop:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(53, 94, 59, 0.6);
+            border-color: #D4AF37;
+        }
+
+        /* RESPONSIVIDADE MOBILE */
+        @media (max-width: 768px) {
+            .modal-content-minimalist {
+                max-width: 95%;
+                width: 95%;
+                max-height: 85vh;
+            }
+
+            .modal-disclaimer {
+                margin-bottom: 8px;
+                padding: 6px 12px;
+            }
+
+            .modal-disclaimer-text {
+                font-size: 0.75rem;
+            }
+
+            .modal-disclaimer-subtext {
+                font-size: 0.7rem;
+            }
+
+            .modal-header-minimalist {
+                padding: 18px 20px;
+            }
+
+            .modal-header-minimalist h2 {
+                font-size: 1.3rem;
+            }
+
+            .modal-body-minimalist {
+                padding: 24px 20px;
+            }
+
+            .modal-section h3 {
+                font-size: 16px;
+            }
+
+            #modalBackToTop {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+                bottom: 16px;
+                right: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-content-minimalist {
+                width: 95%;
+                max-height: 90vh;
+            }
+
+            .modal-header-minimalist {
+                padding: 20px;
+            }
+
+            .modal-header-minimalist h2 {
+                font-size: 20px;
+            }
+
+            .modal-body-minimalist {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -780,13 +1073,20 @@
             <span>Simulador Educacional</span>
         </div>
         
-        <!-- Header do Simulador -->
-        <div style="text-align: center; margin-bottom: 30px;">
+        <!-- Header com Título Centralizado + Botão Absolute -->
+        <div class="header" style="position: relative; text-align: center; padding-right: 120px;">
+            <!-- Botão "Sobre LCI/LCA" - ABSOLUTE no canto superior direito -->
+            <button class="btn-about-lci" onclick="openLCIModal()" aria-label="Conheça LCI e LCA" style="position: absolute; top: 0; right: 0;">
+                <div class="btn-about-icon">📚</div>
+                <div class="btn-about-text" style="font-weight: 400;">Sobre<br>LCI/LCA</div>
+            </button>
+            
+            <!-- Título e Descrição (centralizados, respeitando espaço do botão) -->
             <h1 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 700; color: #D4AF37; margin-bottom: 12px; letter-spacing: -0.01em;">
                 💰 Simulador de LCI e LCA
             </h1>
             <p style="font-family: 'Inter', sans-serif; font-size: 1rem; color: rgba(255, 255, 255, 0.75); max-width: 700px; margin: 0 auto; line-height: 1.6;">
-                Compare Tesouro Selic, IPCA+ e Prefixado com a Poupança e veja a rentabilidade real com dados atualizados
+                Compare investimentos isentos de IR com CDB e Poupança e veja quanto você ganha livre de impostos
             </p>
         </div>
 
@@ -980,18 +1280,173 @@
 
     </div>
 
-    <!-- MODAL EDUCATIVO - SOBRE LCI/LCA -->
-    <div id="lciLcaModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>📖 Tudo sobre LCI e LCA</h2>
-                <span class="close-modal" id="closeLciLcaModal">&times;</span>
+    <!-- MODAL INVLAB PREMIUM: Sobre LCI/LCA -->
+    <div id="lciModal" class="modal-overlay-minimalist" onclick="closeLCIModal()" style="display: none;">
+        <!-- Disclaimer acima do modal -->
+        <div class="modal-disclaimer">
+            <p class="modal-disclaimer-text">Conteúdo 100% educacional • INVLAB © 2025</p>
+            <p class="modal-disclaimer-subtext">Laboratório de Investimentos • Plataforma Profissional</p>
+        </div>
+        
+        <div class="modal-content-minimalist" onclick="event.stopPropagation()">
+            <div class="modal-header-minimalist">
+                <h2>📚 Conheça LCI e LCA</h2>
+                <button class="btn-close-minimalist" onclick="closeLCIModal()" aria-label="Fechar">×</button>
             </div>
             
-            <div class="modal-body">
+            <div class="modal-body-minimalist">
                 
-                <!-- INTRODUÇÃO -->
-                <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-left: 4px solid #00B894; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+                <!-- O que é LCI/LCA -->
+                <div class="modal-section">
+                    <h3>🏦 O que é LCI/LCA?</h3>
+                    <p>
+                        As <strong>LCI (Letras de Crédito Imobiliário)</strong> e as <strong>LCA (Letras de Crédito do Agronegócio)</strong> 
+                        são investimentos de renda fixa emitidos por bancos para financiar os setores imobiliário e do agronegócio.
+                    </p>
+                    <p>
+                        O detalhe mais conhecido é: <strong>LCI e LCA são isentas de Imposto de Renda</strong> 
+                        para pessoas físicas, o que aumenta o rendimento real.
+                    </p>
+                </div>
+
+                <!-- Por que investir -->
+                <div class="modal-section">
+                    <h3>🌱 Por que investir em LCI/LCA?</h3>
+                    <ul>
+                        <li><strong>Isenção de IR</strong> — você fica com 100% do rendimento.</li>
+                        <li><strong>Proteção do FGC</strong> até R$ 250 mil por CPF/banco.</li>
+                        <li><strong>Rentabilidade previsível</strong> (pós, pré ou híbrida).</li>
+                        <li><strong>Baixo risco</strong> — emitidos por instituições financeiras.</li>
+                    </ul>
+                </div>
+
+                <!-- Tipos de LCI/LCA -->
+                <div class="modal-section">
+                    <h3>📊 Tipos de LCI/LCA</h3>
+                    
+                    <h4>📈 Pós-fixado</h4>
+                    <p>Rende um percentual do CDI. Exemplo: 90% a 98% do CDI.</p>
+                    
+                    <h4>🧮 Prefixado</h4>
+                    <p>Rentabilidade fixa no momento da aplicação. Ex: 9% ao ano.</p>
+                    
+                    <h4>📘 Híbrido (IPCA + taxa)</h4>
+                    <p>Protege contra inflação e ainda garante ganho real.</p>
+                </div>
+
+                <!-- Prazo -->
+                <div class="modal-section">
+                    <h3>⏳ E o prazo?</h3>
+                    <p>
+                        LCI/LCA possuem prazo mínimo imposto por lei — geralmente 
+                        <strong>90, 180 ou 365 dias</strong>.  
+                        Antes disso, não é possível resgatar.
+                    </p>
+                </div>
+
+                <!-- Comparação -->
+                <div class="modal-section">
+                    <h3>⚖️ Comparação com CDBs</h3>
+                    <p>
+                        Mesmo rendendo um percentual menor do CDI, as LCI/LCA podem superar CDBs 
+                        porque <strong>não pagam imposto de renda</strong>.  
+                    </p>
+                    <p>Por isso é essencial usar o <strong>Simulador INVLAB</strong> para comparar.</p>
+                </div>
+
+            </div>
+            
+            <!-- Botão Voltar ao Topo (dentro do modal) -->
+            <button id="modalBackToTop" aria-label="Voltar ao topo">↑</button>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // MODAL "SOBRE LCI/LCA"
+        // ============================================
+        
+        function openLCIModal() {
+            document.getElementById('lciModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLCIModal() {
+            document.getElementById('lciModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Fechar modal com tecla ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLCIModal();
+            }
+        });
+
+        // ============================================
+        // BOTÃO "VOLTAR AO TOPO" DENTRO DO MODAL
+        // ============================================
+        
+        const modalBody = document.querySelector('.modal-body-minimalist');
+        const modalBackToTop = document.getElementById('modalBackToTop');
+
+        if (modalBody && modalBackToTop) {
+            // Mostra/esconde o botão baseado no scroll do modal
+            modalBody.addEventListener('scroll', function() {
+                if (modalBody.scrollTop > 200) {
+                    modalBackToTop.classList.add('show');
+                } else {
+                    modalBackToTop.classList.remove('show');
+                }
+            });
+
+            // Volta ao topo do modal ao clicar
+            modalBackToTop.addEventListener('click', function() {
+                modalBody.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+    </script>
+
+    <!-- JavaScript do Simulador -->
+    <script>
+        // Modal LCI/LCA ANTIGO (REMOVER)
+        /* const lciLcaModal = document.getElementById('lciLcaModal');
+        const openLciLcaModalBtn = document.getElementById('openLciLcaModal');
+        const closeLciLcaModalBtn = document.getElementById('closeLciLcaModal');
+
+        // Abrir modal
+        if (openLciLcaModalBtn) {
+            openLciLcaModalBtn.addEventListener('click', function() {
+                lciLcaModal.style.display = 'block';
+            });
+        }
+
+        // Fechar modal (X)
+        if (closeLciLcaModalBtn) {
+            closeLciLcaModalBtn.addEventListener('click', function() {
+                lciLcaModal.style.display = 'none';
+            });
+        }
+
+        // Fechar modal ao clicar fora
+        window.addEventListener('click', function(e) {
+            if (e.target === lciLcaModal) {
+                lciLcaModal.style.display = 'none';
+            }
+        });
+
+        // Fechar modal com ESC
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && lciLcaModal.style.display === 'block') {
+                lciLcaModal.style.display = 'none';
+            }
+        });
+        */ 
+
+        // Dropdown menu functionality
                     <p style="font-size: 1.2rem; color: #2A7FFF; font-weight: 600; margin-bottom: 0.8rem;">
                         🏆 LCI e LCA: Investimentos de Renda Fixa <span style="color: #00B894;">100% Isentos de Imposto de Renda</span>
                     </p>
@@ -1244,41 +1699,8 @@
         </div>
     </div>
 
-    <!-- JavaScript -->
+    <!-- JavaScript do Site -->
     <script>
-        // Modal LCI/LCA
-        const lciLcaModal = document.getElementById('lciLcaModal');
-        const openLciLcaModalBtn = document.getElementById('openLciLcaModal');
-        const closeLciLcaModalBtn = document.getElementById('closeLciLcaModal');
-
-        // Abrir modal
-        if (openLciLcaModalBtn) {
-            openLciLcaModalBtn.addEventListener('click', function() {
-                lciLcaModal.style.display = 'block';
-            });
-        }
-
-        // Fechar modal (X)
-        if (closeLciLcaModalBtn) {
-            closeLciLcaModalBtn.addEventListener('click', function() {
-                lciLcaModal.style.display = 'none';
-            });
-        }
-
-        // Fechar modal ao clicar fora
-        window.addEventListener('click', function(e) {
-            if (e.target === lciLcaModal) {
-                lciLcaModal.style.display = 'none';
-            }
-        });
-
-        // Fechar modal com ESC
-        window.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && lciLcaModal.style.display === 'block') {
-                lciLcaModal.style.display = 'none';
-            }
-        });
-
         // Dropdown menu functionality
         document.querySelectorAll('.dropdown').forEach(dropdown => {
             dropdown.addEventListener('mouseenter', function() {
