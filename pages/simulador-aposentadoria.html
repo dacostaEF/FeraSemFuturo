@@ -839,85 +839,193 @@
         </div>
     </div>
 
-    <!-- MODAL COMPLETO -->
+    <!-- MODAL COMPLETO - PADRÃO INVLAB MASTER -->
     <div id="modalPegadinhas" class="modal-overlay" style="
         display:none;
         position:fixed;
         top:0; left:0;
         width:100%; height:100%;
-        background:rgba(0,0,0,0.75);
-        backdrop-filter:blur(4px);
+        background:rgba(0,0,0,0.85);
+        backdrop-filter:blur(8px);
         justify-content:center;
         align-items:center;
         z-index:9999;">
         
         <div class="modal-content" style="
-            background:#1e293b;
-            padding:30px;
-            border-radius:15px;
+            background:#0D1620;
+            padding:32px;
+            border-radius:16px;
             max-width:900px;
-            width:90%;
-            border:1px solid #334155;
-            max-height:90vh;
-            overflow-y:auto;">
+            width:92%;
+            border:1px solid rgba(204, 170, 102, 0.15);
+            max-height:80vh;
+            overflow-y:auto;
+            box-shadow: 0 0 18px rgba(0, 0, 0, 0.65);">
             
-            <h2 style="margin-bottom:20px; color:#f8fafc; font-size:1.8rem;">
-                ⚠️ As 6 Grandes Pegadinhas da Previdência Privada
-            </h2>
-
-            <p style="color:#cbd5e1; margin-bottom:20px;">
-                Este guia explica, de forma clara e sem enrolação, os pontos que os bancos evitam te contar.
-            </p>
+            <!-- Header com fundo translúcido -->
+            <div style="background: rgba(30, 45, 45, 0.75); padding: 20px; margin: -32px -32px 24px -32px; border-radius: 16px 16px 0 0; border-bottom: 1px solid rgba(204, 170, 102, 0.15);">
+                <h2 style="margin:0; color:#D4AF37; font-size:1.6rem; font-family: 'Playfair Display', Georgia, serif; font-weight:700;">
+                    ⚠️ As 6 Grandes Pegadinhas da Previdência Privada
+                </h2>
+                <p style="color:rgba(255, 255, 255, 0.7); margin:8px 0 0 0; font-size:0.95rem;">
+                    Este guia explica, de forma clara e sem enrolação, os pontos que os bancos evitam te contar.
+                </p>
+            </div>
 
             <!-- PEGADINHA 1 -->
-            <div style="border-left:6px solid #ef4444; padding-left:15px; margin-bottom:20px;">
-                <h3 style="color:#ef4444;">1. Vitalícia Simples – A Armadilha Mortal</h3>
-                <p style="color:#cbd5e1;">Se você morrer cedo, seus herdeiros NÃO recebem nada. O patrimônio fica integralmente com a seguradora.</p>
+            <div class="pegadinha-acordeon" style="margin-bottom:15px; background:rgba(9, 32, 21, 0.75); border:1px solid rgba(138, 204, 166, 0.10); border-radius:12px; overflow:hidden;">
+                <div class="pegadinha-header" onclick="togglePegadinha(1)" style="padding:15px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">1. Vitalícia Simples – A Armadilha Mortal</h3>
+                    <span id="icon-1" style="color:#D4AF37; font-size:1.2rem; transition:0.3s;">▼</span>
+                </div>
+                <div id="content-1" class="pegadinha-content" style="max-height:0; overflow:hidden; transition:max-height 0.3s ease;">
+                    <div style="padding:0 15px 15px 15px; color:rgba(255, 255, 255, 0.85); line-height:1.7;">
+                        <p><strong style="font-weight:700;">O que é:</strong> Quando você converte seu plano em renda vitalícia simples, recebe mensalmente até morrer. SE MORRER, o dinheiro FICA COM O FUNDO. Seus herdeiros NÃO RECEBEM NADA.</p>
+                        
+                        <p><strong style="font-weight:700;">Exemplo prático:</strong> Você acumulou R$ 500.000 durante 30 anos. Converteu em renda vitalícia simples de R$ 3.000/mês. Se morrer no 1º ano após a aposentadoria, seus filhos não recebem os R$ 464.000 restantes. A seguradora fica com tudo!</p>
+                        
+                        <p><strong style="font-weight:700;">Impacto financeiro:</strong> Perda total do patrimônio para os herdeiros. Todo o esforço de 30 anos pode desaparecer em 1 ano.</p>
+                        
+                        <p><strong style="font-weight:700;">Como evitar:</strong> Escolha renda vitalícia REVERSÍVEL (cônjuge/dependente continua recebendo) ou invista por conta própria (100% vai para os herdeiros).</p>
+                    </div>
+                </div>
             </div>
 
             <!-- PEGADINHA 2 -->
-            <div style="border-left:6px solid #f59e0b; padding-left:15px; margin-bottom:20px;">
-                <h3 style="color:#f59e0b;">2. Taxas de Administração Altíssimas</h3>
-                <p style="color:#cbd5e1;">Fundos com 2% ao ano e taxa de carregamento podem destruir até 40% do seu patrimônio ao longo de 30 anos.</p>
+            <div class="pegadinha-acordeon" style="margin-bottom:15px; background:rgba(9, 32, 21, 0.75); border:1px solid rgba(138, 204, 166, 0.10); border-radius:12px; overflow:hidden;">
+                <div class="pegadinha-header" onclick="togglePegadinha(2)" style="padding:15px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">2. Taxas de Administração Altíssimas</h3>
+                    <span id="icon-2" style="color:#D4AF37; font-size:1.2rem; transition:0.3s;">▼</span>
+                </div>
+                <div id="content-2" class="pegadinha-content" style="max-height:0; overflow:hidden; transition:max-height 0.3s ease;">
+                    <div style="padding:0 15px 15px 15px; color:rgba(255, 255, 255, 0.85); line-height:1.7;">
+                        <p><strong style="font-weight:700;">O que é:</strong> Fundos de previdência cobram 2%, 3%, até 4% ao ano de taxa de administração + taxa de carregamento (até 5% de CADA APORTE).</p>
+                        
+                        <p><strong style="font-weight:700;">Exemplo prático:</strong> Aporte de R$ 1.000/mês com taxa de carregamento de 3% = só entra R$ 970. Mais 2% a.a. de taxa de administração. Em 30 anos, essas taxas podem custar R$ 200.000 a R$ 300.000!</p>
+                        
+                        <p><strong style="font-weight:700;">Impacto financeiro:</strong> Pode destruir até 40% do seu patrimônio ao longo de 30 anos. É como ter rentabilidade NEGATIVA todo mês.</p>
+                        
+                        <p><strong style="font-weight:700;">Como evitar:</strong> Escolha planos com taxa MENOR que 1% a.a. e SEM taxa de carregamento. Ou invista direto em Tesouro IPCA+, CDBs (taxas muito menores).</p>
+                    </div>
+                </div>
             </div>
 
             <!-- PEGADINHA 3 -->
-            <div style="border-left:6px solid #3b82f6; padding-left:15px; margin-bottom:20px;">
-                <h3 style="color:#3b82f6;">3. Sem FGC – Você Pode Perder Tudo</h3>
-                <p style="color:#cbd5e1;">Previdência privada NÃO tem garantia do FGC. Se a seguradora quebrar, acabou.</p>
+            <div class="pegadinha-acordeon" style="margin-bottom:15px; background:rgba(9, 32, 21, 0.75); border:1px solid rgba(138, 204, 166, 0.10); border-radius:12px; overflow:hidden;">
+                <div class="pegadinha-header" onclick="togglePegadinha(3)" style="padding:15px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">3. Sem FGC – Você Pode Perder Tudo</h3>
+                    <span id="icon-3" style="color:#D4AF37; font-size:1.2rem; transition:0.3s;">▼</span>
+                </div>
+                <div id="content-3" class="pegadinha-content" style="max-height:0; overflow:hidden; transition:max-height 0.3s ease;">
+                    <div style="padding:0 15px 15px 15px; color:rgba(255, 255, 255, 0.85); line-height:1.7;">
+                        <p><strong style="font-weight:700;">O que é:</strong> Diferente da poupança e CDBs (protegidos pelo FGC até R$ 250.000), a previdência privada NÃO tem essa garantia. Se a seguradora quebrar, você pode perder tudo.</p>
+                        
+                        <p><strong style="font-weight:700;">Exemplo prático:</strong> Você tem R$ 400.000 em um PGBL. A seguradora entra em falência. Teoricamente existe "garantia", mas na prática pode demorar anos e você pode não receber o valor total.</p>
+                        
+                        <p><strong style="font-weight:700;">Impacto financeiro:</strong> Risco de perda total ou parcial do patrimônio. Processo de recuperação pode levar 5-10 anos.</p>
+                        
+                        <p><strong style="font-weight:700;">Como evitar:</strong> Diversifique! Não coloque tudo em previdência. CDBs de bancos grandes têm FGC. Tesouro Direto é garantido pelo governo.</p>
+                    </div>
+                </div>
             </div>
 
             <!-- PEGADINHA 4 -->
-            <div style="border-left:6px solid #10b981; padding-left:15px; margin-bottom:20px;">
-                <h3 style="color:#10b981;">4. Tributação Confusa – Progressiva x Regressiva</h3>
-                <p style="color:#cbd5e1;">Escolher a tributação errada pode fazer você pagar 15% a mais de imposto no resgate.</p>
+            <div class="pegadinha-acordeon" style="margin-bottom:15px; background:rgba(9, 32, 21, 0.75); border:1px solid rgba(138, 204, 166, 0.10); border-radius:12px; overflow:hidden;">
+                <div class="pegadinha-header" onclick="togglePegadinha(4)" style="padding:15px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">4. Tributação Confusa – Progressiva x Regressiva</h3>
+                    <span id="icon-4" style="color:#D4AF37; font-size:1.2rem; transition:0.3s;">▼</span>
+                </div>
+                <div id="content-4" class="pegadinha-content" style="max-height:0; overflow:hidden; transition:max-height 0.3s ease;">
+                    <div style="padding:0 15px 15px 15px; color:rgba(255, 255, 255, 0.85); line-height:1.7;">
+                        <p><strong style="font-weight:700;">O que é:</strong> Você precisa escolher entre tabela PROGRESSIVA (como salário: 0% a 27,5%) ou REGRESSIVA (cai com o tempo: 35% a 10%). Escolha errada pode custar 15-20% a mais de imposto!</p>
+                        
+                        <p><strong style="font-weight:700;">Exemplo prático:</strong> Resgate de R$ 500.000 após 10 anos. Tabela progressiva: 27,5% = R$ 137.500 de IR. Tabela regressiva: 10% = R$ 50.000. Diferença: R$ 87.500!</p>
+                        
+                        <p><strong style="font-weight:700;">Impacto financeiro:</strong> Escolha errada pode custar R$ 50.000 a R$ 100.000 em impostos desnecessários.</p>
+                        
+                        <p><strong style="font-weight:700;">Como evitar:</strong> Regressiva é melhor para quem fica mais de 10 anos. Progressiva para quem resgata antes. MAS: depois de 10 anos, NÃO DÁ PARA TROCAR!</p>
+                    </div>
+                </div>
             </div>
 
             <!-- PEGADINHA 5 -->
-            <div style="border-left:6px solid #8b5cf6; padding-left:15px; margin-bottom:20px;">
-                <h3 style="color:#8b5cf6;">5. Rentabilidade Fictícia</h3>
-                <p style="color:#cbd5e1;">A maioria das simulações usa rentabilidades irreais para te convencer a contratar.</p>
+            <div class="pegadinha-acordeon" style="margin-bottom:15px; background:rgba(9, 32, 21, 0.75); border:1px solid rgba(138, 204, 166, 0.10); border-radius:12px; overflow:hidden;">
+                <div class="pegadinha-header" onclick="togglePegadinha(5)" style="padding:15px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">5. Rentabilidade Fictícia</h3>
+                    <span id="icon-5" style="color:#D4AF37; font-size:1.2rem; transition:0.3s;">▼</span>
+                </div>
+                <div id="content-5" class="pegadinha-content" style="max-height:0; overflow:hidden; transition:max-height 0.3s ease;">
+                    <div style="padding:0 15px 15px 15px; color:rgba(255, 255, 255, 0.85); line-height:1.7;">
+                        <p><strong style="font-weight:700;">O que é:</strong> A maioria das simulações usa rentabilidades irreais (10%, 12% a.a.) para te convencer a contratar. Na realidade, fundos de previdência rendem 5-7% a.a. (ANTES das taxas!).</p>
+                        
+                        <p><strong style="font-weight:700;">Exemplo prático:</strong> Simulador mostra: "R$ 1.000/mês por 30 anos = R$ 1,5 milhão!". Realidade com taxas: R$ 800.000. Diferença: R$ 700.000 que NÃO EXISTE!</p>
+                        
+                        <p><strong style="font-weight:700;">Impacto financeiro:</strong> Frustração total. Você planejou R$ 1,5 milhão, mas tem apenas R$ 800.000. Aposentadoria comprometida.</p>
+                        
+                        <p><strong style="font-weight:700;">Como evitar:</strong> Use simuladores REALISTAS (como o INVLAB!) que mostram taxas reais, inflação e rentabilidades conservadoras. Desconfie de números "otimistas demais".</p>
+                    </div>
+                </div>
             </div>
 
             <!-- PEGADINHA 6 -->
-            <div style="border-left:6px solid #ec4899; padding-left:15px; margin-bottom:20px;">
-                <h3 style="color:#ec4899;">6. Conversão Obrigatória em Renda</h3>
-                <p style="color:#cbd5e1;">Depois de acumular por anos, você é obrigado a converter em renda com regras desfavoráveis.</p>
+            <div class="pegadinha-acordeon" style="margin-bottom:15px; background:rgba(9, 32, 21, 0.75); border:1px solid rgba(138, 204, 166, 0.10); border-radius:12px; overflow:hidden;">
+                <div class="pegadinha-header" onclick="togglePegadinha(6)" style="padding:15px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">6. Conversão Obrigatória em Renda</h3>
+                    <span id="icon-6" style="color:#D4AF37; font-size:1.2rem; transition:0.3s;">▼</span>
+                </div>
+                <div id="content-6" class="pegadinha-content" style="max-height:0; overflow:hidden; transition:max-height 0.3s ease;">
+                    <div style="padding:0 15px 15px 15px; color:rgba(255, 255, 255, 0.85); line-height:1.7;">
+                        <p><strong style="font-weight:700;">O que é:</strong> Depois de acumular por 20-30 anos, você é OBRIGADO a converter em renda (vitalícia ou temporária). Depois de convertido, NÃO DÁ PARA VOLTAR ATRÁS! Não pode mudar VGBL/PGBL, não pode alterar tabela, não pode sacar tudo.</p>
+                        
+                        <p><strong style="font-weight:700;">Exemplo prático:</strong> Você acumulou R$ 600.000. Converteu em renda vitalícia simples de R$ 3.500/mês. 2 anos depois, descobriu que vitalícia reversível seria melhor. AZAR! Não pode mais mudar. Está preso para sempre.</p>
+                        
+                        <p><strong style="font-weight:700;">Impacto financeiro:</strong> Perda de flexibilidade TOTAL. Se precisar de dinheiro para emergência, cirurgia, viagem: NÃO PODE RESGATAR. Só recebe a renda mensal.</p>
+                        
+                        <p><strong style="font-weight:700;">Como evitar:</strong> Investimento próprio (Tesouro, CDBs, FIIs) = TOTAL FLEXIBILIDADE. Pode resgatar quando quiser, quanto quiser, como quiser. Você controla 100%.</p>
+                    </div>
+                </div>
             </div>
 
             <button id="closeModalPeg" style="
-                margin-top:30px;
-                padding:12px 20px;
-                background:#334155;
+                margin-top:24px;
+                padding:12px 24px;
+                background:linear-gradient(90deg, #355E3B, #CCAA66);
                 border:none;
                 border-radius:10px;
-                color:white;
+                color:#0c0e13;
                 font-size:1rem;
-                cursor:pointer;">
+                font-weight:600;
+                cursor:pointer;
+                transition:0.3s;">
                 Fechar
             </button>
         </div>
     </div>
+
+    <!-- CSS para scrollbar dourada -->
+    <style>
+        /* Scrollbar dourada INVLAB Master no modal pegadinhas */
+        .modal-content::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.4); /* Dourado INVLAB */
+            border-radius: 8px;
+            border: 2px solid transparent;
+            background-clip: content-box;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(212, 175, 55, 0.6);
+            background-clip: content-box;
+        }
+    </style>
 
     <!-- ====================================== -->
     <!-- JAVASCRIPT COMPLETO - TODOS OS MÓDULOS -->
@@ -1296,6 +1404,29 @@
         modal.addEventListener("click", (e) => {
             if (e.target === modal) modal.style.display = "none";
         });
+
+        // ============================================
+        // 🎯 ACORDEÃO DAS PEGADINHAS
+        // ============================================
+        function togglePegadinha(num) {
+            const content = document.getElementById(`content-${num}`);
+            const icon = document.getElementById(`icon-${num}`);
+            
+            if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+                // Fechar
+                content.style.maxHeight = '0';
+                icon.style.transform = 'rotate(0deg)';
+                icon.textContent = '▼';
+            } else {
+                // Abrir
+                content.style.maxHeight = content.scrollHeight + 'px';
+                icon.style.transform = 'rotate(180deg)';
+                icon.textContent = '▲';
+            }
+        }
+
+        // Torna a função global para ser acessível pelo onclick
+        window.togglePegadinha = togglePegadinha;
 
         // ============================================
         // 🔧 MÓDULO 6 – ACORDEÃO E PARÂMETROS AVANÇADOS
