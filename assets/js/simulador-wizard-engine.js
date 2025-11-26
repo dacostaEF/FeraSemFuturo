@@ -191,15 +191,31 @@ function executarSimulacaoWizard(dadosWizard) {
     const deficitOuSobra = rendaTotalPrevista - rendaDesejada;
 
     // 10. Aporte necessário para atingir 100% da meta
+    // ===============================================================
+    // CORREÇÃO OFICIAL: Cálculo REAL do aporte necessário
+    // Fórmula PMT com juros compostos (padrão bancário)
+    // ===============================================================
     let aporteNecessario = null;
     if (deficitOuSobra < 0) {
         const meses = anosAteAposentadoria * 12;
-        const juros = taxaMensal(taxaAnualEscolhida);
+        const jurosNominalMensal = taxaMensal(taxaAnualEscolhida);
         
-        let patrimonioNecessario = 0;
-        patrimonioNecessario = patrimonioTotalProjetado + (Math.abs(deficitOuSobra) * 12);
+        // Quanto de renda falta para atingir a meta
+        const rendaFaltante = Math.abs(deficitOuSobra);
         
-        aporteNecessario = (patrimonioNecessario - patrimonioTotalProjetado) / meses;
+        // Patrimônio necessário para gerar essa renda faltante (vitalícia perpétua)
+        const patrimonioNecessario = rendaFaltante / taxaMensalReal;
+        
+        // Diferença entre o patrimônio necessário e o projetado
+        const faltaAcumular = patrimonioNecessario - patrimonioTotalProjetado;
+        
+        if (faltaAcumular > 0) {
+            // Fórmula PMT: juros compostos mensais
+            aporteNecessario = (faltaAcumular * jurosNominalMensal) / 
+                               (Math.pow(1 + jurosNominalMensal, meses) - 1);
+        } else {
+            aporteNecessario = 0;  // já atingiu
+        }
     }
 
     // 11. Retornar objeto completo

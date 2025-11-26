@@ -677,10 +677,10 @@
 
             <div class="input-group">
                 <label class="input-label">
-                    Sua renda mensal atual (bruta)
+                    Sua renda mensal atual (bruta) - apenas informativo
                     <span class="tooltip">
                         <span class="tooltip-icon">i</span>
-                        <span class="tooltip-text">Considere o valor total que você recebe por mês, antes de descontos como INSS e imposto de renda.</span>
+                        <span class="tooltip-text">Este campo é apenas para contexto e NÃO afeta os cálculos da simulação. Informe o valor total que você recebe por mês.</span>
                     </span>
                 </label>
                 <input type="number" class="input-field" id="rendaAtual" placeholder="Ex: 5000" value="">
@@ -723,17 +723,6 @@
                     </span>
                 </label>
                 <input type="number" class="input-field" id="rendaDesejada" placeholder="Ex: 8000" value="">
-            </div>
-
-            <div class="input-group">
-                <label class="input-label">
-                    Seus gastos essenciais mensais (moradia, alimentação, saúde)
-                    <span class="tooltip">
-                        <span class="tooltip-icon">i</span>
-                        <span class="tooltip-text">Moradia, alimentação, saúde, transporte e contas básicas. É o mínimo para manter sua qualidade de vida.</span>
-                    </span>
-                </label>
-                <input type="number" class="input-field" id="gastosEssenciais" placeholder="Ex: 3500" value="">
             </div>
 
             <div class="input-group" style="
@@ -788,21 +777,6 @@
                     </span>
                 </label>
                 <input type="number" class="input-field" id="aporteMensal" placeholder="Ex: 800" value="">
-            </div>
-
-            <div class="input-group">
-                <label class="input-label">
-                    Esse valor é fixo ou pode variar?
-                    <span class="tooltip">
-                        <span class="tooltip-icon">i</span>
-                        <span class="tooltip-text">Se você consegue manter o mesmo valor todo mês, escolha FIXO. Se o valor muda (ex.: autônomo), escolha VARIÁVEL.</span>
-                    </span>
-                </label>
-                <select class="input-field" id="aporteTipo">
-                    <option value="">Selecione...</option>
-                    <option value="fixo">Fixo (consigo manter sempre)</option>
-                    <option value="variavel">Variável (pode mudar)</option>
-                </select>
             </div>
 
             <div class="input-group">

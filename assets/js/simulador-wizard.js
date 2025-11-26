@@ -5,15 +5,13 @@
 
 let wizardData = {
     idadeAtual: null,
-    rendaAtual: null,
+    rendaAtual: null, // apenas informativo
     patrimonioAtual: null,
 
     rendaDesejada: null,
-    gastosEssenciais: null,
     inssEstimado: null,
 
     aporteMensal: null,
-    aporteTipo: null,
     aporteExtraAnual: null,
 
     idadeAposentadoria: null,
@@ -64,13 +62,11 @@ function captureStepData(stepNumber) {
 
         case 2:
             wizardData.rendaDesejada = getValue("rendaDesejada");
-            wizardData.gastosEssenciais = getValue("gastosEssenciais");
             wizardData.inssEstimado = getValue("inssEstimado");
             break;
 
         case 3:
             wizardData.aporteMensal = getValue("aporteMensal");
-            wizardData.aporteTipo = getValue("aporteTipo");
             wizardData.aporteExtraAnual = getValue("aporteExtraAnual");
             break;
 
