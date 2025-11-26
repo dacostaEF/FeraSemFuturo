@@ -466,6 +466,178 @@
             height: auto !important;
         }
 
+        /* ========================================= */
+        /* BOTÕES DE MODAL E INTERPRETAÇÃO */
+        /* ========================================= */
+        
+        .dashboard-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-modal {
+            background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+            color: #D4AF37;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+
+        .btn-modal:hover {
+            border-color: rgba(212, 175, 55, 0.7);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #1a1a1a;
+            border: 1px solid rgba(138, 204, 166, 0.3);
+            border-radius: 12px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(138, 204, 166, 0.2);
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #D4AF37;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: #D4AF37;
+        }
+
+        .modal-body {
+            color: #E4E4E4;
+            line-height: 1.8;
+        }
+
+        .modal-body p {
+            margin-bottom: 12px;
+        }
+
+        .modal-body strong {
+            color: #10b981;
+        }
+
+        /* Bloco de Detalhes */
+        .details-block {
+            background: #0f0f0f;
+            border: 1px solid rgba(138, 204, 166, 0.15);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .details-block p {
+            margin-bottom: 10px;
+            color: #E4E4E4;
+            line-height: 1.6;
+        }
+
+        /* Bloco de Interpretação Automática */
+        .interpretation-block {
+            background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+            border: 1px solid rgba(138, 204, 166, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .interpretation-header {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .interpretation-body {
+            line-height: 1.8;
+            color: #E4E4E4;
+        }
+
+        .interpretation-body ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .interpretation-body li {
+            margin-bottom: 8px;
+        }
+
+        /* Status Colors */
+        .status-success {
+            border-left: 4px solid #10b981;
+        }
+
+        .status-warning {
+            border-left: 4px solid #facc15;
+        }
+
+        .status-alert {
+            border-left: 4px solid #ef4444;
+        }
+
         /* Responsividade Mobile */
         @media (max-width: 768px) {
             .invlab-results canvas {
@@ -898,6 +1070,78 @@
                         <canvas id="graficoEvolucaoOficial" style="max-height: 400px;"></canvas>
                     </div>
                 </section>
+
+                <!-- ===================================================== -->
+                <!-- 📋 DETALHES DA SIMULAÇÃO -->
+                <!-- ===================================================== -->
+                <div class="details-block" id="detailsBlock" style="display:none;">
+                    <p id="inssDetail"></p>
+                    <p id="rendaInvestimentosDetail"></p>
+                    <p id="prazoDetail"></p>
+                    <p id="perfilDetail"></p>
+                </div>
+
+                <!-- ===================================================== -->
+                <!-- 💡 INTERPRETAÇÃO AUTOMÁTICA DO RESULTADO -->
+                <!-- ===================================================== -->
+                <div id="interpretationBlock"></div>
+
+                <!-- ===================================================== -->
+                <!-- BOTÕES DE AÇÃO -->
+                <!-- ===================================================== -->
+                <div class="dashboard-actions" id="dashboardActions" style="display:none;">
+                    <button class="btn-modal" onclick="abrirModalDadosOficial()">📋 Ver dados usados</button>
+                    <button class="btn-modal" onclick="abrirModalFormulasOficial()">🧠 Ver fórmulas e parâmetros</button>
+                </div>
+            </div>
+
+            <!-- ===================================================== -->
+            <!-- MODALS -->
+            <!-- ===================================================== -->
+            
+            <!-- MODAL: DADOS DE ENTRADA -->
+            <div class="modal-overlay" id="modalDadosOficial">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">📋 Dados Usados na Simulação</h3>
+                        <button class="modal-close" onclick="fecharModalOficial('modalDadosOficial')">×</button>
+                    </div>
+                    <div class="modal-body" id="modalDadosConteudo">
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODAL: FÓRMULAS E PARÂMETROS -->
+            <div class="modal-overlay" id="modalFormulasOficial">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">🧠 Cálculo Matemático</h3>
+                        <button class="modal-close" onclick="fecharModalOficial('modalFormulasOficial')">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <h4 style="color: #D4AF37; margin-top: 0;">📊 Parâmetros Utilizados</h4>
+                        <p id="taxaNominal"></p>
+                        <p id="taxaMensal"></p>
+                        <p><strong>Inflação Presumida:</strong> 4,5% a.a. (IPCA médio histórico)</p>
+                        <p id="taxaReal"></p>
+                        
+                        <h4 style="color: #D4AF37; margin-top: 20px;">📐 Fórmulas Utilizadas</h4>
+                        <p><strong>1️⃣ Acumulação com Juros Compostos:</strong></p>
+                        <p style="font-family: monospace; font-size: 0.9em; background: #0f0f0f; padding: 10px; border-radius: 6px;">
+                            FV = PV × (1 + i)^n + PMT × [(1 + i)^n - 1] / i
+                        </p>
+                        
+                        <p><strong>2️⃣ Renda Vitalícia Perpétua:</strong></p>
+                        <p style="font-family: monospace; font-size: 0.9em; background: #0f0f0f; padding: 10px; border-radius: 6px;">
+                            Renda = Patrimônio × Taxa Real Mensal<br>
+                            (Preserva o capital para herança)
+                        </p>
+                        
+                        <p style="margin-top: 15px; font-size: 0.9em; color: #9ca3af;">
+                            <strong>Onde:</strong> PV = Valor Presente, FV = Valor Futuro, PMT = Pagamento, i = Taxa, n = Períodos
+                        </p>
+                    </div>
+                </div>
             </div>
 
             <!-- ===================================================== -->
@@ -1546,6 +1790,13 @@
                 );
             }, 100);
 
+            // ===================================================
+            // 📋 EXIBIR DETALHES, INTERPRETAÇÃO E MODAIS
+            // ===================================================
+            exibirDetalhesOficial(anos, retornoAnual, beneficioINSS, rendaInvestProprio);
+            exibirInterpretacaoOficial(rendaInvestProprio + beneficioINSS, rendaDesejada, investProprio.real);
+            prepararModaisOficial(idadeAtual, idadeApos, aporte, rendaDesejada, beneficioINSS, retornoAnual, anos);
+
             // Retorna dados para módulos seguintes
             return {
                 patrimonio: investProprio.real,
@@ -1598,6 +1849,170 @@
                 }
             });
         }
+
+        // ========================================
+        // 📋 EXIBIR DETALHES DA SIMULAÇÃO
+        // ========================================
+        function exibirDetalhesOficial(anos, retornoAnual, inss, rendaInvest) {
+            const detailsBlock = document.getElementById('detailsBlock');
+            const inssDetail = document.getElementById('inssDetail');
+            const rendaDetail = document.getElementById('rendaInvestimentosDetail');
+            const prazoDetail = document.getElementById('prazoDetail');
+            const perfilDetail = document.getElementById('perfilDetail');
+
+            detailsBlock.style.display = 'block';
+
+            // INSS
+            if (inss === 0) {
+                inssDetail.innerHTML = '💼 <strong>INSS:</strong> <span style="color: #9ca3af;">Não considerado nesta simulação</span><br><span style="font-size: 0.9em; color: #6b7280; margin-left: 30px;">→ A renda total vem exclusivamente dos investimentos</span>';
+            } else {
+                inssDetail.innerHTML = `💼 <strong>INSS:</strong> R$ ${inss.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês<br><span style="font-size: 0.9em; color: #6b7280; margin-left: 30px;">→ Estimativa automática | ⚠️ Sujeito a mudanças nas regras</span>`;
+            }
+
+            // Renda dos Investimentos
+            rendaDetail.innerHTML = `💰 <strong>Renda dos Investimentos:</strong> R$ ${rendaInvest.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês`;
+
+            // Prazo
+            prazoDetail.innerHTML = `⏱️ <strong>Prazo:</strong> ${anos} anos até aposentadoria`;
+
+            // Perfil
+            const percentual = (retornoAnual * 100).toFixed(1);
+            perfilDetail.innerHTML = `📊 <strong>Perfil:</strong> ${currentScenario.charAt(0).toUpperCase() + currentScenario.slice(1)} (${percentual}% a.a.)`;
+        }
+
+        // ========================================
+        // 💡 EXIBIR INTERPRETAÇÃO AUTOMÁTICA
+        // ========================================
+        function exibirInterpretacaoOficial(rendaTotal, rendaDesejada, patrimonio) {
+            const interpretationBlock = document.getElementById('interpretationBlock');
+            const dashboardActions = document.getElementById('dashboardActions');
+            
+            dashboardActions.style.display = 'flex';
+
+            const percentualAtingido = (rendaTotal / rendaDesejada) * 100;
+            let html = '';
+            let statusClass = '';
+            let icone = '';
+            let titulo = '';
+            let conteudo = '';
+
+            if (percentualAtingido >= 100) {
+                statusClass = 'status-success';
+                icone = '🎉';
+                titulo = 'Parabéns! Sua meta foi atingida.';
+                conteudo = `
+                    <p>Você terá uma aposentadoria confortável mantendo disciplina nos investimentos.</p>
+                    <p style="margin-top: 15px;"><strong>Resumo:</strong></p>
+                    <ul>
+                        <li><strong>Renda desejada:</strong> R$ ${rendaDesejada.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</li>
+                        <li><strong>Renda projetada:</strong> R$ ${rendaTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</li>
+                        <li><strong>Excedente:</strong> R$ ${(rendaTotal - rendaDesejada).toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>💡 Sugestões opcionais:</strong></p>
+                    <ul>
+                        <li>Antecipar aposentadoria em alguns anos</li>
+                        <li>Aumentar patrimônio para deixar herança maior</li>
+                        <li>Elevar padrão de vida na aposentadoria</li>
+                    </ul>
+                `;
+            } else if (percentualAtingido >= 80) {
+                statusClass = 'status-warning';
+                icone = '💡';
+                titulo = 'Você está muito perto da sua meta!';
+                const faltam = rendaDesejada - rendaTotal;
+                conteudo = `
+                    <p>Faltam apenas <strong>R$ ${faltam.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</strong> para atingir 100% da meta.</p>
+                    <p style="margin-top: 15px;"><strong>📈 Pontos positivos:</strong></p>
+                    <ul>
+                        <li>Patrimônio projetado sólido: <strong>R$ ${patrimonio.toLocaleString('pt-BR', {maximumFractionDigits: 0})}</strong></li>
+                        <li><strong>${percentualAtingido.toFixed(1)}%</strong> da meta já atingidos</li>
+                        <li>Capital preservado para herança</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>🎯 Como atingir 100%:</strong></p>
+                    <ul>
+                        <li>Aumentar aporte mensal</li>
+                        <li>Incluir aportes extras anuais (13º, bônus)</li>
+                        <li>Postergar aposentadoria em 1-2 anos</li>
+                    </ul>
+                `;
+            } else {
+                statusClass = 'status-alert';
+                icone = '⚠️';
+                titulo = 'Meta ainda distante, mas totalmente possível.';
+                conteudo = `
+                    <p>Atualmente você atingiria <strong>${percentualAtingido.toFixed(1)}%</strong> da meta desejada. Vamos ajustar seu plano juntos!</p>
+                    <p style="margin-top: 15px;"><strong>🛠️ Caminhos possíveis:</strong></p>
+                    <ul>
+                        <li><strong>Elevar aporte mensal:</strong> Aumentar valor investido mensalmente</li>
+                        <li><strong>Incluir aportes anuais:</strong> 13º salário, bônus, restituição IR</li>
+                        <li><strong>Ajustar idade de aposentadoria:</strong> Trabalhar alguns anos a mais</li>
+                        <li><strong>Testar diferentes perfis:</strong> Avaliar aumentar exposição a renda variável</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.95em; color: #9ca3af;">
+                        💪 <strong>Lembre-se:</strong> Pequenos ajustes agora fazem uma enorme diferença no futuro. O importante é começar!
+                    </p>
+                `;
+            }
+
+            html = `
+                <div class="interpretation-block ${statusClass}">
+                    <div class="interpretation-header">
+                        <span>${icone}</span>
+                        <span>${titulo}</span>
+                    </div>
+                    <div class="interpretation-body">
+                        ${conteudo}
+                    </div>
+                </div>
+            `;
+
+            interpretationBlock.innerHTML = html;
+        }
+
+        // ========================================
+        // 📋 PREPARAR CONTEÚDO DOS MODAIS
+        // ========================================
+        function prepararModaisOficial(idadeAtual, idadeApos, aporte, rendaDesejada, inss, retornoAnual, anos) {
+            const modalDadosConteudo = document.getElementById('modalDadosConteudo');
+            
+            modalDadosConteudo.innerHTML = `
+                <p><strong>Idade atual:</strong> ${idadeAtual} anos</p>
+                <p><strong>Idade de aposentadoria:</strong> ${idadeApos} anos</p>
+                <p><strong>Aporte mensal:</strong> R$ ${Number(aporte).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                <p><strong>Perfil investidor:</strong> ${currentScenario.charAt(0).toUpperCase() + currentScenario.slice(1)} (${(retornoAnual * 100).toFixed(1)}% a.a.)</p>
+                <p><strong>Renda desejada:</strong> R$ ${rendaDesejada.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</p>
+                <p><strong>Estimativa de INSS:</strong> ${inss === 0 ? 'Não considerado (R$ 0)' : 'R$ ' + inss.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' (automático)'}</p>
+                <p><strong>Taxa real usada:</strong> ${((retornoAnual - 0.045) * 100).toFixed(2)}% a.a. (após inflação)</p>
+                <p><strong>Inflação presumida:</strong> 4,5% a.a.</p>
+            `;
+
+            // Atualizar modal de fórmulas
+            document.getElementById('taxaNominal').innerHTML = `<strong>Taxa Nominal Anual:</strong> ${(retornoAnual * 100).toFixed(1)}% a.a.`;
+            document.getElementById('taxaMensal').innerHTML = `<strong>Taxa Equivalente Mensal:</strong> ${((Math.pow(1 + retornoAnual, 1/12) - 1) * 100).toFixed(4)}% a.m.`;
+            document.getElementById('taxaReal').innerHTML = `<strong>Taxa Real:</strong> ${((retornoAnual - 0.045) * 100).toFixed(2)}% a.a. (${((Math.pow(1 + (retornoAnual - 0.045), 1/12) - 1) * 100).toFixed(4)}% a.m.)`;
+        }
+
+        // ========================================
+        // 🔧 FUNÇÕES DOS MODAIS
+        // ========================================
+        function abrirModalDadosOficial() {
+            document.getElementById('modalDadosOficial').classList.add('active');
+        }
+
+        function abrirModalFormulasOficial() {
+            document.getElementById('modalFormulasOficial').classList.add('active');
+        }
+
+        function fecharModalOficial(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Fechar modal clicando fora
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                e.target.classList.remove('active');
+            }
+        });
 
         // ================================
         // 🔵 MÓDULO 4: INTERFACE PREMIUM

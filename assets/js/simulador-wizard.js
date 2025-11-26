@@ -302,12 +302,14 @@ function finalizarWizard() {
 
         <!-- INFO EXTRA -->
         <div class="dashboard-info-extra">
-            <p>💼 <strong>INSS:</strong> ${
+            <p style="margin-bottom: 8px;">💼 <strong>INSS:</strong> ${
                 resultados.inssReal === 0 
-                ? '<span style="color: #9ca3af;">Não considerado nesta simulação</span>'
-                : 'R$ ' + resultados.inssReal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '/mês'
+                ? '<span style="color: #9ca3af;">Não considerado nesta simulação</span><br><span style="font-size: 0.9em; color: #6b7280; margin-left: 30px;">→ A renda total vem exclusivamente dos investimentos</span>'
+                : (wizardData.inssEstimado && wizardData.inssEstimado > 0)
+                    ? 'R$ ' + resultados.inssReal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '/mês<br><span style="font-size: 0.9em; color: #6b7280; margin-left: 30px;">→ Valor informado por você | ✓ Considerado no cálculo da renda total</span>'
+                    : 'R$ ' + resultados.inssReal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '/mês (estimativa automática)<br><span style="font-size: 0.9em; color: #6b7280; margin-left: 30px;">→ Calculado como 40% da renda desejada | ⚠️ Sujeito a mudanças nas regras</span>'
             }</p>
-            <p>💰 <strong>Investimentos:</strong> R$ ${resultados.rendaRealPossivel.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</p>
+            <p>💰 <strong>Renda dos Investimentos:</strong> R$ ${resultados.rendaRealPossivel.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</p>
             <p>⏱️ <strong>Prazo:</strong> ${resultados.anosAteAposentadoria} anos até aposentadoria</p>
             <p>📊 <strong>Perfil:</strong> ${resultados.perfil.charAt(0).toUpperCase() + resultados.perfil.slice(1)} (${(resultados.taxaAnualEscolhida * 100).toFixed(1)}% a.a.)</p>
         </div>
@@ -328,11 +330,83 @@ function finalizarWizard() {
                     <p class="aporte-texto">
                         Para atingir sua meta de <strong>R$ ${resultados.rendaDesejada.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong>, 
                         você precisaria investir aproximadamente 
-                        <strong>R$ ${resultados.aporteNecessario.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong>.
+                        <strong>R$ ${resultados.aporteNecessario.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês A MAIS</strong> 
+                        (totalizando <strong>R$ ${(Number(wizardData.aporteMensal) + resultados.aporteNecessario).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong>).
                     </p>
                 </div>
             </div>
         ` : ''}
+
+        <!-- INTERPRETAÇÃO AUTOMÁTICA DO RESULTADO -->
+        ${gerarInterpretacaoAutomatica(resultados, wizardData)}
+
+        <!-- BOTÕES DE AÇÃO -->
+        <div class="dashboard-actions">
+            <button class="btn-modal" onclick="abrirModalDados()">📋 Ver dados usados</button>
+            <button class="btn-modal" onclick="abrirModalFormulas()">🧠 Ver fórmulas e parâmetros</button>
+        </div>
+
+        <!-- MODAL: DADOS DE ENTRADA -->
+        <div class="modal-overlay" id="modalDados">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">📋 Dados Usados na Simulação</h3>
+                    <button class="modal-close" onclick="fecharModal('modalDados')">×</button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Idade atual:</strong> ${wizardData.idadeAtual} anos</p>
+                    <p><strong>Idade de aposentadoria:</strong> ${wizardData.idadeAposentadoria} anos</p>
+                    <p><strong>Patrimônio atual:</strong> R$ ${Number(wizardData.patrimonioAtual || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                    <p><strong>Aporte mensal:</strong> R$ ${Number(wizardData.aporteMensal).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                    <p><strong>Aporte extra anual:</strong> R$ ${Number(wizardData.aporteExtraAnual || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                    <p><strong>Perfil investidor:</strong> ${resultados.perfil.charAt(0).toUpperCase() + resultados.perfil.slice(1)} (${(resultados.taxaAnualEscolhida * 100).toFixed(1)}% a.a.)</p>
+                    <p><strong>Renda desejada:</strong> R$ ${resultados.rendaDesejada.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</p>
+                    <p><strong>Estimativa de INSS:</strong> ${resultados.inssReal === 0 ? 'Não considerado (R$ 0)' : 'R$ ' + resultados.inssReal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + (wizardData.inssEstimado > 0 ? ' (manual)' : ' (automático)')}</p>
+                    <p><strong>Estratégia:</strong> ${resultados.tipoRenda === 'vitalicia' ? 'Renda Vitalícia' : 'Renda por Período'} + ${resultados.estrategia === 'perpetua' ? 'Capital Preservado (Perpétua)' : 'Uso Gradual do Capital'}</p>
+                    <p><strong>Taxa real usada:</strong> ${((resultados.taxaAnualEscolhida - 0.045) * 100).toFixed(2)}% a.a. (após inflação)</p>
+                    <p><strong>Inflação presumida:</strong> 4,5% a.a.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL: FÓRMULAS E PARÂMETROS -->
+        <div class="modal-overlay" id="modalFormulas">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">🧠 Cálculo Matemático</h3>
+                    <button class="modal-close" onclick="fecharModal('modalFormulas')">×</button>
+                </div>
+                <div class="modal-body">
+                    <h4 style="color: #D4AF37; margin-top: 0;">📊 Parâmetros Utilizados</h4>
+                    <p><strong>Taxa Nominal Anual:</strong> ${(resultados.taxaAnualEscolhida * 100).toFixed(1)}% a.a.</p>
+                    <p><strong>Taxa Equivalente Mensal:</strong> ${(Math.pow(1 + resultados.taxaAnualEscolhida, 1/12) - 1) * 100).toFixed(4)}% a.m.</p>
+                    <p><strong>Inflação Presumida:</strong> 4,5% a.a. (IPCA médio histórico)</p>
+                    <p><strong>Taxa Real:</strong> ${((resultados.taxaAnualEscolhida - 0.045) * 100).toFixed(2)}% a.a. (${((Math.pow(1 + (resultados.taxaAnualEscolhida - 0.045), 1/12) - 1) * 100).toFixed(4)}% a.m.)</p>
+                    
+                    <h4 style="color: #D4AF37; margin-top: 20px;">📐 Fórmulas Utilizadas</h4>
+                    <p><strong>1️⃣ Acumulação com Juros Compostos:</strong></p>
+                    <p style="font-family: monospace; font-size: 0.9em; background: #0f0f0f; padding: 10px; border-radius: 6px;">
+                        FV = PV × (1 + i)^n + PMT × [(1 + i)^n - 1] / i
+                    </p>
+                    
+                    <p><strong>2️⃣ Renda Vitalícia Perpétua:</strong></p>
+                    <p style="font-family: monospace; font-size: 0.9em; background: #0f0f0f; padding: 10px; border-radius: 6px;">
+                        Renda = Patrimônio × Taxa Real Mensal<br>
+                        (Preserva o capital para herança)
+                    </p>
+                    
+                    <p><strong>3️⃣ Renda por Período (PMT):</strong></p>
+                    <p style="font-family: monospace; font-size: 0.9em; background: #0f0f0f; padding: 10px; border-radius: 6px;">
+                        R = (P × i) / [1 - (1 + i)^-n]<br>
+                        (Consome capital gradualmente)
+                    </p>
+                    
+                    <p style="margin-top: 15px; font-size: 0.9em; color: #9ca3af;">
+                        <strong>Onde:</strong> PV = Valor Presente, FV = Valor Futuro, PMT = Pagamento, i = Taxa, n = Períodos
+                    </p>
+                </div>
+            </div>
+        </div>
     `;
 
     // ===================================================
@@ -346,6 +420,117 @@ function finalizarWizard() {
         );
     }, 100);
 }
+
+// -----------------------------------------------------
+// INTERPRETAÇÃO AUTOMÁTICA DO RESULTADO
+// -----------------------------------------------------
+function gerarInterpretacaoAutomatica(resultados, wizardData) {
+    const percentualAtingido = (resultados.rendaTotalPrevista / resultados.rendaDesejada) * 100;
+    let html = '';
+    let statusClass = '';
+    let icone = '';
+    let titulo = '';
+    let conteudo = '';
+
+    if (percentualAtingido >= 100) {
+        // 🟢 META ATINGIDA
+        statusClass = 'status-success';
+        icone = '🎉';
+        titulo = 'Parabéns! Sua meta foi atingida.';
+        conteudo = `
+            <p>Você terá uma aposentadoria confortável mantendo disciplina nos investimentos.</p>
+            <p style="margin-top: 15px;"><strong>Resumo:</strong></p>
+            <ul>
+                <li><strong>Renda desejada:</strong> R$ ${resultados.rendaDesejada.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</li>
+                <li><strong>Renda projetada:</strong> R$ ${resultados.rendaTotalPrevista.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</li>
+                <li><strong>Excedente:</strong> R$ ${Math.abs(resultados.deficitOuSobra).toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</li>
+            </ul>
+            <p style="margin-top: 15px;"><strong>💡 Sugestões opcionais:</strong></p>
+            <ul>
+                <li>Antecipar aposentadoria em alguns anos</li>
+                <li>Aumentar patrimônio para deixar herança maior</li>
+                <li>Elevar padrão de vida na aposentadoria</li>
+            </ul>
+        `;
+    } else if (percentualAtingido >= 80) {
+        // 🟡 PRÓXIMO DA META
+        statusClass = 'status-warning';
+        icone = '💡';
+        titulo = 'Você está muito perto da sua meta!';
+        const faltam = Math.abs(resultados.deficitOuSobra);
+        const aporteAdicional = resultados.aporteNecessario || 0;
+        conteudo = `
+            <p>Faltam apenas <strong>R$ ${faltam.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</strong> para atingir 100% da meta.</p>
+            <p style="margin-top: 15px;"><strong>📈 Pontos positivos:</strong></p>
+            <ul>
+                <li>Patrimônio projetado sólido: <strong>R$ ${resultados.patrimonioTotalProjetado.toLocaleString('pt-BR', {maximumFractionDigits: 0})}</strong></li>
+                <li><strong>${percentualAtingido.toFixed(1)}%</strong> da meta já atingidos</li>
+                <li>${resultados.estrategia === 'perpetua' ? 'Renda perpétua = patrimônio preservado para herança' : 'Estratégia de consumo gradual do capital'}</li>
+            </ul>
+            <p style="margin-top: 15px;"><strong>🎯 Como atingir 100%:</strong></p>
+            <ul>
+                ${aporteAdicional > 0 ? `<li>Aumentar aporte mensal de R$ ${Number(wizardData.aporteMensal).toLocaleString('pt-BR', {minimumFractionDigits: 2})} para R$ ${(Number(wizardData.aporteMensal) + aporteAdicional).toLocaleString('pt-BR', {minimumFractionDigits: 2})} (+R$ ${aporteAdicional.toLocaleString('pt-BR', {minimumFractionDigits: 2})})</li>` : ''}
+                <li>Aumentar aporte anual (13º, bônus, etc)</li>
+                <li>Postergar aposentadoria em 1-2 anos</li>
+            </ul>
+        `;
+    } else {
+        // 🔴 DISTANTE DA META
+        statusClass = 'status-alert';
+        icone = '⚠️';
+        titulo = 'Meta ainda distante, mas totalmente possível.';
+        const percentualFaltando = 100 - percentualAtingido;
+        conteudo = `
+            <p>Atualmente você atingiria <strong>${percentualAtingido.toFixed(1)}%</strong> da meta desejada. Vamos ajustar seu plano juntos!</p>
+            <p style="margin-top: 15px;"><strong>🛠️ Caminhos possíveis:</strong></p>
+            <ul>
+                <li><strong>Elevar aporte mensal:</strong> Aumentar valor investido mensalmente</li>
+                <li><strong>Incluir aportes anuais:</strong> 13º salário, bônus, restituição IR</li>
+                <li><strong>Ajustar idade de aposentadoria:</strong> Trabalhar alguns anos a mais</li>
+                <li><strong>Testar diferentes perfis:</strong> Avaliar aumentar exposição a renda variável</li>
+            </ul>
+            <p style="margin-top: 15px; font-size: 0.95em; color: #9ca3af;">
+                💪 <strong>Lembre-se:</strong> Pequenos ajustes agora fazem uma enorme diferença no futuro. O importante é começar!
+            </p>
+        `;
+    }
+
+    html = `
+        <div class="interpretation-block ${statusClass}">
+            <div class="interpretation-header">
+                <span>${icone}</span>
+                <span>${titulo}</span>
+            </div>
+            <div class="interpretation-body">
+                ${conteudo}
+            </div>
+        </div>
+    `;
+
+    return html;
+}
+
+// -----------------------------------------------------
+// FUNÇÕES DOS MODAIS
+// -----------------------------------------------------
+function abrirModalDados() {
+    document.getElementById('modalDados').classList.add('active');
+}
+
+function abrirModalFormulas() {
+    document.getElementById('modalFormulas').classList.add('active');
+}
+
+function fecharModal(modalId) {
+    document.getElementById(modalId).classList.remove('active');
+}
+
+// Fechar modal clicando fora
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('modal-overlay')) {
+        e.target.classList.remove('active');
+    }
+});
 
 // -----------------------------------------------------
 // BARRA DE PROGRESSO (UX)
