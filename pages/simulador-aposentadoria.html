@@ -86,6 +86,25 @@
             padding: 0;
             color: #dce7f3;
             font-family: 'Segoe UI', Tahoma, sans-serif;
+            position: relative;
+        }
+
+        /* Marca d'água INVLAB */
+        .invlab-simulator-container::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background-image: url('../assets/images/Logo_tutorfinanceiro.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.06;
+            z-index: 0;
+            pointer-events: none;
         }
 
         /* 2. Header */
@@ -118,6 +137,7 @@
             backdrop-filter: blur(4px);
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
 
         .invlab-module.hidden {
@@ -1137,6 +1157,52 @@
             background: rgba(212, 175, 55, 0.6);
             background-clip: content-box;
         }
+
+        /* ========================================= */
+        /* CARD DE APORTE NECESSÁRIO (PREMIUM) */
+        /* ========================================= */
+        #card-aporte-necessario {
+            border: 1px solid rgba(204, 170, 102, 0.4);
+            background: rgba(40, 30, 10, 0.25);
+            padding: 18px;
+            border-radius: 14px;
+            margin-top: 25px;
+            transition: 0.3s ease;
+        }
+
+        #card-aporte-necessario:hover {
+            background: rgba(204, 170, 102, 0.15);
+            border-color: rgba(204, 170, 102, 0.8);
+        }
+
+        #card-aporte-necessario .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        #card-aporte-necessario .titulo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #FFD46B;
+        }
+
+        #card-aporte-necessario .emoji {
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .aporte-texto {
+            color: #FFD46B;
+            font-size: 15px;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .aporte-texto strong {
+            color: #FFFFFF;
+            font-weight: 700;
+        }
     </style>
 
     <!-- ====================================== -->
@@ -1481,9 +1547,69 @@
                         <strong style="color:#facc15; font-size:1.2rem;">R$ ${gap.toLocaleString("pt-BR", {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong>
                     </div>
                 </div>
+
+                <!-- CARD PREMIUM DE APORTE NECESSÁRIO -->
+                <div id="card-aporte-necessario" style="display: none;">
+                    <div class="card-header">
+                        <span class="emoji">💡</span>
+                        <span class="titulo">Sugestão para atingir sua meta</span>
+                    </div>
+                    <div class="card-body">
+                        <p id="aporte-necessario-texto" class="aporte-texto"></p>
+                    </div>
+                </div>
             `;
 
             document.getElementById("resultsSection").appendChild(container);
+
+            // ===================================================
+            // CALCULAR E EXIBIR APORTE NECESSÁRIO (SE HOUVER GAP)
+            // ===================================================
+            if (gap > 0) {
+                // Calcular aporte necessário com fórmula PMT correta
+                const idadeAtual = parseInt(document.getElementById("currentAge").value);
+                const idadeApos = parseInt(document.getElementById("retirementAge").value);
+                const aporteAtual = parseFloat(document.getElementById("monthlyInvestment").value);
+                const tipoRenda = document.querySelector("input[name='tipoRendaOficial']:checked")?.value || "vitalicia";
+                
+                const anosAteAposent = idadeApos - idadeAtual;
+                const meses = anosAteAposent * 12;
+                
+                // Taxa nominal para acumulação (8% para moderado, por exemplo)
+                const taxaNominal = 0.08; // Buscar do perfil selecionado
+                const taxaNominalMensal = Math.pow(1 + taxaNominal, 1/12) - 1;
+                
+                // Taxa real para renda vitalícia
+                const taxaReal = taxaNominal - 0.045; // 8% - 4.5% inflação = 3.5%
+                const taxaRealMensal = Math.pow(1 + taxaReal, 1/12) - 1;
+                
+                // Patrimônio extra necessário para cobrir o gap
+                let patrimonioExtra = 0;
+                if (tipoRenda === "vitalicia") {
+                    patrimonioExtra = gap / taxaRealMensal;
+                } else {
+                    const anosPeriodo = parseInt(document.getElementById("anosPeriodoOficial")?.value) || 30;
+                    const mesesPeriodo = anosPeriodo * 12;
+                    patrimonioExtra = (gap * (1 - Math.pow(1 + taxaRealMensal, -mesesPeriodo))) / taxaRealMensal;
+                }
+                
+                // Aporte necessário com PMT
+                const aporteNecessario = (patrimonioExtra * taxaNominalMensal) / 
+                                        (Math.pow(1 + taxaNominalMensal, meses) - 1);
+                
+                // Exibir card se aporte for razoável
+                if (aporteNecessario > 0 && aporteNecessario < 100000) {
+                    const cardAporte = document.getElementById("card-aporte-necessario");
+                    const textoAporte = document.getElementById("aporte-necessario-texto");
+                    
+                    cardAporte.style.display = "block";
+                    textoAporte.innerHTML = `
+                        Para atingir sua meta de <strong>R$ ${rendaDesejada.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong>, 
+                        você precisaria investir aproximadamente 
+                        <strong>R$ ${aporteNecessario.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong>.
+                    `;
+                }
+            }
         }
 
         function calcularSimulacao_UI_Upgrade_final() {
