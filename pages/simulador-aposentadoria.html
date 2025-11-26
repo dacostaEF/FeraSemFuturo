@@ -1261,12 +1261,19 @@
             const rendaPrevRev = rendaVitalicia(prev.real, retornoAnual, "reversivel");
 
             // 4) INSS (manual ou automático)
-            let beneficioINSS;
-            if (inssManual !== "" && inssManual !== null) {
-                // Se usuário informou, usar o valor dele (pode ser 0)
-                beneficioINSS = parseFloat(inssManual);
+            // INSS: Respeitar ZERO do usuário (não forçar cálculo automático)
+            let beneficioINSS = 0;
+            const inssManualValue = parseFloat(inssManual);
+            
+            if (!isNaN(inssManualValue) && inssManual !== "" && inssManual !== null) {
+                // Se o usuário informou um valor numérico:
+                if (inssManualValue > 0) {
+                    beneficioINSS = inssManualValue;   // usa o valor informado
+                } else {
+                    beneficioINSS = 0;                 // ZERO significa "não considerar INSS"
+                }
             } else {
-                // Se deixou vazio, calcular automaticamente
+                // Apenas se o usuário NÃO INFORMAR NADA (campo vazio)
                 beneficioINSS = calcularINSS(rendaDesejada);
             }
 

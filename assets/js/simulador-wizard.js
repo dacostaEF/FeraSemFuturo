@@ -198,7 +198,11 @@ function finalizarWizard() {
 
         <!-- INFO EXTRA -->
         <div class="dashboard-info-extra">
-            <p>💼 <strong>INSS:</strong> R$ ${resultados.inssReal.toLocaleString('pt-BR')}/mês</p>
+            <p>💼 <strong>INSS:</strong> ${
+                resultados.inssReal === 0 
+                ? '<span style="color: #9ca3af;">Não considerado nesta simulação</span>'
+                : 'R$ ' + resultados.inssReal.toLocaleString('pt-BR') + '/mês'
+            }</p>
             <p>💰 <strong>Investimentos:</strong> R$ ${resultados.rendaRealPossivel.toLocaleString('pt-BR')}/mês</p>
             <p>⏱️ <strong>Prazo:</strong> ${resultados.anosAteAposentadoria} anos até aposentadoria</p>
             <p>📊 <strong>Perfil:</strong> ${resultados.perfil.charAt(0).toUpperCase() + resultados.perfil.slice(1)} (${(resultados.taxaAnualEscolhida * 100).toFixed(1)}% a.a.)</p>

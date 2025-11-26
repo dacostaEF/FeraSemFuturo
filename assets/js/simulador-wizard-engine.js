@@ -170,8 +170,19 @@ function executarSimulacaoWizard(dadosWizard) {
         aporteExtraAnual
     );
 
-    // 7. INSS estimado oficial se não informado
-    const inssReal = inssEstimado > 0 ? inssEstimado : calcularINSS(rendaDesejada);
+    // 7. INSS: Respeitar ZERO do usuário (não forçar cálculo automático)
+    let inssReal = 0;
+    if (!isNaN(inssEstimado) && inssEstimado !== null && inssEstimado !== "") {
+        // Se o usuário informou um valor numérico:
+        if (inssEstimado > 0) {
+            inssReal = inssEstimado;   // usa o valor informado
+        } else {
+            inssReal = 0;              // ZERO significa "não considerar INSS"
+        }
+    } else {
+        // Apenas se o usuário NÃO INFORMAR NADA (campo vazio)
+        inssReal = calcularINSS(rendaDesejada);
+    }
 
     // 8. Renda final prevista = INSS + investimentos
     const rendaTotalPrevista = rendaRealPossivel + inssReal;
