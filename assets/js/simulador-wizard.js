@@ -130,33 +130,199 @@ function finalizarWizard() {
 
     console.log("DADOS FINAIS DO WIZARD:", wizardData);
 
+    // ===================================================
+    // 🔥 EXECUTAR MOTOR DE CÁLCULO REAL
+    // ===================================================
+    const resultados = executarSimulacaoWizard(wizardData);
+    console.log("RESULTADOS COMPLETOS DA SIMULAÇÃO:", resultados);
+
+    // Esconder steps
     document.querySelectorAll('.wizard-step').forEach(step => {
         step.classList.remove('active');
     });
 
+    // Ativar dashboard
     const dash = document.getElementById('dashboard');
     dash.classList.add('active');
 
+    // ===================================================
+    // 🎨 DASHBOARD PREMIUM COM RESULTADOS REAIS
+    // ===================================================
+
+    const atingiuMeta = resultados.deficitOuSobra >= 0;
+    const corStatus = atingiuMeta ? '#10b981' : '#facc15';
+    const iconeStatus = atingiuMeta ? '✅' : '⚠️';
+    const textoStatus = atingiuMeta 
+        ? 'Parabéns! Você atingirá sua meta de aposentadoria!' 
+        : 'Atenção: ajustes necessários para atingir sua meta.';
+
     dash.innerHTML = `
-        <div class="dashboard-placeholder">📊</div>
-        <h2 class="dashboard-title">Resumo da Sua Simulação</h2>
-        <p class="dashboard-description">
-            <strong>Idade atual:</strong> ${wizardData.idadeAtual}<br>
-            <strong>Renda atual:</strong> R$ ${wizardData.rendaAtual}<br>
-            <strong>Patrimônio acumulado:</strong> R$ ${wizardData.patrimonioAtual}<br><br>
+        <div style="max-width: 900px; margin: 0 auto;">
+            
+            <!-- CABEÇALHO -->
+            <div style="text-align: center; margin-bottom: 40px;">
+                <div style="font-size: 3rem; margin-bottom: 10px;">📊</div>
+                <h2 style="
+                    font-family: 'Playfair Display', Georgia, serif;
+                    font-size: 2rem;
+                    font-weight: 700;
+                    color: #D4AF37;
+                    margin-bottom: 10px;
+                ">Sua Projeção de Aposentadoria</h2>
+                <p style="color: rgba(16, 185, 129, 0.85); font-size: 1.05rem;">
+                    Análise completa baseada nos seus dados
+                </p>
+            </div>
 
-            <strong>Renda desejada na aposentadoria:</strong> R$ ${wizardData.rendaDesejada}<br>
-            <strong>Gastos essenciais:</strong> R$ ${wizardData.gastosEssenciais}<br>
-            <strong>Estimativa INSS:</strong> R$ ${wizardData.inssEstimado}<br><br>
+            <!-- STATUS PRINCIPAL -->
+            <div style="
+                background: rgba(26, 26, 26, 0.9);
+                border-left: 6px solid ${corStatus};
+                border-radius: 12px;
+                padding: 24px;
+                margin-bottom: 30px;
+                text-align: center;
+            ">
+                <div style="font-size: 2.5rem; margin-bottom: 10px;">${iconeStatus}</div>
+                <h3 style="color: ${corStatus}; font-size: 1.3rem; margin-bottom: 10px;">${textoStatus}</h3>
+                <p style="color: #E4E4E4; font-size: 1rem;">
+                    ${atingiuMeta 
+                        ? `Você terá uma sobra de <strong style="color: #10b981;">R$ ${Math.abs(resultados.deficitOuSobra).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong> por mês.`
+                        : `Faltam <strong style="color: #facc15;">R$ ${Math.abs(resultados.deficitOuSobra).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong> por mês para atingir sua meta.`
+                    }
+                </p>
+            </div>
 
-            <strong>Aporte mensal:</strong> R$ ${wizardData.aporteMensal}<br>
-            <strong>Tipo de aporte:</strong> ${wizardData.aporteTipo}<br>
-            <strong>Aporte extra anual:</strong> R$ ${wizardData.aporteExtraAnual}<br><br>
+            <!-- GRID DE RESULTADOS -->
+            <div style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+                margin-bottom: 30px;
+            ">
+                
+                <!-- PATRIMÔNIO TOTAL -->
+                <div style="
+                    background: rgba(26, 26, 26, 0.9);
+                    border: 1px solid rgba(138, 204, 166, 0.1);
+                    border-radius: 12px;
+                    padding: 20px;
+                ">
+                    <div style="color: #10b981; font-size: 0.9rem; margin-bottom: 8px; font-weight: 600;">💰 PATRIMÔNIO PROJETADO</div>
+                    <div style="color: #E4E4E4; font-size: 1.8rem; font-weight: 700; margin-bottom: 8px;">
+                        R$ ${resultados.patrimonioTotalProjetado.toLocaleString('pt-BR', {maximumFractionDigits: 0})}
+                    </div>
+                    <div style="color: #9CA3AF; font-size: 0.85rem;">
+                        Acumulado em ${resultados.anosAteAposentadoria} anos
+                    </div>
+                </div>
 
-            <strong>Idade para se aposentar:</strong> ${wizardData.idadeAposentadoria}<br>
-            <strong>Perfil investidor:</strong> ${wizardData.perfilInvestidor}<br>
-            <strong>Expectativa de vida:</strong> ${wizardData.expectativaVida}<br>
-        </p>
+                <!-- RENDA MENSAL -->
+                <div style="
+                    background: rgba(26, 26, 26, 0.9);
+                    border: 1px solid rgba(138, 204, 166, 0.1);
+                    border-radius: 12px;
+                    padding: 20px;
+                ">
+                    <div style="color: #10b981; font-size: 0.9rem; margin-bottom: 8px; font-weight: 600;">📈 RENDA MENSAL PREVISTA</div>
+                    <div style="color: #E4E4E4; font-size: 1.8rem; font-weight: 700; margin-bottom: 8px;">
+                        R$ ${resultados.rendaTotalPrevista.toLocaleString('pt-BR', {minimumFractionDigits: 2})}
+                    </div>
+                    <div style="color: #9CA3AF; font-size: 0.85rem;">
+                        INSS (R$ ${resultados.inssReal.toLocaleString('pt-BR')}) + Investimentos (R$ ${resultados.rendaRealPossivel.toLocaleString('pt-BR')})
+                    </div>
+                </div>
+
+                <!-- META -->
+                <div style="
+                    background: rgba(26, 26, 26, 0.9);
+                    border: 1px solid rgba(138, 204, 166, 0.1);
+                    border-radius: 12px;
+                    padding: 20px;
+                ">
+                    <div style="color: #10b981; font-size: 0.9rem; margin-bottom: 8px; font-weight: 600;">🎯 SUA META</div>
+                    <div style="color: #E4E4E4; font-size: 1.8rem; font-weight: 700; margin-bottom: 8px;">
+                        R$ ${resultados.rendaDesejada.toLocaleString('pt-BR', {minimumFractionDigits: 2})}
+                    </div>
+                    <div style="color: #9CA3AF; font-size: 0.85rem;">
+                        Renda mensal desejada
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- DETALHES ADICIONAIS -->
+            <div style="
+                background: rgba(26, 26, 26, 0.9);
+                border: 1px solid rgba(138, 204, 166, 0.1);
+                border-radius: 12px;
+                padding: 24px;
+                margin-bottom: 30px;
+            ">
+                <h3 style="color: #D4AF37; font-size: 1.2rem; margin-bottom: 20px; font-family: 'Playfair Display', serif;">📋 Detalhes da Simulação</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; color: #E4E4E4;">
+                    <div>
+                        <span style="color: #9CA3AF; font-size: 0.85rem;">Anos até aposentadoria:</span><br>
+                        <strong>${resultados.anosAteAposentadoria} anos</strong>
+                    </div>
+                    <div>
+                        <span style="color: #9CA3AF; font-size: 0.85rem;">Perfil de investidor:</span><br>
+                        <strong style="text-transform: capitalize;">${resultados.perfil}</strong>
+                    </div>
+                    <div>
+                        <span style="color: #9CA3AF; font-size: 0.85rem;">Rentabilidade adotada:</span><br>
+                        <strong>${(resultados.taxaAnualEscolhida * 100).toFixed(1)}% ao ano</strong>
+                    </div>
+                    <div>
+                        <span style="color: #9CA3AF; font-size: 0.85rem;">Aporte mensal:</span><br>
+                        <strong>R$ ${wizardData.aporteMensal}</strong>
+                    </div>
+                </div>
+
+                ${!atingiuMeta && resultados.aporteNecessario ? `
+                    <div style="
+                        margin-top: 20px;
+                        padding: 15px;
+                        background: rgba(250, 204, 21, 0.1);
+                        border-left: 4px solid #facc15;
+                        border-radius: 8px;
+                    ">
+                        <strong style="color: #facc15;">💡 Sugestão:</strong>
+                        <p style="margin: 8px 0 0 0; color: #E4E4E4;">
+                            Para atingir sua meta, você precisaria investir aproximadamente 
+                            <strong style="color: #facc15;">R$ ${resultados.aporteNecessario.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong> 
+                            por mês.
+                        </p>
+                    </div>
+                ` : ''}
+            </div>
+
+            <!-- ESPAÇO PARA GRÁFICO (FUTURO) -->
+            <div style="
+                background: rgba(26, 26, 26, 0.9);
+                border: 1px solid rgba(138, 204, 166, 0.1);
+                border-radius: 12px;
+                padding: 24px;
+                text-align: center;
+            ">
+                <h3 style="color: #D4AF37; font-size: 1.2rem; margin-bottom: 15px; font-family: 'Playfair Display', serif;">📈 Projeção de Acumulação</h3>
+                <p style="color: #9CA3AF; font-size: 0.95rem;">
+                    Gráfico de evolução será exibido aqui (próxima fase)
+                </p>
+                <div style="
+                    margin-top: 15px;
+                    padding: 20px;
+                    background: rgba(16, 185, 129, 0.05);
+                    border-radius: 8px;
+                ">
+                    <p style="color: #10b981; margin: 0;">
+                        ✓ ${resultados.dadosMensais.length} meses de projeção calculados
+                    </p>
+                </div>
+            </div>
+
+        </div>
     `;
 }
 
