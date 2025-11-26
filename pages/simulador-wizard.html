@@ -205,6 +205,52 @@
             pointer-events: none;
         }
 
+        /* ========================================= */
+        /* CARD DE APORTE NECESSÁRIO (PREMIUM) */
+        /* ========================================= */
+        #card-aporte-necessario {
+            border: 1px solid rgba(204, 170, 102, 0.4);
+            background: rgba(40, 30, 10, 0.25);
+            padding: 18px;
+            border-radius: 14px;
+            margin-top: 25px;
+            transition: 0.3s ease;
+        }
+
+        #card-aporte-necessario:hover {
+            background: rgba(204, 170, 102, 0.15);
+            border-color: rgba(204, 170, 102, 0.8);
+        }
+
+        #card-aporte-necessario .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        #card-aporte-necessario .titulo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #FFD46B;
+        }
+
+        #card-aporte-necessario .emoji {
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .aporte-texto {
+            color: #FFD46B;
+            font-size: 15px;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .aporte-texto strong {
+            color: #FFFFFF;
+            font-weight: 700;
+        }
+
         .wizard-step.active {
             display: block;
             animation: fadeInUp 0.5s forwards;

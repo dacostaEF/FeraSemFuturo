@@ -211,14 +211,19 @@ function finalizarWizard() {
             <p style="color:#888; font-size:13px; margin-top:10px;">✓ ${resultados.dadosMensais.length} meses de projeção calculados</p>
         </div>
 
-        ${!atingiuMeta && resultados.aporteNecessario ? `
-            <div class="dashboard-insights">
-                <strong style="color:#facc15;">💡 Sugestão para atingir sua meta:</strong>
-                <p style="margin-top:8px; color:#E4E4E4;">
-                    Para atingir sua meta de <strong>R$ ${resultados.rendaDesejada.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong>, 
-                    você precisaria investir aproximadamente 
-                    <strong style="color:#facc15;">R$ ${resultados.aporteNecessario.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong>.
-                </p>
+        ${!atingiuMeta && resultados.aporteNecessario && resultados.aporteNecessario > 0 ? `
+            <div id="card-aporte-necessario">
+                <div class="card-header">
+                    <span class="emoji">💡</span>
+                    <span class="titulo">Sugestão para atingir sua meta</span>
+                </div>
+                <div class="card-body">
+                    <p class="aporte-texto">
+                        Para atingir sua meta de <strong>R$ ${resultados.rendaDesejada.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong>, 
+                        você precisaria investir aproximadamente 
+                        <strong>R$ ${resultados.aporteNecessario.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong>.
+                    </p>
+                </div>
             </div>
         ` : ''}
     `;
