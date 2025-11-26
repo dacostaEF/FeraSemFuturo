@@ -302,15 +302,23 @@ function finalizarWizard() {
 
         <!-- INFO EXTRA -->
         <div class="dashboard-info-extra">
-            <p style="margin-bottom: 8px;">💼 <strong>INSS:</strong> ${
-                resultados.inssReal === 0 
-                ? '<span style="color: #9ca3af;">Não considerado nesta simulação</span><br><span style="font-size: 0.9em; color: #6b7280; margin-left: 30px;">→ A renda total vem exclusivamente dos investimentos</span>'
-                : (wizardData.inssEstimado && wizardData.inssEstimado > 0)
-                    ? 'R$ ' + resultados.inssReal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '/mês<br><span style="font-size: 0.9em; color: #6b7280; margin-left: 30px;">→ Valor informado por você | ✓ Considerado no cálculo da renda total</span>'
-                    : 'R$ ' + resultados.inssReal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '/mês (estimativa automática)<br><span style="font-size: 0.9em; color: #6b7280; margin-left: 30px;">→ Calculado como 40% da renda desejada | ⚠️ Sujeito a mudanças nas regras</span>'
-            }</p>
-            <p>💰 <strong>Renda dos Investimentos:</strong> R$ ${resultados.rendaRealPossivel.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</p>
-            <p>⏱️ <strong>Prazo:</strong> ${resultados.anosAteAposentadoria} anos até aposentadoria</p>
+            <p style="margin-bottom: 8px;"><strong>📌 Origem da Renda:</strong></p>
+            <ul style="margin-left: 20px; margin-top: 8px;">
+                ${resultados.inssReal === 0 
+                    ? '<li><strong>100% dos investimentos</strong> (INSS não considerado)</li>'
+                    : `<li><strong>INSS:</strong> R$ ${resultados.inssReal.toLocaleString('pt-BR', {minimumFractionDigits: 2})} (${((resultados.inssReal / resultados.rendaTotalPrevista) * 100).toFixed(0)}%)</li>
+                       <li><strong>Investimentos:</strong> R$ ${resultados.rendaRealPossivel.toLocaleString('pt-BR', {minimumFractionDigits: 2})} (${((resultados.rendaRealPossivel / resultados.rendaTotalPrevista) * 100).toFixed(0)}%)</li>
+                       <li><strong>Total:</strong> R$ ${resultados.rendaTotalPrevista.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</li>`
+                }
+                <li><strong>Estratégia:</strong> ${
+                    resultados.tipoRenda === 'vitalicia' && resultados.estrategia === 'perpetua'
+                        ? 'Renda Vitalícia com Capital Preservado'
+                        : resultados.tipoRenda === 'periodo'
+                            ? `Renda por ${wizardData.anosPeriodo || 30} anos (capital ${resultados.estrategia === 'esgotavel' ? 'consumido gradualmente' : 'preservado'})`
+                            : `Renda com uso gradual do capital (${wizardData.anosDuracao || 30} anos)`
+                }</li>
+            </ul>
+            <p style="margin-top: 15px;">⏱️ <strong>Prazo:</strong> ${resultados.anosAteAposentadoria} anos até aposentadoria</p>
             <p>📊 <strong>Perfil:</strong> ${resultados.perfil.charAt(0).toUpperCase() + resultados.perfil.slice(1)} (${(resultados.taxaAnualEscolhida * 100).toFixed(1)}% a.a.)</p>
         </div>
 
@@ -475,13 +483,13 @@ function gerarInterpretacaoAutomatica(resultados, wizardData) {
             </ul>
         `;
     } else {
-        // 🔴 DISTANTE DA META
+        // 🟢 DISTANTE DA META (mensagem acolhedora)
         statusClass = 'status-alert';
-        icone = '⚠️';
-        titulo = 'Meta ainda distante, mas totalmente possível.';
+        icone = '💡';
+        titulo = 'Você está no caminho certo — faltam ajustes simples para alcançar sua meta.';
         const percentualFaltando = 100 - percentualAtingido;
         conteudo = `
-            <p>Atualmente você atingiria <strong>${percentualAtingido.toFixed(1)}%</strong> da meta desejada. Vamos ajustar seu plano juntos!</p>
+            <p>Atualmente você atingiria <strong>${percentualAtingido.toFixed(1)}%</strong> da meta desejada. Isso já é um ótimo começo!</p>
             <p style="margin-top: 15px;"><strong>🛠️ Caminhos possíveis:</strong></p>
             <ul>
                 <li><strong>Elevar aporte mensal:</strong> Aumentar valor investido mensalmente</li>
@@ -489,8 +497,8 @@ function gerarInterpretacaoAutomatica(resultados, wizardData) {
                 <li><strong>Ajustar idade de aposentadoria:</strong> Trabalhar alguns anos a mais</li>
                 <li><strong>Testar diferentes perfis:</strong> Avaliar aumentar exposição a renda variável</li>
             </ul>
-            <p style="margin-top: 15px; font-size: 0.95em; color: #9ca3af;">
-                💪 <strong>Lembre-se:</strong> Pequenos ajustes agora fazem uma enorme diferença no futuro. O importante é começar!
+            <p style="margin-top: 15px; font-size: 0.95em; color: #10b981;">
+                ✔️ <strong>Escolha um caminho acima e teste rapidamente no simulador.</strong>
             </p>
         `;
     }
