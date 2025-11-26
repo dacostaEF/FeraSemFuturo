@@ -101,7 +101,6 @@ function executarSimulacaoWizard(dadosWizard) {
     // 1. Extrair dados básicos
     const idadeAtual = Number(dadosWizard.idadeAtual);
     const idadeAposent = Number(dadosWizard.idadeAposentadoria);
-    const expectativaVida = Number(dadosWizard.expectativaVida);
     const rendaAtual = Number(dadosWizard.rendaAtual);
     const rendaDesejada = Number(dadosWizard.rendaDesejada);
     const gastosEssenciais = Number(dadosWizard.gastosEssenciais);
@@ -110,6 +109,12 @@ function executarSimulacaoWizard(dadosWizard) {
     const aporteExtraAnual = Number(dadosWizard.aporteExtraAnual || 0);
     const perfil = dadosWizard.perfilInvestidor;
     const patrimonioAtual = Number(dadosWizard.patrimonioAtual || 0);
+
+    // Dados de renda humanizada
+    const tipoRenda = dadosWizard.tipoRenda || "vitalicia";
+    const estrategia = dadosWizard.estrategia || "perpetua";
+    const anosPeriodo = Number(dadosWizard.anosPeriodo) || 30;
+    const anosDuracao = Number(dadosWizard.anosDuracao) || 30;
 
     // 2. Definir taxa anual baseada no perfil
     const taxaAnualEscolhida = PERFIS_RENTABILIDADE[perfil];
@@ -127,12 +132,35 @@ function executarSimulacaoWizard(dadosWizard) {
 
     const patrimonioTotalProjetado = patrimonioAtual + acumuladoAportes;
 
-    // 5. Renda vitalícia possível a partir do patrimônio total
-    const rendaRealPossivel = rendaVitalicia(
-        patrimonioTotalProjetado,
-        taxaAnualEscolhida,
-        expectativaVida
-    );
+    // 5. NOVO: Calcular renda baseada na estratégia escolhida
+    const taxaAnualReal = taxaAnualEscolhida - INFLACAO_MEDIA;
+    const taxaMensalReal = Math.pow(1 + taxaAnualReal, 1/12) - 1;
+
+    let rendaRealPossivel = 0;
+
+    // Estratégia 1: Vitalícia perpétua (só juros, capital preservado)
+    if (tipoRenda === "vitalicia" && estrategia === "perpetua") {
+        rendaRealPossivel = patrimonioTotalProjetado * taxaMensalReal;
+    }
+
+    // Estratégia 2: Período determinado ou esgotável (consome capital com juros)
+    else if (tipoRenda === "periodo" || estrategia === "esgotavel") {
+        const anos = tipoRenda === "periodo" ? anosPeriodo : anosDuracao;
+        const meses = anos * 12;
+        
+        if (taxaMensalReal > 0) {
+            rendaRealPossivel = (patrimonioTotalProjetado * taxaMensalReal) / 
+                               (1 - Math.pow(1 + taxaMensalReal, -meses));
+        } else {
+            // Fallback se taxa for zero ou negativa
+            rendaRealPossivel = patrimonioTotalProjetado / meses;
+        }
+    }
+
+    // Fallback: se nada definido, usa vitalícia
+    else {
+        rendaRealPossivel = patrimonioTotalProjetado * taxaMensalReal;
+    }
 
     // 6. Projeção mês mês (gráficos)
     const dadosMensais = projetarPatrimonioMensal(
@@ -156,7 +184,6 @@ function executarSimulacaoWizard(dadosWizard) {
     if (deficitOuSobra < 0) {
         const meses = anosAteAposentadoria * 12;
         const juros = taxaMensal(taxaAnualEscolhida);
-        const objetivoRendaMensal = rendaDesejada;
         
         let patrimonioNecessario = 0;
         patrimonioNecessario = patrimonioTotalProjetado + (Math.abs(deficitOuSobra) * 12);
@@ -177,7 +204,9 @@ function executarSimulacaoWizard(dadosWizard) {
         aporteNecessario,
         dadosMensais,
         taxaAnualEscolhida,
-        perfil
+        perfil,
+        tipoRenda,
+        estrategia
     };
 }
 

@@ -18,7 +18,10 @@ let wizardData = {
 
     idadeAposentadoria: null,
     perfilInvestidor: null,
-    expectativaVida: null
+    tipoRenda: null,
+    anosPeriodo: null,
+    estrategia: null,
+    anosDuracao: null
 };
 
 // -----------------------------------------------------
@@ -74,7 +77,10 @@ function captureStepData(stepNumber) {
         case 4:
             wizardData.idadeAposentadoria = getValue("idadeAposentadoria");
             wizardData.perfilInvestidor = getValue("perfilInvestidor");
-            wizardData.expectativaVida = getValue("expectativaVida");
+            wizardData.tipoRenda = document.querySelector("input[name='tipoRenda']:checked")?.value || "vitalicia";
+            wizardData.anosPeriodo = getValue("anosPeriodo") || null;
+            wizardData.estrategia = document.querySelector("input[name='estrategia']:checked")?.value || "perpetua";
+            wizardData.anosDuracao = getValue("anosDuracao") || null;
             break;
     }
 }
@@ -230,6 +236,57 @@ function updateProgress(currentStep) {
 }
 
 // -----------------------------------------------------
+// REGRAS DE BLOQUEIO (Renda Vitalícia / Período)
+// -----------------------------------------------------
+function atualizarRegrasWizard() {
+    const rTipo = document.querySelector("input[name='tipoRenda']:checked");
+    const rEstrategia = document.querySelector("input[name='estrategia']:checked");
+    
+    if (!rTipo || !rEstrategia) return;
+
+    const tipo = rTipo.value;
+    const est = rEstrategia.value;
+
+    // Mostrar/esconder campos condicionais
+    const periodoContainer = document.getElementById("periodoContainer");
+    const duracaoContainer = document.getElementById("anosDuracaoContainer");
+
+    if (periodoContainer) {
+        periodoContainer.style.display = tipo === "periodo" ? "block" : "none";
+    }
+
+    if (duracaoContainer) {
+        duracaoContainer.style.display = est === "esgotavel" ? "block" : "none";
+    }
+
+    // BLOQUEIO 1: Vitalícia só aceita perpétua
+    const radioEsgotavel = document.querySelector("input[value='esgotavel']");
+    const radioPerpetua = document.querySelector("input[value='perpetua']");
+    
+    if (tipo === "vitalicia") {
+        if (radioEsgotavel) radioEsgotavel.disabled = true;
+        if (est === "esgotavel" && radioPerpetua) {
+            radioPerpetua.checked = true;
+        }
+    } else {
+        if (radioEsgotavel) radioEsgotavel.disabled = false;
+    }
+
+    // BLOQUEIO 2: Perpétua só aceita vitalícia
+    const radioPeriodo = document.querySelector("input[value='periodo']");
+    const radioVitalicia = document.querySelector("input[value='vitalicia']");
+    
+    if (est === "perpetua") {
+        if (radioPeriodo) radioPeriodo.disabled = true;
+        if (tipo === "periodo" && radioVitalicia) {
+            radioVitalicia.checked = true;
+        }
+    } else {
+        if (radioPeriodo) radioPeriodo.disabled = false;
+    }
+}
+
+// -----------------------------------------------------
 // EVENTOS
 // -----------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
@@ -271,5 +328,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
     });
+
+    // Listeners para radio buttons de renda
+    const rTipo = document.querySelectorAll("input[name='tipoRenda']");
+    const rEstrategia = document.querySelectorAll("input[name='estrategia']");
+
+    rTipo.forEach(r => r.addEventListener("change", atualizarRegrasWizard));
+    rEstrategia.forEach(r => r.addEventListener("change", atualizarRegrasWizard));
+
+    // Inicializar regras
+    setTimeout(atualizarRegrasWizard, 100);
 
 });

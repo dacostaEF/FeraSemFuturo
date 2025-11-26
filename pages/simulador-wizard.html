@@ -284,6 +284,47 @@
             transition: all 0.3s ease;
         }
 
+        /* ========================================= */
+        /* OPTION LINES (Radio com descrição) */
+        /* ========================================= */
+        .option-line {
+            display: block;
+            padding: 14px;
+            margin-bottom: 12px;
+            background: rgba(15, 15, 15, 0.6);
+            border: 1px solid rgba(138,204,166,0.25);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .option-line:hover {
+            border-color: rgba(204,170,102,0.7);
+            background: rgba(15, 15, 15, 0.8);
+        }
+
+        .option-line input[type="radio"] {
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        .option-title {
+            font-weight: 600;
+            font-size: 15px;
+            display: block;
+            color: #e5e5e5;
+            margin-bottom: 4px;
+        }
+
+        .option-desc {
+            font-size: 13px;
+            color: #9ca3af;
+            display: block;
+            margin-left: 24px;
+            line-height: 1.5;
+        }
+
         .input-field:focus {
             outline: none;
             border-color: #10b981;
@@ -788,8 +829,8 @@
         <div class="wizard-step" id="step-4">
             <div class="step-header">
                 <div class="step-number">4</div>
-                <h2 class="step-title">Idade de Aposentadoria</h2>
-                <p class="step-description">Quando você pretende se aposentar?</p>
+                <h2 class="step-title">Plano de Renda na Aposentadoria</h2>
+                <p class="step-description">Escolha a estratégia que faz mais sentido para sua vida</p>
             </div>
 
             <div class="input-group">
@@ -819,15 +860,86 @@
                 </select>
             </div>
 
-            <div class="input-group">
-                <label class="input-label">
-                    Quantos anos você espera viver após se aposentar?
-                    <span class="tooltip">
-                        <span class="tooltip-icon">i</span>
-                        <span class="tooltip-text">Estimativa de quantos anos de renda você deseja garantir depois que se aposentar. Ex.: aposenta aos 65 e quer planejar até os 90 → 25 anos.</span>
-                    </span>
-                </label>
-                <input type="number" class="input-field" id="expectativaVida" placeholder="Ex: 25 anos" value="">
+            <hr style="border: 0; border-top: 1px solid rgba(138,204,166,0.15); margin: 24px 0;">
+
+            <!-- CONTAINER PREMIUM PARA ESTRATÉGIAS -->
+            <div style="
+                background: rgba(212, 175, 55, 0.03);
+                border: 1.5px solid rgba(212, 175, 55, 0.25);
+                border-radius: 14px;
+                padding: 24px;
+                margin-bottom: 16px;
+                box-shadow: 0 4px 12px rgba(212, 175, 55, 0.08);
+            ">
+                <div class="input-group">
+                    <label class="input-label">
+                        Como você prefere planejar sua renda?
+                        <span class="tooltip">
+                            <span class="tooltip-icon">i</span>
+                            <span class="tooltip-text">Renda vitalícia preserva seu patrimônio indefinidamente. Período determinado permite usar o capital para uma renda maior durante um prazo específico.</span>
+                        </span>
+                    </label>
+
+                    <label class="option-line">
+                        <input type="radio" name="tipoRenda" value="vitalicia" checked>
+                        <span class="option-title">💚 Renda vitalícia (enquanto eu viver)</span>
+                        <span class="option-desc">O sistema calcula uma renda sustentável que não acaba, garantindo tranquilidade para toda a vida.</span>
+                    </label>
+
+                    <label class="option-line">
+                        <input type="radio" name="tipoRenda" value="periodo">
+                        <span class="option-title">⏱️ Renda por período determinado</span>
+                        <span class="option-desc">Você escolhe por quantos anos deseja manter a renda ativa após se aposentar.</span>
+
+                        <div id="periodoContainer" style="display:none; margin-top:10px;">
+                            <label class="input-label">Por quantos anos você deseja receber a renda?</label>
+                            <input type="number" id="anosPeriodo" class="input-field" placeholder="Ex: 30" min="5" max="60" value="30">
+                        </div>
+                    </label>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid rgba(212, 175, 55, 0.15); margin: 24px 0;">
+
+                <div class="input-group">
+                    <label class="input-label">
+                        Estratégia de patrimônio na aposentadoria
+                        <span class="tooltip">
+                            <span class="tooltip-icon">i</span>
+                            <span class="tooltip-text">Preservar capital mantém sua herança intacta mas oferece renda menor. Usar capital gradualmente permite renda maior mas consome o patrimônio ao longo do tempo.</span>
+                        </span>
+                    </label>
+
+                    <label class="option-line">
+                        <input type="radio" name="estrategia" value="perpetua" checked>
+                        <span class="option-title">🏛️ Preservar capital (renda perpétua)</span>
+                        <span class="option-desc">Patrimônio nunca se esgota. Renda menor, porém eterna. Excelente para quem quer deixar herança.</span>
+                    </label>
+
+                    <label class="option-line">
+                        <input type="radio" name="estrategia" value="esgotavel">
+                        <span class="option-title">📊 Usar capital gradualmente</span>
+                        <span class="option-desc">Renda mensal maior, com prazo de duração definido por você.</span>
+
+                        <div id="anosDuracaoContainer" style="display:none; margin-top:10px;">
+                            <label class="input-label">Duração desejada do patrimônio (anos):</label>
+                            <input type="number" id="anosDuracao" class="input-field" placeholder="Ex: 30" min="5" max="60" value="30">
+                        </div>
+                    </label>
+                </div>
+
+                <p style="
+                    margin-top: 16px;
+                    margin-bottom: 0;
+                    font-size: 0.9rem;
+                    color: #FACC15;
+                    line-height: 1.5;
+                    background: rgba(250, 204, 21, 0.05);
+                    border: 1px solid rgba(250, 204, 21, 0.3);
+                    border-radius: 8px;
+                    padding: 12px;
+                ">
+                    💡 <strong>Recomendamos Renda Vitalícia + Preservar Capital</strong> para máxima segurança e tranquilidade.
+                </p>
             </div>
 
             <div class="step-actions">
