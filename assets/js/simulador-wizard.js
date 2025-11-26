@@ -127,6 +127,114 @@ function validateStep(stepNumber) {
 }
 
 // -----------------------------------------------------
+// RENDERIZAR GRÁFICO CHART.JS (INVLAB PREMIUM)
+// -----------------------------------------------------
+function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria) {
+    const canvas = document.getElementById('graficoEvolucao');
+    if (!canvas) return;
+
+    // Destruir gráfico anterior se existir
+    if (window.chartEvolucao) {
+        window.chartEvolucao.destroy();
+    }
+
+    // Preparar dados (converter meses em anos)
+    const labels = [];
+    const valores = [];
+    const anosAteAposentadoria = idadeAposentadoria - idadeAtual;
+
+    dadosMensais.forEach((item, index) => {
+        // A cada 12 meses, adiciona um ponto no gráfico
+        if (index % 12 === 0 || index === dadosMensais.length - 1) {
+            const ano = Math.floor(index / 12);
+            labels.push(`${ano} anos`);
+            valores.push(item.saldo);
+        }
+    });
+
+    // Configuração do gráfico INVLAB Premium
+    const ctx = canvas.getContext('2d');
+    window.chartEvolucao = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Patrimônio Acumulado',
+                data: valores,
+                borderColor: '#10b981',
+                backgroundColor: (context) => {
+                    const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
+                    gradient.addColorStop(0, 'rgba(16, 185, 129, 0.3)');
+                    gradient.addColorStop(1, 'rgba(16, 185, 129, 0.01)');
+                    return gradient;
+                },
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: '#10b981',
+                pointBorderColor: '#0D0D0D',
+                pointBorderWidth: 2,
+                pointRadius: 4,
+                pointHoverRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 2,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(13, 13, 13, 0.95)',
+                    titleColor: '#D4AF37',
+                    bodyColor: '#E4E4E4',
+                    borderColor: 'rgba(212, 175, 55, 0.3)',
+                    borderWidth: 1,
+                    padding: 12,
+                    displayColors: false,
+                    callbacks: {
+                        label: function(context) {
+                            return 'Patrimônio: R$ ' + context.parsed.y.toLocaleString('pt-BR', {maximumFractionDigits: 0});
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        color: 'rgba(138, 204, 166, 0.1)',
+                        drawBorder: false
+                    },
+                    ticks: {
+                        color: '#9CA3AF',
+                        font: {
+                            size: 11
+                        }
+                    }
+                },
+                y: {
+                    grid: {
+                        color: 'rgba(138, 204, 166, 0.1)',
+                        drawBorder: false
+                    },
+                    ticks: {
+                        color: '#9CA3AF',
+                        font: {
+                            size: 11
+                        },
+                        callback: function(value) {
+                            return 'R$ ' + (value / 1000).toFixed(0) + 'k';
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+// -----------------------------------------------------
 // FINALIZAR
 // -----------------------------------------------------
 function finalizarWizard() {
@@ -204,11 +312,10 @@ function finalizarWizard() {
             <p>📊 <strong>Perfil:</strong> ${resultados.perfil.charAt(0).toUpperCase() + resultados.perfil.slice(1)} (${(resultados.taxaAnualEscolhida * 100).toFixed(1)}% a.a.)</p>
         </div>
 
-        <!-- GRÁFICO (PLACEHOLDER) -->
-        <div class="dashboard-section" style="text-align:center; padding:40px 20px; background:#0f0f0f; border-radius:10px;">
-            <h3 style="color:#D4AF37; margin-bottom:15px;">📈 Evolução do Patrimônio</h3>
-            <p style="color:#10b981;">Gráfico será exibido aqui (próxima fase)</p>
-            <p style="color:#888; font-size:13px; margin-top:10px;">✓ ${resultados.dadosMensais.length} meses de projeção calculados</p>
+        <!-- GRÁFICO CHART.JS -->
+        <div class="dashboard-section" style="padding:30px 20px; background:#0f0f0f; border-radius:10px;">
+            <h3 style="color:#D4AF37; margin-bottom:20px; text-align:center;">📈 Evolução do Patrimônio</h3>
+            <canvas id="graficoEvolucao" style="max-height: 400px;"></canvas>
         </div>
 
         ${!atingiuMeta && resultados.aporteNecessario && resultados.aporteNecessario > 0 ? `
@@ -227,6 +334,17 @@ function finalizarWizard() {
             </div>
         ` : ''}
     `;
+
+    // ===================================================
+    // 📈 RENDERIZAR GRÁFICO APÓS CRIAR DASHBOARD
+    // ===================================================
+    setTimeout(() => {
+        renderizarGraficoEvolucao(
+            resultados.dadosMensais,
+            wizardData.idadeAtual,
+            wizardData.idadeAposentadoria
+        );
+    }, 100);
 }
 
 // -----------------------------------------------------

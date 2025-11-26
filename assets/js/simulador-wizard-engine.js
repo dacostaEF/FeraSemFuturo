@@ -34,10 +34,10 @@ function taxaMensal(taxaAnual) {
 }
 
 // Acumulação com juros compostos mensais
-function acumulacaoComJuros(aporteMensal, anos, taxaAnual, aporteExtraAnual = 0) {
+function acumulacaoComJuros(aporteMensal, anos, taxaAnual, aporteExtraAnual = 0, patrimonioInicial = 0) {
     const meses = anos * 12;
     const jurosMensal = taxaMensal(taxaAnual);
-    let saldo = 0;
+    let saldo = Number(patrimonioInicial);  // 👈 CORREÇÃO: começa com o que já tem
 
     for (let m = 1; m <= meses; m++) {
         saldo = saldo * (1 + jurosMensal) + Number(aporteMensal);
@@ -72,10 +72,10 @@ function rendaVitalicia(patrimonio, taxaAnual, expectativaAnos) {
 }
 
 // Projeção mês a mês do patrimônio (para gráficos)
-function projetarPatrimonioMensal(aporteMensal, anos, taxaAnual, aporteExtraAnual = 0) {
+function projetarPatrimonioMensal(aporteMensal, anos, taxaAnual, aporteExtraAnual = 0, patrimonioInicial = 0) {
     const jurosMensal = taxaMensal(taxaAnual);
     const meses = anos * 12;
-    let saldo = 0;
+    let saldo = Number(patrimonioInicial);  // 👈 CORREÇÃO: começa com o patrimônio inicial
     let dados = [];
 
     for (let m = 1; m <= meses; m++) {
@@ -123,14 +123,13 @@ function executarSimulacaoWizard(dadosWizard) {
     const anosAteAposentadoria = idadeAposent - idadeAtual;
 
     // 4. Patrimônio acumulado até lá (com o que já tem + aportes futuros)
-    const acumuladoAportes = acumulacaoComJuros(
+    const patrimonioTotalProjetado = acumulacaoComJuros(
         aporteMensal,
         anosAteAposentadoria,
         taxaAnualEscolhida,
-        aporteExtraAnual
+        aporteExtraAnual,
+        patrimonioAtual  // 👈 CORREÇÃO: patrimônio inicial entra rendendo juros
     );
-
-    const patrimonioTotalProjetado = patrimonioAtual + acumuladoAportes;
 
     // 5. NOVO: Calcular renda baseada na estratégia escolhida
     const taxaAnualReal = taxaAnualEscolhida - INFLACAO_MEDIA;
@@ -167,7 +166,8 @@ function executarSimulacaoWizard(dadosWizard) {
         aporteMensal,
         anosAteAposentadoria,
         taxaAnualEscolhida,
-        aporteExtraAnual
+        aporteExtraAnual,
+        patrimonioAtual  // 👈 CORREÇÃO: gráfico mostra patrimônio inicial
     );
 
     // 7. INSS: Respeitar ZERO do usuário (não forçar cálculo automático)

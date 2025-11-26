@@ -9,6 +9,9 @@
     <!-- Fontes INVLAB -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Chart.js para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <style>
         /* ========================================= */
         /* VERSÃO WIZARD — NÃO CONECTADA AO MOTOR */
@@ -601,12 +604,25 @@
         }
 
         /* ========================================= */
+        /* GRÁFICO CHART.JS - RESPONSIVIDADE */
+        /* ========================================= */
+        
+        .dashboard-section canvas {
+            width: 100% !important;
+            height: auto !important;
+        }
+
+        /* ========================================= */
         /* RESPONSIVO */
         /* ========================================= */
 
         @media (max-width: 768px) {
             .dashboard-cards {
                 grid-template-columns: 1fr;
+            }
+            
+            .dashboard-section canvas {
+                max-height: 300px !important;
             }
             .landing-explicativa {
                 padding: 30px 20px;

@@ -457,8 +457,20 @@
             background:#334155;
         }
 
+        /* ========================================= */
+        /* GRÁFICO CHART.JS - RESPONSIVIDADE */
+        /* ========================================= */
+        
+        .invlab-results canvas {
+            width: 100% !important;
+            height: auto !important;
+        }
+
         /* Responsividade Mobile */
         @media (max-width: 768px) {
+            .invlab-results canvas {
+                max-height: 300px !important;
+            }
             .invlab-title {
                 font-size: 1.8rem;
             }
@@ -876,6 +888,16 @@
                         </div>
                     </div>
                 </section>
+
+                <!-- ===================================================== -->
+                <!-- 📈 GRÁFICO DE EVOLUÇÃO DO PATRIMÔNIO -->
+                <!-- ===================================================== -->
+                <section class="invlab-results" style="margin-top: 40px;">
+                    <h2 class="module-title">📈 Evolução do Patrimônio</h2>
+                    <div style="padding: 30px 20px; background: #0f0f0f; border-radius: 10px; border: 1px solid rgba(138, 204, 166, 0.15);">
+                        <canvas id="graficoEvolucaoOficial" style="max-height: 400px;"></canvas>
+                    </div>
+                </section>
             </div>
 
             <!-- ===================================================== -->
@@ -1248,12 +1270,12 @@
         // -----------------------------------------
         // Função: calcula acumulação REAL
         // -----------------------------------------
-        function acumulacaoReal(aporte, anos, retornoAnual) {
+        function acumulacaoReal(aporte, anos, retornoAnual, patrimonioInicial = 0) {
             const i = taxaMensal(retornoAnual);         
             const inf = taxaMensal(INFLACAO_MEDIA / 100); 
             const meses = anos * 12;
 
-            let valorNominal = 0;
+            let valorNominal = Number(patrimonioInicial);  // 👈 CORREÇÃO: começa com o que já tem
 
             for (let m = 0; m < meses; m++) {
                 valorNominal = valorNominal * (1 + i) + aporte;
@@ -1291,6 +1313,138 @@
         }
 
         // -----------------------------------------
+        // PROJETAR PATRIMÔNIO MÊS A MÊS (para gráfico)
+        // -----------------------------------------
+        function projetarPatrimonioMensalOficial(aporteMensal, anos, taxaAnual, aporteExtraAnual = 0, patrimonioInicial = 0) {
+            const taxaMensal = Math.pow(1 + taxaAnual, 1/12) - 1;
+            const meses = anos * 12;
+            let saldo = Number(patrimonioInicial);  // 👈 CORREÇÃO: começa com o patrimônio inicial
+            let dados = [];
+
+            for (let m = 1; m <= meses; m++) {
+                saldo = saldo * (1 + taxaMensal) + Number(aporteMensal);
+                
+                if (aporteExtraAnual > 0 && m % 12 === 0) {
+                    saldo += Number(aporteExtraAnual);
+                }
+
+                dados.push({
+                    mes: m,
+                    saldo: saldo
+                });
+            }
+
+            return dados;
+        }
+
+        // -----------------------------------------
+        // RENDERIZAR GRÁFICO CHART.JS (INVLAB PREMIUM)
+        // -----------------------------------------
+        function renderizarGraficoEvolucaoOficial(dadosMensais, idadeAtual, idadeAposentadoria) {
+            const canvas = document.getElementById('graficoEvolucaoOficial');
+            if (!canvas) return;
+
+            // Destruir gráfico anterior se existir
+            if (window.chartEvolucaoOficial) {
+                window.chartEvolucaoOficial.destroy();
+            }
+
+            // Preparar dados (converter meses em anos)
+            const labels = [];
+            const valores = [];
+
+            dadosMensais.forEach((item, index) => {
+                // A cada 12 meses, adiciona um ponto no gráfico
+                if (index % 12 === 0 || index === dadosMensais.length - 1) {
+                    const ano = Math.floor(index / 12);
+                    labels.push(`${ano} anos`);
+                    valores.push(item.saldo);
+                }
+            });
+
+            // Configuração do gráfico INVLAB Premium
+            const ctx = canvas.getContext('2d');
+            window.chartEvolucaoOficial = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Patrimônio Acumulado',
+                        data: valores,
+                        borderColor: '#10b981',
+                        backgroundColor: (context) => {
+                            const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
+                            gradient.addColorStop(0, 'rgba(16, 185, 129, 0.3)');
+                            gradient.addColorStop(1, 'rgba(16, 185, 129, 0.01)');
+                            return gradient;
+                        },
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#10b981',
+                        pointBorderColor: '#0D0D0D',
+                        pointBorderWidth: 2,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    aspectRatio: 2,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(13, 13, 13, 0.95)',
+                            titleColor: '#D4AF37',
+                            bodyColor: '#E4E4E4',
+                            borderColor: 'rgba(212, 175, 55, 0.3)',
+                            borderWidth: 1,
+                            padding: 12,
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return 'Patrimônio: R$ ' + context.parsed.y.toLocaleString('pt-BR', {maximumFractionDigits: 0});
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: 'rgba(138, 204, 166, 0.1)',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#9CA3AF',
+                                font: {
+                                    size: 11
+                                }
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(138, 204, 166, 0.1)',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#9CA3AF',
+                                font: {
+                                    size: 11
+                                },
+                                callback: function(value) {
+                                    return 'R$ ' + (value / 1000).toFixed(0) + 'k';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // -----------------------------------------
         // Função principal de simulação
         // -----------------------------------------
         function calcularSimulacao() {
@@ -1316,7 +1470,8 @@
             const retornoAnual = rentabilidades[currentScenario];
 
             // 1) INVESTIMENTO PRÓPRIO
-            const investProprio = acumulacaoReal(aporte, anos, retornoAnual);
+            const patrimonioAtual = 0;  // TODO: adicionar campo no HTML para patrimônio inicial
+            const investProprio = acumulacaoReal(aporte, anos, retornoAnual, patrimonioAtual);
             
             // 2) PREVIDÊNCIA PRIVADA
             const prev = acumulacaoPrevidencia(aporte, anos, retornoAnual);
@@ -1371,6 +1526,25 @@
                 rendaPrevSimples,
                 rendaPrevRev
             );
+
+            // ===================================================
+            // 📈 GERAR PROJEÇÃO MENSAL E RENDERIZAR GRÁFICO
+            // ===================================================
+            const dadosMensais = projetarPatrimonioMensalOficial(
+                aporte,
+                anos,
+                retornoAnual,
+                0,  // aporte extra anual (pode ser adicionado como campo depois)
+                patrimonioAtual  // 👈 CORREÇÃO: patrimônio inicial no gráfico
+            );
+
+            setTimeout(() => {
+                renderizarGraficoEvolucaoOficial(
+                    dadosMensais,
+                    idadeAtual,
+                    idadeApos
+                );
+            }, 100);
 
             // Retorna dados para módulos seguintes
             return {
