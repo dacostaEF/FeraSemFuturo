@@ -379,7 +379,7 @@ function finalizarWizard() {
                 <div class="modal-body">
                     <h4 style="color: #D4AF37; margin-top: 0;">📊 Parâmetros Utilizados</h4>
                     <p><strong>Taxa Nominal Anual:</strong> ${(resultados.taxaAnualEscolhida * 100).toFixed(1)}% a.a.</p>
-                    <p><strong>Taxa Equivalente Mensal:</strong> ${(Math.pow(1 + resultados.taxaAnualEscolhida, 1/12) - 1) * 100).toFixed(4)}% a.m.</p>
+                    <p><strong>Taxa Equivalente Mensal:</strong> ${((Math.pow(1 + resultados.taxaAnualEscolhida, 1/12) - 1) * 100).toFixed(4)}% a.m.</p>
                     <p><strong>Inflação Presumida:</strong> 4,5% a.a. (IPCA médio histórico)</p>
                     <p><strong>Taxa Real:</strong> ${((resultados.taxaAnualEscolhida - 0.045) * 100).toFixed(2)}% a.a. (${((Math.pow(1 + (resultados.taxaAnualEscolhida - 0.045), 1/12) - 1) * 100).toFixed(4)}% a.m.)</p>
                     
