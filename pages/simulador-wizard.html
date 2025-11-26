@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Aposentadoria - Wizard | INVLAB</title>
+    <meta name="description" content="Simulador guiado passo a passo para planejar sua renda complementar de aposentadoria. INVLAB - Educação financeira sem pegadinhas.">
+    
+    <!-- Fontes INVLAB -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================= */
+        /* VERSÃO WIZARD — NÃO CONECTADA AO MOTOR */
+        /* ========================================= */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0D0D0D;
+            color: #E4E4E4;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        .wizard-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* ========================================= */
+        /* LANDING PAGE EXPLICATIVA (TOPO) */
+        /* ========================================= */
+
+        .landing-explicativa {
+            background: rgba(9, 32, 21, 0.75);
+            border: 1px solid rgba(138, 204, 166, 0.15);
+            border-left: 6px solid #10b981;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.1);
+        }
+
+        .landing-icon {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .landing-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #D4AF37;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .landing-subtitle {
+            font-size: 1.15rem;
+            color: rgba(16, 185, 129, 0.9);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .landing-info {
+            background: rgba(13, 13, 13, 0.6);
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .landing-info h3 {
+            color: #10b981;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .landing-info ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .landing-info li {
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .landing-info li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .landing-disclaimer {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            color: #D4AF37;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .btn-start-wizard {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 30px auto 0;
+            padding: 18px 40px;
+            background: linear-gradient(90deg, #355E3B, #CCAA66);
+            color: #0c0e13;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-align: center;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-start-wizard:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.5);
+        }
+
+        /* ========================================= */
+        /* WIZARD STEPS (PASSOS) */
+        /* ========================================= */
+
+        .wizard-step {
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid rgba(138, 204, 166, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            display: none; /* Escondido por padrão */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .wizard-step.active {
+            display: block;
+            animation: fadeInUp 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(138, 204, 166, 0.2);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #355E3B, #CCAA66);
+            color: #0c0e13;
+            border-radius: 50%;
+            line-height: 50px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .step-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #D4AF37;
+            margin-bottom: 10px;
+        }
+
+        .step-description {
+            font-size: 1rem;
+            color: rgba(16, 185, 129, 0.85);
+        }
+
+        /* ========================================= */
+        /* CAMPOS DE INPUT */
+        /* ========================================= */
+
+        .input-group {
+            margin-bottom: 24px;
+        }
+
+        .input-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #E4E4E4;
+            margin-bottom: 10px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(13, 13, 13, 0.8);
+            border: 1px solid rgba(138, 204, 166, 0.2);
+            border-radius: 10px;
+            color: #E4E4E4;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .input-field::placeholder {
+            color: rgba(228, 228, 228, 0.4);
+        }
+
+        /* ========================================= */
+        /* TOOLTIPS (PLACEHOLDER) */
+        /* ========================================= */
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+
+        .tooltip-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 50%;
+            color: #D4AF37;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(13, 13, 13, 0.98);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: #E4E4E4;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            z-index: 100;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* ========================================= */
+        /* BOTÕES DE NAVEGAÇÃO */
+        /* ========================================= */
+
+        .step-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(138, 204, 166, 0.2);
+        }
+
+        .btn-prev,
+        .btn-next {
+            padding: 14px 32px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-prev {
+            background: rgba(138, 204, 166, 0.1);
+            border: 1px solid rgba(138, 204, 166, 0.3);
+            color: #10b981;
+        }
+
+        .btn-prev:hover {
+            background: rgba(138, 204, 166, 0.2);
+            transform: translateX(-4px);
+        }
+
+        .btn-next {
+            background: linear-gradient(90deg, #355E3B, #CCAA66);
+            color: #0c0e13;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(212, 175, 55, 0.5);
+        }
+
+        /* ========================================= */
+        /* CONTAINER DASHBOARD FINAL (VAZIO) */
+        /* ========================================= */
+
+        .dashboard-container {
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid rgba(138, 204, 166, 0.1);
+            border-radius: 16px;
+            padding: 60px 40px;
+            text-align: center;
+            display: none; /* Escondido por padrão */
+        }
+
+        .dashboard-container.active {
+            display: block;
+        }
+
+        .dashboard-placeholder {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #D4AF37;
+            margin-bottom: 10px;
+        }
+
+        .dashboard-description {
+            font-size: 1rem;
+            color: rgba(16, 185, 129, 0.85);
+        }
+
+        /* ========================================= */
+        /* BARRA DE PROGRESSO DO WIZARD */
+        /* ========================================= */
+
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: #111111;
+            border-radius: 999px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 1px solid rgba(138, 204, 166, 0.25);
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #355E3B, #CCAA66);
+            transition: width 0.3s ease;
+        }
+
+        /* ========================================= */
+        /* RESPONSIVO */
+        /* ========================================= */
+
+        @media (max-width: 768px) {
+            .landing-explicativa {
+                padding: 30px 20px;
+            }
+
+            .landing-title {
+                font-size: 1.6rem;
+            }
+
+            .wizard-step {
+                padding: 30px 20px;
+            }
+
+            .step-title {
+                font-size: 1.5rem;
+            }
+
+            .step-actions {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .btn-prev,
+            .btn-next {
+                width: 100%;
+            }
+
+            .tooltip-text {
+                left: auto;
+                right: 0;
+                top: 30px;
+                transform: none;
+                white-space: normal;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wizard-container">
+
+        <!-- Barra de Progresso do Wizard -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <!-- ========================================= -->
+        <!-- LANDING PAGE EXPLICATIVA (TOPO) -->
+        <!-- ========================================= -->
+
+        <div class="landing-explicativa">
+            <div class="landing-icon">🎯</div>
+            <h1 class="landing-title">Simulador de Renda Complementar - Guiado</h1>
+            <p class="landing-subtitle">
+                Planeje sua aposentadoria de forma inteligente, passo a passo, 
+                com transparência total e educação financeira real.
+            </p>
+
+            <div class="landing-info">
+                <h3>⚠️ O que este simulador NÃO faz:</h3>
+                <ul>
+                    <li>NÃO calcula sua aposentadoria pelo INSS</li>
+                    <li>NÃO substitui o simulador oficial do governo</li>
+                    <li>NÃO vende produtos ou serviços</li>
+                </ul>
+            </div>
+
+            <div class="landing-info">
+                <h3>✓ O que este simulador FAZ:</h3>
+                <ul>
+                    <li>Calcula sua RENDA COMPLEMENTAR (além do INSS)</li>
+                    <li>Mostra quanto você precisa investir mensalmente</li>
+                    <li>Compara previdência privada vs investimento próprio</li>
+                    <li>Alerta sobre pegadinhas e taxas abusivas</li>
+                    <li>Guia você passo a passo com dados REAIS</li>
+                </ul>
+            </div>
+
+            <div class="landing-disclaimer">
+                💡 <strong>Premissa:</strong> Você receberá o INSS como base + seus investimentos próprios como complemento
+            </div>
+
+            <button class="btn-start-wizard" id="btnStartWizard">
+                🚀 Começar Simulação Guiada
+            </button>
+        </div>
+
+        <div id="landingWizard" style="display: none;">
+            <!-- Placeholder para controle do JS -->
+        </div>
+
+        <!-- ========================================= -->
+        <!-- PASSO 1: Dados Atuais -->
+        <!-- ========================================= -->
+
+        <div class="wizard-step" id="step-1">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <h2 class="step-title">Dados Atuais</h2>
+                <p class="step-description">Vamos começar com sua situação atual</p>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">
+                    Sua idade atual
+                    <span class="tooltip">
+                        <span class="tooltip-icon">i</span>
+                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                    </span>
+                </label>
+                <input type="number" class="input-field" id="idadeAtual" placeholder="Ex: 30" value="">
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">
+                    Sua renda mensal atual (bruta)
+                    <span class="tooltip">
+                        <span class="tooltip-icon">i</span>
+                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                    </span>
+                </label>
+                <input type="number" class="input-field" id="rendaAtual" placeholder="Ex: 5000" value="">
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">
+                    Você já tem investimentos acumulados?
+                    <span class="tooltip">
+                        <span class="tooltip-icon">i</span>
+                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                    </span>
+                </label>
+                <input type="number" class="input-field" id="patrimonioAtual" placeholder="Ex: 20000 (ou deixe 0)" value="">
+            </div>
+
+            <div class="step-actions">
+                <button class="btn-prev" style="visibility: hidden;">← Voltar</button>
+                <button class="btn-next">Próximo →</button>
+            </div>
+        </div>
+
+        <!-- ========================================= -->
+        <!-- PASSO 2: Padrão de Vida Desejado -->
+        <!-- ========================================= -->
+
+        <div class="wizard-step" id="step-2">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <h2 class="step-title">Padrão de Vida Desejado</h2>
+                <p class="step-description">Quanto você quer receber mensalmente na aposentadoria?</p>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">
+                    Renda mensal desejada na aposentadoria
+                    <span class="tooltip">
+                        <span class="tooltip-icon">i</span>
+                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                    </span>
+                </label>
+                <input type="number" class="input-field" id="rendaDesejada" placeholder="Ex: 8000" value="">
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">
+                    Seus gastos essenciais mensais (moradia, alimentação, saúde)
+                    <span class="tooltip">
+                        <span class="tooltip-icon">i</span>
+                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                    </span>
+                </label>
+                <input type="number" class="input-field" id="gastosEssenciais" placeholder="Ex: 3500" value="">
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">
+                    Estimativa do seu INSS (se souber, ou deixe em branco)
+                    <span class="tooltip">
+                        <span class="tooltip-icon">i</span>
+                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                    </span>
+                </label>
+                <input type="number" class="input-field" id="inssEstimado" placeholder="Ex: 3000 (opcional)" value="">
+            </div>
+
+            <div class="step-actions">
+                <button class="btn-prev">← Voltar</button>
+                <button class="btn-next">Próximo →</button>
+            </div>
+        </div>
+
+        <!-- ========================================= -->
+        <!-- PASSO 3: Aporte Mensal -->
+        <!-- ========================================= -->
+
+        <div class="wizard-step" id="step-3">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <h2 class="step-title">Aporte Mensal</h2>
+                <p class="step-description">Quanto você pode investir por mês?</p>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">
+                    Quanto você consegue investir mensalmente?
+                    <span class="tooltip">
+                        <span class="tooltip-icon">i</span>
+                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                    </span>
+                </label>
+                <input type="number" class="input-field" id="aporteMensal" placeholder="Ex: 800" value="">
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">
+                    Esse valor é fixo ou pode variar?
+                    <span class="tooltip">
+                        <span class="tooltip-icon">i</span>
+                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                    </span>
+                </label>
+                <select class="input-field" id="aporteTipo">
+                    <option value="">Selecione...</option>
+                    <option value="fixo">Fixo (consigo manter sempre)</option>
+                    <option value="variavel">Variável (pode mudar)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">
+                    Você pretende fazer aportes extras anuais? (13º, bônus, etc)
+                    <span class="tooltip">
+                        <span class="tooltip-icon">i</span>
+                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                    </span>
+                </label>
+                <input type="number" class="input-field" id="aporteExtraAnual" placeholder="Ex: 3000 (ou deixe 0)" value="">
+            </div>
+
+            <div class="step-actions">
+                <button class="btn-prev">← Voltar</button>
+                <button class="btn-next">Próximo →</button>
+            </div>
+        </div>
+
+        <!-- ========================================= -->
+        <!-- PASSO 4: Idade de Aposentadoria -->
+        <!-- ========================================= -->
+
+        <div class="wizard-step" id="step-4">
+            <div class="step-header">
+                <div class="step-number">4</div>
+                <h2 class="step-title">Idade de Aposentadoria</h2>
+                <p class="step-description">Quando você pretende se aposentar?</p>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">
+                    Com quantos anos você quer se aposentar?
+                    <span class="tooltip">
+                        <span class="tooltip-icon">i</span>
+                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                    </span>
+                </label>
+                <input type="number" class="input-field" id="idadeAposentadoria" placeholder="Ex: 65" value="">
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">
+                    Seu perfil de investidor
+                    <span class="tooltip">
+                        <span class="tooltip-icon">i</span>
+                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                    </span>
+                </label>
+                <select class="input-field" id="perfilInvestidor">
+                    <option value="">Selecione...</option>
+                    <option value="conservador">Conservador (segurança máxima)</option>
+                    <option value="moderado">Moderado (equilíbrio)</option>
+                    <option value="arrojado">Arrojado (aceito mais risco)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">
+                    Quantos anos você espera viver após se aposentar?
+                    <span class="tooltip">
+                        <span class="tooltip-icon">i</span>
+                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                    </span>
+                </label>
+                <input type="number" class="input-field" id="expectativaVida" placeholder="Ex: 25 anos" value="">
+            </div>
+
+            <div class="step-actions">
+                <button class="btn-prev">← Voltar</button>
+                <button class="btn-next">✓ Finalizar e Ver Resultado</button>
+            </div>
+        </div>
+
+        <!-- ========================================= -->
+        <!-- CONTAINER DASHBOARD FINAL (VAZIO) -->
+        <!-- ========================================= -->
+
+        <div class="dashboard-container" id="dashboard">
+            <div class="dashboard-placeholder">📊</div>
+            <h2 class="dashboard-title">Dashboard de Resultados</h2>
+            <p class="dashboard-description">
+                Aqui será exibido o resultado completo da simulação.<br>
+                (Será conectado na ETAPA 4)
+            </p>
+        </div>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- JAVASCRIPT EXTERNO -->
+    <!-- ========================================= -->
+    <script src="../assets/js/simulador-wizard.js"></script>
+
+</body>
+</html>
+
