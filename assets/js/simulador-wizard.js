@@ -179,18 +179,18 @@ function finalizarWizard() {
 
             <div class="card">
                 <h3>📈 Renda Mensal Prevista</h3>
-                <p class="valor" style="color: #D4AF37;">R$ ${resultados.rendaTotalPrevista.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
+                <p class="valor" style="color: #D4AF37;">R$ ${resultados.rendaTotalPrevista.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
             </div>
 
             <div class="card">
                 <h3>🎯 Meta Mensal</h3>
-                <p class="valor" style="color: #E4E4E4;">R$ ${resultados.rendaDesejada.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
+                <p class="valor" style="color: #E4E4E4;">R$ ${resultados.rendaDesejada.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
             </div>
 
             <div class="card">
                 <h3>📊 Diferença</h3>
                 <p class="valor" style="color: ${atingiuMeta ? '#10b981' : '#facc15'};">
-                    ${atingiuMeta ? '+' : ''}R$ ${Math.abs(resultados.deficitOuSobra).toLocaleString('pt-BR', {minimumFractionDigits: 2})}
+                    ${atingiuMeta ? '+' : ''}R$ ${Math.abs(resultados.deficitOuSobra).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                 </p>
             </div>
 
@@ -201,9 +201,9 @@ function finalizarWizard() {
             <p>💼 <strong>INSS:</strong> ${
                 resultados.inssReal === 0 
                 ? '<span style="color: #9ca3af;">Não considerado nesta simulação</span>'
-                : 'R$ ' + resultados.inssReal.toLocaleString('pt-BR') + '/mês'
+                : 'R$ ' + resultados.inssReal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '/mês'
             }</p>
-            <p>💰 <strong>Investimentos:</strong> R$ ${resultados.rendaRealPossivel.toLocaleString('pt-BR')}/mês</p>
+            <p>💰 <strong>Investimentos:</strong> R$ ${resultados.rendaRealPossivel.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</p>
             <p>⏱️ <strong>Prazo:</strong> ${resultados.anosAteAposentadoria} anos até aposentadoria</p>
             <p>📊 <strong>Perfil:</strong> ${resultados.perfil.charAt(0).toUpperCase() + resultados.perfil.slice(1)} (${(resultados.taxaAnualEscolhida * 100).toFixed(1)}% a.a.)</p>
         </div>
@@ -219,9 +219,9 @@ function finalizarWizard() {
             <div class="dashboard-insights">
                 <strong style="color:#facc15;">💡 Sugestão para atingir sua meta:</strong>
                 <p style="margin-top:8px; color:#E4E4E4;">
-                    Para atingir sua meta de <strong>R$ ${resultados.rendaDesejada.toLocaleString('pt-BR')}/mês</strong>, 
+                    Para atingir sua meta de <strong>R$ ${resultados.rendaDesejada.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong>, 
                     você precisaria investir aproximadamente 
-                    <strong style="color:#facc15;">R$ ${resultados.aporteNecessario.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</strong>.
+                    <strong style="color:#facc15;">R$ ${resultados.aporteNecessario.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong>.
                 </p>
             </div>
         ` : ''}

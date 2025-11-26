@@ -1289,10 +1289,10 @@
 
             // Herança
             document.getElementById("heritageOwnValue").textContent =
-                "R$ " + investProprio.real.toLocaleString("pt-BR");
+                "R$ " + investProprio.real.toLocaleString("pt-BR", {minimumFractionDigits: 2, maximumFractionDigits: 2});
 
             document.getElementById("heritageRevValue").textContent =
-                "R$ " + (prev.real * 0.8).toLocaleString("pt-BR");
+                "R$ " + (prev.real * 0.8).toLocaleString("pt-BR", {minimumFractionDigits: 2, maximumFractionDigits: 2});
 
             document.getElementById("heritageSimpleValue").textContent = "R$ 0";
 
@@ -1398,7 +1398,7 @@
             if (inss > 0) {
                 insights.push({
                     tipo: "informacao",
-                    texto: `ℹ️ Seu INSS estimado deve ser em torno de R$ ${inss.toLocaleString("pt-BR")}.`
+                    texto: `ℹ️ Seu INSS estimado deve ser em torno de R$ ${inss.toLocaleString("pt-BR", {minimumFractionDigits: 2, maximumFractionDigits: 2})}.`
                 });
             }
 
@@ -1471,14 +1471,14 @@
                     <div style="background:#0f172a; border-left:6px solid #38bdf8; padding:20px; border-radius:10px;">
                         <h4 style="color:#38bdf8; margin-bottom:10px;">📘 INSS Estimado</h4>
                         <p style="margin-top:10px; color:#cbd5e1;">Renda estimada pelo INSS:</p>
-                        <strong style="color:#38bdf8; font-size:1.2rem;">R$ ${inss.toLocaleString("pt-BR")}</strong>
+                        <strong style="color:#38bdf8; font-size:1.2rem;">R$ ${inss.toLocaleString("pt-BR", {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong>
                     </div>
 
                     <div style="background:#0f172a; border-left:6px solid #facc15; padding:20px; border-radius:10px;">
                         <h4 style="color:#facc15; margin-bottom:10px;">📉 Gap da Meta</h4>
                         <p style="margin-top:10px; color:#cbd5e1;">Para atingir a renda desejada de  
-                        <strong style="color:#facc15;">R$ ${rendaDesejada.toLocaleString("pt-BR")}</strong>, falta ainda:</p>
-                        <strong style="color:#facc15; font-size:1.2rem;">R$ ${gap.toLocaleString("pt-BR")}</strong>
+                        <strong style="color:#facc15;">R$ ${rendaDesejada.toLocaleString("pt-BR", {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong>, falta ainda:</p>
+                        <strong style="color:#facc15; font-size:1.2rem;">R$ ${gap.toLocaleString("pt-BR", {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong>
                     </div>
                 </div>
             `;
