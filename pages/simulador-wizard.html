@@ -274,13 +274,16 @@
             background: rgba(13, 13, 13, 0.98);
             border: 1px solid rgba(212, 175, 55, 0.4);
             color: #E4E4E4;
-            padding: 10px 14px;
+            padding: 12px 16px;
             border-radius: 8px;
             font-size: 0.85rem;
-            white-space: nowrap;
+            white-space: normal;
+            max-width: 280px;
+            width: max-content;
+            line-height: 1.5;
             z-index: 100;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
         }
 
         .tooltip:hover .tooltip-text {
@@ -422,12 +425,12 @@
             }
 
             .tooltip-text {
-                left: auto;
-                right: 0;
-                top: 30px;
-                transform: none;
-                white-space: normal;
-                max-width: 250px;
+                left: 50%;
+                right: auto;
+                top: 35px;
+                transform: translateX(-50%);
+                max-width: 90vw;
+                width: 280px;
             }
         }
     </style>
@@ -502,7 +505,7 @@
                     Sua idade atual
                     <span class="tooltip">
                         <span class="tooltip-icon">i</span>
-                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                        <span class="tooltip-text">Use sua idade de hoje. Ela define quanto tempo você ainda tem para investir até a aposentadoria.</span>
                     </span>
                 </label>
                 <input type="number" class="input-field" id="idadeAtual" placeholder="Ex: 30" value="">
@@ -513,7 +516,7 @@
                     Sua renda mensal atual (bruta)
                     <span class="tooltip">
                         <span class="tooltip-icon">i</span>
-                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                        <span class="tooltip-text">Considere o valor total que você recebe por mês, antes de descontos como INSS e imposto de renda.</span>
                     </span>
                 </label>
                 <input type="number" class="input-field" id="rendaAtual" placeholder="Ex: 5000" value="">
@@ -524,7 +527,7 @@
                     Você já tem investimentos acumulados?
                     <span class="tooltip">
                         <span class="tooltip-icon">i</span>
-                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                        <span class="tooltip-text">Some o que você já tem investido hoje (poupança, CDB, Tesouro, fundos, etc.). Se ainda não começou, deixe 0.</span>
                     </span>
                 </label>
                 <input type="number" class="input-field" id="patrimonioAtual" placeholder="Ex: 20000 (ou deixe 0)" value="">
@@ -552,7 +555,7 @@
                     Renda mensal desejada na aposentadoria
                     <span class="tooltip">
                         <span class="tooltip-icon">i</span>
-                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                        <span class="tooltip-text">Quanto você gostaria de receber todo mês na aposentadoria, somando INSS + investimentos próprios.</span>
                     </span>
                 </label>
                 <input type="number" class="input-field" id="rendaDesejada" placeholder="Ex: 8000" value="">
@@ -563,7 +566,7 @@
                     Seus gastos essenciais mensais (moradia, alimentação, saúde)
                     <span class="tooltip">
                         <span class="tooltip-icon">i</span>
-                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                        <span class="tooltip-text">Moradia, alimentação, saúde, transporte e contas básicas. É o mínimo para manter sua qualidade de vida.</span>
                     </span>
                 </label>
                 <input type="number" class="input-field" id="gastosEssenciais" placeholder="Ex: 3500" value="">
@@ -574,7 +577,7 @@
                     Estimativa do seu INSS (se souber, ou deixe em branco)
                     <span class="tooltip">
                         <span class="tooltip-icon">i</span>
-                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                        <span class="tooltip-text">Se você já fez uma simulação no site do INSS, use o valor aproximado. Se não souber, pode deixar em branco.</span>
                     </span>
                 </label>
                 <input type="number" class="input-field" id="inssEstimado" placeholder="Ex: 3000 (opcional)" value="">
@@ -602,7 +605,7 @@
                     Quanto você consegue investir mensalmente?
                     <span class="tooltip">
                         <span class="tooltip-icon">i</span>
-                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                        <span class="tooltip-text">Valor que você consegue separar todo mês para investir, de forma realista, sem apertar demais o orçamento.</span>
                     </span>
                 </label>
                 <input type="number" class="input-field" id="aporteMensal" placeholder="Ex: 800" value="">
@@ -613,7 +616,7 @@
                     Esse valor é fixo ou pode variar?
                     <span class="tooltip">
                         <span class="tooltip-icon">i</span>
-                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                        <span class="tooltip-text">Se você consegue manter o mesmo valor todo mês, escolha FIXO. Se o valor muda (ex.: autônomo), escolha VARIÁVEL.</span>
                     </span>
                 </label>
                 <select class="input-field" id="aporteTipo">
@@ -628,7 +631,7 @@
                     Você pretende fazer aportes extras anuais? (13º, bônus, etc)
                     <span class="tooltip">
                         <span class="tooltip-icon">i</span>
-                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                        <span class="tooltip-text">Use aqui valores como 13º salário, bônus ou outras entradas que você possa investir 1 vez por ano.</span>
                     </span>
                 </label>
                 <input type="number" class="input-field" id="aporteExtraAnual" placeholder="Ex: 3000 (ou deixe 0)" value="">
@@ -656,7 +659,7 @@
                     Com quantos anos você quer se aposentar?
                     <span class="tooltip">
                         <span class="tooltip-icon">i</span>
-                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                        <span class="tooltip-text">Idade em que você gostaria de parar de trabalhar ou reduzir bastante o ritmo. Pode ser um objetivo, não precisa ser perfeito.</span>
                     </span>
                 </label>
                 <input type="number" class="input-field" id="idadeAposentadoria" placeholder="Ex: 65" value="">
@@ -667,7 +670,7 @@
                     Seu perfil de investidor
                     <span class="tooltip">
                         <span class="tooltip-icon">i</span>
-                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                        <span class="tooltip-text">Conservador prioriza segurança; moderado busca equilíbrio; arrojado aceita mais risco em troca de retorno maior no longo prazo.</span>
                     </span>
                 </label>
                 <select class="input-field" id="perfilInvestidor">
@@ -683,7 +686,7 @@
                     Quantos anos você espera viver após se aposentar?
                     <span class="tooltip">
                         <span class="tooltip-icon">i</span>
-                        <span class="tooltip-text">TEXTO EXPLICATIVO AQUI DEPOIS</span>
+                        <span class="tooltip-text">Estimativa de quantos anos de renda você deseja garantir depois que se aposentar. Ex.: aposenta aos 65 e quer planejar até os 90 → 25 anos.</span>
                     </span>
                 </label>
                 <input type="number" class="input-field" id="expectativaVida" placeholder="Ex: 25 anos" value="">
