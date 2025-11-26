@@ -25,12 +25,33 @@
             color: #E4E4E4;
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
+            position: relative;
+        }
+
+        /* MARCA D'ÁGUA */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background-image: url('../assets/images/invlab-logo.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.03;
+            z-index: 0;
+            pointer-events: none;
         }
 
         .wizard-container {
             max-width: 900px;
             margin: 0 auto;
             padding: 40px 20px;
+            position: relative;
+            z-index: 1;
         }
 
         /* ========================================= */
@@ -394,10 +415,77 @@
         }
 
         /* ========================================= */
+        /* DASHBOARD PREMIUM INVLAB */
+        /* ========================================= */
+
+        .dashboard-header {
+            background: linear-gradient(90deg, #355E3B, #22c55e);
+            padding: 18px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: #0f0f0f;
+            border: 1px solid rgba(138,204,166,0.25);
+            border-radius: 12px;
+            padding: 14px;
+        }
+
+        .card h3 {
+            font-size: 14px;
+            color: #bbb;
+        }
+
+        .card .valor {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 6px;
+        }
+
+        .dashboard-info-extra {
+            margin-bottom: 25px;
+        }
+
+        .dashboard-info-extra p {
+            font-size: 13px;
+            color: #aaa;
+            margin: 4px 0;
+        }
+
+        .dashboard-section {
+            margin-top: 35px;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-insights {
+            margin-top: 30px;
+            padding: 16px;
+            background: #0f0f0f;
+            border: 1px solid rgba(204,170,102,0.3);
+            border-radius: 12px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        /* ========================================= */
         /* RESPONSIVO */
         /* ========================================= */
 
         @media (max-width: 768px) {
+            .dashboard-cards {
+                grid-template-columns: 1fr;
+            }
             .landing-explicativa {
                 padding: 30px 20px;
             }
