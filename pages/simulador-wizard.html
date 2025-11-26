@@ -572,15 +572,20 @@
                 <input type="number" class="input-field" id="gastosEssenciais" placeholder="Ex: 3500" value="">
             </div>
 
-            <div class="input-group">
+            <div class="input-group" style="
+                background: rgba(250, 204, 21, 0.05);
+                border: 1px solid rgba(250, 204, 21, 0.3);
+                border-radius: 10px;
+                padding: 16px;
+            ">
                 <label class="input-label">
                     Estimativa do seu INSS (se souber, ou deixe em branco)
                     <span class="tooltip">
                         <span class="tooltip-icon">i</span>
-                        <span class="tooltip-text">Se você já fez uma simulação no site do INSS, use o valor aproximado. Se não souber, pode deixar em branco.</span>
+                        <span class="tooltip-text">Se você não quiser considerar o benefício do INSS no cálculo da sua renda total, informe ZERO aqui. Neste caso, sua renda na aposentadoria será calculada apenas pelos seus investimentos.</span>
                     </span>
                 </label>
-                <input type="number" class="input-field" id="inssEstimado" placeholder="Ex: 3000 (opcional)" value="">
+                <input type="number" class="input-field" id="inssEstimado" placeholder="Ex: 3000 (opcional ou 0 para ignorar)" value="">
             </div>
 
             <div class="step-actions">

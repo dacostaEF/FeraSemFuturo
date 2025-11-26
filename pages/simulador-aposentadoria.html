@@ -705,6 +705,40 @@
                         <label>Renda Mensal Desejada na Aposentadoria (R$)</label>
                         <input type="number" id="desiredIncome" placeholder="Ex: 6000">
                     </div>
+
+                    <div class="input-group" style="
+                        background: rgba(250, 204, 21, 0.05);
+                        border: 1px solid rgba(250, 204, 21, 0.3);
+                        border-radius: 10px;
+                        padding: 16px;
+                        position: relative;
+                    ">
+                        <label style="display: flex; align-items: center; gap: 8px;">
+                            Estimativa do seu INSS (opcional)
+                            <span style="
+                                display: inline-flex;
+                                align-items: center;
+                                justify-content: center;
+                                width: 18px;
+                                height: 18px;
+                                background: rgba(212, 175, 55, 0.2);
+                                border: 1px solid rgba(212, 175, 55, 0.4);
+                                border-radius: 50%;
+                                color: #D4AF37;
+                                font-size: 0.75rem;
+                                font-weight: 700;
+                                cursor: help;
+                                position: relative;
+                            " title="Se você não quiser considerar o benefício do INSS no cálculo da sua renda total, informe ZERO aqui. Neste caso, sua renda na aposentadoria será calculada apenas pelos seus investimentos.">i</span>
+                        </label>
+                        <input type="number" id="inssManual" placeholder="Ex: 3000 (ou 0 para ignorar)" style="background: rgba(13, 13, 13, 0.8);">
+                        <p style="
+                            margin-top: 8px;
+                            font-size: 0.85rem;
+                            color: rgba(250, 204, 21, 0.9);
+                            line-height: 1.4;
+                        ">💡 Deixe vazio para calcular automaticamente (40% da renda desejada) ou informe 0 para analisar apenas seus investimentos.</p>
+                    </div>
                 </div>
 
                 <div class="module-actions">
@@ -1137,6 +1171,7 @@
             const idadeApos = parseInt(document.getElementById("retirementAge").value);
             const aporte = parseFloat(document.getElementById("monthlyInvestment").value);
             const rendaDesejada = parseFloat(document.getElementById("desiredIncome").value);
+            const inssManual = document.getElementById("inssManual").value;
 
             // Validação
             if (!idadeAtual || !idadeApos || !aporte || !rendaDesejada) {
@@ -1163,8 +1198,15 @@
             const rendaPrevSimples = rendaVitalicia(prev.real, retornoAnual, "simples");
             const rendaPrevRev = rendaVitalicia(prev.real, retornoAnual, "reversivel");
 
-            // 4) INSS (estimado real)
-            const beneficioINSS = calcularINSS(rendaDesejada);
+            // 4) INSS (manual ou automático)
+            let beneficioINSS;
+            if (inssManual !== "" && inssManual !== null) {
+                // Se usuário informou, usar o valor dele (pode ser 0)
+                beneficioINSS = parseFloat(inssManual);
+            } else {
+                // Se deixou vazio, calcular automaticamente
+                beneficioINSS = calcularINSS(rendaDesejada);
+            }
 
             // Atualiza DOM
             document.getElementById("resultOwn").textContent =
