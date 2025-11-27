@@ -911,6 +911,16 @@
                     </div>
 
                     <div class="input-group">
+                        <label>Aporte Extra Anual (13º/Férias) (R$)</label>
+                        <input type="number" id="aporteExtraAnualOficial" placeholder="Ex: 3000" value="0">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Patrimônio Atual Investido (R$)</label>
+                        <input type="number" id="patrimonioAtualOficial" placeholder="Ex: 25000" value="0">
+                    </div>
+
+                    <div class="input-group">
                         <label>Renda Mensal Desejada na Aposentadoria (R$)</label>
                         <input type="number" id="desiredIncome" placeholder="Ex: 6000">
                     </div>
@@ -1518,15 +1528,20 @@
         // -----------------------------------------
         // Função: calcula acumulação REAL
         // -----------------------------------------
-        function acumulacaoReal(aporte, anos, retornoAnual, patrimonioInicial = 0) {
+        function acumulacaoReal(aporte, anos, retornoAnual, patrimonioInicial = 0, aporteExtraAnual = 0) {
             const i = taxaMensal(retornoAnual);         
             const inf = taxaMensal(INFLACAO_MEDIA / 100); 
             const meses = anos * 12;
 
             let valorNominal = Number(patrimonioInicial);  // 👈 CORREÇÃO: começa com o que já tem
 
-            for (let m = 0; m < meses; m++) {
+            for (let m = 1; m <= meses; m++) {
                 valorNominal = valorNominal * (1 + i) + aporte;
+                
+                // 👉 PASSO 5: Adiciona aporte extra anual no final de cada ano
+                if (aporteExtraAnual > 0 && m % 12 === 0) {
+                    valorNominal += Number(aporteExtraAnual);
+                }
             }
 
             const valorReal = valorNominal / Math.pow(1 + inf, meses);
@@ -1702,6 +1717,12 @@
             const aporte = parseFloat(document.getElementById("monthlyInvestment").value);
             const rendaDesejada = parseFloat(document.getElementById("desiredIncome").value);
             const inssManual = document.getElementById("inssManual").value;
+            
+            // 👉 PASSO 3: Capturar patrimônio atual do campo HTML
+            const patrimonioAtual = parseFloat(document.getElementById("patrimonioAtualOficial").value) || 0;
+            
+            // 👉 PASSO 5: Capturar aporte extra anual do campo HTML
+            const aporteExtraAnual = parseFloat(document.getElementById("aporteExtraAnualOficial").value) || 0;
 
             // Validação
             if (!idadeAtual || !idadeApos || !aporte || !rendaDesejada) {
@@ -1718,16 +1739,23 @@
             const retornoAnual = rentabilidades[currentScenario];
 
             // 1) INVESTIMENTO PRÓPRIO
-            const patrimonioAtual = 0;  // TODO: adicionar campo no HTML para patrimônio inicial
-            const investProprio = acumulacaoReal(aporte, anos, retornoAnual, patrimonioAtual);
+            // ✅ CORREÇÃO: agora usa os valores reais dos campos (patrimônio inicial e aporte extra)
+            const investProprio = acumulacaoReal(aporte, anos, retornoAnual, patrimonioAtual, aporteExtraAnual);
             
             // 2) PREVIDÊNCIA PRIVADA
             const prev = acumulacaoPrevidencia(aporte, anos, retornoAnual);
 
             // 3) RENDAS
-            const rendaInvestProprio = investProprio.real * (retornoAnual / 12);
-            const rendaPrevSimples = rendaVitalicia(prev.real, retornoAnual, "simples");
-            const rendaPrevRev = rendaVitalicia(prev.real, retornoAnual, "reversivel");
+            // ✅ PADRÃO WIZARD: Usar RENDA VITALÍCIA COM CAPITAL PRESERVADO
+            // Taxa real = taxa nominal - inflação
+            const taxaAnualReal = retornoAnual - (INFLACAO_MEDIA / 100);
+            const taxaMensalReal = Math.pow(1 + taxaAnualReal, 1/12) - 1;
+            
+            // Renda mensal = Patrimônio × Taxa Mensal Real (só os juros, preserva capital)
+            const rendaInvestProprio = investProprio.nominal * taxaMensalReal;
+            
+            const rendaPrevSimples = rendaVitalicia(prev.nominal, retornoAnual, "simples");
+            const rendaPrevRev = rendaVitalicia(prev.nominal, retornoAnual, "reversivel");
 
             // 4) INSS (manual ou automático)
             // INSS: Respeitar ZERO do usuário (não forçar cálculo automático)
@@ -1747,8 +1775,9 @@
             }
 
             // Atualiza DOM
+            // ✅ PADRÃO WIZARD: Usar valor NOMINAL
             document.getElementById("resultOwn").textContent =
-                "R$ " + investProprio.real.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
+                "R$ " + investProprio.nominal.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
 
             document.getElementById("resultPensionSimple").textContent =
                 "R$ " + rendaPrevSimples.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
@@ -1757,11 +1786,13 @@
                 "R$ " + rendaPrevRev.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
 
             // Herança
+            // ✅ PADRÃO WIZARD: Usar valor NOMINAL
             document.getElementById("heritageOwnValue").textContent =
-                "R$ " + investProprio.real.toLocaleString("pt-BR", {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                "R$ " + investProprio.nominal.toLocaleString("pt-BR", {minimumFractionDigits: 2, maximumFractionDigits: 2});
 
+            // ✅ PADRÃO WIZARD: Usar valor NOMINAL
             document.getElementById("heritageRevValue").textContent =
-                "R$ " + (prev.real * 0.8).toLocaleString("pt-BR", {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                "R$ " + (prev.nominal * 0.8).toLocaleString("pt-BR", {minimumFractionDigits: 2, maximumFractionDigits: 2});
 
             document.getElementById("heritageSimpleValue").textContent = "R$ 0";
 
@@ -1769,8 +1800,9 @@
             document.getElementById("resultsSection").style.display = "block";
 
             // Atualiza gráfico
+            // ✅ PADRÃO WIZARD: Usar valor NOMINAL
             atualizarGrafico(
-                investProprio.real,
+                investProprio.nominal,
                 rendaPrevSimples,
                 rendaPrevRev
             );
@@ -1782,8 +1814,8 @@
                 aporte,
                 anos,
                 retornoAnual,
-                0,  // aporte extra anual (pode ser adicionado como campo depois)
-                patrimonioAtual  // 👈 CORREÇÃO: patrimônio inicial no gráfico
+                aporteExtraAnual,  // ✅ CORREÇÃO: agora usa o valor real do campo
+                patrimonioAtual    // ✅ CORREÇÃO: patrimônio inicial no gráfico
             );
 
             setTimeout(() => {
@@ -1797,13 +1829,14 @@
             // ===================================================
             // 📋 EXIBIR DETALHES, INTERPRETAÇÃO E MODAIS
             // ===================================================
+            // ✅ PADRÃO WIZARD: Usar valor NOMINAL em todas as exibições
             exibirDetalhesOficial(anos, retornoAnual, beneficioINSS, rendaInvestProprio);
-            exibirInterpretacaoOficial(rendaInvestProprio + beneficioINSS, rendaDesejada, investProprio.real);
+            exibirInterpretacaoOficial(rendaInvestProprio + beneficioINSS, rendaDesejada, investProprio.nominal);
             prepararModaisOficial(idadeAtual, idadeApos, aporte, rendaDesejada, beneficioINSS, retornoAnual, anos);
 
             // Retorna dados para módulos seguintes
             return {
-                patrimonio: investProprio.real,
+                patrimonio: investProprio.nominal,
                 rendaSimples: rendaPrevSimples,
                 rendaReversivel: rendaPrevRev,
                 rendaDesejada: rendaDesejada,
