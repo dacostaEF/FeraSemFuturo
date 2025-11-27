@@ -413,6 +413,35 @@
                 bottom: 24px;
                 right: 24px;
             }
+            
+            /* FOOTER MOBILE - 2 COLUNAS FORÇADO */
+            .footer-grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 24px 16px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            /* FOOTER MOBILE COMPACTO - 2 COLUNAS */
+            .footer-grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 20px 12px !important;
+            }
+            
+            .footer-column h4 {
+                font-size: 0.9rem !important;
+                margin-bottom: 10px !important;
+            }
+            
+            .footer-column a {
+                font-size: 0.8rem !important;
+            }
+            
+            .footer-column li {
+                margin-bottom: 6px !important;
+            }
         }
     </style>
 </head>
