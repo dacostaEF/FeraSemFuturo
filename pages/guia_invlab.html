@@ -73,6 +73,22 @@
                 bottom: 24px;
                 right: 24px;
             }
+            
+            /* TÍTULOS MOBILE - REDUZIDOS */
+            h1 {
+                font-size: 1.8rem !important;
+                line-height: 1.3 !important;
+            }
+            
+            .article-lead {
+                font-size: 0.95rem !important;
+            }
+            
+            /* FOOTER 2 COLUNAS MOBILE */
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 24px 16px !important;
+            }
         }
         
         /* Footer Premium INVLAB */
@@ -194,16 +210,36 @@
             }
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 480px) {
+            /* TÍTULOS MOBILE COMPACTOS */
+            h1 {
+                font-size: 1.5rem !important;
+                line-height: 1.3 !important;
+                padding: 0 10px !important;
+            }
+            
+            .article-lead {
+                font-size: 0.9rem !important;
+                padding: 0 10px !important;
+            }
+            
+            /* FOOTER 2 COLUNAS COMPACTO */
             .footer-content {
-                grid-template-columns: 1fr;
-                gap: 20px;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 20px 12px !important;
             }
+            
             .footer-logo-section {
-                grid-column: span 1;
+                grid-column: span 2 !important;
+                text-align: center !important;
             }
+            
             .footer h4 {
-                text-align: center;
+                font-size: 0.9rem !important;
+            }
+            
+            .footer a {
+                font-size: 0.8rem !important;
             }
             .footer ul {
                 text-align: center;
