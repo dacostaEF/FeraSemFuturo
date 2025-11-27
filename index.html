@@ -42,7 +42,7 @@
         .mobile-menu-btn {
             display: none;
             position: fixed;
-            top: 20px;
+            top: 60px;
             left: 20px;
             z-index: 2000;
             background: rgba(26, 26, 26, 0.95);
@@ -52,20 +52,14 @@
             height: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 1.8rem;
+            color: #D4AF37;
         }
         
         .mobile-menu-btn:hover {
             border-color: #D4AF37;
             box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
-        }
-        
-        .mobile-menu-btn span {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: #D4AF37;
-            margin: 5px auto;
-            transition: all 0.3s ease;
+            transform: scale(1.05);
         }
         
         /* Drawer Lateral (Left) */
@@ -371,9 +365,7 @@
 <body>
     <!-- 📱 MENU MOBILE HAMBÚRGUER -->
     <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
+        ☰
     </button>
     
     <!-- Backdrop (Fundo escurecido) -->
