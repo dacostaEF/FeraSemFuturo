@@ -85,12 +85,30 @@
                 right: 24px;
             }
             
-            /* MENU HAMBÚRGUER MOBILE */
+            /* HEADER FIXO NO TOPO */
+            .main-header {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                z-index: 999 !important;
+                background: #0D0D0D !important;
+                border-bottom: 1px solid rgba(212, 175, 55, 0.25) !important;
+                padding: 12px 0 !important;
+                height: 70px !important;
+            }
+            
+            /* AJUSTE DO CONTEÚDO PARA NÃO FICAR EMBAIXO DO HEADER */
+            .content-wrapper-wide {
+                padding-top: 90px !important;
+            }
+            
+            /* MENU HAMBÚRGUER MOBILE - FIXO */
             .hamburger-icon {
                 display: flex !important;
                 position: fixed;
-                top: 60px;
-                left: 20px;
+                top: 12px;
+                left: 16px;
                 z-index: 1000;
                 background: transparent;
                 border: 2px solid #D4AF37;
@@ -115,21 +133,29 @@
                 display: none !important;
             }
             
-            /* LOGO MOBILE CENTRALIZADA */
+            /* LOGO MOBILE CENTRALIZADA - FIXO */
             .header-logo {
-                position: absolute !important;
+                position: fixed !important;
                 left: 50% !important;
                 transform: translateX(-50%) !important;
-                top: 70px !important;
+                top: 15px !important;
+                z-index: 1000 !important;
             }
             
             .header-logo img {
-                width: 80px !important;
+                width: 70px !important;
                 height: auto !important;
             }
             
             .header-logo .logo-text {
                 display: none !important;
+            }
+            
+            /* BREADCRUMB MOBILE - ABAIXO DO HEADER FIXO */
+            .breadcrumb {
+                margin-top: 0 !important;
+                padding-top: 8px !important;
+                font-size: 0.85rem !important;
             }
             
             /* DRAWER LATERAL */
