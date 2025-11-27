@@ -133,12 +133,13 @@ main > *::before,
     align-items: center;
     gap: 12px;
     margin-bottom: 0;
+    margin-top: 8px; /* RESPIRO: descola da linha superior */
     z-index: 10;
     line-height: 0; /* ADICIONADO: elimina espaço fantasma abaixo da imagem */
 }
 
 .header-logo img {
-    height: 28px; /* REDUZIDO: 33px → 28px (menu mais compacto) */
+    height: 47px; /* AUMENTADO 68% total: 28px → 47px (logo com texto integrado) */
     filter: 
         brightness(1.15)
         drop-shadow(0 2px 8px rgba(255, 215, 0, 0.35))
