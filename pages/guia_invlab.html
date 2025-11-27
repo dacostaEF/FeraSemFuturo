@@ -34,6 +34,17 @@
     <link rel="stylesheet" href="../assets/css/artigo-styles.css">
     
     <style>
+        /* Hambúrguer - Escondido no Desktop */
+        .hamburger-icon {
+            display: none;
+        }
+        
+        /* Drawer Mobile - Escondido no Desktop */
+        .mobile-drawer,
+        .drawer-backdrop {
+            display: none;
+        }
+        
         /* Back to Top Button - Premium INVLAB */
         #backToTop {
             display: none;
@@ -72,6 +83,125 @@
                 line-height: 44px;
                 bottom: 24px;
                 right: 24px;
+            }
+            
+            /* MENU HAMBÚRGUER MOBILE */
+            .hamburger-icon {
+                display: flex !important;
+                position: fixed;
+                top: 60px;
+                left: 20px;
+                z-index: 1000;
+                background: transparent;
+                border: 2px solid #D4AF37;
+                border-radius: 8px;
+                width: 48px;
+                height: 48px;
+                align-items: center;
+                justify-content: center;
+                font-size: 28px;
+                color: #D4AF37;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            
+            .hamburger-icon:hover {
+                background: rgba(212, 175, 55, 0.1);
+                border-color: rgba(212, 175, 55, 0.7);
+            }
+            
+            /* ESCONDE MENU DESKTOP */
+            .tabs-nav-wrapper {
+                display: none !important;
+            }
+            
+            /* LOGO MOBILE CENTRALIZADA */
+            .header-logo {
+                position: absolute !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                top: 70px !important;
+            }
+            
+            .header-logo img {
+                width: 80px !important;
+                height: auto !important;
+            }
+            
+            .header-logo .logo-text {
+                display: none !important;
+            }
+            
+            /* DRAWER LATERAL */
+            .mobile-drawer {
+                position: fixed;
+                top: 0;
+                left: -300px;
+                width: 280px;
+                height: 100vh;
+                background: #1A1A1A;
+                z-index: 10000;
+                transition: left 0.3s ease;
+                overflow-y: auto;
+                border-right: 1px solid #D4AF37;
+            }
+            
+            .mobile-drawer.active {
+                left: 0;
+            }
+            
+            .drawer-backdrop {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.7);
+                z-index: 9999;
+                display: none;
+            }
+            
+            .drawer-backdrop.active {
+                display: block;
+            }
+            
+            .drawer-close-btn {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: transparent;
+                border: none;
+                color: #D4AF37;
+                font-size: 32px;
+                cursor: pointer;
+            }
+            
+            .drawer-nav {
+                margin-top: 80px;
+                padding: 20px;
+            }
+            
+            .drawer-nav a {
+                display: block;
+                color: rgba(16, 185, 129, 0.85);
+                text-decoration: none;
+                padding: 14px 12px;
+                font-size: 1rem;
+                font-family: 'Inter', sans-serif;
+                transition: all 0.2s ease;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            
+            .drawer-nav a:hover {
+                color: #D4AF37;
+                background: rgba(212, 175, 55, 0.05);
+                padding-left: 20px;
+            }
+            
+            .drawer-nav .separator {
+                height: 1px;
+                background: rgba(212, 175, 55, 0.2);
+                margin: 12px 0;
             }
             
             /* TÍTULOS MOBILE - REDUZIDOS */
@@ -218,9 +348,24 @@
                 padding: 0 10px !important;
             }
             
+            /* TÍTULOS DE SEÇÕES (H2) DOURADOS - REDUZIDOS */
+            h2 {
+                font-size: 1.3rem !important;
+                line-height: 1.4 !important;
+                margin-bottom: 12px !important;
+            }
+            
+            /* TEXTOS EXPLICATIVOS - LINE-HEIGHT REDUZIDO */
+            p {
+                font-size: 0.9rem !important;
+                line-height: 1.5 !important;
+                margin-bottom: 12px !important;
+            }
+            
             .article-lead {
                 font-size: 0.9rem !important;
                 padding: 0 10px !important;
+                line-height: 1.5 !important;
             }
             
             /* FOOTER 2 COLUNAS COMPACTO */
@@ -248,12 +393,37 @@
     </style>
 </head>
 <body>
+    <!-- Menu Mobile Drawer (Hambúrguer) -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <button class="drawer-close-btn" onclick="closeDrawer()">✕</button>
+        <nav class="drawer-nav">
+            <a href="../index.html">🏠 INÍCIO</a>
+            <a href="../index.html#primeiros-passos">🚀 Primeiros Passos</a>
+            <div class="separator"></div>
+            <a href="../index.html#renda-fixa">💰 Renda Fixa</a>
+            <a href="../index.html#renda-variavel">📈 Renda Variável</a>
+            <a href="../index.html#criptoativos">🔐 Cripto Ativos</a>
+            <a href="../index.html#outros-investimentos">💎 Outros Investimentos</a>
+            <a href="../index.html#ferramentas">🛠️ Ferramentas</a>
+            <div class="separator"></div>
+            <a href="guia_invlab.html">ℹ️ Sobre o INVLAB</a>
+            <a href="metodologia.html">🔬 Metodologia</a>
+            <a href="../index.html#aviso-legal">⚠️ Aviso Legal</a>
+        </nav>
+    </div>
+    <div class="drawer-backdrop" id="drawerBackdrop" onclick="closeDrawer()"></div>
+
     <!-- Header Fixo -->
     <header class="main-header">
         <div class="header-container">
+            <!-- Botão Hambúrguer Mobile -->
+            <button class="hamburger-icon" onclick="openDrawer()" aria-label="Menu">
+                ☰
+            </button>
+            
             <!-- Logo -->
             <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
-                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                <img src="../assets/images/Logo_InvLab.png" alt="INVLAB">
                 <span class="logo-text">INVLAB</span>
             </div>
             
@@ -726,6 +896,21 @@
 
     <!-- Scripts -->
     <script src="../assets/js/script.js"></script>
+    
+    <!-- Script Menu Mobile Drawer -->
+    <script>
+        function openDrawer() {
+            document.getElementById('mobileDrawer').classList.add('active');
+            document.getElementById('drawerBackdrop').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeDrawer() {
+            document.getElementById('mobileDrawer').classList.remove('active');
+            document.getElementById('drawerBackdrop').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    </script>
 </body>
 </html>
 
