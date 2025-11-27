@@ -170,6 +170,25 @@
             .tabs-nav-wrapper {
                 display: none !important;
             }
+            
+            /* Logo Mobile - Centralizada */
+            .header-logo {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .header-logo img {
+                width: 80px !important;
+                height: auto !important;
+            }
+            
+            .header-logo .logo-text {
+                display: none !important;
+            }
         }
         
         /* 🎨 INVLAB PREMIUM - Hovers e Animações para Cards */
@@ -400,7 +419,7 @@
         <div class="header-container">
          <!-- Logo -->
             <div class="header-logo">
-                <img src="assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+                <img src="assets/images/Logo_InvLab.png" alt="INVLAB - Laboratório de Investimentos" class="logo-img">
                 <span class="logo-text">INVLAB</span>
             </div>
             
