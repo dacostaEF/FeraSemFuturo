@@ -237,6 +237,43 @@
             animation: glow-pulse 2s ease-in-out infinite;
         }
         
+        /* Cards de Aposentadoria - Hover Premium (mesmo padrão dos cards de remuneração) */
+        .aposentadoria-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .aposentadoria-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2A7FFF, #10b981);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .aposentadoria-card:hover {
+            border-color: rgba(212, 175, 55, 0.7) !important;
+            transform: translateY(-6px);
+            box-shadow: 
+                0 8px 24px rgba(212, 175, 55, 0.2),
+                0 4px 12px rgba(16, 185, 129, 0.1);
+            background: rgba(26, 26, 26, 0.8);
+        }
+        
+        .aposentadoria-card:hover::before {
+            opacity: 1;
+        }
+        
+        .aposentadoria-card:hover > div:first-child {
+            transform: scale(1.1);
+            animation: glow-pulse 2s ease-in-out infinite;
+        }
+        
         /* Cards de Investimentos - Hover Premium */
         .investment-card {
             transition: all 0.3s ease;
@@ -309,6 +346,12 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 2px 8px rgba(53, 94, 59, 0.2);
+        }
+        
+        /* Botão Gold Touch com largura automática (para botões inline) */
+        .btn-simulador-invlab[style*="width: auto"],
+        .btn-simulador-invlab.inline {
+            width: auto;
         }
         
         .btn-simulador-invlab:hover {
@@ -628,8 +671,8 @@
                         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; max-width: 1000px; margin: 0 auto;">
                             
                             <!-- Card Simulador Wizard -->
-                            <div style="background: rgba(26, 26, 26, 0.6); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 16px; padding: 32px; text-align: center; transition: all 0.3s ease;">
-                                <div style="font-size: 48px; margin-bottom: 16px;">🧙‍♂️</div>
+                            <div class="aposentadoria-card" style="background: rgba(26, 26, 26, 0.6); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 16px; padding: 32px; text-align: center; transition: all 0.3s ease;">
+                                <div style="font-size: 48px; margin-bottom: 16px; transition: all 0.3s ease;">🧙‍♂️</div>
                                 <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #E4E4E4; margin-bottom: 12px;">
                                     Simulador Guiado (Wizard)
                                 </h3>
@@ -642,8 +685,8 @@
                             </div>
 
                             <!-- Card Simulador Completo -->
-                            <div style="background: rgba(26, 26, 26, 0.6); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 16px; padding: 32px; text-align: center; transition: all 0.3s ease;">
-                                <div style="font-size: 48px; margin-bottom: 16px;">📊</div>
+                            <div class="aposentadoria-card" style="background: rgba(26, 26, 26, 0.6); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 16px; padding: 32px; text-align: center; transition: all 0.3s ease;">
+                                <div style="font-size: 48px; margin-bottom: 16px; transition: all 0.3s ease;">📊</div>
                                 <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #E4E4E4; margin-bottom: 12px;">
                                     Simulador Completo (PRO)
                                 </h3>
@@ -696,9 +739,9 @@
 
                             <!-- Botão Educação -->
                             <div style="text-align: center; margin-top: 32px;">
-                                <div style="display: inline-block; background: rgba(212, 175, 55, 0.1); border: 2px solid #D4AF37; border-radius: 8px; padding: 14px 32px; font-family: 'Inter', sans-serif; font-size: 1rem; color: #D4AF37; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
+                                <button class="btn-simulador-invlab inline" data-tab-link="primeiros-passos">
                                     🚀 Começar Educação Financeira →
-                                </div>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -707,46 +750,6 @@
                 <!-- ========================================
                      FIM DA NOVA ESTRUTURA
                      ======================================== -->
-
-                <!-- Seção: Diferenciais -->
-                <section class="section benefits">
-                    <h2 class="section-title-premium">💎 Por que o INVLAB é diferente?</h2>
-                    <p class="section-subtitle-premium">Seu laboratório para testar estratégias antes de investir de verdade.</p>
-                    
-                    <div class="benefits-grid">
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
-                                <i class="ph-duotone ph-chart-line-up icon-invlab-padrao"></i>
-                            </div>
-                            <h3>Dados Reais do Mercado</h3>
-                            <p>Modelagens baseadas em indicadores atualizados, sem achismos.</p>
-                        </div>
-
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
-                                <i class="ph-duotone ph-flask icon-invlab-padrao"></i>
-                            </div>
-                            <h3>Simuladores Profissionais</h3>
-                            <p>Cálculos completos com juros compostos, IR, taxas e cenários avançados.</p>
-                        </div>
-
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
-                                <i class="ph-duotone ph-chart-donut icon-invlab-padrao"></i>
-                            </div>
-                            <h3>Análise Comparativa Inteligente</h3>
-                            <p>Compare múltiplos produtos lado a lado e veja quem realmente rende mais.</p>
-                        </div>
-
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
-                                <i class="ph-duotone ph-shield-check icon-invlab-padrao"></i>
-                            </div>
-                            <h3>Ambiente Seguro para Testes</h3>
-                            <p>Experimente estratégias, valide hipóteses e aprenda sem arriscar seu capital.</p>
-                        </div>
-                    </div>
-                </section>
 
                 <!-- Posicionamento: Não Somos Corretora -->
                 <div style="margin: 48px auto 32px; max-width: 1200px; padding: 32px; background: rgba(26, 26, 26, 0.8); border: 1px solid rgba(42, 127, 255, 0.2); border-radius: 16px; text-align: center;">
