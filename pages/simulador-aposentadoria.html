@@ -294,6 +294,66 @@
             color: #00e38c;
         }
 
+        /* Tooltip Icon - Padrão INVLAB */
+        .tooltip-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(16, 185, 129, 0.2));
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 50%;
+            color: #D4AF37;
+            font-size: 0.75rem;
+            font-weight: bold;
+            cursor: help;
+            margin-left: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tooltip-icon:hover {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.4), rgba(16, 185, 129, 0.3));
+            border-color: #D4AF37;
+            transform: scale(1.15);
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+        }
+
+        .tooltip-icon[title]:hover::after {
+            content: attr(title);
+            position: absolute;
+            bottom: 130%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(26, 26, 26, 0.98);
+            color: #E4E4E4;
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            white-space: normal;
+            width: 320px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            text-align: left;
+            font-weight: 400;
+            z-index: 1000;
+            pointer-events: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .tooltip-icon[title]:hover::before {
+            content: '';
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: rgba(26, 26, 26, 0.98);
+            z-index: 1001;
+        }
+
         /* 8. Herança */
         .invlab-heritage {
             background: rgba(20, 24, 33, 0.88);
@@ -1034,19 +1094,38 @@
                     <h2 class="module-title">📊 Resultados da Simulação</h2>
                     <div class="results-grid">
                         <div class="result-card">
-                            <h3>💰 Investimento Próprio</h3>
+                            <h3>
+                                💰 Investimento Próprio 
+                                <span class="tooltip-icon" title="💡 Renda Vitalícia Perpétua: Você recebe APENAS os juros do patrimônio. O capital de R$ 2.175.398 NUNCA ACABA e pode ser deixado como herança integral. Renda mensal baseada na taxa real (8% - 4,5% inflação = 3,5% a.a.). Esta é a estratégia mais eficiente!">ℹ️</span>
+                            </h3>
                             <p id="resultOwn">—</p>
                         </div>
 
                         <div class="result-card">
-                            <h3>🏦 Vitalícia Simples</h3>
+                            <h3>
+                                🏦 Vitalícia Simples 
+                                <span class="tooltip-icon" title="⚠️ Previdência Tradicional: Você CONSOME o capital aos poucos junto com os juros. Renda maior que a perpétua, mas quando você morre sobra R$ 0 de herança. Usada em planos PGBL/VGBL tradicionais. NÃO recomendada!">ℹ️</span>
+                            </h3>
                             <p id="resultPensionSimple">—</p>
                         </div>
 
                         <div class="result-card">
-                            <h3>🔄 Com Reversão</h3>
+                            <h3>
+                                🔄 Com Reversão 
+                                <span class="tooltip-icon" title="👨‍👩‍👧 Previdência com Proteção Familiar: Renda MENOR, mas quando você morre seu cônjuge continua recebendo (geralmente 80%). Deixa herança parcial (~20% do capital). Usada para proteger dependentes, mas menos rentável.">ℹ️</span>
+                            </h3>
                             <p id="resultPensionRev">—</p>
                         </div>
+                    </div>
+
+                    <!-- Card Destacado: Renda Mensal (Padrão Wizard) -->
+                    <div style="margin-top: 32px; padding: 24px; background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(16, 185, 129, 0.08)); border: 2px solid rgba(212, 175, 55, 0.3); border-radius: 16px; text-align: center;">
+                        <h3 style="color: #D4AF37; font-size: 1.1rem; margin-bottom: 8px; font-family: 'Playfair Display', serif;">
+                            💰 Renda Mensal do Investimento Próprio
+                            <span class="tooltip-icon" title="💡 Esta é a renda mensal que você receberá com Investimento Próprio usando a estratégia de Renda Vitalícia Perpétua (só os juros, capital preservado). Calculada com base na taxa real (8% - 4,5% = 3,5% a.a.). Mesma apresentação do Simulador Wizard!">ℹ️</span>
+                        </h3>
+                        <p id="rendaMensalDestacada" style="font-size: 2.2rem; font-weight: 700; color: #10b981; margin: 0; font-family: 'Inter', sans-serif;">—</p>
+                        <p style="color: rgba(228, 228, 228, 0.7); font-size: 0.9rem; margin-top: 8px;">Capital preservado + Herança integral</p>
                     </div>
 
                     <!-- Gráfico -->
@@ -1784,6 +1863,10 @@
 
             document.getElementById("resultPensionRev").textContent =
                 "R$ " + rendaPrevRev.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
+
+            // ✅ NOVO: Atualizar Renda Mensal Destacada (Padrão Wizard)
+            document.getElementById("rendaMensalDestacada").textContent =
+                "R$ " + rendaInvestProprio.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
             // Herança
             // ✅ PADRÃO WIZARD: Usar valor NOMINAL
