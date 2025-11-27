@@ -171,25 +171,42 @@
                 display: none !important;
             }
             
-            /* Logo Mobile - Centralizada */
+            /* Logo Mobile - Centralizada - FORÇA EXIBIÇÃO DA IMAGEM */
             .header-logo {
                 position: absolute !important;
                 left: 50% !important;
                 transform: translateX(-50%) !important;
-                display: flex !important;
-                flex-direction: column !important;
-                align-items: center !important;
+                display: block !important;
+                text-align: center !important;
                 margin-bottom: 40px !important;
                 top: 70px !important;
+                width: 80px !important;
+                height: 80px !important;
+                overflow: visible !important;
             }
             
-            .header-logo img {
+            .header-logo img,
+            .header-logo .logo-img {
+                display: block !important;
                 width: 80px !important;
                 height: auto !important;
+                max-width: 80px !important;
+                object-fit: contain !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                position: relative !important;
+                z-index: 999 !important;
             }
             
-            .header-logo .logo-text {
+            .header-logo .logo-text,
+            .header-logo span {
                 display: none !important;
+                visibility: hidden !important;
+                width: 0 !important;
+                height: 0 !important;
+                font-size: 0 !important;
+                line-height: 0 !important;
+                opacity: 0 !important;
             }
             
             /* Hero Section - Respiro da Logo */
@@ -437,7 +454,7 @@
         <div class="header-container">
          <!-- Logo -->
             <div class="header-logo">
-                <img src="assets/images/Logo_InvLab.png" alt="INVLAB - Laboratório de Investimentos" class="logo-img">
+                <img src="assets/images/Logo_InvLab.png" alt="INVLAB" class="logo-img" loading="eager">
                 <span class="logo-text">INVLAB</span>
             </div>
             
