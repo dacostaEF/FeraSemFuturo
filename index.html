@@ -297,6 +297,7 @@
         
         /* 🔥 BOTÃO SIMULADOR INVLAB - Degradê Premium Gold Touch */
         .btn-simulador-invlab {
+            width: 100%;
             background: linear-gradient(135deg, #355E3B 0%, #CCAA66 100%);
             border: 1px solid rgba(204, 170, 102, 0.3);
             color: #E4E4E4;
@@ -316,6 +317,7 @@
             box-shadow: 
                 0 8px 24px rgba(53, 94, 59, 0.3),
                 0 4px 12px rgba(204, 170, 102, 0.2);
+            color: #FFFFFF;
         }
         
         .btn-simulador-invlab:active {
@@ -433,6 +435,11 @@
                 margin-bottom: 6px !important;
             }
         }
+        
+        /* ==========================================
+           BOTÕES SIMULADORES - PADRÃO INVLAB PREMIUM
+           (Gold Touch já definido acima nas linhas 298-323)
+           ========================================== */
     </style>
 </head>
 <body>
@@ -607,18 +614,99 @@
         <!-- ABA: INÍCIO -->
         <div class="tab-content active" id="inicio">
             <div class="content-wrapper">
-                <!-- Hero Section -->
-                <div class="hero-section">
-                    <h1 class="hero-title">Liberte Seu Futuro Financeiro</h1>
-                    
-                    <p class="hero-description">
-                        Simuladores que revelam quanto você <strong style="color: #D4AF37;">perde</strong> em taxas escondidas.
-                    </p>
-                    
-                    <p class="hero-description secondary">
-                        Dados reais do mercado, simulações práticas e ambiente completo para testar estratégias.
-                    </p>
-                </div>
+                <!-- SEÇÃO 1: Planeje Sua Aposentadoria -->
+                <section class="section" style="margin-top: 0; padding: 30px 0 60px 0;">
+                    <div class="content-wrapper">
+                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.2rem; font-weight: 800; color: #D4AF37; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em;">
+                            🧩 Planeje Sua Aposentadoria
+                        </h2>
+                        <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(16, 185, 129, 0.65); text-align: center; margin-bottom: 40px; line-height: 1.6; max-width: 900px; margin-left: auto; margin-right: auto;">
+                            Simule sua renda futura, compare estratégias e descubra exatamente quanto investir para viver bem — sem depender de promessas do mercado.
+                        </p>
+
+                        <!-- Grid 2 Simuladores -->
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; max-width: 1000px; margin: 0 auto;">
+                            
+                            <!-- Card Simulador Wizard -->
+                            <div style="background: rgba(26, 26, 26, 0.6); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 16px; padding: 32px; text-align: center; transition: all 0.3s ease;">
+                                <div style="font-size: 48px; margin-bottom: 16px;">🧙‍♂️</div>
+                                <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #E4E4E4; margin-bottom: 12px;">
+                                    Simulador Guiado (Wizard)
+                                </h3>
+                                <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #9CA3AF; line-height: 1.6; margin-bottom: 24px;">
+                                    Planejamento simples e direto, passo a passo, para quem quer clareza imediata.
+                                </p>
+                                <button class="btn-simulador-invlab">
+                                    Calcular Aposentadoria (Guiado)
+                                </button>
+                            </div>
+
+                            <!-- Card Simulador Completo -->
+                            <div style="background: rgba(26, 26, 26, 0.6); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 16px; padding: 32px; text-align: center; transition: all 0.3s ease;">
+                                <div style="font-size: 48px; margin-bottom: 16px;">📊</div>
+                                <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #E4E4E4; margin-bottom: 12px;">
+                                    Simulador Completo (PRO)
+                                </h3>
+                                <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #9CA3AF; line-height: 1.6; margin-bottom: 24px;">
+                                    Projeções avançadas: vitalícia, capital preservado, IR, INSS e comparações completas.
+                                </p>
+                                <button class="btn-simulador-invlab">
+                                    Calcular Aposentadoria (Avançado)
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SEÇÃO 2: Educação Financeira -->
+                <section class="section" style="margin-top: 40px; padding: 60px 0; background: rgba(16, 185, 129, 0.03); border-top: 1px solid rgba(16, 185, 129, 0.1); border-bottom: 1px solid rgba(16, 185, 129, 0.1);">
+                    <div class="content-wrapper">
+                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 800; color: #D4AF37; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em;">
+                            📚 Aprenda a Proteger e Multiplicar o Seu Patrimônio
+                        </h2>
+                        <p style="font-family: 'Inter', sans-serif; font-size: 1rem; color: rgba(255, 255, 255, 0.8); text-align: center; margin-bottom: 32px; line-height: 1.7; max-width: 800px; margin-left: auto; margin-right: auto;">
+                            Antes de investir, entenda como o mercado realmente funciona. Aprenda os fundamentos que bancos e agentes raramente explicam — e descubra como pequenas taxas corroem décadas de trabalho.
+                        </p>
+
+                        <!-- Lista de Benefícios Educacionais -->
+                        <div style="max-width: 700px; margin: 0 auto;">
+                            <ul style="list-style: none; padding: 0; font-family: 'Inter', sans-serif; font-size: 0.95rem; color: rgba(16, 185, 129, 0.85); line-height: 2;">
+                                <li style="padding-left: 28px; position: relative; margin-bottom: 12px;">
+                                    <span style="position: absolute; left: 0; color: #10b981;">✓</span>
+                                    Domine juros compostos e projeções reais
+                                </li>
+                                <li style="padding-left: 28px; position: relative; margin-bottom: 12px;">
+                                    <span style="position: absolute; left: 0; color: #10b981;">✓</span>
+                                    Aprenda os tipos de investimentos essenciais (CDB, Tesouro, FIIs, Ações)
+                                </li>
+                                <li style="padding-left: 28px; position: relative; margin-bottom: 12px;">
+                                    <span style="position: absolute; left: 0; color: #10b981;">✓</span>
+                                    Entenda as diferenças entre PGBL, VGBL e Investimento Próprio
+                                </li>
+                                <li style="padding-left: 28px; position: relative; margin-bottom: 12px;">
+                                    <span style="position: absolute; left: 0; color: #10b981;">✓</span>
+                                    Descubra as armadilhas mais comuns em previdências privadas
+                                </li>
+                                <li style="padding-left: 28px; position: relative; margin-bottom: 12px;">
+                                    <span style="position: absolute; left: 0; color: #10b981;">✓</span>
+                                    Use o conhecimento para fazer seu dinheiro trabalhar para você
+                                </li>
+                            </ul>
+
+                            <!-- Botão Educação -->
+                            <div style="text-align: center; margin-top: 32px;">
+                                <div style="display: inline-block; background: rgba(212, 175, 55, 0.1); border: 2px solid #D4AF37; border-radius: 8px; padding: 14px 32px; font-family: 'Inter', sans-serif; font-size: 1rem; color: #D4AF37; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
+                                    🚀 Começar Educação Financeira →
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ========================================
+                     FIM DA NOVA ESTRUTURA
+                     ======================================== -->
 
                 <!-- Seção: Diferenciais -->
                 <section class="section benefits">
