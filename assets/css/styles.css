@@ -2960,3 +2960,185 @@ main > *::before,
     }
 }
 
+/* ======================================================
+   📱 INVLAB – AJUSTES MOBILE PÁGINA INÍCIO (TELAS <= 768px)
+   Solução unificada: base da análise do usuário + complementos
+   ====================================================== */
+@media (max-width: 768px) {
+    /* Títulos principais - Página Início */
+    #inicio h1, 
+    #inicio h2, 
+    #inicio .section-title {
+        font-size: 1.6rem !important;
+        line-height: 1.25 !important;
+    }
+
+    /* Subtítulos - Página Início */
+    #inicio h3 {
+        font-size: 1.25rem !important;
+    }
+
+    /* Parágrafos - Página Início */
+    #inicio p {
+        font-size: 0.95rem !important;
+        line-height: 1.45 !important;
+        margin-bottom: 14px !important;
+    }
+
+    /* Listas - Ajuste específico de line-height */
+    #inicio ul li {
+        line-height: 1.5 !important;
+    }
+
+    /* Grid dos simuladores (wizard + PRO) - 2 colunas → 1 coluna */
+    #inicio .content-wrapper > div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+        gap: 22px !important;
+    }
+
+    /* Container "INVLAB não é corretora" - Grid 2x2 → 1 coluna */
+    #inicio .invlab-grid-2x2 {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+        text-align: center !important;
+    }
+
+    /* Cards simuladores de aposentadoria */
+    #inicio .aposentadoria-card {
+        padding: 22px !important;
+    }
+    
+    #inicio .aposentadoria-card > div:first-child {
+        font-size: 34px !important;
+    }
+
+    /* Botões - Página Início */
+    #inicio .btn-simulador-invlab {
+        font-size: 0.95rem !important;
+        padding: 12px 20px !important;
+    }
+
+    /* Seções - Página Início */
+    #inicio .section {
+        padding: 35px 0 !important;
+    }
+
+    /* Cards educacionais */
+    #inicio .learning-card,
+    #inicio .inv-card,
+    #inicio .investment-card {
+        padding: 20px !important;
+    }
+
+    #inicio .inv-card-title,
+    #inicio .learning-card h3,
+    #inicio .investment-card h3 {
+        font-size: 1.15rem !important;
+    }
+
+    /* Ícones - Página Início */
+    #inicio .inv-card-icon,
+    #inicio .investment-header i,
+    #inicio .remuneration-icon i {
+        font-size: 32px !important;
+    }
+}
+
+/* ======================================================
+   📱 INVLAB – AJUSTES MOBILE PÁGINA INÍCIO (TELAS <= 480px)
+   iPhone SE, Galaxy S mini, Motorola compacto
+   ====================================================== */
+@media (max-width: 480px) {
+    /* Títulos ainda menores para caber com elegância */
+    #inicio h1, 
+    #inicio h2, 
+    #inicio .section-title {
+        font-size: 1.45rem !important;
+    }
+
+    #inicio h3 {
+        font-size: 1.15rem !important;
+    }
+
+    /* Parágrafos mais compactos */
+    #inicio p {
+        font-size: 0.9rem !important;
+        line-height: 1.4 !important;
+    }
+
+    /* Listas - Compactação adicional */
+    #inicio ul li {
+        font-size: 0.9rem !important;
+        margin-bottom: 8px !important;
+        line-height: 1.4 !important;
+    }
+
+    /* Cards - Compactação */
+    #inicio .aposentadoria-card {
+        padding: 18px !important;
+    }
+    
+    #inicio .aposentadoria-card > div:first-child {
+        font-size: 28px !important;
+    }
+
+    #inicio .learning-card,
+    #inicio .inv-card,
+    #inicio .investment-card {
+        padding: 16px !important;
+    }
+
+    /* Botão */
+    #inicio .btn-simulador-invlab {
+        font-size: 0.9rem !important;
+        padding: 10px 16px !important;
+    }
+}
+
+/* ======================================================
+   📟 INVLAB – AJUSTES MICROTELAS PÁGINA INÍCIO (<= 360px)
+   Celulares antigos, mini-screens, Android bem compactos
+   ====================================================== */
+@media (max-width: 360px) {
+    /* Títulos finos */
+    #inicio h1, 
+    #inicio h2, 
+    #inicio .section-title {
+        font-size: 1.3rem !important;
+    }
+
+    #inicio h3 {
+        font-size: 1.05rem !important;
+    }
+
+    /* Texto bem compacto */
+    #inicio p {
+        font-size: 0.85rem !important;
+        line-height: 1.35 !important;
+    }
+
+    /* Listas - Ultra compactas */
+    #inicio ul li {
+        font-size: 0.85rem !important;
+        line-height: 1.35 !important;
+    }
+
+    /* Cards ultracompactos */
+    #inicio .aposentadoria-card,
+    #inicio .learning-card,
+    #inicio .inv-card,
+    #inicio .investment-card {
+        padding: 14px !important;
+    }
+
+    #inicio .aposentadoria-card > div:first-child {
+        font-size: 24px !important;
+    }
+
+    /* Botões menores */
+    #inicio .btn-simulador-invlab {
+        padding: 8px 14px !important;
+        font-size: 0.85rem !important;
+    }
+}
+
