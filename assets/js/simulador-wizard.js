@@ -350,14 +350,8 @@ function finalizarWizard() {
 
         <!-- BOTÕES DE AÇÃO -->
         <div class="dashboard-actions">
-            <button class="btn-modal" onclick="abrirModalDados()">
-                <span>📋</span>
-                <span>Ver dados usados</span>
-            </button>
-            <button class="btn-modal" onclick="abrirModalFormulas()">
-                <span>🧠</span>
-                <span>Ver fórmulas e parâmetros</span>
-            </button>
+            <button class="btn-modal" onclick="abrirModalDados()">Ver dados usados</button>
+            <button class="btn-modal" onclick="abrirModalFormulas()">Ver fórmulas e parâmetros</button>
         </div>
 
         <!-- PAINEL DE AJUSTES RÁPIDOS -->
@@ -415,14 +409,8 @@ function finalizarWizard() {
             </div>
             
             <div class="ajuste-actions">
-                <button id="btnRecalcularWizard" class="btn-simulador-invlab">
-                    <span>🔄</span>
-                    <span>Recalcular projeção</span>
-                </button>
-                <button id="btnResetarAjustes" class="btn-resetar-ajustes">
-                    <span>↺</span>
-                    <span>Resetar valores originais</span>
-                </button>
+                <button id="btnRecalcularWizard" class="btn-simulador-invlab">Recalcular projeção</button>
+                <button id="btnResetarAjustes" class="btn-simulador-invlab">Resetar valores originais</button>
             </div>
         </div>
 
