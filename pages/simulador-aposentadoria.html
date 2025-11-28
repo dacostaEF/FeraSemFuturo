@@ -180,6 +180,7 @@
             display: grid;
             gap: 22px;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            align-items: stretch;  /* Estica os cards para mesma altura (alinhamento topo E base) */
         }
 
         /* 5. Grupos de inputs */
@@ -1226,8 +1227,8 @@
                         border: 1.5px solid rgba(212, 175, 55, 0.25);
                         border-radius: 14px;
                         padding: 20px;
-                        margin-top: 20px;
                         box-shadow: 0 4px 12px rgba(212, 175, 55, 0.08);
+                        grid-column: span 2;
                     ">
                         <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px; font-weight: 600; font-size: 1rem; color: #E4E4E4;">
                             Estratégia de Renda na Aposentadoria
@@ -1247,39 +1248,43 @@
                             " title="Renda vitalícia preserva seu patrimônio indefinidamente. Período determinado permite usar o capital para uma renda maior durante um prazo específico.">i</span>
                         </label>
 
-                        <div style="margin-bottom: 12px; padding: 12px; background: rgba(15, 15, 15, 0.6); border: 1px solid rgba(138,204,166,0.25); border-radius: 10px; cursor: pointer;">
-                            <label style="cursor: pointer; display: flex; align-items: start; gap: 8px;">
-                                <input type="radio" name="tipoRendaOficial" value="vitalicia" checked style="margin-top: 2px;">
-                                <div>
-                                    <div style="font-weight: 600; color: #10b981; margin-bottom: 4px;">💚 Renda vitalícia (recomendado)</div>
-                                    <div style="font-size: 0.85rem; color: #9ca3af;">Patrimônio preservado indefinidamente. Renda sustentável para toda a vida.</div>
-                                </div>
-                            </label>
-                        </div>
-
-                        <div style="padding: 12px; background: rgba(15, 15, 15, 0.6); border: 1px solid rgba(138,204,166,0.25); border-radius: 10px; cursor: pointer;">
-                            <label style="cursor: pointer; display: flex; align-items: start; gap: 8px;">
-                                <input type="radio" name="tipoRendaOficial" value="periodo" style="margin-top: 2px;">
-                                <div>
-                                    <div style="font-weight: 600; color: #FACC15; margin-bottom: 4px;">⏱️ Renda por período determinado</div>
-                                    <div style="font-size: 0.85rem; color: #9ca3af;">Consome o capital gradualmente por um prazo que você define.</div>
-                                    <div id="periodoContainerOficial" style="display:none; margin-top:10px;">
-                                        <input type="number" id="anosPeriodoOficial" placeholder="Quantos anos? (Ex: 30)" min="5" max="60" value="30" style="width: 100%; padding: 8px; background: rgba(13, 13, 13, 0.8); border: 1px solid rgba(138, 204, 166, 0.2); border-radius: 6px; color: #E4E4E4;">
+                        <div class="opcoes-renda-linha">
+                            <div style="margin-bottom: 12px; padding: 12px; background: rgba(15, 15, 15, 0.6); border: 1px solid rgba(138,204,166,0.25); border-radius: 10px; cursor: pointer;">
+                                <label style="cursor: pointer; display: flex; align-items: start; gap: 8px;">
+                                    <input type="radio" name="tipoRendaOficial" value="vitalicia" checked style="margin-top: 2px;">
+                                    <div>
+                                        <div style="font-weight: 600; color: #10b981; margin-bottom: 4px;">💚 Renda vitalícia (recomendado)</div>
+                                        <div style="font-size: 0.85rem; color: #9ca3af;">Patrimônio preservado indefinidamente. Renda sustentável para toda a vida.</div>
                                     </div>
-                                </div>
-                            </label>
+                                </label>
+                            </div>
+
+                            <div style="padding: 12px; background: rgba(15, 15, 15, 0.6); border: 1px solid rgba(138,204,166,0.25); border-radius: 10px; cursor: pointer;">
+                                <label style="cursor: pointer; display: flex; align-items: start; gap: 8px;">
+                                    <input type="radio" name="tipoRendaOficial" value="periodo" style="margin-top: 2px;">
+                                    <div>
+                                        <div style="font-weight: 600; color: #FACC15; margin-bottom: 4px;">⏱️ Renda por período determinado</div>
+                                        <div style="font-size: 0.85rem; color: #9ca3af;">Consome o capital gradualmente por um prazo que você define.</div>
+                                        <div id="periodoContainerOficial" style="display:none; margin-top:10px;">
+                                            <input type="number" id="anosPeriodoOficial" placeholder="Quantos anos? (Ex: 30)" min="5" max="60" value="30" style="width: 100%; padding: 8px; background: rgba(13, 13, 13, 0.8); border: 1px solid rgba(138, 204, 166, 0.2); border-radius: 6px; color: #E4E4E4;">
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
                         </div>
 
-                        <p style="
-                            margin-top: 12px;
-                            margin-bottom: 0;
-                            font-size: 0.85rem;
-                            color: #FACC15;
-                            background: rgba(250, 204, 21, 0.05);
-                            border: 1px solid rgba(250, 204, 21, 0.3);
-                            border-radius: 8px;
-                            padding: 10px;
-                        ">💡 <strong>Recomendamos Renda Vitalícia</strong> para máxima segurança e possibilidade de deixar herança.</p>
+                        <div class="recomendacao-renda-full">
+                            <p style="
+                                margin-top: 12px;
+                                margin-bottom: 0;
+                                font-size: 0.85rem;
+                                color: #FACC15;
+                                background: rgba(250, 204, 21, 0.05);
+                                border: 1px solid rgba(250, 204, 21, 0.3);
+                                border-radius: 8px;
+                                padding: 10px;
+                            ">💡 <strong>Recomendamos Renda Vitalícia</strong> para máxima segurança e possibilidade de deixar herança.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -1762,6 +1767,28 @@
         .aporte-texto strong {
             color: #FFFFFF;
             font-weight: 700;
+        }
+
+        /* ===== Ajuste espacial do bloco de Estratégia de Renda ===== */
+        .opcoes-renda-linha {
+            display: flex;
+            gap: 20px;           /* Espaço entre as duas opções */
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .opcoes-renda-linha > div {
+            flex: 1;             /* Cada card ocupa 50% */
+        }
+
+        /* Remove margin-bottom do primeiro card quando dentro do flex */
+        .opcoes-renda-linha > div:first-child {
+            margin-bottom: 0;
+        }
+
+        /* Bloco amarelo ocupando toda a largura */
+        .recomendacao-renda-full {
+            width: 100%;
         }
     </style>
 
