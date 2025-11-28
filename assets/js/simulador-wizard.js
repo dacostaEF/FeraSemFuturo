@@ -302,7 +302,7 @@ function finalizarWizard() {
 
         <!-- INFO EXTRA -->
         <div class="dashboard-info-extra">
-            <p style="margin-bottom: 8px;"><strong>📌 Origem da Renda:</strong></p>
+            <p class="dashboard-section-title" style="margin-bottom: 8px;">📌 Origem da Renda:</p>
             <ul style="margin-left: 20px; margin-top: 8px;">
                 ${resultados.inssReal === 0 
                     ? '<li><strong>100% dos investimentos</strong> (INSS não considerado)</li>'
@@ -347,6 +347,70 @@ function finalizarWizard() {
 
         <!-- INTERPRETAÇÃO AUTOMÁTICA DO RESULTADO -->
         ${gerarInterpretacaoAutomatica(resultados, wizardData)}
+
+        <!-- PAINEL DE AJUSTES RÁPIDOS -->
+        <div id="painelAjustesRapidos" class="quick-adjust-card">
+            <h3 class="titulo-ajustes">🔧 Ajustes Rápidos</h3>
+            <p class="subtitulo-ajustes" style="color: #9ca3af; font-size: 0.9rem; text-align: center; margin-bottom: 20px;">
+                Ajuste os parâmetros e veja o impacto em tempo real
+            </p>
+            
+            <div class="ajuste-grid">
+                <div class="ajuste-item">
+                    <label for="ajusteIdadeAtual">Idade atual</label>
+                    <input type="number" id="ajusteIdadeAtual" class="ajuste-input" 
+                           value="${wizardData.idadeAtual}" 
+                           min="18" max="90">
+                </div>
+                
+                <div class="ajuste-item">
+                    <label for="ajusteIdadeApos">Idade de aposentadoria</label>
+                    <input type="number" id="ajusteIdadeApos" class="ajuste-input" 
+                           value="${wizardData.idadeAposentadoria}" 
+                           min="${wizardData.idadeAtual + 1}" max="90"
+                           data-min-base="${wizardData.idadeAtual}">
+                </div>
+                
+                <div class="ajuste-item">
+                    <label for="ajustePatrimonioInicial">Patrimônio inicial (R$)</label>
+                    <input type="number" id="ajustePatrimonioInicial" class="ajuste-input" 
+                           value="${Number(wizardData.patrimonioAtual || 0)}" 
+                           min="0" step="1000">
+                </div>
+                
+                <div class="ajuste-item">
+                    <label for="ajusteAporte">Aporte mensal (R$)</label>
+                    <input type="number" id="ajusteAporte" class="ajuste-input" 
+                           value="${Number(wizardData.aporteMensal)}" 
+                           min="0" step="100">
+                </div>
+                
+                <div class="ajuste-item">
+                    <label for="ajustePerfil">Perfil de investimento</label>
+                    <select id="ajustePerfil" class="ajuste-input ajuste-select">
+                        <option value="conservador" ${wizardData.perfilInvestidor === 'conservador' ? 'selected' : ''}>Conservador (6% a.a.)</option>
+                        <option value="moderado" ${wizardData.perfilInvestidor === 'moderado' ? 'selected' : ''}>Moderado (8% a.a.)</option>
+                        <option value="arrojado" ${wizardData.perfilInvestidor === 'arrojado' ? 'selected' : ''}>Arrojado (10% a.a.)</option>
+                    </select>
+                </div>
+                
+                <div class="ajuste-item">
+                    <label for="ajusteRendaDesejada">Renda desejada (R$/mês)</label>
+                    <input type="number" id="ajusteRendaDesejada" class="ajuste-input" 
+                           value="${Number(wizardData.rendaDesejada)}" 
+                           min="0" step="100">
+                </div>
+            </div>
+            
+            <div class="ajuste-actions">
+                <button id="btnRecalcularWizard" class="btn-simulador-invlab">
+                    🔄 Recalcular projeção
+                </button>
+                <button id="btnResetarAjustes" class="btn-resetar-ajustes">
+                    ↺ Resetar valores originais
+                </button>
+            </div>
+        </div>
 
         <!-- BOTÕES DE AÇÃO -->
         <div class="dashboard-actions">
@@ -426,6 +490,9 @@ function finalizarWizard() {
             wizardData.idadeAtual,
             wizardData.idadeAposentadoria
         );
+        
+        // Configurar painel de ajustes rápidos
+        configurarPainelAjustes(resultados);
     }, 100);
 }
 
@@ -605,6 +672,205 @@ function atualizarRegrasWizard() {
 // -----------------------------------------------------
 // EVENTOS
 // -----------------------------------------------------
+// =====================================================
+// PAINEL DE AJUSTES RÁPIDOS - VARIÁVEIS E FUNÇÕES
+// =====================================================
+
+// Armazenar valores originais da primeira simulação
+let valoresOriginais = null;
+let resultadosOriginais = null;
+
+// Salvar valores originais quando o dashboard é exibido
+function salvarValoresOriginais(resultados) {
+    valoresOriginais = {
+        idadeAtual: wizardData.idadeAtual,
+        idadeAposentadoria: wizardData.idadeAposentadoria,
+        patrimonioAtual: wizardData.patrimonioAtual || 0,
+        aporteMensal: wizardData.aporteMensal,
+        rendaDesejada: wizardData.rendaDesejada,
+        perfilInvestidor: wizardData.perfilInvestidor
+    };
+    resultadosOriginais = JSON.parse(JSON.stringify(resultados)); // Deep copy
+}
+
+// Função auxiliar para converter string formatada em número
+function converterParaNumero(valor) {
+    if (typeof valor === 'number') return valor;
+    if (!valor) return 0;
+    // Remove pontos (milhares) e substitui vírgula por ponto (decimal)
+    const limpo = String(valor).replace(/\./g, '').replace(',', '.');
+    return parseFloat(limpo) || 0;
+}
+
+// Função para recalcular simulação com ajustes
+function recalcularComAjustes() {
+    // Ler valores dos inputs
+    const inputIdadeAtual = document.getElementById('ajusteIdadeAtual');
+    const inputIdadeApos = document.getElementById('ajusteIdadeApos');
+    const inputPatrimonioInicial = document.getElementById('ajustePatrimonioInicial');
+    const inputAporte = document.getElementById('ajusteAporte');
+    const inputPerfil = document.getElementById('ajustePerfil');
+    const inputRendaDesejada = document.getElementById('ajusteRendaDesejada');
+
+    const novaIdadeAtual = parseInt(inputIdadeAtual?.value) || 0;
+    const novaIdadeApos = parseInt(inputIdadeApos?.value) || 0;
+    const novoPatrimonioInicial = converterParaNumero(inputPatrimonioInicial?.value);
+    const novoAporte = converterParaNumero(inputAporte?.value);
+    const novoPerfil = inputPerfil?.value || 'moderado';
+    const novaRendaDesejada = converterParaNumero(inputRendaDesejada?.value);
+
+    // Validações
+    if (novaIdadeAtual < 18 || novaIdadeAtual > 90) {
+        alert('⚠️ A idade atual deve estar entre 18 e 90 anos.');
+        return;
+    }
+
+    if (novaIdadeApos <= novaIdadeAtual) {
+        alert(`⚠️ A idade de aposentadoria deve ser maior que a idade atual (${novaIdadeAtual} anos).`);
+        return;
+    }
+
+    if (novoPatrimonioInicial < 0) {
+        alert('⚠️ O patrimônio inicial não pode ser negativo.');
+        return;
+    }
+
+    if (novoAporte <= 0) {
+        alert('⚠️ O aporte mensal deve ser maior que zero.');
+        return;
+    }
+
+    if (!novoPerfil || !PERFIS_RENTABILIDADE[novoPerfil]) {
+        alert('⚠️ Selecione um perfil de investimento válido.');
+        return;
+    }
+
+    if (novaRendaDesejada <= 0) {
+        alert('⚠️ A renda desejada deve ser maior que zero.');
+        return;
+    }
+
+    // Atualizar wizardData
+    wizardData.idadeAtual = novaIdadeAtual;
+    wizardData.idadeAposentadoria = novaIdadeApos;
+    wizardData.patrimonioAtual = novoPatrimonioInicial;
+    wizardData.aporteMensal = novoAporte;
+    wizardData.rendaDesejada = novaRendaDesejada;
+
+    // Atualizar perfil de investimento (rentabilidade vem automaticamente do perfil)
+    wizardData.perfilInvestidor = novoPerfil;
+
+    // Atualizar min da idade de aposentadoria no input
+    if (inputIdadeApos) {
+        inputIdadeApos.min = novaIdadeAtual + 1;
+    }
+
+    // Recalcular
+    const novosResultados = executarSimulacaoWizard(wizardData);
+
+    // Atualizar dashboard completo
+    finalizarWizard();
+
+    // Feedback visual
+    const btnRecalcular = document.getElementById('btnRecalcularWizard');
+    if (btnRecalcular) {
+        const textoOriginal = btnRecalcular.innerHTML;
+        btnRecalcular.innerHTML = '✅ Recalculado!';
+        btnRecalcular.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+        setTimeout(() => {
+            btnRecalcular.innerHTML = textoOriginal;
+            btnRecalcular.style.background = '';
+        }, 2000);
+    }
+}
+
+// Função para resetar valores originais
+function resetarValoresOriginais() {
+    if (!valoresOriginais) {
+        alert('⚠️ Não há valores originais salvos.');
+        return;
+    }
+
+    // Restaurar wizardData
+    wizardData.idadeAtual = valoresOriginais.idadeAtual;
+    wizardData.idadeAposentadoria = valoresOriginais.idadeAposentadoria;
+    wizardData.patrimonioAtual = valoresOriginais.patrimonioAtual;
+    wizardData.aporteMensal = valoresOriginais.aporteMensal;
+    wizardData.rendaDesejada = valoresOriginais.rendaDesejada;
+    wizardData.perfilInvestidor = valoresOriginais.perfilInvestidor;
+
+    // Restaurar inputs
+    const ajusteIdadeAtual = document.getElementById('ajusteIdadeAtual');
+    const ajusteIdadeApos = document.getElementById('ajusteIdadeApos');
+    const ajustePatrimonioInicial = document.getElementById('ajustePatrimonioInicial');
+    const ajusteAporte = document.getElementById('ajusteAporte');
+    const ajustePerfil = document.getElementById('ajustePerfil');
+    const ajusteRendaDesejada = document.getElementById('ajusteRendaDesejada');
+
+    if (ajusteIdadeAtual) ajusteIdadeAtual.value = valoresOriginais.idadeAtual;
+    if (ajusteIdadeApos) {
+        ajusteIdadeApos.value = valoresOriginais.idadeAposentadoria;
+        ajusteIdadeApos.min = valoresOriginais.idadeAtual + 1;
+    }
+    if (ajustePatrimonioInicial) ajustePatrimonioInicial.value = Number(valoresOriginais.patrimonioAtual);
+    if (ajusteAporte) ajusteAporte.value = Number(valoresOriginais.aporteMensal);
+    if (ajustePerfil) ajustePerfil.value = valoresOriginais.perfilInvestidor;
+    if (ajusteRendaDesejada) ajusteRendaDesejada.value = Number(valoresOriginais.rendaDesejada);
+
+    // Recalcular com valores originais
+    const resultados = executarSimulacaoWizard(wizardData);
+    finalizarWizard();
+}
+
+// Adicionar event listeners quando o painel for criado
+function configurarPainelAjustes(resultados) {
+    // Salvar valores originais na primeira vez
+    if (!valoresOriginais) {
+        salvarValoresOriginais(resultados);
+    }
+
+    // Aguardar um pouco para garantir que o DOM foi atualizado
+    setTimeout(() => {
+        const btnRecalcular = document.getElementById('btnRecalcularWizard');
+        const btnResetar = document.getElementById('btnResetarAjustes');
+
+        if (btnRecalcular) {
+            btnRecalcular.addEventListener('click', recalcularComAjustes);
+        }
+
+        if (btnResetar) {
+            btnResetar.addEventListener('click', resetarValoresOriginais);
+        }
+
+        // Perfil já define a rentabilidade automaticamente - sem necessidade de sincronização
+
+        // Atualizar min da idade de aposentadoria quando idade atual mudar
+        const ajusteIdadeAtual = document.getElementById('ajusteIdadeAtual');
+        const ajusteIdadeApos = document.getElementById('ajusteIdadeApos');
+        
+        if (ajusteIdadeAtual && ajusteIdadeApos) {
+            ajusteIdadeAtual.addEventListener('input', function() {
+                const novaIdadeAtual = parseInt(this.value) || 18;
+                ajusteIdadeApos.min = novaIdadeAtual + 1;
+                if (parseInt(ajusteIdadeApos.value) <= novaIdadeAtual) {
+                    ajusteIdadeApos.value = novaIdadeAtual + 1;
+                }
+            });
+        }
+
+        // Adicionar validação em tempo real nos inputs
+        const inputs = document.querySelectorAll('.ajuste-input[type="number"]');
+        inputs.forEach(input => {
+            input.addEventListener('input', function() {
+                // Garantir que valores monetários sejam positivos
+                if ((this.id === 'ajusteAporte' || this.id === 'ajusteRendaDesejada' || this.id === 'ajustePatrimonioInicial') && this.value < 0) {
+                    this.value = 0;
+                }
+            });
+        });
+    }, 100);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 
     console.log("✅ JavaScript do Wizard carregado!");
