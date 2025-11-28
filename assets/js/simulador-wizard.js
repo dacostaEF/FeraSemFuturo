@@ -491,8 +491,16 @@ function finalizarWizard() {
             wizardData.idadeAposentadoria
         );
         
-        // Configurar painel de ajustes rápidos
-        configurarPainelAjustes(resultados);
+        // Verificar se o painel existe antes de configurar
+        const painel = document.getElementById('painelAjustesRapidos');
+        if (painel) {
+            console.log('✅ Painel de ajustes encontrado, configurando...');
+            configurarPainelAjustes(resultados);
+        } else {
+            console.error('❌ Painel de ajustes NÃO encontrado no DOM!');
+            console.log('Dashboard innerHTML length:', dash.innerHTML.length);
+            console.log('Procurando por "painelAjustesRapidos":', dash.innerHTML.includes('painelAjustesRapidos'));
+        }
     }, 100);
 }
 
