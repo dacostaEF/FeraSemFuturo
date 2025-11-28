@@ -423,16 +423,28 @@
             background: rgba(13, 13, 13, 0.98);
             border: 1px solid rgba(212, 175, 55, 0.4);
             color: #E4E4E4;
-            padding: 12px 16px;
+            padding: 10px 14px;
             border-radius: 8px;
-            font-size: 0.85rem;
+            font-size: 0.75rem; /* Reduzido de 0.85rem para mais elegante */
             white-space: normal;
-            max-width: 280px;
+            max-width: 260px;
             width: max-content;
-            line-height: 1.5;
+            min-width: 200px;
+            line-height: 1.4; /* Reduzido de 1.5 */
             z-index: 100;
             transition: all 0.3s ease;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+        }
+        
+        /* Tooltip aparece à direita por padrão */
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* Se tooltip estiver perto da borda direita, aparece acima */
+        .tooltip-text {
+            /* Por padrão à direita, mas em mobile sempre centraliza */
         }
 
         .tooltip:hover .tooltip-text {
@@ -912,14 +924,25 @@
                 font-size: 20px !important; /* Reduzido de 22px */
             }
 
-            /* Tooltip */
+            /* Tooltip - Ajuste para mobile: centraliza e garante que não saia da tela */
             .tooltip-text {
-                left: 50%;
-                right: auto;
-                top: 35px;
-                transform: translateX(-50%);
-                max-width: 90vw;
-                width: 280px;
+                left: 50% !important;
+                right: auto !important;
+                top: 35px !important;
+                transform: translateX(-50%) !important;
+                max-width: calc(100vw - 32px) !important; /* Garante margem de 16px de cada lado */
+                width: auto !important;
+                min-width: 200px !important;
+                font-size: 0.7rem !important; /* Reduzido ainda mais em mobile */
+                padding: 8px 12px !important; /* Padding mais compacto */
+                line-height: 1.35 !important;
+            }
+            
+            /* Em hover, mantém centralizado em mobile */
+            .tooltip:hover .tooltip-text {
+                left: 50% !important;
+                right: auto !important;
+                transform: translateX(-50%) !important;
             }
         }
 
@@ -1413,6 +1436,78 @@
     <!-- ========================================= -->
     <script src="../assets/js/simulador-wizard-engine.js"></script>
     <script src="../assets/js/simulador-wizard.js"></script>
+    
+    <!-- ========================================= -->
+    <!-- AJUSTE INTELIGENTE DE TOOLTIPS -->
+    <!-- ========================================= -->
+    <script>
+        // Reposiciona tooltips para não saírem da tela
+        function ajustarTooltips() {
+            const tooltips = document.querySelectorAll('.tooltip');
+            
+            tooltips.forEach(tooltip => {
+                const tooltipText = tooltip.querySelector('.tooltip-text');
+                if (!tooltipText) return;
+                
+                // Remove classes de posicionamento anteriores
+                tooltipText.classList.remove('tooltip-left', 'tooltip-right', 'tooltip-top', 'tooltip-bottom');
+                
+                const rect = tooltip.getBoundingClientRect();
+                const tooltipRect = tooltipText.getBoundingClientRect();
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+                
+                // Em mobile, sempre centraliza acima
+                if (window.innerWidth <= 768) {
+                    tooltipText.style.left = '50%';
+                    tooltipText.style.right = 'auto';
+                    tooltipText.style.top = 'auto';
+                    tooltipText.style.bottom = '100%';
+                    tooltipText.style.transform = 'translateX(-50%) translateY(-8px)';
+                    return;
+                }
+                
+                // Desktop: verifica espaço disponível
+                const spaceRight = viewportWidth - rect.right;
+                const spaceLeft = rect.left;
+                const spaceBelow = viewportHeight - rect.bottom;
+                const spaceAbove = rect.top;
+                
+                // Se não couber à direita, move para esquerda
+                if (spaceRight < 300 && spaceLeft > 300) {
+                    tooltipText.style.left = 'auto';
+                    tooltipText.style.right = '30px';
+                    tooltipText.style.transform = 'translateY(-50%)';
+                } else if (spaceRight < 300 && spaceLeft < 300) {
+                    // Se não couber em nenhum lado, coloca acima
+                    tooltipText.style.left = '50%';
+                    tooltipText.style.right = 'auto';
+                    tooltipText.style.top = 'auto';
+                    tooltipText.style.bottom = '100%';
+                    tooltipText.style.transform = 'translateX(-50%) translateY(-8px)';
+                } else {
+                    // Padrão: à direita
+                    tooltipText.style.left = '30px';
+                    tooltipText.style.right = 'auto';
+                    tooltipText.style.top = '50%';
+                    tooltipText.style.bottom = 'auto';
+                    tooltipText.style.transform = 'translateY(-50%)';
+                }
+            });
+        }
+        
+        // Ajusta tooltips ao carregar e ao redimensionar
+        document.addEventListener('DOMContentLoaded', () => {
+            ajustarTooltips();
+            
+            // Ajusta ao passar o mouse sobre tooltips
+            document.querySelectorAll('.tooltip').forEach(tooltip => {
+                tooltip.addEventListener('mouseenter', ajustarTooltips);
+            });
+        });
+        
+        window.addEventListener('resize', ajustarTooltips);
+    </script>
 
 </body>
 </html>
