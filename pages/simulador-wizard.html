@@ -1678,9 +1678,235 @@
                 font-size: 0.9rem !important;
             }
         }
+
+        /* 📱 MENU MOBILE HAMBÚRGUER (LEFT DRAWER) - INVLAB PREMIUM */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 20px;
+            z-index: 2000;
+            background: rgba(26, 26, 26, 0.95);
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            border-radius: 12px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.8rem;
+            color: #D4AF37;
+        }
+        
+        .mobile-menu-btn:hover {
+            border-color: #D4AF37;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+            transform: scale(1.05);
+        }
+        
+        /* Drawer Lateral (Left) */
+        .mobile-drawer {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            background: rgba(13, 13, 13, 0.98);
+            border-right: 2px solid rgba(212, 175, 55, 0.3);
+            z-index: 2001;
+            transition: left 0.4s ease;
+            overflow-y: auto;
+            padding: 80px 0 40px 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .mobile-drawer.active {
+            left: 0;
+        }
+        
+        /* Backdrop (Fundo escurecido com blur) */
+        .mobile-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-backdrop.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Botão Fechar (X) */
+        .mobile-drawer-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            color: #D4AF37;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-drawer-close:hover {
+            border-color: #D4AF37;
+            background: rgba(212, 175, 55, 0.1);
+        }
+        
+        /* Links do Menu Mobile */
+        .mobile-menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .mobile-menu-list li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .mobile-menu-list a {
+            display: block;
+            padding: 18px 30px;
+            color: #E4E4E4;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-list a:hover {
+            background: rgba(212, 175, 55, 0.1);
+            color: #D4AF37;
+            padding-left: 40px;
+        }
+        
+        /* Separador no menu */
+        .mobile-menu-separator {
+            height: 1px;
+            background: rgba(212, 175, 55, 0.2);
+            margin: 20px 30px;
+        }
+        
+        /* Media Query - Mostrar apenas em mobile */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            /* Esconder menu desktop */
+            .tabs-nav-wrapper {
+                display: none !important;
+            }
+            
+            /* Logo Mobile - Centralizada - TAMANHO EQUILIBRADO COM HAMBÚRGUER */
+            .header-logo {
+                position: absolute !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                display: block !important;
+                text-align: center !important;
+                margin-bottom: 10px !important;
+                top: 12px !important;
+                width: 48px !important;
+                height: 48px !important;
+                overflow: visible !important;
+            }
+            
+            .header-logo img,
+            .header-logo .logo-img {
+                display: block !important;
+                width: 48px !important;
+                height: auto !important;
+                max-width: 48px !important;
+                object-fit: contain !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                position: relative !important;
+                z-index: 999 !important;
+            }
+
+            /* FOOTER MOBILE - 2 COLUNAS FORÇADO */
+            .footer-grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 24px 16px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            /* FOOTER MOBILE COMPACTO - 2 COLUNAS */
+            .footer-grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 20px 12px !important;
+            }
+            
+            .footer-column h4 {
+                font-size: 0.9rem !important;
+                margin-bottom: 10px !important;
+            }
+            
+            .footer-column a {
+                font-size: 0.8rem !important;
+            }
+            
+            .footer-column li {
+                margin-bottom: 6px !important;
+            }
+
+            /* Breadcrumb Mobile - Ajustes de padding e font-size */
+            div[style*="position: sticky"][style*="top: 110px"] {
+                padding: 10px 12px !important;
+            }
+            
+            div[style*="position: sticky"][style*="top: 110px"] nav {
+                font-size: 12px !important;
+                gap: 6px !important;
+            }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Botão Menu Mobile Hambúrguer -->
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+        ☰
+    </button>
+    
+    <!-- Backdrop (Fundo escurecido) -->
+    <div class="mobile-backdrop" id="mobileBackdrop"></div>
+    
+    <!-- Drawer Lateral Mobile -->
+    <nav class="mobile-drawer" id="mobileDrawer">
+        <button class="mobile-drawer-close" id="mobileDrawerClose">×</button>
+        
+        <ul class="mobile-menu-list">
+            <li><a href="../index.html#inicio">🏠 Início</a></li>
+            <li><a href="../index.html#primeiros-passos">📚 Primeiros Passos</a></li>
+            <li><a href="../index.html#renda-fixa">📊 Renda Fixa</a></li>
+            <li><a href="../index.html#renda-variavel">📈 Renda Variável</a></li>
+            <li><a href="../index.html#criptoativos">🔐 Criptoativos</a></li>
+            <li><a href="../index.html#ferramentas">🛠️ Ferramentas</a></li>
+            <li><a href="../index.html#outros-investimentos">💎 Outros Investimentos</a></li>
+            <div class="mobile-menu-separator"></div>
+            <li><a href="simulador-wizard.html">🧙 Simulador Wizard</a></li>
+            <li><a href="simulador-aposentadoria.html">🏖️ Simulador Aposentadoria</a></li>
+        </ul>
+    </nav>
 
     <!-- CARROSSEL: Indicadores Renda Fixa -->
     <section id="invlab-carousel-container"></section>
@@ -1690,8 +1916,7 @@
         <div class="header-container">
             <!-- Logo -->
             <div class="header-logo">
-                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
-                <span class="logo-text">INVLAB</span>
+                <img src="../assets/images/Logo_InvLab.png" alt="INVLAB" class="logo-img" loading="eager">
             </div>
             
             <!-- Sistema de Abas INVLAB -->
@@ -2189,6 +2414,52 @@
         window.addEventListener('resize', ajustarTooltips);
     </script>
 
+    <!-- JavaScript do Menu Mobile Hambúrguer -->
+    <script>
+        // Controle do Menu Mobile
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const mobileBackdrop = document.getElementById('mobileBackdrop');
+        const mobileDrawerClose = document.getElementById('mobileDrawerClose');
+        
+        // Abrir drawer
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileDrawer.classList.add('active');
+                mobileBackdrop.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+        
+        // Fechar drawer (botão X)
+        if (mobileDrawerClose) {
+            mobileDrawerClose.addEventListener('click', function() {
+                mobileDrawer.classList.remove('active');
+                mobileBackdrop.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        }
+        
+        // Fechar drawer (backdrop)
+        if (mobileBackdrop) {
+            mobileBackdrop.addEventListener('click', function() {
+                mobileDrawer.classList.remove('active');
+                mobileBackdrop.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        }
+        
+        // Fechar drawer ao clicar em link
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-list a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileDrawer.classList.remove('active');
+                mobileBackdrop.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+
     <!-- FOOTER MASTER INVLAB -->
     <footer style="background: #0D0D0D; border-top: 1px solid rgba(212, 175, 55, 0.25); margin-top: 60px; padding: 60px 20px 30px;">
         <div class="content-wrapper-wide">
@@ -2202,10 +2473,10 @@
                 </p>
             </div>
             
-            <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px; margin-bottom: 40px;">
+            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px; margin-bottom: 40px;">
                 
                 <!-- Coluna 1: Renda Fixa -->
-                <div>
+                <div class="footer-column">
                     <h4 style="font-family: 'Playfair Display', Georgia, serif; color: #D4AF37; margin-bottom: 16px; font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em;">Renda Fixa</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.875rem; line-height: 2;">
                         <li><a href="../index.html#renda-fixa" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">💰 Poupança</a></li>
@@ -2216,7 +2487,7 @@
                 </div>
 
                 <!-- Coluna 2: Renda Variável -->
-                <div>
+                <div class="footer-column">
                     <h4 style="font-family: 'Playfair Display', Georgia, serif; color: #D4AF37; margin-bottom: 16px; font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em;">Renda Variável</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.875rem; line-height: 2;">
                         <li><a href="../index.html#renda-variavel" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">📈 Introdução</a></li>
@@ -2227,7 +2498,7 @@
                 </div>
 
                 <!-- Coluna 3: Criptoativos -->
-                <div>
+                <div class="footer-column">
                     <h4 style="font-family: 'Playfair Display', Georgia, serif; color: #D4AF37; margin-bottom: 16px; font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em;">Criptoativos</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.875rem; line-height: 2;">
                         <li><a href="../index.html#criptoativos" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🔐 Introdução</a></li>
@@ -2238,7 +2509,7 @@
                 </div>
 
                 <!-- Coluna 4: Ferramentas -->
-                <div>
+                <div class="footer-column">
                     <h4 style="font-family: 'Playfair Display', Georgia, serif; color: #D4AF37; margin-bottom: 16px; font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em;">Ferramentas</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.875rem; line-height: 2;">
                         <li><a href="calculadora.html" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">🧮 Calculadoras</a></li>
@@ -2249,7 +2520,7 @@
                 </div>
 
                 <!-- Coluna 5: Sobre -->
-                <div>
+                <div class="footer-column">
                     <h4 style="font-family: 'Playfair Display', Georgia, serif; color: #D4AF37; margin-bottom: 16px; font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em;">INVLAB</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.875rem; line-height: 2;">
                         <li><a href="../index.html#sobre" style="font-family: 'Inter', sans-serif; color: rgba(16, 185, 129, 0.85); text-decoration: none; transition: color 0.2s ease;">ℹ️ Sobre</a></li>
