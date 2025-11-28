@@ -1070,6 +1070,20 @@
                 gap: 16px !important;
             }
 
+            /* Largura dos inputs e containers - aproveitar 100% do espaço */
+            .invlab-module,
+            .input-group {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .input-group input,
+            .input-group select {
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
             /* Inputs */
             .input-group input,
             .input-group select {
@@ -1086,14 +1100,68 @@
                 font-size: 1rem !important;
             }
 
-            /* Seleção de estratégia */
+            /* Seleção de estratégia - botões lado a lado no mobile */
             .scenario-selector {
-                flex-direction: column !important;
-                gap: 12px !important;
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                gap: 6px !important;
+                width: 100% !important;
+                margin-top: 10px !important;
+                flex-wrap: nowrap !important;
             }
 
             .scenario-btn {
-                width: 100% !important;
+                flex: 1 !important;
+                width: auto !important;
+                white-space: nowrap !important;
+                text-align: center !important;
+                padding: 8px 4px !important;
+                position: relative !important;
+            }
+
+            /* Esconde o texto original no mobile usando text-indent */
+            .scenario-btn {
+                text-indent: -9999px !important;
+                overflow: hidden !important;
+            }
+
+            /* Mostra texto abreviado usando ::after */
+            .scenario-btn[data-scenario="conservador"]::after {
+                content: "📊 Conserv." !important;
+                position: absolute !important;
+                left: 0 !important;
+                right: 0 !important;
+                top: 50% !important;
+                transform: translateY(-50%) !important;
+                text-indent: 0 !important;
+                font-size: 0.72rem !important;
+                font-weight: 600 !important;
+            }
+
+            .scenario-btn[data-scenario="moderado"]::after {
+                content: "📈 Moder." !important;
+                position: absolute !important;
+                left: 0 !important;
+                right: 0 !important;
+                top: 50% !important;
+                transform: translateY(-50%) !important;
+                text-indent: 0 !important;
+                font-size: 0.72rem !important;
+                font-weight: 600 !important;
+            }
+
+            .scenario-btn[data-scenario="arrojado"]::after {
+                content: "🚀 Arroj." !important;
+                position: absolute !important;
+                left: 0 !important;
+                right: 0 !important;
+                top: 50% !important;
+                transform: translateY(-50%) !important;
+                text-indent: 0 !important;
+                font-size: 0.72rem !important;
+                font-weight: 600 !important;
             }
 
             /* Opções de renda em coluna */
