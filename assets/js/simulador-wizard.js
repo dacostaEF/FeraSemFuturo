@@ -394,9 +394,9 @@ function finalizarWizard() {
                 <div class="ajuste-item">
                     <label for="ajustePerfil">Perfil de investimento</label>
                     <select id="ajustePerfil" class="ajuste-input ajuste-select">
-                        <option value="conservador" ${wizardData.perfilInvestidor === 'conservador' ? 'selected' : ''}>Conservador (6% a.a.)</option>
-                        <option value="moderado" ${wizardData.perfilInvestidor === 'moderado' ? 'selected' : ''}>Moderado (8% a.a.)</option>
-                        <option value="arrojado" ${wizardData.perfilInvestidor === 'arrojado' ? 'selected' : ''}>Arrojado (10% a.a.)</option>
+                        <option value="conservador" ${wizardData.perfilInvestidor === 'conservador' ? 'selected' : ''} data-text-mobile="Conservador">Conservador (6% a.a.)</option>
+                        <option value="moderado" ${wizardData.perfilInvestidor === 'moderado' ? 'selected' : ''} data-text-mobile="Moderado">Moderado (8% a.a.)</option>
+                        <option value="arrojado" ${wizardData.perfilInvestidor === 'arrojado' ? 'selected' : ''} data-text-mobile="Arrojado">Arrojado (10% a.a.)</option>
                     </select>
                 </div>
                 
@@ -826,12 +826,48 @@ function resetarValoresOriginais() {
     finalizarWizard();
 }
 
+// Ajustar texto do select de perfil em mobile (esconder parênteses)
+function ajustarSelectPerfilMobile() {
+    // Verificar se está em mobile
+    const isMobile = window.innerWidth <= 768;
+    const selectPerfil = document.getElementById('ajustePerfil');
+    
+    if (selectPerfil) {
+        const options = selectPerfil.querySelectorAll('option');
+        options.forEach(option => {
+            if (isMobile) {
+                // Em mobile, usar apenas o texto do data-text-mobile ou remover parênteses
+                const textMobile = option.getAttribute('data-text-mobile');
+                if (textMobile) {
+                    option.textContent = textMobile;
+                } else {
+                    // Fallback: remover tudo entre parênteses
+                    option.textContent = option.textContent.replace(/\s*\([^)]*\)\s*/, '');
+                }
+            } else {
+                // Em desktop, restaurar texto completo
+                const value = option.value;
+                if (value === 'conservador') {
+                    option.textContent = 'Conservador (6% a.a.)';
+                } else if (value === 'moderado') {
+                    option.textContent = 'Moderado (8% a.a.)';
+                } else if (value === 'arrojado') {
+                    option.textContent = 'Arrojado (10% a.a.)';
+                }
+            }
+        });
+    }
+}
+
 // Adicionar event listeners quando o painel for criado
 function configurarPainelAjustes(resultados) {
     // Salvar valores originais na primeira vez
     if (!valoresOriginais) {
         salvarValoresOriginais(resultados);
     }
+
+    // Ajustar texto do select de perfil em mobile (esconder parênteses)
+    ajustarSelectPerfilMobile();
 
     // Aguardar um pouco para garantir que o DOM foi atualizado
     setTimeout(() => {
@@ -847,6 +883,9 @@ function configurarPainelAjustes(resultados) {
         }
 
         // Perfil já define a rentabilidade automaticamente - sem necessidade de sincronização
+
+        // Listener para redimensionamento da janela (ajustar texto do select)
+        window.addEventListener('resize', ajustarSelectPerfilMobile);
 
         // Atualizar min da idade de aposentadoria quando idade atual mudar
         const ajusteIdadeAtual = document.getElementById('ajusteIdadeAtual');

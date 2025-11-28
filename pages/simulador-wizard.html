@@ -1657,6 +1657,13 @@
             justify-content: center;        /* centraliza o texto horizontalmente */
             text-align: center !important;  /* centraliza o texto nas linhas */
         }
+
+        /* Em mobile, esconder texto dentro dos parênteses do select de perfil */
+        @media (max-width: 768px) {
+            #painelAjustesRapidos #ajustePerfil option {
+                font-size: 0.9rem !important;
+            }
+        }
     </style>
 </head>
 <body>
