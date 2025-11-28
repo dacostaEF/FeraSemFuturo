@@ -416,10 +416,12 @@ function finalizarWizard() {
             
             <div class="ajuste-actions">
                 <button id="btnRecalcularWizard" class="btn-simulador-invlab">
-                    🔄 Recalcular projeção
+                    <span>🔄</span>
+                    <span>Recalcular projeção</span>
                 </button>
                 <button id="btnResetarAjustes" class="btn-resetar-ajustes">
-                    ↺ Resetar valores originais
+                    <span>↺</span>
+                    <span>Resetar valores originais</span>
                 </button>
             </div>
         </div>
