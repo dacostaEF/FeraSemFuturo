@@ -348,6 +348,12 @@ function finalizarWizard() {
         <!-- INTERPRETAÇÃO AUTOMÁTICA DO RESULTADO -->
         ${gerarInterpretacaoAutomatica(resultados, wizardData)}
 
+        <!-- BOTÕES DE AÇÃO -->
+        <div class="dashboard-actions">
+            <button class="btn-modal" onclick="abrirModalDados()">📋 Ver dados usados</button>
+            <button class="btn-modal" onclick="abrirModalFormulas()">🧠 Ver fórmulas e parâmetros</button>
+        </div>
+
         <!-- PAINEL DE AJUSTES RÁPIDOS -->
         <div id="painelAjustesRapidos" class="quick-adjust-card">
             <h3 class="titulo-ajustes">🔧 Ajustes Rápidos</h3>
@@ -410,12 +416,6 @@ function finalizarWizard() {
                     ↺ Resetar valores originais
                 </button>
             </div>
-        </div>
-
-        <!-- BOTÕES DE AÇÃO -->
-        <div class="dashboard-actions">
-            <button class="btn-modal" onclick="abrirModalDados()">📋 Ver dados usados</button>
-            <button class="btn-modal" onclick="abrirModalFormulas()">🧠 Ver fórmulas e parâmetros</button>
         </div>
 
         <!-- MODAL: DADOS DE ENTRADA -->
