@@ -350,8 +350,14 @@ function finalizarWizard() {
 
         <!-- BOTÕES DE AÇÃO -->
         <div class="dashboard-actions">
-            <button class="btn-modal" onclick="abrirModalDados()">📋 Ver dados usados</button>
-            <button class="btn-modal" onclick="abrirModalFormulas()">🧠 Ver fórmulas e parâmetros</button>
+            <button class="btn-modal" onclick="abrirModalDados()">
+                <span>📋</span>
+                <span>Ver dados usados</span>
+            </button>
+            <button class="btn-modal" onclick="abrirModalFormulas()">
+                <span>🧠</span>
+                <span>Ver fórmulas e parâmetros</span>
+            </button>
         </div>
 
         <!-- PAINEL DE AJUSTES RÁPIDOS -->
