@@ -535,8 +535,21 @@
             /* Container "INVLAB não é corretora" - Grid 2x2 → 1 coluna */
             #inicio .invlab-grid-2x2 {
                 grid-template-columns: 1fr !important;
-                gap: 12px !important;
-                text-align: center !important;
+                gap: 6px !important; /* Reduzido de 12px para 6px - aproxima as linhas */
+                text-align: left !important; /* Alinha itens à esquerda em mobile */
+                max-width: 100% !important; /* Remove limitação de largura */
+                margin: 0 !important; /* Remove margem automática */
+            }
+            
+            /* Parágrafos do grid - Reduz margin para aproximar linhas */
+            #inicio .invlab-grid-2x2 p {
+                margin: 0 !important; /* Remove qualquer margin dos parágrafos */
+            }
+            
+            /* Container principal - Reduz padding lateral para frases ocuparem toda linha */
+            #inicio div[style*="max-width: 1200px"][style*="padding: 32px"] {
+                padding: 20px 12px !important; /* Reduz padding lateral: 32px → 12px (62% redução) */
+                margin: 32px 12px 24px !important; /* Adiciona margem lateral mínima */
             }
 
             /* Cards simuladores de aposentadoria */
@@ -985,9 +998,8 @@
 
                 <!-- Aviso Legal Premium -->
                 <div class="legal-disclaimer-invlab">
-                    <div class="legal-icon">⚠️</div>
                     <div class="legal-content">
-                        <h4>Aviso Legal</h4>
+                        <h4>⚠️ Aviso Legal</h4>
                         <p>Esta plataforma é exclusivamente <strong>educacional e de simulação</strong>. Os resultados apresentados são projeções baseadas em premissas e <strong>não garantem rentabilidade futura</strong>. Não somos assessores de investimentos e não recomendamos produtos financeiros. Sempre consulte um profissional certificado (CEA/CFP) antes de investir.</p>
                         <p class="legal-link">📋 Leia nossa <a href="pages/metodologia.html">Metodologia</a> para entender nossas fontes de dados e cálculos.</p>
                     </div>

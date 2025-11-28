@@ -463,9 +463,6 @@
    Layout moderno com ícone lateral
    ============================================ */
 .legal-disclaimer-invlab {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
     background: rgba(245, 158, 11, 0.08);  /* Laranja suave - alerta */
     border: 1px solid rgba(245, 158, 11, 0.3);
     border-left: 4px solid #F59E0B;  /* Barra laranja forte */
@@ -475,14 +472,8 @@
     max-width: 1200px;
 }
 
-.legal-icon {
-    font-size: 32px;
-    flex-shrink: 0;
-    line-height: 1;
-}
-
 .legal-content {
-    flex: 1;
+    width: 100%;
 }
 
 .legal-content h4 {
