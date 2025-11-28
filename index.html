@@ -210,9 +210,14 @@
                 padding-top: 0 !important;
             }
             
-            /* Header - Aumentar altura para acomodar logo */
+            /* Header - Altura compacta para mobile */
             .main-header {
-                min-height: 120px !important;
+                min-height: 70px !important; /* Reduzido de 120px para eliminar espaço vazio */
+            }
+            
+            /* Header container - Padding ultra compacto */
+            .header-container {
+                padding: 4px 12px !important; /* Reduzido: top 4px (era 8px), lateral 12px (era 15px) */
             }
         }
         
@@ -490,6 +495,12 @@
            IMPORTANTE: Estilos aqui para sobrescrever estilos inline
            ====================================================== */
         @media (max-width: 768px) {
+            /* PRIMEIRA SEÇÃO - Espaçamento superior para não ficar coberto pelo header */
+            #inicio .section:first-of-type {
+                margin-top: 20px !important;
+                padding-top: 20px !important;
+            }
+            
             /* Títulos principais - Página Início */
             #inicio h1, 
             #inicio h2, 
@@ -574,6 +585,12 @@
            iPhone SE, Galaxy S mini, Motorola compacto
            ====================================================== */
         @media (max-width: 480px) {
+            /* PRIMEIRA SEÇÃO - Espaçamento superior adicional para telas pequenas */
+            #inicio .section:first-of-type {
+                margin-top: 30px !important;
+                padding-top: 25px !important;
+            }
+            
             /* Títulos ainda menores para caber com elegância */
             #inicio h1, 
             #inicio h2, 
@@ -625,6 +642,12 @@
            Celulares antigos, mini-screens, Android bem compactos
            ====================================================== */
         @media (max-width: 360px) {
+            /* PRIMEIRA SEÇÃO - Espaçamento superior para microtelas */
+            #inicio .section:first-of-type {
+                margin-top: 25px !important;
+                padding-top: 20px !important;
+            }
+            
             /* Títulos finos */
             #inicio h1, 
             #inicio h2, 
