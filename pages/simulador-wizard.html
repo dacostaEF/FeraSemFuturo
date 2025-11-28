@@ -777,27 +777,96 @@
         /* ========================================= */
 
         @media (max-width: 768px) {
-            .dashboard-cards {
-                grid-template-columns: 1fr;
+            /* Container principal - Padding reduzido */
+            .wizard-container {
+                padding: 20px 16px !important; /* Reduzido de 40px 20px */
             }
             
-            .dashboard-section canvas {
-                max-height: 300px !important;
+            /* Títulos principais */
+            h1, h2, .landing-title, .step-title, .dashboard-title {
+                font-size: 1.6rem !important;
+                line-height: 1.25 !important;
             }
+
+            /* Subtítulos */
+            h3 {
+                font-size: 1.25rem !important;
+            }
+
+            /* Parágrafos */
+            p, .landing-subtitle, .dashboard-description {
+                font-size: 0.95rem !important;
+                line-height: 1.45 !important;
+                margin-bottom: 14px !important;
+            }
+
+            /* Listas */
+            ul li {
+                line-height: 1.5 !important;
+                font-size: 0.95rem !important;
+            }
+
+            /* Landing explicativa */
             .landing-explicativa {
-                padding: 30px 20px;
+                padding: 22px 16px !important; /* Reduzido de 30px 20px */
+                margin-bottom: 40px !important; /* Reduzido de 60px */
+            }
+
+            .landing-icon {
+                font-size: 2.5rem !important; /* Reduzido de 3.5rem */
+                margin-bottom: 16px !important; /* Reduzido de 20px */
             }
 
             .landing-title {
-                font-size: 1.6rem;
+                font-size: 1.6rem !important;
+                margin-bottom: 16px !important; /* Reduzido de 20px */
             }
 
+            .landing-subtitle {
+                font-size: 0.95rem !important;
+                margin-bottom: 20px !important; /* Reduzido de 30px */
+            }
+
+            .landing-info {
+                padding: 18px !important; /* Reduzido de 24px */
+                margin-bottom: 16px !important; /* Reduzido de 20px */
+            }
+
+            .landing-info h3 {
+                font-size: 1.15rem !important; /* Reduzido de 1.2rem */
+                margin-bottom: 10px !important; /* Reduzido de 12px */
+            }
+
+            /* Listas - Reduz espaçamento entre itens (mesmo padrão do container INVLAB não é corretora) */
+            .landing-info li {
+                padding: 3px 0 3px 28px !important; /* Mantém padding-left para separar tique do texto */
+                margin-bottom: 0 !important;
+            }
+
+            /* Tique verde - Ajusta posicionamento e tamanho em mobile */
+            .landing-info li::before {
+                left: 4px !important; /* Ajusta posição do tique */
+                font-size: 1rem !important; /* Tamanho adequado para mobile */
+                top: 50% !important;
+                transform: translateY(-50%) !important; /* Centraliza verticalmente */
+            }
+
+            /* Wizard steps */
             .wizard-step {
-                padding: 30px 20px;
+                padding: 22px 16px !important; /* Reduzido de 30px 20px */
+                margin-bottom: 20px !important; /* Reduzido de 30px */
             }
 
             .step-title {
-                font-size: 1.5rem;
+                font-size: 1.5rem !important;
+            }
+
+            /* Botões */
+            .btn-start-wizard,
+            .btn-prev,
+            .btn-next {
+                font-size: 0.95rem !important;
+                padding: 12px 20px !important;
             }
 
             .step-actions {
@@ -810,6 +879,35 @@
                 width: 100%;
             }
 
+            /* Dashboard */
+            .dashboard-cards {
+                grid-template-columns: 1fr;
+                gap: 12px !important; /* Reduzido de 14px */
+            }
+            
+            .dashboard-section canvas {
+                max-height: 300px !important;
+            }
+
+            .dashboard-header {
+                padding: 14px !important; /* Reduzido de 18px */
+                font-size: 16px !important; /* Reduzido de 18px */
+                margin-bottom: 20px !important; /* Reduzido de 25px */
+            }
+
+            .card {
+                padding: 12px !important; /* Reduzido de 14px */
+            }
+
+            .card h3 {
+                font-size: 13px !important; /* Reduzido de 14px */
+            }
+
+            .card .valor {
+                font-size: 20px !important; /* Reduzido de 22px */
+            }
+
+            /* Tooltip */
             .tooltip-text {
                 left: 50%;
                 right: auto;
@@ -817,6 +915,152 @@
                 transform: translateX(-50%);
                 max-width: 90vw;
                 width: 280px;
+            }
+        }
+
+        /* ======================================================
+           📱 AJUSTES MOBILE (TELAS <= 480px)
+           ====================================================== */
+        @media (max-width: 480px) {
+            /* Container principal */
+            .wizard-container {
+                padding: 16px 12px !important;
+            }
+
+            /* Títulos ainda menores */
+            h1, h2, .landing-title, .step-title, .dashboard-title {
+                font-size: 1.45rem !important;
+            }
+
+            h3 {
+                font-size: 1.15rem !important;
+            }
+
+            /* Parágrafos mais compactos */
+            p, .landing-subtitle, .dashboard-description {
+                font-size: 0.9rem !important;
+                line-height: 1.4 !important;
+            }
+
+            /* Listas */
+            ul li {
+                font-size: 0.9rem !important;
+                margin-bottom: 8px !important;
+                line-height: 1.4 !important;
+            }
+
+            /* Landing explicativa */
+            .landing-explicativa {
+                padding: 18px 12px !important;
+                margin-bottom: 32px !important;
+            }
+
+            .landing-icon {
+                font-size: 2rem !important;
+                margin-bottom: 12px !important;
+            }
+
+            .landing-title {
+                font-size: 1.45rem !important;
+                margin-bottom: 12px !important;
+            }
+
+            .landing-subtitle {
+                font-size: 0.9rem !important;
+                margin-bottom: 16px !important;
+            }
+
+            .landing-info {
+                padding: 16px !important;
+                margin-bottom: 12px !important;
+            }
+
+            /* Listas - Espaçamento ainda mais compacto em telas pequenas */
+            .landing-info li {
+                padding: 2px 0 2px 26px !important; /* Mantém padding-left para separar tique */
+            }
+
+            /* Tique verde - Ajuste fino para telas pequenas */
+            .landing-info li::before {
+                left: 3px !important;
+                font-size: 0.95rem !important;
+            }
+
+            /* Wizard steps */
+            .wizard-step {
+                padding: 18px 12px !important;
+                margin-bottom: 16px !important;
+            }
+
+            /* Botões */
+            .btn-start-wizard,
+            .btn-prev,
+            .btn-next {
+                font-size: 0.9rem !important;
+                padding: 10px 16px !important;
+            }
+
+            /* Dashboard */
+            .dashboard-header {
+                padding: 12px !important;
+                font-size: 15px !important;
+                margin-bottom: 16px !important;
+            }
+
+            .card {
+                padding: 10px !important;
+            }
+
+            .card .valor {
+                font-size: 18px !important;
+            }
+        }
+
+        /* ======================================================
+           📟 AJUSTES MICROTELAS (<= 360px)
+           ====================================================== */
+        @media (max-width: 360px) {
+            /* Títulos finos */
+            h1, h2, .landing-title, .step-title, .dashboard-title {
+                font-size: 1.3rem !important;
+            }
+
+            h3 {
+                font-size: 1.05rem !important;
+            }
+
+            /* Texto bem compacto */
+            p, .landing-subtitle, .dashboard-description {
+                font-size: 0.85rem !important;
+                line-height: 1.35 !important;
+            }
+
+            /* Listas */
+            ul li {
+                font-size: 0.85rem !important;
+                line-height: 1.35 !important;
+            }
+
+            /* Landing explicativa */
+            .landing-explicativa {
+                padding: 14px 10px !important;
+            }
+
+            .landing-icon {
+                font-size: 1.8rem !important;
+            }
+
+            /* Wizard steps */
+            .wizard-step {
+                padding: 14px 10px !important;
+            }
+
+            /* Botões menores */
+            .btn-start-wizard,
+            .btn-prev,
+            .btn-next {
+                padding: 8px 14px !important;
+                font-size: 0.85rem !important;
             }
         }
     </style>
