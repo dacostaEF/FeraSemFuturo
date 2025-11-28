@@ -859,6 +859,28 @@ function ajustarSelectPerfilMobile() {
     }
 }
 
+// Ajustar label "Idade atual" em desktop (substituir <br> por espaço)
+function ajustarLabelIdadeAtualDesktop() {
+    const isDesktop = window.innerWidth > 768;
+    const labelIdadeAtual = document.querySelector('#painelAjustesRapidos label[for="ajusteIdadeAtual"]');
+    
+    if (labelIdadeAtual) {
+        if (isDesktop) {
+            // Em desktop, substituir <br> por espaço
+            const html = labelIdadeAtual.innerHTML;
+            if (html.includes('<br>')) {
+                labelIdadeAtual.innerHTML = html.replace('<br>', ' ');
+            }
+        } else {
+            // Em mobile, restaurar <br>
+            const html = labelIdadeAtual.innerHTML;
+            if (html.includes(' atual')) {
+                labelIdadeAtual.innerHTML = html.replace(' atual', '<br>atual');
+            }
+        }
+    }
+}
+
 // Adicionar event listeners quando o painel for criado
 function configurarPainelAjustes(resultados) {
     // Salvar valores originais na primeira vez
@@ -868,6 +890,9 @@ function configurarPainelAjustes(resultados) {
 
     // Ajustar texto do select de perfil em mobile (esconder parênteses)
     ajustarSelectPerfilMobile();
+
+    // Ajustar label "Idade atual" em desktop (adicionar espaço)
+    ajustarLabelIdadeAtualDesktop();
 
     // Aguardar um pouco para garantir que o DOM foi atualizado
     setTimeout(() => {
@@ -884,8 +909,11 @@ function configurarPainelAjustes(resultados) {
 
         // Perfil já define a rentabilidade automaticamente - sem necessidade de sincronização
 
-        // Listener para redimensionamento da janela (ajustar texto do select)
-        window.addEventListener('resize', ajustarSelectPerfilMobile);
+        // Listener para redimensionamento da janela (ajustar texto do select e label)
+        window.addEventListener('resize', function() {
+            ajustarSelectPerfilMobile();
+            ajustarLabelIdadeAtualDesktop();
+        });
 
         // Atualizar min da idade de aposentadoria quando idade atual mudar
         const ajusteIdadeAtual = document.getElementById('ajusteIdadeAtual');
