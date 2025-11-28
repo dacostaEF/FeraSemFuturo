@@ -794,9 +794,10 @@
         /* ========================================= */
 
         @media (max-width: 768px) {
-            /* Container principal - Padding reduzido */
+            /* Container principal - Padding reduzido para aproveitar espaço */
             .wizard-container {
-                padding: 20px 16px !important; /* Reduzido de 40px 20px */
+                padding: 20px 8px !important; /* Reduzido de 40px 20px - próximo das bordas */
+                max-width: 100% !important; /* Remove limitação de largura */
             }
             
             /* Títulos principais */
@@ -896,32 +897,59 @@
                 width: 100%;
             }
 
-            /* Dashboard */
+            /* Dashboard - Aproveita todo espaço horizontal em mobile */
+            .dashboard-container {
+                padding: 20px 12px !important; /* Reduzido de 60px 40px - próximo das bordas */
+                margin: 0 -4px !important; /* Remove margens laterais */
+            }
+            
+            .dashboard-section {
+                padding: 16px 0 !important; /* Remove padding lateral */
+                margin: 0 !important;
+            }
+            
+            /* Dashboard cards - Mantém 2 colunas em mobile (igual desktop) */
             .dashboard-cards {
-                grid-template-columns: 1fr;
-                gap: 12px !important; /* Reduzido de 14px */
+                grid-template-columns: repeat(2, 1fr) !important; /* 2 colunas mesmo em mobile */
+                gap: 8px !important; /* Gap reduzido para caber melhor */
+                margin: 0 !important; /* Remove margens */
             }
             
             .dashboard-section canvas {
                 max-height: 300px !important;
+                width: 100% !important; /* Garante que gráfico use toda largura */
+                margin: 0 !important;
             }
 
             .dashboard-header {
-                padding: 14px !important; /* Reduzido de 18px */
-                font-size: 16px !important; /* Reduzido de 18px */
-                margin-bottom: 20px !important; /* Reduzido de 25px */
+                padding: 14px 12px !important; /* Reduzido padding lateral */
+                font-size: 16px !important;
+                margin-bottom: 20px !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
             }
 
             .card {
-                padding: 12px !important; /* Reduzido de 14px */
+                padding: 12px !important;
+                margin: 0 !important; /* Remove margens */
             }
 
             .card h3 {
-                font-size: 13px !important; /* Reduzido de 14px */
+                font-size: 13px !important;
             }
 
             .card .valor {
-                font-size: 20px !important; /* Reduzido de 22px */
+                font-size: 20px !important;
+            }
+            
+            .dashboard-info-extra {
+                padding: 12px !important; /* Reduz padding lateral */
+                margin: 16px 0 !important; /* Remove margens laterais */
+            }
+            
+            .dashboard-insights {
+                padding: 12px !important; /* Reduz padding lateral */
+                margin: 16px 0 !important;
             }
 
             /* Tooltip - Ajuste para mobile: centraliza e garante que não saia da tela */
@@ -950,9 +978,10 @@
            📱 AJUSTES MOBILE (TELAS <= 480px)
            ====================================================== */
         @media (max-width: 480px) {
-            /* Container principal */
+            /* Container principal - Ainda mais próximo das bordas */
             .wizard-container {
-                padding: 16px 12px !important;
+                padding: 16px 6px !important; /* Padding lateral mínimo */
+                max-width: 100% !important;
             }
 
             /* Títulos ainda menores */
@@ -1028,19 +1057,42 @@
                 padding: 10px 16px !important;
             }
 
-            /* Dashboard */
+            /* Dashboard - Ainda mais compacto em telas pequenas */
+            .dashboard-container {
+                padding: 16px 6px !important; /* Reduzido ainda mais */
+            }
+            
+            .dashboard-section {
+                padding: 12px 0 !important;
+            }
+            
+            /* Dashboard cards - Mantém 2 colunas mesmo em telas pequenas */
+            .dashboard-cards {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 6px !important; /* Gap ainda menor para telas pequenas */
+            }
+            
             .dashboard-header {
-                padding: 12px !important;
+                padding: 12px 8px !important; /* Padding lateral mínimo */
                 font-size: 15px !important;
                 margin-bottom: 16px !important;
             }
 
             .card {
-                padding: 10px !important;
+                padding: 10px 6px !important; /* Reduz padding lateral para caber 2 colunas */
+            }
+
+            .card h3 {
+                font-size: 12px !important; /* Reduzido para caber melhor */
             }
 
             .card .valor {
-                font-size: 18px !important;
+                font-size: 16px !important; /* Reduzido de 18px para caber melhor */
+            }
+            
+            .dashboard-info-extra,
+            .dashboard-insights {
+                padding: 10px 6px !important; /* Padding lateral mínimo */
             }
         }
 
