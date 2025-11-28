@@ -1085,6 +1085,24 @@
                 gap: 16px !important;
             }
 
+            /* Container INSS ocupa toda a largura no mobile (igual ao container Estratégia de Renda) */
+            /* Forçar todos os elementos com grid-column: span 2 a ocuparem 100% no mobile */
+            .module-grid > div[style*="grid-column: span 2"],
+            .module-grid > .input-group[style*="grid-column: span 2"],
+            .module-grid > .input-group-inss {
+                grid-column: 1 / -1 !important;  /* Ocupa toda a largura no mobile */
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+            }
+            
+            /* Seletor específico para o container INSS usando classe */
+            .input-group-inss {
+                grid-column: 1 / -1 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
             /* Largura dos inputs e containers - aproveitar 100% do espaço */
             .invlab-module,
             .input-group {
@@ -1144,9 +1162,9 @@
                 overflow: hidden !important;
             }
 
-            /* ---- 1. Remover emojis dos botões de risco (somente texto abreviado) ---- */
+            /* ---- 1. Remover emojis dos botões de risco (texto completo) ---- */
             .scenario-btn[data-scenario="conservador"]::after {
-                content: "Conserv." !important;  /* Sem emoji */
+                content: "Conservador" !important;  /* Texto completo, sem emoji */
                 position: absolute !important;
                 left: 0 !important;
                 right: 0 !important;
@@ -1158,7 +1176,7 @@
             }
 
             .scenario-btn[data-scenario="moderado"]::after {
-                content: "Moder." !important;  /* Sem emoji */
+                content: "Moderado" !important;  /* Texto completo, sem emoji */
                 position: absolute !important;
                 left: 0 !important;
                 right: 0 !important;
@@ -1170,7 +1188,7 @@
             }
 
             .scenario-btn[data-scenario="arrojado"]::after {
-                content: "Arroj." !important;  /* Sem emoji */
+                content: "Arrojado" !important;  /* Texto completo, sem emoji */
                 position: absolute !important;
                 left: 0 !important;
                 right: 0 !important;
@@ -1509,12 +1527,13 @@
                         <input type="number" id="desiredIncome" placeholder="Ex: 6000">
                     </div>
 
-                    <div class="input-group" style="
+                    <div class="input-group input-group-inss" style="
                         background: rgba(250, 204, 21, 0.05);
                         border: 1px solid rgba(250, 204, 21, 0.3);
                         border-radius: 10px;
                         padding: 16px;
                         position: relative;
+                        grid-column: span 2;
                     ">
                         <label style="display: flex; align-items: center; gap: 8px;">
                             Estimativa do seu INSS (opcional)
