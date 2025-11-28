@@ -1469,6 +1469,906 @@ Isso cria **hierarquia visual clara** e evita sensação de "elementos colados".
 
 ---
 
+### 18.7 🗺️ BREADCRUMB INVLAB - PADRÃO DESKTOP COMPLETO
+
+**Status:** ✅ Implementado e testado  
+**Página de Referência:** `pages/simulador-aposentadoria.html`  
+**Objetivo:** Documentar todas as características do breadcrumb como identidade visual oficial do INVLAB
+
+---
+
+#### 18.7.1 Container Principal (`<div>`)
+
+**Posicionamento:**
+```css
+position: sticky;        /* Fixo ao rolar */
+top: 110px;             /* Abaixo do header (altura do menu master) */
+z-index: 100;           /* Acima do conteúdo, abaixo do menu */
+```
+
+**Visual:**
+```css
+background: #0D0D0D;    /* Fundo preto */
+width: 100%;            /* Largura total */
+padding: 12px 20px 12px; /* 12px top/bottom, 20px left, 12px right */
+margin-bottom: 0 !important; /* Sem margem inferior */
+```
+
+**Estrutura HTML:**
+```html
+<div style="position: sticky; top: 110px; z-index: 100; background: #0D0D0D; width: 100%; padding: 12px 20px 12px; margin-bottom: 0 !important;">
+    <nav class="breadcrumb-nav">
+        <!-- conteúdo -->
+    </nav>
+</div>
+```
+
+---
+
+#### 18.7.2 Navegação Interna (`<nav>`)
+
+**Layout:**
+```css
+max-width: 1200px;      /* Largura máxima centralizada */
+margin: 0 auto;         /* Centralizado */
+display: flex;          /* Flexbox horizontal */
+align-items: center;    /* Alinhamento vertical centralizado */
+gap: 8px;               /* Espaçamento entre itens */
+```
+
+**Tipografia:**
+```css
+font-family: 'Inter', sans-serif;  /* Fonte Inter */
+font-size: 12px;                   /* Tamanho 12px */
+color: rgba(255, 255, 255, 0.6);   /* Cor base (60% opacidade) */
+```
+
+**Estrutura HTML:**
+```html
+<nav style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 12px; color: rgba(255, 255, 255, 0.6);">
+    <!-- itens do breadcrumb -->
+</nav>
+```
+
+---
+
+#### 18.7.3 Itens do Breadcrumb
+
+**1️⃣ Link "🏠 Início":**
+```html
+<a href="../index.html" style="font-family: 'Inter', sans-serif; font-size: 12px; color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s;">🏠 Início</a>
+```
+
+**Propriedades:**
+- `font-family: 'Inter', sans-serif`
+- `font-size: 12px`
+- `color: rgba(255, 255, 255, 0.7)` - 70% opacidade
+- `text-decoration: none` - sem sublinhado
+- `transition: color 0.3s` - transição de cor
+
+---
+
+**2️⃣ Separador "/":**
+```html
+<span style="font-family: 'Inter', sans-serif; font-size: 12px; color: rgba(255, 255, 255, 0.4);">/</span>
+```
+
+**Propriedades:**
+- `font-family: 'Inter', sans-serif`
+- `font-size: 12px`
+- `color: rgba(255, 255, 255, 0.4)` - 40% opacidade (mais discreto)
+- Elemento: `<span>` (texto estático)
+
+---
+
+**3️⃣ Link "🛠️ Ferramentas":**
+```html
+<a href="../index.html#ferramentas" style="font-family: 'Inter', sans-serif; font-size: 12px; color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s;">🛠️ Ferramentas</a>
+```
+
+**Propriedades:**
+- `font-family: 'Inter', sans-serif`
+- `font-size: 12px`
+- `color: rgba(255, 255, 255, 0.7)` - 70% opacidade
+- `text-decoration: none` - sem sublinhado
+- `transition: color 0.3s` - transição de cor
+
+---
+
+**4️⃣ Separador "/":**
+```html
+<span style="font-family: 'Inter', sans-serif; font-size: 12px; color: rgba(255, 255, 255, 0.4);">/</span>
+```
+
+**Propriedades:**
+- `font-family: 'Inter', sans-serif`
+- `font-size: 12px`
+- `color: rgba(255, 255, 255, 0.4)` - 40% opacidade
+- Elemento: `<span>` (texto estático)
+
+---
+
+**5️⃣ Página Atual "🏖️ Simulador de Aposentadoria" (Destaque):**
+```html
+<span style="font-family: 'Inter', sans-serif; font-size: 12px; color: #FFFFFF; font-weight: 600; background: rgba(42, 127, 255, 0.15); padding: 4px 10px; border-radius: 6px; border-left: 3px solid #3B82F6;">🏖️ Simulador de Aposentadoria</span>
+```
+
+**Propriedades:**
+- `font-family: 'Inter', sans-serif`
+- `font-size: 12px`
+- `color: #FFFFFF` - branco (100% opacidade)
+- `font-weight: 600` - semibold
+- `background: rgba(42, 127, 255, 0.15)` - fundo azul (15% opacidade)
+- `padding: 4px 10px` - 4px vertical, 10px horizontal
+- `border-radius: 6px` - bordas arredondadas
+- `border-left: 3px solid #3B82F6` - borda esquerda azul sólida
+- Elemento: `<span>` (não clicável, indica página atual)
+
+---
+
+#### 18.7.4 Posição em Relação ao Menu Master
+
+**Hierarquia Visual:**
+1. **Menu master (header)** - `position: sticky`, `top: 0`, `z-index: alto`
+2. **Breadcrumb** - `position: sticky`, `top: 110px`, `z-index: 100`
+3. **Conteúdo principal** - abaixo do breadcrumb
+
+**Espaçamento:**
+- `top: 110px` - posicionado 110px do topo (altura do header)
+- Fica fixo ao rolar, sempre abaixo do menu
+
+---
+
+#### 18.7.5 Resumo das Características
+
+| Elemento | Fonte | Tamanho | Cor | Opacidade | Peso |
+|----------|-------|---------|-----|-----------|------|
+| **Container** | - | - | `#0D0D0D` | 100% | - |
+| **Nav** | Inter | 12px | Branco | 60% | Normal |
+| **Links** | Inter | 12px | Branco | 70% | Normal |
+| **Separadores** | Inter | 12px | Branco | 40% | Normal |
+| **Página Atual** | Inter | 12px | Branco | 100% | 600 (semibold) |
+
+---
+
+#### 18.7.6 Destaque da Página Atual
+
+**Características visuais:**
+- ✅ **Fundo azul translúcido:** `rgba(42, 127, 255, 0.15)`
+- ✅ **Borda esquerda azul:** `3px solid #3B82F6`
+- ✅ **Texto branco sólido:** `#FFFFFF`
+- ✅ **Font-weight:** `600` (semibold)
+- ✅ **Padding interno:** `4px 10px`
+- ✅ **Border-radius:** `6px`
+
+**Por quê:**
+- Diferencia claramente a página atual dos links navegáveis
+- Cria hierarquia visual (página atual = destaque)
+- Mantém identidade INVLAB (azul premium)
+- Não é clicável (apenas indicador visual)
+
+---
+
+#### 18.7.7 Comportamento
+
+**Funcionalidades:**
+- ✅ **Fixo ao rolar** (`position: sticky`)
+- ✅ **Sempre visível** abaixo do menu
+- ✅ **Links com transição** de cor no hover
+- ✅ **Página atual não clicável** (apenas indicador visual)
+
+**Estrutura HTML Completa:**
+```html
+<!-- Breadcrumb (fixo, abaixo do menu) -->
+<div style="position: sticky; top: 110px; z-index: 100; background: #0D0D0D; width: 100%; padding: 12px 20px 12px; margin-bottom: 0 !important;">
+    <nav style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 12px; color: rgba(255, 255, 255, 0.6);">
+        <a href="../index.html" style="font-family: 'Inter', sans-serif; font-size: 12px; color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s;">🏠 Início</a>
+        <span style="font-family: 'Inter', sans-serif; font-size: 12px; color: rgba(255, 255, 255, 0.4);">/</span>
+        <a href="../index.html#ferramentas" style="font-family: 'Inter', sans-serif; font-size: 12px; color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s;">🛠️ Ferramentas</a>
+        <span style="font-family: 'Inter', sans-serif; font-size: 12px; color: rgba(255, 255, 255, 0.4);">/</span>
+        <span style="font-family: 'Inter', sans-serif; font-size: 12px; color: #FFFFFF; font-weight: 600; background: rgba(42, 127, 255, 0.15); padding: 4px 10px; border-radius: 6px; border-left: 3px solid #3B82F6;">🏖️ Simulador de Aposentadoria</span>
+    </nav>
+</div>
+```
+
+---
+
+#### 18.7.8 CSS Recomendado (Classe `.breadcrumb-nav`)
+
+Para facilitar a manutenção, recomenda-se criar uma classe CSS:
+
+```css
+/* Breadcrumb Container */
+.breadcrumb-container {
+    position: sticky;
+    top: 110px;
+    z-index: 100;
+    background: #0D0D0D;
+    width: 100%;
+    padding: 12px 20px 12px;
+    margin-bottom: 0 !important;
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb-nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Links do Breadcrumb */
+.breadcrumb-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.breadcrumb-nav a:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Separadores */
+.breadcrumb-nav .breadcrumb-separator {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Página Atual (Destaque) */
+.breadcrumb-nav .breadcrumb-current {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #FFFFFF;
+    font-weight: 600;
+    background: rgba(42, 127, 255, 0.15);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border-left: 3px solid #3B82F6;
+}
+```
+
+---
+
+#### 18.7.9 Checklist de Implementação
+
+Ao implementar o breadcrumb em uma nova página:
+
+- [ ] 1. Container com `position: sticky` e `top: 110px`
+- [ ] 2. Background `#0D0D0D` (preto)
+- [ ] 3. Padding `12px 20px 12px`
+- [ ] 4. Nav com `max-width: 1200px` e `margin: 0 auto`
+- [ ] 5. Flexbox com `gap: 8px`
+- [ ] 6. Fonte Inter, tamanho 12px
+- [ ] 7. Links com cor `rgba(255, 255, 255, 0.7)` e transição
+- [ ] 8. Separadores com cor `rgba(255, 255, 255, 0.4)`
+- [ ] 9. Página atual com fundo azul, borda esquerda e font-weight 600
+- [ ] 10. Z-index 100 (acima do conteúdo, abaixo do menu)
+- [ ] 11. Testar comportamento sticky ao rolar
+- [ ] 12. Validar responsividade (ajustes para mobile em media queries)
+
+---
+
+#### 18.7.10 Responsividade (Mobile)
+
+**⚠️ IMPORTANTE:** As características acima são para **desktop**. Para mobile, ajustar:
+
+```css
+@media (max-width: 768px) {
+    .breadcrumb-container {
+        top: 96px;              /* Altura menor do header mobile */
+        padding: 8px 10px !important;
+    }
+    
+    .breadcrumb-nav {
+        font-size: 12px !important;
+        gap: 6px !important;
+    }
+    
+    .breadcrumb-nav a,
+    .breadcrumb-nav .breadcrumb-separator,
+    .breadcrumb-nav .breadcrumb-current {
+        font-size: 12px !important;
+    }
+}
+```
+
+---
+
+#### 18.7.11 Status
+
+**Status:** ✅ **PADRÃO OFICIAL INVLAB**  
+**Página de referência:** `pages/simulador-aposentadoria.html`  
+**Última atualização:** Janeiro de 2025  
+**Aplicável a:** Todas as páginas do site INVLAB
+
+**⚠️ IMPORTANTE:** Este breadcrumb é **identidade visual oficial** do INVLAB e deve ser preservado e replicado em todas as páginas do site para manter consistência visual.
+
+---
+
+### 18.8 🎯 MENU PREMIUM INVLAB - PADRÃO DESKTOP COMPLETO
+
+**Status:** ✅ Implementado e testado  
+**Páginas de Referência:** `index.html`, `pages/simulador-aposentadoria.html`  
+**Objetivo:** Documentar todas as características do menu premium/master como identidade visual oficial do INVLAB
+
+---
+
+#### 18.8.1 Container Principal (`.main-header`)
+
+**Posicionamento:**
+```css
+position: fixed;        /* Fixo no topo */
+top: 60px;             /* Abaixo do carrossel (55px) + gap (5px) */
+left: 0;
+right: 0;
+z-index: 1000;         /* Acima de todo conteúdo */
+```
+
+**Visual:**
+```css
+background: #0D0D0D;    /* Fundo preto opaco */
+overflow: visible !important;  /* Permite dropdowns aparecerem */
+padding: 0;            /* Zero padding no header principal */
+margin: 0;             /* Zero margin */
+box-shadow: none;      /* Sem sombra para visual limpo */
+border-bottom: none;   /* Sem borda inferior */
+```
+
+**Estrutura HTML:**
+```html
+<header class="main-header">
+    <div class="header-container">
+        <!-- Logo e Menu -->
+    </div>
+</header>
+```
+
+---
+
+#### 18.8.2 Container Interno (`.header-container`)
+
+**Layout:**
+```css
+position: relative;
+max-width: 1200px;     /* Largura máxima centralizada */
+margin: 0 auto;        /* Centralizado */
+padding: 8px 32px 0 !important;  /* 8px top, 32px laterais, 0 bottom */
+display: flex;
+flex-direction: column;
+gap: 0 !important;     /* Zero gap */
+overflow: visible !important;
+```
+
+**Visual:**
+```css
+min-height: 0 !important;  /* Zero altura mínima */
+border: none !important;    /* Sem bordas */
+box-shadow: none !important; /* Sem sombras */
+```
+
+---
+
+#### 18.8.3 Logo (`.header-logo`)
+
+**⚠️ IMPORTANTE:** Logo **SEM texto "INVLAB"** - apenas imagem.
+
+**Posicionamento:**
+```css
+position: absolute;
+left: 32px;            /* Margem esquerda */
+top: 50%;
+transform: translateY(-50%);  /* Centralizado verticalmente */
+display: flex;
+align-items: center;
+gap: 12px;
+z-index: 10;
+margin-top: 8px;       /* Respiro superior */
+line-height: 0;        /* Elimina espaço fantasma */
+```
+
+**Imagem do Logo:**
+```css
+height: 47px;          /* Altura fixa desktop */
+filter: 
+    brightness(1.15)
+    drop-shadow(0 2px 8px rgba(255, 215, 0, 0.35))
+    drop-shadow(0 0 12px rgba(255, 215, 0, 0.15));
+transition: all 0.3s ease;
+```
+
+**Hover do Logo:**
+```css
+filter: 
+    brightness(1.25)
+    drop-shadow(0 2px 10px rgba(255, 215, 0, 0.5))
+    drop-shadow(0 0 16px rgba(255, 215, 0, 0.25));
+transform: scale(1.02);
+```
+
+**Estrutura HTML:**
+```html
+<div class="header-logo">
+    <img src="../assets/images/Logo_InvLab.png" alt="INVLAB" class="logo-img" loading="eager">
+</div>
+```
+
+**⚠️ CRÍTICO:** 
+- **NÃO incluir** `<span class="logo-text">INVLAB</span>` - apenas a imagem
+- **Path:** `../assets/images/Logo_InvLab.png` (páginas em `pages/`) ou `assets/images/Logo_InvLab.png` (página `index.html`)
+
+---
+
+#### 18.8.4 Sistema de Abas (`.tabs-nav-wrapper` e `.tabs-nav`)
+
+**Wrapper (`.tabs-nav-wrapper`):**
+```css
+position: relative;
+overflow: visible !important;  /* Permite dropdowns */
+scrollbar-width: none;         /* Esconde scrollbar */
+padding: 0;
+margin: 0;
+border: none;
+box-shadow: none;
+```
+
+**Navegação (`.tabs-nav`):**
+```css
+position: relative;
+display: flex;
+flex-wrap: nowrap;
+justify-content: center;  /* Centralizado */
+align-items: center;
+gap: 0;                   /* Zero gap entre botões */
+padding: 0;
+margin: 0;
+width: 100%;
+overflow: visible !important;
+border: none;
+box-shadow: none;
+```
+
+**Estrutura HTML:**
+```html
+<div class="tabs-nav-wrapper">
+    <nav class="tabs-nav" id="tabsNav">
+        <!-- Botões de aba -->
+    </nav>
+</div>
+```
+
+---
+
+#### 18.8.5 Botões de Aba (`.tab-btn`)
+
+**Layout:**
+```css
+position: relative;
+flex: 0 0 auto;
+min-width: 130px;
+max-width: 130px;
+width: 130px;
+padding: 6px 12px;      /* 6px vertical, 12px horizontal */
+border-radius: 6px;
+```
+
+**Visual:**
+```css
+background: transparent;
+border: none;
+color: rgba(255, 255, 255, 0.7);  /* Branco 70% opacidade */
+font-size: 12px;
+font-weight: 600;
+text-transform: none;
+letter-spacing: 0.3px;
+line-height: 1.2;
+text-align: center;
+white-space: normal;    /* Permite quebra de linha */
+```
+
+**Estados:**
+```css
+/* Hover */
+.tab-btn:hover {
+    background: transparent;
+    color: var(--blue-action);  /* Azul INVLAB (#2A7FFF) */
+}
+
+/* Ativo */
+.tab-btn.active {
+    background: transparent;
+    color: var(--blue-action);  /* Azul INVLAB (#2A7FFF) */
+}
+```
+
+**Transição:**
+```css
+transition: all 0.2s ease;
+cursor: pointer;
+```
+
+**Estrutura HTML:**
+```html
+<!-- Aba simples -->
+<button class="tab-btn" onclick="window.location.href='../index.html#inicio'">
+    🏠 Início
+</button>
+
+<!-- Aba com quebra de linha -->
+<button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">
+    📚 Primeiros<br>Passos
+</button>
+```
+
+---
+
+#### 18.8.6 Dropdowns (`.tab-with-dropdown`)
+
+**Container do Dropdown:**
+```css
+position: relative;
+display: inline-block;
+flex: 0 0 auto;
+```
+
+**Seta do Dropdown (`.arrow`):**
+```css
+font-size: 10px;
+margin-left: 4px;
+opacity: 0.6;
+display: inline-flex;
+align-items: center;
+transition: all 0.2s ease;
+```
+
+**Hover da Seta:**
+```css
+opacity: 1.0;
+transform: rotate(180deg);
+```
+
+**Menu Dropdown (`.dropdown-menu`):**
+```css
+position: absolute !important;
+left: 0 !important;
+top: 100% !important;
+min-width: 220px;
+margin-top: 8px;
+background: rgba(14, 14, 14, 0.98);  /* Fundo quase preto */
+backdrop-filter: blur(10px);
+border: 1px solid rgba(42, 127, 255, 0.3);  /* Borda azul INVLAB */
+border-radius: 8px;
+padding: 8px 0;
+box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+z-index: 999999 !important;
+```
+
+**Estado Oculto (padrão):**
+```css
+opacity: 0;
+visibility: hidden;
+transform: translateY(-10px);
+pointer-events: none;
+transition: all 0.3s ease;
+```
+
+**Estado Aberto (`.open`):**
+```css
+.tab-with-dropdown.open .dropdown-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    display: block !important;
+    transform: translateY(0) !important;
+}
+```
+
+**Links do Dropdown:**
+```css
+display: block;
+padding: 12px 16px;
+color: rgba(255, 255, 255, 0.9);
+text-decoration: none;
+font-size: 13px;
+font-weight: 500;
+transition: all 0.2s ease;
+```
+
+**Hover dos Links:**
+```css
+background: rgba(42, 127, 255, 0.12);  /* Fundo azul suave */
+color: var(--blue-action);              /* Azul INVLAB */
+padding-left: 20px;                     /* Shift à direita */
+```
+
+**Item Ativo:**
+```css
+background: rgba(42, 127, 255, 0.18);
+color: var(--blue-action);
+border-left: 3px solid var(--blue-action);
+font-weight: 600;
+```
+
+**Estrutura HTML:**
+```html
+<div class="tab-with-dropdown">
+    <button class="tab-btn dropdown-toggle">
+        📊 Renda<br>Fixa <span class="arrow">▼</span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="pages/simulador-cdbs.html">🏦 CDBs</a></li>
+        <li><a href="pages/simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+        <!-- ... mais itens ... -->
+    </ul>
+</div>
+```
+
+---
+
+#### 18.8.7 Categorias no Dropdown (`.dropdown-category`)
+
+**Header da Categoria (`.category-header`):**
+```css
+padding: 12px 16px;
+color: rgba(255, 255, 255, 0.9);
+font-size: 13px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.2s ease;
+```
+
+**Hover do Header:**
+```css
+background: rgba(42, 127, 255, 0.15) !important;
+color: #2A7FFF !important;  /* Azul INVLAB */
+```
+
+**Submenu (`.category-submenu`):**
+```css
+padding-left: 40px;  /* Indentação */
+background: rgba(0, 0, 0, 0.2);
+```
+
+**Links do Submenu:**
+```css
+padding: 10px 16px;
+color: rgba(255, 255, 255, 0.75);
+font-size: 12px;
+```
+
+**Hover dos Links do Submenu:**
+```css
+background: rgba(42, 127, 255, 0.18) !important;
+color: rgba(255, 255, 255, 0.95) !important;
+padding-left: 44px !important;
+transform: translateX(2px);
+border-left: 3px solid var(--blue-primary);
+```
+
+**Estrutura HTML:**
+```html
+<li class="dropdown-category">
+    <div class="category-header" data-category="etfs" onclick="window.location.href='pages/etfs.html'">
+        <span class="category-name">💵 ETFs</span>
+        <span class="category-arrow">▶</span>
+    </div>
+    <ul class="category-submenu" id="submenu-etfs">
+        <li><a href="#">📊 Simulador de Indexação</a></li>
+        <li><a href="#">📈 ETFs Nacionais</a></li>
+    </ul>
+</li>
+```
+
+---
+
+#### 18.8.8 Resumo das Características
+
+| Elemento | Propriedade | Valor Desktop | Motivo |
+|----------|-------------|---------------|--------|
+| **Header** | `position` | `fixed` | Fixo no topo |
+| **Header** | `top` | `60px` | Abaixo do carrossel |
+| **Header** | `background` | `#0D0D0D` | Preto opaco |
+| **Header** | `z-index` | `1000` | Acima do conteúdo |
+| **Container** | `max-width` | `1200px` | Centralizado |
+| **Container** | `padding` | `8px 32px 0` | Compacto |
+| **Logo** | `position` | `absolute` | Esquerda fixa |
+| **Logo** | `left` | `32px` | Margem esquerda |
+| **Logo** | `height` | `47px` | Tamanho desktop |
+| **Logo** | `filter` | Glow dourado | Efeito premium |
+| **Tab Button** | `min-width` | `130px` | Largura fixa |
+| **Tab Button** | `font-size` | `12px` | Legível |
+| **Tab Button** | `color` | `rgba(255,255,255,0.7)` | Branco 70% |
+| **Tab Button** | `color (hover/active)` | `#2A7FFF` | Azul INVLAB |
+| **Dropdown** | `background` | `rgba(14,14,14,0.98)` | Quase preto |
+| **Dropdown** | `border` | `1px solid rgba(42,127,255,0.3)` | Azul INVLAB |
+| **Dropdown** | `min-width` | `220px` | Largura mínima |
+| **Dropdown Link** | `font-size` | `13px` | Legível |
+| **Dropdown Link** | `padding` | `12px 16px` | Confortável |
+
+---
+
+#### 18.8.9 Comportamento e Interações
+
+**Funcionalidades:**
+- ✅ **Fixo no topo** (`position: fixed`)
+- ✅ **Dropdowns aparecem ao clicar** (classe `.open`)
+- ✅ **Hover muda cor para azul INVLAB** (`#2A7FFF`)
+- ✅ **Logo com glow dourado** no hover
+- ✅ **Transições suaves** (0.2s - 0.3s)
+- ✅ **Scroll horizontal** em mobile/tablet
+
+**JavaScript Necessário:**
+```javascript
+// Toggle dropdown ao clicar
+document.querySelectorAll('.dropdown-toggle').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const dropdown = this.closest('.tab-with-dropdown');
+        dropdown.classList.toggle('open');
+    });
+});
+
+// Fechar dropdown ao clicar fora
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.tab-with-dropdown')) {
+        document.querySelectorAll('.tab-with-dropdown').forEach(dd => {
+            dd.classList.remove('open');
+        });
+    }
+});
+```
+
+---
+
+#### 18.8.10 Responsividade
+
+**Tablet (max-width: 1024px):**
+```css
+.main-header {
+    top: 50px;
+}
+
+.header-container {
+    padding: 12px 20px;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.header-logo {
+    position: static;
+    transform: none;
+    justify-content: center;
+}
+
+.header-logo img {
+    height: 27px;
+}
+
+.tab-btn {
+    min-width: 110px;
+    font-size: 10px;
+}
+```
+
+**Mobile (max-width: 768px):**
+```css
+.main-header {
+    top: 46px;
+}
+
+.header-container {
+    padding: 8px 15px;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.header-logo {
+    position: static;
+    transform: none;
+}
+
+.header-logo img {
+    height: 38px;
+}
+
+.tab-btn {
+    min-width: 95px;
+    font-size: 9px;
+    padding: 8px 10px;
+}
+```
+
+**Mobile - Dropdowns:**
+```css
+.tab-with-dropdown .dropdown-menu {
+    position: fixed;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 32px);
+    max-width: 480px;
+}
+```
+
+---
+
+#### 18.8.11 Estrutura HTML Completa
+
+```html
+<!-- Header Fixo -->
+<header class="main-header">
+    <div class="header-container">
+        <!-- Logo (SEM texto "INVLAB") -->
+        <div class="header-logo">
+            <img src="../assets/images/Logo_InvLab.png" alt="INVLAB" class="logo-img" loading="eager">
+        </div>
+        
+        <!-- Sistema de Abas INVLAB -->
+        <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <!-- Aba simples -->
+                <button class="tab-btn" onclick="window.location.href='../index.html#inicio'">
+                    🏠 Início
+                </button>
+                
+                <!-- Aba com dropdown -->
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">
+                        📊 Renda<br>Fixa <span class="arrow">▼</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="pages/simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="pages/simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+```
+
+---
+
+#### 18.8.12 Checklist de Implementação
+
+Ao implementar o menu premium em uma nova página:
+
+- [ ] 1. Header com `class="main-header"` e `position: fixed`
+- [ ] 2. Container com `class="header-container"` e `max-width: 1200px`
+- [ ] 3. Logo **SEM** texto "INVLAB" (apenas imagem)
+- [ ] 4. Path correto do logo (`../assets/images/Logo_InvLab.png` ou `assets/images/Logo_InvLab.png`)
+- [ ] 5. Wrapper de abas com `class="tabs-nav-wrapper"`
+- [ ] 6. Navegação com `class="tabs-nav"`
+- [ ] 7. Botões com `class="tab-btn"` e `min-width: 130px`
+- [ ] 8. Dropdowns com estrutura `.tab-with-dropdown` > `.dropdown-toggle` > `.dropdown-menu`
+- [ ] 9. JavaScript para toggle de dropdowns
+- [ ] 10. Z-index correto (header: 1000, dropdown: 999999)
+- [ ] 11. Testar comportamento sticky ao rolar
+- [ ] 12. Validar responsividade (desktop/tablet/mobile)
+- [ ] 13. Verificar paths dos links (relativos conforme estrutura)
+
+---
+
+#### 18.8.13 Status
+
+**Status:** ✅ **PADRÃO OFICIAL INVLAB**  
+**Páginas de referência:**  
+- `index.html` (página principal)  
+- `pages/simulador-aposentadoria.html` (página de simulador)  
+
+**Última atualização:** Janeiro de 2025  
+**Aplicável a:** Todas as páginas do site INVLAB
+
+**⚠️ IMPORTANTE:** Este menu premium é **identidade visual oficial** do INVLAB e deve ser preservado e replicado em todas as páginas do site para manter consistência visual. O logo **NÃO deve incluir** o texto "INVLAB" - apenas a imagem.
+
+---
+
 ## 🚀 19. PADRÃO DE PÁGINAS DE ARTIGOS (CHECKLIST COMPLETO)
 
 **Status:** ✅ TESTADO E APROVADO  
