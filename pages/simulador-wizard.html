@@ -1171,14 +1171,24 @@
                 gap: 12px !important;
             }
 
+            .ajuste-item {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: stretch !important;
+            }
+
             .ajuste-item label {
                 font-size: 0.85rem !important;
                 margin-bottom: 6px !important;
+                min-height: 20px !important;
             }
 
             .ajuste-input {
                 padding: 10px 12px !important;
                 font-size: 0.9rem !important;
+                height: 42px !important;
+                box-sizing: border-box !important;
+                width: 100% !important;
             }
 
             .ajuste-select {
@@ -1263,14 +1273,24 @@
                 gap: 10px !important;
             }
 
+            .ajuste-item {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: stretch !important;
+            }
+
             .ajuste-item label {
                 font-size: 0.8rem !important;
                 margin-bottom: 5px !important;
+                min-height: 18px !important;
             }
 
             .ajuste-input {
                 padding: 8px 10px !important;
                 font-size: 0.85rem !important;
+                height: 42px !important;
+                box-sizing: border-box !important;
+                width: 100% !important;
             }
 
             .ajuste-select {
@@ -1409,14 +1429,24 @@
                 gap: 10px !important;
             }
 
+            .ajuste-item {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: stretch !important;
+            }
+
             .ajuste-item label {
                 font-size: 0.8rem !important;
                 margin-bottom: 5px !important;
+                min-height: 18px !important;
             }
 
             .ajuste-input {
                 padding: 8px 10px !important;
                 font-size: 0.85rem !important;
+                height: 42px !important;
+                box-sizing: border-box !important;
+                width: 100% !important;
             }
 
             .ajuste-select {
@@ -1513,14 +1543,24 @@
                 gap: 8px !important;
             }
 
+            .ajuste-item {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: stretch !important;
+            }
+
             .ajuste-item label {
                 font-size: 0.75rem !important;
                 margin-bottom: 4px !important;
+                min-height: 16px !important;
             }
 
             .ajuste-input {
                 padding: 7px 8px !important;
                 font-size: 0.8rem !important;
+                height: 42px !important;
+                box-sizing: border-box !important;
+                width: 100% !important;
             }
 
             .ajuste-select {
@@ -1568,6 +1608,54 @@
             border: 1px solid rgba(255,255,255,0.15) !important;
             border-radius: 8px !important;
             margin: 10px 0;
+        }
+
+        /* Correção fina dos botões inferiores do Painel de Ajustes Rápidos */
+        #painelAjustesRapidos .btn-simulador-invlab {
+            font-size: 0.82rem !important;   /* Igual ao tamanho dos botões superiores */
+            padding: 10px 16px !important;   /* Ajuste proporcional */
+        }
+
+        /* Ajuste fino dos botões superiores do dashboard do Wizard */
+        #dashboardResult .btn-simulador-invlab {
+            font-size: 0.82rem !important;   /* Igual aos botões inferiores */
+            padding: 10px 16px !important;   /* Mesmo padrão */
+            font-weight: 600;
+        }
+
+        /* Ajuste fino dos botões superiores (Ver dados usados e Ver fórmulas) */
+        .dashboard-actions .btn-modal {
+            font-size: 0.82rem !important;   /* Igual aos botões inferiores */
+            padding: 10px 16px !important;   /* Mesmo padrão */
+            font-weight: 600 !important;
+        }
+
+        /* Alinhamento horizontal das 3 caixas na primeira linha do Painel de Ajustes Rápidos */
+        #painelAjustesRapidos .linha-ajustes {
+            display: flex;
+            gap: 16px;
+        }
+
+        /* Cada caixa deve ocupar a mesma proporção */
+        #painelAjustesRapidos .linha-ajustes .ajuste-item {
+            flex: 1;
+        }
+
+        /* Normalização da altura dos inputs */
+        #painelAjustesRapidos .linha-ajustes .ajuste-item input {
+            height: 42px !important;
+            padding: 8px 10px !important;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Padronizar altura dos labels da primeira linha do painel Ajustes Rápidos */
+        #painelAjustesRapidos .ajuste-item label {
+            min-height: 32px !important;    /* força mesma altura */
+            display: flex;
+            align-items: flex-end;          /* empurra o texto pra baixo */
+            justify-content: center;        /* centraliza o texto horizontalmente */
+            text-align: center !important;  /* centraliza o texto nas linhas */
         }
     </style>
 </head>

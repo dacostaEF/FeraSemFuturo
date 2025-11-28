@@ -363,7 +363,7 @@ function finalizarWizard() {
             
             <div class="ajuste-grid">
                 <div class="ajuste-item">
-                    <label for="ajusteIdadeAtual">Idade atual</label>
+                    <label for="ajusteIdadeAtual">Idade<br>atual</label>
                     <input type="number" id="ajusteIdadeAtual" class="ajuste-input" 
                            value="${wizardData.idadeAtual}" 
                            min="18" max="90">
