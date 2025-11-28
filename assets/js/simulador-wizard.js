@@ -446,15 +446,15 @@ function gerarInterpretacaoAutomatica(resultados, wizardData) {
         icone = '🎉';
         titulo = 'Parabéns! Sua meta foi atingida.';
         conteudo = `
-            <p>Você terá uma aposentadoria confortável mantendo disciplina nos investimentos.</p>
-            <p style="margin-top: 15px;"><strong>Resumo:</strong></p>
-            <ul>
-                <li><strong>Renda desejada:</strong> R$ ${resultados.rendaDesejada.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</li>
-                <li><strong>Renda projetada:</strong> R$ ${resultados.rendaTotalPrevista.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</li>
-                <li><strong>Excedente:</strong> R$ ${Math.abs(resultados.deficitOuSobra).toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</li>
+            <p style="color: #E4E4E4;">Você terá uma aposentadoria confortável mantendo disciplina nos investimentos.</p>
+            <p style="margin-top: 15px; color: #E4E4E4;">Resumo:</p>
+            <ul style="color: #E4E4E4;">
+                <li>Renda desejada: <span style="color: #D4AF37;">R$ ${resultados.rendaDesejada.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</span></li>
+                <li>Renda projetada: <span style="color: #D4AF37;">R$ ${resultados.rendaTotalPrevista.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</span></li>
+                <li>Excedente: <span style="color: #D4AF37;">R$ ${Math.abs(resultados.deficitOuSobra).toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</span></li>
             </ul>
-            <p style="margin-top: 15px;"><strong>💡 Sugestões opcionais:</strong></p>
-            <ul>
+            <p style="margin-top: 15px; color: #E4E4E4;">💡 Sugestões opcionais:</p>
+            <ul style="color: #E4E4E4;">
                 <li>Antecipar aposentadoria em alguns anos</li>
                 <li>Aumentar patrimônio para deixar herança maior</li>
                 <li>Elevar padrão de vida na aposentadoria</li>
@@ -489,16 +489,16 @@ function gerarInterpretacaoAutomatica(resultados, wizardData) {
         titulo = 'Você está no caminho certo — faltam ajustes simples para alcançar sua meta.';
         const percentualFaltando = 100 - percentualAtingido;
         conteudo = `
-            <p>Atualmente você atingiria <strong>${percentualAtingido.toFixed(1)}%</strong> da meta desejada. Isso já é um ótimo começo!</p>
-            <p style="margin-top: 15px;"><strong>🛠️ Caminhos possíveis:</strong></p>
-            <ul>
-                <li><strong>Elevar aporte mensal:</strong> Aumentar valor investido mensalmente</li>
-                <li><strong>Incluir aportes anuais:</strong> 13º salário, bônus, restituição IR</li>
-                <li><strong>Ajustar idade de aposentadoria:</strong> Trabalhar alguns anos a mais</li>
-                <li><strong>Testar diferentes perfis:</strong> Avaliar aumentar exposição a renda variável</li>
+            <p style="color: #E4E4E4;">Atualmente você atingiria <span style="color: #D4AF37;">${percentualAtingido.toFixed(1)}%</span> da meta desejada. Isso já é um ótimo começo!</p>
+            <p style="margin-top: 15px; color: #E4E4E4;">🛠️ Caminhos possíveis:</p>
+            <ul style="color: #E4E4E4;">
+                <li>Elevar aporte mensal: Aumentar valor investido mensalmente</li>
+                <li>Incluir aportes anuais: 13º salário, bônus, restituição IR</li>
+                <li>Ajustar idade de aposentadoria: Trabalhar alguns anos a mais</li>
+                <li>Testar diferentes perfis: Avaliar aumentar exposição a renda variável</li>
             </ul>
-            <p style="margin-top: 15px; font-size: 0.95em; color: #10b981;">
-                ✔️ <strong>Escolha um caminho acima e teste rapidamente no simulador.</strong>
+            <p style="margin-top: 15px; font-size: 0.95em; color: #E4E4E4;">
+                ✔️ Escolha um caminho acima e teste rapidamente no simulador.
             </p>
         `;
     }
