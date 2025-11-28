@@ -468,16 +468,16 @@ function gerarInterpretacaoAutomatica(resultados, wizardData) {
         const faltam = Math.abs(resultados.deficitOuSobra);
         const aporteAdicional = resultados.aporteNecessario || 0;
         conteudo = `
-            <p>Faltam apenas <strong>R$ ${faltam.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</strong> para atingir 100% da meta.</p>
-            <p style="margin-top: 15px;"><strong>📈 Pontos positivos:</strong></p>
-            <ul>
-                <li>Patrimônio projetado sólido: <strong>R$ ${resultados.patrimonioTotalProjetado.toLocaleString('pt-BR', {maximumFractionDigits: 0})}</strong></li>
-                <li><strong>${percentualAtingido.toFixed(1)}%</strong> da meta já atingidos</li>
+            <p style="color: #E4E4E4;">Faltam apenas <span style="color: #D4AF37;">R$ ${faltam.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</span> para atingir 100% da meta.</p>
+            <p style="margin-top: 15px; color: #E4E4E4;">📈 Pontos positivos:</p>
+            <ul style="color: #E4E4E4;">
+                <li>Patrimônio projetado sólido: <span style="color: #D4AF37;">R$ ${resultados.patrimonioTotalProjetado.toLocaleString('pt-BR', {maximumFractionDigits: 0})}</span></li>
+                <li><span style="color: #D4AF37;">${percentualAtingido.toFixed(1)}%</span> da meta já atingidos</li>
                 <li>${resultados.estrategia === 'perpetua' ? 'Renda perpétua = patrimônio preservado para herança' : 'Estratégia de consumo gradual do capital'}</li>
             </ul>
-            <p style="margin-top: 15px;"><strong>🎯 Como atingir 100%:</strong></p>
-            <ul>
-                ${aporteAdicional > 0 ? `<li>Aumentar aporte mensal de R$ ${Number(wizardData.aporteMensal).toLocaleString('pt-BR', {minimumFractionDigits: 2})} para R$ ${(Number(wizardData.aporteMensal) + aporteAdicional).toLocaleString('pt-BR', {minimumFractionDigits: 2})} (+R$ ${aporteAdicional.toLocaleString('pt-BR', {minimumFractionDigits: 2})})</li>` : ''}
+            <p style="margin-top: 15px; color: #E4E4E4;">🎯 Como atingir 100%:</p>
+            <ul style="color: #E4E4E4;">
+                ${aporteAdicional > 0 ? `<li>Aumentar aporte mensal de <span style="color: #D4AF37;">R$ ${Number(wizardData.aporteMensal).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span> para <span style="color: #D4AF37;">R$ ${(Number(wizardData.aporteMensal) + aporteAdicional).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span> (<span style="color: #D4AF37;">+R$ ${aporteAdicional.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span>)</li>` : ''}
                 <li>Aumentar aporte anual (13º, bônus, etc)</li>
                 <li>Postergar aposentadoria em 1-2 anos</li>
             </ul>
