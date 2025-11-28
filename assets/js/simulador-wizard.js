@@ -261,7 +261,6 @@ function finalizarWizard() {
     // ===================================================
 
     const atingiuMeta = resultados.deficitOuSobra >= 0;
-    const corStatus = atingiuMeta ? '#10b981' : '#facc15';
     const iconeStatus = atingiuMeta ? '✅' : '⚠️';
     const textoStatus = atingiuMeta 
         ? 'Parabéns! Você atingirá sua meta de aposentadoria!' 
@@ -269,7 +268,7 @@ function finalizarWizard() {
 
     dash.innerHTML = `
         <!-- HEADER DE STATUS -->
-        <div class="dashboard-header" style="color: ${corStatus};">
+        <div class="dashboard-header" style="color: #D4AF37;">
             ${iconeStatus} ${textoStatus}
         </div>
 
