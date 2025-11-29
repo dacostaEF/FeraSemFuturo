@@ -92,6 +92,47 @@ function projetarPatrimonioMensal(aporteMensal, anos, taxaAnual, aporteExtraAnua
     return dados;
 }
 
+// ============================================================
+// 🟦 PROJEÇÃO PÓS-APOSENTADORIA: RENDA VITALÍCIA
+// ============================================================
+function projetarPatrimonioVitalicia(patrimonioInicial, taxaMensalReal, anosProjecao = 30) {
+    const meses = anosProjecao * 12;
+    let saldo = patrimonioInicial;
+    let dados = [];
+
+    // Patrimônio permanece constante (só juros são consumidos)
+    for (let m = 0; m <= meses; m++) {
+        dados.push({
+            mes: m,
+            saldo: saldo  // Capital preservado
+        });
+    }
+
+    return dados;
+}
+
+// ============================================================
+// 🟧 PROJEÇÃO PÓS-APOSENTADORIA: RENDA POR PERÍODO (CONSUMO)
+// ============================================================
+function projetarPatrimonioPorPeriodo(patrimonioInicial, rendaMensal, taxaMensalReal, mesesTotal) {
+    let saldo = patrimonioInicial;
+    let dados = [];
+
+    for (let m = 0; m <= mesesTotal; m++) {
+        if (m === 0) {
+            dados.push({ mes: m, saldo: saldo });
+        } else {
+            // Aplica juros e subtrai a renda mensal
+            saldo = saldo * (1 + taxaMensalReal) - rendaMensal;
+            if (saldo < 0) saldo = 0;  // Não pode ficar negativo
+            
+            dados.push({ mes: m, saldo: saldo });
+        }
+    }
+
+    return dados;
+}
+
 // ===============================================================
 // MOTOR PRINCIPAL (ADAPTADO PARA WIZARD)
 // ===============================================================
@@ -218,7 +259,34 @@ function executarSimulacaoWizard(dadosWizard) {
         }
     }
 
-    // 11. Retornar objeto completo
+    // 11. Calcular herança baseada na estratégia
+    let heranca = 0;
+    if (tipoRenda === "vitalicia" && estrategia === "perpetua") {
+        heranca = patrimonioTotalProjetado;  // Capital preservado
+    } else {
+        heranca = 0;  // Capital consumido
+    }
+
+    // 12. Projeção pós-aposentadoria (para gráfico completo)
+    let projecaoPosAposentadoria = [];
+    if (tipoRenda === "vitalicia" && estrategia === "perpetua") {
+        projecaoPosAposentadoria = projetarPatrimonioVitalicia(
+            patrimonioTotalProjetado,
+            taxaMensalReal,
+            30  // 30 anos de projeção pós-aposentadoria
+        );
+    } else if (tipoRenda === "periodo" || estrategia === "esgotavel") {
+        const anos = tipoRenda === "periodo" ? anosPeriodo : anosDuracao;
+        const meses = anos * 12;
+        projecaoPosAposentadoria = projetarPatrimonioPorPeriodo(
+            patrimonioTotalProjetado,
+            rendaRealPossivel,
+            taxaMensalReal,
+            meses
+        );
+    }
+
+    // 13. Retornar objeto completo
     return {
         anosAteAposentadoria,
         patrimonioTotalProjetado,
@@ -230,10 +298,14 @@ function executarSimulacaoWizard(dadosWizard) {
         deficitOuSobra,
         aporteNecessario,
         dadosMensais,
+        projecaoPosAposentadoria,  // ✅ NOVO: projeção pós-aposentadoria
+        heranca,  // ✅ NOVO: valor da herança
         taxaAnualEscolhida,
+        taxaMensalReal,  // ✅ NOVO: para uso no gráfico
         perfil,
         tipoRenda,
-        estrategia
+        estrategia,
+        anosPeriodo  // ✅ NOVO: para exibição
     };
 }
 

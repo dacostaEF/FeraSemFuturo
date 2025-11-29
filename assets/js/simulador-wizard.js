@@ -129,7 +129,7 @@ function validateStep(stepNumber) {
 // -----------------------------------------------------
 // RENDERIZAR GRÁFICO CHART.JS (INVLAB PREMIUM)
 // -----------------------------------------------------
-function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria) {
+function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria, projecaoPosAposentadoria = null, tipoRenda = 'vitalicia', estrategia = 'perpetua') {
     const canvas = document.getElementById('graficoEvolucao');
     if (!canvas) return;
 
@@ -143,6 +143,7 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria)
     const valores = [];
     const anosAteAposentadoria = idadeAposentadoria - idadeAtual;
 
+    // Fase 1: Acumulação até aposentadoria
     dadosMensais.forEach((item, index) => {
         // A cada 12 meses, adiciona um ponto no gráfico
         if (index % 12 === 0 || index === dadosMensais.length - 1) {
@@ -152,31 +153,101 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria)
         }
     });
 
+    // Fase 2: Pós-aposentadoria (se houver projeção)
+    let valoresPosAposentadoria = [];
+    let labelsPosAposentadoria = [];
+    if (projecaoPosAposentadoria && projecaoPosAposentadoria.length > 0) {
+        const patrimonioFinal = valores[valores.length - 1];
+        const anoAposentadoria = anosAteAposentadoria;
+        
+        projecaoPosAposentadoria.forEach((item, index) => {
+            // A cada 12 meses ou pontos importantes
+            if (index % 12 === 0 || index === projecaoPosAposentadoria.length - 1) {
+                const anosAposAposentadoria = Math.floor(index / 12);
+                labelsPosAposentadoria.push(`${anoAposentadoria + anosAposAposentadoria} anos`);
+                valoresPosAposentadoria.push(item.saldo);
+            }
+        });
+    }
+
+    // Determinar cor e label baseado na estratégia
+    const isVitalicia = tipoRenda === 'vitalicia' && estrategia === 'perpetua';
+    const corAcumulacao = '#10b981';  // Verde para acumulação
+    const corConsumo = '#e74c3c';     // Vermelho para consumo
+    const corVitalicia = '#2ecc71';   // Verde claro para vitalícia preservada
+
+    // Preparar datasets
+    const datasets = [{
+        label: 'Acumulação até Aposentadoria',
+        data: valores,
+        borderColor: corAcumulacao,
+        backgroundColor: (context) => {
+            const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(16, 185, 129, 0.3)');
+            gradient.addColorStop(1, 'rgba(16, 185, 129, 0.01)');
+            return gradient;
+        },
+        borderWidth: 3,
+        fill: true,
+        tension: 0.4,
+        pointBackgroundColor: corAcumulacao,
+        pointBorderColor: '#0D0D0D',
+        pointBorderWidth: 2,
+        pointRadius: 4,
+        pointHoverRadius: 6
+    }];
+
+    // Adicionar dataset pós-aposentadoria se houver
+    if (valoresPosAposentadoria.length > 0) {
+        // Combinar labels e valores
+        const labelsCompletos = [...labels, ...labelsPosAposentadoria];
+        const valoresCompletos = [...valores, ...valoresPosAposentadoria];
+        
+        datasets[0].data = valoresCompletos;
+        
+        // Se for período (consumo), adicionar linha de consumo
+        if (!isVitalicia) {
+            datasets.push({
+                label: 'Consumo do Patrimônio (Pós-Aposentadoria)',
+                data: new Array(valores.length).fill(null).concat(valoresPosAposentadoria),
+                borderColor: corConsumo,
+                backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                borderWidth: 3,
+                borderDash: [5, 5],
+                fill: false,
+                tension: 0.4,
+                pointBackgroundColor: corConsumo,
+                pointBorderColor: '#0D0D0D',
+                pointBorderWidth: 2,
+                pointRadius: 3,
+                pointHoverRadius: 5
+            });
+        } else {
+            // Se for vitalícia, linha horizontal preservada
+            datasets.push({
+                label: 'Patrimônio Preservado (Pós-Aposentadoria)',
+                data: new Array(valores.length).fill(null).concat(valoresPosAposentadoria),
+                borderColor: corVitalicia,
+                backgroundColor: 'rgba(46, 204, 113, 0.1)',
+                borderWidth: 3,
+                fill: false,
+                tension: 0,
+                pointBackgroundColor: corVitalicia,
+                pointBorderColor: '#0D0D0D',
+                pointBorderWidth: 2,
+                pointRadius: 3,
+                pointHoverRadius: 5
+            });
+        }
+    }
+
     // Configuração do gráfico INVLAB Premium
     const ctx = canvas.getContext('2d');
     window.chartEvolucao = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: labels,
-            datasets: [{
-                label: 'Patrimônio Acumulado',
-                data: valores,
-                borderColor: '#10b981',
-                backgroundColor: (context) => {
-                    const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
-                    gradient.addColorStop(0, 'rgba(16, 185, 129, 0.3)');
-                    gradient.addColorStop(1, 'rgba(16, 185, 129, 0.01)');
-                    return gradient;
-                },
-                borderWidth: 3,
-                fill: true,
-                tension: 0.4,
-                pointBackgroundColor: '#10b981',
-                pointBorderColor: '#0D0D0D',
-                pointBorderWidth: 2,
-                pointRadius: 4,
-                pointHoverRadius: 6
-            }]
+            labels: valoresPosAposentadoria.length > 0 ? [...labels, ...labelsPosAposentadoria] : labels,
+            datasets: datasets
         },
         options: {
             responsive: true,
@@ -283,6 +354,13 @@ function finalizarWizard() {
             <div class="card">
                 <h3>📈 Renda Mensal Prevista</h3>
                 <p class="valor" style="color: #D4AF37;">R$ ${resultados.rendaTotalPrevista.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px;">
+                    ${resultados.tipoRenda === 'vitalicia' && resultados.estrategia === 'perpetua'
+                        ? '💚 Renda vitalícia (capital preservado)'
+                        : resultados.tipoRenda === 'periodo'
+                            ? `⏱️ Renda por ${resultados.anosPeriodo || 30} anos (capital consumido)`
+                            : '📊 Renda com uso gradual do capital'}
+                </p>
             </div>
 
             <div class="card">
@@ -291,9 +369,16 @@ function finalizarWizard() {
             </div>
 
             <div class="card">
-                <h3>📊 Diferença</h3>
-                <p class="valor" style="color: ${atingiuMeta ? '#10b981' : '#facc15'};">
-                    ${atingiuMeta ? '+' : ''}R$ ${Math.abs(resultados.deficitOuSobra).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+                <h3>💎 Herança Projetada</h3>
+                <p class="valor" style="color: ${resultados.heranca > 0 ? '#10b981' : '#ef4444'};">
+                    ${resultados.heranca > 0 
+                        ? 'R$ ' + resultados.heranca.toLocaleString('pt-BR', {maximumFractionDigits: 0})
+                        : 'R$ 0 (capital consumido)'}
+                </p>
+                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px;">
+                    ${resultados.heranca > 0 
+                        ? 'Patrimônio preservado para herança'
+                        : 'Capital será consumido ao final do período'}
                 </p>
             </div>
 
@@ -311,10 +396,15 @@ function finalizarWizard() {
                 }
                 <li><strong>Estratégia:</strong> ${
                     resultados.tipoRenda === 'vitalicia' && resultados.estrategia === 'perpetua'
-                        ? 'Renda Vitalícia com Capital Preservado'
+                        ? '💚 Renda Vitalícia Perpétua (capital preservado indefinidamente)'
                         : resultados.tipoRenda === 'periodo'
-                            ? `Renda por ${wizardData.anosPeriodo || 30} anos (capital ${resultados.estrategia === 'esgotavel' ? 'consumido gradualmente' : 'preservado'})`
-                            : `Renda com uso gradual do capital (${wizardData.anosDuracao || 30} anos)`
+                            ? `⏱️ Renda por ${resultados.anosPeriodo || 30} anos (capital consumido gradualmente)`
+                            : `📊 Renda com uso gradual do capital (${wizardData.anosDuracao || 30} anos)`
+                }</li>
+                <li><strong>Herança:</strong> ${
+                    resultados.heranca > 0
+                        ? `R$ ${resultados.heranca.toLocaleString('pt-BR', {maximumFractionDigits: 0})} (patrimônio preservado)`
+                        : 'R$ 0 (capital será consumido)'
                 }</li>
             </ul>
             <p style="margin-top: 15px;">⏱️ <strong>Prazo:</strong> ${resultados.anosAteAposentadoria} anos até aposentadoria</p>
@@ -483,7 +573,10 @@ function finalizarWizard() {
         renderizarGraficoEvolucao(
             resultados.dadosMensais,
             wizardData.idadeAtual,
-            wizardData.idadeAposentadoria
+            wizardData.idadeAposentadoria,
+            resultados.projecaoPosAposentadoria,  // ✅ NOVO: projeção pós-aposentadoria
+            resultados.tipoRenda,  // ✅ NOVO: tipo de renda
+            resultados.estrategia  // ✅ NOVO: estratégia
         );
         
         // Verificar se o painel existe antes de configurar
@@ -628,7 +721,10 @@ function atualizarRegrasWizard() {
     const rTipo = document.querySelector("input[name='tipoRenda']:checked");
     const rEstrategia = document.querySelector("input[name='estrategia']:checked");
     
-    if (!rTipo || !rEstrategia) return;
+    if (!rTipo || !rEstrategia) {
+        console.warn("⚠️ atualizarRegrasWizard: Radio buttons não encontrados");
+        return;
+    }
 
     const tipo = rTipo.value;
     const est = rEstrategia.value;
@@ -645,31 +741,38 @@ function atualizarRegrasWizard() {
         duracaoContainer.style.display = est === "esgotavel" ? "block" : "none";
     }
 
-    // BLOQUEIO 1: Vitalícia só aceita perpétua
+    // BLOQUEIO 1: Vitalícia só aceita perpétua (preservar capital)
     const radioEsgotavel = document.querySelector("input[value='esgotavel']");
     const radioPerpetua = document.querySelector("input[value='perpetua']");
     
     if (tipo === "vitalicia") {
+        // Se escolheu vitalícia, só pode preservar capital (perpétua)
         if (radioEsgotavel) radioEsgotavel.disabled = true;
         if (est === "esgotavel" && radioPerpetua) {
             radioPerpetua.checked = true;
         }
     } else {
+        // Se escolheu período, pode escolher qualquer estratégia
         if (radioEsgotavel) radioEsgotavel.disabled = false;
     }
 
-    // BLOQUEIO 2: Perpétua só aceita vitalícia
+    // BLOQUEIO 2: REMOVIDO - Não bloquear período quando perpétua está selecionado
+    // O usuário pode escolher "período determinado" independentemente da estratégia
     const radioPeriodo = document.querySelector("input[value='periodo']");
     const radioVitalicia = document.querySelector("input[value='vitalicia']");
     
-    if (est === "perpetua") {
-        if (radioPeriodo) radioPeriodo.disabled = true;
-        if (tipo === "periodo" && radioVitalicia) {
-            radioVitalicia.checked = true;
-        }
-    } else {
-        if (radioPeriodo) radioPeriodo.disabled = false;
+    // SEMPRE permitir seleção de ambos os tipos de renda
+    // Garantir que nunca fiquem desabilitados
+    if (radioPeriodo) {
+        radioPeriodo.disabled = false;
+        radioPeriodo.removeAttribute('disabled'); // Força remoção
     }
+    if (radioVitalicia) {
+        radioVitalicia.disabled = false;
+        radioVitalicia.removeAttribute('disabled'); // Força remoção
+    }
+    
+    console.log(`✅ Regras atualizadas: tipoRenda=${tipo}, estrategia=${est}`);
 }
 
 // -----------------------------------------------------
