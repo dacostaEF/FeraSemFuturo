@@ -721,13 +721,21 @@ function atualizarRegrasWizard() {
     const rTipo = document.querySelector("input[name='tipoRenda']:checked");
     const rEstrategia = document.querySelector("input[name='estrategia']:checked");
     
-    if (!rTipo || !rEstrategia) {
-        console.warn("⚠️ atualizarRegrasWizard: Radio buttons não encontrados");
+    if (!rTipo) {
+        console.warn("⚠️ atualizarRegrasWizard: Radio button tipoRenda não encontrado");
         return;
+    }
+    
+    // Se rEstrategia não estiver encontrado, buscar o padrão
+    if (!rEstrategia) {
+        const estrategiaPadrao = document.querySelector("input[name='estrategia'][value='perpetua']");
+        if (estrategiaPadrao) {
+            estrategiaPadrao.checked = true;
+        }
     }
 
     const tipo = rTipo.value;
-    const est = rEstrategia.value;
+    const est = rEstrategia ? rEstrategia.value : "perpetua";
 
     // Mostrar/esconder campos condicionais
     const periodoContainer = document.getElementById("periodoContainer");
@@ -747,13 +755,25 @@ function atualizarRegrasWizard() {
     
     if (tipo === "vitalicia") {
         // Se escolheu vitalícia, só pode preservar capital (perpétua)
-        if (radioEsgotavel) radioEsgotavel.disabled = true;
+        if (radioEsgotavel) {
+            radioEsgotavel.disabled = true;
+        }
         if (est === "esgotavel" && radioPerpetua) {
             radioPerpetua.checked = true;
         }
     } else {
         // Se escolheu período, pode escolher qualquer estratégia
-        if (radioEsgotavel) radioEsgotavel.disabled = false;
+        // FORÇAR habilitação da opção "Usar capital gradualmente"
+        if (radioEsgotavel) {
+            radioEsgotavel.disabled = false;
+            radioEsgotavel.removeAttribute('disabled'); // Força remoção
+        }
+    }
+    
+    // SEMPRE garantir que "Preservar capital" esteja habilitado
+    if (radioPerpetua) {
+        radioPerpetua.disabled = false;
+        radioPerpetua.removeAttribute('disabled'); // Força remoção
     }
 
     // BLOQUEIO 2: REMOVIDO - Não bloquear período quando perpétua está selecionado
@@ -772,7 +792,236 @@ function atualizarRegrasWizard() {
         radioVitalicia.removeAttribute('disabled'); // Força remoção
     }
     
+    // VERIFICAÇÃO FINAL: Garantir que quando "período" está selecionado, 
+    // "esgotavel" esteja SEMPRE habilitado
+    if (tipo === "periodo" && radioEsgotavel) {
+        radioEsgotavel.disabled = false;
+        radioEsgotavel.removeAttribute('disabled');
+        console.log("✅ Forçando habilitação de 'Usar capital gradualmente' para período");
+    }
+    
+    // Log detalhado para debug
     console.log(`✅ Regras atualizadas: tipoRenda=${tipo}, estrategia=${est}`);
+    console.log(`   - radioEsgotavel disabled: ${radioEsgotavel ? radioEsgotavel.disabled : 'não encontrado'}`);
+    console.log(`   - radioPerpetua disabled: ${radioPerpetua ? radioPerpetua.disabled : 'não encontrado'}`);
+}
+
+// ================================================================
+// CONFIGURAR LISTENERS DE ESTRATÉGIA
+// ================================================================
+function configurarListenersEstrategia() {
+    console.log("🔧 Configurando listeners de estratégia...");
+    
+    // Remover listeners anteriores se existirem (usando uma flag)
+    if (window.listenersEstrategiaConfigurados) {
+        console.log("⚠️ Listeners já configurados, pulando...");
+        return;
+    }
+    
+    const rEstrategia = document.querySelectorAll("input[name='estrategia']");
+    console.log(`🔍 Encontrados ${rEstrategia.length} radio buttons de estratégia`);
+    
+    if (rEstrategia.length === 0) {
+        console.warn("⚠️ Nenhum radio button de estratégia encontrado! Tentando novamente em 500ms...");
+        setTimeout(configurarListenersEstrategia, 500);
+        return;
+    }
+    
+    rEstrategia.forEach((r, index) => {
+        // Listener no input radio - usar once: false para permitir múltiplas tentativas
+        r.addEventListener("click", function(e) {
+            console.log(`🖱️ Clicou em estratégia [${index}]: ${this.value}`);
+            // Verificar se está tentando selecionar "esgotavel" com "vitalicia" ativo
+            const tipoRendaAtual = document.querySelector("input[name='tipoRenda']:checked");
+            console.log(`   Tipo de renda atual: ${tipoRendaAtual ? tipoRendaAtual.value : 'não encontrado'}`);
+            
+            if (this.value === "esgotavel" && tipoRendaAtual && tipoRendaAtual.value === "vitalicia") {
+                console.log("⚠️ BLOQUEANDO: Tentativa de selecionar esgotavel com vitalicia ativo");
+                // Prevenir a seleção
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                this.checked = false;
+                
+                // Manter "perpetua" selecionado
+                const radioPerpetua = document.querySelector("input[value='perpetua']");
+                if (radioPerpetua) {
+                    radioPerpetua.checked = true;
+                }
+                
+                // Mostrar modal explicativo
+                console.log("📢 Chamando mostrarModalVitaliciaEsgotavel()...");
+                mostrarModalVitaliciaEsgotavel();
+                return false;
+            }
+        }, { capture: true }); // Usar capture para pegar antes de outros listeners
+        
+        r.addEventListener("change", function() {
+            console.log(`🔄 Estratégia mudou para: ${this.value}`);
+            atualizarRegrasWizard();
+        });
+    });
+    
+    // Também adicionar listener nos labels (caso o usuário clique no container)
+    const labelsEstrategia = document.querySelectorAll("label.option-line");
+    console.log(`🔍 Encontrados ${labelsEstrategia.length} labels`);
+    
+    labelsEstrategia.forEach((label, index) => {
+        const radio = label.querySelector("input[name='estrategia']");
+        if (radio && radio.value === "esgotavel") {
+            console.log(`   Configurando listener no label [${index}] para esgotavel`);
+            
+            label.addEventListener("click", function(e) {
+                console.log(`🖱️ Clicou no label [${index}] de esgotavel`);
+                // Verificar se está tentando selecionar "esgotavel" com "vitalicia" ativo
+                const tipoRendaAtual = document.querySelector("input[name='tipoRenda']:checked");
+                
+                if (tipoRendaAtual && tipoRendaAtual.value === "vitalicia") {
+                    console.log("⚠️ BLOQUEANDO (via label): Tentativa de selecionar esgotavel com vitalicia ativo");
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                    
+                    // Prevenir que o radio seja marcado
+                    const radioEsgotavel = this.querySelector("input[name='estrategia']");
+                    if (radioEsgotavel) {
+                        radioEsgotavel.checked = false;
+                    }
+                    
+                    // Manter "perpetua" selecionado
+                    const radioPerpetua = document.querySelector("input[value='perpetua']");
+                    if (radioPerpetua) {
+                        radioPerpetua.checked = true;
+                    }
+                    
+                    // Mostrar modal explicativo
+                    console.log("📢 Chamando mostrarModalVitaliciaEsgotavel() (via label)...");
+                    mostrarModalVitaliciaEsgotavel();
+                    return false;
+                }
+            }, { capture: true });
+        }
+    });
+    
+    window.listenersEstrategiaConfigurados = true;
+    console.log("✅ Listeners de estratégia configurados!");
+}
+
+// ================================================================
+// MODAL EXPLICATIVO - Renda Vitalícia vs Usar Capital
+// ================================================================
+function mostrarModalVitaliciaEsgotavel() {
+    console.log("🔍 Função mostrarModalVitaliciaEsgotavel chamada");
+    let modal = document.getElementById("modalVitaliciaEsgotavel");
+    
+    // Se não encontrar, tentar buscar de outras formas
+    if (!modal) {
+        console.warn("⚠️ Modal não encontrado por ID, tentando buscar por classe...");
+        modal = document.querySelector(".modal-overlay#modalVitaliciaEsgotavel");
+    }
+    
+    console.log("🔍 Modal encontrado:", modal ? "SIM" : "NÃO");
+    
+    if (modal) {
+        console.log("✅ Exibindo modal...");
+        
+        // Múltiplas formas de garantir que o modal apareça
+        modal.style.display = "flex";
+        modal.style.visibility = "visible";
+        modal.style.opacity = "1";
+        modal.classList.add("active");
+        modal.setAttribute("style", 
+            "display: flex !important; " +
+            "position: fixed !important; " +
+            "top: 0 !important; " +
+            "left: 0 !important; " +
+            "width: 100% !important; " +
+            "height: 100% !important; " +
+            "background: rgba(0, 0, 0, 0.85) !important; " +
+            "z-index: 10000 !important; " +
+            "justify-content: center !important; " +
+            "align-items: center !important; " +
+            "padding: 20px !important; " +
+            "visibility: visible !important; " +
+            "opacity: 1 !important;"
+        );
+        
+        document.body.style.overflow = "hidden"; // Prevenir scroll
+        
+        console.log("✅ Modal exibido! Verifique na tela.");
+    } else {
+        console.error("❌ Modal não encontrado! Verifique se o ID está correto no HTML.");
+        console.error("   Tentando criar modal dinamicamente...");
+        
+        // Criar modal dinamicamente se não existir (fallback)
+        criarModalDinamico();
+    }
+}
+
+// Função fallback para criar modal se não existir
+function criarModalDinamico() {
+    const modalHTML = `
+        <div id="modalVitaliciaEsgotavel" class="modal-overlay" style="display: flex !important; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 10000; justify-content: center; align-items: center; padding: 20px;">
+            <div class="modal-content" style="max-width: 600px; background: #1a1a1a; border: 1px solid rgba(138, 204, 166, 0.3); border-radius: 12px; padding: 30px;">
+                <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(138, 204, 166, 0.2);">
+                    <h3 class="modal-title" style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #D4AF37; font-weight: 700;">💡 Por que essas opções não combinam?</h3>
+                    <button class="modal-close" onclick="fecharModalVitaliciaEsgotavel()" style="background: none; border: none; color: #9ca3af; font-size: 24px; cursor: pointer; padding: 0; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">×</button>
+                </div>
+                <div class="modal-body" style="color: #E4E4E4; line-height: 1.8;">
+                    <p style="font-size: 1.1rem; color: #E4E4E4; margin-bottom: 15px; line-height: 1.6;">
+                        <strong style="color: #10b981;">Renda Vitalícia</strong> significa que você receberá uma renda <strong>fixa e constante</strong> pelo resto da sua vida, sem nunca acabar.
+                    </p>
+                    <p style="font-size: 1.1rem; color: #E4E4E4; line-height: 1.6; margin-bottom: 20px;">
+                        <strong style="color: #10b981;">Usar Capital Gradualmente</strong> significa que você vai <strong>consumir seu patrimônio</strong> ao longo do tempo para ter uma renda maior.
+                    </p>
+                    <p style="color: #FACC15; margin-top: 20px; line-height: 1.7;">
+                        <strong>💡 Solução:</strong> Se você quer Renda Vitalícia, escolha "Preservar Capital". Se quer uma renda maior (mas que vai acabar), escolha "Renda por Período" + "Usar Capital Gradualmente".
+                    </p>
+                </div>
+                <div style="padding: 15px; text-align: right; border-top: 1px solid rgba(138, 204, 166, 0.2); margin-top: 20px;">
+                    <button onclick="fecharModalVitaliciaEsgotavel()" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer;">Entendi! 👍</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    console.log("✅ Modal criado dinamicamente!");
+}
+
+function fecharModalVitaliciaEsgotavel() {
+    const modal = document.getElementById("modalVitaliciaEsgotavel");
+    if (modal) {
+        modal.style.display = "none";
+        document.body.style.overflow = ""; // Restaurar scroll
+    }
+}
+
+// Fechar modal ao clicar no backdrop
+function configurarModalVitaliciaEsgotavel() {
+    const modal = document.getElementById("modalVitaliciaEsgotavel");
+    if (modal) {
+        modal.addEventListener("click", function(e) {
+            if (e.target === modal) {
+                fecharModalVitaliciaEsgotavel();
+            }
+        });
+    }
+}
+
+// Configurar quando DOM estiver pronto
+if (typeof document !== "undefined") {
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", configurarModalVitaliciaEsgotavel);
+    } else {
+        configurarModalVitaliciaEsgotavel();
+    }
+}
+
+// Tornar funções globais para uso no onclick do HTML
+if (typeof window !== "undefined") {
+    window.fecharModalVitaliciaEsgotavel = fecharModalVitaliciaEsgotavel;
+    window.mostrarModalVitaliciaEsgotavel = mostrarModalVitaliciaEsgotavel;
 }
 
 // -----------------------------------------------------
@@ -1055,6 +1304,18 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         console.error("❌ Botão btnStartWizard NÃO encontrado!");
     }
+    
+    // Configurar listeners de estratégia após um pequeno delay para garantir que elementos estejam prontos
+    // Chamar múltiplas vezes para garantir que funcione
+    setTimeout(() => {
+        console.log("⏰ Primeira tentativa de configurar listeners (300ms)...");
+        configurarListenersEstrategia();
+    }, 300);
+    
+    setTimeout(() => {
+        console.log("⏰ Segunda tentativa de configurar listeners (1000ms)...");
+        configurarListenersEstrategia();
+    }, 1000);
 
     const steps = document.querySelectorAll('.wizard-step');
 
@@ -1088,10 +1349,83 @@ document.addEventListener("DOMContentLoaded", () => {
     const rTipo = document.querySelectorAll("input[name='tipoRenda']");
     const rEstrategia = document.querySelectorAll("input[name='estrategia']");
 
-    rTipo.forEach(r => r.addEventListener("change", atualizarRegrasWizard));
-    rEstrategia.forEach(r => r.addEventListener("change", atualizarRegrasWizard));
+    rTipo.forEach(r => {
+        r.addEventListener("change", function() {
+            console.log(`🔄 Tipo de renda mudou para: ${this.value}`);
+            atualizarRegrasWizard();
+        });
+    });
+    
+    // Configurar listeners de estratégia
+    configurarListenersEstrategia();
+    
+    // Event delegation no container do passo 4 para garantir que funcione
+    // Isso funciona mesmo se os elementos ainda não estiverem prontos
+    const step4 = document.getElementById("step-4");
+    if (step4) {
+        console.log("✅ Step 4 encontrado, adicionando event delegation...");
+        step4.addEventListener("click", function(e) {
+            // Verificar se o clique foi em um input de estratégia ou seu label
+            const target = e.target;
+            const radioEsgotavel = target.closest("label")?.querySelector("input[value='esgotavel']") || 
+                                   (target.type === "radio" && target.value === "esgotavel" ? target : null);
+            
+            if (radioEsgotavel) {
+                const tipoRendaAtual = document.querySelector("input[name='tipoRenda']:checked");
+                
+                if (tipoRendaAtual && tipoRendaAtual.value === "vitalicia") {
+                    console.log("⚠️ Event delegation: Bloqueando esgotavel com vitalicia");
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    radioEsgotavel.checked = false;
+                    
+                    const radioPerpetua = document.querySelector("input[value='perpetua']");
+                    if (radioPerpetua) {
+                        radioPerpetua.checked = true;
+                    }
+                    
+                    mostrarModalVitaliciaEsgotavel();
+                    return false;
+                }
+            }
+        }, { capture: true });
+    } else {
+        console.warn("⚠️ Step 4 não encontrado, tentando novamente...");
+        setTimeout(() => {
+            const step4Retry = document.getElementById("step-4");
+            if (step4Retry) {
+                step4Retry.addEventListener("click", function(e) {
+                    const target = e.target;
+                    const radioEsgotavel = target.closest("label")?.querySelector("input[value='esgotavel']") || 
+                                           (target.type === "radio" && target.value === "esgotavel" ? target : null);
+                    
+                    if (radioEsgotavel) {
+                        const tipoRendaAtual = document.querySelector("input[name='tipoRenda']:checked");
+                        
+                        if (tipoRendaAtual && tipoRendaAtual.value === "vitalicia") {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            radioEsgotavel.checked = false;
+                            
+                            const radioPerpetua = document.querySelector("input[value='perpetua']");
+                            if (radioPerpetua) {
+                                radioPerpetua.checked = true;
+                            }
+                            
+                            mostrarModalVitaliciaEsgotavel();
+                            return false;
+                        }
+                    }
+                }, { capture: true });
+            }
+        }, 500);
+    }
 
-    // Inicializar regras
-    setTimeout(atualizarRegrasWizard, 100);
+    // Inicializar regras (com delay maior para garantir que elementos estejam prontos)
+    setTimeout(() => {
+        console.log("🔧 Inicializando regras do wizard...");
+        atualizarRegrasWizard();
+    }, 200);
 
 });

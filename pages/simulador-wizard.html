@@ -860,6 +860,11 @@
         .modal-overlay.active {
             display: flex;
         }
+        
+        /* Garantir que modal funcione mesmo quando display:flex é aplicado via JavaScript */
+        .modal-overlay[style*="display: flex"] {
+            display: flex !important;
+        }
 
         .modal-content {
             background: #1a1a1a;
@@ -2544,6 +2549,70 @@
             </div>
         </div>
     </footer>
+
+    <!-- Modal Explicativo - Renda Vitalícia vs Usar Capital -->
+    <div id="modalVitaliciaEsgotavel" class="modal-overlay" style="display: none;">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 class="modal-title">💡 Por que essas opções não combinam?</h3>
+                <button class="modal-close" onclick="fecharModalVitaliciaEsgotavel()">×</button>
+            </div>
+            <div class="modal-body">
+                <div style="padding: 20px; background: rgba(250, 204, 21, 0.05); border-left: 4px solid #FACC15; border-radius: 8px; margin-bottom: 20px;">
+                    <p style="font-size: 1.1rem; color: #E4E4E4; margin-bottom: 15px; line-height: 1.6;">
+                        <strong>Renda Vitalícia</strong> significa que você receberá uma renda <strong>fixa e constante</strong> pelo resto da sua vida, sem nunca acabar.
+                    </p>
+                    <p style="font-size: 1.1rem; color: #E4E4E4; line-height: 1.6;">
+                        <strong>Usar Capital Gradualmente</strong> significa que você vai <strong>consumir seu patrimônio</strong> ao longo do tempo para ter uma renda maior.
+                    </p>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 1rem;">🤔 Por que não podem ser usadas juntas?</h4>
+                    <ul style="color: #E4E4E4; line-height: 1.8; padding-left: 20px;">
+                        <li style="margin-bottom: 10px;">
+                            <strong>Renda Vitalícia</strong> precisa que seu patrimônio <strong>permaneça intacto</strong> para gerar juros eternamente.
+                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <strong>Usar Capital Gradualmente</strong> significa <strong>gastar o patrimônio</strong>, que vai diminuindo até acabar.
+                        </li>
+                        <li style="margin-bottom: 10px;">
+                            Se você <strong>gastar o capital</strong>, não terá mais como gerar a <strong>renda vitalícia</strong> no futuro.
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+                    <h4 style="color: #10b981; margin-bottom: 10px; font-size: 1rem;">✅ O que fazer então?</h4>
+                    <p style="color: #E4E4E4; line-height: 1.7; margin: 0;">
+                        Se você quer <strong>Renda Vitalícia</strong>, escolha <strong>"Preservar Capital"</strong>. Assim, você receberá uma renda mensal fixa (menor, mas eterna) e seu patrimônio ficará preservado para deixar como herança.
+                    </p>
+                </div>
+
+                <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 15px;">
+                    <h4 style="color: #ef4444; margin-bottom: 10px; font-size: 1rem;">💡 Quer uma renda maior?</h4>
+                    <p style="color: #E4E4E4; line-height: 1.7; margin: 0;">
+                        Se você quer uma <strong>renda maior</strong> (mas que vai acabar em alguns anos), escolha <strong>"Renda por Período Determinado"</strong> + <strong>"Usar Capital Gradualmente"</strong>. Assim você pode consumir o patrimônio para ter mais renda mensal.
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 15px; text-align: right; border-top: 1px solid rgba(138, 204, 166, 0.2);">
+                <button onclick="fecharModalVitaliciaEsgotavel()" style="
+                    background: linear-gradient(135deg, #10b981, #059669);
+                    color: white;
+                    border: none;
+                    padding: 12px 24px;
+                    border-radius: 8px;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    Entendi! 👍
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- APIs e Scripts do Carrossel -->
     <script defer src="../assets/js/bcb-api.js"></script>
