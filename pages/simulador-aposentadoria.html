@@ -2139,6 +2139,15 @@
         // ============================
         //  🔥 ENGINE REAL INVLAB 🔥
         // ============================
+        
+        // Stub para evitar erro de referência ao simulador wizard
+        // (função não é necessária nesta página, mas pode ser chamada por scripts externos)
+        if (typeof window.simuladorWizardStart === 'undefined') {
+            window.simuladorWizardStart = function() {
+                // Função stub - não faz nada nesta página
+                console.log('ℹ️ simuladorWizardStart chamada, mas não é necessária nesta página');
+            };
+        }
 
         // Valores de referência realistas
         const INFLACAO_MEDIA = 4.5;      
