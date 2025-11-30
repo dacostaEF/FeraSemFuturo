@@ -77,9 +77,26 @@ function captureStepData(stepNumber) {
             wizardData.idadeAposentadoria = getValue("idadeAposentadoria");
             wizardData.perfilInvestidor = getValue("perfilInvestidor");
             wizardData.tipoRenda = document.querySelector("input[name='tipoRenda']:checked")?.value || "vitalicia";
-            wizardData.anosPeriodo = getValue("anosPeriodo") || null;
             wizardData.estrategia = document.querySelector("input[name='estrategia']:checked")?.value || "perpetua";
-            wizardData.anosDuracao = getValue("anosDuracao") || null;
+            
+            // Captura idade terminal para Período OU Esgotável
+            if (wizardData.tipoRenda === "periodo" || wizardData.estrategia === "esgotavel") {
+                const idadeTerminal = parseInt(getValue("idadeTerminal")) || 95;
+                wizardData.idadeFinal = idadeTerminal;
+                
+                // Calcular anosPeriodo/anosDuracao a partir da idade terminal
+                if (wizardData.tipoRenda === "periodo") {
+                    wizardData.anosPeriodo = idadeTerminal - Number(wizardData.idadeAposentadoria);
+                    wizardData.mostrarTodasCurvas = document.getElementById("mostrarTodasCurvas").checked || false;
+                } else {
+                    wizardData.anosDuracao = idadeTerminal - Number(wizardData.idadeAposentadoria);
+                }
+            } else {
+                wizardData.idadeFinal = 95; // padrão
+                wizardData.anosPeriodo = null;
+                wizardData.anosDuracao = null;
+                wizardData.mostrarTodasCurvas = false;
+            }
             break;
     }
 }
@@ -132,7 +149,7 @@ function validateStep(stepNumber) {
 // -----------------------------------------------------
 // RENDERIZAR GRÁFICO CHART.JS (INVLAB PREMIUM)
 // -----------------------------------------------------
-function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria, projecaoPosAposentadoria = null, tipoRenda = 'vitalicia', estrategia = 'perpetua') {
+function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria, projecaoPosAposentadoria = null, tipoRenda = 'vitalicia', estrategia = 'perpetua', curvasExtras = null, idadeFinal = null) {
     const canvas = document.getElementById('graficoEvolucao');
     if (!canvas) return;
 
@@ -159,6 +176,8 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
     // Fase 2: Pós-aposentadoria (se houver projeção)
     let valoresPosAposentadoria = [];
     let labelsPosAposentadoria = [];
+    let maxAnosTotal = anosAteAposentadoria; // Inicializar com anos até aposentadoria
+    
     if (projecaoPosAposentadoria && projecaoPosAposentadoria.length > 0) {
         const patrimonioFinal = valores[valores.length - 1];
         const anoAposentadoria = anosAteAposentadoria;
@@ -167,11 +186,35 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
             // A cada 12 meses ou pontos importantes
             if (index % 12 === 0 || index === projecaoPosAposentadoria.length - 1) {
                 const anosAposAposentadoria = Math.floor(index / 12);
-                labelsPosAposentadoria.push(`${anoAposentadoria + anosAposAposentadoria} anos`);
+                const anoTotal = anoAposentadoria + anosAposAposentadoria;
+                labelsPosAposentadoria.push(`${anoTotal} anos`);
                 valoresPosAposentadoria.push(item.saldo);
+                
+                // Atualizar máximo se necessário
+                if (anoTotal > maxAnosTotal) {
+                    maxAnosTotal = anoTotal;
+                }
             }
         });
     }
+    
+    // Calcular limite do eixo X baseado na idade máxima (115 anos)
+    // Se houver curvas extras, considerar a maior idade
+    let idadeMaxima = idadeFinal || 115;
+    if (curvasExtras && curvasExtras.length > 0) {
+        curvasExtras.forEach(curvaObj => {
+            if (curvaObj.idade > idadeMaxima) {
+                idadeMaxima = curvaObj.idade;
+            }
+        });
+    }
+    
+    // Calcular anos totais necessários: anos até aposentadoria + (idade máxima - idade aposentadoria)
+    const anosAposAposentadoriaMax = idadeMaxima - idadeAposentadoria;
+    const anosTotalMax = anosAteAposentadoria + Math.max(anosAposAposentadoriaMax, 0);
+    
+    // Garantir que o limite seja pelo menos 85 anos (elegante) ou o necessário
+    const limiteEixoX = Math.max(anosTotalMax, 85);
 
     // Determinar cor e label baseado na estratégia
     const isVitalicia = tipoRenda === 'vitalicia' && estrategia === 'perpetua';
@@ -211,7 +254,7 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
         // Se for período (consumo), adicionar linha de consumo
         if (!isVitalicia) {
             datasets.push({
-                label: 'Consumo do Patrimônio (Pós-Aposentadoria)',
+                label: tipoRenda === 'periodo' && idadeFinal ? `Até ${idadeFinal} anos (selecionado)` : 'Consumo do Patrimônio',
                 data: new Array(valores.length).fill(null).concat(valoresPosAposentadoria),
                 borderColor: corConsumo,
                 backgroundColor: 'rgba(231, 76, 60, 0.1)',
@@ -228,7 +271,7 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
         } else {
             // Se for vitalícia, linha horizontal preservada
             datasets.push({
-                label: 'Patrimônio Preservado (Pós-Aposentadoria)',
+                label: 'Patrimônio Preservado',
                 data: new Array(valores.length).fill(null).concat(valoresPosAposentadoria),
                 borderColor: corVitalicia,
                 backgroundColor: 'rgba(46, 204, 113, 0.1)',
@@ -244,12 +287,142 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
         }
     }
 
+    // Adicionar curvas extras (múltiplas curvas de longevidade)
+    if (curvasExtras && curvasExtras.length > 0) {
+        const anosAteAposentadoria = idadeAposentadoria - idadeAtual;
+        
+        curvasExtras.forEach(curvaObj => {
+            // Preparar dados da curva extra (amostrar a cada 12 meses)
+            const valoresCurva = [];
+            const labelsCurva = [];
+            
+            curvaObj.curva.forEach((item, index) => {
+                if (index % 12 === 0 || index === curvaObj.curva.length - 1) {
+                    const anosAposAposentadoria = Math.floor(index / 12);
+                    const anoTotal = anosAteAposentadoria + anosAposAposentadoria;
+                    labelsCurva.push(`${anoTotal} anos`);
+                    valoresCurva.push(item.saldo);
+                    
+                    // Atualizar maxAnosTotal
+                    if (anoTotal > maxAnosTotal) {
+                        maxAnosTotal = anoTotal;
+                    }
+                }
+            });
+            
+            // Criar array de dados mapeado: null até aposentadoria, depois os valores da curva
+            const dadosCurva = new Array(valores.length).fill(null).concat(valoresCurva);
+            
+            datasets.push({
+                label: `Até ${curvaObj.idade} anos`,
+                data: dadosCurva,
+                borderWidth: 2,
+                fill: false,
+                tension: 0.1,
+                borderColor:
+                    curvaObj.idade === 95 ? "#2E86C1" :
+                    curvaObj.idade === 105 ? "#D35400" :
+                    "#8E44AD",
+                pointRadius: 1,
+                pointHoverRadius: 3,
+                borderDash: [3, 3]  // Linha tracejada para diferenciar
+            });
+        });
+    }
+
+    // Usar o maior entre limiteEixoX e maxAnosTotal para garantir que todas as curvas sejam visíveis
+    const limiteFinal = Math.max(limiteEixoX, maxAnosTotal);
+    
+    // Preparar labels finais (combinar acumulação + pós-aposentadoria)
+    let labelsFinais = valoresPosAposentadoria.length > 0 ? [...labels, ...labelsPosAposentadoria] : labels;
+    
+    // Estender labels até o limite final se necessário
+    const ultimoLabel = labelsFinais[labelsFinais.length - 1];
+    const ultimoAno = ultimoLabel ? parseInt(ultimoLabel.replace(' anos', '')) : maxAnosTotal;
+    
+    if (ultimoAno < limiteFinal) {
+        // Adicionar labels adicionais até o limite (a cada 3-4 anos para não poluir)
+        const incremento = Math.max(3, Math.ceil((limiteFinal - ultimoAno) / 10));
+        for (let ano = ultimoAno + incremento; ano <= limiteFinal; ano += incremento) {
+            labelsFinais.push(`${ano} anos`);
+        }
+        // Garantir que o último seja exatamente o limite
+        if (labelsFinais[labelsFinais.length - 1] !== `${limiteFinal} anos`) {
+            labelsFinais.push(`${limiteFinal} anos`);
+        }
+    }
+    
+    // Função para mapear dados baseado nos anos dos labels
+    const mapearDadosPorAno = (dadosOriginais, labelsOriginais, labelsFinais) => {
+        const dadosMapeados = [];
+        
+        // Criar um mapa de ano -> valor para busca rápida
+        const mapaAnoValor = {};
+        labelsOriginais.forEach((label, index) => {
+            if (index < dadosOriginais.length && dadosOriginais[index] !== null) {
+                const ano = parseInt(label.replace(' anos', ''));
+                mapaAnoValor[ano] = dadosOriginais[index];
+            }
+        });
+        
+        // Mapear cada label final para seu valor correspondente
+        labelsFinais.forEach(labelFinal => {
+            const anoFinal = parseInt(labelFinal.replace(' anos', ''));
+            
+            // Procurar valor exato primeiro
+            if (mapaAnoValor[anoFinal] !== undefined) {
+                dadosMapeados.push(mapaAnoValor[anoFinal]);
+            } else {
+                // Se não encontrou exato, procurar o mais próximo anterior
+                let valorEncontrado = null;
+                let anoMaisProximo = -1;
+                
+                Object.keys(mapaAnoValor).forEach(ano => {
+                    const anoNum = parseInt(ano);
+                    if (anoNum <= anoFinal && anoNum > anoMaisProximo) {
+                        anoMaisProximo = anoNum;
+                        valorEncontrado = mapaAnoValor[ano];
+                    }
+                });
+                
+                dadosMapeados.push(valorEncontrado);
+            }
+        });
+        
+        return dadosMapeados;
+    };
+    
+    // Preparar labels originais completos
+    const labelsOriginaisCompletos = valoresPosAposentadoria.length > 0 ? [...labels, ...labelsPosAposentadoria] : labels;
+    
+    // Mapear todos os datasets para os labels finais
+    datasets.forEach((dataset, index) => {
+        // Filtrar apenas valores não-null
+        const dadosOriginais = [];
+        const labelsOriginaisFiltrados = [];
+        
+        dataset.data.forEach((valor, idx) => {
+            if (valor !== null && idx < labelsOriginaisCompletos.length) {
+                dadosOriginais.push(valor);
+                labelsOriginaisFiltrados.push(labelsOriginaisCompletos[idx]);
+            }
+        });
+        
+        // Se tem dados, mapear para os labels finais
+        if (dadosOriginais.length > 0) {
+            dataset.data = mapearDadosPorAno(dadosOriginais, labelsOriginaisFiltrados, labelsFinais);
+        } else {
+            // Se não tem dados, preencher com null
+            dataset.data = new Array(labelsFinais.length).fill(null);
+        }
+    });
+    
     // Configuração do gráfico INVLAB Premium
     const ctx = canvas.getContext('2d');
     window.chartEvolucao = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: valoresPosAposentadoria.length > 0 ? [...labels, ...labelsPosAposentadoria] : labels,
+            labels: labelsFinais,
             datasets: datasets
         },
         options: {
@@ -258,7 +431,21 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
             aspectRatio: 2,
             plugins: {
                 legend: {
-                    display: false
+                    display: true,
+                    position: 'top',
+                    align: 'center',  // Centralizado no topo
+                    labels: {
+                        color: '#E4E4E4',
+                        font: {
+                            size: 10,  // Tamanho adequado, não muito grande
+                            family: "'Inter', sans-serif"
+                        },
+                        padding: 8,
+                        usePointStyle: true,
+                        pointStyle: 'line',
+                        boxWidth: 20,
+                        boxHeight: 1
+                    }
                 },
                 tooltip: {
                     backgroundColor: 'rgba(13, 13, 13, 0.95)',
@@ -285,7 +472,11 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
                         color: '#9CA3AF',
                         font: {
                             size: 11
-                        }
+                        },
+                        maxTicksLimit: 30,  // Limitar número de ticks para não poluir
+                        autoSkip: true,
+                        maxRotation: 0,
+                        minRotation: 0
                     }
                 },
                 y: {
@@ -318,7 +509,22 @@ function finalizarWizard() {
     // ===================================================
     // 🔥 EXECUTAR MOTOR DE CÁLCULO REAL
     // ===================================================
-    const resultados = executarSimulacaoWizard(wizardData);
+    const tipoRenda = document.querySelector("input[name='tipoRenda']:checked").value;
+
+    // Captura idade terminal para Período OU Esgotável
+    let idadeFinal = 95;
+    if (tipoRenda === "periodo" || estrategia === "esgotavel") {
+        idadeFinal = parseInt(document.getElementById("idadeTerminal").value) || 95;
+    }
+
+    const mostrarTodas = document.getElementById("mostrarTodasCurvas")?.checked || false;
+
+    const resultados = executarSimulacaoWizard({
+        ...wizardData,
+        tipoRenda: tipoRenda,
+        idadeFinal: idadeFinal,
+        mostrarTodasCurvas: mostrarTodas
+    });
     console.log("RESULTADOS COMPLETOS DA SIMULAÇÃO:", resultados);
 
     // Esconder steps
@@ -400,9 +606,16 @@ function finalizarWizard() {
                 <li><strong>Estratégia:</strong> ${
                     resultados.tipoRenda === 'vitalicia' && resultados.estrategia === 'perpetua'
                         ? '💚 Renda Vitalícia Perpétua (capital preservado indefinidamente)'
-                        : resultados.tipoRenda === 'periodo'
-                            ? `⏱️ Renda por ${resultados.anosPeriodo || 30} anos (capital consumido gradualmente)`
-                            : `📊 Renda com uso gradual do capital (${wizardData.anosDuracao || 30} anos)`
+                        : resultados.tipoRenda === 'periodo' && resultados.estrategia === 'perpetua'
+                            ? `⏱️ Renda por Período Determinado (até ${resultados.idadeFinal || 95} anos) - Perpétua (preservar capital)<br>
+                               <span style="font-size: 0.85rem; color: #9ca3af;">Sua renda será calculada usando apenas os juros reais. O patrimônio permanece constante ao longo da aposentadoria, e uma herança integral é preservada.</span>`
+                        : resultados.tipoRenda === 'periodo' && resultados.estrategia === 'esgotavel'
+                            ? `⏱️ Renda por Período Determinado (até ${resultados.idadeFinal || 95} anos) - Esgotável<br>
+                               <span style="font-size: 0.85rem; color: #9ca3af;">Sua renda será calculada para consumir todo o patrimônio até a idade selecionada. Se você viver além dessa idade, poderá ficar sem recursos.</span>`
+                        : resultados.estrategia === 'esgotavel'
+                            ? `📊 Usar Capital Gradualmente (até ${resultados.idadeFinal || 95} anos)<br>
+                               <span style="font-size: 0.85rem; color: #9ca3af;">Sua renda será calculada para consumir todo o patrimônio até a idade selecionada. Se você viver além dessa idade, poderá ficar sem recursos.</span>`
+                            : `📊 Renda com uso gradual do capital`
                 }</li>
                 <li><strong>Herança:</strong> ${
                     resultados.heranca > 0
@@ -513,6 +726,13 @@ function finalizarWizard() {
             </div>
         </div>
 
+        <!-- BOTÃO FECHAR DASHBOARD -->
+        <div style="text-align: center; margin-top: 30px; margin-bottom: 20px; padding: 0 20px;">
+            <button id="btnFecharDashboard" class="btn-modal" style="max-width: 300px; width: 100%; margin: 0 auto; display: block;">
+                Fechar e Voltar para Ajustes
+            </button>
+        </div>
+
         <!-- MODAL: DADOS DE ENTRADA -->
         <div class="modal-overlay" id="modalDados">
             <div class="modal-content">
@@ -586,7 +806,9 @@ function finalizarWizard() {
             wizardData.idadeAposentadoria,
             resultados.projecaoPosAposentadoria,  // ✅ NOVO: projeção pós-aposentadoria
             resultados.tipoRenda,  // ✅ NOVO: tipo de renda
-            resultados.estrategia  // ✅ NOVO: estratégia
+            resultados.estrategia,  // ✅ NOVO: estratégia
+            resultados.curvasExtras,  // 🟣 NOVO: múltiplas curvas de longevidade
+            resultados.idadeFinal  // 🟣 NOVO: idade final selecionada
         );
         
         // Verificar se o painel existe antes de configurar
@@ -612,6 +834,14 @@ function finalizarWizard() {
                     resultados.estrategia,
                     resultados.anosPeriodo
                 );
+            };
+        }
+
+        // Configurar botão de fechar dashboard
+        const btnFecharDashboard = document.getElementById('btnFecharDashboard');
+        if (btnFecharDashboard) {
+            btnFecharDashboard.onclick = () => {
+                fecharDashboard();
             };
         }
     }, 100);
@@ -721,6 +951,20 @@ function fecharModal(modalId) {
     document.getElementById(modalId).classList.remove('active');
 }
 
+// -----------------------------------------------------
+// FECHAR DASHBOARD E VOLTAR AO STEP 4
+// -----------------------------------------------------
+function fecharDashboard() {
+    // Fechar o dashboard
+    const dash = document.getElementById('dashboard');
+    if (dash) {
+        dash.classList.remove('active');
+    }
+
+    // Voltar para o step 4
+    activateStep(4);
+}
+
 // Fechar modal clicando fora
 document.addEventListener('click', function(e) {
     if (e.target.classList.contains('modal-overlay')) {
@@ -763,15 +1007,11 @@ function atualizarRegrasWizard() {
     const est = rEstrategia ? rEstrategia.value : "perpetua";
 
     // Mostrar/esconder campos condicionais
-    const periodoContainer = document.getElementById("periodoContainer");
-    const duracaoContainer = document.getElementById("anosDuracaoContainer");
+    const idadeTerminalContainer = document.getElementById("idadeTerminalContainer");
 
-    if (periodoContainer) {
-        periodoContainer.style.display = tipo === "periodo" ? "block" : "none";
-    }
-
-    if (duracaoContainer) {
-        duracaoContainer.style.display = est === "esgotavel" ? "block" : "none";
+    if (idadeTerminalContainer) {
+        // Mostrar idade terminal se for período OU se estratégia for esgotavel
+        idadeTerminalContainer.style.display = (tipo === "periodo" || est === "esgotavel") ? "block" : "none";
     }
 
     // BLOQUEIO 1: Vitalícia só aceita perpétua (preservar capital)
@@ -843,16 +1083,16 @@ function configurarListenersEstrategia() {
         return;
     }
     
-    const rEstrategia = document.querySelectorAll("input[name='estrategia']");
-    console.log(`🔍 Encontrados ${rEstrategia.length} radio buttons de estratégia`);
+    const rEstrategiaBtns = document.querySelectorAll("input[name='estrategia']");
+    console.log(`🔍 Encontrados ${rEstrategiaBtns.length} radio buttons de estratégia`);
     
-    if (rEstrategia.length === 0) {
+    if (rEstrategiaBtns.length === 0) {
         console.warn("⚠️ Nenhum radio button de estratégia encontrado! Tentando novamente em 500ms...");
         setTimeout(configurarListenersEstrategia, 500);
         return;
     }
     
-    rEstrategia.forEach((r, index) => {
+    rEstrategiaBtns.forEach((r, index) => {
         // Listener no input radio - usar once: false para permitir múltiplas tentativas
         r.addEventListener("click", function(e) {
             console.log(`🖱️ Clicou em estratégia [${index}]: ${this.value}`);
@@ -1371,12 +1611,40 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Listeners para radio buttons de renda
-    const rTipo = document.querySelectorAll("input[name='tipoRenda']");
-    const rEstrategia = document.querySelectorAll("input[name='estrategia']");
+    const rTipoBtns = document.querySelectorAll("input[name='tipoRenda']");
+    const rEstrategiaBtnsMain = document.querySelectorAll("input[name='estrategia']");
 
-    rTipo.forEach(r => {
-        r.addEventListener("change", function() {
-            console.log(`🔄 Tipo de renda mudou para: ${this.value}`);
+    // Função auxiliar para atualizar visibilidade dos campos
+    const atualizarVisibilidadeCampos = () => {
+        const tipo = document.querySelector("input[name='tipoRenda']:checked")?.value || "vitalicia";
+        const estrategia = document.querySelector("input[name='estrategia']:checked")?.value || "perpetua";
+        
+        if (tipo === "periodo") {
+            document.getElementById("idadeTerminalContainer").style.display = "block";
+            document.getElementById("containerTodasCurvas").style.display = "block";
+        } else if (estrategia === "esgotavel") {
+            document.getElementById("idadeTerminalContainer").style.display = "block";
+            document.getElementById("containerTodasCurvas").style.display = "none";
+        } else {
+            document.getElementById("idadeTerminalContainer").style.display = "none";
+            document.getElementById("containerTodasCurvas").style.display = "none";
+        }
+    };
+
+    // Mostrar/ocultar campos de idade terminal se tipo = 'periodo' OU estratégia = 'esgotavel'
+    rTipoBtns.forEach(el => {
+        el.addEventListener("change", () => {
+            console.log(`🔄 Tipo de renda mudou para: ${el.value}`);
+            atualizarVisibilidadeCampos();
+            atualizarRegrasWizard();
+        });
+    });
+    
+    // Também mostrar idade terminal quando estratégia mudar para esgotavel
+    rEstrategiaBtnsMain.forEach(el => {
+        el.addEventListener("change", () => {
+            console.log(`🔄 Estratégia mudou para: ${el.value}`);
+            atualizarVisibilidadeCampos();
             atualizarRegrasWizard();
         });
     });
@@ -1815,5 +2083,15 @@ function fecharModalRendaMensal() {
     }
 }
 
-// Tornar função global para acesso via onclick
+// Tornar funções globais para acesso via onclick
 window.fecharModalRendaMensal = fecharModalRendaMensal;
+
+// Garantir que simuladorWizardStart esteja acessível globalmente
+if (typeof window.simuladorWizardStart === 'undefined') {
+    window.simuladorWizardStart = function() {
+        console.log("🚀 Função simuladorWizardStart chamada!");
+        document.querySelector('.landing-explicativa').style.display = 'none';
+        activateStep(1);
+        updateProgress(1);
+    };
+}

@@ -2267,12 +2267,7 @@
                     <label class="option-line">
                         <input type="radio" name="tipoRenda" value="periodo">
                         <span class="option-title">⏱️ Renda por período determinado</span>
-                        <span class="option-desc">Você escolhe por quantos anos deseja manter a renda ativa após se aposentar.</span>
-
-                        <div id="periodoContainer" style="display:none; margin-top:10px;">
-                            <label class="input-label">Por quantos anos você deseja receber a renda?</label>
-                            <input type="number" id="anosPeriodo" class="input-field" placeholder="Ex: 30" min="5" max="60" value="30">
-                        </div>
+                        <span class="option-desc">Você escolhe até qual idade deseja manter a renda ativa após se aposentar.</span>
                     </label>
                 </div>
 
@@ -2296,12 +2291,33 @@
                     <label class="option-line">
                         <input type="radio" name="estrategia" value="esgotavel">
                         <span class="option-title">📊 Usar capital gradualmente</span>
-                        <span class="option-desc">Renda mensal maior, com prazo de duração definido por você.</span>
+                        <span class="option-desc">Renda mensal maior, consumindo o patrimônio até a idade selecionada.</span>
+                    </label>
+                </div>
 
-                        <div id="anosDuracaoContainer" style="display:none; margin-top:10px;">
-                            <label class="input-label">Duração desejada do patrimônio (anos):</label>
-                            <input type="number" id="anosDuracao" class="input-field" placeholder="Ex: 30" min="5" max="60" value="30">
-                        </div>
+                <!-- IDADE TERMINAL -->
+                <div class="input-group" id="idadeTerminalContainer" style="display:none;">
+                    <label class="input-label">
+                        Até qual idade você quer que sua renda dure?
+                    </label>
+                    <select id="idadeTerminal" class="input-field">
+                        <option value="90">90 anos</option>
+                        <option value="95" selected>95 anos</option>
+                        <option value="100">100 anos</option>
+                        <option value="105">105 anos</option>
+                        <option value="110">110 anos</option>
+                        <option value="115">115 anos</option>
+                    </select>
+                    <p style="margin-top: 8px; font-size: 0.85rem; color: #9ca3af; line-height: 1.4;">
+                        💡 Esta idade será usada tanto para "Renda por período" quanto para "Usar capital gradualmente".
+                    </p>
+                </div>
+
+                <!-- Checkbox para múltiplas curvas -->
+                <div id="containerTodasCurvas" style="display:none; margin-top:10px;">
+                    <label style="font-size:14px;">
+                        <input type="checkbox" id="mostrarTodasCurvas">
+                        Mostrar todas as curvas (95, 105 e 115 anos)
                     </label>
                 </div>
 
