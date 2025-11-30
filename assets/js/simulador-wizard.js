@@ -827,12 +827,8 @@ function finalizarWizard() {
         if (btnRendaMensal) {
             btnRendaMensal.onclick = () => {
                 abrirGraficoRendaMensal(
-                    resultados.rendaRealPossivel,
-                    resultados.projecaoPosAposentadoria,
-                    wizardData.idadeAposentadoria,
-                    resultados.tipoRenda,
-                    resultados.estrategia,
-                    resultados.anosPeriodo
+                    resultados.rendaMensalDetalhada,
+                    resultados.idadeAposentadoria
                 );
             };
         }
@@ -1726,16 +1722,21 @@ document.addEventListener("DOMContentLoaded", () => {
 // ============================================================
 // 📊 GRÁFICO: RENDA MENSAL AO LONGO DA APOSENTADORIA
 // ============================================================
-function abrirGraficoRendaMensal(rendaMensal, projecaoPos, idadeApos, tipoRenda, estrategia, anosPeriodo) {
+function abrirGraficoRendaMensal(listaRenda, idadeApos) {
     console.log("📊 Abrindo gráfico de renda mensal...");
-    console.log("📊 Parâmetros recebidos:", { rendaMensal, projecaoPos, idadeApos, tipoRenda, estrategia, anosPeriodo });
+    console.log("📊 Parâmetros recebidos:", { listaRenda: listaRenda?.length, idadeApos });
     
-    // Converter parâmetros para números
-    rendaMensal = Number(rendaMensal) || 0;
+    // Converter parâmetros
     idadeApos = Number(idadeApos) || 0;
-    anosPeriodo = Number(anosPeriodo) || 30;
     
-    console.log("📊 Parâmetros convertidos:", { rendaMensal, idadeApos, anosPeriodo, tipoRenda, estrategia });
+    // Validar lista de renda
+    if (!listaRenda || !Array.isArray(listaRenda) || listaRenda.length === 0) {
+        console.error("❌ Lista de renda inválida ou vazia!");
+        alert("Erro: Não foi possível gerar o gráfico. Dados de renda inválidos.");
+        return;
+    }
+    
+    console.log(`✅ Lista de renda válida com ${listaRenda.length} meses`);
     
     // Verificar se Chart.js está disponível
     if (typeof Chart === 'undefined' && typeof window.Chart === 'undefined') {
@@ -1803,58 +1804,20 @@ function abrirGraficoRendaMensal(rendaMensal, projecaoPos, idadeApos, tipoRenda,
             return;
         }
     
-        // Calcular idades e rendas
-        const idades = [];
+        // Gerar labels de idade (amostrar a cada 12 meses para não sobrecarregar)
+        const labels = [];
         const rendas = [];
-        let idadeZera = null;
         
-        if (!projecaoPos || projecaoPos.length === 0) {
-            console.warn("⚠️ Projeção pós-aposentadoria vazia! Criando projeção básica...");
-            // Criar projeção básica de 30 anos
-            for (let i = 0; i <= 360; i += 12) {
-                const idade = Number(idadeApos) + (i / 12);
-                if (!isNaN(idade)) {
-                    idades.push(idade);
-                    rendas.push(rendaMensal || 0);
-                }
+        for (let i = 0; i < listaRenda.length; i++) {
+            // Amostrar a cada 12 meses ou no último mês
+            if (i % 12 === 0 || i === listaRenda.length - 1) {
+                const idade = idadeApos + Math.floor(i / 12);
+                labels.push(idade + " anos");
+                rendas.push(listaRenda[i]);
             }
-        } else {
-            console.log(`✅ Projeção encontrada com ${projecaoPos.length} pontos`);
-            // Construir vetor de idades (eixo X) e rendas (eixo Y)
-            // Amostrar a cada 12 meses para não sobrecarregar o gráfico
-            projecaoPos.forEach((p, index) => {
-                if (index % 12 === 0 || index === projecaoPos.length - 1) {
-                    // Garantir que idade seja um número
-                    const idadeCalculada = Number(idadeApos) + (Number(index) / 12);
-                    if (isNaN(idadeCalculada) || !isFinite(idadeCalculada)) {
-                        console.error(`❌ Erro: idade calculada não é um número válido! idadeApos=${idadeApos} (tipo: ${typeof idadeApos}), index=${index}`);
-                        return; // Pular este ponto
-                    }
-                    // Usar Math.round para evitar problemas com toFixed
-                    const idade = Math.round(idadeCalculada * 10) / 10; // Arredondar para 1 casa decimal
-                    idades.push(idade);
-                    
-                    // Para período determinado: renda constante até zerar, depois zero
-                    if (tipoRenda === "periodo" || estrategia === "esgotavel") {
-                        // Verificar se o patrimônio já zerou
-                        if (p.saldo <= 0 && idadeZera === null) {
-                            idadeZera = idade;
-                        }
-                        
-                        if (idadeZera !== null && idade >= idadeZera) {
-                            rendas.push(0);
-                        } else {
-                            rendas.push(rendaMensal || 0);
-                        }
-                    } else {
-                        // Vitalícia: renda constante para sempre
-                        rendas.push(rendaMensal || 0);
-                    }
-                }
-            });
         }
         
-        console.log(`✅ Dados preparados: ${idades.length} pontos, renda: R$ ${rendaMensal?.toLocaleString('pt-BR') || 0}`);
+        console.log(`✅ Dados preparados: ${labels.length} pontos de idade, ${rendas.length} valores de renda`);
         
         // Destruir gráfico antigo se existir
         if (graficoRendaMensal) {
@@ -1862,17 +1825,14 @@ function abrirGraficoRendaMensal(rendaMensal, projecaoPos, idadeApos, tipoRenda,
             graficoRendaMensal = null;
         }
         
-        // Determinar cor baseada na estratégia
-        const corRenda = (tipoRenda === "periodo" || estrategia === "esgotavel") ? "#e74c3c" : "#2ecc71";
-        const labelRenda = (tipoRenda === "periodo" || estrategia === "esgotavel") 
-            ? "Renda Mensal (até esgotar patrimônio)" 
-            : "Renda Mensal Vitalícia";
+        // Verificar se há renda zerada (estratégia esgotável)
+        const temRendaZero = rendas.some(r => r === 0 || r < 0.01);
+        const corRenda = temRendaZero ? "#ff6666" : "#2ecc71";
+        const labelRenda = "Renda Mensal (real ao longo do tempo)";
         
-        // Validar dados antes de criar gráfico
-        if (idades.length === 0 || rendas.length === 0) {
-            console.error("❌ Dados vazios! Não é possível criar gráfico.");
-            console.error("   idades.length:", idades.length);
-            console.error("   rendas.length:", rendas.length);
+        // Validar dados
+        if (labels.length === 0 || rendas.length === 0) {
+            console.error("❌ Dados vazios!");
             const infoDiv = document.getElementById("infoRendaMensal");
             if (infoDiv) {
                 const pElement = infoDiv.querySelector('p');
@@ -1887,151 +1847,104 @@ function abrirGraficoRendaMensal(rendaMensal, projecaoPos, idadeApos, tipoRenda,
             return;
         }
         
-        // Garantir que idades e rendas tenham o mesmo tamanho
-        const minLength = Math.min(idades.length, rendas.length);
-        if (minLength === 0) {
-            console.error("❌ Arrays vazios após processamento!");
-            return;
-        }
-        
-        // Ajustar arrays para terem o mesmo tamanho
-        const idadesFinal = idades.slice(0, minLength);
-        const rendasFinal = rendas.slice(0, minLength);
-        
-        console.log(`✅ Dados finais: ${idadesFinal.length} pontos`);
-        
-        // Destruir gráfico antigo se existir
-        if (graficoRendaMensal) {
-            console.log("🗑️ Destruindo gráfico anterior...");
-            graficoRendaMensal.destroy();
-            graficoRendaMensal = null;
-        }
-        
-        // Criar gráfico
-        console.log("🎨 Criando gráfico Chart.js...");
-        console.log(`   Labels: ${idadesFinal.length}, Dados: ${rendasFinal.length}`);
-        console.log(`   Primeiros 5 labels:`, idadesFinal.slice(0, 5));
-        console.log(`   Primeiros 5 valores:`, rendasFinal.slice(0, 5));
-        
         try {
-            // Preparar labels finais
-            const labelsFinais = idadesFinal.map(idade => `${Math.floor(idade)} anos`);
-            
-            console.log("🎨 Criando gráfico com:", {
-                labelsCount: labelsFinais.length,
-                dataCount: rendasFinal.length,
-                primeiroLabel: labelsFinais[0],
-                ultimoLabel: labelsFinais[labelsFinais.length - 1],
-                primeiroValor: rendasFinal[0],
-                ultimoValor: rendasFinal[rendasFinal.length - 1]
+            graficoRendaMensal = new ChartLib(ctx, {
+                type: "line",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: labelRenda,
+                        data: rendas,
+                        borderColor: corRenda,
+                        backgroundColor: "rgba(255, 100, 100, 0.25)",
+                        borderWidth: 2,
+                        tension: 0.3,
+                        fill: true,
+                        pointRadius: 2,
+                        pointHoverRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                color: '#E4E4E4'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                            titleColor: '#D4AF37',
+                            bodyColor: '#E4E4E4',
+                            callbacks: {
+                                label: function(context) {
+                                    return `Renda: R$ ${context.parsed.y.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: "Renda Mensal (R$)",
+                                color: "#ffcc00"
+                            },
+                            ticks: {
+                                color: '#9ca3af',
+                                callback: function(value) {
+                                    return 'R$ ' + value.toLocaleString('pt-BR', {maximumFractionDigits: 0});
+                                }
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: "Idade",
+                                color: "#ffcc00"
+                            },
+                            ticks: {
+                                color: '#9ca3af',
+                                maxTicksLimit: 20
+                            }
+                        }
+                    }
+                }
             });
             
-            graficoRendaMensal = new ChartLib(ctx, {
-            type: "line",
-            data: {
-                labels: labelsFinais,
-                datasets: [{
-                    label: labelRenda,
-                    data: rendasFinal,
-                borderColor: corRenda,
-                backgroundColor: tipoRenda === "periodo" || estrategia === "esgotavel" 
-                    ? "rgba(231, 76, 60, 0.1)" 
-                    : "rgba(46, 204, 113, 0.1)",
-                borderWidth: 3,
-                fill: true,
-                tension: 0.2,
-                pointRadius: 2,
-                pointHoverRadius: 5,
-                pointBackgroundColor: corRenda,
-                pointBorderColor: "#0D0D0D",
-                pointBorderWidth: 2
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            aspectRatio: 2,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'top',
-                    labels: {
-                        color: '#E4E4E4',
-                        font: {
-                            family: "'Inter', sans-serif",
-                            size: 12
-                        }
-                    }
-                },
-                tooltip: {
-                    backgroundColor: 'rgba(0, 0, 0, 0.9)',
-                    titleColor: '#D4AF37',
-                    bodyColor: '#E4E4E4',
-                    borderColor: '#10b981',
-                    borderWidth: 1,
-                    padding: 12,
-                    callbacks: {
-                        label: function(context) {
-                            return `Renda: R$ ${context.parsed.y.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês`;
-                        }
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    title: { 
-                        display: true, 
-                        text: "Idade",
-                        color: '#D4AF37',
-                        font: {
-                            family: "'Inter', sans-serif",
-                            size: 14,
-                            weight: 'bold'
-                        }
-                    },
-                    ticks: {
-                        color: '#9ca3af',
-                        maxTicksLimit: 15
-                    },
-                    grid: {
-                        color: 'rgba(138, 204, 166, 0.1)'
-                    }
-                },
-                y: {
-                    beginAtZero: true,
-                    title: { 
-                        display: true, 
-                        text: "Renda Mensal (R$)",
-                        color: '#D4AF37',
-                        font: {
-                            family: "'Inter', sans-serif",
-                            size: 14,
-                            weight: 'bold'
-                        }
-                    },
-                    ticks: {
-                        color: '#9ca3af',
-                        callback: function(value) {
-                            return 'R$ ' + value.toLocaleString('pt-BR', {maximumFractionDigits: 0});
-                        }
-                    },
-                    grid: {
-                        color: 'rgba(138, 204, 166, 0.1)'
-                    }
-                }
-            }
-        }
-    });
-    
             console.log("✅ Gráfico Chart.js criado com sucesso!");
             
-            // Esconder loading se ainda estiver visível
+            // Esconder loading
             if (loadingDiv) {
                 loadingDiv.style.display = "none";
             }
+            
+            // Atualizar informações textuais
+            const infoDiv = document.getElementById("infoRendaMensal");
+            if (infoDiv) {
+                const rendaInicial = listaRenda[0] || 0;
+                const rendaFinal = listaRenda[listaRenda.length - 1] || 0;
+                const mesesTotal = listaRenda.length;
+                const idadeFinal = idadeApos + Math.floor(mesesTotal / 12);
+                
+                let textoInfo = "";
+                if (temRendaZero) {
+                    textoInfo = `📊 <strong>Renda por Período Determinado:</strong> Você receberá uma renda mensal que começa em <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> e termina em <strong>R$ 0</strong> aproximadamente aos <strong>${idadeFinal} anos</strong>, quando seu patrimônio se esgotará.`;
+                } else {
+                    textoInfo = `💚 <strong>Renda Vitalícia:</strong> Você receberá <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> de forma permanente, preservando seu patrimônio para sempre.`;
+                }
+                
+                const pElement = infoDiv.querySelector('p');
+                if (pElement) {
+                    pElement.innerHTML = textoInfo;
+                }
+            }
         } catch (error) {
             console.error("❌ Erro ao criar gráfico:", error);
-            console.error("Stack trace:", error.stack);
             const infoDiv = document.getElementById("infoRendaMensal");
             if (infoDiv) {
                 const pElement = infoDiv.querySelector('p');
@@ -2044,27 +1957,6 @@ function abrirGraficoRendaMensal(rendaMensal, projecaoPos, idadeApos, tipoRenda,
                 loadingDiv.textContent = `❌ Erro: ${error.message}`;
             }
             return;
-        }
-    
-        // Atualizar informações textuais
-        const infoDiv = document.getElementById("infoRendaMensal");
-        if (infoDiv) {
-            let textoInfo = "";
-            if (tipoRenda === "periodo" || estrategia === "esgotavel") {
-                if (idadeZera && !isNaN(Number(idadeZera))) {
-                    const idadeZeraNum = Number(idadeZera);
-                    textoInfo = `📊 <strong>Renda por Período Determinado:</strong> Você receberá <strong>R$ ${(rendaMensal || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> até aproximadamente <strong>${Math.floor(idadeZeraNum)} anos</strong>, quando seu patrimônio se esgotará.`;
-                } else {
-                    const idadeFinal = Number(idadeApos) + Number(anosPeriodo || 30);
-                    textoInfo = `📊 <strong>Renda por Período Determinado:</strong> Você receberá <strong>R$ ${(rendaMensal || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> por <strong>${anosPeriodo || 30} anos</strong> (até aproximadamente ${Math.floor(idadeFinal)} anos).`;
-                }
-            } else {
-                textoInfo = `💚 <strong>Renda Vitalícia:</strong> Você receberá <strong>R$ ${(rendaMensal || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> de forma permanente, preservando seu patrimônio para sempre.`;
-            }
-            const pElement = infoDiv.querySelector('p');
-            if (pElement) {
-                pElement.innerHTML = textoInfo;
-            }
         }
         
         console.log("✅ Gráfico de renda mensal criado com sucesso!");

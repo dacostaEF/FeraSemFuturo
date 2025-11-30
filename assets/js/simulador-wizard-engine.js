@@ -133,6 +133,47 @@ function projetarPatrimonioPorPeriodo(patrimonioInicial, rendaMensal, taxaMensal
     return dados;
 }
 
+// ============================================================
+// 🟣 RENDA OTIMIZADA: CÁLCULO PMT PARA LONGEVIDADE
+// ============================================================
+function calcularRendaPeriodo(pv, taxaMensalReal, idadeApos, idadeFinal) {
+    const meses = (idadeFinal - idadeApos) * 12;
+    if (meses <= 0) return { rendaMensal: 0, mesesDuracao: 0 };
+
+    const pmt = (pv * taxaMensalReal) / (1 - Math.pow(1 + taxaMensalReal, -meses));
+    return { rendaMensal: pmt, mesesDuracao: meses };
+}
+
+// ============================================================
+// 🟣 PROJEÇÃO DE CONSUMO ATÉ LONGEVIDADE
+// ============================================================
+function projetarConsumoLongevidade(pv, renda, taxaMensalReal, meses) {
+    let saldo = pv;
+    const dados = [];
+
+    for (let i = 0; i <= meses; i++) {
+        dados.push({
+            mes: i,
+            saldo: saldo
+        });
+
+        if (i < meses) {
+            saldo = saldo * (1 + taxaMensalReal) - renda;  // juros e saque
+            
+            if (saldo < 0) {
+                saldo = 0;  // Não pode ficar negativo
+                dados.push({
+                    mes: i + 1,
+                    saldo: 0
+                });
+                break;
+            }
+        }
+    }
+
+    return dados;
+}
+
 // ===============================================================
 // MOTOR PRINCIPAL (ADAPTADO PARA WIZARD)
 // ===============================================================
@@ -156,6 +197,8 @@ function executarSimulacaoWizard(dadosWizard) {
     const estrategia = dadosWizard.estrategia || "perpetua";
     const anosPeriodo = Number(dadosWizard.anosPeriodo) || 30;
     const anosDuracao = Number(dadosWizard.anosDuracao) || 30;
+    const idadeFinal = Number(dadosWizard.idadeFinal) || null;  // Nova: idade de longevidade
+    const mostrarTodasCurvas = dadosWizard.mostrarTodasCurvas || false;  // Nova: flag múltiplas curvas
 
     // 2. Definir taxa anual baseada no perfil
     const taxaAnualEscolhida = PERFIS_RENTABILIDADE[perfil];
@@ -196,11 +239,33 @@ function executarSimulacaoWizard(dadosWizard) {
     }
 
     // ============================================================
+    // 🟣 ESTRATÉGIA OTIMIZADA: RENDA POR PERÍODO COM LONGEVIDADE
+    // ============================================================
+    // Nova estratégia: consome capital até idadeFinal (ex: 115 anos)
+    // Renda média (maior que vitalícia, menor que esgotável rápido)
+    else if (tipoRenda === "periodo" && idadeFinal) {
+        const calc = calcularRendaPeriodo(
+            patrimonioTotalProjetado,
+            taxaMensalReal,
+            idadeAposent,
+            idadeFinal
+        );
+        rendaRealPossivel = calc.rendaMensal;
+    }
+
+    // ============================================================
     // ESTRATÉGIA 3: RENDA POR PERÍODO + USAR CAPITAL GRADUALMENTE
     // ============================================================
     // Renda maior (consome capital + juros), até zerar no período
     else if (tipoRenda === "periodo" && estrategia === "esgotavel") {
-        const meses = anosPeriodo * 12;
+        // Usar idadeFinal se disponível, senão calcular a partir de anosPeriodo
+        let meses;
+        if (idadeFinal) {
+            const anosAposAposentadoria = idadeFinal - idadeAposent;
+            meses = anosAposAposentadoria * 12;
+        } else {
+            meses = anosPeriodo * 12;
+        }
         
         if (taxaMensalReal > 0) {
             rendaRealPossivel = (patrimonioTotalProjetado * taxaMensalReal) / 
@@ -215,9 +280,16 @@ function executarSimulacaoWizard(dadosWizard) {
     // ESTRATÉGIA 4: RENDA VITALÍCIA + USAR CAPITAL GRADUALMENTE
     // ============================================================
     // Esta combinação não deveria ser permitida (já tem modal de aviso)
-    // Mas se chegar aqui, trata como consumo por período padrão
+    // Mas se chegar aqui, trata como consumo por período usando idadeFinal
     else if (tipoRenda === "vitalicia" && estrategia === "esgotavel") {
-        const meses = anosDuracao * 12;
+        // Usar idadeFinal se disponível, senão calcular a partir de anosDuracao
+        let meses;
+        if (idadeFinal) {
+            const anosAposAposentadoria = idadeFinal - idadeAposent;
+            meses = anosAposAposentadoria * 12;
+        } else {
+            meses = anosDuracao * 12;
+        }
         
         if (taxaMensalReal > 0) {
             rendaRealPossivel = (patrimonioTotalProjetado * taxaMensalReal) / 
@@ -300,10 +372,45 @@ function executarSimulacaoWizard(dadosWizard) {
 
     // 12. Projeção pós-aposentadoria (para gráfico completo)
     let projecaoPosAposentadoria = [];
+    let curvasExtras = [];  // Nova: múltiplas curvas de longevidade
     
+    // 🟣 ESTRATÉGIA OTIMIZADA: RENDA POR PERÍODO COM LONGEVIDADE
+    // Patrimônio diminui suavemente até idadeFinal
+    if (tipoRenda === "periodo" && idadeFinal) {
+        const calc = calcularRendaPeriodo(
+            patrimonioTotalProjetado,
+            taxaMensalReal,
+            idadeAposent,
+            idadeFinal
+        );
+
+        projecaoPosAposentadoria = projetarConsumoLongevidade(
+            patrimonioTotalProjetado,
+            calc.rendaMensal,
+            taxaMensalReal,
+            calc.mesesDuracao
+        );
+
+        heranca = projecaoPosAposentadoria[projecaoPosAposentadoria.length - 1]?.saldo || 0;
+
+        // MULTIPLAS CURVAS
+        if (mostrarTodasCurvas) {
+            const idades = [95, 105, 115];
+            idades.forEach(idFinal => {
+                const c = calcularRendaPeriodo(patrimonioTotalProjetado, taxaMensalReal, idadeAposent, idFinal);
+                const curva = projetarConsumoLongevidade(
+                    patrimonioTotalProjetado,
+                    c.rendaMensal,
+                    taxaMensalReal,
+                    c.mesesDuracao
+                );
+                curvasExtras.push({ idade: idFinal, curva: curva });
+            });
+        }
+    }
     // ESTRATÉGIA 1: RENDA VITALÍCIA + PRESERVAR CAPITAL
     // Patrimônio permanece constante (só juros são consumidos)
-    if (tipoRenda === "vitalicia" && estrategia === "perpetua") {
+    else if (tipoRenda === "vitalicia" && estrategia === "perpetua") {
         projecaoPosAposentadoria = projetarPatrimonioVitalicia(
             patrimonioTotalProjetado,
             taxaMensalReal,
@@ -321,9 +428,16 @@ function executarSimulacaoWizard(dadosWizard) {
         );
     }
     // ESTRATÉGIA 3: RENDA POR PERÍODO + USAR CAPITAL GRADUALMENTE
-    // Patrimônio diminui até zerar no período
+    // Patrimônio diminui até zerar no período (usa idadeFinal)
     else if (tipoRenda === "periodo" && estrategia === "esgotavel") {
-        const meses = anosPeriodo * 12;
+        // Usar idadeFinal se disponível, senão calcular a partir de anosPeriodo
+        let meses;
+        if (idadeFinal) {
+            const anosAposAposentadoria = idadeFinal - idadeAposent;
+            meses = anosAposAposentadoria * 12;
+        } else {
+            meses = anosPeriodo * 12;
+        }
         projecaoPosAposentadoria = projetarPatrimonioPorPeriodo(
             patrimonioTotalProjetado,
             rendaRealPossivel,
@@ -332,9 +446,16 @@ function executarSimulacaoWizard(dadosWizard) {
         );
     }
     // ESTRATÉGIA 4: RENDA VITALÍCIA + USAR CAPITAL GRADUALMENTE (não recomendado)
-    // Trata como consumo por período
+    // Trata como consumo por período usando idadeFinal
     else if (tipoRenda === "vitalicia" && estrategia === "esgotavel") {
-        const meses = anosDuracao * 12;
+        // Usar idadeFinal se disponível, senão calcular a partir de anosDuracao
+        let meses;
+        if (idadeFinal) {
+            const anosAposAposentadoria = idadeFinal - idadeAposent;
+            meses = anosAposAposentadoria * 12;
+        } else {
+            meses = anosDuracao * 12;
+        }
         projecaoPosAposentadoria = projetarPatrimonioPorPeriodo(
             patrimonioTotalProjetado,
             rendaRealPossivel,
@@ -343,7 +464,38 @@ function executarSimulacaoWizard(dadosWizard) {
         );
     }
 
-    // 13. Retornar objeto completo
+    // 13. Gerar renda mensal detalhada para o modal
+    let rendaMensalDetalhada = [];
+    let idadeFinalParaRenda = idadeFinal || (idadeAposent + 30); // Fallback: 30 anos se não tiver idadeFinal
+    
+    // Determinar idade final baseada na estratégia
+    if (idadeFinal) {
+        // Se tem idadeFinal, usar ela (estratégia otimizada ou esgotável com longevidade)
+        idadeFinalParaRenda = idadeFinal;
+    } else if ((tipoRenda === "periodo" && estrategia === "esgotavel") || (tipoRenda === "vitalicia" && estrategia === "esgotavel")) {
+        // Estratégia esgotável sem idadeFinal: usar anosPeriodo ou anosDuracao
+        if (anosPeriodo) {
+            idadeFinalParaRenda = idadeAposent + anosPeriodo;
+        } else if (anosDuracao) {
+            idadeFinalParaRenda = idadeAposent + anosDuracao;
+        }
+    } else if (tipoRenda === "periodo" && estrategia === "perpetua") {
+        // Período com capital preservado: usar anosPeriodo
+        if (anosPeriodo) {
+            idadeFinalParaRenda = idadeAposent + anosPeriodo;
+        }
+    }
+    // Se for vitalícia perpétua, idadeFinalParaRenda já está como fallback (30 anos)
+    
+    rendaMensalDetalhada = gerarRendaMensalAoLongoDoTempo(
+        patrimonioTotalProjetado,
+        taxaAnualReal,
+        idadeAposent,
+        idadeFinalParaRenda,
+        estrategia
+    );
+
+    // 14. Retornar objeto completo
     return {
         anosAteAposentadoria,
         patrimonioTotalProjetado,
@@ -362,8 +514,43 @@ function executarSimulacaoWizard(dadosWizard) {
         perfil,
         tipoRenda,
         estrategia,
-        anosPeriodo  // ✅ NOVO: para exibição
+        anosPeriodo,  // ✅ NOVO: para exibição
+        curvasExtras,  // 🟣 NOVO: múltiplas curvas de longevidade
+        idadeFinal,  // 🟣 NOVO: idade de longevidade escolhida
+        rendaMensalDetalhada,  // 🟧 NOVO: renda mensal detalhada para o modal
+        idadeAposentadoria: idadeAposent  // 🟧 NOVO: idade de aposentadoria para o modal
     };
+}
+
+// ===============================================================
+// 🟧 GERAR RENDA MENSAL AO LONGO DO TEMPO
+// ===============================================================
+function gerarRendaMensalAoLongoDoTempo(patrimonio, taxaAnualReal, idadeApos, idadeFinal, estrategia) {
+    const meses = (idadeFinal - idadeApos) * 12;
+    const taxaMensal = Math.pow(1 + taxaAnualReal, 1/12) - 1;
+
+    let rendaMensal = [];
+    let patrimonioAtual = patrimonio;
+
+    // Estratégia PERPÉTUA (capital preservado)
+    if (estrategia === "perpetua") {
+        const renda = patrimonio * taxaMensal;
+        for (let i = 0; i < meses; i++) {
+            rendaMensal.push(renda);
+        }
+        return rendaMensal;
+    }
+
+    // Estratégia ESGOTÁVEL (capital será consumido)
+    const rendaPMT = (patrimonioAtual * taxaMensal) / (1 - Math.pow(1 + taxaMensal, -meses));
+
+    for (let i = 0; i < meses; i++) {
+        rendaMensal.push(rendaPMT);
+        patrimonioAtual = patrimonioAtual * (1 + taxaMensal) - rendaPMT;
+        if (patrimonioAtual < 0) patrimonioAtual = 0;
+    }
+
+    return rendaMensal;
 }
 
 // ===============================================================
@@ -372,5 +559,6 @@ function executarSimulacaoWizard(dadosWizard) {
 
 if (typeof window !== "undefined") {
     window.executarSimulacaoWizard = executarSimulacaoWizard;
+    window.gerarRendaMensalAoLongoDoTempo = gerarRendaMensalAoLongoDoTempo;
 }
 
