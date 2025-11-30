@@ -1672,6 +1672,9 @@
                         </h3>
                         <p id="rendaMensalDestacada" style="font-size: 2.2rem; font-weight: 700; color: #10b981; margin: 0; font-family: 'Inter', sans-serif;">—</p>
                         <p style="color: rgba(228, 228, 228, 0.7); font-size: 0.9rem; margin-top: 8px;">Capital preservado + Herança integral</p>
+                        <button id="btnVerRendaMensal" style="margin-top: 16px; padding: 12px 24px; background: linear-gradient(135deg, #D4AF37, #FFD700); border: none; border-radius: 8px; color: #0D0D0D; font-weight: 700; cursor: pointer; font-size: 0.95rem; transition: transform 0.2s;">
+                            📊 Ver Renda Mensal ao Longo do Tempo
+                        </button>
                     </div>
 
                     <!-- Gráfico -->
@@ -2130,6 +2133,61 @@
         .recomendacao-renda-full {
             width: 100%;
         }
+        
+        /* Modal Renda Mensal - INVLAB */
+        .inv-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        .inv-modal-content {
+            background: #0D1620;
+            padding: 32px;
+            border-radius: 16px;
+            max-width: 900px;
+            width: 92%;
+            border: 1px solid rgba(204, 170, 102, 0.15);
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 0 18px rgba(0, 0, 0, 0.65);
+            position: relative;
+        }
+        .inv-modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #9ca3af;
+            font-size: 32px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        .inv-modal-close:hover {
+            color: #D4AF37;
+        }
+        .inv-modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: #D4AF37;
+            font-weight: 700;
+            margin: 0 0 16px 0;
+        }
+        .inv-modal-desc {
+            color: #E4E4E4;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
     </style>
 
     <!-- ====================================== -->
@@ -2256,6 +2314,52 @@
             return dados;
         }
 
+        // ================================================
+        // PROJEÇÃO PÓS-APOSENTADORIA (VITALÍCIA ou PERÍODO)
+        // ================================================
+        function projetarConsumoAposAposentadoria(patrimonioInicial, idadeApos, tipoRenda, anosPeriodo, retornoAnual) {
+
+            const taxaAnualReal = retornoAnual - (INFLACAO_MEDIA / 100);
+            const taxaMensalReal = Math.pow(1 + taxaAnualReal, 1/12) - 1;
+
+            let idadeAtual = idadeApos;
+            let patrimonio = patrimonioInicial;
+
+            const pontos = [];
+
+            // Caso 1 — Vitalícia: patrimônio preservado
+            if (tipoRenda === "vitalicia") {
+                for (let i = 0; i <= 40; i++) { // 40 anos pós-aposentadoria
+                    pontos.push({ idade: idadeApos + i, valor: patrimonio });
+                }
+                return pontos;
+            }
+
+            // Caso 2 — Período Determinado: consumo do capital
+            if (tipoRenda === "periodo" && anosPeriodo > 0) {
+                const meses = anosPeriodo * 12;
+
+                let renda;
+                if (taxaMensalReal > 0) {
+                    renda = (patrimonioInicial * taxaMensalReal) /
+                            (1 - Math.pow(1 + taxaMensalReal, -meses));
+                } else {
+                    renda = patrimonioInicial / meses;
+                }
+
+                for (let i = 0; i < anosPeriodo; i++) {
+                    // patrimônio = patrimônio*(1+taxa) – 12*renda
+                    patrimonio = patrimonio * Math.pow(1 + taxaMensalReal, 12) - (renda * 12);
+                    if (patrimonio < 0) patrimonio = 0;
+                    pontos.push({ idade: idadeApos + i + 1, valor: patrimonio });
+                }
+
+                return pontos;
+            }
+
+            return [];
+        }
+
         // -----------------------------------------
         // RENDERIZAR GRÁFICO CHART.JS (INVLAB PREMIUM)
         // -----------------------------------------
@@ -2268,43 +2372,58 @@
                 window.chartEvolucaoOficial.destroy();
             }
 
-            // Preparar dados (converter meses em anos)
-            const labels = [];
-            const valores = [];
+            // Captura opções escolhidas
+            const tipoRenda = document.querySelector('input[name="tipoRendaOficial"]:checked')?.value || "vitalicia";
+            const anosPeriodo = parseInt(document.getElementById("anosPeriodoOficial")?.value) || 0;
 
+            // Converter dadosMensais para formato {idade, valor}
+            const dadosMensaisFormatados = [];
             dadosMensais.forEach((item, index) => {
-                // A cada 12 meses, adiciona um ponto no gráfico
                 if (index % 12 === 0 || index === dadosMensais.length - 1) {
                     const ano = Math.floor(index / 12);
-                    labels.push(`${ano} anos`);
-                    valores.push(item.saldo);
+                    dadosMensaisFormatados.push({ idade: idadeAtual + ano, valor: item.saldo });
                 }
             });
 
-            // Configuração do gráfico INVLAB Premium
+            // Projeção de consumo pós-aposentadoria
+            const idadeApos = idadeAposentadoria;
+            const patrimonioInicial = dadosMensaisFormatados[dadosMensaisFormatados.length - 1].valor;
+
+            // Buscar retornoAnual das variáveis globais
+            const retornoAnual = rentabilidades[currentScenario] || 6.5;
+
+            const dadosPos = projetarConsumoAposAposentadoria(
+                patrimonioInicial,
+                idadeApos,
+                tipoRenda,
+                anosPeriodo,
+                retornoAnual
+            );
+
+            // Construção da curva completa
+            const labels = [
+                ...dadosMensaisFormatados.map(p => p.idade),
+                ...dadosPos.map(p => p.idade)
+            ];
+
+            const valores = [
+                ...dadosMensaisFormatados.map(p => p.valor),
+                ...dadosPos.map(p => p.valor)
+            ];
+
+            // Renderização
             const ctx = canvas.getContext('2d');
             window.chartEvolucaoOficial = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Patrimônio Acumulado',
+                        label: 'Patrimônio total',
                         data: valores,
-                        borderColor: '#10b981',
-                        backgroundColor: (context) => {
-                            const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
-                            gradient.addColorStop(0, 'rgba(16, 185, 129, 0.3)');
-                            gradient.addColorStop(1, 'rgba(16, 185, 129, 0.01)');
-                            return gradient;
-                        },
+                        borderColor: '#FFD700',
+                        backgroundColor: 'transparent',
                         borderWidth: 3,
-                        fill: true,
-                        tension: 0.4,
-                        pointBackgroundColor: '#10b981',
-                        pointBorderColor: '#0D0D0D',
-                        pointBorderWidth: 2,
-                        pointRadius: 4,
-                        pointHoverRadius: 6
+                        tension: 0.15
                     }]
                 },
                 options: {
@@ -2401,14 +2520,47 @@
             // 2) PREVIDÊNCIA PRIVADA
             const prev = acumulacaoPrevidencia(aporte, anos, retornoAnual);
 
-            // 3) RENDAS
-            // ✅ PADRÃO WIZARD: Usar RENDA VITALÍCIA COM CAPITAL PRESERVADO
-            // Taxa real = taxa nominal - inflação
+            // 3) RENDAS — AGORA SUPORTANDO VITALÍCIA E PERÍODO
+            
+            // Capturar tipo de renda selecionado
+            const tipoRenda = document.querySelector('input[name="tipoRendaOficial"]:checked')?.value || "vitalicia";
+            const anosPeriodo = parseInt(document.getElementById("anosPeriodoOficial")?.value) || 0;
+            
+            // Taxa real (taxa nominal - inflação)
             const taxaAnualReal = retornoAnual - (INFLACAO_MEDIA / 100);
             const taxaMensalReal = Math.pow(1 + taxaAnualReal, 1/12) - 1;
             
-            // Renda mensal = Patrimônio × Taxa Mensal Real (só os juros, preserva capital)
-            const rendaInvestProprio = investProprio.nominal * taxaMensalReal;
+            let rendaInvestProprio = 0;
+            
+            // ==============================
+            // A) RENDA VITALÍCIA (PRESERVA CAPITAL)
+            // ==============================
+            if (tipoRenda === "vitalicia") {
+                rendaInvestProprio = investProprio.nominal * taxaMensalReal;
+            }
+            
+            // ==============================
+            // B) RENDA POR PERÍODO (CONSUME CAPITAL)
+            // ==============================
+            else if (tipoRenda === "periodo" && anosPeriodo > 0) {
+                const meses = anosPeriodo * 12;
+                
+                if (taxaMensalReal > 0) {
+                    // Fórmula PMT
+                    rendaInvestProprio =
+                        (investProprio.nominal * taxaMensalReal) /
+                        (1 - Math.pow(1 + taxaMensalReal, -meses));
+                } else {
+                    rendaInvestProprio = investProprio.nominal / meses;
+                }
+            }
+            
+            // Atualizar DOM
+            document.getElementById("rendaMensalDestacada").textContent =
+                "R$ " + rendaInvestProprio.toLocaleString("pt-BR", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
             
             const rendaPrevSimples = rendaVitalicia(prev.nominal, retornoAnual, "simples");
             const rendaPrevRev = rendaVitalicia(prev.nominal, retornoAnual, "reversivel");
@@ -2440,10 +2592,6 @@
 
             document.getElementById("resultPensionRev").textContent =
                 "R$ " + rendaPrevRev.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
-
-            // ✅ NOVO: Atualizar Renda Mensal Destacada (Padrão Wizard)
-            document.getElementById("rendaMensalDestacada").textContent =
-                "R$ " + rendaInvestProprio.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
             // Herança
             // ✅ PADRÃO WIZARD: Usar valor NOMINAL
@@ -2493,6 +2641,22 @@
             exibirDetalhesOficial(anos, retornoAnual, beneficioINSS, rendaInvestProprio);
             exibirInterpretacaoOficial(rendaInvestProprio + beneficioINSS, rendaDesejada, investProprio.nominal);
             prepararModaisOficial(idadeAtual, idadeApos, aporte, rendaDesejada, beneficioINSS, retornoAnual, anos);
+
+            // Event listener para botão "Ver Renda Mensal"
+            const btnVerRenda = document.getElementById("btnVerRendaMensal");
+            if (btnVerRenda) {
+                btnVerRenda.onclick = function() {
+                    abrirModalRendaMensal();
+                    renderizarRendaMensal_PRO(
+                        rendaInvestProprio,
+                        beneficioINSS,
+                        40,                    // 40 anos de horizonte
+                        idadeApos,
+                        tipoRenda,
+                        anosPeriodo
+                    );
+                };
+            }
 
             // Retorna dados para módulos seguintes
             return {
@@ -3312,6 +3476,104 @@
             console.log('📄 PDF gerado com sucesso!');
         }
 
+        // ================================================
+        // MODAL — Abertura e Fechamento
+        // ================================================
+        function abrirModalRendaMensal() {
+            document.getElementById("modalRendaMensal").style.display = "block";
+        }
+        function fecharModalRendaMensal() {
+            document.getElementById("modalRendaMensal").style.display = "none";
+        }
+
+        // =======================================================
+        // RENDERIZAÇÃO — Renda Mensal ao Longo da Aposentadoria
+        // =======================================================
+        function renderizarRendaMensal_PRO(rendaInvest, rendaINSS, anosAposentadoria, idadeApos, tipoRenda, anosPeriodo) {
+
+            const ctx = document.getElementById("graficoRendaMensal").getContext("2d");
+
+            if (window.graficoRendaMensalInstancia) {
+                window.graficoRendaMensalInstancia.destroy();
+            }
+
+            // Construção dos vetores
+            const labels = [];
+            const rendaPropria = [];
+            const rendaPrevidenciaria = [];
+            const rendaTotal = [];
+
+            let meses = anosAposentadoria * 12;
+
+            for (let i = 0; i < meses; i++) {
+                labels.push((idadeApos + i/12).toFixed(1));
+
+                rendaPropria.push(rendaInvest);
+                rendaPrevidenciaria.push(rendaINSS);
+                rendaTotal.push(rendaInvest + rendaINSS);
+            }
+
+            // Texto explicativo
+            const explicacao = document.getElementById("textoExplicativoModal");
+
+            if (tipoRenda === "vitalicia") {
+                explicacao.innerHTML = `
+                    Esta simulação assume <b>renda vitalícia</b>, preservando totalmente o capital.
+                    Você receberia um valor constante enquanto viver.
+                `;
+            } else {
+                explicacao.innerHTML = `
+                    Esta simulação mostra sua renda mensal sob a estratégia de 
+                    <b>Renda por Período Determinado</b>, planejada para durar até os 
+                    <b>${idadeApos + anosPeriodo}</b> anos.
+                `;
+            }
+
+            // Gráfico
+            window.graficoRendaMensalInstancia = new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: "Investimentos Próprios",
+                            data: rendaPropria,
+                            borderColor: "#FFD700",
+                            borderWidth: 3
+                        },
+                        {
+                            label: "INSS",
+                            data: rendaPrevidenciaria,
+                            borderColor: "#00E2FF",
+                            borderWidth: 3
+                        },
+                        {
+                            label: "Renda Total",
+                            data: rendaTotal,
+                            borderColor: "#00FF88",
+                            borderWidth: 3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    tension: 0.2,
+                    plugins: {
+                        legend: { position: "top" }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: "Renda Mensal (R$)" }
+                        },
+                        x: {
+                            title: { display: true, text: "Idade" }
+                        }
+                    }
+                }
+            });
+        }
+
         // Log inicial
         console.log('🏖️ Simulador de Aposentadoria INVLAB - TODOS OS 7 MÓDULOS INTEGRADOS ✅');
     </script>
@@ -3449,5 +3711,27 @@
             });
         });
     </script>
+
+    <!-- =============================================== -->
+    <!-- MODAL — Renda Mensal ao Longo da Aposentadoria -->
+    <!-- =============================================== -->
+    <div id="modalRendaMensal" class="inv-modal">
+        <div class="inv-modal-content">
+
+            <span class="inv-modal-close" onclick="fecharModalRendaMensal()">&times;</span>
+
+            <h2 class="inv-modal-title">
+                Renda Mensal ao Longo da Aposentadoria
+            </h2>
+
+            <p class="inv-modal-desc" id="textoExplicativoModal">
+                <!-- Texto será preenchido dinamicamente -->
+            </p>
+
+            <canvas id="graficoRendaMensal" height="260"></canvas>
+
+        </div>
+    </div>
+
 </body>
 </html>
