@@ -2193,6 +2193,7 @@
     <!-- ====================================== -->
     <!-- JAVASCRIPT COMPLETO - TODOS OS MÓDULOS -->
     <!-- ====================================== -->
+    <script src="../assets/js/simulador-pro-engine.js"></script>
     <script>
         // ============================
         //  🔥 ENGINE REAL INVLAB 🔥
@@ -2363,7 +2364,7 @@
         // -----------------------------------------
         // RENDERIZAR GRÁFICO CHART.JS (INVLAB PREMIUM)
         // -----------------------------------------
-        function renderizarGraficoEvolucaoOficial(dadosMensais, idadeAtual, idadeAposentadoria) {
+        function renderizarGraficoEvolucaoOficial(resultado, idadeAtual, idadeAposentadoria) {
             const canvas = document.getElementById('graficoEvolucaoOficial');
             if (!canvas) return;
 
@@ -2372,67 +2373,178 @@
                 window.chartEvolucaoOficial.destroy();
             }
 
-            // Captura opções escolhidas
-            const tipoRenda = document.querySelector('input[name="tipoRendaOficial"]:checked')?.value || "vitalicia";
-            const anosPeriodo = parseInt(document.getElementById("anosPeriodoOficial")?.value) || 0;
+            const idadeApos = idadeAposentadoria;
+            const tipoRenda = resultado.tipoRenda || "vitalicia";
+            const anosPeriodo = resultado.anosPeriodo || 0;
+            const valorINSS = resultado.valorINSS || 0;
+            const rendaMensalDetalhada = resultado.rendaMensalDetalhada || [];
 
-            // Converter dadosMensais para formato {idade, valor}
-            const dadosMensaisFormatados = [];
-            dadosMensais.forEach((item, index) => {
-                if (index % 12 === 0 || index === dadosMensais.length - 1) {
+            // ============================================================
+            // PREPARAR DADOS DE PATRIMÔNIO (Curva Verde)
+            // ============================================================
+            // Acumulação até aposentadoria
+            const dadosAcumulacao = [];
+            resultado.acumulacaoMensal.forEach((saldo, index) => {
+                if (index % 12 === 0 || index === resultado.acumulacaoMensal.length - 1) {
                     const ano = Math.floor(index / 12);
-                    dadosMensaisFormatados.push({ idade: idadeAtual + ano, valor: item.saldo });
+                    dadosAcumulacao.push({ idade: idadeAtual + ano, valor: saldo });
                 }
             });
 
-            // Projeção de consumo pós-aposentadoria
-            const idadeApos = idadeAposentadoria;
-            const patrimonioInicial = dadosMensaisFormatados[dadosMensaisFormatados.length - 1].valor;
+            // Projeção pós-aposentadoria
+            let dadosPosAposentadoria = [];
+            if (tipoRenda === "vitalicia") {
+                // Patrimônio preservado (linha horizontal)
+                const patrimonioFinal = resultado.patrimonioFinal;
+                const anosPos = resultado.idadeFinal - idadeApos;
+                for (let i = 0; i <= anosPos; i++) {
+                    dadosPosAposentadoria.push({ idade: idadeApos + i, valor: patrimonioFinal });
+                }
+            } else if (tipoRenda === "periodo" && resultado.curvaConsumo.length > 0) {
+                // Patrimônio consumindo (curva descendente)
+                resultado.curvaConsumo.forEach((saldo, index) => {
+                    if (index % 12 === 0 || index === resultado.curvaConsumo.length - 1) {
+                        const ano = Math.floor(index / 12);
+                        dadosPosAposentadoria.push({ idade: idadeApos + ano, valor: saldo });
+                    }
+                });
+            }
 
-            // Buscar retornoAnual das variáveis globais
-            const retornoAnual = rentabilidades[currentScenario] || 6.5;
+            // Combinar acumulação + pós-aposentadoria
+            const todosDadosPatrimonio = [...dadosAcumulacao, ...dadosPosAposentadoria];
+            const labels = todosDadosPatrimonio.map(p => p.idade);
+            const valoresPatrimonio = todosDadosPatrimonio.map(p => p.valor);
 
-            const dadosPos = projetarConsumoAposAposentadoria(
-                patrimonioInicial,
-                idadeApos,
-                tipoRenda,
-                anosPeriodo,
-                retornoAnual
-            );
+            // ============================================================
+            // PREPARAR DADOS DE RENDA MENSAL (Curva Lilás)
+            // ============================================================
+            const valoresRendaMensal = [];
+            const valoresINSS = [];
+            const valoresTotal = [];
 
-            // Construção da curva completa
-            const labels = [
-                ...dadosMensaisFormatados.map(p => p.idade),
-                ...dadosPos.map(p => p.idade)
-            ];
+            // Criar mapa de idade -> renda mensal para alinhamento correto
+            const mapaRendaPorIdade = {};
+            if (rendaMensalDetalhada.length > 0) {
+                rendaMensalDetalhada.forEach((renda, index) => {
+                    if (index % 12 === 0 || index === rendaMensalDetalhada.length - 1) {
+                        const idade = idadeApos + Math.floor(index / 12);
+                        mapaRendaPorIdade[idade] = renda;
+                    }
+                });
+            }
 
-            const valores = [
-                ...dadosMensaisFormatados.map(p => p.valor),
-                ...dadosPos.map(p => p.valor)
-            ];
+            // Alinhar rendas com os labels (idades) do patrimônio
+            labels.forEach((idade) => {
+                if (idade < idadeApos) {
+                    // Antes da aposentadoria: null
+                    valoresRendaMensal.push(null);
+                    valoresINSS.push(null);
+                    valoresTotal.push(null);
+                } else {
+                    // Após aposentadoria: usar renda do mapa ou última disponível
+                    const renda = mapaRendaPorIdade[idade] || valoresRendaMensal[valoresRendaMensal.length - 1] || 0;
+                    const rendaValida = renda > 0 ? renda : null;
+                    const inssValido = valorINSS > 0 ? valorINSS : null;
+                    
+                    valoresRendaMensal.push(rendaValida);
+                    valoresINSS.push(inssValido);
+                    
+                    // Total = renda + INSS (se ambos válidos) ou apenas renda (se INSS = 0)
+                    if (rendaValida !== null) {
+                        valoresTotal.push(rendaValida + (inssValido || 0));
+                    } else {
+                        valoresTotal.push(null);
+                    }
+                }
+            });
 
-            // Renderização
+            // ============================================================
+            // RENDERIZAÇÃO COM 4 CURVAS
+            // ============================================================
             const ctx = canvas.getContext('2d');
             window.chartEvolucaoOficial = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
-                    datasets: [{
-                        label: 'Patrimônio total',
-                        data: valores,
-                        borderColor: '#FFD700',
-                        backgroundColor: 'transparent',
-                        borderWidth: 3,
-                        tension: 0.15
-                    }]
+                    datasets: [
+                        {
+                            // 1. PATRIMÔNIO (Verde) - Eixo Y esquerdo
+                            label: 'Patrimônio',
+                            data: valoresPatrimonio,
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.15,
+                            fill: true,
+                            yAxisID: 'y',
+                            pointRadius: 2,
+                            pointHoverRadius: 5
+                        },
+                        {
+                            // 2. RENDA MENSAL DO PATRIMÔNIO (Lilás) - Eixo Y direito
+                            label: 'Renda Mensal (Investimentos)',
+                            data: valoresRendaMensal,
+                            borderColor: '#a855f7',
+                            backgroundColor: 'rgba(168, 85, 247, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.25,
+                            fill: false,
+                            yAxisID: 'y1',
+                            pointRadius: 2,
+                            pointHoverRadius: 5
+                        },
+                        {
+                            // 3. INSS (Azul Ciano) - Eixo Y direito
+                            label: 'Renda do INSS',
+                            data: valoresINSS,
+                            borderColor: '#4da6ff',
+                            backgroundColor: 'rgba(77, 166, 255, 0.1)',
+                            borderWidth: 2,
+                            borderDash: [6, 4],
+                            tension: 0,
+                            fill: false,
+                            yAxisID: 'y1',
+                            pointRadius: 1,
+                            pointHoverRadius: 4
+                        },
+                        {
+                            // 4. RENDA TOTAL (Dourado) - Eixo Y direito
+                            label: 'Renda Total (Patrimônio + INSS)',
+                            data: valoresTotal,
+                            borderColor: '#ffcc00',
+                            backgroundColor: 'rgba(255, 204, 0, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.25,
+                            fill: true,
+                            yAxisID: 'y1',
+                            pointRadius: 2,
+                            pointHoverRadius: 5
+                        }
+                    ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: true,
                     aspectRatio: 2,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
                     plugins: {
                         legend: {
-                            display: false
+                            display: true,
+                            position: 'top',
+                            align: 'center',
+                            labels: {
+                                color: '#E4E4E4',
+                                font: {
+                                    size: 11,
+                                    family: "'Inter', sans-serif"
+                                },
+                                padding: 10,
+                                usePointStyle: true,
+                                boxWidth: 12
+                            }
                         },
                         tooltip: {
                             backgroundColor: 'rgba(13, 13, 13, 0.95)',
@@ -2441,10 +2553,20 @@
                             borderColor: 'rgba(212, 175, 55, 0.3)',
                             borderWidth: 1,
                             padding: 12,
-                            displayColors: false,
+                            displayColors: true,
                             callbacks: {
                                 label: function(context) {
-                                    return 'Patrimônio: R$ ' + context.parsed.y.toLocaleString('pt-BR', {maximumFractionDigits: 0});
+                                    const label = context.dataset.label || '';
+                                    const value = context.parsed.y;
+                                    if (value === null || value === undefined) return '';
+                                    
+                                    if (context.datasetIndex === 0) {
+                                        // Patrimônio
+                                        return label + ': R$ ' + value.toLocaleString('pt-BR', {maximumFractionDigits: 0});
+                                    } else {
+                                        // Rendas (mensais)
+                                        return label + ': R$ ' + value.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '/mês';
+                                    }
                                 }
                             }
                         }
@@ -2460,21 +2582,56 @@
                                 font: {
                                     size: 11
                                 }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Idade',
+                                color: '#D4AF37'
                             }
                         },
                         y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
                             grid: {
                                 color: 'rgba(138, 204, 166, 0.1)',
                                 drawBorder: false
                             },
                             ticks: {
-                                color: '#9CA3AF',
+                                color: '#10b981',
                                 font: {
                                     size: 11
                                 },
                                 callback: function(value) {
                                     return 'R$ ' + (value / 1000).toFixed(0) + 'k';
                                 }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Patrimônio (R$)',
+                                color: '#10b981'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            grid: {
+                                drawOnChartArea: false
+                            },
+                            ticks: {
+                                color: '#ffcc00',
+                                font: {
+                                    size: 11
+                                },
+                                callback: function(value) {
+                                    return 'R$ ' + value.toLocaleString('pt-BR', {maximumFractionDigits: 0});
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Renda Mensal (R$)',
+                                color: '#ffcc00'
                             }
                         }
                     }
@@ -2487,20 +2644,28 @@
         // -----------------------------------------
         function calcularSimulacao() {
 
+            // ================================
+            // 1. COLETAR DADOS DO FORM
+            // ================================
             const idadeAtual = parseInt(document.getElementById("currentAge").value);
             const idadeApos = parseInt(document.getElementById("retirementAge").value);
-            const aporte = parseFloat(document.getElementById("monthlyInvestment").value);
+            const aporteMensal = parseFloat(document.getElementById("monthlyInvestment").value);
             const rendaDesejada = parseFloat(document.getElementById("desiredIncome").value);
             const inssManual = document.getElementById("inssManual").value;
             
-            // 👉 PASSO 3: Capturar patrimônio atual do campo HTML
-            const patrimonioAtual = parseFloat(document.getElementById("patrimonioAtualOficial").value) || 0;
+            const patrimonioInicial = parseFloat(document.getElementById("patrimonioAtualOficial").value) || 0;
+            const aporteAnual = parseFloat(document.getElementById("aporteExtraAnualOficial").value) || 0;
             
-            // 👉 PASSO 5: Capturar aporte extra anual do campo HTML
-            const aporteExtraAnual = parseFloat(document.getElementById("aporteExtraAnualOficial").value) || 0;
+            const tipoRenda = document.querySelector('input[name="tipoRendaOficial"]:checked')?.value || "vitalicia";
+            const anosPeriodo = parseInt(document.getElementById("anosPeriodoOficial")?.value) || 0;
+            
+            // Calcular idade final (padrão: 30 anos após aposentadoria se não fornecido)
+            const idadeFinal = idadeApos + (anosPeriodo > 0 ? anosPeriodo : 30);
+            
+            const retornoAnual = rentabilidades[currentScenario];
 
             // Validação
-            if (!idadeAtual || !idadeApos || !aporte || !rendaDesejada) {
+            if (!idadeAtual || !idadeApos || !aporteMensal || !rendaDesejada) {
                 alert('⚠️ Preencha todos os campos!');
                 return;
             }
@@ -2510,82 +2675,55 @@
                 return;
             }
 
+            // ================================
+            // 2. CHAMAR O ENGINE UNIFICADO
+            // ================================
+            const resultado = window.simuladorProEngine.executarSimulacaoCompleta({
+                idadeAtual,
+                idadeApos,
+                idadeFinal,
+                aporteMensal,
+                aporteAnual,
+                patrimonioInicial,
+                retornoAnual,
+                tipoRenda,
+                anosPeriodo,
+                rendaDesejada,
+                inssInformado: inssManual
+            });
+
+            console.log("Resultado PRO completo:", resultado);
+
+            // ================================
+            // 3. ADAPTAR RESULTADOS PARA COMPATIBILIDADE
+            // ================================
             const anos = idadeApos - idadeAtual;
-            const retornoAnual = rentabilidades[currentScenario];
+            
+            // Usar renda baseada no tipo selecionado
+            const rendaInvestProprio = tipoRenda === "vitalicia" ? resultado.rendaVital : resultado.rendaPeriodoMensal;
+            const beneficioINSS = resultado.valorINSS;
+            
+            // Manter compatibilidade com código existente (previdência privada)
+            const prev = acumulacaoPrevidencia(aporteMensal, anos, retornoAnual);
+            const rendaPrevSimples = rendaVitalicia(prev.nominal, retornoAnual, "simples");
+            const rendaPrevRev = rendaVitalicia(prev.nominal, retornoAnual, "reversivel");
+            
+            // Criar objeto investProprio para compatibilidade
+            const investProprio = {
+                nominal: resultado.patrimonioFinal
+            };
 
-            // 1) INVESTIMENTO PRÓPRIO
-            // ✅ CORREÇÃO: agora usa os valores reais dos campos (patrimônio inicial e aporte extra)
-            const investProprio = acumulacaoReal(aporte, anos, retornoAnual, patrimonioAtual, aporteExtraAnual);
-            
-            // 2) PREVIDÊNCIA PRIVADA
-            const prev = acumulacaoPrevidencia(aporte, anos, retornoAnual);
-
-            // 3) RENDAS — AGORA SUPORTANDO VITALÍCIA E PERÍODO
-            
-            // Capturar tipo de renda selecionado
-            const tipoRenda = document.querySelector('input[name="tipoRendaOficial"]:checked')?.value || "vitalicia";
-            const anosPeriodo = parseInt(document.getElementById("anosPeriodoOficial")?.value) || 0;
-            
-            // Taxa real (taxa nominal - inflação)
-            const taxaAnualReal = retornoAnual - (INFLACAO_MEDIA / 100);
-            const taxaMensalReal = Math.pow(1 + taxaAnualReal, 1/12) - 1;
-            
-            let rendaInvestProprio = 0;
-            
-            // ==============================
-            // A) RENDA VITALÍCIA (PRESERVA CAPITAL)
-            // ==============================
-            if (tipoRenda === "vitalicia") {
-                rendaInvestProprio = investProprio.nominal * taxaMensalReal;
-            }
-            
-            // ==============================
-            // B) RENDA POR PERÍODO (CONSUME CAPITAL)
-            // ==============================
-            else if (tipoRenda === "periodo" && anosPeriodo > 0) {
-                const meses = anosPeriodo * 12;
-                
-                if (taxaMensalReal > 0) {
-                    // Fórmula PMT
-                    rendaInvestProprio =
-                        (investProprio.nominal * taxaMensalReal) /
-                        (1 - Math.pow(1 + taxaMensalReal, -meses));
-                } else {
-                    rendaInvestProprio = investProprio.nominal / meses;
-                }
-            }
-            
-            // Atualizar DOM
+            // ================================
+            // 4. ATUALIZAR DOM (mantendo elementos existentes)
+            // ================================
             document.getElementById("rendaMensalDestacada").textContent =
                 "R$ " + rendaInvestProprio.toLocaleString("pt-BR", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2
                 });
-            
-            const rendaPrevSimples = rendaVitalicia(prev.nominal, retornoAnual, "simples");
-            const rendaPrevRev = rendaVitalicia(prev.nominal, retornoAnual, "reversivel");
 
-            // 4) INSS (manual ou automático)
-            // INSS: Respeitar ZERO do usuário (não forçar cálculo automático)
-            let beneficioINSS = 0;
-            const inssManualValue = parseFloat(inssManual);
-            
-            if (!isNaN(inssManualValue) && inssManual !== "" && inssManual !== null) {
-                // Se o usuário informou um valor numérico:
-                if (inssManualValue > 0) {
-                    beneficioINSS = inssManualValue;   // usa o valor informado
-                } else {
-                    beneficioINSS = 0;                 // ZERO significa "não considerar INSS"
-                }
-            } else {
-                // Apenas se o usuário NÃO INFORMAR NADA (campo vazio)
-                beneficioINSS = calcularINSS(rendaDesejada);
-            }
-
-            // Atualiza DOM
-            // ✅ PADRÃO WIZARD: Usar valor NOMINAL
             document.getElementById("resultOwn").textContent =
-                "R$ " + investProprio.nominal.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
+                "R$ " + resultado.patrimonioFinal.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
 
             document.getElementById("resultPensionSimple").textContent =
                 "R$ " + rendaPrevSimples.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
@@ -2594,11 +2732,9 @@
                 "R$ " + rendaPrevRev.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
 
             // Herança
-            // ✅ PADRÃO WIZARD: Usar valor NOMINAL
             document.getElementById("heritageOwnValue").textContent =
-                "R$ " + investProprio.nominal.toLocaleString("pt-BR", {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                "R$ " + resultado.heranca.toLocaleString("pt-BR", {minimumFractionDigits: 2, maximumFractionDigits: 2});
 
-            // ✅ PADRÃO WIZARD: Usar valor NOMINAL
             document.getElementById("heritageRevValue").textContent =
                 "R$ " + (prev.nominal * 0.8).toLocaleString("pt-BR", {minimumFractionDigits: 2, maximumFractionDigits: 2});
 
@@ -2607,42 +2743,39 @@
             // Mostra seção de resultados
             document.getElementById("resultsSection").style.display = "block";
 
-            // Atualiza gráfico
-            // ✅ PADRÃO WIZARD: Usar valor NOMINAL
+            // ================================
+            // 5. ATUALIZAR GRÁFICOS (mantendo funções existentes)
+            // ================================
             atualizarGrafico(
-                investProprio.nominal,
+                resultado.patrimonioFinal,
                 rendaPrevSimples,
                 rendaPrevRev
             );
 
-            // ===================================================
-            // 📈 GERAR PROJEÇÃO MENSAL E RENDERIZAR GRÁFICO
-            // ===================================================
-            const dadosMensais = projetarPatrimonioMensalOficial(
-                aporte,
-                anos,
-                retornoAnual,
-                aporteExtraAnual,  // ✅ CORREÇÃO: agora usa o valor real do campo
-                patrimonioAtual    // ✅ CORREÇÃO: patrimônio inicial no gráfico
-            );
+            // Converter acumulacaoMensal para formato esperado por renderizarGraficoEvolucaoOficial
+            const dadosMensais = resultado.acumulacaoMensal.map((saldo, index) => ({
+                mes: index,
+                saldo: saldo
+            }));
 
             setTimeout(() => {
                 renderizarGraficoEvolucaoOficial(
-                    dadosMensais,
+                    resultado,  // Passar resultado completo do engine
                     idadeAtual,
                     idadeApos
                 );
             }, 100);
 
-            // ===================================================
-            // 📋 EXIBIR DETALHES, INTERPRETAÇÃO E MODAIS
-            // ===================================================
-            // ✅ PADRÃO WIZARD: Usar valor NOMINAL em todas as exibições
+            // ================================
+            // 6. EXIBIR DETALHES E INTERPRETAÇÃO (mantendo funções existentes)
+            // ================================
             exibirDetalhesOficial(anos, retornoAnual, beneficioINSS, rendaInvestProprio);
-            exibirInterpretacaoOficial(rendaInvestProprio + beneficioINSS, rendaDesejada, investProprio.nominal);
-            prepararModaisOficial(idadeAtual, idadeApos, aporte, rendaDesejada, beneficioINSS, retornoAnual, anos);
+            exibirInterpretacaoOficial(rendaInvestProprio + beneficioINSS, rendaDesejada, resultado.patrimonioFinal);
+            prepararModaisOficial(idadeAtual, idadeApos, aporteMensal, rendaDesejada, beneficioINSS, retornoAnual, anos);
 
-            // Event listener para botão "Ver Renda Mensal"
+            // ================================
+            // 7. CONFIGURAR MODAL DE RENDA MENSAL
+            // ================================
             const btnVerRenda = document.getElementById("btnVerRendaMensal");
             if (btnVerRenda) {
                 btnVerRenda.onclick = function() {
@@ -2658,13 +2791,16 @@
                 };
             }
 
-            // Retorna dados para módulos seguintes
+            // ================================
+            // 8. RETORNAR DADOS (mantendo formato esperado)
+            // ================================
             return {
-                patrimonio: investProprio.nominal,
+                patrimonio: resultado.patrimonioFinal,
                 rendaSimples: rendaPrevSimples,
                 rendaReversivel: rendaPrevRev,
                 rendaDesejada: rendaDesejada,
-                inss: beneficioINSS
+                inss: beneficioINSS,
+                resultado: resultado  // Adicionar resultado completo para uso futuro
             };
         }
 
