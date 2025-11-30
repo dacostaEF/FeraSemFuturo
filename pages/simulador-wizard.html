@@ -2136,22 +2136,21 @@
                 padding: 16px;
             ">
                 <label class="input-label">
-                    Estimativa do seu INSS (se souber, ou deixe em branco)
+                    Aposentadoria do INSS (opcional)
                     <span class="tooltip">
                         <span class="tooltip-icon">i</span>
-                        <span class="tooltip-text">Se você não quiser considerar o benefício do INSS no cálculo da sua renda total, informe ZERO aqui. Neste caso, sua renda na aposentadoria será calculada apenas pelos seus investimentos.</span>
+                        <span class="tooltip-text">Informe o valor se souber. Deixe vazio para estimativa automática. Digite 0 para ignorar.</span>
                     </span>
                 </label>
-                <input type="number" class="input-field" id="inssEstimado" placeholder="Ex: 3000 (opcional ou 0 para ignorar)" value="">
-                
-                <p style="
-                    margin-top: 12px;
-                    margin-bottom: 0;
-                    font-size: 0.9rem;
-                    color: #FACC15;
-                    line-height: 1.5;
-                ">
-                    💡 <strong>Deixe vazio</strong> para calcular automaticamente (40% da renda desejada) ou informe <strong>0 para analisar apenas seus investimentos</strong>.
+                <input 
+                    type="number" 
+                    id="inssEstimado" 
+                    class="input-field" 
+                    placeholder="Ex: 3000 (opcional ou 0 para ignorar)"
+                >
+                <p class="input-hint" style="color: #FFD966; margin-top: 10px;">
+                    💡 Se deixar vazio, o simulador estima automaticamente.  
+                    Digite 0 para ignorar o INSS.
                 </p>
             </div>
 

@@ -65,7 +65,30 @@ function captureStepData(stepNumber) {
 
         case 2:
             wizardData.rendaDesejada = getValue("rendaDesejada");
-            wizardData.inssEstimado = getValue("inssEstimado");
+            
+            // INSS: informado, vazio (auto) ou zero (ignorar)
+            let inssEstimadoCampo = document.getElementById("inssEstimado")?.value.trim();
+            const rendaDesejada = parseFloat(wizardData.rendaDesejada) || 0;
+            
+            // Regra de ouro:
+            // "" → estimar automaticamente (40% da renda desejada)
+            // "0" → ignorar completamente
+            // número > 0 → usar o valor informado
+            let valorINSS = 0;
+            
+            if (inssEstimadoCampo === "" || inssEstimadoCampo === null) {
+                // Estimar automaticamente = 40% da renda desejada
+                valorINSS = rendaDesejada * 0.40;
+            } else {
+                let num = parseFloat(inssEstimadoCampo);
+                if (!isNaN(num) && num > 0) {
+                    valorINSS = num;
+                } else {
+                    valorINSS = 0; // usuário digitou 0 → ignorar INSS
+                }
+            }
+            
+            wizardData.inssEstimado = valorINSS;
             break;
 
         case 3:
@@ -601,9 +624,9 @@ function finalizarWizard() {
             <ul style="margin-left: 20px; margin-top: 8px;">
                 ${resultados.inssReal === 0 
                     ? '<li><strong>100% dos investimentos</strong> (INSS não considerado)</li>'
-                    : `<li><strong>INSS:</strong> R$ ${resultados.inssReal.toLocaleString('pt-BR', {minimumFractionDigits: 2})} (${((resultados.inssReal / resultados.rendaTotalPrevista) * 100).toFixed(0)}%)</li>
-                       <li><strong>Investimentos:</strong> R$ ${resultados.rendaRealPossivel.toLocaleString('pt-BR', {minimumFractionDigits: 2})} (${((resultados.rendaRealPossivel / resultados.rendaTotalPrevista) * 100).toFixed(0)}%)</li>
-                       <li><strong>Total:</strong> R$ ${resultados.rendaTotalPrevista.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</li>`
+                    : `<li><strong>Renda do Patrimônio:</strong> R$ ${resultados.rendaRealPossivel.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</li>
+                       <li><strong>Renda do INSS:</strong> R$ ${resultados.inssReal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</li>
+                       <li><strong>Renda Total:</strong> R$ ${resultados.rendaTotalPrevista.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</li>`
                 }
                 <li><strong>Estratégia:</strong> ${
                     resultados.tipoRenda === 'vitalicia' && resultados.estrategia === 'perpetua'
@@ -628,6 +651,24 @@ function finalizarWizard() {
             <p style="margin-top: 15px;">⏱️ <strong>Prazo:</strong> ${resultados.anosAteAposentadoria} anos até aposentadoria</p>
             <p>📊 <strong>Perfil:</strong> ${resultados.perfil.charAt(0).toUpperCase() + resultados.perfil.slice(1)} (${(resultados.taxaAnualEscolhida * 100).toFixed(1)}% a.a.)</p>
         </div>
+
+        ${resultados.inssReal > 0 ? `
+        <!-- CAIXA DESTACADA: ESTIMATIVA DE INSS -->
+        <div style="border: 2px solid #4da6ff; background: rgba(77, 166, 255, 0.1); border-radius: 12px; padding: 20px; margin: 25px 0;">
+            <h4 style="color: #4da6ff; margin-top: 0; margin-bottom: 15px; font-size: 1.1rem;">
+                📘 Estimativa de INSS
+            </h4>
+            <p style="color: #E4E4E4; line-height: 1.6; margin-bottom: 10px;">
+                Baseada no salário de <strong>R$ ${wizardData.rendaAtual?.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) || 'N/A'}</strong> e aposentadoria prevista aos <strong>${wizardData.idadeAposentadoria} anos</strong>:
+            </p>
+            <p style="color: #4da6ff; font-size: 1.1rem; font-weight: 600; margin: 10px 0;">
+                🧮 Benefício estimado: <strong>R$ ${resultados.inssReal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> (em valores reais)
+            </p>
+            <p style="color: #9ca3af; font-size: 0.85rem; margin-top: 15px; line-height: 1.5; border-top: 1px solid rgba(77, 166, 255, 0.3); padding-top: 15px;">
+                💡 <strong>Observação:</strong> Este valor do INSS é uma estimativa baseada nos seus dados. Para um cálculo oficial e detalhado, consulte o portal <a href="https://meu.inss.gov.br" target="_blank" style="color: #4da6ff; text-decoration: underline;">Meu INSS</a>.
+            </p>
+        </div>
+        ` : ''}
 
         <!-- GRÁFICO CHART.JS -->
         <div class="dashboard-section" style="padding:30px 20px; background:#0f0f0f; border-radius:10px;">
@@ -830,7 +871,8 @@ function finalizarWizard() {
             btnRendaMensal.onclick = () => {
                 abrirGraficoRendaMensal(
                     resultados.rendaMensalDetalhada,
-                    resultados.idadeAposentadoria
+                    resultados.idadeAposentadoria,
+                    resultados.inssReal || 0
                 );
             };
         }
@@ -1724,12 +1766,13 @@ document.addEventListener("DOMContentLoaded", () => {
 // ============================================================
 // 📊 GRÁFICO: RENDA MENSAL AO LONGO DA APOSENTADORIA
 // ============================================================
-function abrirGraficoRendaMensal(listaRenda, idadeApos) {
+function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0) {
     console.log("📊 Abrindo gráfico de renda mensal...");
-    console.log("📊 Parâmetros recebidos:", { listaRenda: listaRenda?.length, idadeApos });
+    console.log("📊 Parâmetros recebidos:", { listaRenda: listaRenda?.length, idadeApos, inssValor });
     
     // Converter parâmetros
     idadeApos = Number(idadeApos) || 0;
+    inssValor = Number(inssValor) || 0;
     
     // Validar lista de renda
     if (!listaRenda || !Array.isArray(listaRenda) || listaRenda.length === 0) {
@@ -1827,11 +1870,6 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos) {
             graficoRendaMensal = null;
         }
         
-        // Verificar se há renda zerada (estratégia esgotável)
-        const temRendaZero = rendas.some(r => r === 0 || r < 0.01);
-        const corRenda = temRendaZero ? "#ff6666" : "#2ecc71";
-        const labelRenda = "Renda Mensal (real ao longo do tempo)";
-        
         // Validar dados
         if (labels.length === 0 || rendas.length === 0) {
             console.error("❌ Dados vazios!");
@@ -1849,22 +1887,53 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos) {
             return;
         }
         
+        // Preparar 3 datasets: Patrimônio, INSS e Total
+        // Renda do patrimônio (já calculada)
+        const datasetPropria = {
+            label: "Renda do Patrimônio",
+            data: rendas,
+            borderColor: "#00ff88",
+            backgroundColor: "rgba(0, 255, 136, 0.1)",
+            borderWidth: 3,
+            tension: 0.25,
+            fill: true,
+            pointRadius: 2,
+            pointHoverRadius: 5
+        };
+
+        // INSS (valor constante após aposentadoria)
+        const datasetINSS = {
+            label: "Renda do INSS",
+            data: rendas.map(() => inssValor),
+            borderColor: "#4da6ff",
+            backgroundColor: "rgba(77, 166, 255, 0.1)",
+            borderWidth: 2,
+            borderDash: [6, 4],
+            tension: 0.15,
+            fill: false,
+            pointRadius: 1,
+            pointHoverRadius: 4
+        };
+
+        // Soma total
+        const datasetTotal = {
+            label: "Renda Total (Patrimônio + INSS)",
+            data: rendas.map((v) => v + inssValor),
+            borderColor: "#ffcc00",
+            backgroundColor: "rgba(255, 204, 0, 0.1)",
+            borderWidth: 3,
+            tension: 0.25,
+            fill: true,
+            pointRadius: 2,
+            pointHoverRadius: 5
+        };
+        
         try {
             graficoRendaMensal = new ChartLib(ctx, {
                 type: "line",
                 data: {
                     labels: labels,
-                    datasets: [{
-                        label: labelRenda,
-                        data: rendas,
-                        borderColor: corRenda,
-                        backgroundColor: "rgba(255, 100, 100, 0.25)",
-                        borderWidth: 2,
-                        tension: 0.3,
-                        fill: true,
-                        pointRadius: 2,
-                        pointHoverRadius: 5
-                    }]
+                    datasets: [datasetPropria, datasetINSS, datasetTotal]
                 },
                 options: {
                     responsive: true,
@@ -1932,12 +2001,20 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos) {
                 const rendaFinal = listaRenda[listaRenda.length - 1] || 0;
                 const mesesTotal = listaRenda.length;
                 const idadeFinal = idadeApos + Math.floor(mesesTotal / 12);
+                const temRendaZero = rendas.some(r => r === 0 || r < 0.01);
+                const rendaTotalInicial = rendaInicial + inssValor;
                 
                 let textoInfo = "";
                 if (temRendaZero) {
-                    textoInfo = `📊 <strong>Renda por Período Determinado:</strong> Você receberá uma renda mensal que começa em <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> e termina em <strong>R$ 0</strong> aproximadamente aos <strong>${idadeFinal} anos</strong>, quando seu patrimônio se esgotará.`;
+                    textoInfo = `📊 <strong>Renda por Período Determinado:</strong> Você receberá uma renda mensal do patrimônio que começa em <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> e termina em <strong>R$ 0</strong> aproximadamente aos <strong>${idadeFinal} anos</strong>, quando seu patrimônio se esgotará.`;
                 } else {
-                    textoInfo = `💚 <strong>Renda Vitalícia:</strong> Você receberá <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> de forma permanente, preservando seu patrimônio para sempre.`;
+                    textoInfo = `💚 <strong>Renda Vitalícia:</strong> Você receberá <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> do patrimônio de forma permanente, preservando seu capital para sempre.`;
+                }
+                
+                if (inssValor > 0) {
+                    textoInfo += `<br><br>📘 <strong>INSS:</strong> Você receberá adicionalmente <strong>R$ ${inssValor.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> do INSS.`;
+                    textoInfo += `<br><br>💰 <strong>Renda Total:</strong> <strong>R$ ${rendaTotalInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> (patrimônio + INSS).`;
+                    textoInfo += `<br><br><span style="font-size: 0.85rem; color: #9ca3af;">💡 <strong>Observação:</strong> O valor do INSS é uma estimativa. Para um cálculo oficial, consulte o portal <a href="https://meu.inss.gov.br" target="_blank" style="color: #4da6ff;">Meu INSS</a>.</span>`;
                 }
                 
                 const pElement = infoDiv.querySelector('p');
