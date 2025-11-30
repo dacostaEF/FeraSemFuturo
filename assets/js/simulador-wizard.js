@@ -1557,12 +1557,14 @@ function abrirGraficoRendaMensal(rendaMensal, projecaoPos, idadeApos, tipoRenda,
             projecaoPos.forEach((p, index) => {
                 if (index % 12 === 0 || index === projecaoPos.length - 1) {
                     // Garantir que idade seja um número
-                    const idade = Number(idadeApos) + (Number(index) / 12);
-                    if (isNaN(idade)) {
-                        console.error(`❌ Erro: idade calculada não é um número! idadeApos=${idadeApos}, index=${index}`);
+                    const idadeCalculada = Number(idadeApos) + (Number(index) / 12);
+                    if (isNaN(idadeCalculada) || !isFinite(idadeCalculada)) {
+                        console.error(`❌ Erro: idade calculada não é um número válido! idadeApos=${idadeApos} (tipo: ${typeof idadeApos}), index=${index}`);
                         return; // Pular este ponto
                     }
-                    idades.push(parseFloat(idade.toFixed(1)));
+                    // Usar Math.round para evitar problemas com toFixed
+                    const idade = Math.round(idadeCalculada * 10) / 10; // Arredondar para 1 casa decimal
+                    idades.push(idade);
                     
                     // Para período determinado: renda constante até zerar, depois zero
                     if (tipoRenda === "periodo" || estrategia === "esgotavel") {

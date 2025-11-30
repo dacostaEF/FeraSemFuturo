@@ -178,15 +178,29 @@ function executarSimulacaoWizard(dadosWizard) {
 
     let rendaRealPossivel = 0;
 
-    // Estratégia 1: Vitalícia perpétua (só juros, capital preservado)
+    // ============================================================
+    // ESTRATÉGIA 1: RENDA VITALÍCIA + PRESERVAR CAPITAL
+    // ============================================================
+    // Renda menor (só juros), patrimônio preservado para sempre
     if (tipoRenda === "vitalicia" && estrategia === "perpetua") {
         rendaRealPossivel = patrimonioTotalProjetado * taxaMensalReal;
     }
 
-    // Estratégia 2: Período determinado ou esgotável (consome capital com juros)
-    else if (tipoRenda === "periodo" || estrategia === "esgotavel") {
-        const anos = tipoRenda === "periodo" ? anosPeriodo : anosDuracao;
-        const meses = anos * 12;
+    // ============================================================
+    // ESTRATÉGIA 2: RENDA POR PERÍODO + PRESERVAR CAPITAL
+    // ============================================================
+    // Renda menor (só juros), mas por período limitado
+    // Patrimônio permanece intacto durante e após o período
+    else if (tipoRenda === "periodo" && estrategia === "perpetua") {
+        rendaRealPossivel = patrimonioTotalProjetado * taxaMensalReal;
+    }
+
+    // ============================================================
+    // ESTRATÉGIA 3: RENDA POR PERÍODO + USAR CAPITAL GRADUALMENTE
+    // ============================================================
+    // Renda maior (consome capital + juros), até zerar no período
+    else if (tipoRenda === "periodo" && estrategia === "esgotavel") {
+        const meses = anosPeriodo * 12;
         
         if (taxaMensalReal > 0) {
             rendaRealPossivel = (patrimonioTotalProjetado * taxaMensalReal) / 
@@ -197,7 +211,23 @@ function executarSimulacaoWizard(dadosWizard) {
         }
     }
 
-    // Fallback: se nada definido, usa vitalícia
+    // ============================================================
+    // ESTRATÉGIA 4: RENDA VITALÍCIA + USAR CAPITAL GRADUALMENTE
+    // ============================================================
+    // Esta combinação não deveria ser permitida (já tem modal de aviso)
+    // Mas se chegar aqui, trata como consumo por período padrão
+    else if (tipoRenda === "vitalicia" && estrategia === "esgotavel") {
+        const meses = anosDuracao * 12;
+        
+        if (taxaMensalReal > 0) {
+            rendaRealPossivel = (patrimonioTotalProjetado * taxaMensalReal) / 
+                               (1 - Math.pow(1 + taxaMensalReal, -meses));
+        } else {
+            rendaRealPossivel = patrimonioTotalProjetado / meses;
+        }
+    }
+
+    // Fallback: se nada definido, usa vitalícia (só juros)
     else {
         rendaRealPossivel = patrimonioTotalProjetado * taxaMensalReal;
     }
@@ -261,23 +291,50 @@ function executarSimulacaoWizard(dadosWizard) {
 
     // 11. Calcular herança baseada na estratégia
     let heranca = 0;
-    if (tipoRenda === "vitalicia" && estrategia === "perpetua") {
-        heranca = patrimonioTotalProjetado;  // Capital preservado
+    // Herança = patrimônio preservado (não consumido)
+    if (estrategia === "perpetua") {
+        heranca = patrimonioTotalProjetado;  // Capital preservado (vitalícia ou período)
     } else {
-        heranca = 0;  // Capital consumido
+        heranca = 0;  // Capital consumido (esgotável)
     }
 
     // 12. Projeção pós-aposentadoria (para gráfico completo)
     let projecaoPosAposentadoria = [];
+    
+    // ESTRATÉGIA 1: RENDA VITALÍCIA + PRESERVAR CAPITAL
+    // Patrimônio permanece constante (só juros são consumidos)
     if (tipoRenda === "vitalicia" && estrategia === "perpetua") {
         projecaoPosAposentadoria = projetarPatrimonioVitalicia(
             patrimonioTotalProjetado,
             taxaMensalReal,
             30  // 30 anos de projeção pós-aposentadoria
         );
-    } else if (tipoRenda === "periodo" || estrategia === "esgotavel") {
-        const anos = tipoRenda === "periodo" ? anosPeriodo : anosDuracao;
-        const meses = anos * 12;
+    }
+    // ESTRATÉGIA 2: RENDA POR PERÍODO + PRESERVAR CAPITAL
+    // Patrimônio permanece constante durante o período
+    else if (tipoRenda === "periodo" && estrategia === "perpetua") {
+        const meses = anosPeriodo * 12;
+        projecaoPosAposentadoria = projetarPatrimonioVitalicia(
+            patrimonioTotalProjetado,
+            taxaMensalReal,
+            anosPeriodo  // Projeção pelo período determinado
+        );
+    }
+    // ESTRATÉGIA 3: RENDA POR PERÍODO + USAR CAPITAL GRADUALMENTE
+    // Patrimônio diminui até zerar no período
+    else if (tipoRenda === "periodo" && estrategia === "esgotavel") {
+        const meses = anosPeriodo * 12;
+        projecaoPosAposentadoria = projetarPatrimonioPorPeriodo(
+            patrimonioTotalProjetado,
+            rendaRealPossivel,
+            taxaMensalReal,
+            meses
+        );
+    }
+    // ESTRATÉGIA 4: RENDA VITALÍCIA + USAR CAPITAL GRADUALMENTE (não recomendado)
+    // Trata como consumo por período
+    else if (tipoRenda === "vitalicia" && estrategia === "esgotavel") {
+        const meses = anosDuracao * 12;
         projecaoPosAposentadoria = projetarPatrimonioPorPeriodo(
             patrimonioTotalProjetado,
             rendaRealPossivel,
