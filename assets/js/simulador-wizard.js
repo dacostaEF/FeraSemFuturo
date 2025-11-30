@@ -510,6 +510,7 @@ function finalizarWizard() {
     // 🔥 EXECUTAR MOTOR DE CÁLCULO REAL
     // ===================================================
     const tipoRenda = document.querySelector("input[name='tipoRenda']:checked").value;
+    const estrategia = document.querySelector("input[name='estrategia']:checked")?.value || "perpetua";
 
     // Captura idade terminal para Período OU Esgotável
     let idadeFinal = 95;
@@ -522,6 +523,7 @@ function finalizarWizard() {
     const resultados = executarSimulacaoWizard({
         ...wizardData,
         tipoRenda: tipoRenda,
+        estrategia: estrategia,
         idadeFinal: idadeFinal,
         mostrarTodasCurvas: mostrarTodas
     });
