@@ -1765,7 +1765,18 @@
                                             <div style="font-weight: 600; color: #10b981; margin-bottom: 4px;">⏱️ Renda por período determinado</div>
                                             <div style="font-size: 0.85rem; color: #9ca3af;">Você escolhe até qual idade deseja manter a renda ativa após se aposentar.</div>
                                             <div id="periodoContainerOficial" style="display:none; margin-top:10px;">
-                                                <input type="number" id="anosPeriodoOficial" placeholder="Quantos anos? (Ex: 30)" min="5" max="60" value="30" style="width: 100%; padding: 8px; background: rgba(13, 13, 13, 0.8); border: 1px solid rgba(138, 204, 166, 0.2); border-radius: 6px; color: #E4E4E4;">
+                                                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem; color: #E4E4E4; font-weight: 500;">
+                                                    Até qual idade você quer que sua renda dure?
+                                                </label>
+                                                <select id="idadeTerminalPeriodoOficial" style="width: 100%; padding: 8px; background: rgba(13, 13, 13, 0.8); border: 1px solid rgba(138, 204, 166, 0.2); border-radius: 6px; color: #E4E4E4;">
+                                                    <option value="90">90 anos</option>
+                                                    <option value="95" selected>95 anos</option>
+                                                    <option value="100">100 anos</option>
+                                                    <option value="105">105 anos</option>
+                                                    <option value="110">110 anos</option>
+                                                    <option value="115">115 anos</option>
+                                                </select>
+                                                <p style="margin-top: 6px; font-size: 0.8rem; color: #9ca3af;">💡 Esta idade será usada tanto para "Renda por período" quanto para "Usar capital gradualmente".</p>
                                             </div>
                                         </div>
                                     </label>
@@ -1828,6 +1839,14 @@
                                     </label>
                                 </div>
                             </div>
+                        </div>
+
+                        <!-- Checkbox para múltiplas curvas -->
+                        <div id="containerTodasCurvasOficial" style="display:none; margin-top:10px;">
+                            <label style="font-size:14px; color: #E4E4E4; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" id="mostrarTodasCurvasOficial" style="cursor: pointer;">
+                                Mostrar todas as curvas (95, 105 e 115 anos)
+                            </label>
                         </div>
 
                         <div class="recomendacao-renda-full">
@@ -2865,21 +2884,35 @@
             const aporteAnual = parseFloat(document.getElementById("aporteExtraAnualOficial").value) || 0;
             
             const tipoRenda = document.querySelector('input[name="tipoRendaOficial"]:checked')?.value || "vitalicia";
-            const anosPeriodo = parseInt(document.getElementById("anosPeriodoOficial")?.value) || 0;
+            const estrategia = document.querySelector('input[name="estrategiaOficial"]:checked')?.value || "perpetua";
             
-            // Calcular idade final (padrão: 30 anos após aposentadoria se não fornecido)
-            const idadeFinal = idadeApos + (anosPeriodo > 0 ? anosPeriodo : 30);
+            // Capturar idade terminal para Período OU Esgotável (similar ao Wizard)
+            let idadeFinal = 95; // padrão
+            let mostrarTodasCurvas = false;
+            
+            if (tipoRenda === "periodo" || estrategia === "esgotavel") {
+                // Usar o select apropriado baseado na seleção
+                if (tipoRenda === "periodo") {
+                    idadeFinal = parseInt(document.getElementById("idadeTerminalPeriodoOficial")?.value) || 95;
+                    mostrarTodasCurvas = document.getElementById("mostrarTodasCurvasOficial")?.checked || false;
+                } else {
+                    idadeFinal = parseInt(document.getElementById("idadeTerminalOficial")?.value) || 95;
+                }
+            }
+            
+            // Calcular anosPeriodo a partir da idade terminal (similar ao Wizard)
+            const anosPeriodo = tipoRenda === "periodo" ? (idadeFinal - idadeApos) : 0;
             
             const retornoAnual = rentabilidades[currentScenario];
 
-            // Validação
+            // Validação usando função dedicada
+            if (!verificarIdadesPro()) {
+                return; // A função já mostra o alert apropriado
+            }
+            
+            // Validação de campos obrigatórios
             if (!idadeAtual || !idadeApos || !aporteMensal || !rendaDesejada) {
                 alert('⚠️ Preencha todos os campos!');
-                return;
-            }
-
-            if (idadeApos <= idadeAtual) {
-                alert('⚠️ A idade de aposentadoria deve ser maior que a idade atual!');
                 return;
             }
 
@@ -2895,6 +2928,7 @@
                 patrimonioInicial,
                 retornoAnual,
                 tipoRenda,
+                estrategia,  // ✅ NOVO: estratégia (perpetua ou esgotavel)
                 anosPeriodo,
                 rendaDesejada,
                 inssInformado: inssManual
@@ -3606,7 +3640,12 @@
                 if (tipoRenda === "vitalicia") {
                     patrimonioExtra = gap / taxaRealMensal;
                 } else {
-                    const anosPeriodo = parseInt(document.getElementById("anosPeriodoOficial")?.value) || 30;
+                    // Calcular anosPeriodo a partir da idade terminal (similar ao Wizard)
+                    let idadeFinalPeriodo = 95; // padrão
+                    if (tipoRenda === "periodo") {
+                        idadeFinalPeriodo = parseInt(document.getElementById("idadeTerminalPeriodoOficial")?.value) || 95;
+                    }
+                    const anosPeriodo = idadeFinalPeriodo - idadeApos;
                     const mesesPeriodo = anosPeriodo * 12;
                     patrimonioExtra = (gap * (1 - Math.pow(1 + taxaRealMensal, -mesesPeriodo))) / taxaRealMensal;
                 }
@@ -3692,16 +3731,152 @@
             });
         }
 
+        // ================================================================
+        // VALIDAÇÃO DE IDADES (similar ao Wizard)
+        // ================================================================
+        function verificarIdadesPro() {
+            const idadeAtual = parseInt(document.getElementById("currentAge")?.value) || 0;
+            const idadeApos = parseInt(document.getElementById("retirementAge")?.value) || 0;
+            const idadeTerminalPeriodo = parseInt(document.getElementById("idadeTerminalPeriodoOficial")?.value) || 0;
+            const idadeTerminalEsgotavel = parseInt(document.getElementById("idadeTerminalOficial")?.value) || 0;
+            
+            // Validações básicas
+            if (idadeAtual < 18 || idadeAtual > 90) {
+                alert("⚠️ A idade atual deve estar entre 18 e 90 anos.");
+                return false;
+            }
+            
+            if (idadeApos < 18 || idadeApos > 80) {
+                alert("⚠️ A idade de aposentadoria deve estar entre 18 e 80 anos.");
+                return false;
+            }
+            
+            if (idadeAtual >= idadeApos) {
+                alert("⚠️ A idade de aposentadoria deve ser maior que a idade atual.");
+                return false;
+            }
+            
+            // Diferença mínima de 5 anos
+            if (idadeApos - idadeAtual < 5) {
+                alert("⚠️ A diferença entre a idade atual e a de aposentadoria deve ser de pelo menos 5 anos.");
+                return false;
+            }
+            
+            // Validar idade terminal se estiver visível
+            if (idadeTerminalPeriodo > 0 && idadeTerminalPeriodo <= idadeApos) {
+                alert("⚠️ A idade terminal deve ser maior que a idade de aposentadoria.");
+                return false;
+            }
+            
+            if (idadeTerminalEsgotavel > 0 && idadeTerminalEsgotavel <= idadeApos) {
+                alert("⚠️ A idade terminal deve ser maior que a idade de aposentadoria.");
+                return false;
+            }
+            
+            return true;
+        }
+
+        // ================================================================
+        // ATUALIZAR REGRAS (similar ao atualizarRegrasWizard)
+        // ================================================================
+        function atualizarRegrasPro() {
+            const rTipo = document.querySelector("input[name='tipoRendaOficial']:checked");
+            const rEstrategia = document.querySelector("input[name='estrategiaOficial']:checked");
+            
+            if (!rTipo) {
+                console.warn("⚠️ atualizarRegrasPro: Radio button tipoRendaOficial não encontrado");
+                return;
+            }
+            
+            // Se rEstrategia não estiver encontrado, buscar o padrão
+            if (!rEstrategia) {
+                const estrategiaPadrao = document.querySelector("input[name='estrategiaOficial'][value='perpetua']");
+                if (estrategiaPadrao) {
+                    estrategiaPadrao.checked = true;
+                }
+            }
+            
+            const tipo = rTipo.value;
+            const est = rEstrategia ? rEstrategia.value : "perpetua";
+            
+            // Mostrar/esconder campos condicionais
+            const periodoContainer = document.getElementById("periodoContainerOficial");
+            const idadeTerminalContainer = document.getElementById("idadeTerminalContainerOficial");
+            const containerTodasCurvas = document.getElementById("containerTodasCurvasOficial");
+            
+            if (periodoContainer) {
+                periodoContainer.style.display = (tipo === "periodo") ? "block" : "none";
+            }
+            
+            if (idadeTerminalContainer) {
+                idadeTerminalContainer.style.display = (tipo === "periodo" || est === "esgotavel") ? "block" : "none";
+            }
+            
+            if (containerTodasCurvas) {
+                containerTodasCurvas.style.display = (tipo === "periodo") ? "block" : "none";
+            }
+            
+            // BLOQUEIO 1: Vitalícia só aceita perpétua (preservar capital)
+            const radioEsgotavel = document.querySelector("input[name='estrategiaOficial'][value='esgotavel']");
+            const radioPerpetua = document.querySelector("input[name='estrategiaOficial'][value='perpetua']");
+            
+            if (tipo === "vitalicia") {
+                // Se escolheu vitalícia, só pode preservar capital (perpétua)
+                if (radioEsgotavel) {
+                    radioEsgotavel.disabled = true;
+                }
+                if (est === "esgotavel" && radioPerpetua) {
+                    radioPerpetua.checked = true;
+                }
+            } else {
+                // Se escolheu período, pode escolher qualquer estratégia
+                if (radioEsgotavel) {
+                    radioEsgotavel.disabled = false;
+                    radioEsgotavel.removeAttribute('disabled');
+                }
+            }
+            
+            // SEMPRE garantir que "Preservar capital" esteja habilitado
+            if (radioPerpetua) {
+                radioPerpetua.disabled = false;
+                radioPerpetua.removeAttribute('disabled');
+            }
+            
+            // BLOQUEIO 2: Período + Preservar capital = INVÁLIDO (deve usar capital gradualmente)
+            // Nota: Esta regra pode ser ajustada conforme necessidade do negócio
+            // Por enquanto, vamos apenas avisar mas não bloquear completamente
+            
+            console.log(`✅ Regras atualizadas: tipoRenda=${tipo}, estrategia=${est}`);
+        }
+
+        // Função auxiliar para atualizar visibilidade dos campos (similar ao Wizard)
+        const atualizarVisibilidadeCamposPro = () => {
+            atualizarRegrasPro(); // Usar a função completa de regras
+        };
+
+        // Sincronizar valores entre os dois selects de idade terminal
+        const sincronizarIdadeTerminal = () => {
+            const selectPeriodo = document.getElementById("idadeTerminalPeriodoOficial");
+            const selectEsgotavel = document.getElementById("idadeTerminalOficial");
+            
+            if (selectPeriodo && selectEsgotavel) {
+                // Quando um muda, atualizar o outro
+                selectPeriodo.addEventListener("change", function() {
+                    selectEsgotavel.value = this.value;
+                });
+                
+                selectEsgotavel.addEventListener("change", function() {
+                    selectPeriodo.value = this.value;
+                });
+            }
+        };
+
         const radiosRenda = document.querySelectorAll("input[name='tipoRendaOficial']");
         radiosRenda.forEach(radio => {
             radio.addEventListener("change", function() {
-                const container = document.getElementById("periodoContainerOficial");
-                if (this.value === "periodo") {
-                    container.style.display = "block";
-                } else {
-                    container.style.display = "none";
-                }
+                atualizarRegrasPro(); // Usar função completa
                 atualizarDestaqueOpcoes(); // Atualizar destaque visual
+                verificarConflitoVitaliciaEsgotavel(); // Verificar conflitos
             });
             radio.addEventListener("click", function() {
                 atualizarDestaqueOpcoes(); // Atualizar destaque visual
@@ -3712,12 +3887,18 @@
         const radiosEstrategia = document.querySelectorAll("input[name='estrategiaOficial']");
         radiosEstrategia.forEach(radio => {
             radio.addEventListener("change", function() {
+                atualizarRegrasPro(); // Usar função completa
                 atualizarDestaqueOpcoes(); // Atualizar destaque visual
+                verificarConflitoVitaliciaEsgotavel(); // Verificar conflitos
             });
             radio.addEventListener("click", function() {
                 atualizarDestaqueOpcoes(); // Atualizar destaque visual
             });
         });
+
+        // Inicializar visibilidade e sincronização
+        atualizarVisibilidadeCamposPro();
+        sincronizarIdadeTerminal();
 
         // Tornar os containers clicáveis (como no Wizard)
         function tornarContainersClicaveis() {
@@ -4010,24 +4191,48 @@
             console.log("✅ Listeners de estratégia configurados no PRO!");
             
             // Verificar conflito inicial (caso já exista)
-            setTimeout(() => verificarConflitoVitaliciaEsgotavel(), 100);
+            setTimeout(() => {
+                verificarConflitoVitaliciaEsgotavel();
+                atualizarRegrasPro(); // Atualizar regras iniciais
+            }, 100);
+        }
+
+        // ================================================================
+        // INICIALIZAÇÃO COMPLETA (similar ao Wizard)
+        // ================================================================
+        function inicializarValidacoesPro() {
+            console.log("🔧 Inicializando validações do PRO...");
+            
+            // Configurar bloqueio de estratégia
+            configurarBloqueioEstrategiaPro();
+            
+            // Atualizar regras iniciais
+            atualizarRegrasPro();
+            
+            // Verificar conflitos iniciais
+            verificarConflitoVitaliciaEsgotavel();
+            
+            // Atualizar destaque visual
+            atualizarDestaqueOpcoes();
+            
+            console.log("✅ Validações do PRO inicializadas!");
         }
 
         // Configurar quando DOM estiver pronto (igual ao Wizard)
         if (document.readyState === 'loading') {
             document.addEventListener("DOMContentLoaded", function() {
                 setTimeout(() => {
-                    console.log("⏰ Primeira tentativa de configurar bloqueio (300ms)...");
-                    configurarBloqueioEstrategiaPro();
+                    console.log("⏰ Primeira tentativa de inicializar validações (300ms)...");
+                    inicializarValidacoesPro();
                 }, 300);
                 setTimeout(() => {
-                    console.log("⏰ Segunda tentativa de configurar bloqueio (1000ms)...");
-                    configurarBloqueioEstrategiaPro();
+                    console.log("⏰ Segunda tentativa de inicializar validações (1000ms)...");
+                    inicializarValidacoesPro();
                 }, 1000);
             });
         } else {
-            setTimeout(() => configurarBloqueioEstrategiaPro(), 300);
-            setTimeout(() => configurarBloqueioEstrategiaPro(), 1000);
+            setTimeout(() => inicializarValidacoesPro(), 300);
+            setTimeout(() => inicializarValidacoesPro(), 1000);
         }
 
         // Configurar modal quando DOM estiver pronto

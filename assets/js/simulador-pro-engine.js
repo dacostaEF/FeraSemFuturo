@@ -7,21 +7,26 @@ function taxaMensalEfetiva(taxaAnual) {
     return Math.pow(1 + taxaAnual, 1 / 12) - 1;
 }
 
-// Acumulação mensal até a aposentadoria
+// Acumulação mensal até a aposentadoria (igual ao Wizard)
 function projetarAcumulacaoMensal(idadeAtual, idadeApos, aporteMensal, aporteAnual, patrimonioAtual, taxaMensal) {
     const meses = (idadeApos - idadeAtual) * 12;
     const historico = [];
-    let saldo = patrimonioAtual;
+    let saldo = Number(patrimonioAtual);  // Começa com patrimônio inicial
 
-    for (let m = 0; m <= meses; m++) {
-        historico.push(saldo);
+    // Adicionar ponto inicial (mês 0)
+    historico.push(saldo);
 
-        saldo = saldo * (1 + taxaMensal);
-        saldo += aporteMensal;
+    // Loop começa em m=1 (igual ao Wizard)
+    for (let m = 1; m <= meses; m++) {
+        // Aplica juros e adiciona aporte mensal
+        saldo = saldo * (1 + taxaMensal) + Number(aporteMensal);
 
-        if (m % 12 === 0 && m !== 0) {
-            saldo += aporteAnual;
+        // Aporte extra anual no final de cada ano (m % 12 === 0)
+        if (aporteAnual > 0 && m % 12 === 0) {
+            saldo += Number(aporteAnual);
         }
+
+        historico.push(saldo);
     }
 
     return { historico, saldoFinal: saldo };
@@ -142,6 +147,7 @@ window.simuladorProEngine.executarSimulacaoCompleta = function (params) {
         patrimonioInicial,
         retornoAnual,
         tipoRenda,
+        estrategia,  // ✅ NOVO: estratégia (perpetua ou esgotavel)
         anosPeriodo,
         rendaDesejada,
         inssInformado
@@ -150,11 +156,18 @@ window.simuladorProEngine.executarSimulacaoCompleta = function (params) {
     // Valor padrão para idadeFinal se não fornecido
     const idadeFinalUsada = idadeFinal || (idadeApos + 30); // Padrão: 30 anos após aposentadoria
 
-    // Conversões
-    const taxaMensal = taxaMensalEfetiva(retornoAnual - (INFLACAO_MEDIA / 100));
+    // ============================================================
+    // TAXAS: NOMINAL para acumulação, REAL para renda
+    // ============================================================
+    // Taxa NOMINAL mensal (para acumulação) - igual ao Wizard
+    const taxaMensalNominal = taxaMensalEfetiva(retornoAnual);
+    
+    // Taxa REAL mensal (para cálculo de renda) - igual ao Wizard
+    const taxaAnualReal = retornoAnual - (INFLACAO_MEDIA / 100);
+    const taxaMensalReal = taxaMensalEfetiva(taxaAnualReal);
 
     // ============================================================
-    // 1. ACUMULAÇÃO ATÉ A APOSENTADORIA
+    // 1. ACUMULAÇÃO ATÉ A APOSENTADORIA (usa taxa NOMINAL)
     // ============================================================
     const acumulacao = projetarAcumulacaoMensal(
         idadeAtual,
@@ -162,18 +175,71 @@ window.simuladorProEngine.executarSimulacaoCompleta = function (params) {
         aporteMensal,
         aporteAnual,
         patrimonioInicial,
-        taxaMensal
+        taxaMensalNominal  // ✅ CORREÇÃO: usar taxa NOMINAL na acumulação
     );
     const patrimonioFinal = acumulacao.saldoFinal;
 
     // ============================================================
-    // 2. CÁLCULO DA RENDA MENSAL (vitalícia e por período)
+    // 2. CÁLCULO DA RENDA MENSAL (baseado na estratégia, igual ao Wizard)
     // ============================================================
-    const rendaVital = rendaVitalicia(patrimonioFinal, taxaMensal);
-    let rendaPeriodoMensal = 0;
-    if (tipoRenda === "periodo" && anosPeriodo > 0) {
-        rendaPeriodoMensal = rendaPorPeriodo(patrimonioFinal, taxaMensal, anosPeriodo);
+    // Determinar estratégia final
+    const estrategiaFinal = estrategia || (tipoRenda === "vitalicia" ? "perpetua" : "perpetua");
+    
+    let rendaRealPossivel = 0;
+    
+    // ESTRATÉGIA 1: RENDA VITALÍCIA + PRESERVAR CAPITAL
+    if (tipoRenda === "vitalicia" && estrategiaFinal === "perpetua") {
+        rendaRealPossivel = patrimonioFinal * taxaMensalReal;
     }
+    // ESTRATÉGIA 2: RENDA POR PERÍODO + PRESERVAR CAPITAL
+    else if (tipoRenda === "periodo" && estrategiaFinal === "perpetua") {
+        rendaRealPossivel = patrimonioFinal * taxaMensalReal;
+    }
+    // ESTRATÉGIA OTIMIZADA: RENDA POR PERÍODO COM LONGEVIDADE (idadeFinal)
+    else if (tipoRenda === "periodo" && idadeFinalUsada) {
+        const meses = (idadeFinalUsada - idadeApos) * 12;
+        if (taxaMensalReal > 0 && meses > 0) {
+            rendaRealPossivel = (patrimonioFinal * taxaMensalReal) / (1 - Math.pow(1 + taxaMensalReal, -meses));
+        } else {
+            rendaRealPossivel = patrimonioFinal / meses;
+        }
+    }
+    // ESTRATÉGIA 3: RENDA POR PERÍODO + USAR CAPITAL GRADUALMENTE
+    else if (tipoRenda === "periodo" && estrategiaFinal === "esgotavel") {
+        let meses;
+        if (idadeFinalUsada) {
+            meses = (idadeFinalUsada - idadeApos) * 12;
+        } else {
+            meses = anosPeriodo * 12;
+        }
+        if (taxaMensalReal > 0 && meses > 0) {
+            rendaRealPossivel = (patrimonioFinal * taxaMensalReal) / (1 - Math.pow(1 + taxaMensalReal, -meses));
+        } else {
+            rendaRealPossivel = patrimonioFinal / meses;
+        }
+    }
+    // ESTRATÉGIA 4: RENDA VITALÍCIA + USAR CAPITAL GRADUALMENTE (não recomendado, mas tratado)
+    else if (tipoRenda === "vitalicia" && estrategiaFinal === "esgotavel") {
+        let meses;
+        if (idadeFinalUsada) {
+            meses = (idadeFinalUsada - idadeApos) * 12;
+        } else {
+            meses = 30 * 12; // fallback: 30 anos
+        }
+        if (taxaMensalReal > 0 && meses > 0) {
+            rendaRealPossivel = (patrimonioFinal * taxaMensalReal) / (1 - Math.pow(1 + taxaMensalReal, -meses));
+        } else {
+            rendaRealPossivel = patrimonioFinal / meses;
+        }
+    }
+    // Fallback: vitalícia perpétua
+    else {
+        rendaRealPossivel = patrimonioFinal * taxaMensalReal;
+    }
+    
+    // Manter compatibilidade com código existente
+    const rendaVital = rendaRealPossivel;  // Para compatibilidade
+    const rendaPeriodoMensal = tipoRenda === "periodo" ? rendaRealPossivel : 0;
 
     // ============================================================
     // 3. CÁLCULO DO INSS
@@ -191,32 +257,35 @@ window.simuladorProEngine.executarSimulacaoCompleta = function (params) {
         curvaConsumo = projetarPatrimonioConsumo(
             patrimonioFinal,
             rendaPeriodoMensal,
-            taxaMensal,
+            taxaMensalReal,  // ✅ CORREÇÃO: usar taxa REAL
             anosPeriodo
         );
     }
 
     // ============================================================
-    // 5. HERANÇA
+    // 5. HERANÇA (baseada na estratégia, não no tipo de renda)
     // ============================================================
     let heranca = 0;
-    if (tipoRenda === "vitalicia") {
-        heranca = patrimonioFinal; // capital preservado
+    // estrategiaFinal já foi determinada acima (linha 186)
+    
+    // Herança = patrimônio preservado (não consumido)
+    if (estrategiaFinal === "perpetua") {
+        heranca = patrimonioFinal;  // Capital preservado (vitalícia ou período com preservação)
     } else {
-        heranca = 0;               // período = consome capital
+        heranca = 0;  // Capital consumido (esgotável)
     }
 
     // ============================================================
     // 6. GERAR RENDA MENSAL DETALHADA (para gráficos)
     // ============================================================
-    const taxaAnualReal = retornoAnual - (INFLACAO_MEDIA / 100);
-    const estrategia = tipoRenda === "vitalicia" ? "perpetua" : "esgotavel";
+    // taxaAnualReal já foi calculada acima
+    // estrategiaFinal já foi determinada acima
     const rendaMensalDetalhada = gerarRendaMensalAoLongoDoTempo(
         patrimonioFinal,
         taxaAnualReal,
         idadeApos,
         idadeFinalUsada,
-        estrategia
+        estrategiaFinal  // ✅ CORREÇÃO: usar estrategiaFinal
     );
 
     // ============================================================
@@ -224,21 +293,22 @@ window.simuladorProEngine.executarSimulacaoCompleta = function (params) {
     // ============================================================
     return {
         patrimonioFinal,
-        rendaVital,
-        rendaPeriodoMensal,
+        rendaVital,  // Mantido para compatibilidade
+        rendaPeriodoMensal,  // Mantido para compatibilidade
+        rendaRealPossivel,  // ✅ NOVO: renda calculada baseada na estratégia (igual ao Wizard)
         valorINSS,
         acumulacaoMensal: acumulacao.historico,
         curvaVitalicia,
         curvaConsumo,
         anosPeriodo,
         idadeFinal: idadeFinalUsada,
-        rendaTotalVital: rendaVital + valorINSS,
-        rendaTotalPeriodo: rendaPeriodoMensal + valorINSS,
+        rendaTotalVital: rendaRealPossivel + valorINSS,  // ✅ CORREÇÃO: usar rendaRealPossivel
+        rendaTotalPeriodo: rendaRealPossivel + valorINSS,  // ✅ CORREÇÃO: usar rendaRealPossivel
         heranca,
         rendaMensalDetalhada,  // 🟧 NOVO: renda mensal detalhada para gráficos
-        taxaMensal,  // 🟧 NOVO: taxa mensal real para cálculos
+        taxaMensalReal,  // ✅ CORREÇÃO: taxa mensal REAL (para cálculos de renda)
         tipoRenda,  // 🟧 NOVO: tipo de renda selecionado
-        estrategia  // 🟧 NOVO: estratégia (perpetua ou esgotavel)
+        estrategia: estrategiaFinal  // ✅ CORREÇÃO: estratégia final determinada
     };
 };
 
