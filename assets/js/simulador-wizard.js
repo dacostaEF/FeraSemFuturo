@@ -2167,12 +2167,21 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0, rendasMen
                         legend: {
                             display: true,
                             position: 'top',
+                            align: 'center',
                             labels: {
                                 color: '#E4E4E4',
                                 usePointStyle: true,  // ✅ AJUSTE: Usar estilo de linha em vez de caixa
                                 pointStyle: 'line',  // ✅ AJUSTE: Linha na legenda
-                                boxWidth: 0,  // ✅ AJUSTE: Remover largura da caixa
-                                boxHeight: 0  // ✅ AJUSTE: Remover altura da caixa
+                                boxWidth: 30,  // ✅ AJUSTE: Aumentar comprimento das linhas na legenda
+                                boxHeight: 2,  // ✅ AJUSTE 2: Restaurar altura para mostrar elementos visuais
+                                padding: 12,  // ✅ AJUSTE 1: Adicionar padding para espaçamento
+                                font: {
+                                    size: 11
+                                }
+                            },
+                            padding: {
+                                top: 10,  // ✅ AJUSTE 1: Espaçamento superior entre labels e gráfico
+                                bottom: 5
                             }
                         },
                         tooltip: {
@@ -2238,21 +2247,21 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0, rendasMen
                 
                 let textoInfo = "";
                 
-                // ✅ DOSE 7: Título principal com explicação sobre linha principal
+                // ✅ AJUSTE 3: Remover negrito desnecessário quando já temos cor destacada
                 if (temRendaZero) {
-                    textoInfo = `📊 <strong>Renda por Período Determinado:</strong> Você receberá uma renda mensal do patrimônio que começa em <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> e termina em <strong>R$ 0</strong> aproximadamente aos <strong>${idadeFinalCalculada} anos</strong>, quando seu patrimônio se esgotará.`;
+                    textoInfo = `📊 <span style="color: #10b981;">Renda por Período Determinado:</span> Você receberá uma renda mensal do patrimônio que começa em <span style="color: #D4AF37;">R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</span> e termina em <span style="color: #D4AF37;">R$ 0</span> aproximadamente aos <span style="color: #D4AF37;">${idadeFinalCalculada} anos</span>, quando seu patrimônio se esgotará.`;
                 } else {
-                    textoInfo = `💚 <strong>Renda Vitalícia:</strong> Você receberá <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> do patrimônio de forma permanente, preservando seu capital para sempre.`;
+                    textoInfo = `💚 <span style="color: #10b981;">Renda Vitalícia:</span> Você receberá <span style="color: #D4AF37;">R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</span> do patrimônio de forma permanente, preservando seu capital para sempre.`;
                 }
                 
-                // ✅ DOSE 7: Explicação sobre linha principal
+                // ✅ AJUSTE 3: Remover negrito desnecessário
                 if (idadeFinal) {
-                    textoInfo += `<br><br>📌 <strong>Linha principal (verde):</strong> Renda mensal calculada para durar até <strong>${idadeFinal} anos</strong>, baseada na sua escolha.`;
+                    textoInfo += `<br><br>📌 <span style="color: #10b981;">Linha principal (verde):</span> Renda mensal calculada para durar até <span style="color: #D4AF37;">${idadeFinal} anos</span>, baseada na sua escolha.`;
                 }
                 
-                // ✅ DOSE 7: Explicação sobre curvas extras (apenas se existirem)
+                // ✅ AJUSTE 3: Remover negrito desnecessário quando já temos cor destacada
                 if (temCurvasExtras) {
-                    textoInfo += `<br><br>📈 <strong>Linhas extras (tracejadas):</strong> Cenários de longevidade alternativos para você comparar:`;
+                    textoInfo += `<br><br>📈 <span style="color: #10b981;">Linhas extras (tracejadas):</span> Cenários de longevidade alternativos para você comparar:`;
                     rendasMensaisExtras.forEach(curva => {
                         const valorRenda = curva.rendaMensal && curva.rendaMensal.length > 0 ? curva.rendaMensal[0] : 0;
                         const coresCurva = {
@@ -2261,15 +2270,16 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0, rendasMen
                             115: "#8E44AD"  // Roxo
                         };
                         const corNome = curva.idade === 95 ? "azul" : curva.idade === 105 ? "laranja" : "roxo";
-                        textoInfo += `<br>&nbsp;&nbsp;• <span style="color: ${coresCurva[curva.idade] || '#CCCCCC'};">Linha ${corNome} (até ${curva.idade} anos):</span> Renda mensal de <strong>R$ ${valorRenda.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> ajustada para durar até ${curva.idade} anos.`;
+                        textoInfo += `<br>&nbsp;&nbsp;• <span style="color: ${coresCurva[curva.idade] || '#CCCCCC'};">Linha ${corNome} (até ${curva.idade} anos):</span> Renda mensal de <span style="color: #D4AF37;">R$ ${valorRenda.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</span> ajustada para durar até ${curva.idade} anos.`;
                     });
-                    textoInfo += `<br><br><span style="font-size: 0.85rem; color: #9ca3af;">💡 <strong>Dica:</strong> Compare os valores para entender como sua renda mensal varia conforme sua expectativa de vida. Quanto maior a longevidade, menor será a renda mensal para que o patrimônio dure até aquela idade.</span>`;
+                    textoInfo += `<br><br><span style="font-size: 0.85rem; color: #9ca3af;">💡 <span style="color: #D4AF37;">Dica:</span> Compare os valores para entender como sua renda mensal varia conforme sua expectativa de vida. Quanto maior a longevidade, menor será a renda mensal para que o patrimônio dure até aquela idade.</span>`;
                 }
                 
+                // ✅ AJUSTE 3: Remover negrito desnecessário quando já temos cor destacada
                 if (inssValor > 0) {
-                    textoInfo += `<br><br>📘 <strong>INSS:</strong> Você receberá adicionalmente <strong>R$ ${inssValor.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> do INSS.`;
-                    textoInfo += `<br><br>💰 <strong>Renda Total:</strong> <strong>R$ ${rendaTotalInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> (patrimônio + INSS).`;
-                    textoInfo += `<br><br><span style="font-size: 0.85rem; color: #9ca3af;">💡 <strong>Observação:</strong> O valor do INSS é uma estimativa. Para um cálculo oficial, consulte o portal <a href="https://meu.inss.gov.br" target="_blank" style="color: #4da6ff;">Meu INSS</a>.</span>`;
+                    textoInfo += `<br><br>📘 <span style="color: #4da6ff;">INSS:</span> Você receberá adicionalmente <span style="color: #D4AF37;">R$ ${inssValor.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</span> do INSS.`;
+                    textoInfo += `<br><br>💰 <span style="color: #ffcc00;">Renda Total:</span> <span style="color: #D4AF37;">R$ ${rendaTotalInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</span> (patrimônio + INSS).`;
+                    textoInfo += `<br><br><span style="font-size: 0.85rem; color: #9ca3af;">💡 <span style="color: #D4AF37;">Observação:</span> O valor do INSS é uma estimativa. Para um cálculo oficial, consulte o portal <a href="https://meu.inss.gov.br" target="_blank" style="color: #4da6ff;">Meu INSS</a>.</span>`;
                 }
                 
                 const pElement = infoDiv.querySelector('p');
