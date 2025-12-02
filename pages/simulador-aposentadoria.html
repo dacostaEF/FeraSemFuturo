@@ -2699,34 +2699,34 @@
                             label: 'Patrimônio',
                             data: valoresPatrimonio,
                             borderColor: '#10b981',
-                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                            borderWidth: 3,
+                            backgroundColor: 'rgba(16, 185, 129, 0.05)',  // ✅ AJUSTE: Transparência reduzida
+                            borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
                             tension: 0.15,
                             fill: true,
                             yAxisID: 'y',
-                            pointRadius: 2,
-                            pointHoverRadius: 5
+                            pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
+                            pointHoverRadius: 4
                         },
                         {
                             // 2. RENDA MENSAL DO PATRIMÔNIO (Lilás) - Eixo Y direito
                             label: 'Renda Mensal (Investimentos)',
                             data: valoresRendaMensal,
                             borderColor: '#a855f7',
-                            backgroundColor: 'rgba(168, 85, 247, 0.1)',
-                            borderWidth: 3,
+                            backgroundColor: 'rgba(168, 85, 247, 0.05)',  // ✅ AJUSTE: Transparência reduzida
+                            borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
                             tension: 0.25,
                             fill: false,
                             yAxisID: 'y1',
-                            pointRadius: 2,
-                            pointHoverRadius: 5
+                            pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
+                            pointHoverRadius: 4
                         },
                         {
                             // 3. INSS (Azul Ciano) - Eixo Y direito
                             label: 'Renda do INSS',
                             data: valoresINSS,
                             borderColor: '#4da6ff',
-                            backgroundColor: 'rgba(77, 166, 255, 0.1)',
-                            borderWidth: 2,
+                            backgroundColor: 'rgba(77, 166, 255, 0.05)',  // ✅ AJUSTE: Transparência reduzida
+                            borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
                             borderDash: [6, 4],
                             tension: 0,
                             fill: false,
@@ -2769,8 +2769,10 @@
                                     family: "'Inter', sans-serif"
                                 },
                                 padding: 10,
-                                usePointStyle: true,
-                                boxWidth: 12
+                                usePointStyle: true,  // ✅ AJUSTE: Usar estilo de linha em vez de caixa
+                                pointStyle: 'line',  // ✅ AJUSTE: Linha na legenda
+                                boxWidth: 0,  // ✅ AJUSTE: Remover largura da caixa
+                                boxHeight: 0  // ✅ AJUSTE: Remover altura da caixa
                             }
                         },
                         tooltip: {
@@ -4688,37 +4690,37 @@
                     label: "Renda do Patrimônio",
                     data: rendas,
                     borderColor: "#00ff88",
-                    backgroundColor: "rgba(0, 255, 136, 0.1)",
-                    borderWidth: 3,
+                    backgroundColor: "rgba(0, 255, 136, 0.05)",  // ✅ AJUSTE: Transparência reduzida
+                    borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
                     tension: 0.25,
                     fill: true,
-                    pointRadius: 2,
-                    pointHoverRadius: 5
+                    pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
+                    pointHoverRadius: 4
                 };
 
                 const datasetINSS = {
                     label: "Renda do INSS",
                     data: rendas.map(() => inssValor),
                     borderColor: "#4da6ff",
-                    backgroundColor: "rgba(77, 166, 255, 0.1)",
-                    borderWidth: 2,
+                    backgroundColor: "rgba(77, 166, 255, 0.05)",  // ✅ AJUSTE: Transparência reduzida
+                    borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
                     borderDash: [6, 4],
                     tension: 0.15,
                     fill: false,
-                    pointRadius: 1,
-                    pointHoverRadius: 4
+                    pointRadius: 1,  // Mantido pequeno para INSS
+                    pointHoverRadius: 3
                 };
 
                 const datasetTotal = {
                     label: "Renda Total (Patrimônio + INSS)",
                     data: rendas.map((v) => v + inssValor),
                     borderColor: "#ffcc00",
-                    backgroundColor: "rgba(255, 204, 0, 0.1)",
-                    borderWidth: 3,
+                    backgroundColor: "rgba(255, 204, 0, 0.05)",  // ✅ AJUSTE: Transparência reduzida
+                    borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
                     tension: 0.25,
                     fill: true,
-                    pointRadius: 2,
-                    pointHoverRadius: 5
+                    pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
+                    pointHoverRadius: 4
                 };
                 
                 try {
@@ -4736,7 +4738,11 @@
                                     display: true,
                                     position: 'top',
                                     labels: {
-                                        color: '#E4E4E4'
+                                        color: '#E4E4E4',
+                                        usePointStyle: true,  // ✅ AJUSTE: Usar estilo de linha em vez de caixa
+                                        pointStyle: 'line',  // ✅ AJUSTE: Linha na legenda
+                                        boxWidth: 0,  // ✅ AJUSTE: Remover largura da caixa
+                                        boxHeight: 0  // ✅ AJUSTE: Remover altura da caixa
                                     }
                                 },
                                 tooltip: {
@@ -4867,19 +4873,27 @@
                             label: "Investimentos Próprios",
                             data: rendaPropria,
                             borderColor: "#FFD700",
-                            borderWidth: 3
+                            borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
+                            pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
+                            pointHoverRadius: 4
                         },
                         {
                             label: "INSS",
                             data: rendaPrevidenciaria,
                             borderColor: "#00E2FF",
-                            borderWidth: 3
+                            borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
+                            pointRadius: 1,  // Mantido pequeno para INSS
+                            pointHoverRadius: 3
                         },
                         {
                             label: "Renda Total",
                             data: rendaTotal,
                             borderColor: "#00FF88",
-                            borderWidth: 3
+                            borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
+                            pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
+                            pointHoverRadius: 4
+                            pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
+                            pointHoverRadius: 4
                         }
                     ]
                 },

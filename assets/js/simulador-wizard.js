@@ -52,6 +52,24 @@ function activateStep(stepNumber) {
 }
 
 // -----------------------------------------------------
+// FUNÇÃO AUXILIAR: FORMATAR VALORES MONETÁRIOS (TRATAR NaN)
+// -----------------------------------------------------
+function formatarValorMonetario(valor, minDecimais = 2, maxDecimais = 2) {
+    // ✅ VALIDAÇÃO: Verificar se valor é válido
+    if (valor === null || valor === undefined || isNaN(valor)) {
+        return '<span style="color: #ef4444;">–</span>'; // Retorna "–" em vermelho para valores inválidos
+    }
+    
+    // ✅ VALIDAÇÃO: Verificar se valor é um número finito
+    if (!isFinite(valor)) {
+        return '<span style="color: #ef4444;">Erro</span>'; // Retorna "Erro" em vermelho
+    }
+    
+    // Formatar normalmente se valor é válido
+    return `R$ ${valor.toLocaleString('pt-BR', {minimumFractionDigits: minDecimais, maximumFractionDigits: maxDecimais})}`;
+}
+
+// -----------------------------------------------------
 // CAPTURAR DADOS
 // -----------------------------------------------------
 function captureStepData(stepNumber) {
@@ -164,6 +182,11 @@ function validateStep(stepNumber) {
             alert("⚠️ A idade de aposentadoria deve ser maior que a idade atual.");
             return false;
         }
+        // ✅ NOVO: Validar perfil do investidor
+        if (!wizardData.perfilInvestidor || !['conservador', 'moderado', 'arrojado'].includes(wizardData.perfilInvestidor)) {
+            alert("⚠️ Por favor, selecione um perfil de investidor.");
+            return false;
+        }
     }
 
     return true;
@@ -252,18 +275,18 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
         borderColor: corAcumulacao,
         backgroundColor: (context) => {
             const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
-            gradient.addColorStop(0, 'rgba(16, 185, 129, 0.3)');
+            gradient.addColorStop(0, 'rgba(16, 185, 129, 0.15)');  // ✅ AJUSTE: Transparência reduzida
             gradient.addColorStop(1, 'rgba(16, 185, 129, 0.01)');
             return gradient;
         },
-        borderWidth: 3,
+        borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
         fill: true,
         tension: 0.4,
         pointBackgroundColor: corAcumulacao,
         pointBorderColor: '#0D0D0D',
-        pointBorderWidth: 2,
-        pointRadius: 4,
-        pointHoverRadius: 6
+        pointBorderWidth: 1,
+        pointRadius: 2,  // ✅ AJUSTE: Pontos menores
+        pointHoverRadius: 4
     }];
 
     // Adicionar dataset pós-aposentadoria se houver
@@ -280,16 +303,16 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
                 label: tipoRenda === 'periodo' && idadeFinal ? `Até ${idadeFinal} anos (selecionado)` : 'Consumo do Patrimônio',
                 data: new Array(valores.length).fill(null).concat(valoresPosAposentadoria),
                 borderColor: corConsumo,
-                backgroundColor: 'rgba(231, 76, 60, 0.1)',
-                borderWidth: 3,
+                backgroundColor: 'rgba(231, 76, 60, 0.05)',  // ✅ AJUSTE: Transparência reduzida
+                borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
                 borderDash: [5, 5],
                 fill: false,
                 tension: 0.4,
                 pointBackgroundColor: corConsumo,
                 pointBorderColor: '#0D0D0D',
-                pointBorderWidth: 2,
-                pointRadius: 3,
-                pointHoverRadius: 5
+                pointBorderWidth: 1,
+                pointRadius: 2,  // ✅ AJUSTE: Pontos menores
+                pointHoverRadius: 4
             });
         } else {
             // Se for vitalícia, linha horizontal preservada
@@ -297,15 +320,15 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
                 label: 'Patrimônio Preservado',
                 data: new Array(valores.length).fill(null).concat(valoresPosAposentadoria),
                 borderColor: corVitalicia,
-                backgroundColor: 'rgba(46, 204, 113, 0.1)',
-                borderWidth: 3,
+                backgroundColor: 'rgba(46, 204, 113, 0.05)',  // ✅ AJUSTE: Transparência reduzida
+                borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
                 fill: false,
                 tension: 0,
                 pointBackgroundColor: corVitalicia,
                 pointBorderColor: '#0D0D0D',
-                pointBorderWidth: 2,
-                pointRadius: 3,
-                pointHoverRadius: 5
+                pointBorderWidth: 1,
+                pointRadius: 2,  // ✅ AJUSTE: Pontos menores
+                pointHoverRadius: 4
             });
         }
     }
@@ -339,14 +362,14 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
             datasets.push({
                 label: `Até ${curvaObj.idade} anos`,
                 data: dadosCurva,
-                borderWidth: 2,
+                borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
                 fill: false,
                 tension: 0.1,
                 borderColor:
                     curvaObj.idade === 95 ? "#2E86C1" :
                     curvaObj.idade === 105 ? "#D35400" :
                     "#8E44AD",
-                pointRadius: 1,
+                pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
                 pointHoverRadius: 3,
                 borderDash: [3, 3]  // Linha tracejada para diferenciar
             });
@@ -464,10 +487,10 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
                             family: "'Inter', sans-serif"
                         },
                         padding: 8,
-                        usePointStyle: true,
-                        pointStyle: 'line',
-                        boxWidth: 20,
-                        boxHeight: 1
+                        usePointStyle: true,  // ✅ AJUSTE: Usar estilo de linha em vez de caixa
+                        pointStyle: 'line',  // ✅ AJUSTE: Linha na legenda
+                        boxWidth: 0,  // ✅ AJUSTE: Remover largura da caixa
+                        boxHeight: 0  // ✅ AJUSTE: Remover altura da caixa
                     }
                 },
                 tooltip: {
@@ -526,31 +549,80 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
 // FINALIZAR
 // -----------------------------------------------------
 function finalizarWizard() {
+    try {
+        console.log("DADOS FINAIS DO WIZARD:", wizardData);
 
-    console.log("DADOS FINAIS DO WIZARD:", wizardData);
+        // ===================================================
+        // 🔥 EXECUTAR MOTOR DE CÁLCULO REAL
+        // ===================================================
+        const tipoRenda = document.querySelector("input[name='tipoRenda']:checked")?.value;
+        if (!tipoRenda) {
+            alert("⚠️ Por favor, selecione um tipo de renda.");
+            return;
+        }
+        
+        const estrategia = document.querySelector("input[name='estrategia']:checked")?.value || "perpetua";
 
-    // ===================================================
-    // 🔥 EXECUTAR MOTOR DE CÁLCULO REAL
-    // ===================================================
-    const tipoRenda = document.querySelector("input[name='tipoRenda']:checked").value;
-    const estrategia = document.querySelector("input[name='estrategia']:checked")?.value || "perpetua";
+        // Captura idade terminal para Período OU Esgotável
+        let idadeFinal = 95;
+        if (tipoRenda === "periodo" || estrategia === "esgotavel") {
+            idadeFinal = parseInt(document.getElementById("idadeTerminal")?.value) || 95;
+        }
 
-    // Captura idade terminal para Período OU Esgotável
-    let idadeFinal = 95;
-    if (tipoRenda === "periodo" || estrategia === "esgotavel") {
-        idadeFinal = parseInt(document.getElementById("idadeTerminal").value) || 95;
-    }
+        // ✅ CORREÇÃO: Usar wizardData.mostrarTodasCurvas (já capturado em captureStepData)
+        // Garantir que captureStepData(4) foi chamado antes
+        const mostrarTodas = wizardData.mostrarTodasCurvas || false;
+        
+        // ✅ LOG: Debug para verificar se mostrarTodasCurvas chegou corretamente
+        console.log("🟣 DEBUG - mostrarTodasCurvas:", {
+            doWizardData: wizardData.mostrarTodasCurvas,
+            doCheckbox: document.getElementById("mostrarTodasCurvas")?.checked,
+            valorUsado: mostrarTodas,
+            tipoRenda: tipoRenda,
+            estrategia: estrategia,
+            idadeFinal: idadeFinal
+        });
 
-    const mostrarTodas = document.getElementById("mostrarTodasCurvas")?.checked || false;
+        // Verificar se executarSimulacaoWizard está disponível
+        if (typeof executarSimulacaoWizard !== 'function') {
+            console.error("❌ executarSimulacaoWizard não está disponível!");
+            alert("⚠️ Erro: Motor de cálculo não está disponível. Por favor, recarregue a página.");
+            return;
+        }
 
-    const resultados = executarSimulacaoWizard({
-        ...wizardData,
-        tipoRenda: tipoRenda,
-        estrategia: estrategia,
-        idadeFinal: idadeFinal,
-        mostrarTodasCurvas: mostrarTodas
-    });
-    console.log("RESULTADOS COMPLETOS DA SIMULAÇÃO:", resultados);
+        const resultados = executarSimulacaoWizard({
+            ...wizardData,
+            tipoRenda: tipoRenda,
+            estrategia: estrategia,
+            idadeFinal: idadeFinal,
+            mostrarTodasCurvas: mostrarTodas
+        });
+        console.log("RESULTADOS COMPLETOS DA SIMULAÇÃO:", resultados);
+        
+        // ✅ LOG: Debug para verificar curvasExtras geradas
+        if (resultados && resultados.curvasExtras) {
+            console.log("🟣 DEBUG - curvasExtras geradas:", {
+                quantidade: resultados.curvasExtras.length,
+                idades: resultados.curvasExtras.map(c => c.idade),
+                mostrarTodasCurvas: mostrarTodas,
+                tipoRenda: tipoRenda,
+                estrategia: estrategia
+            });
+        } else {
+            console.log("🟣 DEBUG - curvasExtras:", {
+                existe: !!resultados?.curvasExtras,
+                quantidade: resultados?.curvasExtras?.length || 0,
+                motivo: !mostrarTodas ? "mostrarTodasCurvas = false" : 
+                        tipoRenda !== "periodo" ? "tipoRenda !== periodo" : 
+                        "curvasExtras não foi gerado"
+            });
+        }
+        
+        if (!resultados) {
+            console.error("❌ executarSimulacaoWizard retornou undefined!");
+            alert("⚠️ Erro ao calcular simulação. Por favor, verifique os dados e tente novamente.");
+            return;
+        }
 
     // Esconder steps
     document.querySelectorAll('.wizard-step').forEach(step => {
@@ -565,7 +637,9 @@ function finalizarWizard() {
     // 🎨 DASHBOARD INVLAB MASTER
     // ===================================================
 
-    const atingiuMeta = resultados.deficitOuSobra >= 0;
+    // ✅ CORREÇÃO DOSE 6: Proteger contra NaN antes de calcular atingiuMeta
+    const deficitOuSobraValido = isNaN(resultados.deficitOuSobra) ? -1 : resultados.deficitOuSobra;
+    const atingiuMeta = deficitOuSobraValido >= 0;
     const iconeStatus = atingiuMeta ? '✅' : '⚠️';
     const textoStatus = atingiuMeta 
         ? 'Parabéns! Você atingirá sua meta de aposentadoria!' 
@@ -582,12 +656,12 @@ function finalizarWizard() {
             
             <div class="card">
                 <h3>💰 Patrimônio Projetado</h3>
-                <p class="valor" style="color: #10b981;">R$ ${resultados.patrimonioTotalProjetado.toLocaleString('pt-BR', {maximumFractionDigits: 0})}</p>
+                <p class="valor" style="color: #10b981;">${formatarValorMonetario(resultados.patrimonioTotalProjetado, 0)}</p>
             </div>
 
             <div class="card">
                 <h3>📈 Renda Mensal Prevista</h3>
-                <p class="valor" style="color: #D4AF37;">R$ ${resultados.rendaTotalPrevista.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                <p class="valor" style="color: #D4AF37;">${formatarValorMonetario(resultados.rendaTotalPrevista)}</p>
                 <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px;">
                     ${resultados.tipoRenda === 'vitalicia' && resultados.estrategia === 'perpetua'
                         ? '💚 Renda vitalícia (capital preservado)'
@@ -599,14 +673,14 @@ function finalizarWizard() {
 
             <div class="card">
                 <h3>🎯 Meta Mensal</h3>
-                <p class="valor" style="color: #E4E4E4;">R$ ${resultados.rendaDesejada.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                <p class="valor" style="color: #E4E4E4;">${formatarValorMonetario(resultados.rendaDesejada)}</p>
             </div>
 
             <div class="card">
                 <h3>💎 Herança Projetada</h3>
                 <p class="valor" style="color: ${resultados.heranca > 0 ? '#10b981' : '#ef4444'};">
                     ${resultados.heranca > 0 
-                        ? 'R$ ' + resultados.heranca.toLocaleString('pt-BR', {maximumFractionDigits: 0})
+                        ? formatarValorMonetario(resultados.heranca, 0)
                         : 'R$ 0 (capital consumido)'}
                 </p>
                 <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px;">
@@ -624,9 +698,9 @@ function finalizarWizard() {
             <ul style="margin-left: 20px; margin-top: 8px;">
                 ${resultados.inssReal === 0 
                     ? '<li><strong>100% dos investimentos</strong> (INSS não considerado)</li>'
-                    : `<li><strong>Renda do Patrimônio:</strong> R$ ${resultados.rendaRealPossivel.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</li>
-                       <li><strong>Renda do INSS:</strong> R$ ${resultados.inssReal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</li>
-                       <li><strong>Renda Total:</strong> R$ ${resultados.rendaTotalPrevista.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</li>`
+                    : `<li><strong>Renda do Patrimônio:</strong> ${formatarValorMonetario(resultados.rendaRealPossivel)}/mês</li>
+                       <li><strong>Renda do INSS:</strong> ${formatarValorMonetario(resultados.inssReal)}/mês</li>
+                       <li><strong>Renda Total:</strong> ${formatarValorMonetario(resultados.rendaTotalPrevista)}/mês</li>`
                 }
                 <li><strong>Estratégia:</strong> ${
                     resultados.tipoRenda === 'vitalicia' && resultados.estrategia === 'perpetua'
@@ -644,7 +718,7 @@ function finalizarWizard() {
                 }</li>
                 <li><strong>Herança:</strong> ${
                     resultados.heranca > 0
-                        ? `R$ ${resultados.heranca.toLocaleString('pt-BR', {maximumFractionDigits: 0})} (patrimônio preservado)`
+                        ? `${formatarValorMonetario(resultados.heranca, 0)} (patrimônio preservado)`
                         : 'R$ 0 (capital será consumido)'
                 }</li>
             </ul>
@@ -843,6 +917,17 @@ function finalizarWizard() {
     // 📈 RENDERIZAR GRÁFICO APÓS CRIAR DASHBOARD
     // ===================================================
     setTimeout(() => {
+        // ✅ VALIDAÇÃO: Verificar se curvasExtras existe e não está vazio antes de renderizar
+        const curvasExtrasParaGrafico = resultados.curvasExtras && resultados.curvasExtras.length > 0 
+            ? resultados.curvasExtras 
+            : null;
+        
+        if (curvasExtrasParaGrafico) {
+            console.log("🟣 DEBUG - Renderizando gráfico COM curvas extras:", curvasExtrasParaGrafico.length);
+        } else {
+            console.log("🟣 DEBUG - Renderizando gráfico SEM curvas extras");
+        }
+        
         renderizarGraficoEvolucao(
             resultados.dadosMensais,
             wizardData.idadeAtual,
@@ -850,7 +935,7 @@ function finalizarWizard() {
             resultados.projecaoPosAposentadoria,  // ✅ NOVO: projeção pós-aposentadoria
             resultados.tipoRenda,  // ✅ NOVO: tipo de renda
             resultados.estrategia,  // ✅ NOVO: estratégia
-            resultados.curvasExtras,  // 🟣 NOVO: múltiplas curvas de longevidade
+            curvasExtrasParaGrafico,  // 🟣 NOVO: múltiplas curvas de longevidade (validado)
             resultados.idadeFinal  // 🟣 NOVO: idade final selecionada
         );
         
@@ -872,7 +957,11 @@ function finalizarWizard() {
                 abrirGraficoRendaMensal(
                     resultados.rendaMensalDetalhada,
                     resultados.idadeAposentadoria,
-                    resultados.inssReal || 0
+                    resultados.inssReal || 0,
+                    resultados.rendasMensaisExtras || [],  // 🟣 NOVO: passar curvas extras de renda
+                    resultados.idadeFinal || null,  // ✅ DOSE 7: idade final escolhida
+                    resultados.tipoRenda || 'vitalicia',  // ✅ DOSE 7: tipo de renda
+                    resultados.estrategia || 'perpetua'  // ✅ DOSE 7: estratégia
                 );
             };
         }
@@ -885,13 +974,31 @@ function finalizarWizard() {
             };
         }
     }, 100);
+    } catch (error) {
+        console.error("❌ Erro em finalizarWizard:", error);
+        alert("⚠️ Ocorreu um erro ao finalizar a simulação. Por favor, verifique o console para mais detalhes.\n\nErro: " + error.message);
+    }
 }
 
 // -----------------------------------------------------
 // INTERPRETAÇÃO AUTOMÁTICA DO RESULTADO
 // -----------------------------------------------------
 function gerarInterpretacaoAutomatica(resultados, wizardData) {
+    // ✅ CORREÇÃO DOSE 6: Validar valores antes de calcular percentual
+    if (isNaN(resultados.rendaTotalPrevista) || isNaN(resultados.rendaDesejada) || resultados.rendaDesejada <= 0) {
+        return '<p style="color: #ef4444;">⚠️ Erro ao calcular percentual. Por favor, verifique os dados informados.</p>';
+    }
+    
+    // ✅ CORREÇÃO DOSE 6: Validar deficitOuSobra antes de usar
+    const deficitOuSobraValido = isNaN(resultados.deficitOuSobra) ? -1 : resultados.deficitOuSobra;
+    
     const percentualAtingido = (resultados.rendaTotalPrevista / resultados.rendaDesejada) * 100;
+    
+    // ✅ CORREÇÃO DOSE 6: Validar se percentualAtingido é válido
+    if (isNaN(percentualAtingido) || !isFinite(percentualAtingido)) {
+        return '<p style="color: #ef4444;">⚠️ Erro ao calcular percentual atingido. Por favor, verifique os dados informados.</p>';
+    }
+    
     let html = '';
     let statusClass = '';
     let icone = '';
@@ -907,9 +1014,9 @@ function gerarInterpretacaoAutomatica(resultados, wizardData) {
             <p style="color: #E4E4E4;">Você terá uma aposentadoria confortável mantendo disciplina nos investimentos.</p>
             <p style="margin-top: 15px; color: #E4E4E4;">Resumo:</p>
             <ul style="color: #E4E4E4;">
-                <li>Renda desejada: <span style="color: #D4AF37;">R$ ${resultados.rendaDesejada.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</span></li>
-                <li>Renda projetada: <span style="color: #D4AF37;">R$ ${resultados.rendaTotalPrevista.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</span></li>
-                <li>Excedente: <span style="color: #D4AF37;">R$ ${Math.abs(resultados.deficitOuSobra).toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</span></li>
+                <li>Renda desejada: <span style="color: #D4AF37;">${formatarValorMonetario(resultados.rendaDesejada)}/mês</span></li>
+                <li>Renda projetada: <span style="color: #D4AF37;">${formatarValorMonetario(resultados.rendaTotalPrevista)}/mês</span></li>
+                <li>Excedente: <span style="color: #D4AF37;">${formatarValorMonetario(Math.abs(deficitOuSobraValido))}/mês</span></li>
             </ul>
             <p style="margin-top: 15px; color: #E4E4E4;">💡 Sugestões opcionais:</p>
             <ul style="color: #E4E4E4;">
@@ -923,19 +1030,20 @@ function gerarInterpretacaoAutomatica(resultados, wizardData) {
         statusClass = 'status-warning';
         icone = '💡';
         titulo = 'Você está muito perto da sua meta!';
-        const faltam = Math.abs(resultados.deficitOuSobra);
-        const aporteAdicional = resultados.aporteNecessario || 0;
+        // ✅ CORREÇÃO DOSE 6: Usar deficitOuSobraValido (já validado) e formatarValorMonetario
+        const faltam = Math.abs(deficitOuSobraValido);
+        const aporteAdicional = (resultados.aporteNecessario && !isNaN(resultados.aporteNecessario)) ? resultados.aporteNecessario : 0;
         conteudo = `
-            <p style="color: #E4E4E4;">Faltam apenas <span style="color: #D4AF37;">R$ ${faltam.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</span> para atingir 100% da meta.</p>
+            <p style="color: #E4E4E4;">Faltam apenas <span style="color: #D4AF37;">${formatarValorMonetario(faltam)}/mês</span> para atingir 100% da meta.</p>
             <p style="margin-top: 15px; color: #E4E4E4;">📈 Pontos positivos:</p>
             <ul style="color: #E4E4E4;">
-                <li>Patrimônio projetado sólido: <span style="color: #D4AF37;">R$ ${resultados.patrimonioTotalProjetado.toLocaleString('pt-BR', {maximumFractionDigits: 0})}</span></li>
+                <li>Patrimônio projetado sólido: <span style="color: #D4AF37;">${formatarValorMonetario(resultados.patrimonioTotalProjetado, 0)}</span></li>
                 <li><span style="color: #D4AF37;">${percentualAtingido.toFixed(1)}%</span> da meta já atingidos</li>
                 <li>${resultados.estrategia === 'perpetua' ? 'Renda perpétua = patrimônio preservado para herança' : 'Estratégia de consumo gradual do capital'}</li>
             </ul>
             <p style="margin-top: 15px; color: #E4E4E4;">🎯 Como atingir 100%:</p>
             <ul style="color: #E4E4E4;">
-                ${aporteAdicional > 0 ? `<li>Aumentar aporte mensal de <span style="color: #D4AF37;">R$ ${Number(wizardData.aporteMensal).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span> para <span style="color: #D4AF37;">R$ ${(Number(wizardData.aporteMensal) + aporteAdicional).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span> (<span style="color: #D4AF37;">+R$ ${aporteAdicional.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span>)</li>` : ''}
+                ${aporteAdicional > 0 && !isNaN(wizardData.aporteMensal) ? `<li>Aumentar aporte mensal de <span style="color: #D4AF37;">${formatarValorMonetario(Number(wizardData.aporteMensal))}</span> para <span style="color: #D4AF37;">${formatarValorMonetario(Number(wizardData.aporteMensal) + aporteAdicional)}</span> (<span style="color: #D4AF37;">+${formatarValorMonetario(aporteAdicional)}</span>)</li>` : ''}
                 <li>Aumentar aporte anual (13º, bônus, etc)</li>
                 <li>Postergar aposentadoria em 1-2 anos</li>
             </ul>
@@ -1635,15 +1743,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (nextBtn) {
             nextBtn.onclick = () => {
+                try {
+                    captureStepData(index + 1);
 
-                captureStepData(index + 1);
+                    if (!validateStep(index + 1)) return;
 
-                if (!validateStep(index + 1)) return;
-
-                if (index + 1 === 4) {
-                    finalizarWizard();
-                } else {
-                    activateStep(index + 2);
+                    if (index + 1 === 4) {
+                        finalizarWizard();
+                    } else {
+                        activateStep(index + 2);
+                    }
+                } catch (error) {
+                    console.error("❌ Erro ao processar próximo passo:", error);
+                    alert("⚠️ Ocorreu um erro. Por favor, verifique o console para mais detalhes.");
                 }
             };
         }
@@ -1766,9 +1878,15 @@ document.addEventListener("DOMContentLoaded", () => {
 // ============================================================
 // 📊 GRÁFICO: RENDA MENSAL AO LONGO DA APOSENTADORIA
 // ============================================================
-function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0) {
+function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0, rendasMensaisExtras = [], idadeFinal = null, tipoRenda = 'vitalicia', estrategia = 'perpetua') {
     console.log("📊 Abrindo gráfico de renda mensal...");
-    console.log("📊 Parâmetros recebidos:", { listaRenda: listaRenda?.length, idadeApos, inssValor });
+    console.log("📊 Parâmetros recebidos:", { 
+        listaRenda: listaRenda?.length, 
+        idadeApos, 
+        inssValor, 
+        rendasMensaisExtras: rendasMensaisExtras?.length,
+        rendasMensaisExtrasDetalhes: rendasMensaisExtras?.map(c => ({ idade: c.idade, tamanho: c.rendaMensal?.length, primeira: c.rendaMensal?.[0] }))
+    });
     
     // Converter parâmetros
     idadeApos = Number(idadeApos) || 0;
@@ -1893,12 +2011,12 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0) {
             label: "Renda do Patrimônio",
             data: rendas,
             borderColor: "#00ff88",
-            backgroundColor: "rgba(0, 255, 136, 0.1)",
-            borderWidth: 3,
+            backgroundColor: "rgba(0, 255, 136, 0.05)",  // ✅ AJUSTE: Transparência reduzida
+            borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
             tension: 0.25,
             fill: true,
-            pointRadius: 2,
-            pointHoverRadius: 5
+            pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
+            pointHoverRadius: 4
         };
 
         // INSS (valor constante após aposentadoria)
@@ -1906,13 +2024,13 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0) {
             label: "Renda do INSS",
             data: rendas.map(() => inssValor),
             borderColor: "#4da6ff",
-            backgroundColor: "rgba(77, 166, 255, 0.1)",
-            borderWidth: 2,
+            backgroundColor: "rgba(77, 166, 255, 0.05)",  // ✅ AJUSTE: Transparência reduzida
+            borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
             borderDash: [6, 4],
             tension: 0.15,
             fill: false,
-            pointRadius: 1,
-            pointHoverRadius: 4
+            pointRadius: 1,  // Mantido pequeno para INSS
+            pointHoverRadius: 3
         };
 
         // Soma total
@@ -1920,20 +2038,127 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0) {
             label: "Renda Total (Patrimônio + INSS)",
             data: rendas.map((v) => v + inssValor),
             borderColor: "#ffcc00",
-            backgroundColor: "rgba(255, 204, 0, 0.1)",
-            borderWidth: 3,
+            backgroundColor: "rgba(255, 204, 0, 0.05)",  // ✅ AJUSTE: Transparência reduzida
+            borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
             tension: 0.25,
             fill: true,
-            pointRadius: 2,
-            pointHoverRadius: 5
+            pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
+            pointHoverRadius: 4
         };
+        
+        // 🟣 NOVO: Preparar datasets para curvas extras de renda (quando mostrarTodasCurvas está ativo)
+        const datasetsExtras = [];
+        if (rendasMensaisExtras && rendasMensaisExtras.length > 0) {
+            console.log("🟣 DEBUG - Preparando curvas extras de renda:", {
+                quantidade: rendasMensaisExtras.length,
+                idades: rendasMensaisExtras.map(c => c.idade),
+                detalhes: rendasMensaisExtras
+            });
+            
+            rendasMensaisExtras.forEach(curvaExtra => {
+                // ✅ CORREÇÃO DOSE 3: Trabalhar por IDADE, não por índice
+                // Isso garante que cada curva termine na idade correta, independente do tamanho dos arrays
+                const rendasExtra = [];
+                
+                console.log(`🟣 Processando curva extra ${curvaExtra.idade} anos:`, {
+                    tamanhoArray: curvaExtra.rendaMensal.length,
+                    primeiraRenda: curvaExtra.rendaMensal[0],
+                    ultimaRenda: curvaExtra.rendaMensal[curvaExtra.rendaMensal.length - 1],
+                    idadeFinal: curvaExtra.idade,
+                    idadeInicio: idadeApos
+                });
+                
+                // Valor constante da curva (todos os meses têm o mesmo valor)
+                const valorRendaConstante = curvaExtra.rendaMensal && curvaExtra.rendaMensal.length > 0 
+                    ? curvaExtra.rendaMensal[0] 
+                    : null;
+                
+                // Mapear os valores da curva extra para os labels principais TRABALHANDO POR IDADE
+                labels.forEach((label, index) => {
+                    const idadeLabel = parseInt(label.replace(" anos", ""));
+                    const idadeInicio = idadeApos;
+                    
+                    // ✅ LÓGICA ROBUSTA: Verificar se a idade está dentro do range da curva
+                    // - Antes da aposentadoria: null (não faz sentido ter renda)
+                    // - Depois da idade final da curva: null (curva termina)
+                    // - Entre aposentadoria e idade final: usar valor constante
+                    if (idadeLabel < idadeInicio) {
+                        // Antes da aposentadoria → null
+                        rendasExtra.push(null);
+                    } else if (idadeLabel > curvaExtra.idade) {
+                        // Depois da idade final da curva → null (curva termina aqui)
+                        rendasExtra.push(null);
+                    } else if (idadeLabel >= idadeInicio && idadeLabel <= curvaExtra.idade) {
+                        // Dentro do range válido → usar valor constante
+                        rendasExtra.push(valorRendaConstante);
+                    } else {
+                        // Fallback: null
+                        rendasExtra.push(null);
+                    }
+                });
+                
+                // ✅ LOG: Verificar quantos pontos válidos foram criados
+                const pontosValidos = rendasExtra.filter(r => r !== null && r !== undefined);
+                const primeiraIdadeValida = labels.findIndex((label, idx) => rendasExtra[idx] !== null);
+                const ultimaIdadeValida = rendasExtra.lastIndexOf(valorRendaConstante);
+                
+                console.log(`✅ Curva ${curvaExtra.idade} anos mapeada:`, {
+                    pontosValidos: pontosValidos.length,
+                    primeiraIdade: primeiraIdadeValida >= 0 ? labels[primeiraIdadeValida] : 'N/A',
+                    ultimaIdade: ultimaIdadeValida >= 0 ? labels[ultimaIdadeValida] : 'N/A',
+                    valor: valorRendaConstante
+                });
+                
+                // Determinar cor baseada na idade
+                const cor = curvaExtra.idade === 95 ? "#2E86C1" :
+                           curvaExtra.idade === 105 ? "#D35400" : "#8E44AD";
+                
+                // ✅ CORREÇÃO: Usar pontosValidos já declarado acima (linha 2081)
+                const rendaInicial = pontosValidos[0];
+                
+                console.log(`✅ Curva extra ${curvaExtra.idade} anos:`, {
+                    rendaInicial: rendaInicial,
+                    rendaFormatada: rendaInicial ? `R$ ${rendaInicial.toFixed(2)}` : 'null',
+                    totalPontos: rendasExtra.length,
+                    pontosValidos: pontosValidos.length,
+                    primeirosValores: rendasExtra.slice(0, 5)
+                });
+                
+                if (pontosValidos.length === 0) {
+                    console.warn(`⚠️ Curva extra ${curvaExtra.idade} anos não tem valores válidos!`);
+                }
+                
+                datasetsExtras.push({
+                    label: `Renda até ${curvaExtra.idade} anos`,
+                    data: rendasExtra,  // Usar os mesmos labels do gráfico principal
+                    borderColor: cor,
+                    backgroundColor: "transparent",
+                    borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
+                    borderDash: [5, 5],  // Linha tracejada para diferenciar
+                    tension: 0.25,
+                    fill: false,
+                    pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
+                    pointHoverRadius: 4
+                });
+            });
+        }
+        
+        // Combinar todos os datasets
+        const todosDatasets = [datasetPropria, datasetINSS, datasetTotal, ...datasetsExtras];
+        
+        console.log("📊 Total de datasets:", todosDatasets.length);
+        console.log("📊 Datasets extras:", datasetsExtras.length);
+        datasetsExtras.forEach((ds, idx) => {
+            const valoresValidos = ds.data.filter(d => d !== null && d !== undefined && d > 0);
+            console.log(`  Dataset ${idx + 1}: ${ds.label}, valores válidos: ${valoresValidos.length}, primeiro valor: ${valoresValidos[0]}`);
+        });
         
         try {
             graficoRendaMensal = new ChartLib(ctx, {
                 type: "line",
                 data: {
                     labels: labels,
-                    datasets: [datasetPropria, datasetINSS, datasetTotal]
+                    datasets: todosDatasets
                 },
                 options: {
                     responsive: true,
@@ -1943,7 +2168,11 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0) {
                             display: true,
                             position: 'top',
                             labels: {
-                                color: '#E4E4E4'
+                                color: '#E4E4E4',
+                                usePointStyle: true,  // ✅ AJUSTE: Usar estilo de linha em vez de caixa
+                                pointStyle: 'line',  // ✅ AJUSTE: Linha na legenda
+                                boxWidth: 0,  // ✅ AJUSTE: Remover largura da caixa
+                                boxHeight: 0  // ✅ AJUSTE: Remover altura da caixa
                             }
                         },
                         tooltip: {
@@ -1994,21 +2223,47 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0) {
                 loadingDiv.style.display = "none";
             }
             
-            // Atualizar informações textuais
+            // ✅ DOSE 7: Atualizar informações textuais com explicação melhorada sobre curvas extras
             const infoDiv = document.getElementById("infoRendaMensal");
             if (infoDiv) {
                 const rendaInicial = listaRenda[0] || 0;
                 const rendaFinal = listaRenda[listaRenda.length - 1] || 0;
                 const mesesTotal = listaRenda.length;
-                const idadeFinal = idadeApos + Math.floor(mesesTotal / 12);
+                const idadeFinalCalculada = idadeFinal || (idadeApos + Math.floor(mesesTotal / 12));
                 const temRendaZero = rendas.some(r => r === 0 || r < 0.01);
                 const rendaTotalInicial = rendaInicial + inssValor;
                 
+                // ✅ DOSE 7: Verificar se há curvas extras
+                const temCurvasExtras = rendasMensaisExtras && rendasMensaisExtras.length > 0;
+                
                 let textoInfo = "";
+                
+                // ✅ DOSE 7: Título principal com explicação sobre linha principal
                 if (temRendaZero) {
-                    textoInfo = `📊 <strong>Renda por Período Determinado:</strong> Você receberá uma renda mensal do patrimônio que começa em <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> e termina em <strong>R$ 0</strong> aproximadamente aos <strong>${idadeFinal} anos</strong>, quando seu patrimônio se esgotará.`;
+                    textoInfo = `📊 <strong>Renda por Período Determinado:</strong> Você receberá uma renda mensal do patrimônio que começa em <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> e termina em <strong>R$ 0</strong> aproximadamente aos <strong>${idadeFinalCalculada} anos</strong>, quando seu patrimônio se esgotará.`;
                 } else {
                     textoInfo = `💚 <strong>Renda Vitalícia:</strong> Você receberá <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> do patrimônio de forma permanente, preservando seu capital para sempre.`;
+                }
+                
+                // ✅ DOSE 7: Explicação sobre linha principal
+                if (idadeFinal) {
+                    textoInfo += `<br><br>📌 <strong>Linha principal (verde):</strong> Renda mensal calculada para durar até <strong>${idadeFinal} anos</strong>, baseada na sua escolha.`;
+                }
+                
+                // ✅ DOSE 7: Explicação sobre curvas extras (apenas se existirem)
+                if (temCurvasExtras) {
+                    textoInfo += `<br><br>📈 <strong>Linhas extras (tracejadas):</strong> Cenários de longevidade alternativos para você comparar:`;
+                    rendasMensaisExtras.forEach(curva => {
+                        const valorRenda = curva.rendaMensal && curva.rendaMensal.length > 0 ? curva.rendaMensal[0] : 0;
+                        const coresCurva = {
+                            95: "#2E86C1",  // Azul
+                            105: "#D35400", // Laranja
+                            115: "#8E44AD"  // Roxo
+                        };
+                        const corNome = curva.idade === 95 ? "azul" : curva.idade === 105 ? "laranja" : "roxo";
+                        textoInfo += `<br>&nbsp;&nbsp;• <span style="color: ${coresCurva[curva.idade] || '#CCCCCC'};">Linha ${corNome} (até ${curva.idade} anos):</span> Renda mensal de <strong>R$ ${valorRenda.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> ajustada para durar até ${curva.idade} anos.`;
+                    });
+                    textoInfo += `<br><br><span style="font-size: 0.85rem; color: #9ca3af;">💡 <strong>Dica:</strong> Compare os valores para entender como sua renda mensal varia conforme sua expectativa de vida. Quanto maior a longevidade, menor será a renda mensal para que o patrimônio dure até aquela idade.</span>`;
                 }
                 
                 if (inssValor > 0) {
