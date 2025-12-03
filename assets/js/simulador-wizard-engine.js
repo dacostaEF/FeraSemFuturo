@@ -115,19 +115,33 @@ function projetarPatrimonioVitalicia(patrimonioInicial, taxaMensalReal, anosProj
 // 🟧 PROJEÇÃO PÓS-APOSENTADORIA: RENDA POR PERÍODO (CONSUMO)
 // ============================================================
 function projetarPatrimonioPorPeriodo(patrimonioInicial, rendaMensal, taxaMensalReal, mesesTotal) {
-    let saldo = patrimonioInicial;
-    let dados = [];
+    const pv = Number(patrimonioInicial);
+    const pmt = Number(rendaMensal);
+    const i = taxaMensalReal;
+
+    const dados = [];
 
     for (let m = 0; m <= mesesTotal; m++) {
+        let saldo;
+
         if (m === 0) {
-            dados.push({ mes: m, saldo: saldo });
+            saldo = pv;
         } else {
-            // Aplica juros e subtrai a renda mensal
-            saldo = saldo * (1 + taxaMensalReal) - rendaMensal;
-            if (saldo < 0) saldo = 0;  // Não pode ficar negativo
-            
-            dados.push({ mes: m, saldo: saldo });
+            const fator = Math.pow(1 + i, m);
+            // Fórmula da anuidade (saldo no mês m)
+            // B(m) = PV·(1+i)^m − PMT · ((1+i)^m − 1)/i
+            saldo = pv * fator - pmt * ((fator - 1) / i);
         }
+
+        // Evita possíveis resíduos numéricos negativos muito pequenos
+        if (saldo < 0 && saldo > -1e-6) {
+            saldo = 0;
+        }
+
+        dados.push({
+            mes: m,
+            saldo: saldo
+        });
     }
 
     return dados;
@@ -153,11 +167,11 @@ function calcularRendaPreservar20(pv, taxaMensalReal, idadeApos, idadeFinal) {
 
     const FV = pv * 0.20; // 20% preservado
     const i = taxaMensalReal;
-    const fator = Math.pow(1 + i, meses);
 
     // Fórmula correta de PMT com valor residual (annuity immediate)
-    // PMT = (PV * i - FV * i / (1+i)^n) / (1 - 1/(1+i)^n)
-    const rendaMensal = (pv * i - FV * i / fator) / (1 - 1 / fator);
+    const rendaMensal =
+        (i * (pv - FV / Math.pow(1 + i, meses))) /
+        (1 - 1 / Math.pow(1 + i, meses));
 
     return {
         rendaMensal,

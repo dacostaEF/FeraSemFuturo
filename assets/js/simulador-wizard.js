@@ -3,6 +3,8 @@
 //  VERSÃO OTIMIZADA (robusta e profissional)
 // =====================================================
 
+console.log("🚀 Engine NOVO carregado! ", new Date().toISOString());
+
 let wizardData = {
     idadeAtual: null,
     rendaAtual: null, // apenas informativo
@@ -225,8 +227,8 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
     // Esta fase vai de idadeAtual até idadeAposentadoria
     // ✅ CORREÇÃO: Usar item.mes (que começa em 1) ao invés de index (que começa em 0)
     dadosMensais.forEach((item, index) => {
-        // A cada 12 meses, adiciona um ponto no gráfico
-        if (item.mes % 12 === 0 || index === dadosMensais.length - 1) {
+        // Adicionar primeiro ponto (mês 1) e depois a cada 12 meses, ou último ponto
+        if (index === 0 || item.mes % 12 === 0 || index === dadosMensais.length - 1) {
             // ✅ CORREÇÃO: Usar item.mes - 1 porque item.mes começa em 1, não em 0
             const mesesDesdeInicio = item.mes - 1;
             const idadeReal = ajustarIdade(mesesDesdeInicio); // Idade real baseada em idadeAtual
@@ -244,13 +246,6 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
     if (projecaoPosAposentadoria && projecaoPosAposentadoria.length > 0) {
         const mesesAteAposentadoria = anosAteAposentadoria * 12; // Meses desde idadeAtual até idadeAposentadoria
         
-        // Calcular o piso de 20% do patrimônio inicial (último valor da acumulação)
-        const patrimonioInicial = valores.length > 0 ? valores[valores.length - 1] : 0;
-        const piso20 = patrimonioInicial * 0.20;
-        
-        // Detectar se é estratégia "preservar20"
-        const isPreservar20 = estrategia === "preservar20" || (tipoRenda === "periodo" && estrategia === "perpetua" && idadeFinal);
-        
         // ✅ CORREÇÃO: projecaoPosAposentadoria tem item.mes começando em 0
         projecaoPosAposentadoria.forEach((item, index) => {
             // A cada 12 meses ou pontos importantes
@@ -261,9 +256,8 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
                 const idadeReal = ajustarIdade(mesesTotais); // Idade real baseada em idadeAtual
                 labelsPosAposentadoria.push(idadeReal.toString());
                 
-                // Garantir que o valor nunca caia abaixo do piso de 20% para estratégia "preservar20"
-                const saldoAjustado = isPreservar20 ? Math.max(item.saldo, piso20) : item.saldo;
-                valoresPosAposentadoria.push(saldoAjustado);
+                // Usar valor exato do motor, sem ajustes artificiais
+                valoresPosAposentadoria.push(item.saldo);
             }
         });
     }
@@ -406,32 +400,27 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
     if (curvasExtras && curvasExtras.length > 0) {
         const mesesAteAposentadoria = anosAteAposentadoria * 12; // Meses desde idadeAtual até idadeAposentadoria
         
+        // ===============================
+        // CURVAS EXTRAS – BLOCO CORRIGIDO
+        // ===============================
         curvasExtras.forEach(curvaObj => {
-            // Preparar dados da curva extra (amostrar a cada 12 meses)
             const valoresCurva = [];
             const labelsCurva = [];
-            
-            // Calcular o piso de 20% do patrimônio inicial (último valor da acumulação)
-            const patrimonioInicial = valores.length > 0 ? valores[valores.length - 1] : 0;
-            const piso20 = patrimonioInicial * 0.20;
-            
-            // ✅ CORREÇÃO: curvasExtras tem item.mes começando em 0 (igual projecaoPosAposentadoria)
+
             curvaObj.curva.forEach((item, index) => {
+                // Plotar apenas até onde o motor realmente gerou
                 if (item.mes % 12 === 0 || index === curvaObj.curva.length - 1) {
-                    // mesesTotais = meses desde idadeAtual até aposentadoria + meses desde aposentadoria
+
                     const mesesTotais = mesesAteAposentadoria + item.mes;
-                    const idadeReal = ajustarIdade(mesesTotais); // Idade real baseada em idadeAtual
-                    labelsCurva.push(idadeReal.toString());
-                    
-                    // Garantir que o valor nunca caia abaixo do piso de 20%
-                    const saldoAjustado = Math.max(item.saldo, piso20);
-                    valoresCurva.push(saldoAjustado);
+                    const idadeReal = ajustarIdade(mesesTotais);
+
+                    labelsCurva.push(String(idadeReal));
+                    valoresCurva.push(item.saldo);  // ❗ Sem Math.max e sem prolongar curva
                 }
             });
-            
-            // Criar array de dados mapeado: null até aposentadoria, depois os valores da curva
+
             const dadosCurva = new Array(valores.length).fill(null).concat(valoresCurva);
-            
+
             datasets.push({
                 label: `Até ${curvaObj.idade} anos`,
                 data: dadosCurva,
@@ -449,99 +438,22 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
         });
     }
 
-    // ✅ Labels finais: concatenar labels da acumulação + pós-aposentadoria
+    // ✅ Labels finais: usar apenas labels da curva principal (acumulação + pós-aposentadoria)
+    // NÃO adicionar labels extras das curvas extras para evitar extrapolação
     let labelsFinais = valoresPosAposentadoria.length > 0 ? [...labels, ...labelsPosAposentadoria] : labels;
     
-    // Coletar todas as idades das curvas extras e adicionar aos labels finais (evitar duplicatas)
-    if (curvasExtras && curvasExtras.length > 0) {
-        const mesesAteAposentadoria = anosAteAposentadoria * 12;
-        const idadesExtras = new Set();
+    // IMPORTANTE: NÃO ajustar datasets com nulls - cada curva deve manter seu tamanho original
+    // Isso permite que as curvas parem exatamente onde o motor determinou
+    
+    // Ajustar linha horizontal da herança 20% se existir
+    const linhaHeranca = datasets.find(d => d.label === "Herança Preservada (20% do Patrimônio Inicial)");
+    if (linhaHeranca) {
+        const idadeAposentadoriaNum = Number(idadeAposentadoria);
+        const indiceAposentadoria = labelsFinais.findIndex(l => parseInt(l, 10) >= idadeAposentadoriaNum);
+        const piso = linhaHeranca.data.find(v => v !== null) || 0;
         
-        curvasExtras.forEach(curvaObj => {
-            // ✅ CORREÇÃO: Usar item.mes ao invés de index
-            curvaObj.curva.forEach((item, index) => {
-                if (item.mes % 12 === 0 || index === curvaObj.curva.length - 1) {
-                    const mesesTotais = mesesAteAposentadoria + item.mes;
-                    const idadeReal = ajustarIdade(mesesTotais);
-                    idadesExtras.add(idadeReal);
-                }
-            });
-        });
-        
-        // Adicionar idades extras que não estão nos labels finais
-        idadesExtras.forEach(idade => {
-            const idadeStr = idade.toString();
-            if (!labelsFinais.includes(idadeStr)) {
-                labelsFinais.push(idadeStr);
-            }
-        });
-        
-        // Ordenar numericamente
-        labelsFinais = labelsFinais.map(l => parseInt(l, 10)).sort((a, b) => a - b).map(l => l.toString());
-        
-        // Calcular o piso de 20% do patrimônio inicial
-        const patrimonioInicial = valores.length > 0 ? valores[valores.length - 1] : 0;
-        const piso20 = patrimonioInicial * 0.20;
-        const isPreservar20 = estrategia === "preservar20" || (tipoRenda === "periodo" && estrategia === "perpetua" && idadeFinal);
-        
-        // Ajustar todos os datasets para ter o mesmo tamanho que labelsFinais (preencher com nulls)
-        datasets.forEach(dataset => {
-            while (dataset.data.length < labelsFinais.length) {
-                dataset.data.push(null);
-            }
-            
-            // Garantir que valores das curvas "preservar20" nunca caiam abaixo do piso
-            if (isPreservar20 && dataset.label !== "Herança Preservada (20% do Patrimônio Inicial)") {
-                dataset.data = dataset.data.map(val => {
-                    if (val !== null && val < piso20) {
-                        return piso20;
-                    }
-                    return val;
-                });
-            }
-        });
-        
-        // Ajustar linha horizontal da herança 20% se existir
-        const linhaHeranca = datasets.find(d => d.label === "Herança Preservada (20% do Patrimônio Inicial)");
-        if (linhaHeranca) {
-            const idadeAposentadoriaNum = Number(idadeAposentadoria);
-            const idadeAposentadoriaStr = idadeAposentadoriaNum.toString();
-            const indiceAposentadoria = labelsFinais.findIndex(l => parseInt(l, 10) >= idadeAposentadoriaNum);
-            const piso = linhaHeranca.data.find(v => v !== null) || 0;
-            
-            // Recalcular linha horizontal para os labels finais
-            linhaHeranca.data = labelsFinais.map((_, idx) => idx >= indiceAposentadoria ? piso : null);
-        }
-    } else {
-        // Calcular o piso de 20% do patrimônio inicial
-        const patrimonioInicial = valores.length > 0 ? valores[valores.length - 1] : 0;
-        const piso20 = patrimonioInicial * 0.20;
-        const isPreservar20 = estrategia === "preservar20" || (tipoRenda === "periodo" && estrategia === "perpetua" && idadeFinal);
-        
-        // Garantir que valores das curvas "preservar20" nunca caiam abaixo do piso
-        if (isPreservar20) {
-            datasets.forEach(dataset => {
-                if (dataset.label !== "Herança Preservada (20% do Patrimônio Inicial)") {
-                    dataset.data = dataset.data.map(val => {
-                        if (val !== null && val < piso20) {
-                            return piso20;
-                        }
-                        return val;
-                    });
-                }
-            });
-        }
-        
-        // Mesmo sem curvas extras, ajustar linha horizontal se existir
-        const linhaHeranca = datasets.find(d => d.label === "Herança Preservada (20% do Patrimônio Inicial)");
-        if (linhaHeranca) {
-            const idadeAposentadoriaNum = Number(idadeAposentadoria);
-            const indiceAposentadoria = labelsFinais.findIndex(l => parseInt(l, 10) >= idadeAposentadoriaNum);
-            const piso = linhaHeranca.data.find(v => v !== null) || 0;
-            
-            // Recalcular linha horizontal para os labels finais
-            linhaHeranca.data = labelsFinais.map((_, idx) => idx >= indiceAposentadoria ? piso : null);
-        }
+        // Recalcular linha horizontal para os labels finais
+        linhaHeranca.data = labelsFinais.map((_, idx) => idx >= indiceAposentadoria ? piso : null);
     }
     
     // Configuração do gráfico INVLAB Premium
