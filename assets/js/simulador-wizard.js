@@ -204,64 +204,60 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
         window.chartEvolucao.destroy();
     }
 
+    // ✅ FUNÇÃO DE AJUSTE VISUAL: Converte meses desde início em idade real
+    // IMPORTANTE: idadeAtual e idadeAposentadoria são VARIÁVEIS DINÂMICAS fornecidas pelo usuário
+    // O eixo X começa em idadeAtual (início da formação do patrimônio)
+    // O pico de acumulação está em idadeAposentadoria (início do uso do patrimônio)
+    const idadeAtualNum = Number(idadeAtual); // Converter para número (evitar concatenação de strings)
+    const idadeAposentadoriaNum = Number(idadeAposentadoria);
+    
+    const ajustarIdade = (mesesDesdeInicio) => {
+        // Idade real = idadeAtual + meses desde o início / 12
+        return Math.floor(idadeAtualNum + mesesDesdeInicio / 12);
+    };
+
     // Preparar dados (converter meses em anos)
     const labels = [];
     const valores = [];
-    const anosAteAposentadoria = idadeAposentadoria - idadeAtual;
+    const anosAteAposentadoria = idadeAposentadoriaNum - idadeAtualNum;
 
     // Fase 1: Acumulação até aposentadoria
+    // Esta fase vai de idadeAtual até idadeAposentadoria
+    // ✅ CORREÇÃO: Usar item.mes (que começa em 1) ao invés de index (que começa em 0)
     dadosMensais.forEach((item, index) => {
         // A cada 12 meses, adiciona um ponto no gráfico
-        if (index % 12 === 0 || index === dadosMensais.length - 1) {
-            const ano = Math.floor(index / 12);
-            labels.push(`${ano} anos`);
+        if (item.mes % 12 === 0 || index === dadosMensais.length - 1) {
+            // ✅ CORREÇÃO: Usar item.mes - 1 porque item.mes começa em 1, não em 0
+            const mesesDesdeInicio = item.mes - 1;
+            const idadeReal = ajustarIdade(mesesDesdeInicio); // Idade real baseada em idadeAtual
+            labels.push(idadeReal.toString());
             valores.push(item.saldo);
         }
     });
 
     // Fase 2: Pós-aposentadoria (se houver projeção)
+    // Esta fase começa em idadeAposentadoria e continua adiante
+    // Representa o período de uso/consumo do patrimônio após a aposentadoria
     let valoresPosAposentadoria = [];
     let labelsPosAposentadoria = [];
-    let maxAnosTotal = anosAteAposentadoria; // Inicializar com anos até aposentadoria
     
     if (projecaoPosAposentadoria && projecaoPosAposentadoria.length > 0) {
-        const patrimonioFinal = valores[valores.length - 1];
-        const anoAposentadoria = anosAteAposentadoria;
+        const mesesAteAposentadoria = anosAteAposentadoria * 12; // Meses desde idadeAtual até idadeAposentadoria
         
+        // ✅ CORREÇÃO: projecaoPosAposentadoria tem item.mes começando em 0
         projecaoPosAposentadoria.forEach((item, index) => {
             // A cada 12 meses ou pontos importantes
-            if (index % 12 === 0 || index === projecaoPosAposentadoria.length - 1) {
-                const anosAposAposentadoria = Math.floor(index / 12);
-                const anoTotal = anoAposentadoria + anosAposAposentadoria;
-                labelsPosAposentadoria.push(`${anoTotal} anos`);
+            // ✅ CORREÇÃO: Usar item.mes diretamente (já começa em 0, então é meses desde início da projeção)
+            if (item.mes % 12 === 0 || index === projecaoPosAposentadoria.length - 1) {
+                // mesesTotais = meses desde idadeAtual até aposentadoria + meses desde aposentadoria
+                const mesesTotais = mesesAteAposentadoria + item.mes;
+                const idadeReal = ajustarIdade(mesesTotais); // Idade real baseada em idadeAtual
+                labelsPosAposentadoria.push(idadeReal.toString());
                 valoresPosAposentadoria.push(item.saldo);
-                
-                // Atualizar máximo se necessário
-                if (anoTotal > maxAnosTotal) {
-                    maxAnosTotal = anoTotal;
-                }
             }
         });
     }
     
-    // Calcular limite do eixo X baseado na idade máxima (115 anos)
-    // Se houver curvas extras, considerar a maior idade
-    let idadeMaxima = idadeFinal || 115;
-    if (curvasExtras && curvasExtras.length > 0) {
-        curvasExtras.forEach(curvaObj => {
-            if (curvaObj.idade > idadeMaxima) {
-                idadeMaxima = curvaObj.idade;
-            }
-        });
-    }
-    
-    // Calcular anos totais necessários: anos até aposentadoria + (idade máxima - idade aposentadoria)
-    const anosAposAposentadoriaMax = idadeMaxima - idadeAposentadoria;
-    const anosTotalMax = anosAteAposentadoria + Math.max(anosAposAposentadoriaMax, 0);
-    
-    // Garantir que o limite seja pelo menos 85 anos (elegante) ou o necessário
-    const limiteEixoX = Math.max(anosTotalMax, 85);
-
     // Determinar cor e label baseado na estratégia
     const isVitalicia = tipoRenda === 'vitalicia' && estrategia === 'perpetua';
     const corAcumulacao = '#10b981';  // Verde para acumulação
@@ -275,17 +271,17 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
         borderColor: corAcumulacao,
         backgroundColor: (context) => {
             const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
-            gradient.addColorStop(0, 'rgba(16, 185, 129, 0.15)');  // ✅ AJUSTE: Transparência reduzida
+            gradient.addColorStop(0, 'rgba(16, 185, 129, 0.15)');
             gradient.addColorStop(1, 'rgba(16, 185, 129, 0.01)');
             return gradient;
         },
-        borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
+        borderWidth: 1.5,
         fill: true,
         tension: 0.4,
         pointBackgroundColor: corAcumulacao,
         pointBorderColor: '#0D0D0D',
         pointBorderWidth: 1,
-        pointRadius: 2,  // ✅ AJUSTE: Pontos menores
+        pointRadius: 2,
         pointHoverRadius: 4
     }];
 
@@ -303,15 +299,15 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
                 label: tipoRenda === 'periodo' && idadeFinal ? `Até ${idadeFinal} anos (selecionado)` : 'Consumo do Patrimônio',
                 data: new Array(valores.length).fill(null).concat(valoresPosAposentadoria),
                 borderColor: corConsumo,
-                backgroundColor: 'rgba(231, 76, 60, 0.05)',  // ✅ AJUSTE: Transparência reduzida
-                borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
+                backgroundColor: 'rgba(231, 76, 60, 0.05)',
+                borderWidth: 1.5,
                 borderDash: [5, 5],
                 fill: false,
                 tension: 0.4,
                 pointBackgroundColor: corConsumo,
                 pointBorderColor: '#0D0D0D',
                 pointBorderWidth: 1,
-                pointRadius: 2,  // ✅ AJUSTE: Pontos menores
+                pointRadius: 2,
                 pointHoverRadius: 4
             });
         } else {
@@ -320,39 +316,38 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
                 label: 'Patrimônio Preservado',
                 data: new Array(valores.length).fill(null).concat(valoresPosAposentadoria),
                 borderColor: corVitalicia,
-                backgroundColor: 'rgba(46, 204, 113, 0.05)',  // ✅ AJUSTE: Transparência reduzida
-                borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
+                backgroundColor: 'rgba(46, 204, 113, 0.05)',
+                borderWidth: 1.5,
                 fill: false,
                 tension: 0,
                 pointBackgroundColor: corVitalicia,
                 pointBorderColor: '#0D0D0D',
                 pointBorderWidth: 1,
-                pointRadius: 2,  // ✅ AJUSTE: Pontos menores
+                pointRadius: 2,
                 pointHoverRadius: 4
             });
         }
     }
 
     // Adicionar curvas extras (múltiplas curvas de longevidade)
+    // Estas curvas mostram cenários alternativos (ex: até 95, 105, 115 anos)
+    // Todas começam em idadeAposentadoria e se estendem até idades diferentes
     if (curvasExtras && curvasExtras.length > 0) {
-        const anosAteAposentadoria = idadeAposentadoria - idadeAtual;
+        const mesesAteAposentadoria = anosAteAposentadoria * 12; // Meses desde idadeAtual até idadeAposentadoria
         
         curvasExtras.forEach(curvaObj => {
             // Preparar dados da curva extra (amostrar a cada 12 meses)
             const valoresCurva = [];
             const labelsCurva = [];
             
+            // ✅ CORREÇÃO: curvasExtras tem item.mes começando em 0 (igual projecaoPosAposentadoria)
             curvaObj.curva.forEach((item, index) => {
-                if (index % 12 === 0 || index === curvaObj.curva.length - 1) {
-                    const anosAposAposentadoria = Math.floor(index / 12);
-                    const anoTotal = anosAteAposentadoria + anosAposAposentadoria;
-                    labelsCurva.push(`${anoTotal} anos`);
+                if (item.mes % 12 === 0 || index === curvaObj.curva.length - 1) {
+                    // mesesTotais = meses desde idadeAtual até aposentadoria + meses desde aposentadoria
+                    const mesesTotais = mesesAteAposentadoria + item.mes;
+                    const idadeReal = ajustarIdade(mesesTotais); // Idade real baseada em idadeAtual
+                    labelsCurva.push(idadeReal.toString());
                     valoresCurva.push(item.saldo);
-                    
-                    // Atualizar maxAnosTotal
-                    if (anoTotal > maxAnosTotal) {
-                        maxAnosTotal = anoTotal;
-                    }
                 }
             });
             
@@ -362,106 +357,57 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
             datasets.push({
                 label: `Até ${curvaObj.idade} anos`,
                 data: dadosCurva,
-                borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
+                borderWidth: 1.5,
                 fill: false,
                 tension: 0.1,
                 borderColor:
                     curvaObj.idade === 95 ? "#2E86C1" :
                     curvaObj.idade === 105 ? "#D35400" :
                     "#8E44AD",
-                pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
+                pointRadius: 1.5,
                 pointHoverRadius: 3,
-                borderDash: [3, 3]  // Linha tracejada para diferenciar
+                borderDash: [3, 3]
             });
         });
     }
 
-    // Usar o maior entre limiteEixoX e maxAnosTotal para garantir que todas as curvas sejam visíveis
-    const limiteFinal = Math.max(limiteEixoX, maxAnosTotal);
-    
-    // Preparar labels finais (combinar acumulação + pós-aposentadoria)
+    // ✅ Labels finais: concatenar labels da acumulação + pós-aposentadoria
     let labelsFinais = valoresPosAposentadoria.length > 0 ? [...labels, ...labelsPosAposentadoria] : labels;
     
-    // Estender labels até o limite final se necessário
-    const ultimoLabel = labelsFinais[labelsFinais.length - 1];
-    const ultimoAno = ultimoLabel ? parseInt(ultimoLabel.replace(' anos', '')) : maxAnosTotal;
-    
-    if (ultimoAno < limiteFinal) {
-        // Adicionar labels adicionais até o limite (a cada 3-4 anos para não poluir)
-        const incremento = Math.max(3, Math.ceil((limiteFinal - ultimoAno) / 10));
-        for (let ano = ultimoAno + incremento; ano <= limiteFinal; ano += incremento) {
-            labelsFinais.push(`${ano} anos`);
-        }
-        // Garantir que o último seja exatamente o limite
-        if (labelsFinais[labelsFinais.length - 1] !== `${limiteFinal} anos`) {
-            labelsFinais.push(`${limiteFinal} anos`);
-        }
+    // Coletar todas as idades das curvas extras e adicionar aos labels finais (evitar duplicatas)
+    if (curvasExtras && curvasExtras.length > 0) {
+        const mesesAteAposentadoria = anosAteAposentadoria * 12;
+        const idadesExtras = new Set();
+        
+        curvasExtras.forEach(curvaObj => {
+            // ✅ CORREÇÃO: Usar item.mes ao invés de index
+            curvaObj.curva.forEach((item, index) => {
+                if (item.mes % 12 === 0 || index === curvaObj.curva.length - 1) {
+                    const mesesTotais = mesesAteAposentadoria + item.mes;
+                    const idadeReal = ajustarIdade(mesesTotais);
+                    idadesExtras.add(idadeReal);
+                }
+            });
+        });
+        
+        // Adicionar idades extras que não estão nos labels finais
+        idadesExtras.forEach(idade => {
+            const idadeStr = idade.toString();
+            if (!labelsFinais.includes(idadeStr)) {
+                labelsFinais.push(idadeStr);
+            }
+        });
+        
+        // Ordenar numericamente
+        labelsFinais = labelsFinais.map(l => parseInt(l, 10)).sort((a, b) => a - b).map(l => l.toString());
+        
+        // Ajustar todos os datasets para ter o mesmo tamanho que labelsFinais (preencher com nulls)
+        datasets.forEach(dataset => {
+            while (dataset.data.length < labelsFinais.length) {
+                dataset.data.push(null);
+            }
+        });
     }
-    
-    // Função para mapear dados baseado nos anos dos labels
-    const mapearDadosPorAno = (dadosOriginais, labelsOriginais, labelsFinais) => {
-        const dadosMapeados = [];
-        
-        // Criar um mapa de ano -> valor para busca rápida
-        const mapaAnoValor = {};
-        labelsOriginais.forEach((label, index) => {
-            if (index < dadosOriginais.length && dadosOriginais[index] !== null) {
-                const ano = parseInt(label.replace(' anos', ''));
-                mapaAnoValor[ano] = dadosOriginais[index];
-            }
-        });
-        
-        // Mapear cada label final para seu valor correspondente
-        labelsFinais.forEach(labelFinal => {
-            const anoFinal = parseInt(labelFinal.replace(' anos', ''));
-            
-            // Procurar valor exato primeiro
-            if (mapaAnoValor[anoFinal] !== undefined) {
-                dadosMapeados.push(mapaAnoValor[anoFinal]);
-            } else {
-                // Se não encontrou exato, procurar o mais próximo anterior
-                let valorEncontrado = null;
-                let anoMaisProximo = -1;
-                
-                Object.keys(mapaAnoValor).forEach(ano => {
-                    const anoNum = parseInt(ano);
-                    if (anoNum <= anoFinal && anoNum > anoMaisProximo) {
-                        anoMaisProximo = anoNum;
-                        valorEncontrado = mapaAnoValor[ano];
-                    }
-                });
-                
-                dadosMapeados.push(valorEncontrado);
-            }
-        });
-        
-        return dadosMapeados;
-    };
-    
-    // Preparar labels originais completos
-    const labelsOriginaisCompletos = valoresPosAposentadoria.length > 0 ? [...labels, ...labelsPosAposentadoria] : labels;
-    
-    // Mapear todos os datasets para os labels finais
-    datasets.forEach((dataset, index) => {
-        // Filtrar apenas valores não-null
-        const dadosOriginais = [];
-        const labelsOriginaisFiltrados = [];
-        
-        dataset.data.forEach((valor, idx) => {
-            if (valor !== null && idx < labelsOriginaisCompletos.length) {
-                dadosOriginais.push(valor);
-                labelsOriginaisFiltrados.push(labelsOriginaisCompletos[idx]);
-            }
-        });
-        
-        // Se tem dados, mapear para os labels finais
-        if (dadosOriginais.length > 0) {
-            dataset.data = mapearDadosPorAno(dadosOriginais, labelsOriginaisFiltrados, labelsFinais);
-        } else {
-            // Se não tem dados, preencher com null
-            dataset.data = new Array(labelsFinais.length).fill(null);
-        }
-    });
     
     // Configuração do gráfico INVLAB Premium
     const ctx = canvas.getContext('2d');
@@ -510,6 +456,15 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
             },
             scales: {
                 x: {
+                    title: {
+                        display: true,
+                        text: 'Idade (anos)',
+                        color: '#D4AF37',
+                        font: {
+                            size: 12,
+                            weight: 'bold'
+                        }
+                    },
                     grid: {
                         color: 'rgba(138, 204, 166, 0.1)',
                         drawBorder: false
@@ -519,10 +474,14 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
                         font: {
                             size: 11
                         },
-                        maxTicksLimit: 30,  // Limitar número de ticks para não poluir
+                        maxTicksLimit: 30,
                         autoSkip: true,
                         maxRotation: 0,
-                        minRotation: 0
+                        minRotation: 0,
+                        callback: function(value, index) {
+                            // Retornar o label diretamente (já é uma idade real)
+                            return labelsFinais[index] || '';
+                        }
                     }
                 },
                 y: {
