@@ -619,7 +619,10 @@ function finalizarWizard() {
             </div>
 
             <div class="card">
-                <h3>📈 Renda Mensal Prevista</h3>
+                <h3>
+                    📈 Renda Mensal Prevista
+                    <span class="info-icon-modal" onclick="abrirModalPremissasRenda()" style="cursor: pointer;" title="Clique para ver premissas técnicas">i</span>
+                </h3>
                 <p class="valor" style="color: #D4AF37;">${formatarValorMonetario(resultados.rendaTotalPrevista)}</p>
                 <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px;">
                     ${resultados.tipoRenda === 'vitalicia' && resultados.estrategia === 'perpetua'
@@ -870,6 +873,126 @@ function finalizarWizard() {
                 </div>
             </div>
         </div>
+
+        <!-- MODAL DE PREMISSAS TÉCNICAS DA RENDA MENSAL -->
+        <div id="modalPremissasRenda" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 99999; padding-top: 80px; padding-bottom: 40px; overflow-y: auto;">
+            <div style="max-width: 800px; margin: 0 auto; background: #0D0D0D; border: 2px solid rgba(212, 175, 55, 0.4); border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6); max-height: calc(100vh - 120px); display: flex; flex-direction: column;">
+                <!-- Header do Modal (fixo no topo) -->
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 25px 30px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); flex-shrink: 0;">
+                    <h2 style="color: #D4AF37; margin: 0; font-size: 1.5rem;">📘 Como calculamos sua Renda Mensal Prevista</h2>
+                    <button onclick="fecharModalPremissasRenda()" style="background: transparent; border: 1px solid rgba(212, 175, 55, 0.4); color: #D4AF37; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(212, 175, 55, 0.2)'; this.style.borderColor='#D4AF37';" onmouseout="this.style.background='transparent'; this.style.borderColor='rgba(212, 175, 55, 0.4)';" title="Fechar">×</button>
+                </div>
+
+                <!-- Conteúdo do Modal (com scroll) -->
+                <div style="color: #E4E4E4; line-height: 1.8; font-size: 0.95rem; padding: 30px; overflow-y: auto; flex: 1;">
+                    <p style="margin-bottom: 20px; color: #E4E4E4;">
+                        Sua <strong style="color: #D4AF37;">Renda Mensal Prevista</strong> é uma projeção baseada no modelo <strong style="color: #10b981;">Renda Vitalícia com Capital Preservado</strong>, uma estratégia em que você utiliza somente os rendimentos reais do patrimônio acumulado, mantendo o valor total investido para o resto da vida (e podendo deixar como herança).
+                    </p>
+
+                    <h3 style="color: #D4AF37; margin-top: 30px; margin-bottom: 15px; font-size: 1.2rem;">🔧 Como funciona o cálculo?</h3>
+                    <p style="margin-bottom: 20px;">Usamos três pilares:</p>
+
+                    <div style="background: rgba(212, 175, 55, 0.05); border-left: 4px solid #D4AF37; padding: 15px; margin: 15px 0; border-radius: 6px;">
+                        <h4 style="color: #D4AF37; margin-top: 0; margin-bottom: 10px;">1️⃣ Taxa real de longo prazo (após inflação):</h4>
+                        <p style="margin: 0;">
+                            Consideramos um retorno real estimado de <strong style="color: #D4AF37;">0,287% ao mês (≈ 3,5% ao ano)</strong>.<br>
+                            Essa taxa é compatível com estudos históricos de juros reais no Brasil, incluindo análises do <strong>IBRE/FGV</strong> e comportamento do <strong>CDI/Selic</strong> ao longo de décadas.
+                        </p>
+                    </div>
+
+                    <div style="background: rgba(16, 185, 129, 0.05); border-left: 4px solid #10b981; padding: 15px; margin: 15px 0; border-radius: 6px;">
+                        <h4 style="color: #10b981; margin-top: 0; margin-bottom: 10px;">2️⃣ Seu patrimônio projetado na data de aposentadoria:</h4>
+                        <p style="margin: 0;">
+                            O simulador atualiza mês a mês seu saldo acumulado considerando:<br>
+                            • aportes,<br>
+                            • rentabilidade do perfil,<br>
+                            • prazo até aposentadoria.
+                        </p>
+                    </div>
+
+                    <div style="background: rgba(46, 204, 113, 0.05); border-left: 4px solid #2ecc71; padding: 15px; margin: 15px 0; border-radius: 6px;">
+                        <h4 style="color: #2ecc71; margin-top: 0; margin-bottom: 10px;">3️⃣ Retirada apenas dos juros reais:</h4>
+                        <p style="margin: 0;">
+                            O valor mensal calculado corresponde a apenas os rendimentos reais do seu patrimônio, garantindo:<br>
+                            • renda vitalícia,<br>
+                            • preservação integral do capital,<br>
+                            • possibilidade de deixar herança.
+                        </p>
+                    </div>
+
+                    <div style="background: rgba(77, 166, 255, 0.1); border: 1px solid rgba(77, 166, 255, 0.3); padding: 15px; margin: 25px 0; border-radius: 8px;">
+                        <p style="margin: 0; color: #4da6ff;">
+                            <strong>💡 Importante:</strong> A renda exibida já está calculada em valores "descontados da inflação", ou seja, ela mantém o poder de compra ao longo do tempo.
+                        </p>
+                    </div>
+
+                    <!-- Disclaimer -->
+                    <div style="background: rgba(239, 68, 68, 0.1); border: 2px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 20px; margin-top: 30px;">
+                        <h3 style="color: #ef4444; margin-top: 0; margin-bottom: 15px; font-size: 1.1rem;">🔒 Aviso Importante (Disclaimer)</h3>
+                        <p style="margin-bottom: 12px; color: #E4E4E4;">
+                            As projeções apresentadas neste simulador têm <strong>caráter educacional e ilustrativo</strong>.
+                        </p>
+                        <p style="margin-bottom: 12px; color: #E4E4E4;">
+                            Os valores futuros dependem de condições de mercado, inflação, juros reais, política econômica e desempenho dos investimentos ao longo do tempo.
+                        </p>
+                        <p style="margin-bottom: 12px; color: #E4E4E4;">
+                            As taxas utilizadas seguem estimativas de retorno real de longo prazo, com base em estudos históricos de juros reais no Brasil (incluindo análises do <strong>IBRE/FGV</strong>, <strong>CDI</strong> e <strong>Selic real</strong>), mas <strong>não constituem garantia de resultados</strong>.
+                        </p>
+                        <p style="margin: 0; color: #E4E4E4;">
+                            Recomenda-se revisar periodicamente seu planejamento, pois mudanças de renda, objetivos pessoais ou condições macroeconômicas podem alterar significativamente as projeções.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CSS para o ícone de informação e modal -->
+        <style>
+            .info-icon-modal {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 20px;
+                height: 20px;
+                background: rgba(212, 175, 55, 0.2);
+                border: 1px solid rgba(212, 175, 55, 0.4);
+                border-radius: 50%;
+                color: #D4AF37;
+                font-size: 0.85rem;
+                font-weight: 700;
+                margin-left: 8px;
+                transition: all 0.3s ease;
+            }
+            .info-icon-modal:hover {
+                background: rgba(212, 175, 55, 0.3);
+                border-color: #D4AF37;
+                transform: scale(1.1);
+            }
+            
+            /* Estilo para scrollbar do modal */
+            #modalPremissasRenda > div > div:last-child {
+                scrollbar-width: thin;
+                scrollbar-color: rgba(212, 175, 55, 0.5) rgba(13, 13, 13, 0.3);
+            }
+            
+            #modalPremissasRenda > div > div:last-child::-webkit-scrollbar {
+                width: 8px;
+            }
+            
+            #modalPremissasRenda > div > div:last-child::-webkit-scrollbar-track {
+                background: rgba(13, 13, 13, 0.3);
+                border-radius: 4px;
+            }
+            
+            #modalPremissasRenda > div > div:last-child::-webkit-scrollbar-thumb {
+                background: rgba(212, 175, 55, 0.5);
+                border-radius: 4px;
+            }
+            
+            #modalPremissasRenda > div > div:last-child::-webkit-scrollbar-thumb:hover {
+                background: rgba(212, 175, 55, 0.7);
+            }
+        </style>
     `;
 
     // ===================================================
@@ -2280,6 +2403,47 @@ function fecharModalRendaMensal() {
 
 // Tornar funções globais para acesso via onclick
 window.fecharModalRendaMensal = fecharModalRendaMensal;
+
+// ===================================================
+// MODAL DE PREMISSAS TÉCNICAS DA RENDA MENSAL
+// ===================================================
+function abrirModalPremissasRenda() {
+    const modal = document.getElementById('modalPremissasRenda');
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Prevenir scroll da página
+    }
+}
+
+function fecharModalPremissasRenda() {
+    const modal = document.getElementById('modalPremissasRenda');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Restaurar scroll
+    }
+}
+
+// Fechar modal ao clicar fora dele
+document.addEventListener('click', function(event) {
+    const modal = document.getElementById('modalPremissasRenda');
+    if (modal && event.target === modal) {
+        fecharModalPremissasRenda();
+    }
+});
+
+// Fechar modal com tecla ESC
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const modal = document.getElementById('modalPremissasRenda');
+        if (modal && modal.style.display === 'block') {
+            fecharModalPremissasRenda();
+        }
+    }
+});
+
+// Tornar funções globais
+window.abrirModalPremissasRenda = abrirModalPremissasRenda;
+window.fecharModalPremissasRenda = fecharModalPremissasRenda;
 
 // Garantir que simuladorWizardStart esteja acessível globalmente
 if (typeof window.simuladorWizardStart === 'undefined') {
