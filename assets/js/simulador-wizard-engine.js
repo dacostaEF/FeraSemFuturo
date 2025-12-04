@@ -159,6 +159,39 @@ function calcularRendaPeriodo(pv, taxaMensalReal, idadeApos, idadeFinal) {
 }
 
 // ============================================================
+// 🔧 FUNÇÕES AUXILIARES PARA CURVAS ESGOTÁVEIS
+// ============================================================
+
+// Função auxiliar — calcular PMT esgotável para um n meses
+function calcularPMTEsgotavel(pv, taxaMensal, meses) {
+    if (meses <= 0) return 0;
+
+    // Fórmula do PMT para esgotar capital (renda esgotável)
+    const fator = Math.pow(1 + taxaMensal, meses);
+    const pmt = pv * (taxaMensal * fator) / (fator - 1);
+
+    return pmt;
+}
+
+// Função auxiliar — projetar curva usando PMT específico
+function projetarCurvaEsgotavel(pv, pmt, taxaMensal, mesesTotal) {
+    const dados = [];
+    let saldo = pv;
+
+    for (let m = 0; m <= mesesTotal; m++) {
+        dados.push({ mes: m, saldo: saldo });
+
+        if (m < mesesTotal) {
+            saldo = saldo * (1 + taxaMensal) - pmt;
+
+            // Limite para evitar números negativos por arredondamento
+            if (saldo < 0) saldo = 0;
+        }
+    }
+    return dados;
+}
+
+// ============================================================
 // 🟦 RENDA PRESERVANDO 20% DO PATRIMÔNIO
 // ============================================================
 function calcularRendaPreservar20(pv, taxaMensalReal, idadeApos, idadeFinal) {
@@ -199,25 +232,19 @@ function projetarPatrimonioPreservar20(pv, renda, taxaMensalReal, meses) {
         // Aplica juros e subtrai renda
         saldo = saldo * (1 + taxaMensalReal) - renda;
         
-        // Se é o último mês, garante que está exatamente em H e encerra
-        if (m === meses) {
-            saldo = H; // Garante valor exato no último mês
-            dados.push({
-                mes: m,
-                saldo: saldo
-            });
-            break; // encerra a curva no ponto exato
-        }
-        
-        // Se chegou ao piso de 20% (com tolerância), ajusta para H e encerra
-        // Isso garante que a curva pare quando tocar os 20%, não continue
+        // Se chegou ao piso de 20% (com tolerância), ajusta para H e preenche até o final
         if (saldo <= H + tolerancia) {
             saldo = H; // Garante valor exato
-            dados.push({
-                mes: m,
-                saldo: saldo
-            });
-            break; // encerra a curva no ponto exato
+            
+            // Empurra saldo para o final mantendo H
+            for (let k = m; k <= meses; k++) {
+                dados.push({
+                    mes: k,
+                    saldo: H
+                });
+            }
+            
+            return dados; // Retorna com todos os meses preenchidos até o final
         }
         
         // Adiciona o ponto atual
@@ -225,6 +252,11 @@ function projetarPatrimonioPreservar20(pv, renda, taxaMensalReal, meses) {
             mes: m,
             saldo: saldo
         });
+    }
+    
+    // Se chegou até aqui sem tocar o piso, garantir que o último mês está em H
+    if (dados.length > 0) {
+        dados[dados.length - 1].saldo = H;
     }
     
     return dados;
@@ -286,30 +318,73 @@ function executarSimulacaoWizard(dadosWizard) {
     const idadeFinal = Number(dadosWizard.idadeFinal) || null;  // Nova: idade de longevidade
     const mostrarTodasCurvas = dadosWizard.mostrarTodasCurvas || false;  // Nova: flag múltiplas curvas
 
-    // 2. Definir taxa anual baseada no perfil
-    // ✅ VALIDAÇÃO: Verificar se perfil é válido antes de usar
+    // =============================
+    // VALIDAÇÃO ANTES DOS CÁLCULOS
+    // Garantir que funções nunca recebam undefined/NaN
+    // =============================
+    
+    // 1. Validar perfil do investidor
     if (!perfil || !PERFIS_RENTABILIDADE[perfil]) {
         console.error("❌ Perfil de investidor inválido ou não informado:", perfil);
-        // Retornar erro estruturado em vez de deixar NaN propagar
         return {
             erro: true,
-            mensagem: "Perfil de investidor não informado ou inválido. Por favor, selecione um perfil válido.",
+            mensagem: "Perfil do investidor inválido ou ausente. Por favor, selecione um perfil válido.",
             perfil: perfil
         };
     }
     
+    // 2. Calcular taxa anual baseada no perfil
     const taxaAnualEscolhida = PERFIS_RENTABILIDADE[perfil];
     
-    // ✅ VALIDAÇÃO: Verificar se taxaAnualEscolhida é válida (não undefined/NaN)
-    if (isNaN(taxaAnualEscolhida) || taxaAnualEscolhida === undefined || taxaAnualEscolhida === null) {
+    // 3. Validar taxaAnualEscolhida antes de usar em cálculos
+    if (typeof taxaAnualEscolhida !== "number" || isNaN(taxaAnualEscolhida)) {
         console.error("❌ Taxa anual escolhida inválida:", taxaAnualEscolhida);
         return {
             erro: true,
-            mensagem: "Erro ao calcular taxa de rentabilidade. Por favor, verifique o perfil selecionado.",
+            mensagem: "taxaAnualEscolhida inválida antes do cálculo. Por favor, verifique o perfil selecionado.",
             taxaAnualEscolhida: taxaAnualEscolhida
         };
     }
+    
+    // 4. Validar se taxa anual não é <= -100% (evita NaN em Math.pow)
+    if (taxaAnualEscolhida <= -1) {
+        console.error("❌ Taxa anual inválida (<= -100%):", taxaAnualEscolhida);
+        return {
+            erro: true,
+            mensagem: "Taxa anual inválida: não pode ser <= -100%.",
+            taxaAnualEscolhida: taxaAnualEscolhida
+        };
+    }
+    
+    // 5. Calcular taxa real e taxa mensal
+    const taxaAnualReal = taxaAnualEscolhida - INFLACAO_MEDIA;
+    const taxaMensalReal = Math.pow(1 + taxaAnualReal, 1/12) - 1;
+    
+    // 6. Validar taxaMensalReal (verifica se Math.pow não retornou NaN/Infinity)
+    if (!isFinite(taxaMensalReal)) {
+        console.error("❌ Falha ao calcular taxaMensalReal:", { taxaAnualReal, taxaMensalReal, taxaAnualEscolhida });
+        return {
+            erro: true,
+            mensagem: "Falha ao calcular taxaMensalReal — taxa anual pode ser inválida.",
+            taxas: { taxaAnualReal, taxaMensalReal, taxaAnualEscolhida }
+        };
+    }
+    
+    // 7. Validar taxaAnualReal também
+    if (!isFinite(taxaAnualReal)) {
+        console.error("❌ Taxa anual real inválida:", taxaAnualReal);
+        return {
+            erro: true,
+            mensagem: "Taxa anual real inválida. Por favor, verifique os dados informados.",
+            taxas: { taxaAnualReal, taxaAnualEscolhida, INFLACAO_MEDIA }
+        };
+    }
 
+    // =============================
+    // AGORA SIM: CÁLCULOS SEGUROS
+    // Todas as validações foram aprovadas
+    // =============================
+    
     // 3. Calcular o tempo até a aposentadoria
     const anosAteAposentadoria = idadeAposent - idadeAtual;
 
@@ -329,20 +404,6 @@ function executarSimulacaoWizard(dadosWizard) {
             erro: true,
             mensagem: "Erro ao calcular patrimônio projetado. Por favor, verifique os dados informados.",
             patrimonioTotalProjetado: patrimonioTotalProjetado
-        };
-    }
-
-    // 5. NOVO: Calcular renda baseada na estratégia escolhida
-    const taxaAnualReal = taxaAnualEscolhida - INFLACAO_MEDIA;
-    const taxaMensalReal = Math.pow(1 + taxaAnualReal, 1/12) - 1;
-    
-    // ✅ VALIDAÇÃO: Verificar se taxas calculadas são válidas
-    if (isNaN(taxaMensalReal) || isNaN(taxaAnualReal)) {
-        console.error("❌ Taxas calculadas inválidas:", { taxaAnualReal, taxaMensalReal, taxaAnualEscolhida });
-        return {
-            erro: true,
-            mensagem: "Erro ao calcular taxas de rentabilidade. Por favor, verifique os dados informados.",
-            taxas: { taxaAnualReal, taxaMensalReal, taxaAnualEscolhida }
         };
     }
 
@@ -500,19 +561,57 @@ function executarSimulacaoWizard(dadosWizard) {
 
     // 10. Aporte necessário para atingir 100% da meta
     // ===============================================================
-    // CORREÇÃO OFICIAL: Cálculo REAL do aporte necessário
-    // Fórmula PMT com juros compostos (padrão bancário)
+    // CÁLCULO CORRETO DO APORTE NECESSÁRIO
+    // Considera a estratégia escolhida (vitalícia, esgotável, preservar20)
     // ===============================================================
     let aporteNecessario = null;
     if (deficitOuSobra < 0) {
         const meses = anosAteAposentadoria * 12;
         const jurosNominalMensal = taxaMensal(taxaAnualEscolhida);
-        
-        // Quanto de renda falta para atingir a meta
         const rendaFaltante = Math.abs(deficitOuSobra);
         
-        // Patrimônio necessário para gerar essa renda faltante (vitalícia perpétua)
-        const patrimonioNecessario = rendaFaltante / taxaMensalReal;
+        let patrimonioNecessario;
+        
+        // Caso 1: Vitalícia Perpétua (capital preservado)
+        if (tipoRenda === "vitalicia" && estrategia === "perpetua") {
+            // Fórmula: renda = patrimonio * taxaMensalReal
+            // Portanto: patrimonio = renda / taxaMensalReal
+            patrimonioNecessario = rendaFaltante / taxaMensalReal;
+        }
+        // Caso 2: Período + Perpetua (sem idadeFinal) - também vitalícia
+        else if (tipoRenda === "periodo" && estrategia === "perpetua" && !idadeFinal) {
+            // Mesma fórmula de vitalícia (capital preservado)
+            patrimonioNecessario = rendaFaltante / taxaMensalReal;
+        }
+        // Caso 3: Preservar 20% (tem FV = 20% do PV)
+        else if (estrategia === "preservar20") {
+            const idadeAlvo = idadeFinal || 95;
+            const n = (idadeAlvo - idadeAposent) * 12;
+            const i = taxaMensalReal;
+            const FV_ratio = 0.20; // 20% preservado
+            
+            // Fórmula: PMT = (i * (PV - FV/(1+i)^n)) / (1 - 1/(1+i)^n)
+            // Rearranjando para encontrar PV dado PMT:
+            // PV = PMT * (1 - (1+i)^-n) / i / (1 - FV_ratio / (1+i)^n)
+            const fator_n = Math.pow(1 + i, n);
+            patrimonioNecessario = rendaFaltante * (1 - 1/fator_n) / i / (1 - FV_ratio / fator_n);
+        }
+        // Caso 4: Esgotável (consome todo capital) ou Período com idadeFinal
+        else {
+            // Esgotável: periodo + esgotavel, vitalicia + esgotavel, ou periodo + idadeFinal (sem perpetua)
+            let n;
+            if (idadeFinal && idadeFinal > idadeAposent) {
+                n = (idadeFinal - idadeAposent) * 12;
+            } else if (tipoRenda === "periodo") {
+                n = anosPeriodo * 12;
+            } else {
+                n = anosDuracao * 12;
+            }
+            
+            const i = taxaMensalReal;
+            // Fórmula de anuidade: PV = PMT * (1 - (1+i)^-n) / i
+            patrimonioNecessario = rendaFaltante * (1 - Math.pow(1 + i, -n)) / i;
+        }
         
         // Diferença entre o patrimônio necessário e o projetado
         const faltaAcumular = patrimonioNecessario - patrimonioTotalProjetado;
@@ -553,35 +652,10 @@ function executarSimulacaoWizard(dadosWizard) {
             calc.mesesDuracao
         );
 
-        // ✅ CORREÇÃO: Herança baseada na estratégia, não apenas no saldo final
-        // Se for "Preservar capital", herança = patrimônio total (não consome principal)
-        // Se for "Usar capital", herança = saldo final (pode ser 0 ou parcial)
-        if (estrategia === "perpetua") {
-            // Preservar capital → herança = patrimônio total (não foi consumido)
-            heranca = patrimonioTotalProjetado;
-        } else {
-            // Usar capital gradualmente → herança = saldo final (pode ser 0)
-            heranca = projecaoPosAposentadoria[projecaoPosAposentadoria.length - 1]?.saldo || 0;
-        }
+        // ✅ CORREÇÃO: Herança sempre baseada no saldo final da projeção
+        // Isso garante consistência com o gráfico e correção matemática
+        heranca = projecaoPosAposentadoria?.[projecaoPosAposentadoria.length - 1]?.saldo || 0;
 
-        // MULTIPLAS CURVAS
-        if (mostrarTodasCurvas) {
-            console.log("🟣 Gerando curvas extras para 'periodo + idadeFinal':", { tipoRenda, idadeFinal, mostrarTodasCurvas });
-            const idades = [95, 105, 115];
-            idades.forEach(idFinal => {
-                const c = calcularRendaPeriodo(patrimonioTotalProjetado, taxaMensalReal, idadeAposent, idFinal);
-                const curva = projetarConsumoLongevidade(
-                    patrimonioTotalProjetado,
-                    c.rendaMensal,
-                    taxaMensalReal,
-                    c.mesesDuracao
-                );
-                curvasExtras.push({ idade: idFinal, curva: curva });
-            });
-            console.log("🟣 Curvas extras geradas:", curvasExtras.length);
-        } else {
-            console.log("🟣 Curvas extras NÃO geradas: mostrarTodasCurvas =", mostrarTodasCurvas);
-        }
     }
     // ESTRATÉGIA 1: RENDA VITALÍCIA + PRESERVAR CAPITAL
     // Patrimônio permanece constante (só juros são consumidos)
@@ -595,8 +669,9 @@ function executarSimulacaoWizard(dadosWizard) {
             taxaMensalReal,
             anosProjecao  // Projeção até 116 anos (perpétua)
         );
-        // ✅ CORREÇÃO: Herança = patrimônio total (capital preservado)
-        heranca = patrimonioTotalProjetado;
+        // ✅ CORREÇÃO: Herança sempre baseada no saldo final da projeção
+        heranca = projecaoPosAposentadoria?.[projecaoPosAposentadoria.length - 1]?.saldo || 0;
+        
     }
     // ESTRATÉGIA 2: RENDA POR PERÍODO + PRESERVAR CAPITAL
     // Se tiver idadeFinal, usar "preservar20" em vez de manter constante
@@ -613,27 +688,9 @@ function executarSimulacaoWizard(dadosWizard) {
                 meses
             );
             
-            // Herança = 20% do patrimônio inicial (valor mínimo preservado)
+            // Caso 2 — preservar 20% do patrimônio inicial
             heranca = patrimonioTotalProjetado * 0.20;
             
-            // 🟣 NOVO: Gerar curvas extras para "Preservar 20%"
-            if (mostrarTodasCurvas) {
-                console.log("🟣 Gerando curvas extras para 'periodo + perpetua (preservar20)':", { tipoRenda, estrategia, mostrarTodasCurvas });
-                const idades = [95, 105, 115];
-                idades.forEach(idFinal => {
-                    const calc = calcularRendaPreservar20(patrimonioTotalProjetado, taxaMensalReal, idadeAposent, idFinal);
-                    const anosAposAposentadoria = idFinal - idadeAposent;
-                    const mesesExtra = anosAposAposentadoria * 12;
-                    const curva = projetarPatrimonioPreservar20(
-                        patrimonioTotalProjetado,
-                        calc.rendaMensal,
-                        taxaMensalReal,
-                        mesesExtra
-                    );
-                    curvasExtras.push({ idade: idFinal, curva: curva });
-                });
-                console.log("🟣 Curvas extras geradas:", curvasExtras.length);
-            }
         } else {
             // Sem idadeFinal, manter comportamento original (patrimônio constante)
             const meses = anosPeriodo * 12;
@@ -642,26 +699,9 @@ function executarSimulacaoWizard(dadosWizard) {
                 taxaMensalReal,
                 anosPeriodo  // Projeção pelo período determinado
             );
-            // ✅ CORREÇÃO: Herança = patrimônio total (capital preservado)
-            heranca = patrimonioTotalProjetado;
+            // ✅ CORREÇÃO: Herança sempre baseada no saldo final da projeção
+            heranca = projecaoPosAposentadoria?.[projecaoPosAposentadoria.length - 1]?.saldo || 0;
             
-            // 🟣 NOVO: Gerar curvas extras para "Renda por Período + Preservar Capital"
-            if (mostrarTodasCurvas) {
-                console.log("🟣 Gerando curvas extras para 'periodo + perpetua':", { tipoRenda, estrategia, mostrarTodasCurvas });
-                const idades = [95, 105, 115];
-                idades.forEach(idFinal => {
-                    const anosProjecao = idFinal - idadeAposent;
-                    const curva = projetarPatrimonioVitalicia(
-                        patrimonioTotalProjetado,
-                        taxaMensalReal,
-                        anosProjecao
-                    );
-                    curvasExtras.push({ idade: idFinal, curva: curva });
-                });
-                console.log("🟣 Curvas extras geradas:", curvasExtras.length);
-            } else {
-                console.log("🟣 Curvas extras NÃO geradas: mostrarTodasCurvas =", mostrarTodasCurvas);
-            }
         }
     }
     // ESTRATÉGIA 3: RENDA POR PERÍODO + USAR CAPITAL GRADUALMENTE
@@ -685,26 +725,6 @@ function executarSimulacaoWizard(dadosWizard) {
         // ✅ CORREÇÃO: Herança = saldo final (pode ser 0 se consumir tudo)
         heranca = projecaoPosAposentadoria[projecaoPosAposentadoria.length - 1]?.saldo || 0;
         
-        // 🟣 NOVO: Gerar curvas extras para "Renda por Período + Usar Capital Gradualmente"
-        if (mostrarTodasCurvas) {
-            console.log("🟣 Gerando curvas extras para 'periodo + esgotavel':", { tipoRenda, estrategia, mostrarTodasCurvas });
-            const idades = [95, 105, 115];
-            idades.forEach(idFinal => {
-                const calc = calcularRendaPeriodo(patrimonioTotalProjetado, taxaMensalReal, idadeAposent, idFinal);
-                const anosAposAposentadoria = idFinal - idadeAposent;
-                const mesesExtra = anosAposAposentadoria * 12;
-                const curva = projetarConsumoLongevidade(
-                    patrimonioTotalProjetado,
-                    calc.rendaMensal,
-                    taxaMensalReal,
-                    mesesExtra
-                );
-                curvasExtras.push({ idade: idFinal, curva: curva });
-            });
-            console.log("🟣 Curvas extras geradas:", curvasExtras.length);
-        } else {
-            console.log("🟣 Curvas extras NÃO geradas: mostrarTodasCurvas =", mostrarTodasCurvas);
-        }
     }
     // ============================================================
     // ESTRATÉGIA 5: PRESERVAR 20% DO PATRIMÔNIO
@@ -728,29 +748,9 @@ function executarSimulacaoWizard(dadosWizard) {
             meses
         );
         
-        // Herança = 20% do patrimônio inicial (valor mínimo preservado)
-        heranca = patrimonioTotalProjetado * 0.20;
+        // ✅ CORREÇÃO: Herança sempre baseada no saldo final da projeção
+        heranca = projecaoPosAposentadoria?.[projecaoPosAposentadoria.length - 1]?.saldo || 0;
         
-        // 🟣 NOVO: Gerar curvas extras para "Preservar 20%"
-        if (mostrarTodasCurvas) {
-            console.log("🟣 Gerando curvas extras para 'preservar20':", { estrategia, mostrarTodasCurvas });
-            const idades = [95, 105, 115];
-            idades.forEach(idFinal => {
-                const calc = calcularRendaPreservar20(patrimonioTotalProjetado, taxaMensalReal, idadeAposent, idFinal);
-                const anosAposAposentadoria = idFinal - idadeAposent;
-                const mesesExtra = anosAposAposentadoria * 12;
-                const curva = projetarPatrimonioPreservar20(
-                    patrimonioTotalProjetado,
-                    calc.rendaMensal,
-                    taxaMensalReal,
-                    mesesExtra
-                );
-                curvasExtras.push({ idade: idFinal, curva: curva });
-            });
-            console.log("🟣 Curvas extras geradas:", curvasExtras.length);
-        } else {
-            console.log("🟣 Curvas extras NÃO geradas: mostrarTodasCurvas =", mostrarTodasCurvas);
-        }
     }
     // ESTRATÉGIA 4: RENDA VITALÍCIA + USAR CAPITAL GRADUALMENTE (não recomendado)
     // Trata como consumo por período usando idadeFinal
@@ -772,16 +772,23 @@ function executarSimulacaoWizard(dadosWizard) {
         
         // ✅ CORREÇÃO: Herança = saldo final (pode ser 0 se consumir tudo)
         heranca = projecaoPosAposentadoria[projecaoPosAposentadoria.length - 1]?.saldo || 0;
+        
     }
     
-    // ✅ CORREÇÃO: Garantir que herança foi calculada (fallback para casos não cobertos)
-    // Se ainda não foi definida, calcular baseado na estratégia
-    if (heranca === undefined || (heranca === 0 && estrategia === "perpetua" && projecaoPosAposentadoria.length === 0)) {
-        if (estrategia === "perpetua") {
-            heranca = patrimonioTotalProjetado;  // Capital preservado
-        } else {
-            heranca = 0;  // Capital consumido
-        }
+    // =======================
+    // Cálculo correto da herança
+    // =======================
+    if (tipoRenda === "vitalicia" && estrategia === "perpetua") {
+        // Caso 1 — patrimônio permanece intacto
+        heranca = patrimonioTotalProjetado;
+    }
+    else if (tipoRenda === "periodo" && estrategia === "perpetua" && idadeFinal) {
+        // Caso 2 — preservar 20% do patrimônio inicial
+        heranca = patrimonioTotalProjetado * 0.20;
+    }
+    else {
+        // Caso 3 — esgotável: pegar o saldo final real
+        heranca = projecaoPosAposentadoria?.[projecaoPosAposentadoria.length - 1]?.saldo || 0;
     }
 
     // 13. Gerar renda mensal detalhada para o modal
@@ -850,18 +857,28 @@ function executarSimulacaoWizard(dadosWizard) {
                 const meses = (curvaObj.idade - idadeAposent) * 12;
                 
                 if (estrategia === "perpetua") {
-                    // Para "Preservar Capital", a renda é constante (só juros) - mesma para todas as idades
-                    // MAS: mesmo preservando capital, podemos calcular rendas diferentes baseadas em PMT
-                    // para mostrar o trade-off entre renda e preservação
-                    const calc = calcularRendaPeriodo(
-                        patrimonioTotalProjetado,
-                        taxaMensalReal,
-                        idadeAposent,
-                        curvaObj.idade
-                    );
-                    // Usar PMT calculado (que será menor para idades maiores)
-                    rendaMensalExtra = new Array(meses).fill(calc.rendaMensal);
-                    console.log(`✅ Renda mensal (Preservar Capital - PMT) para ${curvaObj.idade} anos: R$ ${calc.rendaMensal.toFixed(2)}/mês`);
+                    // ================================================
+                    // Correção BUG #13 - renda correta para cada idade extra
+                    // ================================================
+                    let rendaExtraMensal = 0;
+                    
+                    if (idadeFinal && idadeFinal > idadeAposent) {
+                        // Preservar capital com idadeFinal definida → usar preservar20
+                        const res = calcularRendaPreservar20(
+                            patrimonioTotalProjetado,
+                            taxaMensalReal,
+                            idadeAposent,
+                            curvaObj.idade
+                        );
+                        rendaExtraMensal = res.rendaMensal;
+                    } else {
+                        // Preservar capital sem idadeFinal → só juros (constante)
+                        rendaExtraMensal = patrimonioTotalProjetado * taxaMensalReal;
+                    }
+                    
+                    // Usar renda calculada corretamente
+                    rendaMensalExtra = new Array(meses).fill(rendaExtraMensal);
+                    console.log(`✅ Renda mensal (Preservar Capital) para ${curvaObj.idade} anos: R$ ${rendaExtraMensal.toFixed(2)}/mês`);
                 } else if (estrategia === "esgotavel") {
                     // Para "Usar Capital Gradualmente", calcular PMT para consumir até a idade final
                     // Cada idade terá uma renda DIFERENTE (maior para 95, menor para 115)
@@ -913,6 +930,110 @@ function executarSimulacaoWizard(dadosWizard) {
         });
         
         console.log("🟣 Rendas mensais extras geradas:", rendasMensaisExtras);
+    }
+
+    // =====================================================
+    // CURVAS EXTRAS (95, 105, 115 anos)
+    // Sempre geradas quando mostrarTodasCurvas = true
+    // Usa a mesma estratégia da curva principal
+    // =====================================================
+    if (mostrarTodasCurvas) {
+        console.log("🟣 Gerando curvas extras centralizadas:", { tipoRenda, estrategia, mostrarTodasCurvas });
+        curvasExtras = [];
+        const idadesExtras = [95, 105, 115];
+
+        idadesExtras.forEach(idadeAlvo => {
+            if (idadeAlvo > idadeAposent) {
+                const meses = (idadeAlvo - idadeAposent) * 12;
+                let curva;
+
+                // Usar mesma estratégia da curva principal
+                if (estrategia === "perpetua" && tipoRenda === "vitalicia") {
+                    // Renda Vitalícia Perpétua: patrimônio constante
+                    const anosProjecao = idadeAlvo - idadeAposent;
+                    curva = projetarPatrimonioVitalicia(
+                        patrimonioTotalProjetado,
+                        taxaMensalReal,
+                        anosProjecao
+                    );
+                }
+                else if (estrategia === "perpetua" && tipoRenda === "periodo") {
+                    // Renda por Período + Preservar Capital: pode ser preservar20 ou vitalicia
+                    if (idadeFinal && idadeFinal > idadeAposent) {
+                        // Se tem idadeFinal, usar estratégia "preservar20"
+                        const calc = calcularRendaPreservar20(
+                            patrimonioTotalProjetado,
+                            taxaMensalReal,
+                            idadeAposent,
+                            idadeAlvo
+                        );
+                        curva = projetarPatrimonioPreservar20(
+                            patrimonioTotalProjetado,
+                            calc.rendaMensal,
+                            taxaMensalReal,
+                            meses
+                        );
+                    } else {
+                        // Sem idadeFinal, usar vitalicia (patrimônio constante)
+                        const anosProjecao = idadeAlvo - idadeAposent;
+                        curva = projetarPatrimonioVitalicia(
+                            patrimonioTotalProjetado,
+                            taxaMensalReal,
+                            anosProjecao
+                        );
+                    }
+                }
+                else if (estrategia === "preservar20") {
+                    // Preservar 20%: patrimônio desce até 20%
+                    const calc = calcularRendaPreservar20(
+                        patrimonioTotalProjetado,
+                        taxaMensalReal,
+                        idadeAposent,
+                        idadeAlvo
+                    );
+                    curva = projetarPatrimonioPreservar20(
+                        patrimonioTotalProjetado,
+                        calc.rendaMensal,
+                        taxaMensalReal,
+                        meses
+                    );
+                }
+                else if (estrategia === "esgotavel") {
+                    // Esgotável: patrimônio zera na idade alvo
+                    const pmtEspecifico = calcularPMTEsgotavel(
+                        patrimonioTotalProjetado,
+                        taxaMensalReal,
+                        meses
+                    );
+                    curva = projetarCurvaEsgotavel(
+                        patrimonioTotalProjetado,
+                        pmtEspecifico,
+                        taxaMensalReal,
+                        meses
+                    );
+                }
+                else {
+                    // Fallback: usar vitalicia (patrimônio constante)
+                    const anosProjecao = idadeAlvo - idadeAposent;
+                    curva = projetarPatrimonioVitalicia(
+                        patrimonioTotalProjetado,
+                        taxaMensalReal,
+                        anosProjecao
+                    );
+                }
+
+                if (curva) {
+                    curvasExtras.push({
+                        idade: idadeAlvo,
+                        curva: curva
+                    });
+                }
+            }
+        });
+
+        console.log("🟣 Curvas extras geradas (centralizadas):", curvasExtras.length);
+    } else {
+        console.log("🟣 Curvas extras NÃO geradas: mostrarTodasCurvas =", mostrarTodasCurvas);
     }
 
     // 14. Retornar objeto completo

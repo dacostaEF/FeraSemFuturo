@@ -57,18 +57,36 @@ function activateStep(stepNumber) {
 // FUNÇÃO AUXILIAR: FORMATAR VALORES MONETÁRIOS (TRATAR NaN)
 // -----------------------------------------------------
 function formatarValorMonetario(valor, minDecimais = 2, maxDecimais = 2) {
-    // ✅ VALIDAÇÃO: Verificar se valor é válido
-    if (valor === null || valor === undefined || isNaN(valor)) {
-        return '<span style="color: #ef4444;">–</span>'; // Retorna "–" em vermelho para valores inválidos
+    // 1. Trata nulos
+    if (valor === null || valor === undefined) {
+        return '<span style="color: #ef4444;">–</span>';
     }
-    
-    // ✅ VALIDAÇÃO: Verificar se valor é um número finito
-    if (!isFinite(valor)) {
-        return '<span style="color: #ef4444;">Erro</span>'; // Retorna "Erro" em vermelho
+
+    // 2. Se vier como string, limpar e converter
+    if (typeof valor === "string") {
+        // remove espaços
+        valor = valor.trim();
+
+        if (valor === "") {
+            return '<span style="color: #ef4444;">–</span>';
+        }
+
+        // remove separador de milhar ".", depois troca vírgula por ponto
+        // ex: "1.234.567,89" -> "1234567.89"
+        valor = valor.replace(/\./g, "").replace(",", ".");
+        valor = Number(valor);
     }
-    
-    // Formatar normalmente se valor é válido
-    return `R$ ${valor.toLocaleString('pt-BR', {minimumFractionDigits: minDecimais, maximumFractionDigits: maxDecimais})}`;
+
+    // 3. Validação final
+    if (isNaN(valor) || !isFinite(valor)) {
+        return '<span style="color: #ef4444;">–</span>';
+    }
+
+    // 4. Formatação em pt-BR (mantendo prefixo "R$ " para compatibilidade)
+    return `R$ ${valor.toLocaleString("pt-BR", {
+        minimumFractionDigits: minDecimais,
+        maximumFractionDigits: maxDecimais
+    })}`;
 }
 
 // -----------------------------------------------------
@@ -134,10 +152,19 @@ function captureStepData(stepNumber) {
                 } else {
                     wizardData.anosDuracao = idadeTerminal - Number(wizardData.idadeAposentadoria);
                 }
-            } else {
-                // ✅ CORREÇÃO: Para Renda Vitalícia Perpétua, NÃO definir idadeFinal
-                // O motor vai usar 116 anos automaticamente (não limitar a 95)
-                wizardData.idadeFinal = null; // null = sem limite, motor usa 116 anos
+            } 
+            else if (wizardData.tipoRenda === "vitalicia" && wizardData.estrategia === "perpetua") {
+                // Para renda vitalícia perpétua, o patrimônio não é consumido.
+                // idadeFinal deve ser igual à idade de aposentadoria para evitar null.
+                // O motor usará 116 anos internamente para a projeção, mas receberá um valor válido.
+                wizardData.idadeFinal = Number(wizardData.idadeAposentadoria);
+                wizardData.anosPeriodo = null;
+                wizardData.anosDuracao = null;
+                wizardData.mostrarTodasCurvas = false;
+            } 
+            else {
+                // Fallback seguro — engine nunca deve receber null
+                wizardData.idadeFinal = Number(wizardData.idadeAposentadoria);
                 wizardData.anosPeriodo = null;
                 wizardData.anosDuracao = null;
                 wizardData.mostrarTodasCurvas = false;
@@ -215,9 +242,10 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
     const idadeAtualNum = Number(idadeAtual); // Converter para número (evitar concatenação de strings)
     const idadeAposentadoriaNum = Number(idadeAposentadoria);
     
+    // Correção OFF-BY-ONE: calcula idade com base em anos completos decorridos
     const ajustarIdade = (mesesDesdeInicio) => {
-        // Idade real = idadeAtual + meses desde o início / 12
-        return Math.floor(idadeAtualNum + mesesDesdeInicio / 12);
+        const idadeCorreta = idadeAtualNum + (mesesDesdeInicio / 12);
+        return Math.floor(idadeCorreta);
     };
 
     // Preparar dados (converter meses em anos)
@@ -292,10 +320,13 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
     }];
 
     // Adicionar dataset pós-aposentadoria se houver
+    let labelsCompletos = null;
+    let valoresCompletos = null;
+    
     if (valoresPosAposentadoria.length > 0) {
         // Combinar labels e valores
-        const labelsCompletos = [...labels, ...labelsPosAposentadoria];
-        const valoresCompletos = [...valores, ...valoresPosAposentadoria];
+        labelsCompletos = [...labels, ...labelsPosAposentadoria];
+        valoresCompletos = [...valores, ...valoresPosAposentadoria];
         
         datasets[0].data = valoresCompletos;
         
@@ -440,9 +471,14 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
         });
     }
 
-    // ✅ Labels finais: usar apenas labels da curva principal (acumulação + pós-aposentadoria)
-    // NÃO adicionar labels extras das curvas extras para evitar extrapolação
-    let labelsFinais = valoresPosAposentadoria.length > 0 ? [...labels, ...labelsPosAposentadoria] : labels;
+    // ✅ Labels finais: ajustar para refletir exatamente o tamanho da curva projetada
+    // Ajusta o eixo X para refletir exatamente o tamanho da curva projetada
+    let labelsFinais;
+    if (labelsCompletos && valoresCompletos) {
+        labelsFinais = labelsCompletos.slice(0, valoresCompletos.length);
+    } else {
+        labelsFinais = labels;
+    }
     
     // ✅ GARANTIR que o eixo X vá até 116 anos (OBRIGATÓRIO - TODOS OS GRÁFICOS)
     const idadeMaxima = 116;
@@ -464,6 +500,26 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
         });
         // Reordenar
         labelsFinais = labelsFinais.map(l => parseInt(l, 10)).sort((a, b) => a - b).map(l => l.toString());
+    }
+    
+    // ✅ IMPORTANTE: NÃO limitar labelsFinais ao tamanho de valoresCompletos
+    // O eixo X DEVE ir até 116 anos mesmo que os dados terminem antes
+    // Os datasets serão mapeados corretamente com null para idades sem dados
+    
+    // ✅ MAPEAR datasets para labelsFinais expandidos até 116 anos
+    if (labelsCompletos && valoresCompletos && labelsFinais.length > labelsCompletos.length) {
+        // Criar mapa idade -> valor para mapeamento eficiente
+        const mapaIdadeValor = new Map();
+        labelsCompletos.forEach((label, idx) => {
+            const idade = parseInt(label, 10);
+            mapaIdadeValor.set(idade, valoresCompletos[idx]);
+        });
+        
+        // Mapear dataset principal para labelsFinais expandidos
+        datasets[0].data = labelsFinais.map(label => {
+            const idade = parseInt(label, 10);
+            return mapaIdadeValor.has(idade) ? mapaIdadeValor.get(idade) : null;
+        });
     }
     
     // IMPORTANTE: NÃO ajustar datasets com nulls - cada curva deve manter seu tamanho original
@@ -594,12 +650,22 @@ function finalizarWizard() {
         const estrategia = document.querySelector("input[name='estrategia']:checked")?.value || "perpetua";
 
         // Captura idade terminal para Período OU Esgotável
-        // ✅ CORREÇÃO: Para Renda Vitalícia Perpétua, NÃO definir idadeFinal
-        let idadeFinal = null;
+        // ✅ CORREÇÃO: Nunca enviar null para o engine
+        let idadeFinal;
         if (tipoRenda === "periodo" || estrategia === "esgotavel") {
             idadeFinal = parseInt(document.getElementById("idadeTerminal")?.value) || 95;
+        } 
+        else if (tipoRenda === "vitalicia" && estrategia === "perpetua") {
+            // Para renda vitalícia perpétua, definir idadeFinal como idadeAposentadoria
+            // O motor usará 116 anos internamente, mas receberá um valor válido
+            const idadeApos = parseInt(document.getElementById("idadeAposentadoria")?.value) || 63;
+            idadeFinal = idadeApos;
+        } 
+        else {
+            // Fallback seguro — engine nunca deve receber null
+            const idadeApos = parseInt(document.getElementById("idadeAposentadoria")?.value) || 63;
+            idadeFinal = idadeApos;
         }
-        // Para vitalicia + perpetua, idadeFinal permanece null (motor usa 116 anos)
 
         // ✅ CORREÇÃO: Usar wizardData.mostrarTodasCurvas (já capturado em captureStepData)
         // Garantir que captureStepData(4) foi chamado antes
@@ -622,13 +688,34 @@ function finalizarWizard() {
             return;
         }
 
-        const resultados = executarSimulacaoWizard({
-            ...wizardData,
+        // Garante consistência mínima entre wizard → engine
+        const dadosParaEngine = {
+            idadeAtual: Number(wizardData.idadeAtual),
+            idadeAposentadoria: Number(wizardData.idadeAposentadoria),
+
+            // idadeFinal nunca deve ser nula
+            idadeFinal: Number(idadeFinal) || (Number(wizardData.idadeAposentadoria) + 30),
+
+            rendaAtual: Number(wizardData.rendaAtual) || 0,
+            rendaDesejada: Number(wizardData.rendaDesejada) || 0,
+            gastosEssenciais: Number(wizardData.gastosEssenciais) || 0,
+            inssEstimado: Number(wizardData.inssEstimado) || 0,
+            aporteMensal: Number(wizardData.aporteMensal) || 0,
+            aporteExtraAnual: Number(wizardData.aporteExtraAnual) || 0,
+            patrimonioAtual: Number(wizardData.patrimonioAtual) || 0,
+            perfilInvestidor: wizardData.perfilInvestidor || 'moderado',
+
+            // Estratégia e tipo de renda obrigatórios
             tipoRenda: tipoRenda,
             estrategia: estrategia,
-            idadeFinal: idadeFinal,
-            mostrarTodasCurvas: mostrarTodas
-        });
+            anosPeriodo: Number(wizardData.anosPeriodo) || 30,
+            anosDuracao: Number(wizardData.anosDuracao) || 30,
+
+            mostrarTodasCurvas: Boolean(mostrarTodas)
+        };
+
+        // Chamada segura do motor
+        const resultados = executarSimulacaoWizard(dadosParaEngine);
         console.log("RESULTADOS COMPLETOS DA SIMULAÇÃO:", resultados);
         
         // ✅ LOG: Debug para verificar curvasExtras geradas
@@ -663,6 +750,20 @@ function finalizarWizard() {
 
     // Ativar dashboard
     const dash = document.getElementById('dashboard');
+    
+    // ✅ CORREÇÃO: Remover modais existentes antes de recriar (evita IDs duplicados)
+    // Isso garante que modais criados dinamicamente fora do dashboard sejam removidos
+    const modaisParaRemover = [
+        'modalVitaliciaEsgotavel' // Modal criado dinamicamente fora do dashboard
+    ];
+    modaisParaRemover.forEach(modalId => {
+        const modalExistente = document.getElementById(modalId);
+        if (modalExistente) {
+            modalExistente.remove();
+            console.log(`🔄 Modal ${modalId} removido antes de recriar dashboard`);
+        }
+    });
+    
     dash.classList.add('active');
 
     // ===================================================
@@ -676,6 +777,12 @@ function finalizarWizard() {
     const textoStatus = atingiuMeta 
         ? 'Parabéns! Você atingirá sua meta de aposentadoria!' 
         : 'Atenção: ajustes necessários para atingir sua meta.';
+
+    // =============================================
+    // REMOVER CSS DINÂMICO ANTIGO (se existir)
+    // =============================================
+    const cssAntigo = document.getElementById("wizard-dynamic-style");
+    if (cssAntigo) cssAntigo.remove();
 
     dash.innerHTML = `
         <!-- HEADER DE STATUS -->
@@ -758,7 +865,7 @@ function finalizarWizard() {
                 }</li>
             </ul>
             <p style="margin-top: 15px;">⏱️ <strong>Prazo:</strong> ${resultados.anosAteAposentadoria} anos até aposentadoria</p>
-            <p>📊 <strong>Perfil:</strong> ${resultados.perfil.charAt(0).toUpperCase() + resultados.perfil.slice(1)} (${(resultados.taxaAnualEscolhida * 100).toFixed(1)}% a.a.)</p>
+            <p>📊 <strong>Perfil:</strong> ${resultados.perfil && resultados.perfil.charAt ? resultados.perfil.charAt(0).toUpperCase() + resultados.perfil.slice(1) : 'N/A'} (${resultados.taxaAnualEscolhida ? (resultados.taxaAnualEscolhida * 100).toFixed(1) : 'N/A'}% a.a.)</p>
         </div>
 
         ${resultados.inssReal > 0 ? `
@@ -898,7 +1005,7 @@ function finalizarWizard() {
                     <p><strong>Patrimônio atual:</strong> R$ ${Number(wizardData.patrimonioAtual || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
                     <p><strong>Aporte mensal:</strong> R$ ${Number(wizardData.aporteMensal).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
                     <p><strong>Aporte extra anual:</strong> R$ ${Number(wizardData.aporteExtraAnual || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
-                    <p><strong>Perfil investidor:</strong> ${resultados.perfil.charAt(0).toUpperCase() + resultados.perfil.slice(1)} (${(resultados.taxaAnualEscolhida * 100).toFixed(1)}% a.a.)</p>
+                    <p><strong>Perfil investidor:</strong> ${resultados.perfil && resultados.perfil.charAt ? resultados.perfil.charAt(0).toUpperCase() + resultados.perfil.slice(1) : 'N/A'} (${resultados.taxaAnualEscolhida ? (resultados.taxaAnualEscolhida * 100).toFixed(1) : 'N/A'}% a.a.)</p>
                     <p><strong>Renda desejada:</strong> R$ ${resultados.rendaDesejada.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</p>
                     <p><strong>Estimativa de INSS:</strong> ${resultados.inssReal === 0 ? 'Não considerado (R$ 0)' : 'R$ ' + resultados.inssReal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + (wizardData.inssEstimado > 0 ? ' (manual)' : ' (automático)')}</p>
                     <p><strong>Estratégia:</strong> ${resultados.tipoRenda === 'vitalicia' ? 'Renda Vitalícia' : 'Renda por Período'} + ${resultados.estrategia === 'perpetua' ? 'Capital Preservado (Perpétua)' : 'Uso Gradual do Capital'}</p>
@@ -1020,7 +1127,7 @@ function finalizarWizard() {
         </div>
 
         <!-- CSS para o ícone de informação e modal -->
-        <style>
+        <style id="wizard-dynamic-style">
             .info-icon-modal {
                 display: inline-flex;
                 align-items: center;
@@ -1167,20 +1274,27 @@ function finalizarWizard() {
 // INTERPRETAÇÃO AUTOMÁTICA DO RESULTADO
 // -----------------------------------------------------
 function gerarInterpretacaoAutomatica(resultados, wizardData) {
-    // ✅ CORREÇÃO DOSE 6: Validar valores antes de calcular percentual
-    if (isNaN(resultados.rendaTotalPrevista) || isNaN(resultados.rendaDesejada) || resultados.rendaDesejada <= 0) {
-        return '<p style="color: #ef4444;">⚠️ Erro ao calcular percentual. Por favor, verifique os dados informados.</p>';
+    // Blindagem contra valores inválidos vindos do motor
+    if (!resultados || typeof resultados !== 'object') {
+        return '<p style="color: #ef4444;">⚠️ Erro: Dados de simulação inválidos.</p>';
+    }
+    
+    const rendaPrevista = Number(resultados?.rendaTotalPrevista) || 0;
+    const rendaDesejada = Number(resultados?.rendaDesejada) || 0;
+    
+    // Evita divisão por zero e problemas de Infinity/NaN
+    const divisor = rendaDesejada > 0 ? rendaDesejada : 1;
+    
+    // Cálculo seguro
+    const percentualAtingido = (rendaPrevista / divisor) * 100;
+    
+    // Validar resultado final
+    if (isNaN(percentualAtingido) || !isFinite(percentualAtingido)) {
+        return '<p style="color: #ef4444;">⚠️ Erro ao calcular percentual atingido. Por favor, verifique os dados informados.</p>';
     }
     
     // ✅ CORREÇÃO DOSE 6: Validar deficitOuSobra antes de usar
     const deficitOuSobraValido = isNaN(resultados.deficitOuSobra) ? -1 : resultados.deficitOuSobra;
-    
-    const percentualAtingido = (resultados.rendaTotalPrevista / resultados.rendaDesejada) * 100;
-    
-    // ✅ CORREÇÃO DOSE 6: Validar se percentualAtingido é válido
-    if (isNaN(percentualAtingido) || !isFinite(percentualAtingido)) {
-        return '<p style="color: #ef4444;">⚠️ Erro ao calcular percentual atingido. Por favor, verifique os dados informados.</p>';
-    }
     
     let html = '';
     let statusClass = '';
@@ -1197,8 +1311,8 @@ function gerarInterpretacaoAutomatica(resultados, wizardData) {
             <p style="color: #E4E4E4;">Você terá uma aposentadoria confortável mantendo disciplina nos investimentos.</p>
             <p style="margin-top: 15px; color: #E4E4E4;">Resumo:</p>
             <ul style="color: #E4E4E4;">
-                <li>Renda desejada: <span style="color: #D4AF37;">${formatarValorMonetario(resultados.rendaDesejada)}/mês</span></li>
-                <li>Renda projetada: <span style="color: #D4AF37;">${formatarValorMonetario(resultados.rendaTotalPrevista)}/mês</span></li>
+                <li>Renda desejada: <span style="color: #D4AF37;">${formatarValorMonetario(rendaDesejada)}/mês</span></li>
+                <li>Renda projetada: <span style="color: #D4AF37;">${formatarValorMonetario(rendaPrevista)}/mês</span></li>
                 <li>Excedente: <span style="color: #D4AF37;">${formatarValorMonetario(Math.abs(deficitOuSobraValido))}/mês</span></li>
             </ul>
             <p style="margin-top: 15px; color: #E4E4E4;">💡 Sugestões opcionais:</p>
@@ -1406,13 +1520,15 @@ function atualizarRegrasWizard() {
 // CONFIGURAR LISTENERS DE ESTRATÉGIA
 // ================================================================
 function configurarListenersEstrategia() {
-    console.log("🔧 Configurando listeners de estratégia...");
-    
-    // Remover listeners anteriores se existirem (usando uma flag)
-    if (window.listenersEstrategiaConfigurados) {
-        console.log("⚠️ Listeners já configurados, pulando...");
-        return;
+    // ===============================
+    // PREVENIR LISTENERS DUPLICADOS
+    // ===============================
+    if (window.__listenersEstrategiaCarregados) {
+        return; // impede múltiplas execuções
     }
+    window.__listenersEstrategiaCarregados = true;
+    
+    console.log("🔧 Configurando listeners de estratégia...");
     
     const rEstrategiaBtns = document.querySelectorAll("input[name='estrategia']");
     console.log(`🔍 Encontrados ${rEstrategiaBtns.length} radio buttons de estratégia`);
@@ -1556,6 +1672,13 @@ function mostrarModalVitaliciaEsgotavel() {
 
 // Função fallback para criar modal se não existir
 function criarModalDinamico() {
+    // ✅ CORREÇÃO: Remover modal existente antes de criar novo (evita IDs duplicados)
+    const modalExistente = document.getElementById("modalVitaliciaEsgotavel");
+    if (modalExistente) {
+        modalExistente.remove();
+        console.log("🔄 Modal existente removido antes de criar novo");
+    }
+    
     const modalHTML = `
         <div id="modalVitaliciaEsgotavel" class="modal-overlay" style="display: flex !important; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 10000; justify-content: center; align-items: center; padding: 20px;">
             <div class="modal-content" style="max-width: 600px; background: #1a1a1a; border: 1px solid rgba(138, 204, 166, 0.3); border-radius: 12px; padding: 30px;">
@@ -1701,12 +1824,38 @@ function recalcularComAjustes() {
         return;
     }
 
-    // Atualizar wizardData
-    wizardData.idadeAtual = novaIdadeAtual;
-    wizardData.idadeAposentadoria = novaIdadeApos;
+    // Atualização do estado principal (wizardData)
+    wizardData.idadeAtual = Number(novaIdadeAtual) || wizardData.idadeAtual;
+    wizardData.idadeAposentadoria = Number(novaIdadeApos) || wizardData.idadeAposentadoria;
+    wizardData.aporteMensal = Number(novoAporte) || wizardData.aporteMensal;
     wizardData.patrimonioAtual = novoPatrimonioInicial;
-    wizardData.aporteMensal = novoAporte;
     wizardData.rendaDesejada = novaRendaDesejada;
+
+    // 1. Sincroniza visualmente os inputs do wizard
+    const inputIdadeAtualWizard = document.querySelector('input[name="idadeAtual"]');
+    if (inputIdadeAtualWizard) inputIdadeAtualWizard.value = wizardData.idadeAtual;
+
+    const inputIdadeAposWizard = document.querySelector('input[name="idadeAposentadoria"]');
+    if (inputIdadeAposWizard) inputIdadeAposWizard.value = wizardData.idadeAposentadoria;
+
+    const inputAporteWizard = document.querySelector('input[name="aporteMensal"]');
+    if (inputAporteWizard) inputAporteWizard.value = wizardData.aporteMensal;
+
+    // 2. Garantia de consistência mínima
+    if (wizardData.idadeAposentadoria <= wizardData.idadeAtual) {
+        wizardData.idadeAposentadoria = wizardData.idadeAtual + 1;
+        if (inputIdadeAposWizard) inputIdadeAposWizard.value = wizardData.idadeAposentadoria;
+    }
+
+    // 3. Atualiza idadeFinal se necessário
+    if (!wizardData.idadeFinal || wizardData.idadeFinal <= wizardData.idadeAposentadoria) {
+        wizardData.idadeFinal = wizardData.idadeAposentadoria + 30;
+    }
+
+    // 4. Garante que campos dependentes não fiquem undefined
+    wizardData.rendaDesejada = Number(wizardData.rendaDesejada) || 0;
+    wizardData.rendaAtual = Number(wizardData.rendaAtual) || 0;
+    wizardData.inssEstimado = Number(wizardData.inssEstimado) || 0;
 
     // Atualizar perfil de investimento (rentabilidade vem automaticamente do perfil)
     wizardData.perfilInvestidor = novoPerfil;
