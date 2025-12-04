@@ -154,10 +154,9 @@ function captureStepData(stepNumber) {
                 }
             } 
             else if (wizardData.tipoRenda === "vitalicia" && wizardData.estrategia === "perpetua") {
-                // Para renda vitalícia perpétua, o patrimônio não é consumido.
-                // idadeFinal deve ser igual à idade de aposentadoria para evitar null.
-                // O motor usará 116 anos internamente para a projeção, mas receberá um valor válido.
-                wizardData.idadeFinal = Number(wizardData.idadeAposentadoria);
+                // Para renda vitalícia perpétua, usar 116 anos (padrão do motor)
+                // O motor projeta até 116 anos para vitalícia perpétua
+                wizardData.idadeFinal = 116;
                 wizardData.anosPeriodo = null;
                 wizardData.anosDuracao = null;
                 wizardData.mostrarTodasCurvas = false;
@@ -656,10 +655,9 @@ function finalizarWizard() {
             idadeFinal = parseInt(document.getElementById("idadeTerminal")?.value) || 95;
         } 
         else if (tipoRenda === "vitalicia" && estrategia === "perpetua") {
-            // Para renda vitalícia perpétua, definir idadeFinal como idadeAposentadoria
-            // O motor usará 116 anos internamente, mas receberá um valor válido
-            const idadeApos = parseInt(document.getElementById("idadeAposentadoria")?.value) || 63;
-            idadeFinal = idadeApos;
+            // Para renda vitalícia perpétua, usar 116 anos (padrão do motor)
+            // O motor projeta até 116 anos para vitalícia perpétua
+            idadeFinal = 116;
         } 
         else {
             // Fallback seguro — engine nunca deve receber null
@@ -669,7 +667,10 @@ function finalizarWizard() {
 
         // ✅ CORREÇÃO: Usar wizardData.mostrarTodasCurvas (já capturado em captureStepData)
         // Garantir que captureStepData(4) foi chamado antes
-        const mostrarTodas = wizardData.mostrarTodasCurvas || false;
+        // Usar verificação explícita para garantir que o valor capturado seja usado
+        const mostrarTodas = wizardData.mostrarTodasCurvas !== undefined ? 
+                             wizardData.mostrarTodasCurvas : 
+                             false;
         
         // ✅ LOG: Debug para verificar se mostrarTodasCurvas chegou corretamente
         console.log("🟣 DEBUG - mostrarTodasCurvas:", {
@@ -1667,6 +1668,37 @@ function mostrarModalVitaliciaEsgotavel() {
         
         // Criar modal dinamicamente se não existir (fallback)
         criarModalDinamico();
+        
+        // Após criar, buscar novamente e exibir
+        modal = document.getElementById("modalVitaliciaEsgotavel");
+        if (modal) {
+            console.log("✅ Modal criado dinamicamente, exibindo...");
+            modal.style.display = "flex";
+            modal.style.visibility = "visible";
+            modal.style.opacity = "1";
+            modal.classList.add("active");
+            modal.setAttribute("style", 
+                "display: flex !important; " +
+                "position: fixed !important; " +
+                "top: 0 !important; " +
+                "left: 0 !important; " +
+                "width: 100% !important; " +
+                "height: 100% !important; " +
+                "background: rgba(0, 0, 0, 0.85) !important; " +
+                "z-index: 10000 !important; " +
+                "justify-content: center !important; " +
+                "align-items: center !important; " +
+                "padding: 20px !important; " +
+                "visibility: visible !important; " +
+                "opacity: 1 !important;"
+            );
+            document.body.style.overflow = "hidden";
+            
+            // Configurar listener para fechar ao clicar no backdrop
+            configurarModalVitaliciaEsgotavel();
+        } else {
+            console.error("❌ Erro: Não foi possível criar o modal dinamicamente!");
+        }
     }
 }
 
@@ -1718,13 +1750,23 @@ function fecharModalVitaliciaEsgotavel() {
 
 // Fechar modal ao clicar no backdrop
 function configurarModalVitaliciaEsgotavel() {
-    const modal = document.getElementById("modalVitaliciaEsgotavel");
+    // Garantir que o modal existe antes de configurar
+    let modal = document.getElementById("modalVitaliciaEsgotavel");
+    if (!modal) {
+        console.log("🔧 Modal não encontrado na inicialização, criando...");
+        criarModalDinamico();
+        modal = document.getElementById("modalVitaliciaEsgotavel");
+    }
+    
     if (modal) {
         modal.addEventListener("click", function(e) {
             if (e.target === modal) {
                 fecharModalVitaliciaEsgotavel();
             }
         });
+        console.log("✅ Modal configurado corretamente!");
+    } else {
+        console.error("❌ Erro: Não foi possível criar o modal na inicialização!");
     }
 }
 
@@ -1814,7 +1856,14 @@ function recalcularComAjustes() {
         return;
     }
 
-    if (!novoPerfil || !PERFIS_RENTABILIDADE[novoPerfil]) {
+    // Verificar se PERFIS_RENTABILIDADE está disponível (exportado do motor)
+    const perfisDisponiveis = window.PERFIS_RENTABILIDADE || {
+        conservador: 0.06,
+        moderado: 0.08,
+        arrojado: 0.10
+    };
+
+    if (!novoPerfil || !perfisDisponiveis[novoPerfil]) {
         alert('⚠️ Selecione um perfil de investimento válido.');
         return;
     }

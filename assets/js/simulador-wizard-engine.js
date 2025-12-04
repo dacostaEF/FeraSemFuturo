@@ -633,7 +633,7 @@ function executarSimulacaoWizard(dadosWizard) {
     
     // 12. Projeção pós-aposentadoria (para gráfico completo)
     let projecaoPosAposentadoria = [];
-    let curvasExtras = [];  // Nova: múltiplas curvas de longevidade
+    let curvasExtras = null;  // Iniciar como null (será inicializado como [] apenas se mostrarTodasCurvas = true)
     
     // 🟣 ESTRATÉGIA OTIMIZADA: RENDA POR PERÍODO COM LONGEVIDADE
     // Patrimônio diminui suavemente até idadeFinal
@@ -1108,11 +1108,12 @@ function gerarRendaMensalAoLongoDoTempo(patrimonio, taxaAnualReal, idadeApos, id
 }
 
 // ===============================================================
-// EXPORTAR PARA O WIZARD
+// EXPORTAR PARA O WIZARD (ATUALIZADO)
 // ===============================================================
 
 if (typeof window !== "undefined") {
     window.executarSimulacaoWizard = executarSimulacaoWizard;
     window.gerarRendaMensalAoLongoDoTempo = gerarRendaMensalAoLongoDoTempo;
+    window.PERFIS_RENTABILIDADE = PERFIS_RENTABILIDADE; // ← NOVA EXPORTAÇÃO
 }
 
