@@ -793,7 +793,13 @@ function executarSimulacaoWizard(dadosWizard) {
     // Isso é mais consistente com o conceito de "vitalícia" e alinha com as curvas extras
     let idadeFinalParaRenda;
     
-    if (idadeFinal) {
+    // ✅ CORREÇÃO: Verificar Renda Vitalícia Perpétua PRIMEIRO (antes de usar idadeFinal)
+    // Isso garante que mesmo se idadeFinal for definida, a perpétua use 116 anos
+    if (tipoRenda === "vitalicia" && estrategia === "perpetua") {
+        // ✅ CORREÇÃO: Vitalícia PERPÉTUA → usar 116 anos (padrão de longevidade estendido)
+        // Renda perpétua não deve ter limite, mas para fins de visualização usamos 116 anos
+        idadeFinalParaRenda = 116;
+    } else if (idadeFinal) {
         // Se tem idadeFinal, usar ela (estratégia otimizada ou esgotável com longevidade)
         idadeFinalParaRenda = idadeFinal;
     } else if ((tipoRenda === "periodo" && estrategia === "esgotavel") || (tipoRenda === "vitalicia" && estrategia === "esgotavel")) {
@@ -812,20 +818,16 @@ function executarSimulacaoWizard(dadosWizard) {
         } else {
             idadeFinalParaRenda = idadeAposent + 30; // Fallback
         }
-    } else if (tipoRenda === "vitalicia" && estrategia === "perpetua") {
-        // ✅ CORREÇÃO: Vitalícia PERPÉTUA → usar 116 anos (padrão de longevidade estendido)
-        // Renda perpétua não deve ter limite, mas para fins de visualização usamos 116 anos
-        idadeFinalParaRenda = 116;
     } else if (estrategia === "preservar20") {
-        // Preservar 20%: usar idadeFinal se disponível, senão 95 anos
+        // Preservar 20%: usar idadeFinal se disponível, senão 116 anos (padrão estendido)
         if (idadeFinal) {
             idadeFinalParaRenda = idadeFinal;
         } else {
-            idadeFinalParaRenda = 95;
+            idadeFinalParaRenda = 116; // ✅ CORREÇÃO: usar 116 anos em vez de 95
         }
     } else {
-        // Fallback genérico: 30 anos
-        idadeFinalParaRenda = idadeAposent + 30;
+        // Fallback genérico: 116 anos (padrão de longevidade estendido)
+        idadeFinalParaRenda = 116;
     }
     
     rendaMensalDetalhada = gerarRendaMensalAoLongoDoTempo(

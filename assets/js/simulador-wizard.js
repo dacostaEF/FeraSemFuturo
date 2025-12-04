@@ -135,7 +135,9 @@ function captureStepData(stepNumber) {
                     wizardData.anosDuracao = idadeTerminal - Number(wizardData.idadeAposentadoria);
                 }
             } else {
-                wizardData.idadeFinal = 95; // padrão
+                // ✅ CORREÇÃO: Para Renda Vitalícia Perpétua, NÃO definir idadeFinal
+                // O motor vai usar 116 anos automaticamente (não limitar a 95)
+                wizardData.idadeFinal = null; // null = sem limite, motor usa 116 anos
                 wizardData.anosPeriodo = null;
                 wizardData.anosDuracao = null;
                 wizardData.mostrarTodasCurvas = false;
@@ -592,10 +594,12 @@ function finalizarWizard() {
         const estrategia = document.querySelector("input[name='estrategia']:checked")?.value || "perpetua";
 
         // Captura idade terminal para Período OU Esgotável
-        let idadeFinal = 95;
+        // ✅ CORREÇÃO: Para Renda Vitalícia Perpétua, NÃO definir idadeFinal
+        let idadeFinal = null;
         if (tipoRenda === "periodo" || estrategia === "esgotavel") {
             idadeFinal = parseInt(document.getElementById("idadeTerminal")?.value) || 95;
         }
+        // Para vitalicia + perpetua, idadeFinal permanece null (motor usa 116 anos)
 
         // ✅ CORREÇÃO: Usar wizardData.mostrarTodasCurvas (já capturado em captureStepData)
         // Garantir que captureStepData(4) foi chamado antes
