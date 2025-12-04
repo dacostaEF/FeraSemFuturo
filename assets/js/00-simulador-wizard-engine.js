@@ -585,15 +585,11 @@ function executarSimulacaoWizard(dadosWizard) {
     }
     // ESTRATÉGIA 1: RENDA VITALÍCIA + PRESERVAR CAPITAL
     // Patrimônio permanece constante (só juros são consumidos)
-    // ✅ CORREÇÃO: Renda PERPÉTUA deve ir até 116 anos (não limitada a 30 ou 95 anos)
     else if (tipoRenda === "vitalicia" && estrategia === "perpetua") {
-        // Calcular anos até 116 anos (padrão de longevidade estendido)
-        const idadeMaxima = 116;
-        const anosProjecao = idadeMaxima - idadeAposent;
         projecaoPosAposentadoria = projetarPatrimonioVitalicia(
             patrimonioTotalProjetado,
             taxaMensalReal,
-            anosProjecao  // Projeção até 116 anos (perpétua)
+            30  // 30 anos de projeção pós-aposentadoria
         );
         // ✅ CORREÇÃO: Herança = patrimônio total (capital preservado)
         heranca = patrimonioTotalProjetado;
@@ -813,9 +809,9 @@ function executarSimulacaoWizard(dadosWizard) {
             idadeFinalParaRenda = idadeAposent + 30; // Fallback
         }
     } else if (tipoRenda === "vitalicia" && estrategia === "perpetua") {
-        // ✅ CORREÇÃO: Vitalícia PERPÉTUA → usar 116 anos (padrão de longevidade estendido)
-        // Renda perpétua não deve ter limite, mas para fins de visualização usamos 116 anos
-        idadeFinalParaRenda = 116;
+        // ✅ CORREÇÃO: Vitalícia perpétua → usar 95 anos (padrão de longevidade)
+        // Isso é mais consistente com o conceito de "vitalícia" e alinha com as curvas extras
+        idadeFinalParaRenda = 95;
     } else if (estrategia === "preservar20") {
         // Preservar 20%: usar idadeFinal se disponível, senão 95 anos
         if (idadeFinal) {

@@ -397,6 +397,7 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
     // Adicionar curvas extras (múltiplas curvas de longevidade)
     // Estas curvas mostram cenários alternativos (ex: até 95, 105, 115 anos)
     // Todas começam em idadeAposentadoria e se estendem até idades diferentes
+    const mapasCurvasExtras = new Map(); // Mapa para armazenar idade -> valor de cada curva extra
     if (curvasExtras && curvasExtras.length > 0) {
         const mesesAteAposentadoria = anosAteAposentadoria * 12; // Meses desde idadeAtual até idadeAposentadoria
         
@@ -406,6 +407,7 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
         curvasExtras.forEach(curvaObj => {
             const valoresCurva = [];
             const labelsCurva = [];
+            const mapaCurva = new Map(); // Mapa idade -> valor para esta curva
 
             curvaObj.curva.forEach((item, index) => {
                 // Plotar apenas até onde o motor realmente gerou
@@ -416,8 +418,12 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
 
                     labelsCurva.push(String(idadeReal));
                     valoresCurva.push(item.saldo);  // ❗ Sem Math.max e sem prolongar curva
+                    mapaCurva.set(idadeReal, item.saldo); // Armazenar no mapa
                 }
             });
+
+            // Armazenar mapa desta curva
+            mapasCurvasExtras.set(`Até ${curvaObj.idade} anos`, mapaCurva);
 
             const dadosCurva = new Array(valores.length).fill(null).concat(valoresCurva);
 
@@ -443,17 +449,10 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
     let labelsFinais = valoresPosAposentadoria.length > 0 ? [...labels, ...labelsPosAposentadoria] : labels;
     
     // ✅ GARANTIR que o eixo X vá até 116 anos (OBRIGATÓRIO - TODOS OS GRÁFICOS)
-    const idadeMaxima = 116;
-    const idadeMaximaAtual = labelsFinais.length > 0 ? Math.max(...labelsFinais.map(l => parseInt(l, 10))) : idadeAtualNum;
-    
-    if (idadeMaximaAtual < idadeMaxima) {
+    const idadeMaxima = labelsFinais.length > 0 ? Math.max(...labelsFinais.map(l => parseInt(l, 10))) : 0;
+    if (idadeMaxima < 116) {
         // Adicionar idades importantes até 116 anos
-        const idadesImportantes = [];
-        for (let idade = idadeMaximaAtual + 1; idade <= idadeMaxima; idade++) {
-            if (idade % 5 === 0 || idade === 95 || idade === 100 || idade === 105 || idade === 110 || idade === 115 || idade === 116) {
-                idadesImportantes.push(idade);
-            }
-        }
+        const idadesImportantes = [95, 100, 105, 110, 115, 116];
         idadesImportantes.forEach(idade => {
             const idadeStr = idade.toString();
             if (!labelsFinais.includes(idadeStr)) {
@@ -464,10 +463,48 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
         labelsFinais = labelsFinais.map(l => parseInt(l, 10)).sort((a, b) => a - b).map(l => l.toString());
     }
     
-    // IMPORTANTE: NÃO ajustar datasets com nulls - cada curva deve manter seu tamanho original
-    // Isso permite que as curvas parem exatamente onde o motor determinou
+    // ✅ Ajustar datasets para corresponder aos labels finais expandidos (até 115 anos)
+    // Criar mapas idade -> valor para mapeamento correto
+    const mapaAcumulacao = new Map();
+    labels.forEach((idade, idx) => {
+        mapaAcumulacao.set(parseInt(idade, 10), valores[idx]);
+    });
     
-    // Ajustar linha horizontal da herança 20% se existir
+    const mapaPosAposentadoria = new Map();
+    labelsPosAposentadoria.forEach((idade, idx) => {
+        mapaPosAposentadoria.set(parseInt(idade, 10), valoresPosAposentadoria[idx]);
+    });
+    
+    // Ajustar cada dataset para corresponder aos labels finais
+    datasets.forEach(dataset => {
+        if (dataset.label === 'Acumulação até Aposentadoria') {
+            dataset.data = labelsFinais.map(idadeLabel => {
+                const idadeNum = parseInt(idadeLabel, 10);
+                return mapaAcumulacao.has(idadeNum) ? mapaAcumulacao.get(idadeNum) : null;
+            });
+        } else if (dataset.label.includes('Consumo')) {
+            dataset.data = labelsFinais.map(idadeLabel => {
+                const idadeNum = parseInt(idadeLabel, 10);
+                return mapaPosAposentadoria.has(idadeNum) ? mapaPosAposentadoria.get(idadeNum) : null;
+            });
+        } else if (dataset.label.includes('Herança Preservada')) {
+            const patrimonioTotalProjetado = valores.length > 0 ? valores[valores.length - 1] : 0;
+            const piso = patrimonioTotalProjetado * 0.20;
+            const idadeAposentadoriaNum = Number(idadeAposentadoria);
+            dataset.data = labelsFinais.map(idadeLabel => {
+                const idadeNum = parseInt(idadeLabel, 10);
+                return idadeNum >= idadeAposentadoriaNum ? piso : null;
+            });
+        } else if (dataset.label.includes('Até')) {
+            const mapaCurva = mapasCurvasExtras.get(dataset.label);
+            if (mapaCurva) {
+                dataset.data = labelsFinais.map(idadeLabel => {
+                    const idadeNum = parseInt(idadeLabel, 10);
+                    return mapaCurva.has(idadeNum) ? mapaCurva.get(idadeNum) : null;
+                });
+            }
+        }
+    });
     const linhaHeranca = datasets.find(d => d.label === "Herança Preservada (20% do Patrimônio Inicial)");
     if (linhaHeranca) {
         const idadeAposentadoriaNum = Number(idadeAposentadoria);
