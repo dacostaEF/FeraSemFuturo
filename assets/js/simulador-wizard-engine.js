@@ -895,12 +895,19 @@ function executarSimulacaoWizard(dadosWizard) {
     // ✅ SIMPLIFICAÇÃO: Sempre usar 95 anos como idade final
     const idadeFinalParaRenda = 95;
     
+    // ✅ CORREÇÃO CRÍTICA: Para Caso 2 (periodo + perpetua + idadeFinal), usar estratégia "preservar20"
+    let estrategiaParaRenda = estrategia;
+    if (tipoRenda === "periodo" && estrategia === "perpetua" && idadeFinalParaRenda > idadeAposent) {
+        estrategiaParaRenda = "preservar20";
+        console.log("✅ CASO 2: Ajustando estratégia para 'preservar20' na geração de renda mensal");
+    }
+    
     let rendaMensalDetalhada = gerarRendaMensalAoLongoDoTempo(
         patrimonioTotalProjetado,
         taxaAnualReal,
         idadeAposent,
         idadeFinalParaRenda,
-        estrategia
+        estrategiaParaRenda
     );
 
     // 14. Retornar objeto completo
@@ -951,10 +958,15 @@ function gerarRendaMensalAoLongoDoTempo(patrimonio, taxaAnualReal, idadeApos, id
     }
 
     // Estratégia PRESERVAR 20% (capital desce até 20% do inicial)
+    // ✅ CORREÇÃO: Usar a mesma fórmula de calcularRendaPreservar20 para consistência
     if (estrategia === "preservar20") {
         const H = patrimonio * 0.20; // Herança = 20% do patrimônio inicial
-        const P_menos_H = patrimonio - H; // Patrimônio disponível para consumo
-        const renda = (P_menos_H * taxaMensal) / (1 - Math.pow(1 + taxaMensal, -meses));
+        const i = taxaMensal;
+        
+        // Fórmula exata do PMT com valor residual FV (mesma de calcularRendaPreservar20)
+        // PMT = [PV - FV/(1+i)^n] * [i / (1 - (1+i)^-n)]
+        const fator_n = Math.pow(1 + i, meses);
+        const renda = (patrimonio - H / fator_n) * i / (1 - 1 / fator_n);
         
         for (let i = 0; i < meses; i++) {
             rendaMensal.push(renda);

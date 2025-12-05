@@ -1046,44 +1046,126 @@ function finalizarWizard() {
                 <!-- Conteúdo do Modal (com scroll) -->
                 <div style="color: #E4E4E4; line-height: 1.8; font-size: 0.95rem; padding: 30px; overflow-y: auto; flex: 1;">
                     <p style="margin-bottom: 20px; color: #E4E4E4;">
-                        Sua <strong style="color: #D4AF37;">Renda Mensal Prevista</strong> é uma projeção baseada no modelo <strong style="color: #10b981;">Renda Vitalícia com Capital Preservado</strong>, uma estratégia em que você utiliza somente os rendimentos reais do patrimônio acumulado, mantendo o valor total investido para o resto da vida (e podendo deixar como herança).
+                        Sua <strong style="color: #D4AF37;">Renda Mensal Prevista</strong> é calculada com base na estratégia escolhida e considera <strong style="color: #10b981;">juros reais</strong> (após descontar a inflação) ou <strong style="color: #e74c3c;">juros nominais</strong>, dependendo do cenário. Abaixo explicamos como cada caso funciona:
                     </p>
 
-                    <h3 style="color: #D4AF37; margin-top: 30px; margin-bottom: 15px; font-size: 1.2rem;">🔧 Como funciona o cálculo?</h3>
-                    <p style="margin-bottom: 20px;">Usamos três pilares:</p>
+                    <h3 style="color: #D4AF37; margin-top: 30px; margin-bottom: 20px; font-size: 1.3rem;">📊 Os 3 Cenários de Cálculo de Renda</h3>
 
-                    <div style="background: rgba(212, 175, 55, 0.05); border-left: 4px solid #D4AF37; padding: 15px; margin: 15px 0; border-radius: 6px;">
-                        <h4 style="color: #D4AF37; margin-top: 0; margin-bottom: 10px;">1️⃣ Taxa real de longo prazo (após inflação):</h4>
-                        <p style="margin: 0;">
-                            Consideramos um retorno real estimado de <strong style="color: #D4AF37;">0,287% ao mês (≈ 3,5% ao ano)</strong>.<br>
-                            Essa taxa é compatível com estudos históricos de juros reais no Brasil, incluindo análises do <strong>IBRE/FGV</strong> e comportamento do <strong>CDI/Selic</strong> ao longo de décadas.
+                    <!-- CASO 1: VITALÍCIA PERPÉTUA -->
+                    <div style="background: rgba(16, 185, 129, 0.1); border: 2px solid #10b981; border-radius: 12px; padding: 20px; margin: 20px 0;">
+                        <h4 style="color: #10b981; margin-top: 0; margin-bottom: 15px; font-size: 1.15rem;">💚 Caso 1: Renda Vitalícia Perpétua (Preservar Capital)</h4>
+                        <p style="margin-bottom: 12px;">
+                            <strong style="color: #10b981;">Taxa utilizada:</strong> <strong>Taxa Real</strong> (Taxa Nominal - Inflação)
+                        </p>
+                        <p style="margin-bottom: 12px;">
+                            <strong style="color: #D4AF37;">Como funciona:</strong>
+                        </p>
+                        <ul style="margin-left: 20px; margin-bottom: 12px;">
+                            <li>Usamos apenas os <strong>juros reais</strong> do patrimônio acumulado</li>
+                            <li><strong>Taxa Real = Taxa Nominal (6%, 8% ou 10%) - Inflação (4,5%)</strong></li>
+                            <li>Exemplo: Perfil Moderado (8% a.a.) → Taxa Real = 8% - 4,5% = <strong>3,5% a.a. real</strong></li>
+                            <li><strong>Renda Mensal = Patrimônio × Taxa Mensal Real</strong></li>
+                        </ul>
+                        <p style="margin-bottom: 12px;">
+                            <strong style="color: #D4AF37;">Juros de saque:</strong> Apenas os juros reais são retirados mensalmente. O patrimônio <strong>permanece constante</strong> ao longo do tempo, preservando 100% do capital para herança.
+                        </p>
+                        <p style="margin: 0; padding: 12px; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <strong>✅ Vantagem:</strong> Renda vitalícia garantida + patrimônio preservado integralmente. A renda mantém o poder de compra (já descontada da inflação).
                         </p>
                     </div>
 
-                    <div style="background: rgba(16, 185, 129, 0.05); border-left: 4px solid #10b981; padding: 15px; margin: 15px 0; border-radius: 6px;">
-                        <h4 style="color: #10b981; margin-top: 0; margin-bottom: 10px;">2️⃣ Seu patrimônio projetado na data de aposentadoria:</h4>
-                        <p style="margin: 0;">
-                            O simulador atualiza mês a mês seu saldo acumulado considerando:<br>
-                            • aportes,<br>
-                            • rentabilidade do perfil,<br>
-                            • prazo até aposentadoria.
+                    <!-- CASO 2: PRESERVAR 20% -->
+                    <div style="background: rgba(243, 156, 18, 0.1); border: 2px solid #F39C12; border-radius: 12px; padding: 20px; margin: 20px 0;">
+                        <h4 style="color: #F39C12; margin-top: 0; margin-bottom: 15px; font-size: 1.15rem;">🟡 Caso 2: Renda por Período Determinado (Preservar 20% do Capital)</h4>
+                        <p style="margin-bottom: 12px;">
+                            <strong style="color: #F39C12;">Taxa utilizada:</strong> <strong>Taxa Real</strong> (Taxa Nominal - Inflação)
+                        </p>
+                        <p style="margin-bottom: 12px;">
+                            <strong style="color: #D4AF37;">Como funciona:</strong>
+                        </p>
+                        <ul style="margin-left: 20px; margin-bottom: 12px;">
+                            <li>Calculamos uma <strong>renda intermediária</strong> que consome gradualmente o patrimônio</li>
+                            <li>Usamos <strong>Taxa Real</strong> (mesma do Caso 1) para calcular o PMT (pagamento mensal)</li>
+                            <li>A renda é calculada para que aos <strong>95 anos</strong> reste exatamente <strong>20% do patrimônio inicial</strong></li>
+                            <li>Fórmula: <strong>PMT = [PV - FV/(1+i)^n] × [i / (1 - (1+i)^-n)]</strong></li>
+                            <li>Onde: PV = Patrimônio inicial, FV = 20% de PV, i = Taxa Real mensal, n = meses até 95 anos</li>
+                        </ul>
+                        <p style="margin-bottom: 12px;">
+                            <strong style="color: #D4AF37;">Juros de saque:</strong> A cada mês, aplicamos juros reais sobre o saldo e subtraímos a renda. O patrimônio <strong>desce gradualmente</strong> até atingir 20% aos 95 anos, quando <strong>estabiliza</strong> e permanece constante.
+                        </p>
+                        <p style="margin: 0; padding: 12px; background: rgba(243, 156, 18, 0.1); border-radius: 6px;">
+                            <strong>✅ Vantagem:</strong> Renda maior que a vitalícia, mas ainda preserva 20% do patrimônio como herança. A renda mantém o poder de compra (já descontada da inflação).
                         </p>
                     </div>
 
-                    <div style="background: rgba(46, 204, 113, 0.05); border-left: 4px solid #2ecc71; padding: 15px; margin: 15px 0; border-radius: 6px;">
-                        <h4 style="color: #2ecc71; margin-top: 0; margin-bottom: 10px;">3️⃣ Retirada apenas dos juros reais:</h4>
-                        <p style="margin: 0;">
-                            O valor mensal calculado corresponde a apenas os rendimentos reais do seu patrimônio, garantindo:<br>
-                            • renda vitalícia,<br>
-                            • preservação integral do capital,<br>
-                            • possibilidade de deixar herança.
+                    <!-- CASO 3: ESGOTÁVEL -->
+                    <div style="background: rgba(231, 76, 60, 0.1); border: 2px solid #e74c3c; border-radius: 12px; padding: 20px; margin: 20px 0;">
+                        <h4 style="color: #e74c3c; margin-top: 0; margin-bottom: 15px; font-size: 1.15rem;">🔴 Caso 3: Renda por Período Determinado (Esgotável - Usar Capital Gradualmente)</h4>
+                        <p style="margin-bottom: 12px;">
+                            <strong style="color: #e74c3c;">Taxa utilizada:</strong> <strong>Taxa Nominal</strong> (sem descontar inflação)
+                        </p>
+                        <p style="margin-bottom: 12px;">
+                            <strong style="color: #D4AF37;">Como funciona:</strong>
+                        </p>
+                        <ul style="margin-left: 20px; margin-bottom: 12px;">
+                            <li>Calculamos a <strong>renda máxima possível</strong> que consome todo o patrimônio até 95 anos</li>
+                            <li>Usamos <strong>Taxa Nominal</strong> (6%, 8% ou 10% a.a., conforme perfil) <strong>SEM descontar inflação</strong></li>
+                            <li>Fórmula: <strong>PMT = PV × (i × (1+i)^n) / ((1+i)^n - 1)</strong></li>
+                            <li>Onde: PV = Patrimônio inicial, i = Taxa Nominal mensal, n = meses até 95 anos</li>
+                            <li>A renda é calculada para que o patrimônio <strong>zere exatamente aos 95 anos</strong></li>
+                        </ul>
+                        <p style="margin-bottom: 12px;">
+                            <strong style="color: #D4AF37;">Juros de saque:</strong> A cada mês, aplicamos juros nominais sobre o saldo e subtraímos a renda. O patrimônio <strong>desce continuamente</strong> até zerar aos 95 anos.
+                        </p>
+                        <p style="margin: 0; padding: 12px; background: rgba(231, 76, 60, 0.1); border-radius: 6px;">
+                            <strong>⚠️ Atenção:</strong> Esta renda é a maior possível, mas consome todo o capital. Se você viver além de 95 anos, poderá ficar sem recursos. A renda não mantém o poder de compra ao longo do tempo (não está descontada da inflação).
                         </p>
                     </div>
 
-                    <div style="background: rgba(77, 166, 255, 0.1); border: 1px solid rgba(77, 166, 255, 0.3); padding: 15px; margin: 25px 0; border-radius: 8px;">
-                        <p style="margin: 0; color: #4da6ff;">
-                            <strong>💡 Importante:</strong> A renda exibida já está calculada em valores "descontados da inflação", ou seja, ela mantém o poder de compra ao longo do tempo.
+                    <!-- EXPLICAÇÃO SOBRE TAXAS -->
+                    <div style="background: rgba(77, 166, 255, 0.1); border: 2px solid rgba(77, 166, 255, 0.4); border-radius: 12px; padding: 20px; margin: 25px 0;">
+                        <h4 style="color: #4da6ff; margin-top: 0; margin-bottom: 15px; font-size: 1.15rem;">📈 Entendendo Taxa Real vs Taxa Nominal</h4>
+                        <p style="margin-bottom: 12px;">
+                            <strong style="color: #4da6ff;">Taxa Nominal:</strong> É a taxa bruta de retorno dos investimentos (6%, 8% ou 10% a.a., conforme seu perfil).
                         </p>
+                        <p style="margin-bottom: 12px;">
+                            <strong style="color: #4da6ff;">Taxa Real:</strong> É a taxa nominal <strong>descontada da inflação</strong> (estimada em 4,5% a.a.).
+                        </p>
+                        <p style="margin-bottom: 12px;">
+                            <strong style="color: #D4AF37;">Exemplo prático:</strong>
+                        </p>
+                        <ul style="margin-left: 20px; margin-bottom: 12px;">
+                            <li>Perfil Moderado: Taxa Nominal = <strong>8% a.a.</strong></li>
+                            <li>Inflação estimada = <strong>4,5% a.a.</strong></li>
+                            <li>Taxa Real = 8% - 4,5% = <strong>3,5% a.a. real</strong></li>
+                            <li>Taxa Real Mensal = <strong>≈ 0,287% ao mês</strong></li>
+                        </ul>
+                        <p style="margin: 0;">
+                            <strong>💡 Por que usar Taxa Real nos Casos 1 e 2?</strong> Para garantir que a renda mantenha o poder de compra ao longo do tempo. A renda calculada com taxa real já está "descontada da inflação", então você pode comprar a mesma quantidade de bens e serviços no futuro.
+                        </p>
+                    </div>
+
+                    <!-- COMPENSAÇÃO DE INFLAÇÃO -->
+                    <div style="background: rgba(212, 175, 55, 0.1); border: 2px solid rgba(212, 175, 55, 0.4); border-radius: 12px; padding: 20px; margin: 25px 0;">
+                        <h4 style="color: #D4AF37; margin-top: 0; margin-bottom: 15px; font-size: 1.15rem;">💰 Compensação de Inflação</h4>
+                        <p style="margin-bottom: 12px;">
+                            <strong style="color: #D4AF37;">Casos 1 e 2 (Taxa Real):</strong>
+                        </p>
+                        <ul style="margin-left: 20px; margin-bottom: 12px;">
+                            <li>A inflação já está <strong>descontada</strong> no cálculo da renda</li>
+                            <li>A renda mensal mantém o <strong>poder de compra</strong> ao longo do tempo</li>
+                            <li>Você pode comprar a mesma quantidade de bens e serviços no futuro</li>
+                            <li>O patrimônio cresce com a inflação, compensando o aumento de preços</li>
+                        </ul>
+                        <p style="margin-bottom: 12px;">
+                            <strong style="color: #e74c3c;">Caso 3 (Taxa Nominal):</strong>
+                        </p>
+                        <ul style="margin-left: 20px; margin-bottom: 0;">
+                            <li>A inflação <strong>NÃO está descontada</strong> no cálculo</li>
+                            <li>A renda mensal <strong>perde poder de compra</strong> ao longo do tempo</li>
+                            <li>Com o passar dos anos, você poderá comprar menos bens e serviços com a mesma renda</li>
+                            <li>O patrimônio é consumido mais rapidamente porque não há compensação pela inflação</li>
+                        </ul>
                     </div>
 
                     <!-- Disclaimer -->
@@ -2462,7 +2544,7 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0, rendasMen
                 loadingDiv.style.display = "none";
             }
             
-            // ✅ DOSE 7: Atualizar informações textuais com explicação melhorada sobre curvas extras
+            // ✅ CORREÇÃO: Atualizar informações textuais com detecção correta dos 3 casos
             const infoDiv = document.getElementById("infoRendaMensal");
             if (infoDiv) {
                 const rendaInicial = listaRenda[0] || 0;
@@ -2472,18 +2554,40 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0, rendasMen
                 const temRendaZero = rendas.some(r => r === 0 || r < 0.01);
                 const rendaTotalInicial = rendaInicial + inssValor;
                 
-                // ✅ SIMPLIFICAÇÃO: Curvas extras removidas
+                // ✅ CORREÇÃO CRÍTICA: Detectar corretamente os 3 casos usando tipoRenda e estrategia
+                const idadeFinalNum = Number(idadeFinal) || 95;
+                const idadeAposNum = Number(idadeApos);
+                
+                // Caso 1: Vitalícia Perpétua
+                const isCaso1 = tipoRenda === 'vitalicia' && estrategia === 'perpetua';
+                
+                // Caso 2: Período + Perpétua + idadeFinal > idadeApos (Preservar 20%)
+                const isCaso2 = tipoRenda === 'periodo' && estrategia === 'perpetua' && idadeFinalNum > idadeAposNum;
+                
+                // Caso 3: Esgotável (periodo + esgotavel OU vitalicia + esgotavel)
+                const isCaso3 = estrategia === 'esgotavel' || (tipoRenda === 'periodo' && estrategia !== 'perpetua' && !isCaso2);
+                
                 let textoInfo = "";
                 
-                // ✅ AJUSTE 3: Remover negrito desnecessário quando já temos cor destacada
-                if (temRendaZero) {
-                    textoInfo = `📊 <span style="color: #10b981;">Renda por Período Determinado:</span> Você receberá uma renda mensal do patrimônio que começa em <span style="color: #D4AF37;">R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</span> e termina em <span style="color: #D4AF37;">R$ 0</span> aproximadamente aos <span style="color: #D4AF37;">${idadeFinalCalculada} anos</span>, quando seu patrimônio se esgotará.`;
-                } else {
-                    textoInfo = `💚 <span style="color: #10b981;">Renda Vitalícia:</span> Você receberá <span style="color: #D4AF37;">R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</span> do patrimônio de forma permanente, preservando seu capital para sempre.`;
+                // CASO 1: Renda Vitalícia Perpétua
+                if (isCaso1) {
+                    textoInfo = `💚 <span style="color: #10b981;">Renda Vitalícia Perpétua:</span> Você receberá <span style="color: #D4AF37;">R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</span> do patrimônio de forma permanente, preservando seu capital para sempre. A renda mantém o poder de compra (já descontada da inflação).`;
+                }
+                // CASO 2: Preservar 20%
+                else if (isCaso2) {
+                    textoInfo = `🟡 <span style="color: #F39C12;">Renda por Período Determinado (Preservar 20%):</span> Você receberá uma renda mensal do patrimônio de <span style="color: #D4AF37;">R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</span> até aproximadamente <span style="color: #D4AF37;">${idadeFinalCalculada} anos</span>. Aos ${idadeFinalCalculada} anos, seu patrimônio terá sido reduzido para <strong style="color: #F39C12;">20% do valor inicial</strong>, que será preservado como herança. A renda mantém o poder de compra (já descontada da inflação).`;
+                }
+                // CASO 3: Esgotável
+                else if (isCaso3) {
+                    textoInfo = `🔴 <span style="color: #e74c3c;">Renda por Período Determinado (Esgotável):</span> Você receberá uma renda mensal do patrimônio que começa em <span style="color: #D4AF37;">R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</span> e termina em <span style="color: #D4AF37;">R$ 0</span> aproximadamente aos <span style="color: #D4AF37;">${idadeFinalCalculada} anos</span>, quando seu patrimônio se esgotará completamente. <strong style="color: #e74c3c;">⚠️ Atenção:</strong> Se você viver além de ${idadeFinalCalculada} anos, poderá ficar sem recursos.`;
+                }
+                // Fallback (não deveria acontecer)
+                else {
+                    textoInfo = `📊 <span style="color: #10b981;">Renda Mensal:</span> Você receberá <span style="color: #D4AF37;">R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</span> do patrimônio.`;
                 }
                 
-                // ✅ AJUSTE 3: Remover negrito desnecessário
-                if (idadeFinal) {
+                // ✅ AJUSTE: Adicionar informação sobre idade final se relevante
+                if (idadeFinal && (isCaso2 || isCaso3)) {
                     textoInfo += `<br><br>📌 <span style="color: #10b981;">Linha principal (verde):</span> Renda mensal calculada para durar até <span style="color: #D4AF37;">${idadeFinal} anos</span>, baseada na sua escolha.`;
                 }
                 
