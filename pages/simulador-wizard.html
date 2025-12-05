@@ -2048,7 +2048,7 @@
                 💡 <strong>Premissa:</strong> Você receberá o INSS como base + seus investimentos próprios como complemento
             </div>
 
-            <button class="btn-start-wizard" id="btnStartWizard" onclick="simuladorWizardStart()">
+            <button class="btn-start-wizard" id="btnStartWizard">
                 🚀 Começar Simulação Guiada
             </button>
         </div>
@@ -2294,27 +2294,11 @@
                     </label>
                 </div>
 
-                <!-- IDADE TERMINAL -->
-                <div class="input-group" id="idadeTerminalContainer" style="display:none;">
-                    <label class="input-label">
-                        Até qual idade você quer que sua renda dure?
-                    </label>
-                    <select id="idadeTerminal" class="input-field">
-                        <option value="95" selected>95 anos</option>
-                        <option value="105">105 anos</option>
-                        <option value="115">115 anos</option>
-                    </select>
-                    <p style="margin-top: 8px; font-size: 0.85rem; color: #9ca3af; line-height: 1.4;">
-                        💡 Esta idade será usada tanto para "Renda por período" quanto para "Usar capital gradualmente".
+                <!-- ✅ SIMPLIFICAÇÃO: Dropdown e checkbox removidos - sempre usamos 95 anos -->
+                <div class="input-group" style="margin-top: 16px;">
+                    <p style="font-size: 0.9rem; color: #8AC926; line-height: 1.5; padding: 12px; background: rgba(138, 201, 38, 0.1); border-radius: 6px; border-left: 3px solid #8AC926;">
+                        📊 <strong>Simulação até 95 anos:</strong> Todas as projeções são calculadas para durar até 95 anos de idade, uma expectativa de vida realista e segura para planejamento financeiro.
                     </p>
-                </div>
-
-                <!-- Checkbox para múltiplas curvas -->
-                <div id="containerTodasCurvas" style="display:none; margin-top:10px;">
-                    <label style="font-size:14px;">
-                        <input type="checkbox" id="mostrarTodasCurvas">
-                        Mostrar todas as curvas (95, 105 e 115 anos)
-                    </label>
                 </div>
 
                 <p style="
