@@ -1925,11 +1925,6 @@
                     <div style="padding: 30px 20px; background: #0f0f0f; border-radius: 10px; border: 1px solid rgba(138, 204, 166, 0.15);">
                         <canvas id="graficoEvolucaoOficial" style="max-height: 400px;"></canvas>
                     </div>
-                    <div style="margin-top: 16px; text-align: center;">
-                        <button id="btnVerRendaMensal" style="padding: 12px 24px; background: linear-gradient(135deg, #D4AF37, #FFD700); border: none; border-radius: 8px; color: #0D0D0D; font-weight: 700; cursor: pointer; font-size: 0.95rem; transition: transform 0.2s;">
-                            📊 Ver Renda Mensal ao Longo do Tempo
-                        </button>
-                    </div>
                 </section>
 
                 <!-- ===================================================== -->
@@ -3390,35 +3385,9 @@
             prepararModaisOficial(idadeAtual, idadeApos, aporteMensal, rendaDesejada, beneficioINSS, retornoAnual, anos);
 
             // ================================
-            // 7. CONFIGURAR MODAL DE RENDA MENSAL
+            // 7. MODAL DE RENDA MENSAL REMOVIDO
+            // O gráfico de renda já está integrado no gráfico de Evolução do Patrimônio
             // ================================
-            const btnVerRenda = document.getElementById("btnVerRendaMensal");
-            if (btnVerRenda) {
-                btnVerRenda.onclick = function() {
-                    abrirModalRendaMensal();
-                    // Usar dados detalhados do resultado (igual ao wizard)
-                    if (resultado.rendaMensalDetalhada && resultado.rendaMensalDetalhada.length > 0) {
-                        abrirGraficoRendaMensalPro(
-                            resultado.rendaMensalDetalhada,
-                            idadeApos,
-                            beneficioINSS,
-                            resultado.tipoRenda || 'vitalicia',
-                            resultado.estrategia || 'perpetua',
-                            resultado.idadeFinal || 95
-                        );
-                    } else {
-                        // Fallback para função antiga se não houver dados detalhados
-                        renderizarRendaMensal_PRO(
-                            rendaInvestProprio,
-                            beneficioINSS,
-                            40,
-                            idadeApos,
-                            tipoRenda,
-                            anosPeriodo
-                        );
-                    }
-                };
-            }
 
             // ================================
             // 8. CONFIGURAR PAINEL DE AJUSTES RÁPIDOS
@@ -5007,330 +4976,14 @@
         }
 
         // ================================================
-        // MODAL — Abertura e Fechamento
+        // MODAL DE RENDA MENSAL REMOVIDO
+        // O gráfico de renda já está integrado no gráfico de Evolução do Patrimônio
         // ================================================
-        function abrirModalRendaMensal() {
-            document.getElementById("modalRendaMensal").style.display = "block";
-        }
-        function fecharModalRendaMensal() {
-            document.getElementById("modalRendaMensal").style.display = "none";
-        }
-
-        // ================================================
-        // GRÁFICO DE RENDA MENSAL (ESTILO WIZARD)
-        // ================================================
-        let graficoRendaMensalPro = null;
-
-        function abrirGraficoRendaMensalPro(listaRenda, idadeApos, inssValor = 0, tipoRenda = 'vitalicia', estrategia = 'perpetua', idadeFinal = 95) {
-            console.log("📊 Abrindo gráfico de renda mensal PRO...");
-            
-            idadeApos = Number(idadeApos) || 0;
-            inssValor = Number(inssValor) || 0;
-            
-            if (!listaRenda || !Array.isArray(listaRenda) || listaRenda.length === 0) {
-                console.error("❌ Lista de renda inválida!");
-                alert("Erro: Não foi possível gerar o gráfico. Dados de renda inválidos.");
-                return;
-            }
-            
-            if (typeof Chart === 'undefined' && typeof window.Chart === 'undefined') {
-                console.error("❌ Chart.js não está carregado!");
-                alert("Erro: Chart.js não está disponível. Por favor, recarregue a página.");
-                return;
-            }
-            
-            const ChartLib = window.Chart || Chart;
-            const modal = document.getElementById("modalRendaMensal");
-            if (!modal) {
-                console.error("❌ Modal não encontrado!");
-                return;
-            }
-            
-            modal.style.display = "block";
-            
-            setTimeout(() => {
-                const canvas = document.getElementById("graficoRendaMensal");
-                if (!canvas) {
-                    console.error("❌ Canvas não encontrado!");
-                    return;
-                }
-                
-                const ctx = canvas.getContext("2d");
-                if (!ctx) {
-                    console.error("❌ Não foi possível obter contexto 2D!");
-                    return;
-                }
-        
-                // Gerar labels de idade (amostrar a cada 12 meses)
-                const labels = [];
-                const rendas = [];
-                
-                for (let i = 0; i < listaRenda.length; i++) {
-                    if (i % 12 === 0 || i === listaRenda.length - 1) {
-                        const idade = idadeApos + Math.floor(i / 12);
-                        labels.push(idade + " anos");
-                        rendas.push(listaRenda[i]);
-                    }
-                }
-                
-                // Destruir gráfico antigo
-                if (graficoRendaMensalPro) {
-                    graficoRendaMensalPro.destroy();
-                    graficoRendaMensalPro = null;
-                }
-                
-                if (labels.length === 0 || rendas.length === 0) {
-                    console.error("❌ Dados vazios!");
-                    return;
-                }
-                
-                // Preparar datasets
-                const datasetPropria = {
-                    label: "Renda do Patrimônio",
-                    data: rendas,
-                    borderColor: "#00ff88",
-                    backgroundColor: "rgba(0, 255, 136, 0.05)",  // ✅ AJUSTE: Transparência reduzida
-                    borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
-                    tension: 0.25,
-                    fill: true,
-                    pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
-                    pointHoverRadius: 4
-                };
-
-                const datasetINSS = {
-                    label: "Renda do INSS",
-                    data: rendas.map(() => inssValor),
-                    borderColor: "#4da6ff",
-                    backgroundColor: "rgba(77, 166, 255, 0.05)",  // ✅ AJUSTE: Transparência reduzida
-                    borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
-                    borderDash: [6, 4],
-                    tension: 0.15,
-                    fill: false,
-                    pointRadius: 1,  // Mantido pequeno para INSS
-                    pointHoverRadius: 3
-                };
-
-                const datasetTotal = {
-                    label: "Renda Total (Patrimônio + INSS)",
-                    data: rendas.map((v) => v + inssValor),
-                    borderColor: "#ffcc00",
-                    backgroundColor: "rgba(255, 204, 0, 0.05)",  // ✅ AJUSTE: Transparência reduzida
-                    borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
-                    tension: 0.25,
-                    fill: true,
-                    pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
-                    pointHoverRadius: 4
-                };
-                
-                try {
-                    graficoRendaMensalPro = new ChartLib(ctx, {
-                        type: "line",
-                        data: {
-                            labels: labels,
-                            datasets: [datasetPropria, datasetINSS, datasetTotal]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: {
-                                    display: true,
-                                    position: 'top',
-                                    labels: {
-                                        color: '#E4E4E4',
-                                        usePointStyle: true,  // ✅ AJUSTE: Usar estilo de linha em vez de caixa
-                                        pointStyle: 'line',  // ✅ AJUSTE: Linha na legenda
-                                        boxWidth: 0,  // ✅ AJUSTE: Remover largura da caixa
-                                        boxHeight: 0  // ✅ AJUSTE: Remover altura da caixa
-                                    }
-                                },
-                                tooltip: {
-                                    backgroundColor: 'rgba(0, 0, 0, 0.9)',
-                                    titleColor: '#D4AF37',
-                                    bodyColor: '#E4E4E4',
-                                    callbacks: {
-                                        label: function(context) {
-                                            return `Renda: R$ ${context.parsed.y.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês`;
-                                        }
-                                    }
-                                }
-                            },
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    title: {
-                                        display: true,
-                                        text: "Renda Mensal (R$)",
-                                        color: "#ffcc00"
-                                    },
-                                    ticks: {
-                                        color: '#9ca3af',
-                                        callback: function(value) {
-                                            return 'R$ ' + value.toLocaleString('pt-BR', {maximumFractionDigits: 0});
-                                        }
-                                    }
-                                },
-                                x: {
-                                    title: {
-                                        display: true,
-                                        text: "Idade",
-                                        color: "#ffcc00"
-                                    },
-                                    ticks: {
-                                        color: '#9ca3af',
-                                        maxTicksLimit: 20
-                                    }
-                                }
-                            }
-                        }
-                    });
-                    
-                    console.log("✅ Gráfico Chart.js criado com sucesso!");
-                    
-                    // ✅ CORREÇÃO: Detectar os 3 casos (igual ao Wizard)
-                    const idadeFinalNum = Number(idadeFinal) || 95;
-                    const idadeAposNum = Number(idadeApos);
-                    
-                    // Caso 1: Vitalícia Perpétua
-                    const isCaso1 = tipoRenda === 'vitalicia' && estrategia === 'perpetua';
-                    
-                    // Caso 2: Período + Perpétua + idadeFinal > idadeApos (Preservar 20%)
-                    const isCaso2 = tipoRenda === 'periodo' && estrategia === 'perpetua' && idadeFinalNum > idadeAposNum;
-                    
-                    // Caso 3: Esgotável
-                    const isCaso3 = estrategia === 'esgotavel' || (tipoRenda === 'periodo' && estrategia !== 'perpetua' && !isCaso2);
-                    
-                    // Atualizar informações textuais
-                    const explicacao = document.getElementById("textoExplicativoModal");
-                    if (explicacao) {
-                        const rendaInicial = listaRenda[0] || 0;
-                        const rendaFinal = listaRenda[listaRenda.length - 1] || 0;
-                        const mesesTotal = listaRenda.length;
-                        const idadeFinalCalculada = idadeApos + Math.floor(mesesTotal / 12);
-                        const rendaTotalInicial = rendaInicial + inssValor;
-                        
-                        let textoInfo = "";
-                        
-                        // ✅ CORREÇÃO: Texto específico para cada caso (igual ao Wizard)
-                        if (isCaso1) {
-                            textoInfo = `💚 <strong>Renda Vitalícia Perpétua (Preservar Capital):</strong> Você receberá <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> do patrimônio de forma permanente, preservando seu capital para sempre. Esta renda é calculada usando a <strong>taxa real</strong> (taxa nominal - inflação), garantindo que seu poder de compra seja mantido ao longo do tempo.`;
-                        } else if (isCaso2) {
-                            textoInfo = `🟡 <strong>Renda por Período Determinado (Preservar 20% do Capital):</strong> Você receberá <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> do patrimônio até os <strong>${idadeFinalNum} anos</strong>, quando seu patrimônio terá sido reduzido para <strong>20% do valor inicial</strong>, que será preservado como herança. Esta renda é calculada usando a <strong>taxa real</strong> (taxa nominal - inflação), garantindo que seu poder de compra seja mantido.`;
-                        } else if (isCaso3) {
-                            textoInfo = `🔴 <strong>Renda por Período Determinado (Esgotável - Usar Capital Gradualmente):</strong> Você receberá <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> do patrimônio até os <strong>${idadeFinalNum} anos</strong>, quando seu patrimônio se esgotará completamente. Esta renda é calculada usando a <strong>taxa nominal</strong> (sem descontar inflação), o que significa que seu poder de compra diminuirá ao longo do tempo conforme a inflação.`;
-                        } else {
-                            // Fallback genérico
-                            textoInfo = `📊 <strong>Renda Mensal:</strong> Você receberá <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> do patrimônio.`;
-                        }
-                        
-                        if (inssValor > 0) {
-                            textoInfo += `<br><br>📘 <strong>INSS:</strong> Você receberá adicionalmente <strong>R$ ${inssValor.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> do INSS.`;
-                            textoInfo += `<br><br>💰 <strong>Renda Total:</strong> <strong>R$ ${rendaTotalInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> (patrimônio + INSS).`;
-                            textoInfo += `<br><br><span style="font-size: 0.85rem; color: #9ca3af;">💡 <strong>Observação:</strong> O valor do INSS é uma estimativa. Para um cálculo oficial, consulte o portal <a href="https://meu.inss.gov.br" target="_blank" style="color: #4da6ff;">Meu INSS</a>.</span>`;
-                        }
-                        
-                        explicacao.innerHTML = textoInfo;
-                    }
-                } catch (error) {
-                    console.error("❌ Erro ao criar gráfico:", error);
-                    alert("Erro ao criar gráfico. Por favor, tente novamente.");
-                }
-            }, 100);
-        }
 
         // =======================================================
-        // RENDERIZAÇÃO — Renda Mensal ao Longo da Aposentadoria
+        // RENDERIZAÇÃO — Renda Mensal REMOVIDA
+        // O gráfico de renda já está integrado no gráfico de Evolução do Patrimônio
         // =======================================================
-        function renderizarRendaMensal_PRO(rendaInvest, rendaINSS, anosAposentadoria, idadeApos, tipoRenda, anosPeriodo) {
-
-            const ctx = document.getElementById("graficoRendaMensal").getContext("2d");
-
-            if (window.graficoRendaMensalInstancia) {
-                window.graficoRendaMensalInstancia.destroy();
-            }
-
-            // Construção dos vetores
-            const labels = [];
-            const rendaPropria = [];
-            const rendaPrevidenciaria = [];
-            const rendaTotal = [];
-
-            let meses = anosAposentadoria * 12;
-
-            for (let i = 0; i < meses; i++) {
-                labels.push((idadeApos + i/12).toFixed(1));
-
-                rendaPropria.push(rendaInvest);
-                rendaPrevidenciaria.push(rendaINSS);
-                rendaTotal.push(rendaInvest + rendaINSS);
-            }
-
-            // Texto explicativo
-            const explicacao = document.getElementById("textoExplicativoModal");
-
-            if (tipoRenda === "vitalicia") {
-                explicacao.innerHTML = `
-                    Esta simulação assume <b>renda vitalícia</b>, preservando totalmente o capital.
-                    Você receberia um valor constante enquanto viver.
-                `;
-            } else {
-                explicacao.innerHTML = `
-                    Esta simulação mostra sua renda mensal sob a estratégia de 
-                    <b>Renda por Período Determinado</b>, planejada para durar até os 
-                    <b>${idadeApos + anosPeriodo}</b> anos.
-                `;
-            }
-
-            // Gráfico
-            window.graficoRendaMensalInstancia = new Chart(ctx, {
-                type: "line",
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: "Investimentos Próprios",
-                            data: rendaPropria,
-                            borderColor: "#FFD700",
-                            borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
-                            pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
-                            pointHoverRadius: 4
-                        },
-                        {
-                            label: "INSS",
-                            data: rendaPrevidenciaria,
-                            borderColor: "#00E2FF",
-                            borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
-                            pointRadius: 1,  // Mantido pequeno para INSS
-                            pointHoverRadius: 3
-                        },
-                        {
-                            label: "Renda Total",
-                            data: rendaTotal,
-                            borderColor: "#00FF88",
-                            borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
-                            pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
-                            pointHoverRadius: 4
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    tension: 0.2,
-                    plugins: {
-                        legend: { position: "top" }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: { display: true, text: "Renda Mensal (R$)" }
-                        },
-                        x: {
-                            title: { display: true, text: "Idade" }
-                        }
-                    }
-                }
-            });
-        }
 
         // Log inicial
         console.log('🏖️ Simulador de Aposentadoria INVLAB - TODOS OS 7 MÓDULOS INTEGRADOS ✅');
@@ -5471,25 +5124,9 @@
     </script>
 
     <!-- =============================================== -->
-    <!-- MODAL — Renda Mensal ao Longo da Aposentadoria -->
+    <!-- MODAL — Renda Mensal REMOVIDO -->
+    <!-- O gráfico de renda já está integrado no gráfico de Evolução do Patrimônio -->
     <!-- =============================================== -->
-    <div id="modalRendaMensal" class="inv-modal">
-        <div class="inv-modal-content">
-
-            <span class="inv-modal-close" onclick="fecharModalRendaMensal()">&times;</span>
-
-            <h2 class="inv-modal-title">
-                Renda Mensal ao Longo da Aposentadoria
-            </h2>
-
-            <p class="inv-modal-desc" id="textoExplicativoModal">
-                <!-- Texto será preenchido dinamicamente -->
-            </p>
-
-            <canvas id="graficoRendaMensal" height="260"></canvas>
-
-        </div>
-    </div>
 
     <!-- Modal Explicativo - Renda Vitalícia vs Usar Capital -->
     <div id="modalVitaliciaEsgotavel" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); z-index: 10000; justify-content: center; align-items: center; padding: 20px;">
