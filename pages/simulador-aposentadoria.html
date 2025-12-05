@@ -2602,9 +2602,25 @@
 
             const idadeApos = idadeAposentadoria;
             const tipoRenda = resultado.tipoRenda || "vitalicia";
+            const estrategia = resultado.estrategia || "perpetua";
+            const idadeFinal = resultado.idadeFinal || 95;
             const anosPeriodo = resultado.anosPeriodo || 0;
             const valorINSS = resultado.valorINSS || 0;
             const rendaMensalDetalhada = resultado.rendaMensalDetalhada || [];
+            const projecaoPosAposentadoria = resultado.projecaoPosAposentadoria || [];
+
+            // ✅ CORREÇÃO: Detectar os 3 casos (igual ao Wizard)
+            const idadeFinalNum = Number(idadeFinal) || 95;
+            const idadeAposNum = Number(idadeApos);
+            
+            // Caso 1: Vitalícia Perpétua
+            const isCaso1 = tipoRenda === 'vitalicia' && estrategia === 'perpetua';
+            
+            // Caso 2: Período + Perpétua + idadeFinal > idadeApos (Preservar 20%)
+            const isCaso2 = tipoRenda === 'periodo' && estrategia === 'perpetua' && idadeFinalNum > idadeAposNum;
+            
+            // Caso 3: Esgotável
+            const isCaso3 = estrategia === 'esgotavel';
 
             // ============================================================
             // PREPARAR DADOS DE PATRIMÔNIO (Curva Verde)
@@ -2618,30 +2634,164 @@
                 }
             });
 
-            // Projeção pós-aposentadoria
+            // ✅ CORREÇÃO: Usar projecaoPosAposentadoria do engine (igual ao Wizard)
             let dadosPosAposentadoria = [];
-            if (tipoRenda === "vitalicia") {
-                // Patrimônio preservado (linha horizontal)
-                const patrimonioFinal = resultado.patrimonioFinal;
-                const anosPos = resultado.idadeFinal - idadeApos;
-                for (let i = 0; i <= anosPos; i++) {
-                    dadosPosAposentadoria.push({ idade: idadeApos + i, valor: patrimonioFinal });
-                }
-            } else if (tipoRenda === "periodo" && resultado.curvaConsumo.length > 0) {
-                // Patrimônio consumindo (curva descendente)
-                resultado.curvaConsumo.forEach((saldo, index) => {
-                    if (index % 12 === 0 || index === resultado.curvaConsumo.length - 1) {
-                        const ano = Math.floor(index / 12);
-                        dadosPosAposentadoria.push({ idade: idadeApos + ano, valor: saldo });
+            if (projecaoPosAposentadoria && projecaoPosAposentadoria.length > 0) {
+                const mesesAteAposentadoria = (idadeApos - idadeAtual) * 12;
+                
+                projecaoPosAposentadoria.forEach((item, index) => {
+                    // Amostrar a cada 12 meses ou no último ponto
+                    if (item.mes % 12 === 0 || index === projecaoPosAposentadoria.length - 1) {
+                        const mesesTotais = mesesAteAposentadoria + item.mes;
+                        const idadeReal = idadeAtual + Math.floor(mesesTotais / 12);
+                        dadosPosAposentadoria.push({ idade: idadeReal, valor: item.saldo });
                     }
                 });
+            } else {
+                // Fallback para compatibilidade (não deveria acontecer)
+                if (tipoRenda === "vitalicia") {
+                    const patrimonioFinal = resultado.patrimonioFinal;
+                    const anosPos = idadeFinalNum - idadeApos;
+                    for (let i = 0; i <= anosPos; i++) {
+                        dadosPosAposentadoria.push({ idade: idadeApos + i, valor: patrimonioFinal });
+                    }
+                }
             }
 
             // Combinar acumulação + pós-aposentadoria
             const todosDadosPatrimonio = [...dadosAcumulacao, ...dadosPosAposentadoria];
-            const labels = todosDadosPatrimonio.map(p => p.idade);
-            const valoresPatrimonio = todosDadosPatrimonio.map(p => p.valor);
+            let labelsIniciais = todosDadosPatrimonio.map(p => p.idade);
+            let valoresPatrimonioIniciais = todosDadosPatrimonio.map(p => p.valor);
+            
+            // ✅ CORREÇÃO: Expandir eixo X até 116 anos (igual ao Wizard)
+            const idadeMaxima = 116;
+            const idadeMaximaAtual = labelsIniciais.length > 0 ? Math.max(...labelsIniciais) : idadeAtual;
+            
+            // Criar mapa idade -> valor para mapeamento eficiente
+            const mapaIdadeValor = new Map();
+            labelsIniciais.forEach((label, idx) => {
+                mapaIdadeValor.set(label, valoresPatrimonioIniciais[idx]);
+            });
+            
+            let labels = [...labelsIniciais];
+            let valoresPatrimonio = [...valoresPatrimonioIniciais];
+            
+            if (idadeMaximaAtual < idadeMaxima) {
+                // Adicionar idades importantes até 116 anos
+                const idadesImportantes = [];
+                for (let idade = idadeMaximaAtual + 1; idade <= idadeMaxima; idade++) {
+                    if (idade % 5 === 0 || idade === 95 || idade === 100 || idade === 116) {
+                        idadesImportantes.push(idade);
+                    }
+                }
+                idadesImportantes.forEach(idade => {
+                    if (!labels.includes(idade)) {
+                        labels.push(idade);
+                        valoresPatrimonio.push(null); // Sem dados para essas idades
+                    }
+                });
+                // Reordenar
+                const sorted = labels.map((l, i) => ({ idade: l, valor: valoresPatrimonio[i] }))
+                    .sort((a, b) => a.idade - b.idade);
+                labels = sorted.map(s => s.idade);
+                valoresPatrimonio = sorted.map(s => s.valor);
+            }
 
+            // ============================================================
+            // ✅ CORREÇÃO: Preparar datasets baseado nos 3 casos (igual ao Wizard)
+            // ============================================================
+            const datasets = [];
+            
+            // Dataset principal: Acumulação + Pós-aposentadoria (curva contínua)
+            let labelPatrimonio = 'Acumulação até Aposentadoria';
+            let corPatrimonio = '#10b981'; // Verde
+            let borderDashPatrimonio = [];
+            
+            // Ajustar label e cor baseado no caso
+            if (isCaso2) {
+                labelPatrimonio = 'Consumo até o piso (20% preservado)';
+                corPatrimonio = '#F39C12'; // Laranja
+                borderDashPatrimonio = [5, 3]; // Tracejado
+            } else if (isCaso3) {
+                labelPatrimonio = 'Até 95 anos (simulação)';
+                corPatrimonio = '#e74c3c'; // Vermelho
+                borderDashPatrimonio = [5, 5]; // Tracejado
+            } else if (isCaso1) {
+                labelPatrimonio = 'Patrimônio Preservado';
+                corPatrimonio = '#2ecc71'; // Verde claro
+            }
+            
+            // ✅ CORREÇÃO: Ajustar valores do Caso 2 para garantir piso de 20%
+            let valoresPatrimonioAjustados = valoresPatrimonio;
+            if (isCaso2) {
+                const patrimonioTotalProjetado = dadosAcumulacao.length > 0 ? dadosAcumulacao[dadosAcumulacao.length - 1].valor : resultado.patrimonioFinal;
+                const piso = patrimonioTotalProjetado * 0.20;
+                
+                // Encontrar o primeiro índice onde a curva toca ou passa abaixo do piso
+                let indicePiso = -1;
+                for (let i = dadosAcumulacao.length; i < valoresPatrimonio.length; i++) {
+                    if (valoresPatrimonio[i] !== null && valoresPatrimonio[i] <= piso) {
+                        indicePiso = i;
+                        break;
+                    }
+                }
+                
+                // Ajustar valores: manter valores originais até tocar o piso, depois manter constante em piso
+                valoresPatrimonioAjustados = valoresPatrimonio.map((val, idx) => {
+                    if (idx < dadosAcumulacao.length) {
+                        return val; // Manter acumulação original
+                    }
+                    if (indicePiso >= 0 && idx >= indicePiso) {
+                        return piso; // A partir do ponto onde tocou o piso, manter constante
+                    }
+                    if (val !== null && val < piso) {
+                        return piso; // Forçar piso mínimo
+                    }
+                    return val;
+                });
+            }
+            
+            // Dataset principal: Patrimônio (curva contínua)
+            datasets.push({
+                label: labelPatrimonio,
+                data: valoresPatrimonioAjustados,
+                borderColor: corPatrimonio,
+                backgroundColor: isCaso1 ? 'rgba(46, 204, 113, 0.05)' : 'rgba(16, 185, 129, 0.05)',
+                borderWidth: 1.5,
+                borderDash: borderDashPatrimonio,
+                tension: isCaso1 ? 0 : 0.4,
+                fill: isCaso1 ? false : true,
+                yAxisID: 'y',
+                pointRadius: 2,
+                pointHoverRadius: 4
+            });
+            
+            // ✅ CORREÇÃO: Adicionar linha horizontal de 20% para Caso 2
+            if (isCaso2) {
+                const patrimonioTotalProjetado = dadosAcumulacao.length > 0 ? dadosAcumulacao[dadosAcumulacao.length - 1].valor : resultado.patrimonioFinal;
+                const piso = patrimonioTotalProjetado * 0.20;
+                
+                // Encontrar o índice onde começa a aposentadoria
+                const idadeAposentadoriaIndex = dadosAcumulacao.length;
+                
+                // Criar array de dados: null até aposentadoria, depois piso até o final
+                const dadosLinhaHorizontal = labels.map((_, idx) => idx >= idadeAposentadoriaIndex ? piso : null);
+                
+                datasets.push({
+                    label: "Herança Preservada (20% do Patrimônio Inicial)",
+                    data: dadosLinhaHorizontal,
+                    borderColor: "rgba(173, 255, 47, 0.70)", // verde-limão neon premium
+                    backgroundColor: "transparent",
+                    borderWidth: 1.2,
+                    tension: 0,
+                    pointRadius: 0,
+                    pointHoverRadius: 0,
+                    borderDash: [], // linha contínua
+                    fill: false,
+                    yAxisID: 'y'
+                });
+            }
+            
             // ============================================================
             // PREPARAR DADOS DE RENDA MENSAL (Curva Lilás)
             // ============================================================
@@ -2684,9 +2834,9 @@
                     }
                 }
             });
-
+            
             // ============================================================
-            // RENDERIZAÇÃO COM 4 CURVAS
+            // RENDERIZAÇÃO COM CURVAS DE PATRIMÔNIO + RENDA
             // ============================================================
             const ctx = canvas.getContext('2d');
             window.chartEvolucaoOficial = new Chart(ctx, {
@@ -2694,19 +2844,7 @@
                 data: {
                     labels: labels,
                     datasets: [
-                        {
-                            // 1. PATRIMÔNIO (Verde) - Eixo Y esquerdo
-                            label: 'Patrimônio',
-                            data: valoresPatrimonio,
-                            borderColor: '#10b981',
-                            backgroundColor: 'rgba(16, 185, 129, 0.05)',  // ✅ AJUSTE: Transparência reduzida
-                            borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
-                            tension: 0.15,
-                            fill: true,
-                            yAxisID: 'y',
-                            pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
-                            pointHoverRadius: 4
-                        },
+                        ...datasets, // Datasets de patrimônio (acumulação + pós-aposentadoria)
                         {
                             // 2. RENDA MENSAL DO PATRIMÔNIO (Lilás) - Eixo Y direito
                             label: 'Renda Mensal (Investimentos)',
@@ -3029,7 +3167,10 @@
                         abrirGraficoRendaMensalPro(
                             resultado.rendaMensalDetalhada,
                             idadeApos,
-                            beneficioINSS
+                            beneficioINSS,
+                            resultado.tipoRenda || 'vitalicia',
+                            resultado.estrategia || 'perpetua',
+                            resultado.idadeFinal || 95
                         );
                     } else {
                         // Fallback para função antiga se não houver dados detalhados
@@ -4622,7 +4763,7 @@
         // ================================================
         let graficoRendaMensalPro = null;
 
-        function abrirGraficoRendaMensalPro(listaRenda, idadeApos, inssValor = 0) {
+        function abrirGraficoRendaMensalPro(listaRenda, idadeApos, inssValor = 0, tipoRenda = 'vitalicia', estrategia = 'perpetua', idadeFinal = 95) {
             console.log("📊 Abrindo gráfico de renda mensal PRO...");
             
             idadeApos = Number(idadeApos) || 0;
@@ -4788,21 +4929,40 @@
                     
                     console.log("✅ Gráfico Chart.js criado com sucesso!");
                     
+                    // ✅ CORREÇÃO: Detectar os 3 casos (igual ao Wizard)
+                    const idadeFinalNum = Number(idadeFinal) || 95;
+                    const idadeAposNum = Number(idadeApos);
+                    
+                    // Caso 1: Vitalícia Perpétua
+                    const isCaso1 = tipoRenda === 'vitalicia' && estrategia === 'perpetua';
+                    
+                    // Caso 2: Período + Perpétua + idadeFinal > idadeApos (Preservar 20%)
+                    const isCaso2 = tipoRenda === 'periodo' && estrategia === 'perpetua' && idadeFinalNum > idadeAposNum;
+                    
+                    // Caso 3: Esgotável
+                    const isCaso3 = estrategia === 'esgotavel' || (tipoRenda === 'periodo' && estrategia !== 'perpetua' && !isCaso2);
+                    
                     // Atualizar informações textuais
                     const explicacao = document.getElementById("textoExplicativoModal");
                     if (explicacao) {
                         const rendaInicial = listaRenda[0] || 0;
                         const rendaFinal = listaRenda[listaRenda.length - 1] || 0;
                         const mesesTotal = listaRenda.length;
-                        const idadeFinal = idadeApos + Math.floor(mesesTotal / 12);
-                        const temRendaZero = rendas.some(r => r === 0 || r < 0.01);
+                        const idadeFinalCalculada = idadeApos + Math.floor(mesesTotal / 12);
                         const rendaTotalInicial = rendaInicial + inssValor;
                         
                         let textoInfo = "";
-                        if (temRendaZero) {
-                            textoInfo = `📊 <strong>Renda por Período Determinado:</strong> Você receberá uma renda mensal do patrimônio que começa em <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> e termina em <strong>R$ 0</strong> aproximadamente aos <strong>${idadeFinal} anos</strong>, quando seu patrimônio se esgotará.`;
+                        
+                        // ✅ CORREÇÃO: Texto específico para cada caso (igual ao Wizard)
+                        if (isCaso1) {
+                            textoInfo = `💚 <strong>Renda Vitalícia Perpétua (Preservar Capital):</strong> Você receberá <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> do patrimônio de forma permanente, preservando seu capital para sempre. Esta renda é calculada usando a <strong>taxa real</strong> (taxa nominal - inflação), garantindo que seu poder de compra seja mantido ao longo do tempo.`;
+                        } else if (isCaso2) {
+                            textoInfo = `🟡 <strong>Renda por Período Determinado (Preservar 20% do Capital):</strong> Você receberá <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> do patrimônio até os <strong>${idadeFinalNum} anos</strong>, quando seu patrimônio terá sido reduzido para <strong>20% do valor inicial</strong>, que será preservado como herança. Esta renda é calculada usando a <strong>taxa real</strong> (taxa nominal - inflação), garantindo que seu poder de compra seja mantido.`;
+                        } else if (isCaso3) {
+                            textoInfo = `🔴 <strong>Renda por Período Determinado (Esgotável - Usar Capital Gradualmente):</strong> Você receberá <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> do patrimônio até os <strong>${idadeFinalNum} anos</strong>, quando seu patrimônio se esgotará completamente. Esta renda é calculada usando a <strong>taxa nominal</strong> (sem descontar inflação), o que significa que seu poder de compra diminuirá ao longo do tempo conforme a inflação.`;
                         } else {
-                            textoInfo = `💚 <strong>Renda Vitalícia:</strong> Você receberá <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> do patrimônio de forma permanente, preservando seu capital para sempre.`;
+                            // Fallback genérico
+                            textoInfo = `📊 <strong>Renda Mensal:</strong> Você receberá <strong>R$ ${rendaInicial.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> do patrimônio.`;
                         }
                         
                         if (inssValor > 0) {
@@ -4890,8 +5050,6 @@
                             data: rendaTotal,
                             borderColor: "#00FF88",
                             borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
-                            pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
-                            pointHoverRadius: 4
                             pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
                             pointHoverRadius: 4
                         }

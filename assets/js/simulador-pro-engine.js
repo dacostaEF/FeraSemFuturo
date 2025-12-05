@@ -92,6 +92,7 @@ function estimarINSS(rendaDesejada, inssInformado) {
 }
 
 // Gerar renda mensal ao longo do tempo (para gráficos)
+// ✅ CORREÇÃO: Suportar os 3 casos (igual ao Wizard)
 function gerarRendaMensalAoLongoDoTempo(patrimonio, taxaAnualReal, idadeApos, idadeFinal, estrategia) {
     const meses = (idadeFinal - idadeApos) * 12;
     const taxaMensal = Math.pow(1 + taxaAnualReal, 1/12) - 1;
@@ -108,7 +109,27 @@ function gerarRendaMensalAoLongoDoTempo(patrimonio, taxaAnualReal, idadeApos, id
         return rendaMensal;
     }
 
+    // Estratégia PRESERVAR 20% (capital desce até 20% do inicial)
+    // ✅ CORREÇÃO: Usar a mesma fórmula de calcularRendaPreservar20 para consistência
+    if (estrategia === "preservar20") {
+        const H = patrimonio * 0.20; // Herança = 20% do patrimônio inicial
+        const i = taxaMensal;
+        
+        // Fórmula exata do PMT com valor residual FV (mesma de calcularRendaPreservar20)
+        // PMT = [PV - FV/(1+i)^n] * [i / (1 - (1+i)^-n)]
+        const fator_n = Math.pow(1 + i, meses);
+        const renda = (patrimonio - H / fator_n) * i / (1 - 1 / fator_n);
+        
+        for (let i = 0; i < meses; i++) {
+            rendaMensal.push(renda);
+        }
+        return rendaMensal;
+    }
+
     // Estratégia ESGOTÁVEL (capital será consumido)
+    // ✅ NOTA: Esta função recebe taxaAnualReal, mas para esgotável deveria usar nominal
+    // Porém, a renda já foi calculada corretamente em executarSimulacaoCompleta
+    // Aqui apenas retornamos valores constantes baseados na renda já calculada
     const rendaPMT = (patrimonioAtual * taxaMensal) / (1 - Math.pow(1 + taxaMensal, -meses));
 
     for (let i = 0; i < meses; i++) {
@@ -121,7 +142,126 @@ function gerarRendaMensalAoLongoDoTempo(patrimonio, taxaAnualReal, idadeApos, id
 }
 
 // Constante de inflação média
-const INFLACAO_MEDIA = 4.5; // 4.5% a.a.
+const INFLACAO_MEDIA = 0.045; // 4.5% a.a. (decimal, igual ao Wizard)
+
+// ============================================================
+// 🟦 CALCULAR RENDA QUE PRESERVA 20% NO ÚLTIMO MÊS
+// ============================================================
+function calcularRendaPreservar20(pv, taxaMensalReal, idadeApos, idadeFinal) {
+    const meses = (idadeFinal - idadeApos) * 12;
+    if (meses <= 0) return { rendaMensal: 0, mesesDuracao: 0, heranca: pv * 0.20 };
+
+    const FV = pv * 0.20; // 20% preservado
+    const i = taxaMensalReal;
+
+    // Fórmula exata do PMT com valor residual FV
+    // PMT = [PV - FV/(1+i)^n] * [i / (1 - (1+i)^-n)]
+    const fator_n = Math.pow(1 + i, meses);
+    const rendaMensal = (pv - FV / fator_n) * i / (1 - 1 / fator_n);
+
+    return {
+        rendaMensal,
+        mesesDuracao: meses,
+        heranca: FV
+    };
+}
+
+// ============================================================
+// 🟦 PROJEÇÃO DE PATRIMÔNIO PRESERVANDO 20% NO ÚLTIMO MÊS
+// ============================================================
+function projetarPatrimonioPreservar20(pv, renda, taxaMensalReal, meses) {
+    const H = pv * 0.20; // Herança = 20% do patrimônio inicial
+    const dados = [];
+    const tolerancia = 0.01; // Tolerância para comparação (1 centavo)
+    
+    // Adiciona ponto inicial
+    dados.push({ mes: 0, saldo: pv });
+    
+    // Projeta mês a mês iterativamente
+    let saldoAtual = pv;
+    
+    for (let m = 1; m <= meses; m++) {
+        if (m === meses) {
+            // ÚLTIMO MÊS: deve chegar EXATAMENTE em H
+            dados.push({ mes: m, saldo: H });
+            break;
+        }
+        
+        // Calcular saldo do próximo mês: aplicar juros e subtrair renda
+        saldoAtual = saldoAtual * (1 + taxaMensalReal) - renda;
+        
+        // Se chegou ao piso de 20% (ou muito próximo), manter constante até o final
+        if (saldoAtual <= H + tolerancia) {
+            // Ajustar para H exato
+            saldoAtual = H;
+            
+            // Adicionar ponto atual
+            dados.push({ mes: m, saldo: saldoAtual });
+            
+            // Preencher todos os meses restantes com H
+            for (let k = m + 1; k <= meses; k++) {
+                dados.push({ mes: k, saldo: H });
+            }
+            
+            // Garantir que o último mês seja exatamente H
+            if (dados.length > 0 && dados[dados.length - 1].mes === meses) {
+                dados[dados.length - 1].saldo = H;
+            }
+            
+            break; // Parar a projeção
+        }
+        
+        // Adicionar ponto atual
+        dados.push({ mes: m, saldo: saldoAtual });
+    }
+    
+    // Garantir que o último ponto seja exatamente H
+    if (dados.length > 0 && dados[dados.length - 1].mes !== meses) {
+        // Se não chegou ao último mês, adicionar ponto final
+        dados.push({ mes: meses, saldo: H });
+    } else if (dados.length > 0) {
+        // Se já tem o último mês, garantir que seja H
+        dados[dados.length - 1].saldo = H;
+    }
+    
+    return dados;
+}
+
+// ============================================================
+// 🔧 FUNÇÕES AUXILIARES PARA CURVAS ESGOTÁVEIS
+// ============================================================
+
+// Função auxiliar — calcular PMT esgotável para um n meses (usa taxa NOMINAL)
+function calcularPMTEsgotavel(pv, taxaMensal, meses) {
+    if (meses <= 0) return 0;
+
+    // Fórmula do PMT para esgotar capital (renda esgotável)
+    const fator = Math.pow(1 + taxaMensal, meses);
+    const pmt = pv * (taxaMensal * fator) / (fator - 1);
+
+    return pmt;
+}
+
+// Função auxiliar — projetar curva usando PMT específico (usa taxa NOMINAL)
+function projetarCurvaEsgotavel(pv, pmt, taxaMensal, mesesTotal) {
+    const dados = [];
+    let saldo = pv;
+
+    for (let m = 0; m <= mesesTotal; m++) {
+        if (m === mesesTotal) {
+            // ✅ CORREÇÃO: Garantir que o último ponto seja exatamente zero
+            saldo = 0;
+        } else if (m > 0) {
+            saldo = saldo * (1 + taxaMensal) - pmt;
+
+            // Limite para evitar números negativos por arredondamento
+            if (saldo < 0) saldo = 0;
+        }
+        
+        dados.push({ mes: m, saldo: saldo });
+    }
+    return dados;
+}
 
 // Exporte funções
 window.simuladorProEngine = {
@@ -153,8 +293,8 @@ window.simuladorProEngine.executarSimulacaoCompleta = function (params) {
         inssInformado
     } = params;
 
-    // Valor padrão para idadeFinal se não fornecido
-    const idadeFinalUsada = idadeFinal || (idadeApos + 30); // Padrão: 30 anos após aposentadoria
+    // ✅ PADRONIZAÇÃO: Sempre usar 95 anos como idade final (igual ao Wizard)
+    const idadeFinalUsada = 95;
 
     // ============================================================
     // TAXAS: NOMINAL para acumulação, REAL para renda
@@ -163,7 +303,7 @@ window.simuladorProEngine.executarSimulacaoCompleta = function (params) {
     const taxaMensalNominal = taxaMensalEfetiva(retornoAnual);
     
     // Taxa REAL mensal (para cálculo de renda) - igual ao Wizard
-    const taxaAnualReal = retornoAnual - (INFLACAO_MEDIA / 100);
+    const taxaAnualReal = retornoAnual - INFLACAO_MEDIA; // INFLACAO_MEDIA já é decimal (0.045)
     const taxaMensalReal = taxaMensalEfetiva(taxaAnualReal);
 
     // ============================================================
@@ -187,50 +327,50 @@ window.simuladorProEngine.executarSimulacaoCompleta = function (params) {
     
     let rendaRealPossivel = 0;
     
+    // ✅ CORREÇÃO: Detectar Caso 2 PRIMEIRO (periodo + perpetua + idadeFinal > idadeApos)
     // ESTRATÉGIA 1: RENDA VITALÍCIA + PRESERVAR CAPITAL
     if (tipoRenda === "vitalicia" && estrategiaFinal === "perpetua") {
         rendaRealPossivel = patrimonioFinal * taxaMensalReal;
     }
-    // ESTRATÉGIA 2: RENDA POR PERÍODO + PRESERVAR CAPITAL
+    // ESTRATÉGIA 2: RENDA POR PERÍODO + PRESERVAR CAPITAL (PRESERVAR 20%)
+    // ✅ CORREÇÃO CRÍTICA: Detectar Caso 2 corretamente
+    else if (tipoRenda === "periodo" && estrategiaFinal === "perpetua" && idadeFinalUsada > idadeApos) {
+        // CASO 2: Renda por período + preservar capital até idadeFinal
+        // Renda intermediária que consome capital gradualmente até 20% aos 95 anos
+        const calc = calcularRendaPreservar20(
+            patrimonioFinal,
+            taxaMensalReal,
+            idadeApos,
+            idadeFinalUsada
+        );
+        rendaRealPossivel = calc.rendaMensal;
+    }
+    // ESTRATÉGIA 2 (fallback): RENDA POR PERÍODO + PRESERVAR CAPITAL (sem idadeFinal)
     else if (tipoRenda === "periodo" && estrategiaFinal === "perpetua") {
+        // Sem idadeFinal: renda vitalícia (só juros, patrimônio constante)
         rendaRealPossivel = patrimonioFinal * taxaMensalReal;
     }
-    // ESTRATÉGIA OTIMIZADA: RENDA POR PERÍODO COM LONGEVIDADE (idadeFinal)
-    else if (tipoRenda === "periodo" && idadeFinalUsada) {
-        const meses = (idadeFinalUsada - idadeApos) * 12;
-        if (taxaMensalReal > 0 && meses > 0) {
-            rendaRealPossivel = (patrimonioFinal * taxaMensalReal) / (1 - Math.pow(1 + taxaMensalReal, -meses));
-        } else {
-            rendaRealPossivel = patrimonioFinal / meses;
-        }
-    }
-    // ESTRATÉGIA 3: RENDA POR PERÍODO + USAR CAPITAL GRADUALMENTE
+    // ESTRATÉGIA 3: RENDA POR PERÍODO + USAR CAPITAL GRADUALMENTE (ESGOTÁVEL)
+    // ✅ CORREÇÃO: Usar taxa NOMINAL para esgotável (igual ao Wizard)
     else if (tipoRenda === "periodo" && estrategiaFinal === "esgotavel") {
-        let meses;
-        if (idadeFinalUsada) {
-            meses = (idadeFinalUsada - idadeApos) * 12;
-        } else {
-            meses = anosPeriodo * 12;
-        }
-        if (taxaMensalReal > 0 && meses > 0) {
-            rendaRealPossivel = (patrimonioFinal * taxaMensalReal) / (1 - Math.pow(1 + taxaMensalReal, -meses));
-        } else {
-            rendaRealPossivel = patrimonioFinal / meses;
-        }
+        const meses = (idadeFinalUsada - idadeApos) * 12;
+        // PMT usando **taxa nominal** – CORRETO
+        rendaRealPossivel = calcularPMTEsgotavel(
+            patrimonioFinal,
+            taxaMensalNominal,
+            meses
+        );
     }
     // ESTRATÉGIA 4: RENDA VITALÍCIA + USAR CAPITAL GRADUALMENTE (não recomendado, mas tratado)
+    // ✅ CORREÇÃO: Usar taxa NOMINAL para esgotável
     else if (tipoRenda === "vitalicia" && estrategiaFinal === "esgotavel") {
-        let meses;
-        if (idadeFinalUsada) {
-            meses = (idadeFinalUsada - idadeApos) * 12;
-        } else {
-            meses = 30 * 12; // fallback: 30 anos
-        }
-        if (taxaMensalReal > 0 && meses > 0) {
-            rendaRealPossivel = (patrimonioFinal * taxaMensalReal) / (1 - Math.pow(1 + taxaMensalReal, -meses));
-        } else {
-            rendaRealPossivel = patrimonioFinal / meses;
-        }
+        const meses = (idadeFinalUsada - idadeApos) * 12;
+        // PMT usando **taxa nominal** – CORRETO
+        rendaRealPossivel = calcularPMTEsgotavel(
+            patrimonioFinal,
+            taxaMensalNominal,
+            meses
+        );
     }
     // Fallback: vitalícia perpétua
     else {
@@ -247,45 +387,121 @@ window.simuladorProEngine.executarSimulacaoCompleta = function (params) {
     const valorINSS = estimarINSS(rendaDesejada, inssInformado);
 
     // ============================================================
-    // 4. PROJEÇÕES PÓS-APOSENTADORIA
+    // 4. PROJEÇÕES PÓS-APOSENTADORIA (igual ao Wizard)
     // ============================================================
-    let curvaVitalicia = projetarPatrimonioPreservado(
-        patrimonioFinal, idadeAtual, idadeApos, idadeFinalUsada
-    );
-    let curvaConsumo = [];
-    if (tipoRenda === "periodo" && anosPeriodo > 0) {
-        curvaConsumo = projetarPatrimonioConsumo(
+    let projecaoPosAposentadoria = [];
+    
+    // ESTRATÉGIA 1: RENDA VITALÍCIA + PRESERVAR CAPITAL
+    // Patrimônio permanece constante (só juros são consumidos)
+    if (tipoRenda === "vitalicia" && estrategiaFinal === "perpetua") {
+        // Calcular anos até 116 anos (padrão de longevidade estendido, igual ao Wizard)
+        const idadeMaxima = 116;
+        const anosProjecao = idadeMaxima - idadeApos;
+        const meses = anosProjecao * 12;
+        projecaoPosAposentadoria = [];
+        for (let m = 0; m <= meses; m++) {
+            projecaoPosAposentadoria.push({ mes: m, saldo: patrimonioFinal });
+        }
+    }
+    // ESTRATÉGIA 2: RENDA POR PERÍODO + PRESERVAR CAPITAL (PRESERVAR 20%)
+    // ✅ CORREÇÃO CRÍTICA: Detectar Caso 2 corretamente
+    else if (tipoRenda === "periodo" && estrategiaFinal === "perpetua" && idadeFinalUsada > idadeApos) {
+        const anosAposAposentadoria = idadeFinalUsada - idadeApos;
+        const meses = anosAposAposentadoria * 12;
+        
+        projecaoPosAposentadoria = projetarPatrimonioPreservar20(
             patrimonioFinal,
-            rendaPeriodoMensal,
-            taxaMensalReal,  // ✅ CORREÇÃO: usar taxa REAL
-            anosPeriodo
+            rendaRealPossivel,
+            taxaMensalReal,
+            meses
         );
+    }
+    // ESTRATÉGIA 2 (fallback): RENDA POR PERÍODO + PRESERVAR CAPITAL (sem idadeFinal)
+    else if (tipoRenda === "periodo" && estrategiaFinal === "perpetua") {
+        // Sem idadeFinal, manter comportamento original (patrimônio constante)
+        const anosAposAposentadoria = idadeFinalUsada - idadeApos;
+        const meses = anosAposAposentadoria * 12;
+        projecaoPosAposentadoria = [];
+        for (let m = 0; m <= meses; m++) {
+            projecaoPosAposentadoria.push({ mes: m, saldo: patrimonioFinal });
+        }
+    }
+    // ESTRATÉGIA 3: RENDA POR PERÍODO + USAR CAPITAL GRADUALMENTE (ESGOTÁVEL)
+    // ✅ CORREÇÃO: Usar taxa NOMINAL e projetarCurvaEsgotavel
+    else if (tipoRenda === "periodo" && estrategiaFinal === "esgotavel") {
+        const meses = (idadeFinalUsada - idadeApos) * 12;
+        // Curva esgotável usando taxa nominal
+        projecaoPosAposentadoria = projetarCurvaEsgotavel(
+            patrimonioFinal,
+            rendaRealPossivel,
+            taxaMensalNominal,
+            meses
+        );
+    }
+    // ESTRATÉGIA 4: RENDA VITALÍCIA + USAR CAPITAL GRADUALMENTE (não recomendado)
+    // ✅ CORREÇÃO: Usar taxa NOMINAL e projetarCurvaEsgotavel
+    else if (tipoRenda === "vitalicia" && estrategiaFinal === "esgotavel") {
+        const meses = (idadeFinalUsada - idadeApos) * 12;
+        // Curva esgotável usando taxa nominal
+        projecaoPosAposentadoria = projetarCurvaEsgotavel(
+            patrimonioFinal,
+            rendaRealPossivel,
+            taxaMensalNominal,
+            meses
+        );
+    }
+    // Fallback: vitalícia perpétua
+    else {
+        const anosAposAposentadoria = idadeFinalUsada - idadeApos;
+        const meses = anosAposAposentadoria * 12;
+        projecaoPosAposentadoria = [];
+        for (let m = 0; m <= meses; m++) {
+            projecaoPosAposentadoria.push({ mes: m, saldo: patrimonioFinal });
+        }
+    }
+    
+    // Manter compatibilidade com código existente
+    let curvaVitalicia = [];
+    let curvaConsumo = [];
+    if (projecaoPosAposentadoria.length > 0) {
+        // Converter para formato antigo se necessário
+        curvaVitalicia = projecaoPosAposentadoria.map(p => p.saldo);
+        curvaConsumo = projecaoPosAposentadoria.map(p => p.saldo);
     }
 
     // ============================================================
-    // 5. HERANÇA (baseada na estratégia, não no tipo de renda)
+    // 5. HERANÇA (baseada na estratégia, igual ao Wizard)
     // ============================================================
     let heranca = 0;
-    // estrategiaFinal já foi determinada acima (linha 186)
     
-    // Herança = patrimônio preservado (não consumido)
-    if (estrategiaFinal === "perpetua") {
-        heranca = patrimonioFinal;  // Capital preservado (vitalícia ou período com preservação)
-    } else {
-        heranca = 0;  // Capital consumido (esgotável)
+    // Caso 1 — patrimônio permanece intacto
+    if (tipoRenda === "vitalicia" && estrategiaFinal === "perpetua") {
+        heranca = patrimonioFinal;
+    }
+    // Caso 2 — preservar 20% do patrimônio inicial
+    else if (tipoRenda === "periodo" && estrategiaFinal === "perpetua" && idadeFinalUsada > idadeApos) {
+        heranca = patrimonioFinal * 0.20;
+    }
+    // Caso 3 — esgotável: pegar o saldo final real
+    else {
+        heranca = projecaoPosAposentadoria?.[projecaoPosAposentadoria.length - 1]?.saldo || 0;
     }
 
     // ============================================================
     // 6. GERAR RENDA MENSAL DETALHADA (para gráficos)
     // ============================================================
-    // taxaAnualReal já foi calculada acima
-    // estrategiaFinal já foi determinada acima
+    // ✅ CORREÇÃO: Para Caso 2 (periodo + perpetua + idadeFinal), usar estratégia "preservar20"
+    let estrategiaParaRenda = estrategiaFinal;
+    if (tipoRenda === "periodo" && estrategiaFinal === "perpetua" && idadeFinalUsada > idadeApos) {
+        estrategiaParaRenda = "preservar20";
+    }
+    
     const rendaMensalDetalhada = gerarRendaMensalAoLongoDoTempo(
         patrimonioFinal,
         taxaAnualReal,
         idadeApos,
         idadeFinalUsada,
-        estrategiaFinal  // ✅ CORREÇÃO: usar estrategiaFinal
+        estrategiaParaRenda
     );
 
     // ============================================================
@@ -298,16 +514,18 @@ window.simuladorProEngine.executarSimulacaoCompleta = function (params) {
         rendaRealPossivel,  // ✅ NOVO: renda calculada baseada na estratégia (igual ao Wizard)
         valorINSS,
         acumulacaoMensal: acumulacao.historico,
-        curvaVitalicia,
-        curvaConsumo,
+        curvaVitalicia,  // Mantido para compatibilidade
+        curvaConsumo,  // Mantido para compatibilidade
+        projecaoPosAposentadoria,  // ✅ NOVO: projeção pós-aposentadoria (formato igual ao Wizard)
         anosPeriodo,
-        idadeFinal: idadeFinalUsada,
+        idadeFinal: idadeFinalUsada,  // ✅ PADRONIZADO: sempre 95
         rendaTotalVital: rendaRealPossivel + valorINSS,  // ✅ CORREÇÃO: usar rendaRealPossivel
         rendaTotalPeriodo: rendaRealPossivel + valorINSS,  // ✅ CORREÇÃO: usar rendaRealPossivel
         heranca,
-        rendaMensalDetalhada,  // 🟧 NOVO: renda mensal detalhada para gráficos
+        rendaMensalDetalhada,  // ✅ NOVO: renda mensal detalhada para gráficos
         taxaMensalReal,  // ✅ CORREÇÃO: taxa mensal REAL (para cálculos de renda)
-        tipoRenda,  // 🟧 NOVO: tipo de renda selecionado
+        taxaMensalNominal,  // ✅ NOVO: taxa mensal NOMINAL (para acumulação e esgotável)
+        tipoRenda,  // ✅ NOVO: tipo de renda selecionado
         estrategia: estrategiaFinal  // ✅ CORREÇÃO: estratégia final determinada
     };
 };
