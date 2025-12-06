@@ -8,7 +8,8 @@ function taxaMensalEfetiva(taxaAnual) {
 }
 
 // Acumulação mensal até a aposentadoria (igual ao Wizard)
-function projetarAcumulacaoMensal(idadeAtual, idadeApos, aporteMensal, aporteAnual, patrimonioAtual, taxaMensal) {
+// ✅ NOVO: Suporta taxa administrativa (taxaAdmMensal)
+function projetarAcumulacaoMensal(idadeAtual, idadeApos, aporteMensal, aporteAnual, patrimonioAtual, taxaMensal, taxaAdmMensal = 0) {
     const meses = (idadeApos - idadeAtual) * 12;
     const historico = [];
     let saldo = Number(patrimonioAtual);  // Começa com patrimônio inicial
@@ -18,8 +19,12 @@ function projetarAcumulacaoMensal(idadeAtual, idadeApos, aporteMensal, aporteAnu
 
     // Loop começa em m=1 (igual ao Wizard)
     for (let m = 1; m <= meses; m++) {
-        // Aplica juros e adiciona aporte mensal
-        saldo = saldo * (1 + taxaMensal) + Number(aporteMensal);
+        // ✅ CORREÇÃO: Taxa administrativa reduz o retorno, não o saldo diretamente
+        // Taxa efetiva = taxa nominal - taxa administrativa
+        const taxaEfetivaMensal = taxaMensal - taxaAdmMensal;
+        
+        // Aplica juros (com taxa reduzida pela administrativa) e adiciona aporte mensal
+        saldo = saldo * (1 + taxaEfetivaMensal) + Number(aporteMensal);
 
         // Aporte extra anual no final de cada ano (m % 12 === 0)
         if (aporteAnual > 0 && m % 12 === 0) {
@@ -289,7 +294,8 @@ window.simuladorProEngine.executarSimulacaoCompleta = function (params) {
         estrategia,  // ✅ NOVO: estratégia (perpetua ou esgotavel)
         anosPeriodo,
         rendaDesejada,
-        inssInformado
+        inssInformado,
+        taxaAdmAnual = 0  // ✅ NOVO: taxa administrativa anual (decimal, ex: 0.015 para 1.5%)
     } = params;
 
     // ✅ PADRONIZAÇÃO: Sempre usar 95 anos como idade final (igual ao Wizard)
@@ -308,13 +314,17 @@ window.simuladorProEngine.executarSimulacaoCompleta = function (params) {
     // ============================================================
     // 1. ACUMULAÇÃO ATÉ A APOSENTADORIA (usa taxa NOMINAL)
     // ============================================================
+    // ✅ NOVO: Converter taxa administrativa anual para mensal
+    const taxaAdmMensal = taxaMensalEfetiva(taxaAdmAnual);
+    
     const acumulacao = projetarAcumulacaoMensal(
         idadeAtual,
         idadeApos,
         aporteMensal,
         aporteAnual,
         patrimonioInicial,
-        taxaMensalNominal  // ✅ CORREÇÃO: usar taxa NOMINAL na acumulação
+        taxaMensalNominal,  // ✅ CORREÇÃO: usar taxa NOMINAL na acumulação
+        taxaAdmMensal  // ✅ NOVO: aplicar taxa administrativa
     );
     const patrimonioFinal = acumulacao.saldoFinal;
 

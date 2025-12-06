@@ -2051,6 +2051,34 @@
                             🔎 Entenda por que as taxas mudam tudo
                         </button>
                     </div>
+
+                    <!-- Container para resultados avançados -->
+                    <div id="resultado-ajustes-avancados" style="display:none; margin-top: 32px; padding: 24px; background: rgba(255, 255, 255, 0.03); border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.2);">
+                        <h3 style="color: #D4AF37; margin-bottom: 20px; font-size: 1.2rem;">📊 Impacto das Taxas no seu Patrimônio</h3>
+                        
+                        <!-- Cards de comparação -->
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px;">
+                            <div style="padding: 16px; background: rgba(255, 255, 255, 0.05); border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3);">
+                                <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 8px;">Patrimônio Projetado</p>
+                                <p id="resultado-avancado-patrimonio" style="color: #D4AF37; font-size: 1.5rem; font-weight: bold;">—</p>
+                            </div>
+                            <div style="padding: 16px; background: rgba(255, 255, 255, 0.05); border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3);">
+                                <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 8px;">Renda Mensal Prevista</p>
+                                <p id="resultado-avancado-renda" style="color: #D4AF37; font-size: 1.5rem; font-weight: bold;">—</p>
+                            </div>
+                            <div style="padding: 16px; background: rgba(255, 255, 255, 0.05); border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3);">
+                                <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 8px;">Diferença vs. Cenário Base</p>
+                                <p id="resultado-avancado-diferenca" style="color: #ef4444; font-size: 1.2rem; font-weight: bold;">—</p>
+                            </div>
+                        </div>
+
+                        <!-- Texto educativo -->
+                        <div style="padding: 16px; background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; border-radius: 6px; margin-top: 20px;">
+                            <p style="color: #E4E4E4; line-height: 1.7; font-size: 0.95rem; margin: 0;">
+                                <strong style="color: #ef4444;">⚠️ Atenção:</strong> Cada 1% de taxa de administração reduz drasticamente o seu patrimônio futuro, especialmente em prazos longos. Mesmo pequenas diferenças de taxa geram grandes diferenças de renda ao longo dos anos.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -3209,6 +3237,9 @@
             });
 
             console.log("Resultado PRO completo:", resultado);
+            
+            // ✅ NOVO: Salvar resultado base para comparação com ajustes avançados
+            window.resultadoBase = resultado;
 
             // ================================
             // 3. ADAPTAR RESULTADOS PARA COMPATIBILIDADE
@@ -4525,9 +4556,66 @@
         }
 
         // =====================================================
-        // 🔄 APLICAR AJUSTES AVANÇADOS (Recalcular apenas cenário próprio)
+        // 📝 PRÉ-PREENCHER CAMPOS AVANÇADOS COM VALORES DO CENÁRIO BASE
+        // =====================================================
+        function preencherAjustesComValoresDoCenarioBase(resultadoBase) {
+            if (!resultadoBase) return;
+            
+            // Obter valores do cenário base
+            const idadeAtual = parseInt(document.getElementById("currentAge").value);
+            const idadeApos = parseInt(document.getElementById("retirementAge").value);
+            const aporteMensal = parseFloat(document.getElementById("monthlyInvestment").value);
+            const patrimonioInicial = parseFloat(document.getElementById("patrimonioAtualOficial").value) || 0;
+            const currentScenario = window.currentScenario || "moderado";
+            const rentabilidades = {
+                conservador: 0.06,
+                moderado: 0.08,
+                arrojado: 0.10
+            };
+            const retornoAnual = rentabilidades[currentScenario] || 0.08;
+            const INFLACAO_MEDIA = 0.045;
+            
+            // Calcular taxas
+            const taxaAnualReal = retornoAnual - INFLACAO_MEDIA;
+            const taxaMensalReal = Math.pow(1 + taxaAnualReal, 1/12) - 1;
+            const taxaMensalNominal = Math.pow(1 + retornoAnual, 1/12) - 1;
+            
+            // Pré-preencher campos (apenas se estiverem vazios)
+            const rentabilidadeCustom = document.getElementById("rentabilidadeCustom");
+            if (rentabilidadeCustom && !rentabilidadeCustom.value) {
+                rentabilidadeCustom.value = (retornoAnual * 100).toFixed(2);
+            }
+            
+            const inflacaoCustom = document.getElementById("inflacaoCustom");
+            if (inflacaoCustom && !inflacaoCustom.value) {
+                inflacaoCustom.value = (INFLACAO_MEDIA * 100).toFixed(2);
+            }
+            
+            const taxaRealDesejada = document.getElementById("taxaRealDesejada");
+            if (taxaRealDesejada && !taxaRealDesejada.value) {
+                taxaRealDesejada.value = (taxaMensalReal * 100).toFixed(2);
+            }
+            
+            const taxaAdmCustom = document.getElementById("taxaAdmCustom");
+            if (taxaAdmCustom && !taxaAdmCustom.value) {
+                taxaAdmCustom.value = "0"; // Default obrigatório: 0%
+            }
+            
+            const aporteExtra = document.getElementById("aporteExtra");
+            const aporteExtraAnualOficial = document.getElementById("aporteExtraAnualOficial");
+            if (aporteExtra && !aporteExtra.value && aporteExtraAnualOficial) {
+                const valorOficial = parseFloat(aporteExtraAnualOficial.value) || 0;
+                if (valorOficial > 0) {
+                    aporteExtra.value = valorOficial;
+                }
+            }
+        }
+
+        // =====================================================
+        // 🔄 APLICAR AJUSTES AVANÇADOS (Recalcular cenário avançado)
         // =====================================================
         function aplicarAjustesAvancados() {
+            // ✅ CRÍTICO: NÃO atualizar o bloco 1, apenas criar bloco próprio
             // 1. Obter parâmetros avançados
             const paramsAvancados = obterParametrosAvancados();
             
@@ -4566,8 +4654,14 @@
                 return;
             }
             
-            // 6. Recalcular usando o engine
-            const resultado = window.simuladorProEngine.executarSimulacaoCompleta({
+            // 6. Obter resultado base (para comparação)
+            const resultadoBase = window.resultadoBase || null;
+            
+            // 7. Obter taxa administrativa
+            const taxaAdmAnual = paramsAvancados.taxaAdm || 0; // Já em decimal (ex: 0.015 para 1.5%)
+            
+            // 8. Recalcular usando o engine COM taxa administrativa
+            const resultadoAvancado = window.simuladorProEngine.executarSimulacaoCompleta({
                 idadeAtual,
                 idadeApos,
                 idadeFinal,
@@ -4579,95 +4673,83 @@
                 estrategia,
                 anosPeriodo,
                 rendaDesejada,
-                inssInformado: inssManual
+                inssInformado: inssManual,
+                taxaAdmAnual  // ✅ NOVO: passar taxa administrativa
             });
             
-            if (!resultado) {
+            if (!resultadoAvancado) {
                 alert('⚠️ Erro ao recalcular. Verifique os valores inseridos.');
                 return;
             }
             
-            // 7. Atualizar apenas os cards do cenário próprio
-            // ✅ CORREÇÃO CRÍTICA: Usar sempre rendaMensalFinal (variável única do engine)
-            // Esta variável garante que todos os casos (1, 2 e 3) usem a mesma fonte
-            const rendaInvestProprio = resultado.rendaMensalFinal || resultado.rendaRealPossivel || 0;
-            const beneficioINSS = resultado.valorINSS || 0;
-            const patrimonioProjetado = resultado.patrimonioFinal || 0;
-            const rendaMensalPrevista = rendaInvestProprio;
-            const herancaProjetada = resultado.heranca || 0;
-            
-            // Atualizar cards
-            const cardPatrimonio = document.getElementById("cardPatrimonioProjetado");
-            if (cardPatrimonio) {
-                cardPatrimonio.textContent = "R$ " + patrimonioProjetado.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
-            }
-            
-            const cardRenda = document.getElementById("cardRendaMensalPrevista");
-            if (cardRenda) {
-                cardRenda.textContent = "R$ " + rendaMensalPrevista.toLocaleString("pt-BR", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                });
-            }
-            
-            const cardRendaSubtitle = document.getElementById("cardRendaMensalSubtitle");
-            if (cardRendaSubtitle) {
-                const isCaso1 = tipoRenda === 'vitalicia' && estrategia === 'perpetua';
-                const isCaso2 = tipoRenda === 'periodo' && estrategia === 'perpetua' && idadeFinal > idadeApos;
-                const isCaso3 = estrategia === 'esgotavel';
+            // 9. ✅ REGRA CRÍTICA: Verificar consistência quando taxaAdm = 0
+            if (taxaAdmAnual === 0 && resultadoBase) {
+                const diffPatrimonio = Math.abs(resultadoAvancado.patrimonioFinal - resultadoBase.patrimonioFinal);
+                const diffRenda = Math.abs(resultadoAvancado.rendaMensalFinal - resultadoBase.rendaMensalFinal);
                 
-                if (isCaso1) {
-                    cardRendaSubtitle.textContent = "💚 Renda vitalícia (capital preservado)";
-                } else if (isCaso2) {
-                    cardRendaSubtitle.textContent = "🟡 Renda por período (preservar 20% do capital)";
-                } else if (isCaso3) {
-                    cardRendaSubtitle.textContent = "🔴 Renda por período (esgotável - usar capital gradualmente)";
-                } else {
-                    cardRendaSubtitle.textContent = "📊 Renda mensal prevista";
+                if (diffPatrimonio > 1 || diffRenda > 1) {
+                    console.warn("⚠️ Inconsistência detectada: taxaAdm=0 mas resultados diferentes", {
+                        diffPatrimonio,
+                        diffRenda,
+                        base: resultadoBase.patrimonioFinal,
+                        avancado: resultadoAvancado.patrimonioFinal
+                    });
                 }
             }
             
-            const cardHeranca = document.getElementById("cardHerancaProjetada");
-            if (cardHeranca) {
-                if (herancaProjetada > 0) {
-                    cardHeranca.textContent = "R$ " + herancaProjetada.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
-                    cardHeranca.style.color = "#10b981";
-                } else {
-                    cardHeranca.textContent = "R$ 0 (capital consumido)";
-                    cardHeranca.style.color = "#ef4444";
+            // 10. Exibir resultados no container próprio (NÃO atualizar bloco 1)
+            const containerResultado = document.getElementById("resultado-ajustes-avancados");
+            if (containerResultado) {
+                containerResultado.style.display = "block";
+                
+                const rendaAvancada = resultadoAvancado.rendaMensalFinal || resultadoAvancado.rendaRealPossivel || 0;
+                const patrimonioAvancado = resultadoAvancado.patrimonioFinal || 0;
+                
+                // Atualizar cards do resultado avançado
+                const cardPatrimonioAvancado = document.getElementById("resultado-avancado-patrimonio");
+                if (cardPatrimonioAvancado) {
+                    cardPatrimonioAvancado.textContent = "R$ " + patrimonioAvancado.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
                 }
-            }
-            
-            // Atualizar header de status
-            const dashboardHeader = document.getElementById("dashboardHeaderPro");
-            if (dashboardHeader) {
-                const rendaTotal = rendaMensalPrevista + beneficioINSS;
-                const atingiuMeta = rendaTotal >= rendaDesejada;
-                const iconeStatus = atingiuMeta ? '✅' : '⚠️';
-                const textoStatus = atingiuMeta 
-                    ? 'Parabéns! Você atingirá sua meta de aposentadoria!' 
-                    : 'Atenção: ajustes necessários para atingir sua meta.';
-                dashboardHeader.innerHTML = `${iconeStatus} ${textoStatus}`;
-                dashboardHeader.style.display = "block";
-            }
-            
-            // 8. Atualizar gráfico
-            renderizarGraficoEvolucaoOficial(resultado, idadeAtual, idadeApos);
-            
-            // 9. Abrir acordeon do cenário próprio (data-bloco="1")
-            const blocoProprio = document.querySelector('.pro-bloco[data-bloco="1"]');
-            if (blocoProprio && !blocoProprio.classList.contains('open')) {
-                blocoProprio.classList.add('open');
-            }
-            
-            // 10. Scroll suave até o acordeon
-            setTimeout(() => {
-                if (blocoProprio) {
-                    blocoProprio.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                const cardRendaAvancada = document.getElementById("resultado-avancado-renda");
+                if (cardRendaAvancada) {
+                    cardRendaAvancada.textContent = "R$ " + rendaAvancada.toLocaleString("pt-BR", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
                 }
-            }, 100);
+                
+                // Calcular diferença vs. cenário base
+                if (resultadoBase) {
+                    const diffPatrimonio = patrimonioAvancado - resultadoBase.patrimonioFinal;
+                    const diffRenda = rendaAvancada - (resultadoBase.rendaMensalFinal || resultadoBase.rendaRealPossivel || 0);
+                    
+                    const cardDiferenca = document.getElementById("resultado-avancado-diferenca");
+                    if (cardDiferenca) {
+                        if (taxaAdmAnual === 0) {
+                            cardDiferenca.textContent = "Idêntico ao base";
+                            cardDiferenca.style.color = "#10b981";
+                        } else {
+                            const diffTotal = diffPatrimonio + (diffRenda * 12 * (95 - idadeApos)); // Aproximação
+                            cardDiferenca.textContent = "R$ " + diffTotal.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
+                            cardDiferenca.style.color = "#ef4444";
+                        }
+                    }
+                }
+                
+                // Scroll até o resultado
+                setTimeout(() => {
+                    containerResultado.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            }
             
-            // 11. Feedback visual
+            // 11. Mostrar mensagem explicativa
+            const mensagemAjustes = document.getElementById("mensagemAjustesAplicados");
+            if (mensagemAjustes) {
+                mensagemAjustes.style.display = "block";
+            }
+            
+            // 12. Feedback visual
             const btnAplicar = document.getElementById("btn-aplicar-ajustes");
             if (btnAplicar) {
                 const textoOriginal = btnAplicar.textContent;
@@ -4978,9 +5060,19 @@
         // =====================================================
         // BLOCOS MODULARES PRO - TOGGLE (ESTRUTURA BASE)
         // =====================================================
+        // ✅ NOVO: Listener para pré-preencher campos quando acordeon 2 for aberto
         document.querySelectorAll(".pro-bloco-header").forEach(header => {
             header.onclick = () => {
-                header.parentElement.classList.toggle("open");
+                const bloco = header.parentElement;
+                const blocoNum = bloco.getAttribute('data-bloco');
+                const isAbrindo = !bloco.classList.contains('open');
+                
+                bloco.classList.toggle("open");
+                
+                // Se acordeon 2 foi aberto, pré-preencher campos
+                if (blocoNum === "2" && isAbrindo && window.resultadoBase) {
+                    preencherAjustesComValoresDoCenarioBase(window.resultadoBase);
+                }
             };
         });
     </script>
