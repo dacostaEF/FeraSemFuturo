@@ -1659,19 +1659,11 @@
                                         <div>
                                             <div style="font-weight: 600; color: #10b981; margin-bottom: 4px;">⏱️ Renda por período determinado</div>
                                             <div style="font-size: 0.85rem; color: #9ca3af;">Você escolhe até qual idade deseja manter a renda ativa após se aposentar.</div>
+                                            <!-- ✅ SIMPLIFICAÇÃO: Sempre usamos 95 anos (igual ao Wizard) -->
                                             <div id="periodoContainerOficial" style="display:none; margin-top:10px;">
-                                                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem; color: #E4E4E4; font-weight: 500;">
-                                                    Até qual idade você quer que sua renda dure?
-                                                </label>
-                                                <select id="idadeTerminalPeriodoOficial" style="width: 100%; padding: 8px; background: rgba(13, 13, 13, 0.8); border: 1px solid rgba(138, 204, 166, 0.2); border-radius: 6px; color: #E4E4E4;">
-                                                    <option value="90">90 anos</option>
-                                                    <option value="95" selected>95 anos</option>
-                                                    <option value="100">100 anos</option>
-                                                    <option value="105">105 anos</option>
-                                                    <option value="110">110 anos</option>
-                                                    <option value="115">115 anos</option>
-                                                </select>
-                                                <p style="margin-top: 6px; font-size: 0.8rem; color: #9ca3af;">💡 Esta idade será usada tanto para "Renda por período" quanto para "Usar capital gradualmente".</p>
+                                                <p style="font-size: 0.9rem; color: #8AC926; line-height: 1.5; padding: 12px; background: rgba(138, 201, 38, 0.1); border-radius: 6px; border-left: 3px solid #8AC926; margin: 0;">
+                                                    📊 <strong>Simulação até 95 anos:</strong> Todas as projeções são calculadas para durar até 95 anos de idade, uma expectativa de vida realista e segura para planejamento financeiro.
+                                                </p>
                                             </div>
                                         </div>
                                     </label>
@@ -1719,16 +1711,11 @@
                                         <div>
                                             <div style="font-weight: 600; color: #10b981; margin-bottom: 4px;">📊 Usar capital gradualmente</div>
                                             <div style="font-size: 0.85rem; color: #9ca3af;">Renda mensal maior, consumindo o patrimônio até a idade selecionada.</div>
+                                            <!-- ✅ SIMPLIFICAÇÃO: Sempre usamos 95 anos (igual ao Wizard) -->
                                             <div id="idadeTerminalContainerOficial" style="display:none; margin-top:10px;">
-                                                <select id="idadeTerminalOficial" style="width: 100%; padding: 8px; background: rgba(13, 13, 13, 0.8); border: 1px solid rgba(138, 204, 166, 0.2); border-radius: 6px; color: #E4E4E4;">
-                                                    <option value="90">90 anos</option>
-                                                    <option value="95" selected>95 anos</option>
-                                                    <option value="100">100 anos</option>
-                                                    <option value="105">105 anos</option>
-                                                    <option value="110">110 anos</option>
-                                                    <option value="115">115 anos</option>
-                                                </select>
-                                                <p style="margin-top: 6px; font-size: 0.8rem; color: #9ca3af;">💡 Esta idade será usada tanto para "Renda por período" quanto para "Usar capital gradualmente".</p>
+                                                <p style="font-size: 0.9rem; color: #8AC926; line-height: 1.5; padding: 12px; background: rgba(138, 201, 38, 0.1); border-radius: 6px; border-left: 3px solid #8AC926; margin: 0;">
+                                                    📊 <strong>Simulação até 95 anos:</strong> Todas as projeções são calculadas para durar até 95 anos de idade, uma expectativa de vida realista e segura para planejamento financeiro.
+                                                </p>
                                             </div>
                                         </div>
                                     </label>
@@ -1736,13 +1723,7 @@
                             </div>
                         </div>
 
-                        <!-- Checkbox para múltiplas curvas -->
-                        <div id="containerTodasCurvasOficial" style="display:none; margin-top:10px;">
-                            <label style="font-size:14px; color: #E4E4E4; cursor: pointer; display: flex; align-items: center; gap: 8px;">
-                                <input type="checkbox" id="mostrarTodasCurvasOficial" style="cursor: pointer;">
-                                Mostrar todas as curvas (95, 105 e 115 anos)
-                            </label>
-                        </div>
+                        <!-- ✅ SIMPLIFICAÇÃO: Checkbox removido - sempre usamos 95 anos (igual ao Wizard) -->
 
                         <div class="recomendacao-renda-full">
                             <p style="
@@ -2669,7 +2650,7 @@
                 // Adicionar idades importantes até 116 anos
                 const idadesImportantes = [];
                 for (let idade = idadeMaximaAtual + 1; idade <= idadeMaxima; idade++) {
-                    if (idade % 5 === 0 || idade === 95 || idade === 100 || idade === 116) {
+                    if (idade % 5 === 0 || idade === 95 || idade === 116) {
                         idadesImportantes.push(idade);
                     }
                 }
@@ -3015,21 +2996,10 @@
             const tipoRenda = document.querySelector('input[name="tipoRendaOficial"]:checked')?.value || "vitalicia";
             const estrategia = document.querySelector('input[name="estrategiaOficial"]:checked')?.value || "perpetua";
             
-            // Capturar idade terminal para Período OU Esgotável (similar ao Wizard)
-            let idadeFinal = 95; // padrão
-            let mostrarTodasCurvas = false;
+            // ✅ SIMPLIFICAÇÃO: Sempre usar 95 anos como idade final (igual ao Wizard)
+            const idadeFinal = 95;
             
-            if (tipoRenda === "periodo" || estrategia === "esgotavel") {
-                // Usar o select apropriado baseado na seleção
-                if (tipoRenda === "periodo") {
-                    idadeFinal = parseInt(document.getElementById("idadeTerminalPeriodoOficial")?.value) || 95;
-                    mostrarTodasCurvas = document.getElementById("mostrarTodasCurvasOficial")?.checked || false;
-                } else {
-                    idadeFinal = parseInt(document.getElementById("idadeTerminalOficial")?.value) || 95;
-                }
-            }
-            
-            // Calcular anosPeriodo a partir da idade terminal (similar ao Wizard)
+            // Calcular anosPeriodo a partir da idade final (95 anos)
             const anosPeriodo = tipoRenda === "periodo" ? (idadeFinal - idadeApos) : 0;
             
             const retornoAnual = rentabilidades[currentScenario];
@@ -3677,11 +3647,8 @@
                 if (tipoRenda === "vitalicia") {
                     patrimonioExtra = gap / taxaRealMensal;
                 } else {
-                    // Calcular anosPeriodo a partir da idade terminal (similar ao Wizard)
-                    let idadeFinalPeriodo = 95; // padrão
-                    if (tipoRenda === "periodo") {
-                        idadeFinalPeriodo = parseInt(document.getElementById("idadeTerminalPeriodoOficial")?.value) || 95;
-                    }
+                    // ✅ SIMPLIFICAÇÃO: Sempre usar 95 anos como idade final (igual ao Wizard)
+                    const idadeFinalPeriodo = 95;
                     const anosPeriodo = idadeFinalPeriodo - idadeApos;
                     const mesesPeriodo = anosPeriodo * 12;
                     patrimonioExtra = (gap * (1 - Math.pow(1 + taxaRealMensal, -mesesPeriodo))) / taxaRealMensal;
@@ -3774,8 +3741,6 @@
         function verificarIdadesPro() {
             const idadeAtual = parseInt(document.getElementById("currentAge")?.value) || 0;
             const idadeApos = parseInt(document.getElementById("retirementAge")?.value) || 0;
-            const idadeTerminalPeriodo = parseInt(document.getElementById("idadeTerminalPeriodoOficial")?.value) || 0;
-            const idadeTerminalEsgotavel = parseInt(document.getElementById("idadeTerminalOficial")?.value) || 0;
             
             // Validações básicas
             if (idadeAtual < 18 || idadeAtual > 90) {
@@ -3799,16 +3764,7 @@
                 return false;
             }
             
-            // Validar idade terminal se estiver visível
-            if (idadeTerminalPeriodo > 0 && idadeTerminalPeriodo <= idadeApos) {
-                alert("⚠️ A idade terminal deve ser maior que a idade de aposentadoria.");
-                return false;
-            }
-            
-            if (idadeTerminalEsgotavel > 0 && idadeTerminalEsgotavel <= idadeApos) {
-                alert("⚠️ A idade terminal deve ser maior que a idade de aposentadoria.");
-                return false;
-            }
+            // ✅ SIMPLIFICAÇÃO: Validação de idade terminal removida - sempre usamos 95 anos
             
             return true;
         }
@@ -3839,7 +3795,6 @@
             // Mostrar/esconder campos condicionais
             const periodoContainer = document.getElementById("periodoContainerOficial");
             const idadeTerminalContainer = document.getElementById("idadeTerminalContainerOficial");
-            const containerTodasCurvas = document.getElementById("containerTodasCurvasOficial");
             
             if (periodoContainer) {
                 periodoContainer.style.display = (tipo === "periodo") ? "block" : "none";
@@ -3849,9 +3804,7 @@
                 idadeTerminalContainer.style.display = (tipo === "periodo" || est === "esgotavel") ? "block" : "none";
             }
             
-            if (containerTodasCurvas) {
-                containerTodasCurvas.style.display = (tipo === "periodo") ? "block" : "none";
-            }
+            // ✅ SIMPLIFICAÇÃO: containerTodasCurvas removido - sempre usamos 95 anos
             
             // BLOQUEIO 1: Vitalícia só aceita perpétua (preservar capital)
             const radioEsgotavel = document.querySelector("input[name='estrategiaOficial'][value='esgotavel']");
@@ -3891,22 +3844,7 @@
             atualizarRegrasPro(); // Usar a função completa de regras
         };
 
-        // Sincronizar valores entre os dois selects de idade terminal
-        const sincronizarIdadeTerminal = () => {
-            const selectPeriodo = document.getElementById("idadeTerminalPeriodoOficial");
-            const selectEsgotavel = document.getElementById("idadeTerminalOficial");
-            
-            if (selectPeriodo && selectEsgotavel) {
-                // Quando um muda, atualizar o outro
-                selectPeriodo.addEventListener("change", function() {
-                    selectEsgotavel.value = this.value;
-                });
-                
-                selectEsgotavel.addEventListener("change", function() {
-                    selectPeriodo.value = this.value;
-                });
-            }
-        };
+        // ✅ SIMPLIFICAÇÃO: Função sincronizarIdadeTerminal removida - sempre usamos 95 anos
 
         const radiosRenda = document.querySelectorAll("input[name='tipoRendaOficial']");
         radiosRenda.forEach(radio => {
@@ -3933,9 +3871,9 @@
             });
         });
 
-        // Inicializar visibilidade e sincronização
+        // Inicializar visibilidade
         atualizarVisibilidadeCamposPro();
-        sincronizarIdadeTerminal();
+        // ✅ SIMPLIFICAÇÃO: sincronizarIdadeTerminal removida - sempre usamos 95 anos
 
         // Tornar os containers clicáveis (como no Wizard)
         function tornarContainersClicaveis() {
