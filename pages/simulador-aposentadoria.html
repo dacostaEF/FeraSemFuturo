@@ -518,6 +518,42 @@
             background:#334155;
         }
 
+        /* Destaque especial para o campo de Taxa Administrativa */
+        .campo-taxas-destaque {
+            border: 1px solid #d4af37 !important;
+            background: rgba(255, 215, 0, 0.06) !important;
+            border-radius: 6px;
+            padding: 10px;
+        }
+
+        .campo-taxas-destaque label {
+            color: #d4af37 !important;
+        }
+
+        .tooltip-icone {
+            cursor: pointer;
+            margin-left: 5px;
+            font-size: 14px;
+            color: #ffd700;
+            transition: transform 0.2s ease;
+        }
+
+        .tooltip-icone:hover {
+            transform: scale(1.2);
+        }
+
+        .mensagem-ajustes {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #d4af37;
+            border-radius: 8px;
+        }
+
+        .botao-modal-taxas:hover {
+            background: #2a4fa3;
+            transform: translateY(-1px);
+        }
+
         /* ========================================= */
         /* GRÁFICO CHART.JS - RESPONSIVIDADE */
         /* ========================================= */
@@ -913,6 +949,58 @@
 
         .btn-ver-pegadinhas:hover {
             background: #b71c1c;
+        }
+
+
+        .tooltip-icone {
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 6px;
+            color: #ffd700;
+            transition: transform 0.2s ease;
+        }
+
+        .tooltip-icone:hover {
+            transform: scale(1.2);
+        }
+
+
+        .mensagem-ajustes {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #d4af37;
+            border-radius: 8px;
+        }
+
+        .mensagem-ajustes h4 {
+            color: #D4AF37;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .mensagem-ajustes p {
+            color: #E4E4E4;
+            line-height: 1.7;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .botao-modal-taxas {
+            margin-top: 10px;
+            padding: 10px 16px;
+            border-radius: 6px;
+            background: #1f3c88;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .botao-modal-taxas:hover {
+            background: #2a4fa3;
+            transform: translateY(-1px);
         }
     </style>
     
@@ -1907,9 +1995,12 @@
                             <label>Taxa Real Desejada na Aposentadoria (% a.m.)</label>
                             <input type="number" id="taxaRealDesejada" value="" placeholder="Ex: 0.55" step="0.01">
                         </div>
-                        <!-- Taxa administrativa -->
-                        <div class="acordeon-input">
-                            <label>Taxa Administrativa da Previdência (% a.a.)</label>
+                        <!-- Taxa administrativa - COM DESTAQUE -->
+                        <div class="acordeon-input campo-taxas-destaque">
+                            <label>
+                                Taxa Administrativa (% a.a.)
+                                <span class="tooltip-icone" onclick="mostrarInfoTaxa()">ℹ️</span>
+                            </label>
                             <input type="number" id="taxaAdmCustom" value="" placeholder="Ex: 1.5" step="0.1">
                         </div>
                         <!-- Aporte anual -->
@@ -1937,7 +2028,27 @@
                     <!-- Botão para aplicar ajustes avançados -->
                     <div style="text-align: center; margin-top: 24px;">
                         <button id="btn-aplicar-ajustes" class="btn-primary" style="background: rgba(212, 175, 55, 0.2); border: 1px solid rgba(212, 175, 55, 0.4); color: #D4AF37;">
-                            🔄 Aplicar Ajustes Avançados
+                            ✔️ Aplicar Ajustes Avançados
+                        </button>
+                    </div>
+
+                    <!-- Mensagem explicativa (oculta inicialmente) -->
+                    <div id="mensagemAjustesAplicados" class="mensagem-ajustes" style="display:none; margin-top: 24px;">
+                        <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 1.1rem;">🔍 Como a taxa administrativa afeta seu patrimônio</h4>
+                        <p style="color: #E4E4E4; line-height: 1.7; margin-bottom: 12px; font-size: 0.95rem;">
+                            A taxa de administração é um custo anual cobrado por instituições financeiras para gerenciar seu dinheiro.
+                            Mesmo taxas aparentemente pequenas (1% a 2% ao ano) provocam perdas gigantes no longo prazo,
+                            porque incidem sobre todo o patrimônio acumulado.
+                        </p>
+                        <p style="color: #E4E4E4; line-height: 1.7; margin-bottom: 12px; font-size: 0.95rem;">
+                            ➜ Quanto maior o patrimônio, maior o impacto da taxa.<br>
+                            ➜ O efeito é cumulativo: reduz tanto o patrimônio quanto a renda disponível na aposentadoria.
+                        </p>
+                        <p style="color: #E4E4E4; line-height: 1.7; margin-bottom: 12px; font-size: 0.95rem;">
+                            Comparar cenários com e sem taxa é fundamental para decisões financeiras inteligentes.
+                        </p>
+                        <button class="botao-modal-taxas" onclick="abrirModalTaxas()" style="margin-top: 10px; padding: 10px 16px; border-radius: 6px; background: #1f3c88; color: white; border: none; cursor: pointer; font-weight: 600; transition: all 0.2s ease;">
+                            🔎 Entenda por que as taxas mudam tudo
                         </button>
                     </div>
                 </div>
@@ -3104,8 +3215,10 @@
             // ================================
             const anos = idadeApos - idadeAtual;
             
-            // Usar renda baseada no tipo selecionado
-            const rendaInvestProprio = tipoRenda === "vitalicia" ? resultado.rendaVital : resultado.rendaPeriodoMensal;
+            // ✅ CORREÇÃO CRÍTICA: Usar sempre rendaMensalFinal (variável única do engine)
+            // Esta variável garante que todos os casos (1, 2 e 3) usem a mesma fonte
+            // NUNCA usar taxa nominal diretamente para calcular renda exibida
+            const rendaInvestProprio = resultado.rendaMensalFinal || resultado.rendaRealPossivel || 0;
             const beneficioINSS = resultado.valorINSS;
             
             // Manter compatibilidade com código existente (previdência privada)
@@ -3772,7 +3885,40 @@
         // Botão aplicar ajustes avançados
         const btnAplicarAjustes = document.getElementById("btn-aplicar-ajustes");
         if (btnAplicarAjustes) {
-            btnAplicarAjustes.addEventListener("click", aplicarAjustesAvancados);
+            btnAplicarAjustes.addEventListener("click", function() {
+                // Chamar o motor principal de simulação com os valores atualizados
+                aplicarAjustesAvancados();
+                
+                // Exibir bloco explicativo
+                const mensagemAjustes = document.getElementById("mensagemAjustesAplicados");
+                if (mensagemAjustes) {
+                    mensagemAjustes.style.display = "block";
+                    // Scroll suave até a mensagem
+                    setTimeout(() => {
+                        mensagemAjustes.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 300);
+                }
+            });
+        }
+
+        // =====================================================
+        // FUNÇÕES DE INFORMAÇÃO SOBRE TAXAS
+        // =====================================================
+        
+        // Mostra tooltip explicativo da taxa
+        function mostrarInfoTaxa() {
+            alert(
+                "A taxa de administração é cobrada sobre todo o seu patrimônio acumulado. " +
+                "Mesmo taxas pequenas reduzem significativamente o resultado final ao longo de anos."
+            );
+        }
+
+        // Modal das taxas
+        function abrirModalTaxas() {
+            alert(
+                "As taxas reduzem sua rentabilidade ano após ano. " +
+                "Esse efeito cumulativo afeta tanto o patrimônio quanto a renda da aposentadoria."
+            );
         }
 
         // ====================================
@@ -4442,7 +4588,9 @@
             }
             
             // 7. Atualizar apenas os cards do cenário próprio
-            const rendaInvestProprio = resultado.rendaRealPossivel || 0;
+            // ✅ CORREÇÃO CRÍTICA: Usar sempre rendaMensalFinal (variável única do engine)
+            // Esta variável garante que todos os casos (1, 2 e 3) usem a mesma fonte
+            const rendaInvestProprio = resultado.rendaMensalFinal || resultado.rendaRealPossivel || 0;
             const beneficioINSS = resultado.valorINSS || 0;
             const patrimonioProjetado = resultado.patrimonioFinal || 0;
             const rendaMensalPrevista = rendaInvestProprio;

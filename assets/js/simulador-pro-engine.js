@@ -127,9 +127,8 @@ function gerarRendaMensalAoLongoDoTempo(patrimonio, taxaAnualReal, idadeApos, id
     }
 
     // Estratégia ESGOTÁVEL (capital será consumido)
-    // ✅ NOTA: Esta função recebe taxaAnualReal, mas para esgotável deveria usar nominal
-    // Porém, a renda já foi calculada corretamente em executarSimulacaoCompleta
-    // Aqui apenas retornamos valores constantes baseados na renda já calculada
+    // ✅ CORREÇÃO: Calcular com taxa REAL (igual ao gráfico do Wizard)
+    // Isso garante que o gráfico e o card mostrem o mesmo valor (R$ 7.120)
     const rendaPMT = (patrimonioAtual * taxaMensal) / (1 - Math.pow(1 + taxaMensal, -meses));
 
     for (let i = 0; i < meses; i++) {
@@ -351,24 +350,27 @@ window.simuladorProEngine.executarSimulacaoCompleta = function (params) {
         rendaRealPossivel = patrimonioFinal * taxaMensalReal;
     }
     // ESTRATÉGIA 3: RENDA POR PERÍODO + USAR CAPITAL GRADUALMENTE (ESGOTÁVEL)
-    // ✅ CORREÇÃO: Usar taxa NOMINAL para esgotável (igual ao Wizard)
+    // ✅ CORREÇÃO CRÍTICA: Usar taxa REAL para esgotável (igual ao gráfico do Wizard)
+    // O gráfico usa gerarRendaMensalAoLongoDoTempo que calcula com taxa REAL
+    // Por isso devemos usar taxa REAL aqui também para manter consistência
     else if (tipoRenda === "periodo" && estrategiaFinal === "esgotavel") {
         const meses = (idadeFinalUsada - idadeApos) * 12;
-        // PMT usando **taxa nominal** – CORRETO
+        // PMT usando **taxa REAL** – CORRETO (igual ao gráfico do Wizard)
+        // Isso garante que o card mostre o mesmo valor do gráfico (R$ 7.120)
         rendaRealPossivel = calcularPMTEsgotavel(
             patrimonioFinal,
-            taxaMensalNominal,
+            taxaMensalReal,  // ✅ CORREÇÃO: usar taxa REAL, não nominal
             meses
         );
     }
     // ESTRATÉGIA 4: RENDA VITALÍCIA + USAR CAPITAL GRADUALMENTE (não recomendado, mas tratado)
-    // ✅ CORREÇÃO: Usar taxa NOMINAL para esgotável
+    // ✅ CORREÇÃO CRÍTICA: Usar taxa REAL para esgotável (igual ao gráfico do Wizard)
     else if (tipoRenda === "vitalicia" && estrategiaFinal === "esgotavel") {
         const meses = (idadeFinalUsada - idadeApos) * 12;
-        // PMT usando **taxa nominal** – CORRETO
+        // PMT usando **taxa REAL** – CORRETO (igual ao gráfico do Wizard)
         rendaRealPossivel = calcularPMTEsgotavel(
             patrimonioFinal,
-            taxaMensalNominal,
+            taxaMensalReal,  // ✅ CORREÇÃO: usar taxa REAL, não nominal
             meses
         );
     }
@@ -380,6 +382,14 @@ window.simuladorProEngine.executarSimulacaoCompleta = function (params) {
     // Manter compatibilidade com código existente
     const rendaVital = rendaRealPossivel;  // Para compatibilidade
     const rendaPeriodoMensal = tipoRenda === "periodo" ? rendaRealPossivel : 0;
+
+    // ============================================================
+    // ✅ CORREÇÃO CRÍTICA: Variável única para exibição no card
+    // ============================================================
+    // Esta variável garante que todos os casos (1, 2 e 3) usem a mesma fonte
+    // NUNCA usar taxa nominal diretamente para calcular renda exibida
+    // O rendaRealPossivel já foi calculado corretamente acima baseado na estratégia
+    const rendaMensalFinal = rendaRealPossivel;
 
     // ============================================================
     // 3. CÁLCULO DO INSS
@@ -427,26 +437,26 @@ window.simuladorProEngine.executarSimulacaoCompleta = function (params) {
         }
     }
     // ESTRATÉGIA 3: RENDA POR PERÍODO + USAR CAPITAL GRADUALMENTE (ESGOTÁVEL)
-    // ✅ CORREÇÃO: Usar taxa NOMINAL e projetarCurvaEsgotavel
+    // ✅ CORREÇÃO: Usar taxa REAL e projetarCurvaEsgotavel (igual ao gráfico)
     else if (tipoRenda === "periodo" && estrategiaFinal === "esgotavel") {
         const meses = (idadeFinalUsada - idadeApos) * 12;
-        // Curva esgotável usando taxa nominal
+        // Curva esgotável usando taxa REAL (igual ao gráfico)
         projecaoPosAposentadoria = projetarCurvaEsgotavel(
             patrimonioFinal,
             rendaRealPossivel,
-            taxaMensalNominal,
+            taxaMensalReal,  // ✅ CORREÇÃO: usar taxa REAL, não nominal
             meses
         );
     }
     // ESTRATÉGIA 4: RENDA VITALÍCIA + USAR CAPITAL GRADUALMENTE (não recomendado)
-    // ✅ CORREÇÃO: Usar taxa NOMINAL e projetarCurvaEsgotavel
+    // ✅ CORREÇÃO: Usar taxa REAL e projetarCurvaEsgotavel (igual ao gráfico)
     else if (tipoRenda === "vitalicia" && estrategiaFinal === "esgotavel") {
         const meses = (idadeFinalUsada - idadeApos) * 12;
-        // Curva esgotável usando taxa nominal
+        // Curva esgotável usando taxa REAL (igual ao gráfico)
         projecaoPosAposentadoria = projetarCurvaEsgotavel(
             patrimonioFinal,
             rendaRealPossivel,
-            taxaMensalNominal,
+            taxaMensalReal,  // ✅ CORREÇÃO: usar taxa REAL, não nominal
             meses
         );
     }
@@ -496,6 +506,8 @@ window.simuladorProEngine.executarSimulacaoCompleta = function (params) {
         estrategiaParaRenda = "preservar20";
     }
     
+    // ✅ CORREÇÃO: Gerar renda mensal detalhada para gráficos
+    // Para esgotável, não precisa passar rendaJaCalculada pois agora rendaRealPossivel já usa taxa REAL
     const rendaMensalDetalhada = gerarRendaMensalAoLongoDoTempo(
         patrimonioFinal,
         taxaAnualReal,
@@ -512,6 +524,7 @@ window.simuladorProEngine.executarSimulacaoCompleta = function (params) {
         rendaVital,  // Mantido para compatibilidade
         rendaPeriodoMensal,  // Mantido para compatibilidade
         rendaRealPossivel,  // ✅ NOVO: renda calculada baseada na estratégia (igual ao Wizard)
+        rendaMensalFinal,  // ✅ CORREÇÃO CRÍTICA: Variável única para exibição no card (sempre igual a rendaRealPossivel)
         valorINSS,
         acumulacaoMensal: acumulacao.historico,
         curvaVitalicia,  // Mantido para compatibilidade
