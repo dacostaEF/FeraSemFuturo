@@ -565,144 +565,6 @@
         }
 
         /* ========================================= */
-        /* PAINEL DE AJUSTES RÁPIDOS (WIZARD STYLE) */
-        /* ========================================= */
-        .quick-adjust-card {
-            background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 12px;
-            padding: 25px 20px;
-            margin: 25px 0;
-        }
-
-        .titulo-ajustes {
-            color: #D4AF37;
-            text-align: center;
-            margin-bottom: 10px;
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
-
-        .subtitulo-ajustes {
-            color: #9ca3af;
-            font-size: 0.9rem;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .ajuste-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-
-        .ajuste-select {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23D4AF37' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 14px center;
-            padding-right: 40px;
-        }
-
-        .ajuste-item {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .ajuste-item label {
-            display: block;
-            color: #E4E4E4;
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-
-        .ajuste-input {
-            width: 100%;
-            padding: 12px 14px;
-            border-radius: 8px;
-            background: #1b1b1b;
-            border: 1px solid rgba(138, 204, 166, 0.2);
-            color: #E4E4E4;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .ajuste-input:focus {
-            outline: none;
-            border-color: rgba(212, 175, 55, 0.6);
-            background: #1f1f1f;
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
-        }
-
-        .ajuste-input:hover {
-            border-color: rgba(212, 175, 55, 0.4);
-        }
-
-        .ajuste-actions {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-top: 25px;
-        }
-
-        /* Botão Recalcular - Premium InvLab */
-        #btnRecalcularPro.btn-simulador-invlab {
-            background: linear-gradient(135deg, #355E3B 0%, #CCAA66 100%) !important;
-            color: #0c0e13 !important;
-            border: 2px solid rgba(212, 175, 55, 0.4) !important;
-            padding: 14px 32px !important;
-            border-radius: 10px !important;
-            cursor: pointer;
-            font-size: 1.05rem !important;
-            font-weight: 700 !important;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3) !important;
-            min-width: 200px;
-        }
-
-        #btnRecalcularPro.btn-simulador-invlab:hover {
-            background: linear-gradient(135deg, #2d5034, #D4AF37) !important;
-            border-color: rgba(212, 175, 55, 0.7) !important;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5) !important;
-        }
-
-        /* Botão Resetar - Premium InvLab */
-        #btnResetarAjustesPro.btn-simulador-invlab {
-            background: linear-gradient(135deg, #355E3B 0%, #CCAA66 100%) !important;
-            color: #0c0e13 !important;
-            border: 2px solid rgba(212, 175, 55, 0.4) !important;
-            padding: 14px 28px !important;
-            border-radius: 10px !important;
-            cursor: pointer;
-            font-size: 1rem !important;
-            font-weight: 700 !important;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3) !important;
-            min-width: 180px;
-        }
-
-        #btnResetarAjustesPro.btn-simulador-invlab:hover {
-            background: linear-gradient(135deg, #2d5034, #D4AF37) !important;
-            border-color: rgba(212, 175, 55, 0.7) !important;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5) !important;
-        }
-
-        @media (max-width: 768px) {
-            .ajuste-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
         /* Modal Overlay */
         .modal-overlay {
             display: none;
@@ -957,6 +819,39 @@
                 font-size: 0.75rem;
                 padding: 6px 4px;
             }
+        }
+
+        /* ========================================= */
+        /* BLOCOS MODULARES PRO (ESTRUTURA BASE) */
+        /* ========================================= */
+        .pro-bloco {
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .pro-bloco-header {
+            padding: 12px 16px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #f5d77d; /* dourado InvLab */
+            transition: background-color 0.2s ease;
+        }
+
+        .pro-bloco-header:hover {
+            background-color: rgba(245, 215, 125, 0.1);
+        }
+
+        .pro-bloco-content {
+            display: none;
+            padding: 16px;
+        }
+
+        .pro-bloco.open .pro-bloco-content {
+            display: block;
         }
     </style>
     
@@ -1872,196 +1767,168 @@
             <!-- SEÇÃO DE RESULTADOS -->
             <div id="resultsSection">
                 <!-- ===================================================== -->
-                <!-- 🎯 CARDS PRINCIPAIS (ESTILO WIZARD) -->
-                <!-- ===================================================== -->
-                <section class="invlab-results">
-                    <!-- HEADER DE STATUS -->
-                    <div class="dashboard-header" id="dashboardHeaderPro" style="color: #D4AF37; display: none;">
-                        ✅ Parabéns! Você atingirá sua meta de aposentadoria!
-                    </div>
-
-                    <!-- CARDS PRINCIPAIS (2x2 grid, igual ao Wizard) -->
-                    <div class="dashboard-cards" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 25px;">
-                        <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
-                            <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">💰 Patrimônio Projetado</h3>
-                            <p class="valor" id="cardPatrimonioProjetado" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #10b981; margin: 6px 0 0 0;">—</p>
-                        </div>
-
-                        <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
-                            <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">
-                                📈 Renda Mensal Prevista
-                                <span class="info-icon-modal" onclick="abrirModalPremissasRendaPro()" style="cursor: pointer; margin-left: 4px; color: #D4AF37; font-weight: bold;" title="Clique para ver premissas técnicas">i</span>
-                            </h3>
-                            <p class="valor" id="cardRendaMensalPrevista" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #D4AF37; margin: 6px 0 0 0;">—</p>
-                            <p id="cardRendaMensalSubtitle" style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px; margin: 8px 0 0 0;">—</p>
-                        </div>
-
-                        <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
-                            <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">🎯 Meta Mensal</h3>
-                            <p class="valor" id="cardMetaMensal" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #E4E4E4; margin: 6px 0 0 0;">—</p>
-                        </div>
-
-                        <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
-                            <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">💎 Herança Projetada</h3>
-                            <p class="valor" id="cardHerancaProjetada" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #10b981; margin: 6px 0 0 0;">—</p>
-                            <p id="cardHerancaSubtitle" style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px; margin: 8px 0 0 0;">Patrimônio preservado para herança</p>
-                        </div>
-                    </div>
-
-                    <!-- Texto informativo entre cards e gráfico -->
-                    <div class="dashboard-info-extra" style="margin-bottom: 25px; padding: 16px; background: rgba(212, 175, 55, 0.05); border-left: 4px solid #D4AF37; border-radius: 8px;">
-                        <p style="font-size: 13px; color: #aaa; margin: 4px 0; line-height: 1.6;">
-                            📊 A simulação abaixo mostra a evolução do seu patrimônio ao longo do tempo, desde hoje até a aposentadoria e durante toda a sua vida. 
-                            Observe como o patrimônio se comporta de acordo com a estratégia escolhida.
-                        </p>
-                    </div>
-                </section>
-
-                <!-- ===================================================== -->
-                <!-- 📈 GRÁFICO DE EVOLUÇÃO DO PATRIMÔNIO (PRIMEIRO GRÁFICO) -->
-                <!-- ===================================================== -->
-                <section class="invlab-results" style="margin-top: 20px;">
-                    <h2 class="module-title">📈 Evolução do Patrimônio</h2>
-                    <div style="padding: 30px 20px; background: #0f0f0f; border-radius: 10px; border: 1px solid rgba(138, 204, 166, 0.15);">
-                        <canvas id="graficoEvolucaoOficial" style="max-height: 400px;"></canvas>
-                    </div>
-                </section>
-
-                <!-- ===================================================== -->
-                <!-- 📊 COMPARAÇÃO DE CENÁRIOS (APARECE DEPOIS) -->
-                <!-- ===================================================== -->
-                <!-- Resultados Principais (Comparação) -->
-                <section class="invlab-results" style="margin-top: 40px;">
-                    <h2 class="module-title">📊 Comparação de Cenários de Aposentadoria</h2>
-                    <div class="results-grid">
-                        <div class="result-card">
-                            <h3>
-                                💰 Investimento Próprio 
-                                <span class="tooltip-icon" title="💡 Renda Vitalícia Perpétua: Você recebe APENAS os juros do patrimônio. O capital de R$ 2.175.398 NUNCA ACABA e pode ser deixado como herança integral. Renda mensal baseada na taxa real (8% - 4,5% inflação = 3,5% a.a.). Esta é a estratégia mais eficiente!">ℹ️</span>
-                            </h3>
-                            <p id="resultOwn">—</p>
-                        </div>
-
-                        <div class="result-card">
-                            <h3>
-                                🏦 Vitalícia Simples 
-                                <span class="tooltip-icon" title="⚠️ Previdência Tradicional: Você CONSOME o capital aos poucos junto com os juros. Renda maior que a perpétua, mas quando você morre sobra R$ 0 de herança. Usada em planos PGBL/VGBL tradicionais. Matemática mostra: herança zero e taxas altas tornam essa opção menos vantajosa que investimento próprio.">ℹ️</span>
-                            </h3>
-                            <p id="resultPensionSimple">—</p>
-                        </div>
-
-                        <div class="result-card">
-                            <h3>
-                                🔄 Com Reversão 
-                                <span class="tooltip-icon" title="👨‍👩‍👧 Previdência com Proteção Familiar: Renda MENOR, mas quando você morre seu cônjuge continua recebendo (geralmente 80%). Deixa herança parcial (~20% do capital). Usada para proteger dependentes, mas menos rentável.">ℹ️</span>
-                            </h3>
-                            <p id="resultPensionRev">—</p>
-                        </div>
-                    </div>
-
-                    <!-- Gráfico de Comparação -->
-                    <div class="chart-container" style="margin-top: 32px;">
-                        <canvas id="comparisonChart"></canvas>
-                    </div>
-                </section>
-
-                <!-- Herança -->
-                <section class="invlab-heritage" style="margin-top: 40px;">
-                    <h2 class="module-title">💎 Herança – O que sobra para os herdeiros</h2>
-                    <div class="heritage-grid">
-                        <div class="heritage-card">
-                            <h3>💰 Investimento Próprio</h3>
-                            <p id="heritageOwnValue">—</p>
-                        </div>
-
-                        <div class="heritage-card">
-                            <h3>🔄 Vitalícia Reversível</h3>
-                            <p id="heritageRevValue">—</p>
-                        </div>
-
-                        <div class="heritage-card">
-                            <h3>⚠️ Vitalícia Simples</h3>
-                            <p id="heritageSimpleValue" style="color: #ef4444;">R$ 0</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- ===================================================== -->
-                <!-- 🔧 PAINEL DE AJUSTES RÁPIDOS -->
-                <!-- ===================================================== -->
-                <div id="painelAjustesRapidos" class="quick-adjust-card" style="display: none;">
-                    <h3 class="titulo-ajustes">🔧 Ajustes Rápidos</h3>
-                    <p class="subtitulo-ajustes">
-                        Ajuste os parâmetros e veja o impacto em tempo real
-                    </p>
-                    
-                    <div class="ajuste-grid">
-                        <div class="ajuste-item">
-                            <label for="ajusteIdadeAtualPro">Idade<br>atual</label>
-                            <input type="number" id="ajusteIdadeAtualPro" class="ajuste-input" 
-                                   min="18" max="90">
-                        </div>
-                        
-                        <div class="ajuste-item">
-                            <label for="ajusteIdadeAposPro">Idade de aposentadoria</label>
-                            <input type="number" id="ajusteIdadeAposPro" class="ajuste-input" 
-                                   min="19" max="90">
-                        </div>
-                        
-                        <div class="ajuste-item">
-                            <label for="ajustePatrimonioInicialPro">Patrimônio inicial (R$)</label>
-                            <input type="number" id="ajustePatrimonioInicialPro" class="ajuste-input" 
-                                   min="0" step="1000">
-                        </div>
-                        
-                        <div class="ajuste-item">
-                            <label for="ajusteAportePro">Aporte mensal (R$)</label>
-                            <input type="number" id="ajusteAportePro" class="ajuste-input" 
-                                   min="0" step="100">
-                        </div>
-                        
-                        <div class="ajuste-item">
-                            <label for="ajustePerfilPro">Perfil de investimento</label>
-                            <select id="ajustePerfilPro" class="ajuste-input ajuste-select">
-                                <option value="conservador">Conservador (6% a.a.)</option>
-                                <option value="moderado">Moderado (8% a.a.)</option>
-                                <option value="arrojado">Arrojado (10% a.a.)</option>
-                            </select>
-                        </div>
-                        
-                        <div class="ajuste-item">
-                            <label for="ajusteRendaDesejadaPro">Renda desejada (R$/mês)</label>
-                            <input type="number" id="ajusteRendaDesejadaPro" class="ajuste-input" 
-                                   min="0" step="100">
-                        </div>
-                    </div>
-                    
-                    <div class="ajuste-actions">
-                        <button id="btnRecalcularPro" class="btn-simulador-invlab">Recalcular projeção</button>
-                        <button id="btnResetarAjustesPro" class="btn-simulador-invlab">Resetar valores originais</button>
-                    </div>
-                </div>
-
-                <!-- ===================================================== -->
-                <!-- 📋 DETALHES DA SIMULAÇÃO -->
-                <!-- ===================================================== -->
-                <div class="details-block" id="detailsBlock" style="display:none;">
-                    <p id="rendaInvestimentosDetail"></p>
-                    <p id="prazoDetail"></p>
-                    <p id="perfilDetail"></p>
-                </div>
-
-                <!-- ===================================================== -->
-                <!-- 💡 INTERPRETAÇÃO AUTOMÁTICA DO RESULTADO -->
-                <!-- ===================================================== -->
-                <div id="interpretationBlock"></div>
-
-                <!-- ===================================================== -->
                 <!-- BOTÕES DE AÇÃO -->
                 <!-- ===================================================== -->
                 <div class="dashboard-actions" id="dashboardActions" style="display:none;">
                     <button class="btn-modal" onclick="abrirModalDadosOficial()">📋 Ver dados usados</button>
                     <button class="btn-modal" onclick="abrirModalFormulasOficial()">🧠 Ver fórmulas e parâmetros</button>
+                </div>
+            </div>
+
+            <!-- ===================================================== -->
+            <!-- 🎯 BLOCOS MODULARES PRO (ESTRUTURA BASE) -->
+            <!-- ===================================================== -->
+            <div class="pro-bloco" data-bloco="1">
+                <div class="pro-bloco-header">📌 Resultado Essencial</div>
+                <div class="pro-bloco-content">
+                    <!-- ===================================================== -->
+                    <!-- 🎯 CARDS PRINCIPAIS (ESTILO WIZARD) -->
+                    <!-- ===================================================== -->
+                    <section class="invlab-results">
+                        <!-- HEADER DE STATUS -->
+                        <div class="dashboard-header" id="dashboardHeaderPro" style="color: #D4AF37; display: none;">
+                            ✅ Parabéns! Você atingirá sua meta de aposentadoria!
+                        </div>
+
+                        <!-- CARDS PRINCIPAIS (2x2 grid, igual ao Wizard) -->
+                        <div class="dashboard-cards" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 25px;">
+                            <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
+                                <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">💰 Patrimônio Projetado</h3>
+                                <p class="valor" id="cardPatrimonioProjetado" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #10b981; margin: 6px 0 0 0;">—</p>
+                            </div>
+
+                            <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
+                                <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">
+                                    📈 Renda Mensal Prevista
+                                    <span class="info-icon-modal" onclick="abrirModalPremissasRendaPro()" style="cursor: pointer; margin-left: 4px; color: #D4AF37; font-weight: bold;" title="Clique para ver premissas técnicas">i</span>
+                                </h3>
+                                <p class="valor" id="cardRendaMensalPrevista" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #D4AF37; margin: 6px 0 0 0;">—</p>
+                                <p id="cardRendaMensalSubtitle" style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px; margin: 8px 0 0 0;">—</p>
+                            </div>
+
+                            <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
+                                <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">🎯 Meta Mensal</h3>
+                                <p class="valor" id="cardMetaMensal" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #E4E4E4; margin: 6px 0 0 0;">—</p>
+                            </div>
+
+                            <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
+                                <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">💎 Herança Projetada</h3>
+                                <p class="valor" id="cardHerancaProjetada" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #10b981; margin: 6px 0 0 0;">—</p>
+                                <p id="cardHerancaSubtitle" style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px; margin: 8px 0 0 0;">Patrimônio preservado para herança</p>
+                            </div>
+                        </div>
+
+                        <!-- Texto informativo entre cards e gráfico -->
+                        <div class="dashboard-info-extra" style="margin-bottom: 25px; padding: 16px; background: rgba(212, 175, 55, 0.05); border-left: 4px solid #D4AF37; border-radius: 8px;">
+                            <p style="font-size: 13px; color: #aaa; margin: 4px 0; line-height: 1.6;">
+                                📊 A simulação abaixo mostra a evolução do seu patrimônio ao longo do tempo, desde hoje até a aposentadoria e durante toda a sua vida. 
+                                Observe como o patrimônio se comporta de acordo com a estratégia escolhida.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- ===================================================== -->
+                    <!-- 📈 GRÁFICO DE EVOLUÇÃO DO PATRIMÔNIO (PRIMEIRO GRÁFICO) -->
+                    <!-- ===================================================== -->
+                    <section class="invlab-results" style="margin-top: 20px;">
+                        <h2 class="module-title">📈 Evolução do Patrimônio</h2>
+                        <div style="padding: 30px 20px; background: #0f0f0f; border-radius: 10px; border: 1px solid rgba(138, 204, 166, 0.15);">
+                            <canvas id="graficoEvolucaoOficial" style="max-height: 400px;"></canvas>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <div class="pro-bloco" data-bloco="2">
+                <div class="pro-bloco-header">⚙️ Ajustes Avançados</div>
+                <div class="pro-bloco-content"></div>
+            </div>
+
+            <div class="pro-bloco" data-bloco="3">
+                <div class="pro-bloco-header">📊 Comparações</div>
+                <div class="pro-bloco-content">
+                    <!-- ===================================================== -->
+                    <!-- 📊 COMPARAÇÃO DE CENÁRIOS (APARECE DEPOIS) -->
+                    <!-- ===================================================== -->
+                    <!-- Resultados Principais (Comparação) -->
+                    <section class="invlab-results" style="margin-top: 40px;">
+                        <h2 class="module-title">📊 Comparação de Cenários de Aposentadoria</h2>
+                        <div class="results-grid">
+                            <div class="result-card">
+                                <h3>
+                                    💰 Investimento Próprio 
+                                    <span class="tooltip-icon" title="💡 Renda Vitalícia Perpétua: Você recebe APENAS os juros do patrimônio. O capital de R$ 2.175.398 NUNCA ACABA e pode ser deixado como herança integral. Renda mensal baseada na taxa real (8% - 4,5% inflação = 3,5% a.a.). Esta é a estratégia mais eficiente!">ℹ️</span>
+                                </h3>
+                                <p id="resultOwn">—</p>
+                            </div>
+
+                            <div class="result-card">
+                                <h3>
+                                    🏦 Vitalícia Simples 
+                                    <span class="tooltip-icon" title="⚠️ Previdência Tradicional: Você CONSOME o capital aos poucos junto com os juros. Renda maior que a perpétua, mas quando você morre sobra R$ 0 de herança. Usada em planos PGBL/VGBL tradicionais. Matemática mostra: herança zero e taxas altas tornam essa opção menos vantajosa que investimento próprio.">ℹ️</span>
+                                </h3>
+                                <p id="resultPensionSimple">—</p>
+                            </div>
+
+                            <div class="result-card">
+                                <h3>
+                                    🔄 Com Reversão 
+                                    <span class="tooltip-icon" title="👨‍👩‍👧 Previdência com Proteção Familiar: Renda MENOR, mas quando você morre seu cônjuge continua recebendo (geralmente 80%). Deixa herança parcial (~20% do capital). Usada para proteger dependentes, mas menos rentável.">ℹ️</span>
+                                </h3>
+                                <p id="resultPensionRev">—</p>
+                            </div>
+                        </div>
+
+                        <!-- Gráfico de Comparação -->
+                        <div class="chart-container" style="margin-top: 32px;">
+                            <canvas id="comparisonChart"></canvas>
+                        </div>
+                    </section>
+
+                    <!-- Herança -->
+                    <section class="invlab-heritage" style="margin-top: 40px;">
+                        <h2 class="module-title">💎 Herança – O que sobra para os herdeiros</h2>
+                        <div class="heritage-grid">
+                            <div class="heritage-card">
+                                <h3>💰 Investimento Próprio</h3>
+                                <p id="heritageOwnValue">—</p>
+                            </div>
+
+                            <div class="heritage-card">
+                                <h3>🔄 Vitalícia Reversível</h3>
+                                <p id="heritageRevValue">—</p>
+                            </div>
+
+                            <div class="heritage-card">
+                                <h3>⚠️ Vitalícia Simples</h3>
+                                <p id="heritageSimpleValue" style="color: #ef4444;">R$ 0</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <div class="pro-bloco" data-bloco="4">
+                <div class="pro-bloco-header">💼 Ferramentas PRO</div>
+                <div class="pro-bloco-content"></div>
+            </div>
+
+            <div class="pro-bloco" data-bloco="5">
+                <div class="pro-bloco-header">🔍 Diagnóstico Financeiro</div>
+                <div class="pro-bloco-content">
+                    <!-- ===================================================== -->
+                    <!-- 📋 DETALHES DA SIMULAÇÃO -->
+                    <!-- ===================================================== -->
+                    <div class="details-block" id="detailsBlock" style="display:none;">
+                        <p id="rendaInvestimentosDetail"></p>
+                        <p id="prazoDetail"></p>
+                        <p id="perfilDetail"></p>
+                    </div>
+
+                    <!-- ===================================================== -->
+                    <!-- 💡 INTERPRETAÇÃO AUTOMÁTICA DO RESULTADO -->
+                    <!-- ===================================================== -->
+                    <div id="interpretationBlock"></div>
                 </div>
             </div>
 
@@ -3390,21 +3257,6 @@
             // ================================
 
             // ================================
-            // 8. CONFIGURAR PAINEL DE AJUSTES RÁPIDOS
-            // ================================
-            setTimeout(() => {
-                configurarPainelAjustesPro({
-                    idadeAtual,
-                    idadeApos,
-                    patrimonioInicial,
-                    aporteMensal,
-                    retornoAnual,
-                    rendaDesejada,
-                    resultado
-                });
-            }, 200);
-
-            // ================================
             // 9. RETORNAR DADOS (mantendo formato esperado)
             // ================================
             return {
@@ -3415,201 +3267,6 @@
                 inss: beneficioINSS,
                 resultado: resultado  // Adicionar resultado completo para uso futuro
             };
-        }
-
-        // =====================================================
-        // 🔧 PAINEL DE AJUSTES RÁPIDOS - FUNÇÕES
-        // =====================================================
-        let valoresOriginaisPro = null;
-
-        function salvarValoresOriginaisPro(dados) {
-            valoresOriginaisPro = {
-                idadeAtual: dados.idadeAtual,
-                idadeApos: dados.idadeApos,
-                patrimonioInicial: dados.patrimonioInicial,
-                aporteMensal: dados.aporteMensal,
-                retornoAnual: dados.retornoAnual,
-                rendaDesejada: dados.rendaDesejada
-            };
-        }
-
-        function configurarPainelAjustesPro(dados) {
-            // Salvar valores originais na primeira vez
-            if (!valoresOriginaisPro) {
-                salvarValoresOriginaisPro(dados);
-            }
-
-            // Preencher campos do painel
-            const painel = document.getElementById('painelAjustesRapidos');
-            if (!painel) {
-                console.error('❌ Painel de ajustes não encontrado!');
-                return;
-            }
-
-            // Mostrar painel
-            painel.style.display = 'block';
-
-            // Preencher valores
-            document.getElementById('ajusteIdadeAtualPro').value = dados.idadeAtual;
-            document.getElementById('ajusteIdadeAposPro').value = dados.idadeApos;
-            document.getElementById('ajustePatrimonioInicialPro').value = dados.patrimonioInicial || 0;
-            document.getElementById('ajusteAportePro').value = dados.aporteMensal;
-            document.getElementById('ajusteRendaDesejadaPro').value = dados.rendaDesejada;
-
-            // Mapear retorno anual para perfil
-            let perfil = 'moderado';
-            if (dados.retornoAnual <= 0.06) {
-                perfil = 'conservador';
-            } else if (dados.retornoAnual >= 0.10) {
-                perfil = 'arrojado';
-            }
-            document.getElementById('ajustePerfilPro').value = perfil;
-
-            // Configurar min da idade de aposentadoria
-            const ajusteIdadeApos = document.getElementById('ajusteIdadeAposPro');
-            ajusteIdadeApos.min = dados.idadeAtual + 1;
-
-            // Event listeners
-            const btnRecalcular = document.getElementById('btnRecalcularPro');
-            const btnResetar = document.getElementById('btnResetarAjustesPro');
-
-            if (btnRecalcular) {
-                btnRecalcular.onclick = recalcularComAjustesPro;
-            }
-
-            if (btnResetar) {
-                btnResetar.onclick = resetarValoresOriginaisPro;
-            }
-
-            // Atualizar min da idade de aposentadoria quando idade atual mudar
-            const ajusteIdadeAtual = document.getElementById('ajusteIdadeAtualPro');
-            if (ajusteIdadeAtual && ajusteIdadeApos) {
-                ajusteIdadeAtual.addEventListener('input', function() {
-                    const novaIdadeAtual = parseInt(this.value) || 18;
-                    ajusteIdadeApos.min = novaIdadeAtual + 1;
-                    if (parseInt(ajusteIdadeApos.value) <= novaIdadeAtual) {
-                        ajusteIdadeApos.value = novaIdadeAtual + 1;
-                    }
-                });
-            }
-        }
-
-        function recalcularComAjustesPro() {
-            // Ler valores dos inputs
-            const inputIdadeAtual = document.getElementById('ajusteIdadeAtualPro');
-            const inputIdadeApos = document.getElementById('ajusteIdadeAposPro');
-            const inputPatrimonioInicial = document.getElementById('ajustePatrimonioInicialPro');
-            const inputAporte = document.getElementById('ajusteAportePro');
-            const inputPerfil = document.getElementById('ajustePerfilPro');
-            const inputRendaDesejada = document.getElementById('ajusteRendaDesejadaPro');
-
-            const novaIdadeAtual = parseInt(inputIdadeAtual?.value) || 0;
-            const novaIdadeApos = parseInt(inputIdadeApos?.value) || 0;
-            const novoPatrimonioInicial = parseFloat(inputPatrimonioInicial?.value) || 0;
-            const novoAporte = parseFloat(inputAporte?.value) || 0;
-            const novoPerfil = inputPerfil?.value || 'moderado';
-            const novaRendaDesejada = parseFloat(inputRendaDesejada?.value) || 0;
-
-            // Validações
-            if (novaIdadeAtual < 18 || novaIdadeAtual > 90) {
-                alert('⚠️ A idade atual deve estar entre 18 e 90 anos.');
-                return;
-            }
-
-            if (novaIdadeApos <= novaIdadeAtual) {
-                alert(`⚠️ A idade de aposentadoria deve ser maior que a idade atual (${novaIdadeAtual} anos).`);
-                return;
-            }
-
-            if (novoPatrimonioInicial < 0) {
-                alert('⚠️ O patrimônio inicial não pode ser negativo.');
-                return;
-            }
-
-            if (novoAporte <= 0) {
-                alert('⚠️ O aporte mensal deve ser maior que zero.');
-                return;
-            }
-
-            if (novaRendaDesejada <= 0) {
-                alert('⚠️ A renda desejada deve ser maior que zero.');
-                return;
-            }
-
-            // Mapear perfil para retorno anual
-            const rentabilidades = {
-                conservador: 0.06,
-                moderado: 0.08,
-                arrojado: 0.10
-            };
-            const novoRetornoAnual = rentabilidades[novoPerfil] || 0.08;
-
-            // Atualizar campos do formulário principal
-            document.getElementById('currentAge').value = novaIdadeAtual;
-            document.getElementById('retirementAge').value = novaIdadeApos;
-            document.getElementById('patrimonioAtualOficial').value = novoPatrimonioInicial;
-            document.getElementById('monthlyInvestment').value = novoAporte;
-            document.getElementById('desiredIncome').value = novaRendaDesejada;
-
-            // Atualizar perfil de investimento (se houver select)
-            if (document.getElementById('rentabilidadeCustom')) {
-                document.getElementById('rentabilidadeCustom').value = (novoRetornoAnual * 100).toFixed(1);
-            }
-
-            // Atualizar currentScenario se necessário
-            if (novoPerfil === 'conservador') {
-                currentScenario = 'conservador';
-            } else if (novoPerfil === 'arrojado') {
-                currentScenario = 'arrojado';
-            } else {
-                currentScenario = 'moderado';
-            }
-
-            // Recalcular simulação
-            calcularSimulacao();
-
-            // Scroll para resultados
-            setTimeout(() => {
-                document.getElementById("resultsSection").scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 300);
-        }
-
-        function resetarValoresOriginaisPro() {
-            if (!valoresOriginaisPro) {
-                alert('⚠️ Não há valores originais salvos para resetar.');
-                return;
-            }
-
-            // Restaurar valores originais no painel
-            document.getElementById('ajusteIdadeAtualPro').value = valoresOriginaisPro.idadeAtual;
-            document.getElementById('ajusteIdadeAposPro').value = valoresOriginaisPro.idadeApos;
-            document.getElementById('ajustePatrimonioInicialPro').value = valoresOriginaisPro.patrimonioInicial || 0;
-            document.getElementById('ajusteAportePro').value = valoresOriginaisPro.aporteMensal;
-            document.getElementById('ajusteRendaDesejadaPro').value = valoresOriginaisPro.rendaDesejada;
-
-            // Mapear retorno anual para perfil
-            let perfil = 'moderado';
-            if (valoresOriginaisPro.retornoAnual <= 0.06) {
-                perfil = 'conservador';
-            } else if (valoresOriginaisPro.retornoAnual >= 0.10) {
-                perfil = 'arrojado';
-            }
-            document.getElementById('ajustePerfilPro').value = perfil;
-
-            // Restaurar valores no formulário principal
-            document.getElementById('currentAge').value = valoresOriginaisPro.idadeAtual;
-            document.getElementById('retirementAge').value = valoresOriginaisPro.idadeApos;
-            document.getElementById('patrimonioAtualOficial').value = valoresOriginaisPro.patrimonioInicial || 0;
-            document.getElementById('monthlyInvestment').value = valoresOriginaisPro.aporteMensal;
-            document.getElementById('desiredIncome').value = valoresOriginaisPro.rendaDesejada;
-
-            // Recalcular com valores originais
-            calcularSimulacao();
-
-            // Scroll para resultados
-            setTimeout(() => {
-                document.getElementById("resultsSection").scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 300);
         }
 
         // ----------------------------------------------------------
@@ -3922,7 +3579,12 @@
 
             box.innerHTML = html;
 
-            document.getElementById("resultsSection").appendChild(box);
+            const bloco5Content = document.querySelector('.pro-bloco[data-bloco="5"] .pro-bloco-content');
+            if (bloco5Content) {
+                bloco5Content.appendChild(box);
+            } else {
+                document.getElementById("resultsSection").appendChild(box);
+            }
         }
 
         // ===================================================
@@ -3982,7 +3644,12 @@
                 </div>
             `;
 
-            document.getElementById("resultsSection").appendChild(container);
+            const bloco5Content = document.querySelector('.pro-bloco[data-bloco="5"] .pro-bloco-content');
+            if (bloco5Content) {
+                bloco5Content.appendChild(container);
+            } else {
+                document.getElementById("resultsSection").appendChild(container);
+            }
 
             // ===================================================
             // CALCULAR E EXIBIR APORTE NECESSÁRIO (SE HOUVER GAP)
@@ -4987,6 +4654,15 @@
 
         // Log inicial
         console.log('🏖️ Simulador de Aposentadoria INVLAB - TODOS OS 7 MÓDULOS INTEGRADOS ✅');
+
+        // =====================================================
+        // BLOCOS MODULARES PRO - TOGGLE (ESTRUTURA BASE)
+        // =====================================================
+        document.querySelectorAll(".pro-bloco-header").forEach(header => {
+            header.onclick = () => {
+                header.parentElement.classList.toggle("open");
+            };
+        });
     </script>
 
     <!-- FOOTER MASTER INVLAB -->
