@@ -218,33 +218,33 @@
         .btn-next,
         .btn-calc,
         .btn-primary {
-            padding: 15px 26px;
-            border-radius: 12px;
-            font-size: 1.1rem;
+            padding: 14px 24px;
+            border-radius: 10px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            border: 1px solid rgba(204, 170, 102, 0.3);
-            background: linear-gradient(135deg, #355E3B 0%, #CCAA66 100%); /* Gold Touch INVLAB */
-            color: #E4E4E4;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: rgba(212, 175, 55, 0.15);
+            color: #D4AF37;
+            transition: all 0.3s ease;
             margin-top: 25px;
-            box-shadow: 0 2px 8px rgba(53, 94, 59, 0.2);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
         }
 
         .btn-next:hover,
         .btn-calc:hover,
         .btn-primary:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 
-                0 4px 12px rgba(53, 94, 59, 0.3),
-                0 2px 8px rgba(204, 170, 102, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(212, 175, 55, 0.25);
             border-color: #D4AF37;
-            color: #FFFFFF;
+            background: rgba(212, 175, 55, 0.25);
+            color: #D4AF37;
         }
 
         /* Ações */
         .module-actions {
             margin-top: 20px;
+            margin-bottom: 8px;
             text-align: center;
         }
 
@@ -825,18 +825,19 @@
         /* BLOCOS MODULARES PRO (ESTRUTURA BASE) */
         /* ========================================= */
         .pro-bloco {
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(212, 175, 55, 0.2);
             border-radius: 10px;
             margin-bottom: 20px;
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.03);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            background: rgba(212, 175, 55, 0.05);
+            box-shadow: 0 3px 12px rgba(212, 175, 55, 0.1), 0 2px 8px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
         }
 
         .pro-bloco.open {
-            border: 1.5px solid rgba(212, 175, 55, 0.4);
-            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(212, 175, 55, 0.5);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.25), 0 3px 12px rgba(0, 0, 0, 0.3);
+            background: rgba(212, 175, 55, 0.08);
         }
 
         .pro-bloco-header {
@@ -891,6 +892,27 @@
 
         .pro-bloco-container {
             margin-top: 32px;
+        }
+
+        .pegadinhas-btn-container {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .btn-ver-pegadinhas {
+            background: #d32f2f;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            border: none;
+            transition: 0.2s;
+        }
+
+        .btn-ver-pegadinhas:hover {
+            background: #b71c1c;
         }
     </style>
     
@@ -1780,7 +1802,7 @@
                 </div>
 
                 <div class="module-actions">
-                    <button class="btn-primary">🚀 Calcular Simulação Completa</button>
+                    <button class="btn-primary">🚀 Simular Cenários Aposentadoria</button>
                 </div>
             </section>
 
@@ -1801,7 +1823,7 @@
             <div class="pro-bloco-container">
             <div class="pro-bloco" data-bloco="1">
                 <div class="pro-bloco-header">
-                    <span>📌 Resultado Essencial</span>
+                    <span>📌 Cenário do Investimento Próprio (Recomendado)</span>
                     <span class="pro-bloco-arrow">▼</span>
                 </div>
                 <div class="pro-bloco-content">
@@ -1865,10 +1887,53 @@
 
             <div class="pro-bloco" data-bloco="2">
                 <div class="pro-bloco-header">
-                    <span>⚙️ Ajustes Avançados</span>
+                    <span>⚙️ Configurações e Ajustes Avançados</span>
                     <span class="pro-bloco-arrow">▼</span>
                 </div>
-                <div class="pro-bloco-content"></div>
+                <div class="pro-bloco-content">
+                    <div class="acordeon-content-inner">
+                        <!-- Rentabilidade -->
+                        <div class="acordeon-input">
+                            <label>Rentabilidade Personalizada (% a.a.)</label>
+                            <input type="number" id="rentabilidadeCustom" value="" placeholder="Ex: 7.5" step="0.1">
+                        </div>
+                        <!-- Inflação -->
+                        <div class="acordeon-input">
+                            <label>Inflação Estimada (% a.a.)</label>
+                            <input type="number" id="inflacaoCustom" value="" placeholder="Ex: 4.5" step="0.1">
+                        </div>
+                        <!-- Taxa Real Desejada -->
+                        <div class="acordeon-input">
+                            <label>Taxa Real Desejada na Aposentadoria (% a.m.)</label>
+                            <input type="number" id="taxaRealDesejada" value="" placeholder="Ex: 0.55" step="0.01">
+                        </div>
+                        <!-- Taxa administrativa -->
+                        <div class="acordeon-input">
+                            <label>Taxa Administrativa da Previdência (% a.a.)</label>
+                            <input type="number" id="taxaAdmCustom" value="" placeholder="Ex: 1.5" step="0.1">
+                        </div>
+                        <!-- Aporte anual -->
+                        <div class="acordeon-input">
+                            <label>Aporte Extra Anual (R$)</label>
+                            <input type="number" id="aporteExtra" value="" placeholder="Ex: 5000" step="100">
+                        </div>
+                        <!-- Tipo de renda -->
+                        <div class="acordeon-input">
+                            <label>Modelo de Renda Pós-Aposentadoria</label>
+                            <select id="modeloRenda">
+                                <option value="linear">Renda Linear</option>
+                                <option value="simple">Vitalícia Simples</option>
+                                <option value="reversivel">Vitalícia Reversível</option>
+                                <option value="saque">Saque Programado</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="acordeon-divider"></div>
+                    <p style="font-size:0.95rem; color:#94a3b8; margin-bottom:20px;">
+                        Estas configurações permitem simulações avançadas para usuários experientes.  
+                        Se você não sabe o que significa, pode deixar tudo em branco — seu simulador usará automaticamente as configurações padrão mais realistas.
+                    </p>
+                </div>
             </div>
 
             <div class="pro-bloco" data-bloco="3">
@@ -1935,6 +2000,13 @@
                             </div>
                         </div>
                     </section>
+
+                    <!-- Botão Ver Pegadinhas -->
+                    <div class="pegadinhas-btn-container">
+                        <button id="btnPegadinhas" class="btn-ver-pegadinhas">
+                            ⚠️ Ver Pegadinhas da Previdência Privada
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -2116,78 +2188,6 @@
                 <table class="comparador-table" id="comparadorTable"></table>
 
                 <button class="btn-pdf" onclick="gerarPDF_INVLAB()">📄 Baixar Relatório Premium (PDF)</button>
-            </div>
-
-            <!-- ===================================================== -->
-            <!-- 🔧 MÓDULO 6 – CONFIGURAÇÕES AVANÇADAS (ACORDEÃO INVLAB+) -->
-            <!-- ===================================================== -->
-            
-            <!-- ACORDEÃO DE CONFIGURAÇÕES AVANÇADAS -->
-            <div class="acordeon-container">
-                <div class="acordeon-header" id="acordeonToggle">
-                    ⚙️ Configurações Avançadas (Opcional)
-                    <span class="acordeon-icon" id="acordeonIcon">▼</span>
-                </div>
-                <div class="acordeon-content" id="acordeonContent">
-                    <div class="acordeon-content-inner">
-                        <!-- Rentabilidade -->
-                        <div class="acordeon-input">
-                            <label>Rentabilidade Personalizada (% a.a.)</label>
-                            <input type="number" id="rentabilidadeCustom" value="" placeholder="Ex: 7.5" step="0.1">
-                        </div>
-                        <!-- Inflação -->
-                        <div class="acordeon-input">
-                            <label>Inflação Estimada (% a.a.)</label>
-                            <input type="number" id="inflacaoCustom" value="" placeholder="Ex: 4.5" step="0.1">
-                        </div>
-                        <!-- Taxa Real Desejada -->
-                        <div class="acordeon-input">
-                            <label>Taxa Real Desejada na Aposentadoria (% a.m.)</label>
-                            <input type="number" id="taxaRealDesejada" value="" placeholder="Ex: 0.55" step="0.01">
-                        </div>
-                        <!-- Taxa administrativa -->
-                        <div class="acordeon-input">
-                            <label>Taxa Administrativa da Previdência (% a.a.)</label>
-                            <input type="number" id="taxaAdmCustom" value="" placeholder="Ex: 1.5" step="0.1">
-                        </div>
-                        <!-- Aporte anual -->
-                        <div class="acordeon-input">
-                            <label>Aporte Extra Anual (R$)</label>
-                            <input type="number" id="aporteExtra" value="" placeholder="Ex: 5000" step="100">
-                        </div>
-                        <!-- Tipo de renda -->
-                        <div class="acordeon-input">
-                            <label>Modelo de Renda Pós-Aposentadoria</label>
-                            <select id="modeloRenda">
-                                <option value="linear">Renda Linear</option>
-                                <option value="simple">Vitalícia Simples</option>
-                                <option value="reversivel">Vitalícia Reversível</option>
-                                <option value="saque">Saque Programado</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="acordeon-divider"></div>
-                    <p style="font-size:0.95rem; color:#94a3b8; margin-bottom:20px;">
-                        Estas configurações permitem simulações avançadas para usuários experientes.  
-                        Se você não sabe o que significa, pode deixar tudo em branco — seu simulador usará automaticamente as configurações padrão mais realistas.
-                    </p>
-                </div>
-            </div>
-
-            <!-- BOTÃO PARA MOSTRAR O MODAL -->
-            <div style="text-align:center; margin-top:40px;">
-                <button id="btnPegadinhas" style="
-                    padding:14px 25px;
-                    background:linear-gradient(135deg, #dc2626, #b91c1c);
-                    color:#fff;
-                    border:none;
-                    border-radius:10px;
-                    font-size:1.1rem;
-                    cursor:pointer;
-                    font-weight:600;
-                    transition:0.3s;">
-                    ⚠️ Ver Pegadinhas da Previdência Privada
-                </button>
             </div>
 
             <!-- Footer Assinatura -->
@@ -4316,19 +4316,24 @@
         // ============================================
 
         // Acordeão INVLAB+
+        // Acordeon de Configurações Avançadas foi movido para dentro do bloco "Ajustes Avançados"
+        // O sistema de toggle agora é gerenciado pelo pro-bloco (data-bloco="2")
+        // Este código não é mais necessário, mas mantido para compatibilidade
         const acordeonToggle = document.getElementById("acordeonToggle");
         const acordeonContent = document.getElementById("acordeonContent");
         const acordeonIcon = document.getElementById("acordeonIcon");
 
-        acordeonToggle.addEventListener("click", () => {
-            if (acordeonContent.style.maxHeight) {
-                acordeonContent.style.maxHeight = null;
-                acordeonIcon.style.transform = "rotate(0deg)";
-            } else {
-                acordeonContent.style.maxHeight = acordeonContent.scrollHeight + "px";
-                acordeonIcon.style.transform = "rotate(180deg)";
-            }
-        });
+        if (acordeonToggle && acordeonContent && acordeonIcon) {
+            acordeonToggle.addEventListener("click", () => {
+                if (acordeonContent.style.maxHeight) {
+                    acordeonContent.style.maxHeight = null;
+                    acordeonIcon.style.transform = "rotate(0deg)";
+                } else {
+                    acordeonContent.style.maxHeight = acordeonContent.scrollHeight + "px";
+                    acordeonIcon.style.transform = "rotate(180deg)";
+                }
+            });
+        }
 
         // Integração avançada com o motor do módulo 3
         function obterParametrosAvancados() {
