@@ -4719,19 +4719,29 @@
                     });
                 }
                 
-                // Calcular diferença vs. cenário base
+                // ✅ CORREÇÃO CRÍTICA: Calcular diferença vs. cenário base
+                // A comparação deve ser feita APENAS entre os patrimônios acumulados no momento da aposentadoria
+                // NÃO usar valores pós-consumo, valores finais (que chegam a 0), ou valores do gráfico completo
                 if (resultadoBase) {
-                    const diffPatrimonio = patrimonioAvancado - resultadoBase.patrimonioFinal;
-                    const diffRenda = rendaAvancada - (resultadoBase.rendaMensalFinal || resultadoBase.rendaRealPossivel || 0);
+                    // Patrimônio no momento da aposentadoria (ponto correto para comparação)
+                    const patrimonioBaseAposentadoria = resultadoBase.patrimonioFinal; // Patrimônio acumulado sem taxa
+                    const patrimonioComTaxaAposentadoria = resultadoAvancado.patrimonioFinal; // Patrimônio acumulado com taxa
+                    
+                    // ✅ CORREÇÃO: Diferença = base - com taxa (mostra quanto foi perdido)
+                    const diferencaVsBase = patrimonioBaseAposentadoria - patrimonioComTaxaAposentadoria;
                     
                     const cardDiferenca = document.getElementById("resultado-avancado-diferenca");
                     if (cardDiferenca) {
                         if (taxaAdmAnual === 0) {
-                            cardDiferenca.textContent = "Idêntico ao base";
+                            // ✅ REGRA: Para taxa = 0%, diferença deve ser R$ 0,00
+                            cardDiferenca.textContent = "R$ 0,00";
                             cardDiferenca.style.color = "#10b981";
                         } else {
-                            const diffTotal = diffPatrimonio + (diffRenda * 12 * (95 - idadeApos)); // Aproximação
-                            cardDiferenca.textContent = "R$ " + diffTotal.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
+                            // ✅ CORREÇÃO: Mostrar apenas a diferença no patrimônio acumulado na aposentadoria
+                            cardDiferenca.textContent = "R$ " + diferencaVsBase.toLocaleString("pt-BR", { 
+                                minimumFractionDigits: 0,
+                                maximumFractionDigits: 0 
+                            });
                             cardDiferenca.style.color = "#ef4444";
                         }
                     }
