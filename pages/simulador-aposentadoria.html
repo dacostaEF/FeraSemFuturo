@@ -826,32 +826,71 @@
         /* ========================================= */
         .pro-bloco {
             border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 8px;
-            margin-bottom: 12px;
+            border-radius: 10px;
+            margin-bottom: 20px;
             overflow: hidden;
             background: rgba(255, 255, 255, 0.03);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .pro-bloco.open {
+            border: 1.5px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
         .pro-bloco-header {
-            padding: 12px 16px;
+            padding: 14px 24px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1.1rem;
             color: #f5d77d; /* dourado InvLab */
-            transition: background-color 0.2s ease;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .pro-bloco-header span:first-child {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pro-bloco.open .pro-bloco-header {
+            color: #D4AF37;
         }
 
         .pro-bloco-header:hover {
             background-color: rgba(245, 215, 125, 0.1);
         }
 
+        .pro-bloco-arrow {
+            color: #D4AF37;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            margin-left: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pro-bloco.open .pro-bloco-arrow {
+            transform: rotate(180deg);
+        }
+
         .pro-bloco-content {
             display: none;
-            padding: 16px;
+            padding: 20px 24px;
         }
 
         .pro-bloco.open .pro-bloco-content {
             display: block;
+        }
+
+        .pro-bloco-container {
+            margin-top: 32px;
         }
     </style>
     
@@ -1759,8 +1798,12 @@
             <!-- ===================================================== -->
             <!-- 🎯 BLOCOS MODULARES PRO (ESTRUTURA BASE) -->
             <!-- ===================================================== -->
+            <div class="pro-bloco-container">
             <div class="pro-bloco" data-bloco="1">
-                <div class="pro-bloco-header">📌 Resultado Essencial</div>
+                <div class="pro-bloco-header">
+                    <span>📌 Resultado Essencial</span>
+                    <span class="pro-bloco-arrow">▼</span>
+                </div>
                 <div class="pro-bloco-content">
                     <!-- ===================================================== -->
                     <!-- 🎯 CARDS PRINCIPAIS (ESTILO WIZARD) -->
@@ -1821,12 +1864,18 @@
             </div>
 
             <div class="pro-bloco" data-bloco="2">
-                <div class="pro-bloco-header">⚙️ Ajustes Avançados</div>
+                <div class="pro-bloco-header">
+                    <span>⚙️ Ajustes Avançados</span>
+                    <span class="pro-bloco-arrow">▼</span>
+                </div>
                 <div class="pro-bloco-content"></div>
             </div>
 
             <div class="pro-bloco" data-bloco="3">
-                <div class="pro-bloco-header">📊 Comparações</div>
+                <div class="pro-bloco-header">
+                    <span>📊 Comparações</span>
+                    <span class="pro-bloco-arrow">▼</span>
+                </div>
                 <div class="pro-bloco-content">
                     <!-- ===================================================== -->
                     <!-- 📊 COMPARAÇÃO DE CENÁRIOS (APARECE DEPOIS) -->
@@ -1890,12 +1939,18 @@
             </div>
 
             <div class="pro-bloco" data-bloco="4">
-                <div class="pro-bloco-header">💼 Ferramentas PRO</div>
+                <div class="pro-bloco-header">
+                    <span>💼 Ferramentas PRO</span>
+                    <span class="pro-bloco-arrow">▼</span>
+                </div>
                 <div class="pro-bloco-content"></div>
             </div>
 
             <div class="pro-bloco" data-bloco="5">
-                <div class="pro-bloco-header">🔍 Diagnóstico Financeiro</div>
+                <div class="pro-bloco-header">
+                    <span>🔍 Diagnóstico Financeiro</span>
+                    <span class="pro-bloco-arrow">▼</span>
+                </div>
                 <div class="pro-bloco-content">
                     <!-- ===================================================== -->
                     <!-- 📋 DETALHES DA SIMULAÇÃO -->
@@ -2047,6 +2102,8 @@
                     </div>
                 </div>
             </div>
+            </div>
+            <!-- Fim do container dos blocos PRO -->
 
             <!-- ===================================================== -->
             <!-- 🔥 MÓDULO 7 — COMPARADOR PRO + RELATÓRIO PDF INVLAB -->
