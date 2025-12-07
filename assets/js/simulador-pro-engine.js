@@ -553,3 +553,147 @@ window.simuladorProEngine.executarSimulacaoCompleta = function (params) {
     };
 };
 
+// =====================================================
+// 📊 FUNÇÕES PARA ACORDEON 3 - COMPARAÇÕES
+// =====================================================
+
+/**
+ * Calcula acumulação de previdência privada (com taxa administrativa de 2% a.a.)
+ * @param {number} aporteMensal - Aporte mensal
+ * @param {number} anos - Anos de acumulação
+ * @param {number} retornoAnual - Retorno anual nominal (ex: 0.08 para 8%)
+ * @param {number} patrimonioInicial - Patrimônio inicial (opcional, padrão 0)
+ * @param {number} aporteExtraAnual - Aporte extra anual (opcional, padrão 0)
+ * @returns {Object} {nominal: valorNominal, real: valorReal}
+ */
+function acumulacaoPrevidencia(aporteMensal, anos, retornoAnual, patrimonioInicial = 0, aporteExtraAnual = 0) {
+    // Taxa líquida após descontar 2% de taxa administrativa
+    const taxaLiquida = retornoAnual - 0.02;
+    
+    // Converter para taxa mensal
+    const taxaMensal = taxaMensalEfetiva(taxaLiquida);
+    const taxaMensalInflacao = taxaMensalEfetiva(INFLACAO_MEDIA);
+    const meses = anos * 12;
+    
+    let valorNominal = Number(patrimonioInicial);
+    
+    for (let m = 1; m <= meses; m++) {
+        valorNominal = valorNominal * (1 + taxaMensal) + aporteMensal;
+        
+        // Aporte extra anual no final de cada ano
+        if (aporteExtraAnual > 0 && m % 12 === 0) {
+            valorNominal += Number(aporteExtraAnual);
+        }
+    }
+    
+    // Calcular valor real (descontando inflação)
+    const valorReal = valorNominal / Math.pow(1 + INFLACAO_MEDIA, anos);
+    
+    return { nominal: valorNominal, real: valorReal };
+}
+
+/**
+ * Calcula renda vitalícia (simples ou reversível)
+ * @param {number} patrimonio - Patrimônio acumulado
+ * @param {number} retornoAnual - Retorno anual nominal (ex: 0.08 para 8%)
+ * @param {string} tipo - "simples" ou "reversivel"
+ * @returns {number} Renda mensal vitalícia
+ */
+function rendaVitaliciaComparacao(patrimonio, retornoAnual, tipo) {
+    // Taxa mensal nominal (aproximada)
+    const taxaMensal = retornoAnual / 12;
+    
+    // Fatores: simples = 1.20 (renda maior, consome capital), reversivel = 0.80 (renda menor, preserva mais)
+    const fator = tipo === "simples" ? 1.20 : 0.80;
+    
+    return patrimonio * taxaMensal * fator;
+}
+
+/**
+ * Calcula todas as comparações do Acordeão 3
+ * @param {Object} resultadoSimulacao - Resultado da simulação principal
+ * @param {number} aporteMensal - Aporte mensal usado na simulação
+ * @param {number} anos - Anos até aposentadoria
+ * @param {number} retornoAnual - Retorno anual nominal
+ * @returns {Object} Objeto com todos os valores de comparação
+ */
+function calcularComparacoesAcordeao3(resultadoSimulacao, aporteMensal, anos, retornoAnual) {
+    // 1. Acumulação de previdência privada (com taxa de 2%)
+    const prev = acumulacaoPrevidencia(aporteMensal, anos, retornoAnual);
+    
+    // 2. Renda vitalícia simples (consome capital)
+    const rendaPrevSimples = rendaVitaliciaComparacao(prev.nominal, retornoAnual, "simples");
+    
+    // 3. Renda vitalícia reversível (preserva mais capital)
+    const rendaPrevRev = rendaVitaliciaComparacao(prev.nominal, retornoAnual, "reversivel");
+    
+    // 4. Herança do investimento próprio (vem do resultado da simulação)
+    const herancaOwn = resultadoSimulacao.heranca || 0;
+    
+    // 5. Herança da vitalícia reversível (20% do patrimônio nominal)
+    const herancaRev = prev.nominal * 0.20;
+    
+    // 6. Herança da vitalícia simples (sempre 0, pois consome todo o capital)
+    const herancaSimple = 0;
+    
+    return {
+        // Patrimônios acumulados
+        patrimonioProprio: resultadoSimulacao.patrimonioFinal || 0,
+        patrimonioPrevidencia: prev.nominal,
+        
+        // Rendas mensais
+        rendaProprio: resultadoSimulacao.rendaMensalFinal || resultadoSimulacao.rendaRealPossivel || 0,
+        rendaPrevSimples: rendaPrevSimples,
+        rendaPrevRev: rendaPrevRev,
+        
+        // Heranças
+        herancaOwn: herancaOwn,
+        herancaRev: herancaRev,
+        herancaSimple: herancaSimple,
+        
+        // Dados auxiliares
+        prev: prev
+    };
+}
+
+// ✅ Adicionar funções do Acordeão 3 ao objeto exportado
+window.simuladorProEngine.calcularComparacoesAcordeao3 = calcularComparacoesAcordeao3;
+window.simuladorProEngine.acumulacaoPrevidencia = acumulacaoPrevidencia;
+window.simuladorProEngine.rendaVitaliciaComparacao = rendaVitaliciaComparacao;
+
+// =====================================================
+// 🚨 FUNÇÕES PARA ACORDEON 4 - PREVIDÊNCIA PRIVADA
+// =====================================================
+
+/**
+ * Calcula os modelos de previdência privada baseados no patrimônio final
+ * @param {number} patrimonioFinal - Patrimônio final do cenário base
+ * @param {number} rendaMensal - Renda mensal do cenário base
+ * @returns {Object} Objeto com os resultados dos modelos 1 e 2
+ */
+function calcularModelosPrevidencia(patrimonioFinal, rendaMensal) {
+    // Modelo 1 – taxas altas
+    let taxaAdm1 = 0.02;      // 2% a.a.
+    let carregamento1 = 0.02; // 2% sobre aportes
+    let custos1 = 0.005;      // 0.5% a.a.
+    let reducao1 = patrimonioFinal * (taxaAdm1 + custos1);
+    let patrimonio1 = patrimonioFinal - reducao1;
+    let renda1 = rendaMensal * (patrimonio1 / patrimonioFinal);
+
+    // Modelo 2 – taxas moderadas
+    let taxaAdm2 = 0.01;
+    let carregamento2 = 0.00;
+    let custos2 = 0.003;
+    let reducao2 = patrimonioFinal * (taxaAdm2 + custos2);
+    let patrimonio2 = patrimonioFinal - reducao2;
+    let renda2 = rendaMensal * (patrimonio2 / patrimonioFinal);
+
+    return {
+        m1: { patrimonio: patrimonio1, renda: renda1 },
+        m2: { patrimonio: patrimonio2, renda: renda2 }
+    };
+}
+
+// ✅ Adicionar função ao objeto exportado
+window.simuladorProEngine.calcularModelosPrevidencia = calcularModelosPrevidencia;
+
