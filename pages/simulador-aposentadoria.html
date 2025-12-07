@@ -2261,21 +2261,25 @@
                             se comporta quando aplicado em modelos clássicos de previdência privada.
                         </p>
 
-                        <!-- Cenário Base -->
-                        <div class="card-invlab base-card">
+                        <!-- Cenário Base - Cards estilo Acordeão 1 -->
+                        <div style="margin-bottom: 20px;">
                             <h3 style="
                                 font-family: 'Playfair Display', serif;
-                                font-size: 1.3rem;
+                                font-size: 1.1rem;
                                 color: #10b981;
-                                margin-bottom: 12px;
+                                margin-bottom: 14px;
                                 font-weight: 700;
                             ">📌 Cenário Base (Investimento Próprio)</h3>
-                            <p style="color: #E4E4E4; margin-bottom: 8px; line-height: 1.6;">
-                                Patrimônio acumulado: <strong id="pp-base-patrimonio" style="color: #10b981; font-size: 1.1rem;">R$ 0,00</strong>
-                            </p>
-                            <p style="color: #E4E4E4; margin: 0; line-height: 1.6;">
-                                Renda mensal prevista: <strong id="pp-base-renda" style="color: #10b981; font-size: 1.1rem;">R$ 0,00</strong>
-                            </p>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                                <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
+                                    <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">💰 Patrimônio Projetado</h3>
+                                    <p class="valor" id="pp-base-patrimonio" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #10b981; margin: 6px 0 0 0;">—</p>
+                                </div>
+                                <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
+                                    <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">📈 Renda Mensal Prevista</h3>
+                                    <p class="valor" id="pp-base-renda" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #D4AF37; margin: 6px 0 0 0;">—</p>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Modelo 1 -->
@@ -3938,11 +3942,18 @@
                             rendaInvestProprio
                         );
 
-                        // Base
+                        // Base - Usar mesmo formato dos cards do Acordeão 1
                         const ppBasePatrimonio = document.getElementById("pp-base-patrimonio");
                         const ppBaseRenda = document.getElementById("pp-base-renda");
-                        if (ppBasePatrimonio) ppBasePatrimonio.textContent = formatarMoeda(resultado.patrimonioFinal);
-                        if (ppBaseRenda) ppBaseRenda.textContent = formatarMoeda(rendaInvestProprio);
+                        if (ppBasePatrimonio) {
+                            ppBasePatrimonio.textContent = "R$ " + resultado.patrimonioFinal.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
+                        }
+                        if (ppBaseRenda) {
+                            ppBaseRenda.textContent = "R$ " + rendaInvestProprio.toLocaleString("pt-BR", {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            });
+                        }
 
                         // Modelo 1
                         const ppM1Patrimonio = document.getElementById("pp-m1-patrimonio");
