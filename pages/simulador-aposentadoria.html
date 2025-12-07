@@ -2377,6 +2377,61 @@
                             </table>
                         </div>
 
+                        <!-- Texto Educativo -->
+                        <div style="
+                            margin-top: 32px;
+                            padding: 20px;
+                            background: rgba(239, 68, 68, 0.1);
+                            border-left: 4px solid #ef4444;
+                            border-radius: 8px;
+                        ">
+                            <h4 style="
+                                color: #ef4444;
+                                font-size: 1.1rem;
+                                font-weight: 700;
+                                margin-bottom: 12px;
+                                font-family: 'Playfair Display', serif;
+                            ">⚠️ Por que a perda é tão maior?</h4>
+                            <p style="
+                                color: #E4E4E4;
+                                line-height: 1.8;
+                                margin-bottom: 12px;
+                            ">
+                                Quando usamos o motor real, as taxas atuam simultaneamente:
+                            </p>
+                            <ul style="
+                                color: #E4E4E4;
+                                line-height: 1.8;
+                                margin-bottom: 12px;
+                                padding-left: 24px;
+                            ">
+                                <li style="margin-bottom: 8px;">
+                                    <strong style="color: #ef4444;">Carregamento</strong> reduz cada aporte antes de render
+                                </li>
+                                <li style="margin-bottom: 8px;">
+                                    <strong style="color: #ef4444;">A taxa de administração</strong> corrói o patrimônio TODO ANO
+                                </li>
+                                <li style="margin-bottom: 8px;">
+                                    <strong style="color: #ef4444;">Os custos internos</strong> reduzem ainda mais a rentabilidade líquida
+                                </li>
+                                <li style="margin-bottom: 8px;">
+                                    <strong style="color: #ef4444;">O efeito composto</strong> multiplica essas perdas por 30 anos
+                                </li>
+                            </ul>
+                            <p style="
+                                color: #D4AF37;
+                                line-height: 1.8;
+                                font-weight: 600;
+                                margin-top: 16px;
+                                padding: 12px;
+                                background: rgba(212, 175, 55, 0.1);
+                                border-radius: 6px;
+                            ">
+                                Por isso previdências privadas podem destruir 15% a 40% do patrimônio final,
+                                dependendo da combinação de taxas.
+                            </p>
+                        </div>
+
                         <div style="text-align: center; margin-top: 24px;">
                             <button id="btnExplicacaoTaxas" class="btn-entenda" style="
                                 padding: 12px 24px;
@@ -3855,8 +3910,30 @@
                             });
                         };
 
-                        // Calcular modelos de previdência privada
+                        // Função auxiliar para formatar percentual
+                        const formatarPercentual = (valor) => {
+                            return valor.toFixed(2) + "%";
+                        };
+
+                        // Preparar parâmetros do cenário base para passar à função
+                        const paramsBase = {
+                            idadeAtual,
+                            idadeApos,
+                            idadeFinal,
+                            aporteMensal,
+                            aporteAnual,
+                            patrimonioInicial,
+                            retornoAnual,
+                            tipoRenda,
+                            estrategia,
+                            anosPeriodo,
+                            rendaDesejada,
+                            inssInformado: inssManual
+                        };
+
+                        // Calcular modelos de previdência privada usando o motor real
                         const modelos = window.simuladorProEngine.calcularModelosPrevidencia(
+                            paramsBase,
                             resultado.patrimonioFinal,
                             rendaInvestProprio
                         );
@@ -3891,9 +3968,11 @@
                         if (cmpM1Patrimonio) cmpM1Patrimonio.textContent = formatarMoeda(modelos.m1.patrimonio);
                         if (cmpM1Renda) cmpM1Renda.textContent = formatarMoeda(modelos.m1.renda);
                         if (cmpM1Perda) {
-                            const perda1 = modelos.m1.patrimonio - resultado.patrimonioFinal;
-                            cmpM1Perda.textContent = formatarMoeda(perda1);
-                            cmpM1Perda.style.color = perda1 < 0 ? '#ef4444' : '#10b981';
+                            // Mostrar perda absoluta e percentual
+                            const perdaTexto = formatarMoeda(modelos.m1.perdaAbsoluta) + 
+                                " (" + formatarPercentual(modelos.m1.perdaPercentual) + ")";
+                            cmpM1Perda.textContent = perdaTexto;
+                            cmpM1Perda.style.color = modelos.m1.perdaAbsoluta < 0 ? '#ef4444' : '#10b981';
                         }
 
                         const cmpM2Patrimonio = document.getElementById("cmp-m2-patrimonio");
@@ -3902,9 +3981,11 @@
                         if (cmpM2Patrimonio) cmpM2Patrimonio.textContent = formatarMoeda(modelos.m2.patrimonio);
                         if (cmpM2Renda) cmpM2Renda.textContent = formatarMoeda(modelos.m2.renda);
                         if (cmpM2Perda) {
-                            const perda2 = modelos.m2.patrimonio - resultado.patrimonioFinal;
-                            cmpM2Perda.textContent = formatarMoeda(perda2);
-                            cmpM2Perda.style.color = perda2 < 0 ? '#ef4444' : '#10b981';
+                            // Mostrar perda absoluta e percentual
+                            const perdaTexto = formatarMoeda(modelos.m2.perdaAbsoluta) + 
+                                " (" + formatarPercentual(modelos.m2.perdaPercentual) + ")";
+                            cmpM2Perda.textContent = perdaTexto;
+                            cmpM2Perda.style.color = modelos.m2.perdaAbsoluta < 0 ? '#ef4444' : '#10b981';
                         }
                     } catch (error) {
                         console.error("❌ Erro ao calcular modelos de previdência privada:", error);

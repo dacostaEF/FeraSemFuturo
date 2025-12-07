@@ -666,31 +666,108 @@ window.simuladorProEngine.rendaVitaliciaComparacao = rendaVitaliciaComparacao;
 // =====================================================
 
 /**
- * Calcula os modelos de previdência privada baseados no patrimônio final
- * @param {number} patrimonioFinal - Patrimônio final do cenário base
- * @param {number} rendaMensal - Renda mensal do cenário base
- * @returns {Object} Objeto com os resultados dos modelos 1 e 2
+ * Calcula os modelos de previdência privada usando o motor real de simulação
+ * 
+ * Esta função recalcula TODOS OS CENÁRIOS usando o mesmo motor que gera o cenário base,
+ * aplicando as taxas de forma realista mês a mês, sem aproximações ou multiplicadores.
+ * 
+ * @param {Object} paramsBase - Parâmetros do cenário base (mesmos de executarSimulacaoCompleta)
+ * @param {number} patrimonioBase - Patrimônio final do cenário base (para comparação)
+ * @param {number} rendaBase - Renda mensal do cenário base (para comparação)
+ * @returns {Object} Objeto com os resultados dos modelos 1 e 2, incluindo perdas absolutas e percentuais
  */
-function calcularModelosPrevidencia(patrimonioFinal, rendaMensal) {
-    // Modelo 1 – taxas altas
-    let taxaAdm1 = 0.02;      // 2% a.a.
-    let carregamento1 = 0.02; // 2% sobre aportes
-    let custos1 = 0.005;      // 0.5% a.a.
-    let reducao1 = patrimonioFinal * (taxaAdm1 + custos1);
-    let patrimonio1 = patrimonioFinal - reducao1;
-    let renda1 = rendaMensal * (patrimonio1 / patrimonioFinal);
-
-    // Modelo 2 – taxas moderadas
-    let taxaAdm2 = 0.01;
-    let carregamento2 = 0.00;
-    let custos2 = 0.003;
-    let reducao2 = patrimonioFinal * (taxaAdm2 + custos2);
-    let patrimonio2 = patrimonioFinal - reducao2;
-    let renda2 = rendaMensal * (patrimonio2 / patrimonioFinal);
-
+function calcularModelosPrevidencia(paramsBase, patrimonioBase, rendaBase) {
+    // ============================================================
+    // MODELO 1: Previdência Privada Tipo 1 (Taxas Altas)
+    // ============================================================
+    // Taxas do Modelo 1:
+    const taxaAdm1 = 0.02;        // 2% a.a. de taxa de administração
+    const carregamento1 = 0.02;    // 2% sobre cada aporte
+    const custosInternos1 = 0.005; // 0.5% a.a. de custos internos
+    
+    // 1. Aplicar carregamento sobre cada aporte (reduz o aporte efetivo)
+    const aporteMensalLiquido1 = paramsBase.aporteMensal * (1 - carregamento1);
+    const aporteAnualLiquido1 = (paramsBase.aporteAnual || 0) * (1 - carregamento1);
+    
+    // 2. Calcular rentabilidade líquida real (descontar taxas administrativas e custos internos)
+    // A rentabilidade nominal é reduzida pela taxa de administração e custos internos
+    const retornoAnualLiquido1 = paramsBase.retornoAnual - taxaAdm1 - custosInternos1;
+    
+    // 3. RODAR O MOTOR COMPLETO para Modelo 1
+    const resultadoM1 = window.simuladorProEngine.executarSimulacaoCompleta({
+        idadeAtual: paramsBase.idadeAtual,
+        idadeApos: paramsBase.idadeApos,
+        idadeFinal: paramsBase.idadeFinal,
+        aporteMensal: aporteMensalLiquido1,
+        aporteAnual: aporteAnualLiquido1,
+        patrimonioInicial: paramsBase.patrimonioInicial,
+        retornoAnual: retornoAnualLiquido1,  // Rentabilidade já reduzida pelas taxas
+        tipoRenda: paramsBase.tipoRenda,
+        estrategia: paramsBase.estrategia,
+        anosPeriodo: paramsBase.anosPeriodo,
+        rendaDesejada: paramsBase.rendaDesejada,
+        inssInformado: paramsBase.inssInformado,
+        taxaAdmAnual: 0  // Já descontada na rentabilidade, não aplicar novamente
+    });
+    
+    const patrimonioM1 = resultadoM1.patrimonioFinal;
+    const rendaM1 = resultadoM1.rendaMensalFinal || resultadoM1.rendaRealPossivel || 0;
+    const perdaAbsolutaM1 = patrimonioM1 - patrimonioBase;
+    const perdaPercentualM1 = patrimonioBase > 0 ? (perdaAbsolutaM1 / patrimonioBase) * 100 : 0;
+    
+    // ============================================================
+    // MODELO 2: Previdência Privada Tipo 2 (Taxas Moderadas)
+    // ============================================================
+    // Taxas do Modelo 2:
+    const taxaAdm2 = 0.01;        // 1% a.a. de taxa de administração
+    const carregamento2 = 0.00;   // 0% (sem carregamento)
+    const custosInternos2 = 0.003; // 0.3% a.a. de custos internos
+    
+    // 1. Aplicar carregamento sobre cada aporte (neste caso, 0%)
+    const aporteMensalLiquido2 = paramsBase.aporteMensal * (1 - carregamento2);
+    const aporteAnualLiquido2 = (paramsBase.aporteAnual || 0) * (1 - carregamento2);
+    
+    // 2. Calcular rentabilidade líquida real
+    const retornoAnualLiquido2 = paramsBase.retornoAnual - taxaAdm2 - custosInternos2;
+    
+    // 3. RODAR O MOTOR COMPLETO para Modelo 2
+    const resultadoM2 = window.simuladorProEngine.executarSimulacaoCompleta({
+        idadeAtual: paramsBase.idadeAtual,
+        idadeApos: paramsBase.idadeApos,
+        idadeFinal: paramsBase.idadeFinal,
+        aporteMensal: aporteMensalLiquido2,
+        aporteAnual: aporteAnualLiquido2,
+        patrimonioInicial: paramsBase.patrimonioInicial,
+        retornoAnual: retornoAnualLiquido2,  // Rentabilidade já reduzida pelas taxas
+        tipoRenda: paramsBase.tipoRenda,
+        estrategia: paramsBase.estrategia,
+        anosPeriodo: paramsBase.anosPeriodo,
+        rendaDesejada: paramsBase.rendaDesejada,
+        inssInformado: paramsBase.inssInformado,
+        taxaAdmAnual: 0  // Já descontada na rentabilidade, não aplicar novamente
+    });
+    
+    const patrimonioM2 = resultadoM2.patrimonioFinal;
+    const rendaM2 = resultadoM2.rendaMensalFinal || resultadoM2.rendaRealPossivel || 0;
+    const perdaAbsolutaM2 = patrimonioM2 - patrimonioBase;
+    const perdaPercentualM2 = patrimonioBase > 0 ? (perdaAbsolutaM2 / patrimonioBase) * 100 : 0;
+    
+    // ============================================================
+    // RETORNAR RESULTADOS COMPLETOS
+    // ============================================================
     return {
-        m1: { patrimonio: patrimonio1, renda: renda1 },
-        m2: { patrimonio: patrimonio2, renda: renda2 }
+        m1: {
+            patrimonio: patrimonioM1,
+            renda: rendaM1,
+            perdaAbsoluta: perdaAbsolutaM1,
+            perdaPercentual: perdaPercentualM1
+        },
+        m2: {
+            patrimonio: patrimonioM2,
+            renda: rendaM2,
+            perdaAbsoluta: perdaAbsolutaM2,
+            perdaPercentual: perdaPercentualM2
+        }
     };
 }
 
