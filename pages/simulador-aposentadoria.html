@@ -1803,13 +1803,7 @@
                                         <input type="radio" name="tipoRendaOficial" value="periodo" style="margin-top: 2px;">
                                         <div>
                                             <div style="font-weight: 600; color: #10b981; margin-bottom: 4px;">⏱️ Renda por período determinado</div>
-                                            <div style="font-size: 0.85rem; color: #9ca3af;">Todas as projeções são calculadas para durar até 95 anos de idade, uma expectativa de vida realista e segura para planejamento financeiro.</div>
-                                            <!-- ✅ SIMPLIFICAÇÃO: Sempre usamos 95 anos (igual ao Wizard) -->
-                                            <div id="periodoContainerOficial" style="display:none; margin-top:10px;">
-                                                <p style="font-size: 0.9rem; color: #8AC926; line-height: 1.5; padding: 12px; background: rgba(138, 201, 38, 0.1); border-radius: 6px; border-left: 3px solid #8AC926; margin: 0;">
-                                                    📊 <strong>Simulação até 95 anos:</strong> Todas as projeções são calculadas para durar até 95 anos de idade, uma expectativa de vida realista e segura para planejamento financeiro.
-                                                </p>
-                                            </div>
+                                            <div style="font-size: 0.85rem; color: #9ca3af;">Todas as projeções são calculadas para durar até <strong style="color: #D4AF37;">95 anos de idade</strong>, uma expectativa de vida realista e segura para planejamento financeiro.</div>
                                         </div>
                                     </label>
                                 </div>
@@ -1856,12 +1850,6 @@
                                         <div>
                                             <div style="font-weight: 600; color: #10b981; margin-bottom: 4px;">📊 Usar capital gradualmente</div>
                                             <div style="font-size: 0.85rem; color: #9ca3af;">Renda mensal maior, consumindo o patrimônio até a idade selecionada.</div>
-                                            <!-- ✅ SIMPLIFICAÇÃO: Sempre usamos 95 anos (igual ao Wizard) -->
-                                            <div id="idadeTerminalContainerOficial" style="display:none; margin-top:10px;">
-                                                <p style="font-size: 0.9rem; color: #8AC926; line-height: 1.5; padding: 12px; background: rgba(138, 201, 38, 0.1); border-radius: 6px; border-left: 3px solid #8AC926; margin: 0;">
-                                                    📊 <strong>Simulação até 95 anos:</strong> Todas as projeções são calculadas para durar até 95 anos de idade, uma expectativa de vida realista e segura para planejamento financeiro.
-                                                </p>
-                                            </div>
                                         </div>
                                     </label>
                                 </div>
@@ -4790,16 +4778,10 @@
             const est = rEstrategia ? rEstrategia.value : "perpetua";
             
             // Mostrar/esconder campos condicionais
-            const periodoContainer = document.getElementById("periodoContainerOficial");
-            const idadeTerminalContainer = document.getElementById("idadeTerminalContainerOficial");
-            
-            if (periodoContainer) {
-                periodoContainer.style.display = (tipo === "periodo") ? "block" : "none";
-            }
-            
-            if (idadeTerminalContainer) {
-                idadeTerminalContainer.style.display = (tipo === "periodo" || est === "esgotavel") ? "block" : "none";
-            }
+            // Containers removidos - textos verdes eliminados conforme solicitado
+            // const periodoContainer = document.getElementById("periodoContainerOficial");
+            // const idadeTerminalContainer = document.getElementById("idadeTerminalContainerOficial");
+            // Código de exibição removido - elementos não existem mais no HTML
             
             // ✅ SIMPLIFICAÇÃO: containerTodasCurvas removido - sempre usamos 95 anos
             
