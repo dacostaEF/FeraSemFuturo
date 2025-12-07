@@ -2282,62 +2282,79 @@
                             </div>
                         </div>
 
-                        <!-- Modelo 1 -->
-                        <div class="card-invlab model-card">
+                        <!-- Análise Comparativa dos Cenários de Previdência Privada -->
+                        <div style="margin-bottom: 20px; margin-top: 32px;">
                             <h3 style="
                                 font-family: 'Playfair Display', serif;
-                                font-size: 1.2rem;
-                                color: #D4AF37;
-                                margin-bottom: 12px;
+                                font-size: 1.1rem;
+                                color: #10b981;
+                                margin-bottom: 14px;
                                 font-weight: 700;
-                            ">🏛️ Modelo Previdência Privada — Tipo 1</h3>
-                            <p class="pp-desc" style="color: #E4E4E4; margin-bottom: 12px; line-height: 1.6;">
-                                Modelo tradicional com taxas típicas do mercado bancário.
-                            </p>
-                            <ul class="pp-taxas" style="color: #E4E4E4; margin-bottom: 12px; padding-left: 20px; line-height: 1.8;">
-                                <li>Taxa de administração: <strong style="color: #ef4444;">2% a.a.</strong></li>
-                                <li>Carregamento: <strong style="color: #ef4444;">2% sobre aportes</strong></li>
-                                <li>Custos internos: <strong style="color: #ef4444;">0,5% a.a.</strong></li>
-                            </ul>
-                            <p style="color: #E4E4E4; margin-bottom: 8px; line-height: 1.6;">
-                                Patrimônio final: <strong id="pp-m1-patrimonio" style="color: #ef4444; font-size: 1.1rem;">R$ 0,00</strong>
-                            </p>
-                            <p style="color: #E4E4E4; margin: 0; line-height: 1.6;">
-                                Renda mensal estimada: <strong id="pp-m1-renda" style="color: #ef4444; font-size: 1.1rem;">R$ 0,00</strong>
-                            </p>
-                        </div>
-
-                        <!-- Modelo 2 -->
-                        <div class="card-invlab model-card">
-                            <h3 style="
-                                font-family: 'Playfair Display', serif;
-                                font-size: 1.2rem;
-                                color: #D4AF37;
-                                margin-bottom: 12px;
-                                font-weight: 700;
-                            ">🏦 Modelo Previdência Privada — Tipo 2</h3>
-                            <p class="pp-desc" style="color: #E4E4E4; margin-bottom: 12px; line-height: 1.6;">
-                                Modelo moderno com taxas mais baixas, porém ainda com impacto relevante.
-                            </p>
-                            <ul class="pp-taxas" style="color: #E4E4E4; margin-bottom: 12px; padding-left: 20px; line-height: 1.8;">
-                                <li>Taxa de administração: <strong style="color: #f59e0b;">1% a.a.</strong></li>
-                                <li>Carregamento: <strong style="color: #f59e0b;">0%</strong></li>
-                                <li>Custos internos: <strong style="color: #f59e0b;">0,3% a.a.</strong></li>
-                            </ul>
-                            <p style="color: #E4E4E4; margin-bottom: 8px; line-height: 1.6;">
-                                Patrimônio final: <strong id="pp-m2-patrimonio" style="color: #f59e0b; font-size: 1.1rem;">R$ 0,00</strong>
-                            </p>
-                            <p style="color: #E4E4E4; margin: 0; line-height: 1.6;">
-                                Renda mensal estimada: <strong id="pp-m2-renda" style="color: #f59e0b; font-size: 1.1rem;">R$ 0,00</strong>
-                            </p>
+                            ">📊 Análise Comparativa dos Cenários de Previdência Privada</h3>
+                            
+                            <div style="overflow-x: auto;">
+                                <table class="invlab-table" style="
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                    background: #0f0f0f;
+                                    border-radius: 10px;
+                                    overflow: hidden;
+                                    border: 1px solid rgba(138, 204, 166, 0.15);
+                                ">
+                                    <thead>
+                                        <tr style="background: rgba(138, 204, 166, 0.1);">
+                                            <th style="padding: 12px; text-align: left; color: #D4AF37; font-weight: 600; border-bottom: 2px solid rgba(138, 204, 166, 0.2);">Indicador</th>
+                                            <th style="padding: 12px; text-align: center; color: #D4AF37; font-weight: 600; border-bottom: 2px solid rgba(138, 204, 166, 0.2);">
+                                                <div style="display: flex; flex-direction: column; align-items: center;">
+                                                    <span style="font-size: 1rem; margin-bottom: 4px;">🏛️ Modelo Previdência Privada — Tipo 1</span>
+                                                    <span style="font-size: 0.85rem; color: #9ca3af; font-weight: 400;">Modelo tradicional com taxas típicas do mercado bancário.</span>
+                                                </div>
+                                            </th>
+                                            <th style="padding: 12px; text-align: center; color: #D4AF37; font-weight: 600; border-bottom: 2px solid rgba(138, 204, 166, 0.2);">
+                                                <div style="display: flex; flex-direction: column; align-items: center;">
+                                                    <span style="font-size: 1rem; margin-bottom: 4px;">🏦 Modelo Previdência Privada — Tipo 2</span>
+                                                    <span style="font-size: 0.85rem; color: #9ca3af; font-weight: 400;">Modelo moderno com taxas mais baixas, porém ainda com impacto relevante.</span>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="border-bottom: 1px solid rgba(138, 204, 166, 0.1);">
+                                            <td style="padding: 12px; color: #E4E4E4; vertical-align: middle; font-weight: 500;">Taxa de administração</td>
+                                            <td style="padding: 12px; text-align: center; color: #ef4444; font-weight: 600; vertical-align: middle;" id="tbl-m1-taxa-adm">2% a.a.</td>
+                                            <td style="padding: 12px; text-align: center; color: #f59e0b; font-weight: 600; vertical-align: middle;" id="tbl-m2-taxa-adm">1% a.a.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid rgba(138, 204, 166, 0.1);">
+                                            <td style="padding: 12px; color: #E4E4E4; vertical-align: middle; font-weight: 500;">Carregamento</td>
+                                            <td style="padding: 12px; text-align: center; color: #ef4444; font-weight: 600; vertical-align: middle;" id="tbl-m1-carregamento">2% sobre aportes</td>
+                                            <td style="padding: 12px; text-align: center; color: #f59e0b; font-weight: 600; vertical-align: middle;" id="tbl-m2-carregamento">0%</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid rgba(138, 204, 166, 0.1);">
+                                            <td style="padding: 12px; color: #E4E4E4; vertical-align: middle; font-weight: 500;">Custos internos</td>
+                                            <td style="padding: 12px; text-align: center; color: #ef4444; font-weight: 600; vertical-align: middle;" id="tbl-m1-custos">0,5% a.a.</td>
+                                            <td style="padding: 12px; text-align: center; color: #f59e0b; font-weight: 600; vertical-align: middle;" id="tbl-m2-custos">0,3% a.a.</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid rgba(138, 204, 166, 0.1);">
+                                            <td style="padding: 12px; color: #E4E4E4; vertical-align: middle; font-weight: 500;">Patrimônio final</td>
+                                            <td style="padding: 12px; text-align: center; color: #ef4444; font-weight: 600; vertical-align: middle;" id="tbl-m1-patrimonio">—</td>
+                                            <td style="padding: 12px; text-align: center; color: #f59e0b; font-weight: 600; vertical-align: middle;" id="tbl-m2-patrimonio">—</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 12px; color: #E4E4E4; vertical-align: middle; font-weight: 500;">Renda mensal estimada</td>
+                                            <td style="padding: 12px; text-align: center; color: #ef4444; font-weight: 600; vertical-align: middle;" id="tbl-m1-renda">—</td>
+                                            <td style="padding: 12px; text-align: center; color: #f59e0b; font-weight: 600; vertical-align: middle;" id="tbl-m2-renda">—</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
 
                         <!-- Comparação -->
-                        <h3 class="chart-title" style="
+                        <h3 style="
                             font-family: 'Playfair Display', serif;
-                            font-size: 1.3rem;
-                            color: #D4AF37;
-                            margin-bottom: 20px;
+                            font-size: 1.1rem;
+                            color: #10b981;
+                            margin-bottom: 14px;
                             font-weight: 700;
                             margin-top: 32px;
                         ">📊 Comparação dos Três Cenários</h3>
@@ -2381,59 +2398,57 @@
                             </table>
                         </div>
 
-                        <!-- Texto Educativo -->
-                        <div style="
-                            margin-top: 32px;
-                            padding: 20px;
-                            background: rgba(239, 68, 68, 0.1);
-                            border-left: 4px solid #ef4444;
-                            border-radius: 8px;
-                        ">
-                            <h4 style="
-                                color: #ef4444;
-                                font-size: 1.1rem;
-                                font-weight: 700;
-                                margin-bottom: 12px;
-                                font-family: 'Playfair Display', serif;
-                            ">⚠️ Por que a perda é tão maior?</h4>
-                            <p style="
-                                color: #E4E4E4;
-                                line-height: 1.8;
-                                margin-bottom: 12px;
-                            ">
-                                Quando usamos o motor real, as taxas atuam simultaneamente:
+                        <!-- Card Educativo: Entendendo o Impacto das Taxas -->
+                        <div class="insight-card">
+                            <div class="card-header">
+                                <span class="icon">🎯</span>
+                                <h3>Entendendo o impacto das taxas no longo prazo</h3>
+                            </div>
+                            <p class="lead">
+                                As diferenças observadas entre os cenários refletem como taxas compostas atuam em investimentos de longo prazo:
                             </p>
-                            <ul style="
-                                color: #E4E4E4;
-                                line-height: 1.8;
-                                margin-bottom: 12px;
-                                padding-left: 24px;
-                            ">
-                                <li style="margin-bottom: 8px;">
-                                    <strong style="color: #ef4444;">Carregamento</strong> reduz cada aporte antes de render
-                                </li>
-                                <li style="margin-bottom: 8px;">
-                                    <strong style="color: #ef4444;">A taxa de administração</strong> corrói o patrimônio TODO ANO
-                                </li>
-                                <li style="margin-bottom: 8px;">
-                                    <strong style="color: #ef4444;">Os custos internos</strong> reduzem ainda mais a rentabilidade líquida
-                                </li>
-                                <li style="margin-bottom: 8px;">
-                                    <strong style="color: #ef4444;">O efeito composto</strong> multiplica essas perdas por 30 anos
-                                </li>
-                            </ul>
-                            <p style="
-                                color: #D4AF37;
-                                line-height: 1.8;
-                                font-weight: 600;
-                                margin-top: 16px;
-                                padding: 12px;
-                                background: rgba(212, 175, 55, 0.1);
-                                border-radius: 6px;
-                            ">
-                                Por isso previdências privadas podem destruir 15% a 40% do patrimônio final,
-                                dependendo da combinação de taxas.
-                            </p>
+                            <div class="factors-grid">
+                                <div class="factor">
+                                    <div class="factor-icon">💸</div>
+                                    <div class="factor-title">Redução no aporte efetivo</div>
+                                    <div class="factor-desc">
+                                        Carregamento diminui o valor que efetivamente entra no investimento.
+                                    </div>
+                                </div>
+                                <div class="factor">
+                                    <div class="factor-icon">📊</div>
+                                    <div class="factor-title">Impacto anual recorrente</div>
+                                    <div class="factor-desc">
+                                        A taxa administrativa incide sobre todo o patrimônio ano após ano.
+                                    </div>
+                                </div>
+                                <div class="factor">
+                                    <div class="factor-icon">⚙️</div>
+                                    <div class="factor-title">Custos operacionais</div>
+                                    <div class="factor-desc">
+                                        Despesas internas reduzem a rentabilidade líquida do fundo.
+                                    </div>
+                                </div>
+                                <div class="factor">
+                                    <div class="factor-icon">📈</div>
+                                    <div class="factor-title">Multiplicação temporal</div>
+                                    <div class="factor-desc">
+                                        O efeito composto amplifica diferenças ao longo de décadas.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="takeaway">
+                                <div class="takeaway-icon">💡</div>
+                                <div class="takeaway-text">
+                                    <p>
+                                        Uma taxa total entre 2% e 2,5% ao ano pode reduzir o patrimônio final em <strong>20% a 40%</strong>,
+                                        dependendo do tempo de investimento e dos aportes.
+                                    </p>
+                                    <p class="subtle">
+                                        Por isso, produtos com custos eficientes são essenciais para um bom planejamento de longo prazo.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
 
                         <div style="text-align: center; margin-top: 24px;">
@@ -2931,6 +2946,116 @@
         .invlab-table th, .invlab-table td {
             text-align: center;
             vertical-align: middle;
+        }
+
+        /* Card Educativo: Entendendo o Impacto das Taxas */
+        .insight-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 30px;
+            border-left: 4px solid #fbbf24;
+        }
+
+        .insight-card .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .insight-card .card-header .icon {
+            font-size: 26px;
+        }
+
+        .insight-card .card-header h3 {
+            font-size: 1.1rem;
+            color: #10b981;
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .insight-card .lead {
+            color: #ddd;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        .factors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .factor {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 16px;
+            border-radius: 8px;
+            transition: 0.3s ease;
+        }
+
+        .factor:hover {
+            background: rgba(255, 255, 255, 0.09);
+            transform: translateY(-2px);
+        }
+
+        .factor-icon {
+            font-size: 26px;
+            margin-bottom: 6px;
+        }
+
+        .factor-title {
+            color: #60a5fa;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .factor-desc {
+            color: #d1d5db;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .takeaway {
+            display: flex;
+            gap: 16px;
+            background: rgba(251, 191, 36, 0.12);
+            padding: 18px;
+            border-radius: 8px;
+            border: 1px solid rgba(251, 191, 36, 0.25);
+        }
+
+        .takeaway-icon {
+            font-size: 28px;
+        }
+
+        .takeaway-text p {
+            color: #f3f4f6;
+            margin: 0 0 6px;
+            line-height: 1.5;
+        }
+
+        .takeaway-text .subtle {
+            color: #d1d5db;
+            font-size: 13px;
+            font-style: italic;
+        }
+
+        /* Animação de loading para botão de ajustes avançados */
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-emoji {
+            display: inline-block;
+            animation: spin 1s linear infinite;
         }
 
         .pp-card {
@@ -3955,17 +4080,31 @@
                             });
                         }
 
-                        // Modelo 1
-                        const ppM1Patrimonio = document.getElementById("pp-m1-patrimonio");
-                        const ppM1Renda = document.getElementById("pp-m1-renda");
-                        if (ppM1Patrimonio) ppM1Patrimonio.textContent = formatarMoeda(modelos.m1.patrimonio);
-                        if (ppM1Renda) ppM1Renda.textContent = formatarMoeda(modelos.m1.renda);
+                        // Tabela Comparativa - Preencher valores
+                        // Taxas (já estão fixas no HTML, mas vamos garantir)
+                        const tblM1TaxaAdm = document.getElementById("tbl-m1-taxa-adm");
+                        const tblM1Carregamento = document.getElementById("tbl-m1-carregamento");
+                        const tblM1Custos = document.getElementById("tbl-m1-custos");
+                        const tblM1Patrimonio = document.getElementById("tbl-m1-patrimonio");
+                        const tblM1Renda = document.getElementById("tbl-m1-renda");
+                        
+                        if (tblM1TaxaAdm) tblM1TaxaAdm.textContent = "2% a.a.";
+                        if (tblM1Carregamento) tblM1Carregamento.textContent = "2% sobre aportes";
+                        if (tblM1Custos) tblM1Custos.textContent = "0,5% a.a.";
+                        if (tblM1Patrimonio) tblM1Patrimonio.textContent = formatarMoeda(modelos.m1.patrimonio);
+                        if (tblM1Renda) tblM1Renda.textContent = formatarMoeda(modelos.m1.renda);
 
-                        // Modelo 2
-                        const ppM2Patrimonio = document.getElementById("pp-m2-patrimonio");
-                        const ppM2Renda = document.getElementById("pp-m2-renda");
-                        if (ppM2Patrimonio) ppM2Patrimonio.textContent = formatarMoeda(modelos.m2.patrimonio);
-                        if (ppM2Renda) ppM2Renda.textContent = formatarMoeda(modelos.m2.renda);
+                        const tblM2TaxaAdm = document.getElementById("tbl-m2-taxa-adm");
+                        const tblM2Carregamento = document.getElementById("tbl-m2-carregamento");
+                        const tblM2Custos = document.getElementById("tbl-m2-custos");
+                        const tblM2Patrimonio = document.getElementById("tbl-m2-patrimonio");
+                        const tblM2Renda = document.getElementById("tbl-m2-renda");
+                        
+                        if (tblM2TaxaAdm) tblM2TaxaAdm.textContent = "1% a.a.";
+                        if (tblM2Carregamento) tblM2Carregamento.textContent = "0%";
+                        if (tblM2Custos) tblM2Custos.textContent = "0,3% a.a.";
+                        if (tblM2Patrimonio) tblM2Patrimonio.textContent = formatarMoeda(modelos.m2.patrimonio);
+                        if (tblM2Renda) tblM2Renda.textContent = formatarMoeda(modelos.m2.renda);
 
                         // Tabela de comparação
                         const cmpBasePatrimonio = document.getElementById("cmp-base-patrimonio");
@@ -5179,6 +5318,16 @@
         // 🔄 APLICAR AJUSTES AVANÇADOS (Recalcular cenário avançado)
         // =====================================================
         function aplicarAjustesAvancados() {
+            // ✅ Feedback visual: Mostrar emoji de loading
+            const btnAplicar = document.getElementById("btn-aplicar-ajustes");
+            let textoOriginal = "";
+            if (btnAplicar) {
+                textoOriginal = btnAplicar.textContent;
+                btnAplicar.innerHTML = '<span class="loading-emoji">⏳</span> Processando...';
+                btnAplicar.disabled = true;
+                btnAplicar.style.cursor = "wait";
+            }
+            
             // ✅ CRÍTICO: NÃO atualizar o bloco 1, apenas criar bloco próprio
             // 1. Obter parâmetros avançados
             const paramsAvancados = obterParametrosAvancados();
@@ -5210,11 +5359,23 @@
             
             // 5. Validações
             if (!verificarIdadesPro()) {
+                // Restaurar botão se validação falhar
+                if (btnAplicar) {
+                    btnAplicar.textContent = textoOriginal;
+                    btnAplicar.disabled = false;
+                    btnAplicar.style.cursor = "pointer";
+                }
                 return;
             }
             
             if (!idadeAtual || !idadeApos || !aporteMensal || !rendaDesejada) {
                 alert('⚠️ Preencha todos os campos básicos!');
+                // Restaurar botão se validação falhar
+                if (btnAplicar) {
+                    btnAplicar.textContent = textoOriginal;
+                    btnAplicar.disabled = false;
+                    btnAplicar.style.cursor = "pointer";
+                }
                 return;
             }
             
@@ -5243,6 +5404,12 @@
             
             if (!resultadoAvancado) {
                 alert('⚠️ Erro ao recalcular. Verifique os valores inseridos.');
+                // Restaurar botão se erro
+                if (btnAplicar) {
+                    btnAplicar.textContent = textoOriginal;
+                    btnAplicar.disabled = false;
+                    btnAplicar.style.cursor = "pointer";
+                }
                 return;
             }
             
@@ -5319,10 +5486,10 @@
             
             // Mensagem explicativa removida - agora temos apenas o botão que abre o modal
             
-            // 12. Feedback visual
-            const btnAplicar = document.getElementById("btn-aplicar-ajustes");
+            // 12. Feedback visual: Remover loading e mostrar sucesso
             if (btnAplicar) {
-                const textoOriginal = btnAplicar.textContent;
+                btnAplicar.disabled = false;
+                btnAplicar.style.cursor = "pointer";
                 btnAplicar.textContent = "✅ Ajustes aplicados · Cenário recalculado";
                 btnAplicar.style.background = "rgba(16, 185, 129, 0.2)";
                 btnAplicar.style.borderColor = "rgba(16, 185, 129, 0.4)";
