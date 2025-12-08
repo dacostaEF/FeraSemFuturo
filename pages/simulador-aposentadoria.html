@@ -355,6 +355,44 @@
             z-index: 1001;
         }
 
+        /* ✅ Tooltip padrão para Acordeão 1 (Informações Básicas) - Mesmo estilo do Acordeão 3 */
+        /* Aplica apenas a spans com title que não têm classe específica (exclui info-icon-modal) */
+        #module-basic span[title]:not(.info-icon-modal):hover::after,
+        .module-grid span[title]:not(.info-icon-modal):hover::after {
+            content: attr(title);
+            position: absolute;
+            bottom: 130%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(26, 26, 26, 0.98);
+            color: #E4E4E4;
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            white-space: normal;
+            width: 320px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            text-align: left;
+            font-weight: 400;
+            z-index: 1000;
+            pointer-events: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        #module-basic span[title]:not(.info-icon-modal):hover::before,
+        .module-grid span[title]:not(.info-icon-modal):hover::before {
+            content: '';
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: rgba(26, 26, 26, 0.98);
+            z-index: 1001;
+        }
+
         /* 8. Herança */
         .invlab-heritage {
             background: rgba(20, 24, 33, 0.88);
@@ -2154,74 +2192,6 @@
                 </div>
             </div>
 
-            <div class="pro-bloco" data-bloco="3">
-                <div class="pro-bloco-header">
-                    <span>📊 Comparações</span>
-                    <span class="pro-bloco-arrow">▼</span>
-                </div>
-                <div class="pro-bloco-content">
-                    <!-- ===================================================== -->
-                    <!-- 📊 COMPARAÇÃO DE CENÁRIOS (APARECE DEPOIS) -->
-                    <!-- ===================================================== -->
-                    <!-- Resultados Principais (Comparação) -->
-                    <section class="invlab-results" style="margin-top: 40px;">
-                        <h2 class="module-title">📊 Comparação de Cenários de Aposentadoria</h2>
-                        <div class="results-grid">
-                            <div class="result-card">
-                                <h3>
-                                    💰 Investimento Próprio 
-                                    <span class="tooltip-icon" title="💡 Renda Vitalícia Perpétua: Você recebe APENAS os juros do patrimônio. O capital de R$ 2.175.398 NUNCA ACABA e pode ser deixado como herança integral. Renda mensal baseada na taxa real (8% - 4,5% inflação = 3,5% a.a.). Esta é a estratégia mais eficiente!">ℹ️</span>
-                                </h3>
-                                <p id="resultOwn">—</p>
-                            </div>
-
-                            <div class="result-card">
-                                <h3>
-                                    🏦 Vitalícia Simples 
-                                    <span class="tooltip-icon" title="⚠️ Previdência Tradicional: Você CONSOME o capital aos poucos junto com os juros. Renda maior que a perpétua, mas quando você morre sobra R$ 0 de herança. Usada em planos PGBL/VGBL tradicionais. Matemática mostra: herança zero e taxas altas tornam essa opção menos vantajosa que investimento próprio.">ℹ️</span>
-                                </h3>
-                                <p id="resultPensionSimple">—</p>
-                            </div>
-
-                            <div class="result-card">
-                                <h3>
-                                    🔄 Com Reversão 
-                                    <span class="tooltip-icon" title="👨‍👩‍👧 Previdência com Proteção Familiar: Renda MENOR, mas quando você morre seu cônjuge continua recebendo (geralmente 80%). Deixa herança parcial (~20% do capital). Usada para proteger dependentes, mas menos rentável.">ℹ️</span>
-                                </h3>
-                                <p id="resultPensionRev">—</p>
-                            </div>
-                        </div>
-
-                        <!-- Gráfico de Comparação -->
-                        <div class="chart-container" style="margin-top: 32px;">
-                            <canvas id="comparisonChart"></canvas>
-                        </div>
-                    </section>
-
-                    <!-- Herança -->
-                    <section class="invlab-heritage" style="margin-top: 40px;">
-                        <h2 class="module-title">💎 Herança – O que sobra para os herdeiros</h2>
-                        <div class="heritage-grid">
-                            <div class="heritage-card">
-                                <h3>💰 Investimento Próprio</h3>
-                                <p id="heritageOwnValue">—</p>
-                            </div>
-
-                            <div class="heritage-card">
-                                <h3>🔄 Vitalícia Reversível</h3>
-                                <p id="heritageRevValue">—</p>
-                            </div>
-
-                            <div class="heritage-card">
-                                <h3>⚠️ Vitalícia Simples</h3>
-                                <p id="heritageSimpleValue" style="color: #ef4444;">R$ 0</p>
-                            </div>
-                        </div>
-                    </section>
-
-                </div>
-            </div>
-
             <div class="pro-bloco" data-bloco="4">
                 <div class="pro-bloco-header">
                     <span>🚨 As múltiplas taxas da previdência privada</span>
@@ -2462,6 +2432,22 @@
                             </button>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="pro-bloco" data-bloco="3">
+                <div class="pro-bloco-header">
+                    <span>📊 Comparações</span>
+                    <span class="pro-bloco-arrow">▼</span>
+                </div>
+                <div class="pro-bloco-content">
+                    <!-- ===================================================== -->
+                    <!-- 📊 COMPARAÇÃO DE CENÁRIOS (APARECE DEPOIS) -->
+                    <!-- ===================================================== -->
+                    <!-- ✅ Seção "Comparação de Cenários de Aposentadoria" removida (gráfico de barras) -->
+
+                    <!-- ✅ Seção "Herança – O que sobra para os herdeiros" removida -->
+
                 </div>
             </div>
 
@@ -4028,11 +4014,14 @@
             // ================================
             // 5. ATUALIZAR GRÁFICOS (mantendo funções existentes)
             // ================================
-            atualizarGrafico(
-                comparacoes.patrimonioProprio,
-                comparacoes.rendaPrevSimples,
-                comparacoes.rendaPrevRev
-            );
+            // ✅ Protegido: Só atualiza gráfico se o elemento DOM existir
+            if (document.getElementById("comparisonChart")) {
+                atualizarGrafico(
+                    comparacoes.patrimonioProprio,
+                    comparacoes.rendaPrevSimples,
+                    comparacoes.rendaPrevRev
+                );
+            }
 
             // Converter acumulacaoMensal para formato esperado por renderizarGraficoEvolucaoOficial
             const dadosMensais = resultado.acumulacaoMensal.map((saldo, index) => ({
@@ -4197,7 +4186,11 @@
         let grafico = null;
 
         function atualizarGrafico(own, simples, rev) {
+            // ✅ Proteção: Verificar se o elemento existe antes de criar o gráfico
             const ctx = document.getElementById("comparisonChart");
+            if (!ctx) {
+                return; // Elemento não existe, retornar sem fazer nada
+            }
 
             if (grafico) grafico.destroy();
 
@@ -5566,16 +5559,35 @@
         // COMPARADOR — GRÁFICO + TABELA
         // =======================================
         function rodarComparadorPRO() {
-
-            const patrimonio = parseFloat(
-                document.getElementById("resultOwn").textContent.replace(/[R$\s\.]/g,"").replace(",",".")
-            );
-            const rendaSimples = parseFloat(
-                document.getElementById("resultPensionSimple").textContent.replace(/[R$\s\.]/g,"").replace(",",".")
-            );
-            const rendaReversivel = parseFloat(
-                document.getElementById("resultPensionRev").textContent.replace(/[R$\s\.]/g,"").replace(",",".")
-            );
+            // ✅ Proteção: Verificar se os elementos existem (cards podem ter sido removidos)
+            const resultOwnEl = document.getElementById("resultOwn");
+            const resultPensionSimpleEl = document.getElementById("resultPensionSimple");
+            const resultPensionRevEl = document.getElementById("resultPensionRev");
+            
+            // Se os elementos não existirem, tentar usar variáveis globais
+            let patrimonio, rendaSimples, rendaReversivel;
+            
+            if (resultOwnEl && resultPensionSimpleEl && resultPensionRevEl) {
+                // Ler do DOM se os elementos existirem
+                patrimonio = parseFloat(
+                    resultOwnEl.textContent.replace(/[R$\s\.]/g,"").replace(",",".")
+                );
+                rendaSimples = parseFloat(
+                    resultPensionSimpleEl.textContent.replace(/[R$\s\.]/g,"").replace(",",".")
+                );
+                rendaReversivel = parseFloat(
+                    resultPensionRevEl.textContent.replace(/[R$\s\.]/g,"").replace(",",".")
+                );
+            } else if (window.resultadoBase && window.comparacoesBase) {
+                // Fallback: usar variáveis globais se disponíveis
+                patrimonio = window.resultadoBase.patrimonioFinal || 0;
+                rendaSimples = window.comparacoesBase.rendaPrevSimples || 0;
+                rendaReversivel = window.comparacoesBase.rendaPrevRev || 0;
+            } else {
+                // Se não conseguir obter dados, retornar sem fazer nada
+                console.warn("⚠️ Comparador PRO: Dados não disponíveis");
+                return;
+            }
 
             const idadeAtual = parseInt(document.getElementById("currentAge").value);
             const idadeApos = parseInt(document.getElementById("retirementAge").value);
