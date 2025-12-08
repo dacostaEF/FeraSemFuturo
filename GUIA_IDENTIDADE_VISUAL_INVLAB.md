@@ -3050,6 +3050,7 @@ Ao adicionar um container CTA em uma nova página:
 
 **Adicione ao `<style>` inline no `<head>` ou inclua em CSS global:**
 
+#### **Versão Padrão (100% opacidade):**
 ```html
 <style>
 /* 🔥 BOTÃO SIMULADOR INVLAB - Degradê Premium Gold Touch */
@@ -3078,8 +3079,46 @@ Ao adicionar um container CTA em uma nova página:
 .btn-simulador-invlab:active {
     transform: translateY(-2px);
 }
+</style>
+```
 
-/* Responsivo Mobile */
+#### **Versão com Transparência Sutil (60% opacidade):**
+```html
+<style>
+/* 🔥 BOTÃO SIMULADOR INVLAB - Degradê Premium Gold Touch (Sutil) */
+.btn-simulador-invlab {
+    background: linear-gradient(135deg, #355E3B 0%, #CCAA66 100%);
+    border: 1px solid rgba(204, 170, 102, 0.3);
+    color: #E4E4E4;
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(53, 94, 59, 0.2);
+    opacity: 0.6; /* ⭐ 60% de opacidade - mais sutil */
+}
+
+.btn-simulador-invlab:hover {
+    border-color: #D4AF37;
+    transform: translateY(-4px);
+    box-shadow: 
+        0 8px 24px rgba(53, 94, 59, 0.3),
+        0 4px 12px rgba(204, 170, 102, 0.2);
+    opacity: 1; /* ⭐ 100% no hover - destaque claro */
+}
+
+.btn-simulador-invlab:active {
+    transform: translateY(-2px);
+    opacity: 1; /* Mantém 100% quando clicado */
+}
+</style>
+```
+
+#### **Responsivo Mobile (aplica a ambas as versões):**
+```css
 @media (max-width: 480px) {
     .btn-simulador-invlab {
         width: 100%;
@@ -3087,16 +3126,91 @@ Ao adicionar um container CTA em uma nova página:
         font-size: 0.9rem;
     }
 }
-</style>
 ```
+
+**💡 Dica:** Escolha a versão baseado no contexto:
+- **Versão padrão (100%):** Botões principais, CTAs importantes
+- **Versão sutil (60%):** Botões secundários, modais, contextos educacionais
 
 ---
 
-### 22.13 Status
+### 22.13 Transparência Sutil (Opacidade 60%)
+
+**⭐ NOVO PADRÃO:** Para botões que precisam ser mais discretos e menos chamativos, mas mantendo toda a identidade visual.
+
+**Quando usar:**
+- ✅ Botões em seções com muito conteúdo visual
+- ✅ Botões secundários que não são a ação principal
+- ✅ Quando queremos reduzir o "peso visual" sem perder elegância
+- ✅ Botões que abrem modais em contextos educacionais
+
+**CSS com Transparência:**
+```css
+/* Botão Gold Touch com opacidade 60% */
+.btn-simulador-invlab {
+    background: linear-gradient(135deg, #355E3B 0%, #CCAA66 100%);
+    border: 1px solid rgba(204, 170, 102, 0.3);
+    color: #E4E4E4;
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(53, 94, 59, 0.2);
+    opacity: 0.6; /* ⭐ 60% de opacidade - mais sutil e elegante */
+}
+
+.btn-simulador-invlab:hover {
+    border-color: #D4AF37;
+    transform: translateY(-4px);
+    box-shadow: 
+        0 8px 24px rgba(53, 94, 59, 0.3),
+        0 4px 12px rgba(204, 170, 102, 0.2);
+    opacity: 1; /* ⭐ 100% no hover - destaque claro ao interagir */
+}
+
+.btn-simulador-invlab:active {
+    transform: translateY(-2px);
+    opacity: 1; /* Mantém 100% quando clicado */
+}
+```
+
+**Características:**
+- ✅ **Estado normal:** `opacity: 0.6` (60%) - discreto e elegante
+- ✅ **Estado hover:** `opacity: 1` (100%) - destaque claro
+- ✅ **Estado active:** `opacity: 1` (100%) - feedback tátil
+- ✅ **Transição suave:** `transition: all 0.3s ease`
+- ✅ **Mantém todas as cores:** Gradiente, bordas e sombras intactos
+
+**Por quê 60%?**
+- ✅ Suficientemente visível para não passar despercebido
+- ✅ Reduz o "peso visual" sem perder elegância
+- ✅ Cria hierarquia visual clara (botões principais vs secundários)
+- ✅ Hover em 100% cria feedback tátil excelente
+
+**Exemplo de uso:**
+```html
+<!-- Botão com transparência sutil -->
+<button class="btn-simulador-invlab" onclick="abrirModal()">
+    💡 Entenda por que as taxas mudam tudo
+</button>
+```
+
+**⚠️ IMPORTANTE:**
+- Use `opacity` (não `rgba` no background) para manter o gradiente intacto
+- Sempre aplique `opacity: 1` no hover para feedback claro
+- Teste em diferentes fundos para garantir legibilidade
+- Se o texto ficar difícil de ler, ajuste para `opacity: 0.7` ou `0.8`
+
+---
+
+### 22.14 Status
 
 **Status:** ✅ Implementado e testado  
-**Página de referência:** `index.html` (seção Renda Variável)  
-**Aprovado:** 25 de Novembro de 2024  
+**Página de referência:** `pages/simulador-aposentadoria.html` (botões de modal)  
+**Aprovado:** Janeiro de 2025  
 **Próximo:** Expandir para outras seções e páginas
 
 ---
