@@ -1347,6 +1347,40 @@
             }
         }
 
+        /* ========================================= */
+        /* BOTÃO EDUCAÇÃO FINANCEIRA (Padrão INVLA) */
+        /* ========================================= */
+        .btn-simulador-invlab {
+            background: linear-gradient(135deg, #355E3B 0%, #CCAA66 100%);
+            border: 1px solid rgba(204, 170, 102, 0.3);
+            color: #E4E4E4;
+            padding: 14px 32px;
+            font-size: 1rem;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(53, 94, 59, 0.2);
+        }
+
+        .btn-simulador-invlab.inline {
+            width: auto;
+        }
+
+        .btn-simulador-invlab:hover {
+            border-color: #D4AF37;
+            transform: translateY(-4px);
+            box-shadow: 
+                0 8px 24px rgba(53, 94, 59, 0.3),
+                0 4px 12px rgba(204, 170, 102, 0.2);
+            color: #FFFFFF;
+        }
+
+        .btn-simulador-invlab:active {
+            transform: translateY(-2px);
+        }
+
 
 
         .tooltip-icone {
@@ -2275,10 +2309,8 @@
                 </div>
             </section>
 
-            <!-- SEÇÃO DE RESULTADOS -->
-            <div id="resultsSection">
-                <!-- Botões removidos - informações já disponíveis no Wizard -->
-            </div>
+            <!-- SEÇÃO DE RESULTADOS REMOVIDA -->
+            <!-- O conteúdo "Principais Conclusões" e "Conclusão Final" foi removido junto com o acordeão "Diagnóstico Financeiro" -->
 
             <!-- ===================================================== -->
             <!-- 🎯 BLOCOS MODULARES PRO (ESTRUTURA BASE) -->
@@ -2897,27 +2929,16 @@
                     </div>
                 </div>
             </div>
+            </div>
+            <!-- Fim do pro-bloco-container -->
 
-            <div class="pro-bloco" data-bloco="5">
-                <div class="pro-bloco-header">
-                    <span>🔍 Diagnóstico Financeiro</span>
-                    <span class="pro-bloco-arrow">▼</span>
-                </div>
-                <div class="pro-bloco-content">
-                    <!-- ===================================================== -->
-                    <!-- 📋 DETALHES DA SIMULAÇÃO -->
-                    <!-- ===================================================== -->
-                    <div class="details-block" id="detailsBlock" style="display:none;">
-                        <p id="rendaInvestimentosDetail"></p>
-                        <p id="prazoDetail"></p>
-                        <p id="perfilDetail"></p>
-                    </div>
-
-                    <!-- ===================================================== -->
-                    <!-- 💡 INTERPRETAÇÃO AUTOMÁTICA DO RESULTADO -->
-                    <!-- ===================================================== -->
-                    <div id="interpretationBlock"></div>
-                </div>
+            <!-- ===================================================== -->
+            <!-- 🚀 BOTÃO EDUCAÇÃO FINANCEIRA (Abaixo de todos os acordeões) -->
+            <!-- ===================================================== -->
+            <div style="text-align: center; margin-top: 48px; padding: 32px 0;">
+                <button class="btn-simulador-invlab inline" onclick="window.location.href='../index.html#primeiros-passos'">
+                    🚀 Começar Educação Financeira →
+                </button>
             </div>
 
             <!-- ===================================================== -->
@@ -4438,11 +4459,8 @@
                 heritageSimpleValueEl.textContent = "R$ 0";
             }
 
-            // Mostra seção de resultados
-            const resultsSection = document.getElementById("resultsSection");
-            if (resultsSection) {
-                resultsSection.style.display = "block";
-            }
+            // ✅ Seção de resultados removida junto com acordeão "Diagnóstico Financeiro"
+            // Não é mais necessário exibir essa seção
             
             // ✅ NOVO: Abrir automaticamente o acordeon "Cenário do Investimento Próprio (Recomendado)"
             const blocoProprio = document.querySelector('.pro-bloco[data-bloco="1"]');
@@ -4675,10 +4693,18 @@
         // 📋 EXIBIR DETALHES DA SIMULAÇÃO
         // ========================================
         function exibirDetalhesOficial(anos, retornoAnual, inss, rendaInvest) {
+            // ✅ CORREÇÃO: Verificar se os elementos existem antes de usar
+            // (Acordeão "Diagnóstico Financeiro" foi removido)
             const detailsBlock = document.getElementById('detailsBlock');
             const rendaDetail = document.getElementById('rendaInvestimentosDetail');
             const prazoDetail = document.getElementById('prazoDetail');
             const perfilDetail = document.getElementById('perfilDetail');
+
+            // Se os elementos não existem, simplesmente retorna (não quebra o fluxo)
+            if (!detailsBlock || !rendaDetail || !prazoDetail || !perfilDetail) {
+                console.log('Elementos do acordeão "Diagnóstico Financeiro" não encontrados (removido). Função ignorada.');
+                return;
+            }
 
             detailsBlock.style.display = 'block';
 
@@ -4709,7 +4735,16 @@
         // 💡 EXIBIR INTERPRETAÇÃO AUTOMÁTICA
         // ========================================
         function exibirInterpretacaoOficial(rendaTotal, rendaDesejada, patrimonio) {
+            // ✅ CORREÇÃO: Verificar se o elemento existe antes de usar
+            // (Acordeão "Diagnóstico Financeiro" foi removido)
             const interpretationBlock = document.getElementById('interpretationBlock');
+            
+            // Se o elemento não existe, simplesmente retorna (não quebra o fluxo)
+            if (!interpretationBlock) {
+                console.log('Elemento "interpretationBlock" não encontrado (acordeão removido). Função ignorada.');
+                return;
+            }
+            
             // dashboardActions removido - botões não são mais necessários no PRO
 
             const percentualAtingido = (rendaTotal / rendaDesejada) * 100;
@@ -4903,40 +4938,9 @@
         }
 
         function exibirInsights(lista) {
-
-            const box = document.createElement("div");
-            box.className = "insights-box";
-
-            let html = `<h3 style="margin-bottom:15px; font-size:1.3rem; color:#f4f7fa;">🔍 Principais Conclusões</h3>`;
-
-            lista.forEach(item => {
-
-                let cor = "#38bdf8"; // info
-                if (item.tipo === "bom") cor = "#10b981";
-                if (item.tipo === "atencao") cor = "#facc15";
-                if (item.tipo === "péssimo") cor = "#ef4444";
-
-                html += `
-                    <div class="insight-item" style="
-                        padding:12px;
-                        margin-bottom:10px;
-                        background:#0f172a;
-                        border-left:6px solid ${cor};
-                        border-radius:8px;
-                    ">
-                        <p style="font-size:1rem; margin:0; color:#e2e8f0;">${item.texto}</p>
-                    </div>
-                `;
-            });
-
-            box.innerHTML = html;
-
-            const bloco5Content = document.querySelector('.pro-bloco[data-bloco="5"] .pro-bloco-content');
-            if (bloco5Content) {
-                bloco5Content.appendChild(box);
-            } else {
-                document.getElementById("resultsSection").appendChild(box);
-            }
+            // ✅ FUNÇÃO DESABILITADA: Conteúdo removido junto com acordeão "Diagnóstico Financeiro"
+            // Esta função não renderiza mais nada para evitar conteúdo indesejado na página
+            return;
         }
 
         // ===================================================
@@ -4944,64 +4948,9 @@
         // ===================================================
 
         function exibirCardsFinais(patrimonio, rendaSimples, rendaReversivel, inss, rendaDesejada) {
-
-            const container = document.createElement("div");
-            container.style.marginTop = "40px";
-            container.className = "cards-finais";
-
-            let melhorOpcao = "Investimento Próprio";
-            if (rendaReversivel > patrimonio * 0.01) {
-                melhorOpcao = "Previdência Reversível";
-            }
-
-            const gap = Math.max(0, rendaDesejada - (patrimonio * 0.01 + inss));
-
-            container.innerHTML = `
-                <h3 style="font-size:1.4rem; margin-bottom:15px; color:#f4f7fa;">📌 Conclusão Final</h3>
-
-                <div style="
-                    display:grid;
-                    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
-                    gap:20px;
-                ">
-                    <div style="background:#0f172a; border-left:6px solid #10b981; padding:20px; border-radius:10px;">
-                        <h4 style="color:#10b981; margin-bottom:10px;">⭐ Melhor Caminho</h4>
-                        <p style="margin-top:10px; color:#cbd5e1;">Com base nos cálculos, a opção mais eficiente é:</p>
-                        <p style="font-weight:700; font-size:1.2rem; color:#10b981;">${melhorOpcao}</p>
-                    </div>
-
-                    <div style="background:#0f172a; border-left:6px solid #38bdf8; padding:20px; border-radius:10px;">
-                        <h4 style="color:#38bdf8; margin-bottom:10px;">📘 INSS Estimado</h4>
-                        <p style="margin-top:10px; color:#cbd5e1;">Renda estimada pelo INSS:</p>
-                        <strong style="color:#38bdf8; font-size:1.2rem;">R$ ${inss.toLocaleString("pt-BR", {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong>
-                    </div>
-
-                    <div style="background:#0f172a; border-left:6px solid #facc15; padding:20px; border-radius:10px;">
-                        <h4 style="color:#facc15; margin-bottom:10px;">📉 Gap da Meta</h4>
-                        <p style="margin-top:10px; color:#cbd5e1;">Para atingir a renda desejada de  
-                        <strong style="color:#facc15;">R$ ${rendaDesejada.toLocaleString("pt-BR", {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong>, falta ainda:</p>
-                        <strong style="color:#facc15; font-size:1.2rem;">R$ ${gap.toLocaleString("pt-BR", {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong>
-                    </div>
-                </div>
-
-                <!-- CARD PREMIUM DE APORTE NECESSÁRIO -->
-                <div id="card-aporte-necessario" style="display: none;">
-                    <div class="card-header">
-                        <span class="emoji">💡</span>
-                        <span class="titulo">Sugestão para atingir sua meta</span>
-                    </div>
-                    <div class="card-body">
-                        <p id="aporte-necessario-texto" class="aporte-texto"></p>
-                    </div>
-                </div>
-            `;
-
-            const bloco5Content = document.querySelector('.pro-bloco[data-bloco="5"] .pro-bloco-content');
-            if (bloco5Content) {
-                bloco5Content.appendChild(container);
-            } else {
-                document.getElementById("resultsSection").appendChild(container);
-            }
+            // ✅ FUNÇÃO DESABILITADA: Conteúdo removido junto com acordeão "Diagnóstico Financeiro"
+            // Esta função não renderiza mais nada para evitar conteúdo indesejado na página
+            return;
 
             // ===================================================
             // CALCULAR E EXIBIR APORTE NECESSÁRIO (SE HOUVER GAP)
@@ -5074,14 +5023,11 @@
                 dados.inss
             );
 
-            // Exibe
-            exibirInsights(insights);
-            exibirCardsFinais(dados.patrimonio, dados.rendaSimples, dados.rendaReversivel, dados.inss, dados.rendaDesejada);
+            // ✅ FUNÇÕES DESABILITADAS: Conteúdo removido junto com acordeão "Diagnóstico Financeiro"
+            // exibirInsights(insights);
+            // exibirCardsFinais(dados.patrimonio, dados.rendaSimples, dados.rendaReversivel, dados.inss, dados.rendaDesejada);
 
-            // Scroll suave
-            setTimeout(() => {
-                document.getElementById("resultsSection").scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 200);
+            // Scroll suave removido (resultsSection não existe mais)
         }
 
         // Botão principal
