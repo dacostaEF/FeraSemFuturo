@@ -1053,7 +1053,7 @@
         }
 
         .quiz-title {
-            color: #D4AF37;
+            color: #CCAA66;
             font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 8px;
@@ -1062,22 +1062,69 @@
 
         .quiz-subtitle {
             color: #9ca3af;
-            margin-bottom: 32px;
+            margin-bottom: 24px;
             font-size: 1rem;
             line-height: 1.6;
         }
 
+        /* Barra de Progresso */
+        #quiz-progress-wrapper {
+            margin-bottom: 32px;
+            padding: 16px;
+            background: rgba(27, 38, 59, 0.6);
+            border-radius: 10px;
+            border: 1px solid rgba(204, 170, 102, 0.2);
+        }
+
+        #quiz-progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(27, 38, 59, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        #quiz-progress-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #3B82F6 0%, #355E3B 100%);
+            border-radius: 10px;
+            transition: width 0.4s ease;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+        }
+
+        #quiz-progress-text {
+            text-align: center;
+            color: #E5E5E5;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        #quiz-answered-count {
+            color: #CCAA66;
+            font-weight: 700;
+        }
+
         .quiz-section {
             margin-bottom: 32px;
-            padding: 20px;
-            border-left: 4px solid rgba(212, 175, 55, 0.6);
-            background: rgba(212, 175, 55, 0.05);
-            border-radius: 8px;
+            padding: 24px;
+            border-left: 4px solid rgba(204, 170, 102, 0.6);
+            background: rgba(27, 38, 59, 0.4);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .quiz-section:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            border-left-color: rgba(204, 170, 102, 0.8);
         }
 
         .quiz-section h3 {
             margin-bottom: 20px;
-            color: #D4AF37;
+            color: #CCAA66;
             font-size: 1.3rem;
             font-weight: 700;
             font-family: 'Playfair Display', serif;
@@ -1085,19 +1132,32 @@
 
         .quiz-question {
             margin-bottom: 24px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            padding: 18px;
+            background: rgba(13, 27, 42, 0.5);
+            border-radius: 10px;
+            border: 1px solid rgba(204, 170, 102, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .quiz-question:hover {
+            background: rgba(13, 27, 42, 0.7);
+            border-color: rgba(204, 170, 102, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .quiz-question.answered {
+            border-color: rgba(16, 185, 129, 0.4);
+            background: rgba(13, 27, 42, 0.6);
         }
 
         .quiz-question:last-child {
-            border-bottom: none;
             margin-bottom: 0;
-            padding-bottom: 0;
         }
 
         .quiz-question p {
             margin-bottom: 12px;
-            color: #E4E4E4;
+            color: #E5E5E5;
             font-size: 1rem;
             line-height: 1.6;
             font-weight: 500;
@@ -1187,12 +1247,14 @@
 
         #quiz-result {
             margin-top: 32px;
-            padding: 24px;
-            background: rgba(212, 175, 55, 0.08);
-            border: 2px solid rgba(212, 175, 55, 0.3);
+            padding: 28px;
+            background: rgba(27, 38, 59, 0.6);
+            border: 2px solid rgba(204, 170, 102, 0.4);
+            border-left: 4px solid #CCAA66;
             border-radius: 12px;
             display: none;
             animation: fadeIn 0.5s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
         }
 
         #quiz-result.show {
@@ -1200,15 +1262,15 @@
         }
 
         #quiz-result h3 {
-            color: #D4AF37;
-            font-size: 1.5rem;
+            color: #CCAA66;
+            font-size: 1.6rem;
             font-weight: 700;
             margin-bottom: 16px;
             font-family: 'Playfair Display', serif;
         }
 
         #quiz-result p {
-            color: #E4E4E4;
+            color: #E5E5E5;
             line-height: 1.8;
             margin-bottom: 12px;
             font-size: 1rem;
@@ -1220,14 +1282,26 @@
         }
 
         #quiz-result li {
-            color: #E4E4E4;
+            color: #E5E5E5;
             line-height: 1.8;
             margin-bottom: 8px;
         }
 
         #quiz-result strong {
-            color: #D4AF37;
+            color: #CCAA66;
             font-weight: 700;
+        }
+
+        #quiz-result .alert-box {
+            margin-top: 20px;
+            padding: 16px;
+            background: rgba(239, 68, 68, 0.15);
+            border-left: 4px solid #ef4444;
+            border-radius: 8px;
+        }
+
+        #quiz-result .alert-box strong {
+            color: #ef4444;
         }
 
         @keyframes fadeIn {
@@ -2684,6 +2758,14 @@
                         <h2 class="quiz-title">🎯 Qual é a Melhor Estratégia de Previdência Para Você?</h2>
                         <p class="quiz-subtitle">Responda SIM ou NÃO. No final, o InvLab recomenda sua rota ideal.</p>
 
+                        <!-- Barra de Progresso -->
+                        <div id="quiz-progress-wrapper">
+                            <div id="quiz-progress-bar">
+                                <div id="quiz-progress-fill"></div>
+                            </div>
+                            <p id="quiz-progress-text">Você respondeu <span id="quiz-answered-count">0</span> de 9 perguntas</p>
+                        </div>
+
                         <form id="inv-quiz">
                             <!-- ========================== -->
                             <!-- PARTE 1: PERFIL TRIBUTÁRIO -->
@@ -2776,7 +2858,7 @@
                                 </div>
                             </div>
 
-                            <button type="button" id="quiz-submit" onclick="processQuiz()">🔍 Ver Minha Estratégia</button>
+                            <button type="button" id="quiz-submit" onclick="processQuiz()">🔍 Calcular meu diagnóstico</button>
                         </form>
 
                         <div id="quiz-result"></div>
@@ -6293,6 +6375,29 @@
                         btn.classList.add('selected');
                     }
                 });
+                
+                // Marcar pergunta como respondida
+                questionEl.classList.add('answered');
+            }
+            
+            // Atualizar barra de progresso
+            updateQuizProgress();
+        }
+
+        function updateQuizProgress() {
+            const totalQuestions = 9;
+            const answeredCount = Object.keys(quizAnswers).length;
+            const progress = (answeredCount / totalQuestions) * 100;
+            
+            const progressFill = document.getElementById('quiz-progress-fill');
+            const answeredCountEl = document.getElementById('quiz-answered-count');
+            
+            if (progressFill) {
+                progressFill.style.width = progress + '%';
+            }
+            
+            if (answeredCountEl) {
+                answeredCountEl.textContent = answeredCount;
             }
         }
 
@@ -6310,7 +6415,7 @@
 
             let strategy = "";
 
-            // ⚠️ REGRA CRÍTICA – Taxas ruins eliminam previdência
+            // ⚠️ REGRA CRÍTICA – Taxas ruins eliminam previdência (proteção ética)
             if (r.Q8 === "NÃO" || r.Q9 === "NÃO") {
                 strategy = "investimentoProprio";
             } else {
@@ -6336,7 +6441,7 @@
                 // Sucessão
                 if (r.Q5 === "SIM" && r.Q6 === "SIM") {
                     score.vgbl += 3;
-                    score.hibrida += 1;
+                    score.hibrida += 2;
                 }
 
                 // Autonomia
@@ -6372,46 +6477,63 @@
             if (type === "investimentoProprio") {
                 html = `
                     <h3>💡 Estratégia Recomendada: Investimento Próprio</h3>
-                    <p>Você evita taxas que podem consumir 20%–40% do patrimônio e mantém controle total.</p>
+                    <p>Você mantém total controle e evita taxas que podem consumir 20%–40% do patrimônio ao longo do tempo.</p>
+                    <p><strong>Opções recomendadas:</strong></p>
                     <ul>
                         <li>✔️ Tesouro Direto</li>
                         <li>✔️ CDBs de baixo custo</li>
-                        <li>✔️ ETFs</li>
+                        <li>✔️ ETFs com taxa mínima</li>
                     </ul>
-                    <p>Apenas atenção ao planejamento sucessório — pode ser resolvido com testamento simples.</p>
+                    <div class="alert-box">
+                        <p><strong>⚠️ Atenção:</strong> Para sucessão, considere testamento ou seguro de vida para garantir transmissão rápida aos beneficiários.</p>
+                    </div>
                 `;
             }
 
             if (type === "pgbl") {
                 html = `
                     <h3>📘 Estratégia Recomendada: PGBL com Benefício Fiscal</h3>
-                    <p>Você se enquadra no perfil ideal para aproveitar a dedução de até 12% e a tabela regressiva.</p>
-                    <p><strong>⚠️ Isso só vale se a taxa TOTAL for abaixo de 1% a.a.</strong></p>
+                    <p>Você se enquadra no perfil ideal para aproveitar a dedução de até 12% da renda e a tabela regressiva do IR.</p>
+                    <div class="alert-box">
+                        <p><strong>⚠️ IMPORTANTE:</strong> Isso só vale a pena se a taxa TOTAL (administração + carregamento + custos internos) for menor que 1% a.a. Taxas acima disso podem anular o benefício fiscal.</p>
+                    </div>
                 `;
             }
 
             if (type === "vgbl") {
                 html = `
                     <h3>🏛️ Estratégia Recomendada: VGBL para Sucessão</h3>
-                    <p>Boa opção para quem deseja transmissão rápida aos beneficiários e simplicidade sucessória.</p>
-                    <p><strong>⚠️ Só compensa com taxa total baixa (&lt;1% a.a.).</strong></p>
+                    <p>Boa alternativa para quem deseja transmissão rápida aos beneficiários e simplicidade sucessória, sem passar por inventário.</p>
+                    <div class="alert-box">
+                        <p><strong>⚠️ Exige taxa total muito baixa:</strong> Só compensa com taxa total menor que 1% a.a. Caso contrário, o investimento próprio com testamento pode ser mais eficiente.</p>
+                    </div>
                 `;
             }
 
             if (type === "hibrida") {
                 html = `
-                    <h3>🔀 Estratégia Recomendada: Mix Inteligente</h3>
-                    <p>Você combina benefícios fiscais e controle patrimonial.</p>
-                    <p>Distribuição sugerida:</p>
+                    <h3>🔀 Estratégia Recomendada: Estratégia Híbrida Inteligente</h3>
+                    <p>Você combina benefícios fiscais, controle patrimonial e proteção sucessória de forma equilibrada.</p>
+                    <p><strong>Distribuição sugerida:</strong></p>
                     <ul>
-                        <li>✔️ 70–80% investimento próprio</li>
-                        <li>✔️ 20–30% previdência (se taxa &lt;1%)</li>
+                        <li>✔️ 70–80% em investimentos próprios (Tesouro, CDBs, ETFs)</li>
+                        <li>✔️ 20–30% em previdência privada (apenas se taxa total &lt; 1% a.a.)</li>
                     </ul>
+                    <div class="alert-box">
+                        <p><strong>⚠️ Lembre-se:</strong> A parte em previdência só faz sentido se encontrar um plano com taxa total muito baixa. Caso contrário, concentre tudo em investimento próprio.</p>
+                    </div>
                 `;
             }
 
             box.innerHTML = html;
         }
+
+        // Inicializar barra de progresso ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            if (document.getElementById('quiz-progress-fill')) {
+                updateQuizProgress();
+            }
+        });
     </script>
 
     <!-- JavaScript do Menu Mobile Hambúrguer -->
