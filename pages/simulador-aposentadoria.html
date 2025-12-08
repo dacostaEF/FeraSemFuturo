@@ -1132,11 +1132,15 @@
 
         .quiz-question {
             margin-bottom: 24px;
-            padding: 18px;
+            padding: 20px;
             background: rgba(13, 27, 42, 0.5);
             border-radius: 10px;
             border: 1px solid rgba(204, 170, 102, 0.15);
             transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
         }
 
         .quiz-question:hover {
@@ -1156,21 +1160,24 @@
         }
 
         .quiz-question p {
-            margin-bottom: 12px;
+            margin: 0;
             color: #E5E5E5;
             font-size: 1rem;
             line-height: 1.6;
             font-weight: 500;
+            flex: 1;
+            text-align: left;
         }
 
         .quiz-buttons {
             display: flex;
             gap: 12px;
-            flex-wrap: wrap;
+            flex-shrink: 0;
+            align-items: center;
         }
 
         .btn-yes, .btn-no {
-            padding: 12px 24px;
+            padding: 12px 28px;
             border-radius: 8px;
             border: 2px solid transparent;
             cursor: pointer;
@@ -1178,7 +1185,32 @@
             font-size: 1rem;
             transition: all 0.3s ease;
             font-family: 'Inter', sans-serif;
-            min-width: 100px;
+            min-width: 110px;
+            white-space: nowrap;
+        }
+
+        /* Responsivo: Mobile - botões centralizados abaixo */
+        @media (max-width: 768px) {
+            .quiz-question {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 16px;
+            }
+
+            .quiz-question p {
+                text-align: left;
+                margin-bottom: 0;
+            }
+
+            .quiz-buttons {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .btn-yes, .btn-no {
+                flex: 1;
+                min-width: 0;
+            }
         }
 
         .btn-yes {
