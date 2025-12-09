@@ -4097,3 +4097,4 @@ Com esse padrão **testado e aprovado** nos modais CDB e Tesouro Direto, TODOS o
 **Páginas Completas:** `index.html`, `pages/metodologia.html`, `pages/guia_invlab.html`, `pages/artigo-perfil-investidor.html`  
 **Pronto para:** Expansão para todo o site
 
+---

@@ -202,6 +202,88 @@
                 text-align: center;
             }
         }
+
+        /* ============================================
+           ÍCONE DE POPUP INVLAB - PADRÃO OFICIAL
+           ============================================ */
+        .info-icon-popup {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 50%;
+            color: #D4AF37;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: help;
+            position: relative;
+            transition: all 0.3s ease;
+            line-height: 1;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        .info-icon-popup:hover {
+            background: rgba(212, 175, 55, 0.3);
+            border-color: rgba(212, 175, 55, 0.6);
+            transform: scale(1.1);
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+        }
+
+        .info-icon-popup[title]:hover::after {
+            content: attr(title);
+            position: absolute;
+            bottom: 130%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(26, 26, 26, 0.98);
+            color: #E4E4E4;
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            white-space: normal;
+            width: 320px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            text-align: left;
+            font-weight: 400;
+            z-index: 1000;
+            pointer-events: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .info-icon-popup[title]:hover::before {
+            content: '';
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: rgba(26, 26, 26, 0.98);
+            z-index: 1001;
+        }
+
+        /* Responsividade para mobile */
+        @media (max-width: 768px) {
+            .info-icon-popup[title]:hover::after {
+                width: 280px;
+                font-size: 0.85rem;
+                padding: 14px 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .info-icon-popup[title]:hover::after {
+                width: calc(100vw - 40px);
+                max-width: 280px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
     </style>
 </head>
 <body>
@@ -408,31 +490,46 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><strong>Título de Capitalização</strong></td>
+                                    <td>
+                                        <strong>Título de Capitalização</strong>
+                                        <span class="info-icon-popup" title="É um dos piores produtos para o cliente. Não é investimento, mas um título que oferece rendimento baixo (muitas vezes abaixo da poupança), tem regras complexas para resgate e funciona essencialmente como um jogo de azar (sorteios). A comissão altíssima explica o grande interesse dos bancos em empurrá-lo">i</span>
+                                    </td>
                                     <td><span style="color: #ef4444; font-weight: 600;">ALTÍSSIMA (até 30%)</span></td>
                                     <td style="text-align: center; font-size: 1.5rem;">👍</td>
                                     <td style="text-align: center; font-size: 1.5rem;">❌</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Previdência do próprio banco</strong></td>
+                                    <td>
+                                        <strong>Previdência do próprio banco</strong>
+                                        <span class="info-icon-popup" title="A previdência privada (especialmente planos VGBL/PGBL com taxas de administração e carregamento elevadas) é muito lucrativa para o banco. Para o cliente, pode ser útil apenas se houver benefício fiscal (PGBL) e se as taxas forem competitivas — o que raramente ocorre nos grandes bancos de varejo.">i</span>
+                                    </td>
                                     <td><span style="color: #f97316; font-weight: 600;">ALTA (até 5%)</span></td>
                                     <td style="text-align: center; font-size: 1.5rem;">👍</td>
                                     <td style="text-align: center; font-size: 1.5rem;">⚠️</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Fundos caros do banco</strong></td>
+                                    <td>
+                                        <strong>Fundos caros do banco</strong>
+                                        <span class="info-icon-popup" title="Fundos de investimento com taxas de administração elevadas e performance ruim são a norma nos grandes bancos. O cliente paga caro por uma gestão que muitas vezes apenas replica índices de mercado, enquanto o banco lucra com as taxas.">i</span>
+                                    </td>
                                     <td><span style="color: #f97316; font-weight: 600;">ALTA</span></td>
                                     <td style="text-align: center; font-size: 1.5rem;">👍</td>
                                     <td style="text-align: center; font-size: 1.5rem;">❌</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Tesouro Direto</strong></td>
+                                    <td>
+                                        <strong>Tesouro Direto</strong>
+                                        <span class="info-icon-popup" title="É um dos investimentos mais seguros do Brasil e com ótima rentabilidade, acessível a qualquer pessoa. A comissão do banco (custódia) é irrisória ou zero, e a gestão é feita pelo Tesouro Nacional. Por isso, os gerentes de bancos grandes raramente o oferecem proativamente.">i</span>
+                                    </td>
                                     <td><span style="color: #10b981; font-weight: 600;">BAIXA</span></td>
                                     <td style="text-align: center; font-size: 1.5rem;">❌</td>
                                     <td style="text-align: center; font-size: 1.5rem;">👍</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>CDB de outro banco</strong></td>
+                                    <td>
+                                        <strong>CDB de outro banco</strong>
+                                        <span class="info-icon-popup" title="Bancos grandes não ganham nada se você investir em produtos do concorrente. Clientes com grandes volumes podem encontrar CDBs de outros bancos (via corretoras independentes ou plataformas abertas) com rentabilidade muito superior aos oferecidos pelo seu próprio banco.">i</span>
+                                    </td>
                                     <td><span style="color: #10b981; font-weight: 600;">PRÓXIMA DE ZERO</span></td>
                                     <td style="text-align: center; font-size: 1.5rem;">❌</td>
                                     <td style="text-align: center; font-size: 1.5rem;">👍</td>
