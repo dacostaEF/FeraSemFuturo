@@ -1833,12 +1833,21 @@
             }
 
             /* Modal - Centralização perfeita em mobile */
-            .modal-overlay {
+            /* ✅ CORRIGIDO: Só aplicar display: flex quando o modal realmente deve estar visível */
+            .modal-overlay[style*="display: flex"],
+            .modal-overlay[style*="display:flex"],
+            .modal-overlay.active {
                 padding: 15px !important;
                 /* Garantir centralização em mobile */
                 align-items: center !important;
                 justify-content: center !important;
                 display: flex !important;
+            }
+            
+            /* ✅ CRÍTICO: Garantir que modal com display: none permaneça oculto no mobile */
+            .modal-overlay[style*="display: none"],
+            .modal-overlay[style*="display:none"] {
+                display: none !important;
             }
 
             .modal-content {
@@ -1853,6 +1862,28 @@
 
             .modal-title {
                 font-size: 1.2rem !important;
+            }
+
+            /* Botão X do modal - Melhorias para mobile */
+            .modal-close {
+                width: 44px !important; /* Área de toque maior no mobile */
+                height: 44px !important;
+                min-width: 44px !important;
+                min-height: 44px !important;
+                z-index: 10001 !important;
+                position: relative !important;
+                pointer-events: auto !important;
+                touch-action: manipulation !important; /* Melhora resposta ao toque */
+                -webkit-tap-highlight-color: rgba(212, 175, 55, 0.3) !important;
+                font-size: 32px !important; /* Tamanho maior para facilitar toque */
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+
+            .modal-close:active {
+                transform: scale(0.95) !important;
+                color: #D4AF37 !important;
             }
 
             /* Redução do header para mobile */
@@ -5213,7 +5244,7 @@
             radio.addEventListener("change", function() {
                 atualizarRegrasPro(); // Usar função completa
                 atualizarDestaqueOpcoes(); // Atualizar destaque visual
-                verificarConflitoVitaliciaEsgotavel(); // Verificar conflitos
+                verificarConflitoVitaliciaEsgotavel(true); // Verificar conflitos - COM modal
             });
             radio.addEventListener("click", function() {
                 atualizarDestaqueOpcoes(); // Atualizar destaque visual
@@ -5226,7 +5257,7 @@
             radio.addEventListener("change", function() {
                 atualizarRegrasPro(); // Usar função completa
                 atualizarDestaqueOpcoes(); // Atualizar destaque visual
-                verificarConflitoVitaliciaEsgotavel(); // Verificar conflitos
+                verificarConflitoVitaliciaEsgotavel(true); // Verificar conflitos - COM modal
             });
             radio.addEventListener("click", function() {
                 atualizarDestaqueOpcoes(); // Atualizar destaque visual
@@ -5275,7 +5306,17 @@
             console.log("🔍 Tentando abrir modal...");
             const modal = document.getElementById("modalVitaliciaEsgotavel");
             console.log("🔍 Modal encontrado:", modal ? "SIM" : "NÃO");
+            
+            // Verificar se o modal já está aberto para evitar abrir duas vezes
+            if (modal && (modal.style.display === "flex" || modal.style.display === "none" && window.modalVitaliciaAberto)) {
+                console.log("⚠️ Modal já está aberto, ignorando...");
+                return;
+            }
+            
             if (modal) {
+                // Marcar que o modal está aberto
+                window.modalVitaliciaAberto = true;
+                
                 // Múltiplas formas de garantir que o modal apareça
                 modal.style.display = "flex";
                 modal.style.visibility = "visible";
@@ -5289,6 +5330,7 @@
                 modal.style.background = "rgba(0, 0, 0, 0.85)";
                 modal.style.justifyContent = "center";
                 modal.style.alignItems = "center";
+                // ✅ CRÍTICO: Usar setAttribute para garantir que o CSS mobile respeite
                 modal.setAttribute("style", 
                     "display: flex !important; " +
                     "position: fixed !important; " +
@@ -5305,7 +5347,17 @@
                     "visibility: visible !important; " +
                     "opacity: 1 !important;"
                 );
+                
+                // ✅ Adicionar classe 'active' para o CSS mobile reconhecer
+                modal.classList.add("active");
                 document.body.style.overflow = "hidden"; // Prevenir scroll
+                
+                // ✅ CRÍTICO: Reconfigurar o botão X toda vez que o modal abrir
+                // Isso garante que funcione no mobile mesmo se os listeners foram perdidos
+                setTimeout(() => {
+                    configurarBotaoFecharModal();
+                }, 50);
+                
                 console.log("✅ Modal aberto!");
             } else {
                 console.error("❌ Modal não encontrado!");
@@ -5315,8 +5367,15 @@
         function fecharModalVitaliciaEsgotavel() {
             const modal = document.getElementById("modalVitaliciaEsgotavel");
             if (modal) {
+                // ✅ CRÍTICO: Forçar display: none e remover classe active
                 modal.style.display = "none";
+                // Limpar todos os estilos inline e definir apenas display: none
+                const baseStyle = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); z-index: 10000; justify-content: center; align-items: center; padding: 20px; display: none !important;";
+                modal.setAttribute("style", baseStyle);
+                modal.classList.remove("active");
                 document.body.style.overflow = ""; // Restaurar scroll
+                window.modalVitaliciaAberto = false; // Marcar que o modal foi fechado
+                console.log("✅ Modal fechado!");
             }
         }
 
@@ -5324,15 +5383,70 @@
         window.fecharModalVitaliciaEsgotavel = fecharModalVitaliciaEsgotavel;
         window.mostrarModalVitaliciaEsgotavel = mostrarModalVitaliciaEsgotavel;
 
+        // Função específica para configurar o botão X (chamada toda vez que o modal abre)
+        function configurarBotaoFecharModal() {
+            const modalVitaliciaEsgotavel = document.getElementById("modalVitaliciaEsgotavel");
+            if (!modalVitaliciaEsgotavel) return;
+            
+            const btnClose = modalVitaliciaEsgotavel.querySelector(".modal-close");
+            if (!btnClose) return;
+            
+            // Remover todos os event listeners antigos (clonando o botão para limpar)
+            const newBtnClose = btnClose.cloneNode(true);
+            btnClose.parentNode.replaceChild(newBtnClose, btnClose);
+            
+            // Garantir estilos críticos para mobile
+            newBtnClose.style.pointerEvents = "auto";
+            newBtnClose.style.zIndex = "10001";
+            newBtnClose.style.position = "relative";
+            newBtnClose.style.cursor = "pointer";
+            
+            // Remover onclick inline (pode não funcionar bem no mobile)
+            newBtnClose.removeAttribute("onclick");
+            
+            // Adicionar event listeners modernos
+            // Click (desktop e mobile)
+            newBtnClose.addEventListener("click", function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                console.log("🖱️ Botão X clicado (click event)");
+                fecharModalVitaliciaEsgotavel();
+            }, { capture: true });
+            
+            // Touch events (mobile)
+            newBtnClose.addEventListener("touchend", function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                console.log("👆 Botão X tocado (touchend event)");
+                fecharModalVitaliciaEsgotavel();
+            }, { capture: true, passive: false });
+            
+            // Touch start também (para garantir)
+            newBtnClose.addEventListener("touchstart", function(e) {
+                e.stopPropagation();
+            }, { capture: true });
+            
+            console.log("✅ Botão X configurado!");
+        }
+        
         // Fechar modal ao clicar fora dele
         function configurarModalVitaliciaEsgotavel() {
             const modalVitaliciaEsgotavel = document.getElementById("modalVitaliciaEsgotavel");
             if (modalVitaliciaEsgotavel) {
-                modalVitaliciaEsgotavel.addEventListener("click", function(e) {
-                    if (e.target === modalVitaliciaEsgotavel) {
-                        fecharModalVitaliciaEsgotavel();
-                    }
-                });
+                // Fechar ao clicar fora do modal (apenas uma vez)
+                if (!modalVitaliciaEsgotavel.hasAttribute("data-click-outside-configured")) {
+                    modalVitaliciaEsgotavel.addEventListener("click", function(e) {
+                        if (e.target === modalVitaliciaEsgotavel) {
+                            fecharModalVitaliciaEsgotavel();
+                        }
+                    });
+                    modalVitaliciaEsgotavel.setAttribute("data-click-outside-configured", "true");
+                }
+                
+                // Configurar botão X
+                configurarBotaoFecharModal();
             }
         }
 
@@ -5340,13 +5454,15 @@
         // BLOQUEIO: Renda Vitalícia + Usar Capital Gradualmente
         // ====================================
         // Função para verificar conflito e bloquear (chamada sempre que algo muda)
-        function verificarConflitoVitaliciaEsgotavel() {
+        // Parâmetro abrirModal: true = abre modal, false = apenas corrige estado (usado na inicialização)
+        function verificarConflitoVitaliciaEsgotavel(abrirModal = true) {
             const tipoRendaAtual = document.querySelector("input[name='tipoRendaOficial']:checked");
             const estrategiaAtual = document.querySelector("input[name='estrategiaOficial']:checked");
             
             console.log("🔍 Verificando conflito:", {
                 tipoRenda: tipoRendaAtual ? tipoRendaAtual.value : null,
-                estrategia: estrategiaAtual ? estrategiaAtual.value : null
+                estrategia: estrategiaAtual ? estrategiaAtual.value : null,
+                abrirModal: abrirModal
             });
             
             // Se "vitalicia" está selecionado E "esgotavel" está selecionado = CONFLITO!
@@ -5360,9 +5476,13 @@
                     radioPerpetua.checked = true;
                 }
                 
-                // Abrir modal
-                console.log("📢 Abrindo modal...");
-                mostrarModalVitaliciaEsgotavel();
+                // Abrir modal APENAS se abrirModal = true (não na inicialização)
+                if (abrirModal) {
+                    console.log("📢 Abrindo modal...");
+                    mostrarModalVitaliciaEsgotavel();
+                } else {
+                    console.log("🔧 Conflito corrigido silenciosamente (inicialização)");
+                }
                 
                 return true; // Conflito detectado
             }
@@ -5416,9 +5536,14 @@
                                 radioPerpetua.checked = true;
                             }
                             
-                            // Abrir modal IMEDIATAMENTE
-                            console.log("📢 Abrindo modal imediatamente...");
-                            mostrarModalVitaliciaEsgotavel();
+                            // Verificar se o modal já está aberto para evitar abrir duas vezes
+                            if (!window.modalVitaliciaAberto) {
+                                // Abrir modal IMEDIATAMENTE
+                                console.log("📢 Abrindo modal imediatamente...");
+                                mostrarModalVitaliciaEsgotavel();
+                            } else {
+                                console.log("⚠️ Modal já está aberto, ignorando...");
+                            }
                             
                             return false;
                         }
@@ -5428,8 +5553,8 @@
                 // Monitorar mudanças (change event) - verificação adicional
                 radio.addEventListener("change", function() {
                     console.log(`🔄 Estratégia mudou para: ${this.value}`);
-                    // Verificar conflito após a mudança (caso escape do bloqueio)
-                    setTimeout(() => verificarConflitoVitaliciaEsgotavel(), 10);
+                    // Verificar conflito após a mudança (caso escape do bloqueio) - COM modal
+                    setTimeout(() => verificarConflitoVitaliciaEsgotavel(true), 10);
                 });
             });
             
@@ -5440,8 +5565,8 @@
             radiosTipoRenda.forEach((radio) => {
                 radio.addEventListener("change", function() {
                     console.log(`🔄 Tipo de renda mudou para: ${this.value}`);
-                    // Verificar conflito após a mudança
-                    setTimeout(() => verificarConflitoVitaliciaEsgotavel(), 10);
+                    // Verificar conflito após a mudança - COM modal
+                    setTimeout(() => verificarConflitoVitaliciaEsgotavel(true), 10);
                 });
             });
             
@@ -5479,9 +5604,14 @@
                                 radioPerpetua.checked = true;
                             }
                             
-                            // Abrir modal IMEDIATAMENTE
-                            console.log("📢 Abrindo modal imediatamente (via label)...");
-                            mostrarModalVitaliciaEsgotavel();
+                            // Verificar se o modal já está aberto para evitar abrir duas vezes
+                            if (!window.modalVitaliciaAberto) {
+                                // Abrir modal IMEDIATAMENTE
+                                console.log("📢 Abrindo modal imediatamente (via label)...");
+                                mostrarModalVitaliciaEsgotavel();
+                            } else {
+                                console.log("⚠️ Modal já está aberto, ignorando...");
+                            }
                             
                             return false;
                         }
@@ -5492,44 +5622,54 @@
             // 3. Event delegation no container (backup)
             const estrategiaEsgotavelContainer = document.getElementById("estrategiaEsgotavelContainer");
             if (estrategiaEsgotavelContainer) {
-                estrategiaEsgotavelContainer.addEventListener("click", function(e) {
-                    const radioEsgotavel = this.querySelector("input[name='estrategiaOficial'][value='esgotavel']");
-                    if (radioEsgotavel) {
-                        const tipoRendaAtual = document.querySelector("input[name='tipoRendaOficial']:checked");
-                        
-                        if (tipoRendaAtual && tipoRendaAtual.value === "vitalicia") {
-                            console.log("⚠️ Event delegation (container): Bloqueando esgotavel com vitalicia");
+                // Verificar se já tem listener configurado
+                if (!estrategiaEsgotavelContainer.hasAttribute("data-listener-configured")) {
+                    estrategiaEsgotavelContainer.addEventListener("click", function(e) {
+                        const radioEsgotavel = this.querySelector("input[name='estrategiaOficial'][value='esgotavel']");
+                        if (radioEsgotavel) {
+                            const tipoRendaAtual = document.querySelector("input[name='tipoRendaOficial']:checked");
                             
-                            // PREVENIR o clique ANTES de marcar
-                            e.preventDefault();
-                            e.stopPropagation();
-                            e.stopImmediatePropagation();
-                            
-                            // Garantir que não fique marcado
-                            radioEsgotavel.checked = false;
-                            
-                            // Forçar "perpetua" selecionado
-                            const radioPerpetua = document.querySelector("input[name='estrategiaOficial'][value='perpetua']");
-                            if (radioPerpetua) {
-                                radioPerpetua.checked = true;
+                            if (tipoRendaAtual && tipoRendaAtual.value === "vitalicia") {
+                                // Verificar se o modal já está aberto para evitar abrir duas vezes
+                                if (window.modalVitaliciaAberto) {
+                                    console.log("⚠️ Modal já está aberto, ignorando clique...");
+                                    return;
+                                }
+                                
+                                console.log("⚠️ Event delegation (container): Bloqueando esgotavel com vitalicia");
+                                
+                                // PREVENIR o clique ANTES de marcar
+                                e.preventDefault();
+                                e.stopPropagation();
+                                e.stopImmediatePropagation();
+                                
+                                // Garantir que não fique marcado
+                                radioEsgotavel.checked = false;
+                                
+                                // Forçar "perpetua" selecionado
+                                const radioPerpetua = document.querySelector("input[name='estrategiaOficial'][value='perpetua']");
+                                if (radioPerpetua) {
+                                    radioPerpetua.checked = true;
+                                }
+                                
+                                // Abrir modal IMEDIATAMENTE
+                                console.log("📢 Abrindo modal imediatamente (via container)...");
+                                mostrarModalVitaliciaEsgotavel();
+                                
+                                return false;
                             }
-                            
-                            // Abrir modal IMEDIATAMENTE
-                            console.log("📢 Abrindo modal imediatamente (via container)...");
-                            mostrarModalVitaliciaEsgotavel();
-                            
-                            return false;
                         }
-                    }
-                }, { capture: true });
+                    }, { capture: true });
+                    estrategiaEsgotavelContainer.setAttribute("data-listener-configured", "true");
+                }
             }
             
             window.bloqueioEstrategiaProConfigurado = true;
             console.log("✅ Listeners de estratégia configurados no PRO!");
             
-            // Verificar conflito inicial (caso já exista)
+            // Verificar conflito inicial (caso já exista) - SEM abrir modal
             setTimeout(() => {
-                verificarConflitoVitaliciaEsgotavel();
+                verificarConflitoVitaliciaEsgotavel(false); // false = não abre modal na inicialização
                 atualizarRegrasPro(); // Atualizar regras iniciais
             }, 100);
         }
@@ -5546,8 +5686,8 @@
             // Atualizar regras iniciais
             atualizarRegrasPro();
             
-            // Verificar conflitos iniciais
-            verificarConflitoVitaliciaEsgotavel();
+            // Verificar conflitos iniciais - SEM abrir modal
+            verificarConflitoVitaliciaEsgotavel(false); // false = não abre modal na inicialização
             
             // Atualizar destaque visual
             atualizarDestaqueOpcoes();
@@ -5573,11 +5713,39 @@
         }
 
         // Configurar modal quando DOM estiver pronto
-        if (document.readyState === 'loading') {
-            document.addEventListener("DOMContentLoaded", configurarModalVitaliciaEsgotavel);
-        } else {
+        function inicializarModalVitaliciaEsgotavel() {
+            // ✅ CRÍTICO: Garantir que o modal comece OCULTO no mobile (forçar display: none)
+            const modalVitaliciaEsgotavel = document.getElementById("modalVitaliciaEsgotavel");
+            if (modalVitaliciaEsgotavel) {
+                // Forçar display: none mesmo que o CSS mobile tente forçar display: flex
+                const baseStyle = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); z-index: 10000; justify-content: center; align-items: center; padding: 20px; display: none !important;";
+                modalVitaliciaEsgotavel.setAttribute("style", baseStyle);
+                modalVitaliciaEsgotavel.style.display = "none";
+                modalVitaliciaEsgotavel.classList.remove("active");
+                console.log("🔒 Modal forçado a ficar oculto na inicialização");
+            }
+            
             configurarModalVitaliciaEsgotavel();
+            // Garantir que o botão X seja configurado mesmo após delay
+            setTimeout(() => {
+                configurarModalVitaliciaEsgotavel();
+            }, 500);
         }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener("DOMContentLoaded", inicializarModalVitaliciaEsgotavel);
+        } else {
+            inicializarModalVitaliciaEsgotavel();
+        }
+        
+        // ✅ EXTRA: Garantir que o modal fique oculto mesmo após window load (mobile pode carregar CSS depois)
+        window.addEventListener("load", function() {
+            const modalVitaliciaEsgotavel = document.getElementById("modalVitaliciaEsgotavel");
+            if (modalVitaliciaEsgotavel && !window.modalVitaliciaAberto) {
+                modalVitaliciaEsgotavel.style.display = "none";
+                console.log("🔒 Modal forçado a ficar oculto após window load");
+            }
+        });
 
         // ====================================
         // JS DO MODAL
@@ -6570,7 +6738,7 @@
         <div class="modal-content" style="max-width: 600px; background: #1a1a1a; border: 1px solid rgba(138, 204, 166, 0.3); border-radius: 12px; padding: 30px;">
             <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(138, 204, 166, 0.2);">
                 <h3 class="modal-title" style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #D4AF37; font-weight: 700;">💡 Por que essas opções não combinam?</h3>
-                <button class="modal-close" onclick="fecharModalVitaliciaEsgotavel()" style="background: none; border: none; color: #9ca3af; font-size: 24px; cursor: pointer; padding: 0; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">×</button>
+                <button class="modal-close" onclick="fecharModalVitaliciaEsgotavel()" style="background: none; border: none; color: #9ca3af; font-size: 28px; cursor: pointer; padding: 0; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; z-index: 10001; position: relative; pointer-events: auto; line-height: 1; transition: all 0.2s ease;" onmouseover="this.style.color='#D4AF37'; this.style.transform='scale(1.1)'" onmouseout="this.style.color='#9ca3af'; this.style.transform='scale(1)'">×</button>
             </div>
             <div class="modal-body" style="color: #E4E4E4; line-height: 1.8;">
                 <div style="padding: 20px; background: rgba(250, 204, 21, 0.05); border-left: 4px solid #FACC15; border-radius: 8px; margin-bottom: 20px;">

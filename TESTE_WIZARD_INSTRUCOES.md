@@ -245,3 +245,4 @@ Ao executar `testarWizard()`, você deve ver:
 - A taxa real é calculada como: Taxa Nominal - Inflação
 - O período é sempre em anos, convertido para meses internamente
 
+
