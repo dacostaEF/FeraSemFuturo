@@ -23,7 +23,7 @@ class InvlabCarouselRendaVariavel {
 
             // 🚀 Renderiza IMEDIATAMENTE com dados de fallback
             this.data = {
-                ibovespa: 125000,
+                ibovespa: 186000,
                 selic: 13.75,
                 dolar: 5.85,
                 euro: 6.20
@@ -117,7 +117,7 @@ class InvlabCarouselRendaVariavel {
         const slides = [];
         
         // IBOVESPA
-        const ibovespaValue = this.data.ibovespa || 125000;
+        const ibovespaValue = this.data.ibovespa || 186000;
         slides.push({
             type: 'ibovespa',
             label: 'IBOVESPA',

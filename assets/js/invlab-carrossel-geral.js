@@ -59,7 +59,7 @@ class InvlabCarousel {
             this.data = {
                 selic: 13.75, ipca: 4.5, ipca15: 4.3, igpm: 3.8,
                 cdi: 13.65, poupanca: 0.5, dolar: 5.85, euro: 6.20,
-                bitcoin: 285000, ethereum: 15800, ibovespa: 125000
+                bitcoin: 285000, ethereum: 15800, ibovespa: 186000
             };
             
             // Renderiza primeiro (instantâneo)
@@ -233,7 +233,7 @@ class InvlabCarousel {
         };
 
         // SLIDE 8 - IBOVESPA
-        const ibovespaValue = this.data.ibovespa || 125000;
+        const ibovespaValue = this.data.ibovespa || 186000;
         allSlides.ibovespa = {
             type: 'ibovespa',
             label: 'IBOVESPA',
