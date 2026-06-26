@@ -640,6 +640,234 @@
     }
     .btn-lab-secondary:hover { border-color: rgba(255,255,255,0.38); color: #fff; }
 
+    /* ================================================================
+       SEÇÃO: COMO ANALISAR UM FII
+       Dados editoriais + quantitativos via /api/fii-raio-x (cache semanal)
+       ================================================================ */
+    .analise-section { margin: 52px 0; }
+    .analise-header { text-align: center; margin-bottom: 44px; }
+    .analise-badge {
+        display: inline-block;
+        background: rgba(212,175,55,0.10);
+        border: 1px solid rgba(212,175,55,0.30);
+        color: #D4AF37;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 6px 16px;
+        border-radius: 20px;
+        margin-bottom: 18px;
+    }
+    .analise-titulo { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; color: #fff; margin-bottom: 12px; }
+    .analise-subtitulo { font-size: 0.95rem; color: rgba(255,255,255,0.5); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+
+    .analise-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 52px; }
+    .analise-pergunta {
+        background: rgba(255,255,255,0.025);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 16px;
+        padding: 24px;
+        transition: border-color 0.2s;
+    }
+    .analise-pergunta:hover { border-color: rgba(212,175,55,0.22); }
+    .analise-pergunta-num { font-size: 0.68rem; font-weight: 800; letter-spacing: 2px; color: #D4AF37; margin-bottom: 6px; }
+    .analise-pergunta-titulo { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .analise-pergunta-desc { font-size: 0.87rem; color: rgba(255,255,255,0.62); line-height: 1.8; }
+
+    .segmentos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 14px; }
+    .segmento-chip {
+        background: rgba(212,175,55,0.06);
+        border: 1px solid rgba(212,175,55,0.16);
+        border-radius: 10px;
+        padding: 10px 6px;
+        text-align: center;
+        font-size: 0.74rem;
+        color: rgba(255,255,255,0.6);
+    }
+    .segmento-chip .seg-icon { font-size: 1.1rem; display: block; margin-bottom: 4px; }
+
+    .mono-compare { display: flex; gap: 10px; margin-top: 14px; }
+    .mono-card { flex: 1; border-radius: 10px; padding: 14px; text-align: center; font-size: 0.82rem; }
+    .mono-card.risco { background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.18); }
+    .mono-card.diversificado { background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.18); }
+    .mono-card-label { font-weight: 700; margin-bottom: 6px; }
+    .mono-card.risco .mono-card-label { color: rgba(239,68,68,0.8); }
+    .mono-card.diversificado .mono-card-label { color: #10b981; }
+    .mono-card-desc { color: rgba(255,255,255,0.5); line-height: 1.5; }
+    .mono-icon { font-size: 1.5rem; display: block; margin-bottom: 6px; }
+
+    .vacancia-gauge { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .vacancia-faixa { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; }
+    .vacancia-barra { height: 8px; border-radius: 4px; flex: 1; }
+    .vacancia-label { width: 86px; color: rgba(255,255,255,0.45); flex-shrink: 0; }
+    .vacancia-status { width: 90px; font-weight: 700; font-size: 0.76rem; flex-shrink: 0; }
+    .faixa-verde    { background: rgba(16,185,129,0.7); }
+    .faixa-amarela  { background: rgba(245,158,11,0.65); }
+    .faixa-laranja  { background: rgba(239,100,68,0.7); }
+    .faixa-vermelha { background: rgba(239,68,68,0.85); }
+    .status-verde   { color: #10b981; }
+    .status-amarela { color: #F59E0B; }
+    .status-laranja { color: #f97316; }
+    .status-vermelha{ color: #ef4444; }
+
+    .pvp-exemplo {
+        background: rgba(212,175,55,0.05);
+        border: 1px solid rgba(212,175,55,0.14);
+        border-radius: 10px;
+        padding: 14px 16px;
+        margin-top: 14px;
+        font-size: 0.83rem;
+        color: rgba(255,255,255,0.65);
+        line-height: 1.9;
+    }
+    .pvp-exemplo strong { color: #D4AF37; }
+    .pvp-tag {
+        display: inline-block;
+        background: rgba(16,185,129,0.12);
+        border: 1px solid rgba(16,185,129,0.25);
+        color: #10b981;
+        font-size: 0.76rem;
+        font-weight: 700;
+        padding: 2px 10px;
+        border-radius: 6px;
+    }
+    .pvp-tag-yellow {
+        display: inline-block;
+        background: rgba(245,158,11,0.10);
+        border: 1px solid rgba(245,158,11,0.24);
+        color: #F59E0B;
+        font-size: 0.76rem;
+        font-weight: 700;
+        padding: 2px 10px;
+        border-radius: 6px;
+    }
+
+    /* ================================================================
+       RAIO-X INVLAB
+       ================================================================ */
+    .raio-x-section {
+        background: rgba(212,175,55,0.04);
+        border: 1px solid rgba(212,175,55,0.18);
+        border-radius: 22px;
+        padding: 42px 38px;
+        margin-bottom: 24px;
+    }
+    .raio-x-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 32px;
+        flex-wrap: wrap;
+    }
+    .raio-x-titulo { font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .raio-x-subtitulo { font-size: 0.85rem; color: rgba(255,255,255,0.45); max-width: 480px; }
+    .raio-x-ticker-badge {
+        background: rgba(212,175,55,0.10);
+        border: 1px solid rgba(212,175,55,0.28);
+        border-radius: 12px;
+        padding: 10px 20px;
+        text-align: center;
+        flex-shrink: 0;
+    }
+    .raio-x-ticker-code { font-family: 'Courier New', monospace; font-size: 1.4rem; font-weight: 800; color: #D4AF37; display: block; }
+    .raio-x-ticker-seg { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 3px; }
+
+    /* Linha de preços carregados dinamicamente via /api/fii-raio-x */
+    .raio-x-preco-linha {
+        display: flex;
+        align-items: center;
+        background: rgba(255,255,255,0.025);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 12px;
+        padding: 16px 22px;
+        margin-bottom: 28px;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+    .raio-x-preco-item { text-align: center; flex: 1; min-width: 80px; }
+    .raio-x-preco-label { font-size: 0.68rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+    .raio-x-preco-valor { font-size: 1.05rem; font-weight: 700; color: #fff; }
+    .raio-x-preco-valor.carregando { color: rgba(255,255,255,0.22); font-size: 0.82rem; font-style: italic; font-weight: 400; }
+    .raio-x-preco-sep { width: 1px; height: 36px; background: rgba(255,255,255,0.07); flex-shrink: 0; }
+
+    .raio-x-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; margin-bottom: 28px; }
+    .raio-x-indicador {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .raio-x-indicador-label { font-size: 0.84rem; color: rgba(255,255,255,0.55); }
+    .raio-x-estrelas { color: #D4AF37; font-size: 0.9rem; letter-spacing: 2px; }
+
+    .raio-x-chart-wrapper { margin-bottom: 28px; }
+    .raio-x-chart-titulo {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: rgba(255,255,255,0.5);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 12px;
+    }
+    #dividendosChart { max-height: 190px; }
+
+    .invlab-score-box {
+        background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(212,175,55,0.04) 100%);
+        border: 1px solid rgba(212,175,55,0.30);
+        border-radius: 16px;
+        padding: 28px 32px;
+        display: flex;
+        gap: 28px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+    .score-numero { text-align: center; flex-shrink: 0; min-width: 90px; }
+    .score-valor { font-size: 3rem; font-weight: 900; color: #D4AF37; line-height: 1; display: block; }
+    .score-de10 { font-size: 0.78rem; color: rgba(212,175,55,0.5); margin-top: 2px; display: block; }
+    .score-estrelas-linha { font-size: 1rem; color: #D4AF37; margin-top: 6px; display: block; }
+    .score-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: rgba(212,175,55,0.6); margin-top: 4px; display: block; }
+    .score-parecer { flex: 1; min-width: 220px; }
+    .score-parecer-titulo { font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(212,175,55,0.7); margin-bottom: 10px; }
+    .score-parecer-texto { font-size: 0.88rem; color: rgba(255,255,255,0.68); line-height: 1.85; margin: 0 0 10px; }
+    .score-disclaimer { font-size: 0.74rem; color: rgba(255,255,255,0.28); font-style: italic; line-height: 1.6; }
+
+    /* ================================================================
+       CHECKLIST DO INVESTIDOR
+       ================================================================ */
+    .checklist-investidor {
+        background: rgba(16,185,129,0.04);
+        border: 1px solid rgba(16,185,129,0.18);
+        border-radius: 16px;
+        padding: 32px 36px;
+        margin-bottom: 52px;
+    }
+    .checklist-titulo { font-size: 1rem; font-weight: 700; color: #10b981; margin-bottom: 20px; }
+    .checklist-items { display: flex; flex-direction: column; gap: 12px; margin-bottom: 22px; }
+    .checklist-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        cursor: pointer;
+        user-select: none;
+    }
+    .checklist-item input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        accent-color: #10b981;
+        cursor: pointer;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+    .checklist-item span { font-size: 0.9rem; color: rgba(255,255,255,0.68); line-height: 1.6; transition: color 0.2s, opacity 0.2s; }
+    .checklist-item.marcado span { color: #10b981; text-decoration: line-through; opacity: 0.6; }
+    .checklist-progresso { background: rgba(255,255,255,0.05); border-radius: 4px; height: 6px; overflow: hidden; margin-bottom: 10px; }
+    .checklist-barra { height: 100%; background: linear-gradient(90deg, #10b981, #059669); border-radius: 4px; transition: width 0.4s ease; width: 0%; }
+    .checklist-status { font-size: 0.8rem; color: rgba(255,255,255,0.35); text-align: center; }
+    .checklist-status.completo { color: #10b981; font-weight: 700; }
+
     /* --- RESPONSIVE --- */
     @media (max-width: 768px) {
         .lab-hook { padding: 36px 20px; }
@@ -658,6 +886,13 @@
         .lab-assinatura { flex-direction: column; align-items: flex-start; }
         .predio-portfolio { grid-template-columns: repeat(2, 1fr); }
         .renda-anual-row { gap: 20px; }
+        .analise-grid { grid-template-columns: 1fr; }
+        .segmentos-grid { grid-template-columns: repeat(2, 1fr); }
+        .raio-x-section { padding: 24px 18px; }
+        .raio-x-grid { grid-template-columns: 1fr; }
+        .raio-x-preco-sep { display: none; }
+        .invlab-score-box { flex-direction: column; }
+        .checklist-investidor { padding: 24px 18px; }
     }
     </style>
 </head>
@@ -1112,6 +1347,304 @@
                 </div>
             </section>
 
+            <!-- ==========================================
+                 🔍 COMO ANALISAR UM FII
+                 Dados editoriais (segmento, inquilinos, vacância, estrelas) são
+                 hardcoded — mudam lentamente. Dados quantitativos (preço, P/VP,
+                 volume, dividendos) chegam via /api/fii-raio-x com cache semanal.
+                 ========================================== -->
+            <section class="analise-section" id="etapa-analise">
+
+                <div class="analise-header">
+                    <div class="analise-badge">🔍 Método INVLAB</div>
+                    <h2 class="analise-titulo">Como um investidor experiente analisa um FII</h2>
+                    <p class="analise-subtitulo">8 perguntas que todo analista faz antes de colocar dinheiro num Fundo Imobiliário — e que a maioria dos portais nunca ensina.</p>
+                </div>
+
+                <div class="analise-grid">
+
+                    <!-- Pergunta 1 -->
+                    <div class="analise-pergunta">
+                        <div class="analise-pergunta-num">PERGUNTA 01</div>
+                        <div class="analise-pergunta-titulo">🏢 Que tipo de fundo é esse?</div>
+                        <div class="analise-pergunta-desc">Cada segmento responde de forma diferente a ciclos econômicos. Galpões crescem com o e-commerce; shoppings dependem do consumo; lajes corporativas sofrem mais em crises.</div>
+                        <div class="segmentos-grid">
+                            <div class="segmento-chip"><span class="seg-icon">🏢</span>Lajes Corp.</div>
+                            <div class="segmento-chip"><span class="seg-icon">🛒</span>Shoppings</div>
+                            <div class="segmento-chip"><span class="seg-icon">📦</span>Galpões</div>
+                            <div class="segmento-chip"><span class="seg-icon">🏥</span>Hospitais</div>
+                            <div class="segmento-chip"><span class="seg-icon">🏨</span>Hotéis</div>
+                            <div class="segmento-chip"><span class="seg-icon">📄</span>CRI (Papel)</div>
+                            <div class="segmento-chip"><span class="seg-icon">🔀</span>Híbridos</div>
+                            <div class="segmento-chip"><span class="seg-icon">🌎</span>Outros</div>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 2 -->
+                    <div class="analise-pergunta">
+                        <div class="analise-pergunta-num">PERGUNTA 02</div>
+                        <div class="analise-pergunta-titulo">🏭 Quem paga o aluguel?</div>
+                        <div class="analise-pergunta-desc">A qualidade dos inquilinos define a estabilidade da renda. Um contrato com Amazon ou Mercado Livre representa risco radicalmente diferente de uma empresa desconhecida — mesmo que o DY pareça igual.</div>
+                        <div style="margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap;">
+                            <span style="background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.22); color: #10b981; font-size: 0.8rem; font-weight: 700; padding: 4px 12px; border-radius: 20px;">📦 Amazon</span>
+                            <span style="background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.22); color: #10b981; font-size: 0.8rem; font-weight: 700; padding: 4px 12px; border-radius: 20px;">🛍️ Mercado Livre</span>
+                            <span style="background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.22); color: #10b981; font-size: 0.8rem; font-weight: 700; padding: 4px 12px; border-radius: 20px;">🍺 Ambev</span>
+                            <span style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); color: rgba(255,255,255,0.38); font-size: 0.8rem; padding: 4px 12px; border-radius: 20px;">Empresa X Ltda ⚠️</span>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 3 -->
+                    <div class="analise-pergunta">
+                        <div class="analise-pergunta-num">PERGUNTA 03</div>
+                        <div class="analise-pergunta-titulo">🏗️ Quantos imóveis existem no fundo?</div>
+                        <div class="analise-pergunta-desc">Fundo com 1 imóvel: se ele ficar vazio, você recebe zero. Fundo com 30 imóveis: uma vacância pontual impacta muito menos a sua renda mensal.</div>
+                        <div class="mono-compare">
+                            <div class="mono-card risco">
+                                <span class="mono-icon">🏗️</span>
+                                <div class="mono-card-label">Monoativo</div>
+                                <div class="mono-card-desc">1 imóvel<br>Risco concentrado</div>
+                            </div>
+                            <div class="mono-card diversificado">
+                                <span class="mono-icon">🏙️</span>
+                                <div class="mono-card-label">Multiativo</div>
+                                <div class="mono-card-desc">10, 20, 30+<br>Risco diluído</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 4 -->
+                    <div class="analise-pergunta">
+                        <div class="analise-pergunta-num">PERGUNTA 04</div>
+                        <div class="analise-pergunta-titulo">📊 Existe vacância?</div>
+                        <div class="analise-pergunta-desc">Vacância física = % de área vazia sem pagar aluguel. Quanto maior, menor é a renda distribuída. Leia o relatório gerencial do fundo todo mês.</div>
+                        <div class="vacancia-gauge">
+                            <div class="vacancia-faixa">
+                                <div class="vacancia-label">0% – 5%</div>
+                                <div class="vacancia-barra faixa-verde"></div>
+                                <div class="vacancia-status status-verde">🟢 Excelente</div>
+                            </div>
+                            <div class="vacancia-faixa">
+                                <div class="vacancia-label">5% – 15%</div>
+                                <div class="vacancia-barra faixa-amarela"></div>
+                                <div class="vacancia-status status-amarela">🟡 Normal</div>
+                            </div>
+                            <div class="vacancia-faixa">
+                                <div class="vacancia-label">15% – 20%</div>
+                                <div class="vacancia-barra faixa-laranja"></div>
+                                <div class="vacancia-status status-laranja">🟠 Atenção</div>
+                            </div>
+                            <div class="vacancia-faixa">
+                                <div class="vacancia-label">acima de 20%</div>
+                                <div class="vacancia-barra faixa-vermelha"></div>
+                                <div class="vacancia-status status-vermelha">🔴 Alto risco</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 5 -->
+                    <div class="analise-pergunta">
+                        <div class="analise-pergunta-num">PERGUNTA 05</div>
+                        <div class="analise-pergunta-titulo">💰 O Dividend Yield é sustentável?</div>
+                        <div class="analise-pergunta-desc">DY alto nem sempre é bom sinal. Pode significar que o preço da cota caiu muito — não que o fundo melhorou. Pagamentos extraordinários (venda de imóvel) distorcem o DY e não se repetem.</div>
+                        <div style="margin-top: 14px; padding: 12px 16px; background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.20); border-radius: 10px; font-size: 0.83rem; color: rgba(255,255,255,0.60); line-height: 1.7;">
+                            ⚡ Compare sempre o DY dos <strong style="color: #fff;">últimos 12 meses</strong> — não apenas do último pagamento.
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 6 -->
+                    <div class="analise-pergunta">
+                        <div class="analise-pergunta-num">PERGUNTA 06</div>
+                        <div class="analise-pergunta-titulo">⚖️ O P/VP faz sentido?</div>
+                        <div class="analise-pergunta-desc">P/VP = Preço de mercado ÷ Valor Patrimonial. Indica se o mercado está pagando mais ou menos do que os imóveis valem na realidade.</div>
+                        <div class="pvp-exemplo">
+                            Patrimônio: <strong>R$ 100</strong> por cota<br>
+                            Preço na bolsa: <strong>R$ 90</strong> → P/VP = <strong>0,90</strong>
+                            <span class="pvp-tag">🟢 10% abaixo do patrimônio</span><br><br>
+                            Patrimônio: <strong>R$ 100</strong> por cota<br>
+                            Preço na bolsa: <strong>R$ 115</strong> → P/VP = <strong>1,15</strong>
+                            <span class="pvp-tag-yellow">🟡 15% acima do patrimônio</span>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 7 — ocupa linha inteira -->
+                    <div class="analise-pergunta" style="grid-column: 1 / -1;">
+                        <div class="analise-pergunta-num">PERGUNTA 07</div>
+                        <div class="analise-pergunta-titulo">📈 O histórico de dividendos é consistente?</div>
+                        <div class="analise-pergunta-desc">Não basta olhar o pagamento mais recente. Fundos sólidos pagam de forma consistente ao longo de meses e anos — sem grandes quedas ou interrupções repentinas.</div>
+                        <div style="margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+                            <div style="padding: 14px; background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.18); border-radius: 10px; text-align: center;">
+                                <div style="color: #10b981; font-weight: 700; font-size: 0.85rem; margin-bottom: 4px;">✅ Consistente</div>
+                                <div style="font-size: 0.78rem; color: rgba(255,255,255,0.5);">Pequenas variações, sem interrupções</div>
+                            </div>
+                            <div style="padding: 14px; background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.18); border-radius: 10px; text-align: center;">
+                                <div style="color: #F59E0B; font-weight: 700; font-size: 0.85rem; margin-bottom: 4px;">⚡ Irregular</div>
+                                <div style="font-size: 0.78rem; color: rgba(255,255,255,0.5);">Picos podem ser rendimentos extraordinários</div>
+                            </div>
+                            <div style="padding: 14px; background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.18); border-radius: 10px; text-align: center;">
+                                <div style="color: rgba(239,68,68,0.8); font-weight: 700; font-size: 0.85rem; margin-bottom: 4px;">🔴 Com lacunas</div>
+                                <div style="font-size: 0.78rem; color: rgba(255,255,255,0.5);">Meses sem pagamento = sinal de vacância alta</div>
+                            </div>
+                        </div>
+                        <p style="margin-top: 12px; font-size: 0.82rem; color: rgba(255,255,255,0.32); font-style: italic;">→ Veja o histórico real do HGLG11 no Raio-X INVLAB abaixo</p>
+                    </div>
+
+                    <!-- Pergunta 8 -->
+                    <div class="analise-pergunta">
+                        <div class="analise-pergunta-num">PERGUNTA 08</div>
+                        <div class="analise-pergunta-titulo">💧 O fundo tem liquidez suficiente?</div>
+                        <div class="analise-pergunta-desc">FII com baixo volume diário na B3 dificulta compra e venda — spreads maiores, dificuldade de sair da posição quando precisar.</div>
+                        <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 10px;">
+                            <div style="display: flex; align-items: center; gap: 10px; font-size: 0.83rem;"><span style="color: #10b981;">🟢</span><span style="color: rgba(255,255,255,0.6);">&gt; R$ 1M/dia — boa liquidez para a maioria</span></div>
+                            <div style="display: flex; align-items: center; gap: 10px; font-size: 0.83rem;"><span style="color: #F59E0B;">🟡</span><span style="color: rgba(255,255,255,0.6);">R$ 200k – R$ 1M/dia — moderada, atenção</span></div>
+                            <div style="display: flex; align-items: center; gap: 10px; font-size: 0.83rem;"><span style="color: #ef4444;">🔴</span><span style="color: rgba(255,255,255,0.6);">&lt; R$ 200k/dia — restrita, cuidado</span></div>
+                        </div>
+                    </div>
+
+                </div><!-- /analise-grid -->
+
+                <!-- ================================================
+                     RAIO-X INVLAB — HGLG11
+                     Estrelas e texto = editorial (atualizado manualmente)
+                     Preço / P/VP / volume / dividendos = BRAPI (cache semanal)
+                     ================================================ -->
+                <div class="raio-x-section">
+                    <div class="raio-x-header">
+                        <div>
+                            <div class="raio-x-titulo">🔬 Raio-X INVLAB</div>
+                            <div class="raio-x-subtitulo">Aplicando o método a um fundo real. Dados quantitativos atualizados semanalmente via BRAPI — dados qualitativos são editoriais.</div>
+                        </div>
+                        <div class="raio-x-ticker-badge">
+                            <span class="raio-x-ticker-code">HGLG11</span>
+                            <div class="raio-x-ticker-seg">Logístico · Tijolo</div>
+                        </div>
+                    </div>
+
+                    <!-- Dados dinâmicos — preenchidos pelo JavaScript via /api/fii-raio-x -->
+                    <div class="raio-x-preco-linha">
+                        <div class="raio-x-preco-item">
+                            <div class="raio-x-preco-label">Preço da Cota</div>
+                            <div class="raio-x-preco-valor carregando" id="rxPreco">carregando…</div>
+                        </div>
+                        <div class="raio-x-preco-sep"></div>
+                        <div class="raio-x-preco-item">
+                            <div class="raio-x-preco-label">P/VP</div>
+                            <div class="raio-x-preco-valor carregando" id="rxPvp">carregando…</div>
+                        </div>
+                        <div class="raio-x-preco-sep"></div>
+                        <div class="raio-x-preco-item">
+                            <div class="raio-x-preco-label">Volume Diário</div>
+                            <div class="raio-x-preco-valor carregando" id="rxVolume">carregando…</div>
+                        </div>
+                        <div class="raio-x-preco-sep"></div>
+                        <div class="raio-x-preco-item">
+                            <div class="raio-x-preco-label">Variação Dia</div>
+                            <div class="raio-x-preco-valor carregando" id="rxVariacao">carregando…</div>
+                        </div>
+                    </div>
+
+                    <!-- Indicadores com estrelas (editorial) -->
+                    <div class="raio-x-grid">
+                        <div class="raio-x-indicador">
+                            <span class="raio-x-indicador-label">Segmento</span>
+                            <span style="font-size: 0.85rem; color: #fff;">📦 Logístico</span>
+                        </div>
+                        <div class="raio-x-indicador">
+                            <span class="raio-x-indicador-label">Tipo</span>
+                            <span style="font-size: 0.85rem; color: #F59E0B; font-weight: 700;">🧱 Tijolo</span>
+                        </div>
+                        <div class="raio-x-indicador">
+                            <span class="raio-x-indicador-label">Diversificação</span>
+                            <span class="raio-x-estrelas">★★★★★</span>
+                        </div>
+                        <div class="raio-x-indicador">
+                            <span class="raio-x-indicador-label">Qualidade dos Inquilinos</span>
+                            <span class="raio-x-estrelas">★★★★★</span>
+                        </div>
+                        <div class="raio-x-indicador">
+                            <span class="raio-x-indicador-label">Vacância (~3%)</span>
+                            <span class="raio-x-estrelas">★★★★★</span>
+                        </div>
+                        <div class="raio-x-indicador">
+                            <span class="raio-x-indicador-label">Liquidez na B3</span>
+                            <span class="raio-x-estrelas">★★★★★</span>
+                        </div>
+                        <div class="raio-x-indicador">
+                            <span class="raio-x-indicador-label">Consistência dos Dividendos</span>
+                            <span class="raio-x-estrelas">★★★★<span style="opacity:0.22;">★</span></span>
+                        </div>
+                        <div class="raio-x-indicador">
+                            <span class="raio-x-indicador-label">P/VP</span>
+                            <span class="raio-x-estrelas" id="rxPvpEstrelas">★★★★<span style="opacity:0.22;">★</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico de dividendos — dados reais via BRAPI, fallback editorial -->
+                    <div class="raio-x-chart-wrapper">
+                        <div class="raio-x-chart-titulo">📊 Histórico de Distribuições — HGLG11 (R$/cota)</div>
+                        <canvas id="dividendosChart"></canvas>
+                        <p style="font-size: 0.74rem; color: rgba(255,255,255,0.22); text-align: right; margin-top: 8px; font-style: italic;" id="rxChartFonte">Dados via BRAPI · Cache semanal · Apenas educacional</p>
+                    </div>
+
+                    <!-- INVLAB SCORE -->
+                    <div class="invlab-score-box">
+                        <div class="score-numero">
+                            <span class="score-valor">9,2</span>
+                            <span class="score-de10">de 10</span>
+                            <span class="score-estrelas-linha">★★★★★</span>
+                            <span class="score-label">INVLAB Score</span>
+                        </div>
+                        <div class="score-parecer">
+                            <div class="score-parecer-titulo">⭐ Parecer Educativo INVLAB</div>
+                            <p class="score-parecer-texto">
+                                Este fundo apresenta boa diversificação geográfica (30+ imóveis em SP, MG, RJ, PR e RS), baixa vacância (~3%) e inquilinos de alta qualidade como Amazon, Mercado Livre e GPA — características normalmente associadas a maior estabilidade na geração de renda. A gestão (CSHG) tem histórico consistente de distribuições mensais há mais de uma década.<br><br>
+                                Ponto de atenção: em períodos de juros altos, o preço das cotas tende a ser pressionado, independente da qualidade dos imóveis. Acompanhe o relatório gerencial mensalmente.
+                            </p>
+                            <p class="score-disclaimer">⚠️ Isto não é recomendação de compra ou venda. É um exercício educativo de análise — a decisão e a responsabilidade são sempre do investidor.</p>
+                        </div>
+                    </div>
+                </div><!-- /raio-x-section -->
+
+                <!-- CHECKLIST DO INVESTIDOR -->
+                <div class="checklist-investidor">
+                    <div class="checklist-titulo">✅ Antes de investir — Checklist do Analista</div>
+                    <div class="checklist-items" id="checklistItems">
+                        <label class="checklist-item">
+                            <input type="checkbox">
+                            <span>Entendi qual é o segmento do fundo (logístico, shopping, papel, híbrido…)</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox">
+                            <span>Verifiquei a vacância e sei o que ela significa para a renda mensal</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox">
+                            <span>Analisei os principais inquilinos — quem paga o aluguel e qual é o risco de crédito</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox">
+                            <span>Observei o histórico de dividendos dos últimos 12 meses, não só o último pagamento</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox">
+                            <span>Verifiquei o P/VP — o mercado está pagando abaixo ou acima do valor patrimonial?</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox">
+                            <span>Analisei a liquidez diária — consigo entrar e sair da posição com facilidade?</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox">
+                            <span>Estou investindo com foco no longo prazo — não para especular no preço da cota</span>
+                        </label>
+                    </div>
+                    <div class="checklist-progresso">
+                        <div class="checklist-barra" id="checklistBarra"></div>
+                    </div>
+                    <div class="checklist-status" id="checklistStatus">0 de 7 itens verificados</div>
+                </div>
+
+            </section><!-- /analise-section -->
+
             <!-- PERGUNTA PROVOCATIVA 4 -->
             <div class="lab-provocativa">
                 <p class="lab-provocativa-text">
@@ -1350,6 +1883,188 @@
                 slider.addEventListener('input', atualizar);
                 atualizar();
             }
+        });
+    })();
+    </script>
+
+    <!-- Chart.js: gráfico de dividendos no Raio-X (carregado aqui no final do body para não bloquear renderização) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <!-- RAIO-X FII + CHECKLIST -->
+    <script>
+    (function() {
+        // ================================================================
+        // Arquitetura híbrida do Raio-X:
+        //   - /api/fii-raio-x usa cache semanal no servidor (não chama BRAPI a cada visita)
+        //   - Se a API falhar, o gráfico usa dados editoriais aproximados do HGLG11
+        //   - Estrelas, segmento, parecer e score são sempre editoriais (mudam lentamente)
+        // ================================================================
+
+        // Fallback editorial — distribuições mensais aproximadas do HGLG11 (R$/cota)
+        var dividendosFallback = [
+            { data: 'Jul/24', valor: 1.05 }, { data: 'Ago/24', valor: 1.08 },
+            { data: 'Set/24', valor: 1.10 }, { data: 'Out/24', valor: 1.07 },
+            { data: 'Nov/24', valor: 1.12 }, { data: 'Dez/24', valor: 1.15 },
+            { data: 'Jan/25', valor: 1.08 }, { data: 'Fev/25', valor: 1.10 },
+            { data: 'Mar/25', valor: 1.07 }, { data: 'Abr/25', valor: 1.12 },
+            { data: 'Mai/25', valor: 1.09 }, { data: 'Jun/25', valor: 1.11 }
+        ];
+
+        function fmtBRL(val) {
+            return 'R$ ' + parseFloat(val).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function fmtVolume(vol) {
+            if (!vol) return '—';
+            if (vol >= 1e6) return 'R$ ' + (vol / 1e6).toFixed(1) + 'M/dia';
+            if (vol >= 1e3) return 'R$ ' + (vol / 1e3).toFixed(0) + 'k/dia';
+            return '—';
+        }
+
+        function fmtData(dateStr) {
+            if (!dateStr) return '—';
+            var d = new Date(dateStr);
+            var meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+            return meses[d.getUTCMonth()] + '/' + String(d.getUTCFullYear()).slice(2);
+        }
+
+        function renderChart(dividendos) {
+            var canvas = document.getElementById('dividendosChart');
+            if (!canvas || typeof Chart === 'undefined') return;
+
+            new Chart(canvas, {
+                type: 'bar',
+                data: {
+                    labels: dividendos.map(function(d) { return d.data; }),
+                    datasets: [{
+                        label: 'Distribuição (R$/cota)',
+                        data: dividendos.map(function(d) { return d.valor; }),
+                        backgroundColor: 'rgba(212,175,55,0.30)',
+                        borderColor: 'rgba(212,175,55,0.75)',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) { return 'R$ ' + ctx.parsed.y.toFixed(2) + '/cota'; }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(255,255,255,0.04)' },
+                            ticks: { color: 'rgba(255,255,255,0.45)', font: { size: 11 } }
+                        },
+                        y: {
+                            grid: { color: 'rgba(255,255,255,0.06)' },
+                            beginAtZero: false,
+                            ticks: {
+                                color: 'rgba(255,255,255,0.45)',
+                                font: { size: 11 },
+                                callback: function(v) { return 'R$ ' + v.toFixed(2); }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function atualizarCampos(dados) {
+            var el;
+            el = document.getElementById('rxPreco');
+            if (el) { el.classList.remove('carregando'); el.textContent = dados.preco ? fmtBRL(dados.preco) : '—'; }
+
+            el = document.getElementById('rxPvp');
+            if (el) { el.classList.remove('carregando'); el.textContent = dados.pvp ? parseFloat(dados.pvp).toFixed(2) : '—'; }
+
+            el = document.getElementById('rxVolume');
+            if (el) { el.classList.remove('carregando'); el.textContent = fmtVolume(dados.volume); }
+
+            el = document.getElementById('rxVariacao');
+            if (el) {
+                el.classList.remove('carregando');
+                if (dados.variacao !== null && dados.variacao !== undefined) {
+                    var v = parseFloat(dados.variacao);
+                    el.textContent = (v >= 0 ? '+' : '') + v.toFixed(2) + '%';
+                    el.style.color = v >= 0 ? '#10b981' : '#ef4444';
+                } else {
+                    el.textContent = '—';
+                }
+            }
+        }
+
+        function processarDividendos(raw) {
+            if (raw && raw.length > 0) {
+                return raw.map(function(d) {
+                    return { data: fmtData(d.data), valor: parseFloat(d.valor) || 0 };
+                }).filter(function(d) { return d.valor > 0; });
+            }
+            return dividendosFallback;
+        }
+
+        // Checklist interativo
+        function atualizarChecklist() {
+            var checks = document.querySelectorAll('#checklistItems input[type="checkbox"]');
+            var total = checks.length, marcados = 0;
+            for (var i = 0; i < checks.length; i++) {
+                var item = checks[i].closest('.checklist-item');
+                if (checks[i].checked) {
+                    marcados++;
+                    if (item) item.classList.add('marcado');
+                } else {
+                    if (item) item.classList.remove('marcado');
+                }
+            }
+            var barra  = document.getElementById('checklistBarra');
+            var status = document.getElementById('checklistStatus');
+            if (barra)  barra.style.width = (total > 0 ? (marcados / total * 100) : 0) + '%';
+            if (status) {
+                if (marcados === total && total > 0) {
+                    status.textContent = '✅ Checklist completo! Agora simule sua renda abaixo.';
+                    status.classList.add('completo');
+                } else {
+                    status.textContent = marcados + ' de ' + total + ' itens verificados';
+                    status.classList.remove('completo');
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Registra listeners do checklist
+            var checks = document.querySelectorAll('#checklistItems input[type="checkbox"]');
+            for (var i = 0; i < checks.length; i++) {
+                checks[i].addEventListener('change', atualizarChecklist);
+            }
+            atualizarChecklist();
+
+            // Busca dados do Raio-X (token protegido no servidor, resposta em cache semanal)
+            fetch('/api/fii-raio-x/HGLG11')
+                .then(function(r) { return r.json(); })
+                .then(function(dados) {
+                    atualizarCampos(dados);
+                    var divs = processarDividendos(dados.dividendos);
+                    renderChart(divs);
+
+                    // Atualiza rodapé do gráfico para mostrar data real do cache
+                    var fonte = document.getElementById('rxChartFonte');
+                    if (fonte && dados.success && dados.timestamp) {
+                        var dt = new Date(dados.timestamp).toLocaleDateString('pt-BR');
+                        fonte.textContent = 'Dados reais via BRAPI · Atualizado em ' + dt + ' · Cache semanal · Apenas educacional';
+                    }
+                })
+                .catch(function() {
+                    // Falha silenciosa: mostra traço nos campos dinâmicos, gráfico com fallback
+                    ['rxPreco','rxPvp','rxVolume','rxVariacao'].forEach(function(id) {
+                        var el = document.getElementById(id);
+                        if (el) { el.classList.remove('carregando'); el.textContent = '—'; }
+                    });
+                    renderChart(dividendosFallback);
+                });
         });
     })();
     </script>

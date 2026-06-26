@@ -176,6 +176,82 @@ function tryAlternativeAPI(res) {
     });
 }
 
+// ================================================================
+// Raio-X FII — proxy BRAPI com cache semanal
+//
+// Arquitetura híbrida intencional:
+//   QUANTITATIVO (preço, P/VP, volume, histórico dividendos) → BRAPI
+//   QUALITATIVO (segmento, inquilinos, vacância, estrelas)   → editorial/hardcoded
+//
+// Cache semanal porque esses dados mudam devagar — protege o token
+// e evita latência extra a cada visita.
+// ================================================================
+const fiiRaioXCache = {};
+const FII_CACHE_TTL = 7 * 24 * 60 * 60 * 1000; // 7 dias em ms
+
+function fetchBrapi(path) {
+    return new Promise((resolve, reject) => {
+        const sep = path.includes('?') ? '&' : '?';
+        const url = `https://brapi.dev/api/${path}${sep}token=${BRAPI_TOKEN}`;
+        const req = https.get(url, (res) => {
+            let data = '';
+            res.on('data', chunk => data += chunk);
+            res.on('end', () => {
+                try { resolve(JSON.parse(data)); }
+                catch (e) { reject(new Error('Erro ao parsear resposta BRAPI')); }
+            });
+        });
+        req.on('error', reject);
+        req.setTimeout(8000, () => { req.destroy(); reject(new Error('Timeout BRAPI')); });
+    });
+}
+
+app.get('/api/fii-raio-x/:ticker', async (req, res) => {
+    const ticker = req.params.ticker.toUpperCase();
+    const agora  = Date.now();
+
+    if (fiiRaioXCache[ticker] && (agora - fiiRaioXCache[ticker].timestamp < FII_CACHE_TTL)) {
+        console.log(`📦 [Raio-X] Cache hit: ${ticker}`);
+        return res.json(fiiRaioXCache[ticker].data);
+    }
+
+    console.log(`📡 [Raio-X] Buscando BRAPI para: ${ticker}`);
+
+    try {
+        const [quoteRes, divRes] = await Promise.all([
+            fetchBrapi(`quote/${ticker}?fundamental=true`),
+            fetchBrapi(`quote/${ticker}/dividends`)
+        ]);
+
+        const quote    = quoteRes.results?.[0] || {};
+        const rawDivs  = divRes.results?.[0]?.dividendsData?.cashDividends || [];
+
+        const payload = {
+            success:   true,
+            ticker,
+            timestamp: agora,
+            source:    'brapi',
+            preco:     quote.regularMarketPrice        || null,
+            variacao:  quote.regularMarketChangePercent || null,
+            volume:    quote.regularMarketVolume       || null,
+            pvp:       quote.priceToBook               || null,
+            // Últimos 12 meses em ordem cronológica (BRAPI retorna mais recente primeiro)
+            dividendos: rawDivs.slice(0, 12).reverse().map(d => ({
+                data:  d.paymentDate || d.approvedOn || '',
+                valor: parseFloat(d.rate || d.value || 0)
+            }))
+        };
+
+        fiiRaioXCache[ticker] = { timestamp: agora, data: payload };
+        res.json(payload);
+
+    } catch (error) {
+        console.error(`❌ [Raio-X] Erro ao buscar ${ticker}:`, error.message);
+        // Frontend usa fallback editorial quando success: false
+        res.json({ success: false, ticker, preco: null, pvp: null, volume: null, variacao: null, dividendos: [] });
+    }
+});
+
 // 404 handler
 app.use((req, res) => {
     res.status(404).sendFile(path.join(__dirname, 'index.html'));
