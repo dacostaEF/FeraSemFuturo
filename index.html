@@ -753,13 +753,13 @@
             font-weight: 600;
         }
 
-        /* Corrige alinhamento do header — ícone + título juntos à esquerda */
-        #renda-variavel .investment-card .investment-header {
+        /* Corrige alinhamento do header em todos os cards — ícone + título juntos à esquerda */
+        .investment-card .investment-header {
             justify-content: flex-start !important;
             gap: 12px;
         }
 
-        /* Badge na mesma linha do título — div interna vira flex row */
+        /* Badge na mesma linha do título (cards com ícone + div interna — Renda Variável) */
         #renda-variavel .investment-header > div {
             display: flex;
             align-items: center;
