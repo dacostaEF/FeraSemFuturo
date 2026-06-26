@@ -802,6 +802,34 @@
         font-style: italic;
     }
 
+    /* --- ASSINATURA LABORATÓRIO --- */
+    .lab-assinatura {
+        border: 1px solid rgba(212,175,55,0.18);
+        border-radius: 12px;
+        padding: 18px 26px;
+        margin: 0 0 44px;
+        background: rgba(212,175,55,0.03);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 24px;
+        align-items: center;
+    }
+    .lab-assinatura-label {
+        color: #D4AF37;
+        font-size: 0.85rem;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+    .lab-assinatura-items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 22px;
+    }
+    .lab-assinatura-item {
+        font-size: 0.82rem;
+        color: rgba(255,255,255,0.55);
+    }
+
     /* --- RESPONSIVE --- */
     @media (max-width: 768px) {
         .lab-hook { padding: 36px 20px; }
@@ -947,6 +975,17 @@
                 <div class="lab-hook-question">🤔 Como isso é possível?</div>
                 <span class="lab-hook-arrow">↓</span>
                 <div class="lab-hook-answer">A resposta está nos ETFs...</div>
+            </div>
+
+            <!-- ASSINATURA LABORATÓRIO INVLAB -->
+            <div class="lab-assinatura">
+                <div class="lab-assinatura-label">🔬 No Laboratório de hoje você vai descobrir:</div>
+                <div class="lab-assinatura-items">
+                    <div class="lab-assinatura-item">✅ Como um ETF funciona — e por que é diferente de um fundo de banco</div>
+                    <div class="lab-assinatura-item">✅ Por que a taxa de administração importa mais do que parece</div>
+                    <div class="lab-assinatura-item">✅ Qual ETF combina com o seu perfil (Brasil, mundo ou os dois)</div>
+                    <div class="lab-assinatura-item">✅ Como dar os primeiros passos com menos de R$ 200</div>
+                </div>
             </div>
 
             <!-- TÍTULO DA PÁGINA -->
