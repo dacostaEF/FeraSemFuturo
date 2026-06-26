@@ -1,30 +1,830 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ETFs: Diversificação Inteligente - INVLAB Laboratório de Investimentos</title>
-    
+    <title>Laboratório ETF — Descubra, Entenda e Experimente | INVLAB</title>
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
-    
-    <!-- Theme Color - Barra do navegador mobile (Preto Profissional) -->
+
     <meta name="theme-color" content="#0D0D0D">
     <meta name="msapplication-TileColor" content="#0D0D0D">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    
-    <!-- Meta Description -->
-    <meta name="description" content="Entenda ETFs: diversificação inteligente, custos baixos e o primeiro passo na renda variável. Aprenda no INVLAB.">
-    
-    <!-- INVLAB Design System (Universal Cards) -->
+    <meta name="description" content="Laboratório ETF: 5 experimentos para entender o investimento mais inteligente para iniciantes. Sem viés comercial — INVLAB.">
+
+    <!-- INVLAB Design System -->
     <link rel="stylesheet" href="../assets/css/inv-design-system.css">
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="stylesheet" href="../assets/css/invlab-theme.css">
     <link rel="stylesheet" href="../assets/css/artigo-styles.css">
-    <!-- INVLAB Carrossel - Indicadores Renda Variável -->
     <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+
+    <style>
+    /* ================================================================
+       LABORATÓRIO ETF — ESTILOS EXCLUSIVOS
+       ================================================================ */
+
+    /* --- HOOK --- */
+    .lab-hook {
+        background: linear-gradient(135deg, rgba(212,175,55,0.10) 0%, rgba(16,185,129,0.07) 100%);
+        border: 1px solid rgba(212,175,55,0.35);
+        border-radius: 20px;
+        padding: 52px 40px;
+        text-align: center;
+        margin: 32px 0 52px;
+        position: relative;
+        overflow: hidden;
+    }
+    .lab-hook::before {
+        content: '';
+        position: absolute;
+        top: -60%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(ellipse at center, rgba(212,175,55,0.05) 0%, transparent 60%);
+        pointer-events: none;
+    }
+    .lab-hook-badge {
+        display: inline-block;
+        background: rgba(212,175,55,0.12);
+        border: 1px solid rgba(212,175,55,0.4);
+        color: #D4AF37;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        padding: 6px 18px;
+        border-radius: 20px;
+        margin-bottom: 28px;
+    }
+    .lab-hook-title {
+        font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.45;
+        margin-bottom: 10px;
+    }
+    .lab-hook-title em {
+        color: #D4AF37;
+        font-style: normal;
+    }
+    .lab-hook-sub {
+        font-size: 1.1rem;
+        color: rgba(255,255,255,0.55);
+        margin-bottom: 32px;
+        font-style: italic;
+    }
+    .lab-hook-question {
+        font-size: 1.15rem;
+        color: rgba(255,255,255,0.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+    .lab-hook-arrow {
+        display: block;
+        font-size: 1.8rem;
+        color: #D4AF37;
+        margin: 4px auto 10px;
+        animation: bounceDown 1.8s infinite;
+    }
+    @keyframes bounceDown {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(10px); }
+    }
+    .lab-hook-answer {
+        font-size: 1rem;
+        color: #10b981;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
+    /* --- HEADER --- */
+    .lab-header {
+        text-align: center;
+        margin-bottom: 44px;
+    }
+    .lab-header h1 {
+        font-size: clamp(1.9rem, 4vw, 2.8rem);
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 12px;
+    }
+    .lab-subtitle {
+        font-size: 1rem;
+        color: rgba(255,255,255,0.55);
+        max-width: 580px;
+        margin: 0 auto;
+        line-height: 1.7;
+    }
+
+    /* --- BARRA DE PROGRESSO --- */
+    .lab-progress {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 64px;
+        overflow-x: auto;
+        padding: 0 10px 12px;
+    }
+    .lab-step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        min-width: 88px;
+        text-decoration: none;
+    }
+    .lab-step-icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.35rem;
+        border: 2px solid;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .lab-step:hover .lab-step-icon {
+        transform: scale(1.12);
+        box-shadow: 0 0 20px currentColor;
+    }
+    .lab-step-1 .lab-step-icon { background: rgba(139,92,246,0.12); border-color: #8B5CF6; }
+    .lab-step-2 .lab-step-icon { background: rgba(6,182,212,0.12); border-color: #06B6D4; }
+    .lab-step-3 .lab-step-icon { background: rgba(212,175,55,0.12); border-color: #D4AF37; }
+    .lab-step-4 .lab-step-icon { background: rgba(245,158,11,0.12); border-color: #F59E0B; }
+    .lab-step-5 .lab-step-icon { background: rgba(16,185,129,0.12); border-color: #10b981; }
+    .lab-step-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+    }
+    .lab-step-1 .lab-step-label { color: #8B5CF6; }
+    .lab-step-2 .lab-step-label { color: #06B6D4; }
+    .lab-step-3 .lab-step-label { color: #D4AF37; }
+    .lab-step-4 .lab-step-label { color: #F59E0B; }
+    .lab-step-5 .lab-step-label { color: #10b981; }
+    .lab-step-connector {
+        width: 44px;
+        height: 2px;
+        background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.2));
+        margin-bottom: 28px;
+        flex-shrink: 0;
+    }
+
+    /* --- STAGES --- */
+    .lab-stage {
+        border-radius: 18px;
+        padding: 38px;
+        margin-bottom: 14px;
+        border-left: 4px solid;
+        background: rgba(255,255,255,0.025);
+    }
+    .stage-1 { border-color: #8B5CF6; }
+    .stage-2 { border-color: #06B6D4; }
+    .stage-3 { border-color: #D4AF37; }
+    .stage-4 { border-color: #F59E0B; }
+    .stage-5 { border-color: #10b981; }
+
+    .lab-stage-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .lab-stage-num {
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.35);
+    }
+    .lab-stage-title {
+        font-size: 1.45rem;
+        font-weight: 700;
+    }
+    .stage-1 .lab-stage-title { color: #8B5CF6; }
+    .stage-2 .lab-stage-title { color: #06B6D4; }
+    .stage-3 .lab-stage-title { color: #D4AF37; }
+    .stage-4 .lab-stage-title { color: #F59E0B; }
+    .stage-5 .lab-stage-title { color: #10b981; }
+
+    .lab-text {
+        font-size: 0.95rem;
+        color: rgba(255,255,255,0.75);
+        line-height: 1.85;
+        margin-bottom: 16px;
+    }
+    .lab-text strong { color: #fff; }
+    .lab-section-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #fff;
+        margin: 28px 0 14px;
+    }
+
+    /* --- CUSTO COMPARE (Etapa 1) --- */
+    .custo-compare {
+        display: grid;
+        grid-template-columns: 1fr 72px 1fr;
+        align-items: center;
+        gap: 0;
+        margin: 28px 0;
+    }
+    .custo-card {
+        border-radius: 16px;
+        padding: 28px 24px;
+        text-align: center;
+    }
+    .custo-card.solo {
+        background: rgba(239,68,68,0.07);
+        border: 1px solid rgba(239,68,68,0.22);
+    }
+    .custo-card.etf {
+        background: rgba(16,185,129,0.07);
+        border: 1px solid rgba(16,185,129,0.3);
+    }
+    .custo-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+    }
+    .custo-card.solo .custo-label { color: rgba(239,68,68,0.8); }
+    .custo-card.etf .custo-label { color: #10b981; }
+    .custo-preco {
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 800;
+        margin-bottom: 18px;
+        line-height: 1.1;
+    }
+    .custo-card.solo .custo-preco { color: rgba(239,68,68,0.9); }
+    .custo-card.etf .custo-preco { color: #10b981; }
+    .custo-items {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+    }
+    .custo-items li {
+        font-size: 0.84rem;
+        color: rgba(255,255,255,0.6);
+        padding: 6px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        line-height: 1.5;
+    }
+    .custo-items li:last-child { border-bottom: none; }
+    .custo-vs {
+        text-align: center;
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: rgba(255,255,255,0.25);
+    }
+
+    /* --- FRUTA ANALOGY --- */
+    .lab-analogy {
+        background: rgba(212,175,55,0.05);
+        border: 1px solid rgba(212,175,55,0.18);
+        border-radius: 14px;
+        padding: 28px 32px;
+        margin: 24px 0;
+    }
+    .lab-analogy p {
+        color: rgba(255,255,255,0.75);
+        font-size: 0.95rem;
+        line-height: 1.85;
+        margin: 0 0 10px;
+    }
+    .lab-analogy p:last-child { margin: 0; }
+    .lab-analogy strong { color: #D4AF37; }
+
+    .frutas-visual {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin: 20px 0 8px;
+        flex-wrap: wrap;
+    }
+    .frutas-col { text-align: center; }
+    .frutas-grid-emoji {
+        font-size: 1.3rem;
+        line-height: 1.9;
+        letter-spacing: 3px;
+    }
+    .frutas-caption {
+        font-size: 0.75rem;
+        color: rgba(255,255,255,0.4);
+        margin-top: 6px;
+        letter-spacing: 0.5px;
+    }
+    .frutas-arrow-big {
+        font-size: 1.8rem;
+        color: rgba(212,175,55,0.4);
+    }
+    .frutas-cesta { font-size: 3.5rem; }
+
+    /* --- FLOW DIAGRAM (Etapa 2) --- */
+    .lab-flow {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        margin: 28px 0;
+        overflow-x: auto;
+        padding-bottom: 6px;
+        gap: 0;
+    }
+    .flow-node {
+        flex: 1;
+        min-width: 110px;
+        max-width: 170px;
+        background: rgba(255,255,255,0.04);
+        border-radius: 12px;
+        padding: 20px 14px;
+        text-align: center;
+        border: 1px solid rgba(255,255,255,0.08);
+    }
+    .flow-node-icon { font-size: 1.6rem; margin-bottom: 8px; }
+    .flow-node-title {
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 6px;
+    }
+    .flow-node-desc {
+        font-size: 0.72rem;
+        color: rgba(255,255,255,0.45);
+        line-height: 1.5;
+    }
+    .flow-arrow {
+        display: flex;
+        align-items: center;
+        padding: 0 8px;
+        color: rgba(255,255,255,0.2);
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+    .cota-box {
+        background: rgba(6,182,212,0.07);
+        border: 1px solid rgba(6,182,212,0.22);
+        border-radius: 12px;
+        padding: 22px 26px;
+        margin: 22px 0;
+    }
+    .cota-box p {
+        color: rgba(255,255,255,0.78);
+        font-size: 0.93rem;
+        line-height: 1.8;
+        margin: 0;
+    }
+    .cota-box strong { color: #06B6D4; }
+
+    /* --- ETF TABLE (Etapa 3) --- */
+    .etf-table-wrapper {
+        overflow-x: auto;
+        margin: 28px 0;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.07);
+    }
+    .etf-table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 580px;
+    }
+    .etf-table th {
+        background: rgba(212,175,55,0.09);
+        color: #D4AF37;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        padding: 14px 18px;
+        text-align: left;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+    .etf-table td {
+        padding: 14px 18px;
+        font-size: 0.88rem;
+        color: rgba(255,255,255,0.78);
+        border-bottom: 1px solid rgba(255,255,255,0.045);
+        vertical-align: middle;
+    }
+    .etf-table tr:last-child td { border-bottom: none; }
+    .etf-table tr:hover td { background: rgba(255,255,255,0.025); }
+    .etf-ticker {
+        font-family: 'Courier New', monospace;
+        font-weight: 800;
+        font-size: 0.95rem;
+        color: #fff;
+        letter-spacing: 0.5px;
+    }
+    .etf-taxa { font-weight: 700; color: #10b981; }
+    .etf-perfil {
+        display: inline-block;
+        padding: 3px 12px;
+        border-radius: 20px;
+        font-size: 0.73rem;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+    .perfil-iniciante { background: rgba(16,185,129,0.14); color: #10b981; border: 1px solid rgba(16,185,129,0.28); }
+    .perfil-global    { background: rgba(6,182,212,0.14); color: #06B6D4; border: 1px solid rgba(6,182,212,0.28); }
+    .perfil-inter     { background: rgba(245,158,11,0.14); color: #F59E0B; border: 1px solid rgba(245,158,11,0.28); }
+    .perfil-arrojado  { background: rgba(239,68,68,0.14); color: #EF4444; border: 1px solid rgba(239,68,68,0.28); }
+
+    /* --- VANTAGENS / AVISOS (Etapa 4) --- */
+    .lab-cards-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+        margin: 24px 0;
+    }
+    .lab-vantagem {
+        background: rgba(16,185,129,0.05);
+        border: 1px solid rgba(16,185,129,0.22);
+        border-radius: 14px;
+        padding: 22px;
+    }
+    .lab-vantagem h4 {
+        color: #10b981;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        margin-bottom: 16px;
+        font-weight: 700;
+    }
+    .lab-aviso {
+        background: rgba(245,158,11,0.05);
+        border: 1px solid rgba(245,158,11,0.22);
+        border-radius: 14px;
+        padding: 22px;
+    }
+    .lab-aviso h4 {
+        color: #F59E0B;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        margin-bottom: 16px;
+        font-weight: 700;
+    }
+    .lab-check-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .lab-check-list li {
+        font-size: 0.87rem;
+        color: rgba(255,255,255,0.72);
+        padding: 7px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        display: flex;
+        align-items: flex-start;
+        gap: 9px;
+        line-height: 1.55;
+    }
+    .lab-check-list li:last-child { border-bottom: none; }
+    .ir-banner {
+        background: rgba(245,158,11,0.07);
+        border: 1px solid rgba(245,158,11,0.28);
+        border-radius: 14px;
+        padding: 22px 26px;
+        margin: 22px 0;
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+    }
+    .ir-banner-icon { font-size: 1.7rem; flex-shrink: 0; margin-top: 2px; }
+    .ir-banner-content h4 {
+        color: #F59E0B;
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+    .ir-banner-content p {
+        color: rgba(255,255,255,0.72);
+        font-size: 0.87rem;
+        line-height: 1.75;
+        margin: 0;
+    }
+    .ir-banner-content strong { color: #fff; }
+
+    /* --- PERGUNTA PROVOCATIVA --- */
+    .lab-provocativa {
+        text-align: center;
+        padding: 44px 20px;
+        margin: 6px 0;
+    }
+    .lab-provocativa-text {
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
+        color: rgba(255,255,255,0.65);
+        font-style: italic;
+        line-height: 1.65;
+        max-width: 680px;
+        margin: 0 auto 16px;
+        position: relative;
+        padding: 0 12px;
+    }
+    .lab-provocativa-text::before {
+        content: '"';
+        font-size: 5rem;
+        color: rgba(212,175,55,0.12);
+        position: absolute;
+        top: -24px;
+        left: -4px;
+        font-style: normal;
+        line-height: 1;
+        font-family: Georgia, serif;
+    }
+    .lab-provocativa-divider {
+        width: 50px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(212,175,55,0.45), transparent);
+        margin: 0 auto;
+    }
+
+    /* --- QUIZ (Etapa 5) --- */
+    .quiz-container {
+        background: rgba(16,185,129,0.04);
+        border: 1px solid rgba(16,185,129,0.18);
+        border-radius: 18px;
+        padding: 34px;
+        margin: 28px 0;
+    }
+    .quiz-title {
+        text-align: center;
+        color: #10b981;
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+    }
+    .quiz-subtitle {
+        text-align: center;
+        color: rgba(255,255,255,0.45);
+        font-size: 0.83rem;
+        margin-bottom: 26px;
+    }
+    .quiz-progress-bar {
+        width: 100%;
+        height: 3px;
+        background: rgba(255,255,255,0.07);
+        border-radius: 2px;
+        margin-bottom: 28px;
+        overflow: hidden;
+    }
+    .quiz-progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #10b981, #D4AF37);
+        border-radius: 2px;
+        transition: width 0.4s ease;
+        width: 0%;
+    }
+    .quiz-step-indicator {
+        text-align: center;
+        font-size: 0.72rem;
+        color: rgba(255,255,255,0.3);
+        margin-bottom: 18px;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+    }
+    .quiz-question-text {
+        font-size: 1.02rem;
+        color: rgba(255,255,255,0.92);
+        font-weight: 600;
+        margin-bottom: 18px;
+        text-align: center;
+        line-height: 1.5;
+    }
+    .quiz-options {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+    }
+    .quiz-btn {
+        background: rgba(255,255,255,0.035);
+        border: 1px solid rgba(255,255,255,0.10);
+        border-radius: 10px;
+        padding: 14px 20px;
+        color: rgba(255,255,255,0.78);
+        font-size: 0.90rem;
+        cursor: pointer;
+        text-align: left;
+        transition: all 0.2s;
+        font-family: inherit;
+        width: 100%;
+        line-height: 1.4;
+    }
+    .quiz-btn:hover {
+        background: rgba(16,185,129,0.09);
+        border-color: rgba(16,185,129,0.38);
+        color: #fff;
+        transform: translateX(5px);
+    }
+    .quiz-btn.selected {
+        background: rgba(16,185,129,0.13);
+        border-color: #10b981;
+        color: #10b981;
+        font-weight: 600;
+        transform: translateX(5px);
+    }
+    .quiz-result {
+        display: none;
+        text-align: center;
+        padding: 16px 0;
+        animation: fadeInUp 0.5s ease;
+    }
+    .quiz-result.visible { display: block; }
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(12px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .quiz-result-ticker {
+        font-size: clamp(1.8rem, 5vw, 2.8rem);
+        font-weight: 800;
+        color: #D4AF37;
+        margin-bottom: 6px;
+        font-family: 'Courier New', monospace;
+        letter-spacing: 1px;
+    }
+    .quiz-result-nome {
+        font-size: 0.95rem;
+        color: rgba(255,255,255,0.5);
+        margin-bottom: 18px;
+    }
+    .quiz-result-desc {
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.78);
+        line-height: 1.75;
+        max-width: 500px;
+        margin: 0 auto 22px;
+    }
+    .quiz-result-warning {
+        background: rgba(245,158,11,0.09);
+        border: 1px solid rgba(245,158,11,0.28);
+        border-radius: 12px;
+        padding: 18px 22px;
+        font-size: 0.87rem;
+        color: rgba(255,255,255,0.78);
+        line-height: 1.7;
+        max-width: 500px;
+        margin: 0 auto 22px;
+        text-align: left;
+    }
+    .quiz-reset {
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.18);
+        border-radius: 8px;
+        padding: 10px 24px;
+        color: rgba(255,255,255,0.45);
+        font-size: 0.83rem;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all 0.2s;
+    }
+    .quiz-reset:hover {
+        border-color: rgba(255,255,255,0.38);
+        color: rgba(255,255,255,0.78);
+    }
+
+    /* --- CHART PLACEHOLDER --- */
+    .chart-placeholder {
+        background: rgba(255,255,255,0.025);
+        border: 1px dashed rgba(255,255,255,0.10);
+        border-radius: 14px;
+        padding: 52px 40px;
+        text-align: center;
+        margin: 24px 0;
+    }
+    .chart-placeholder-icon { font-size: 2.8rem; margin-bottom: 14px; }
+    .chart-placeholder h4 {
+        color: rgba(255,255,255,0.55);
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+    .chart-placeholder p {
+        color: rgba(255,255,255,0.35);
+        font-size: 0.82rem;
+        line-height: 1.65;
+        max-width: 420px;
+        margin: 0 auto;
+    }
+
+    /* --- FINAL CTA --- */
+    .lab-final-cta {
+        background: linear-gradient(135deg, rgba(16,185,129,0.10) 0%, rgba(212,175,55,0.07) 100%);
+        border: 1px solid rgba(16,185,129,0.28);
+        border-radius: 22px;
+        padding: 52px 44px;
+        text-align: center;
+        margin: 52px 0 70px;
+    }
+    .lab-final-cta h2 {
+        font-size: clamp(1.3rem, 3vw, 1.9rem);
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 14px;
+    }
+    .lab-final-cta p {
+        color: rgba(255,255,255,0.6);
+        font-size: 0.93rem;
+        line-height: 1.75;
+        max-width: 540px;
+        margin: 0 auto 30px;
+    }
+    .lab-cta-buttons {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .btn-lab-primary {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: #fff;
+        padding: 14px 30px;
+        border-radius: 10px;
+        font-size: 0.93rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: transform 0.2s, box-shadow 0.2s;
+        display: inline-block;
+    }
+    .btn-lab-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(16,185,129,0.28);
+    }
+    .btn-lab-secondary {
+        background: transparent;
+        color: rgba(255,255,255,0.65);
+        padding: 14px 30px;
+        border-radius: 10px;
+        font-size: 0.93rem;
+        font-weight: 600;
+        text-decoration: none;
+        border: 1px solid rgba(255,255,255,0.18);
+        transition: all 0.2s;
+        display: inline-block;
+    }
+    .btn-lab-secondary:hover {
+        border-color: rgba(255,255,255,0.38);
+        color: #fff;
+    }
+
+    /* --- CHART --- */
+    .chart-wrapper {
+        background: rgba(255,255,255,0.025);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 14px;
+        padding: 24px 20px;
+        margin: 20px 0 10px;
+        position: relative;
+    }
+    .chart-disclaimer {
+        font-size: 0.76rem;
+        color: rgba(255,255,255,0.3);
+        text-align: center;
+        line-height: 1.65;
+        margin: 0 0 28px;
+        font-style: italic;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+        .lab-hook { padding: 36px 20px; }
+        .lab-stage { padding: 24px 18px; }
+        .custo-compare {
+            grid-template-columns: 1fr;
+            gap: 14px;
+        }
+        .custo-vs { order: 2; }
+        .custo-card.etf { order: 3; }
+        .lab-cards-grid { grid-template-columns: 1fr; }
+        .lab-flow { gap: 4px; }
+        .flow-node { min-width: 82px; padding: 14px 10px; }
+        .flow-arrow { font-size: 0.85rem; padding: 0 2px; }
+        .lab-step-connector { width: 18px; }
+        .lab-step { min-width: 64px; }
+        .lab-final-cta { padding: 36px 20px; }
+        .quiz-container { padding: 24px 16px; }
+        .chart-placeholder { padding: 36px 20px; }
+        .frutas-grid-emoji { font-size: 1.1rem; letter-spacing: 2px; }
+        .frutas-cesta { font-size: 2.8rem; }
+    }
+    </style>
 </head>
 <body>
     <!-- CARROSSEL: Indicadores Renda Variável -->
@@ -33,12 +833,9 @@
     <!-- Header Fixo -->
     <header class="main-header">
         <div class="header-container">
-            <!-- Logo -->
             <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
                 <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
             </div>
-            
-            <!-- Sistema de Abas INVLAB -->
             <div class="tabs-nav-wrapper">
             <nav class="tabs-nav" id="tabsNav">
                 <button class="tab-btn" onclick="window.location.href='../index.html'">
@@ -47,8 +844,6 @@
                 <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">
                     📚 Primeiros<br>Passos
                 </button>
-                
-                <!-- ABA COM DROPDOWN: RENDA FIXA -->
                 <div class="tab-with-dropdown">
                     <button class="tab-btn dropdown-toggle">
                         📊 Renda<br>Fixa <span class="arrow">▼</span>
@@ -60,14 +855,11 @@
                         <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
                     </ul>
                 </div>
-                
-                <!-- ABA COM DROPDOWN: RENDA VARIÁVEL (Menu colapsável interativo) -->
                 <div class="tab-with-dropdown">
                     <button class="tab-btn dropdown-toggle active">
                         📈 Renda<br>Variável <span class="arrow">▼</span>
                     </button>
                     <ul class="dropdown-menu">
-                        <!-- CATEGORIA 1: ETFs (Iniciante - Diversificação) -->
                         <li class="dropdown-category">
                             <div class="category-header" data-category="etfs" onclick="window.location.href='etfs.html'" style="cursor: pointer;">
                                 <span class="category-name">💵 ETFs</span>
@@ -79,8 +871,6 @@
                                 <li><a href="#">🌎 ETFs Internacionais</a></li>
                             </ul>
                         </li>
-                        
-                        <!-- CATEGORIA 2: FIIs (Intermediário - Renda Passiva) -->
                         <li class="dropdown-category">
                             <div class="category-header" data-category="fiis" onclick="window.location.href='fiis.html'" style="cursor: pointer;">
                                 <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span>
@@ -94,8 +884,6 @@
                                 <li><a href="#">🎯 Como Escolher FIIs</a></li>
                             </ul>
                         </li>
-                        
-                        <!-- CATEGORIA 3: Ações (Avançado - Análise Individual) -->
                         <li class="dropdown-category">
                             <div class="category-header" data-category="acoes" onclick="window.location.href='acoes.html'" style="cursor: pointer;">
                                 <span class="category-name">📈 Ações</span>
@@ -110,8 +898,6 @@
                         </li>
                     </ul>
                 </div>
-                
-                <!-- ABA COM DROPDOWN: CRIPTOATIVOS -->
                 <div class="tab-with-dropdown">
                     <button class="tab-btn dropdown-toggle">
                         🔐 Cripto<br>ativos <span class="arrow">▼</span>
@@ -124,13 +910,9 @@
                         <li><a href="tokenizacao.html">🔗 Tokenização</a></li>
                     </ul>
                 </div>
-                
-                <!-- ABA: FERRAMENTAS -->
                 <button class="tab-btn" onclick="window.location.href='../index.html#ferramentas'">
                     🛠️ Ferramentas
                 </button>
-                
-                <!-- ABA: OUTROS INVESTIMENTOS -->
                 <button class="tab-btn" onclick="window.location.href='../index.html#outros-investimentos'">
                     💎 Outros
                 </button>
@@ -142,376 +924,436 @@
     <!-- Conteúdo Principal -->
     <main>
         <div class="content-wrapper-wide">
+
             <!-- Breadcrumb -->
             <nav class="breadcrumb">
                 <a href="../index.html">🏠 Início</a>
                 <span class="breadcrumb-separator">/</span>
                 <a href="../index.html#renda-variavel">📈 Renda Variável</a>
                 <span class="breadcrumb-separator">/</span>
-                <span class="breadcrumb-current">💵 ETFs</span>
+                <span class="breadcrumb-current">🔬 Laboratório ETF</span>
             </nav>
 
-            <!-- Seção Educacional -->
-            <section class="section-educational">
-            <article class="article-content">
-                <!-- Título Principal -->
-                <h1 class="article-title">ETFs – Diversificação Inteligente</h1>
-                
-                <p class="article-lead">
-                    O jeito mais simples, seguro e inteligente de começar na renda variável. Entenda por que os ETFs são o primeiro degrau da sua trilha de investimentos.
+            <!-- ==========================================
+                 HOOK: VOCÊ SABIA?
+                 ========================================== -->
+            <div class="lab-hook">
+                <div class="lab-hook-badge">🔬 Laboratório ETF</div>
+                <h2 class="lab-hook-title">
+                    Com menos de <em>R$ 150</em> você pode investir<br>
+                    simultaneamente nas dezenas de maiores empresas do Brasil.
+                </h2>
+                <p class="lab-hook-sub">Sem precisar escolher nenhuma delas.</p>
+                <div class="lab-hook-question">🤔 Como isso é possível?</div>
+                <span class="lab-hook-arrow">↓</span>
+                <div class="lab-hook-answer">A resposta está nos ETFs...</div>
+            </div>
+
+            <!-- TÍTULO DA PÁGINA -->
+            <div class="lab-header">
+                <h1>🔬 Laboratório ETF</h1>
+                <p class="lab-subtitle">Cinco experimentos para entender o investimento mais inteligente para quem está começando na renda variável.</p>
+            </div>
+
+            <!-- BARRA DE PROGRESSO -->
+            <div class="lab-progress">
+                <a href="#etapa-descubra" class="lab-step lab-step-1">
+                    <div class="lab-step-icon">🔬</div>
+                    <div class="lab-step-label">Descubra</div>
+                </a>
+                <div class="lab-step-connector"></div>
+                <a href="#etapa-entenda" class="lab-step lab-step-2">
+                    <div class="lab-step-icon">🧪</div>
+                    <div class="lab-step-label">Entenda</div>
+                </a>
+                <div class="lab-step-connector"></div>
+                <a href="#etapa-compare" class="lab-step lab-step-3">
+                    <div class="lab-step-icon">📊</div>
+                    <div class="lab-step-label">Compare</div>
+                </a>
+                <div class="lab-step-connector"></div>
+                <a href="#etapa-avalie" class="lab-step lab-step-4">
+                    <div class="lab-step-icon">⚠️</div>
+                    <div class="lab-step-label">Avalie</div>
+                </a>
+                <div class="lab-step-connector"></div>
+                <a href="#etapa-experimente" class="lab-step lab-step-5">
+                    <div class="lab-step-icon">🚀</div>
+                    <div class="lab-step-label">Experimente</div>
+                </a>
+            </div>
+
+            <!-- ==========================================
+                 ETAPA 1: DESCUBRA
+                 ========================================== -->
+            <section class="lab-stage stage-1" id="etapa-descubra">
+                <div class="lab-stage-header">
+                    <span class="lab-stage-num">Etapa 01</span>
+                    <span class="lab-stage-title">🔬 Descubra</span>
+                </div>
+
+                <p class="lab-text">Antes de qualquer definição, um experimento de pensamento.</p>
+
+                <div class="lab-section-title">Quanto custaria montar o Ibovespa sozinho?</div>
+
+                <div class="custo-compare">
+                    <div class="custo-card solo">
+                        <div class="custo-label">Comprando ação por ação</div>
+                        <div class="custo-preco">R$ 2.500+</div>
+                        <ul class="custo-items">
+                            <li>📋 80+ ações para pesquisar e comprar</li>
+                            <li>⚖️ Cada uma com peso diferente no índice</li>
+                            <li>🔄 Rebalancear manualmente todo mês</li>
+                            <li>⏱️ Horas de trabalho contínuo</li>
+                            <li>📉 Risco de escolher mal o peso de cada uma</li>
+                        </ul>
+                    </div>
+                    <div class="custo-vs">vs</div>
+                    <div class="custo-card etf">
+                        <div class="custo-label">Comprando BOVA11</div>
+                        <div class="custo-preco">R$ 145</div>
+                        <ul class="custo-items">
+                            <li>🏷️ 1 ticker: BOVA11</li>
+                            <li>✅ Pesos automáticos — igual ao índice</li>
+                            <li>🤖 Rebalanceamento automático</li>
+                            <li>⚡ 1 clique no home broker</li>
+                            <li>📈 Diversificação completa imediata</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="lab-analogy">
+                    <p>Imagine que você quer comer todas as frutas do mercado.</p>
+                    <div class="frutas-visual">
+                        <div class="frutas-col">
+                            <div class="frutas-grid-emoji">🍎🍊🍋🍇🍓🫐</div>
+                            <div class="frutas-grid-emoji">🍒🍑🥭🍍🍈🍉</div>
+                            <div class="frutas-grid-emoji">🍌🍐🥝🍅🥥🌽</div>
+                            <div class="frutas-caption">80+ empresas, cada uma diferente</div>
+                        </div>
+                        <div class="frutas-arrow-big">→</div>
+                        <div class="frutas-col">
+                            <div class="frutas-cesta">🧺</div>
+                            <div class="frutas-caption">1 ETF — tudo dentro</div>
+                        </div>
+                    </div>
+                    <p>Você pode comprar cada fruta separado, em 80 bancas diferentes, negociar o preço com cada vendedor... ou pegar <strong>a cesta já montada</strong>.</p>
+                    <p>O ETF é a cesta. E ela é gerida em larga escala — por isso o custo é mínimo.</p>
+                </div>
+
+                <p class="lab-text" style="font-size: 0.82rem; color: rgba(255,255,255,0.38);">
+                    * Valores aproximados. O preço do BOVA11 e das ações varia diariamente.
+                </p>
+            </section>
+
+            <!-- PERGUNTA PROVOCATIVA 1 -->
+            <div class="lab-provocativa">
+                <p class="lab-provocativa-text">
+                    Você teria tempo de acompanhar 80 empresas todos os dias — balanços, notícias, câmbio, rebalanceamentos — e ainda ter uma vida?
+                </p>
+                <div class="lab-provocativa-divider"></div>
+            </div>
+
+            <!-- ==========================================
+                 ETAPA 2: ENTENDA
+                 ========================================== -->
+            <section class="lab-stage stage-2" id="etapa-entenda">
+                <div class="lab-stage-header">
+                    <span class="lab-stage-num">Etapa 02</span>
+                    <span class="lab-stage-title">🧪 Entenda</span>
+                </div>
+
+                <p class="lab-text">Um <strong>ETF (Exchange Traded Fund)</strong> é um fundo negociado em bolsa que replica um índice de mercado. Simples assim. Mas entender como ele funciona por dentro muda a forma como você investe.</p>
+
+                <div class="lab-section-title">Como o dinheiro flui: do índice até você</div>
+
+                <div class="lab-flow">
+                    <div class="flow-node">
+                        <div class="flow-node-icon">📊</div>
+                        <div class="flow-node-title">Índice</div>
+                        <div class="flow-node-desc">Ex: Ibovespa — define quais empresas entram e em qual peso</div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">
+                        <div class="flow-node-icon">🏢</div>
+                        <div class="flow-node-title">Gestor</div>
+                        <div class="flow-node-desc">Compra as ações nas proporções exatas do índice</div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">
+                        <div class="flow-node-icon">🏷️</div>
+                        <div class="flow-node-title">BOVA11</div>
+                        <div class="flow-node-desc">Emite cotas que representam uma fração da carteira inteira</div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">
+                        <div class="flow-node-icon">👤</div>
+                        <div class="flow-node-title">Você</div>
+                        <div class="flow-node-desc">Compra cotas no home broker como se fosse uma ação qualquer</div>
+                    </div>
+                </div>
+
+                <div class="cota-box">
+                    <p>Quando você compra <strong>1 cota do BOVA11</strong>, está comprando uma fração de uma carteira com ~80 empresas — Petrobras, Vale, Itaú, WEG, Ambev e dezenas de outras — ponderadas exatamente como o Ibovespa. <strong>O gestor faz todo o trabalho. Você colhe o resultado.</strong></p>
+                </div>
+
+                <div class="lab-section-title">ETF não é fundo de banco</div>
+                <p class="lab-text">A diferença essencial: um fundo de banco é gerido ativamente por um gestor que tenta <em>superar</em> o mercado. O ETF apenas replica o índice — sem tentar ser mais esperto que o mercado. E por isso cobra uma taxa muito menor.</p>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;">
+                    <div style="background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.18); border-radius: 12px; padding: 18px 20px;">
+                        <div style="color: rgba(239,68,68,0.8); font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px;">Fundo de banco</div>
+                        <div style="color: rgba(255,255,255,0.65); font-size: 0.87rem; line-height: 1.7;">Taxa de 1,5% a 2,5%/ano<br>Gestor escolhe as ações<br>Bate o mercado às vezes, perde outras<br>Conflito de interesse com o banco</div>
+                    </div>
+                    <div style="background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.22); border-radius: 12px; padding: 18px 20px;">
+                        <div style="color: #10b981; font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px;">ETF</div>
+                        <div style="color: rgba(255,255,255,0.65); font-size: 0.87rem; line-height: 1.7;">Taxa de 0,07% a 0,80%/ano<br>Replica o índice automaticamente<br>Retorno = desempenho do mercado<br>Sem conflito de interesse</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PERGUNTA PROVOCATIVA 2 -->
+            <div class="lab-provocativa">
+                <p class="lab-provocativa-text">
+                    Vale a pena pagar 2% ao ano para um gestor de banco tentar superar o mercado — quando existe um ETF que cobra 0,10% e <em>é</em> o mercado?
+                </p>
+                <div class="lab-provocativa-divider"></div>
+            </div>
+
+            <!-- ==========================================
+                 ETAPA 3: COMPARE
+                 ========================================== -->
+            <section class="lab-stage stage-3" id="etapa-compare">
+                <div class="lab-stage-header">
+                    <span class="lab-stage-num">Etapa 03</span>
+                    <span class="lab-stage-title">📊 Compare</span>
+                </div>
+
+                <p class="lab-text">Os principais ETFs disponíveis para investidores brasileiros — e o que cada um representa.</p>
+
+                <div class="etf-table-wrapper">
+                    <table class="etf-table">
+                        <thead>
+                            <tr>
+                                <th>Ticker</th>
+                                <th>O que replica</th>
+                                <th>Taxa/ano</th>
+                                <th>Perfil</th>
+                                <th>Ideal para quem...</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="etf-ticker">BOVA11</span></td>
+                                <td>Ibovespa — ~80 maiores empresas da B3</td>
+                                <td><span class="etf-taxa">0,10%</span></td>
+                                <td><span class="etf-perfil perfil-iniciante">Iniciante</span></td>
+                                <td>Quer começar no mercado brasileiro com 1 ETF</td>
+                            </tr>
+                            <tr>
+                                <td><span class="etf-ticker">IVVB11</span></td>
+                                <td>S&amp;P 500 — 500 maiores empresas dos EUA</td>
+                                <td><span class="etf-taxa">0,24%</span></td>
+                                <td><span class="etf-perfil perfil-global">Global</span></td>
+                                <td>Quer exposição ao mercado americano em reais</td>
+                            </tr>
+                            <tr>
+                                <td><span class="etf-ticker">SPXI11</span></td>
+                                <td>S&amp;P 500 — versão alternativa ao IVVB11</td>
+                                <td><span class="etf-taxa">0,07%</span></td>
+                                <td><span class="etf-perfil perfil-global">Global</span></td>
+                                <td>Quer S&amp;P 500 com a menor taxa disponível</td>
+                            </tr>
+                            <tr>
+                                <td><span class="etf-ticker">SMAL11</span></td>
+                                <td>Small Caps BR — empresas menores com potencial</td>
+                                <td><span class="etf-taxa">0,30%</span></td>
+                                <td><span class="etf-perfil perfil-inter">Intermediário</span></td>
+                                <td>Aceita mais risco em troca de mais potencial</td>
+                            </tr>
+                            <tr>
+                                <td><span class="etf-ticker">DIVO11</span></td>
+                                <td>Empresas com histórico sólido de dividendos</td>
+                                <td><span class="etf-taxa">0,40%</span></td>
+                                <td><span class="etf-perfil perfil-inter">Renda passiva</span></td>
+                                <td>Quer construir renda passiva crescente</td>
+                            </tr>
+                            <tr>
+                                <td><span class="etf-ticker">HASH11</span></td>
+                                <td>Criptoativos — Bitcoin, Ethereum e outros</td>
+                                <td><span class="etf-taxa">0,80%</span></td>
+                                <td><span class="etf-perfil perfil-arrojado">Arrojado</span></td>
+                                <td>Quer exposição a cripto com estrutura regulada</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="lab-text" style="font-size: 0.82rem; color: rgba(255,255,255,0.38);">
+                    * Taxas aproximadas. Consulte o prospecto de cada ETF para valores exatos e atualizados.
                 </p>
 
-                <!-- Hero -->
-                <div class="article-hero">
-                    <div class="hero-emoji">📈💵</div>
-                    <p class="hero-caption">Seu ponto de partida na renda variável</p>
+                <div class="lab-section-title">ETF vs. o que você já conhece</div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 16px;">
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px;">
+                        <div style="color: #D4AF37; font-weight: 700; font-size: 0.85rem; margin-bottom: 10px;">📊 ETF vs Poupança</div>
+                        <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.7; margin: 0;">Poupança para o que você vai precisar em menos de 1 ano. ETF para o que você vai usar em 5+ anos. Não são concorrentes — têm funções diferentes.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px;">
+                        <div style="color: #D4AF37; font-weight: 700; font-size: 0.85rem; margin-bottom: 10px;">📊 ETF vs Ação individual</div>
+                        <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.7; margin: 0;">Com ação você escolhe a empresa — maior potencial, maior risco de escolha errada. Com ETF você compra a média do mercado — elimina o risco de concentração.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px;">
+                        <div style="color: #D4AF37; font-weight: 700; font-size: 0.85rem; margin-bottom: 10px;">📊 ETF vs CDI</div>
+                        <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.7; margin: 0;">CDI: previsível, sem oscilação, ideal para reserva de emergência. ETF: oscila no curto prazo, mas historicamente supera o CDI em horizontes de 5+ anos.</p>
+                    </div>
                 </div>
-
-            <!-- Seção 1: O que são ETFs? -->
-            <section class="article-section">
-                <h2>🎓 O que são ETFs?</h2>
-                
-                <p><strong>ETFs (Exchange Traded Funds)</strong> são fundos que replicam um índice de mercado.</p>
-                
-                <p>Em vez de comprar ações individuais, você compra uma <strong>cesta completa de ativos</strong> com um único investimento.</p>
-
-                <p>Isso significa:</p>
-                <ul>
-                    <li>Você <strong>não escolhe empresas uma por uma</strong></li>
-                    <li>A composição já vem pronta</li>
-                    <li>Você acompanha exatamente o desempenho do índice</li>
-                </ul>
             </section>
 
-            <!-- Callout Info -->
-            <div class="callout callout-info">
-                <div class="callout-icon">💡</div>
-                <div class="callout-content">
-                    <h3>No INVLAB, ETFs são o ponto de partida da renda variável</h3>
-                    <p>São seguros, didáticos e ideais para começar.</p>
-                </div>
+            <!-- PERGUNTA PROVOCATIVA 3 -->
+            <div class="lab-provocativa">
+                <p class="lab-provocativa-text">
+                    É possível investir nas maiores empresas dos EUA — Apple, Microsoft, Google, Amazon — sem abrir conta no exterior, em reais, hoje mesmo?
+                </p>
+                <div class="lab-provocativa-divider"></div>
             </div>
 
-            <!-- Seção 2: Características Principais -->
-            <section class="article-section">
-                <h2>💡 Características Principais</h2>
-
-                <!-- Vantagens -->
-                <div class="example-card">
-                    <h3>✔ Vantagens dos ETFs</h3>
-                    <ul>
-                        <li><strong>Diversificação automática</strong></li>
-                        <li>Taxas muito mais baixas que fundos tradicionais</li>
-                        <li>Fácil de entender e simular</li>
-                        <li>Ideal para aportes mensais</li>
-                        <li>Perfeito para iniciantes que não querem escolher dezenas de ações</li>
-                    </ul>
+            <!-- ==========================================
+                 ETAPA 4: AVALIE
+                 ========================================== -->
+            <section class="lab-stage stage-4" id="etapa-avalie">
+                <div class="lab-stage-header">
+                    <span class="lab-stage-num">Etapa 04</span>
+                    <span class="lab-stage-title">⚠️ Avalie</span>
                 </div>
 
-                <!-- Riscos -->
-                <div class="example-card">
-                    <h3>⚠ Riscos (honestos e transparentes)</h3>
-                    <ul>
-                        <li>Acompanham o mercado: quando cai, eles caem junto</li>
-                        <li>Não servem para ganhos rápidos</li>
-                        <li>Em crises prolongadas, podem ficar laterais por anos</li>
-                    </ul>
+                <p class="lab-text">No INVLAB você aprende sem ilusões. ETFs têm vantagens reais — e limitações reais. Conhecer as duas lados é o que separa o investidor informado do entusiasta.</p>
+
+                <div class="lab-cards-grid">
+                    <div class="lab-vantagem">
+                        <h4>✅ Vantagens</h4>
+                        <ul class="lab-check-list">
+                            <li data-icon="🟢">Diversificação automática em dezenas de empresas</li>
+                            <li data-icon="🟢">Taxa de administração até 20× menor que fundos de banco</li>
+                            <li data-icon="🟢">Sem conflito de interesse — o gestor não vende produtos</li>
+                            <li data-icon="🟢">Ideal para aportes mensais disciplinados</li>
+                            <li data-icon="🟢">Começa com menos de R$ 200</li>
+                            <li data-icon="🟢">Transparência total — composição da carteira é pública</li>
+                        </ul>
+                    </div>
+                    <div class="lab-aviso">
+                        <h4>⚡ O que saber antes</h4>
+                        <ul class="lab-check-list">
+                            <li data-icon="🟡">Oscila com o mercado — em crises, cai junto</li>
+                            <li data-icon="🟡">Não substitui reserva de emergência</li>
+                            <li data-icon="🟡">Não existe ganho rápido — é estratégia de longo prazo</li>
+                            <li data-icon="🟡">Cair por semanas ou meses é normal — faz parte</li>
+                            <li data-icon="🟡">Resultado = desempenho do índice, nem mais nem menos</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <!-- Perfil Ideal -->
-                <div class="example-card">
-                    <h3>👤 Perfil ideal</h3>
-                    <ul>
-                        <li>Iniciante em renda variável</li>
-                        <li>Investidor focado em longo prazo</li>
-                        <li>Quem quer investir sem escolher empresa individual</li>
-                        <li>Quem busca simples, sólido e previsível</li>
-                    </ul>
+                <div class="ir-banner">
+                    <div class="ir-banner-icon">💰</div>
+                    <div class="ir-banner-content">
+                        <h4>Imposto de Renda nos ETFs — o que ninguém explica</h4>
+                        <p>ETFs pagam <strong>15% de IR sobre o lucro</strong> na hora da venda — independente do valor vendido. Diferente das ações (que têm isenção até R$ 20.000/mês em vendas), <strong>não existe isenção mensal nos ETFs</strong>. A alíquota é flat: 15% sobre o ganho, sempre. O IR é retido na fonte (1% darf) e você complementa na declaração.</p>
+                    </div>
                 </div>
             </section>
 
-            <!-- Seção 3: Como Funciona na Prática -->
-            <section class="article-section">
-                <h2>🧮 Como os ETFs funcionam na prática</h2>
-
-                <ol>
-                    <li>Existe um <strong>índice</strong> (ex: Ibovespa, S&P500, Nasdaq)</li>
-                    <li>O ETF compra uma <strong>carteira semelhante</strong> a esse índice</li>
-                    <li>Você compra <strong>cotas desse ETF</strong> em vez das ações separadas</li>
-                    <li>O desempenho do ETF <strong>segue o índice automaticamente</strong></li>
-                </ol>
-
-                <h3>Exemplos reais:</h3>
-                
-                <div class="example-card">
-                    <h3>🇧🇷 BOVA11</h3>
-                    <p>Replica o <strong>Ibovespa</strong></p>
-                </div>
-                
-                <div class="example-card">
-                    <h3>🇺🇸 IVVB11</h3>
-                    <p>Replica o <strong>S&P 500</strong> (EUA)</p>
-                </div>
-                
-                <div class="example-card">
-                    <h3>📈 SMAL11</h3>
-                    <p>Replica <strong>Small Caps</strong> (empresas pequenas com potencial)</p>
-                </div>
-
-                <p><strong>Você investe como se estivesse comprando dezenas ou centenas de empresas — mas com um clique.</strong></p>
-            </section>
-
-            <!-- Seção 4: Tipos de ETFs -->
-            <section class="article-section">
-                <h2>🏗️ Tipos de ETFs</h2>
-
-                <!-- ETFs de Ações -->
-                <div class="example-card">
-                    <h3>🟦 ETFs de Ações</h3>
-                    <ul>
-                        <li><strong>BOVA11</strong> → Ibovespa</li>
-                        <li><strong>SMAL11</strong> → Small Caps</li>
-                        <li><strong>IVVB11</strong> → S&P 500</li>
-                        <li><strong>TECH ETFs</strong> → empresas de tecnologia</li>
-                    </ul>
-                </div>
-
-                <!-- ETFs de Renda Fixa -->
-                <div class="example-card">
-                    <h3>🟩 ETFs de Renda Fixa</h3>
-                    <ul>
-                        <li><strong>IMAB11</strong> → títulos indexados à inflação</li>
-                        <li><strong>IRFM11</strong> → juros prefixados</li>
-                    </ul>
-                </div>
-
-                <!-- ETFs Temáticos -->
-                <div class="example-card">
-                    <h3>🟨 ETFs Temáticos</h3>
-                    <ul>
-                        <li>ESG</li>
-                        <li>Energia</li>
-                        <li>Inteligência Artificial</li>
-                        <li>Tecnologia global</li>
-                    </ul>
-                </div>
-
-                <p><strong>👉 Cada tipo tem lógica própria, mas todos seguem o mesmo conceito: replicar índices.</strong></p>
-            </section>
-
-            <!-- Seção 5: Comparações -->
-            <section class="article-section">
-                <h2>📊 Comparações que ajudam o investidor</h2>
-
-                <h3>🇧🇷 ETF Brasil × 🇺🇸 ETF Estados Unidos</h3>
-                <ul>
-                    <li><strong>BOVA11</strong> acompanha o Ibovespa — empresas brasileiras, exposição ao real, mais volatilidade local</li>
-                    <li><strong>IVVB11</strong> acompanha o S&P 500 — empresas americanas, exposição ao dólar, diversificação geográfica</li>
-                    <li>Ter os dois juntos é diversificação real: você não fica refém de um único mercado</li>
-                </ul>
-
-                <h3>📈 ETF × CDI</h3>
-                <ul>
-                    <li><strong>CDI:</strong> previsível, sem oscilação, ideal para reserva de emergência</li>
-                    <li><strong>ETF:</strong> oscila no curto prazo, mas historicamente tende a superar o CDI em horizontes de 5+ anos</li>
-                    <li>Não são concorrentes — são ferramentas com finalidades diferentes na carteira</li>
-                </ul>
-
-                <h3>💰 ETF × Poupança</h3>
-                <ul>
-                    <li><strong>Poupança:</strong> rendimento limitado e previsível, sem risco de oscilação de preço</li>
-                    <li><strong>ETF:</strong> maior potencial histórico de retorno, mas com variação — não substitui a reserva de emergência</li>
-                    <li>Poupança para o que você pode precisar amanhã. ETF para o que você vai usar em anos</li>
-                </ul>
-
-                <h3>🏢 ETF × Ações individuais</h3>
-                <ul>
-                    <li><strong>Ação individual:</strong> você escolhe a empresa — maior potencial, mas também maior risco de escolher mal</li>
-                    <li><strong>ETF:</strong> você compra a média do mercado — menor risco de escolha errada, menor custo de pesquisa</li>
-                    <li>Para quem está começando, o ETF elimina o risco de concentração em uma única empresa</li>
-                </ul>
-            </section>
-
-            <!-- Callout Success -->
-            <div class="callout callout-success">
-                <div class="callout-icon">📊</div>
-                <div class="callout-content">
-                    <h3>Exemplo simples do INVLAB</h3>
-                    <p><em>"Se você investisse R$ 500/mês em ETFs durante 5 anos, quanto teria hoje?"</em></p>
-                    <p><strong>👉 Use nosso simulador para ver cenários realistas.</strong></p>
-                </div>
+            <!-- PERGUNTA PROVOCATIVA 4 -->
+            <div class="lab-provocativa">
+                <p class="lab-provocativa-text">
+                    Se você investisse R$ 500 por mês em BOVA11 durante 10 anos, com rentabilidade média histórica do Ibovespa, quanto teria ao final?
+                </p>
+                <div class="lab-provocativa-divider"></div>
             </div>
 
-            <!-- Seção 6: Alertas Importantes -->
-            <section class="article-section">
-                <h2>⚠️ Alertas importantes – O que ninguém te conta</h2>
-
-                <ul>
-                    <li><strong>ETFs não garantem proteção total</strong> — eles seguem o mercado</li>
-                    <li>Comprar IVVB11 não significa ficar rico porque o dólar subiu</li>
-                    <li><strong>Diversificação não elimina volatilidade</strong></li>
-                    <li>ETF não é atalho para "ganhos rápidos"</li>
-                    <li>É normal cair semanas ou meses — faz parte da renda variável</li>
-                </ul>
-            </section>
-
-            <!-- Callout Warning -->
-            <div class="callout callout-warning">
-                <div class="callout-icon">⚠️</div>
-                <div class="callout-content">
-                    <h3>No INVLAB, você aprende a investir sem ilusões</h3>
-                    <p>Transparência e honestidade são os pilares da educação financeira que oferecemos.</p>
+            <!-- ==========================================
+                 ETAPA 5: EXPERIMENTE
+                 ========================================== -->
+            <section class="lab-stage stage-5" id="etapa-experimente">
+                <div class="lab-stage-header">
+                    <span class="lab-stage-num">Etapa 05</span>
+                    <span class="lab-stage-title">🚀 Experimente</span>
                 </div>
-            </div>
 
-            <!-- Seção 7: Como Começar -->
-            <section class="article-section">
-                <h2>🎯 Como começar com ETFs (simples e direto)</h2>
+                <p class="lab-text">Teoria sem prática não vira convicção. Descubra qual ETF combina com o seu momento — e como começar.</p>
 
+                <!-- QUIZ -->
+                <div class="quiz-container">
+                    <div class="quiz-title">🎯 Qual ETF combina com você?</div>
+                    <div class="quiz-subtitle">3 perguntas • sem resposta certa ou errada</div>
+
+                    <div class="quiz-progress-bar">
+                        <div class="quiz-progress-fill" id="quizProgressFill"></div>
+                    </div>
+                    <div class="quiz-step-indicator" id="quizStepIndicator">Pergunta 1 de 3</div>
+
+                    <div id="quiz-question-container"></div>
+                    <div class="quiz-result" id="quiz-result"></div>
+                </div>
+
+                <!-- GRÁFICO DE PERFORMANCE -->
+                <div class="lab-section-title">📈 Performance Comparativa — R$ 1.000 investidos em Jan/2021</div>
+                <div class="chart-wrapper">
+                    <canvas id="etfChart"></canvas>
+                </div>
+                <p class="chart-disclaimer">📌 Simulação com base no desempenho histórico aproximado dos índices. R$1.000 investidos em janeiro de 2021 em cada ETF. Rentabilidade passada não garante rentabilidade futura.</p>
+
+                <!-- COMO COMEÇAR -->
+                <div class="lab-section-title">Como dar o primeiro passo</div>
                 <div class="tips-list">
                     <div class="tip-item">
                         <div class="tip-number">1</div>
                         <div class="tip-content">
-                            <h3>Abra conta em uma corretora</h3>
-                            <p>Diferente de bancos, corretoras têm acesso à bolsa de valores</p>
+                            <h3>Abra conta em uma corretora independente</h3>
+                            <p>Diferente de bancos, corretoras têm acesso direto à bolsa sem conflito de interesse.</p>
                         </div>
                     </div>
-
                     <div class="tip-item">
                         <div class="tip-number">2</div>
                         <div class="tip-content">
-                            <h3>Pesquise o ticker</h3>
-                            <p>Use códigos como BOVA11, SMAL11, IVVB11 etc.</p>
+                            <h3>Escolha seu ETF pelo perfil (use o quiz acima)</h3>
+                            <p>Para começar: BOVA11 (Brasil) ou IVVB11 (EUA) são os mais indicados para iniciantes.</p>
                         </div>
                     </div>
-
                     <div class="tip-item">
                         <div class="tip-number">3</div>
                         <div class="tip-content">
-                            <h3>Escolha quanto quer investir</h3>
-                            <p>Pode começar com valores pequenos</p>
+                            <h3>Compre cotas no home broker</h3>
+                            <p>Digite o ticker (ex: BOVA11), escolha o valor e compre. Pode ser fracionado — não precisa de cota inteira.</p>
                         </div>
                     </div>
-
                     <div class="tip-item">
                         <div class="tip-number">4</div>
                         <div class="tip-content">
-                            <h3>Compre cotas</h3>
-                            <p>Pode ser fracionado (não precisa comprar cotas inteiras)</p>
+                            <h3>Aporte todo mês — sem se preocupar com o preço</h3>
+                            <p>A disciplina do aporte mensal supera qualquer tentativa de "comprar na baixa". O tempo é o maior aliado.</p>
                         </div>
                     </div>
-
                     <div class="tip-item">
                         <div class="tip-number">5</div>
                         <div class="tip-content">
-                            <h3>Aporte mensalmente</h3>
-                            <p>Como se estivesse "preenchendo seu futuro"</p>
-                        </div>
-                    </div>
-
-                    <div class="tip-item">
-                        <div class="tip-number">6</div>
-                        <div class="tip-content">
-                            <h3>Acompanhe no longo prazo</h3>
-                            <p>Não no dia a dia — foco em 5+ anos</p>
+                            <h3>Horizonte mínimo: 5 anos</h3>
+                            <p>ETF não é para amanhã. É para construir patrimônio. Quanto mais tempo, maior a força dos juros compostos.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Callout Info -->
-            <div class="callout callout-info">
-                <div class="callout-icon">💡</div>
-                <div class="callout-content">
-                    <h3>DICA INVLAB</h3>
-                    <p>ETFs são perfeitos para quem quer aprender renda variável sem se expor ao estresse de escolher ações.</p>
+            <!-- FINAL CTA -->
+            <div class="lab-final-cta">
+                <h2>Experimento concluído. 🎓</h2>
+                <p>Você passou pelos 5 estágios do Laboratório ETF. Agora você entende o que é, como funciona, quanto custa e o que esperar. O próximo passo é praticar — com o valor que você tem disponível, hoje.</p>
+                <div class="lab-cta-buttons">
+                    <a href="fiis.html" class="btn-lab-primary">Próximo: Laboratório FIIs →</a>
+                    <a href="../index.html#ferramentas" class="btn-lab-secondary">Ver simuladores</a>
                 </div>
             </div>
 
-            <!-- Seção 8: Mensagem Final -->
-            <section class="article-section">
-                <h2>⭐ Mensagem Final</h2>
-
-                <p>Os ETFs são o jeito mais <strong>inteligente, seguro e didático</strong> de começar na renda variável.</p>
-                
-                <p>Eles te dão:</p>
-                <ul>
-                    <li>diversificação</li>
-                    <li>simplicidade</li>
-                    <li>custo baixo</li>
-                    <li>e um caminho claro para investir no longo prazo</li>
-                </ul>
-
-                <p><strong>👉 Por isso, no INVLAB eles são o Degrau 1 da sua jornada na renda variável.</strong></p>
-            </section>
-
-            <!-- Seção 9: Explore Mais sobre ETFs -->
-            <section class="article-section">
-                <h2>🔍 Explore mais sobre ETFs</h2>
-                <p style="text-align: center; color: rgba(212, 175, 55, 0.7); margin-bottom: 40px; font-size: 0.9rem;">
-                    🚧 Simuladores e conteúdos chegando em breve
-                </p>
-
-                <!-- CATEGORIA 1: Simuladores e Ferramentas -->
-                <div class="inv-category">
-                    <h3 class="inv-category-title">📊 Simuladores e Ferramentas</h3>
-                    <div class="inv-grid">
-                        <div class="inv-card fundos inv-card-soon">
-                            <div class="inv-card-icon">📊</div>
-                            <h4 class="inv-card-title">Simulador de ETF</h4>
-                            <p class="inv-card-description">Veja como cresceria seu dinheiro investindo em ETFs mês a mês</p>
-                        </div>
-
-                        <div class="inv-card fundos inv-card-soon">
-                            <div class="inv-card-icon">⚖️</div>
-                            <h4 class="inv-card-title">Comparador de ETFs</h4>
-                            <p class="inv-card-description">Compare ETF vs Poupança, ETF vs CDI e ETF Brasil × EUA</p>
-                        </div>
-
-                        <div class="inv-card fundos inv-card-soon">
-                            <div class="inv-card-icon">📈</div>
-                            <h4 class="inv-card-title">Analisador de Rentabilidade</h4>
-                            <p class="inv-card-description">Histórico de performance e projeções realistas por ETF</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CATEGORIA 2: Conteúdos Educativos -->
-                <div class="inv-category">
-                    <h3 class="inv-category-title">🎓 Conteúdos Educativos</h3>
-                    <div class="inv-grid">
-                        <div class="inv-card alternativos inv-card-soon">
-                            <div class="inv-card-icon">🇧🇷</div>
-                            <h4 class="inv-card-title">ETFs Nacionais</h4>
-                            <p class="inv-card-description">Guia completo: BOVA11, SMAL11, TECH ETFs e como escolher</p>
-                        </div>
-
-                        <div class="inv-card alternativos inv-card-soon">
-                            <div class="inv-card-icon">🌎</div>
-                            <h4 class="inv-card-title">ETFs Internacionais</h4>
-                            <p class="inv-card-description">Investimentos globais: IVVB11, NASD11, ACWI11 explicados</p>
-                        </div>
-
-                        <div class="inv-card alternativos inv-card-soon">
-                            <div class="inv-card-icon">🎯</div>
-                            <h4 class="inv-card-title">Estratégias com ETFs</h4>
-                            <p class="inv-card-description">Buy and Hold, rebalanceamento e alocação inteligente</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Callout Final Info -->
-            <div class="callout callout-info">
-                <div class="callout-icon">🚀</div>
-                <div class="callout-content">
-                    <h3>Pronto para avançar?</h3>
-                    <p>Depois de dominar os ETFs, o próximo passo é aprender sobre <strong>FIIs (Fundos Imobiliários)</strong> e começar a receber renda passiva mensal.</p>
-                </div>
-            </div>
-
-            </article>
-            </section>
         </div>
     </main>
 
@@ -519,18 +1361,11 @@
     <footer style="background: rgba(13, 13, 13, 0.97); border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
         <div class="content-wrapper-wide">
             <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
-                <!-- Coluna 1: INVLAB -->
                 <div>
                     <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
-                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">
-                        Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.
-                    </p>
-                    <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
-                        🧭 Guia do INVLAB →
-                    </a>
+                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
+                    <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">🧭 Guia do INVLAB →</a>
                 </div>
-
-                <!-- Coluna 2: Renda Fixa -->
                 <div>
                     <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
@@ -540,19 +1375,15 @@
                         <li><a href="simulador-lci-lca.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
                     </ul>
                 </div>
-
-                <!-- Coluna 3: Renda Variável -->
                 <div>
                     <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
                         <li><a href="../index.html#renda-variavel" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">📈 Introdução</a></li>
                         <li><a href="acoes.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">📊 Ações</a></li>
-                        <li><a href="etfs.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🎯 ETFs</a></li>
+                        <li><a href="etfs.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🔬 Laboratório ETF</a></li>
                         <li><a href="fiis.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🏢 FIIs</a></li>
                     </ul>
                 </div>
-
-                <!-- Coluna 4: Criptoativos -->
                 <div>
                     <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Criptoativos</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
@@ -563,8 +1394,6 @@
                         <li><a href="cbdc.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🏛️ CBDCs</a></li>
                     </ul>
                 </div>
-
-                <!-- Coluna 5: Outros Investimentos -->
                 <div>
                     <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Outros Investimentos</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
@@ -574,8 +1403,6 @@
                         <li><a href="ganhos-inflacao.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">📊 Inflação</a></li>
                     </ul>
                 </div>
-
-                <!-- Coluna 6: Ferramentas -->
                 <div>
                     <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Ferramentas</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
@@ -586,14 +1413,12 @@
                     </ul>
                 </div>
             </div>
-
-            <!-- Disclaimers -->
             <div style="border-top: 1px solid rgba(212, 175, 55, 0.1); padding-top: 20px; margin-top: 20px;">
                 <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
                     ⚠️ Conteúdo 100% educacional. Não somos corretora, não vendemos produtos, não recebemos comissões.
                 </p>
                 <p style="font-size: 0.78rem; color: #64748B; text-align: center; line-height: 1.7; margin-bottom: 12px; max-width: 900px; margin-left: auto; margin-right: auto;">
-                    Conteúdo educacional desenvolvido por especialistas em mercado financeiro tradicional, tecnologia blockchain e tokenização de ativos reais. 
+                    Conteúdo educacional desenvolvido por especialistas em mercado financeiro tradicional, tecnologia blockchain e tokenização de ativos reais.
                     O INVLAB é um laboratório de pesquisa independente dedicado a unir educação, tecnologia e inovação nos mercados de capitais.
                 </p>
                 <p style="font-size: 0.75rem; color: #475569; text-align: center;">
@@ -605,10 +1430,275 @@
 
     <!-- Scripts -->
     <script src="../assets/js/script.js"></script>
-    <!-- APIs para o Carrossel -->
     <script defer src="../assets/js/bcb-api.js"></script>
     <script defer src="../assets/js/stock-api.js"></script>
     <script defer src="../assets/js/invlab-carrossel-renda-variavel.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+    (function() {
+        var labels = ['Jan/2021','Jan/2022','Jan/2023','Jan/2024','Jan/2025','Jun/2026'];
+
+        // Dados aproximados: R$1.000 investidos em cada ETF em Jan/2021
+        // IVVB11: beneficiou de S&P500 + depreciação do BRL frente ao USD
+        var dataIVVB = [1000, 1210, 1065, 1490, 1680, 1960];
+        // BOVA11: acompanhou oscilações do Ibovespa
+        var dataBOVA = [1000,  870,  910, 1110,  990, 1180];
+        // SMAL11: mais volátil, desempenho inferior ao Ibovespa no período
+        var dataSMAL = [1000,  855,  830,  985,  870,  940];
+
+        var ctx = document.getElementById('etfChart');
+        if (!ctx) return;
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'IVVB11 — S&P 500 (EUA)',
+                        data: dataIVVB,
+                        borderColor: '#06B6D4',
+                        backgroundColor: 'rgba(6,182,212,0.07)',
+                        borderWidth: 2.5,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        pointBackgroundColor: '#06B6D4',
+                        tension: 0.4,
+                        fill: false
+                    },
+                    {
+                        label: 'BOVA11 — Ibovespa (Brasil)',
+                        data: dataBOVA,
+                        borderColor: '#D4AF37',
+                        backgroundColor: 'rgba(212,175,55,0.07)',
+                        borderWidth: 2.5,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        pointBackgroundColor: '#D4AF37',
+                        tension: 0.4,
+                        fill: false
+                    },
+                    {
+                        label: 'SMAL11 — Small Caps',
+                        data: dataSMAL,
+                        borderColor: '#F59E0B',
+                        backgroundColor: 'rgba(245,158,11,0.07)',
+                        borderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        pointBackgroundColor: '#F59E0B',
+                        tension: 0.4,
+                        fill: false,
+                        borderDash: [6, 3]
+                    },
+                    {
+                        label: 'Capital inicial (R$ 1.000)',
+                        data: [1000, 1000, 1000, 1000, 1000, 1000],
+                        borderColor: 'rgba(255,255,255,0.12)',
+                        borderWidth: 1,
+                        borderDash: [4, 4],
+                        pointRadius: 0,
+                        fill: false,
+                        tension: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            color: 'rgba(255,255,255,0.65)',
+                            font: { size: 12, family: 'inherit' },
+                            padding: 20,
+                            usePointStyle: true,
+                            pointStyleWidth: 14,
+                            filter: function(item) {
+                                return item.text !== 'Capital inicial (R$ 1.000)';
+                            }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(10,10,10,0.96)',
+                        borderColor: 'rgba(212,175,55,0.25)',
+                        borderWidth: 1,
+                        titleColor: 'rgba(255,255,255,0.55)',
+                        bodyColor: 'rgba(255,255,255,0.85)',
+                        padding: 14,
+                        callbacks: {
+                            label: function(ctx) {
+                                if (ctx.dataset.label === 'Capital inicial (R$ 1.000)') return null;
+                                var val  = ctx.parsed.y;
+                                var ret  = ((val - 1000) / 1000 * 100).toFixed(1);
+                                var sign = ret >= 0 ? '+' : '';
+                                return '  ' + ctx.dataset.label + ':  R$ ' + val.toFixed(0) + '  (' + sign + ret + '%)';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(255,255,255,0.04)', drawBorder: false },
+                        ticks: { color: 'rgba(255,255,255,0.45)', font: { size: 11 } }
+                    },
+                    y: {
+                        grid: { color: 'rgba(255,255,255,0.04)', drawBorder: false },
+                        min: 700,
+                        max: 2100,
+                        ticks: {
+                            color: 'rgba(255,255,255,0.45)',
+                            font: { size: 11 },
+                            callback: function(val) {
+                                return 'R$ ' + val.toLocaleString('pt-BR');
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    })();
+    </script>
+
+    <!-- QUIZ: Qual ETF combina com você? -->
+    <script>
+    (function() {
+        var questions = [
+            {
+                text: "Onde você quer investir?",
+                options: [
+                    { label: "🇧🇷  No Brasil — nas maiores empresas da B3", value: "brasil" },
+                    { label: "🌍  No mundo — exposição ao mercado americano", value: "mundo" },
+                    { label: "🌐  Nos dois — quero diversificação máxima", value: "ambos" }
+                ]
+            },
+            {
+                text: "Qual é o seu objetivo principal?",
+                options: [
+                    { label: "📈  Crescimento do patrimônio no longo prazo", value: "crescimento" },
+                    { label: "💰  Receber renda passiva (dividendos regulares)", value: "renda" },
+                    { label: "🚀  Alto potencial de retorno (aceito mais risco)", value: "risco" }
+                ]
+            },
+            {
+                text: "Qual é o seu horizonte de investimento?",
+                options: [
+                    { label: "⏱️  Menos de 2 anos", value: "curto" },
+                    { label: "📅  Entre 2 e 5 anos", value: "medio" },
+                    { label: "🏔️  5 anos ou mais", value: "longo" }
+                ]
+            }
+        ];
+
+        var results = {
+            warning:  { ticker: "⚠️",            nome: "Atenção ao prazo", desc: null, warning: "ETFs são ideais para horizontes de 2+ anos. No curto prazo, a oscilação do mercado pode trabalhar contra você. Para objetivos de menos de 2 anos, considere <strong>Tesouro Selic</strong> ou <strong>CDB de liquidez diária</strong>. Quando seu horizonte aumentar, volte para descobrir seu ETF ideal." },
+            smal:     { ticker: "SMAL11",         nome: "Small Caps Brasil", desc: "Empresas menores com alto potencial de crescimento — e maior volatilidade. Ideal para quem tem perfil arrojado com foco no mercado brasileiro." },
+            hash:     { ticker: "HASH11",         nome: "Criptoativos (ETF)", desc: "Replica um índice de criptomoedas (Bitcoin, Ethereum e outros) com estrutura regulada pela CVM. O ETF de maior volatilidade da lista — para perfil muito arrojado." },
+            divo:     { ticker: "DIVO11",         nome: "Dividendos Brasil", desc: "Replica empresas com histórico consistente de pagamento de dividendos. Ideal para construir renda passiva crescente sem precisar escolher cada empresa." },
+            bova:     { ticker: "BOVA11",         nome: "Ibovespa", desc: "O ETF mais popular do Brasil. Expõe você às ~80 maiores empresas listadas na B3, na proporção exata do índice. Perfeito para começar e manter." },
+            ivvb:     { ticker: "IVVB11",         nome: "S&P 500", desc: "Investe nas 500 maiores empresas dos EUA — Apple, Microsoft, Google, Amazon. Tudo em reais, sem abrir conta no exterior." },
+            ambos:    { ticker: "BOVA11 + IVVB11", nome: "Brasil + Mundo", desc: "A combinação mais equilibrada: uma parte no mercado brasileiro, outra no americano. Diversificação geográfica real com apenas 2 ETFs." }
+        };
+
+        var currentQ = 0;
+        var answers  = {};
+
+        function getResult() {
+            if (answers.q3 === 'curto') return results.warning;
+            if (answers.q2 === 'risco') return answers.q1 === 'mundo' ? results.hash : results.smal;
+            if (answers.q2 === 'renda') return results.divo;
+            if (answers.q1 === 'brasil') return results.bova;
+            if (answers.q1 === 'mundo')  return results.ivvb;
+            return results.ambos;
+        }
+
+        function renderQuestion(idx) {
+            var q    = questions[idx];
+            var fill = Math.round((idx / questions.length) * 100);
+            var container = document.getElementById('quiz-question-container');
+            var progress  = document.getElementById('quizProgressFill');
+            var indicator = document.getElementById('quizStepIndicator');
+
+            if (progress)  progress.style.width = fill + '%';
+            if (indicator) indicator.textContent = 'Pergunta ' + (idx + 1) + ' de ' + questions.length;
+
+            var opts = '';
+            for (var i = 0; i < q.options.length; i++) {
+                var o = q.options[i];
+                opts += '<button class="quiz-btn" onclick="window.__quizAnswer(\'q' + (idx + 1) + '\',\'' + o.value + '\',' + idx + ',this)">' + o.label + '</button>';
+            }
+            container.innerHTML = '<p class="quiz-question-text">' + q.text + '</p><div class="quiz-options">' + opts + '</div>';
+        }
+
+        window.__quizAnswer = function(key, value, qIdx, btn) {
+            answers[key] = value;
+            var btns = document.querySelectorAll('.quiz-btn');
+            for (var i = 0; i < btns.length; i++) btns[i].classList.remove('selected');
+            btn.classList.add('selected');
+
+            setTimeout(function() {
+                if (qIdx < questions.length - 1) {
+                    currentQ++;
+                    renderQuestion(currentQ);
+                } else {
+                    showResult();
+                }
+            }, 380);
+        };
+
+        function showResult() {
+            var r = getResult();
+            var container = document.getElementById('quiz-question-container');
+            var indicator = document.getElementById('quizStepIndicator');
+            var progress  = document.getElementById('quizProgressFill');
+            var resultDiv = document.getElementById('quiz-result');
+
+            container.style.display = 'none';
+            indicator.style.display = 'none';
+            if (progress) progress.style.width = '100%';
+            resultDiv.classList.add('visible');
+
+            var html = '';
+            if (r.warning) {
+                html = '<div class="quiz-result-ticker">⚠️</div>'
+                     + '<div class="quiz-result-warning">' + r.warning + '</div>'
+                     + '<button class="quiz-reset" onclick="window.__quizReset()">↺ Tentar com outro horizonte</button>';
+            } else {
+                html = '<div class="quiz-result-ticker">' + r.ticker + '</div>'
+                     + '<div class="quiz-result-nome">' + r.nome + '</div>'
+                     + '<p class="quiz-result-desc">' + r.desc + '</p>'
+                     + '<button class="quiz-reset" onclick="window.__quizReset()">↺ Refazer o quiz</button>';
+            }
+            resultDiv.innerHTML = html;
+        }
+
+        window.__quizReset = function() {
+            currentQ = 0;
+            answers  = {};
+            var container = document.getElementById('quiz-question-container');
+            var indicator = document.getElementById('quizStepIndicator');
+            var progress  = document.getElementById('quizProgressFill');
+            var resultDiv = document.getElementById('quiz-result');
+
+            container.style.display = 'block';
+            indicator.style.display = 'block';
+            resultDiv.classList.remove('visible');
+            resultDiv.innerHTML = '';
+            if (progress) progress.style.width = '0%';
+
+            renderQuestion(0);
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (document.getElementById('quiz-question-container')) {
+                renderQuestion(0);
+            }
+        });
+    })();
+    </script>
 </body>
 </html>
-

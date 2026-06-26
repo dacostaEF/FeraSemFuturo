@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -798,6 +798,100 @@
             border-color: #D4AF37;
         }
 
+        /* MODAL - Classes de conteúdo */
+        .modal-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .modal-list li {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+            margin-bottom: 10px;
+            padding-left: 0;
+        }
+
+        .modal-list-ordered {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .modal-list-ordered li {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .ir-table {
+            background: rgba(16, 185, 129, 0.06);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .ir-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .ir-row:last-child {
+            border-bottom: none;
+        }
+
+        .ir-row.highlight {
+            background: rgba(16, 185, 129, 0.15);
+            padding: 10px 12px;
+            border-radius: 8px;
+            border-bottom: none;
+            margin-top: 6px;
+        }
+
+        .ir-row span {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        .ir-row strong {
+            color: #10b981;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .modal-tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 2px solid #10b981;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 0.9rem !important;
+            color: rgba(255, 255, 255, 0.9) !important;
+            margin-top: 12px;
+        }
+
+        .modal-cta {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(212, 175, 55, 0.1));
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        .modal-cta p {
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+        }
+
+        .modal-cta p strong {
+            color: #10b981;
+        }
+
         /* RESPONSIVIDADE MOBILE */
         @media (max-width: 768px) {
             .modal-content-minimalist {
@@ -1262,6 +1356,11 @@
             </div>
         </div>
 
+        <!-- ASSINATURA INVLAB -->
+        <div class="sim-signature">
+            Conteúdo 100% educacional • INVLAB © 2025
+        </div>
+
     </div>
 
     <!-- POPUPS INFORMATIVOS PREMIUM -->
@@ -1412,10 +1511,87 @@
                     </p>
                 </div>
 
+                <!-- Exemplo prático: CDB vs LCI/LCA -->
+                <div class="modal-section full-width">
+                    <h3>🧮 Exemplo Real: CDB 100% CDI vs LCI 90% CDI</h3>
+                    <p>Muita gente acha que LCI/LCA com taxa menor que CDB sempre perde. Veja por que isso é um erro:</p>
+
+                    <div class="ir-table">
+                        <div class="ir-row">
+                            <span><strong>CDB 100% CDI</strong> — 1 ano, R$ 10.000</span>
+                        </div>
+                        <div class="ir-row">
+                            <span>Rendimento bruto (CDI 10,65% aa):</span>
+                            <strong>+ R$ 1.065</strong>
+                        </div>
+                        <div class="ir-row">
+                            <span>Imposto de Renda (20%):</span>
+                            <strong style="color: #ef4444;">− R$ 213</strong>
+                        </div>
+                        <div class="ir-row highlight">
+                            <span>Rendimento líquido CDB:</span>
+                            <strong>R$ 852</strong>
+                        </div>
+                    </div>
+
+                    <div class="ir-table" style="margin-top: 12px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2);">
+                        <div class="ir-row">
+                            <span><strong>LCI 90% CDI</strong> — 1 ano, R$ 10.000</span>
+                        </div>
+                        <div class="ir-row">
+                            <span>Rendimento bruto (9,585% aa):</span>
+                            <strong>+ R$ 959</strong>
+                        </div>
+                        <div class="ir-row">
+                            <span>Imposto de Renda:</span>
+                            <strong style="color: #10b981;">R$ 0 (ISENTO!)</strong>
+                        </div>
+                        <div class="ir-row highlight">
+                            <span>Rendimento líquido LCI:</span>
+                            <strong style="color: #10b981;">R$ 959</strong>
+                        </div>
+                    </div>
+
+                    <p class="modal-tip">💡 LCI 90% CDI rende <strong>R$ 107 a mais</strong> que CDB 100% CDI no mesmo período. Qualquer LCI acima de ~80% CDI já supera CDB 100% CDI num prazo de 12 meses.</p>
+                </div>
+
+                <!-- Como Começar -->
+                <div class="modal-section">
+                    <h3>🚀 Como começar a investir?</h3>
+                    <ol class="modal-list-ordered">
+                        <li><strong>Abra conta em uma corretora independente</strong> — processo rápido e gratuito. Corretoras como XP, BTG, Rico e Inter oferecem LCI/LCA com taxas competitivas</li>
+                        <li><strong>Identifique quanto pode deixar parado</strong> — LCI/LCA tem carência. Invista apenas dinheiro que você não precisará até o vencimento</li>
+                        <li><strong>Compare as opções disponíveis</strong> — veja percentual do CDI, prazo e liquidez entre diferentes bancos</li>
+                        <li><strong>Verifique o FGC</strong> — confirme que o banco emissor é coberto pelo Fundo Garantidor e respeite o limite de R$ 250 mil por instituição</li>
+                        <li><strong>Invista e aguarde</strong> — ao vencimento, 100% do rendimento vai para você, sem desconto de IR</li>
+                    </ol>
+                </div>
+
+                <!-- Dicas de Ouro -->
+                <div class="modal-section" style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(13, 22, 32, 0.8)); border: 1px solid rgba(212, 175, 55, 0.3);">
+                    <h3 style="color: #D4AF37;">💎 Dicas de Ouro</h3>
+                    <ul class="modal-list">
+                        <li>✅ <strong>Prefira LCI/LCA acima de 85% CDI</strong> — abaixo disso, compare o rendimento líquido com CDB antes de aplicar</li>
+                        <li>✅ <strong>Use para objetivos de médio prazo</strong> (1 a 3 anos) com data de uso já definida</li>
+                        <li>✅ <strong>Nunca use como reserva de emergência</strong> — para isso, prefira Tesouro Selic ou CDB com liquidez diária</li>
+                        <li>✅ <strong>Diversifique entre bancos diferentes</strong> para maximizar a cobertura do FGC (R$ 250 mil por banco)</li>
+                        <li>✅ <strong>Use o simulador acima</strong> para comparar LCI/LCA com CDB e Poupança antes de decidir</li>
+                    </ul>
+                </div>
+
+                <!-- CTA -->
+                <div class="modal-cta">
+                    <p><strong>✨ Pronto para simular?</strong></p>
+                    <p>Use a ferramenta acima para comparar LCI/LCA com CDB e Poupança e ver o impacto real da isenção de IR!</p>
+                    <button class="btn-primary" onclick="closeLCIModal()" style="margin-top: 15px;">
+                        Começar a Simular →
+                    </button>
+                </div>
+
             </div>
-            
-            <!-- Botão Voltar ao Topo (dentro do modal) -->
-            <button id="modalBackToTop" aria-label="Voltar ao topo">↑</button>
+
+            <!-- Botão Voltar ao Topo do Modal -->
+            <button class="modal-back-to-top" id="modalBackToTop" aria-label="Voltar ao topo">↑</button>
         </div>
     </div>
 
@@ -1500,296 +1676,6 @@
         }
     </script>
 
-    <!-- JavaScript do Simulador -->
-    <script>
-        // Modal LCI/LCA ANTIGO (REMOVER)
-        /* const lciLcaModal = document.getElementById('lciLcaModal');
-        const openLciLcaModalBtn = document.getElementById('openLciLcaModal');
-        const closeLciLcaModalBtn = document.getElementById('closeLciLcaModal');
-
-        // Abrir modal
-        if (openLciLcaModalBtn) {
-            openLciLcaModalBtn.addEventListener('click', function() {
-                lciLcaModal.style.display = 'block';
-            });
-        }
-
-        // Fechar modal (X)
-        if (closeLciLcaModalBtn) {
-            closeLciLcaModalBtn.addEventListener('click', function() {
-                lciLcaModal.style.display = 'none';
-            });
-        }
-
-        // Fechar modal ao clicar fora
-        window.addEventListener('click', function(e) {
-            if (e.target === lciLcaModal) {
-                lciLcaModal.style.display = 'none';
-            }
-        });
-
-        // Fechar modal com ESC
-        window.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && lciLcaModal.style.display === 'block') {
-                lciLcaModal.style.display = 'none';
-            }
-        });
-        */ 
-
-        // Dropdown menu functionality
-                    <p style="font-size: 1.2rem; color: #2A7FFF; font-weight: 600; margin-bottom: 0.8rem;">
-                        🏆 LCI e LCA: Investimentos de Renda Fixa <span style="color: #00B894;">100% Isentos de Imposto de Renda</span>
-                    </p>
-                    <p style="font-size: 1.05rem; color: #334155; margin: 0; line-height: 1.7;">
-                        Imagine investir e receber <strong>TODO o rendimento direto no seu bolso</strong>, sem descontos do IR. 
-                        Isso é LCI e LCA! A grande sacada é que o governo isenta esses investimentos para incentivar dois setores 
-                        estratégicos da economia: o <strong>imobiliário</strong> e o <strong>agronegócio</strong>.
-                    </p>
-                </div>
-
-                <!-- O QUE SÃO -->
-                <h3 style="color: #2A7FFF; margin-top: 2rem; margin-bottom: 1rem; font-size: 1.3rem;">
-                    💡 O que são LCI e LCA?
-                </h3>
-                
-                <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
-                    <p style="margin-bottom: 1rem;">
-                        <strong style="color: #2A7FFF;">🏢 LCI (Letra de Crédito Imobiliário):</strong>
-                        <br>
-                        Você empresta dinheiro para o banco financiar o setor <strong>imobiliário</strong> 
-                        (construção de casas, apartamentos, reformas, shopping centers). Em troca, recebe juros 
-                        <span style="color: #00B894; font-weight: 600;">sem pagar IR</span>.
-                    </p>
-                    
-                    <p style="margin: 0;">
-                        <strong style="color: #2A7FFF;">🌾 LCA (Letra de Crédito do Agronegócio):</strong>
-                        <br>
-                        Você empresta dinheiro para o banco financiar o <strong>agronegócio</strong> 
-                        (agricultura, pecuária, máquinas agrícolas, produção de alimentos). Em troca, recebe juros 
-                        <span style="color: #00B894; font-weight: 600;">sem pagar IR</span>.
-                    </p>
-                </div>
-
-                <div style="background: #fffbeb; border-left: 4px solid #f59e0b; padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem;">
-                    <p style="margin: 0; font-size: 0.95rem; color: #334155;">
-                        <strong>💰 Por que o governo isenta o IR?</strong>
-                        <br>
-                        Para incentivar você a financiar setores essenciais para o país. O resultado? 
-                        Você ganha mais, a economia cresce, e todo mundo sai ganhando! 🎉
-                    </p>
-                </div>
-
-                <!-- POR QUE INVESTIR -->
-                <h3 style="color: #2A7FFF; margin-top: 2rem; margin-bottom: 1rem; font-size: 1.3rem;">
-                    ✨ Por que investir em LCI/LCA?
-                </h3>
-                
-                <ul style="list-style: none; padding-left: 0; line-height: 1.8;">
-                    <li style="margin-bottom: 1rem;">
-                        ✅ <strong>Isenção de 100% do IR:</strong> O benefício número um! Rentabilidade líquida maior que CDBs equivalentes
-                    </li>
-                    <li style="margin-bottom: 1rem;">
-                        ✅ <strong>Sem taxa de administração:</strong> Você não paga nenhuma tarifa para manter o investimento
-                    </li>
-                    <li style="margin-bottom: 1rem;">
-                        ✅ <strong>Garantia do FGC:</strong> Proteção de até R$ 250 mil por CPF e instituição
-                    </li>
-                    <li style="margin-bottom: 1rem;">
-                        ✅ <strong>Renda Fixa segura:</strong> Lastreado em setores fundamentais da economia (imobiliário e agronegócio)
-                    </li>
-                    <li style="margin-bottom: 1rem;">
-                        ✅ <strong>Diversas modalidades:</strong> Prefixadas (taxa fixa) ou pós-fixadas (% do CDI), de acordo com sua estratégia
-                    </li>
-                    <li style="margin-bottom: 1rem;">
-                        ✅ <strong>Liquidez variada:</strong> Alguns títulos oferecem liquidez diária após carência; outros só no vencimento
-                    </li>
-                    <li style="margin-bottom: 1rem;">
-                        ✅ <strong>Baixo risco:</strong> Previsível e ideal para quem busca segurança
-                    </li>
-                </ul>
-                
-                <div style="background: #dbeafe; border-left: 4px solid #1a73e8; padding: 1rem; border-radius: 6px; margin-top: 1.5rem;">
-                    <p style="margin: 0; font-size: 0.95rem; color: #334155;">
-                        <strong>💡 Dica importante:</strong>
-                        Ao final do prazo, o valor aplicado e todos os rendimentos são automaticamente creditados 
-                        na sua conta, de forma simples e descomplicada. Sem burocracia!
-                    </p>
-                </div>
-
-                <!-- COMPARAÇÃO COM CDB -->
-                <h3 style="color: #2A7FFF; margin-top: 2rem; margin-bottom: 1rem; font-size: 1.3rem;">
-                    ⚖️ LCI/LCA vs CDB: A Diferença do IR
-                </h3>
-                
-                <div style="background: #fffbeb; border-left: 4px solid #f59e0b; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
-                    <p style="font-size: 1.05rem; margin-bottom: 1rem;">
-                        <strong>🧮 Exemplo prático:</strong>
-                    </p>
-                    
-                    <p style="margin-bottom: 0.8rem;">
-                        📊 <strong>CDB 100% do CDI</strong> (1 ano, R$ 10.000):
-                        <br>
-                        → Rendimento bruto: R$ 1.065
-                        <br>
-                        → IR (17,5%): -R$ 186
-                        <br>
-                        → <strong>Rendimento líquido: R$ 879</strong>
-                    </p>
-                    
-                    <p style="margin-bottom: 0.8rem;">
-                        🏛️ <strong>LCI 90% do CDI</strong> (1 ano, R$ 10.000):
-                        <br>
-                        → Rendimento bruto: R$ 959
-                        <br>
-                        → IR: <span style="color: #00B894; font-weight: bold;">R$ 0 (ISENTO!)</span>
-                        <br>
-                        → <strong>Rendimento líquido: R$ 959</strong>
-                    </p>
-                    
-                    <p style="margin: 0; font-size: 1.1rem; color: #2A7FFF;">
-                        💰 <strong>Resultado:</strong> LCI 90% rende MAIS que CDB 100% após impostos!
-                    </p>
-                </div>
-
-                <!-- TIPOS DE RENTABILIDADE -->
-                <h3 style="color: #2A7FFF; margin-top: 2rem; margin-bottom: 1rem; font-size: 1.3rem;">
-                    📊 Tipos de Rentabilidade
-                </h3>
-                
-                <div style="display: grid; gap: 1rem; margin-bottom: 1.5rem;">
-                    <!-- Pós-fixada -->
-                    <div style="background: #f0fdf4; border-left: 4px solid #00B894; padding: 1rem; border-radius: 6px;">
-                        <strong style="color: #2A7FFF;">1️⃣ Pós-fixada (mais comum):</strong>
-                        <br>
-                        Atrelada ao CDI (ex: 90% do CDI, 95% do CDI)
-                        <br>
-                        <em style="color: #64748b; font-size: 0.95rem;">→ Ideal para qualquer momento econômico</em>
-                    </div>
-                    
-                    <!-- Prefixada -->
-                    <div style="background: #eff6ff; border-left: 4px solid #1a73e8; padding: 1rem; border-radius: 6px;">
-                        <strong style="color: #2A7FFF;">2️⃣ Prefixada:</strong>
-                        <br>
-                        Taxa fixa definida na contratação (ex: 11% a.a.)
-                        <br>
-                        <em style="color: #64748b; font-size: 0.95rem;">→ Ideal quando você espera queda dos juros</em>
-                    </div>
-                    
-                    <!-- Híbrida -->
-                    <div style="background: #faf5ff; border-left: 4px solid #9333ea; padding: 1rem; border-radius: 6px;">
-                        <strong style="color: #2A7FFF;">3️⃣ Híbrida (IPCA+):</strong>
-                        <br>
-                        IPCA + taxa fixa (ex: IPCA + 5%)
-                        <br>
-                        <em style="color: #64748b; font-size: 0.95rem;">→ Ideal para objetivos de longo prazo (protege da inflação)</em>
-                    </div>
-                </div>
-
-                <!-- CUIDADOS E PONTOS DE ATENÇÃO -->
-                <h3 style="color: #2A7FFF; margin-top: 2rem; margin-bottom: 1rem; font-size: 1.3rem;">
-                    ⚠️ Pontos de atenção (a verdade que ninguém conta!)
-                </h3>
-                
-                <div style="background: #fef2f2; border-left: 4px solid #ef4444; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
-                    <ul style="margin: 0; padding-left: 1.2rem; line-height: 1.7;">
-                        <li style="margin-bottom: 0.8rem;">
-                            <strong>⏰ Prazo de carência:</strong> Geralmente 90 dias (alguns até 180 ou 360 dias). 
-                            Durante esse período, você NÃO pode resgatar de jeito nenhum. Só invista dinheiro que não vai precisar!
-                        </li>
-                        <li style="margin-bottom: 0.8rem;">
-                            <strong>💰 Investimento mínimo alto:</strong> Varia de R$ 1.000 a R$ 30.000 dependendo do banco. 
-                            LCI/LCA não é para quem está começando com pouco dinheiro.
-                        </li>
-                        <li style="margin-bottom: 0.8rem;">
-                            <strong>🔒 Liquidez limitada:</strong> Após a carência, alguns títulos oferecem liquidez diária, 
-                            mas muitos só liberam o dinheiro no vencimento (6 meses, 1 ano, 2 anos...). Verifique antes!
-                        </li>
-                        <li style="margin-bottom: 0.8rem;">
-                            <strong>📊 Rentabilidade menor que CDB (às vezes):</strong> Uma LCI 90% do CDI pode render MENOS 
-                            que um CDB 110% do CDI (mesmo com IR). Sempre faça as contas antes!
-                        </li>
-                        <li style="margin: 0;">
-                            <strong>⚠️ Não é para Reserva de Emergência:</strong> Apesar de alguns bancos sugerirem, 
-                            LCI/LCA NÃO é ideal para emergências por causa da carência e liquidez limitada. Prefira Tesouro Selic ou CDB com liquidez diária.
-                        </li>
-                    </ul>
-                </div>
-                
-                <div style="background: #fffbeb; border-left: 4px solid #f59e0b; padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem;">
-                    <p style="margin: 0; font-size: 0.95rem; color: #334155;">
-                        <strong>💡 Nossa recomendação honesta:</strong>
-                        LCI/LCA é EXCELENTE para objetivos de médio prazo (1 a 3 anos) com dinheiro que você tem certeza 
-                        que não vai precisar. Para reserva de emergência, prefira Tesouro Selic ou CDB com liquidez diária.
-                    </p>
-                </div>
-
-                <!-- COMO INVESTIR -->
-                <h3 style="color: #2A7FFF; margin-top: 2rem; margin-bottom: 1rem; font-size: 1.3rem;">
-                    🚀 Como começar a investir?
-                </h3>
-                
-                <ol style="line-height: 1.8; padding-left: 1.5rem;">
-                    <li style="margin-bottom: 1rem;">
-                        <strong>Abra conta em uma corretora</strong> (processo rápido e gratuito)
-                    </li>
-                    <li style="margin-bottom: 1rem;">
-                        <strong>Transfira o dinheiro</strong> da sua conta bancária para a corretora
-                    </li>
-                    <li style="margin-bottom: 1rem;">
-                        <strong>Compare as opções</strong> de LCI/LCA disponíveis (rentabilidade, prazo, carência)
-                    </li>
-                    <li style="margin-bottom: 1rem;">
-                        <strong>Escolha o título</strong> que mais se encaixa no seu objetivo e prazo
-                    </li>
-                    <li style="margin: 0;">
-                        <strong>Invista e aguarde o vencimento</strong> para receber 100% do rendimento (sem IR!)
-                    </li>
-                </ol>
-
-                <!-- DICAS FINAIS -->
-                <div style="background: linear-gradient(135deg, #1a73e8 0%, #2A7FFF 100%); color: white; padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
-                    <h3 style="color: white; margin-bottom: 1rem; font-size: 1.2rem;">
-                        💎 Dicas de Ouro
-                    </h3>
-                    
-                    <ul style="margin: 0; padding-left: 1.2rem; line-height: 1.7;">
-                        <li style="margin-bottom: 0.8rem;">
-                            Use LCI/LCA para <strong>complementar CDBs</strong> na sua carteira de Renda Fixa
-                        </li>
-                        <li style="margin-bottom: 0.8rem;">
-                            Prefira <strong>LCI/LCA acima de 85% do CDI</strong> (abaixo disso, CDB pode valer mais)
-                        </li>
-                        <li style="margin-bottom: 0.8rem;">
-                            Respeite o <strong>prazo de carência</strong> - só invista dinheiro que não vai precisar
-                        </li>
-                        <li style="margin-bottom: 0.8rem;">
-                            Diversifique entre <strong>bancos diferentes</strong> para maximizar a garantia do FGC
-                        </li>
-                        <li style="margin: 0;">
-                            Use nosso <strong>simulador acima</strong> para comparar antes de investir! 📊
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- MENSAGEM FINAL -->
-                <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: #f8fafc; border-radius: 8px;">
-                    <p style="font-size: 1.1rem; color: #2A7FFF; font-weight: 500; margin: 0;">
-                        💰 LCI e LCA são excelentes para quem quer <strong>pagar menos imposto</strong> 
-                        e ter <strong>previsibilidade</strong> nos investimentos!
-                    </p>
-                </div>
-
-            </div>
-        </div>
-        
-        <!-- ASSINATURA INVLAB -->
-        <div class="sim-signature">
-            <p style="margin: 0;">💼 <strong>INVLAB</strong> | Simulador Educacional de Investimentos</p>
-            <p style="margin: 5px 0 0 0; opacity: 0.7;">Dados atualizados | Cálculos precisos | Sem viés comercial</p>
-        </div>
-    </div>
-
-    <!-- JavaScript do Site -->
     <script>
         // Dropdown menu functionality
         document.querySelectorAll('.dropdown').forEach(dropdown => {
