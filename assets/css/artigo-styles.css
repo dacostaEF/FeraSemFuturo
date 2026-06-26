@@ -266,6 +266,13 @@
     border-radius: 12px;
     padding: 24px;
     margin-bottom: 20px;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.example-card:hover {
+    border-color: rgba(212, 175, 55, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.1);
 }
 
 .example-card h3 {
@@ -306,6 +313,13 @@
     background: rgba(26, 26, 26, 0.6);
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+}
+
+.tip-item:hover {
+    border-color: rgba(212, 175, 55, 0.3);
+    background: rgba(26, 26, 26, 0.9);
+    transform: translateX(4px);
 }
 
 .tip-number {
@@ -381,6 +395,44 @@
     .callout-icon {
         font-size: 28px;
     }
+}
+
+/* Cards "Em breve" — desabilitados visualmente */
+.inv-card-soon {
+    position: relative;
+    opacity: 0.6;
+    cursor: default !important;
+    pointer-events: none;
+}
+
+.inv-card-soon::after {
+    content: 'Em breve';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(212, 175, 55, 0.12);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: #D4AF37;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 20px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+
+/* Footer INVLAB — identidade dourada nas subpáginas */
+.footer-invlab h4 {
+    color: #D4AF37 !important;
+}
+
+.footer-invlab {
+    background: rgba(13, 13, 13, 0.97) !important;
+    border-top: 1px solid rgba(212, 175, 55, 0.2) !important;
+}
+
+.footer-invlab .footer-inner-border {
+    border-top: 1px solid rgba(212, 175, 55, 0.1) !important;
 }
 
 @media (max-width: 480px) {

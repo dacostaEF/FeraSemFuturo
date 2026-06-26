@@ -69,7 +69,7 @@
                     <ul class="dropdown-menu">
                         <!-- CATEGORIA 1: ETFs (Iniciante - Diversificação) -->
                         <li class="dropdown-category">
-                            <div class="category-header" data-category="etfs">
+                            <div class="category-header" data-category="etfs" onclick="window.location.href='etfs.html'" style="cursor: pointer;">
                                 <span class="category-name">💵 ETFs</span>
                                 <span class="category-arrow">▶</span>
                             </div>
@@ -303,13 +303,32 @@
             <section class="article-section">
                 <h2>📊 Comparações que ajudam o investidor</h2>
 
-                <p>Comparação educativa (sem promessas):</p>
-                
+                <h3>🇧🇷 ETF Brasil × 🇺🇸 ETF Estados Unidos</h3>
                 <ul>
-                    <li>ETF Brasil × ETF Estados Unidos</li>
-                    <li>ETF × CDI</li>
-                    <li>ETF × Poupança</li>
-                    <li>ETF × Ações individuais</li>
+                    <li><strong>BOVA11</strong> acompanha o Ibovespa — empresas brasileiras, exposição ao real, mais volatilidade local</li>
+                    <li><strong>IVVB11</strong> acompanha o S&P 500 — empresas americanas, exposição ao dólar, diversificação geográfica</li>
+                    <li>Ter os dois juntos é diversificação real: você não fica refém de um único mercado</li>
+                </ul>
+
+                <h3>📈 ETF × CDI</h3>
+                <ul>
+                    <li><strong>CDI:</strong> previsível, sem oscilação, ideal para reserva de emergência</li>
+                    <li><strong>ETF:</strong> oscila no curto prazo, mas historicamente tende a superar o CDI em horizontes de 5+ anos</li>
+                    <li>Não são concorrentes — são ferramentas com finalidades diferentes na carteira</li>
+                </ul>
+
+                <h3>💰 ETF × Poupança</h3>
+                <ul>
+                    <li><strong>Poupança:</strong> rendimento limitado e previsível, sem risco de oscilação de preço</li>
+                    <li><strong>ETF:</strong> maior potencial histórico de retorno, mas com variação — não substitui a reserva de emergência</li>
+                    <li>Poupança para o que você pode precisar amanhã. ETF para o que você vai usar em anos</li>
+                </ul>
+
+                <h3>🏢 ETF × Ações individuais</h3>
+                <ul>
+                    <li><strong>Ação individual:</strong> você escolhe a empresa — maior potencial, mas também maior risco de escolher mal</li>
+                    <li><strong>ETF:</strong> você compra a média do mercado — menor risco de escolha errada, menor custo de pesquisa</li>
+                    <li>Para quem está começando, o ETF elimina o risco de concentração em uma única empresa</li>
                 </ul>
             </section>
 
@@ -437,19 +456,19 @@
                 <div class="inv-category">
                     <h3 class="inv-category-title">📊 Simuladores e Ferramentas</h3>
                     <div class="inv-grid">
-                        <div class="inv-card fundos">
+                        <div class="inv-card fundos inv-card-soon">
                             <div class="inv-card-icon">📊</div>
                             <h4 class="inv-card-title">Simulador de ETF</h4>
                             <p class="inv-card-description">Veja como cresceria seu dinheiro investindo em ETFs mês a mês</p>
                         </div>
 
-                        <div class="inv-card fundos">
+                        <div class="inv-card fundos inv-card-soon">
                             <div class="inv-card-icon">⚖️</div>
                             <h4 class="inv-card-title">Comparador de ETFs</h4>
                             <p class="inv-card-description">Compare ETF vs Poupança, ETF vs CDI e ETF Brasil × EUA</p>
                         </div>
 
-                        <div class="inv-card fundos">
+                        <div class="inv-card fundos inv-card-soon">
                             <div class="inv-card-icon">📈</div>
                             <h4 class="inv-card-title">Analisador de Rentabilidade</h4>
                             <p class="inv-card-description">Histórico de performance e projeções realistas por ETF</p>
@@ -461,19 +480,19 @@
                 <div class="inv-category">
                     <h3 class="inv-category-title">🎓 Conteúdos Educativos</h3>
                     <div class="inv-grid">
-                        <div class="inv-card alternativos">
+                        <div class="inv-card alternativos inv-card-soon">
                             <div class="inv-card-icon">🇧🇷</div>
                             <h4 class="inv-card-title">ETFs Nacionais</h4>
                             <p class="inv-card-description">Guia completo: BOVA11, SMAL11, TECH ETFs e como escolher</p>
                         </div>
 
-                        <div class="inv-card alternativos">
+                        <div class="inv-card alternativos inv-card-soon">
                             <div class="inv-card-icon">🌎</div>
                             <h4 class="inv-card-title">ETFs Internacionais</h4>
                             <p class="inv-card-description">Investimentos globais: IVVB11, NASD11, ACWI11 explicados</p>
                         </div>
 
-                        <div class="inv-card alternativos">
+                        <div class="inv-card alternativos inv-card-soon">
                             <div class="inv-card-icon">🎯</div>
                             <h4 class="inv-card-title">Estratégias com ETFs</h4>
                             <p class="inv-card-description">Buy and Hold, rebalanceamento e alocação inteligente</p>
@@ -497,23 +516,23 @@
     </main>
 
     <!-- Footer -->
-    <footer style="background: rgba(15, 23, 42, 0.9); border-top: 1px solid rgba(59, 130, 246, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+    <footer style="background: rgba(13, 13, 13, 0.97); border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
         <div class="content-wrapper-wide">
             <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
                 <!-- Coluna 1: INVLAB -->
                 <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
                     <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">
                         Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.
                     </p>
-                    <a href="guia_invlab.html" style="color: #3B82F6; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
+                    <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
                         🧭 Guia do INVLAB →
                     </a>
                 </div>
 
                 <!-- Coluna 2: Renda Fixa -->
                 <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
                         <li><a href="poupanca.html" style="color: #CBD5E1; text-decoration: none;">💰 Poupança</a></li>
                         <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 CDBs</a></li>
@@ -524,7 +543,7 @@
 
                 <!-- Coluna 3: Renda Variável -->
                 <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
                         <li><a href="../index.html#renda-variavel" style="color: #CBD5E1; text-decoration: none;">📈 Introdução</a></li>
                         <li><a href="acoes.html" style="color: #CBD5E1; text-decoration: none;">📊 Ações</a></li>
@@ -535,7 +554,7 @@
 
                 <!-- Coluna 4: Criptoativos -->
                 <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Criptoativos</h4>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Criptoativos</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
                         <li><a href="../index.html#criptoativos" style="color: #CBD5E1; text-decoration: none;">🔐 Introdução</a></li>
                         <li><a href="bitcoin.html" style="color: #CBD5E1; text-decoration: none;">₿ Bitcoin</a></li>
@@ -547,7 +566,7 @@
 
                 <!-- Coluna 5: Outros Investimentos -->
                 <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Outros Investimentos</h4>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Outros Investimentos</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
                         <li><a href="../index.html#outros-investimentos" style="color: #CBD5E1; text-decoration: none;">💎 Introdução</a></li>
                         <li><a href="ganhos-come-cotas.html" style="color: #CBD5E1; text-decoration: none;">🍽️ Come-cotas</a></li>
@@ -558,7 +577,7 @@
 
                 <!-- Coluna 6: Ferramentas -->
                 <div>
-                    <h4 style="color: #3B82F6; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Ferramentas</h4>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Ferramentas</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
                         <li><a href="simulador-cdbs.html" style="color: #CBD5E1; text-decoration: none;">🏦 Simulador CDBs</a></li>
                         <li><a href="simulador-tesouro-direto.html" style="color: #CBD5E1; text-decoration: none;">🇧🇷 Simulador Tesouro</a></li>
@@ -569,7 +588,7 @@
             </div>
 
             <!-- Disclaimers -->
-            <div style="border-top: 1px solid rgba(59, 130, 246, 0.1); padding-top: 20px; margin-top: 20px;">
+            <div style="border-top: 1px solid rgba(212, 175, 55, 0.1); padding-top: 20px; margin-top: 20px;">
                 <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
                     ⚠️ Conteúdo 100% educacional. Não somos corretora, não vendemos produtos, não recebemos comissões.
                 </p>
