@@ -6,6 +6,7 @@ const http = require('http');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const BRAPI_TOKEN = process.env.BRAPI_TOKEN || '';
 
 // Middleware
 app.use(compression()); // Compressão GZIP
@@ -41,9 +42,6 @@ app.get('/comparador', (req, res) => {
 app.get('/api/ibovespa', async (req, res) => {
     try {
         console.log('📡 [Proxy] Buscando Ibovespa via Brapi...');
-        
-        // ✅ Token da API Brapi
-        const BRAPI_TOKEN = 'rn54bZXu2iFhXug2JuAzD7';
         
         // ✅ Símbolo correto do Ibovespa na Brapi: ^BVSP (não BVSP)
         const brapiUrl = `https://brapi.dev/api/quote/%5EBVSP?token=${BRAPI_TOKEN}`;
@@ -115,7 +113,6 @@ app.get('/api/ibovespa', async (req, res) => {
 // Função auxiliar para tentar API alternativa
 function tryAlternativeAPI(res) {
     // Tenta buscar via IBOV11 como alternativa (se ^BVSP falhou)
-    const BRAPI_TOKEN = 'rn54bZXu2iFhXug2JuAzD7';
     const altUrl = `https://brapi.dev/api/quote/IBOV11?token=${BRAPI_TOKEN}`;
     console.log('🔄 [Proxy] Tentando IBOV11 como alternativa...');
     
