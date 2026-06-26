@@ -759,6 +759,17 @@
             gap: 12px;
         }
 
+        /* Badge na mesma linha do título — div interna vira flex row */
+        #renda-variavel .investment-header > div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        #renda-variavel .investment-header > div h3 {
+            margin: 0;
+        }
+
         /* Trigger 💡 nos cards de risco */
         .risk-tip-trigger {
             display: inline-flex;
