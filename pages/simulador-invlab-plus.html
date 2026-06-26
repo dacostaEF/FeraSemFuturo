@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -58,7 +58,7 @@
             padding: 28px;
             background: rgba(17, 24, 39, 0.6);
             border-radius: 16px;
-            border: 1px solid rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.2);
             border-left: 3px solid #10b981;
             overflow: hidden;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
@@ -917,7 +917,7 @@
             <span style="font-family: 'Inter', sans-serif; font-size: 12px; color: rgba(255, 255, 255, 0.4);">/</span>
             <a href="../index.html#ferramentas" style="font-family: 'Inter', sans-serif; font-size: 12px; color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s;">🛠️ Ferramentas</a>
             <span style="font-family: 'Inter', sans-serif; font-size: 12px; color: rgba(255, 255, 255, 0.4);">/</span>
-            <span style="font-family: 'Inter', sans-serif; font-size: 12px; color: #FFFFFF; font-weight: 600; background: rgba(42, 127, 255, 0.15); padding: 4px 10px; border-radius: 6px; border-left: 3px solid #3B82F6;">📈 INVLAB+ Simulador Universal</span>
+            <span style="font-family: 'Inter', sans-serif; font-size: 12px; color: #FFFFFF; font-weight: 600; background: rgba(42, 127, 255, 0.15); padding: 4px 10px; border-radius: 6px; border-left: 3px solid #D4AF37;">📈 INVLAB+ Simulador Universal</span>
         </nav>
     </div>
 
@@ -1279,8 +1279,8 @@
                             <strong style="color: #d4af37;">⚖️ Diferença Absoluta</strong><br>
                             <span style="color: #9CA3AF; font-size: 0.85rem;">Quanto separa o melhor e o pior ativo.</span>
                         </div>
-                        <div style="background: rgba(59, 130, 246, 0.1); padding: 12px; border-radius: 6px;">
-                            <strong style="color: #3b82f6;">📉 Taxa Média Real</strong><br>
+                        <div style="background: rgba(212, 175, 55, 0.1); padding: 12px; border-radius: 6px;">
+                            <strong style="color: #D4AF37;">📉 Taxa Média Real</strong><br>
                             <span style="color: #9CA3AF; font-size: 0.85rem;">Média das rentabilidades já descontando a inflação.</span>
                         </div>
                     </div>
@@ -1413,15 +1413,15 @@
          MODAL TÉCNICO - COMO FUNCIONA A SIMULAÇÃO
          ============================================ -->
     <div id="modalTecnico" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10001; overflow-y: auto; padding: 20px;">
-        <div style="max-width: 1000px; margin: 40px auto; background: linear-gradient(145deg, #0f172a 0%, #0D0D0D 100%); border-radius: 16px; padding: 40px; border: 2px solid #3b82f6; box-shadow: 0 20px 60px rgba(59, 130, 246, 0.4); position: relative;">
+        <div style="max-width: 1000px; margin: 40px auto; background: linear-gradient(145deg, #0f172a 0%, #0D0D0D 100%); border-radius: 16px; padding: 40px; border: 2px solid #D4AF37; box-shadow: 0 20px 60px rgba(59, 130, 246, 0.4); position: relative;">
             
             <!-- Botão Fechar -->
-            <button onclick="fecharModalTecnico()" style="position: absolute; top: 20px; right: 20px; background: rgba(59, 130, 246, 0.2); border: 1px solid #3b82f6; color: #3b82f6; width: 36px; height: 36px; border-radius: 50%; font-size: 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; font-weight: bold;">
+            <button onclick="fecharModalTecnico()" style="position: absolute; top: 20px; right: 20px; background: rgba(212, 175, 55, 0.2); border: 1px solid #D4AF37; color: #D4AF37; width: 36px; height: 36px; border-radius: 50%; font-size: 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; font-weight: bold;">
                 ✕
             </button>
 
             <!-- Título do Modal -->
-            <h2 style="font-family: 'Playfair Display', Georgia, serif; color: #3b82f6; font-size: 2rem; margin-bottom: 10px; text-align: center; font-weight: 800;">
+            <h2 style="font-family: 'Playfair Display', Georgia, serif; color: #D4AF37; font-size: 2rem; margin-bottom: 10px; text-align: center; font-weight: 800;">
                 🔬 Como o INVLAB+ simula índices e ETFs
             </h2>
             <p style="text-align: center; color: rgba(255, 255, 255, 0.6); font-size: 0.95rem; margin-bottom: 35px; font-family: 'Inter', sans-serif;">
@@ -1429,9 +1429,9 @@
             </p>
 
             <!-- Explicação Curta Inicial -->
-            <div style="background: rgba(59, 130, 246, 0.1); border-left: 4px solid #3b82f6; padding: 20px; border-radius: 8px; margin-bottom: 35px;">
+            <div style="background: rgba(212, 175, 55, 0.1); border-left: 4px solid #D4AF37; padding: 20px; border-radius: 8px; margin-bottom: 35px;">
                 <p style="font-family: 'Inter', sans-serif; color: #e6e6e6; line-height: 1.8; margin: 0; font-size: 1rem;">
-                    <strong style="color: #3b82f6;">Este simulador NÃO usa o gráfico real do passado.</strong><br><br>
+                    <strong style="color: #D4AF37;">Este simulador NÃO usa o gráfico real do passado.</strong><br><br>
                     Ele usa a <strong>rentabilidade média</strong> e a <strong>volatilidade histórica</strong> do ativo para gerar um possível comportamento futuro.<br><br>
                     O objetivo não é prever, e sim ajudar você a entender como cada tipo de investimento se comporta ao longo do tempo.
                 </p>
@@ -1439,7 +1439,7 @@
 
             <!-- Seção 1 -->
             <div style="margin-bottom: 30px;">
-                <h3 style="color: #3b82f6; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                <h3 style="color: #D4AF37; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
                     👁️ 1. Interpretação do gráfico • O que NÃO usamos
                 </h3>
                 <p style="color: #e6e6e6; line-height: 1.8; font-family: 'Inter', sans-serif;">
@@ -1451,13 +1451,13 @@
                         ❌ não usa os "anos bons" ou "anos ruins" do IBOVESPA
                     </span><br>
                     
-                    Isso <strong style="color: #3b82f6;">evita distorções</strong> e garante uma simulação limpa, educacional e consistente.
+                    Isso <strong style="color: #D4AF37;">evita distorções</strong> e garante uma simulação limpa, educacional e consistente.
                 </p>
             </div>
 
             <!-- Seção 2 -->
             <div style="margin-bottom: 30px;">
-                <h3 style="color: #3b82f6; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                <h3 style="color: #D4AF37; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
                     📈 2. O que USAMOS do passado • Dados estatísticos
                 </h3>
                 <p style="color: #e6e6e6; line-height: 1.8; font-family: 'Inter', sans-serif;">
@@ -1474,13 +1474,13 @@
                     </div><br>
                     
                     Esses dois números são suficientes para simular o comportamento típico daquele ativo.<br><br>
-                    <em style="color: #3b82f6;">É a mesma técnica usada em modelos financeiros acadêmicos e educacionais.</em>
+                    <em style="color: #D4AF37;">É a mesma técnica usada em modelos financeiros acadêmicos e educacionais.</em>
                 </p>
             </div>
 
             <!-- Seção 3 -->
             <div style="margin-bottom: 30px;">
-                <h3 style="color: #3b82f6; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                <h3 style="color: #D4AF37; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
                     🎯 3. Marco Zero = Hoje • Futuro plausível
                 </h3>
                 <p style="color: #e6e6e6; line-height: 1.8; font-family: 'Inter', sans-serif;">
@@ -1500,13 +1500,13 @@
                         → Ano X
                     </div><br>
                     
-                    <strong style="color: #3b82f6;">Nunca para trás.</strong>
+                    <strong style="color: #D4AF37;">Nunca para trás.</strong>
                 </p>
             </div>
 
             <!-- Seção 4 -->
             <div style="margin-bottom: 30px;">
-                <h3 style="color: #3b82f6; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                <h3 style="color: #D4AF37; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
                     ⚙️ 4. Como o gráfico é desenhado • Processo mensal
                 </h3>
                 <p style="color: #e6e6e6; line-height: 1.8; font-family: 'Inter', sans-serif;">
@@ -1541,7 +1541,7 @@
 
             <!-- Seção 5 -->
             <div style="margin-bottom: 30px;">
-                <h3 style="color: #3b82f6; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                <h3 style="color: #D4AF37; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
                     💡 5. Por que isso é melhor • Vantagens do método
                 </h3>
                 <p style="color: #e6e6e6; line-height: 1.8; font-family: 'Inter', sans-serif;">
@@ -1562,7 +1562,7 @@
 
             <!-- Seção 6 -->
             <div style="margin-bottom: 30px;">
-                <h3 style="color: #3b82f6; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+                <h3 style="color: #D4AF37; font-size: 1.3rem; margin-bottom: 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
                     📊 6. Como interpretar os resultados • Leitura correta
                 </h3>
                 <p style="color: #e6e6e6; line-height: 1.8; font-family: 'Inter', sans-serif;">
@@ -1585,19 +1585,19 @@
             </div>
 
             <!-- Seção 7 - Conclusão -->
-            <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.1)); border: 1px solid rgba(59, 130, 246, 0.3); padding: 25px; border-radius: 12px; text-align: center;">
-                <h3 style="color: #3b82f6; font-size: 1.3rem; margin-bottom: 15px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
+            <div style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(16, 185, 129, 0.1)); border: 1px solid rgba(59, 130, 246, 0.3); padding: 25px; border-radius: 12px; text-align: center;">
+                <h3 style="color: #D4AF37; font-size: 1.3rem; margin-bottom: 15px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700;">
                     🎓 Conclusão Técnica
                 </h3>
                 <p style="font-family: 'Inter', sans-serif; color: #e6e6e6; line-height: 1.8; margin: 0;">
-                    O INVLAB+ utiliza <strong style="color: #3b82f6;">simulação estocástica</strong> baseada em parâmetros históricos reais.<br>
+                    O INVLAB+ utiliza <strong style="color: #D4AF37;">simulação estocástica</strong> baseada em parâmetros históricos reais.<br>
                     Essa abordagem é padrão em finanças quantitativas e educação financeira acadêmica.<br><br>
                     <em style="color: #10b981;">Você está usando uma ferramenta de nível profissional, com propósito 100% educacional.</em>
                 </p>
             </div>
 
             <div style="text-align: center; margin-top: 30px;">
-                <button onclick="fecharModalTecnico()" style="padding: 14px 32px; background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%); color: #fff; border: none; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);">
+                <button onclick="fecharModalTecnico()" style="padding: 14px 32px; background: linear-gradient(135deg, #D4AF37 0%, #1e40af 100%); color: #fff; border: none; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);">
                     ✅ Entendi a Metodologia
                 </button>
             </div>
@@ -1634,7 +1634,7 @@ const investimentosDisponiveis = {
         nome: 'Tesouro IPCA+ 2029', 
         taxaBase: 9.3, 
         volatilidade: 2, 
-        cor: '#3B82F6',
+        cor: '#D4AF37',
         icon: '📈'
     },
     lci: { 
@@ -2107,7 +2107,7 @@ function renderGrafico(datasets, meses) {
                 <button class="chart-control-btn active" onclick="toggleChartView('linear')">Linear</button>
                 <button class="chart-control-btn" onclick="toggleChartView('log')">Logarítmica</button>
                 <button class="chart-control-btn" onclick="resetZoom()">Resetar Zoom</button>
-                <button class="chart-control-btn" onclick="abrirModalTecnico()" style="background: linear-gradient(135deg, #1e40af, #3b82f6); margin-left: 10px;">ℹ️ Como funciona a simulação</button>
+                <button class="chart-control-btn" onclick="abrirModalTecnico()" style="background: linear-gradient(135deg, #1e40af, #D4AF37); margin-left: 10px;">ℹ️ Como funciona a simulação</button>
             </div>
             <div class="chart-container">
                 <canvas id="grafico"></canvas>

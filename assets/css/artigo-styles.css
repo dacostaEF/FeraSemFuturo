@@ -52,8 +52,8 @@
 }
 
 .breadcrumb a:hover {
-    color: var(--blue-action);
-    text-decoration: underline; /* ADICIONADO: sublinhado no hover para feedback claro */
+    color: #D4AF37;
+    text-decoration: underline;
 }
 
 .breadcrumb-separator {
@@ -62,12 +62,12 @@
 }
 
 .breadcrumb-current {
-    color: #FFFFFF; /* MELHORADO: 0.9 → 100% branco (destaque total) */
-    font-weight: 600; /* MELHORADO: 500 → 600 (mais destaque) */
-    background: rgba(42, 127, 255, 0.15); /* ADICIONADO: fundo sutil para destaque */
-    padding: 4px 10px; /* ADICIONADO: espaçamento interno */
-    border-radius: 6px; /* ADICIONADO: bordas arredondadas */
-    border-left: 3px solid var(--blue-action); /* ADICIONADO: barra azul indicando "você está aqui" */
+    color: #D4AF37;
+    font-weight: 600;
+    background: rgba(212, 175, 55, 0.1);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border-left: 3px solid #D4AF37;
 }
 
 /* Meta do Artigo - REMOVIDO (poluição visual desnecessária) */
@@ -329,11 +329,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--blue-action);
-    color: #FFFFFF;
+    background: linear-gradient(135deg, #D4AF37, #B8960C);
+    color: #0D0D0D;
     font-size: 18px;
     font-weight: 700;
     border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
 }
 
 .tip-content h3 {
