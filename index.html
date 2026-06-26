@@ -704,6 +704,56 @@
         }
 
         /* ================================================
+           RISK CARDS — Hover laranja de alerta
+           Cards da seção "Renda Variável tem riscos"
+           ================================================ */
+        @keyframes risk-glow-pulse {
+            0%, 100% {
+                box-shadow:
+                    0 8px 24px rgba(245, 158, 11, 0.2),
+                    0 0 0 1px rgba(245, 158, 11, 0.3);
+            }
+            50% {
+                box-shadow:
+                    0 12px 32px rgba(245, 158, 11, 0.4),
+                    0 0 0 1px rgba(245, 158, 11, 0.6);
+            }
+        }
+
+        @keyframes risk-icon-pulse {
+            0%, 100% { transform: scale(1); }
+            50%       { transform: scale(1.18); }
+        }
+
+        .risk-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(245, 158, 11, 0.15) !important;
+        }
+
+        .risk-card:hover {
+            border-color: rgba(245, 158, 11, 0.7) !important;
+            transform: translateY(-6px);
+            background: rgba(245, 158, 11, 0.04) !important;
+            animation: risk-glow-pulse 1.8s ease-in-out infinite;
+        }
+
+        .risk-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .risk-card:hover .risk-icon {
+            animation: risk-icon-pulse 1.2s ease-in-out infinite;
+        }
+
+        .risk-card .investment-badge {
+            color: rgba(245, 158, 11, 0.9) !important;
+            font-weight: 600;
+        }
+
+        /* ================================================
            ETF TOOLTIP — INVLAB Premium
            Popup elegante ao passar sobre o código do ETF
            ================================================ */
@@ -2171,30 +2221,33 @@
 
                     <!-- AVISOS IMPORTANTES -->
                     <div class="info-section highlight-section">
-                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 56px; margin-bottom: 36px; letter-spacing: -0.01em;">⚠️ Atenção: Renda Variável tem riscos</h2>
-                        
-                        <div class="investment-types">
-                            <div class="investment-card avancado">
+                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #F59E0B; text-align: center; margin-top: 56px; margin-bottom: 36px; letter-spacing: -0.01em;">⚠️ Atenção: Renda Variável tem riscos</h2>
+
+                        <div class="investment-types risk-cards-group">
+                            <div class="investment-card avancado risk-card">
                                 <div class="investment-header">
-                                    <span class="investment-badge">📉 Volatilidade</span>
+                                    <span class="risk-icon">📉</span>
+                                    <span class="investment-badge">Volatilidade</span>
                                 </div>
                                 <p class="investment-description">
                                     Preços sobem e descem diariamente. Não entre em pânico com quedas temporárias.
                                 </p>
                             </div>
 
-                            <div class="investment-card avancado">
+                            <div class="investment-card avancado risk-card">
                                 <div class="investment-header">
-                                    <span class="investment-badge">⏳ Longo Prazo</span>
+                                    <span class="risk-icon">⏳</span>
+                                    <span class="investment-badge">Longo Prazo</span>
                                 </div>
                                 <p class="investment-description">
                                     Renda variável funciona melhor com prazos longos (5+ anos). Não é para dinheiro curto.
                                 </p>
                             </div>
 
-                            <div class="investment-card avancado">
+                            <div class="investment-card avancado risk-card">
                                 <div class="investment-header">
-                                    <span class="investment-badge">🧠 Conhecimento</span>
+                                    <span class="risk-icon">🧠</span>
+                                    <span class="investment-badge">Conhecimento</span>
                                 </div>
                                 <p class="investment-description">
                                     Estude antes de investir. Não compre apenas por indicação.
