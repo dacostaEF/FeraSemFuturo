@@ -702,6 +702,174 @@
                 font-size: 0.85rem !important;
             }
         }
+
+        /* ================================================
+           ETF TOOLTIP — INVLAB Premium
+           Popup elegante ao passar sobre o código do ETF
+           ================================================ */
+        .etf-tooltip {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            cursor: default;
+        }
+
+        .etf-tooltip .etf-code {
+            color: #D4AF37;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            border-bottom: 1px dashed rgba(212, 175, 55, 0.5);
+            transition: border-color 0.2s ease;
+        }
+
+        .etf-tooltip:hover .etf-code {
+            border-bottom-color: #D4AF37;
+        }
+
+        .etf-info-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 50%;
+            font-size: 10px;
+            color: #D4AF37;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 1;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .etf-tooltip:hover .etf-info-icon {
+            background: rgba(212, 175, 55, 0.3);
+            border-color: #D4AF37;
+        }
+
+        .etf-popup {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            background: rgba(18, 18, 18, 0.98);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 2px 8px rgba(212, 175, 55, 0.1);
+            backdrop-filter: blur(12px);
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+            transform: translateX(-50%) translateY(4px);
+        }
+
+        .etf-popup::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: rgba(212, 175, 55, 0.35);
+        }
+
+        .etf-tooltip:hover .etf-popup,
+        .etf-tooltip.active .etf-popup {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .etf-popup-header {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #D4AF37;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .etf-popup-row {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 8px;
+        }
+
+        .etf-popup-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: rgba(16, 185, 129, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 2px;
+        }
+
+        .etf-popup-value {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82rem;
+            color: #E4E4E4;
+            line-height: 1.45;
+        }
+
+        .etf-popup-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-top: 8px;
+        }
+
+        .etf-popup-tag.iniciante {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .etf-popup-tag.internacional {
+            background: rgba(42, 127, 255, 0.15);
+            color: #2A7FFF;
+            border: 1px solid rgba(42, 127, 255, 0.3);
+        }
+
+        .etf-popup-tag.volatil {
+            background: rgba(245, 158, 11, 0.12);
+            color: #F59E0B;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        /* Mobile: popup abaixo em vez de acima */
+        @media (max-width: 768px) {
+            .etf-popup {
+                bottom: auto;
+                top: calc(100% + 10px);
+                width: 260px;
+                transform: translateX(-30%) translateY(-4px);
+            }
+
+            .etf-popup::after {
+                top: auto;
+                bottom: 100%;
+                border-top-color: transparent;
+                border-bottom-color: rgba(212, 175, 55, 0.35);
+            }
+
+            .etf-tooltip:hover .etf-popup,
+            .etf-tooltip.active .etf-popup {
+                transform: translateX(-30%) translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -1765,10 +1933,77 @@
                                     Fundos de Índice que replicam carteiras teóricas.
                                 </p>
                                 <ul class="investment-list">
-                                    <li><strong>BOVA11:</strong> acompanha o Ibovespa (maiores empresas)</li>
-                                    <li><strong>IVVB11:</strong> investe no S&P 500 (EUA)</li>
+                                    <li>
+                                        <span class="etf-tooltip">
+                                            <span class="etf-code">BOVA11</span>
+                                            <i class="etf-info-icon">i</i>
+                                            <div class="etf-popup">
+                                                <div class="etf-popup-header">📊 BOVA11 — Replica o Ibovespa</div>
+                                                <div class="etf-popup-row">
+                                                    <span class="etf-popup-label">Critério de peso</span>
+                                                    <span class="etf-popup-value">Ponderado pelo free float (valor de mercado em circulação) das maiores empresas da B3</span>
+                                                </div>
+                                                <div class="etf-popup-row">
+                                                    <span class="etf-popup-label">Como funciona</span>
+                                                    <span class="etf-popup-value">O gestor compra ações exatamente na proporção do Ibovespa. Se Petrobras pesa 10% no índice, 10% do fundo está em Petrobras</span>
+                                                </div>
+                                                <div class="etf-popup-row">
+                                                    <span class="etf-popup-label">Resultado prático</span>
+                                                    <span class="etf-popup-value">Se o Ibovespa sobe 2%, o valor do BOVA11 sobe ~2%</span>
+                                                </div>
+                                                <span class="etf-popup-tag iniciante">✓ Ideal para iniciantes</span>
+                                            </div>
+                                        </span>
+                                        — replica o Ibovespa (maiores empresas do Brasil)
+                                    </li>
+                                    <li>
+                                        <span class="etf-tooltip">
+                                            <span class="etf-code">IVVB11</span>
+                                            <i class="etf-info-icon">i</i>
+                                            <div class="etf-popup">
+                                                <div class="etf-popup-header">🌎 IVVB11 — Replica o S&P 500</div>
+                                                <div class="etf-popup-row">
+                                                    <span class="etf-popup-label">Critério de peso</span>
+                                                    <span class="etf-popup-value">500 maiores empresas dos EUA ponderadas por capitalização de mercado</span>
+                                                </div>
+                                                <div class="etf-popup-row">
+                                                    <span class="etf-popup-label">Componente cambial</span>
+                                                    <span class="etf-popup-value">O valor inclui a variação das ações americanas multiplicada pela variação do dólar (USD/BRL)</span>
+                                                </div>
+                                                <div class="etf-popup-row">
+                                                    <span class="etf-popup-label">Como funciona</span>
+                                                    <span class="etf-popup-value">O fundo compra cotas do IVV (ETF da BlackRock nos EUA) e converte para reais</span>
+                                                </div>
+                                                <span class="etf-popup-tag internacional">🌎 Exposição internacional + câmbio</span>
+                                            </div>
+                                        </span>
+                                        — replica o S&P 500, as 500 maiores empresas dos EUA
+                                    </li>
+                                    <li>
+                                        <span class="etf-tooltip">
+                                            <span class="etf-code">SMAL11</span>
+                                            <i class="etf-info-icon">i</i>
+                                            <div class="etf-popup">
+                                                <div class="etf-popup-header">📈 SMAL11 — Replica o Índice SMLL</div>
+                                                <div class="etf-popup-row">
+                                                    <span class="etf-popup-label">Critério de peso</span>
+                                                    <span class="etf-popup-value">Foca em small caps — empresas menores e menos líquidas da B3, excluindo as gigantes do Ibovespa</span>
+                                                </div>
+                                                <div class="etf-popup-row">
+                                                    <span class="etf-popup-label">Como funciona</span>
+                                                    <span class="etf-popup-value">O gestor acompanha a carteira teórica do Índice Small Cap da B3. O peso de cada empresa é limitado para garantir diversificação</span>
+                                                </div>
+                                                <div class="etf-popup-row">
+                                                    <span class="etf-popup-label">Resultado prático</span>
+                                                    <span class="etf-popup-value">O valor oscila conforme a performance média dessas empresas em crescimento</span>
+                                                </div>
+                                                <span class="etf-popup-tag volatil">⚡ Mais volátil — maior potencial</span>
+                                            </div>
+                                        </span>
+                                        — small caps da B3, empresas menores com maior potencial
+                                    </li>
                                     <li>Diversificação automática com um único investimento</li>
-                        </ul>
+                                </ul>
                             </div>
 
                             <!-- FIIs -->
@@ -2714,6 +2949,19 @@
         const mobileMenuLinks = document.querySelectorAll('.mobile-menu-list a');
         mobileMenuLinks.forEach(link => {
             link.addEventListener('click', fecharMenuMobile);
+        });
+
+        // ETF Tooltips — suporte a clique no mobile
+        document.querySelectorAll('.etf-tooltip').forEach(tooltip => {
+            tooltip.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isActive = this.classList.contains('active');
+                document.querySelectorAll('.etf-tooltip').forEach(t => t.classList.remove('active'));
+                if (!isActive) this.classList.add('active');
+            });
+        });
+        document.addEventListener('click', function() {
+            document.querySelectorAll('.etf-tooltip').forEach(t => t.classList.remove('active'));
         });
     </script>
 </body>
