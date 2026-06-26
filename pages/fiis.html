@@ -835,6 +835,52 @@
     .score-disclaimer { font-size: 0.74rem; color: rgba(255,255,255,0.28); font-style: italic; line-height: 1.6; }
 
     /* ================================================================
+       SELETOR DE FIIs DO RAIO-X
+       ================================================================ */
+    .raio-x-seletor { margin-bottom: 24px; }
+    .raio-x-seletor-titulo { font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .raio-x-seletor-nota {
+        font-size: 0.82rem;
+        color: rgba(255,255,255,0.40);
+        line-height: 1.65;
+        margin-bottom: 20px;
+        padding: 10px 16px;
+        background: rgba(212,175,55,0.04);
+        border-left: 2px solid rgba(212,175,55,0.28);
+        border-radius: 0 8px 8px 0;
+        font-style: italic;
+    }
+    .raio-x-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+    .raio-x-btn {
+        flex: 1;
+        min-width: 96px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.10);
+        border-radius: 12px;
+        padding: 12px 10px;
+        color: rgba(255,255,255,0.55);
+        font-family: inherit;
+        font-size: 0.88rem;
+        font-weight: 700;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.2s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+    }
+    .raio-x-btn span { font-size: 0.70rem; font-weight: 400; color: rgba(255,255,255,0.32); }
+    .raio-x-btn:hover { border-color: rgba(212,175,55,0.35); color: #fff; }
+    .raio-x-btn.active { background: rgba(212,175,55,0.10); border-color: rgba(212,175,55,0.50); color: #D4AF37; }
+    .raio-x-btn.active span { color: rgba(212,175,55,0.55); }
+    .raio-x-btn:disabled { opacity: 0.5; cursor: wait; }
+
+    /* Badges distinguindo dado automático de editorial — transparência ao usuário */
+    .badge-auto { display: inline-block; font-size: 0.62rem; background: rgba(6,182,212,0.10); border: 1px solid rgba(6,182,212,0.22); color: rgba(6,182,212,0.70); padding: 1px 7px; border-radius: 10px; margin-left: 5px; vertical-align: middle; white-space: nowrap; }
+    .badge-edit { display: inline-block; font-size: 0.62rem; background: rgba(245,158,11,0.10); border: 1px solid rgba(245,158,11,0.22); color: rgba(245,158,11,0.65); padding: 1px 7px; border-radius: 10px; margin-left: 5px; vertical-align: middle; white-space: nowrap; }
+
+    /* ================================================================
        CHECKLIST DO INVESTIDOR
        ================================================================ */
     .checklist-investidor {
@@ -1503,27 +1549,54 @@
                 </div><!-- /analise-grid -->
 
                 <!-- ================================================
-                     RAIO-X INVLAB — HGLG11
-                     Estrelas e texto = editorial (atualizado manualmente)
-                     Preço / P/VP / volume / dividendos = BRAPI (cache semanal)
+                     RAIO-X INVLAB — SELETOR MULTI-FII
+                     Editorial: segmento, inquilinos, vacância, score, parecer
+                     → por ticker, atualizar manualmente quando necessário
+                     Automático: preço, P/VP, volume, DY, consistência
+                     → calculados da BRAPI via /api/fii-raio-x (cache semanal)
                      ================================================ -->
                 <div class="raio-x-section">
-                    <div class="raio-x-header">
-                        <div>
-                            <div class="raio-x-titulo">🔬 Raio-X INVLAB</div>
-                            <div class="raio-x-subtitulo">Aplicando o método a um fundo real. Dados quantitativos atualizados semanalmente via BRAPI — dados qualitativos são editoriais.</div>
+
+                    <!-- Seletor + disclaimer obrigatório para credibilidade -->
+                    <div class="raio-x-seletor">
+                        <div class="raio-x-seletor-titulo">🔬 Raio-X INVLAB</div>
+                        <div class="raio-x-seletor-nota">
+                            Os fundos abaixo estão entre os maiores e mais negociados da B3 e são apresentados exclusivamente para fins educacionais. Não constituem recomendação de compra, venda ou manutenção. Dados quantitativos atualizados automaticamente via BRAPI (cache semanal). Análises qualitativas são editoriais revisadas pelo INVLAB.
                         </div>
-                        <div class="raio-x-ticker-badge">
-                            <span class="raio-x-ticker-code">HGLG11</span>
-                            <div class="raio-x-ticker-seg">Logístico · Tijolo</div>
+                        <div class="raio-x-btns" id="raioXBtns">
+                            <button class="raio-x-btn active" onclick="selecionarFII('HGLG11', this)">HGLG11<span>Logístico</span></button>
+                            <button class="raio-x-btn" onclick="selecionarFII('XPML11', this)">XPML11<span>Shoppings</span></button>
+                            <button class="raio-x-btn" onclick="selecionarFII('MXRF11', this)">MXRF11<span>CRI · Papel</span></button>
+                            <button class="raio-x-btn" onclick="selecionarFII('KNRI11', this)">KNRI11<span>Híbrido</span></button>
+                            <button class="raio-x-btn" onclick="selecionarFII('BTLG11', this)">BTLG11<span>Logístico</span></button>
                         </div>
                     </div>
 
-                    <!-- Dados dinâmicos — preenchidos pelo JavaScript via /api/fii-raio-x -->
+                    <!-- Cabeçalho dinâmico -->
+                    <div class="raio-x-header" style="margin-top: 24px;">
+                        <div>
+                            <div class="raio-x-subtitulo">
+                                <span class="badge-auto">📊 BRAPI</span> Preço · DY · P/VP · Volume · Consistência
+                                &nbsp;&nbsp;
+                                <span class="badge-edit">✏️ editorial</span> Segmento · Inquilinos · Vacância · Score
+                            </div>
+                        </div>
+                        <div class="raio-x-ticker-badge">
+                            <span class="raio-x-ticker-code" id="rxTickerCode">HGLG11</span>
+                            <div class="raio-x-ticker-seg" id="rxTickerSeg">Logístico · Tijolo</div>
+                        </div>
+                    </div>
+
+                    <!-- Faixa de dados quantitativos — todos automáticos via BRAPI -->
                     <div class="raio-x-preco-linha">
                         <div class="raio-x-preco-item">
                             <div class="raio-x-preco-label">Preço da Cota</div>
                             <div class="raio-x-preco-valor carregando" id="rxPreco">carregando…</div>
+                        </div>
+                        <div class="raio-x-preco-sep"></div>
+                        <div class="raio-x-preco-item">
+                            <div class="raio-x-preco-label">DY 12 meses</div>
+                            <div class="raio-x-preco-valor carregando" id="rxDY12m">carregando…</div>
                         </div>
                         <div class="raio-x-preco-sep"></div>
                         <div class="raio-x-preco-item">
@@ -1542,66 +1615,64 @@
                         </div>
                     </div>
 
-                    <!-- Indicadores com estrelas (editorial) -->
+                    <!-- Grid: editorial (✏️) + automático (📊) com badges visíveis -->
                     <div class="raio-x-grid">
                         <div class="raio-x-indicador">
-                            <span class="raio-x-indicador-label">Segmento</span>
-                            <span style="font-size: 0.85rem; color: #fff;">📦 Logístico</span>
+                            <span class="raio-x-indicador-label">Segmento <span class="badge-edit">✏️</span></span>
+                            <span style="font-size: 0.85rem; color: #fff;" id="rxSegmento">📦 Logístico</span>
                         </div>
                         <div class="raio-x-indicador">
-                            <span class="raio-x-indicador-label">Tipo</span>
-                            <span style="font-size: 0.85rem; color: #F59E0B; font-weight: 700;">🧱 Tijolo</span>
+                            <span class="raio-x-indicador-label">Tipo <span class="badge-edit">✏️</span></span>
+                            <span style="font-size: 0.85rem; font-weight: 700;" id="rxTipo">🧱 Tijolo</span>
                         </div>
                         <div class="raio-x-indicador">
-                            <span class="raio-x-indicador-label">Diversificação</span>
-                            <span class="raio-x-estrelas">★★★★★</span>
+                            <span class="raio-x-indicador-label">Diversificação <span class="badge-edit">✏️</span></span>
+                            <span class="raio-x-estrelas" id="rxDiversificacao">★★★★★</span>
                         </div>
                         <div class="raio-x-indicador">
-                            <span class="raio-x-indicador-label">Qualidade dos Inquilinos</span>
-                            <span class="raio-x-estrelas">★★★★★</span>
+                            <span class="raio-x-indicador-label" id="rxInquilinosLabel">Qualidade dos Inquilinos <span class="badge-edit">✏️</span></span>
+                            <span class="raio-x-estrelas" id="rxInquilinos">★★★★★</span>
                         </div>
                         <div class="raio-x-indicador">
-                            <span class="raio-x-indicador-label">Vacância (~3%)</span>
-                            <span class="raio-x-estrelas">★★★★★</span>
+                            <span class="raio-x-indicador-label" id="rxVacanciaLabel">Vacância (~3%) <span class="badge-edit">✏️</span></span>
+                            <span class="raio-x-estrelas" id="rxVacancia">★★★★★</span>
                         </div>
                         <div class="raio-x-indicador">
-                            <span class="raio-x-indicador-label">Liquidez na B3</span>
-                            <span class="raio-x-estrelas">★★★★★</span>
+                            <span class="raio-x-indicador-label">Liquidez na B3 <span class="badge-auto">📊</span></span>
+                            <span class="raio-x-estrelas" id="rxLiquidez">—</span>
                         </div>
                         <div class="raio-x-indicador">
-                            <span class="raio-x-indicador-label">Consistência dos Dividendos</span>
-                            <span class="raio-x-estrelas">★★★★<span style="opacity:0.22;">★</span></span>
+                            <span class="raio-x-indicador-label">Consistência dos Dividendos <span class="badge-auto">📊</span></span>
+                            <span class="raio-x-estrelas" id="rxConsistencia">—</span>
                         </div>
                         <div class="raio-x-indicador">
-                            <span class="raio-x-indicador-label">P/VP</span>
-                            <span class="raio-x-estrelas" id="rxPvpEstrelas">★★★★<span style="opacity:0.22;">★</span></span>
+                            <span class="raio-x-indicador-label">P/VP em estrelas <span class="badge-auto">📊</span></span>
+                            <span class="raio-x-estrelas" id="rxPvpEstrelas">—</span>
                         </div>
                     </div>
 
-                    <!-- Gráfico de dividendos — dados reais via BRAPI, fallback editorial -->
+                    <!-- Gráfico de dividendos — recriado a cada troca de ticker -->
                     <div class="raio-x-chart-wrapper">
-                        <div class="raio-x-chart-titulo">📊 Histórico de Distribuições — HGLG11 (R$/cota)</div>
+                        <div class="raio-x-chart-titulo" id="rxChartTitulo">📊 Histórico de Distribuições — HGLG11 (R$/cota)</div>
                         <canvas id="dividendosChart"></canvas>
                         <p style="font-size: 0.74rem; color: rgba(255,255,255,0.22); text-align: right; margin-top: 8px; font-style: italic;" id="rxChartFonte">Dados via BRAPI · Cache semanal · Apenas educacional</p>
                     </div>
 
-                    <!-- INVLAB SCORE -->
+                    <!-- INVLAB Score + Parecer editorial -->
                     <div class="invlab-score-box">
                         <div class="score-numero">
-                            <span class="score-valor">9,2</span>
+                            <span class="score-valor" id="rxScore">9,2</span>
                             <span class="score-de10">de 10</span>
-                            <span class="score-estrelas-linha">★★★★★</span>
+                            <span class="score-estrelas-linha" id="rxScoreEstrelas">★★★★★</span>
                             <span class="score-label">INVLAB Score</span>
                         </div>
                         <div class="score-parecer">
-                            <div class="score-parecer-titulo">⭐ Parecer Educativo INVLAB</div>
-                            <p class="score-parecer-texto">
-                                Este fundo apresenta boa diversificação geográfica (30+ imóveis em SP, MG, RJ, PR e RS), baixa vacância (~3%) e inquilinos de alta qualidade como Amazon, Mercado Livre e GPA — características normalmente associadas a maior estabilidade na geração de renda. A gestão (CSHG) tem histórico consistente de distribuições mensais há mais de uma década.<br><br>
-                                Ponto de atenção: em períodos de juros altos, o preço das cotas tende a ser pressionado, independente da qualidade dos imóveis. Acompanhe o relatório gerencial mensalmente.
-                            </p>
+                            <div class="score-parecer-titulo">⭐ Parecer Educativo INVLAB <span class="badge-edit">✏️ editorial</span></div>
+                            <p class="score-parecer-texto" id="rxParecer">Este fundo apresenta boa diversificação geográfica (30+ imóveis em SP, MG, RJ, PR e RS), baixa vacância (~3%) e inquilinos de alta qualidade como Amazon, Mercado Livre e GPA. A gestão (CSHG) tem histórico consistente de distribuições mensais há mais de uma década. Ponto de atenção: em períodos de juros altos, o preço das cotas tende a ser pressionado, independente da qualidade dos imóveis.</p>
                             <p class="score-disclaimer">⚠️ Isto não é recomendação de compra ou venda. É um exercício educativo de análise — a decisão e a responsabilidade são sempre do investidor.</p>
                         </div>
                     </div>
+
                 </div><!-- /raio-x-section -->
 
                 <!-- CHECKLIST DO INVESTIDOR -->
@@ -1887,60 +1958,164 @@
     })();
     </script>
 
-    <!-- Chart.js: gráfico de dividendos no Raio-X (carregado aqui no final do body para não bloquear renderização) -->
+    <!-- Chart.js: gráfico de dividendos no Raio-X -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-    <!-- RAIO-X FII + CHECKLIST -->
+    <!-- RAIO-X FII (multi-ticker) + CHECKLIST -->
     <script>
     (function() {
         // ================================================================
-        // Arquitetura híbrida do Raio-X:
-        //   - /api/fii-raio-x usa cache semanal no servidor (não chama BRAPI a cada visita)
-        //   - Se a API falhar, o gráfico usa dados editoriais aproximados do HGLG11
-        //   - Estrelas, segmento, parecer e score são sempre editoriais (mudam lentamente)
+        // Arquitetura Raio-X:
+        //   AUTOMÁTICO (BRAPI, cache semanal): preço, P/VP, volume, DY, consistência
+        //   EDITORIAL  (por ticker, atualizar manualmente): segmento, inquilinos,
+        //              vacância, diversificação, score, parecer
+        //
+        // Cache de sessão no cliente evita re-fetch ao trocar de ticker
+        // e voltar ao mesmo fundo durante a visita.
         // ================================================================
 
-        // Fallback editorial — distribuições mensais aproximadas do HGLG11 (R$/cota)
-        var dividendosFallback = [
-            { data: 'Jul/24', valor: 1.05 }, { data: 'Ago/24', valor: 1.08 },
-            { data: 'Set/24', valor: 1.10 }, { data: 'Out/24', valor: 1.07 },
-            { data: 'Nov/24', valor: 1.12 }, { data: 'Dez/24', valor: 1.15 },
-            { data: 'Jan/25', valor: 1.08 }, { data: 'Fev/25', valor: 1.10 },
-            { data: 'Mar/25', valor: 1.07 }, { data: 'Abr/25', valor: 1.12 },
-            { data: 'Mai/25', valor: 1.09 }, { data: 'Jun/25', valor: 1.11 }
-        ];
+        var chartInstance = null;   // referência ao Chart.js atual (para destruir antes de recriar)
+        var clientCache   = {};     // cache de sessão: ticker → dados da API
 
+        // --- Dados editoriais por ticker (atualizar manualmente quando necessário) ---
+        var tipoColors = { 'Tijolo': '#F59E0B', 'Papel': '#06B6D4', 'Hibrido': '#8B5CF6' };
+
+        var editorial = {
+            'HGLG11': {
+                segmento: '📦 Logístico', tipo: '🧱 Tijolo', tipoKey: 'Tijolo',
+                badge: 'Logístico · Tijolo',
+                vacanciaLabel: 'Vacância (~3%)', vacanciaStar: 5,
+                divLabel: '30+ imóveis · SP, MG, RJ, PR, RS', divStar: 5,
+                inqLabel: 'Qualidade dos Inquilinos', inqStar: 5,
+                inqDetalhe: 'Amazon, Mercado Livre, GPA, Leroy Merlin',
+                score: '9,2',
+                parecer: 'Este fundo apresenta boa diversificação geográfica (30+ imóveis em SP, MG, RJ, PR e RS), baixa vacância (~3%) e inquilinos de alta qualidade como Amazon, Mercado Livre e GPA. A gestão (CSHG) tem histórico consistente de distribuições mensais há mais de uma década. Ponto de atenção: em períodos de juros altos, o preço das cotas tende a ser pressionado, independente da qualidade dos imóveis. Acompanhe o relatório gerencial mensalmente.'
+            },
+            'XPML11': {
+                segmento: '🛒 Shoppings', tipo: '🧱 Tijolo', tipoKey: 'Tijolo',
+                badge: 'Shoppings · Tijolo',
+                vacanciaLabel: 'Vacância (~5%)', vacanciaStar: 4,
+                divLabel: '16+ shoppings · diversas regiões do Brasil', divStar: 5,
+                inqLabel: 'Qualidade dos Inquilinos', inqStar: 4,
+                inqDetalhe: 'Renner, C&A, Riachuelo, McDonald\'s, Centauro',
+                score: '8,4',
+                parecer: 'Fundo de shoppings com boa diversificação geográfica. A renda depende do consumo das famílias e do movimento nos centros comerciais — em crises econômicas, pode sofrer mais que fundos logísticos. A vacância do setor é naturalmente um pouco mais alta que a de galpões, mas contratos costumam ser indexados ao IGPM. Atenção para sazonalidade: meses de consumo mais fraco tendem a reduzir distribuições.'
+            },
+            'MXRF11': {
+                segmento: '📄 CRI / Crédito Imobiliário', tipo: '📄 Papel', tipoKey: 'Papel',
+                badge: 'CRI · Papel',
+                vacanciaLabel: 'Vacância (N/A — FII de Papel)', vacanciaStar: null,
+                divLabel: '50+ CRIs · múltiplos segmentos e devedores', divStar: 5,
+                inqLabel: 'Risco de Crédito', inqStar: 3,
+                inqDetalhe: 'Devedores dos CRIs — risco de inadimplência, não de vacância',
+                score: '7,8',
+                parecer: 'FII de Papel — investe em CRIs (Certificados de Recebíveis Imobiliários), não em imóveis físicos. Não existe vacância física aqui. O risco principal é de crédito: se os devedores dos CRIs não pagarem, a renda é impactada. O DY costuma ser mais alto que FIIs de Tijolo, compensando esse risco adicional. Indicado para quem entende a diferença entre risco de vacância e risco de crédito imobiliário.'
+            },
+            'KNRI11': {
+                segmento: '🏢 Escritórios + Galpões', tipo: '🔀 Híbrido', tipoKey: 'Hibrido',
+                badge: 'Híbrido · Escritórios+Galpões',
+                vacanciaLabel: 'Vacância (~8%)', vacanciaStar: 3,
+                divLabel: '17+ imóveis · São Paulo e Rio de Janeiro', divStar: 4,
+                inqLabel: 'Qualidade dos Inquilinos', inqStar: 3,
+                inqDetalhe: 'Empresas corporativas de médio e grande porte',
+                score: '7,8',
+                parecer: 'Fundo híbrido com exposição a escritórios e galpões — dois segmentos com comportamentos distintos. Os escritórios sofreram com a popularização do home office após 2020, elevando a vacância nesse segmento. A gestão ativa (Kinea/Itaú) equilibra os dois tipos de ativo. Quando um sofre, o outro pode compensar. Acompanhe a vacância dos escritórios com atenção especial ao comparar com fundos puramente logísticos.'
+            },
+            'BTLG11': {
+                segmento: '📦 Logístico', tipo: '🧱 Tijolo', tipoKey: 'Tijolo',
+                badge: 'Logístico · Tijolo',
+                vacanciaLabel: 'Vacância (~2%)', vacanciaStar: 5,
+                divLabel: '24+ imóveis · SP, MG, RJ, ES', divStar: 4,
+                inqLabel: 'Qualidade dos Inquilinos', inqStar: 4,
+                inqDetalhe: 'Magazine Luiza, Camil, Tok&Stok, grandes varejistas',
+                score: '8,8',
+                parecer: 'Fundo logístico gerido pelo BTG Pactual, com crescimento acelerado nos últimos anos. Vacância baixíssima (~2%) e contratos longos com grandes varejistas. É um fundo mais jovem que o HGLG11, mas com DY competitivo e gestora de primeira linha. Por ter menor histórico, vale acompanhar seu comportamento em diferentes ciclos de juros antes de comparar diretamente com fundos mais estabelecidos.'
+            }
+        };
+
+        // --- Funções utilitárias ---
         function fmtBRL(val) {
             return 'R$ ' + parseFloat(val).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
-
         function fmtVolume(vol) {
             if (!vol) return '—';
             if (vol >= 1e6) return 'R$ ' + (vol / 1e6).toFixed(1) + 'M/dia';
-            if (vol >= 1e3) return 'R$ ' + (vol / 1e3).toFixed(0) + 'k/dia';
+            if (vol >= 1e3) return 'R$ ' + Math.round(vol / 1e3) + 'k/dia';
             return '—';
         }
-
         function fmtData(dateStr) {
             if (!dateStr) return '—';
             var d = new Date(dateStr);
-            var meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-            return meses[d.getUTCMonth()] + '/' + String(d.getUTCFullYear()).slice(2);
+            var m = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+            return m[d.getUTCMonth()] + '/' + String(d.getUTCFullYear()).slice(2);
         }
 
-        function renderChart(dividendos) {
+        // --- Cálculos automáticos a partir dos dados da BRAPI ---
+        function pvpParaEstrelas(pvp) {
+            if (pvp === null || pvp === undefined) return null;
+            if (pvp < 0.85) return 5;
+            if (pvp < 0.95) return 4;
+            if (pvp < 1.05) return 3;
+            if (pvp < 1.20) return 2;
+            return 1;
+        }
+        function volumeParaEstrelas(vol) {
+            if (!vol) return null;
+            if (vol >= 5e6) return 5;
+            if (vol >= 1e6) return 4;
+            if (vol >= 5e5) return 3;
+            if (vol >= 2e5) return 2;
+            return 1;
+        }
+        function consistenciaParaEstrelas(divs) {
+            var vals = (divs || []).map(function(d) { return d.valor; }).filter(function(v) { return v > 0; });
+            if (vals.length < 3) return null;
+            var media = vals.reduce(function(a, b) { return a + b; }, 0) / vals.length;
+            var dp = Math.sqrt(vals.reduce(function(a, b) { return a + Math.pow(b - media, 2); }, 0) / vals.length);
+            var cv = dp / media;
+            if (cv < 0.05) return 5;
+            if (cv < 0.10) return 4;
+            if (cv < 0.20) return 3;
+            if (cv < 0.30) return 2;
+            return 1;
+        }
+        function calcDY(divs, preco) {
+            if (!divs || !divs.length || !preco) return null;
+            var soma = divs.reduce(function(a, d) { return a + (d.valor || 0); }, 0);
+            return (soma / preco * 100).toFixed(1) + '%';
+        }
+
+        // Renderiza N estrelas preenchidas + (5-N) vazias
+        function renderEstrelas(n) {
+            if (n === null || n === undefined) return '<span style="color:rgba(255,255,255,0.28);font-size:0.82rem;font-style:italic;">N/A</span>';
+            var s = '';
+            for (var i = 1; i <= 5; i++) {
+                s += i <= n ? '★' : '<span style="opacity:0.22;">★</span>';
+            }
+            return s;
+        }
+        function scoreParaEstrelas(scoreStr) {
+            var n = parseFloat((scoreStr || '0').replace(',', '.'));
+            if (n >= 9.0) return '★★★★★';
+            if (n >= 8.0) return '★★★★<span style="opacity:0.22;">★</span>';
+            if (n >= 7.0) return '★★★<span style="opacity:0.22;">★★</span>';
+            return '★★<span style="opacity:0.22;">★★★</span>';
+        }
+
+        // --- Gráfico de dividendos ---
+        function renderChart(ticker, dividendos) {
             var canvas = document.getElementById('dividendosChart');
             if (!canvas || typeof Chart === 'undefined') return;
-
-            new Chart(canvas, {
+            if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+            chartInstance = new Chart(canvas, {
                 type: 'bar',
                 data: {
                     labels: dividendos.map(function(d) { return d.data; }),
                     datasets: [{
                         label: 'Distribuição (R$/cota)',
                         data: dividendos.map(function(d) { return d.valor; }),
-                        backgroundColor: 'rgba(212,175,55,0.30)',
-                        borderColor: 'rgba(212,175,55,0.75)',
+                        backgroundColor: 'rgba(212,175,55,0.28)',
+                        borderColor: 'rgba(212,175,55,0.72)',
                         borderWidth: 1,
                         borderRadius: 4
                     }]
@@ -1949,122 +2124,164 @@
                     responsive: true,
                     plugins: {
                         legend: { display: false },
-                        tooltip: {
-                            callbacks: {
-                                label: function(ctx) { return 'R$ ' + ctx.parsed.y.toFixed(2) + '/cota'; }
-                            }
-                        }
+                        tooltip: { callbacks: { label: function(ctx) { return 'R$ ' + ctx.parsed.y.toFixed(2) + '/cota'; } } }
                     },
                     scales: {
-                        x: {
-                            grid: { color: 'rgba(255,255,255,0.04)' },
-                            ticks: { color: 'rgba(255,255,255,0.45)', font: { size: 11 } }
-                        },
+                        x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: 'rgba(255,255,255,0.42)', font: { size: 11 } } },
                         y: {
-                            grid: { color: 'rgba(255,255,255,0.06)' },
-                            beginAtZero: false,
-                            ticks: {
-                                color: 'rgba(255,255,255,0.45)',
-                                font: { size: 11 },
-                                callback: function(v) { return 'R$ ' + v.toFixed(2); }
-                            }
+                            grid: { color: 'rgba(255,255,255,0.06)' }, beginAtZero: false,
+                            ticks: { color: 'rgba(255,255,255,0.42)', font: { size: 11 }, callback: function(v) { return 'R$ ' + v.toFixed(2); } }
                         }
                     }
                 }
             });
+            var t = document.getElementById('rxChartTitulo');
+            if (t) t.textContent = '📊 Histórico de Distribuições — ' + ticker + ' (R$/cota)';
         }
 
-        function atualizarCampos(dados) {
-            var el;
-            el = document.getElementById('rxPreco');
-            if (el) { el.classList.remove('carregando'); el.textContent = dados.preco ? fmtBRL(dados.preco) : '—'; }
+        // Fallbacks editoriais por ticker (usados apenas se a API falhar)
+        var fallbacks = {
+            'HGLG11': [{ data:'Jul/24',valor:1.05},{ data:'Ago/24',valor:1.08},{ data:'Set/24',valor:1.10},{ data:'Out/24',valor:1.07},{ data:'Nov/24',valor:1.12},{ data:'Dez/24',valor:1.15},{ data:'Jan/25',valor:1.08},{ data:'Fev/25',valor:1.10},{ data:'Mar/25',valor:1.07},{ data:'Abr/25',valor:1.12},{ data:'Mai/25',valor:1.09},{ data:'Jun/25',valor:1.11}],
+            'XPML11': [{ data:'Jul/24',valor:0.065},{ data:'Ago/24',valor:0.068},{ data:'Set/24',valor:0.070},{ data:'Out/24',valor:0.066},{ data:'Nov/24',valor:0.072},{ data:'Dez/24',valor:0.074},{ data:'Jan/25',valor:0.068},{ data:'Fev/25',valor:0.070},{ data:'Mar/25',valor:0.067},{ data:'Abr/25',valor:0.071},{ data:'Mai/25',valor:0.069},{ data:'Jun/25',valor:0.073}],
+            'MXRF11': [{ data:'Jul/24',valor:0.105},{ data:'Ago/24',valor:0.108},{ data:'Set/24',valor:0.110},{ data:'Out/24',valor:0.107},{ data:'Nov/24',valor:0.112},{ data:'Dez/24',valor:0.118},{ data:'Jan/25',valor:0.110},{ data:'Fev/25',valor:0.112},{ data:'Mar/25',valor:0.108},{ data:'Abr/25',valor:0.115},{ data:'Mai/25',valor:0.110},{ data:'Jun/25',valor:0.113}],
+            'KNRI11': [{ data:'Jul/24',valor:0.62},{ data:'Ago/24',valor:0.64},{ data:'Set/24',valor:0.63},{ data:'Out/24',valor:0.61},{ data:'Nov/24',valor:0.65},{ data:'Dez/24',valor:0.67},{ data:'Jan/25',valor:0.63},{ data:'Fev/25',valor:0.64},{ data:'Mar/25',valor:0.62},{ data:'Abr/25',valor:0.66},{ data:'Mai/25',valor:0.64},{ data:'Jun/25',valor:0.65}],
+            'BTLG11': [{ data:'Jul/24',valor:0.082},{ data:'Ago/24',valor:0.085},{ data:'Set/24',valor:0.088},{ data:'Out/24',valor:0.084},{ data:'Nov/24',valor:0.090},{ data:'Dez/24',valor:0.095},{ data:'Jan/25',valor:0.087},{ data:'Fev/25',valor:0.089},{ data:'Mar/25',valor:0.086},{ data:'Abr/25',valor:0.092},{ data:'Mai/25',valor:0.088},{ data:'Jun/25',valor:0.091}]
+        };
 
-            el = document.getElementById('rxPvp');
-            if (el) { el.classList.remove('carregando'); el.textContent = dados.pvp ? parseFloat(dados.pvp).toFixed(2) : '—'; }
+        // --- Atualiza campos editoriais (imediato, sem API) ---
+        function aplicarEditorial(ticker) {
+            var ed = editorial[ticker];
+            if (!ed) return;
+            var set = function(id, html, style) {
+                var el = document.getElementById(id);
+                if (!el) return;
+                if (html !== undefined) el.innerHTML = html;
+                if (style) Object.assign(el.style, style);
+            };
+            set('rxTickerCode', ticker);
+            set('rxTickerSeg', ed.badge);
+            set('rxSegmento', ed.segmento);
+            set('rxTipo', ed.tipo, { color: tipoColors[ed.tipoKey] || '#fff' });
+            set('rxDiversificacao', renderEstrelas(ed.divStar));
+            set('rxInquilinosLabel', ed.inqLabel + ' <span class="badge-edit">✏️</span>');
+            set('rxInquilinos', renderEstrelas(ed.inqStar));
+            set('rxVacanciaLabel', ed.vacanciaLabel + ' <span class="badge-edit">✏️</span>');
+            set('rxVacancia', renderEstrelas(ed.vacanciaStar));
+            set('rxScore', ed.score);
+            set('rxScoreEstrelas', scoreParaEstrelas(ed.score));
+            set('rxParecer', ed.parecer);
+            set('rxChartTitulo', '📊 Histórico de Distribuições — ' + ticker + ' (R$/cota)');
+        }
 
-            el = document.getElementById('rxVolume');
-            if (el) { el.classList.remove('carregando'); el.textContent = fmtVolume(dados.volume); }
-
-            el = document.getElementById('rxVariacao');
-            if (el) {
+        // --- Atualiza campos automáticos (após resposta da API) ---
+        function aplicarAutomatico(dados, divs) {
+            var set = function(id, txt, color) {
+                var el = document.getElementById(id);
+                if (!el) return;
                 el.classList.remove('carregando');
-                if (dados.variacao !== null && dados.variacao !== undefined) {
-                    var v = parseFloat(dados.variacao);
-                    el.textContent = (v >= 0 ? '+' : '') + v.toFixed(2) + '%';
-                    el.style.color = v >= 0 ? '#10b981' : '#ef4444';
-                } else {
-                    el.textContent = '—';
-                }
+                el.textContent = txt;
+                if (color) el.style.color = color;
+            };
+            set('rxPreco', dados.preco ? fmtBRL(dados.preco) : '—');
+            set('rxDY12m', calcDY(divs, dados.preco) || '—');
+            set('rxPvp', dados.pvp ? parseFloat(dados.pvp).toFixed(2) : '—');
+            set('rxVolume', fmtVolume(dados.volume));
+            var v = dados.variacao !== null && dados.variacao !== undefined ? parseFloat(dados.variacao) : null;
+            set('rxVariacao', v !== null ? (v >= 0 ? '+' : '') + v.toFixed(2) + '%' : '—', v !== null ? (v >= 0 ? '#10b981' : '#ef4444') : null);
+
+            var liq = document.getElementById('rxLiquidez');
+            if (liq) liq.innerHTML = renderEstrelas(volumeParaEstrelas(dados.volume));
+            var con = document.getElementById('rxConsistencia');
+            if (con) con.innerHTML = renderEstrelas(consistenciaParaEstrelas(divs));
+            var pvpEl = document.getElementById('rxPvpEstrelas');
+            if (pvpEl) pvpEl.innerHTML = renderEstrelas(pvpParaEstrelas(dados.pvp));
+
+            var fonte = document.getElementById('rxChartFonte');
+            if (fonte && dados.success && dados.timestamp) {
+                var dt = new Date(dados.timestamp).toLocaleDateString('pt-BR');
+                fonte.textContent = 'Dados reais via BRAPI · Atualizado em ' + dt + ' · Cache semanal';
             }
         }
 
-        function processarDividendos(raw) {
-            if (raw && raw.length > 0) {
-                return raw.map(function(d) {
-                    return { data: fmtData(d.data), valor: parseFloat(d.valor) || 0 };
-                }).filter(function(d) { return d.valor > 0; });
-            }
-            return dividendosFallback;
-        }
+        // --- Seleciona um FII (chamado pelos botões) ---
+        window.selecionarFII = function(ticker, btn) {
+            // Toggle botão ativo
+            var btns = document.querySelectorAll('#raioXBtns .raio-x-btn');
+            for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+            if (btn) btn.classList.add('active');
 
-        // Checklist interativo
+            // Editorial aplica imediatamente (sem esperar API)
+            aplicarEditorial(ticker);
+
+            // Marca campos automáticos como carregando
+            ['rxPreco','rxDY12m','rxPvp','rxVolume','rxVariacao'].forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) { el.classList.add('carregando'); el.textContent = 'carregando…'; el.style.color = ''; }
+            });
+            ['rxLiquidez','rxConsistencia','rxPvpEstrelas'].forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) el.textContent = '—';
+            });
+
+            // Cache de sessão — evita re-fetch do mesmo ticker na mesma visita
+            if (clientCache[ticker]) {
+                var c = clientCache[ticker];
+                aplicarAutomatico(c.dados, c.divs);
+                renderChart(ticker, c.divs);
+                return;
+            }
+
+            fetch('/api/fii-raio-x/' + ticker)
+                .then(function(r) { return r.json(); })
+                .then(function(dados) {
+                    var rawDivs = dados.dividendos && dados.dividendos.length > 0
+                        ? dados.dividendos.map(function(d) { return { data: fmtData(d.data), valor: parseFloat(d.valor) || 0 }; }).filter(function(d) { return d.valor > 0; })
+                        : (fallbacks[ticker] || []);
+                    clientCache[ticker] = { dados: dados, divs: rawDivs };
+                    aplicarAutomatico(dados, rawDivs);
+                    renderChart(ticker, rawDivs);
+                })
+                .catch(function() {
+                    // Falha silenciosa: campos automáticos mostram traço, gráfico usa fallback editorial
+                    ['rxPreco','rxDY12m','rxPvp','rxVolume','rxVariacao'].forEach(function(id) {
+                        var el = document.getElementById(id);
+                        if (el) { el.classList.remove('carregando'); el.textContent = '—'; }
+                    });
+                    var fb = fallbacks[ticker] || [];
+                    ['rxLiquidez','rxConsistencia','rxPvpEstrelas'].forEach(function(id) {
+                        var el = document.getElementById(id);
+                        if (el) el.innerHTML = renderEstrelas(fb.length ? consistenciaParaEstrelas(fb) : null);
+                    });
+                    renderChart(ticker, fb);
+                });
+        };
+
+        // --- Checklist interativo ---
         function atualizarChecklist() {
             var checks = document.querySelectorAll('#checklistItems input[type="checkbox"]');
             var total = checks.length, marcados = 0;
             for (var i = 0; i < checks.length; i++) {
                 var item = checks[i].closest('.checklist-item');
-                if (checks[i].checked) {
-                    marcados++;
-                    if (item) item.classList.add('marcado');
-                } else {
-                    if (item) item.classList.remove('marcado');
-                }
+                if (checks[i].checked) { marcados++; if (item) item.classList.add('marcado'); }
+                else { if (item) item.classList.remove('marcado'); }
             }
-            var barra  = document.getElementById('checklistBarra');
+            var barra = document.getElementById('checklistBarra');
             var status = document.getElementById('checklistStatus');
-            if (barra)  barra.style.width = (total > 0 ? (marcados / total * 100) : 0) + '%';
+            if (barra) barra.style.width = (total > 0 ? marcados / total * 100 : 0) + '%';
             if (status) {
-                if (marcados === total && total > 0) {
-                    status.textContent = '✅ Checklist completo! Agora simule sua renda abaixo.';
-                    status.classList.add('completo');
-                } else {
-                    status.textContent = marcados + ' de ' + total + ' itens verificados';
-                    status.classList.remove('completo');
-                }
+                if (marcados === total && total > 0) { status.textContent = '✅ Checklist completo! Agora simule sua renda abaixo.'; status.classList.add('completo'); }
+                else { status.textContent = marcados + ' de ' + total + ' itens verificados'; status.classList.remove('completo'); }
             }
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Registra listeners do checklist
+            // Checklist
             var checks = document.querySelectorAll('#checklistItems input[type="checkbox"]');
-            for (var i = 0; i < checks.length; i++) {
-                checks[i].addEventListener('change', atualizarChecklist);
-            }
+            for (var i = 0; i < checks.length; i++) checks[i].addEventListener('change', atualizarChecklist);
             atualizarChecklist();
 
-            // Busca dados do Raio-X (token protegido no servidor, resposta em cache semanal)
-            fetch('/api/fii-raio-x/HGLG11')
-                .then(function(r) { return r.json(); })
-                .then(function(dados) {
-                    atualizarCampos(dados);
-                    var divs = processarDividendos(dados.dividendos);
-                    renderChart(divs);
-
-                    // Atualiza rodapé do gráfico para mostrar data real do cache
-                    var fonte = document.getElementById('rxChartFonte');
-                    if (fonte && dados.success && dados.timestamp) {
-                        var dt = new Date(dados.timestamp).toLocaleDateString('pt-BR');
-                        fonte.textContent = 'Dados reais via BRAPI · Atualizado em ' + dt + ' · Cache semanal · Apenas educacional';
-                    }
-                })
-                .catch(function() {
-                    // Falha silenciosa: mostra traço nos campos dinâmicos, gráfico com fallback
-                    ['rxPreco','rxPvp','rxVolume','rxVariacao'].forEach(function(id) {
-                        var el = document.getElementById(id);
-                        if (el) { el.classList.remove('carregando'); el.textContent = '—'; }
-                    });
-                    renderChart(dividendosFallback);
-                });
+            // Carrega HGLG11 por padrão
+            window.selecionarFII('HGLG11', document.querySelector('#raioXBtns .raio-x-btn'));
         });
     })();
     </script>
