@@ -1,58 +1,304 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ações: Análise Individual e Crescimento | INVLAB</title>
-    
-    <!-- Favicon -->
+    <title>Laboratório de Ações — Aprenda Primeiro a Não Perder Dinheiro | INVLAB</title>
+
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
-    
-    <!-- Theme Color - Barra do navegador mobile (Preto Profissional) -->
+
     <meta name="theme-color" content="#0D0D0D">
-    <meta name="msapplication-TileColor" content="#0D0D0D">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    
-    <!-- Meta Description -->
-    <meta name="description" content="Entenda Ações: análise fundamentalista, valuation e o terceiro passo na renda variável.">
-    
-    <!-- INVLAB Design System (Universal Cards) -->
+    <meta name="description" content="Laboratório de Ações: aprenda primeiro a não perder dinheiro. Psicologia do investidor, sardinhas e tubarões, análise fundamentalista — INVLAB.">
+
     <link rel="stylesheet" href="../assets/css/inv-design-system.css">
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="stylesheet" href="../assets/css/invlab-theme.css">
     <link rel="stylesheet" href="../assets/css/artigo-styles.css">
-    <!-- INVLAB Carrossel - Indicadores Renda Variável -->
     <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+
+    <style>
+    /* ================================================================
+       LABORATÓRIO AÇÕES — ESTILOS EXCLUSIVOS
+       ================================================================ */
+
+    .lab-hook {
+        background: linear-gradient(135deg, rgba(245,158,11,0.09) 0%, rgba(212,175,55,0.07) 100%);
+        border: 1px solid rgba(245,158,11,0.28);
+        border-radius: 20px; padding: 52px 40px;
+        text-align: center; margin: 32px 0 36px;
+        position: relative; overflow: hidden;
+    }
+    .lab-hook::before {
+        content: ''; position: absolute; top: -60%; left: -50%;
+        width: 200%; height: 200%;
+        background: radial-gradient(ellipse at center, rgba(245,158,11,0.05) 0%, transparent 60%);
+        pointer-events: none;
+    }
+    .lab-hook-badge {
+        display: inline-block;
+        background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.35);
+        color: #F59E0B; font-size: 0.72rem; font-weight: 700;
+        letter-spacing: 2.5px; text-transform: uppercase;
+        padding: 6px 18px; border-radius: 20px; margin-bottom: 28px;
+    }
+    .lab-hook-title { font-size: clamp(1.4rem,3.5vw,2.1rem); font-weight: 700; color: #fff; line-height: 1.6; margin-bottom: 18px; }
+    .lab-hook-destaque {
+        background: rgba(212,175,55,0.08); border-left: 3px solid #D4AF37;
+        border-radius: 0 12px 12px 0; padding: 18px 24px;
+        margin: 24px auto; max-width: 580px;
+        font-size: 1.05rem; color: #D4AF37; font-style: italic; font-weight: 600; line-height: 1.7; text-align: left;
+    }
+
+    .lab-assinatura {
+        display: flex; flex-wrap: wrap; align-items: flex-start; gap: 20px;
+        background: rgba(245,158,11,0.04); border: 1px solid rgba(245,158,11,0.16);
+        border-radius: 14px; padding: 22px 28px; margin-bottom: 36px;
+    }
+    .lab-assinatura-label { font-size: 0.82rem; font-weight: 700; color: #F59E0B; letter-spacing: 0.5px; white-space: nowrap; }
+    .lab-assinatura-items { display: flex; flex-wrap: wrap; gap: 10px 22px; }
+    .lab-assinatura-item { font-size: 0.85rem; color: rgba(255,255,255,0.65); }
+
+    .lab-header { margin-bottom: 32px; }
+    .lab-header h1 { font-size: clamp(1.6rem,4vw,2.4rem); font-weight: 800; color: #fff; margin-bottom: 10px; }
+    .lab-subtitle { font-size: 1rem; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 640px; }
+
+    .lab-progress {
+        display: flex; align-items: center; gap: 0;
+        margin-bottom: 48px; overflow-x: auto; padding-bottom: 6px;
+    }
+    .lab-step { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 72px; text-decoration: none; transition: opacity 0.2s; }
+    .lab-step:hover { opacity: 0.8; }
+    .lab-step-icon { font-size: 1.4rem; }
+    .lab-step-label { font-size: 0.68rem; font-weight: 600; color: rgba(255,255,255,0.45); text-align: center; letter-spacing: 0.5px; text-transform: uppercase; }
+    .lab-step-connector { flex: 1; height: 1px; background: rgba(212,175,55,0.18); min-width: 24px; }
+
+    .lab-stage {
+        background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 18px; padding: 36px 40px; margin-bottom: 28px;
+    }
+    .lab-stage-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .lab-stage-num { font-size: 0.7rem; font-weight: 700; color: rgba(245,158,11,0.6); letter-spacing: 2px; text-transform: uppercase; }
+    .lab-stage-title { font-size: 1.1rem; font-weight: 700; color: #F59E0B; }
+    .lab-text { font-size: 0.95rem; color: rgba(255,255,255,0.65); line-height: 1.85; margin-bottom: 22px; }
+    .lab-section-title { font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.07); padding-bottom: 10px; }
+
+    /* CENÁRIOS */
+    .cenario-compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: start; margin: 28px 0; }
+    .cenario-card { border-radius: 14px; padding: 24px 22px; }
+    .cenario-card.risco { background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.22); }
+    .cenario-card.seguro { background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.22); }
+    .cenario-titulo { font-size: 0.78rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 16px; }
+    .cenario-card.risco .cenario-titulo { color: rgba(239,68,68,0.8); }
+    .cenario-card.seguro .cenario-titulo { color: #10b981; }
+    .cenario-item { font-size: 0.85rem; color: rgba(255,255,255,0.55); padding: 5px 0; display: flex; gap: 10px; }
+    .cenario-seta { font-size: 1.6rem; color: rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; padding-top: 60px; flex-shrink: 0; }
+    .cenario-crise { margin: 12px 0; padding: 10px 14px; border-radius: 8px; font-size: 0.88rem; font-weight: 700; text-align: center; }
+    .cenario-card.risco .cenario-crise { background: rgba(239,68,68,0.10); color: #ef4444; }
+    .cenario-card.seguro .cenario-crise { background: rgba(16,185,129,0.10); color: #10b981; }
+    .cenario-resultado { margin-top: 14px; padding: 12px 14px; border-radius: 10px; font-size: 0.9rem; font-weight: 700; text-align: center; }
+    .cenario-card.risco .cenario-resultado { background: rgba(239,68,68,0.12); color: #ef4444; }
+    .cenario-card.seguro .cenario-resultado { background: rgba(16,185,129,0.12); color: #10b981; }
+
+    /* FRASE DESTAQUE */
+    .frase-destaque {
+        background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(212,175,55,0.04));
+        border: 1px solid rgba(212,175,55,0.25); border-radius: 16px;
+        padding: 30px 36px; text-align: center; margin: 32px 0;
+    }
+    .frase-destaque-texto { font-size: clamp(1.05rem,2.5vw,1.35rem); font-weight: 700; color: #D4AF37; line-height: 1.6; font-style: italic; }
+
+    /* PERGUNTA ZERO */
+    .pergunta-zero-box {
+        background: rgba(239,68,68,0.05); border: 2px solid rgba(239,68,68,0.30);
+        border-radius: 20px; padding: 40px; text-align: center; margin: 28px 0;
+    }
+    .pz-icone { font-size: 2.8rem; margin-bottom: 16px; }
+    .pz-titulo { font-size: clamp(1.1rem,2.8vw,1.5rem); font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .pz-subtitulo { font-size: 0.93rem; color: rgba(255,255,255,0.5); margin-bottom: 30px; }
+    .pz-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .pz-btn { padding: 14px 28px; border-radius: 12px; border: none; font-size: 0.92rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+    .pz-btn-nao { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.35); }
+    .pz-btn-nao:hover { background: rgba(239,68,68,0.25); }
+    .pz-btn-sim { background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.35); }
+    .pz-btn-sim:hover { background: rgba(16,185,129,0.25); }
+    .pz-alerta { display: none; margin-top: 24px; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25); border-radius: 12px; padding: 20px 24px; }
+    .pz-alerta p { font-size: 0.9rem; color: rgba(255,255,255,0.65); margin-bottom: 12px; line-height: 1.7; }
+    .pz-alerta-links { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+    .pz-alerta-link { padding: 8px 18px; background: rgba(212,175,55,0.10); border: 1px solid rgba(212,175,55,0.25); border-radius: 8px; color: #D4AF37; font-size: 0.82rem; font-weight: 600; text-decoration: none; transition: background 0.2s; }
+    .pz-alerta-link:hover { background: rgba(212,175,55,0.20); }
+    .pz-ok { display: none; margin-top: 20px; color: #10b981; font-weight: 700; font-size: 1rem; }
+
+    /* RÉGUA TEMPORAL */
+    .regua-wrap { margin: 28px 0; overflow-x: auto; }
+    .regua-linha { display: flex; align-items: flex-start; gap: 0; }
+    .regua-polo { flex: 1; text-align: center; position: relative; }
+    .regua-polo::before { content: ''; position: absolute; top: 18px; left: 50%; right: -50%; height: 2px; background: rgba(212,175,55,0.20); z-index: 0; }
+    .regua-polo:last-child::before { display: none; }
+    .regua-ponto { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; margin: 0 auto 12px; position: relative; z-index: 1; }
+    .regua-polo.curto .regua-ponto { background: rgba(16,185,129,0.15); border: 2px solid rgba(16,185,129,0.40); }
+    .regua-polo.medio .regua-ponto { background: rgba(245,158,11,0.12); border: 2px solid rgba(245,158,11,0.35); }
+    .regua-polo.longo .regua-ponto { background: rgba(212,175,55,0.12); border: 2px solid rgba(212,175,55,0.40); }
+    .regua-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+    .regua-polo.curto .regua-label { color: #10b981; }
+    .regua-polo.medio .regua-label { color: #F59E0B; }
+    .regua-polo.longo .regua-label { color: #D4AF37; }
+    .regua-item { font-size: 0.8rem; color: rgba(255,255,255,0.55); padding: 2px 0; }
+
+    /* SARDINHAS E TUBARÕES */
+    .sardinha-ciclo { display: flex; flex-direction: column; gap: 0; margin: 24px 0; }
+    .sardinha-step { display: flex; gap: 18px; align-items: flex-start; position: relative; }
+    .sardinha-step::before { content: ''; position: absolute; left: 19px; top: 40px; bottom: -12px; width: 2px; background: rgba(255,255,255,0.06); z-index: 0; }
+    .sardinha-step:last-child::before { display: none; }
+    .sardinha-num { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 800; position: relative; z-index: 1; margin-bottom: 12px; }
+    .sardinha-step.tubarao .sardinha-num  { background: rgba(99,102,241,0.15); border: 2px solid rgba(99,102,241,0.35); color: #818CF8; }
+    .sardinha-step.midia .sardinha-num    { background: rgba(245,158,11,0.12); border: 2px solid rgba(245,158,11,0.30); color: #F59E0B; }
+    .sardinha-step.sardinha .sardinha-num { background: rgba(239,68,68,0.10);  border: 2px solid rgba(239,68,68,0.28);  color: #ef4444; }
+    .sardinha-step.saida .sardinha-num    { background: rgba(99,102,241,0.15); border: 2px solid rgba(99,102,241,0.35); color: #818CF8; }
+    .sardinha-step.queda .sardinha-num    { background: rgba(239,68,68,0.10);  border: 2px solid rgba(239,68,68,0.28);  color: #ef4444; }
+    .sardinha-step.prejuizo .sardinha-num { background: rgba(239,68,68,0.15);  border: 2px solid rgba(239,68,68,0.40);  color: #ef4444; }
+    .sardinha-conteudo { padding-bottom: 24px; }
+    .sardinha-titulo { font-size: 0.92rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .sardinha-desc { font-size: 0.85rem; color: rgba(255,255,255,0.50); line-height: 1.65; }
+    .sardinha-alertas { background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.20); border-radius: 14px; padding: 24px 28px; margin-top: 28px; }
+    .sardinha-alerta-titulo { font-size: 0.82rem; font-weight: 700; color: rgba(239,68,68,0.8); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+    .sardinha-alerta-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+    .sardinha-alerta-item-icon { color: #ef4444; flex-shrink: 0; font-size: 1rem; margin-top: 1px; }
+    .sardinha-alerta-item-texto { font-size: 0.87rem; color: rgba(255,255,255,0.60); line-height: 1.6; }
+
+    /* O QUE É UMA AÇÃO */
+    .acao-equacao { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; margin: 28px 0; }
+    .acao-eq-bloco { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: 14px; padding: 20px 28px; text-align: center; }
+    .acao-eq-icone { font-size: 2rem; margin-bottom: 8px; }
+    .acao-eq-label { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+    .acao-eq-op { font-size: 1.6rem; color: rgba(255,255,255,0.25); }
+    .acao-direitos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 24px 0; }
+    .acao-direito-card { background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.15); border-radius: 12px; padding: 18px 16px; text-align: center; }
+    .acao-direito-icon { font-size: 1.4rem; margin-bottom: 8px; }
+    .acao-direito-titulo { font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.80); margin-bottom: 4px; }
+    .acao-direito-desc { font-size: 0.76rem; color: rgba(255,255,255,0.45); line-height: 1.5; }
+
+    /* 8 PERGUNTAS */
+    .analise-section { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 18px; padding: 36px 40px; margin-bottom: 28px; }
+    .analise-badge { display: inline-block; background: rgba(245,158,11,0.10); border: 1px solid rgba(245,158,11,0.25); color: #F59E0B; font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 4px 14px; border-radius: 20px; margin-bottom: 12px; }
+    .analise-titulo { font-size: 1.15rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .analise-subtitulo { font-size: 0.88rem; color: rgba(255,255,255,0.45); margin-bottom: 30px; line-height: 1.6; }
+    .analise-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 28px; }
+    .analise-pergunta { background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 20px 22px; transition: border-color 0.2s; }
+    .analise-pergunta:hover { border-color: rgba(245,158,11,0.25); }
+    .analise-pergunta-num { font-size: 0.68rem; font-weight: 700; color: rgba(245,158,11,0.55); letter-spacing: 2px; margin-bottom: 8px; }
+    .analise-pergunta-titulo { font-size: 0.93rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .analise-pergunta-desc { font-size: 0.83rem; color: rgba(255,255,255,0.50); line-height: 1.65; }
+    .moat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+    .moat-card { background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.12); border-radius: 10px; padding: 12px; text-align: center; font-size: 0.76rem; color: rgba(255,255,255,0.50); }
+    .moat-card-icon { font-size: 1.1rem; margin-bottom: 4px; }
+    .moat-card-nome { font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,0.72); margin-bottom: 3px; }
+    .pl-escala { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    .pl-tag { padding: 5px 12px; border-radius: 8px; font-size: 0.78rem; font-weight: 700; }
+    .pl-tag.verde   { background: rgba(16,185,129,0.12); color: #10b981; }
+    .pl-tag.amarelo { background: rgba(245,158,11,0.12); color: #F59E0B; }
+    .pl-tag.laranja { background: rgba(239,68,68,0.10);  color: #ef4444; }
+
+    /* DIAGNÓSTICO */
+    .diagnostico-section { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 36px 40px; margin-bottom: 28px; }
+    .diagnostico-badge { display: inline-block; background: rgba(245,158,11,0.10); border: 1px solid rgba(245,158,11,0.28); color: #F59E0B; font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 4px 14px; border-radius: 20px; margin-bottom: 12px; }
+    .diagnostico-titulo { font-size: 1.15rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .diagnostico-subtitulo { font-size: 0.85rem; color: rgba(255,255,255,0.42); line-height: 1.65; margin-bottom: 16px; }
+    .diag-disclaimer { background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.15); border-radius: 10px; padding: 12px 18px; font-size: 0.78rem; color: rgba(255,255,255,0.40); line-height: 1.6; margin-bottom: 20px; }
+    .diag-seletor-label { font-size: 0.75rem; font-weight: 700; color: rgba(255,255,255,0.35); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
+    .diag-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .diag-btn { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.09); border-radius: 10px; cursor: pointer; font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.55); transition: all 0.2s; white-space: nowrap; }
+    .diag-btn span { font-size: 0.68rem; font-weight: 400; color: rgba(255,255,255,0.28); }
+    .diag-btn:hover { border-color: rgba(245,158,11,0.30); color: #fff; }
+    .diag-btn.active { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.45); color: #F59E0B; }
+    .diag-btn.active span { color: rgba(245,158,11,0.50); }
+    .diag-ticker-info { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.06); flex-wrap: wrap; }
+    .diag-ticker-code { font-size: 1.6rem; font-weight: 800; color: #fff; }
+    .diag-ticker-nome-wrap { flex: 1; }
+    .diag-ticker-nome { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
+    .diag-ticker-seg { font-size: 0.85rem; color: rgba(255,255,255,0.45); }
+    .diag-ticker-risco { font-size: 0.72rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; border: 1px solid; white-space: nowrap; }
+    .risco-baixo { color: #10b981; border-color: rgba(16,185,129,0.35); background: rgba(16,185,129,0.08); }
+    .risco-medio { color: #F59E0B; border-color: rgba(245,158,11,0.35); background: rgba(245,158,11,0.08); }
+    .risco-alto  { color: #ef4444; border-color: rgba(239,68,68,0.35);   background: rgba(239,68,68,0.08); }
+    .diag-preco-linha { display: flex; flex-wrap: wrap; gap: 0; background: rgba(255,255,255,0.025); border-radius: 12px; overflow: hidden; margin-bottom: 24px; }
+    .diag-preco-item { flex: 1; min-width: 90px; padding: 16px 18px; }
+    .diag-preco-item + .diag-preco-item { border-left: 1px solid rgba(255,255,255,0.05); }
+    .diag-preco-label { font-size: 0.68rem; font-weight: 600; color: rgba(255,255,255,0.30); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+    .diag-preco-valor { font-size: 1.05rem; font-weight: 700; color: #fff; }
+    .diag-preco-valor.carregando { color: rgba(255,255,255,0.20); font-size: 0.8rem; animation: pulse 1.4s infinite; }
+    @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:0.7} }
+    .diag-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 24px; }
+    .diag-indicador { background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 16px 18px; }
+    .diag-ind-label { font-size: 0.70rem; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .diag-estrelas { font-size: 1.1rem; color: #D4AF37; letter-spacing: 1px; }
+    .diag-chart-wrapper { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 24px; margin-bottom: 24px; }
+    .diag-chart-titulo { font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.55); margin-bottom: 16px; }
+    .diag-chart-vazio { text-align: center; padding: 20px; color: rgba(255,255,255,0.28); font-size: 0.85rem; line-height: 1.7; }
+    #diagChart { max-height: 200px; }
+    .invlab-score-box { display: flex; align-items: center; gap: 28px; background: rgba(212,175,55,0.06); border: 1px solid rgba(212,175,55,0.20); border-radius: 14px; padding: 24px 28px; margin-bottom: 24px; }
+    .score-numero { text-align: center; flex-shrink: 0; }
+    .score-valor { font-size: 2.4rem; font-weight: 800; color: #D4AF37; line-height: 1; margin-bottom: 4px; }
+    .score-label { font-size: 0.68rem; font-weight: 700; color: rgba(212,175,55,0.55); letter-spacing: 1.5px; text-transform: uppercase; }
+    .score-estrelas { font-size: 1.05rem; color: #D4AF37; margin-top: 4px; }
+    .score-parecer { font-size: 0.87rem; color: rgba(255,255,255,0.58); line-height: 1.75; }
+    .badge-auto { display: inline-block; font-size: 0.60rem; background: rgba(6,182,212,0.10); border: 1px solid rgba(6,182,212,0.22); color: rgba(6,182,212,0.70); padding: 1px 7px; border-radius: 10px; margin-left: 5px; vertical-align: middle; white-space: nowrap; }
+    .badge-edit { display: inline-block; font-size: 0.60rem; background: rgba(245,158,11,0.10); border: 1px solid rgba(245,158,11,0.22); color: rgba(245,158,11,0.65); padding: 1px 7px; border-radius: 10px; margin-left: 5px; vertical-align: middle; white-space: nowrap; }
+
+    /* CHECKLIST */
+    .checklist-investidor { background: rgba(16,185,129,0.04); border: 1px solid rgba(16,185,129,0.18); border-radius: 16px; padding: 32px 36px; margin-bottom: 52px; }
+    .checklist-titulo { font-size: 1rem; font-weight: 700; color: #10b981; margin-bottom: 20px; }
+    .checklist-items { display: flex; flex-direction: column; gap: 12px; margin-bottom: 22px; }
+    .checklist-item { display: flex; align-items: flex-start; gap: 14px; cursor: pointer; user-select: none; }
+    .checklist-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: #10b981; cursor: pointer; flex-shrink: 0; margin-top: 2px; }
+    .checklist-item span { font-size: 0.9rem; color: rgba(255,255,255,0.68); line-height: 1.6; transition: color 0.2s, opacity 0.2s; }
+    .checklist-item.marcado span { color: #10b981; text-decoration: line-through; opacity: 0.6; }
+    .checklist-progresso { background: rgba(255,255,255,0.05); border-radius: 4px; height: 6px; overflow: hidden; margin-bottom: 10px; }
+    .checklist-barra { height: 100%; background: linear-gradient(90deg, #10b981, #059669); border-radius: 4px; transition: width 0.4s ease; width: 0%; }
+    .checklist-status { font-size: 0.8rem; color: rgba(255,255,255,0.35); text-align: center; }
+    .checklist-status.completo { color: #10b981; font-weight: 700; }
+
+    /* CTA FINAL */
+    .lab-final-cta { background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(212,175,55,0.05)); border: 1px solid rgba(245,158,11,0.22); border-radius: 20px; padding: 52px 40px; text-align: center; margin-bottom: 52px; }
+    .lab-final-cta h2 { font-size: clamp(1.3rem,3vw,1.9rem); font-weight: 800; color: #fff; margin-bottom: 14px; }
+    .lab-final-cta p { color: rgba(255,255,255,0.6); font-size: 0.93rem; line-height: 1.75; max-width: 540px; margin: 0 auto 30px; }
+    .lab-cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-lab-secondary { padding: 14px 28px; background: transparent; border: 1px solid rgba(255,255,255,0.18); border-radius: 12px; color: rgba(255,255,255,0.65); font-size: 0.92rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: border-color 0.2s; }
+    .btn-lab-secondary:hover { border-color: rgba(255,255,255,0.35); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+        .lab-hook { padding: 36px 20px; }
+        .lab-stage { padding: 24px 18px; }
+        .cenario-compare { grid-template-columns: 1fr; }
+        .cenario-seta { display: none; }
+        .acao-direitos { grid-template-columns: 1fr; }
+        .analise-grid { grid-template-columns: 1fr; }
+        .moat-grid { grid-template-columns: repeat(2, 1fr); }
+        .diag-grid { grid-template-columns: repeat(2, 1fr); }
+        .diagnostico-section { padding: 24px 18px; }
+        .invlab-score-box { flex-direction: column; }
+        .checklist-investidor { padding: 24px 18px; }
+        .lab-final-cta { padding: 36px 20px; }
+        .lab-assinatura { flex-direction: column; }
+    }
+    </style>
 </head>
 <body>
-    <!-- CARROSSEL: Indicadores Renda Variável -->
     <section id="invlab-carousel-container"></section>
 
-    <!-- Header Fixo -->
     <header class="main-header">
         <div class="header-container">
-            <!-- Logo -->
             <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
                 <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
             </div>
-            
-            <!-- Sistema de Abas INVLAB -->
             <div class="tabs-nav-wrapper">
             <nav class="tabs-nav" id="tabsNav">
-                <button class="tab-btn" onclick="window.location.href='../index.html'">
-                    🏠 Início
-                </button>
-                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">
-                    📚 Primeiros<br>Passos
-                </button>
-                
-                <!-- ABA COM DROPDOWN: RENDA FIXA -->
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Início</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">📚 Primeiros<br>Passos</button>
                 <div class="tab-with-dropdown">
-                    <button class="tab-btn dropdown-toggle">
-                        📊 Renda<br>Fixa <span class="arrow">▼</span>
-                    </button>
+                    <button class="tab-btn dropdown-toggle">📊 Renda<br>Fixa <span class="arrow">▼</span></button>
                     <ul class="dropdown-menu">
                         <li><a href="#">💰 Poupança</a></li>
                         <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
@@ -60,523 +306,585 @@
                         <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
                     </ul>
                 </div>
-                
-                <!-- ABA COM DROPDOWN: RENDA VARIÁVEL (Menu colapsável interativo) -->
                 <div class="tab-with-dropdown">
-                    <button class="tab-btn dropdown-toggle active">
-                        📈 Renda<br>Variável <span class="arrow">▼</span>
-                    </button>
+                    <button class="tab-btn dropdown-toggle active">📈 Renda<br>Variável <span class="arrow">▼</span></button>
                     <ul class="dropdown-menu">
-                        <!-- CATEGORIA 1: ETFs (Iniciante - Diversificação) -->
                         <li class="dropdown-category">
-                            <div class="category-header" data-category="etfs" onclick="window.location.href='etfs.html'" style="cursor: pointer;">
-                                <span class="category-name">💵 ETFs</span>
-                                <span class="category-arrow">▶</span>
+                            <div class="category-header" onclick="window.location.href='etfs.html'" style="cursor:pointer;">
+                                <span class="category-name">💵 ETFs</span><span class="category-arrow">▶</span>
                             </div>
                             <ul class="category-submenu" id="submenu-etfs">
                                 <li><a href="#">📊 Simulador de Indexação</a></li>
-                                <li><a href="#">📈 ETFs Nacionais</a></li>
-                                <li><a href="#">🌎 ETFs Internacionais</a></li>
                             </ul>
                         </li>
-                        
-                        <!-- CATEGORIA 2: FIIs (Intermediário - Renda Passiva) -->
                         <li class="dropdown-category">
-                            <div class="category-header" data-category="fiis" onclick="window.location.href='fiis.html'" style="cursor: pointer;">
-                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span>
-                                <span class="category-arrow">▶</span>
+                            <div class="category-header" onclick="window.location.href='fiis.html'" style="cursor:pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span><span class="category-arrow">▶</span>
                             </div>
                             <ul class="category-submenu" id="submenu-fiis">
                                 <li><a href="#">📊 Simulador de Renda Passiva</a></li>
-                                <li><a href="#">🏘️ FIIs de Tijolo</a></li>
-                                <li><a href="#">📋 FIIs de Papel</a></li>
-                                <li><a href="#">🔄 FIIs Híbridos</a></li>
-                                <li><a href="#">🎯 Como Escolher FIIs</a></li>
                             </ul>
                         </li>
-                        
-                        <!-- CATEGORIA 3: Ações (Avançado - Análise Individual) -->
                         <li class="dropdown-category">
-                            <div class="category-header" data-category="acoes" onclick="window.location.href='acoes.html'" style="cursor: pointer;">
-                                <span class="category-name">📈 Ações</span>
-                                <span class="category-arrow">▶</span>
+                            <div class="category-header" onclick="window.location.href='acoes.html'" style="cursor:pointer;">
+                                <span class="category-name">📈 Ações</span><span class="category-arrow">▶</span>
                             </div>
                             <ul class="category-submenu" id="submenu-acoes">
                                 <li><a href="#">📊 Simulador de Dividendos</a></li>
-                                <li><a href="#">💰 Valuation (P/L, P/VP)</a></li>
-                                <li><a href="#">🏭 Análise Setorial</a></li>
-                                <li><a href="#">📉 Day Trade vs Buy&Hold</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
-                
-                <!-- ABA COM DROPDOWN: CRIPTOATIVOS -->
                 <div class="tab-with-dropdown">
-                    <button class="tab-btn dropdown-toggle">
-                        🔐 Cripto<br>ativos <span class="arrow">▼</span>
-                    </button>
+                    <button class="tab-btn dropdown-toggle">🔐 Cripto<br>ativos <span class="arrow">▼</span></button>
                     <ul class="dropdown-menu">
                         <li><a href="bitcoin.html">₿ Bitcoin</a></li>
                         <li><a href="ethereum.html">⧫ Ethereum</a></li>
                         <li><a href="altcoins.html">🪙 Altcoins</a></li>
-                        <li><a href="nfts.html">🖼️ NFTs</a></li>
-                        <li><a href="tokenizacao.html">🔗 Tokenização</a></li>
                     </ul>
                 </div>
-                
-                <!-- ABA: FERRAMENTAS -->
-                <button class="tab-btn" onclick="window.location.href='../index.html#ferramentas'">
-                    🛠️ Ferramentas
-                </button>
-                
-                <!-- ABA: OUTROS INVESTIMENTOS -->
-                <button class="tab-btn" onclick="window.location.href='../index.html#outros-investimentos'">
-                    💎 Outros
-                </button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#ferramentas'">🛠️ Ferramentas</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#outros-investimentos'">💎 Outros</button>
             </nav>
             </div>
         </div>
     </header>
 
-    <!-- Conteúdo Principal -->
     <main>
         <div class="content-wrapper-wide">
-            <!-- Breadcrumb -->
+
             <nav class="breadcrumb">
                 <a href="../index.html">🏠 Início</a>
                 <span class="breadcrumb-separator">/</span>
                 <a href="../index.html#renda-variavel">📈 Renda Variável</a>
                 <span class="breadcrumb-separator">/</span>
-                <span class="breadcrumb-current">📈 Ações</span>
+                <span class="breadcrumb-current">📈 Laboratório de Ações</span>
             </nav>
 
-            <!-- Seção Educacional -->
-            <section class="section-educational">
-            <article class="article-content">
-                <!-- Título Principal -->
-                <h1 class="article-title">Ações – Análise Individual e Crescimento</h1>
-                
-                <p class="article-lead">
-                    Torne-se sócio de empresas. Entenda valuation, dividendos e por que as ações são o terceiro degrau da sua trilha na renda variável.
+            <!-- HOOK -->
+            <div class="lab-hook">
+                <div class="lab-hook-badge">📈 Laboratório de Ações</div>
+                <h2 class="lab-hook-title">A maioria dos investidores não perde dinheiro porque escolheu uma empresa ruim.</h2>
+                <p style="font-size:1rem;color:rgba(255,255,255,0.55);max-width:520px;margin:0 auto 20px;line-height:1.75;">
+                    Perde porque foi <strong style="color:#fff;">obrigada a vender uma empresa boa na pior hora.</strong><br>
+                    Por que isso acontece? Porque misturou o dinheiro da Bolsa com o dinheiro das contas do mês.
                 </p>
-
-                <!-- Hero -->
-                <div class="article-hero">
-                    <div class="hero-emoji">📈💼</div>
-                    <p class="hero-caption">Seu caminho para análise avançada</p>
-                </div>
-
-            <!-- Seção 1: O que são Ações? -->
-            <section class="article-section">
-                <h2>🎓 O que são ações?</h2>
-                
-                <p><strong>Ações são pequenas frações do capital de uma empresa.</strong></p>
-                
-                <p>Quando você compra ações, você se torna sócio daquela empresa e passa a participar:</p>
-                
-                <ul>
-                    <li>da valorização do preço da ação</li>
-                    <li>dos dividendos (parte do lucro distribuída)</li>
-                    <li>de outros eventos (bonificações, desdobramentos, etc.)</li>
-                </ul>
-
-                <p>Na renda variável, as ações são o <strong>Degrau 3 no INVLAB:</strong></p>
-                <p>Maior potencial de retorno, maior complexidade, maior necessidade de estudo.</p>
-            </section>
-
-            <!-- Callout Info -->
-            <div class="callout callout-info">
-                <div class="callout-icon">💡</div>
-                <div class="callout-content">
-                    <h3>Ações = Nível Avançado da Renda Variável</h3>
-                    <p>Você só chega aqui depois de entender bem a base: ETFs e FIIs.</p>
+                <div class="lab-hook-destaque">
+                    "O risco da Bolsa não é a queda.<br>O risco é precisar do dinheiro durante a queda."
                 </div>
             </div>
 
-            <!-- Seção 2: Características Principais -->
-            <section class="article-section">
-                <h2>💡 Características principais</h2>
-
-                <!-- Vantagens -->
-                <div class="example-card">
-                    <h3>✔ Vantagens das ações</h3>
-                    <ul>
-                        <li><strong>Potencial de valorização</strong> acima da inflação e da renda fixa no longo prazo</li>
-                        <li>Participação no crescimento de empresas reais</li>
-                        <li>Possibilidade de renda com dividendos</li>
-                        <li>Acesso a diversos setores da economia (bancos, energia, varejo, tecnologia…)</li>
-                    </ul>
-                </div>
-
-                <!-- Riscos -->
-                <div class="example-card">
-                    <h3>⚠ Riscos (sem maquiagem)</h3>
-                    <ul>
-                        <li>Alta volatilidade no curto prazo</li>
-                        <li>Preço pode cair mesmo com lucro bom (humor do mercado)</li>
-                        <li>Resultados dependem da gestão da empresa, do setor e da economia</li>
-                        <li>É possível ter perdas relevantes se não houver estratégia e disciplina</li>
-                    </ul>
-                </div>
-
-                <!-- Perfil Ideal -->
-                <div class="example-card">
-                    <h3>👤 Perfil ideal</h3>
-                    <ul>
-                        <li>Investidor que já aprendeu ETFs e FIIs</li>
-                        <li>Quem tem horizonte de longo prazo (5, 10, 15 anos ou mais)</li>
-                        <li>Quem está disposto a estudar empresas, setores e fundamentos</li>
-                        <li>Quem aceita ver oscilações fortes sem tomar decisões por impulso</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Seção 3: Como Funciona na Prática -->
-            <section class="article-section">
-                <h2>🧮 Como as ações funcionam na prática</h2>
-
-                <ol>
-                    <li>A empresa emite ações e lista na bolsa</li>
-                    <li>Investidores compram e vendem essas ações no dia a dia</li>
-                    <li>O preço é definido por oferta e demanda</li>
-                    <li>Se a empresa cresce, lucra mais e entrega bons resultados, o mercado tende a valorizar o papel ao longo do tempo</li>
-                    <li>A empresa pode distribuir parte do lucro como dividendos ou juros sobre capital próprio</li>
-                </ol>
-
-                <h3>Exemplo simples:</h3>
-                
-                <div class="example-card">
-                    <ul>
-                        <li>Você compra <strong>100 ações</strong> a R$ 20,00 (R$ 2.000 investidos)</li>
-                        <li>Depois de alguns anos, a ação vai para <strong>R$ 35,00</strong></li>
-                        <li>Seu investimento passa a valer <strong>R$ 3.500</strong> (sem contar dividendos)</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Seção 4: Tipos de Ações -->
-            <section class="article-section">
-                <h2>🏗️ Tipos de ações e perfis</h2>
-
-                <!-- Blue Chips -->
-                <div class="example-card">
-                    <h3>🟦 Blue Chips</h3>
-                    <ul>
-                        <li>Empresas grandes, consolidadas, com muita liquidez</li>
-                        <li><strong>Exemplos:</strong> grandes bancos, empresas de energia, gigantes da bolsa</li>
-                        <li>Em geral, mais estáveis que small caps</li>
-                    </ul>
-                </div>
-
-                <!-- Ações de Dividendos -->
-                <div class="example-card">
-                    <h3>🟩 Ações de Dividendos</h3>
-                    <ul>
-                        <li>Empresas que distribuem parte relevante do lucro</li>
-                        <li>Foco em geração de renda periódica</li>
-                    </ul>
-                </div>
-
-                <!-- Ações de Crescimento -->
-                <div class="example-card">
-                    <h3>🟨 Ações de Crescimento (Growth)</h3>
-                    <ul>
-                        <li>Empresas que reinvestem o lucro para crescer</li>
-                        <li>Foco maior em valorização do preço da ação, menos em dividendos</li>
-                    </ul>
-                </div>
-
-                <!-- Small Caps -->
-                <div class="example-card">
-                    <h3>🟥 Small Caps</h3>
-                    <ul>
-                        <li>Empresas menores, com maior potencial de crescimento</li>
-                        <li>Mais voláteis e arriscadas</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Seção 5: Comparações -->
-            <section class="article-section">
-                <h2>📊 Comparações que ajudam</h2>
-                
-                <h3>Ações x Renda Fixa</h3>
-                <ul>
-                    <li><strong>Renda fixa:</strong> previsibilidade</li>
-                    <li><strong>Ações:</strong> crescimento de patrimônio no longo prazo</li>
-                </ul>
-
-                <h3>Ações x ETFs</h3>
-                <ul>
-                    <li><strong>ETF:</strong> você compra a média do mercado</li>
-                    <li><strong>Ação individual:</strong> você aposta em empresas específicas</li>
-                </ul>
-
-                <h3>Ações x FIIs</h3>
-                <ul>
-                    <li><strong>Ações:</strong> foco em crescimento de lucro</li>
-                    <li><strong>FIIs:</strong> foco em renda recorrente</li>
-                </ul>
-            </section>
-
-            <!-- Seção 6: Alertas Importantes -->
-            <section class="article-section">
-                <h2>⚠️ Alertas importantes – O que ninguém te conta</h2>
-
-                <ul>
-                    <li>Ações não são "cassino", mas também não são linha reta pra cima</li>
-                    <li>Você pode comprar empresas boas na hora errada e sofrer no curto prazo</li>
-                    <li>Ficar pulando de ação em ação costuma dar resultado pior que estratégia simples</li>
-                    <li>"Dica quente" e "ação da moda" quase sempre vêm tarde demais</li>
-                </ul>
-            </section>
-
-            <!-- Callout Warning -->
-            <div class="callout callout-warning">
-                <div class="callout-icon">⚠️</div>
-                <div class="callout-content">
-                    <h3>No INVLAB, o foco é educação</h3>
-                    <p>Entender negócios, setores, fundamentos e estratégia, não apostar em "tiro curto".</p>
+            <!-- ASSINATURA -->
+            <div class="lab-assinatura">
+                <div class="lab-assinatura-label">🔬 No Laboratório de hoje você vai descobrir:</div>
+                <div class="lab-assinatura-items">
+                    <div class="lab-assinatura-item">✅ Por que a maioria perde — antes de qualquer técnica</div>
+                    <div class="lab-assinatura-item">✅ Como tubarões ganham dinheiro na sardinha</div>
+                    <div class="lab-assinatura-item">✅ As 8 perguntas que todo analista faz antes de comprar</div>
+                    <div class="lab-assinatura-item">✅ Diagnóstico real de 6 empresas — do excelente ao especulativo</div>
                 </div>
             </div>
 
-            <!-- Seção 7: Como Começar -->
-            <section class="article-section">
-                <h2>🎯 Como começar com ações</h2>
+            <!-- TÍTULO -->
+            <div class="lab-header">
+                <h1>📈 Laboratório de Ações</h1>
+                <p class="lab-subtitle">Aprenda primeiro a não perder dinheiro. Depois, como escolher boas empresas — com dados reais e sem ilusão.</p>
+            </div>
 
-                <div class="tips-list">
-                    <div class="tip-item">
-                        <div class="tip-number">1</div>
-                        <div class="tip-content">
-                            <h3>Tenha uma base em renda fixa, ETFs e FIIs</h3>
-                            <p>Ações são o degrau 3 — entender os fundamentos anteriores reduz erros e decisões impulsivas</p>
+            <!-- BARRA DE PROGRESSO -->
+            <div class="lab-progress">
+                <a href="#etapa-erro" class="lab-step">
+                    <div class="lab-step-icon">🔥</div>
+                    <div class="lab-step-label">O Erro</div>
+                </a>
+                <div class="lab-step-connector"></div>
+                <a href="#etapa-sardinhas" class="lab-step">
+                    <div class="lab-step-icon">🦈</div>
+                    <div class="lab-step-label">O Mercado</div>
+                </a>
+                <div class="lab-step-connector"></div>
+                <a href="#etapa-ativo" class="lab-step">
+                    <div class="lab-step-icon">📈</div>
+                    <div class="lab-step-label">O Ativo</div>
+                </a>
+                <div class="lab-step-connector"></div>
+                <a href="#etapa-analise" class="lab-step">
+                    <div class="lab-step-icon">🔬</div>
+                    <div class="lab-step-label">Analise</div>
+                </a>
+                <div class="lab-step-connector"></div>
+                <a href="#etapa-diagnostico" class="lab-step">
+                    <div class="lab-step-icon">🏆</div>
+                    <div class="lab-step-label">Diagnóstico</div>
+                </a>
+            </div>
+
+            <!-- ETAPA 1: O MAIOR ERRO -->
+            <section class="lab-stage" id="etapa-erro">
+                <div class="lab-stage-header">
+                    <span class="lab-stage-num">Etapa 01</span>
+                    <span class="lab-stage-title">🔥 O Maior Erro do Pequeno Investidor</span>
+                </div>
+                <p class="lab-text">Antes de falar em P/L, EBITDA ou valuation — existe um erro que destrói mais patrimônio do que qualquer escolha errada de ação. É comportamental, invisível, e acontece com quase todo iniciante.</p>
+
+                <div class="lab-section-title">Os dois cenários — mesma empresa, resultados opostos</div>
+                <div class="cenario-compare">
+                    <div class="cenario-card risco">
+                        <div class="cenario-titulo">❌ Sem Reserva de Emergência</div>
+                        <div class="cenario-item">💸 Conta de Luz</div>
+                        <div class="cenario-item">💸 Aluguel</div>
+                        <div class="cenario-item">💸 Escola</div>
+                        <div class="cenario-item">💸 Mercado</div>
+                        <div class="cenario-item" style="margin-top:8px;">⬇️ Dinheiro em Ações</div>
+                        <div class="cenario-crise">📉 Bolsa cai 35%</div>
+                        <div class="cenario-item">😱 "Preciso pagar o aluguel..."</div>
+                        <div class="cenario-resultado">Vende na baixa → Prejuízo realizado</div>
+                    </div>
+                    <div class="cenario-seta">→</div>
+                    <div class="cenario-card seguro">
+                        <div class="cenario-titulo">✅ Com Reserva de Emergência</div>
+                        <div class="cenario-item">🛡️ 6 meses de gastos no Tesouro Selic</div>
+                        <div class="cenario-item" style="color:rgba(255,255,255,0.25);font-style:italic;">Contas do mês: cobertas</div>
+                        <div class="cenario-item" style="margin-top:8px;">⬇️ Dinheiro em Ações</div>
+                        <div class="cenario-crise">📉 Bolsa cai 35%</div>
+                        <div class="cenario-item">😁 "Posso esperar. Tenho reserva."</div>
+                        <div class="cenario-resultado">Aguarda a recuperação → Lucro</div>
+                    </div>
+                </div>
+                <p class="lab-text">A empresa era a mesma nos dois cenários. O resultado foi oposto. A diferença não foi análise — foi <strong style="color:#fff;">preparação financeira antes de investir.</strong></p>
+
+                <!-- PERGUNTA ZERO -->
+                <div class="pergunta-zero-box" id="perguntaZeroBox">
+                    <div class="pz-icone">⛔</div>
+                    <div class="pz-titulo">Pergunta Zero — antes de qualquer ação</div>
+                    <div class="pz-subtitulo">Esse dinheiro pode ficar parado por pelo menos 5 anos?</div>
+                    <div class="pz-btns">
+                        <button class="pz-btn pz-btn-nao" onclick="responderPZ(false)">❌ Não, preciso antes</button>
+                        <button class="pz-btn pz-btn-sim" onclick="responderPZ(true)">✅ Sim, posso esperar</button>
+                    </div>
+                    <div class="pz-alerta" id="pzAlerta">
+                        <p>⚠️ Então <strong>ações não são o investimento adequado</strong> para esse objetivo agora. Ações podem cair 40% antes de subir — sem tempo para esperar, você seria forçado a vender na baixa.</p>
+                        <p>Para objetivos de curto e médio prazo, conheça as alternativas:</p>
+                        <div class="pz-alerta-links">
+                            <a href="simulador-cdbs.html" class="pz-alerta-link">🏦 CDBs</a>
+                            <a href="simulador-tesouro-direto.html" class="pz-alerta-link">🇧🇷 Tesouro Selic</a>
+                            <a href="simulador-lci-lca.html" class="pz-alerta-link">🏛️ LCI/LCA</a>
                         </div>
                     </div>
+                    <div class="pz-ok" id="pzOk">✅ Ótimo. Esse é o pré-requisito número um. Continue o laboratório.</div>
+                </div>
 
-                    <div class="tip-item">
-                        <div class="tip-number">2</div>
-                        <div class="tip-content">
-                            <h3>Defina um percentual da sua carteira para ações</h3>
-                            <p>ex: 10–20% no começo</p>
+                <!-- RÉGUA TEMPORAL -->
+                <div class="lab-section-title" style="margin-top:32px;">Cada investimento tem seu horizonte ideal</div>
+                <div class="regua-wrap">
+                    <div class="regua-linha">
+                        <div class="regua-polo curto">
+                            <div class="regua-ponto">🛡️</div>
+                            <div class="regua-label">0 – 1 ano</div>
+                            <div class="regua-item">Tesouro Selic</div>
+                            <div class="regua-item">Poupança</div>
+                            <div class="regua-item">CDB liquidez diária</div>
+                            <div class="regua-item">LCI / LCA</div>
                         </div>
-                    </div>
-
-                    <div class="tip-item">
-                        <div class="tip-number">3</div>
-                        <div class="tip-content">
-                            <h3>Estude setores</h3>
-                            <p>bancos, energia, saneamento, varejo, tech, etc.</p>
+                        <div class="regua-polo medio">
+                            <div class="regua-ponto">⚖️</div>
+                            <div class="regua-label">1 – 5 anos</div>
+                            <div class="regua-item">CDB longo prazo</div>
+                            <div class="regua-item">ETFs</div>
+                            <div class="regua-item">FIIs</div>
                         </div>
-                    </div>
-
-                    <div class="tip-item">
-                        <div class="tip-number">4</div>
-                        <div class="tip-content">
-                            <h3>Analise empresas por indicadores simples:</h3>
-                            <ul>
-                                <li>P/L (Preço/Lucro)</li>
-                                <li>P/VP (Preço/Patrimônio)</li>
-                                <li>ROE</li>
-                                <li>Dívida / EBITDA</li>
-                                <li>Histórico de lucros</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="tip-item">
-                        <div class="tip-number">5</div>
-                        <div class="tip-content">
-                            <h3>Comece com poucas empresas, valores pequenos</h3>
-                            <p>Aprenda a dinâmica do mercado antes de ampliar a posição — erros com valores pequenos ensinam mais do que cursos</p>
-                        </div>
-                    </div>
-
-                    <div class="tip-item">
-                        <div class="tip-number">6</div>
-                        <div class="tip-content">
-                            <h3>Foque no longo prazo</h3>
-                            <p>Não no sobe e desce diário</p>
+                        <div class="regua-polo longo">
+                            <div class="regua-ponto">📈</div>
+                            <div class="regua-label">5 anos+</div>
+                            <div class="regua-item">Ações</div>
+                            <div class="regua-item">ETFs de ações</div>
+                            <div class="regua-item">FIIs selecionados</div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Seção 8: Mensagem Final -->
-            <section class="article-section">
-                <h2>⭐ Mensagem final</h2>
+            <!-- ETAPA 2: SARDINHAS E TUBARÕES -->
+            <section class="lab-stage" id="etapa-sardinhas">
+                <div class="lab-stage-header">
+                    <span class="lab-stage-num">Etapa 02</span>
+                    <span class="lab-stage-title">🦈 O Jogo das Sardinhas e dos Tubarões</span>
+                </div>
+                <p class="lab-text">Antes de comprar qualquer ação, entenda como o mercado realmente funciona. Existem dois tipos de participante — e saber em qual grupo você está pode mudar tudo.</p>
 
-                <p>Investir em ações é participar da <strong>economia real</strong>, como sócio de negócios que produzem, vendem, geram empregos e lucros.</p>
-                
-                <p>As ações:</p>
-                <ul>
-                    <li>ampliam o potencial de crescimento da sua carteira</li>
-                    <li>permitem que você se torne sócio de empresas que admira</li>
-                    <li>exigem responsabilidade, estudo e paciência</li>
-                </ul>
-
-                <p><strong>👉 No INVLAB, ações são o nível avançado da jornada:</strong> você só chega aqui depois de entender bem a base.</p>
-            </section>
-
-            <!-- Seção 9: Explore Mais sobre Ações -->
-            <section class="article-section">
-                <h2>🔍 Explore mais sobre Ações</h2>
-                <p style="text-align: center; color: rgba(212, 175, 55, 0.7); margin-bottom: 40px; font-size: 0.9rem;">
-                    🚧 Simuladores e conteúdos chegando em breve — você está no nível avançado!
-                </p>
-
-                <!-- CATEGORIA 1: Simuladores e Ferramentas -->
-                <div class="inv-category">
-                    <h3 class="inv-category-title">📊 Simuladores e Ferramentas</h3>
-                    <div class="inv-grid">
-                        <div class="inv-card fundos inv-card-soon">
-                            <div class="inv-card-icon">💰</div>
-                            <h4 class="inv-card-title">Simulador de Dividendos</h4>
-                            <p class="inv-card-description">Projete quanto poderia receber em dividendos com aportes periódicos</p>
+                <div class="lab-section-title">O ciclo que se repete</div>
+                <div class="sardinha-ciclo">
+                    <div class="sardinha-step tubarao">
+                        <div class="sardinha-num">1</div>
+                        <div class="sardinha-conteudo">
+                            <div class="sardinha-titulo">🦈 O tubarão acumula em silêncio</div>
+                            <div class="sardinha-desc">Fundos, bancos e grandes investidores compram devagar, ao longo de semanas. O preço ainda está baixo. Nenhum analista fala sobre essa empresa.</div>
                         </div>
-
-                        <div class="inv-card fundos inv-card-soon">
-                            <div class="inv-card-icon">💰</div>
-                            <h4 class="inv-card-title">Calculadora de Valuation</h4>
-                            <p class="inv-card-description">Análise de P/L, P/VP, ROE e outros múltiplos fundamentalistas</p>
+                    </div>
+                    <div class="sardinha-step midia">
+                        <div class="sardinha-num">2</div>
+                        <div class="sardinha-conteudo">
+                            <div class="sardinha-titulo">📺 A narrativa chega à mídia</div>
+                            <div class="sardinha-desc">"Empresa X tem potencial enorme." O canal do YouTube publica. O grupo do WhatsApp compartilha. A notícia está em todo lugar. O preço já subiu 30–40%.</div>
                         </div>
-
-                        <div class="inv-card fundos inv-card-soon">
-                            <div class="inv-card-icon">📈</div>
-                            <h4 class="inv-card-title">Comparador de Ações</h4>
-                            <p class="inv-card-description">Compare empresas do mesmo setor lado a lado</p>
+                    </div>
+                    <div class="sardinha-step sardinha">
+                        <div class="sardinha-num">3</div>
+                        <div class="sardinha-conteudo">
+                            <div class="sardinha-titulo">🐟 A sardinha entra animada</div>
+                            <div class="sardinha-desc">O pequeno investidor compra com euforia. "Não posso perder essa oportunidade." Ele entra exatamente onde o tubarão precisava de liquidez para sair.</div>
+                        </div>
+                    </div>
+                    <div class="sardinha-step saida">
+                        <div class="sardinha-num">4</div>
+                        <div class="sardinha-conteudo">
+                            <div class="sardinha-titulo">🦈 O tubarão vende na liquidez da sardinha</div>
+                            <div class="sardinha-desc">Com todo mundo comprando, há volume suficiente para o tubarão vender toda sua posição. Ele realiza lucro. A sardinha está comprando exatamente o que ele está vendendo.</div>
+                        </div>
+                    </div>
+                    <div class="sardinha-step queda">
+                        <div class="sardinha-num">5</div>
+                        <div class="sardinha-conteudo">
+                            <div class="sardinha-titulo">📉 O preço cai</div>
+                            <div class="sardinha-desc">Sem mais compradores entrando, o preço começa a ceder. A sardinha vê sua posição virar prejuízo. Não entende por quê — a empresa parecia boa.</div>
+                        </div>
+                    </div>
+                    <div class="sardinha-step prejuizo">
+                        <div class="sardinha-num">6</div>
+                        <div class="sardinha-conteudo">
+                            <div class="sardinha-titulo">😱 A sardinha vende com prejuízo — ou segura esperando</div>
+                            <div class="sardinha-desc">Sem reserva e sem paciência, vende na baixa. Ou fica esperando "voltar ao preço que comprei" — às vezes por anos. O tubarão já está posicionado no próximo ciclo.</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- CATEGORIA 2: Conteúdos Educativos -->
-                <div class="inv-category">
-                    <h3 class="inv-category-title">🎓 Conteúdos Educativos</h3>
-                    <div class="inv-grid">
-                        <div class="inv-card alternativos inv-card-soon">
-                            <div class="inv-card-icon">🔍</div>
-                            <h4 class="inv-card-title">Análise fundamentalista básica</h4>
-                            <p class="inv-card-description">Aprenda a interpretar P/L, P/VP, ROE e margem de forma didática</p>
-                        </div>
+                <div class="sardinha-alertas">
+                    <div class="sardinha-alerta-titulo">⚠️ Sinais de que você pode estar chegando tarde</div>
+                    <div class="sardinha-alerta-item">
+                        <div class="sardinha-alerta-item-icon">🚩</div>
+                        <div class="sardinha-alerta-item-texto">A ação que "todo mundo está falando" ao mesmo tempo, em múltiplos canais</div>
+                    </div>
+                    <div class="sardinha-alerta-item">
+                        <div class="sardinha-alerta-item-icon">🚩</div>
+                        <div class="sardinha-alerta-item-texto">"Dica quente" chegando por WhatsApp, Telegram ou grupo de investimentos</div>
+                    </div>
+                    <div class="sardinha-alerta-item">
+                        <div class="sardinha-alerta-item-icon">🚩</div>
+                        <div class="sardinha-alerta-item-texto">O preço já subiu 40%+ antes de você ouvir falar pela primeira vez</div>
+                    </div>
+                    <div class="sardinha-alerta-item">
+                        <div class="sardinha-alerta-item-icon">🚩</div>
+                        <div class="sardinha-alerta-item-texto">Volume de negociação muito acima da média sem notícia clara que justifique</div>
+                    </div>
+                    <div class="sardinha-alerta-item">
+                        <div class="sardinha-alerta-item-icon">🚩</div>
+                        <div class="sardinha-alerta-item-texto">Influenciador recomendando empresa sem declarar que possui posição nela</div>
+                    </div>
+                </div>
 
-                        <div class="inv-card alternativos inv-card-soon">
-                            <div class="inv-card-icon">🏭</div>
-                            <h4 class="inv-card-title">Setores e estratégias</h4>
-                            <p class="inv-card-description">Como diferentes setores se comportam ao longo do ciclo econômico</p>
-                        </div>
+                <div class="frase-destaque" style="margin-top:28px;">
+                    <div class="frase-destaque-texto">"Quando você ouve a dica, o tubarão já está saindo."</div>
+                </div>
+            </section>
 
-                        <div class="inv-card alternativos inv-card-soon">
-                            <div class="inv-card-icon">📉</div>
-                            <h4 class="inv-card-title">Day Trade vs Buy & Hold</h4>
-                            <p class="inv-card-description">Diferenças, riscos e qual estratégia faz sentido para você</p>
+            <!-- ETAPA 3: O QUE É UMA AÇÃO -->
+            <section class="lab-stage" id="etapa-ativo">
+                <div class="lab-stage-header">
+                    <span class="lab-stage-num">Etapa 03</span>
+                    <span class="lab-stage-title">📈 O Que É uma Ação</span>
+                </div>
+                <p class="lab-text">Simples assim: comprar uma ação é comprar um pedaço de uma empresa real. Não é uma aposta. Não é um número numa tela. É uma fração de um negócio que contrata funcionários, paga fornecedores, serve clientes e gera lucro — ou prejuízo.</p>
+
+                <div class="acao-equacao">
+                    <div class="acao-eq-bloco">
+                        <div class="acao-eq-icone">📈</div>
+                        <div style="font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:4px;">1 Ação</div>
+                        <div class="acao-eq-label">WEGE3, VALE3, etc.</div>
+                    </div>
+                    <div class="acao-eq-op">=</div>
+                    <div class="acao-eq-bloco">
+                        <div class="acao-eq-icone">🏭</div>
+                        <div style="font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:4px;">Fração da Empresa</div>
+                        <div class="acao-eq-label">Sócio minoritário</div>
+                    </div>
+                    <div class="acao-eq-op">=</div>
+                    <div class="acao-eq-bloco">
+                        <div class="acao-eq-icone">💼</div>
+                        <div style="font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:4px;">Direitos Reais</div>
+                        <div class="acao-eq-label">Nos lucros e decisões</div>
+                    </div>
+                </div>
+
+                <div class="lab-section-title">O que você tem como acionista</div>
+                <div class="acao-direitos">
+                    <div class="acao-direito-card">
+                        <div class="acao-direito-icon">💰</div>
+                        <div class="acao-direito-titulo">Dividendos</div>
+                        <div class="acao-direito-desc">Parte dos lucros distribuída em dinheiro para todos os acionistas. Em boas empresas, acontece regularmente.</div>
+                    </div>
+                    <div class="acao-direito-card">
+                        <div class="acao-direito-icon">📊</div>
+                        <div class="acao-direito-titulo">Valorização</div>
+                        <div class="acao-direito-desc">Se a empresa cresce, o valor da sua fração cresce. Essa é a fonte principal de retorno no longo prazo.</div>
+                    </div>
+                    <div class="acao-direito-card">
+                        <div class="acao-direito-icon">🗳️</div>
+                        <div class="acao-direito-titulo">Voto (ON)</div>
+                        <div class="acao-direito-desc">Ações ordinárias dão direito a votar nas assembleias. Ações preferenciais (PN) têm prioridade nos dividendos.</div>
+                    </div>
+                </div>
+                <p class="lab-text">O preço de mercado oscila todos os dias, mas o valor real do negócio muda devagar. Essa diferença é onde os bons investidores encontram oportunidade.</p>
+            </section>
+
+            <!-- ETAPA 4: 8 PERGUNTAS -->
+            <section class="analise-section" id="etapa-analise">
+                <div class="analise-badge">🔬 Etapa 04</div>
+                <div class="analise-titulo">Como Analisar uma Empresa — As 8 Perguntas do Analista</div>
+                <div class="analise-subtitulo">Antes de comprar qualquer ação, um analista fundamentalista faz estas perguntas. Você não precisa de software caro — precisa das perguntas certas.</div>
+
+                <div class="analise-grid">
+                    <div class="analise-pergunta">
+                        <div class="analise-pergunta-num">PERGUNTA 01</div>
+                        <div class="analise-pergunta-titulo">Você entende como a empresa ganha dinheiro?</div>
+                        <div class="analise-pergunta-desc">Se você não consegue explicar para um amigo como a empresa lucra, não compre. Warren Buffett chama isso de "círculo de competência". Investir no que não entende é especulação, não investimento.</div>
+                    </div>
+                    <div class="analise-pergunta">
+                        <div class="analise-pergunta-num">PERGUNTA 02</div>
+                        <div class="analise-pergunta-titulo">A empresa tem lucro consistente?</div>
+                        <div class="analise-pergunta-desc">Receita crescendo não é suficiente. Verifique o lucro líquido dos últimos 5 anos. Ele cresce? É consistente ou oscila muito? Empresa que alterna lucro e prejuízo exige nível extra de atenção.</div>
+                    </div>
+                    <div class="analise-pergunta">
+                        <div class="analise-pergunta-num">PERGUNTA 03</div>
+                        <div class="analise-pergunta-titulo">Qual é o nível de endividamento?</div>
+                        <div class="analise-pergunta-desc">Dívida não é necessariamente ruim — depende do quanto a empresa gera de caixa para pagá-la. O indicador Dívida Líquida / EBITDA mostra quantos anos de resultado operacional seriam necessários para quitar a dívida. Acima de 3x merece atenção.</div>
+                    </div>
+                    <div class="analise-pergunta">
+                        <div class="analise-pergunta-num">PERGUNTA 04</div>
+                        <div class="analise-pergunta-titulo">A governança protege o acionista minoritário?</div>
+                        <div class="analise-pergunta-desc">Verifique o Tag Along: se o controlador vender a empresa, você recebe quanto do preço? 100% é o ideal. Ações ON (ordinárias) têm mais proteção que PN (preferenciais).</div>
+                    </div>
+                    <div class="analise-pergunta">
+                        <div class="analise-pergunta-num">PERGUNTA 05</div>
+                        <div class="analise-pergunta-titulo">A empresa está crescendo?</div>
+                        <div class="analise-pergunta-desc">Compare receita e lucro de 5 anos atrás com hoje. Crescimento real (acima da inflação) significa que a empresa está ganhando mercado. Estagnação não é necessariamente ruim — desde que compensada por dividendos generosos.</div>
+                    </div>
+                    <div class="analise-pergunta">
+                        <div class="analise-pergunta-num">PERGUNTA 06</div>
+                        <div class="analise-pergunta-titulo">Existe uma vantagem competitiva (moat)?</div>
+                        <div class="analise-pergunta-desc">Por que os concorrentes não copiam o modelo da empresa? O "fosso" protege o negócio no longo prazo. Uma empresa sem diferencial vai ser corroída pela concorrência.</div>
+                        <div class="moat-grid">
+                            <div class="moat-card"><div class="moat-card-icon">🏷️</div><div class="moat-card-nome">Marca</div>Pessoas pagam mais pelo nome</div>
+                            <div class="moat-card"><div class="moat-card-icon">🔄</div><div class="moat-card-nome">Switching cost</div>Trocar de fornecedor é caro</div>
+                            <div class="moat-card"><div class="moat-card-icon">📉</div><div class="moat-card-nome">Custo baixo</div>Escala que concorrentes não têm</div>
                         </div>
+                    </div>
+                    <div class="analise-pergunta">
+                        <div class="analise-pergunta-num">PERGUNTA 07</div>
+                        <div class="analise-pergunta-titulo">O preço está justo? (P/L)</div>
+                        <div class="analise-pergunta-desc">O Preço/Lucro (P/L) mostra quanto o mercado paga por cada real de lucro. Não existe P/L universalmente "certo" — depende do setor e do crescimento esperado.</div>
+                        <div class="pl-escala">
+                            <span class="pl-tag verde">P/L &lt; 10 — Barato ou em crise?</span>
+                            <span class="pl-tag amarelo">P/L 10–20 — Razoável</span>
+                            <span class="pl-tag laranja">P/L &gt; 30 — Caro ou muito crescimento esperado</span>
+                        </div>
+                    </div>
+                    <div class="analise-pergunta">
+                        <div class="analise-pergunta-num">PERGUNTA 08</div>
+                        <div class="analise-pergunta-titulo">A ação tem liquidez suficiente?</div>
+                        <div class="analise-pergunta-desc">Ações com volume diário abaixo de R$ 1M podem ser difíceis de vender rapidamente — você pode ser forçado a vender abaixo do preço desejado. Para iniciantes, priorize ações do Ibovespa.</div>
                     </div>
                 </div>
             </section>
 
-            <!-- Callout Final Success -->
-            <div class="callout callout-success">
-                <div class="callout-icon">🎯</div>
-                <div class="callout-content">
-                    <h3>Parabéns por chegar até aqui!</h3>
-                    <p>Você completou a <strong>Trilha Pedagógica da Renda Variável</strong>: ETFs → FIIs → Ações. Continue explorando e refinando sua estratégia!</p>
+            <!-- ETAPA 5: DIAGNÓSTICO EMPRESARIAL -->
+            <section class="diagnostico-section" id="etapa-diagnostico">
+                <div class="diagnostico-badge">🏆 Etapa 05</div>
+                <div class="diagnostico-titulo">Diagnóstico Empresarial INVLAB</div>
+                <div class="diagnostico-subtitulo">
+                    Seis empresas — do excelente ao altamente especulativo — para você aprender a diferença com dados reais.
+                    Indicadores quantitativos chegam via BRAPI <span class="badge-auto">📊 BRAPI</span>.
+                    Análise qualitativa é editorial <span class="badge-edit">✏️ editorial</span>.
+                </div>
+
+                <div class="diag-disclaimer">
+                    As empresas abaixo foram selecionadas exclusivamente para fins educacionais, representando um espectro intencional de qualidade — de excelente a especulativo. Não constituem recomendação de compra, venda ou manutenção de qualquer ativo. Dados de preço e liquidez são atualizados semanalmente via BRAPI.
+                </div>
+
+                <div class="diag-seletor-label">Selecione uma empresa</div>
+                <div class="diag-btns" id="diagBtns">
+                    <button class="diag-btn active" onclick="selecionarEmpresa('WEGE3', this)">WEGE3<span>WEG · Excelente</span></button>
+                    <button class="diag-btn" onclick="selecionarEmpresa('ITUB4', this)">ITUB4<span>Itaú · Excelente</span></button>
+                    <button class="diag-btn" onclick="selecionarEmpresa('VALE3', this)">VALE3<span>Vale · Cíclica</span></button>
+                    <button class="diag-btn" onclick="selecionarEmpresa('PETR4', this)">PETR4<span>Petrobras · Política</span></button>
+                    <button class="diag-btn" onclick="selecionarEmpresa('MGLU3', this)">MGLU3<span>Magalu · Especulativa</span></button>
+                    <button class="diag-btn" onclick="selecionarEmpresa('COGN3', this)">COGN3<span>Cogna · Especulativa</span></button>
+                </div>
+
+                <div class="diag-ticker-info">
+                    <div class="diag-ticker-code" id="diagTickerCode">WEGE3</div>
+                    <div class="diag-ticker-nome-wrap">
+                        <div class="diag-ticker-nome" id="diagTickerNome">WEG S.A.</div>
+                        <div class="diag-ticker-seg" id="diagTickerSeg">Bens de Capital · Industrial</div>
+                    </div>
+                    <span class="diag-ticker-risco risco-baixo" id="diagRisco">Risco Baixo</span>
+                </div>
+
+                <div class="diag-preco-linha">
+                    <div class="diag-preco-item">
+                        <div class="diag-preco-label">Preço <span class="badge-auto">📊</span></div>
+                        <div class="diag-preco-valor carregando" id="diagPreco">carregando…</div>
+                    </div>
+                    <div class="diag-preco-item">
+                        <div class="diag-preco-label">P/L <span class="badge-auto">📊</span></div>
+                        <div class="diag-preco-valor carregando" id="diagPL">carregando…</div>
+                    </div>
+                    <div class="diag-preco-item">
+                        <div class="diag-preco-label">DY 12m <span class="badge-auto">📊</span></div>
+                        <div class="diag-preco-valor carregando" id="diagDY">carregando…</div>
+                    </div>
+                    <div class="diag-preco-item">
+                        <div class="diag-preco-label">Volume <span class="badge-auto">📊</span></div>
+                        <div class="diag-preco-valor carregando" id="diagVolume">carregando…</div>
+                    </div>
+                    <div class="diag-preco-item">
+                        <div class="diag-preco-label">Variação <span class="badge-auto">📊</span></div>
+                        <div class="diag-preco-valor carregando" id="diagVariacao">carregando…</div>
+                    </div>
+                </div>
+
+                <div class="diag-grid">
+                    <div class="diag-indicador">
+                        <div class="diag-ind-label">Negócio <span class="badge-edit">✏️</span></div>
+                        <div class="diag-estrelas" id="diagNegocio">—</div>
+                    </div>
+                    <div class="diag-indicador">
+                        <div class="diag-ind-label">Lucro <span class="badge-edit">✏️</span></div>
+                        <div class="diag-estrelas" id="diagLucro">—</div>
+                    </div>
+                    <div class="diag-indicador">
+                        <div class="diag-ind-label">Dívida <span class="badge-edit">✏️</span></div>
+                        <div class="diag-estrelas" id="diagDivida">—</div>
+                    </div>
+                    <div class="diag-indicador">
+                        <div class="diag-ind-label">Governança <span class="badge-edit">✏️</span></div>
+                        <div class="diag-estrelas" id="diagGovernanca">—</div>
+                    </div>
+                    <div class="diag-indicador">
+                        <div class="diag-ind-label">Resiliência <span class="badge-edit">✏️</span></div>
+                        <div class="diag-estrelas" id="diagResiliencia">—</div>
+                    </div>
+                    <div class="diag-indicador">
+                        <div class="diag-ind-label">Liquidez <span class="badge-auto">📊</span></div>
+                        <div class="diag-estrelas" id="diagLiquidez">—</div>
+                    </div>
+                    <div class="diag-indicador">
+                        <div class="diag-ind-label">P/L <span class="badge-auto">📊</span></div>
+                        <div class="diag-estrelas" id="diagPLEstrelas">—</div>
+                    </div>
+                </div>
+
+                <div class="diag-chart-wrapper">
+                    <div class="diag-chart-titulo" id="diagChartTitulo">📊 Proventos por Ação — WEGE3</div>
+                    <div id="diagChartVazio" class="diag-chart-vazio" style="display:none;">
+                        Esta empresa não distribuiu proventos relevantes no período analisado.<br>
+                        <span style="font-size:0.78rem;opacity:0.65;">O retorno esperado vem exclusivamente da valorização da ação — que pode não se materializar.</span>
+                    </div>
+                    <canvas id="diagChart" style="display:block;"></canvas>
+                    <div style="margin-top:10px;font-size:0.72rem;color:rgba(255,255,255,0.25);text-align:right;" id="diagChartFonte">Dados via BRAPI · Cache semanal · Apenas educacional</div>
+                </div>
+
+                <div class="invlab-score-box">
+                    <div class="score-numero">
+                        <div class="score-valor" id="diagScore">—</div>
+                        <div class="score-label">INVLAB Score</div>
+                        <div class="score-estrelas" id="diagScoreEstrelas">—</div>
+                    </div>
+                    <div class="score-parecer" id="diagParecer">Selecione uma empresa para ver o diagnóstico completo.</div>
+                </div>
+            </section>
+
+            <!-- CHECKLIST -->
+            <div class="checklist-investidor">
+                <div class="checklist-titulo">✅ Checklist do Investidor em Ações</div>
+                <div class="checklist-items" id="checklistItems">
+                    <label class="checklist-item"><input type="checkbox"><span>Tenho reserva de emergência (6 meses de gastos) em Tesouro Selic ou CDB de liquidez diária</span></label>
+                    <label class="checklist-item"><input type="checkbox"><span>O dinheiro que vou investir pode ficar aplicado por pelo menos 5 anos</span></label>
+                    <label class="checklist-item"><input type="checkbox"><span>Entendo como a empresa ganha dinheiro e consigo explicar em uma frase</span></label>
+                    <label class="checklist-item"><input type="checkbox"><span>Verifiquei o histórico de lucros dos últimos 5 anos — não só a receita</span></label>
+                    <label class="checklist-item"><input type="checkbox"><span>Sei qual é o nível de dívida e se a empresa consegue pagá-la com o caixa gerado</span></label>
+                    <label class="checklist-item"><input type="checkbox"><span>Analisei o Tag Along e a governança — meus direitos como minoritário estão protegidos</span></label>
+                    <label class="checklist-item"><input type="checkbox"><span>Entendo que o risco não é a queda — é precisar do dinheiro durante a queda</span></label>
+                    <label class="checklist-item"><input type="checkbox"><span>Não estou respondendo a uma "dica quente" — tomei minha decisão com análise própria</span></label>
+                </div>
+                <div class="checklist-progresso"><div class="checklist-barra" id="checklistBarra"></div></div>
+                <div class="checklist-status" id="checklistStatus">0 de 8 itens verificados</div>
+            </div>
+
+            <!-- CTA FINAL -->
+            <div class="lab-final-cta">
+                <h2>Laboratório concluído. 🎓</h2>
+                <p>Agora você sabe por que a maioria perde antes de escolher qualquer empresa, como reconhecer o ciclo sardinhas–tubarões, as 8 perguntas que separam investimento de especulação — e a diferença real entre uma WEG e uma Cogna.</p>
+                <div class="lab-cta-buttons">
+                    <a href="fiis.html" class="btn-lab-secondary">← Revisitar FIIs</a>
+                    <a href="etfs.html" class="btn-lab-secondary">← Revisitar ETFs</a>
                 </div>
             </div>
 
-            <!-- Callout Revisar Base -->
-            <div class="callout callout-info">
-                <div class="callout-icon">🔄</div>
-                <div class="callout-content">
-                    <h3>Revisar base em ETFs e FIIs</h3>
-                    <p>Volte aos fundamentos de <a href="etfs.html">ETFs</a> e <a href="fiis.html">FIIs</a> sempre que precisar reforçar a base da sua estratégia antes de avançar em ações.</p>
-                </div>
-            </div>
-
-            </article>
-            </section>
         </div>
     </main>
 
-    <!-- Footer -->
     <footer style="background: rgba(13, 13, 13, 0.97); border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
         <div class="content-wrapper-wide">
             <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
-                <!-- Coluna 1: INVLAB -->
                 <div>
                     <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
-                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">
-                        Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.
-                    </p>
-                    <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
-                        🧭 Guia do INVLAB →
-                    </a>
+                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
+                    <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">🧭 Guia do INVLAB →</a>
                 </div>
-
-                <!-- Coluna 2: Renda Fixa -->
                 <div>
                     <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="poupanca.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">💰 Poupança</a></li>
-                        <li><a href="simulador-cdbs.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🏦 CDBs</a></li>
-                        <li><a href="simulador-tesouro-direto.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
-                        <li><a href="simulador-lci-lca.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
+                        <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
                     </ul>
                 </div>
-
-                <!-- Coluna 3: Renda Variável -->
                 <div>
                     <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="../index.html#renda-variavel" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">📈 Introdução</a></li>
-                        <li><a href="acoes.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">📊 Ações</a></li>
-                        <li><a href="etfs.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🎯 ETFs</a></li>
-                        <li><a href="fiis.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🏢 FIIs</a></li>
+                        <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Laboratório Ações</a></li>
+                        <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔬 Laboratório ETF</a></li>
+                        <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 Laboratório FIIs</a></li>
                     </ul>
                 </div>
-
-                <!-- Coluna 4: Criptoativos -->
                 <div>
                     <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Criptoativos</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="../index.html#criptoativos" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🔐 Introdução</a></li>
-                        <li><a href="bitcoin.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">₿ Bitcoin</a></li>
-                        <li><a href="stablecoins.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">💵 Stablecoins</a></li>
-                        <li><a href="blockchain.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">⛓️ Blockchain</a></li>
-                        <li><a href="cbdc.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🏛️ CBDCs</a></li>
+                        <li><a href="bitcoin.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">₿ Bitcoin</a></li>
+                        <li><a href="stablecoins.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💵 Stablecoins</a></li>
+                        <li><a href="blockchain.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">⛓️ Blockchain</a></li>
                     </ul>
                 </div>
-
-                <!-- Coluna 5: Outros Investimentos -->
                 <div>
-                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Outros Investimentos</h4>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Outros</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="../index.html#outros-investimentos" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">💎 Introdução</a></li>
-                        <li><a href="ganhos-come-cotas.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🍽️ Come-cotas</a></li>
-                        <li><a href="ganhos-iof-regressivo.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">📉 IOF Regressivo</a></li>
-                        <li><a href="ganhos-inflacao.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">📊 Inflação</a></li>
+                        <li><a href="ganhos-come-cotas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🍽️ Come-cotas</a></li>
+                        <li><a href="ganhos-iof-regressivo.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📉 IOF Regressivo</a></li>
+                        <li><a href="ganhos-inflacao.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📊 Inflação</a></li>
                     </ul>
                 </div>
-
-                <!-- Coluna 6: Ferramentas -->
                 <div>
                     <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Ferramentas</h4>
                     <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="simulador-cdbs.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🏦 Simulador CDBs</a></li>
-                        <li><a href="simulador-tesouro-direto.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🇧🇷 Simulador Tesouro</a></li>
-                        <li><a href="simulador-lci-lca.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🏛️ Simulador LCI/LCA</a></li>
-                        <li><a href="calculadora.html" style="color: rgba(16, 185, 129, 0.85); text-decoration: none;">🧮 Juros Compostos</a></li>
+                        <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 Simulador CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Simulador Tesouro</a></li>
+                        <li><a href="calculadora.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🧮 Juros Compostos</a></li>
                     </ul>
                 </div>
             </div>
-
-            <!-- Disclaimers -->
-            <div style="border-top: 1px solid rgba(212, 175, 55, 0.1); padding-top: 20px; margin-top: 20px;">
+            <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
                 <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
                     ⚠️ Conteúdo 100% educacional. Não somos corretora, não vendemos produtos, não recebemos comissões.
-                </p>
-                <p style="font-size: 0.78rem; color: #64748B; text-align: center; line-height: 1.7; margin-bottom: 12px; max-width: 900px; margin-left: auto; margin-right: auto;">
-                    Conteúdo educacional desenvolvido por especialistas em mercado financeiro tradicional, tecnologia blockchain e tokenização de ativos reais. 
-                    O INVLAB é um laboratório de pesquisa independente dedicado a unir educação, tecnologia e inovação nos mercados de capitais.
                 </p>
                 <p style="font-size: 0.75rem; color: #475569; text-align: center;">
                     © 2025 INVLAB - Laboratório de Investimentos | Plataforma Educacional
@@ -585,11 +893,257 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="../assets/js/script.js"></script>
-    <!-- APIs para o Carrossel -->
     <script defer src="../assets/js/bcb-api.js"></script>
     <script defer src="../assets/js/stock-api.js"></script>
     <script defer src="../assets/js/invlab-carrossel-renda-variavel.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <!-- DIAGNÓSTICO EMPRESARIAL + PERGUNTA ZERO + CHECKLIST -->
+    <script>
+    (function() {
+        // ================================================================
+        // Arquitetura Diagnóstico Empresarial:
+        //   AUTOMÁTICO (BRAPI, cache semanal): preço, P/L, volume, DY, liquidez
+        //   EDITORIAL  (por ticker, atualizar manualmente): negócio, lucro,
+        //              dívida, governança, resiliência, score, parecer
+        // ================================================================
+
+        var chartInstance = null;
+        var clientCache   = {};
+
+        var riscoClass = { baixo: 'risco-baixo', medio: 'risco-medio', alto: 'risco-alto' };
+
+        var editorial = {
+            'WEGE3': {
+                nome: 'WEG S.A.', seg: 'Bens de Capital · Industrial',
+                risco: 'Risco Baixo', riscoKey: 'baixo',
+                negocio: 5, lucro: 5, divida: 5, governanca: 5, resiliencia: 5,
+                score: '9,6',
+                parecer: 'A empresa mais bem gerida da Bolsa brasileira. WEG fabrica motores elétricos e equipamentos de automação industrial — referência global, exportando para mais de 135 países. Crescimento consistente há mais de 20 anos, dívida praticamente zerada e retorno sobre patrimônio acima de 20% ao ano. O ponto de atenção é o preço: por ser tão boa, raramente fica "barata" pelo P/L tradicional. Quem comprou caro e esperou, ainda assim saiu bem no longo prazo. Ideal para estudar antes de qualquer outra empresa.'
+            },
+            'ITUB4': {
+                nome: 'Itaú Unibanco', seg: 'Bancário · Financeiro',
+                risco: 'Risco Baixo', riscoKey: 'baixo',
+                negocio: 5, lucro: 5, divida: null, governanca: 4, resiliencia: 4,
+                score: '8,6',
+                parecer: 'O banco mais lucrativo do Brasil, com décadas de resultados consistentes. Paga dividendos regulares e tem histórico sólido de valorização no longo prazo. A estrutura de capital de bancos é diferente de empresas normais — dívida alta é inerente ao negócio bancário, por isso o indicador "Dívida" não se aplica da mesma forma. Em períodos de recessão e inadimplência elevada, o lucro tende a cair — mas o Itaú tem reservas para atravessar esses ciclos.'
+            },
+            'VALE3': {
+                nome: 'Vale S.A.', seg: 'Mineração · Commodities',
+                risco: 'Risco Médio', riscoKey: 'medio',
+                negocio: 4, lucro: 3, divida: 4, governanca: 3, resiliencia: 3,
+                score: '7,2',
+                parecer: 'A Vale exporta principalmente minério de ferro — o preço não é definido pela gestão, mas pelo mercado internacional e pela demanda chinesa. Quando a China cresce, a Vale cresce. Quando a China desacelera, a Vale sofre. O Dividend Yield pode ser altíssimo num ano e quase zero no seguinte. Os desastres de Mariana (2015) e Brumadinho (2019) deixaram marcas na governança. É uma empresa boa em um negócio estruturalmente cíclico — exige entendimento do ciclo de commodities.'
+            },
+            'PETR4': {
+                nome: 'Petrobras S.A.', seg: 'Petróleo e Gás · Energia',
+                risco: 'Risco Médio', riscoKey: 'medio',
+                negocio: 4, lucro: 3, divida: 3, governanca: 2, resiliencia: 2,
+                score: '6,4',
+                parecer: 'A Petrobras tem uma das melhores operações de extração de petróleo do mundo — o pré-sal é uma vantagem competitiva real e gigantesca. Mas o maior acionista é o governo federal. Isso significa que decisões sobre preços de combustível, dividendos e investimentos podem mudar com cada novo governo. Não é o risco do petróleo — é o risco de Brasília. O DY pode ser extraordinário num ano e zero no seguinte, dependendo da política do governo de plantão.'
+            },
+            'MGLU3': {
+                nome: 'Magazine Luiza S.A.', seg: 'Varejo · E-commerce',
+                risco: 'Risco Alto', riscoKey: 'alto',
+                negocio: 3, lucro: 1, divida: 2, governanca: 3, resiliencia: 1,
+                score: '3,8',
+                parecer: 'A queridinha da Bolsa durante a pandemia — e a aula mais cara que muitos iniciantes receberam. Em 2021 chegou a R$ 25 por ação. Em 2024 estava abaixo de R$ 2. A queda de ~95% do pico não foi acidente: empresa muito endividada + sem lucro consistente + Selic subindo de 2% para 13,75% = destruição de valor. A MGLU3 está aqui para ensinar: existem empresas com narrativa fantástica que ainda não provaram ser lucrativas. Narrativa não paga dívida.'
+            },
+            'COGN3': {
+                nome: 'Cogna Educação', seg: 'Educação Superior · Serviços',
+                risco: 'Risco Alto', riscoKey: 'alto',
+                negocio: 2, lucro: 1, divida: 1, governanca: 2, resiliencia: 1,
+                score: '2,6',
+                parecer: 'A COGN3 completa o espectro educacional. Em 2019 valia R$ 20. Em 2024, abaixo de R$ 3. Dívida alta + mercado de educação superior com evasão crescente + concorrência de plataformas digitais = empresa que luta para estabilizar o resultado. Não é análise negativa por análise — é para que você internalize o que separa uma empresa especulativa de uma de qualidade: margem de lucro, geração de caixa, capacidade de pagar a dívida. Aprenda essa diferença com dados, não com dinheiro real.'
+            }
+        };
+
+        var fallbacks = {
+            'WEGE3': [{data:'Jul/24',valor:0.28},{data:'Set/24',valor:0.30},{data:'Nov/24',valor:0.32},{data:'Jan/25',valor:0.29},{data:'Mar/25',valor:0.31},{data:'Mai/25',valor:0.30}],
+            'ITUB4': [{data:'Jul/24',valor:0.35},{data:'Ago/24',valor:0.35},{data:'Set/24',valor:0.35},{data:'Out/24',valor:0.35},{data:'Nov/24',valor:0.35},{data:'Dez/24',valor:0.50},{data:'Jan/25',valor:0.35},{data:'Fev/25',valor:0.35},{data:'Mar/25',valor:0.35},{data:'Abr/25',valor:0.35},{data:'Mai/25',valor:0.35},{data:'Jun/25',valor:0.35}],
+            'VALE3': [{data:'Set/24',valor:1.50},{data:'Dez/24',valor:2.00},{data:'Mar/25',valor:1.20}],
+            'PETR4': [{data:'Jul/24',valor:0.50},{data:'Ago/24',valor:0.50},{data:'Set/24',valor:0.50},{data:'Out/24',valor:0.50},{data:'Nov/24',valor:0.50},{data:'Dez/24',valor:0.80},{data:'Jan/25',valor:0.50},{data:'Fev/25',valor:0.50},{data:'Mar/25',valor:0.50},{data:'Abr/25',valor:0.50},{data:'Mai/25',valor:0.50},{data:'Jun/25',valor:0.50}],
+            'MGLU3': [],
+            'COGN3': []
+        };
+
+        function fmtBRL(val) { return 'R$ ' + parseFloat(val).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+        function fmtVolume(vol) {
+            if (!vol) return '—';
+            if (vol >= 1e8) return 'R$ ' + (vol / 1e6).toFixed(0) + 'M/dia';
+            if (vol >= 1e6) return 'R$ ' + (vol / 1e6).toFixed(1) + 'M/dia';
+            if (vol >= 1e3) return 'R$ ' + Math.round(vol / 1e3) + 'k/dia';
+            return '—';
+        }
+        function fmtData(dateStr) {
+            if (!dateStr) return '—';
+            var d = new Date(dateStr);
+            var m = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+            return m[d.getUTCMonth()] + '/' + String(d.getUTCFullYear()).slice(2);
+        }
+        function volumeParaEstrelas(vol) {
+            if (!vol) return null;
+            if (vol >= 5e8) return 5;
+            if (vol >= 1e8) return 4;
+            if (vol >= 2e7) return 3;
+            if (vol >= 5e6) return 2;
+            return 1;
+        }
+        function plParaEstrelas(pl) {
+            if (pl === null || pl === undefined || pl <= 0) return null;
+            if (pl < 10) return 5;
+            if (pl < 15) return 4;
+            if (pl < 22) return 3;
+            if (pl < 35) return 2;
+            return 1;
+        }
+        function calcDY(divs, preco) {
+            if (!divs || !divs.length || !preco) return null;
+            var soma = divs.reduce(function(a, d) { return a + (d.valor || 0); }, 0);
+            return soma > 0 ? (soma / preco * 100).toFixed(1) + '%' : '0%';
+        }
+        function renderEstrelas(n) {
+            if (n === null || n === undefined) return '<span style="color:rgba(255,255,255,0.25);font-size:0.80rem;font-style:italic;">N/A</span>';
+            var s = '';
+            for (var i = 1; i <= 5; i++) s += i <= n ? '★' : '<span style="opacity:0.20;">★</span>';
+            return s;
+        }
+        function scoreParaEstrelas(scoreStr) {
+            var n = parseFloat((scoreStr || '0').replace(',', '.'));
+            if (n >= 9.0) return '★★★★★';
+            if (n >= 8.0) return '★★★★<span style="opacity:0.22;">★</span>';
+            if (n >= 7.0) return '★★★<span style="opacity:0.22;">★★</span>';
+            if (n >= 5.0) return '★★<span style="opacity:0.22;">★★★</span>';
+            return '★<span style="opacity:0.22;">★★★★</span>';
+        }
+
+        function renderChart(ticker, divs) {
+            var canvas = document.getElementById('diagChart');
+            var vazio  = document.getElementById('diagChartVazio');
+            var titulo = document.getElementById('diagChartTitulo');
+            if (!canvas || typeof Chart === 'undefined') return;
+            if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+            var semZero = (divs || []).filter(function(d) { return d.valor > 0; });
+            if (!semZero.length) {
+                canvas.style.display = 'none';
+                if (vazio)  vazio.style.display  = 'block';
+                if (titulo) titulo.textContent = '📊 Proventos por Ação — ' + ticker;
+                return;
+            }
+            canvas.style.display = 'block';
+            if (vazio)  vazio.style.display  = 'none';
+            if (titulo) titulo.textContent = '📊 Proventos por Ação — ' + ticker + ' (R$/ação)';
+            chartInstance = new Chart(canvas, {
+                type: 'bar',
+                data: {
+                    labels: semZero.map(function(d) { return d.data; }),
+                    datasets: [{ label: 'Provento (R$/ação)', data: semZero.map(function(d) { return d.valor; }), backgroundColor: 'rgba(212,175,55,0.28)', borderColor: 'rgba(212,175,55,0.72)', borderWidth: 1, borderRadius: 4 }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx) { return 'R$ ' + ctx.parsed.y.toFixed(4) + '/ação'; } } } },
+                    scales: {
+                        x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: 'rgba(255,255,255,0.42)', font: { size: 11 } } },
+                        y: { grid: { color: 'rgba(255,255,255,0.06)' }, beginAtZero: true, ticks: { color: 'rgba(255,255,255,0.42)', font: { size: 11 }, callback: function(v) { return 'R$ ' + v.toFixed(2); } } }
+                    }
+                }
+            });
+        }
+
+        function aplicarEditorial(ticker) {
+            var ed = editorial[ticker];
+            if (!ed) return;
+            var set = function(id, html, style) { var el = document.getElementById(id); if (!el) return; if (html !== undefined) el.innerHTML = html; if (style) Object.assign(el.style, style); };
+            set('diagTickerCode', ticker);
+            set('diagTickerNome', ed.nome);
+            set('diagTickerSeg', ed.seg);
+            var riscoEl = document.getElementById('diagRisco');
+            if (riscoEl) { riscoEl.textContent = ed.risco; riscoEl.className = 'diag-ticker-risco ' + (riscoClass[ed.riscoKey] || ''); }
+            set('diagNegocio',    renderEstrelas(ed.negocio));
+            set('diagLucro',      renderEstrelas(ed.lucro));
+            set('diagDivida',     renderEstrelas(ed.divida));
+            set('diagGovernanca', renderEstrelas(ed.governanca));
+            set('diagResiliencia',renderEstrelas(ed.resiliencia));
+            set('diagScore',      ed.score);
+            set('diagScoreEstrelas', scoreParaEstrelas(ed.score));
+            set('diagParecer',    ed.parecer);
+        }
+
+        function aplicarAutomatico(dados, divs) {
+            var set = function(id, txt, color) { var el = document.getElementById(id); if (!el) return; el.classList.remove('carregando'); el.textContent = txt; if (color) el.style.color = color; };
+            set('diagPreco',  dados.preco ? fmtBRL(dados.preco) : '—');
+            set('diagPL',     dados.pl && dados.pl > 0 ? parseFloat(dados.pl).toFixed(1) + 'x' : (dados.pl !== null && dados.pl !== undefined ? 'Prejuízo' : '—'));
+            set('diagDY',     calcDY(divs, dados.preco) || '—');
+            set('diagVolume', fmtVolume(dados.volume));
+            var v = dados.variacao !== null && dados.variacao !== undefined ? parseFloat(dados.variacao) : null;
+            set('diagVariacao', v !== null ? (v >= 0 ? '+' : '') + v.toFixed(2) + '%' : '—', v !== null ? (v >= 0 ? '#10b981' : '#ef4444') : null);
+            var liqEl = document.getElementById('diagLiquidez');
+            if (liqEl) liqEl.innerHTML = renderEstrelas(volumeParaEstrelas(dados.volume));
+            var plEl = document.getElementById('diagPLEstrelas');
+            if (plEl) plEl.innerHTML = renderEstrelas(plParaEstrelas(dados.pl));
+            var fonte = document.getElementById('diagChartFonte');
+            if (fonte && dados.success && dados.timestamp) { var dt = new Date(dados.timestamp).toLocaleDateString('pt-BR'); fonte.textContent = 'Dados via BRAPI · Atualizado em ' + dt + ' · Cache semanal'; }
+        }
+
+        window.selecionarEmpresa = function(ticker, btn) {
+            var btns = document.querySelectorAll('#diagBtns .diag-btn');
+            for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+            if (btn) btn.classList.add('active');
+            aplicarEditorial(ticker);
+            ['diagPreco','diagPL','diagDY','diagVolume','diagVariacao'].forEach(function(id) { var el = document.getElementById(id); if (el) { el.classList.add('carregando'); el.textContent = 'carregando…'; el.style.color = ''; } });
+            ['diagLiquidez','diagPLEstrelas'].forEach(function(id) { var el = document.getElementById(id); if (el) el.textContent = '—'; });
+            if (clientCache[ticker]) { var c = clientCache[ticker]; aplicarAutomatico(c.dados, c.divs); renderChart(ticker, c.divs); return; }
+            fetch('/api/acao-diagnostico/' + ticker)
+                .then(function(r) { return r.json(); })
+                .then(function(dados) {
+                    var rawDivs = dados.dividendos && dados.dividendos.length > 0
+                        ? dados.dividendos.map(function(d) { return { data: fmtData(d.data), valor: parseFloat(d.valor) || 0 }; }).filter(function(d) { return d.valor > 0; })
+                        : (fallbacks[ticker] || []);
+                    clientCache[ticker] = { dados: dados, divs: rawDivs };
+                    aplicarAutomatico(dados, rawDivs);
+                    renderChart(ticker, rawDivs);
+                })
+                .catch(function() {
+                    ['diagPreco','diagPL','diagDY','diagVolume','diagVariacao'].forEach(function(id) { var el = document.getElementById(id); if (el) { el.classList.remove('carregando'); el.textContent = '—'; } });
+                    renderChart(ticker, fallbacks[ticker] || []);
+                });
+        };
+
+        window.responderPZ = function(sim) {
+            var alerta = document.getElementById('pzAlerta');
+            var ok     = document.getElementById('pzOk');
+            var box    = document.getElementById('perguntaZeroBox');
+            if (!alerta || !ok || !box) return;
+            if (sim) { alerta.style.display = 'none'; ok.style.display = 'block'; box.style.borderColor = 'rgba(16,185,129,0.40)'; }
+            else     { ok.style.display = 'none'; alerta.style.display = 'block'; box.style.borderColor = 'rgba(239,68,68,0.50)'; }
+        };
+
+        function atualizarChecklist() {
+            var checks = document.querySelectorAll('#checklistItems input[type="checkbox"]');
+            var total = checks.length, marcados = 0;
+            for (var i = 0; i < checks.length; i++) {
+                var item = checks[i].closest('.checklist-item');
+                if (checks[i].checked) { marcados++; if (item) item.classList.add('marcado'); }
+                else { if (item) item.classList.remove('marcado'); }
+            }
+            var barra  = document.getElementById('checklistBarra');
+            var status = document.getElementById('checklistStatus');
+            if (barra) barra.style.width = (total > 0 ? marcados / total * 100 : 0) + '%';
+            if (status) {
+                if (marcados === total && total > 0) { status.textContent = '✅ Checklist completo! Você está preparado para os próximos passos.'; status.classList.add('completo'); }
+                else { status.textContent = marcados + ' de ' + total + ' itens verificados'; status.classList.remove('completo'); }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var checks = document.querySelectorAll('#checklistItems input[type="checkbox"]');
+            for (var i = 0; i < checks.length; i++) checks[i].addEventListener('change', atualizarChecklist);
+            atualizarChecklist();
+            window.selecionarEmpresa('WEGE3', document.querySelector('#diagBtns .diag-btn'));
+        });
+    })();
+    </script>
 </body>
 </html>

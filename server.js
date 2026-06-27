@@ -252,6 +252,60 @@ app.get('/api/fii-raio-x/:ticker', async (req, res) => {
     }
 });
 
+// ================================================================
+// Diagnóstico Empresarial — proxy BRAPI com cache semanal
+//
+// Mesma arquitetura do Raio-X FII:
+//   QUANTITATIVO (preço, P/L, volume, histórico dividendos) → BRAPI
+//   QUALITATIVO (negócio, governança, resiliência, score)   → editorial
+// ================================================================
+const acaoDiagCache = {};
+
+app.get('/api/acao-diagnostico/:ticker', async (req, res) => {
+    const ticker = req.params.ticker.toUpperCase();
+    const agora  = Date.now();
+
+    if (acaoDiagCache[ticker] && (agora - acaoDiagCache[ticker].timestamp < FII_CACHE_TTL)) {
+        console.log(`📦 [Diag] Cache hit: ${ticker}`);
+        return res.json(acaoDiagCache[ticker].data);
+    }
+
+    console.log(`📡 [Diag] Buscando BRAPI para: ${ticker}`);
+
+    try {
+        const [quoteRes, divRes] = await Promise.all([
+            fetchBrapi(`quote/${ticker}?fundamental=true`),
+            fetchBrapi(`quote/${ticker}/dividends`)
+        ]);
+
+        const quote   = quoteRes.results?.[0] || {};
+        const rawDivs = divRes.results?.[0]?.dividendsData?.cashDividends || [];
+
+        const payload = {
+            success:   true,
+            ticker,
+            timestamp: agora,
+            source:    'brapi',
+            preco:     quote.regularMarketPrice         || null,
+            variacao:  quote.regularMarketChangePercent || null,
+            volume:    quote.regularMarketVolume        || null,
+            pl:        quote.priceToEarnings            || null,
+            pvp:       quote.priceToBook                || null,
+            dividendos: rawDivs.slice(0, 12).reverse().map(d => ({
+                data:  d.paymentDate || d.approvedOn || '',
+                valor: parseFloat(d.rate || d.value || 0)
+            }))
+        };
+
+        acaoDiagCache[ticker] = { timestamp: agora, data: payload };
+        res.json(payload);
+
+    } catch (error) {
+        console.error(`❌ [Diag] Erro ao buscar ${ticker}:`, error.message);
+        res.json({ success: false, ticker, preco: null, pl: null, pvp: null, volume: null, variacao: null, dividendos: [] });
+    }
+});
+
 // 404 handler
 app.use((req, res) => {
     res.status(404).sendFile(path.join(__dirname, 'index.html'));
