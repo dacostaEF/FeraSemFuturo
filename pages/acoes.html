@@ -187,6 +187,20 @@
     .analise-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 28px; }
     .analise-pergunta { background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 20px 22px; transition: border-color 0.2s; }
     .analise-pergunta:hover { border-color: rgba(245,158,11,0.25); }
+    .analise-pergunta.essencial { border-color: rgba(212,175,55,0.45); background: rgba(212,175,55,0.045); }
+    .analise-pergunta.essencial:hover { border-color: rgba(212,175,55,0.70); }
+    .pergunta-essencial-badge {
+        display: inline-flex; align-items: center; gap: 5px;
+        font-size: 0.62rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+        color: #D4AF37; background: rgba(212,175,55,0.10);
+        border: 1px solid rgba(212,175,55,0.28); border-radius: 20px;
+        padding: 3px 10px; margin-bottom: 10px;
+    }
+    .analise-legenda {
+        font-size: 0.78rem; color: rgba(255,255,255,0.32);
+        text-align: center; margin-top: -8px; margin-bottom: 28px;
+        line-height: 1.6;
+    }
     .analise-pergunta-num { font-size: 0.68rem; font-weight: 700; color: rgba(245,158,11,0.55); letter-spacing: 2px; margin-bottom: 8px; }
     .analise-pergunta-titulo { font-size: 0.93rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
     .analise-pergunta-desc { font-size: 0.83rem; color: rgba(255,255,255,0.50); line-height: 1.65; }
@@ -643,12 +657,14 @@
                 <div class="analise-subtitulo">Antes de comprar qualquer ação, um analista fundamentalista faz estas perguntas. Você não precisa de software caro — precisa das perguntas certas.</div>
 
                 <div class="analise-grid">
-                    <div class="analise-pergunta">
+                    <div class="analise-pergunta essencial">
+                        <div class="pergunta-essencial-badge">⭐ Essencial para iniciantes</div>
                         <div class="analise-pergunta-num">PERGUNTA 01</div>
                         <div class="analise-pergunta-titulo">Você entende como a empresa ganha dinheiro?</div>
                         <div class="analise-pergunta-desc">Se você não consegue explicar para um amigo como a empresa lucra, não compre. Warren Buffett chama isso de "círculo de competência". Investir no que não entende é especulação, não investimento.</div>
                     </div>
-                    <div class="analise-pergunta">
+                    <div class="analise-pergunta essencial">
+                        <div class="pergunta-essencial-badge">⭐ Essencial para iniciantes</div>
                         <div class="analise-pergunta-num">PERGUNTA 02</div>
                         <div class="analise-pergunta-titulo">A empresa tem lucro consistente?</div>
                         <div class="analise-pergunta-desc">Receita crescendo não é suficiente. Verifique o lucro líquido dos últimos 5 anos. Ele cresce? É consistente ou oscila muito? Empresa que alterna lucro e prejuízo exige nível extra de atenção.</div>
@@ -678,7 +694,8 @@
                             <div class="moat-card"><div class="moat-card-icon">📉</div><div class="moat-card-nome">Custo baixo</div>Escala que concorrentes não têm</div>
                         </div>
                     </div>
-                    <div class="analise-pergunta">
+                    <div class="analise-pergunta essencial">
+                        <div class="pergunta-essencial-badge">⭐ Essencial para iniciantes</div>
                         <div class="analise-pergunta-num">PERGUNTA 07</div>
                         <div class="analise-pergunta-titulo">O preço está justo? (P/L)</div>
                         <div class="analise-pergunta-desc">O Preço/Lucro (P/L) mostra quanto o mercado paga por cada real de lucro. Não existe P/L universalmente "certo" — depende do setor e do crescimento esperado.</div>
@@ -693,6 +710,9 @@
                         <div class="analise-pergunta-titulo">A ação tem liquidez suficiente?</div>
                         <div class="analise-pergunta-desc">Ações com volume diário abaixo de R$ 1M podem ser difíceis de vender rapidamente — você pode ser forçado a vender abaixo do preço desejado. Para iniciantes, priorize ações do Ibovespa.</div>
                     </div>
+                </div>
+                <div class="analise-legenda">
+                    ⭐ Perguntas com borda dourada são prioritárias para quem está começando — responda essas três antes de qualquer outra.
                 </div>
             </section>
 
