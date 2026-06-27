@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratório de Criptoativos — A Revolução da Propriedade Digital | INVLAB</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="description" content="Laboratório de Criptoativos: entenda Bitcoin, Ethereum, Stablecoins e a revolução da tokenização de ativos. INVLAB — educação financeira sem viés comercial.">
+
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+
+    <style>
+    /* ================================================================
+       LABORATÓRIO CRIPTOATIVOS — ESTILOS EXCLUSIVOS
+       ================================================================ */
+
+    .lab-hook {
+        background: linear-gradient(135deg, rgba(99,102,241,0.09) 0%, rgba(139,92,246,0.07) 100%);
+        border: 1px solid rgba(99,102,241,0.28);
+        border-radius: 20px; padding: 52px 40px;
+        text-align: center; margin: 32px 0 36px;
+        position: relative; overflow: hidden;
+    }
+    .lab-hook::before {
+        content: ''; position: absolute; top: -60%; left: -50%;
+        width: 200%; height: 200%;
+        background: radial-gradient(ellipse at center, rgba(99,102,241,0.05) 0%, transparent 60%);
+        pointer-events: none;
+    }
+    .lab-hook-badge {
+        display: inline-block;
+        background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.35);
+        color: #818CF8; font-size: 0.72rem; font-weight: 700;
+        letter-spacing: 2.5px; text-transform: uppercase;
+        padding: 6px 18px; border-radius: 20px; margin-bottom: 28px;
+    }
+    .lab-hook-title { font-size: clamp(1.4rem,3.5vw,2.1rem); font-weight: 700; color: #fff; line-height: 1.5; margin-bottom: 18px; }
+    .lab-hook-destaque {
+        background: rgba(99,102,241,0.08); border-left: 3px solid #818CF8;
+        border-radius: 0 12px 12px 0; padding: 18px 24px;
+        margin: 24px auto; max-width: 560px;
+        font-size: 1.05rem; color: #818CF8; font-style: italic; font-weight: 600; line-height: 1.7; text-align: left;
+    }
+
+    .lab-stage {
+        background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 18px; padding: 36px 40px; margin-bottom: 28px;
+    }
+    .lab-stage-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .lab-stage-num { font-size: 0.7rem; font-weight: 700; color: rgba(99,102,241,0.6); letter-spacing: 2px; text-transform: uppercase; }
+    .lab-stage-title { font-size: 1.1rem; font-weight: 700; color: #818CF8; }
+    .lab-text { font-size: 0.95rem; color: rgba(255,255,255,0.65); line-height: 1.85; margin-bottom: 22px; }
+
+    /* PROGRESS */
+    .lab-progress { display: flex; align-items: center; gap: 0; margin-bottom: 48px; overflow-x: auto; padding-bottom: 6px; }
+    .lab-step { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 72px; text-decoration: none; transition: opacity 0.2s; }
+    .lab-step:hover { opacity: 0.8; }
+    .lab-step-icon { font-size: 1.4rem; }
+    .lab-step-label { font-size: 0.65rem; font-weight: 600; color: rgba(255,255,255,0.40); text-align: center; letter-spacing: 0.5px; text-transform: uppercase; }
+    .lab-step-connector { flex: 1; height: 1px; background: rgba(99,102,241,0.18); min-width: 20px; }
+
+    /* TIMELINE */
+    .cripto-timeline { display: flex; align-items: flex-start; gap: 0; overflow-x: auto; padding: 8px 0 16px; margin: 24px 0; }
+    .tl-step { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 80px; text-align: center; flex-shrink: 0; }
+    .tl-step-dot { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; border: 2px solid; }
+    .tl-step.passado .tl-step-dot { background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.25); }
+    .tl-step.presente .tl-step-dot { background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.40); box-shadow: 0 0 12px rgba(245,158,11,0.20); }
+    .tl-step.futuro .tl-step-dot { background: rgba(212,175,55,0.10); border-color: rgba(212,175,55,0.35); }
+    .tl-step-label { font-size: 0.65rem; font-weight: 600; color: rgba(255,255,255,0.45); line-height: 1.3; }
+    .tl-step.presente .tl-step-label { color: #F59E0B; }
+    .tl-step.futuro .tl-step-label { color: rgba(212,175,55,0.70); }
+    .tl-connector { flex: 1; height: 2px; background: rgba(99,102,241,0.18); min-width: 16px; margin-top: 22px; flex-shrink: 0; }
+    .tl-connector.ativo { background: rgba(245,158,11,0.35); }
+    .tl-connector.futuro { background: rgba(212,175,55,0.15); border-top: 2px dashed rgba(212,175,55,0.20); height: 0; }
+
+    /* FAMÍLIAS */
+    .familia-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin: 24px 0; }
+    .familia-card { border-radius: 16px; padding: 24px 22px; border: 1px solid; background: rgba(255,255,255,0.02); transition: transform 0.2s, box-shadow 0.2s; cursor: default; }
+    .familia-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+    .familia-card.btc  { border-color: rgba(245,158,11,0.30); }
+    .familia-card.eth  { border-color: rgba(99,102,241,0.30); }
+    .familia-card.stable { border-color: rgba(16,185,129,0.30); }
+    .familia-card.alt  { border-color: rgba(139,92,246,0.30); }
+    .familia-card.token { border-color: rgba(212,175,55,0.35); }
+    .familia-card-emoji { font-size: 2rem; margin-bottom: 12px; }
+    .familia-card-nome { font-size: 1rem; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .familia-card-funcao { font-size: 0.78rem; font-weight: 600; margin-bottom: 12px; }
+    .familia-card.btc  .familia-card-funcao { color: #F59E0B; }
+    .familia-card.eth  .familia-card-funcao { color: #818CF8; }
+    .familia-card.stable .familia-card-funcao { color: #10b981; }
+    .familia-card.alt  .familia-card-funcao { color: #8B5CF6; }
+    .familia-card.token .familia-card-funcao { color: #D4AF37; }
+    .familia-card-desc { font-size: 0.83rem; color: rgba(255,255,255,0.50); line-height: 1.65; margin-bottom: 16px; }
+    .familia-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; padding: 7px 16px; border-radius: 8px; border: 1px solid; background: transparent; cursor: pointer; transition: all 0.2s; }
+    .familia-card.btc  .familia-btn { color: #F59E0B; border-color: rgba(245,158,11,0.35); }
+    .familia-card.eth  .familia-btn { color: #818CF8; border-color: rgba(99,102,241,0.35); }
+    .familia-card.stable .familia-btn { color: #10b981; border-color: rgba(16,185,129,0.35); }
+    .familia-card.alt  .familia-btn { color: #8B5CF6; border-color: rgba(139,92,246,0.35); }
+    .familia-card.token .familia-btn { color: #D4AF37; border-color: rgba(212,175,55,0.35); }
+    .familia-btn:hover { background: rgba(255,255,255,0.05); }
+
+    /* TABELA DEMOCRATIZAÇÃO */
+    .demo-table-wrap { margin: 28px 0; overflow-x: auto; }
+    .demo-table { width: 100%; border-collapse: collapse; }
+    .demo-table thead tr { border-bottom: 1px solid rgba(212,175,55,0.20); }
+    .demo-table th { font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #D4AF37; padding: 12px 20px; text-align: left; }
+    .demo-table td { font-size: 0.88rem; color: rgba(255,255,255,0.65); padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle; line-height: 1.55; }
+    .demo-table tr:last-child td { border-bottom: none; background: rgba(212,175,55,0.04); }
+    .demo-table tr:last-child td { color: rgba(255,255,255,0.80); }
+    .demo-table .demo-tec { font-weight: 700; color: #fff; }
+    .demo-badge { display: inline-block; font-size: 0.68rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-left: 8px; vertical-align: middle; }
+    .demo-badge.novo { background: rgba(212,175,55,0.12); border: 1px solid rgba(212,175,55,0.30); color: #D4AF37; }
+    .demo-table .row-token { background: rgba(212,175,55,0.03); }
+
+    /* TABELA CUSTÓDIA */
+    .custodia-table-wrap { margin: 24px 0; overflow-x: auto; }
+    .custodia-table { width: 100%; border-collapse: collapse; }
+    .custodia-table th { font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.50); padding: 10px 16px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .custodia-table td { font-size: 0.86rem; color: rgba(255,255,255,0.60); padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); line-height: 1.5; vertical-align: middle; }
+    .custodia-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .custodia-table .custodia-label { font-weight: 700; color: #fff; }
+    .custodia-table .c-verde { color: #10b981; font-weight: 600; }
+    .custodia-table .c-amarelo { color: #F59E0B; font-weight: 600; }
+    .custodia-table .c-vermelho { color: #ef4444; font-weight: 600; }
+
+    /* FRASE DESTAQUE */
+    .frase-destaque {
+        background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(212,175,55,0.04));
+        border: 1px solid rgba(212,175,55,0.25); border-radius: 16px;
+        padding: 30px 36px; text-align: center; margin: 32px 0;
+    }
+    .frase-destaque-texto { font-size: clamp(1.05rem,2.5vw,1.3rem); font-weight: 700; color: #D4AF37; line-height: 1.6; font-style: italic; }
+
+    /* RAIO-X */
+    .rx-section { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 36px 40px; margin-bottom: 28px; }
+    .rx-badge { display: inline-block; background: rgba(16,185,129,0.10); border: 1px solid rgba(16,185,129,0.28); color: #10b981; font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 4px 14px; border-radius: 20px; margin-bottom: 12px; }
+    .rx-titulo { font-size: 1.1rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .rx-subtitulo { font-size: 0.85rem; color: rgba(255,255,255,0.42); margin-bottom: 20px; line-height: 1.6; }
+    .rx-disclaimer { background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.15); border-radius: 10px; padding: 10px 16px; font-size: 0.76rem; color: rgba(255,255,255,0.40); line-height: 1.6; margin-bottom: 20px; }
+    .rx-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .rx-btn { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.09); border-radius: 10px; cursor: pointer; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.55); transition: all 0.2s; }
+    .rx-btn span { font-size: 0.68rem; font-weight: 400; color: rgba(255,255,255,0.28); }
+    .rx-btn:hover { border-color: rgba(16,185,129,0.30); color: #fff; }
+    .rx-btn.active { background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.45); color: #10b981; }
+    .rx-btn.active span { color: rgba(16,185,129,0.50); }
+    .rx-painel { display: none; }
+    .rx-painel.ativo { display: block; }
+    .rx-topo { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.06); flex-wrap: wrap; }
+    .rx-emoji { font-size: 2.2rem; }
+    .rx-info { flex: 1; }
+    .rx-nome { font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 2px; }
+    .rx-funcao { font-size: 0.85rem; color: rgba(255,255,255,0.45); }
+    .rx-metricas { display: flex; flex-wrap: wrap; gap: 0; background: rgba(255,255,255,0.025); border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+    .rx-metrica { flex: 1; min-width: 120px; padding: 16px 18px; border-right: 1px solid rgba(255,255,255,0.05); }
+    .rx-metrica:last-child { border-right: none; }
+    .rx-metrica-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.30); margin-bottom: 8px; }
+    .rx-metrica-valor { font-size: 1.1rem; font-weight: 700; color: #fff; }
+    .rx-metrica-valor.positivo { color: #10b981; }
+    .rx-metrica-valor.negativo { color: #ef4444; }
+    .rx-metrica-badge { display: inline-block; font-size: 0.58rem; font-weight: 700; padding: 2px 7px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
+    .badge-auto { background: rgba(16,185,129,0.12); color: #10b981; border: 1px solid rgba(16,185,129,0.25); }
+    .badge-edit { background: rgba(245,158,11,0.12); color: #F59E0B; border: 1px solid rgba(245,158,11,0.25); }
+    .rx-editorial { background: rgba(245,158,11,0.04); border: 1px solid rgba(245,158,11,0.14); border-radius: 12px; padding: 20px 22px; }
+    .rx-ed-titulo { font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(245,158,11,0.60); margin-bottom: 14px; }
+    .rx-ed-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+    .rx-ed-item { font-size: 0.82rem; color: rgba(255,255,255,0.55); }
+    .rx-ed-item strong { color: rgba(255,255,255,0.80); }
+    .rx-ed-desc { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.84rem; color: rgba(255,255,255,0.55); line-height: 1.75; }
+
+    /* FUTURO MANIFESTO */
+    .futuro-manifesto {
+        background: linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(139,92,246,0.06) 100%);
+        border: 1px solid rgba(99,102,241,0.25); border-radius: 20px;
+        padding: 52px 40px; text-align: center; margin: 32px 0;
+        position: relative; overflow: hidden;
+    }
+    .futuro-manifesto::before {
+        content: ''; position: absolute; inset: 0;
+        background: radial-gradient(ellipse at 50% 0%, rgba(99,102,241,0.08) 0%, transparent 60%);
+        pointer-events: none;
+    }
+    .futuro-titulo { font-size: clamp(1.2rem,3vw,1.8rem); font-weight: 800; color: #fff; margin-bottom: 20px; line-height: 1.4; }
+    .futuro-pergunta { font-size: 0.95rem; color: rgba(255,255,255,0.55); line-height: 1.85; margin-bottom: 28px; max-width: 580px; margin-left: auto; margin-right: auto; }
+    .futuro-tendencias { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 36px; }
+    .futuro-tag { display: inline-block; background: rgba(99,102,241,0.10); border: 1px solid rgba(99,102,241,0.25); border-radius: 20px; padding: 6px 16px; font-size: 0.80rem; color: rgba(255,255,255,0.65); }
+    .futuro-frase-final { background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.25); border-radius: 14px; padding: 28px 36px; max-width: 620px; margin: 0 auto; font-size: clamp(0.95rem,2.2vw,1.15rem); color: #D4AF37; font-style: italic; font-weight: 700; line-height: 1.7; }
+
+    /* MODAIS */
+    .cripto-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.80); z-index: 9000; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
+    .cripto-modal.aberto { display: flex; }
+    .modal-box { background: #111217; border: 1px solid rgba(212,175,55,0.22); border-radius: 20px; width: 100%; max-width: 680px; max-height: 88vh; overflow-y: auto; padding: 40px; position: relative; }
+    .modal-close { position: absolute; top: 18px; right: 22px; background: none; border: none; color: rgba(255,255,255,0.35); font-size: 1.5rem; cursor: pointer; line-height: 1; padding: 4px 8px; border-radius: 6px; transition: all 0.2s; }
+    .modal-close:hover { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.70); }
+    .modal-emoji { font-size: 2.4rem; margin-bottom: 12px; }
+    .modal-titulo { font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .modal-subtitulo { font-size: 0.88rem; color: rgba(255,255,255,0.42); margin-bottom: 28px; line-height: 1.6; }
+    .modal-secao { margin-bottom: 24px; }
+    .modal-secao-titulo { font-size: 0.78rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.40); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .modal-texto { font-size: 0.9rem; color: rgba(255,255,255,0.60); line-height: 1.80; }
+    .modal-destaque { background: rgba(212,175,55,0.07); border-left: 3px solid #D4AF37; border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 16px 0; font-size: 0.88rem; color: rgba(255,255,255,0.65); line-height: 1.70; }
+    .modal-alerta { background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.22); border-radius: 10px; padding: 14px 18px; margin: 16px 0; font-size: 0.86rem; color: rgba(255,255,255,0.60); line-height: 1.70; }
+    .modal-verde { background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.22); border-radius: 10px; padding: 14px 18px; margin: 16px 0; font-size: 0.86rem; color: rgba(255,255,255,0.60); line-height: 1.70; }
+    .modal-lista { list-style: none; padding: 0; margin: 12px 0; }
+    .modal-lista li { font-size: 0.88rem; color: rgba(255,255,255,0.58); padding: 5px 0 5px 18px; position: relative; line-height: 1.60; }
+    .modal-lista li::before { content: '→'; position: absolute; left: 0; color: rgba(212,175,55,0.50); font-size: 0.8rem; }
+    .modal-exemplo-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(190px,1fr)); gap: 12px; margin: 16px 0; }
+    .modal-exemplo-card { background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px; }
+    .modal-exemplo-icon { font-size: 1.5rem; margin-bottom: 8px; }
+    .modal-exemplo-titulo { font-size: 0.82rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .modal-exemplo-desc { font-size: 0.76rem; color: rgba(255,255,255,0.45); line-height: 1.55; }
+
+    /* BOTÃO EXPLORAR MODAL */
+    .btn-explorar { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; background: rgba(99,102,241,0.10); border: 1px solid rgba(99,102,241,0.30); border-radius: 10px; color: #818CF8; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: all 0.2s; margin-top: 8px; }
+    .btn-explorar:hover { background: rgba(99,102,241,0.18); }
+    .btn-link { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25); border-radius: 8px; color: #ef4444; font-size: 0.80rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+    .btn-link:hover { background: rgba(239,68,68,0.14); }
+
+    /* CTA FINAL */
+    .lab-final-cta { text-align: center; background: rgba(99,102,241,0.05); border: 1px solid rgba(99,102,241,0.18); border-radius: 20px; padding: 48px 40px; margin: 28px 0; }
+    .lab-final-cta h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 12px; }
+    .lab-final-cta p { font-size: 0.92rem; color: rgba(255,255,255,0.50); line-height: 1.80; max-width: 560px; margin: 0 auto 28px; }
+    .lab-cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-lab-secondary { padding: 10px 22px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; color: rgba(255,255,255,0.60); font-size: 0.84rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+    .btn-lab-secondary:hover { background: rgba(255,255,255,0.08); color: #fff; }
+
+    @media (max-width: 768px) {
+        .lab-hook { padding: 36px 24px; }
+        .lab-stage { padding: 28px 22px; }
+        .familia-grid { grid-template-columns: 1fr; }
+        .rx-ed-grid { grid-template-columns: 1fr; }
+        .rx-metricas { flex-direction: column; }
+        .rx-metrica { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .futuro-manifesto { padding: 36px 24px; }
+        .modal-box { padding: 28px 22px; }
+        .demo-table th, .demo-table td { padding: 10px 14px; }
+        .futuro-frase-final { padding: 22px 24px; }
+    }
+    </style>
+</head>
+<body>
+    <section id="invlab-carousel-container"></section>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+            </div>
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Início</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">📚 Primeiros<br>Passos</button>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">📊 Renda<br>Fixa <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle">📈 Renda<br>Variável <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='etfs.html'" style="cursor:pointer;">
+                                <span class="category-name">💵 ETFs</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-etfs">
+                                <li><a href="#">📊 Simulador de Indexação</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='fiis.html'" style="cursor:pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-fiis">
+                                <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='acoes.html'" style="cursor:pointer;">
+                                <span class="category-name">📈 Ações</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-acoes">
+                                <li><a href="#">📊 Simulador de Dividendos</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle active">🔐 Cripto<br>ativos <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="cripto.html" style="color:#D4AF37;font-weight:700;">🔬 Laboratório Cripto</a></li>
+                    </ul>
+                </div>
+                <button class="tab-btn" onclick="window.location.href='../index.html#ferramentas'">🛠️ Ferramentas</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#outros-investimentos'">💎 Outros</button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="content-wrapper-wide">
+
+            <nav class="breadcrumb">
+                <a href="../index.html">🏠 Início</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">🔐 Laboratório de Criptoativos</span>
+            </nav>
+
+            <!-- HOOK -->
+            <div class="lab-hook">
+                <div class="lab-hook-badge">🔬 Laboratório de Criptoativos</div>
+                <h2 class="lab-hook-title">A maior revolução financeira<br>desde a criação da internet.</h2>
+                <p style="font-size:1rem;color:rgba(255,255,255,0.50);max-width:500px;margin:0 auto 20px;line-height:1.75;">
+                    Não estamos falando apenas de uma nova moeda.<br>
+                    Estamos falando de uma nova forma de <strong style="color:#fff;">representar, possuir e transferir valor.</strong>
+                </p>
+                <div class="lab-hook-destaque">
+                    "O futuro não é apenas uma nova moeda.<br>O futuro é uma nova forma de representar valor."
+                </div>
+            </div>
+
+            <!-- PROGRESS -->
+            <div class="lab-progress">
+                <a href="#etapa-evolucao" class="lab-step"><span class="lab-step-icon">⏳</span><span class="lab-step-label">Evolução</span></a>
+                <div class="lab-step-connector"></div>
+                <a href="#etapa-problema" class="lab-step"><span class="lab-step-icon">❓</span><span class="lab-step-label">O Problema</span></a>
+                <div class="lab-step-connector"></div>
+                <a href="#etapa-familias" class="lab-step"><span class="lab-step-icon">🗂️</span><span class="lab-step-label">Famílias</span></a>
+                <div class="lab-step-connector"></div>
+                <a href="#etapa-tokenizacao" class="lab-step"><span class="lab-step-icon">🪙</span><span class="lab-step-label">Tokenização</span></a>
+                <div class="lab-step-connector"></div>
+                <a href="#etapa-custodia" class="lab-step"><span class="lab-step-icon">🔐</span><span class="lab-step-label">Custódia</span></a>
+                <div class="lab-step-connector"></div>
+                <a href="#etapa-raio-x" class="lab-step"><span class="lab-step-icon">📊</span><span class="lab-step-label">Raio-X</span></a>
+                <div class="lab-step-connector"></div>
+                <a href="#etapa-futuro" class="lab-step"><span class="lab-step-icon">🌍</span><span class="lab-step-label">Futuro</span></a>
+            </div>
+
+            <!-- ETAPA 1: EVOLUÇÃO DO DINHEIRO -->
+            <div class="lab-stage" id="etapa-evolucao">
+                <div class="lab-stage-header">
+                    <span class="lab-stage-num">Etapa 01</span>
+                    <span class="lab-stage-title">Como o dinheiro evoluiu</span>
+                </div>
+                <p class="lab-text">Hoje quase ninguém anda com dinheiro no bolso. Pagamos contas pelo celular, recebemos salários em conta digital, transferimos valor pelo PIX em segundos. A digitalização do dinheiro já aconteceu — e você usou ela hoje. Os criptoativos são a <strong style="color:#fff;">próxima etapa dessa evolução.</strong></p>
+
+                <div class="cripto-timeline">
+                    <div class="tl-step passado"><div class="tl-step-dot">🥇</div><div class="tl-step-label">Ouro</div></div>
+                    <div class="tl-connector"></div>
+                    <div class="tl-step passado"><div class="tl-step-dot">🪙</div><div class="tl-step-label">Moedas</div></div>
+                    <div class="tl-connector"></div>
+                    <div class="tl-step passado"><div class="tl-step-dot">📜</div><div class="tl-step-label">Papel-Moeda</div></div>
+                    <div class="tl-connector"></div>
+                    <div class="tl-step passado"><div class="tl-step-dot">💳</div><div class="tl-step-label">Cartões</div></div>
+                    <div class="tl-connector"></div>
+                    <div class="tl-step passado"><div class="tl-step-dot">🖥️</div><div class="tl-step-label">Internet Banking</div></div>
+                    <div class="tl-connector ativo"></div>
+                    <div class="tl-step presente"><div class="tl-step-dot">⚡</div><div class="tl-step-label">PIX / Pagamentos Instantâneos</div></div>
+                    <div class="tl-connector ativo"></div>
+                    <div class="tl-step presente"><div class="tl-step-dot">⛓️</div><div class="tl-step-label">Blockchain</div></div>
+                    <div class="tl-connector futuro"></div>
+                    <div class="tl-step futuro"><div class="tl-step-dot">🪙</div><div class="tl-step-label">Tokenização</div></div>
+                    <div class="tl-connector futuro"></div>
+                    <div class="tl-step futuro"><div class="tl-step-dot">🌐</div><div class="tl-step-label">Economia Digital</div></div>
+                </div>
+
+                <p class="lab-text" style="margin-bottom:0;">O ponto em laranja é onde estamos agora. Blockchain e tokenização não são ficção científica — são infraestrutura em construção ativa, com países, bancos e empresas já operando versões reais dessas tecnologias.</p>
+            </div>
+
+            <!-- ETAPA 2: O PROBLEMA -->
+            <div class="lab-stage" id="etapa-problema">
+                <div class="lab-stage-header">
+                    <span class="lab-stage-num">Etapa 02</span>
+                    <span class="lab-stage-title">O problema que criou o Bitcoin</span>
+                </div>
+                <p class="lab-text">Todo mundo começa explicando cripto pelo Bitcoin. O INVLAB começa pela pergunta certa:</p>
+
+                <div class="frase-destaque" style="background:rgba(99,102,241,0.07);border-color:rgba(99,102,241,0.25);">
+                    <div class="frase-destaque-texto" style="color:#818CF8;">Por que o mundo precisou criar o Bitcoin?</div>
+                </div>
+
+                <p class="lab-text">A resposta não é "para criar uma nova moeda." A resposta é um problema muito mais antigo:</p>
+
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:24px 0;">
+                    <div style="background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.18);border-radius:12px;padding:20px;">
+                        <div style="font-size:1.4rem;margin-bottom:8px;">🏦</div>
+                        <div style="font-size:0.82rem;font-weight:700;color:rgba(239,68,68,0.80);margin-bottom:6px;">O PROBLEMA</div>
+                        <div style="font-size:0.86rem;color:rgba(255,255,255,0.55);line-height:1.60;">Como enviar valor para qualquer pessoa no mundo sem depender de um banco, de um governo ou de autorização de ninguém?</div>
+                    </div>
+                    <div style="background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.18);border-radius:12px;padding:20px;">
+                        <div style="font-size:1.4rem;margin-bottom:8px;">₿</div>
+                        <div style="font-size:0.82rem;font-weight:700;color:#10b981;margin-bottom:6px;">A SOLUÇÃO — 2009</div>
+                        <div style="font-size:0.86rem;color:rgba(255,255,255,0.55);line-height:1.60;">Uma rede de computadores que registra e valida transações coletivamente, sem nenhuma autoridade central. Descentralizada. Imutável. Global.</div>
+                    </div>
+                    <div style="background:rgba(212,175,55,0.05);border:1px solid rgba(212,175,55,0.18);border-radius:12px;padding:20px;">
+                        <div style="font-size:1.4rem;margin-bottom:8px;">⛓️</div>
+                        <div style="font-size:0.82rem;font-weight:700;color:#D4AF37;margin-bottom:6px;">A TECNOLOGIA</div>
+                        <div style="font-size:0.86rem;color:rgba(255,255,255,0.55);line-height:1.60;">Blockchain — um livro de registros compartilhado por milhares de computadores ao mesmo tempo. Alterar esse registro exige consenso de toda a rede.</div>
+                    </div>
+                </div>
+
+                <p class="lab-text" style="margin-bottom:0;">O Bitcoin provou que uma rede descentralizada funciona. Esse foi o experimento que abriu caminho para tudo o que veio depois.</p>
+            </div>
+
+            <!-- ETAPA 3: AS FAMÍLIAS -->
+            <div class="lab-stage" id="etapa-familias">
+                <div class="lab-stage-header">
+                    <span class="lab-stage-num">Etapa 03</span>
+                    <span class="lab-stage-title">As famílias dos criptoativos</span>
+                </div>
+                <p class="lab-text">O erro mais comum é achar que tudo é Bitcoin. Existem famílias completamente diferentes com objetivos distintos. Clique em qualquer família para entender em profundidade.</p>
+
+                <div class="familia-grid">
+                    <div class="familia-card btc">
+                        <div class="familia-card-emoji">🟠</div>
+                        <div class="familia-card-nome">Bitcoin</div>
+                        <div class="familia-card-funcao">Reserva Digital de Valor</div>
+                        <div class="familia-card-desc">O ouro da internet. Oferta fixa em 21 milhões de unidades. Nenhum governo, banco ou empresa pode criar mais.</div>
+                        <button class="familia-btn" onclick="window.abrirModal('modal-bitcoin')">Explorar Bitcoin →</button>
+                    </div>
+                    <div class="familia-card eth">
+                        <div class="familia-card-emoji">🔵</div>
+                        <div class="familia-card-nome">Ethereum</div>
+                        <div class="familia-card-funcao">Infraestrutura Programável</div>
+                        <div class="familia-card-desc">Um computador global descentralizado. Permite criar contratos que executam automaticamente, sem intermediários.</div>
+                        <button class="familia-btn" onclick="window.abrirModal('modal-ethereum')">Explorar Ethereum →</button>
+                    </div>
+                    <div class="familia-card stable">
+                        <div class="familia-card-emoji">🟢</div>
+                        <div class="familia-card-nome">Stablecoins</div>
+                        <div class="familia-card-funcao">Moedas Digitais Estáveis</div>
+                        <div class="familia-card-desc">Criptoativos que mantêm paridade com o dólar ou outras moedas. USDT, USDC, DAI — e o Drex (Real Digital).</div>
+                        <button class="familia-btn" onclick="window.abrirModal('modal-stablecoins')">Explorar Stablecoins →</button>
+                    </div>
+                    <div class="familia-card alt">
+                        <div class="familia-card-emoji">🟣</div>
+                        <div class="familia-card-nome">Altcoins e NFTs</div>
+                        <div class="familia-card-funcao">Projetos e Certificados Digitais</div>
+                        <div class="familia-card-desc">Milhares de projetos tentando resolver problemas específicos. Alto risco — a maioria não sobrevive. NFTs como certificados digitais.</div>
+                        <button class="familia-btn" onclick="window.abrirModal('modal-altcoins')">Explorar Altcoins →</button>
+                    </div>
+                    <div class="familia-card token">
+                        <div class="familia-card-emoji">🟡</div>
+                        <div class="familia-card-nome">Tokens</div>
+                        <div class="familia-card-funcao">Representação Digital de Direitos</div>
+                        <div class="familia-card-desc">A família mais importante para o futuro. Tokens representam participações, imóveis, créditos, recebíveis — qualquer ativo econômico.</div>
+                        <button class="familia-btn" onclick="window.abrirModal('modal-tokens')">Explorar Tokens →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ETAPA 4: TOKENIZAÇÃO -->
+            <div class="lab-stage" id="etapa-tokenizacao">
+                <div class="lab-stage-header">
+                    <span class="lab-stage-num">Etapa 04</span>
+                    <span class="lab-stage-title">A grande revolução — Tokenização</span>
+                </div>
+                <p class="lab-text">Cada geração de tecnologia financeira democratizou o acesso a uma categoria de ativos. Veja o padrão:</p>
+
+                <!-- TABELA DEMOCRATIZAÇÃO -->
+                <div class="demo-table-wrap">
+                    <table class="demo-table">
+                        <thead>
+                            <tr>
+                                <th>Tecnologia</th>
+                                <th>O que democratizou?</th>
+                                <th>Antes era exclusivo de</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="demo-tec">📈 Ações</span></td>
+                                <td>Participação em empresas</td>
+                                <td>Sócios fundadores e grandes fundos</td>
+                            </tr>
+                            <tr>
+                                <td><span class="demo-tec">🏢 FIIs</span></td>
+                                <td>Patrimônio imobiliário</td>
+                                <td>Proprietários de imóveis comerciais</td>
+                            </tr>
+                            <tr>
+                                <td><span class="demo-tec">📊 ETFs</span></td>
+                                <td>Carteiras inteiras de ativos</td>
+                                <td>Gestores profissionais e fundos</td>
+                            </tr>
+                            <tr class="row-token">
+                                <td><span class="demo-tec">🪙 Tokenização <span class="demo-badge novo">próxima etapa</span></span></td>
+                                <td><strong>Qualquer ativo econômico</strong></td>
+                                <td>Quem o mercado tradicional exclui</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="lab-text">A tokenização não é uma categoria — é uma <strong style="color:#fff;">infraestrutura.</strong> Ela pode representar digitalmente qualquer direito econômico: imóveis, participações, obras de arte, créditos de carbono, recebíveis, royalties de música, projetos de energia renovável.</p>
+
+                <div class="frase-destaque">
+                    <div class="frase-destaque-texto">"Cada inovação ampliou o acesso das pessoas aos investimentos.<br>A tokenização representa o próximo passo dessa evolução."</div>
+                </div>
+
+                <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:4px;">
+                    <button class="btn-explorar" onclick="window.abrirModal('modal-exemplos')">🏢 Ver exemplos de tokenização →</button>
+                    <div style="font-size:0.78rem;color:rgba(255,255,255,0.30);">Prédios, fazendas, energia, arte, royalties</div>
+                </div>
+
+                <div style="margin-top:24px;background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.18);border-radius:12px;padding:18px 22px;">
+                    <div style="font-size:0.78rem;font-weight:700;color:rgba(239,68,68,0.70);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">⚠️ Importante — credibilidade acima de tudo</div>
+                    <div style="font-size:0.85rem;color:rgba(255,255,255,0.55);line-height:1.75;">A tokenização é uma tecnologia para representar direitos digitalmente — não elimina regras. Dependendo da estrutura, um token pode ser considerado valor mobiliário e estar sujeito à regulamentação da CVM. Bons projetos continuam precisando de governança, transparência e segurança jurídica.</div>
+                </div>
+            </div>
+
+            <!-- ETAPA 5: CUSTÓDIA -->
+            <div class="lab-stage" id="etapa-custodia">
+                <div class="lab-stage-header">
+                    <span class="lab-stage-num">Etapa 05</span>
+                    <span class="lab-stage-title">Quem realmente controla seus ativos?</span>
+                </div>
+                <p class="lab-text">Existe uma diferença crítica entre <em>ter cripto</em> e <em>possuir cripto de verdade</em>. No mercado tradicional, o banco faz a custódia por você. No cripto, a responsabilidade pode ser inteiramente sua — ou de quem você escolheu confiar.</p>
+
+                <div class="custodia-table-wrap">
+                    <table class="custodia-table">
+                        <thead>
+                            <tr>
+                                <th>Cenário</th>
+                                <th>Quem custodia?</th>
+                                <th>Risco principal</th>
+                                <th>Cobertura</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="custodia-label">💵 Dinheiro no banco</td>
+                                <td>O banco</td>
+                                <td>Banco quebrar</td>
+                                <td class="c-verde">FGC cobre até R$ 250 mil</td>
+                            </tr>
+                            <tr>
+                                <td class="custodia-label">📱 Cripto em exchange</td>
+                                <td>A exchange</td>
+                                <td>Exchange quebrar ou ser hackeada</td>
+                                <td class="c-vermelho">Sem seguro — risco total</td>
+                            </tr>
+                            <tr>
+                                <td class="custodia-label">🔐 Cripto em carteira própria</td>
+                                <td>Você mesmo</td>
+                                <td>Perda da chave privada</td>
+                                <td class="c-amarelo">Sem recuperação possível</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="lab-text">No mercado cripto existe uma frase conhecida: <strong style="color:#fff;">"Not your keys, not your coins."</strong> Se a chave privada não é sua, os ativos não estão totalmente sob seu controle.</p>
+
+                <button class="btn-link" onclick="window.abrirModal('modal-ftx')">📖 Ver o caso FTX — como R$ 32 bilhões evaporaram em 72 horas →</button>
+            </div>
+
+            <!-- ETAPA 6: RAIO-X -->
+            <div class="rx-section" id="etapa-raio-x">
+                <div class="rx-badge">📊 Raio-X INVLAB</div>
+                <div class="rx-titulo">Dados em tempo real — Bitcoin, Ethereum, Solana</div>
+                <div class="rx-subtitulo">Dados quantitativos via BRAPI (atualizados automaticamente). Dados editoriais são curadoria INVLAB.</div>
+                <div class="rx-disclaimer">
+                    <strong style="color:rgba(212,175,55,0.70);">📊 BRAPI</strong> = dados de mercado em tempo real &nbsp;|&nbsp; <strong style="color:rgba(245,158,11,0.70);">✏️ Editorial</strong> = análise qualitativa INVLAB. Nenhum dado quantitativo é hardcoded.
+                </div>
+
+                <div class="rx-btns">
+                    <button class="rx-btn" id="btn-BTC" onclick="window.selecionarCripto('BTC',this)">₿ BTC<span>Bitcoin</span></button>
+                    <button class="rx-btn" id="btn-ETH" onclick="window.selecionarCripto('ETH',this)">⧫ ETH<span>Ethereum</span></button>
+                    <button class="rx-btn" id="btn-SOL" onclick="window.selecionarCripto('SOL',this)">◎ SOL<span>Solana</span></button>
+                </div>
+
+                <div id="rx-painel-BTC" class="rx-painel">
+                    <div class="rx-topo">
+                        <div class="rx-emoji">🟠</div>
+                        <div class="rx-info">
+                            <div class="rx-nome">Bitcoin</div>
+                            <div class="rx-funcao">Reserva Digital de Valor · Pioneiro descentralizado</div>
+                        </div>
+                    </div>
+                    <div class="rx-metricas">
+                        <div class="rx-metrica">
+                            <div class="rx-metrica-label">Preço (USD) <span class="rx-metrica-badge badge-auto">📊 BRAPI</span></div>
+                            <div class="rx-metrica-valor" id="rx-BTC-preco">—</div>
+                        </div>
+                        <div class="rx-metrica">
+                            <div class="rx-metrica-label">Variação 24h <span class="rx-metrica-badge badge-auto">📊 BRAPI</span></div>
+                            <div class="rx-metrica-valor" id="rx-BTC-var">—</div>
+                        </div>
+                        <div class="rx-metrica">
+                            <div class="rx-metrica-label">Volume 24h <span class="rx-metrica-badge badge-auto">📊 BRAPI</span></div>
+                            <div class="rx-metrica-valor" id="rx-BTC-vol">—</div>
+                        </div>
+                    </div>
+                    <div class="rx-editorial">
+                        <div class="rx-ed-titulo">✏️ Editorial INVLAB</div>
+                        <div class="rx-ed-grid">
+                            <div class="rx-ed-item"><strong>Criação:</strong> 2009</div>
+                            <div class="rx-ed-item"><strong>Criador:</strong> Satoshi Nakamoto (pseudônimo)</div>
+                            <div class="rx-ed-item"><strong>Oferta máxima:</strong> 21 milhões (fixo e imutável)</div>
+                            <div class="rx-ed-item"><strong>Consenso:</strong> Proof of Work (mineração)</div>
+                        </div>
+                        <div class="rx-ed-desc">Primeira rede de transferência de valor digital sem intermediários. Sua principal característica é a escassez programada — nunca haverá mais de 21 milhões de unidades, independente de qualquer decisão governamental ou corporativa. Bancos centrais de vários países já incluem Bitcoin em suas reservas estratégicas.</div>
+                    </div>
+                </div>
+
+                <div id="rx-painel-ETH" class="rx-painel">
+                    <div class="rx-topo">
+                        <div class="rx-emoji">🔵</div>
+                        <div class="rx-info">
+                            <div class="rx-nome">Ethereum</div>
+                            <div class="rx-funcao">Infraestrutura Programável · Contratos Inteligentes</div>
+                        </div>
+                    </div>
+                    <div class="rx-metricas">
+                        <div class="rx-metrica">
+                            <div class="rx-metrica-label">Preço (USD) <span class="rx-metrica-badge badge-auto">📊 BRAPI</span></div>
+                            <div class="rx-metrica-valor" id="rx-ETH-preco">—</div>
+                        </div>
+                        <div class="rx-metrica">
+                            <div class="rx-metrica-label">Variação 24h <span class="rx-metrica-badge badge-auto">📊 BRAPI</span></div>
+                            <div class="rx-metrica-valor" id="rx-ETH-var">—</div>
+                        </div>
+                        <div class="rx-metrica">
+                            <div class="rx-metrica-label">Volume 24h <span class="rx-metrica-badge badge-auto">📊 BRAPI</span></div>
+                            <div class="rx-metrica-valor" id="rx-ETH-vol">—</div>
+                        </div>
+                    </div>
+                    <div class="rx-editorial">
+                        <div class="rx-ed-titulo">✏️ Editorial INVLAB</div>
+                        <div class="rx-ed-grid">
+                            <div class="rx-ed-item"><strong>Criação:</strong> 2015</div>
+                            <div class="rx-ed-item"><strong>Criador:</strong> Vitalik Buterin</div>
+                            <div class="rx-ed-item"><strong>Oferta:</strong> Sem limite fixo (inflação controlada)</div>
+                            <div class="rx-ed-item"><strong>Consenso:</strong> Proof of Stake (desde 2022)</div>
+                        </div>
+                        <div class="rx-ed-desc">Plataforma para execução de contratos inteligentes — código que executa automaticamente quando condições são atingidas, sem intermediários. É a base técnica para DeFi (finanças descentralizadas), NFTs e a maior parte dos projetos de tokenização de ativos reais em desenvolvimento.</div>
+                    </div>
+                </div>
+
+                <div id="rx-painel-SOL" class="rx-painel">
+                    <div class="rx-topo">
+                        <div class="rx-emoji">🟣</div>
+                        <div class="rx-info">
+                            <div class="rx-nome">Solana</div>
+                            <div class="rx-funcao">Blockchain de Alta Velocidade · DeFi e NFTs</div>
+                        </div>
+                    </div>
+                    <div class="rx-metricas">
+                        <div class="rx-metrica">
+                            <div class="rx-metrica-label">Preço (USD) <span class="rx-metrica-badge badge-auto">📊 BRAPI</span></div>
+                            <div class="rx-metrica-valor" id="rx-SOL-preco">—</div>
+                        </div>
+                        <div class="rx-metrica">
+                            <div class="rx-metrica-label">Variação 24h <span class="rx-metrica-badge badge-auto">📊 BRAPI</span></div>
+                            <div class="rx-metrica-valor" id="rx-SOL-var">—</div>
+                        </div>
+                        <div class="rx-metrica">
+                            <div class="rx-metrica-label">Volume 24h <span class="rx-metrica-badge badge-auto">📊 BRAPI</span></div>
+                            <div class="rx-metrica-valor" id="rx-SOL-vol">—</div>
+                        </div>
+                    </div>
+                    <div class="rx-editorial">
+                        <div class="rx-ed-titulo">✏️ Editorial INVLAB</div>
+                        <div class="rx-ed-grid">
+                            <div class="rx-ed-item"><strong>Criação:</strong> 2020</div>
+                            <div class="rx-ed-item"><strong>Criador:</strong> Anatoly Yakovenko</div>
+                            <div class="rx-ed-item"><strong>Oferta:</strong> Expansível (inflação decrescente)</div>
+                            <div class="rx-ed-item"><strong>Consenso:</strong> Proof of History + Proof of Stake</div>
+                        </div>
+                        <div class="rx-ed-desc">Focada em velocidade e baixas taxas de transação — processa milhares de operações por segundo frente às dezenas do Ethereum. Tornou-se alternativa relevante para aplicações de alta performance. Porém, já sofreu interrupções de rede significativas, o que levanta questões sobre descentralização real.</div>
+                    </div>
+                </div>
+
+                <div id="rx-carregando" style="text-align:center;padding:24px;color:rgba(255,255,255,0.30);font-size:0.88rem;">Selecione um ativo acima para ver o Raio-X completo.</div>
+            </div>
+
+            <!-- ETAPA 7: O FUTURO DA PROPRIEDADE -->
+            <div class="futuro-manifesto" id="etapa-futuro">
+                <div style="position:relative;z-index:1;">
+                    <div class="lab-hook-badge" style="background:rgba(212,175,55,0.10);border-color:rgba(212,175,55,0.30);color:#D4AF37;">🌍 O Futuro da Propriedade</div>
+                    <div class="futuro-titulo">Como será o mercado financeiro<br>daqui a 20 anos?</div>
+                    <div class="futuro-pergunta">Não é uma previsão — é uma reflexão. Continuaremos comprando ações, imóveis, obras de arte e participações exatamente como fazemos hoje? Ou grande parte desses ativos será representada por registros digitais negociados globalmente?</div>
+                    <div class="futuro-tendencias">
+                        <span class="futuro-tag">📱 Menos dinheiro físico</span>
+                        <span class="futuro-tag">⚡ Pagamentos instantâneos globais</span>
+                        <span class="futuro-tag">🏦 Moedas digitais de bancos centrais</span>
+                        <span class="futuro-tag">🪙 Tokenização de ativos reais</span>
+                        <span class="futuro-tag">📋 Contratos inteligentes automatizados</span>
+                        <span class="futuro-tag">🔓 Fracionamento de ativos inacessíveis</span>
+                        <span class="futuro-tag">🤖 IA + Blockchain + Finanças</span>
+                    </div>
+                    <div class="futuro-frase-final">
+                        "O Bitcoin mostrou que é possível descentralizar o dinheiro.<br>A tokenização mostra que é possível digitalizar a propriedade."
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA FINAL -->
+            <div class="lab-final-cta">
+                <h2>Laboratório concluído. 🎓</h2>
+                <p>Você entendeu por que os criptoativos existem, conheceu as cinco famílias, compreendeu a revolução da tokenização e aprendeu a diferença crítica entre custodiar e possuir. Esse é o ponto de partida para entender os próximos 20 anos do mercado financeiro.</p>
+                <div class="lab-cta-buttons">
+                    <a href="acoes.html" class="btn-lab-secondary">← Revisitar Ações</a>
+                    <a href="fiis.html" class="btn-lab-secondary">← Revisitar FIIs</a>
+                    <a href="etfs.html" class="btn-lab-secondary">← Revisitar ETFs</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ===== MODAIS ===== -->
+
+    <!-- MODAL BITCOIN -->
+    <div class="cripto-modal" id="modal-bitcoin">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-bitcoin')">✕</button>
+            <div class="modal-emoji">🟠</div>
+            <div class="modal-titulo">Bitcoin</div>
+            <div class="modal-subtitulo">Reserva Digital de Valor · Criado em 2009 · Oferta máxima: 21 milhões</div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">A Origem</div>
+                <div class="modal-texto">Em 2008, uma pessoa ou grupo usando o pseudônimo <strong>Satoshi Nakamoto</strong> publicou o whitepaper "Bitcoin: A Peer-to-Peer Electronic Cash System". A proposta era simples e radical: criar um sistema de transferência de valor pela internet sem nenhum intermediário central — sem banco, sem governo, sem autorização de ninguém.</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Por que 21 milhões?</div>
+                <div class="modal-texto">A oferta máxima de 21 milhões de bitcoins está escrita no código — e nenhuma entidade no mundo pode mudar isso sem o consenso da rede inteira. Isso cria escassez programada, diferente das moedas tradicionais que podem ser impressas em qualquer quantidade por decisão governamental.</div>
+                <div class="modal-destaque">Em 2024, havia mais de 19,8 milhões de bitcoins em circulação. Os últimos serão minerados por volta de 2140.</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Mineração — o que é?</div>
+                <div class="modal-texto">A mineração não cria dinheiro do nada. Ela <strong>valida transações e protege a rede</strong>. Computadores ao redor do mundo competem para resolver problemas matemáticos complexos. Quem resolve primeiro registra o próximo bloco de transações e recebe novos bitcoins como recompensa. Esse processo é chamado de Proof of Work (Prova de Trabalho).</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">A Contradição dos Bancos Centrais</div>
+                <div class="modal-texto">Por anos, bancos centrais e governos tentaram combater o Bitcoin. Mas em 2024 os EUA aprovaram ETFs de Bitcoin, e países como El Salvador o adotaram como moeda legal. O que mudou? Perceberam que a tecnologia não pode ser destruída — apenas adotada ou ignorada.</div>
+                <div class="modal-alerta">⚠️ Bitcoin é o ativo mais volátil dentre os estudados no INVLAB. Quedas de 50%+ em meses são históricas. Apenas alocações proporcionais ao seu perfil e horizonte de tempo fazem sentido.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ETHEREUM -->
+    <div class="cripto-modal" id="modal-ethereum">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-ethereum')">✕</button>
+            <div class="modal-emoji">🔵</div>
+            <div class="modal-titulo">Ethereum</div>
+            <div class="modal-subtitulo">Infraestrutura Programável · Contratos Inteligentes · DeFi</div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">A Grande Diferença</div>
+                <div class="modal-texto">Se o Bitcoin é ouro digital, o Ethereum é um <strong>computador global descentralizado</strong>. Em 2015, Vitalik Buterin criou uma blockchain que pode executar programas — chamados de contratos inteligentes (smart contracts). Um contrato inteligente é código que executa automaticamente quando condições são atingidas, sem precisar de banco, advogado ou notário.</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">O que os contratos inteligentes permitem?</div>
+                <ul class="modal-lista">
+                    <li>Empréstimos sem banco — colateral em cripto, taxa automática, liquidação automática</li>
+                    <li>Tokenização de ativos — dividir um imóvel em mil tokens e vender via código</li>
+                    <li>NFTs — certificados digitais únicos de propriedade ou autenticidade</li>
+                    <li>DAOs — organizações governadas por código, sem diretoria centralizada</li>
+                    <li>Seguros paramétricos — pagamento automático ao confirmar o evento</li>
+                </ul>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">A Transição de 2022 — The Merge</div>
+                <div class="modal-texto">Em setembro de 2022, o Ethereum migrou de Proof of Work (mineração) para Proof of Stake (validação por staking). O consumo de energia caiu 99,95%. Validadores agora "apostam" ETH como garantia de comportamento honesto na rede — se agirem de forma maliciosa, perdem o ETH apostado.</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Gas Fees</div>
+                <div class="modal-texto">Cada operação na rede Ethereum consome "gas" — a taxa paga aos validadores. Em períodos de alta demanda, essas taxas sobem significativamente. É o principal ponto de crítica e o motivo de concorrentes como Solana ganharem espaço.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL STABLECOINS -->
+    <div class="cripto-modal" id="modal-stablecoins">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-stablecoins')">✕</button>
+            <div class="modal-emoji">🟢</div>
+            <div class="modal-titulo">Stablecoins e CBDCs</div>
+            <div class="modal-subtitulo">Moedas digitais estáveis — privadas e governamentais</div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">O que são Stablecoins?</div>
+                <div class="modal-texto">Criptoativos cujo valor é ancorado em uma moeda tradicional — geralmente o dólar. USDT (Tether), USDC (Circle) e DAI (MakerDAO) são as maiores. Você move dólares na velocidade e com a programabilidade de uma blockchain — sem abrir conta no exterior, sem intermediário bancário.</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Principais Stablecoins</div>
+                <div class="modal-exemplo-grid">
+                    <div class="modal-exemplo-card">
+                        <div class="modal-exemplo-icon">💵</div>
+                        <div class="modal-exemplo-titulo">USDT (Tether)</div>
+                        <div class="modal-exemplo-desc">A mais utilizada no mundo. Centralizada — lastreada em reservas da empresa Tether.</div>
+                    </div>
+                    <div class="modal-exemplo-card">
+                        <div class="modal-exemplo-icon">🔵</div>
+                        <div class="modal-exemplo-titulo">USDC (Circle)</div>
+                        <div class="modal-exemplo-desc">Regulamentada e auditada regularmente. Reservas em dólares e títulos do Tesouro americano.</div>
+                    </div>
+                    <div class="modal-exemplo-card">
+                        <div class="modal-exemplo-icon">⚙️</div>
+                        <div class="modal-exemplo-titulo">DAI (MakerDAO)</div>
+                        <div class="modal-exemplo-desc">Descentralizada — paridade mantida por algoritmo e colateral em cripto, sem empresa controladora.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">CBDCs — A Resposta dos Governos</div>
+                <div class="modal-texto">Bancos centrais do mundo todo estão criando suas próprias moedas digitais — as <strong>CBDCs (Central Bank Digital Currencies)</strong>. O Brasil tem o <strong>Drex (Real Digital)</strong>, a China tem o yuan digital, a Europa desenvolve o euro digital. A diferença fundamental: CBDCs são centralizadas — o governo mantém controle total, incluindo a possibilidade de rastreio de todas as transações.</div>
+                <div class="modal-destaque">Stablecoin privada (USDT, USDC) vs CBDC governamental: mesma tecnologia, filosofia oposta. Um é descentralizado por natureza; o outro é digital por design, mas controlado pelo Estado.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ALTCOINS -->
+    <div class="cripto-modal" id="modal-altcoins">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-altcoins')">✕</button>
+            <div class="modal-emoji">🟣</div>
+            <div class="modal-titulo">Altcoins e NFTs</div>
+            <div class="modal-subtitulo">Projetos específicos e certificados digitais</div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">O que são Altcoins?</div>
+                <div class="modal-texto">Toda criptomoeda que não é Bitcoin é tecnicamente uma altcoin (moeda alternativa). Existem mais de 20.000 projetos listados em diferentes exchanges. Cada um propõe resolver um problema: velocidade, privacidade, governança descentralizada, infraestrutura de identidade, supply chain, jogos.</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">A realidade do mercado de altcoins</div>
+                <div class="modal-alerta">⚠️ A grande maioria das altcoins vai a zero. Projetos sem fundamento real, sem equipe comprometida e sem caso de uso concreto são extremamente comuns. O risco é altíssimo — investir sem entender o projeto é especulação pura, não investimento.</div>
+                <div class="modal-texto">Algumas referências que resistiram ao tempo: Chainlink (oráculos de dados para contratos inteligentes), Polkadot (interoperabilidade entre blockchains), XRP (pagamentos bancários internacionais). Cada uma tem tese específica — não são intercambiáveis com Bitcoin ou Ethereum.</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">NFTs — Certificados Digitais</div>
+                <div class="modal-texto">NFT (Non-Fungible Token) é um token único — não intercambiável com outro. Funciona como um <strong>certificado digital de propriedade ou autenticidade</strong>. A mídia popularizou NFTs como "imagens caras" — mas o conceito é mais amplo:</div>
+                <ul class="modal-lista">
+                    <li>Ingressos de eventos com autenticidade verificável na blockchain</li>
+                    <li>Certificados de conclusão de curso imutáveis</li>
+                    <li>Registros de propriedade de imóveis em piloto no Brasil</li>
+                    <li>Identidade digital autosoberana</li>
+                    <li>Rastreabilidade de produtos na cadeia de suprimentos</li>
+                </ul>
+                <div class="modal-verde">A especulação de 2021 com arte digital não define o que NFTs podem ser. O certificado digital é o caso de uso real e duradouro.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL TOKENS -->
+    <div class="cripto-modal" id="modal-tokens">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-tokens')">✕</button>
+            <div class="modal-emoji">🟡</div>
+            <div class="modal-titulo">Tokens — Representação Digital de Direitos</div>
+            <div class="modal-subtitulo">A família mais importante para o futuro do mercado financeiro</div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">O que é um Token?</div>
+                <div class="modal-texto">Um token é uma representação digital de um direito econômico, registrado em blockchain. Ele pode representar participação, propriedade, renda futura, crédito, permissão de uso — qualquer direito que possa ser codificado.</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Tipos de Tokens</div>
+                <div class="modal-exemplo-grid">
+                    <div class="modal-exemplo-card">
+                        <div class="modal-exemplo-icon">🏢</div>
+                        <div class="modal-exemplo-titulo">Security Token</div>
+                        <div class="modal-exemplo-desc">Representam participação econômica — sujeitos à regulamentação de valores mobiliários (CVM no Brasil).</div>
+                    </div>
+                    <div class="modal-exemplo-card">
+                        <div class="modal-exemplo-icon">🎫</div>
+                        <div class="modal-exemplo-titulo">Utility Token</div>
+                        <div class="modal-exemplo-desc">Dão acesso a um serviço ou plataforma. Não representam participação acionária.</div>
+                    </div>
+                    <div class="modal-exemplo-card">
+                        <div class="modal-exemplo-icon">🗳️</div>
+                        <div class="modal-exemplo-titulo">Governance Token</div>
+                        <div class="modal-exemplo-desc">Dão direito de voto em protocolos descentralizados — quem tem tokens decide o rumo do projeto.</div>
+                    </div>
+                    <div class="modal-exemplo-card">
+                        <div class="modal-exemplo-icon">🏠</div>
+                        <div class="modal-exemplo-titulo">RWA Token</div>
+                        <div class="modal-exemplo-desc">Real World Assets — representam ativos físicos reais: imóveis, commodities, recebíveis, obras de arte.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">RWA — Real World Assets: o próximo grande mercado</div>
+                <div class="modal-texto">A tokenização de ativos reais (RWA) é considerada por grandes bancos como BlackRock, JP Morgan e Goldman Sachs como o próximo ciclo de crescimento do mercado de capitais. O potencial estimado é de trilhões de dólares em ativos que poderão ser fracionados e negociados globalmente via blockchain.</div>
+                <div class="modal-destaque">Em 2024, o BlackRock lançou um fundo tokenizado de títulos do Tesouro americano na blockchain Ethereum, captando centenas de milhões em semanas. O mercado tradicional não está combatendo a tokenização — está adotando.</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">⚠️ A questão jurídica — importante</div>
+                <div class="modal-texto">Nem todo token é juridicamente tratado da mesma forma. Nos EUA e no Brasil, um token que representa direito econômico pode ser classificado como valor mobiliário, sujeitando-se às mesmas regras de ações e debêntures. Emitir tokens sem a estrutura jurídica correta é ilegal. O INVLAB ensina o conceito — a execução exige consultoria jurídica especializada.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL EXEMPLOS TOKENIZAÇÃO -->
+    <div class="cripto-modal" id="modal-exemplos">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-exemplos')">✕</button>
+            <div class="modal-emoji">🏢</div>
+            <div class="modal-titulo">Exemplos de Tokenização</div>
+            <div class="modal-subtitulo">Como a tokenização democratiza o acesso a ativos antes inacessíveis</div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Imóvel Comercial</div>
+                <div class="modal-texto">Imagine um prédio comercial avaliado em <strong>R$ 50 milhões</strong>. Antes da tokenização, apenas grandes investidores podiam adquirir. Com tokenização, esse prédio pode ser dividido em <strong>1 milhão de tokens</strong>. Cada token representa uma fração do imóvel. Um investidor com R$ 500 pode participar com 10 tokens — recebendo proporção dos aluguéis e da valorização.</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Fazenda e Agronegócio</div>
+                <div class="modal-texto">Uma fazenda avaliada em R$ 10 milhões pode ser tokenizada em 100.000 tokens. Os detentores recebem proporção da renda da safra. Produtores acessam capital sem precisar de empréstimo bancário — e investidores acessam o agro sem precisar comprar terra.</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Parque Solar</div>
+                <div class="modal-texto">Um projeto de energia solar levanta R$ 20 milhões via emissão de tokens. Cada token representa participação na receita de energia gerada ao longo de 20 anos. Investidores recebem pagamentos mensais automáticos via contrato inteligente — sem intermediário financeiro processando o pagamento.</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Royalties de Música</div>
+                <div class="modal-texto">Um músico independente tokeniza 30% dos royalties futuros de seu catálogo. Fãs e investidores compram tokens e recebem automaticamente a proporção das receitas de streaming, sync e execução pública. O músico capta recursos sem gravadora — os investidores apostam no crescimento do artista.</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Créditos de Carbono</div>
+                <div class="modal-texto">Projetos de compensação ambiental (como reflorestamento ou captura de CO₂) geram créditos de carbono que podem ser tokenizados. Empresas compram tokens para compensar suas emissões. A blockchain garante rastreabilidade e evita dupla contagem — um dos problemas históricos do mercado de carbono.</div>
+                <div class="modal-verde">O mercado voluntário de carbono movimentou ~US$ 2 bilhões em 2023. A tokenização pode resolver problemas críticos de transparência e liquidez nesse mercado.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL FTX -->
+    <div class="cripto-modal" id="modal-ftx">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-ftx')">✕</button>
+            <div class="modal-emoji">⚠️</div>
+            <div class="modal-titulo">O Caso FTX — Novembro de 2022</div>
+            <div class="modal-subtitulo">Como R$ 32 bilhões evaporaram em 72 horas</div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">O que aconteceu</div>
+                <div class="modal-texto">A FTX era a segunda maior exchange de criptoativos do mundo. Em novembro de 2022, uma reportagem revelou que a empresa estava usando os fundos de clientes para cobrir apostas especulativas da empresa irmã, a Alameda Research. Em menos de 72 horas, clientes tentaram sacar seus recursos. A FTX não tinha os fundos — e declarou falência.</div>
+                <div class="modal-alerta">Mais de US$ 8 bilhões (aproximadamente R$ 32 bilhões) em recursos de clientes sumiu. O fundador Sam Bankman-Fried foi condenado a 25 anos de prisão por fraude e conspiração.</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">A Lição Mais Importante</div>
+                <div class="modal-texto">Quem mantinha cripto <strong>dentro da FTX</strong> perdeu tudo. Quem mantinha em <strong>carteira própria (self-custody)</strong> com chave privada sob seu controle, não perdeu um satoshi. A exchange foi o ponto de falha — não a tecnologia.</div>
+                <div class="modal-destaque">"Not your keys, not your coins." — Se você não controla a chave privada, você não controla os ativos. A exchange é intermediária, não cofre.</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">O que é uma Chave Privada?</div>
+                <div class="modal-texto">Uma chave privada é uma sequência de letras e números que prova que você é o dono de um endereço na blockchain. É como a senha do seu cofre — mas sem recuperação possível se perdida. Quem tem a chave privada, tem os ativos. Quem perde a chave, perde tudo permanentemente.</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Carteiras — Hot vs Cold</div>
+                <ul class="modal-lista">
+                    <li><strong>Hot Wallet:</strong> carteira conectada à internet (Metamask, Trust Wallet). Conveniente — mais vulnerável a ataques online.</li>
+                    <li><strong>Cold Wallet (Hardware):</strong> dispositivo físico offline (Ledger, Trezor). Máxima segurança — chave privada nunca toca a internet.</li>
+                    <li><strong>Exchange:</strong> não é carteira — é custódia terceirizada. Conveniência máxima, risco máximo de contraparte.</li>
+                </ul>
+                <div class="modal-verde">Para valores significativos, a indústria recomenda manter em cold wallet. Para operações frequentes, uma parcela em hot wallet ou exchange reconhecida é prática comum.</div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background: rgba(13, 13, 13, 0.97); border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+        <div class="content-wrapper-wide">
+            <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+                <div>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
+                    <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">🧭 Guia do INVLAB →</a>
+                </div>
+                <div>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Laboratório Ações</a></li>
+                        <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔬 Laboratório ETF</a></li>
+                        <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 Laboratório FIIs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Criptoativos</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔬 Laboratório Cripto</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Outros</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="ganhos-come-cotas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🍽️ Come-cotas</a></li>
+                        <li><a href="ganhos-iof-regressivo.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📉 IOF Regressivo</a></li>
+                        <li><a href="ganhos-inflacao.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📊 Inflação</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Ferramentas</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 Simulador CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Simulador Tesouro</a></li>
+                        <li><a href="calculadora.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🧮 Juros Compostos</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
+                <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                    ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
+                </p>
+                <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                    © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/script.js"></script>
+    <script defer src="../assets/js/bcb-api.js"></script>
+    <script defer src="../assets/js/stock-api.js"></script>
+    <script defer src="../assets/js/invlab-carrossel-renda-variavel.js"></script>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // ================================================================
+        // SISTEMA DE MODAIS
+        // ================================================================
+        window.abrirModal = function(id) {
+            var el = document.getElementById(id);
+            if (el) { el.classList.add('aberto'); document.body.style.overflow = 'hidden'; }
+        };
+        window.fecharModal = function(id) {
+            var el = document.getElementById(id);
+            if (el) { el.classList.remove('aberto'); document.body.style.overflow = ''; }
+        };
+        document.querySelectorAll('.cripto-modal').forEach(function(m) {
+            m.addEventListener('click', function(e) { if (e.target === m) window.fecharModal(m.id); });
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.cripto-modal.aberto').forEach(function(m) {
+                    m.classList.remove('aberto'); document.body.style.overflow = '';
+                });
+            }
+        });
+
+        // ================================================================
+        // RAIO-X CRIPTO — cache de sessão por ticker
+        // ================================================================
+        var rxCache = {};
+
+        function fmtPreco(v) {
+            if (v == null) return '—';
+            return 'US$ ' + Number(v).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+        function fmtVar(v) {
+            if (v == null) return { txt: '—', cls: '' };
+            var n = parseFloat(v);
+            return { txt: (n >= 0 ? '+' : '') + n.toFixed(2) + '%', cls: n >= 0 ? 'positivo' : 'negativo' };
+        }
+        function fmtVol(v) {
+            if (v == null) return '—';
+            var n = parseFloat(v);
+            if (n >= 1e9) return 'US$ ' + (n / 1e9).toFixed(2) + ' B';
+            if (n >= 1e6) return 'US$ ' + (n / 1e6).toFixed(1) + ' M';
+            return 'US$ ' + Number(n).toLocaleString('pt-BR');
+        }
+
+        function renderRxTicker(ticker, data) {
+            var preco = document.getElementById('rx-' + ticker + '-preco');
+            var varEl  = document.getElementById('rx-' + ticker + '-var');
+            var vol   = document.getElementById('rx-' + ticker + '-vol');
+            if (preco) preco.textContent = fmtPreco(data.preco);
+            if (varEl) {
+                var r = fmtVar(data.variacao);
+                varEl.textContent = r.txt;
+                varEl.className = 'rx-metrica-valor ' + r.cls;
+            }
+            if (vol) vol.textContent = fmtVol(data.volume);
+        }
+
+        window.selecionarCripto = function(ticker, btn) {
+            // atualiza botões
+            document.querySelectorAll('.rx-btn').forEach(function(b) { b.classList.remove('active'); });
+            if (btn) btn.classList.add('active');
+
+            // troca painel
+            document.querySelectorAll('.rx-painel').forEach(function(p) { p.classList.remove('ativo'); });
+            var painel = document.getElementById('rx-painel-' + ticker);
+            if (painel) painel.classList.add('ativo');
+            var loading = document.getElementById('rx-carregando');
+            if (loading) loading.style.display = 'none';
+
+            // verifica cache
+            if (rxCache[ticker]) { renderRxTicker(ticker, rxCache[ticker]); return; }
+
+            // busca API
+            fetch('/api/cripto-raio-x/' + ticker)
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    rxCache[ticker] = data;
+                    renderRxTicker(ticker, data);
+                })
+                .catch(function() {
+                    rxCache[ticker] = { preco: null, variacao: null, volume: null };
+                    renderRxTicker(ticker, rxCache[ticker]);
+                });
+        };
+
+    })();
+    </script>
+</body>
+</html>

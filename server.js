@@ -306,6 +306,49 @@ app.get('/api/acao-diagnostico/:ticker', async (req, res) => {
     }
 });
 
+// ================================================================
+// Raio-X Criptoativos — proxy BRAPI com cache semanal
+// BTC / ETH / SOL via quote endpoint da BRAPI
+// Retorna: preco (USD), variacao 24h, volume 24h
+// ================================================================
+const criptoRaioXCache = {};
+
+app.get('/api/cripto-raio-x/:ticker', async (req, res) => {
+    const ticker = req.params.ticker.toUpperCase();
+    const tickers = ['BTC', 'ETH', 'SOL'];
+    if (!tickers.includes(ticker)) return res.status(400).json({ success: false, error: 'Ticker não suportado' });
+
+    const agora = Date.now();
+    if (criptoRaioXCache[ticker] && (agora - criptoRaioXCache[ticker].timestamp < FII_CACHE_TTL)) {
+        console.log(`📦 [Cripto] Cache hit: ${ticker}`);
+        return res.json(criptoRaioXCache[ticker].data);
+    }
+
+    console.log(`📡 [Cripto] Buscando BRAPI para: ${ticker}`);
+
+    try {
+        const quoteRes = await fetchBrapi(`quote/${ticker}`);
+        const quote = quoteRes.results?.[0] || {};
+
+        const payload = {
+            success:  true,
+            ticker,
+            timestamp: agora,
+            source:   'brapi',
+            preco:    quote.regularMarketPrice         || null,
+            variacao: quote.regularMarketChangePercent || null,
+            volume:   quote.regularMarketVolume        || null,
+        };
+
+        criptoRaioXCache[ticker] = { timestamp: agora, data: payload };
+        res.json(payload);
+
+    } catch (error) {
+        console.error(`❌ [Cripto] Erro ao buscar ${ticker}:`, error.message);
+        res.json({ success: false, ticker, preco: null, variacao: null, volume: null });
+    }
+});
+
 // 404 handler
 app.use((req, res) => {
     res.status(404).sendFile(path.join(__dirname, 'index.html'));
