@@ -329,17 +329,84 @@
     .btn-lab-secondary { padding: 10px 22px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; color: rgba(255,255,255,0.60); font-size: 0.84rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
     .btn-lab-secondary:hover { background: rgba(255,255,255,0.08); color: #fff; }
 
+    /* MAPA GLOBAL */
+    .mapa-global-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 16px;
+        margin: 28px 0;
+    }
+    .mapa-regiao {
+        background: rgba(255,255,255,0.025);
+        border: 1px solid rgba(212,175,55,0.15);
+        border-radius: 16px;
+        padding: 24px 20px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .mapa-regiao:hover {
+        transform: translateY(-4px);
+        background: rgba(212,175,55,0.05);
+        border-color: rgba(212,175,55,0.35);
+        box-shadow: 0 8px 30px rgba(212,175,55,0.07);
+    }
+    .mapa-regiao-flag { font-size: 2rem; }
+    .mapa-regiao-nome { font-size: 1rem; font-weight: 700; color: #fff; }
+    .mapa-regiao-status { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.5px; }
+    .mapa-regiao-status.ativo { color: #10b981; }
+    .mapa-regiao-destaques { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0; }
+    .tag-destaque {
+        display: inline-block;
+        background: rgba(212,175,55,0.08);
+        border: 1px solid rgba(212,175,55,0.22);
+        border-radius: 20px;
+        padding: 3px 10px;
+        font-size: 0.68rem;
+        font-weight: 600;
+        color: rgba(212,175,55,0.80);
+        letter-spacing: 0.5px;
+    }
+    .mapa-regiao-clique {
+        font-size: 0.74rem;
+        color: rgba(255,255,255,0.25);
+        margin-top: auto;
+        padding-top: 8px;
+        transition: color 0.2s;
+    }
+    .mapa-regiao:hover .mapa-regiao-clique { color: rgba(212,175,55,0.55); }
+    .mapa-legenda-global {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        margin: 20px 0;
+        font-size: 0.76rem;
+        color: rgba(255,255,255,0.30);
+    }
+    .mapa-conclusao {
+        text-align: center;
+        background: linear-gradient(135deg, rgba(212,175,55,0.05), rgba(99,102,241,0.03));
+        border: 1px solid rgba(212,175,55,0.15);
+        border-radius: 16px;
+        padding: 28px 24px;
+        margin-top: 16px;
+    }
+
     @media (max-width: 768px) {
         .lab-hook { padding: 36px 24px; }
         .lab-stage { padding: 28px 22px; }
         .familia-grid { grid-template-columns: 1fr; }
-        .rx-ed-grid { grid-template-columns: 1fr; }
-        .rx-metricas { flex-direction: column; }
-        .rx-metrica { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .futuro-manifesto { padding: 36px 24px; }
         .modal-box { padding: 28px 22px; }
         .demo-table th, .demo-table td { padding: 10px 14px; }
         .futuro-frase-final { padding: 22px 24px; }
+        .mapa-global-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    }
+    @media (max-width: 480px) {
+        .mapa-global-grid { grid-template-columns: 1fr; }
     }
     </style>
 </head>
@@ -440,7 +507,7 @@
                 <div class="lab-step-connector"></div>
                 <a href="#etapa-custodia" class="lab-step"><span class="lab-step-icon">🔐</span><span class="lab-step-label">Custódia</span></a>
                 <div class="lab-step-connector"></div>
-                <a href="#etapa-raio-x" class="lab-step"><span class="lab-step-icon">📊</span><span class="lab-step-label">Raio-X</span></a>
+                <a href="#etapa-raio-x" class="lab-step"><span class="lab-step-icon">🌍</span><span class="lab-step-label">Mapa Global</span></a>
                 <div class="lab-step-connector"></div>
                 <a href="#etapa-futuro" class="lab-step"><span class="lab-step-icon">🌍</span><span class="lab-step-label">Futuro</span></a>
             </div>
@@ -721,124 +788,97 @@
                 <button class="btn-link" onclick="window.abrirModal('modal-ftx')">📖 Ver o caso FTX — como R$ 32 bilhões evaporaram em 72 horas →</button>
             </div>
 
-            <!-- ETAPA 6: RAIO-X -->
+            <!-- ETAPA 6: MAPA DA TOKENIZAÇÃO GLOBAL -->
             <div class="rx-section" id="etapa-raio-x">
-                <div class="rx-badge">📊 Raio-X INVLAB</div>
-                <div class="rx-titulo">Dados em tempo real — Bitcoin, Ethereum, Solana</div>
-                <div class="rx-subtitulo">Dados quantitativos via BRAPI (atualizados automaticamente). Dados editoriais são curadoria INVLAB.</div>
-                <div class="rx-disclaimer">
-                    <strong style="color:rgba(212,175,55,0.70);">📊 BRAPI</strong> = dados de mercado em tempo real &nbsp;|&nbsp; <strong style="color:rgba(245,158,11,0.70);">✏️ Editorial</strong> = análise qualitativa INVLAB. Nenhum dado quantitativo é hardcoded.
+                <div class="rx-badge">🌍 Raio-X INVLAB — Movimento Global</div>
+                <div class="rx-titulo">O mundo está construindo a infraestrutura da economia digital</div>
+                <div class="rx-subtitulo">Não é teoria. Não é promessa. São fatos em cada continente. Clique em qualquer região para entender o que está acontecendo <strong style="color:#fff;">agora</strong>.</div>
+
+                <div class="mapa-global-grid">
+
+                    <div class="mapa-regiao" onclick="window.abrirModal('modal-brasil')">
+                        <span class="mapa-regiao-flag">🇧🇷</span>
+                        <span class="mapa-regiao-nome">Brasil</span>
+                        <span class="mapa-regiao-status ativo">🟢 Em operação</span>
+                        <div class="mapa-regiao-destaques">
+                            <span class="tag-destaque">Drex</span>
+                            <span class="tag-destaque">PIX</span>
+                            <span class="tag-destaque">Sandbox CVM</span>
+                        </div>
+                        <span class="mapa-regiao-clique">Clique para detalhes →</span>
+                    </div>
+
+                    <div class="mapa-regiao" onclick="window.abrirModal('modal-eua')">
+                        <span class="mapa-regiao-flag">🇺🇸</span>
+                        <span class="mapa-regiao-nome">Estados Unidos</span>
+                        <span class="mapa-regiao-status ativo">🟢 Em operação</span>
+                        <div class="mapa-regiao-destaques">
+                            <span class="tag-destaque">ETFs Spot BTC</span>
+                            <span class="tag-destaque">BlackRock</span>
+                            <span class="tag-destaque">Fidelity</span>
+                        </div>
+                        <span class="mapa-regiao-clique">Clique para detalhes →</span>
+                    </div>
+
+                    <div class="mapa-regiao" onclick="window.abrirModal('modal-europa')">
+                        <span class="mapa-regiao-flag">🇪🇺</span>
+                        <span class="mapa-regiao-nome">União Europeia</span>
+                        <span class="mapa-regiao-status ativo">🟢 Em operação</span>
+                        <div class="mapa-regiao-destaques">
+                            <span class="tag-destaque">MiCA</span>
+                            <span class="tag-destaque">Marco Regulatório</span>
+                        </div>
+                        <span class="mapa-regiao-clique">Clique para detalhes →</span>
+                    </div>
+
+                    <div class="mapa-regiao" onclick="window.abrirModal('modal-dubai')">
+                        <span class="mapa-regiao-flag">🇦🇪</span>
+                        <span class="mapa-regiao-nome">Dubai (EAU)</span>
+                        <span class="mapa-regiao-status ativo">🟢 Em operação</span>
+                        <div class="mapa-regiao-destaques">
+                            <span class="tag-destaque">VARA</span>
+                            <span class="tag-destaque">Tokenização Imobiliária</span>
+                        </div>
+                        <span class="mapa-regiao-clique">Clique para detalhes →</span>
+                    </div>
+
+                    <div class="mapa-regiao" onclick="window.abrirModal('modal-singapura')">
+                        <span class="mapa-regiao-flag">🇸🇬</span>
+                        <span class="mapa-regiao-nome">Singapura</span>
+                        <span class="mapa-regiao-status ativo">🟢 Em operação</span>
+                        <div class="mapa-regiao-destaques">
+                            <span class="tag-destaque">MAS</span>
+                            <span class="tag-destaque">Ativos Digitais</span>
+                        </div>
+                        <span class="mapa-regiao-clique">Clique para detalhes →</span>
+                    </div>
+
+                    <div class="mapa-regiao" onclick="window.abrirModal('modal-suica')">
+                        <span class="mapa-regiao-flag">🇨🇭</span>
+                        <span class="mapa-regiao-nome">Suíça</span>
+                        <span class="mapa-regiao-status ativo">🟢 Em operação</span>
+                        <div class="mapa-regiao-destaques">
+                            <span class="tag-destaque">Crypto Valley</span>
+                            <span class="tag-destaque">Zug</span>
+                        </div>
+                        <span class="mapa-regiao-clique">Clique para detalhes →</span>
+                    </div>
+
                 </div>
 
-                <div class="rx-btns">
-                    <button class="rx-btn" id="btn-BTC" onclick="window.selecionarCripto('BTC',this)">₿ BTC<span>Bitcoin</span></button>
-                    <button class="rx-btn" id="btn-ETH" onclick="window.selecionarCripto('ETH',this)">⧫ ETH<span>Ethereum</span></button>
-                    <button class="rx-btn" id="btn-SOL" onclick="window.selecionarCripto('SOL',this)">◎ SOL<span>Solana</span></button>
+                <div class="mapa-legenda-global">
+                    <span>🟢 Em operação — projetos reais, regulação ativa</span>
+                    <span>🟡 Em desenvolvimento — testes, sandbox, pilotos</span>
+                    <span>🔵 Planejado — discussão regulatória em andamento</span>
                 </div>
 
-                <div id="rx-painel-BTC" class="rx-painel">
-                    <div class="rx-topo">
-                        <div class="rx-emoji">🟠</div>
-                        <div class="rx-info">
-                            <div class="rx-nome">Bitcoin</div>
-                            <div class="rx-funcao">Reserva Digital de Valor · Pioneiro descentralizado</div>
-                        </div>
-                    </div>
-                    <div class="rx-metricas">
-                        <div class="rx-metrica">
-                            <div class="rx-metrica-label">Preço (USD) <span class="rx-metrica-badge badge-auto">📊 BRAPI</span></div>
-                            <div class="rx-metrica-valor" id="rx-BTC-preco">—</div>
-                        </div>
-                        <div class="rx-metrica">
-                            <div class="rx-metrica-label">Variação 24h <span class="rx-metrica-badge badge-auto">📊 BRAPI</span></div>
-                            <div class="rx-metrica-valor" id="rx-BTC-var">—</div>
-                        </div>
-                        <div class="rx-metrica">
-                            <div class="rx-metrica-label">Volume 24h <span class="rx-metrica-badge badge-auto">📊 BRAPI</span></div>
-                            <div class="rx-metrica-valor" id="rx-BTC-vol">—</div>
-                        </div>
-                    </div>
-                    <div class="rx-editorial">
-                        <div class="rx-ed-titulo">✏️ Editorial INVLAB</div>
-                        <div class="rx-ed-grid">
-                            <div class="rx-ed-item"><strong>Criação:</strong> 2009</div>
-                            <div class="rx-ed-item"><strong>Criador:</strong> Satoshi Nakamoto (pseudônimo)</div>
-                            <div class="rx-ed-item"><strong>Oferta máxima:</strong> 21 milhões (fixo e imutável)</div>
-                            <div class="rx-ed-item"><strong>Consenso:</strong> Proof of Work (mineração)</div>
-                        </div>
-                        <div class="rx-ed-desc">Primeira rede de transferência de valor digital sem intermediários. Sua principal característica é a escassez programada — nunca haverá mais de 21 milhões de unidades, independente de qualquer decisão governamental ou corporativa. Bancos centrais de vários países já incluem Bitcoin em suas reservas estratégicas.</div>
-                    </div>
+                <div class="mapa-conclusao">
+                    <span style="font-size:2rem;display:block;margin-bottom:8px;">🌍</span>
+                    <p style="font-size:0.95rem;color:rgba(255,255,255,0.5);line-height:1.8;max-width:600px;margin:0 auto;">
+                        Seis regiões. Seis abordagens. Um movimento comum:
+                        <strong style="color:#D4AF37;">a digitalização da propriedade e do valor</strong>.
+                    </p>
                 </div>
-
-                <div id="rx-painel-ETH" class="rx-painel">
-                    <div class="rx-topo">
-                        <div class="rx-emoji">🔵</div>
-                        <div class="rx-info">
-                            <div class="rx-nome">Ethereum</div>
-                            <div class="rx-funcao">Infraestrutura Programável · Contratos Inteligentes</div>
-                        </div>
-                    </div>
-                    <div class="rx-metricas">
-                        <div class="rx-metrica">
-                            <div class="rx-metrica-label">Preço (USD) <span class="rx-metrica-badge badge-auto">📊 BRAPI</span></div>
-                            <div class="rx-metrica-valor" id="rx-ETH-preco">—</div>
-                        </div>
-                        <div class="rx-metrica">
-                            <div class="rx-metrica-label">Variação 24h <span class="rx-metrica-badge badge-auto">📊 BRAPI</span></div>
-                            <div class="rx-metrica-valor" id="rx-ETH-var">—</div>
-                        </div>
-                        <div class="rx-metrica">
-                            <div class="rx-metrica-label">Volume 24h <span class="rx-metrica-badge badge-auto">📊 BRAPI</span></div>
-                            <div class="rx-metrica-valor" id="rx-ETH-vol">—</div>
-                        </div>
-                    </div>
-                    <div class="rx-editorial">
-                        <div class="rx-ed-titulo">✏️ Editorial INVLAB</div>
-                        <div class="rx-ed-grid">
-                            <div class="rx-ed-item"><strong>Criação:</strong> 2015</div>
-                            <div class="rx-ed-item"><strong>Criador:</strong> Vitalik Buterin</div>
-                            <div class="rx-ed-item"><strong>Oferta:</strong> Sem limite fixo (inflação controlada)</div>
-                            <div class="rx-ed-item"><strong>Consenso:</strong> Proof of Stake (desde 2022)</div>
-                        </div>
-                        <div class="rx-ed-desc">Plataforma para execução de contratos inteligentes — código que executa automaticamente quando condições são atingidas, sem intermediários. É a base técnica para DeFi (finanças descentralizadas), NFTs e a maior parte dos projetos de tokenização de ativos reais em desenvolvimento.</div>
-                    </div>
-                </div>
-
-                <div id="rx-painel-SOL" class="rx-painel">
-                    <div class="rx-topo">
-                        <div class="rx-emoji">🟣</div>
-                        <div class="rx-info">
-                            <div class="rx-nome">Solana</div>
-                            <div class="rx-funcao">Blockchain de Alta Velocidade · DeFi e NFTs</div>
-                        </div>
-                    </div>
-                    <div class="rx-metricas">
-                        <div class="rx-metrica">
-                            <div class="rx-metrica-label">Preço (USD) <span class="rx-metrica-badge badge-auto">📊 BRAPI</span></div>
-                            <div class="rx-metrica-valor" id="rx-SOL-preco">—</div>
-                        </div>
-                        <div class="rx-metrica">
-                            <div class="rx-metrica-label">Variação 24h <span class="rx-metrica-badge badge-auto">📊 BRAPI</span></div>
-                            <div class="rx-metrica-valor" id="rx-SOL-var">—</div>
-                        </div>
-                        <div class="rx-metrica">
-                            <div class="rx-metrica-label">Volume 24h <span class="rx-metrica-badge badge-auto">📊 BRAPI</span></div>
-                            <div class="rx-metrica-valor" id="rx-SOL-vol">—</div>
-                        </div>
-                    </div>
-                    <div class="rx-editorial">
-                        <div class="rx-ed-titulo">✏️ Editorial INVLAB</div>
-                        <div class="rx-ed-grid">
-                            <div class="rx-ed-item"><strong>Criação:</strong> 2020</div>
-                            <div class="rx-ed-item"><strong>Criador:</strong> Anatoly Yakovenko</div>
-                            <div class="rx-ed-item"><strong>Oferta:</strong> Expansível (inflação decrescente)</div>
-                            <div class="rx-ed-item"><strong>Consenso:</strong> Proof of History + Proof of Stake</div>
-                        </div>
-                        <div class="rx-ed-desc">Focada em velocidade e baixas taxas de transação — processa milhares de operações por segundo frente às dezenas do Ethereum. Tornou-se alternativa relevante para aplicações de alta performance. Porém, já sofreu interrupções de rede significativas, o que levanta questões sobre descentralização real.</div>
-                    </div>
-                </div>
-
-                <div id="rx-carregando" style="text-align:center;padding:24px;color:rgba(255,255,255,0.30);font-size:0.88rem;">Selecione um ativo acima para ver o Raio-X completo.</div>
             </div>
 
             <!-- ETAPA 7: O FUTURO DA PROPRIEDADE -->
@@ -875,6 +915,130 @@
 
         </div>
     </main>
+
+    <!-- ===== MODAIS MAPA GLOBAL ===== -->
+
+    <!-- BRASIL -->
+    <div class="cripto-modal" id="modal-brasil">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-brasil')">✕</button>
+            <div class="modal-emoji">🇧🇷</div>
+            <div class="modal-titulo">Brasil</div>
+            <div class="modal-subtitulo">PIX · Drex · Sandbox CVM — O país mais digital da América Latina</div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Drex — O Real Digital</div>
+                <div class="modal-texto">O Banco Central do Brasil está desenvolvendo o <strong>Drex</strong>, a versão digital do Real. Diferente do Bitcoin, o Drex é uma <strong>CBDC (Central Bank Digital Currency)</strong> — controlada pelo governo, mas construída sobre tecnologia de registro distribuído. Está em fase de testes com bancos e instituições financeiras parceiras.</div>
+            </div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">PIX — A Infraestrutura já existe</div>
+                <div class="modal-texto">O PIX é uma das maiores infraestruturas de pagamentos instantâneos do mundo. Mais de 150 milhões de brasileiros já operam com transferências digitais instantâneas. Ele criou a cultura e a confiança necessárias para o próximo passo: a tokenização do próprio dinheiro e dos ativos.</div>
+            </div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Sandbox Regulatório da CVM</div>
+                <div class="modal-texto">A CVM criou um ambiente controlado para testes de tokenização e ofertas públicas de ativos digitais. Empresas como <strong>Liqi, Kria e Vórtx</strong> já tokenizaram imóveis e recebíveis no Brasil sob supervisão regulatória. O mercado não está esperando — está operando.</div>
+            </div>
+            <div class="modal-destaque">O Brasil tem a infraestrutura (PIX), a regulação em construção (CVM + Banco Central) e o apetite digital para se tornar referência global em tokenização de ativos reais.</div>
+        </div>
+    </div>
+
+    <!-- EUA -->
+    <div class="cripto-modal" id="modal-eua">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-eua')">✕</button>
+            <div class="modal-emoji">🇺🇸</div>
+            <div class="modal-titulo">Estados Unidos</div>
+            <div class="modal-subtitulo">ETFs Spot de Bitcoin · BlackRock · Fidelity — O capital institucional chegou</div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">ETFs Spot de Bitcoin — 2024</div>
+                <div class="modal-texto">Em janeiro de 2024, a SEC aprovou os primeiros <strong>ETFs de Bitcoin à vista</strong> nos EUA. Isso significa que fundos de pensão, seguradoras e investidores comuns podem comprar exposição a Bitcoin através da bolsa de valores tradicional — sem lidar com carteiras, chaves ou exchanges de cripto.</div>
+            </div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">BlackRock — O sinal mais forte do mercado</div>
+                <div class="modal-texto">A <strong>BlackRock</strong> — maior gestora de ativos do mundo, com mais de US$ 10 trilhões sob gestão — lançou seu próprio ETF de Bitcoin (IBIT). A mesma empresa que por anos tratou Bitcoin como especulação passou a oferecer exposição ao ativo para seus clientes institucionais. Isso não é opinião: é decisão de negócio baseada em demanda real.</div>
+            </div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Tokenização de Ativos Reais</div>
+                <div class="modal-texto">A BlackRock também lançou um fundo tokenizado de títulos do Tesouro americano na blockchain Ethereum. JP Morgan opera a plataforma Onyx para liquidação de ativos digitais. Goldman Sachs e Fidelity têm divisões dedicadas a digital assets. O mercado tradicional não está combatendo a tokenização — está adotando.</div>
+            </div>
+            <div class="modal-destaque">Os EUA passaram de "combater cripto" para "regular e adotar". O sinal mais claro de que o mercado amadureceu e que os ativos digitais são parte permanente do sistema financeiro.</div>
+        </div>
+    </div>
+
+    <!-- EUROPA -->
+    <div class="cripto-modal" id="modal-europa">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-europa')">✕</button>
+            <div class="modal-emoji">🇪🇺</div>
+            <div class="modal-titulo">União Europeia</div>
+            <div class="modal-subtitulo">MiCA — O marco regulatório mais abrangente do mundo</div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">MiCA — Markets in Crypto-Assets</div>
+                <div class="modal-texto">Em 2024, a União Europeia colocou em vigor o <strong>MiCA</strong>, o primeiro regulamento abrangente do mundo para criptoativos. Ele estabelece regras claras para emissão de tokens, operação de exchanges, proteção ao consumidor e prevenção à lavagem de dinheiro — cobrindo todo o bloco em um único framework.</div>
+            </div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">O que o MiCA muda na prática</div>
+                <div class="modal-texto">Antes do MiCA, cada país europeu tinha regras próprias (ou nenhuma). Uma exchange precisava de licenças separadas em cada país. Com o MiCA, uma única licença vale para toda a União Europeia. Isso reduz drasticamente a incerteza jurídica e atrai investimento institucional que antes ficava de fora por falta de clareza regulatória.</div>
+            </div>
+            <div class="modal-verde">A abordagem europeia é metódica — mas estruturada. O MiCA mostra que é possível regular cripto sem proibir. É referência global que outros países, incluindo o Brasil, estão estudando.</div>
+        </div>
+    </div>
+
+    <!-- DUBAI -->
+    <div class="cripto-modal" id="modal-dubai">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-dubai')">✕</button>
+            <div class="modal-emoji">🇦🇪</div>
+            <div class="modal-titulo">Dubai — Emirados Árabes Unidos</div>
+            <div class="modal-subtitulo">VARA · Tokenização Imobiliária — O hub do Oriente Médio</div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">VARA — O primeiro regulador dedicado a ativos virtuais</div>
+                <div class="modal-texto">Dubai criou a <strong>VARA (Virtual Assets Regulatory Authority)</strong> — o primeiro órgão regulador do mundo dedicado exclusivamente a criptoativos, com poder de fiscalização e licenciamento. Empresas como Binance, Crypto.com e OKX têm licenças VARA e operam legalmente em Dubai. A regulação clara atraiu as maiores exchanges do mundo.</div>
+            </div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Tokenização Imobiliária em escala real</div>
+                <div class="modal-texto">Dubai já tokeniza imóveis de alto padrão. Investidores de qualquer parte do mundo compram frações de imóveis comerciais e residenciais com registro imutável na blockchain. O mercado imobiliário de Dubai — que movimenta dezenas de bilhões por ano — usa tokenização como instrumento real de captação e distribuição de propriedade.</div>
+            </div>
+            <div class="modal-destaque">Dubai se posicionou deliberadamente como "capital da tokenização" — atraindo empresas, capital humano qualificado e projetos-piloto que depois viram referência global.</div>
+        </div>
+    </div>
+
+    <!-- SINGAPURA -->
+    <div class="cripto-modal" id="modal-singapura">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-singapura')">✕</button>
+            <div class="modal-emoji">🇸🇬</div>
+            <div class="modal-titulo">Singapura</div>
+            <div class="modal-subtitulo">MAS · Projeto Guardian — Hub financeiro da Ásia com regulação de precisão</div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">MAS — Monetary Authority of Singapore</div>
+                <div class="modal-texto">O banco central de Singapura tem uma das estruturas mais sofisticadas do mundo para ativos digitais. Exchanges e projetos de tokenização operam com segurança jurídica total, desde que cumpram os requisitos de licenciamento da MAS. A abordagem é: "regule para atrair, não para afastar."</div>
+            </div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Projeto Guardian — Tokenização com grandes bancos</div>
+                <div class="modal-texto">A MAS liderou o <strong>Projeto Guardian</strong> — uma iniciativa com JP Morgan, DBS e outros grandes bancos para testar tokenização de ativos financeiros (títulos, fundos de investimento, câmbio) em redes blockchain. Os resultados foram usados para calibrar a regulação real do país. Singapura não apenas permite — ela experimenta e aprende.</div>
+            </div>
+            <div class="modal-verde">Singapura prova que regulação inteligente é diferente de regulação permissiva. Alta exigência, processos claros e ambiente previsível atraem os melhores projetos do mundo.</div>
+        </div>
+    </div>
+
+    <!-- SUÍÇA -->
+    <div class="cripto-modal" id="modal-suica">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-suica')">✕</button>
+            <div class="modal-emoji">🇨🇭</div>
+            <div class="modal-titulo">Suíça</div>
+            <div class="modal-subtitulo">Crypto Valley · Zug · SIX Exchange — O ecossistema mais maduro da Europa</div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Crypto Valley — O berço do ecossistema</div>
+                <div class="modal-texto">A região de <strong>Zug</strong> é conhecida como Crypto Valley — o primeiro e mais consolidado ecossistema de blockchain do mundo. A Fundação Ethereum foi estabelecida em Zug. Cardano, Polkadot e dezenas de protocolos relevantes têm raízes suíças. Não é coincidência: a Suíça oferece estabilidade jurídica, neutralidade política e infraestrutura financeira de classe mundial.</div>
+            </div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Tokenização de Ações com validade jurídica</div>
+                <div class="modal-texto">A Suíça permite a <strong>tokenização de ações e títulos</strong> desde 2018, com força jurídica equivalente às versões tradicionais. A bolsa de valores suíça (SIX) opera a <strong>SDX (SIX Digital Exchange)</strong> — uma infraestrutura de mercado de capitais inteiramente baseada em blockchain, onde títulos tokenizados são emitidos, negociados e liquidados digitalmente.</div>
+            </div>
+            <div class="modal-destaque">A Suíça prova que inovação tecnológica e segurança jurídica não são opostos. São complementares — quando há vontade regulatória para construí-los juntos.</div>
+        </div>
+    </div>
 
     <!-- ===== MODAIS TOKENIZAÇÃO ===== -->
 
@@ -1450,9 +1614,6 @@
     (function() {
         'use strict';
 
-        // ================================================================
-        // SISTEMA DE MODAIS
-        // ================================================================
         window.abrirModal = function(id) {
             var el = document.getElementById(id);
             if (el) { el.classList.add('aberto'); document.body.style.overflow = 'hidden'; }
@@ -1471,69 +1632,6 @@
                 });
             }
         });
-
-        // ================================================================
-        // RAIO-X CRIPTO — cache de sessão por ticker
-        // ================================================================
-        var rxCache = {};
-
-        function fmtPreco(v) {
-            if (v == null) return '—';
-            return 'US$ ' + Number(v).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        }
-        function fmtVar(v) {
-            if (v == null) return { txt: '—', cls: '' };
-            var n = parseFloat(v);
-            return { txt: (n >= 0 ? '+' : '') + n.toFixed(2) + '%', cls: n >= 0 ? 'positivo' : 'negativo' };
-        }
-        function fmtVol(v) {
-            if (v == null) return '—';
-            var n = parseFloat(v);
-            if (n >= 1e9) return 'US$ ' + (n / 1e9).toFixed(2) + ' B';
-            if (n >= 1e6) return 'US$ ' + (n / 1e6).toFixed(1) + ' M';
-            return 'US$ ' + Number(n).toLocaleString('pt-BR');
-        }
-
-        function renderRxTicker(ticker, data) {
-            var preco = document.getElementById('rx-' + ticker + '-preco');
-            var varEl  = document.getElementById('rx-' + ticker + '-var');
-            var vol   = document.getElementById('rx-' + ticker + '-vol');
-            if (preco) preco.textContent = fmtPreco(data.preco);
-            if (varEl) {
-                var r = fmtVar(data.variacao);
-                varEl.textContent = r.txt;
-                varEl.className = 'rx-metrica-valor ' + r.cls;
-            }
-            if (vol) vol.textContent = fmtVol(data.volume);
-        }
-
-        window.selecionarCripto = function(ticker, btn) {
-            // atualiza botões
-            document.querySelectorAll('.rx-btn').forEach(function(b) { b.classList.remove('active'); });
-            if (btn) btn.classList.add('active');
-
-            // troca painel
-            document.querySelectorAll('.rx-painel').forEach(function(p) { p.classList.remove('ativo'); });
-            var painel = document.getElementById('rx-painel-' + ticker);
-            if (painel) painel.classList.add('ativo');
-            var loading = document.getElementById('rx-carregando');
-            if (loading) loading.style.display = 'none';
-
-            // verifica cache
-            if (rxCache[ticker]) { renderRxTicker(ticker, rxCache[ticker]); return; }
-
-            // busca API
-            fetch('/api/cripto-raio-x/' + ticker)
-                .then(function(r) { return r.json(); })
-                .then(function(data) {
-                    rxCache[ticker] = data;
-                    renderRxTicker(ticker, data);
-                })
-                .catch(function() {
-                    rxCache[ticker] = { preco: null, variacao: null, volume: null };
-                    renderRxTicker(ticker, rxCache[ticker]);
-                });
-        };
 
     })();
     </script>
