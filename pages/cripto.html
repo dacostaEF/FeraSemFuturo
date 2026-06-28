@@ -274,6 +274,47 @@
     .modal-exemplo-titulo { font-size: 0.82rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
     .modal-exemplo-desc { font-size: 0.76rem; color: rgba(255,255,255,0.45); line-height: 1.55; }
 
+    /* GRADE DE TOKENS */
+    .token-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 16px;
+        margin: 28px 0;
+    }
+    .token-card {
+        background: rgba(255,255,255,0.025);
+        border: 1px solid rgba(212,175,55,0.15);
+        border-radius: 16px;
+        padding: 22px 18px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .token-card:hover {
+        transform: translateY(-6px) scale(1.02);
+        background: rgba(212,175,55,0.06);
+        border-color: rgba(212,175,55,0.4);
+        box-shadow: 0 12px 40px rgba(212,175,55,0.08);
+    }
+    .token-emoji { display: block; font-size: 2.4rem; margin-bottom: 8px; }
+    .token-nome { display: block; font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .token-desc { display: block; font-size: 0.72rem; color: rgba(255,255,255,0.35); line-height: 1.4; }
+    .token-destaque-final {
+        text-align: center;
+        background: linear-gradient(135deg, rgba(212,175,55,0.06), rgba(99,102,241,0.04));
+        border: 1px solid rgba(212,175,55,0.2);
+        border-radius: 20px;
+        padding: 32px 24px;
+        margin: 24px 0 12px;
+    }
+    @media (max-width: 600px) {
+        .token-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .token-card { padding: 16px 12px; }
+        .token-emoji { font-size: 1.8rem; }
+        .token-nome { font-size: 0.78rem; }
+        .token-desc { font-size: 0.65rem; }
+    }
+
     /* BOTÃO EXPLORAR MODAL */
     .btn-explorar { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; background: rgba(99,102,241,0.10); border: 1px solid rgba(99,102,241,0.30); border-radius: 10px; color: #818CF8; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: all 0.2s; margin-top: 8px; }
     .btn-explorar:hover { background: rgba(99,102,241,0.18); }
@@ -521,9 +562,10 @@
             <div class="lab-stage" id="etapa-tokenizacao">
                 <div class="lab-stage-header">
                     <span class="lab-stage-num">Etapa 04</span>
-                    <span class="lab-stage-title">A grande revolução — Tokenização</span>
+                    <span class="lab-stage-title">🚀 A Grande Revolução — Tokenização</span>
                 </div>
-                <p class="lab-text">Cada geração de tecnologia financeira democratizou o acesso a uma categoria de ativos. Veja o padrão:</p>
+
+                <p class="lab-text" style="max-width:700px;">Cada geração de tecnologia financeira democratizou o acesso a uma categoria de ativos. A tokenização é a primeira que <strong style="color:#fff;">não tem limite de categoria.</strong></p>
 
                 <!-- INFOGRÁFICO DEMOCRATIZAÇÃO -->
                 <div class="infografico-revolucao">
@@ -565,20 +607,71 @@
                     </div>
                 </div>
 
-                <p class="lab-text">A tokenização não é uma categoria — é uma <strong style="color:#fff;">infraestrutura.</strong> Ela pode representar digitalmente qualquer direito econômico: imóveis, participações, obras de arte, créditos de carbono, recebíveis, royalties de música, projetos de energia renovável.</p>
-
-                <div class="frase-destaque">
-                    <div class="frase-destaque-texto">"Cada inovação ampliou o acesso das pessoas aos investimentos.<br>A tokenização representa o próximo passo dessa evolução."</div>
+                <!-- GRADE DE EXEMPLOS -->
+                <p class="lab-text" style="margin-bottom:4px;">Clique em qualquer ativo abaixo para entender como a tokenização muda as regras do jogo:</p>
+                <div class="token-grid">
+                    <div class="token-card" onclick="window.abrirModal('modal-ex-imovel')">
+                        <span class="token-emoji">🏢</span>
+                        <span class="token-nome">Prédios Comerciais</span>
+                        <span class="token-desc">Invista em imóveis de R$ 50M com R$ 500</span>
+                    </div>
+                    <div class="token-card" onclick="window.abrirModal('modal-ex-fazenda')">
+                        <span class="token-emoji">🌾</span>
+                        <span class="token-nome">Fazendas</span>
+                        <span class="token-desc">Participe da renda do agronegócio</span>
+                    </div>
+                    <div class="token-card" onclick="window.abrirModal('modal-ex-energia')">
+                        <span class="token-emoji">⚡</span>
+                        <span class="token-nome">Parques Solares</span>
+                        <span class="token-desc">Receba renda de energia por 20 anos</span>
+                    </div>
+                    <div class="token-card" onclick="window.abrirModal('modal-ex-arte')">
+                        <span class="token-emoji">🎨</span>
+                        <span class="token-nome">Obras de Arte</span>
+                        <span class="token-desc">Propriedade fracionada de quadros valiosos</span>
+                    </div>
+                    <div class="token-card" onclick="window.abrirModal('modal-ex-musica')">
+                        <span class="token-emoji">🎵</span>
+                        <span class="token-nome">Royalties Musicais</span>
+                        <span class="token-desc">Ganhe com streaming e execuções</span>
+                    </div>
+                    <div class="token-card" onclick="window.abrirModal('modal-ex-carbono')">
+                        <span class="token-emoji">🌱</span>
+                        <span class="token-nome">Créditos de Carbono</span>
+                        <span class="token-desc">Invista em compensação ambiental</span>
+                    </div>
+                    <div class="token-card" onclick="window.abrirModal('modal-ex-empresas')">
+                        <span class="token-emoji">🏭</span>
+                        <span class="token-nome">Participação em Empresas</span>
+                        <span class="token-desc">Startups e negócios privados</span>
+                    </div>
+                    <div class="token-card" onclick="window.abrirModal('modal-ex-patentes')">
+                        <span class="token-emoji">💡</span>
+                        <span class="token-nome">Patentes e Propriedade Intelectual</span>
+                        <span class="token-desc">Licenciamento de inovações</span>
+                    </div>
+                    <div class="token-card" onclick="window.abrirModal('modal-ex-petroleo')">
+                        <span class="token-emoji">🛢️</span>
+                        <span class="token-nome">Campos de Petróleo</span>
+                        <span class="token-desc">Project Finance global via token de produção</span>
+                    </div>
                 </div>
 
-                <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:4px;">
-                    <button class="btn-explorar" onclick="window.abrirModal('modal-exemplos')">🏢 Ver exemplos de tokenização →</button>
-                    <div style="font-size:0.78rem;color:rgba(255,255,255,0.30);">Prédios, fazendas, energia, arte, royalties</div>
+                <!-- DESTAQUE FINAL -->
+                <div class="token-destaque-final">
+                    <div style="font-size:2.2rem;margin-bottom:8px;">🪙</div>
+                    <div style="font-size:1.2rem;font-weight:700;color:#D4AF37;line-height:1.6;">
+                        "Se tem valor econômico,<br>pode ser tokenizado."
+                    </div>
+                    <div style="font-size:0.85rem;color:rgba(255,255,255,0.40);margin-top:8px;">
+                        A tokenização é a infraestrutura que vai representar trilhões em ativos nas próximas décadas.
+                    </div>
                 </div>
 
-                <div style="margin-top:24px;background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.18);border-radius:12px;padding:18px 22px;">
-                    <div style="font-size:0.78rem;font-weight:700;color:rgba(239,68,68,0.70);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">⚠️ Importante — credibilidade acima de tudo</div>
-                    <div style="font-size:0.85rem;color:rgba(255,255,255,0.55);line-height:1.75;">A tokenização é uma tecnologia para representar direitos digitalmente — não elimina regras. Dependendo da estrutura, um token pode ser considerado valor mobiliário e estar sujeito à regulamentação da CVM. Bons projetos continuam precisando de governança, transparência e segurança jurídica.</div>
+                <!-- AVISO JURÍDICO -->
+                <div style="margin-top:16px;background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.18);border-radius:12px;padding:18px 22px;">
+                    <div style="font-size:0.78rem;font-weight:700;color:rgba(239,68,68,0.70);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">⚠️ Importante</div>
+                    <div style="font-size:0.85rem;color:rgba(255,255,255,0.55);line-height:1.75;">Tokenização não elimina regras. Dependendo da estrutura, um token pode ser considerado valor mobiliário e estar sujeito à regulamentação da CVM. Bons projetos continuam precisando de governança, transparência e segurança jurídica.</div>
                 </div>
             </div>
 
@@ -783,7 +876,243 @@
         </div>
     </main>
 
-    <!-- ===== MODAIS ===== -->
+    <!-- ===== MODAIS TOKENIZAÇÃO ===== -->
+
+    <!-- IMÓVEL -->
+    <div class="cripto-modal" id="modal-ex-imovel">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-ex-imovel')">✕</button>
+            <div class="modal-emoji">🏢</div>
+            <div class="modal-titulo">Prédios Comerciais</div>
+            <div class="modal-subtitulo">Como a tokenização democratiza o mercado imobiliário corporativo</div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">O problema antigo</div>
+                <div class="modal-texto">Um prédio comercial premium em São Paulo custa entre R$ 20 e R$ 100 milhões. Hoje, apenas grandes fundos imobiliários e investidores ultra-qualificados conseguem ter acesso direto a esse tipo de ativo. O investidor comum só chega indiretamente, via FII — com todas as limitações de liquidez e governança que isso implica.</div>
+            </div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Com tokenização</div>
+                <div class="modal-texto">Esse mesmo prédio é dividido em <strong>1 milhão de tokens</strong>. Cada token representa uma fração real do imóvel. Com R$ 500, você compra 10 tokens. Você recebe proporção dos aluguéis mensalmente, via contrato inteligente — sem gestora intermediando, sem taxa de administração oculta.</div>
+            </div>
+            <div class="modal-destaque">Investidor com R$ 500 recebe os mesmos direitos proporcionais que o investidor com R$ 500.000. Isso não existia antes da tokenização.</div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Já está acontecendo no Brasil</div>
+                <div class="modal-texto">Empresas como Liqi, Kria e Vórtx já tokenizaram imóveis comerciais no Brasil sob supervisão da CVM. O mercado existe — ainda está em fase inicial, mas cresce a cada trimestre.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAZENDA -->
+    <div class="cripto-modal" id="modal-ex-fazenda">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-ex-fazenda')">✕</button>
+            <div class="modal-emoji">🌾</div>
+            <div class="modal-titulo">Fazendas e Agronegócio</div>
+            <div class="modal-subtitulo">O maior setor da economia brasileira agora acessível em frações</div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">O agro sem tokenização</div>
+                <div class="modal-texto">O agronegócio representa mais de 25% do PIB brasileiro. Mas investir nele diretamente exige capital para comprar terra, máquinas, insumos. Os instrumentos disponíveis — CRA, LCA — não dão ao investidor participação real na operação.</div>
+            </div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Com tokenização</div>
+                <div class="modal-texto">Uma fazenda de 500 hectares no Mato Grosso, avaliada em R$ 15 milhões, é dividida em tokens. O detentor do token recebe proporção da renda da safra — soja, milho, algodão. Quando a safra sobe, seu retorno sobe. É acesso real à produção, não apenas a um título de dívida.</div>
+            </div>
+            <div class="modal-destaque">O produtor capta recursos sem banco. O investidor acessa o agro sem precisar de terra. Ambos ganham.</div>
+        </div>
+    </div>
+
+    <!-- ENERGIA -->
+    <div class="cripto-modal" id="modal-ex-energia">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-ex-energia')">✕</button>
+            <div class="modal-emoji">⚡</div>
+            <div class="modal-titulo">Parques de Energia Renovável</div>
+            <div class="modal-subtitulo">Renda de energia limpa por décadas, acessível a qualquer investidor</div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">O modelo</div>
+                <div class="modal-texto">Um parque solar de 10 MW no Nordeste gera energia por 25 anos com custo operacional baixo após instalação. O desenvolvedor do projeto tokeniza o parque para captar os R$ 20 milhões necessários para construção. Investidores compram tokens e recebem proporção da receita de energia gerada mensalmente.</div>
+            </div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Por que é poderoso</div>
+                <div class="modal-texto">A receita é previsível — contratos de venda de energia (PPAs) têm duração de 15 a 25 anos com preços fixos. O investidor sabe aproximadamente o que vai receber. É um dos ativos mais estáveis possíveis de tokenizar.</div>
+            </div>
+            <div class="modal-verde">Você financia a transição energética e recebe renda por décadas. Com R$ 100.</div>
+        </div>
+    </div>
+
+    <!-- ARTE -->
+    <div class="cripto-modal" id="modal-ex-arte">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-ex-arte')">✕</button>
+            <div class="modal-emoji">🎨</div>
+            <div class="modal-titulo">Obras de Arte</div>
+            <div class="modal-subtitulo">O mercado de arte sempre foi o mais exclusivo. A tokenização muda isso.</div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">O mercado de arte antes</div>
+                <div class="modal-texto">Uma obra de Tarsila do Amaral ou Vik Muniz pode custar de R$ 500 mil a R$ 5 milhões. Leilões internacionais movimentam bilhões anualmente — mas são inacessíveis ao investidor comum. A arte como ativo financeiro sempre foi privilégio de museus, galerias e colecionadores milionários.</div>
+            </div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Com tokenização</div>
+                <div class="modal-texto">Uma obra de R$ 1 milhão é tokenizada em 10.000 tokens de R$ 100 cada. A obra permanece em custódia física certificada. Os detentores de tokens são coproprietários — participam da valorização quando a obra é vendida, ou de aluguéis para exposições.</div>
+            </div>
+            <div class="modal-destaque">O mercado global de arte movimenta US$ 65 bilhões por ano. Menos de 1% desse mercado é acessível a investidores não-milionários. A tokenização muda essa proporção.</div>
+        </div>
+    </div>
+
+    <!-- MÚSICA -->
+    <div class="cripto-modal" id="modal-ex-musica">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-ex-musica')">✕</button>
+            <div class="modal-emoji">🎵</div>
+            <div class="modal-titulo">Royalties Musicais</div>
+            <div class="modal-subtitulo">Invista no futuro de um artista — e ganhe toda vez que a música tocar</div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Como funciona hoje</div>
+                <div class="modal-texto">Gravadoras compram os direitos de catálogos musicais há décadas. Quando Michael Jackson morreu, sua estate valia bilhões em royalties futuros. Fundos de investimento como Hipgnosis Songs Fund compram catálogos de artistas como Bob Dylan e Red Hot Chili Peppers — e recebem streaming, sync, execução pública.</div>
+            </div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Com tokenização</div>
+                <div class="modal-texto">Um músico independente tokeniza 30% dos royalties futuros do seu catálogo. Fãs e investidores compram tokens e recebem automaticamente proporção das receitas — cada stream no Spotify, cada execução em rádio, cada uso em publicidade. O contrato inteligente distribui os pagamentos sem intermediário.</div>
+            </div>
+            <div class="modal-verde">O artista capta recursos sem gravadora. Os investidores acessam royalties que antes eram exclusivos de grandes fundos. E a plataforma é a blockchain — não uma gravadora cobrando 85% da receita.</div>
+        </div>
+    </div>
+
+    <!-- CARBONO -->
+    <div class="cripto-modal" id="modal-ex-carbono">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-ex-carbono')">✕</button>
+            <div class="modal-emoji">🌱</div>
+            <div class="modal-titulo">Créditos de Carbono</div>
+            <div class="modal-subtitulo">O mercado ambiental que pode ser revolucionado pela tokenização</div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">O problema atual</div>
+                <div class="modal-texto">O mercado voluntário de carbono movimentou US$ 2 bilhões em 2023 — e tem potencial de crescer para US$ 50 bilhões até 2030. Mas enfrenta um problema crítico: dupla contagem. O mesmo crédito de carbono sendo vendido mais de uma vez para empresas diferentes. A rastreabilidade é precária.</div>
+            </div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Com tokenização</div>
+                <div class="modal-texto">Cada crédito de carbono gerado por um projeto de reflorestamento ou captura de CO₂ é registrado como um token único na blockchain. Quando uma empresa compra e usa esse crédito para compensar emissões, o token é "queimado" — removido permanentemente da circulação. Dupla contagem torna-se tecnicamente impossível.</div>
+            </div>
+            <div class="modal-destaque">Transparência, rastreabilidade e liquidez em um mercado que hoje é opaco e fragmentado. A tokenização resolve os três problemas ao mesmo tempo.</div>
+        </div>
+    </div>
+
+    <!-- EMPRESAS -->
+    <div class="cripto-modal" id="modal-ex-empresas">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-ex-empresas')">✕</button>
+            <div class="modal-emoji">🏭</div>
+            <div class="modal-titulo">Participação em Empresas</div>
+            <div class="modal-subtitulo">O financiamento de startups e negócios sem precisar abrir capital na bolsa</div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">O modelo atual</div>
+                <div class="modal-texto">Uma startup com potencial de crescimento tem três caminhos para captar recursos: angels e VCs (que ficam com participação e controle), crowdfunding de equity (limitado e burocrático), ou IPO na bolsa (extremamente caro e restrito). A maioria dos bons negócios fica sem acesso a capital adequado.</div>
+            </div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Com tokenização</div>
+                <div class="modal-texto">A empresa emite tokens representando participação econômica ou direitos específicos sobre receita futura. Investidores de qualquer país compram via blockchain. O processo é mais rápido, mais barato e globalmente acessível. A startup capta de milhares de pequenos investidores — não de um VC que vai exigir controle.</div>
+            </div>
+            <div class="modal-alerta">⚠️ Tokens que representam participação acionária são considerados valores mobiliários no Brasil e nos EUA. A estrutura jurídica precisa ser cuidadosamente desenhada com apoio de especialistas em direito societário e regulação da CVM/SEC.</div>
+        </div>
+    </div>
+
+    <!-- PATENTES -->
+    <div class="cripto-modal" id="modal-ex-patentes">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-ex-patentes')">✕</button>
+            <div class="modal-emoji">💡</div>
+            <div class="modal-titulo">Patentes e Propriedade Intelectual</div>
+            <div class="modal-subtitulo">Monetizar inovação sem esperar por um comprador único</div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">O problema da PI hoje</div>
+                <div class="modal-texto">Um pesquisador ou empresa detém uma patente valiosa — mas para monetizá-la precisa vender para uma grande corporação ou esperar anos por licenciamentos. O processo é lento, caro juridicamente, e favorece quem tem mais poder de barganha. O inventor raramente recebe o valor justo.</div>
+            </div>
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Com tokenização</div>
+                <div class="modal-texto">A patente é tokenizada — os tokens representam direito proporcional às receitas de licenciamento futuras. O inventor vende parte dos tokens para levantar capital imediato. Compradores de tokens recebem sua proporção toda vez que a patente é licenciada para uso industrial ou comercial. O contrato inteligente distribui automaticamente.</div>
+            </div>
+            <div class="modal-destaque">Inovadores acessam capital sem abrir mão do controle total da invenção. Investidores acessam retorno de propriedade intelectual — um mercado antes reservado a fundos de patent trolling e grandes corporações.</div>
+        </div>
+    </div>
+
+    <!-- PETRÓLEO -->
+    <div class="cripto-modal" id="modal-ex-petroleo">
+        <div class="modal-box">
+            <button class="modal-close" onclick="window.fecharModal('modal-ex-petroleo')">✕</button>
+            <div class="modal-emoji">🛢️</div>
+            <div class="modal-titulo">Campos de Petróleo</div>
+            <div class="modal-subtitulo">A aplicação mais sofisticada da tokenização — Project Finance com capital global, lastreado em reservas certificadas</div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">O modelo tradicional — e seus limites</div>
+                <div class="modal-texto">A exploração de petróleo é o projeto de maior intensidade de capital da economia global. Um campo offshore no pré-sal pode exigir US$ 500 milhões apenas para perfurar o primeiro poço. Historicamente, esse capital vem de três fontes: grandes majors (Shell, Petrobras, BP), fundos soberanos e bancos de desenvolvimento — via estruturas de <strong>Project Finance</strong>. O investidor comum não existe nessa equação.</div>
+                <div class="modal-destaque">Project Finance é uma estrutura onde o financiamento é garantido pelo fluxo de caixa do próprio projeto — não pelos ativos dos patrocinadores. Uma SPV (Sociedade de Propósito Específico) é criada exclusivamente para o campo, isolando o risco. É o instrumento favorito de grandes projetos de infraestrutura no mundo.</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">A inovação estrutural — token como equity democratizado</div>
+                <div class="modal-texto">A pergunta é: e se, em vez de um sindicato bancário tradicional, o equity do projeto fosse captado via emissão de tokens acessíveis globalmente? O token representaria direito proporcional nos fluxos de caixa da produção — cada barril vendido gera receita distribuída automaticamente via contrato inteligente.</div>
+                <div class="modal-exemplo-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="modal-exemplo-card">
+                        <div class="modal-exemplo-icon">🏗️</div>
+                        <div class="modal-exemplo-titulo">Pré-Financiamento</div>
+                        <div class="modal-exemplo-desc">Estudo de viabilidade, estrutura jurídica (SPV), due diligence técnica e certificação de reservas.</div>
+                    </div>
+                    <div class="modal-exemplo-card">
+                        <div class="modal-exemplo-icon">💰</div>
+                        <div class="modal-exemplo-titulo">Captação via ICO</div>
+                        <div class="modal-exemplo-desc">Emissão dos tokens para investidores globais. Contrato inteligente define direitos, vesting e distribuição.</div>
+                    </div>
+                    <div class="modal-exemplo-card" style="grid-column: 1 / -1; display:flex; align-items:flex-start; gap:16px;">
+                        <div style="font-size:1.5rem;flex-shrink:0;margin-top:2px;">⚙️</div>
+                        <div>
+                            <div class="modal-exemplo-titulo">Operação e Retorno</div>
+                            <div class="modal-exemplo-desc">Produção do campo, pagamento da dívida sênior e distribuição proporcional dos retornos aos detentores de tokens — via contrato inteligente, sem intermediários financeiros.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">O lastro único — reservas certificadas 1P, 2P e 3P</div>
+                <div class="modal-texto">A diferença fundamental entre um token de petróleo e uma altcoin especulativa está no <strong>lastro</strong>. Empresas especializadas (como DeGolyer &amp; MacNaughton ou Gaffney Cline) certificam as reservas do campo segundo padrões internacionais:</div>
+                <ul class="modal-lista">
+                    <li><strong>1P — Reservas Provadas:</strong> altíssima confiança geológica e econômica. Base conservadora de valorização do token.</li>
+                    <li><strong>2P — Reservas Prováveis:</strong> 50% de probabilidade de recuperação. Indica o potencial de crescimento do ativo.</li>
+                    <li><strong>3P — Reservas Possíveis:</strong> cenário otimista com exploração adicional bem-sucedida.</li>
+                </ul>
+                <div class="modal-destaque">À medida que o campo evolui — de 3P para 2P para 1P — as reservas são "upgradeadas". Cada certificação melhora o fundamento do token. A valorização não é especulativa: é lastreada em petróleo no subsolo, auditado por terceiros independentes.</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Por que blockchain muda o jogo no Project Finance</div>
+                <div class="modal-texto">Project Finance tradicional é notoriamente opaco para investidores minoritários. Relatórios anuais, auditoria anual, reuniões de comitê — o pequeno investidor nunca sabe em tempo real o que está acontecendo no projeto. Com blockchain, cada distribuição de receita, cada marco operacional e cada relatório de produção podem ser registrados imutavelmente. Os detentores de tokens têm acesso à mesma informação que os bancos seniores.</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">Governança descentralizada</div>
+                <div class="modal-texto">Tokens de governança permitem que os detentores votem em decisões estratégicas: aprovação de operadores, escolha de blocos adicionais para perfuração, políticas de hedging de preço do petróleo. Uma estrutura que antes exigia conselho de administração fechado pode ser aberta a milhares de coproprietários globais.</div>
+            </div>
+
+            <div class="modal-secao">
+                <div class="modal-secao-titulo">⚖️ Regulação — O que você precisa saber</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+                    <div style="background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.22);border-radius:12px;padding:16px;">
+                        <div style="font-size:0.78rem;font-weight:700;color:#F59E0B;margin-bottom:8px;">🇧🇷 No Brasil</div>
+                        <div style="font-size:0.80rem;color:rgba(255,255,255,0.55);line-height:1.60;">Token de produção de petróleo é valor mobiliário — regulado pela <strong style="color:rgba(255,255,255,0.75);">CVM</strong>. Projetos E&amp;P precisam de licença da <strong style="color:rgba(255,255,255,0.75);">ANP</strong>.</div>
+                    </div>
+                    <div style="background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.22);border-radius:12px;padding:16px;">
+                        <div style="font-size:0.78rem;font-weight:700;color:#F59E0B;margin-bottom:8px;">🇺🇸 Nos EUA</div>
+                        <div style="font-size:0.80rem;color:rgba(255,255,255,0.55);line-height:1.60;">O teste Howey da <strong style="color:rgba(255,255,255,0.75);">SEC</strong> enquadra esse token como security. Exige registro formal ou isenção regulatória específica.</div>
+                    </div>
+                </div>
+                <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:14px 16px;font-size:0.80rem;color:rgba(255,255,255,0.45);line-height:1.70;">
+                    A complexidade jurídica é alta — mas projetos bem estruturados estão sendo aprovados. Requer assessoria especializada em direito do petróleo, regulação de capitais e blockchain. O obstáculo regulatório não elimina a tese — ele é parte do processo.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MODAIS PRINCIPAIS ===== -->
 
     <!-- MODAL BITCOIN -->
     <div class="cripto-modal" id="modal-bitcoin">
