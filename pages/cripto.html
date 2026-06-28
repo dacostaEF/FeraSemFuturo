@@ -108,18 +108,74 @@
     .familia-card.token .familia-btn { color: #D4AF37; border-color: rgba(212,175,55,0.35); }
     .familia-btn:hover { background: rgba(255,255,255,0.05); }
 
-    /* TABELA DEMOCRATIZAÇÃO */
-    .demo-table-wrap { margin: 28px 0; overflow-x: auto; }
-    .demo-table { width: 100%; border-collapse: collapse; }
-    .demo-table thead tr { border-bottom: 1px solid rgba(212,175,55,0.20); }
-    .demo-table th { font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #D4AF37; padding: 12px 20px; text-align: left; }
-    .demo-table td { font-size: 0.88rem; color: rgba(255,255,255,0.65); padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle; line-height: 1.55; }
-    .demo-table tr:last-child td { border-bottom: none; background: rgba(212,175,55,0.04); }
-    .demo-table tr:last-child td { color: rgba(255,255,255,0.80); }
-    .demo-table .demo-tec { font-weight: 700; color: #fff; }
-    .demo-badge { display: inline-block; font-size: 0.68rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-left: 8px; vertical-align: middle; }
-    .demo-badge.novo { background: rgba(212,175,55,0.12); border: 1px solid rgba(212,175,55,0.30); color: #D4AF37; }
-    .demo-table .row-token { background: rgba(212,175,55,0.03); }
+    /* INFOGRÁFICO DEMOCRATIZAÇÃO */
+    .infografico-revolucao {
+        background: linear-gradient(135deg, rgba(212,175,55,0.05), rgba(99,102,241,0.05));
+        border: 1px solid rgba(212,175,55,0.2);
+        border-radius: 24px;
+        padding: 40px 30px;
+        margin: 32px 0;
+    }
+    .infra-titulo {
+        font-size: 1.2rem; font-weight: 700; color: #D4AF37;
+        text-align: center; margin-bottom: 32px; letter-spacing: 1px;
+    }
+    .infra-linha {
+        display: flex; align-items: center; justify-content: center;
+        flex-wrap: wrap; gap: 0;
+    }
+    .infra-bloco {
+        display: flex; flex-direction: column; align-items: center;
+        background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 16px; padding: 20px 24px; min-width: 100px;
+        transition: all 0.3s;
+    }
+    .infra-bloco:hover { transform: translateY(-4px); background: rgba(255,255,255,0.06); }
+    .infra-bloco.destaque-final {
+        border-color: rgba(212,175,55,0.4);
+        background: rgba(212,175,55,0.08);
+        box-shadow: 0 0 30px rgba(212,175,55,0.08);
+        padding: 28px 36px; min-width: 130px;
+    }
+    .infra-icone { font-size: 2rem; margin-bottom: 6px; }
+    .infra-bloco.destaque-final .infra-icone { font-size: 2.6rem; }
+    .infra-nome { font-size: 0.9rem; font-weight: 700; color: #fff; }
+    .infra-bloco.destaque-final .infra-nome { font-size: 1.05rem; }
+    .infra-seta { font-size: 1.2rem; color: rgba(255,255,255,0.25); margin: 6px 0; }
+    .infra-destino { font-size: 0.78rem; color: rgba(255,255,255,0.45); font-weight: 600; }
+    .infra-bloco.destaque-final .infra-destino { color: rgba(212,175,55,0.75); font-size: 0.84rem; }
+    .infra-conector {
+        width: 40px; height: 2px;
+        background: rgba(255,255,255,0.10);
+        margin: 0 4px; flex-shrink: 0;
+    }
+    .infra-conector.destaque {
+        background: linear-gradient(90deg, rgba(255,255,255,0.10), rgba(212,175,55,0.50));
+        height: 3px;
+    }
+    .infra-badge {
+        margin-top: 10px;
+        background: rgba(212,175,55,0.15); border: 1px solid rgba(212,175,55,0.3);
+        border-radius: 20px; padding: 4px 14px;
+        font-size: 0.6rem; font-weight: 700; color: #D4AF37;
+        letter-spacing: 1.5px; text-transform: uppercase;
+    }
+    .infra-legenda {
+        margin-top: 32px; padding-top: 24px;
+        border-top: 1px solid rgba(255,255,255,0.06);
+        text-align: center; font-size: 0.92rem;
+        color: rgba(255,255,255,0.50); line-height: 1.8;
+    }
+    .infra-legenda strong { color: #D4AF37; }
+
+    @media (max-width: 640px) {
+        .infra-linha { flex-direction: column; align-items: center; gap: 4px; }
+        .infra-conector { width: 2px; height: 24px; margin: 0; }
+        .infra-conector.destaque { width: 3px; height: 30px; background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(212,175,55,0.50)); }
+        .infra-bloco { width: 100%; max-width: 260px; }
+        .infra-bloco.destaque-final { width: 100%; max-width: 260px; }
+        .infra-seta { display: none; }
+    }
 
     /* TABELA CUSTÓDIA */
     .custodia-table-wrap { margin: 24px 0; overflow-x: auto; }
@@ -469,39 +525,44 @@
                 </div>
                 <p class="lab-text">Cada geração de tecnologia financeira democratizou o acesso a uma categoria de ativos. Veja o padrão:</p>
 
-                <!-- TABELA DEMOCRATIZAÇÃO -->
-                <div class="demo-table-wrap">
-                    <table class="demo-table">
-                        <thead>
-                            <tr>
-                                <th>Tecnologia</th>
-                                <th>O que democratizou?</th>
-                                <th>Antes era exclusivo de</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><span class="demo-tec">📈 Ações</span></td>
-                                <td>Participação em empresas</td>
-                                <td>Sócios fundadores e grandes fundos</td>
-                            </tr>
-                            <tr>
-                                <td><span class="demo-tec">🏢 FIIs</span></td>
-                                <td>Patrimônio imobiliário</td>
-                                <td>Proprietários de imóveis comerciais</td>
-                            </tr>
-                            <tr>
-                                <td><span class="demo-tec">📊 ETFs</span></td>
-                                <td>Carteiras inteiras de ativos</td>
-                                <td>Gestores profissionais e fundos</td>
-                            </tr>
-                            <tr class="row-token">
-                                <td><span class="demo-tec">🪙 Tokenização <span class="demo-badge novo">próxima etapa</span></span></td>
-                                <td><strong>Qualquer ativo econômico</strong></td>
-                                <td>Quem o mercado tradicional exclui</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <!-- INFOGRÁFICO DEMOCRATIZAÇÃO -->
+                <div class="infografico-revolucao">
+                    <div class="infra-titulo">A Evolução da Democracia Financeira</div>
+                    <div class="infra-linha">
+                        <div class="infra-bloco">
+                            <span class="infra-icone">📈</span>
+                            <span class="infra-nome">Ações</span>
+                            <span class="infra-seta">↓</span>
+                            <span class="infra-destino">Empresas</span>
+                        </div>
+                        <div class="infra-conector"></div>
+                        <div class="infra-bloco">
+                            <span class="infra-icone">🏢</span>
+                            <span class="infra-nome">FIIs</span>
+                            <span class="infra-seta">↓</span>
+                            <span class="infra-destino">Imóveis</span>
+                        </div>
+                        <div class="infra-conector"></div>
+                        <div class="infra-bloco">
+                            <span class="infra-icone">📊</span>
+                            <span class="infra-nome">ETFs</span>
+                            <span class="infra-seta">↓</span>
+                            <span class="infra-destino">Carteiras</span>
+                        </div>
+                        <div class="infra-conector destaque"></div>
+                        <div class="infra-bloco destaque-final">
+                            <span class="infra-icone">🪙</span>
+                            <span class="infra-nome">TOKEN</span>
+                            <span class="infra-seta">↓</span>
+                            <span class="infra-destino">Qualquer Ativo</span>
+                            <div class="infra-badge">🚀 A Revolução</div>
+                        </div>
+                    </div>
+                    <div class="infra-legenda">
+                        Cada inovação ampliou o acesso. A tokenização é a primeira tecnologia que permite
+                        <strong>representar digitalmente qualquer direito econômico</strong> — imóveis,
+                        participações, royalties, créditos de carbono.
+                    </div>
                 </div>
 
                 <p class="lab-text">A tokenização não é uma categoria — é uma <strong style="color:#fff;">infraestrutura.</strong> Ela pode representar digitalmente qualquer direito econômico: imóveis, participações, obras de arte, créditos de carbono, recebíveis, royalties de música, projetos de energia renovável.</p>
