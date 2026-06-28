@@ -395,6 +395,48 @@
         margin-top: 16px;
     }
 
+    /* A SEMENTE */
+    .semente {
+        background: linear-gradient(135deg, rgba(212,175,55,0.06), rgba(99,102,241,0.04));
+        border: 1px solid rgba(212,175,55,0.2);
+        border-radius: 24px;
+        padding: 52px 36px;
+        margin: 36px 0;
+        text-align: center;
+    }
+    .semente-badge {
+        display: inline-block;
+        background: rgba(212,175,55,0.10);
+        border: 1px solid rgba(212,175,55,0.2);
+        color: #D4AF37;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 4px 16px;
+        border-radius: 20px;
+        margin-bottom: 32px;
+    }
+    .semente-transformacao { max-width: 480px; margin: 0 auto 28px; }
+    .semente-entrada { font-size: 0.95rem; color: rgba(255,255,255,0.38); line-height: 1.8; margin-bottom: 8px; }
+    .semente-pergunta-antiga { font-size: 1.1rem; font-weight: 700; color: rgba(255,255,255,0.22); font-style: italic; }
+    .semente-seta { font-size: 1.6rem; color: rgba(212,175,55,0.3); margin: 12px 0; }
+    .semente-saida { font-size: 0.95rem; color: rgba(255,255,255,0.50); line-height: 1.8; }
+    .semente-pergunta-nova { font-size: 1.15rem; font-weight: 700; color: #D4AF37; }
+    .semente-reflexao {
+        font-size: 0.90rem;
+        color: rgba(255,255,255,0.28);
+        line-height: 2;
+        max-width: 440px;
+        margin: 24px auto;
+    }
+    .semente-conclusao {
+        font-size: 1.05rem;
+        color: rgba(255,255,255,0.45);
+        line-height: 1.8;
+        margin-top: 8px;
+    }
+
     @media (max-width: 768px) {
         .lab-hook { padding: 36px 24px; }
         .lab-stage { padding: 28px 22px; }
@@ -404,9 +446,11 @@
         .demo-table th, .demo-table td { padding: 10px 14px; }
         .futuro-frase-final { padding: 22px 24px; }
         .mapa-global-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+        .semente { padding: 36px 20px; }
     }
     @media (max-width: 480px) {
         .mapa-global-grid { grid-template-columns: 1fr; }
+        .semente-pergunta-antiga, .semente-pergunta-nova { font-size: 1rem; }
     }
     </style>
 </head>
@@ -902,14 +946,31 @@
                 </div>
             </div>
 
-            <!-- CTA FINAL -->
-            <div class="lab-final-cta">
-                <h2>Laboratório concluído. 🎓</h2>
-                <p>Você entendeu por que os criptoativos existem, conheceu as cinco famílias, compreendeu a revolução da tokenização e aprendeu a diferença crítica entre custodiar e possuir. Esse é o ponto de partida para entender os próximos 20 anos do mercado financeiro.</p>
-                <div class="lab-cta-buttons">
-                    <a href="acoes.html" class="btn-lab-secondary">← Revisitar Ações</a>
-                    <a href="fiis.html" class="btn-lab-secondary">← Revisitar FIIs</a>
-                    <a href="etfs.html" class="btn-lab-secondary">← Revisitar ETFs</a>
+            <!-- A SEMENTE -->
+            <div class="semente">
+                <div class="semente-badge">🌱 A Semente</div>
+
+                <div class="semente-transformacao">
+                    <p class="semente-entrada">
+                        Você entrou perguntando:<br>
+                        <span class="semente-pergunta-antiga">"Bitcoin vai subir?"</span>
+                    </p>
+                    <div class="semente-seta">↓</div>
+                    <p class="semente-saida">
+                        Você sai entendendo que<br>
+                        <span class="semente-pergunta-nova">essa talvez seja a pergunta menos importante sobre o assunto.</span>
+                    </p>
+                </div>
+
+                <div class="semente-reflexao">
+                    Tecnologias que mudam infraestrutura não pedem permissão.<br>
+                    A internet não pediu. O PIX não pediu.<br>
+                    A tokenização também não vai pedir.
+                </div>
+
+                <div class="semente-conclusao">
+                    A diferença está em quem consegue ver isso<br>
+                    <span style="color:#D4AF37;">antes do consenso</span>.
                 </div>
             </div>
 
