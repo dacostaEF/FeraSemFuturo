@@ -308,7 +308,9 @@ app.get('/api/acao-diagnostico/:ticker', async (req, res) => {
 
 // ================================================================
 // Raio-X Criptoativos — proxy BRAPI com cache semanal
-// BTC / ETH / SOL via quote endpoint da BRAPI
+// BTC / ETH / SOL via endpoint v2/crypto da BRAPI (correto para cripto)
+// O endpoint /api/quote/{ticker} é para ativos da B3 — SOL não está
+// disponível por lá. O v2/crypto cobre todos os três corretamente.
 // Retorna: preco (USD), variacao 24h, volume 24h
 // ================================================================
 const criptoRaioXCache = {};
@@ -324,11 +326,11 @@ app.get('/api/cripto-raio-x/:ticker', async (req, res) => {
         return res.json(criptoRaioXCache[ticker].data);
     }
 
-    console.log(`📡 [Cripto] Buscando BRAPI para: ${ticker}`);
+    console.log(`📡 [Cripto] Buscando BRAPI v2/crypto para: ${ticker}`);
 
     try {
-        const quoteRes = await fetchBrapi(`quote/${ticker}`);
-        const quote = quoteRes.results?.[0] || {};
+        const quoteRes = await fetchBrapi(`v2/crypto?coin=${ticker}&currency=USD`);
+        const quote = quoteRes.coins?.[0] || {};
 
         const payload = {
             success:  true,
