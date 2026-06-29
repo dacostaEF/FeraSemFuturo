@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Defesa do Investidor — Custos Invisíveis, Conflitos de Interesse e Decisões que Protegem seu Patrimônio | INVLAB</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="description" content="Aprenda a identificar custos invisíveis, conflitos de interesse e decisões que podem comprometer seu patrimônio. Previdência, crédito, produtos empurrados e armadilhas do sistema financeiro — explicados sem hype. INVLAB.">
+
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+
+    <style>
+    /* ================================================================
+       DEFESA DO INVESTIDOR — ESTILOS EXCLUSIVOS
+       ================================================================ */
+
+    .defesa-hook {
+        background: linear-gradient(135deg, rgba(245,158,11,0.08) 0%, rgba(239,68,68,0.05) 100%);
+        border: 1px solid rgba(245,158,11,0.28);
+        border-radius: 20px; padding: 52px 40px;
+        text-align: center; margin: 48px 0 36px;
+        position: relative; overflow: hidden;
+    }
+    .defesa-hook::before {
+        content: ''; position: absolute; top: -60%; left: -50%;
+        width: 200%; height: 200%;
+        background: radial-gradient(ellipse at center, rgba(245,158,11,0.04) 0%, transparent 60%);
+        pointer-events: none;
+    }
+    .defesa-hook-badge {
+        display: inline-block;
+        background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.35);
+        color: #F59E0B; font-size: 0.72rem; font-weight: 700;
+        letter-spacing: 2.5px; text-transform: uppercase;
+        padding: 6px 18px; border-radius: 20px; margin-bottom: 28px;
+    }
+    .defesa-hook-title {
+        font-size: clamp(1.4rem,3.5vw,2.1rem); font-weight: 700;
+        color: #fff; line-height: 1.5; margin-bottom: 18px;
+    }
+    .defesa-hook-destaque {
+        background: rgba(245,158,11,0.07); border-left: 3px solid #F59E0B;
+        border-radius: 0 12px 12px 0; padding: 18px 24px;
+        margin: 24px auto; max-width: 620px;
+        font-size: 1.05rem; color: #F59E0B; font-style: italic;
+        font-weight: 600; line-height: 1.7; text-align: left;
+    }
+
+    .defesa-stage {
+        background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 18px; padding: 36px 40px; margin-bottom: 28px;
+    }
+    .defesa-stage-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .defesa-stage-num {
+        font-size: 0.7rem; font-weight: 700;
+        color: rgba(245,158,11,0.6); letter-spacing: 2px; text-transform: uppercase;
+    }
+    .defesa-stage-title { font-size: 1.1rem; font-weight: 700; color: #F59E0B; }
+    .defesa-text { font-size: 0.95rem; color: rgba(255,255,255,0.65); line-height: 1.85; margin-bottom: 22px; }
+
+    .checklist-box {
+        background: rgba(16,185,129,0.04); border: 1px solid rgba(16,185,129,0.20);
+        border-radius: 16px; padding: 32px 36px; margin: 28px 0;
+    }
+    .checklist-title {
+        font-size: 1rem; font-weight: 700; color: #10b981;
+        margin-bottom: 20px; letter-spacing: 0.5px;
+    }
+    .checklist-item {
+        display: flex; align-items: flex-start; gap: 12px;
+        padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+        font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.6;
+    }
+    .checklist-item:last-child { border-bottom: none; }
+    .checklist-check {
+        width: 20px; height: 20px; border: 2px solid rgba(16,185,129,0.40);
+        border-radius: 4px; flex-shrink: 0; margin-top: 2px;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .checklist-item strong { color: rgba(255,255,255,0.85); }
+
+    .conflito-grid {
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+        gap: 16px; margin: 24px 0;
+    }
+    .conflito-card {
+        background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.18);
+        border-radius: 14px; padding: 22px 20px;
+    }
+    .conflito-card-agente { font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(239,68,68,0.65); margin-bottom: 8px; }
+    .conflito-card-quer { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .conflito-card-versus { font-size: 0.75rem; color: rgba(255,255,255,0.30); margin-bottom: 6px; }
+    .conflito-card-investidor { font-size: 0.88rem; color: rgba(16,185,129,0.80); }
+
+    @media (max-width: 768px) {
+        .defesa-hook { padding: 36px 24px; }
+        .defesa-stage { padding: 28px 22px; }
+        .checklist-box { padding: 24px 20px; }
+    }
+    </style>
+</head>
+<body>
+    <section id="invlab-carousel-container"></section>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+            </div>
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Início</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">📚 Primeiros<br>Passos</button>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-fixa'">📊 Renda<br>Fixa <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="poupanca.html">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-variavel'">📈 Renda<br>Variável <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='etfs.html'" style="cursor:pointer;">
+                                <span class="category-name">💵 ETFs</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-etfs">
+                                <li><a href="#">📊 Simulador de Indexação</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='fiis.html'" style="cursor:pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-fiis">
+                                <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='acoes.html'" style="cursor:pointer;">
+                                <span class="category-name">📈 Ações</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-acoes">
+                                <li><a href="#">📊 Simulador de Dividendos</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <button class="tab-btn" onclick="window.location.href='cripto.html'">🌐 Economia<br>Digital</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#outros-investimentos'">🧬 Instrumentos<br>Avançados</button>
+                <button class="tab-btn active" onclick="window.location.href='defesa-investidor.html'">🛡 Defesa do<br>Investidor</button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="../index.html">🏠 Início</a></li>
+            <li><a href="../index.html#primeiros-passos">📚 Primeiros Passos</a></li>
+            <li><a href="../index.html#renda-fixa">📊 Renda Fixa</a></li>
+            <li><a href="../index.html#renda-variavel">📈 Renda Variável</a></li>
+            <li><a href="cripto.html">🌐 Economia Digital</a></li>
+            <li><a href="../index.html#outros-investimentos">🧬 Instrumentos Avançados</a></li>
+            <li><a href="defesa-investidor.html">🛡 Defesa do Investidor</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <div class="invlab-lab-container">
+
+            <!-- TÍTULO DA SEÇÃO -->
+            <div style="padding-top: 96px; padding-bottom: 8px; text-align: center;">
+                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; font-weight: 800; color: #D4AF37; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em; line-height: 1.2;">🛡 Defesa do Investidor</h2>
+                <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(16, 185, 129, 0.65); text-align: center; line-height: 1.8; margin-bottom: 14px; max-width: 860px; margin-left: auto; margin-right: auto;">Aprenda a identificar custos invisíveis, conflitos de interesse e decisões que podem comprometer seu patrimônio no longo prazo.</p>
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: rgba(255, 255, 255, 0.38); text-align: center; line-height: 1.8; margin-bottom: 0; max-width: 860px; margin-left: auto; margin-right: auto;">Nenhum produto financeiro é bom ou ruim por si só. O resultado depende de para quem é indicado, quanto custa e se resolve o problema certo.</p>
+            </div>
+
+            <!-- HOOK -->
+            <div class="defesa-hook">
+                <div class="defesa-hook-badge">🛡 Laboratório de Defesa do Investidor</div>
+                <h2 class="defesa-hook-title">O sistema não é seu inimigo.<br>A decisão desinformada sim.</h2>
+                <p style="font-size:1rem; color:rgba(255,255,255,0.50); max-width:560px; margin:0 auto 20px; line-height:1.75;">
+                    Bancos, corretoras e gestores não são vilões. Mas os objetivos deles nem sempre coincidem com os seus.
+                    Entender essa diferença é o que separa o investidor protegido do investidor explorado.
+                </p>
+                <div class="defesa-hook-destaque">
+                    "Só quem entende as regras do jogo consegue jogar a seu favor."
+                </div>
+            </div>
+
+            <!-- CONFLITOS DE INTERESSE -->
+            <div class="inv-category">
+                <h3 class="inv-category-title">⚖️ Os conflitos que ninguém explica</h3>
+                <p class="inv-category-subtitle">Cada agente do sistema financeiro tem seus próprios objetivos. Conhecê-los é o primeiro passo para tomar decisões mais conscientes.</p>
+                <div class="conflito-grid">
+                    <div class="conflito-card">
+                        <div class="conflito-card-agente">🏦 Banco</div>
+                        <div class="conflito-card-quer">Quer vender produtos</div>
+                        <div class="conflito-card-versus">vs.</div>
+                        <div class="conflito-card-investidor">Você quer rentabilidade</div>
+                    </div>
+                    <div class="conflito-card">
+                        <div class="conflito-card-agente">📊 Corretora</div>
+                        <div class="conflito-card-quer">Quer movimentação</div>
+                        <div class="conflito-card-versus">vs.</div>
+                        <div class="conflito-card-investidor">Você precisa de disciplina</div>
+                    </div>
+                    <div class="conflito-card">
+                        <div class="conflito-card-agente">💼 Gestor de Fundo</div>
+                        <div class="conflito-card-quer">Recebe taxa sobre patrimônio</div>
+                        <div class="conflito-card-versus">vs.</div>
+                        <div class="conflito-card-investidor">Você quer retorno líquido</div>
+                    </div>
+                    <div class="conflito-card">
+                        <div class="conflito-card-agente">👔 Gerente</div>
+                        <div class="conflito-card-quer">Tem meta de vendas</div>
+                        <div class="conflito-card-versus">vs.</div>
+                        <div class="conflito-card-investidor">Você quer o melhor produto</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PREVIDÊNCIA PRIVADA -->
+            <div class="inv-category">
+                <h3 class="inv-category-title">🏦 Previdência Privada</h3>
+                <p class="inv-category-subtitle">O problema não é o PGBL nem o VGBL. O problema é vender o produto errado para a pessoa errada — ou cobrar taxas que consomem todo o benefício fiscal.</p>
+                <div class="inv-grid">
+                    <div class="inv-card previdencia">
+                        <div class="inv-card-icon">🧾</div>
+                        <h4 class="inv-card-title">PGBL — Para quem realmente serve</h4>
+                        <p class="inv-card-description">Deduz até 12% da renda bruta no IR — mas só funciona para quem faz declaração completa. Se você usa declaração simplificada, o PGBL não tem vantagem fiscal.</p>
+                    </div>
+                    <div class="inv-card previdencia">
+                        <div class="inv-card-icon">🧾</div>
+                        <h4 class="inv-card-title">VGBL — O mais vendido, nem sempre o mais adequado</h4>
+                        <p class="inv-card-description">IR só sobre o rendimento no resgate. Ideal para declaração simplificada. Frequentemente vendido para quem deveria ter PGBL — e vice-versa.</p>
+                    </div>
+                    <div class="inv-card previdencia">
+                        <div class="inv-card-icon">⚠️</div>
+                        <h4 class="inv-card-title">Taxa de carregamento</h4>
+                        <p class="inv-card-description">Cobrada sobre cada aporte — pode chegar a 5%. Em um fundo com taxa de 3% ao ano de administração + carregamento, o benefício fiscal some. Compare sempre antes de contratar.</p>
+                    </div>
+                    <div class="inv-card previdencia">
+                        <div class="inv-card-icon">🔄</div>
+                        <h4 class="inv-card-title">Portabilidade — seu direito ignorado</h4>
+                        <p class="inv-card-description">Você pode transferir sua previdência para outro plano sem tributação. Se seu fundo cobra taxas altas, portabilidade é a saída — mas poucos gerentes vão te contar isso.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CRÉDITO E EMPRÉSTIMOS -->
+            <div class="inv-category">
+                <h3 class="inv-category-title">💳 Crédito e Empréstimos</h3>
+                <p class="inv-category-subtitle">Crédito não é ruim. Crédito caro e mal escolhido, sim. Entenda o custo real de cada linha antes de assinar.</p>
+                <div class="inv-grid">
+                    <div class="inv-card alternativos">
+                        <div class="inv-card-icon">📋</div>
+                        <h4 class="inv-card-title">O que é o CET</h4>
+                        <p class="inv-card-description">Custo Efetivo Total — inclui juros, seguros, taxas administrativas e IOF. É o número real que você paga. Sempre compare CET, nunca só a taxa de juros anunciada.</p>
+                    </div>
+                    <div class="inv-card alternativos">
+                        <div class="inv-card-icon">✅</div>
+                        <h4 class="inv-card-title">Consignado — quando faz sentido</h4>
+                        <p class="inv-card-description">Desconto direto na folha reduz risco para o banco — por isso tem juros menores. Faz sentido para reorganizar dívidas mais caras. Não faz sentido como solução permanente ou por impulso.</p>
+                    </div>
+                    <div class="inv-card alternativos">
+                        <div class="inv-card-icon">🚨</div>
+                        <h4 class="inv-card-title">Rotativo do cartão — a armadilha mais cara</h4>
+                        <p class="inv-card-description">Pode superar 400% ao ano. Pagar o mínimo da fatura é entrar numa espiral. Nenhum investimento rende o suficiente para compensar essa taxa. Quite antes de investir.</p>
+                    </div>
+                    <div class="inv-card alternativos">
+                        <div class="inv-card-icon">🏗️</div>
+                        <h4 class="inv-card-title">Financiamento imobiliário</h4>
+                        <p class="inv-card-description">SAC ou Price? Com ou sem FGTS? A diferença no custo total pode ser de dezenas de milhares de reais. Simule diferentes cenários antes de escolher.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRODUTOS EMPURRADOS -->
+            <div class="inv-category">
+                <h3 class="inv-category-title">⚠️ Produtos que são vendidos, não escolhidos</h3>
+                <p class="inv-category-subtitle">Alguns produtos existem para remunerar quem vende, não quem compra. Conhecê-los não significa evitá-los sempre — significa avaliá-los com consciência.</p>
+                <div class="inv-grid">
+                    <div class="inv-card ganho">
+                        <div class="inv-card-badge ganho">🎰 Atenção</div>
+                        <h4 class="inv-card-title">Título de Capitalização</h4>
+                        <p class="inv-card-description">Não é investimento — é uma poupança com sorteio. Rentabilidade negativa garantida. Muito lucrativo para quem vende. Raramente vantajoso para quem compra.</p>
+                    </div>
+                    <div class="inv-card ganho">
+                        <div class="inv-card-badge ganho">📦 Atenção</div>
+                        <h4 class="inv-card-title">COE — Cuidado com a embalagem</h4>
+                        <p class="inv-card-description">Certificado de Operações Estruturadas. Pode ser interessante — mas a maioria é vendida com proteção de capital que esconde rentabilidade baixa e prazo longo. Leia o prospecto.</p>
+                    </div>
+                    <div class="inv-card ganho">
+                        <div class="inv-card-badge ganho">💼 Atenção</div>
+                        <h4 class="inv-card-title">Fundos de taxa alta</h4>
+                        <p class="inv-card-description">Um fundo com 2,5% de taxa de administração precisa superar o benchmark em 2,5% todo ano só para empatar. A maioria não consegue. ETFs de índice costumam ganhar no longo prazo.</p>
+                    </div>
+                    <div class="inv-card ganho">
+                        <div class="inv-card-badge ganho">🛡 Atenção</div>
+                        <h4 class="inv-card-title">Seguros desnecessários</h4>
+                        <p class="inv-card-description">Seguro prestamista, seguro de cartão, seguro de desemprego embutido. Cada um parece barato individualmente — somados, consomem parte significativa da sua renda sem cobertura proporcional.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ARMADILHAS -->
+            <div class="inv-category">
+                <h3 class="inv-category-title">🚨 Sinais de alerta — reconheça antes de assinar</h3>
+                <p class="inv-category-subtitle">Certas frases e práticas são red flags universais no mercado financeiro. Aprenda a identificá-las.</p>
+                <div class="inv-grid">
+                    <div class="inv-card perigo">
+                        <div class="inv-card-badge perigo">🚩 Red Flag</div>
+                        <h4 class="inv-card-title">"Rendimento garantido acima do mercado"</h4>
+                        <p class="inv-card-description">Nenhum investimento legal garante retorno fixo alto sem risco. Se soa bom demais, é porque tem risco escondido — ou fraude.</p>
+                    </div>
+                    <div class="inv-card perigo">
+                        <div class="inv-card-badge perigo">🚩 Red Flag</div>
+                        <h4 class="inv-card-title">"Oferta exclusiva, só até hoje"</h4>
+                        <p class="inv-card-description">Urgência artificial é técnica de venda. Decisões financeiras boas não desaparecem amanhã. Se precisar decidir agora, a resposta é não.</p>
+                    </div>
+                    <div class="inv-card perigo">
+                        <div class="inv-card-badge perigo">🚩 Red Flag</div>
+                        <h4 class="inv-card-title">"Sem risco nenhum"</h4>
+                        <p class="inv-card-description">Todo investimento tem algum risco — de crédito, mercado, liquidez ou inflação. "Sem risco" significa que o risco está escondido ou que você não entendeu o produto.</p>
+                    </div>
+                    <div class="inv-card perigo">
+                        <div class="inv-card-badge perigo">🚩 Red Flag</div>
+                        <h4 class="inv-card-title">"Todo mundo está investindo nisso"</h4>
+                        <p class="inv-card-description">Argumento de manada. Popularidade não valida um investimento. Bolhas são feitas exatamente assim — todo mundo compra, o último paga o preço.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHECKLIST -->
+            <div class="defesa-stage">
+                <div class="defesa-stage-header">
+                    <span class="defesa-stage-num">Ferramenta</span>
+                    <span class="defesa-stage-title">✅ Antes de assinar qualquer contrato financeiro</span>
+                </div>
+                <p class="defesa-text">Use este checklist para qualquer produto — investimento, empréstimo, seguro ou previdência. Se você não conseguir responder a maioria, peça tempo para pesquisar antes de assinar.</p>
+                <div class="checklist-box">
+                    <div class="checklist-title">Perguntas que todo investidor deve fazer</div>
+                    <div class="checklist-item">
+                        <div class="checklist-check"></div>
+                        <span><strong>Quanto custa?</strong> Taxa de administração, carregamento, saída, IOF, IR — qual é o custo total real?</span>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checklist-check"></div>
+                        <span><strong>Existe liquidez?</strong> Quando posso resgatar? Há carência? Qual a penalidade por sair antes do prazo?</span>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checklist-check"></div>
+                        <span><strong>Existe alternativa?</strong> Há um produto similar com custo menor ou condição melhor em outra instituição?</span>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checklist-check"></div>
+                        <span><strong>Quem ganha dinheiro com isso?</strong> Qual é a comissão de quem está vendendo? Esse incentivo afeta a recomendação?</span>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checklist-check"></div>
+                        <span><strong>Qual o custo total?</strong> Se for um empréstimo: quanto pago no final? Se for investimento: quanto fico com retorno líquido?</span>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checklist-check"></div>
+                        <span><strong>Esse produto resolve meu problema?</strong> Ou é o produto que o vendedor precisa colocar esse mês?</span>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checklist-check"></div>
+                        <span><strong>Eu entendi completamente?</strong> Se houver qualquer parte que não ficou clara, não assine até entender.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AVISO EDITORIAL -->
+            <div class="outro-aviso-box">
+                <div class="outro-aviso-icon">🛡</div>
+                <h3>Posição editorial do INVLAB</h3>
+                <p>
+                    O INVLAB <strong>não combate instituições financeiras</strong>. Bancos, corretoras e gestores cumprem um papel legítimo no sistema.
+                </p>
+                <p style="margin-bottom: 0;">
+                    O que combatemos é a <strong>decisão mal informada</strong> — aquela tomada sem entender custos, conflitos e alternativas. Um cliente bem informado é melhor para o sistema inteiro, inclusive para as instituições sérias.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer style="background: rgba(13, 13, 13, 0.97); border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+        <div class="content-wrapper-wide">
+            <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+                <div>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
+                    <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">🧭 Guia do INVLAB →</a>
+                </div>
+                <div>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Laboratório Ações</a></li>
+                        <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔬 Laboratório ETFs</a></li>
+                        <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 Laboratório FIIs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Economia Digital</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌐 Economia Digital</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Defesa do Investidor</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Ferramentas</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 Simulador CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Simulador Tesouro</a></li>
+                        <li><a href="calculadora.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🧮 Juros Compostos</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
+                <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                    ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
+                </p>
+                <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                    © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/script.js"></script>
+    <script defer src="../assets/js/bcb-api.js"></script>
+    <script defer src="../assets/js/invlab-carrossel-renda-variavel.js"></script>
+</body>
+</html>
