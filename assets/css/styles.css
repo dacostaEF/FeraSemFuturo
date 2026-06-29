@@ -2297,10 +2297,16 @@ main > *::before,
 .content-wrapper-wide {
     max-width: 1200px; /* PADRONIZADO: 1100px → 1200px (consistente com todo o site) */
     margin: 0 auto;
-    padding: 8px 20px 0; /* ULTRA COMPACTO: 15px → 8px (50% redução extra) */
+    padding: 8px 32px 0;
     border: none !important; /* FORÇADO: sem bordas */
     outline: none !important; /* FORÇADO: sem outline */
     box-shadow: none !important; /* FORÇADO: sem sombras */
+}
+
+/* Container padrão para páginas educacionais/laboratórios */
+.invlab-lab-container {
+    width: min(100% - 64px, 1160px);
+    margin-inline: auto;
 }
 
 /* Seção Educacional */
