@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previdência sem Armadilhas — PGBL, VGBL, Taxas, Tributação e Conversão em Renda | INVLAB</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="description" content="Entenda quando PGBL, VGBL e planos corporativos fazem sentido — e quando taxas, impostos, carência e regras de conversão em renda podem comprometer sua aposentadoria. INVLAB.">
+
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+
+    <style>
+    /* ================================================================
+       PREVIDÊNCIA SEM ARMADILHAS — ESTILOS EXCLUSIVOS
+       ================================================================ */
+
+    .prev-hook {
+        background: linear-gradient(135deg, rgba(245,158,11,0.07) 0%, rgba(239,68,68,0.04) 100%);
+        border: 1px solid rgba(245,158,11,0.25);
+        border-radius: 20px; padding: 52px 40px;
+        text-align: center; margin: 48px 0 36px;
+        position: relative; overflow: hidden;
+    }
+    .prev-hook::before {
+        content: ''; position: absolute; top: -60%; left: -50%;
+        width: 200%; height: 200%;
+        background: radial-gradient(ellipse at center, rgba(245,158,11,0.04) 0%, transparent 60%);
+        pointer-events: none;
+    }
+    .prev-hook-badge {
+        display: inline-block;
+        background: rgba(245,158,11,0.10); border: 1px solid rgba(245,158,11,0.30);
+        color: #F59E0B; font-size: 0.72rem; font-weight: 700;
+        letter-spacing: 2.5px; text-transform: uppercase;
+        padding: 6px 18px; border-radius: 20px; margin-bottom: 28px;
+    }
+    .prev-hook-frase {
+        background: rgba(245,158,11,0.07); border-left: 3px solid #F59E0B;
+        border-radius: 0 12px 12px 0; padding: 18px 24px;
+        margin: 24px auto; max-width: 640px;
+        font-size: 1.02rem; color: #F59E0B; font-style: italic;
+        font-weight: 600; line-height: 1.7; text-align: left;
+    }
+
+    /* Seções de conteúdo */
+    .prev-section {
+        background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 20px; padding: 44px 40px; margin-bottom: 28px;
+    }
+    .prev-section-tag {
+        font-size: 0.68rem; font-weight: 700; letter-spacing: 2.5px;
+        text-transform: uppercase; color: rgba(245,158,11,0.55); margin-bottom: 10px;
+    }
+    .prev-section-title {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 1.4rem; font-weight: 700; color: #D4AF37;
+        margin-bottom: 16px; line-height: 1.3;
+    }
+    .prev-text {
+        font-size: 0.95rem; color: rgba(255,255,255,0.62); line-height: 1.88; margin-bottom: 22px;
+    }
+    .prev-text strong { color: rgba(255,255,255,0.88); }
+    .prev-frase-invlab {
+        background: rgba(16,185,129,0.06); border-left: 3px solid rgba(16,185,129,0.50);
+        border-radius: 0 10px 10px 0; padding: 16px 22px; margin: 20px 0;
+        font-size: 0.93rem; color: rgba(16,185,129,0.85); font-style: italic;
+        font-weight: 500; line-height: 1.7;
+    }
+    .prev-frase-invlab::before { content: '💬 INVLAB — '; font-style: normal; font-weight: 700; }
+
+    /* Grid comparativo PGBL/VGBL */
+    .prev-compare-grid {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 24px 0;
+    }
+    .prev-compare-card {
+        border-radius: 14px; padding: 28px 24px;
+    }
+    .prev-compare-card.pgbl {
+        background: rgba(129,140,248,0.06); border: 1px solid rgba(129,140,248,0.25);
+    }
+    .prev-compare-card.vgbl {
+        background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.25);
+    }
+    .prev-compare-card h4 {
+        font-size: 1.05rem; font-weight: 700; margin-bottom: 14px;
+    }
+    .prev-compare-card.pgbl h4 { color: #818CF8; }
+    .prev-compare-card.vgbl h4 { color: #10b981; }
+    .prev-compare-item {
+        font-size: 0.88rem; color: rgba(255,255,255,0.62); line-height: 1.6;
+        padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .prev-compare-item:last-child { border-bottom: none; }
+    .prev-compare-item strong { color: rgba(255,255,255,0.85); }
+
+    /* Tabela de alíquotas */
+    .aliquota-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    .aliquota-table th {
+        background: rgba(245,158,11,0.10); color: #F59E0B;
+        font-size: 0.78rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+        padding: 12px 16px; text-align: left; border-bottom: 1px solid rgba(245,158,11,0.20);
+    }
+    .aliquota-table td {
+        padding: 11px 16px; font-size: 0.88rem; color: rgba(255,255,255,0.65);
+        border-bottom: 1px solid rgba(255,255,255,0.05); line-height: 1.5;
+    }
+    .aliquota-table tr:last-child td { border-bottom: none; }
+    .aliquota-table td.aliq-anos { color: rgba(255,255,255,0.85); font-weight: 600; }
+    .aliquota-table td.aliq-alto { color: #ef4444; font-weight: 700; }
+    .aliquota-table td.aliq-medio { color: #F59E0B; font-weight: 700; }
+    .aliquota-table td.aliq-baixo { color: #10b981; font-weight: 700; }
+    .aliquota-table tr.aliq-destaque td { background: rgba(16,185,129,0.05); }
+
+    /* Grid de taxas */
+    .taxa-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 16px; margin: 24px 0; }
+    .taxa-card {
+        border-radius: 14px; padding: 22px 20px;
+        background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.18);
+    }
+    .taxa-card-nome { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(239,68,68,0.65); margin-bottom: 8px; }
+    .taxa-card-valor { font-size: 1.3rem; font-weight: 800; color: #ef4444; margin-bottom: 8px; }
+    .taxa-card-desc { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+    /* Grid de modalidades de renda */
+    .renda-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 16px; margin: 24px 0; }
+    .renda-card { border-radius: 14px; padding: 24px 20px; }
+    .renda-card.simples { background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.22); }
+    .renda-card.prazo { background: rgba(245,158,11,0.05); border: 1px solid rgba(245,158,11,0.22); }
+    .renda-card.reversivel { background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.22); }
+    .renda-card.certa { background: rgba(129,140,248,0.05); border: 1px solid rgba(129,140,248,0.22); }
+    .renda-card-tipo { font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
+    .renda-card.simples .renda-card-tipo { color: rgba(239,68,68,0.70); }
+    .renda-card.prazo .renda-card-tipo { color: rgba(245,158,11,0.70); }
+    .renda-card.reversivel .renda-card-tipo { color: rgba(16,185,129,0.70); }
+    .renda-card.certa .renda-card-tipo { color: rgba(129,140,248,0.70); }
+    .renda-card-nome { font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .renda-card-desc { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.65; }
+    .renda-card-alerta { font-size: 0.80rem; font-weight: 600; margin-top: 10px; padding: 8px 10px; border-radius: 8px; line-height: 1.5; }
+    .renda-card.simples .renda-card-alerta { background: rgba(239,68,68,0.10); color: rgba(239,68,68,0.80); }
+    .renda-card.prazo .renda-card-alerta { background: rgba(245,158,11,0.10); color: rgba(245,158,11,0.80); }
+    .renda-card.reversivel .renda-card-alerta { background: rgba(16,185,129,0.10); color: rgba(16,185,129,0.80); }
+    .renda-card.certa .renda-card-alerta { background: rgba(129,140,248,0.10); color: rgba(129,140,248,0.80); }
+
+    /* Comparador visual */
+    .comparador-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.85rem; }
+    .comparador-table th {
+        padding: 14px 16px; text-align: center; font-size: 0.75rem;
+        font-weight: 700; letter-spacing: 0.5px; border-bottom: 2px solid rgba(255,255,255,0.08);
+    }
+    .comparador-table th:first-child { text-align: left; }
+    .comparador-table th.col-ruim { color: #ef4444; background: rgba(239,68,68,0.05); }
+    .comparador-table th.col-ok { color: #F59E0B; background: rgba(245,158,11,0.05); }
+    .comparador-table th.col-bom { color: #10b981; background: rgba(16,185,129,0.05); }
+    .comparador-table th.col-bom2 { color: #818CF8; background: rgba(129,140,248,0.05); }
+    .comparador-table td {
+        padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.04);
+        text-align: center; color: rgba(255,255,255,0.60); vertical-align: top; line-height: 1.5;
+    }
+    .comparador-table td:first-child {
+        text-align: left; font-weight: 600; color: rgba(255,255,255,0.80); font-size: 0.82rem;
+    }
+    .comparador-table tr:last-child td { border-bottom: none; }
+    .comparador-table td.ruim { color: rgba(239,68,68,0.80); }
+    .comparador-table td.ok { color: rgba(245,158,11,0.80); }
+    .comparador-table td.bom { color: rgba(16,185,129,0.80); }
+
+    /* Checklist */
+    .prev-checklist { margin: 24px 0; }
+    .prev-check-item {
+        display: flex; align-items: flex-start; gap: 14px;
+        padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+        font-size: 0.90rem; color: rgba(255,255,255,0.65); line-height: 1.65;
+    }
+    .prev-check-item:last-child { border-bottom: none; }
+    .prev-check-num {
+        width: 26px; height: 26px; border: 2px solid rgba(245,158,11,0.35);
+        border-radius: 6px; flex-shrink: 0; display: flex; align-items: center;
+        justify-content: center; font-size: 0.72rem; font-weight: 700;
+        color: rgba(245,158,11,0.60); margin-top: 1px;
+    }
+    .prev-check-item strong { color: rgba(255,255,255,0.88); }
+
+    /* Alerta informativo */
+    .prev-alerta {
+        background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.22);
+        border-radius: 14px; padding: 20px 24px; margin: 20px 0;
+        font-size: 0.90rem; color: rgba(255,255,255,0.65); line-height: 1.75;
+    }
+    .prev-alerta strong { color: #ef4444; }
+    .prev-alerta-title { font-size: 0.78rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(239,68,68,0.65); margin-bottom: 8px; }
+
+    /* Destaque verde */
+    .prev-destaque-verde {
+        background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.20);
+        border-radius: 14px; padding: 20px 24px; margin: 20px 0;
+        font-size: 0.90rem; color: rgba(255,255,255,0.65); line-height: 1.75;
+    }
+    .prev-destaque-verde strong { color: #10b981; }
+
+    /* Breadcrumb */
+    .prev-breadcrumb {
+        font-size: 0.80rem; color: rgba(255,255,255,0.30);
+        padding: 20px 0 0; display: flex; align-items: center; gap: 8px;
+    }
+    .prev-breadcrumb a { color: rgba(245,158,11,0.60); text-decoration: none; }
+    .prev-breadcrumb a:hover { color: #F59E0B; }
+    .prev-breadcrumb span { color: rgba(255,255,255,0.20); }
+
+    @media (max-width: 768px) {
+        .prev-hook { padding: 36px 22px; }
+        .prev-section { padding: 32px 22px; }
+        .prev-compare-grid { grid-template-columns: 1fr; }
+        .aliquota-table th, .aliquota-table td { padding: 10px 12px; }
+        .comparador-table { font-size: 0.78rem; }
+        .comparador-table th, .comparador-table td { padding: 10px 10px; }
+    }
+    </style>
+</head>
+<body>
+    <section id="invlab-carousel-container"></section>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+            </div>
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Início</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">📚 Primeiros<br>Passos</button>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-fixa'">📊 Renda<br>Fixa <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="poupanca.html">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-variavel'">📈 Renda<br>Variável <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='etfs.html'" style="cursor:pointer;">
+                                <span class="category-name">💵 ETFs</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='fiis.html'" style="cursor:pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='acoes.html'" style="cursor:pointer;">
+                                <span class="category-name">📈 Ações</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <button class="tab-btn" onclick="window.location.href='cripto.html'">🌐 Economia<br>Digital</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#outros-investimentos'">🧬 Instrumentos<br>Avançados</button>
+                <button class="tab-btn active" onclick="window.location.href='defesa-investidor.html'">🛡 Defesa do<br>Investidor</button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="invlab-lab-container">
+
+            <!-- BREADCRUMB -->
+            <div class="prev-breadcrumb">
+                <a href="../index.html">Início</a>
+                <span>›</span>
+                <a href="defesa-investidor.html">Defesa do Investidor</a>
+                <span>›</span>
+                <span style="color: rgba(255,255,255,0.55);">Previdência sem Armadilhas</span>
+            </div>
+
+            <!-- TÍTULO DA SEÇÃO -->
+            <div style="padding-top: 48px; padding-bottom: 8px; text-align: center;">
+                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.4rem; font-weight: 800; color: #D4AF37; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em; line-height: 1.2;">🎯 Previdência sem Armadilhas</h2>
+                <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(16, 185, 129, 0.65); text-align: center; line-height: 1.8; margin-bottom: 14px; max-width: 860px; margin-left: auto; margin-right: auto;">Entenda quando PGBL, VGBL e planos corporativos fazem sentido — e quando taxas, impostos, carência e regras de conversão em renda podem comprometer sua aposentadoria.</p>
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: rgba(255, 255, 255, 0.38); text-align: center; line-height: 1.8; margin-bottom: 0; max-width: 860px; margin-left: auto; margin-right: auto;">Previdência privada pode ser uma ferramenta legítima de planejamento. Mas, mal escolhida, pode se tornar um dos produtos mais caros da vida financeira do investidor.</p>
+            </div>
+
+            <!-- HOOK -->
+            <div class="prev-hook">
+                <div class="prev-hook-badge">🎯 Laboratório — Previdência Privada</div>
+                <h2 style="font-size: clamp(1.3rem,3vw,1.9rem); font-weight: 700; color: #fff; line-height: 1.5; margin-bottom: 18px; max-width: 680px; margin-left: auto; margin-right: auto;">Previdência privada não é ruim.<br>É <em>mal explicada</em>.</h2>
+                <p style="font-size: 1rem; color: rgba(255,255,255,0.50); max-width: 580px; margin: 0 auto 20px; line-height: 1.80;">
+                    Os planos de previdência têm regras complexas — tributação, carência, conversão em renda, taxas que não aparecem no extrato. Conhecer essas regras é o que separa o investidor bem posicionado do investidor surpreendido lá na frente.
+                </p>
+                <div class="prev-hook-frase">
+                    O maior risco da previdência privada não é o mercado. É contratar sem ler as letras pequenas do contrato.
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 1 — PGBL x VGBL
+                 ====================================================== -->
+            <div class="prev-section">
+                <div class="prev-section-tag">Bloco 01 — Produto</div>
+                <h3 class="prev-section-title">PGBL × VGBL — para quem cada um serve</h3>
+                <p class="prev-text">
+                    A diferença entre PGBL e VGBL não é apenas técnica — ela define quanto imposto você vai pagar no futuro.
+                    Escolher o produto errado pode anular completamente o benefício fiscal que motivou a contratação.
+                </p>
+
+                <div class="prev-compare-grid">
+                    <div class="prev-compare-card pgbl">
+                        <h4>🧾 PGBL</h4>
+                        <div class="prev-compare-item"><strong>IR:</strong> incide sobre o valor total resgatado — aporte + rendimentos</div>
+                        <div class="prev-compare-item"><strong>Benefício:</strong> deduz até 12% da renda bruta tributável na declaração completa</div>
+                        <div class="prev-compare-item"><strong>Para quem:</strong> declara IR pelo modelo completo com renda tributável relevante</div>
+                        <div class="prev-compare-item"><strong>Efeito real:</strong> diferimento do imposto — você adia o pagamento, não elimina</div>
+                    </div>
+                    <div class="prev-compare-card vgbl">
+                        <h4>🧾 VGBL</h4>
+                        <div class="prev-compare-item"><strong>IR:</strong> incide apenas sobre os rendimentos no resgate</div>
+                        <div class="prev-compare-item"><strong>Benefício:</strong> sem dedução fiscal, mas IR menor na saída</div>
+                        <div class="prev-compare-item"><strong>Para quem:</strong> declara IR pelo modelo simplificado ou isento</div>
+                        <div class="prev-compare-item"><strong>Efeito real:</strong> eficiência tributária no resgate, sem benefício de entrada</div>
+                    </div>
+                </div>
+
+                <div class="prev-alerta">
+                    <div class="prev-alerta-title">⚠️ Erro frequente</div>
+                    Contratar PGBL sem declarar pelo modelo completo é o erro mais comum na previdência privada.
+                    Sem a dedução, o investidor paga IR sobre 100% do valor resgatado — aporte e rendimento —
+                    enquanto no VGBL pagaria apenas sobre os rendimentos. <strong>O resultado é um imposto significativamente maior sem nenhum benefício de entrada.</strong>
+                </div>
+
+                <div class="prev-frase-invlab">
+                    PGBL não é "melhor" que VGBL. Ele só faz sentido quando o benefício fiscal da dedução é real, usado corretamente e supera os custos do plano.
+                </div>
+
+                <div class="prev-destaque-verde">
+                    <strong>Como saber qual escolher:</strong> se você declara IR pelo modelo completo e tem renda tributável que gera imposto a pagar, o PGBL pode ser vantajoso.
+                    Se você declara pelo simplificado, é isento ou não tem renda tributável suficiente — o VGBL é o caminho correto.
+                    Em caso de dúvida, consulte um contador antes de contratar.
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 2 — TAXAS
+                 ====================================================== -->
+            <div class="prev-section">
+                <div class="prev-section-tag">Bloco 02 — Custos</div>
+                <h3 class="prev-section-title">Taxas — o que reduz seu saldo antes mesmo de investir</h3>
+                <p class="prev-text">
+                    Um plano de previdência pode ter até três camadas de custo simultâneas.
+                    Cada uma delas corrói a rentabilidade de forma silenciosa — raramente aparece destacada no momento da contratação.
+                </p>
+
+                <div class="taxa-grid">
+                    <div class="taxa-card">
+                        <div class="taxa-card-nome">Taxa de Carregamento</div>
+                        <div class="taxa-card-valor">Até 5%</div>
+                        <div class="taxa-card-desc">Cobrada sobre cada aporte. Se você deposita R$ 1.000 com carregamento de 3%, apenas R$ 970 entram no investimento. Os outros R$ 30 ficam com a seguradora — antes de qualquer rendimento.</div>
+                    </div>
+                    <div class="taxa-card">
+                        <div class="taxa-card-nome">Taxa de Administração</div>
+                        <div class="taxa-card-valor">0,5% a 3% a.a.</div>
+                        <div class="taxa-card-desc">Cobrada anualmente sobre o patrimônio total. Fundos de banco tradicional costumam cobrar entre 2% e 3% ao ano. Gestoras independentes em plataformas abertas: entre 0,5% e 1%. A diferença de 2 pontos percentuais ao ano, em 20 anos, é enorme.</div>
+                    </div>
+                    <div class="taxa-card">
+                        <div class="taxa-card-nome">Taxa de Saída</div>
+                        <div class="taxa-card-valor">Variável</div>
+                        <div class="taxa-card-desc">Cobrada no resgate antecipado em alguns planos. Uma camada adicional que penaliza quem precisa resgatar antes do prazo esperado.</div>
+                    </div>
+                </div>
+
+                <div class="prev-alerta">
+                    <div class="prev-alerta-title">⚠️ O efeito composto das taxas</div>
+                    Um fundo de previdência com <strong>2% de taxa de administração + 2% de taxa de carregamento</strong> precisa superar o benchmark em
+                    aproximadamente 4 pontos percentuais ao ano só para empatar com um produto de custo zero. Isso é matematicamente difícil de sustentar no longo prazo.
+                    Compare sempre a rentabilidade <em>líquida de taxas</em> — não a rentabilidade bruta anunciada.
+                </div>
+
+                <div class="prev-frase-invlab">
+                    Antes de perguntar quanto o plano rendeu, pergunte quanto do seu dinheiro realmente entrou no investimento — e quanto saiu em taxas antes disso.
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 3 — TRIBUTAÇÃO
+                 ====================================================== -->
+            <div class="prev-section">
+                <div class="prev-section-tag">Bloco 03 — Imposto de Renda</div>
+                <h3 class="prev-section-title">Tributação — a tabela regressiva não começa em 10%</h3>
+                <p class="prev-text">
+                    A tabela regressiva é frequentemente apresentada como "paga só 10% de IR". Isso é verdade — mas apenas para quem permanece por mais de 10 anos.
+                    Nos primeiros anos, a alíquota começa em 35%. E um detalhe crítico: <strong>cada aporte tem sua própria contagem de tempo</strong>.
+                    Aportes recentes são mais tributados do que aportes antigos, mesmo dentro do mesmo plano.
+                </p>
+
+                <table class="aliquota-table">
+                    <tr>
+                        <th>Prazo de permanência</th>
+                        <th>Tabela Regressiva</th>
+                        <th>Observação</th>
+                    </tr>
+                    <tr>
+                        <td class="aliq-anos">Até 2 anos</td>
+                        <td class="aliq-alto">35%</td>
+                        <td>Alíquota mais alta — penaliza resgates no início</td>
+                    </tr>
+                    <tr>
+                        <td class="aliq-anos">2 a 4 anos</td>
+                        <td class="aliq-alto">30%</td>
+                        <td>Ainda significativo</td>
+                    </tr>
+                    <tr>
+                        <td class="aliq-anos">4 a 6 anos</td>
+                        <td class="aliq-medio">25%</td>
+                        <td>Redução gradual</td>
+                    </tr>
+                    <tr>
+                        <td class="aliq-anos">6 a 8 anos</td>
+                        <td class="aliq-medio">20%</td>
+                        <td>–</td>
+                    </tr>
+                    <tr>
+                        <td class="aliq-anos">8 a 10 anos</td>
+                        <td class="aliq-medio">15%</td>
+                        <td>–</td>
+                    </tr>
+                    <tr class="aliq-destaque">
+                        <td class="aliq-anos">Acima de 10 anos</td>
+                        <td class="aliq-baixo">10%</td>
+                        <td>Alíquota mínima — requer prazo longo e disciplina</td>
+                    </tr>
+                </table>
+
+                <p class="prev-text" style="margin-top: 20px;">
+                    A <strong>tabela progressiva</strong> é a alternativa: funciona como o IR normal — 0% para rendas baixas, 7,5%, 15%, 22,5% e até 27,5%.
+                    O imposto é calculado no momento do resgate e pode ser ajustado na declaração anual.
+                    Para quem tem renda baixa na aposentadoria, pode ser mais vantajosa que a regressiva.
+                </p>
+
+                <div class="prev-alerta">
+                    <div class="prev-alerta-title">⚠️ Atenção na escolha da tabela</div>
+                    A escolha entre tabela regressiva e progressiva é <strong>feita no momento da contratação e, em geral, é irreversível</strong>.
+                    Projetar qual será sua situação de renda na aposentadoria — antes de assinar — é fundamental para tomar essa decisão com clareza.
+                </div>
+
+                <div class="prev-frase-invlab">
+                    A tabela regressiva não é "10% de imposto". É uma escada: começa pesada e só premia quem permanece por muitos anos — e entende que cada aporte tem seu próprio prazo contando.
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 4 — LIQUIDEZ E CARÊNCIA
+                 ====================================================== -->
+            <div class="prev-section">
+                <div class="prev-section-tag">Bloco 04 — Acesso ao dinheiro</div>
+                <h3 class="prev-section-title">Liquidez — previdência não é reserva de emergência</h3>
+                <p class="prev-text">
+                    Diferentemente de um Tesouro Selic ou de um CDB com liquidez diária, a previdência privada impõe regras de carência para resgates.
+                    Conforme regulamentação da Susep, planos de previdência podem estabelecer carência de <strong>60 dias a 6 meses</strong> entre resgates parciais, dependendo do regulamento de cada plano.
+                </p>
+
+                <div class="prev-alerta">
+                    <div class="prev-alerta-title">⚠️ Consequência prática</div>
+                    Em uma emergência financeira, o dinheiro da previdência pode não estar disponível imediatamente.
+                    Antes de contratar, leia o regulamento do plano e entenda exatamente em quanto tempo você consegue resgatar — tanto no primeiro resgate quanto nos subsequentes.
+                </div>
+
+                <p class="prev-text">
+                    Há também um direito que poucos conhecem: a <strong>portabilidade</strong>.
+                    Você pode transferir seu saldo acumulado de um plano de previdência para outro — entre diferentes seguradoras — sem tributação no momento da transferência.
+                    Isso permite migrar de um plano com taxas altas para um plano mais eficiente sem encerrar o investimento.
+                </p>
+
+                <div class="prev-destaque-verde">
+                    <strong>Portabilidade:</strong> é seu direito e está previsto na regulamentação da Susep. Planos com carregamento de saída podem cobrar taxa nessa transferência — verifique as condições no regulamento antes de solicitar.
+                    Se seu plano atual tem custo alto, a portabilidade é frequentemente a melhor saída.
+                </div>
+
+                <div class="prev-frase-invlab">
+                    Previdência não deve ser confundida com reserva de emergência. O dinheiro pode ser seu, mas o acesso a ele segue as regras de carência definidas no contrato.
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 5 — CONVERSÃO EM RENDA
+                 ====================================================== -->
+            <div class="prev-section">
+                <div class="prev-section-tag">Bloco 05 — O ponto mais importante</div>
+                <h3 class="prev-section-title">Conversão em renda — a decisão mais irreversível</h3>
+                <p class="prev-text">
+                    Este é o ponto que mais investidores desconhecem — e o que pode ter maior impacto financeiro para toda a família.
+                    Ao optar pela conversão em renda, o investidor deixa de ter uma reserva acumulada e passa a receber um benefício mensal
+                    conforme as regras da modalidade contratada. Em muitas modalidades, <strong>o saldo acumulado não é transferível aos herdeiros</strong>.
+                </p>
+                <p class="prev-text">
+                    A Susep diferencia as seguintes modalidades principais de renda:
+                </p>
+
+                <div class="renda-grid">
+                    <div class="renda-card simples">
+                        <div class="renda-card-tipo">Modalidade 01</div>
+                        <div class="renda-card-nome">Renda Vitalícia Simples</div>
+                        <div class="renda-card-desc">Pagamentos mensais enquanto o titular viver. Ao falecer, os pagamentos cessam — independentemente de quanto saldo havia sido acumulado.</div>
+                        <div class="renda-card-alerta">⚠️ Herdeiros não recebem o saldo restante.</div>
+                    </div>
+                    <div class="renda-card prazo">
+                        <div class="renda-card-tipo">Modalidade 02</div>
+                        <div class="renda-card-nome">Renda Vitalícia com Prazo Mínimo Garantido</div>
+                        <div class="renda-card-desc">Se o titular falecer antes do prazo mínimo definido no contrato, os herdeiros recebem os pagamentos até o fim desse prazo. Após o prazo, sem benefício aos herdeiros.</div>
+                        <div class="renda-card-alerta">⚠️ Proteção parcial — limitada ao prazo contratado.</div>
+                    </div>
+                    <div class="renda-card reversivel">
+                        <div class="renda-card-tipo">Modalidade 03</div>
+                        <div class="renda-card-nome">Renda Vitalícia Reversível ao Beneficiário</div>
+                        <div class="renda-card-desc">Ao falecer, um beneficiário designado passa a receber um percentual da renda (geralmente entre 50% e 100%) pelo restante de sua própria vida.</div>
+                        <div class="renda-card-alerta">✓ Proteção mais ampla — mas renda mensal é menor.</div>
+                    </div>
+                    <div class="renda-card certa">
+                        <div class="renda-card-tipo">Modalidade 04</div>
+                        <div class="renda-card-nome">Renda por Prazo Certo</div>
+                        <div class="renda-card-desc">Pagamentos por um prazo definido no contrato. Se o titular falecer antes do fim do prazo, os herdeiros continuam recebendo até o término.</div>
+                        <div class="renda-card-alerta">✓ Previsibilidade — mas sem proteção vitalícia.</div>
+                    </div>
+                </div>
+
+                <div class="prev-alerta">
+                    <div class="prev-alerta-title">⚠️ Atenção antes de converter</div>
+                    A conversão em renda é, em geral, <strong>irreversível</strong>. Uma vez ativada, o investidor deixa de ter controle sobre o saldo acumulado.
+                    O cálculo do valor mensal a receber é feito com base em tábuas atuariais da seguradora —
+                    critérios que raramente são explicados de forma simples no momento da contratação.
+                    Avalie com cuidado, compare alternativas e, se necessário, consulte um profissional independente antes de tomar essa decisão.
+                </div>
+
+                <div class="prev-frase-invlab">
+                    Antes de transformar sua reserva em renda, entenda se o saldo continuará pertencendo à sua família ou se será convertido em um fluxo de pagamento condicionado às regras do contrato.
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 6 — PLANOS CORPORATIVOS
+                 ====================================================== -->
+            <div class="prev-section">
+                <div class="prev-section-tag">Bloco 06 — Previdência no trabalho</div>
+                <h3 class="prev-section-title">Planos corporativos — quando é benefício real e quando não é</h3>
+                <p class="prev-text">
+                    Planos de previdência oferecidos por empresas podem ser um dos benefícios financeiros mais valiosos disponíveis — ou apenas um produto caro com embalagem institucional.
+                    A diferença está em alguns detalhes que valem a pena investigar antes de aderir.
+                </p>
+
+                <div class="prev-destaque-verde">
+                    <strong>Quando é benefício real:</strong> a empresa contribui com um percentual equivalente ao seu aporte (matching).
+                    Se a empresa deposita 50% do que você deposita, você tem retorno imediato garantido de 50% sobre esse valor — independentemente de qualquer rentabilidade.
+                    Isso raramente é igualado por qualquer outro investimento.
+                </div>
+
+                <div class="prev-alerta">
+                    <div class="prev-alerta-title">⚠️ Quando analisar com cuidado</div>
+                    Se o plano corporativo <strong>não tem contribuição da empresa</strong>, é simplesmente um produto de previdência negociado coletivamente.
+                    Pode ter condições melhores ou piores que o mercado aberto. Verifique: taxa de administração, gestora responsável, condições de portabilidade e histórico de rentabilidade — antes de aderir apenas pelo fato de ser "da empresa".
+                </div>
+
+                <p class="prev-text">
+                    Outro ponto relevante nos planos corporativos é a <strong>regra de vesting</strong>: a contribuição da empresa pode estar condicionada a um tempo mínimo de permanência na companhia.
+                    Saindo antes desse prazo, o funcionário pode perder parte ou a totalidade das contribuições feitas pela empresa — mas geralmente mantém seus próprios aportes.
+                    Leia as regras do plano antes de contar com esse valor como parte do seu patrimônio.
+                </p>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 7 — COMPARADOR
+                 ====================================================== -->
+            <div class="prev-section">
+                <div class="prev-section-tag">Bloco 07 — Contexto comparativo</div>
+                <h3 class="prev-section-title">Como a previdência se compara a outras alternativas de longo prazo</h3>
+                <p class="prev-text">
+                    Nenhum produto é universalmente melhor. O quadro abaixo compara aspectos relevantes para ajudar a contextualizar a decisão — não para substituir uma análise personalizada.
+                </p>
+
+                <div style="overflow-x: auto;">
+                <table class="comparador-table">
+                    <tr>
+                        <th style="color:rgba(255,255,255,0.50);">Critério</th>
+                        <th class="col-ruim">Prev. taxas altas<br><span style="font-weight:400;font-size:0.70rem;">(banco tradicional)</span></th>
+                        <th class="col-ok">Prev. bem escolhida<br><span style="font-weight:400;font-size:0.70rem;">(plataforma aberta)</span></th>
+                        <th class="col-bom">Tesouro IPCA+</th>
+                        <th class="col-bom2">ETF diversificado</th>
+                    </tr>
+                    <tr>
+                        <td>Liquidez</td>
+                        <td class="ruim">Carência 60d–6m</td>
+                        <td class="ok">Carência 60d–6m</td>
+                        <td class="bom">D+1 no vencimento / D+2 antes</td>
+                        <td class="bom">D+2</td>
+                    </tr>
+                    <tr>
+                        <td>Taxa de custo</td>
+                        <td class="ruim">2–3% a.a. + carregamento</td>
+                        <td class="ok">0,5–1% a.a. sem carregamento</td>
+                        <td class="bom">0,20% a.a. (Tesouro Nacional)</td>
+                        <td class="bom">0,10–0,50% a.a.</td>
+                    </tr>
+                    <tr>
+                        <td>Tributação</td>
+                        <td class="ruim">IR sobre tudo (PGBL) ou só rend. (VGBL)</td>
+                        <td class="ok">IR sobre tudo (PGBL) ou só rend. (VGBL)</td>
+                        <td class="bom">Tabela regressiva (mín. 10% em 10 anos)</td>
+                        <td class="bom">Tabela regressiva (mín. 15%)</td>
+                    </tr>
+                    <tr>
+                        <td>Benefício fiscal de entrada</td>
+                        <td class="ok">Sim (PGBL, se correto)</td>
+                        <td class="ok">Sim (PGBL, se correto)</td>
+                        <td class="ruim">Não</td>
+                        <td class="ruim">Não</td>
+                    </tr>
+                    <tr>
+                        <td>Proteção herdeiros</td>
+                        <td class="ok">Depende da modalidade de renda</td>
+                        <td class="ok">Depende da modalidade de renda</td>
+                        <td class="bom">Herança normal, sem ITCMD em geral</td>
+                        <td class="bom">Herança normal</td>
+                    </tr>
+                    <tr>
+                        <td>Transparência</td>
+                        <td class="ruim">Regulamento extenso, tábuas não divulgadas</td>
+                        <td class="ok">Regulamento acessível</td>
+                        <td class="bom">Regras públicas e simples</td>
+                        <td class="bom">Prospecto público e acessível</td>
+                    </tr>
+                </table>
+                </div>
+
+                <p class="prev-text" style="margin-top:16px; font-size:0.83rem; color:rgba(255,255,255,0.35);">
+                    Nota: a tabela apresenta características gerais para fins educativos. Rentabilidades, tributação e condições específicas variam conforme o produto e a situação individual do investidor.
+                </p>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 8 — CHECKLIST
+                 ====================================================== -->
+            <div class="prev-section">
+                <div class="prev-section-tag">Bloco 08 — Antes de assinar</div>
+                <h3 class="prev-section-title">✅ Checklist INVLAB — perguntas antes de contratar</h3>
+                <p class="prev-text">
+                    Use estas perguntas antes de contratar, migrar ou converter qualquer plano de previdência privada.
+                    Se você não conseguir responder a maioria delas com clareza, peça as informações por escrito à seguradora antes de assinar.
+                </p>
+
+                <div class="prev-checklist">
+                    <div class="prev-check-item">
+                        <div class="prev-check-num">01</div>
+                        <span>Eu declaro IR pelo <strong>modelo completo</strong>? Tenho renda tributável suficiente para que o PGBL gere benefício fiscal real?</span>
+                    </div>
+                    <div class="prev-check-item">
+                        <div class="prev-check-num">02</div>
+                        <span>Qual é a <strong>taxa de administração</strong> do fundo? Comparei com planos em plataformas abertas (ex.: XP, Itaú Personnalité plataforma aberta, Bradesco Prime com fundos de terceiros)?</span>
+                    </div>
+                    <div class="prev-check-item">
+                        <div class="prev-check-num">03</div>
+                        <span>Existe <strong>taxa de carregamento</strong>? De quanto? Isso significa que parte do meu aporte não é investida.</span>
+                    </div>
+                    <div class="prev-check-item">
+                        <div class="prev-check-num">04</div>
+                        <span>Qual <strong>tabela de tributação</strong> é mais vantajosa para meu perfil — regressiva ou progressiva? Qual será minha situação de renda na aposentadoria?</span>
+                    </div>
+                    <div class="prev-check-item">
+                        <div class="prev-check-num">05</div>
+                        <span>Qual é a <strong>carência</strong> entre resgates? Em quanto tempo consigo acessar o dinheiro se precisar?</span>
+                    </div>
+                    <div class="prev-check-item">
+                        <div class="prev-check-num">06</div>
+                        <span>A <strong>gestora</strong> é do próprio banco ou independente? Qual o histórico de rentabilidade líquida de taxas nos últimos 5 anos?</span>
+                    </div>
+                    <div class="prev-check-item">
+                        <div class="prev-check-num">07</div>
+                        <span>Se for plano corporativo: <strong>a empresa contribui</strong>? Quais são as regras de vesting? O que acontece com a parte da empresa se eu sair antes do prazo?</span>
+                    </div>
+                    <div class="prev-check-item">
+                        <div class="prev-check-num">08</div>
+                        <span>Já considerei a <strong>portabilidade</strong>? Se meu plano atual tem custo alto, posso migrar para um melhor sem tributação?</span>
+                    </div>
+                    <div class="prev-check-item">
+                        <div class="prev-check-num">09</div>
+                        <span>Entendo as <strong>modalidades de conversão em renda</strong>? Em caso de falecimento, minha família continua recebendo ou perde o saldo?</span>
+                    </div>
+                    <div class="prev-check-item">
+                        <div class="prev-check-num">10</div>
+                        <span>Comparei a previdência com <strong>alternativas de longo prazo</strong> como Tesouro IPCA+ ou ETFs? Qual produto atende melhor meu objetivo considerando custo, tributação e liquidez?</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FECHAMENTO EDITORIAL -->
+            <div style="margin: 12px 0 60px; padding: 48px 40px; background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, rgba(245,158,11,0.04) 100%); border: 1px solid rgba(16,185,129,0.15); border-radius: 24px; text-align: center;">
+                <div style="font-size: 1.3rem; margin-bottom: 20px;">🎯</div>
+                <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.4rem; font-weight: 700; color: #D4AF37; margin-bottom: 20px;">Posição editorial do INVLAB</h3>
+                <p style="font-size: 0.97rem; color: rgba(255,255,255,0.62); line-height: 1.85; max-width: 640px; margin: 0 auto 16px;">
+                    Previdência privada <strong style="color:rgba(255,255,255,0.85);">pode ser uma ferramenta legítima de planejamento financeiro de longo prazo</strong>.
+                    Planos bem escolhidos, com taxas competitivas e adequação ao perfil do investidor, cumprem um papel importante.
+                </p>
+                <p style="font-size: 0.97rem; color: rgba(255,255,255,0.62); line-height: 1.85; max-width: 640px; margin: 0 auto;">
+                    O que o INVLAB defende é que <strong style="color:rgba(255,255,255,0.85);">o investidor conheça as regras antes de assinar</strong> — taxas, tributação, carência, modalidades de renda e alternativas disponíveis.
+                    Decisões bem informadas produzem resultados melhores. Esse é o propósito deste laboratório.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer style="background: rgba(13, 13, 13, 0.97); border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+        <div class="content-wrapper-wide">
+            <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+                <div>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
+                    <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">🧭 Guia do INVLAB →</a>
+                </div>
+                <div>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Ações</a></li>
+                        <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💵 ETFs</a></li>
+                        <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 FIIs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Economia Digital</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌐 Economia Digital</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Defesa do Investidor</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
+                        <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Ferramentas</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 Simulador CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Simulador Tesouro</a></li>
+                        <li><a href="calculadora.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🧮 Juros Compostos</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
+                <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                    ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
+                </p>
+                <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                    © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/script.js"></script>
+    <script defer src="../assets/js/bcb-api.js"></script>
+    <script defer src="../assets/js/invlab-carrossel-renda-variavel.js"></script>
+</body>
+</html>
