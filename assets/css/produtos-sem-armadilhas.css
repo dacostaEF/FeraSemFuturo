@@ -1,0 +1,252 @@
+/* ================================================================
+   PRODUTOS SEM ARMADILHAS — ESTILOS EXCLUSIVOS
+   Paleta: índigo (#818CF8) / violeta (#6366F1)
+   Filosofia: investigar antes de decidir
+   ================================================================ */
+
+/* HOOK */
+.prod-hook {
+    background: linear-gradient(135deg, rgba(99,102,241,0.07) 0%, rgba(129,140,248,0.04) 100%);
+    border: 1px solid rgba(99,102,241,0.22);
+    border-radius: 20px; padding: 52px 40px;
+    text-align: center; margin: 48px 0 36px;
+    position: relative; overflow: hidden;
+}
+.prod-hook::before {
+    content: ''; position: absolute; top: -60%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(ellipse at center, rgba(99,102,241,0.05) 0%, transparent 60%);
+    pointer-events: none;
+}
+.prod-hook-badge {
+    display: inline-block;
+    background: rgba(99,102,241,0.10); border: 1px solid rgba(99,102,241,0.30);
+    color: #818CF8; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    padding: 6px 18px; border-radius: 20px; margin-bottom: 28px;
+}
+.prod-hook-frase {
+    background: rgba(99,102,241,0.07); border-left: 3px solid #818CF8;
+    border-radius: 0 12px 12px 0; padding: 18px 24px;
+    margin: 24px auto; max-width: 640px;
+    font-size: 1.02rem; color: rgba(255,255,255,0.72); font-style: italic;
+    font-weight: 500; line-height: 1.7; text-align: left;
+}
+
+/* SEÇÕES */
+.prod-section {
+    background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px; padding: 44px 40px; margin-bottom: 28px;
+}
+.prod-section-tag {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; color: rgba(99,102,241,0.60); margin-bottom: 10px;
+}
+.prod-section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.4rem; font-weight: 700; color: #D4AF37;
+    margin-bottom: 16px; line-height: 1.3;
+}
+.prod-text {
+    font-size: 0.95rem; color: rgba(255,255,255,0.62); line-height: 1.88; margin-bottom: 22px;
+}
+.prod-text strong { color: rgba(255,255,255,0.88); }
+.prod-frase-invlab {
+    background: rgba(16,185,129,0.06); border-left: 3px solid rgba(16,185,129,0.50);
+    border-radius: 0 10px 10px 0; padding: 16px 22px; margin: 20px 0;
+    font-size: 0.93rem; color: rgba(16,185,129,0.85); font-style: italic;
+    font-weight: 500; line-height: 1.7;
+}
+.prod-frase-invlab::before { content: '💬 INVLAB — '; font-style: normal; font-weight: 700; }
+
+/* CARDS DAS 4 PERGUNTAS */
+.prod-perguntas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px; margin: 28px 0;
+}
+.prod-pergunta-card {
+    background: rgba(99,102,241,0.05);
+    border: 1px solid rgba(99,102,241,0.20);
+    border-radius: 16px; padding: 28px 24px;
+    transition: border-color 0.3s, transform 0.3s;
+}
+.prod-pergunta-card:hover {
+    border-color: rgba(129,140,248,0.45);
+    transform: translateY(-3px);
+}
+.prod-pergunta-num {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, #6366F1, #818CF8);
+    border-radius: 10px; display: flex; align-items: center;
+    justify-content: center; font-size: 0.85rem; font-weight: 800;
+    color: #fff; margin-bottom: 16px;
+}
+.prod-pergunta-titulo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.05rem; font-weight: 700; color: #fff;
+    margin-bottom: 12px; line-height: 1.4;
+}
+.prod-pergunta-body {
+    font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.7;
+}
+
+/* ESTUDOS DE CASO */
+.prod-estudo {
+    background: rgba(255,255,255,0.015);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px; margin-bottom: 24px; overflow: hidden;
+}
+.prod-estudo-header {
+    background: rgba(99,102,241,0.08);
+    border-bottom: 1px solid rgba(99,102,241,0.18);
+    padding: 22px 28px; display: flex; align-items: center; gap: 14px;
+}
+.prod-estudo-badge {
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: rgba(129,140,248,0.70);
+    background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.25);
+    padding: 4px 10px; border-radius: 20px;
+}
+.prod-estudo-titulo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.15rem; font-weight: 700; color: #fff;
+}
+.prod-estudo-body { padding: 6px 0; }
+.prod-estudo-row {
+    display: grid; grid-template-columns: 200px 1fr;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.88rem; line-height: 1.65;
+}
+.prod-estudo-row:last-child { border-bottom: none; }
+.prod-estudo-label {
+    padding: 14px 20px 14px 28px;
+    font-weight: 600; font-size: 0.78rem; letter-spacing: 0.3px;
+    display: flex; align-items: flex-start; gap: 8px;
+    color: rgba(255,255,255,0.50);
+}
+.prod-estudo-label.promete { color: rgba(129,140,248,0.80); }
+.prod-estudo-label.funciona { color: rgba(96,165,250,0.80); }
+.prod-estudo-label.ganha { color: rgba(245,158,11,0.80); }
+.prod-estudo-label.faz-sentido { color: rgba(16,185,129,0.80); }
+.prod-estudo-label.nao-faz { color: rgba(239,68,68,0.80); }
+.prod-estudo-label.alternativas { color: rgba(6,182,212,0.80); }
+.prod-estudo-valor {
+    padding: 14px 28px 14px 0;
+    color: rgba(255,255,255,0.62);
+}
+.prod-estudo-valor strong { color: rgba(255,255,255,0.85); }
+
+/* ALERTA */
+.prod-alerta {
+    background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.22);
+    border-radius: 14px; padding: 20px 24px; margin: 20px 0;
+    font-size: 0.90rem; color: rgba(255,255,255,0.65); line-height: 1.75;
+}
+.prod-alerta strong { color: #ef4444; }
+.prod-alerta-title { font-size: 0.78rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: rgba(239,68,68,0.65); margin-bottom: 8px; }
+
+/* DESTAQUE NEUTRO */
+.prod-destaque {
+    background: rgba(99,102,241,0.06); border: 1px solid rgba(99,102,241,0.20);
+    border-radius: 14px; padding: 20px 24px; margin: 20px 0;
+    font-size: 0.90rem; color: rgba(255,255,255,0.65); line-height: 1.75;
+}
+.prod-destaque strong { color: #818CF8; }
+
+/* BLOCO FILOSÓFICO */
+.prod-filosofia {
+    background: rgba(212,175,55,0.04); border: 1px solid rgba(212,175,55,0.18);
+    border-radius: 20px; padding: 48px 44px; margin: 8px 0 28px;
+    text-align: center; position: relative;
+}
+.prod-filosofia-titulo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem); font-weight: 800; color: #D4AF37;
+    margin-bottom: 28px; line-height: 1.3;
+}
+.prod-filosofia-linha {
+    font-size: 1rem; color: rgba(255,255,255,0.60); line-height: 2.0;
+    margin-bottom: 8px;
+}
+.prod-filosofia-linha strong { color: rgba(255,255,255,0.88); }
+.prod-filosofia-destaque {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.15rem; font-style: italic; color: rgba(129,140,248,0.85);
+    margin: 28px auto 0; max-width: 580px; line-height: 1.7;
+}
+
+/* CHECKLIST */
+.prod-checklist { margin: 24px 0; }
+.prod-check-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.90rem; color: rgba(255,255,255,0.65); line-height: 1.65;
+}
+.prod-check-item:last-child { border-bottom: none; }
+.prod-check-num {
+    width: 26px; height: 26px; border: 2px solid rgba(99,102,241,0.35);
+    border-radius: 6px; flex-shrink: 0; display: flex; align-items: center;
+    justify-content: center; font-size: 0.72rem; font-weight: 700;
+    color: rgba(129,140,248,0.70); margin-top: 1px;
+}
+.prod-check-item strong { color: rgba(255,255,255,0.88); }
+
+/* GRAND FINALE / SEMENTE */
+.prod-semente {
+    background: linear-gradient(135deg, rgba(99,102,241,0.06) 0%, rgba(16,185,129,0.05) 100%);
+    border: 1px solid rgba(99,102,241,0.20); border-radius: 24px;
+    padding: 56px 44px; margin: 12px 0 48px; text-align: center;
+    position: relative; overflow: hidden;
+}
+.prod-semente::before {
+    content: ''; position: absolute; top: -40%; left: -20%;
+    width: 140%; height: 180%;
+    background: radial-gradient(ellipse at center, rgba(99,102,241,0.04) 0%, transparent 60%);
+    pointer-events: none;
+}
+.prod-semente-titulo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.4rem, 2.8vw, 2rem); font-weight: 800; color: #D4AF37;
+    margin-bottom: 24px; line-height: 1.3;
+}
+.prod-semente-linha {
+    font-size: 1rem; color: rgba(255,255,255,0.55); line-height: 2.2; margin-bottom: 4px;
+}
+.prod-semente-linha strong { color: rgba(255,255,255,0.85); }
+.prod-semente-assinatura {
+    font-size: 1.35rem; margin-top: 32px; color: rgba(16,185,129,0.80); font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .prod-hook { padding: 36px 22px; }
+    .prod-section { padding: 32px 22px; }
+    .prod-filosofia { padding: 36px 24px; }
+    .prod-semente { padding: 40px 24px; }
+    .prod-perguntas-grid { grid-template-columns: 1fr; }
+    .prod-estudo-row { grid-template-columns: 1fr; }
+    .prod-estudo-label { padding: 12px 20px 4px 20px; }
+    .prod-estudo-valor { padding: 4px 20px 12px 20px; }
+    .prod-estudo-header { padding: 18px 20px; }
+}
+
+/* BACK TO TOP — padrão INVLAB */
+#backToTop {
+    display: none; position: fixed; bottom: 40px; right: 40px; z-index: 9999;
+    width: 56px; height: 56px;
+    background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+    color: #0D0D0D; border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 50%;
+    font-size: 28px; font-weight: 700; text-align: center; line-height: 52px;
+    cursor: pointer; box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+    transition: all 0.3s ease-in-out; opacity: 0;
+}
+#backToTop:hover {
+    background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.6);
+    border-color: rgba(16, 185, 129, 0.6);
+}
+@media (max-width: 768px) {
+    #backToTop { width: 48px; height: 48px; font-size: 24px; line-height: 44px; bottom: 24px; right: 24px; }
+}

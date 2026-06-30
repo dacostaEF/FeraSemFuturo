@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos Financeiros sem Armadilhas — Aprenda a investigar antes de decidir | INVLAB</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="description" content="Aprenda a avaliar qualquer produto financeiro com 4 perguntas simples — antes de assinar, antes de contratar, antes de decidir. Capitalização, COE, Fundos e Seguros analisados pelo INVLAB.">
+
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+
+    <link rel="stylesheet" href="../assets/css/produtos-sem-armadilhas.css">
+</head>
+<body>
+    <section id="invlab-carousel-container"></section>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+            </div>
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Início</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">📚 Primeiros<br>Passos</button>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-fixa'">📊 Renda<br>Fixa <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="poupanca.html">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-variavel'">📈 Renda<br>Variável <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='etfs.html'" style="cursor:pointer;">
+                                <span class="category-name">💵 ETFs</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='fiis.html'" style="cursor:pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='acoes.html'" style="cursor:pointer;">
+                                <span class="category-name">📈 Ações</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <button class="tab-btn" onclick="window.location.href='cripto.html'">🌐 Economia<br>Digital</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#outros-investimentos'">🧬 Instrumentos<br>Avançados</button>
+                <button class="tab-btn active" onclick="window.location.href='defesa-investidor.html'">🛡 Defesa do<br>Investidor</button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <main style="margin-top: 110px;">
+        <!-- BREADCRUMB STICKY -->
+        <div style="position: sticky; top: 110px; z-index: 999; background: #0D0D0D; width: 100%; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <nav style="max-width: min(calc(100% - 64px), 1160px); margin: 0 auto; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.35);">
+                <a href="defesa-investidor.html" style="color: rgba(129,140,248,0.65); text-decoration: none; transition: color 0.3s;">🛡 Defesa do Investidor</a>
+                <span style="color: rgba(255,255,255,0.20);">›</span>
+                <span style="color: rgba(255,255,255,0.60);">Produtos sem Armadilhas</span>
+            </nav>
+        </div>
+
+        <div class="invlab-lab-container">
+
+            <!-- TÍTULO DA SEÇÃO -->
+            <div style="padding-top: 40px; padding-bottom: 8px; text-align: center;">
+                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.4rem; font-weight: 800; color: #D4AF37; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em; line-height: 1.2;">🔍 Produtos sem Armadilhas</h2>
+                <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(16, 185, 129, 0.65); text-align: center; line-height: 1.8; margin-bottom: 14px; max-width: 860px; margin-left: auto; margin-right: auto;">Aprenda a avaliar qualquer produto financeiro com as mesmas 4 perguntas — antes de assinar, antes de contratar, antes de decidir.</p>
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: rgba(255, 255, 255, 0.38); text-align: center; line-height: 1.8; margin-bottom: 0; max-width: 860px; margin-left: auto; margin-right: auto;">O INVLAB não ensina o investidor a desconfiar de tudo. Ensina a investigar antes de decidir.</p>
+            </div>
+
+            <!-- ======================================================
+                 HOOK — ABERTURA UNIVERSAL
+                 ====================================================== -->
+            <div class="prod-hook">
+                <div class="prod-hook-badge">🔍 Laboratório — Produtos Financeiros</div>
+                <h2 style="font-size: clamp(1.3rem,3vw,1.9rem); font-weight: 700; color: #fff; line-height: 1.5; margin-bottom: 22px; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Você já saiu de um banco com a sensação de que comprou um produto... sem ter certeza se realmente precisava dele?
+                </h2>
+                <p style="font-size: 1rem; color: rgba(255,255,255,0.50); max-width: 620px; margin: 0 auto 14px; line-height: 1.85;">
+                    Essa sensação é mais comum do que parece.
+                </p>
+                <p style="font-size: 1rem; color: rgba(255,255,255,0.50); max-width: 620px; margin: 0 auto 14px; line-height: 1.85;">
+                    Na maioria das vezes, o problema não está no produto.<br>
+                    Também não está em quem o vende.
+                </p>
+                <p style="font-size: 1rem; color: rgba(255,255,255,0.50); max-width: 620px; margin: 0 auto 28px; line-height: 1.85;">
+                    O problema é que quem compra e quem vende nem sempre têm exatamente os mesmos objetivos.<br>
+                    Isso não é desonestidade — é estrutura. É como o sistema funciona.
+                </p>
+                <div class="prod-hook-frase">
+                    É justamente por isso que aprender a avaliar um produto financeiro é muito mais importante do que decorar seus nomes.
+                </div>
+                <p style="font-size: 0.92rem; color: rgba(255,255,255,0.40); max-width: 580px; margin: 22px auto 0; line-height: 1.75;">
+                    Este laboratório foi criado para ensinar exatamente isso.<br>
+                    Não queremos dizer o que você deve contratar.<br>
+                    Queremos mostrar <strong style="color: rgba(255,255,255,0.70);">como fazer as perguntas certas antes de qualquer decisão.</strong>
+                </p>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 1 — AS 4 PERGUNTAS
+                 ====================================================== -->
+            <div class="prod-section">
+                <div class="prod-section-tag">Bloco 01 — O método</div>
+                <h3 class="prod-section-title">4 perguntas para qualquer produto financeiro</h3>
+                <p class="prod-text">
+                    Antes de contratar qualquer produto financeiro — seja ele indicado por um gerente, um assessor, um influenciador ou um amigo — existem quatro perguntas que você precisa conseguir responder sozinho.
+                </p>
+                <p class="prod-text">
+                    <strong>Não são perguntas difíceis.</strong> São perguntas simples que a maioria das pessoas nunca faz — porque ninguém ensinou que era preciso fazê-las.
+                </p>
+
+                <div class="prod-perguntas-grid">
+                    <div class="prod-pergunta-card">
+                        <div class="prod-pergunta-num">1</div>
+                        <div class="prod-pergunta-titulo">Que problema esse produto resolve?</div>
+                        <div class="prod-pergunta-body">
+                            Se você não consegue responder isso em uma frase simples, provavelmente ainda não é hora de contratar. Todo produto financeiro deve resolver um problema específico na sua vida — não um problema genérico inventado pelo vendedor.
+                        </div>
+                    </div>
+                    <div class="prod-pergunta-card">
+                        <div class="prod-pergunta-num">2</div>
+                        <div class="prod-pergunta-titulo">Como a instituição ganha dinheiro?</div>
+                        <div class="prod-pergunta-body">
+                            Toda instituição financeira precisa gerar receita — isso é natural e legítimo. Entender de onde vem essa remuneração — taxa de administração, comissão, spread, carregamento — ajuda a compreender os incentivos envolvidos na recomendação.
+                        </div>
+                    </div>
+                    <div class="prod-pergunta-card">
+                        <div class="prod-pergunta-num">3</div>
+                        <div class="prod-pergunta-titulo">Existe uma alternativa mais simples?</div>
+                        <div class="prod-pergunta-body">
+                            Em finanças, complexidade raramente é sinônimo de qualidade. Produtos mais elaborados nem sempre são melhores. Às vezes, uma alternativa direta entrega resultado semelhante com menos custo e mais transparência.
+                        </div>
+                    </div>
+                    <div class="prod-pergunta-card">
+                        <div class="prod-pergunta-num">4</div>
+                        <div class="prod-pergunta-titulo">Eu realmente entendi o que estou contratando?</div>
+                        <div class="prod-pergunta-body">
+                            Se a resposta for "mais ou menos" ou "o gerente explicou e pareceu fazer sentido", ainda não é a hora de assinar. Você tem o direito — e a responsabilidade — de entender exatamente o que está no contrato.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prod-frase-invlab">
+                    Quem sabe fazer as perguntas certas não depende de nenhum especialista para tomar boas decisões. Depende apenas do próprio raciocínio.
+                </div>
+
+                <div class="prod-destaque">
+                    <strong>Por que essas 4 perguntas funcionam?</strong> Porque elas são independentes de qualquer produto específico. Capitalização, COE, fundo, seguro — o método é o mesmo. As respostas mudam, a estrutura não.
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 2 — O MESMO RACIOCÍNIO APLICADO NA PRÁTICA
+                 ====================================================== -->
+            <div class="prod-section">
+                <div class="prod-section-tag">Bloco 02 — Na prática</div>
+                <h3 class="prod-section-title">O mesmo raciocínio aplicado na prática</h3>
+                <p class="prod-text">
+                    Quatro produtos que aparecem com frequência no mercado financeiro brasileiro. Para cada um, aplicamos exatamente o mesmo framework de análise — sem simplificações e sem exageros.
+                </p>
+                <p class="prod-text">
+                    O objetivo não é dizer que esses produtos são bons ou ruins. É mostrar <strong>em que contexto cada um faz sentido — e em qual não faz.</strong>
+                </p>
+
+                <!-- ESTUDO 01: Título de Capitalização -->
+                <div class="prod-estudo">
+                    <div class="prod-estudo-header">
+                        <span class="prod-estudo-badge">Produto 01</span>
+                        <span class="prod-estudo-titulo">Título de Capitalização</span>
+                    </div>
+                    <div class="prod-estudo-body">
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label promete">💬 O que promete</div>
+                            <div class="prod-estudo-valor">Juntar dinheiro com a chance de ganhar prêmios em sorteios periódicos. A ideia é combinar poupança forçada com a emoção de uma loteria — sem o risco de perder o principal.</div>
+                        </div>
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label funciona">⚙️ Como funciona</div>
+                            <div class="prod-estudo-valor">Você paga mensalidades por um período determinado. Uma parte vai para o fundo de resgate, outra cobre o custo do sorteio e a margem da seguradora. No vencimento, você recebe o valor acumulado — <strong>geralmente abaixo do que depositou em termos reais</strong>, sem correção pelo IPCA ou taxa de juros expressiva.</div>
+                        </div>
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label ganha">💰 Como a instituição ganha</div>
+                            <div class="prod-estudo-valor">Alta comissão para o distribuidor — gerente, correspondente bancário, representante comercial. A seguradora tem margem elevada sobre os prêmios pagos, porque a sinistralidade dos sorteios é estruturalmente baixa em relação à arrecadação.</div>
+                        </div>
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label faz-sentido">✅ Quando pode fazer sentido</div>
+                            <div class="prod-estudo-valor">Para quem tem dificuldade genuína de poupar por conta própria e valoriza o mecanismo de "forçação de poupança". Para presentes corporativos ou ações promocionais. Para quem entende o produto e aceita o retorno limitado em troca da disciplina que ele impõe.</div>
+                        </div>
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label nao-faz">⚠️ Quando normalmente não faz</div>
+                            <div class="prod-estudo-valor">Para quem busca rendimento real acima da inflação. Para quem já tem disciplina financeira. Para quem tem dívidas a quitar — o capital aplicado teria retorno muito maior sendo usado para reduzir juros de crédito rotativo ou parcelamento.</div>
+                        </div>
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label alternativas">🔄 Alternativas a considerar</div>
+                            <div class="prod-estudo-valor">Tesouro Selic, CDB de liquidez diária ou poupança rendem mais e oferecem liquidez comparável — sem a cláusula de carência dos títulos de capitalização. Para quem quer "forçar" a poupança, débito automático em aplicação de renda fixa funciona de forma semelhante.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ESTUDO 02: COE -->
+                <div class="prod-estudo">
+                    <div class="prod-estudo-header">
+                        <span class="prod-estudo-badge">Produto 02</span>
+                        <span class="prod-estudo-titulo">COE — Certificado de Operações Estruturadas</span>
+                    </div>
+                    <div class="prod-estudo-body">
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label promete">💬 O que promete</div>
+                            <div class="prod-estudo-valor">Exposição a ativos sofisticados — índices internacionais, ações estrangeiras, moedas, commodities — com proteção do capital investido no vencimento. A proposta é participar do potencial de valorização de mercados globais sem arriscar o principal.</div>
+                        </div>
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label funciona">⚙️ Como funciona</div>
+                            <div class="prod-estudo-valor">Estrutura derivativa que combina renda fixa (para garantir o capital no vencimento) com derivativos (para proporcionar exposição ao ativo-alvo). O prazo costuma ser longo — de 2 a 5 anos. <strong>A proteção de capital só vale no vencimento</strong> — resgates antecipados podem não ter a mesma garantia, dependendo das condições de mercado no momento.</div>
+                        </div>
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label ganha">💰 Como a instituição ganha</div>
+                            <div class="prod-estudo-valor">O banco cria e distribui o COE com um spread embutido na estrutura. Não há taxa explícita declarada — o custo está na diferença entre o que o banco paga internamente pela operação e o que o investidor recebe como potencial de retorno. Esse custo é real, mas não transparente na leitura superficial do produto.</div>
+                        </div>
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label faz-sentido">✅ Quando pode fazer sentido</div>
+                            <div class="prod-estudo-valor">Para investidores que entendem a estrutura completamente, concordam com o prazo e valorizam genuinamente a exposição ao ativo-alvo com limitação do risco de perda do principal. Quando a janela de mercado justifica o produto e o prazo é compatível com o planejamento financeiro.</div>
+                        </div>
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label nao-faz">⚠️ Quando normalmente não faz</div>
+                            <div class="prod-estudo-valor">Quando o prazo é incompatível com a necessidade de liquidez do investidor. Quando o custo de oportunidade de ficar sem acesso ao dinheiro é alto. Quando o investidor não leu e não compreendeu o prospecto — especialmente as condições de participação e os cenários de mercado que ativam ou limitam o retorno.</div>
+                        </div>
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label alternativas">🔄 Alternativas a considerar</div>
+                            <div class="prod-estudo-valor">Dependendo do objetivo de exposição, combinações de Tesouro IPCA+ com ETFs internacionais podem oferecer acesso semelhante a mercados globais com mais transparência de custo, liquidez diária e sem prazo fixo de vencimento.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ESTUDO 03: Fundos caros -->
+                <div class="prod-estudo">
+                    <div class="prod-estudo-header">
+                        <span class="prod-estudo-badge">Produto 03</span>
+                        <span class="prod-estudo-titulo">Fundos de Investimento com Taxas Elevadas</span>
+                    </div>
+                    <div class="prod-estudo-body">
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label promete">💬 O que promete</div>
+                            <div class="prod-estudo-valor">Gestão profissional do patrimônio para superar o mercado — ou um benchmark específico como o CDI ou o Ibovespa. A proposta é que o gestor, com análise e estratégia, entregue retorno superior ao que o investidor obteria sozinho.</div>
+                        </div>
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label funciona">⚙️ Como funciona</div>
+                            <div class="prod-estudo-valor">Um gestor profissional aloca o patrimônio do fundo conforme a estratégia definida. O cotista paga <strong>taxa de administração</strong> (percentual anual sobre o patrimônio, cobrada independentemente do resultado) e, em alguns casos, <strong>taxa de performance</strong> (percentual sobre o que exceder o benchmark).</div>
+                        </div>
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label ganha">💰 Como a instituição ganha</div>
+                            <div class="prod-estudo-valor">A gestora recebe taxa de administração sempre — haja lucro ou prejuízo no fundo. Fundos distribuídos por bancos frequentemente pagam <strong>rebate ao distribuidor</strong> — uma parte da taxa de administração vai para o banco que vendeu o fundo, não para o gestor. Esse fluxo de incentivo existe mesmo que o fundo não tenha o melhor desempenho da categoria.</div>
+                        </div>
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label faz-sentido">✅ Quando pode fazer sentido</div>
+                            <div class="prod-estudo-valor">Quando a estratégia do gestor é genuinamente diferenciada, transparente e com histórico consistente de longo prazo. Quando as taxas são proporcionais ao valor real entregue. Fundos de nicho — multimercado macro, crédito estruturado, long-biased com gestão ativa — podem justificar custo maior quando o diferencial é comprovável.</div>
+                        </div>
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label nao-faz">⚠️ Quando normalmente não faz</div>
+                            <div class="prod-estudo-valor">Quando o fundo replica um índice com taxa acima de 0,5% ao ano — ETFs fazem o mesmo com custo menor. Quando o histórico de performance não sustenta a taxa cobrada. Quando o produto foi recomendado sem análise comparativa com alternativas disponíveis no mercado.</div>
+                        </div>
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label alternativas">🔄 Alternativas a considerar</div>
+                            <div class="prod-estudo-valor">ETFs de índice — Ibovespa, S&amp;P 500, IMA-B — oferecem diversificação instantânea com taxas significativamente menores que a maioria dos fundos ativos. Para renda fixa, títulos públicos no Tesouro Direto ou CDBs de bancos comparáveis frequentemente superam fundos DI caros após o desconto das taxas.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ESTUDO 04: Seguros embutidos -->
+                <div class="prod-estudo">
+                    <div class="prod-estudo-header">
+                        <span class="prod-estudo-badge">Produto 04</span>
+                        <span class="prod-estudo-titulo">Seguros Embutidos em Outros Produtos</span>
+                    </div>
+                    <div class="prod-estudo-body">
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label promete">💬 O que promete</div>
+                            <div class="prod-estudo-valor">Proteção financeira em caso de eventos inesperados — demissão involuntária, invalidez temporária ou permanente, morte, danos ao imóvel, roubo do cartão. Seguros importantes quando o risco é real e a cobertura é proporcional.</div>
+                        </div>
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label funciona">⚙️ Como funciona</div>
+                            <div class="prod-estudo-valor">Seguros prestamistas, de cartão, de desemprego e residenciais são frequentemente vendidos embutidos em outros produtos — crédito consignado, cartão de crédito, financiamento imobiliário. O prêmio é descontado automaticamente, <strong>muitas vezes sem destaque no momento da contratação</strong>. A cobertura e as exclusões estão nas condições gerais, que raramente são lidas antes da assinatura.</div>
+                        </div>
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label ganha">💰 Como a instituição ganha</div>
+                            <div class="prod-estudo-valor">Alta comissão para o distribuidor — gerente, banco, correspondente. Prêmio recorrente ao longo de toda a vigência do produto principal. Historicamente, a sinistralidade de seguros embutidos é baixa em relação ao volume de prêmios arrecadados — parte expressiva dos seguros nunca é acionada.</div>
+                        </div>
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label faz-sentido">✅ Quando pode fazer sentido</div>
+                            <div class="prod-estudo-valor">Seguro de vida com cobertura adequada para quem tem dependentes financeiros. Seguro residencial para imóvel próprio com cobertura real de danos. Seguros com escopo claramente definido, cláusulas de exclusão compreensíveis e prêmio proporcional ao risco coberto.</div>
+                        </div>
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label nao-faz">⚠️ Quando normalmente não faz</div>
+                            <div class="prod-estudo-valor">Quando a cobertura duplica outro seguro que você já possui. Quando as cláusulas de exclusão tornam a cobertura praticamente inutilizável na maioria dos cenários reais. Quando o valor do prêmio mensal é desproporcional ao risco coberto — especialmente em seguros prestamistas vinculados a crédito de valor baixo.</div>
+                        </div>
+                        <div class="prod-estudo-row">
+                            <div class="prod-estudo-label alternativas">🔄 Alternativas a considerar</div>
+                            <div class="prod-estudo-valor">Avaliar cada risco individualmente — não como pacote. Cotar o seguro separadamente do produto principal: frequentemente é possível obter cobertura equivalente com prêmio menor. Ler as condições gerais antes de contratar, especialmente as cláusulas de exclusão e os prazos de carência para acionamento.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="invlab-editorial invlab-nota">
+                    <span>📋</span>
+                    <span><strong>Nota INVLAB:</strong> Os quatro produtos analisados aqui existem em versões legítimas e bem estruturadas. O objetivo desta análise não é classificá-los como bons ou ruins — é mostrar o framework de avaliação que qualquer investidor pode aplicar, independentemente do produto apresentado.</span>
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 3 — FILOSOFIA: NÃO MEMORIZE PRODUTOS
+                 ====================================================== -->
+            <div class="prod-filosofia">
+                <h3 class="prod-filosofia-titulo">Não memorize produtos.<br>Memorize perguntas.</h3>
+
+                <p class="prod-filosofia-linha">Chegamos ao ponto mais importante deste laboratório.</p>
+
+                <p class="prod-filosofia-linha">
+                    <strong>Os produtos mudam.</strong><br>
+                    As regras mudam.<br>
+                    Os nomes mudam.<br>
+                    As taxas mudam.<br>
+                    Os regulamentos mudam.
+                </p>
+
+                <p class="prod-filosofia-linha">
+                    Mas uma boa pergunta continua sendo uma boa pergunta — <strong>para sempre.</strong>
+                </p>
+
+                <p class="prod-filosofia-linha">
+                    As quatro perguntas deste laboratório funcionarão para qualquer produto financeiro que você encontrar ao longo da vida.<br>
+                    Inclusive para produtos que ainda nem existem.
+                </p>
+
+                <p class="prod-filosofia-linha">
+                    O investidor que aprende a fazer as perguntas certas não depende de nenhum especialista para tomar boas decisões.<br>
+                    Depende apenas do <strong>próprio raciocínio.</strong>
+                </p>
+
+                <div class="prod-filosofia-destaque">
+                    "O INVLAB não ensina o investidor a desconfiar de tudo.<br>Ensina a investigar antes de decidir."
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 CHECKLIST INVLAB
+                 ====================================================== -->
+            <div class="prod-section">
+                <div class="prod-section-tag">Checklist — Antes de contratar</div>
+                <h3 class="prod-section-title">As 7 perguntas antes de assinar qualquer coisa</h3>
+                <p class="prod-text">
+                    Guarde este checklist. Aplique-o antes de contratar qualquer produto financeiro — independentemente de quem está oferecendo ou como foi apresentado.
+                </p>
+
+                <div class="prod-checklist">
+                    <div class="prod-check-item">
+                        <div class="prod-check-num">1</div>
+                        <div><strong>Consigo explicar em uma frase o problema que este produto resolve para mim?</strong> Se a resposta for "não" ou "talvez", a decisão ainda não está madura.</div>
+                    </div>
+                    <div class="prod-check-item">
+                        <div class="prod-check-num">2</div>
+                        <div><strong>Sei exatamente como e quanto a instituição ganha com este produto?</strong> Se a remuneração não está clara, busque essa informação antes de avançar.</div>
+                    </div>
+                    <div class="prod-check-item">
+                        <div class="prod-check-num">3</div>
+                        <div><strong>Pesquisei se existe uma alternativa mais simples com resultado semelhante?</strong> Complexidade não é garantia de qualidade.</div>
+                    </div>
+                    <div class="prod-check-item">
+                        <div class="prod-check-num">4</div>
+                        <div><strong>Li as condições gerais e entendi o que está incluído — e principalmente o que está excluído?</strong> As exclusões estão sempre nas letras menores.</div>
+                    </div>
+                    <div class="prod-check-item">
+                        <div class="prod-check-num">5</div>
+                        <div><strong>Sei o prazo, a liquidez e quando posso acessar o dinheiro sem penalidade?</strong> Liquidez não é detalhe — é parte essencial da decisão.</div>
+                    </div>
+                    <div class="prod-check-item">
+                        <div class="prod-check-num">6</div>
+                        <div><strong>Conheço todos os custos: taxa de administração, carregamento, IOF, Imposto de Renda?</strong> O retorno líquido pode ser muito diferente do retorno bruto anunciado.</div>
+                    </div>
+                    <div class="prod-check-item">
+                        <div class="prod-check-num">7</div>
+                        <div><strong>Estou tomando esta decisão com tranquilidade, sem urgência ou pressão?</strong> Produtos financeiros sérios não vencem em 24 horas. Se houver pressa, questione o motivo.</div>
+                    </div>
+                </div>
+
+                <div class="invlab-editorial invlab-dica">
+                    <span>💡</span>
+                    <span><strong>Dica prática:</strong> Se você não consegue responder pelo menos 5 das 7 perguntas acima, peça um prazo para pensar. Qualquer instituição séria vai respeitar esse pedido. Se não respeitar — esse já é um dado importante sobre a qualidade do produto e de quem o está oferecendo.</span>
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 GRAND FINALE — 🌱 A SEMENTE
+                 ====================================================== -->
+            <div class="prod-semente">
+                <div class="prod-semente-titulo">🌱 A Semente</div>
+
+                <p class="prod-semente-linha">Neste laboratório, você não aprendeu sobre quatro produtos financeiros.</p>
+                <p class="prod-semente-linha">Você aprendeu <strong>quatro maneiras de fazer a mesma pergunta.</strong></p>
+
+                <br>
+
+                <p class="prod-semente-linha">E quando uma boa pergunta vira hábito...</p>
+
+                <br>
+
+                <p class="prod-semente-linha">Ela protege mais do que qualquer regulamentação.</p>
+                <p class="prod-semente-linha">Mais do que qualquer lista de produtos não recomendados.</p>
+                <p class="prod-semente-linha">Mais do que qualquer alerta de especialista.</p>
+
+                <br>
+
+                <p class="prod-semente-linha">A semente do investidor consciente não é o conhecimento de produtos.</p>
+                <p class="prod-semente-linha">É a <strong>curiosidade de perguntar.</strong></p>
+
+                <br>
+
+                <p class="prod-semente-linha">Antes de assinar.</p>
+                <p class="prod-semente-linha">Antes de contratar.</p>
+                <p class="prod-semente-linha">Antes de decidir.</p>
+
+                <div class="prod-semente-assinatura">🌱 Plante essa semente.</div>
+            </div>
+
+        </div><!-- /invlab-lab-container -->
+    </main>
+
+    <!-- FOOTER -->
+    <footer style="background: rgba(0,0,0,0.50); border-top: 1px solid rgba(212,175,55,0.1); padding: 48px 32px 32px; margin-top: 60px;">
+        <div style="max-width: 1160px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px; margin-bottom: 32px;">
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Primeiros Passos</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="../index.html#primeiros-passos" style="color: rgba(16,185,129,0.85); text-decoration: none;">📚 Aprenda a Investir</a></li>
+                    <li><a href="guia_invlab.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🧭 Guia do INVLAB</a></li>
+                    <li><a href="metodologia.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔬 Nossa Metodologia</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="poupanca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💰 Poupança</a></li>
+                    <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                    <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Ações</a></li>
+                    <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💵 ETFs</a></li>
+                    <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 FIIs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Economia Digital</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌐 Economia Digital</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Instrumentos Avançados</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="../index.html#outros-fundos" style="color: rgba(16,185,129,0.85); text-decoration: none;">💼 Fundos e Estruturados</a></li>
+                    <li><a href="../index.html#outros-ouro" style="color: rgba(16,185,129,0.85); text-decoration: none;">🥇 Ouro</a></li>
+                    <li><a href="../index.html#outros-derivativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">⚡ Derivativos e Opções</a></li>
+                    <li><a href="../index.html#outros-alternativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚀 Invest. Alternativos</a></li>
+                    <li><a href="../index.html#outros-ativos-reais" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏠 Ativos Reais</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Defesa do Investidor</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
+                    <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                    <li><a href="credito-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔥 Crédito</a></li>
+                    <li><a href="produtos-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔍 Produtos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
+            <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
+            </p>
+            <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
+            </p>
+        </div>
+        </div>
+    </footer>
+
+    <div id="backToTop">↑</div>
+
+    <script src="../assets/js/script.js"></script>
+    <script defer src="../assets/js/bcb-api.js"></script>
+    <script defer src="../assets/js/invlab-carrossel-renda-variavel.js"></script>
+    <script>
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+                setTimeout(() => backToTopButton.style.opacity = '1', 10);
+            } else {
+                backToTopButton.style.opacity = '0';
+                setTimeout(() => backToTopButton.style.display = 'none', 300);
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
