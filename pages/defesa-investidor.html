@@ -81,8 +81,13 @@
     <main>
         <div class="invlab-lab-container">
 
+            <!-- BREADCRUMB -->
+            <div style="display:flex; align-items:center; gap:8px; font-family:'Inter',sans-serif; font-size:0.85rem; color:rgba(255,255,255,0.40); padding-top:28px;">
+                <span style="color:#D4AF37; font-weight:600;">🛡 Defesa do Investidor</span>
+            </div>
+
             <!-- TÍTULO DA SEÇÃO -->
-            <div style="padding-top: 96px; padding-bottom: 8px; text-align: center;">
+            <div style="padding-top: 20px; padding-bottom: 8px; text-align: center;">
                 <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; font-weight: 800; color: #D4AF37; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em; line-height: 1.2;">🛡 Defesa do Investidor</h2>
                 <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(16, 185, 129, 0.65); text-align: center; line-height: 1.8; margin-bottom: 14px; max-width: 860px; margin-left: auto; margin-right: auto;">Aprenda a identificar custos invisíveis, conflitos de interesse e decisões que podem comprometer seu patrimônio no longo prazo.</p>
                 <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: rgba(255, 255, 255, 0.38); text-align: center; line-height: 1.8; margin-bottom: 0; max-width: 860px; margin-left: auto; margin-right: auto;">Nenhum produto financeiro é bom ou ruim por si só. O resultado depende de para quem é indicado, quanto custa e se resolve o problema certo.</p>
@@ -164,25 +169,29 @@
                 <h3 class="inv-category-title">💳 Crédito e Empréstimos</h3>
                 <p class="inv-category-subtitle">Crédito não é ruim. Crédito caro e mal escolhido, sim. Entenda o custo real de cada linha antes de assinar.</p>
                 <div class="inv-grid">
-                    <div class="inv-card alternativos">
+                    <div class="inv-card alternativos" onclick="window.location.href='credito-sem-armadilhas.html'" style="cursor:pointer;">
                         <div class="inv-card-icon">📋</div>
                         <h4 class="inv-card-title">O que é o CET</h4>
                         <p class="inv-card-description">Custo Efetivo Total — inclui juros, seguros, taxas administrativas e IOF. É o número real que você paga. Sempre compare CET, nunca só a taxa de juros anunciada.</p>
+                        <p style="font-size:0.78rem; color:rgba(249,115,22,0.65); margin-top:12px; font-weight:600;">🔥 Ver análise completa →</p>
                     </div>
-                    <div class="inv-card alternativos">
+                    <div class="inv-card alternativos" onclick="window.location.href='credito-sem-armadilhas.html'" style="cursor:pointer;">
                         <div class="inv-card-icon">✅</div>
                         <h4 class="inv-card-title">Consignado — quando faz sentido</h4>
                         <p class="inv-card-description">Desconto direto na folha reduz risco para o banco — por isso tem juros menores. Faz sentido para reorganizar dívidas mais caras. Não faz sentido como solução permanente ou por impulso.</p>
+                        <p style="font-size:0.78rem; color:rgba(249,115,22,0.65); margin-top:12px; font-weight:600;">🔥 Ver análise completa →</p>
                     </div>
-                    <div class="inv-card alternativos">
+                    <div class="inv-card alternativos" onclick="window.location.href='credito-sem-armadilhas.html'" style="cursor:pointer;">
                         <div class="inv-card-icon">🚨</div>
                         <h4 class="inv-card-title">Rotativo do cartão — a armadilha mais cara</h4>
                         <p class="inv-card-description">Pode superar 400% ao ano. Pagar o mínimo da fatura é entrar numa espiral. Nenhum investimento rende o suficiente para compensar essa taxa. Quite antes de investir.</p>
+                        <p style="font-size:0.78rem; color:rgba(249,115,22,0.65); margin-top:12px; font-weight:600;">🔥 Ver análise completa →</p>
                     </div>
-                    <div class="inv-card alternativos">
+                    <div class="inv-card alternativos" onclick="window.location.href='credito-sem-armadilhas.html'" style="cursor:pointer;">
                         <div class="inv-card-icon">🏗️</div>
                         <h4 class="inv-card-title">Financiamento imobiliário</h4>
                         <p class="inv-card-description">SAC ou Price? Com ou sem FGTS? A diferença no custo total pode ser de dezenas de milhares de reais. Simule diferentes cenários antes de escolher.</p>
+                        <p style="font-size:0.78rem; color:rgba(249,115,22,0.65); margin-top:12px; font-weight:600;">🔥 Ver análise completa →</p>
                     </div>
                 </div>
             </div>
@@ -396,6 +405,7 @@
                 <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
                     <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
                     <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                    <li><a href="credito-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔥 Crédito</a></li>
                 </ul>
             </div>
         </div>
@@ -413,5 +423,23 @@
     <script src="../assets/js/script.js"></script>
     <script defer src="../assets/js/bcb-api.js"></script>
     <script defer src="../assets/js/invlab-carrossel-renda-variavel.js"></script>
-</body>
+    <div id="backToTop">↑</div>
+    <script>
+        (function() {
+            var btn = document.getElementById('backToTop');
+            if (!btn) return;
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    btn.style.display = 'block';
+                    setTimeout(function() { btn.style.opacity = '1'; }, 10);
+                } else {
+                    btn.style.opacity = '0';
+                    setTimeout(function() { btn.style.display = 'none'; }, 300);
+                }
+            });
+            btn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+    </script></body>
 </html>

@@ -202,3 +202,42 @@
     .comparador-table { font-size: 0.78rem; }
     .comparador-table th, .comparador-table td { padding: 10px 10px; }
 }
+
+/* BACK TO TOP — padrão INVLAB */
+#backToTop {
+    display: none;
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 9999;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+    color: #0D0D0D;
+    border: 2px solid rgba(16, 185, 129, 0.3);
+    border-radius: 50%;
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 52px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+}
+#backToTop:hover {
+    background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.6);
+    border-color: rgba(16, 185, 129, 0.6);
+}
+@media (max-width: 768px) {
+    #backToTop {
+        width: 48px;
+        height: 48px;
+        font-size: 24px;
+        line-height: 44px;
+        bottom: 24px;
+        right: 24px;
+    }
+}

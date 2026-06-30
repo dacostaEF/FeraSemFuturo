@@ -1,0 +1,538 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crédito sem Armadilhas — O que o Banco Não Te Conta sobre CET, Consignado, Rotativo e Financiamento | INVLAB</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="description" content="Entenda o CET, as armadilhas do consignado, o perigo real do rotativo do cartão e como comparar SAC x Price no financiamento imobiliário. Crédito explicado sem hype, com os números que o banco não destaca. INVLAB.">
+
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+    <link rel="stylesheet" href="../assets/css/credito-sem-armadilhas.css">
+</head>
+<body>
+    <section id="invlab-carousel-container"></section>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+            </div>
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Início</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">📚 Primeiros<br>Passos</button>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-fixa'">📊 Renda<br>Fixa <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="poupanca.html">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-variavel'">📈 Renda<br>Variável <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='etfs.html'" style="cursor:pointer;">
+                                <span class="category-name">💵 ETFs</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='fiis.html'" style="cursor:pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='acoes.html'" style="cursor:pointer;">
+                                <span class="category-name">📈 Ações</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <button class="tab-btn" onclick="window.location.href='cripto.html'">🌐 Economia<br>Digital</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#outros-investimentos'">🧬 Instrumentos<br>Avançados</button>
+                <button class="tab-btn active" onclick="window.location.href='defesa-investidor.html'">🛡 Defesa do<br>Investidor</button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="invlab-lab-container">
+
+            <!-- BREADCRUMB -->
+            <div class="cred-breadcrumb">
+                <a href="defesa-investidor.html">🛡 Defesa do Investidor</a>
+                <span>›</span>
+                <span style="color: rgba(255,255,255,0.55);">Crédito sem Armadilhas</span>
+            </div>
+
+            <!-- TÍTULO DA SEÇÃO -->
+            <div style="padding-top: 28px; padding-bottom: 8px; text-align: center;">
+                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.4rem; font-weight: 800; color: #F97316; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em; line-height: 1.2;">🔥 Crédito sem Armadilhas</h2>
+                <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(239,68,68,0.70); text-align: center; line-height: 1.8; margin-bottom: 14px; max-width: 860px; margin-left: auto; margin-right: auto;">O que o banco não te conta sobre CET, consignado, rotativo do cartão e financiamento imobiliário.</p>
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: rgba(255,255,255,0.38); text-align: center; line-height: 1.8; margin-bottom: 0; max-width: 860px; margin-left: auto; margin-right: auto;">Crédito é uma ferramenta legítima de planejamento financeiro. Mal compreendido, é também a forma mais rápida de comprometer um patrimônio inteiro.</p>
+            </div>
+
+            <!-- HOOK -->
+            <div class="cred-hook">
+                <div class="cred-hook-badge">🔥 Laboratório — Crédito e Empréstimos</div>
+                <h2 style="font-size: clamp(1.3rem,3vw,1.9rem); font-weight: 700; color: #fff; line-height: 1.5; margin-bottom: 18px; max-width: 680px; margin-left: auto; margin-right: auto;">Crédito não é vilão.<br>O problema é o preço que você não enxerga.</h2>
+                <p style="font-size: 1rem; color: rgba(255,255,255,0.50); max-width: 580px; margin: 0 auto 20px; line-height: 1.80;">
+                    Toda linha de crédito tem um custo real — e ele raramente é o número que aparece em destaque na propaganda. Taxa de juros, IOF, tarifas, seguros embutidos: cada um soma ao que você efetivamente paga.
+                </p>
+                <div class="cred-hook-frase">
+                    Crédito não é vilão. O problema é quando você não entende o preço que está pagando.
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 1 — O CET
+                 ====================================================== -->
+            <div class="cred-section">
+                <div class="cred-section-tag">Bloco 01 — O conceito que une tudo</div>
+                <h3 class="cred-section-title">CET — Custo Efetivo Total: o único número que importa</h3>
+                <p class="cred-text">
+                    Toda propaganda de crédito anuncia uma <strong>taxa de juros</strong>. Quase nenhuma anuncia o <strong>CET</strong> — Custo Efetivo Total — com o mesmo destaque.
+                    A diferença entre os dois números é exatamente o que o banco não quer que vire o critério da sua decisão.
+                </p>
+                <p class="cred-text">
+                    O CET reúne, em uma única taxa anual, tudo o que compõe o custo real da operação: juros, IOF, tarifa de cadastro, seguros obrigatórios ou embutidos, e qualquer outra cobrança vinculada ao contrato.
+                    É o número que você paga de verdade — não o número usado para atrair sua atenção.
+                </p>
+
+                <table class="cet-table">
+                    <tr>
+                        <th>Componente</th>
+                        <th>Aparece na propaganda?</th>
+                        <th>Entra no CET?</th>
+                    </tr>
+                    <tr>
+                        <td>Taxa de juros nominal</td>
+                        <td>Sim — em destaque</td>
+                        <td>Sim</td>
+                    </tr>
+                    <tr>
+                        <td>IOF</td>
+                        <td>Raramente</td>
+                        <td>Sim</td>
+                    </tr>
+                    <tr>
+                        <td>Tarifa de cadastro / TAC</td>
+                        <td>Não</td>
+                        <td>Sim</td>
+                    </tr>
+                    <tr>
+                        <td>Seguro prestamista embutido</td>
+                        <td>Não</td>
+                        <td>Sim</td>
+                    </tr>
+                    <tr class="cet-destaque">
+                        <td>CET — custo real anual</td>
+                        <td>Quase nunca em destaque</td>
+                        <td>É o resultado de tudo isso somado</td>
+                    </tr>
+                </table>
+
+                <div class="cred-destaque">
+                    <strong>Editorial:</strong> todo banco é obrigado por lei, conforme regulamentação do Banco Central, a informar o CET antes da assinatura do contrato. Esse número costuma estar no contrato — não necessariamente no anúncio. Pedir o CET por escrito, antes de decidir, é um direito do tomador.
+                </div>
+
+                <div class="cred-frase-invlab">
+                    Comparar taxa de juros entre duas propostas de crédito é comparar a parte visível do preço. Comparar o CET é comparar o preço inteiro.
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 2 — CONSIGNADO
+                 ====================================================== -->
+            <div class="cred-section">
+                <div class="cred-section-tag">Bloco 02 — Crédito com desconto em folha</div>
+                <h3 class="cred-section-title">Crédito Consignado — a linha mais barata, e a mais visada por golpes</h3>
+                <p class="cred-text">
+                    O valor é descontado diretamente da folha de pagamento ou do benefício do INSS, antes mesmo de o dinheiro chegar até você.
+                    Isso reduz o risco de inadimplência para o banco — e é exatamente por isso que o consignado costuma ter as menores taxas do mercado de crédito pessoal.
+                </p>
+
+                <div class="cred-card-grid">
+                    <div class="cred-card risco-baixo">
+                        <div class="cred-card-nome">Vantagem real</div>
+                        <div class="cred-card-valor">Menor taxa do mercado</div>
+                        <div class="cred-card-desc">O desconto automático reduz o risco de crédito para a instituição, e essa economia se reflete em juros menores do que o crédito pessoal comum.</div>
+                    </div>
+                    <div class="cred-card risco-medio">
+                        <div class="cred-card-nome">Margem consignável</div>
+                        <div class="cred-card-valor">Até 35%</div>
+                        <div class="cred-card-desc">A lei limita o comprometimento da renda ou benefício a um percentual máximo — geralmente até 35% (parte pode ser reservada a cartão consignado). Ultrapassar esse limite não é permitido.</div>
+                    </div>
+                    <div class="cred-card risco-alto">
+                        <div class="cred-card-nome">Risco mais comum</div>
+                        <div class="cred-card-valor">Contrato não solicitado</div>
+                        <div class="cred-card-desc">Aposentados e pensionistas do INSS são alvo frequente de contratos de consignado e cartões consignados não solicitados, com descontos que só são percebidos no extrato do benefício.</div>
+                    </div>
+                </div>
+
+                <div class="cred-alerta">
+                    <div class="cred-alerta-title">⚠️ Golpe da portabilidade forçada</div>
+                    Ligações ou abordagens oferecendo "redução da prestação" ou "troca de banco vantajosa" têm sido usadas para realizar portabilidades de consignado sem autorização clara do titular, muitas vezes aumentando o prazo e o custo total do contrato.
+                    Portabilidade de consignado só deve ser feita por iniciativa do titular, com simulação comparada por escrito antes de qualquer assinatura.
+                </div>
+
+                <div class="cred-destaque">
+                    <strong>Como se proteger:</strong> consulte regularmente o extrato de descontos do seu benefício ou contracheque. Qualquer desconto não reconhecido deve ser contestado junto ao INSS (via Meu INSS) ou ao RH, e pode ser denunciado ao Banco Central.
+                </div>
+
+                <div class="cred-frase-invlab">
+                    O consignado é, em geral, a linha de crédito mais barata disponível para quem tem renda recorrente. O problema nunca foi o produto — foi ele ser vendido sem ser pedido.
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 3 — ROTATIVO DO CARTÃO
+                 ====================================================== -->
+            <div class="cred-section">
+                <div class="cred-section-tag">Bloco 03 — A linha mais perigosa do mercado</div>
+                <h3 class="cred-section-title">Rotativo do Cartão de Crédito — a armadilha mais cara em circulação</h3>
+                <p class="cred-text">
+                    O rotativo é acionado automaticamente quando você paga apenas o mínimo da fatura. É a linha de crédito mais cara disponível no mercado brasileiro de forma estruturada —
+                    e, segundo dados historicamente divulgados pelo Banco Central, o CET do rotativo do cartão já ultrapassou <strong>400% ao ano</strong> em determinados períodos.
+                </p>
+
+                <div class="cred-sim-box">
+                    <p style="font-family:'Inter',sans-serif; font-size:0.82rem; color:rgba(255,255,255,0.45); margin-bottom:14px;">Simulação ilustrativa — R$ 1.000 em fatura, pagando apenas o mínimo (~15%) todo mês, com juros do rotativo na faixa histórica de ~12% a.m.:</p>
+                    <div class="cred-sim-row">
+                        <div class="cred-sim-mes">Mês 1</div>
+                        <div class="cred-sim-bar-wrap"><div class="cred-sim-bar" style="width:22%;"></div></div>
+                        <div class="cred-sim-valor">≈ R$ 1.000</div>
+                    </div>
+                    <div class="cred-sim-row">
+                        <div class="cred-sim-mes">Mês 3</div>
+                        <div class="cred-sim-bar-wrap"><div class="cred-sim-bar" style="width:38%;"></div></div>
+                        <div class="cred-sim-valor">≈ R$ 1.350</div>
+                    </div>
+                    <div class="cred-sim-row">
+                        <div class="cred-sim-mes">Mês 6</div>
+                        <div class="cred-sim-bar-wrap"><div class="cred-sim-bar" style="width:60%;"></div></div>
+                        <div class="cred-sim-valor">≈ R$ 1.950</div>
+                    </div>
+                    <div class="cred-sim-row">
+                        <div class="cred-sim-mes">Mês 12</div>
+                        <div class="cred-sim-bar-wrap"><div class="cred-sim-bar" style="width:100%;"></div></div>
+                        <div class="cred-sim-valor" style="color:#EF4444;">≈ R$ 3.600+</div>
+                    </div>
+                    <p style="font-family:'Inter',sans-serif; font-size:0.78rem; color:rgba(255,255,255,0.32); margin-top:14px;">Valores aproximados e ilustrativos, considerando manutenção apenas do pagamento mínimo. O CET real varia por instituição, perfil e período — consulte sempre a fatura e o site do Banco Central para taxas atualizadas.</p>
+                </div>
+
+                <div class="cred-alerta">
+                    <div class="cred-alerta-title">⚠️ Pagar o mínimo é entrar numa espiral</div>
+                    Nenhum investimento legítimo disponível no mercado rende o suficiente para compensar uma dívida com CET de centenas de por cento ao ano.
+                    Quitar o rotativo do cartão — ainda que isso signifique usar reserva de emergência ou vender um investimento de baixo retorno — tende a ser, matematicamente, a melhor decisão financeira disponível nesse cenário.
+                </div>
+
+                <div class="cred-destaque">
+                    <strong>Saída prática:</strong> se a fatura não cabe no orçamento, o parcelamento da fatura ou o crédito pessoal/consignado — com taxas muito menores — costuma ser bem mais barato do que permanecer no rotativo. Negocie com o próprio banco antes do vencimento.
+                </div>
+
+                <div class="cred-frase-invlab">
+                    O rotativo do cartão não é uma dívida cara. É a forma mais eficiente já criada pelo sistema financeiro de transformar um problema pequeno em um problema grande.
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 4 — FINANCIAMENTO IMOBILIÁRIO
+                 ====================================================== -->
+            <div class="cred-section">
+                <div class="cred-section-tag">Bloco 04 — A maior dívida da vida financeira</div>
+                <h3 class="cred-section-title">Financiamento Imobiliário — SAC, Price e o custo que ninguém detalha no balcão</h3>
+                <p class="cred-text">
+                    Um financiamento imobiliário é, para a maioria das famílias, o maior compromisso financeiro de uma vida inteira. A escolha do sistema de amortização e o entendimento do CET completo
+                    podem representar uma diferença de dezenas de milhares de reais ao longo do contrato.
+                </p>
+
+                <div class="cred-compare-grid">
+                    <div class="cred-compare-card sac">
+                        <h4>📉 SAC — Sistema de Amortização Constante</h4>
+                        <div class="cred-compare-item"><strong>Amortização:</strong> constante — mesmo valor todo mês</div>
+                        <div class="cred-compare-item"><strong>Parcelas:</strong> decrescentes ao longo do tempo</div>
+                        <div class="cred-compare-item"><strong>Parcela inicial:</strong> mais alta</div>
+                        <div class="cred-compare-item"><strong>Total de juros pago:</strong> menor no longo prazo</div>
+                    </div>
+                    <div class="cred-compare-card price">
+                        <h4>📊 Price — Tabela Price</h4>
+                        <div class="cred-compare-item"><strong>Amortização:</strong> crescente ao longo do tempo</div>
+                        <div class="cred-compare-item"><strong>Parcelas:</strong> fixas (em geral)</div>
+                        <div class="cred-compare-item"><strong>Parcela inicial:</strong> mais baixa que no SAC</div>
+                        <div class="cred-compare-item"><strong>Total de juros pago:</strong> maior no longo prazo</div>
+                    </div>
+                </div>
+
+                <div class="cred-destaque">
+                    <strong>Em 20 a 30 anos de contrato</strong>, a diferença total de juros pagos entre SAC e Price pode somar dezenas de milhares de reais — sendo o SAC, no geral, mais barato no acumulado, mas exigindo parcela inicial mais alta. A escolha correta depende da capacidade de pagamento no início do contrato, não apenas do total final.
+                </div>
+
+                <p class="cred-text">
+                    O CET de um financiamento imobiliário vai além da taxa de juros do contrato: inclui também custos como <strong>ITBI</strong>, <strong>registro em cartório</strong>, <strong>avaliação do imóvel</strong> e <strong>seguros obrigatórios</strong> (MIP e DFI), que são exigidos por lei em todo financiamento habitacional.
+                </p>
+
+                <div class="cred-alerta">
+                    <div class="cred-alerta-title">⚠️ Custos que pegam o comprador de surpresa</div>
+                    ITBI (em geral 2% a 3% do valor do imóvel), registro em cartório, escritura e tarifas de avaliação somam, com frequência, entre 4% e 8% do valor do imóvel — fora da entrada e fora das parcelas. Esse valor precisa ser planejado separadamente, e não é financiável pelo sistema habitacional.
+                </div>
+
+                <div class="cred-destaque">
+                    <strong>FGTS na amortização:</strong> o saldo do FGTS pode ser usado para reduzir o saldo devedor (amortização extraordinária) a cada período de carência definido por lei, reduzindo o prazo ou o valor das parcelas — sem custo adicional. Avaliar essa opção periodicamente é um direito do mutuário pouco utilizado.
+                </div>
+
+                <div class="cred-frase-invlab">
+                    Financiamento imobiliário não se compara pela parcela mensal. Compara-se pelo CET completo, pelo sistema de amortização e pelos custos de cartório que raramente entram na simulação do balcão.
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 5 — COMPARADOR GERAL
+                 ====================================================== -->
+            <div class="cred-section">
+                <div class="cred-section-tag">Bloco 05 — Contexto comparativo</div>
+                <h3 class="cred-section-title">Como as linhas de crédito se comparam entre si</h3>
+                <p class="cred-text">
+                    Nenhuma linha de crédito é universalmente boa ou ruim. O quadro abaixo organiza as principais modalidades por custo, prazo e perfil de uso — para contextualizar, não substituir uma simulação individual.
+                </p>
+
+                <div style="overflow-x: auto;">
+                <table class="comparador-credito">
+                    <tr>
+                        <th>Modalidade</th>
+                        <th>CET médio aproximado</th>
+                        <th>Prazo típico</th>
+                        <th>Risco</th>
+                        <th>Para quem serve</th>
+                    </tr>
+                    <tr>
+                        <td>Consignado</td>
+                        <td class="risco-baixo">~1,5% a 2,5% a.m.</td>
+                        <td>Até 84–96 meses</td>
+                        <td class="risco-baixo">Baixo</td>
+                        <td>Quem tem renda/benefício recorrente e precisa reorganizar dívidas mais caras</td>
+                    </tr>
+                    <tr>
+                        <td>Crédito Pessoal</td>
+                        <td class="risco-medio">~4% a 8% a.m.</td>
+                        <td>Até 48 meses</td>
+                        <td class="risco-medio">Médio</td>
+                        <td>Quem não tem acesso a consignado e precisa de prazo curto</td>
+                    </tr>
+                    <tr>
+                        <td>Cheque Especial</td>
+                        <td class="risco-alto">~6% a 8% a.m.</td>
+                        <td>Uso pontual / sem prazo fixo</td>
+                        <td class="risco-alto">Alto</td>
+                        <td>Apenas emergência de curtíssimo prazo — nunca como crédito recorrente</td>
+                    </tr>
+                    <tr>
+                        <td>Rotativo do Cartão</td>
+                        <td class="risco-alto">Pode superar 400% a.a.</td>
+                        <td>Sem prazo definido — renova mês a mês</td>
+                        <td class="risco-alto">Altíssimo</td>
+                        <td>Para ninguém — sempre migrar para parcelamento ou outra linha</td>
+                    </tr>
+                    <tr>
+                        <td>Financiamento Imobiliário</td>
+                        <td class="risco-baixo">~0,7% a 1,2% a.m. + CET adicional</td>
+                        <td>180 a 420 meses</td>
+                        <td class="risco-baixo">Baixo (com planejamento)</td>
+                        <td>Aquisição de imóvel, com capacidade de pagamento de longo prazo</td>
+                    </tr>
+                </table>
+                </div>
+
+                <p class="cred-text" style="margin-top:16px; font-size:0.83rem; color:rgba(255,255,255,0.35);">
+                    Nota: valores de CET são faixas aproximadas e variam por instituição, perfil de crédito, garantias e período. Consulte sempre o CET informado no seu contrato e as taxas atualizadas no site do Banco Central antes de decidir.
+                </p>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 6 — CHECKLIST
+                 ====================================================== -->
+            <div class="cred-section">
+                <div class="cred-section-tag">Bloco 06 — Antes de assinar</div>
+                <h3 class="cred-section-title">✓ Checklist do Tomador Consciente</h3>
+                <p class="cred-text">
+                    Use estas perguntas antes de contratar qualquer linha de crédito — consignado, pessoal, cheque especial ou financiamento.
+                    Se você não conseguir responder a maioria delas com clareza, peça as informações por escrito antes de assinar.
+                </p>
+
+                <div class="cred-checklist">
+                    <div class="cred-check-item">
+                        <div class="cred-check-num">01</div>
+                        <span>Qual é o <strong>CET</strong> completo da operação — não apenas a taxa de juros anunciada?</span>
+                    </div>
+                    <div class="cred-check-item">
+                        <div class="cred-check-num">02</div>
+                        <span>Eu solicitei esse crédito, ou ele foi <strong>oferecido sem eu pedir</strong>? Em caso de consignado, verifiquei o extrato de descontos recentemente?</span>
+                    </div>
+                    <div class="cred-check-item">
+                        <div class="cred-check-num">03</div>
+                        <span>Existem <strong>seguros embutidos</strong> no contrato? Eles são obrigatórios ou foram adicionados sem necessidade?</span>
+                    </div>
+                    <div class="cred-check-item">
+                        <div class="cred-check-num">04</div>
+                        <span>Comparei o CET dessa proposta com pelo menos <strong>outra instituição</strong> antes de assinar?</span>
+                    </div>
+                    <div class="cred-check-item">
+                        <div class="cred-check-num">05</div>
+                        <span>Esse crédito está sendo usado para <strong>reorganizar uma dívida mais cara</strong> — ou está criando uma dívida nova?</span>
+                    </div>
+                    <div class="cred-check-item">
+                        <div class="cred-check-num">06</div>
+                        <span>Se for financiamento imobiliário: já simulei <strong>SAC e Price</strong>, e incluí ITBI, registro e seguros no orçamento total?</span>
+                    </div>
+                    <div class="cred-check-item">
+                        <div class="cred-check-num">07</div>
+                        <span>Estou pagando apenas o <strong>mínimo da fatura</strong> do cartão? Se sim, já avaliei migrar para parcelamento ou outra linha mais barata?</span>
+                    </div>
+                    <div class="cred-check-item">
+                        <div class="cred-check-num">08</div>
+                        <span>Entendo o <strong>prazo total</strong> e o <strong>valor final pago</strong> — não apenas o valor da parcela mensal?</span>
+                    </div>
+                    <div class="cred-check-item">
+                        <div class="cred-check-num">09</div>
+                        <span>Esse crédito <strong>resolve meu problema</strong>, ou é o produto que a instituição precisa colocar esse mês?</span>
+                    </div>
+                    <div class="cred-check-item">
+                        <div class="cred-check-num">10</div>
+                        <span>Eu entendi <strong>completamente</strong> o contrato? Se houver qualquer parte que não ficou clara, não assino até entender.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 GRAND FINALE
+                 ====================================================== -->
+
+            <div style="margin: 0 0 28px; padding: 52px 40px; text-align: center; background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.06); border-radius: 24px;">
+                <p style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.2rem,3vw,1.7rem); font-weight: 700; color: #fff; line-height: 1.6; max-width: 700px; margin: 0 auto 24px;">
+                    O sistema financeiro não esconde o preço do crédito.
+                </p>
+                <p style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.2rem,3vw,1.7rem); font-weight: 700; color: #F97316; line-height: 1.6; max-width: 700px; margin: 0 auto;">
+                    Ele apenas não destaca o número que mais importa.
+                </p>
+            </div>
+
+            <div style="margin: 0 0 28px; padding: 48px 40px; text-align: center;">
+                <p style="font-size: 0.92rem; color: rgba(255,255,255,0.28); line-height: 2.8; margin: 0;">
+                    A taxa muda.<br>
+                    O banco muda.<br>
+                    A propaganda muda.<br>
+                    O contrato muda.<br>
+                    <span style="color: rgba(255,255,255,0.65); font-style: italic; font-size: 1rem;">Mas o CET continua sendo<br>o único número que conta a história inteira.</span>
+                </p>
+                <p style="font-size: 0.88rem; color: rgba(255,255,255,0.32); margin-top: 28px; max-width: 580px; margin-left: auto; margin-right: auto; line-height: 1.8;">
+                    Por isso, toda decisão de crédito deve ser tomada com o custo total em mãos — não com a parcela mensal como único critério.
+                </p>
+            </div>
+
+            <div style="margin: 0 0 70px; padding: 60px 40px; text-align: center;">
+                <div style="font-size: 1.3rem; margin-bottom: 28px;">🌱</div>
+                <p style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.3rem,3.5vw,1.9rem); font-weight: 700; color: rgba(255,255,255,0.80); line-height: 1.6; max-width: 640px; margin: 0 auto 18px;">
+                    O melhor crédito não é o que cabe na parcela.
+                </p>
+                <p style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.3rem,3.5vw,1.9rem); font-weight: 800; color: #F97316; line-height: 1.6; max-width: 640px; margin: 0 auto;">
+                    É o que sobra de patrimônio depois que o contrato termina.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer style="background: rgba(13, 13, 13, 0.97); border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+    <div class="content-wrapper-wide">
+        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
+                <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">🧭 Guia do INVLAB →</a>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                    <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Ações</a></li>
+                    <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💵 ETFs</a></li>
+                    <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 FIIs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Economia Digital</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌐 Economia Digital</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Instrumentos Avançados</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="../index.html#outros-fundos" style="color: rgba(16,185,129,0.85); text-decoration: none;">💼 Fundos e Estruturados</a></li>
+                    <li><a href="../index.html#outros-ouro" style="color: rgba(16,185,129,0.85); text-decoration: none;">🥇 Ouro</a></li>
+                    <li><a href="../index.html#outros-derivativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">⚡ Derivativos e Opções</a></li>
+                    <li><a href="../index.html#outros-alternativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚀 Invest. Alternativos</a></li>
+                    <li><a href="../index.html#outros-ativos-reais" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏠 Ativos Reais</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Defesa do Investidor</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
+                    <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                    <li><a href="credito-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔥 Crédito</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
+            <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
+            </p>
+            <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
+            </p>
+        </div>
+    </div>
+</footer>
+
+    <div id="backToTop">↑</div>
+
+    <script src="../assets/js/script.js"></script>
+    <script defer src="../assets/js/bcb-api.js"></script>
+    <script defer src="../assets/js/invlab-carrossel-renda-variavel.js"></script>
+    <script>
+      const backToTopButton = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          backToTopButton.style.display = 'block';
+          setTimeout(() => backToTopButton.style.opacity = '1', 10);
+        } else {
+          backToTopButton.style.opacity = '0';
+          setTimeout(() => backToTopButton.style.display = 'none', 300);
+        }
+      });
+      backToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    </script>
+</body>
+</html>

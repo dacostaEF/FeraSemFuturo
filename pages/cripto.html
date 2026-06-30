@@ -515,8 +515,13 @@
     <main>
         <div class="invlab-lab-container">
 
+            <!-- BREADCRUMB -->
+            <div style="display:flex; align-items:center; gap:8px; font-family:'Inter',sans-serif; font-size:0.85rem; color:rgba(255,255,255,0.40); padding-top:28px;">
+                <span style="color:#818CF8; font-weight:600;">🌐 Economia Digital</span>
+            </div>
+
             <!-- TÍTULO DA SEÇÃO -->
-            <div style="padding-top: 96px; padding-bottom: 8px; text-align: center;">
+            <div style="padding-top: 20px; padding-bottom: 8px; text-align: center;">
                 <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; font-weight: 800; color: #D4AF37; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em; line-height: 1.2;">🌐 O Futuro da Economia Digital</h2>
                 <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(16, 185, 129, 0.65); text-align: center; line-height: 1.8; margin-bottom: 14px; max-width: 860px; margin-left: auto; margin-right: auto;">Entenda como blockchain, Bitcoin, tokenização e ativos digitais estão transformando a forma como pessoas, empresas e governos registram, possuem, negociam e transferem valor na economia digital.</p>
                 <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: rgba(255, 255, 255, 0.38); text-align: center; line-height: 1.8; margin-bottom: 0; max-width: 860px; margin-left: auto; margin-right: auto;">Muito além das criptomoedas — compreenda a infraestrutura que pode redefinir o sistema financeiro nas próximas décadas.</p>
@@ -1649,6 +1654,7 @@
                 <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
                     <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
                     <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                    <li><a href="credito-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔥 Crédito</a></li>
                 </ul>
             </div>
         </div>
@@ -1693,5 +1699,23 @@
 
     })();
     </script>
-</body>
+    <div id="backToTop">↑</div>
+    <script>
+        (function() {
+            var btn = document.getElementById('backToTop');
+            if (!btn) return;
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    btn.style.display = 'block';
+                    setTimeout(function() { btn.style.opacity = '1'; }, 10);
+                } else {
+                    btn.style.opacity = '0';
+                    setTimeout(function() { btn.style.display = 'none'; }, 300);
+                }
+            });
+            btn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+    </script></body>
 </html>

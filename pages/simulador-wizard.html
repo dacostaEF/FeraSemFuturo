@@ -1884,7 +1884,26 @@
             }
         }
     </style>
-</head>
+    <style>
+    #backToTop {
+        display: none; position: fixed; bottom: 40px; right: 40px; z-index: 9999;
+        width: 56px; height: 56px;
+        background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+        color: #0D0D0D; border: 2px solid rgba(16,185,129,0.3); border-radius: 50%;
+        font-size: 28px; font-weight: 700; text-align: center; line-height: 52px;
+        cursor: pointer; box-shadow: 0 4px 16px rgba(212,175,55,0.4);
+        transition: all 0.3s ease-in-out; opacity: 0;
+    }
+    #backToTop:hover {
+        background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 8px 24px rgba(212,175,55,0.6);
+        border-color: rgba(16,185,129,0.6);
+    }
+    @media (max-width: 768px) {
+        #backToTop { width: 48px; height: 48px; font-size: 24px; line-height: 44px; bottom: 24px; right: 24px; }
+    }
+    </style></head>
 <body>
 
     <!-- Botão Menu Mobile Hambúrguer -->
@@ -1905,7 +1924,7 @@
             <li><a href="../index.html#renda-fixa">📊 Renda Fixa</a></li>
             <li><a href="../index.html#renda-variavel">📈 Renda Variável</a></li>
             <li><a href="cripto.html">🌐 Economia Digital</a></li>
-            <li><a href="../index.html#ferramentas">🛠️ Ferramentas</a></li>
+            <li><span>🛠️ Ferramentas</span></li>
             <li><a href="../index.html#outros-investimentos">💎 Outros Investimentos</a></li>
             <li><a href="defesa-investidor.html">🛡 Defesa do Investidor</a></li>
             <div class="mobile-menu-separator"></div>
@@ -1975,9 +1994,7 @@
     <!-- Breadcrumb (fixo, abaixo do menu) -->
     <div style="position: sticky; top: 110px; z-index: 100; background: #0D0D0D; width: 100%; padding: 12px 20px 12px; margin-bottom: 0 !important;">
         <nav style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 8px; font-size: 14px; color: rgba(255, 255, 255, 0.6);">
-            <a href="../index.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s;">🏠 Início</a>
-            <span style="color: rgba(255, 255, 255, 0.4);">/</span>
-            <a href="../index.html#ferramentas" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s;">🛠️ Ferramentas</a>
+                        <span style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s;">🛠️ Ferramentas</span>
             <span style="color: rgba(255, 255, 255, 0.4);">/</span>
             <span style="color: #FFFFFF; font-weight: 600; background: rgba(42, 127, 255, 0.15); padding: 4px 10px; border-radius: 6px; border-left: 3px solid #D4AF37;">🧙 Simulador Wizard</span>
         </nav>
@@ -2486,6 +2503,7 @@
                 <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
                     <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
                     <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                    <li><a href="credito-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔥 Crédito</a></li>
                 </ul>
             </div>
         </div>
@@ -2596,6 +2614,24 @@
     <script defer src="../assets/js/invlab-carrossel-renda-fixa.js"></script>
 
     <script src="../assets/js/script.js"></script>
-</body>
+    <div id="backToTop">↑</div>
+    <script>
+        (function() {
+            var btn = document.getElementById('backToTop');
+            if (!btn) return;
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    btn.style.display = 'block';
+                    setTimeout(function() { btn.style.opacity = '1'; }, 10);
+                } else {
+                    btn.style.opacity = '0';
+                    setTimeout(function() { btn.style.display = 'none'; }, 300);
+                }
+            });
+            btn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+    </script></body>
 </html>
 

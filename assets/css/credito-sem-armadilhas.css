@@ -1,0 +1,401 @@
+/* ============================================================
+   CRÉDITO SEM ARMADILHAS — estilos dedicados
+   Paleta: vermelho (#EF4444) / laranja (#F97316)
+   Espelha os componentes de previdencia-sem-armadilhas.css
+   ============================================================ */
+
+.cred-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.40);
+    padding-top: 28px;
+}
+.cred-breadcrumb a {
+    color: #F97316;
+    text-decoration: none;
+}
+.cred-breadcrumb a:hover { text-decoration: underline; }
+
+/* HOOK */
+.cred-hook {
+    margin: 36px 0 28px;
+    padding: 48px 40px;
+    text-align: center;
+    background: radial-gradient(ellipse at top, rgba(239,68,68,0.07) 0%, rgba(13,13,13,0) 60%);
+    border: 1px solid rgba(239,68,68,0.18);
+    border-radius: 24px;
+}
+.cred-hook-badge {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #F97316;
+    background: rgba(249,115,22,0.10);
+    border: 1px solid rgba(249,115,22,0.30);
+    border-radius: 999px;
+    padding: 7px 18px;
+    margin-bottom: 22px;
+}
+.cred-hook-frase {
+    display: inline-block;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.65);
+    border-left: 3px solid #EF4444;
+    padding: 10px 22px;
+    max-width: 560px;
+    text-align: left;
+    margin: 0 auto;
+}
+
+/* SECTION WRAPPER */
+.cred-section {
+    margin: 0 0 36px;
+    padding: 40px;
+    background: rgba(255,255,255,0.015);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 24px;
+}
+.cred-section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(249,115,22,0.65);
+    margin-bottom: 10px;
+}
+.cred-section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.25rem, 2.6vw, 1.65rem);
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 18px;
+    line-height: 1.35;
+}
+.cred-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.98rem;
+    color: rgba(255,255,255,0.62);
+    line-height: 1.85;
+    margin-bottom: 16px;
+}
+.cred-text strong { color: rgba(255,255,255,0.85); }
+
+/* ALERTA (vermelho) */
+.cred-alerta {
+    margin: 18px 0;
+    padding: 20px 26px;
+    background: rgba(239,68,68,0.07);
+    border: 1px solid rgba(239,68,68,0.25);
+    border-left: 4px solid #EF4444;
+    border-radius: 0 14px 14px 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.70);
+    line-height: 1.8;
+}
+.cred-alerta-title {
+    font-weight: 700;
+    color: #EF4444;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+/* DESTAQUE positivo (laranja suave) */
+.cred-destaque {
+    margin: 18px 0;
+    padding: 18px 24px;
+    background: rgba(249,115,22,0.06);
+    border: 1px solid rgba(249,115,22,0.22);
+    border-radius: 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.68);
+    line-height: 1.8;
+}
+.cred-destaque strong { color: #F97316; }
+
+/* FRASE INVLAB (itálica de fechamento de bloco) */
+.cred-frase-invlab {
+    margin: 22px 0 4px;
+    padding: 18px 0 0;
+    border-top: 1px dashed rgba(255,255,255,0.10);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 1.02rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+}
+
+/* CET TABLE */
+.cet-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    overflow: hidden;
+    border-radius: 12px;
+}
+.cet-table th {
+    background: rgba(239,68,68,0.10);
+    color: rgba(255,255,255,0.80);
+    font-weight: 700;
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 0.80rem;
+    letter-spacing: 0.3px;
+}
+.cet-table td {
+    padding: 12px 16px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.65);
+}
+.cet-table tr.cet-destaque td {
+    background: rgba(239,68,68,0.08);
+    color: #fff;
+    font-weight: 600;
+}
+
+/* CARDS GENÉRICOS (grid 2/3 colunas) */
+.cred-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+    margin: 22px 0;
+}
+.cred-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 22px 24px;
+}
+.cred-card-nome {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #fff;
+    margin-bottom: 6px;
+}
+.cred-card-valor {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 800;
+    font-size: 1.35rem;
+    color: #F97316;
+    margin-bottom: 10px;
+}
+.cred-card-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.86rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+}
+.cred-card.risco-alto { border-color: rgba(239,68,68,0.35); }
+.cred-card.risco-alto .cred-card-valor { color: #EF4444; }
+.cred-card.risco-medio { border-color: rgba(245,158,11,0.30); }
+.cred-card.risco-medio .cred-card-valor { color: #F59E0B; }
+.cred-card.risco-baixo { border-color: rgba(16,185,129,0.30); }
+.cred-card.risco-baixo .cred-card-valor { color: #10b981; }
+
+/* SIMULAÇÃO ROTATIVO — barra de evolução */
+.cred-sim-box {
+    margin: 22px 0;
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(239,68,68,0.25);
+    border-radius: 16px;
+    padding: 26px 28px;
+}
+.cred-sim-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+}
+.cred-sim-row:last-child { border-bottom: none; }
+.cred-sim-mes {
+    flex-shrink: 0;
+    width: 70px;
+    color: rgba(255,255,255,0.45);
+    font-weight: 600;
+}
+.cred-sim-bar-wrap {
+    flex: 1;
+    background: rgba(255,255,255,0.05);
+    border-radius: 6px;
+    height: 10px;
+    overflow: hidden;
+}
+.cred-sim-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #F97316, #EF4444);
+    border-radius: 6px;
+}
+.cred-sim-valor {
+    flex-shrink: 0;
+    width: 110px;
+    text-align: right;
+    color: #fff;
+    font-weight: 700;
+}
+
+/* SAC x PRICE */
+.cred-compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 22px 0;
+}
+@media (max-width: 720px) {
+    .cred-compare-grid { grid-template-columns: 1fr; }
+}
+.cred-compare-card {
+    border-radius: 18px;
+    padding: 24px 26px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.02);
+}
+.cred-compare-card h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    color: #fff;
+    margin-bottom: 14px;
+}
+.cred-compare-card.sac { border-color: rgba(16,185,129,0.25); }
+.cred-compare-card.price { border-color: rgba(239,68,68,0.25); }
+.cred-compare-item {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.86rem;
+    color: rgba(255,255,255,0.62);
+    line-height: 1.7;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.cred-compare-item:last-child { border-bottom: none; }
+.cred-compare-item strong { color: rgba(255,255,255,0.88); }
+
+/* COMPARADOR GERAL */
+.comparador-credito {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.84rem;
+    margin: 20px 0;
+}
+.comparador-credito th {
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 700;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.55);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+.comparador-credito td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.65);
+}
+.comparador-credito td.risco-alto { color: #EF4444; font-weight: 600; }
+.comparador-credito td.risco-medio { color: #F59E0B; font-weight: 600; }
+.comparador-credito td.risco-baixo { color: #10b981; font-weight: 600; }
+
+/* CHECKLIST */
+.cred-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 22px;
+}
+.cred-check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 20px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.90rem;
+    color: rgba(255,255,255,0.68);
+    line-height: 1.65;
+}
+.cred-check-num {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(239,68,68,0.12);
+    border: 1px solid rgba(239,68,68,0.35);
+    border-radius: 8px;
+    font-weight: 800;
+    color: #F97316;
+    font-size: 0.80rem;
+}
+.cred-check-item strong { color: #fff; }
+
+/* RED FLAG TAGS */
+.cred-redflag {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #EF4444;
+    background: rgba(239,68,68,0.10);
+    border: 1px solid rgba(239,68,68,0.30);
+    border-radius: 999px;
+    padding: 5px 14px;
+    margin-bottom: 10px;
+}
+
+/* BACK TO TOP — padrão INVLAB (igual artigo-gerente.html) */
+#backToTop {
+    display: none;
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 9999;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+    color: #0D0D0D;
+    border: 2px solid rgba(16, 185, 129, 0.3);
+    border-radius: 50%;
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 52px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+}
+#backToTop:hover {
+    background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.6);
+    border-color: rgba(16, 185, 129, 0.6);
+}
+@media (max-width: 768px) {
+    #backToTop {
+        width: 48px;
+        height: 48px;
+        font-size: 24px;
+        line-height: 44px;
+        bottom: 24px;
+        right: 24px;
+    }
+}

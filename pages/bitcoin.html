@@ -580,6 +580,7 @@
                 <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
                     <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
                     <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                    <li><a href="credito-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔥 Crédito</a></li>
                 </ul>
             </div>
         </div>
@@ -600,6 +601,24 @@
     <script defer src="../assets/js/bcb-api.js"></script>
     <script defer src="../assets/js/crypto-api.js"></script>
     <script defer src="../assets/js/invlab-carrossel-criptoativos.js"></script>
-</body>
+    <div id="backToTop">↑</div>
+    <script>
+        (function() {
+            var btn = document.getElementById('backToTop');
+            if (!btn) return;
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    btn.style.display = 'block';
+                    setTimeout(function() { btn.style.opacity = '1'; }, 10);
+                } else {
+                    btn.style.opacity = '0';
+                    setTimeout(function() { btn.style.display = 'none'; }, 300);
+                }
+            });
+            btn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+    </script></body>
 </html>
 
