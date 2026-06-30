@@ -1,0 +1,312 @@
+/* ================================================================
+   SINAIS DE ALERTA — COMO RECONHECER UMA VENDA ANTES DE ASSINAR
+   Paleta: violeta (#A78BFA) / roxo (#8B5CF6)
+   Filosofia: psicologia da decisão — autonomia do investidor
+   ================================================================ */
+
+/* HOOK */
+.alerta-hook {
+    background: linear-gradient(135deg, rgba(139,92,246,0.08) 0%, rgba(167,139,250,0.04) 100%);
+    border: 1px solid rgba(139,92,246,0.24);
+    border-radius: 20px; padding: 52px 40px;
+    text-align: center; margin: 48px 0 36px;
+    position: relative; overflow: hidden;
+}
+.alerta-hook::before {
+    content: ''; position: absolute; top: -60%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(ellipse at center, rgba(139,92,246,0.05) 0%, transparent 60%);
+    pointer-events: none;
+}
+.alerta-hook-badge {
+    display: inline-block;
+    background: rgba(139,92,246,0.10); border: 1px solid rgba(139,92,246,0.30);
+    color: #A78BFA; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    padding: 6px 18px; border-radius: 20px; margin-bottom: 28px;
+}
+.alerta-hook-frase {
+    background: rgba(139,92,246,0.08); border-left: 3px solid #8B5CF6;
+    border-radius: 0 14px 14px 0; padding: 22px 28px;
+    margin: 28px auto; max-width: 640px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem); font-weight: 700;
+    color: rgba(255,255,255,0.88); font-style: italic; line-height: 1.6; text-align: left;
+}
+
+/* SEÇÕES */
+.alerta-section {
+    background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px; padding: 44px 40px; margin-bottom: 28px;
+}
+.alerta-section-tag {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; color: rgba(139,92,246,0.60); margin-bottom: 10px;
+}
+.alerta-section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.4rem; font-weight: 700; color: #D4AF37;
+    margin-bottom: 16px; line-height: 1.3;
+}
+.alerta-text {
+    font-size: 0.95rem; color: rgba(255,255,255,0.62); line-height: 1.88; margin-bottom: 22px;
+}
+.alerta-text strong { color: rgba(255,255,255,0.88); }
+.alerta-frase-invlab {
+    background: rgba(16,185,129,0.06); border-left: 3px solid rgba(16,185,129,0.50);
+    border-radius: 0 10px 10px 0; padding: 16px 22px; margin: 20px 0;
+    font-size: 0.93rem; color: rgba(16,185,129,0.85); font-style: italic;
+    font-weight: 500; line-height: 1.7;
+}
+.alerta-frase-invlab::before { content: '💬 INVLAB — '; font-style: normal; font-weight: 700; }
+
+/* GATILHOS MENTAIS — grid explicativo */
+.alerta-gatilhos-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px; margin: 24px 0;
+}
+.alerta-gatilho-card {
+    background: rgba(139,92,246,0.05); border: 1px solid rgba(139,92,246,0.18);
+    border-radius: 14px; padding: 22px 20px;
+    transition: border-color 0.3s, transform 0.3s;
+}
+.alerta-gatilho-card:hover { border-color: rgba(167,139,250,0.40); transform: translateY(-2px); }
+.alerta-gatilho-icon { font-size: 1.5rem; margin-bottom: 10px; display: block; }
+.alerta-gatilho-nome {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: rgba(167,139,250,0.80); margin-bottom: 8px;
+}
+.alerta-gatilho-desc { font-size: 0.86rem; color: rgba(255,255,255,0.55); line-height: 1.65; }
+.alerta-gatilho-exemplo {
+    margin-top: 10px; font-size: 0.82rem; font-style: italic;
+    color: rgba(167,139,250,0.60); line-height: 1.5;
+}
+
+/* SINAIS DE ALERTA — análise profunda */
+.alerta-sinal {
+    background: rgba(255,255,255,0.015);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px; margin-bottom: 24px; overflow: hidden;
+}
+.alerta-sinal-header {
+    background: rgba(139,92,246,0.08);
+    border-bottom: 1px solid rgba(139,92,246,0.18);
+    padding: 22px 28px; display: flex; align-items: center; gap: 14px;
+}
+.alerta-sinal-badge {
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: rgba(167,139,250,0.70);
+    background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.25);
+    padding: 4px 10px; border-radius: 20px; flex-shrink: 0;
+}
+.alerta-sinal-frase {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.05rem; font-weight: 700; color: #fff; font-style: italic;
+}
+.alerta-sinal-body { padding: 6px 0; }
+.alerta-sinal-row {
+    display: grid; grid-template-columns: 200px 1fr;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.88rem; line-height: 1.65;
+}
+.alerta-sinal-row:last-child { border-bottom: none; }
+.alerta-sinal-label {
+    padding: 14px 20px 14px 28px;
+    font-weight: 600; font-size: 0.78rem; letter-spacing: 0.3px;
+    display: flex; align-items: flex-start; gap: 8px;
+    color: rgba(255,255,255,0.50);
+}
+.alerta-sinal-label.promete { color: rgba(167,139,250,0.85); }
+.alerta-sinal-label.funciona { color: rgba(96,165,250,0.85); }
+.alerta-sinal-label.risco { color: rgba(245,158,11,0.85); }
+.alerta-sinal-label.desarma { color: rgba(16,185,129,0.85); }
+.alerta-sinal-valor {
+    padding: 14px 28px 14px 0;
+    color: rgba(255,255,255,0.62);
+}
+.alerta-sinal-valor strong { color: rgba(255,255,255,0.85); }
+
+/* MÉTODO PARE */
+.alerta-pare-wrapper {
+    background: linear-gradient(135deg, rgba(109,40,217,0.10) 0%, rgba(139,92,246,0.06) 100%);
+    border: 1px solid rgba(139,92,246,0.32); border-radius: 24px;
+    padding: 52px 44px; margin: 8px 0 28px; text-align: center;
+    position: relative; overflow: hidden;
+}
+.alerta-pare-wrapper::before {
+    content: ''; position: absolute; top: -40%; left: -20%;
+    width: 140%; height: 180%;
+    background: radial-gradient(ellipse at center, rgba(139,92,246,0.06) 0%, transparent 60%);
+    pointer-events: none;
+}
+.alerta-pare-metodologia-tag {
+    display: inline-block; font-size: 0.68rem; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase; color: #A78BFA;
+    background: rgba(139,92,246,0.10); border: 1px solid rgba(139,92,246,0.30);
+    border-radius: 20px; padding: 6px 18px; margin-bottom: 20px;
+}
+.alerta-pare-titulo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 900;
+    letter-spacing: 0.08em; color: #A78BFA; margin-bottom: 8px;
+}
+.alerta-pare-subtitulo {
+    font-size: 0.92rem; color: rgba(255,255,255,0.45);
+    margin-bottom: 36px; line-height: 1.6; max-width: 500px; margin-left: auto; margin-right: auto;
+}
+.alerta-pare-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px; margin: 0 auto; max-width: 900px;
+}
+.alerta-pare-step {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(139,92,246,0.22);
+    border-radius: 18px; padding: 32px 20px; text-align: center;
+    transition: border-color 0.3s, transform 0.3s;
+}
+.alerta-pare-step:hover { border-color: rgba(167,139,250,0.50); transform: translateY(-3px); }
+.alerta-pare-letra {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 3.2rem; font-weight: 900; color: #A78BFA;
+    line-height: 1; margin-bottom: 12px; display: block;
+}
+.alerta-pare-palavra {
+    font-size: 0.92rem; font-weight: 700; color: #fff;
+    margin-bottom: 14px; letter-spacing: 0.3px;
+}
+.alerta-pare-separator {
+    width: 30px; height: 2px; background: rgba(167,139,250,0.30);
+    margin: 0 auto 14px;
+}
+.alerta-pare-desc {
+    font-size: 0.83rem; color: rgba(255,255,255,0.50); line-height: 1.65;
+}
+.alerta-pare-frase {
+    font-family: 'Playfair Display', Georgia, serif; font-size: 1.05rem;
+    font-style: italic; color: rgba(167,139,250,0.80);
+    margin: 32px auto 0; max-width: 560px; line-height: 1.7;
+}
+
+/* PARE EM AÇÃO */
+.alerta-em-acao {
+    background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px; margin-bottom: 8px; overflow: hidden;
+}
+.alerta-em-acao-header {
+    background: rgba(139,92,246,0.08); border-bottom: 1px solid rgba(139,92,246,0.18);
+    padding: 18px 28px;
+}
+.alerta-em-acao-situacao {
+    font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.70;
+    padding: 16px 28px 4px; font-style: italic;
+}
+.alerta-em-acao-step {
+    display: flex; align-items: flex-start; gap: 18px;
+    padding: 16px 28px; border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.alerta-em-acao-step:last-child { border-bottom: none; }
+.alerta-em-acao-letra {
+    width: 38px; height: 38px; flex-shrink: 0;
+    background: linear-gradient(135deg, #7C3AED, #A78BFA);
+    border-radius: 10px; display: flex; align-items: center;
+    justify-content: center; font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.2rem; font-weight: 900; color: #fff;
+}
+.alerta-em-acao-conteudo { flex: 1; }
+.alerta-em-acao-acao {
+    font-size: 0.88rem; font-weight: 700; color: #A78BFA;
+    margin-bottom: 4px; font-size: 0.78rem; letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+.alerta-em-acao-desc {
+    font-size: 0.90rem; color: rgba(255,255,255,0.65); line-height: 1.7;
+}
+.alerta-em-acao-resultado {
+    background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.20);
+    border-radius: 0 0 18px 18px; padding: 16px 28px;
+    font-size: 0.88rem; color: rgba(16,185,129,0.80); font-style: italic; line-height: 1.7;
+}
+
+/* CHECKLIST */
+.alerta-checklist { margin: 24px 0; }
+.alerta-check-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.90rem; color: rgba(255,255,255,0.65); line-height: 1.65;
+}
+.alerta-check-item:last-child { border-bottom: none; }
+.alerta-check-num {
+    width: 26px; height: 26px; border: 2px solid rgba(139,92,246,0.35);
+    border-radius: 6px; flex-shrink: 0; display: flex; align-items: center;
+    justify-content: center; font-size: 0.72rem; font-weight: 700;
+    color: rgba(167,139,250,0.70); margin-top: 1px;
+}
+.alerta-check-item strong { color: rgba(255,255,255,0.88); }
+
+/* GRAND FINALE / SEMENTE */
+.alerta-semente {
+    background: linear-gradient(135deg, rgba(139,92,246,0.07) 0%, rgba(16,185,129,0.05) 100%);
+    border: 1px solid rgba(139,92,246,0.22); border-radius: 24px;
+    padding: 56px 44px; margin: 12px 0 48px; text-align: center;
+    position: relative; overflow: hidden;
+}
+.alerta-semente::before {
+    content: ''; position: absolute; top: -40%; left: -20%;
+    width: 140%; height: 180%;
+    background: radial-gradient(ellipse at center, rgba(139,92,246,0.04) 0%, transparent 60%);
+    pointer-events: none;
+}
+.alerta-semente-titulo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.4rem, 2.8vw, 2rem); font-weight: 800; color: #D4AF37;
+    margin-bottom: 24px; line-height: 1.3;
+}
+.alerta-semente-linha {
+    font-size: 1rem; color: rgba(255,255,255,0.55); line-height: 2.2; margin-bottom: 4px;
+}
+.alerta-semente-linha strong { color: rgba(255,255,255,0.85); }
+.alerta-semente-assinatura {
+    font-size: 1.35rem; margin-top: 32px; color: rgba(16,185,129,0.80); font-weight: 700;
+}
+
+@media (max-width: 900px) {
+    .alerta-pare-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+    .alerta-hook { padding: 36px 22px; }
+    .alerta-section { padding: 32px 22px; }
+    .alerta-pare-wrapper { padding: 36px 22px; }
+    .alerta-semente { padding: 40px 22px; }
+    .alerta-gatilhos-grid { grid-template-columns: 1fr 1fr; }
+    .alerta-sinal-row { grid-template-columns: 1fr; }
+    .alerta-sinal-label { padding: 12px 20px 4px 20px; }
+    .alerta-sinal-valor { padding: 4px 20px 12px 20px; }
+    .alerta-sinal-header { padding: 18px 20px; flex-direction: column; gap: 8px; }
+    .alerta-em-acao-step { padding: 14px 20px; }
+    .alerta-em-acao-situacao { padding: 14px 20px 4px; }
+    .alerta-em-acao-resultado { padding: 14px 20px; }
+    .alerta-em-acao-header { padding: 16px 20px; }
+}
+@media (max-width: 480px) {
+    .alerta-pare-grid { grid-template-columns: 1fr; }
+    .alerta-gatilhos-grid { grid-template-columns: 1fr; }
+}
+
+/* BACK TO TOP — padrão INVLAB */
+#backToTop {
+    display: none; position: fixed; bottom: 40px; right: 40px; z-index: 9999;
+    width: 56px; height: 56px;
+    background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+    color: #0D0D0D; border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 50%;
+    font-size: 28px; font-weight: 700; text-align: center; line-height: 52px;
+    cursor: pointer; box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+    transition: all 0.3s ease-in-out; opacity: 0;
+}
+#backToTop:hover {
+    background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.6);
+    border-color: rgba(16, 185, 129, 0.6);
+}
+@media (max-width: 768px) {
+    #backToTop { width: 48px; height: 48px; font-size: 24px; line-height: 44px; bottom: 24px; right: 24px; }
+}
