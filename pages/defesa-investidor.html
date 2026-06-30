@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -18,95 +18,7 @@
     <link rel="stylesheet" href="../assets/css/artigo-styles.css">
     <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
 
-    <style>
-    /* ================================================================
-       DEFESA DO INVESTIDOR — ESTILOS EXCLUSIVOS
-       ================================================================ */
-
-    .defesa-hook {
-        background: linear-gradient(135deg, rgba(245,158,11,0.08) 0%, rgba(239,68,68,0.05) 100%);
-        border: 1px solid rgba(245,158,11,0.28);
-        border-radius: 20px; padding: 52px 40px;
-        text-align: center; margin: 48px 0 36px;
-        position: relative; overflow: hidden;
-    }
-    .defesa-hook::before {
-        content: ''; position: absolute; top: -60%; left: -50%;
-        width: 200%; height: 200%;
-        background: radial-gradient(ellipse at center, rgba(245,158,11,0.04) 0%, transparent 60%);
-        pointer-events: none;
-    }
-    .defesa-hook-badge {
-        display: inline-block;
-        background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.35);
-        color: #F59E0B; font-size: 0.72rem; font-weight: 700;
-        letter-spacing: 2.5px; text-transform: uppercase;
-        padding: 6px 18px; border-radius: 20px; margin-bottom: 28px;
-    }
-    .defesa-hook-title {
-        font-size: clamp(1.4rem,3.5vw,2.1rem); font-weight: 700;
-        color: #fff; line-height: 1.5; margin-bottom: 18px;
-    }
-    .defesa-hook-destaque {
-        background: rgba(245,158,11,0.07); border-left: 3px solid #F59E0B;
-        border-radius: 0 12px 12px 0; padding: 18px 24px;
-        margin: 24px auto; max-width: 620px;
-        font-size: 1.05rem; color: #F59E0B; font-style: italic;
-        font-weight: 600; line-height: 1.7; text-align: left;
-    }
-
-    .defesa-stage {
-        background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07);
-        border-radius: 18px; padding: 36px 40px; margin-bottom: 28px;
-    }
-    .defesa-stage-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
-    .defesa-stage-num {
-        font-size: 0.7rem; font-weight: 700;
-        color: rgba(245,158,11,0.6); letter-spacing: 2px; text-transform: uppercase;
-    }
-    .defesa-stage-title { font-size: 1.1rem; font-weight: 700; color: #F59E0B; }
-    .defesa-text { font-size: 0.95rem; color: rgba(255,255,255,0.65); line-height: 1.85; margin-bottom: 22px; }
-
-    .checklist-box {
-        background: rgba(16,185,129,0.04); border: 1px solid rgba(16,185,129,0.20);
-        border-radius: 16px; padding: 32px 36px; margin: 28px 0;
-    }
-    .checklist-title {
-        font-size: 1rem; font-weight: 700; color: #10b981;
-        margin-bottom: 20px; letter-spacing: 0.5px;
-    }
-    .checklist-item {
-        display: flex; align-items: flex-start; gap: 12px;
-        padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
-        font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.6;
-    }
-    .checklist-item:last-child { border-bottom: none; }
-    .checklist-check {
-        width: 20px; height: 20px; border: 2px solid rgba(16,185,129,0.40);
-        border-radius: 4px; flex-shrink: 0; margin-top: 2px;
-        display: flex; align-items: center; justify-content: center;
-    }
-    .checklist-item strong { color: rgba(255,255,255,0.85); }
-
-    .conflito-grid {
-        display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
-        gap: 16px; margin: 24px 0;
-    }
-    .conflito-card {
-        background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.18);
-        border-radius: 14px; padding: 22px 20px;
-    }
-    .conflito-card-agente { font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(239,68,68,0.65); margin-bottom: 8px; }
-    .conflito-card-quer { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
-    .conflito-card-versus { font-size: 0.75rem; color: rgba(255,255,255,0.30); margin-bottom: 6px; }
-    .conflito-card-investidor { font-size: 0.88rem; color: rgba(16,185,129,0.80); }
-
-    @media (max-width: 768px) {
-        .defesa-hook { padding: 36px 24px; }
-        .defesa-stage { padding: 28px 22px; }
-        .checklist-box { padding: 24px 20px; }
-    }
-    </style>
+    <link rel="stylesheet" href="../assets/css/defesa-investidor.css">
 </head>
 <body>
     <section id="invlab-carousel-container"></section>
@@ -440,60 +352,63 @@
     </main>
 
     <footer style="background: rgba(13, 13, 13, 0.97); border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
-        <div class="content-wrapper-wide">
-            <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
-                <div>
-                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
-                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
-                    <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">🧭 Guia do INVLAB →</a>
-                </div>
-                <div>
-                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
-                        <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
-                        <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Laboratório Ações</a></li>
-                        <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔬 Laboratório ETFs</a></li>
-                        <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 Laboratório FIIs</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Economia Digital</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌐 Economia Digital</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Defesa do Investidor</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Ferramentas</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 Simulador CDBs</a></li>
-                        <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Simulador Tesouro</a></li>
-                        <li><a href="calculadora.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🧮 Juros Compostos</a></li>
-                    </ul>
-                </div>
+    <div class="content-wrapper-wide">
+        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
+                <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">🧭 Guia do INVLAB →</a>
             </div>
-            <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
-                <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
-                    ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
-                </p>
-                <p style="font-size: 0.75rem; color: #475569; text-align: center;">
-                    © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
-                </p>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                    <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Ações</a></li>
+                    <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💵 ETFs</a></li>
+                    <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 FIIs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Economia Digital</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌐 Economia Digital</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Instrumentos Avançados</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="../index.html#outros-fundos" style="color: rgba(16,185,129,0.85); text-decoration: none;">💼 Fundos e Estruturados</a></li>
+                    <li><a href="../index.html#outros-ouro" style="color: rgba(16,185,129,0.85); text-decoration: none;">🥇 Ouro</a></li>
+                    <li><a href="../index.html#outros-derivativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">⚡ Derivativos e Opções</a></li>
+                    <li><a href="../index.html#outros-alternativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚀 Invest. Alternativos</a></li>
+                    <li><a href="../index.html#outros-ativos-reais" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏠 Ativos Reais</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Defesa do Investidor</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
+                    <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                </ul>
             </div>
         </div>
-    </footer>
+        <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
+            <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
+            </p>
+            <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
+            </p>
+        </div>
+    </div>
+</footer>
 
     <script src="../assets/js/script.js"></script>
     <script defer src="../assets/js/bcb-api.js"></script>

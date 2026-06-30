@@ -87,15 +87,28 @@ function reinitTabLinks() {
     });
 }
 
-// Verifica hash na URL e abre a aba correspondente
+// Verifica hash na URL e abre a aba correspondente (ou sub-seção dentro de uma aba)
 function checkURLHash() {
     const hash = window.location.hash.substring(1); // Remove o '#'
-    
-    if (hash) {
-        const targetTab = document.getElementById(hash);
-        if (targetTab) {
-            switchTab(hash);
-        }
+
+    if (!hash) return;
+
+    const target = document.getElementById(hash);
+    if (!target) return;
+
+    // Se o elemento é um tab-content, ativa direto
+    if (target.classList.contains('tab-content')) {
+        switchTab(hash);
+        return;
+    }
+
+    // Se é uma sub-seção dentro de um tab-content, ativa o tab pai e rola até a seção
+    const parentTab = target.closest('.tab-content');
+    if (parentTab) {
+        switchTab(parentTab.id);
+        setTimeout(() => {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 150);
     }
 }
 

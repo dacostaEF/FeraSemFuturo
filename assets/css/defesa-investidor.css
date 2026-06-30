@@ -1,0 +1,87 @@
+/* ================================================================
+   DEFESA DO INVESTIDOR — ESTILOS EXCLUSIVOS
+   ================================================================ */
+
+.defesa-hook {
+    background: linear-gradient(135deg, rgba(245,158,11,0.08) 0%, rgba(239,68,68,0.05) 100%);
+    border: 1px solid rgba(245,158,11,0.28);
+    border-radius: 20px; padding: 52px 40px;
+    text-align: center; margin: 48px 0 36px;
+    position: relative; overflow: hidden;
+}
+.defesa-hook::before {
+    content: ''; position: absolute; top: -60%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(ellipse at center, rgba(245,158,11,0.04) 0%, transparent 60%);
+    pointer-events: none;
+}
+.defesa-hook-badge {
+    display: inline-block;
+    background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.35);
+    color: #F59E0B; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    padding: 6px 18px; border-radius: 20px; margin-bottom: 28px;
+}
+.defesa-hook-title {
+    font-size: clamp(1.4rem,3.5vw,2.1rem); font-weight: 700;
+    color: #fff; line-height: 1.5; margin-bottom: 18px;
+}
+.defesa-hook-destaque {
+    background: rgba(245,158,11,0.07); border-left: 3px solid #F59E0B;
+    border-radius: 0 12px 12px 0; padding: 18px 24px;
+    margin: 24px auto; max-width: 620px;
+    font-size: 1.05rem; color: #F59E0B; font-style: italic;
+    font-weight: 600; line-height: 1.7; text-align: left;
+}
+
+.defesa-stage {
+    background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 18px; padding: 36px 40px; margin-bottom: 28px;
+}
+.defesa-stage-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.defesa-stage-num {
+    font-size: 0.7rem; font-weight: 700;
+    color: rgba(245,158,11,0.6); letter-spacing: 2px; text-transform: uppercase;
+}
+.defesa-stage-title { font-size: 1.1rem; font-weight: 700; color: #F59E0B; }
+.defesa-text { font-size: 0.95rem; color: rgba(255,255,255,0.65); line-height: 1.85; margin-bottom: 22px; }
+
+.checklist-box {
+    background: rgba(16,185,129,0.04); border: 1px solid rgba(16,185,129,0.20);
+    border-radius: 16px; padding: 32px 36px; margin: 28px 0;
+}
+.checklist-title {
+    font-size: 1rem; font-weight: 700; color: #10b981;
+    margin-bottom: 20px; letter-spacing: 0.5px;
+}
+.checklist-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.6;
+}
+.checklist-item:last-child { border-bottom: none; }
+.checklist-check {
+    width: 20px; height: 20px; border: 2px solid rgba(16,185,129,0.40);
+    border-radius: 4px; flex-shrink: 0; margin-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+}
+.checklist-item strong { color: rgba(255,255,255,0.85); }
+
+.conflito-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+    gap: 16px; margin: 24px 0;
+}
+.conflito-card {
+    background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.18);
+    border-radius: 14px; padding: 22px 20px;
+}
+.conflito-card-agente { font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(239,68,68,0.65); margin-bottom: 8px; }
+.conflito-card-quer { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.conflito-card-versus { font-size: 0.75rem; color: rgba(255,255,255,0.30); margin-bottom: 6px; }
+.conflito-card-investidor { font-size: 0.88rem; color: rgba(16,185,129,0.80); }
+
+@media (max-width: 768px) {
+    .defesa-hook { padding: 36px 24px; }
+    .defesa-stage { padding: 28px 22px; }
+    .checklist-box { padding: 24px 20px; }
+}

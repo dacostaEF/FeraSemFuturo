@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -17,212 +17,7 @@
     <link rel="stylesheet" href="../assets/css/artigo-styles.css">
     <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
 
-    <style>
-    /* ================================================================
-       PREVIDÊNCIA SEM ARMADILHAS — ESTILOS EXCLUSIVOS
-       ================================================================ */
-
-    .prev-hook {
-        background: linear-gradient(135deg, rgba(245,158,11,0.07) 0%, rgba(239,68,68,0.04) 100%);
-        border: 1px solid rgba(245,158,11,0.25);
-        border-radius: 20px; padding: 52px 40px;
-        text-align: center; margin: 48px 0 36px;
-        position: relative; overflow: hidden;
-    }
-    .prev-hook::before {
-        content: ''; position: absolute; top: -60%; left: -50%;
-        width: 200%; height: 200%;
-        background: radial-gradient(ellipse at center, rgba(245,158,11,0.04) 0%, transparent 60%);
-        pointer-events: none;
-    }
-    .prev-hook-badge {
-        display: inline-block;
-        background: rgba(245,158,11,0.10); border: 1px solid rgba(245,158,11,0.30);
-        color: #F59E0B; font-size: 0.72rem; font-weight: 700;
-        letter-spacing: 2.5px; text-transform: uppercase;
-        padding: 6px 18px; border-radius: 20px; margin-bottom: 28px;
-    }
-    .prev-hook-frase {
-        background: rgba(245,158,11,0.07); border-left: 3px solid #F59E0B;
-        border-radius: 0 12px 12px 0; padding: 18px 24px;
-        margin: 24px auto; max-width: 640px;
-        font-size: 1.02rem; color: #F59E0B; font-style: italic;
-        font-weight: 600; line-height: 1.7; text-align: left;
-    }
-
-    /* Seções de conteúdo */
-    .prev-section {
-        background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07);
-        border-radius: 20px; padding: 44px 40px; margin-bottom: 28px;
-    }
-    .prev-section-tag {
-        font-size: 0.68rem; font-weight: 700; letter-spacing: 2.5px;
-        text-transform: uppercase; color: rgba(245,158,11,0.55); margin-bottom: 10px;
-    }
-    .prev-section-title {
-        font-family: 'Playfair Display', Georgia, serif;
-        font-size: 1.4rem; font-weight: 700; color: #D4AF37;
-        margin-bottom: 16px; line-height: 1.3;
-    }
-    .prev-text {
-        font-size: 0.95rem; color: rgba(255,255,255,0.62); line-height: 1.88; margin-bottom: 22px;
-    }
-    .prev-text strong { color: rgba(255,255,255,0.88); }
-    .prev-frase-invlab {
-        background: rgba(16,185,129,0.06); border-left: 3px solid rgba(16,185,129,0.50);
-        border-radius: 0 10px 10px 0; padding: 16px 22px; margin: 20px 0;
-        font-size: 0.93rem; color: rgba(16,185,129,0.85); font-style: italic;
-        font-weight: 500; line-height: 1.7;
-    }
-    .prev-frase-invlab::before { content: '💬 INVLAB — '; font-style: normal; font-weight: 700; }
-
-    /* Grid comparativo PGBL/VGBL */
-    .prev-compare-grid {
-        display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 24px 0;
-    }
-    .prev-compare-card {
-        border-radius: 14px; padding: 28px 24px;
-    }
-    .prev-compare-card.pgbl {
-        background: rgba(129,140,248,0.06); border: 1px solid rgba(129,140,248,0.25);
-    }
-    .prev-compare-card.vgbl {
-        background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.25);
-    }
-    .prev-compare-card h4 {
-        font-size: 1.05rem; font-weight: 700; margin-bottom: 14px;
-    }
-    .prev-compare-card.pgbl h4 { color: #818CF8; }
-    .prev-compare-card.vgbl h4 { color: #10b981; }
-    .prev-compare-item {
-        font-size: 0.88rem; color: rgba(255,255,255,0.62); line-height: 1.6;
-        padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    .prev-compare-item:last-child { border-bottom: none; }
-    .prev-compare-item strong { color: rgba(255,255,255,0.85); }
-
-    /* Tabela de alíquotas */
-    .aliquota-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-    .aliquota-table th {
-        background: rgba(245,158,11,0.10); color: #F59E0B;
-        font-size: 0.78rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
-        padding: 12px 16px; text-align: left; border-bottom: 1px solid rgba(245,158,11,0.20);
-    }
-    .aliquota-table td {
-        padding: 11px 16px; font-size: 0.88rem; color: rgba(255,255,255,0.65);
-        border-bottom: 1px solid rgba(255,255,255,0.05); line-height: 1.5;
-    }
-    .aliquota-table tr:last-child td { border-bottom: none; }
-    .aliquota-table td.aliq-anos { color: rgba(255,255,255,0.85); font-weight: 600; }
-    .aliquota-table td.aliq-alto { color: #ef4444; font-weight: 700; }
-    .aliquota-table td.aliq-medio { color: #F59E0B; font-weight: 700; }
-    .aliquota-table td.aliq-baixo { color: #10b981; font-weight: 700; }
-    .aliquota-table tr.aliq-destaque td { background: rgba(16,185,129,0.05); }
-
-    /* Grid de taxas */
-    .taxa-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 16px; margin: 24px 0; }
-    .taxa-card {
-        border-radius: 14px; padding: 22px 20px;
-        background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.18);
-    }
-    .taxa-card-nome { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(239,68,68,0.65); margin-bottom: 8px; }
-    .taxa-card-valor { font-size: 1.3rem; font-weight: 800; color: #ef4444; margin-bottom: 8px; }
-    .taxa-card-desc { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
-
-    /* Grid de modalidades de renda */
-    .renda-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 16px; margin: 24px 0; }
-    .renda-card { border-radius: 14px; padding: 24px 20px; }
-    .renda-card.simples { background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.22); }
-    .renda-card.prazo { background: rgba(245,158,11,0.05); border: 1px solid rgba(245,158,11,0.22); }
-    .renda-card.reversivel { background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.22); }
-    .renda-card.certa { background: rgba(129,140,248,0.05); border: 1px solid rgba(129,140,248,0.22); }
-    .renda-card-tipo { font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
-    .renda-card.simples .renda-card-tipo { color: rgba(239,68,68,0.70); }
-    .renda-card.prazo .renda-card-tipo { color: rgba(245,158,11,0.70); }
-    .renda-card.reversivel .renda-card-tipo { color: rgba(16,185,129,0.70); }
-    .renda-card.certa .renda-card-tipo { color: rgba(129,140,248,0.70); }
-    .renda-card-nome { font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
-    .renda-card-desc { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.65; }
-    .renda-card-alerta { font-size: 0.80rem; font-weight: 600; margin-top: 10px; padding: 8px 10px; border-radius: 8px; line-height: 1.5; }
-    .renda-card.simples .renda-card-alerta { background: rgba(239,68,68,0.10); color: rgba(239,68,68,0.80); }
-    .renda-card.prazo .renda-card-alerta { background: rgba(245,158,11,0.10); color: rgba(245,158,11,0.80); }
-    .renda-card.reversivel .renda-card-alerta { background: rgba(16,185,129,0.10); color: rgba(16,185,129,0.80); }
-    .renda-card.certa .renda-card-alerta { background: rgba(129,140,248,0.10); color: rgba(129,140,248,0.80); }
-
-    /* Comparador visual */
-    .comparador-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.85rem; }
-    .comparador-table th {
-        padding: 14px 16px; text-align: center; font-size: 0.75rem;
-        font-weight: 700; letter-spacing: 0.5px; border-bottom: 2px solid rgba(255,255,255,0.08);
-    }
-    .comparador-table th:first-child { text-align: left; }
-    .comparador-table th.col-ruim { color: #ef4444; background: rgba(239,68,68,0.05); }
-    .comparador-table th.col-ok { color: #F59E0B; background: rgba(245,158,11,0.05); }
-    .comparador-table th.col-bom { color: #10b981; background: rgba(16,185,129,0.05); }
-    .comparador-table th.col-bom2 { color: #818CF8; background: rgba(129,140,248,0.05); }
-    .comparador-table td {
-        padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.04);
-        text-align: center; color: rgba(255,255,255,0.60); vertical-align: top; line-height: 1.5;
-    }
-    .comparador-table td:first-child {
-        text-align: left; font-weight: 600; color: rgba(255,255,255,0.80); font-size: 0.82rem;
-    }
-    .comparador-table tr:last-child td { border-bottom: none; }
-    .comparador-table td.ruim { color: rgba(239,68,68,0.80); }
-    .comparador-table td.ok { color: rgba(245,158,11,0.80); }
-    .comparador-table td.bom { color: rgba(16,185,129,0.80); }
-
-    /* Checklist */
-    .prev-checklist { margin: 24px 0; }
-    .prev-check-item {
-        display: flex; align-items: flex-start; gap: 14px;
-        padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
-        font-size: 0.90rem; color: rgba(255,255,255,0.65); line-height: 1.65;
-    }
-    .prev-check-item:last-child { border-bottom: none; }
-    .prev-check-num {
-        width: 26px; height: 26px; border: 2px solid rgba(245,158,11,0.35);
-        border-radius: 6px; flex-shrink: 0; display: flex; align-items: center;
-        justify-content: center; font-size: 0.72rem; font-weight: 700;
-        color: rgba(245,158,11,0.60); margin-top: 1px;
-    }
-    .prev-check-item strong { color: rgba(255,255,255,0.88); }
-
-    /* Alerta informativo */
-    .prev-alerta {
-        background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.22);
-        border-radius: 14px; padding: 20px 24px; margin: 20px 0;
-        font-size: 0.90rem; color: rgba(255,255,255,0.65); line-height: 1.75;
-    }
-    .prev-alerta strong { color: #ef4444; }
-    .prev-alerta-title { font-size: 0.78rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(239,68,68,0.65); margin-bottom: 8px; }
-
-    /* Destaque verde */
-    .prev-destaque-verde {
-        background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.20);
-        border-radius: 14px; padding: 20px 24px; margin: 20px 0;
-        font-size: 0.90rem; color: rgba(255,255,255,0.65); line-height: 1.75;
-    }
-    .prev-destaque-verde strong { color: #10b981; }
-
-    /* Breadcrumb */
-    .prev-breadcrumb {
-        font-size: 0.80rem; color: rgba(255,255,255,0.30);
-        padding: 20px 0 0; display: flex; align-items: center; gap: 8px;
-    }
-    .prev-breadcrumb a { color: rgba(245,158,11,0.60); text-decoration: none; }
-    .prev-breadcrumb a:hover { color: #F59E0B; }
-    .prev-breadcrumb span { color: rgba(255,255,255,0.20); }
-
-    @media (max-width: 768px) {
-        .prev-hook { padding: 36px 22px; }
-        .prev-section { padding: 32px 22px; }
-        .prev-compare-grid { grid-template-columns: 1fr; }
-        .aliquota-table th, .aliquota-table td { padding: 10px 12px; }
-        .comparador-table { font-size: 0.78rem; }
-        .comparador-table th, .comparador-table td { padding: 10px 10px; }
-    }
-    </style>
+    <link rel="stylesheet" href="../assets/css/previdencia-sem-armadilhas.css">
 </head>
 <body>
     <section id="invlab-carousel-container"></section>
@@ -841,61 +636,63 @@
     </main>
 
     <footer style="background: rgba(13, 13, 13, 0.97); border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
-        <div class="content-wrapper-wide">
-            <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
-                <div>
-                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
-                    <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
-                    <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">🧭 Guia do INVLAB →</a>
-                </div>
-                <div>
-                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
-                        <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
-                        <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Ações</a></li>
-                        <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💵 ETFs</a></li>
-                        <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 FIIs</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Economia Digital</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌐 Economia Digital</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Defesa do Investidor</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
-                        <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Ferramentas</h4>
-                    <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 Simulador CDBs</a></li>
-                        <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Simulador Tesouro</a></li>
-                        <li><a href="calculadora.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🧮 Juros Compostos</a></li>
-                    </ul>
-                </div>
+    <div class="content-wrapper-wide">
+        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
+                <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">🧭 Guia do INVLAB →</a>
             </div>
-            <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
-                <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
-                    ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
-                </p>
-                <p style="font-size: 0.75rem; color: #475569; text-align: center;">
-                    © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
-                </p>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                    <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Ações</a></li>
+                    <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💵 ETFs</a></li>
+                    <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 FIIs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Economia Digital</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌐 Economia Digital</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Instrumentos Avançados</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="../index.html#outros-fundos" style="color: rgba(16,185,129,0.85); text-decoration: none;">💼 Fundos e Estruturados</a></li>
+                    <li><a href="../index.html#outros-ouro" style="color: rgba(16,185,129,0.85); text-decoration: none;">🥇 Ouro</a></li>
+                    <li><a href="../index.html#outros-derivativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">⚡ Derivativos e Opções</a></li>
+                    <li><a href="../index.html#outros-alternativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚀 Invest. Alternativos</a></li>
+                    <li><a href="../index.html#outros-ativos-reais" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏠 Ativos Reais</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Defesa do Investidor</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
+                    <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                </ul>
             </div>
         </div>
-    </footer>
+        <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
+            <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
+            </p>
+            <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
+            </p>
+        </div>
+    </div>
+</footer>
 
     <script src="../assets/js/script.js"></script>
     <script defer src="../assets/js/bcb-api.js"></script>

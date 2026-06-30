@@ -2505,7 +2505,7 @@
                     </p>
 
                     <!-- CATEGORIA 1: Fundos e Produtos Estruturados -->
-                    <div class="inv-category">
+                    <div class="inv-category" id="outros-fundos">
                         <h3 class="inv-category-title">📦 Fundos e Produtos Estruturados</h3>
                         <p class="inv-category-subtitle">Produtos que reúnem vários ativos sob gestão profissional — entenda o que está por trás antes de aplicar.</p>
                         <div class="inv-grid">
@@ -2528,7 +2528,7 @@
                     </div>
 
                     <!-- CATEGORIA: Ouro — Reserva Global -->
-                    <div class="inv-category">
+                    <div class="inv-category" id="outros-ouro">
                         <h3 class="inv-category-title">🥇 Ouro — A Reserva Global</h3>
                         <p class="inv-category-subtitle">O único ativo que os bancos centrais do mundo inteiro guardam como reserva. Não é tendência — é o que existe há 5.000 anos quando as moedas perdem credibilidade.</p>
                         <div class="inv-grid">
@@ -2556,7 +2556,7 @@
                     </div>
 
                     <!-- CATEGORIA: Derivativos — Opções -->
-                    <div class="inv-category">
+                    <div class="inv-category" id="outros-derivativos">
                         <h3 class="inv-category-title">⚡ Derivativos — Opções</h3>
                         <p class="inv-category-subtitle">Contratos cujo valor deriva de outro ativo. Poderosos para proteção e estratégia — mas exigem conhecimento sólido antes de operar.</p>
                         <div class="inv-grid">
@@ -2584,7 +2584,7 @@
                     </div>
 
                     <!-- CATEGORIA 2: Investimentos Alternativos -->
-                    <div class="inv-category">
+                    <div class="inv-category" id="outros-alternativos">
                         <h3 class="inv-category-title">🚀 Investimentos Alternativos</h3>
                         <p class="inv-category-subtitle">Produtos de alta complexidade, geralmente acessíveis a investidores qualificados. Conheça o conceito antes de considerar.</p>
                         <div class="inv-grid">
@@ -2612,7 +2612,7 @@
                     </div>
 
                     <!-- CATEGORIA 3: Ativos Reais -->
-                    <div class="inv-category">
+                    <div class="inv-category" id="outros-ativos-reais">
                         <h3 class="inv-category-title">🏠 Ativos Reais</h3>
                         <p class="inv-category-subtitle">Investimentos em bens físicos — oferecem proteção contra inflação, mas têm baixa liquidez e custo alto de entrada.</p>
                         <div class="inv-grid">
@@ -2654,102 +2654,64 @@
     </main>
 
     <!-- Footer Premium INVLAB -->
-    <footer class="footer-invlab-premium">
-        <div class="content-wrapper-wide">
-            <!-- Logo e Descrição Institucional -->
-            <div class="footer-brand">
-                <img src="assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos" class="footer-logo">
-                <p class="footer-brand-text">Laboratório educacional de investimentos.<br>Sem venda de produtos, sem comissões, sem viés comercial.</p>
-                <a href="pages/guia_invlab.html" class="footer-cta">
-                    🧭 Guia do INVLAB →
-                </a>
+    <footer style="background: rgba(13, 13, 13, 0.97); border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+    <div class="content-wrapper-wide">
+        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
+                <a href="pages/guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">🧭 Guia do INVLAB →</a>
             </div>
-
-            <!-- Grid de Colunas -->
-            <div class="footer-grid">
-                <!-- Coluna 1: Renda Fixa -->
-                <div class="footer-column">
-                    <h4>Renda Fixa</h4>
-                    <ul>
-                        <li><a href="pages/poupanca.html">💰 Poupança</a></li>
-                        <li><a href="pages/simulador-cdbs.html">🏦 CDBs</a></li>
-                        <li><a href="pages/simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
-                        <li><a href="pages/simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
-                    </ul>
-                </div>
-
-                <!-- Coluna 2: Renda Variável -->
-                <div class="footer-column">
-                    <h4>Renda Variável</h4>
-                    <ul>
-                        <li><a href="#renda-variavel" data-tab-link="renda-variavel">📈 Introdução</a></li>
-                        <li><a href="pages/acoes.html">📊 Ações</a></li>
-                        <li><a href="pages/etfs.html">🎯 ETFs</a></li>
-                        <li><a href="pages/fiis.html">🏢 FIIs</a></li>
-                    </ul>
-                </div>
-
-                <!-- Coluna 3: Criptoativos -->
-                <div class="footer-column">
-                    <h4>Economia Digital</h4>
-                    <ul>
-                        <li><a href="pages/cripto.html">🔬 Laboratório</a></li>
-                        <li><a href="pages/bitcoin.html">₿ Bitcoin</a></li>
-                        <li><a href="pages/stablecoins.html">💵 Stablecoins</a></li>
-                        <li><a href="pages/blockchain.html">⛓️ Blockchain</a></li>
-                        <li><a href="pages/cbdc.html">🏛️ CBDCs</a></li>
-                    </ul>
-                </div>
-
-                <!-- Coluna 4: Instrumentos Avançados -->
-                <div class="footer-column">
-                    <h4>Instrumentos Avançados</h4>
-                    <ul>
-                        <li><a href="#outros-investimentos" data-tab-link="outros-investimentos">🧬 Introdução</a></li>
-                        <li><a href="pages/ganhos-come-cotas.html">🍽️ Come-cotas</a></li>
-                        <li><a href="pages/ganhos-iof-regressivo.html">📉 IOF Regressivo</a></li>
-                        <li><a href="pages/ganhos-inflacao.html">📊 Inflação</a></li>
-                    </ul>
-                </div>
-
-                <!-- Coluna 5: Defesa do Investidor -->
-                <div class="footer-column">
-                    <h4>Defesa do Investidor</h4>
-                    <ul>
-                        <li><a href="pages/defesa-investidor.html">🛡 Laboratório</a></li>
-                        <li><a href="pages/defesa-investidor.html#previdencia">🏦 Previdência</a></li>
-                        <li><a href="pages/defesa-investidor.html#credito">💳 Crédito</a></li>
-                    </ul>
-                </div>
-
-                <!-- Coluna 6: Ferramentas -->
-                <div class="footer-column">
-                    <h4>Ferramentas</h4>
-                    <ul>
-                        <li><a href="pages/simulador-invlab-plus.html">📈 INVLAB+</a></li>
-                        <li><a href="pages/simulador-cdbs.html">🏦 Simulador CDBs</a></li>
-                        <li><a href="pages/simulador-tesouro-direto.html">🇧🇷 Simulador Tesouro</a></li>
-                        <li><a href="pages/simulador-lci-lca.html">🏛️ Simulador LCI/LCA</a></li>
-                        <li><a href="pages/calculadora.html">🧮 Juros Compostos</a></li>
-                    </ul>
-                </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="pages/simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
+                    <li><a href="pages/simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                    <li><a href="pages/simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
+                </ul>
             </div>
-
-            <!-- Disclaimers Finais -->
-            <div class="footer-bottom">
-                <p class="footer-disclaimer">
-                    ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
-                </p>
-                <p class="footer-institutional">
-                    Conteúdo educacional desenvolvido por especialistas em mercado financeiro tradicional, tecnologia blockchain e tokenização de ativos reais. 
-                    O INVLAB é um laboratório de pesquisa independente dedicado a unir educação, tecnologia e inovação nos mercados de capitais.
-                </p>
-                <p class="footer-copyright">
-                    © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
-                </p>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="pages/acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Ações</a></li>
+                    <li><a href="pages/etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💵 ETFs</a></li>
+                    <li><a href="pages/fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 FIIs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Economia Digital</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="pages/cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌐 Economia Digital</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Instrumentos Avançados</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="#outros-fundos" style="color: rgba(16,185,129,0.85); text-decoration: none;">💼 Fundos e Estruturados</a></li>
+                    <li><a href="#outros-ouro" style="color: rgba(16,185,129,0.85); text-decoration: none;">🥇 Ouro</a></li>
+                    <li><a href="#outros-derivativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">⚡ Derivativos e Opções</a></li>
+                    <li><a href="#outros-alternativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚀 Invest. Alternativos</a></li>
+                    <li><a href="#outros-ativos-reais" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏠 Ativos Reais</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Defesa do Investidor</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="pages/defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
+                    <li><a href="pages/previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                </ul>
             </div>
         </div>
-    </footer>
+        <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
+            <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
+            </p>
+            <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
+            </p>
+        </div>
+    </div>
+</footer>
 
     <!-- INVLAB Scripts - Carregamento Otimizado -->
     <!-- Script principal carrega primeiro (menu e abas) -->
