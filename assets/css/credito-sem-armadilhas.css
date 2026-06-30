@@ -4,6 +4,7 @@
    Espelha os componentes de previdencia-sem-armadilhas.css
    ============================================================ */
 
+/* Breadcrumb — classe mantida para compatibilidade mas não utilizada na estrutura atual */
 .cred-breadcrumb {
     display: flex;
     align-items: center;
@@ -11,7 +12,6 @@
     font-family: 'Inter', sans-serif;
     font-size: 0.85rem;
     color: rgba(255,255,255,0.40);
-    padding-top: 120px;
 }
 .cred-breadcrumb a {
     color: #F97316;
