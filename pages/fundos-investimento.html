@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundos de Investimentos — Como delegar decisões sem abrir mão do conhecimento | INVLAB</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="description" content="Entenda o que são Fundos de Investimentos, como funcionam, quais custos têm e quando fazem — ou não — sentido para você. INVLAB.">
+
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+    <link rel="stylesheet" href="../assets/css/fundos-investimento.css">
+</head>
+<body>
+    <section id="invlab-carousel-container"></section>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+            </div>
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Início</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">📚 Primeiros<br>Passos</button>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-fixa'">📊 Renda<br>Fixa <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="poupanca.html">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-variavel'">📈 Renda<br>Variável <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='etfs.html'" style="cursor:pointer;">
+                                <span class="category-name">💵 ETFs</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-etfs">
+                                <li><a href="#">📊 Simulador de Indexação</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='fiis.html'" style="cursor:pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-fiis">
+                                <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='acoes.html'" style="cursor:pointer;">
+                                <span class="category-name">📈 Ações</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-acoes">
+                                <li><a href="#">📊 Simulador de Dividendos</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <button class="tab-btn" onclick="window.location.href='cripto.html'">🌐 Economia<br>Digital</button>
+                <button class="tab-btn active" onclick="window.location.href='instrumentos-avancados.html'">🧬 Instrumentos<br>Avançados</button>
+                <button class="tab-btn" onclick="window.location.href='defesa-investidor.html'">🛡 Defesa do<br>Investidor</button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <main style="margin-top: 110px;">
+        <!-- BREADCRUMB STICKY -->
+        <div style="position: sticky; top: 110px; z-index: 999; background: #0D0D0D; width: 100%; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <nav style="max-width: min(calc(100% - 64px), 1160px); margin: 0 auto; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.35);">
+                <span onclick="window.location.href='instrumentos-avancados.html'" style="cursor:pointer; color: rgba(34,211,238,0.65); font-weight:600;">🧬 Instrumentos Avançados</span>
+                <span>›</span>
+                <span style="color: rgba(96,165,250,0.75); font-weight:600;">Fundos de Investimentos</span>
+            </nav>
+        </div>
+        <div class="invlab-lab-container">
+
+            <!-- TÍTULO -->
+            <div style="padding-top: 40px; padding-bottom: 8px; text-align: center;">
+                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; font-weight: 800; color: #D4AF37; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em; line-height: 1.2;">💼 Fundos de Investimentos</h2>
+                <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(96,165,250,0.65); text-align: center; line-height: 1.8; margin-bottom: 14px; max-width: 860px; margin-left: auto; margin-right: auto;">Delegando decisões sem abrir mão do conhecimento.</p>
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: rgba(255,255,255,0.38); text-align: center; line-height: 1.8; margin-bottom: 0; max-width: 860px; margin-left: auto; margin-right: auto;">Você precisa tomar todas as decisões de investimento sozinho? Ou pode confiar parte delas a profissionais especializados? Este laboratório foi criado para responder exatamente essa pergunta.</p>
+            </div>
+
+            <!-- HOOK -->
+            <div class="fundos-hook">
+                <div class="fundos-hook-badge">💼 Laboratório — Fundos de Investimentos</div>
+                <h2 style="font-size: clamp(1.4rem,3.5vw,2.1rem); font-weight: 700; color: #fff; line-height: 1.5; margin-bottom: 18px;">Delegar decisões de investimento não é perder o controle.<br>É uma escolha consciente.</h2>
+                <p style="font-size:1rem; color:rgba(255,255,255,0.50); max-width:600px; margin:0 auto 20px; line-height:1.78;">
+                    Quando você compra um CDB ou uma ação, toma a decisão diretamente.
+                    Quando investe em um Fundo, faz algo diferente: decide confiar essas decisões a um gestor profissional.
+                    Essa diferença muda tudo — e raramente é explicada com clareza.
+                </p>
+                <div class="fundos-hook-frase">
+                    "A pergunta não é: qual Fundo rende mais? A pergunta certa é: quando faz sentido delegar a gestão do meu patrimônio?"
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 1 — POR QUE OS FUNDOS EXISTEM?
+                 ====================================================== -->
+            <div class="fundos-section">
+                <div class="fundos-section-tag">Seção 01 — O ponto de partida</div>
+                <h3 class="fundos-section-title">Por que os Fundos de Investimentos existem?</h3>
+                <p class="fundos-text">
+                    Antes de entender como um Fundo funciona, vale responder uma pergunta mais fundamental: por que alguém delegaria suas decisões de investimento?
+                </p>
+                <p class="fundos-text">
+                    A resposta está na <strong>especialização</strong>. O mercado financeiro é vasto e cada classe de ativo tem suas próprias regras, ritmos e riscos. Nenhum investidor consegue dominar todas essas especialidades com a mesma profundidade — especialmente quando também tem uma vida profissional, uma família e outros projetos em paralelo.
+                </p>
+
+                <div class="fundos-especialidades-grid">
+                    <div class="fundos-especialidade-item">
+                        <div class="fundos-especialidade-icon">📊</div>
+                        <div class="fundos-especialidade-nome">Renda Fixa</div>
+                        <div class="fundos-especialidade-desc">Curvas de juros, crédito privado, marcação a mercado</div>
+                    </div>
+                    <div class="fundos-especialidade-item">
+                        <div class="fundos-especialidade-icon">📈</div>
+                        <div class="fundos-especialidade-nome">Ações</div>
+                        <div class="fundos-especialidade-desc">Valuation, análise de empresas, ciclos setoriais</div>
+                    </div>
+                    <div class="fundos-especialidade-item">
+                        <div class="fundos-especialidade-icon">🌎</div>
+                        <div class="fundos-especialidade-nome">Câmbio</div>
+                        <div class="fundos-especialidade-desc">Macroeconomia internacional, fluxos de capital</div>
+                    </div>
+                    <div class="fundos-especialidade-item">
+                        <div class="fundos-especialidade-icon">⚡</div>
+                        <div class="fundos-especialidade-nome">Derivativos</div>
+                        <div class="fundos-especialidade-desc">Opções, futuros, hedge e proteção de carteira</div>
+                    </div>
+                    <div class="fundos-especialidade-item">
+                        <div class="fundos-especialidade-icon">🌍</div>
+                        <div class="fundos-especialidade-nome">Internacional</div>
+                        <div class="fundos-especialidade-desc">Regulações globais, moedas, geopolítica</div>
+                    </div>
+                    <div class="fundos-especialidade-item">
+                        <div class="fundos-especialidade-icon">🛢️</div>
+                        <div class="fundos-especialidade-nome">Commodities</div>
+                        <div class="fundos-especialidade-desc">Ciclos produtivos, demanda global, clima</div>
+                    </div>
+                </div>
+
+                <p class="fundos-text">
+                    Os Fundos surgem exatamente para resolver esse problema. Eles reúnem o capital de muitos investidores em uma estrutura única e confiam a gestão desse patrimônio a <strong>profissionais especializados</strong> — com dedicação exclusiva, ferramentas analíticas avançadas e acesso a mercados que seriam inacessíveis individualmente.
+                </p>
+                <div class="fundos-frase-invlab">
+                    Um Fundo não é uma solução mágica. É uma estrutura de delegação consciente. A qualidade do resultado depende da qualidade do gestor — e da clareza do investidor sobre o que está contratando.
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 2 — COMO FUNCIONA?
+                 ====================================================== -->
+            <div class="fundos-section">
+                <div class="fundos-section-tag">Seção 02 — A estrutura</div>
+                <h3 class="fundos-section-title">Como funciona um Fundo de Investimentos?</h3>
+                <p class="fundos-text">
+                    Um Fundo funciona como um <strong>condomínio financeiro</strong>. Cada investidor entra com uma contribuição, recebe em troca uma fração do patrimônio total (a cota), e a gestão coletiva é exercida por um profissional especializado. O resultado — positivo ou negativo — é distribuído proporcionalmente entre todos os cotistas.
+                </p>
+
+                <div class="fundos-flow">
+                    <div class="fundos-flow-node">
+                        <div class="fundos-flow-node-title">👥 Investidores</div>
+                        <div class="fundos-flow-node-desc">Pessoas físicas e jurídicas que aplicam recursos</div>
+                    </div>
+                    <div class="fundos-flow-arrow-block">
+                        <div class="fundos-flow-arrow-label">fazem aportes</div>
+                        <div class="fundos-flow-arrow-line"></div>
+                        <div class="fundos-flow-arrow-head"></div>
+                    </div>
+                    <div class="fundos-flow-node">
+                        <div class="fundos-flow-node-title">📦 Fundo</div>
+                        <div class="fundos-flow-node-desc">Patrimônio coletivo dividido em cotas</div>
+                    </div>
+                    <div class="fundos-flow-arrow-block">
+                        <div class="fundos-flow-arrow-label">delega a gestão</div>
+                        <div class="fundos-flow-arrow-line"></div>
+                        <div class="fundos-flow-arrow-head"></div>
+                    </div>
+                    <div class="fundos-flow-node">
+                        <div class="fundos-flow-node-title">👔 Gestor</div>
+                        <div class="fundos-flow-node-desc">Profissional que toma as decisões de compra e venda</div>
+                    </div>
+                    <div class="fundos-flow-arrow-block">
+                        <div class="fundos-flow-arrow-label">opera no</div>
+                        <div class="fundos-flow-arrow-line"></div>
+                        <div class="fundos-flow-arrow-head"></div>
+                    </div>
+                    <div class="fundos-flow-node">
+                        <div class="fundos-flow-node-title">📊 Mercado Financeiro</div>
+                        <div class="fundos-flow-node-desc">Bolsa, renda fixa, câmbio, derivativos</div>
+                    </div>
+                    <div class="fundos-flow-arrow-block">
+                        <div class="fundos-flow-arrow-label">gera resultado</div>
+                        <div class="fundos-flow-arrow-line"></div>
+                        <div class="fundos-flow-arrow-head"></div>
+                    </div>
+                    <div class="fundos-flow-node" style="background: rgba(16,185,129,0.06); border-color: rgba(16,185,129,0.22);">
+                        <div class="fundos-flow-node-title" style="color: rgba(16,185,129,0.85);">🎯 Valorização ou desvalorização das cotas</div>
+                        <div class="fundos-flow-node-desc">O resultado reflete diretamente no valor de cada cota</div>
+                    </div>
+                </div>
+
+                <p class="fundos-text" style="margin-top: 28px;">Conheça os termos que você vai encontrar ao analisar qualquer Fundo:</p>
+
+                <div class="fundos-definicoes">
+                    <div class="fundos-definicao-item">
+                        <div class="fundos-definicao-termo">📌 Cota</div>
+                        <div class="fundos-definicao-desc">A menor fração do patrimônio do Fundo. Quando você aplica, compra cotas ao valor do dia. Quando resgata, vende suas cotas. O lucro ou prejuízo é a diferença entre o preço de compra e o de venda.</div>
+                    </div>
+                    <div class="fundos-definicao-item">
+                        <div class="fundos-definicao-termo">🏦 Patrimônio Líquido</div>
+                        <div class="fundos-definicao-desc">O valor total dos ativos do Fundo menos suas obrigações. Fundos maiores geralmente têm menor custo relativo de administração e maior capacidade de diversificação.</div>
+                    </div>
+                    <div class="fundos-definicao-item">
+                        <div class="fundos-definicao-termo">👔 Gestor</div>
+                        <div class="fundos-definicao-desc">O profissional (ou equipe) responsável por tomar as decisões de investimento — quais ativos comprar, em que proporção e quando vender. É a figura mais importante para entender o perfil do Fundo.</div>
+                    </div>
+                    <div class="fundos-definicao-item">
+                        <div class="fundos-definicao-termo">🏢 Administrador</div>
+                        <div class="fundos-definicao-desc">Responsável pela parte operacional e legal: contabilidade, registros, comunicação com a CVM e com os cotistas. Diferente do gestor — administra a estrutura, não a carteira.</div>
+                    </div>
+                    <div class="fundos-definicao-item">
+                        <div class="fundos-definicao-termo">🔒 Custodiante</div>
+                        <div class="fundos-definicao-desc">A instituição que guarda fisicamente os ativos do Fundo e garante que estejam segregados do patrimônio do gestor. Uma camada importante de proteção para o cotista.</div>
+                    </div>
+                    <div class="fundos-definicao-item">
+                        <div class="fundos-definicao-termo">📋 Regulamento</div>
+                        <div class="fundos-definicao-desc">O documento legal que rege o Fundo. Define a política de investimento, taxas, prazo de resgate, público-alvo e restrições. Leitura obrigatória antes de qualquer aplicação.</div>
+                    </div>
+                    <div class="fundos-definicao-item">
+                        <div class="fundos-definicao-termo">🎯 Política de Investimento</div>
+                        <div class="fundos-definicao-desc">As regras que definem onde o gestor pode investir. Um Fundo de Ações, por lei, deve manter pelo menos 67% do patrimônio em ações. Conhecer a política é entender o que você realmente está comprando.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 3 — CUSTOS
+                 ====================================================== -->
+            <div class="fundos-section">
+                <div class="fundos-section-tag">Seção 03 — O que você paga</div>
+                <h3 class="fundos-section-title">Quais custos existem em um Fundo?</h3>
+                <p class="fundos-text">
+                    Entender os custos de um Fundo é parte essencial da decisão de investimento. Eles são cobranças legítimas pela estrutura de gestão — mas precisam fazer sentido em relação ao benefício que o Fundo entrega. Conhecê-los é o mínimo necessário antes de qualquer aplicação.
+                </p>
+
+                <div class="fundos-custo">
+                    <div class="fundos-custo-header">
+                        <span class="fundos-custo-badge universal">Universal</span>
+                        <span class="fundos-custo-nome">Taxa de Administração</span>
+                    </div>
+                    <div class="fundos-custo-body">
+                        Cobrada como percentual ao ano sobre o patrimônio líquido do Fundo. É descontada diariamente do valor da cota — ou seja, o rendimento que você vê já é o rendimento <strong>líquido desta taxa</strong>. Fundos passivos (que seguem um índice) costumam ter taxas menores do que fundos ativos (que tentam superar o mercado).
+                        <div class="fundos-custo-exemplo">Exemplo: um Fundo com 2% ao ano de taxa de administração precisa render 2% a mais do que sua alternativa direta só para empatar — antes de considerar qualquer outro custo.</div>
+                    </div>
+                </div>
+
+                <div class="fundos-custo">
+                    <div class="fundos-custo-header">
+                        <span class="fundos-custo-badge condicional">Condicional</span>
+                        <span class="fundos-custo-nome">Taxa de Performance</span>
+                    </div>
+                    <div class="fundos-custo-body">
+                        Cobrada apenas quando o Fundo supera um benchmark predefinido (como o CDI ou o Ibovespa). Geralmente representada como um percentual sobre o que exceder esse referencial. A lógica é alinhar os interesses do gestor com os do cotista: <strong>o gestor só ganha extra quando o investidor ganha acima do esperado</strong>.
+                        <div class="fundos-custo-exemplo">Exemplo: "20% sobre o que exceder o CDI" significa que, se o Fundo render CDI + 5%, o gestor retém 1% (20% de 5%) e o cotista fica com CDI + 4%.</div>
+                    </div>
+                </div>
+
+                <div class="fundos-custo">
+                    <div class="fundos-custo-header">
+                        <span class="fundos-custo-badge condicional">Rara em fundos comuns</span>
+                        <span class="fundos-custo-nome">Taxa de Carregamento</span>
+                    </div>
+                    <div class="fundos-custo-body">
+                        Cobrada na entrada (quando você aplica) ou na saída (quando resgata), como um percentual do valor movimentado. Comum em fundos de previdência privada — mais rara em fundos de investimento comuns. Quando existir, <strong>negocie ou busque fundos sem essa cobrança</strong>, pois ela reduz diretamente o capital investido antes de qualquer rendimento.
+                    </div>
+                </div>
+
+                <div class="fundos-custo">
+                    <div class="fundos-custo-header">
+                        <span class="fundos-custo-badge fiscal">Fiscal</span>
+                        <span class="fundos-custo-nome">Come-Cotas</span>
+                    </div>
+                    <div class="fundos-custo-body">
+                        Uma das peculiaridades mais importantes do sistema tributário brasileiro de fundos. Aplicado a Fundos de Renda Fixa e Multimercado (não a Fundos de Ações), o come-cotas é uma <strong>antecipação semestral do Imposto de Renda</strong> — ocorre em maio e novembro. O governo desconta automaticamente uma parte das suas cotas para cobrar o IR antes do resgate.
+                        <div class="fundos-custo-exemplo">Efeito prático: você perde o benefício dos juros compostos sobre o valor do imposto antecipado. Ao longo de anos, esse custo composto é mais relevante do que parece à primeira vista.</div>
+                    </div>
+                </div>
+
+                <div class="fundos-custo">
+                    <div class="fundos-custo-header">
+                        <span class="fundos-custo-badge fiscal">Fiscal</span>
+                        <span class="fundos-custo-nome">Imposto de Renda</span>
+                    </div>
+                    <div class="fundos-custo-body">
+                        Segue tabela regressiva — quanto mais tempo você mantém o investimento, menor a alíquota paga no resgate. A tributação incide sobre o rendimento (não sobre o principal):
+                        <div style="margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.82rem;">
+                            <div style="background: rgba(255,255,255,0.03); border-radius: 8px; padding: 10px 14px;">
+                                <div style="color: rgba(255,255,255,0.45); margin-bottom: 4px;">Até 6 meses</div>
+                                <div style="color: rgba(239,68,68,0.80); font-weight: 700;">22,5%</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); border-radius: 8px; padding: 10px 14px;">
+                                <div style="color: rgba(255,255,255,0.45); margin-bottom: 4px;">6 a 12 meses</div>
+                                <div style="color: rgba(245,158,11,0.80); font-weight: 700;">20,0%</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); border-radius: 8px; padding: 10px 14px;">
+                                <div style="color: rgba(255,255,255,0.45); margin-bottom: 4px;">12 a 24 meses</div>
+                                <div style="color: rgba(96,165,250,0.80); font-weight: 700;">17,5%</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); border-radius: 8px; padding: 10px 14px;">
+                                <div style="color: rgba(255,255,255,0.45); margin-bottom: 4px;">Acima de 24 meses</div>
+                                <div style="color: rgba(16,185,129,0.80); font-weight: 700;">15,0%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 4 — QUANDO FAZ SENTIDO?
+                 ====================================================== -->
+            <div class="fundos-section">
+                <div class="fundos-section-tag">Seção 04 — A decisão consciente</div>
+                <h3 class="fundos-section-title">Quando um Fundo costuma fazer sentido?</h3>
+                <p class="fundos-text">
+                    Delegar a gestão não é certo nem errado em si. É uma escolha que depende do perfil, do momento e do objetivo de cada investidor. Estas são situações em que um Fundo pode adicionar valor real:
+                </p>
+
+                <div class="fundos-quando-grid">
+                    <div class="fundos-quando-item sim">
+                        <span class="fundos-quando-icon">✓</span>
+                        <div><strong>Pouco tempo para acompanhar o mercado.</strong> Quando a vida profissional e pessoal não deixa espaço para análise consistente dos investimentos.</div>
+                    </div>
+                    <div class="fundos-quando-item sim">
+                        <span class="fundos-quando-icon">✓</span>
+                        <div><strong>Busca por diversificação eficiente.</strong> Um único Fundo pode acessar dezenas de ativos com um aporte inicial muito menor do que seria necessário para montar uma carteira equivalente diretamente.</div>
+                    </div>
+                    <div class="fundos-quando-item sim">
+                        <span class="fundos-quando-icon">✓</span>
+                        <div><strong>Acesso a estratégias profissionais.</strong> Estratégias de hedge, arbitragem, derivativos e mercados internacionais que exigem licenças, sistemas e conhecimento especializados.</div>
+                    </div>
+                    <div class="fundos-quando-item sim">
+                        <span class="fundos-quando-icon">✓</span>
+                        <div><strong>Patrimônio ainda em construção.</strong> Com valores menores, um Fundo pode oferecer diversificação que seria impossível montar individualmente com eficiência de custos.</div>
+                    </div>
+                    <div class="fundos-quando-item sim">
+                        <span class="fundos-quando-icon">✓</span>
+                        <div><strong>Investimentos internacionais.</strong> Acesso a mercados estrangeiros de forma regulada, sem a necessidade de abrir conta no exterior ou entender legislações de outros países.</div>
+                    </div>
+                    <div class="fundos-quando-item sim">
+                        <span class="fundos-quando-icon">✓</span>
+                        <div><strong>Estratégias de alta complexidade.</strong> Fundos Multimercado, por exemplo, podem operar em vários mercados simultaneamente com uma gestão de risco que seria inviável para o investidor individual replicar.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 5 — QUANDO TALVEZ NÃO FAÇA SENTIDO?
+                 ====================================================== -->
+            <div class="fundos-section">
+                <div class="fundos-section-tag">Seção 05 — O outro lado</div>
+                <h3 class="fundos-section-title">Quando outras alternativas podem ser melhores?</h3>
+                <p class="fundos-text">
+                    A identidade editorial do INVLAB exige que apresentemos o outro lado com a mesma clareza. Existem situações em que investir diretamente — sem a intermediação de um Fundo — pode ser mais eficiente:
+                </p>
+
+                <div class="fundos-quando-grid">
+                    <div class="fundos-quando-item neutro">
+                        <span class="fundos-quando-icon">◆</span>
+                        <div><strong>Carteira simples e bem definida.</strong> Tesouro Direto + CDB + ETF de índice pode entregar excelente resultado com custo muito menor do que qualquer Fundo ativo — e sem a incerteza do gestor.</div>
+                    </div>
+                    <div class="fundos-quando-item neutro">
+                        <span class="fundos-quando-icon">◆</span>
+                        <div><strong>ETFs de índice como alternativa.</strong> Para quem busca exposição ao mercado de ações ou renda fixa de forma passiva, ETFs costumam ter taxas significativamente menores do que fundos ativos equivalentes.</div>
+                    </div>
+                    <div class="fundos-quando-item neutro">
+                        <span class="fundos-quando-icon">◆</span>
+                        <div><strong>Taxas incompatíveis com o retorno esperado.</strong> Um Fundo com taxa de administração alta precisa entregar um retorno diferenciado para justificar o custo. Se o histórico não confirma essa entrega, a taxa é um obstáculo.</div>
+                    </div>
+                    <div class="fundos-quando-item neutro">
+                        <span class="fundos-quando-icon">◆</span>
+                        <div><strong>Estratégia que você não compreende.</strong> Nunca invista em um Fundo cuja estratégia você não consegue explicar com suas próprias palavras. Complexidade que você não entende não é sofisticação — é risco que não consegue avaliar.</div>
+                    </div>
+                    <div class="fundos-quando-item neutro">
+                        <span class="fundos-quando-icon">◆</span>
+                        <div><strong>Liquidez necessária em curto prazo.</strong> Muitos Fundos têm prazos de cotização e resgate (D+30, D+60 ou mais). Se você pode precisar do dinheiro rapidamente, verifique os prazos antes — não depois.</div>
+                    </div>
+                    <div class="fundos-quando-item neutro">
+                        <span class="fundos-quando-icon">◆</span>
+                        <div><strong>Capacidade e interesse em investir diretamente.</strong> Se você tem tempo, interesse e disposição para estudar e acompanhar os mercados, a gestão direta da carteira pode ser mais eficiente e alinhada ao seu perfil.</div>
+                    </div>
+                </div>
+
+                <div class="fundos-frase-invlab">
+                    O INVLAB não defende Fundos contra investimentos diretos. Defende a escolha consciente — aquela em que o investidor entende o que está contratando, por que está contratando e quanto está pagando por isso.
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 6 — AS GRANDES FAMÍLIAS
+                 ====================================================== -->
+            <div class="fundos-section">
+                <div class="fundos-section-tag">Seção 06 — O mapa do território</div>
+                <h3 class="fundos-section-title">As grandes famílias dos Fundos de Investimentos</h3>
+                <p class="fundos-text">
+                    O mercado de Fundos no Brasil é vasto e regulado pela CVM. Conhecer as principais categorias ajuda a entender qual se encaixa em cada objetivo — e qual está claramente fora do seu perfil.
+                </p>
+
+                <div class="fundos-familia-grid">
+
+                    <div class="fundos-familia-card">
+                        <div class="fundos-familia-header">
+                            <span class="fundos-familia-icon">💰</span>
+                            <span class="fundos-familia-nome">Fundos de Renda Fixa</span>
+                        </div>
+                        <div class="fundos-familia-body">
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label objetivo">Objetivo</div>
+                                <div class="fundos-familia-value">Preservar capital e superar referências de renda fixa como o CDI</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label perfil">Perfil</div>
+                                <div class="fundos-familia-value">Conservador a moderado</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label risco">Risco</div>
+                                <div class="fundos-familia-value">Baixo a médio — sujeito a variações de taxa de juros e qualidade do crédito</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label quando">Quando</div>
+                                <div class="fundos-familia-value">Reserva estratégica, prazo curto a médio, proteção do principal</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fundos-familia-card">
+                        <div class="fundos-familia-header">
+                            <span class="fundos-familia-icon">📈</span>
+                            <span class="fundos-familia-nome">Fundos de Ações</span>
+                        </div>
+                        <div class="fundos-familia-body">
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label objetivo">Objetivo</div>
+                                <div class="fundos-familia-value">Crescimento de longo prazo por exposição ao mercado acionário</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label perfil">Perfil</div>
+                                <div class="fundos-familia-value">Arrojado — exige tolerância a oscilações relevantes</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label risco">Risco</div>
+                                <div class="fundos-familia-value">Alto — acompanha e amplifica a volatilidade do mercado de ações</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label quando">Quando</div>
+                                <div class="fundos-familia-value">Horizonte de 5 anos ou mais, objetivo de crescimento patrimonial</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fundos-familia-card">
+                        <div class="fundos-familia-header">
+                            <span class="fundos-familia-icon">🌎</span>
+                            <span class="fundos-familia-nome">Fundos Cambiais</span>
+                        </div>
+                        <div class="fundos-familia-body">
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label objetivo">Objetivo</div>
+                                <div class="fundos-familia-value">Exposição à variação do dólar, euro ou outra moeda estrangeira</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label perfil">Perfil</div>
+                                <div class="fundos-familia-value">Moderado a arrojado</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label risco">Risco</div>
+                                <div class="fundos-familia-value">Médio-alto — depende inteiramente da oscilação cambial</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label quando">Quando</div>
+                                <div class="fundos-familia-value">Proteção cambial, obrigações em moeda estrangeira, diversificação</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fundos-familia-card">
+                        <div class="fundos-familia-header">
+                            <span class="fundos-familia-icon">🌍</span>
+                            <span class="fundos-familia-nome">Fundos Internacionais</span>
+                        </div>
+                        <div class="fundos-familia-body">
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label objetivo">Objetivo</div>
+                                <div class="fundos-familia-value">Diversificação em mercados globais fora do Brasil</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label perfil">Perfil</div>
+                                <div class="fundos-familia-value">Moderado a arrojado</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label risco">Risco</div>
+                                <div class="fundos-familia-value">Médio-alto — inclui risco de mercado internacional e cambial combinados</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label quando">Quando</div>
+                                <div class="fundos-familia-value">Diversificação geográfica, acesso a economias desenvolvidas</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fundos-familia-card" style="border-color: rgba(37,99,235,0.25);">
+                        <div class="fundos-familia-header" style="background: rgba(37,99,235,0.14); border-color: rgba(37,99,235,0.28);">
+                            <span class="fundos-familia-icon">🚀</span>
+                            <span class="fundos-familia-nome">Fundos Multimercado</span>
+                        </div>
+                        <div class="fundos-familia-body">
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label objetivo">Objetivo</div>
+                                <div class="fundos-familia-value">Retorno consistente em diferentes cenários econômicos, com grande flexibilidade de gestão</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label perfil">Perfil</div>
+                                <div class="fundos-familia-value">Moderado a arrojado — depende da estratégia específica</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label risco">Risco</div>
+                                <div class="fundos-familia-value">Médio-alto — pode incluir alavancagem e estratégias complexas</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label quando">Quando</div>
+                                <div class="fundos-familia-value">Busca por gestão ativa e diversificada em uma única estrutura</div>
+                            </div>
+                        </div>
+                        <div class="fundos-familia-link em-breve">🧬 Laboratório Multimercado — em breve</div>
+                    </div>
+
+                    <div class="fundos-familia-card">
+                        <div class="fundos-familia-header">
+                            <span class="fundos-familia-icon">🔒</span>
+                            <span class="fundos-familia-nome">Fundos de Crédito Privado</span>
+                        </div>
+                        <div class="fundos-familia-body">
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label objetivo">Objetivo</div>
+                                <div class="fundos-familia-value">Rentabilidade acima da renda fixa tradicional via títulos privados</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label perfil">Perfil</div>
+                                <div class="fundos-familia-value">Moderado</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label risco">Risco</div>
+                                <div class="fundos-familia-value">Médio — risco de crédito dos emissores dos títulos, sem cobertura do FGC</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label quando">Quando</div>
+                                <div class="fundos-familia-value">Prazo definido, busca prêmio de crédito, tolerância à menor liquidez</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fundos-familia-card">
+                        <div class="fundos-familia-header">
+                            <span class="fundos-familia-icon">🎯</span>
+                            <span class="fundos-familia-nome">Fundos Previdenciários</span>
+                        </div>
+                        <div class="fundos-familia-body">
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label objetivo">Objetivo</div>
+                                <div class="fundos-familia-value">Acumulação de longo prazo com benefício fiscal (PGBL/VGBL)</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label perfil">Perfil</div>
+                                <div class="fundos-familia-value">Qualquer — depende da política de investimento do fundo escolhido</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label risco">Risco</div>
+                                <div class="fundos-familia-value">Varia — conservador a arrojado conforme a composição da carteira</div>
+                            </div>
+                            <div class="fundos-familia-row">
+                                <div class="fundos-familia-label quando">Quando</div>
+                                <div class="fundos-familia-value">Planejamento de aposentadoria, horizonte 10+ anos, vantagem fiscal declarada</div>
+                            </div>
+                        </div>
+                        <div class="fundos-familia-link ativo" onclick="window.location.href='previdencia-sem-armadilhas.html'">🎯 Ver Laboratório de Previdência →</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 7 — COMO COMPARAR DOIS FUNDOS?
+                 ====================================================== -->
+            <div class="fundos-section">
+                <div class="fundos-section-tag">Seção 07 — O framework de análise</div>
+                <h3 class="fundos-section-title">Como comparar dois Fundos de forma inteligente?</h3>
+                <p class="fundos-text">
+                    Esta é uma das seções mais importantes deste laboratório. O erro mais comum entre investidores de todos os perfis é comparar Fundos apenas pelo retorno passado. O INVLAB propõe uma ordem diferente — e mais honesta — de análise:
+                </p>
+
+                <div class="fundos-comparar-intro">
+                    <strong>Nunca comece pela rentabilidade.</strong><br>
+                    <span style="font-size: 0.90rem; color: rgba(255,255,255,0.50);">Retorno passado não garante retorno futuro. Mas a qualidade da estrutura, do gestor e do alinhamento com o seu perfil — isso diz muito sobre o que esperar.</span>
+                </div>
+
+                <div class="fundos-comparar-grid">
+                    <div class="fundos-comparar-item">
+                        <div class="fundos-comparar-num">1</div>
+                        <div class="fundos-comparar-body">
+                            <div class="fundos-comparar-criterio">Objetivo do Fundo</div>
+                            <div class="fundos-comparar-porque">O que esse Fundo tenta fazer? Preservar capital? Crescer? Proteger do câmbio? Um Fundo cujo objetivo não coincide com o seu objetivo é o Fundo errado — independentemente do retorno passado.</div>
+                        </div>
+                    </div>
+                    <div class="fundos-comparar-item">
+                        <div class="fundos-comparar-num">2</div>
+                        <div class="fundos-comparar-body">
+                            <div class="fundos-comparar-criterio">Benchmark</div>
+                            <div class="fundos-comparar-porque">Qual referência o Fundo tenta superar? CDI? Ibovespa? IPCA? Sem saber o benchmark, você não consegue avaliar se o retorno é bom ou ruim — é só um número sem contexto.</div>
+                        </div>
+                    </div>
+                    <div class="fundos-comparar-item">
+                        <div class="fundos-comparar-num">3</div>
+                        <div class="fundos-comparar-body">
+                            <div class="fundos-comparar-criterio">Gestor e Equipe</div>
+                            <div class="fundos-comparar-porque">Qual a reputação e o histórico do gestor responsável? Uma troca de gestor pode mudar completamente o perfil do Fundo — mesmo que o nome e a estratégia pareçam os mesmos.</div>
+                        </div>
+                    </div>
+                    <div class="fundos-comparar-item">
+                        <div class="fundos-comparar-num">4</div>
+                        <div class="fundos-comparar-body">
+                            <div class="fundos-comparar-criterio">Patrimônio Líquido</div>
+                            <div class="fundos-comparar-porque">Fundos muito pequenos têm custo relativo maior (as taxas fixas diluem menos) e podem ter liquidez comprometida em momentos de resgate intenso.</div>
+                        </div>
+                    </div>
+                    <div class="fundos-comparar-item">
+                        <div class="fundos-comparar-num">5</div>
+                        <div class="fundos-comparar-body">
+                            <div class="fundos-comparar-criterio">Volatilidade</div>
+                            <div class="fundos-comparar-porque">Qual o desvio padrão dos retornos? Um Fundo com alto retorno e alta volatilidade pode ser inadequado para quem não tolera oscilações — mesmo que o número final pareça atraente.</div>
+                        </div>
+                    </div>
+                    <div class="fundos-comparar-item">
+                        <div class="fundos-comparar-num">6</div>
+                        <div class="fundos-comparar-body">
+                            <div class="fundos-comparar-criterio">Liquidez e Prazo de Resgate</div>
+                            <div class="fundos-comparar-porque">D+0 (mesmo dia), D+1, D+30, D+60? Há carência mínima? A liquidez precisa ser compatível com a sua necessidade de acesso ao dinheiro.</div>
+                        </div>
+                    </div>
+                    <div class="fundos-comparar-item">
+                        <div class="fundos-comparar-num">7</div>
+                        <div class="fundos-comparar-body">
+                            <div class="fundos-comparar-criterio">Horizonte Recomendado</div>
+                            <div class="fundos-comparar-porque">O Fundo tem uma janela ideal de permanência? Estratégias de longo prazo em horizontes curtos podem entregar retornos muito abaixo do potencial — ou perdas.</div>
+                        </div>
+                    </div>
+                    <div class="fundos-comparar-item">
+                        <div class="fundos-comparar-num">8</div>
+                        <div class="fundos-comparar-body">
+                            <div class="fundos-comparar-criterio">Comportamento em Crises</div>
+                            <div class="fundos-comparar-porque">Como o Fundo se comportou em 2020 (pandemia) e em 2022 (alta de juros global)? O desempenho em períodos adversos revela mais sobre a gestão do que qualquer ano de alta.</div>
+                        </div>
+                    </div>
+                    <div class="fundos-comparar-item">
+                        <div class="fundos-comparar-num">9</div>
+                        <div class="fundos-comparar-body">
+                            <div class="fundos-comparar-criterio">Taxas — o custo total real</div>
+                            <div class="fundos-comparar-porque">Taxa de administração + taxa de performance + come-cotas + IR. Calcule o custo total, não apenas a taxa de administração anunciada. A diferença entre o bruto e o líquido pode ser surpreendente.</div>
+                        </div>
+                    </div>
+                    <div class="fundos-comparar-item">
+                        <div class="fundos-comparar-num">10</div>
+                        <div class="fundos-comparar-body">
+                            <div class="fundos-comparar-criterio">Aderência ao seu perfil</div>
+                            <div class="fundos-comparar-porque">A estratégia do Fundo faz sentido para a sua situação, seus objetivos e sua tolerância ao risco? Se a resposta for não, nenhum retorno passado justifica a aplicação.</div>
+                        </div>
+                    </div>
+                    <div class="fundos-comparar-item rentabilidade">
+                        <div class="fundos-comparar-num">↓</div>
+                        <div class="fundos-comparar-body">
+                            <div class="fundos-comparar-criterio">Agora sim — Rentabilidade</div>
+                            <div class="fundos-comparar-porque">Com todos os critérios anteriores verificados, o retorno histórico passa a ter contexto real. Compare com o benchmark do Fundo — não com outros Fundos de categorias diferentes. E lembre: passado não garante futuro.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 8 — COMO UM GESTOR PENSA?
+                 ====================================================== -->
+            <div class="fundos-section">
+                <div class="fundos-section-tag">Seção 08 — Por dentro da gestão</div>
+                <h3 class="fundos-section-title">Como um gestor profissional constrói uma carteira?</h3>
+                <p class="fundos-text">
+                    Entender o processo de gestão aproxima o investidor das decisões que afetam diretamente o valor das suas cotas. Por que o mesmo Fundo pode render bem em um período e mal em outro? Por que gestores diferentes chegam a resultados tão distintos com estratégias aparentemente similares? O processo abaixo dá uma resposta intuitiva.
+                </p>
+
+                <div class="fundos-gestor-steps">
+                    <div class="fundos-gestor-step">
+                        <div class="fundos-gestor-letra">1</div>
+                        <div class="fundos-gestor-conteudo">
+                            <div class="fundos-gestor-titulo">Leitura do cenário macroeconômico</div>
+                            <div class="fundos-gestor-desc">O gestor começa pelo contexto global: crescimento econômico, <strong>inflação</strong>, nível dos juros nos principais países, câmbio e fluxos de capital. Esse cenário determina quais classes de ativo tendem a performar melhor — e quais têm maior risco.</div>
+                        </div>
+                    </div>
+                    <div class="fundos-gestor-step-seta">↓</div>
+
+                    <div class="fundos-gestor-step">
+                        <div class="fundos-gestor-letra">2</div>
+                        <div class="fundos-gestor-conteudo">
+                            <div class="fundos-gestor-titulo">Análise de juros e política monetária</div>
+                            <div class="fundos-gestor-desc">A decisão de juros dos bancos centrais (Copom no Brasil, Fed nos EUA) impacta diretamente o preço de todos os ativos — desde títulos públicos até ações e câmbio. O gestor interpreta sinais do banco central antes de posicionar a carteira.</div>
+                        </div>
+                    </div>
+                    <div class="fundos-gestor-step-seta">↓</div>
+
+                    <div class="fundos-gestor-step">
+                        <div class="fundos-gestor-letra">3</div>
+                        <div class="fundos-gestor-conteudo">
+                            <div class="fundos-gestor-titulo">Análise dos mercados específicos</div>
+                            <div class="fundos-gestor-desc">Com o cenário macro definido, o gestor analisa os mercados de <strong>renda fixa, ações, câmbio e commodities</strong> separadamente: quais setores estão mais atrativos, quais empresas têm potencial de valorização, quais títulos oferecem melhor risco-retorno.</div>
+                        </div>
+                    </div>
+                    <div class="fundos-gestor-step-seta">↓</div>
+
+                    <div class="fundos-gestor-step">
+                        <div class="fundos-gestor-letra">4</div>
+                        <div class="fundos-gestor-conteudo">
+                            <div class="fundos-gestor-titulo">Definição da estratégia</div>
+                            <div class="fundos-gestor-desc">Com base nos dois passos anteriores, o gestor define a <strong>estratégia da carteira</strong>: quais ativos incluir, em que proporção, qual o nível de risco aceitável, se usará hedge (proteção) e como gerenciará a liquidez do Fundo.</div>
+                        </div>
+                    </div>
+                    <div class="fundos-gestor-step-seta">↓</div>
+
+                    <div class="fundos-gestor-step">
+                        <div class="fundos-gestor-letra">5</div>
+                        <div class="fundos-gestor-conteudo">
+                            <div class="fundos-gestor-titulo">Construção e rebalanceamento da carteira</div>
+                            <div class="fundos-gestor-desc">A carteira é montada com as posições definidas — e monitorada continuamente. Quando o cenário muda, a estratégia é revisada. Esse processo de <strong>rebalanceamento constante</strong> é o trabalho central da gestão ativa, e justifica a taxa de administração.</div>
+                        </div>
+                    </div>
+                    <div class="fundos-gestor-step-seta">↓</div>
+
+                    <div class="fundos-gestor-step">
+                        <div class="fundos-gestor-letra">6</div>
+                        <div class="fundos-gestor-conteudo">
+                            <div class="fundos-gestor-titulo">Resultado — valorização ou desvalorização das cotas</div>
+                            <div class="fundos-gestor-desc">Cada decisão ao longo do processo se reflete no valor da cota. <strong>Gestores diferentes diante do mesmo cenário tomam decisões diferentes</strong> — e chegam a resultados diferentes. É por isso que a escolha do gestor é tão relevante quanto a escolha do tipo de Fundo.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fundos-frase-invlab">
+                    O investidor que entende o processo de gestão deixa de olhar apenas para o número do retorno e passa a avaliar se as decisões tomadas fazem sentido — tanto no período bom quanto no período ruim.
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 CHECKLIST INVLAB
+                 ====================================================== -->
+            <div class="fundos-section">
+                <div class="fundos-section-tag">Checklist — Antes de aplicar</div>
+                <h3 class="fundos-section-title">Antes de investir em qualquer Fundo, pergunte:</h3>
+                <p class="fundos-text">
+                    Use este checklist para qualquer Fundo — de renda fixa, ações, multimercado ou qualquer outra categoria. Se você não conseguir responder a maioria dessas perguntas, pesquise antes de aplicar.
+                </p>
+
+                <div class="fundos-checklist">
+                    <div class="fundos-check-item">
+                        <div class="fundos-check-num">1</div>
+                        <div><strong>Qual o objetivo deste Fundo?</strong> O objetivo declarado no regulamento coincide com o meu objetivo de investimento?</div>
+                    </div>
+                    <div class="fundos-check-item">
+                        <div class="fundos-check-num">2</div>
+                        <div><strong>Quem é o gestor?</strong> Qual é o histórico e a reputação de quem tomará as decisões com o meu patrimônio?</div>
+                    </div>
+                    <div class="fundos-check-item">
+                        <div class="fundos-check-num">3</div>
+                        <div><strong>Há quanto tempo este Fundo existe?</strong> Fundos com histórico mais longo permitem avaliar o comportamento em diferentes ciclos econômicos — não apenas em períodos favoráveis.</div>
+                    </div>
+                    <div class="fundos-check-item">
+                        <div class="fundos-check-num">4</div>
+                        <div><strong>Como se comportou em momentos adversos?</strong> O que aconteceu com o Fundo em 2020, 2022 ou em outros períodos de estresse de mercado?</div>
+                    </div>
+                    <div class="fundos-check-item">
+                        <div class="fundos-check-num">5</div>
+                        <div><strong>Quais taxas cobra — e qual é o custo total real?</strong> Administração, performance, come-cotas e IR combinados. Quanto sobra para mim ao final?</div>
+                    </div>
+                    <div class="fundos-check-item">
+                        <div class="fundos-check-num">6</div>
+                        <div><strong>Existe uma alternativa mais simples para o mesmo objetivo?</strong> Um ETF de índice, o Tesouro Direto ou um CDB resolveriam o mesmo problema com menor custo e mais clareza?</div>
+                    </div>
+                    <div class="fundos-check-item">
+                        <div class="fundos-check-num">7</div>
+                        <div><strong>Essa estratégia faz sentido para mim?</strong> Consigo explicar com minhas próprias palavras o que este Fundo faz e por que ele está na minha carteira?</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 A SEMENTE
+                 ====================================================== -->
+            <div class="fundos-semente">
+                <div style="font-size: 1.6rem; margin-bottom: 28px;">🌱</div>
+                <h3 class="fundos-semente-titulo">A Semente deste Laboratório</h3>
+
+                <p class="fundos-semente-linha">Um Fundo de Investimentos permite delegar decisões.</p>
+                <p class="fundos-semente-linha">Mas <strong>nunca deve substituir o seu entendimento.</strong></p>
+
+                <br>
+
+                <p class="fundos-semente-linha">Delegar é confiar num profissional.</p>
+                <p class="fundos-semente-linha"><strong>Compreender continua sendo sua responsabilidade.</strong></p>
+
+                <br>
+
+                <p class="fundos-semente-linha">O melhor gestor pode administrar seu patrimônio.</p>
+                <p class="fundos-semente-linha">Mas <strong>apenas você pode administrar suas decisões.</strong></p>
+
+                <br>
+
+                <div style="margin: 8px auto; max-width: 560px; padding: 28px 32px; background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.20); border-radius: 16px;">
+                    <p style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1rem, 2vw, 1.15rem); color: rgba(255,255,255,0.68); line-height: 1.78; margin: 0 0 10px; font-style: italic;">O investidor que entende o que está delegando</p>
+                    <p style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1rem, 2vw, 1.15rem); color: rgba(16,185,129,0.90); line-height: 1.78; margin: 0; font-weight: 700;">raramente se surpreende negativamente com o resultado.</p>
+                </div>
+
+                <div class="fundos-semente-assinatura">🌱</div>
+            </div>
+
+        </div><!-- /invlab-lab-container -->
+    </main>
+
+    <!-- FOOTER -->
+    <footer style="background: rgba(0,0,0,0.50); border-top: 1px solid rgba(212,175,55,0.1); padding: 48px 32px 32px; margin-top: 60px;">
+        <div style="max-width: 1160px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px; margin-bottom: 32px;">
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Primeiros Passos</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="../index.html#primeiros-passos" style="color: rgba(16,185,129,0.85); text-decoration: none;">📚 Aprenda a Investir</a></li>
+                    <li><a href="guia_invlab.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🧭 Guia do INVLAB</a></li>
+                    <li><a href="metodologia.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔬 Nossa Metodologia</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="poupanca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💰 Poupança</a></li>
+                    <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                    <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Ações</a></li>
+                    <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💵 ETFs</a></li>
+                    <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 FIIs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Economia Digital</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌐 Economia Digital</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Instrumentos Avançados</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="fundos-investimento.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💼 Fundos de Investimentos</a></li>
+                    <li><a href="instrumentos-avancados.html#ouro" style="color: rgba(16,185,129,0.85); text-decoration: none;">🥇 Ouro</a></li>
+                    <li><a href="instrumentos-avancados.html#derivativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">⚡ Derivativos e Opções</a></li>
+                    <li><a href="instrumentos-avancados.html#alternativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚀 Invest. Alternativos</a></li>
+                    <li><a href="instrumentos-avancados.html#ativos-reais" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏠 Ativos Reais</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Defesa do Investidor</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
+                    <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                    <li><a href="credito-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔥 Crédito</a></li>
+                    <li><a href="produtos-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔍 Produtos</a></li>
+                    <li><a href="sinais-de-alerta.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚨 Sinais de alerta</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
+            <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
+            </p>
+            <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
+            </p>
+        </div>
+        </div>
+    </footer>
+
+    <div id="backToTop">↑</div>
+
+    <script src="../assets/js/script.js"></script>
+    <script defer src="../assets/js/bcb-api.js"></script>
+    <script defer src="../assets/js/invlab-carrossel-renda-variavel.js"></script>
+    <script>
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+                setTimeout(() => backToTopButton.style.opacity = '1', 10);
+            } else {
+                backToTopButton.style.opacity = '0';
+                setTimeout(() => backToTopButton.style.display = 'none', 300);
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
