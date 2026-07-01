@@ -1,0 +1,133 @@
+/* ================================================================
+   INSTRUMENTOS AVANÇADOS — ESTILOS EXCLUSIVOS
+   Paleta: teal (#06B6D4) / ciano (#22D3EE)
+   Filosofia: entender antes de entrar
+   ================================================================ */
+
+/* HOOK */
+.instr-hook {
+    background: linear-gradient(135deg, rgba(6,182,212,0.07) 0%, rgba(34,211,238,0.04) 100%);
+    border: 1px solid rgba(6,182,212,0.22);
+    border-radius: 20px; padding: 52px 40px;
+    text-align: center; margin: 48px 0 36px;
+    position: relative; overflow: hidden;
+}
+.instr-hook::before {
+    content: ''; position: absolute; top: -60%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(ellipse at center, rgba(6,182,212,0.05) 0%, transparent 60%);
+    pointer-events: none;
+}
+.instr-hook-badge {
+    display: inline-block;
+    background: rgba(6,182,212,0.10); border: 1px solid rgba(6,182,212,0.30);
+    color: #22D3EE; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    padding: 6px 18px; border-radius: 20px; margin-bottom: 28px;
+}
+.instr-hook-title {
+    font-size: clamp(1.4rem,3.5vw,2.1rem); font-weight: 700;
+    color: #fff; line-height: 1.5; margin-bottom: 18px;
+}
+.instr-hook-destaque {
+    background: rgba(6,182,212,0.07); border-left: 3px solid #06B6D4;
+    border-radius: 0 12px 12px 0; padding: 18px 24px;
+    margin: 24px auto; max-width: 660px;
+    font-size: 1.02rem; color: rgba(34,211,238,0.85); font-style: italic;
+    font-weight: 600; line-height: 1.7; text-align: left;
+}
+
+/* CARD VARIANTE — INSTRUMENTOS AVANÇADOS */
+.inv-card.avancados {
+    border-left: 4px solid #06B6D4;
+}
+.inv-card.avancados:hover {
+    border-left-width: 6px;
+    box-shadow: 0 8px 24px rgba(6, 182, 212, 0.30);
+}
+
+/* CARD VARIANTE — OURO */
+.inv-card.ouro {
+    border-left: 4px solid #D4AF37;
+}
+.inv-card.ouro:hover {
+    border-left-width: 6px;
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.30);
+}
+
+/* CARD VARIANTE — DERIVATIVOS */
+.inv-card.derivativos {
+    border-left: 4px solid #F97316;
+}
+.inv-card.derivativos:hover {
+    border-left-width: 6px;
+    box-shadow: 0 8px 24px rgba(249, 115, 22, 0.30);
+}
+
+/* AVISO EDITORIAL */
+.instr-aviso-box {
+    background: rgba(6,182,212,0.04); border: 1px solid rgba(6,182,212,0.18);
+    border-radius: 18px; padding: 36px 40px; margin-bottom: 28px;
+    text-align: center;
+}
+.instr-aviso-box h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.1rem; font-weight: 700; color: #22D3EE;
+    margin-bottom: 16px;
+}
+.instr-aviso-box p {
+    font-size: 0.92rem; color: rgba(255,255,255,0.62); line-height: 1.80; margin-bottom: 14px;
+}
+.instr-aviso-box strong { color: rgba(255,255,255,0.85); }
+
+/* SEMENTE */
+.instr-semente {
+    background: linear-gradient(135deg, rgba(6,182,212,0.06) 0%, rgba(16,185,129,0.05) 100%);
+    border: 1px solid rgba(6,182,212,0.20); border-radius: 24px;
+    padding: 56px 44px; margin: 12px 0 48px; text-align: center;
+    position: relative; overflow: hidden;
+}
+.instr-semente::before {
+    content: ''; position: absolute; top: -40%; left: -20%;
+    width: 140%; height: 180%;
+    background: radial-gradient(ellipse at center, rgba(6,182,212,0.04) 0%, transparent 60%);
+    pointer-events: none;
+}
+.instr-semente-titulo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.4rem, 2.8vw, 2rem); font-weight: 800; color: #D4AF37;
+    margin-bottom: 24px; line-height: 1.3;
+}
+.instr-semente-linha {
+    font-size: 1rem; color: rgba(255,255,255,0.55); line-height: 2.2; margin-bottom: 4px;
+}
+.instr-semente-linha strong { color: rgba(255,255,255,0.85); }
+.instr-semente-assinatura {
+    font-size: 1.35rem; margin-top: 32px; color: rgba(6,182,212,0.80); font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .instr-hook { padding: 36px 22px; }
+    .instr-semente { padding: 40px 24px; }
+    .instr-aviso-box { padding: 28px 22px; }
+}
+
+/* BACK TO TOP — padrão INVLAB */
+#backToTop {
+    display: none; position: fixed; bottom: 40px; right: 40px; z-index: 9999;
+    width: 56px; height: 56px;
+    background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+    color: #0D0D0D; border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 50%;
+    font-size: 28px; font-weight: 700; text-align: center; line-height: 52px;
+    cursor: pointer; box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+    transition: all 0.3s ease-in-out; opacity: 0;
+}
+#backToTop:hover {
+    background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.6);
+    border-color: rgba(16, 185, 129, 0.6);
+}
+@media (max-width: 768px) {
+    #backToTop { width: 48px; height: 48px; font-size: 24px; line-height: 44px; bottom: 24px; right: 24px; }
+}

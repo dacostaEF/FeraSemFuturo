@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instrumentos Avançados — Fundos, Ouro, Derivativos, Alternativos e Ativos Reais | INVLAB</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="description" content="Fundos, ouro, derivativos, investimentos alternativos e ativos reais — entenda o que são, como funcionam e o que saber antes de usar. INVLAB.">
+
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+
+    <link rel="stylesheet" href="../assets/css/instrumentos-avancados.css">
+</head>
+<body>
+    <section id="invlab-carousel-container"></section>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+            </div>
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Início</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">📚 Primeiros<br>Passos</button>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-fixa'">📊 Renda<br>Fixa <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="poupanca.html">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-variavel'">📈 Renda<br>Variável <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='etfs.html'" style="cursor:pointer;">
+                                <span class="category-name">💵 ETFs</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-etfs">
+                                <li><a href="#">📊 Simulador de Indexação</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='fiis.html'" style="cursor:pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-fiis">
+                                <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='acoes.html'" style="cursor:pointer;">
+                                <span class="category-name">📈 Ações</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-acoes">
+                                <li><a href="#">📊 Simulador de Dividendos</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <button class="tab-btn" onclick="window.location.href='cripto.html'">🌐 Economia<br>Digital</button>
+                <button class="tab-btn active" onclick="window.location.href='instrumentos-avancados.html'">🧬 Instrumentos<br>Avançados</button>
+                <button class="tab-btn" onclick="window.location.href='defesa-investidor.html'">🛡 Defesa do<br>Investidor</button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <main style="margin-top: 110px;">
+        <!-- BREADCRUMB STICKY -->
+        <div style="position: sticky; top: 110px; z-index: 999; background: #0D0D0D; width: 100%; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <nav style="max-width: min(calc(100% - 64px), 1160px); margin: 0 auto; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.35);">
+                <span style="color: rgba(6,182,212,0.75); font-weight: 600;">🧬 Instrumentos Avançados</span>
+            </nav>
+        </div>
+        <div class="invlab-lab-container">
+
+            <!-- TÍTULO DA SEÇÃO -->
+            <div style="padding-top: 40px; padding-bottom: 8px; text-align: center;">
+                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; font-weight: 800; color: #D4AF37; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em; line-height: 1.2;">🧬 Instrumentos Avançados</h2>
+                <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(6,182,212,0.65); text-align: center; line-height: 1.8; margin-bottom: 14px; max-width: 860px; margin-left: auto; margin-right: auto;">Fundos, ouro, derivativos, alternativos e ativos reais — o universo além do básico, explicado com a clareza que o mercado raramente oferece.</p>
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: rgba(255, 255, 255, 0.38); text-align: center; line-height: 1.8; margin-bottom: 0; max-width: 860px; margin-left: auto; margin-right: auto;">Complexidade não é sinônimo de sofisticação. Um instrumento avançado só faz sentido quando você entende por que ele está na sua carteira — não quando alguém te convenceu de que deveria estar.</p>
+            </div>
+
+            <!-- HOOK -->
+            <div class="instr-hook">
+                <div class="instr-hook-badge">🧬 Laboratório de Instrumentos Avançados</div>
+                <h2 class="instr-hook-title">O mercado tem ferramentas poderosas.<br>A pergunta é: para quem — e para quê?</h2>
+                <p style="font-size:1rem; color:rgba(255,255,255,0.50); max-width:580px; margin:0 auto 20px; line-height:1.75;">
+                    Derivativos, fundos estruturados, ouro e investimentos alternativos existem por razões legítimas.
+                    Mas cada um deles exige uma pergunta antes da assinatura: esse instrumento resolve um problema real meu?
+                </p>
+                <div class="instr-hook-destaque">
+                    "O investidor informado não tem medo de produtos complexos. Ele sabe quando eles fazem — e quando não fazem — sentido para o seu caso."
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 CATEGORIA 1 — FUNDOS E PRODUTOS ESTRUTURADOS
+                 ====================================================== -->
+            <div class="inv-category" id="fundos">
+                <h3 class="inv-category-title">📦 Fundos e Produtos Estruturados</h3>
+                <p class="inv-category-subtitle">Veículos que reúnem vários ativos sob gestão profissional. A chave está em entender o que está por dentro — e quanto realmente custa.</p>
+                <div class="inv-grid">
+                    <div class="inv-card fundos">
+                        <div class="inv-card-icon">💼</div>
+                        <h4 class="inv-card-title">Fundos Multimercado</h4>
+                        <p class="inv-card-description">Investem em várias classes de ativos simultaneamente — renda fixa, ações, câmbio e derivativos na mesma carteira. A flexibilidade é real, mas atenção: taxa de administração, taxa de performance e come-cotas podem consumir boa parte do retorno.</p>
+                    </div>
+                    <div class="inv-card fundos">
+                        <div class="inv-card-icon">🌍</div>
+                        <h4 class="inv-card-title">BDRs — Acesso Internacional</h4>
+                        <p class="inv-card-description">Brazilian Depositary Receipts. Permitem investir em Apple, Google e Amazon pela B3, em reais, sem precisar de conta no exterior. Convenientes — mas incluem o risco cambial (dólar/real) além do risco da empresa. Isso não é necessariamente ruim: é uma variável a conhecer.</p>
+                    </div>
+                    <div class="inv-card fundos">
+                        <div class="inv-card-icon">🔌</div>
+                        <h4 class="inv-card-title">Fundos de Infraestrutura</h4>
+                        <p class="inv-card-description">Investem em rodovias, portos, saneamento e energia. Contratos de longo prazo com fluxo mais previsível. Geralmente isentos de Imposto de Renda para pessoa física. Um instrumento legítimo para quem busca renda com horizonte longo — desde que entenda a iliquidez típica.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 CATEGORIA 2 — OURO
+                 ====================================================== -->
+            <div class="inv-category" id="ouro">
+                <h3 class="inv-category-title">🥇 Ouro — A Reserva Global</h3>
+                <p class="inv-category-subtitle">O único ativo que bancos centrais do mundo inteiro guardam como reserva. Não é tendência — é o que existe há 5.000 anos quando as moedas perdem credibilidade.</p>
+                <div class="inv-grid">
+                    <div class="inv-card ouro">
+                        <div class="inv-card-icon">🏦</div>
+                        <h4 class="inv-card-title">Por que o ouro existe como reserva?</h4>
+                        <p class="inv-card-description">Dólar, euro e real são moedas fiduciárias — valem porque os governos dizem que valem. O ouro não depende de nenhum governo. Em momentos de crise severa, instabilidade geopolítica ou colapso de moeda, o ouro tende a manter poder de compra quando outras classes de ativo falham.</p>
+                    </div>
+                    <div class="inv-card ouro">
+                        <div class="inv-card-icon">📉</div>
+                        <h4 class="inv-card-title">Proteção contra inflação e crise</h4>
+                        <p class="inv-card-description">Quando a inflação corrói o valor do dinheiro ou os juros reais ficam negativos, o ouro tende a valorizar. Não é garantia absoluta — é uma correlação histórica de milênios. Por isso bancos centrais o mantêm mesmo com reservas em dólar. É uma âncora, não um motor de crescimento.</p>
+                    </div>
+                    <div class="inv-card ouro">
+                        <div class="inv-card-icon">📊</div>
+                        <h4 class="inv-card-title">Como investir em ouro no Brasil</h4>
+                        <p class="inv-card-description">Três formas principais: ETF de ouro na B3 (GOLD11 — mais acessível e líquido), contratos futuros na B3 (para quem domina derivativos) e ouro físico em barras certificadas (custo de custódia alto, pouca liquidez). Para a maioria dos perfis, o GOLD11 é o caminho mais direto e eficiente.</p>
+                    </div>
+                    <div class="inv-card ouro">
+                        <div class="inv-card-icon">⚠️</div>
+                        <h4 class="inv-card-title">O que o ouro não faz</h4>
+                        <p class="inv-card-description">Ouro não paga dividendos, não tem lucros, não cresce como empresa. O retorno vem exclusivamente da variação de preço. É reserva de valor — não motor de crescimento. Em carteiras equilibradas, a alocação costuma ficar entre 5% e 15%. Acima disso, o custo de oportunidade começa a pesar.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 CATEGORIA 3 — DERIVATIVOS
+                 ====================================================== -->
+            <div class="inv-category" id="derivativos">
+                <h3 class="inv-category-title">⚡ Derivativos — O Mundo das Opções</h3>
+                <p class="inv-category-subtitle">Contratos cujo valor deriva de outro ativo. Poderosos para proteção de carteira e estratégias avançadas — mas exigem conhecimento sólido antes de operar qualquer posição.</p>
+                <div class="inv-grid">
+                    <div class="inv-card derivativos">
+                        <div class="inv-card-icon">📋</div>
+                        <h4 class="inv-card-title">O que são Opções?</h4>
+                        <p class="inv-card-description">Uma opção é um contrato que dá o <strong>direito</strong> (não a obrigação) de comprar ou vender um ativo por um preço definido até uma data futura. Você paga um prêmio por esse direito. A grande assimetria: como comprador, você pode perder apenas o prêmio pago. Como vendedor, a exposição pode ser muito maior.</p>
+                    </div>
+                    <div class="inv-card derivativos">
+                        <div class="inv-card-icon">📈</div>
+                        <h4 class="inv-card-title">Call — Opção de Compra</h4>
+                        <p class="inv-card-description">Direito de comprar o ativo por um preço fixo (strike). Se a ação subir acima do strike antes do vencimento, você lucra. Se não, perde o prêmio pago — e nada mais. Usada por quem acredita na valorização do ativo e quer alavancagem em relação à compra direta da ação.</p>
+                    </div>
+                    <div class="inv-card derivativos">
+                        <div class="inv-card-icon">📉</div>
+                        <h4 class="inv-card-title">Put — Opção de Venda</h4>
+                        <p class="inv-card-description">Direito de vender o ativo por um preço fixo. Usada como proteção: se você tem ações e quer limitar o prejuízo em caso de queda, compra puts para garantir um preço mínimo de saída. É como contratar um seguro para sua carteira — paga o prêmio, define o risco máximo.</p>
+                    </div>
+                    <div class="inv-card derivativos">
+                        <div class="inv-card-icon">🎓</div>
+                        <h4 class="inv-card-title">Antes de operar opções</h4>
+                        <p class="inv-card-description">Opções têm data de vencimento, valor intrínseco, valor extrínseco (theta), sensibilidade ao preço (delta) e volatilidade implícita. Cada fator influencia o preço do contrato de forma independente. Operar sem entender todos eles é o caminho mais rápido para perder capital. Domine ações antes de entrar nesse mercado.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 CATEGORIA 4 — INVESTIMENTOS ALTERNATIVOS
+                 ====================================================== -->
+            <div class="inv-category" id="alternativos">
+                <h3 class="inv-category-title">🚀 Investimentos Alternativos</h3>
+                <p class="inv-category-subtitle">Produtos de alta complexidade e, em geral, baixa liquidez. Existem por razões legítimas — mas exigem perfil e horizonte compatíveis. Conheça o conceito antes de considerar qualquer alocação.</p>
+                <div class="inv-grid">
+                    <div class="inv-card avancados">
+                        <div class="inv-card-icon">🚀</div>
+                        <h4 class="inv-card-title">Venture Capital</h4>
+                        <p class="inv-card-description">Investimento em startups de alto potencial de crescimento. Alto risco, com possibilidade de alto retorno. Horizonte longo (7 a 10 anos é comum) e illiquidez total durante o período. A grande maioria das startups não gera o retorno esperado — mas as que geram podem compensar o portfólio inteiro.</p>
+                    </div>
+                    <div class="inv-card avancados">
+                        <div class="inv-card-icon">🏭</div>
+                        <h4 class="inv-card-title">Private Equity</h4>
+                        <p class="inv-card-description">Aquisição de participações em empresas já estabelecidas, fora da bolsa de valores. A estratégia envolve reestruturação operacional ou crescimento acelerado com prazo definido de saída. Geralmente acessível apenas a investidores qualificados, com tíquete mínimo elevado.</p>
+                    </div>
+                    <div class="inv-card avancados">
+                        <div class="inv-card-icon">🤝</div>
+                        <h4 class="inv-card-title">Peer-to-Peer Lending</h4>
+                        <p class="inv-card-description">Empréstimos diretos entre pessoas via plataformas digitais, sem intermediação bancária. Taxas atrativas para quem empresta — mas sem garantia do FGC. O risco de inadimplência é integralmente do investidor. A diversificação entre vários tomadores é essencial para diluir o risco.</p>
+                    </div>
+                    <div class="inv-card avancados">
+                        <div class="inv-card-icon">🛢️</div>
+                        <h4 class="inv-card-title">Commodities</h4>
+                        <p class="inv-card-description">Petróleo, café, soja, minério de ferro — matérias-primas que movimentam a economia global. Funcionam como proteção contra inflação e oferecem diversificação geográfica. Mas estão sujeitos à volatilidade de ciclos econômicos, clima, geopolítica e oferta/demanda mundial.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 CATEGORIA 5 — ATIVOS REAIS
+                 ====================================================== -->
+            <div class="inv-category" id="ativos-reais">
+                <h3 class="inv-category-title">🏠 Ativos Reais</h3>
+                <p class="inv-category-subtitle">Investimentos em bens físicos — oferecem proteção contra inflação e tangibilidade que ativos financeiros não têm. A contrapartida: baixa liquidez, custo alto de entrada e gestão ativa necessária.</p>
+                <div class="inv-grid">
+                    <div class="inv-card reais">
+                        <div class="inv-card-icon">🏠</div>
+                        <h4 class="inv-card-title">Imóveis</h4>
+                        <p class="inv-card-description">Compra direta para aluguel ou revenda. Proteção histórica contra inflação e geração de renda passiva. A outra face: capital imobilizado por anos, custo de manutenção, ITBI e IR na venda, vacância e inadimplência. Antes de comprar, compare o retorno com FIIs — que têm liquidez diária e sem gestão operacional.</p>
+                    </div>
+                    <div class="inv-card reais">
+                        <div class="inv-card-icon">🏗️</div>
+                        <h4 class="inv-card-title">Terrenos e Loteamentos</h4>
+                        <p class="inv-card-description">Aquisição de terrenos para valorização de longo prazo. Sem renda durante o período de espera e com liquidez muito baixa — pode levar anos para encontrar comprador ao preço desejado. A valorização depende fortemente da localização e do desenvolvimento urbano ao redor.</p>
+                    </div>
+                    <div class="inv-card reais">
+                        <div class="inv-card-icon">🎨</div>
+                        <h4 class="inv-card-title">Colecionáveis</h4>
+                        <p class="inv-card-description">Arte, relógios de grife, vinhos raros, itens de coleção. Mercado de nicho com potencial de valorização expressiva — mas exige conhecimento profundo do segmento para autenticar, precificar e encontrar compradores. Não há mercado organizado, não há liquidez garantida, não há preço de referência público.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AVISO EDITORIAL -->
+            <div class="instr-aviso-box">
+                <div style="font-size: 2rem; margin-bottom: 16px;">🧬</div>
+                <h3>Posição editorial do INVLAB</h3>
+                <p>
+                    Estes instrumentos <strong>não possuem simuladores no INVLAB</strong>. São produtos com regras, prazos e estruturas que vão além do escopo dos nossos laboratórios de simulação.
+                </p>
+                <p>
+                    Nosso objetivo é apresentar um <strong>panorama educacional honesto</strong>: o que cada instrumento é, como funciona e o que você precisa entender antes de considerar qualquer alocação.
+                </p>
+                <p style="margin-bottom: 0;">
+                    Nenhum instrumento aqui é recomendado ou desaconselhado de forma genérica. O que faz sentido depende do seu perfil, do seu objetivo e do seu horizonte de tempo — não de tendências ou pressão comercial.
+                </p>
+            </div>
+
+            <!-- A SEMENTE -->
+            <div class="instr-semente">
+                <div style="font-size: 1.6rem; margin-bottom: 28px;">🌱</div>
+                <h3 class="instr-semente-titulo">A Semente deste Laboratório</h3>
+
+                <p class="instr-semente-linha">Instrumentos avançados existem porque o mercado é complexo.</p>
+                <p class="instr-semente-linha">Mas complexidade <strong>nunca foi argumento para assinar.</strong></p>
+
+                <br>
+
+                <p class="instr-semente-linha">O investidor maduro não rejeita o que não entende.</p>
+                <p class="instr-semente-linha">Ele <strong>para, estuda, e decide com convicção.</strong></p>
+
+                <br>
+
+                <div style="margin: 8px auto; max-width: 560px; padding: 28px 32px; background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.20); border-radius: 16px;">
+                    <p style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(255,255,255,0.70); line-height: 1.75; margin: 0 0 10px; font-style: italic;">A diferença entre um instrumento sofisticado e uma armadilha sofisticada</p>
+                    <p style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(16,185,129,0.90); line-height: 1.75; margin: 0; font-weight: 700;">é quem entende o produto antes de assinar.</p>
+                </div>
+
+                <div class="instr-semente-assinatura">🌱</div>
+            </div>
+
+        </div><!-- /invlab-lab-container -->
+    </main>
+
+    <!-- FOOTER -->
+    <footer style="background: rgba(0,0,0,0.50); border-top: 1px solid rgba(212,175,55,0.1); padding: 48px 32px 32px; margin-top: 60px;">
+        <div style="max-width: 1160px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px; margin-bottom: 32px;">
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Primeiros Passos</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="../index.html#primeiros-passos" style="color: rgba(16,185,129,0.85); text-decoration: none;">📚 Aprenda a Investir</a></li>
+                    <li><a href="guia_invlab.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🧭 Guia do INVLAB</a></li>
+                    <li><a href="metodologia.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔬 Nossa Metodologia</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="poupanca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💰 Poupança</a></li>
+                    <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                    <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Ações</a></li>
+                    <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💵 ETFs</a></li>
+                    <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 FIIs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Economia Digital</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌐 Economia Digital</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Instrumentos Avançados</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="instrumentos-avancados.html#fundos" style="color: rgba(16,185,129,0.85); text-decoration: none;">💼 Fundos e Estruturados</a></li>
+                    <li><a href="instrumentos-avancados.html#ouro" style="color: rgba(16,185,129,0.85); text-decoration: none;">🥇 Ouro</a></li>
+                    <li><a href="instrumentos-avancados.html#derivativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">⚡ Derivativos e Opções</a></li>
+                    <li><a href="instrumentos-avancados.html#alternativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚀 Invest. Alternativos</a></li>
+                    <li><a href="instrumentos-avancados.html#ativos-reais" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏠 Ativos Reais</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Defesa do Investidor</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
+                    <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                    <li><a href="credito-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔥 Crédito</a></li>
+                    <li><a href="produtos-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔍 Produtos</a></li>
+                    <li><a href="sinais-de-alerta.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚨 Sinais de alerta</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
+            <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
+            </p>
+            <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
+            </p>
+        </div>
+        </div>
+    </footer>
+
+    <div id="backToTop">↑</div>
+
+    <script src="../assets/js/script.js"></script>
+    <script defer src="../assets/js/bcb-api.js"></script>
+    <script defer src="../assets/js/invlab-carrossel-renda-variavel.js"></script>
+    <script>
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+                setTimeout(() => backToTopButton.style.opacity = '1', 10);
+            } else {
+                backToTopButton.style.opacity = '0';
+                setTimeout(() => backToTopButton.style.display = 'none', 300);
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
