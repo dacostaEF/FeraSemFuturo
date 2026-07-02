@@ -1,0 +1,774 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commodities — A Origem da Economia Real | INVLAB</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="description" content="De onde nasce toda riqueza produzida pela humanidade? Um laboratório INVLAB sobre commodities, economia física, superciclos, geopolítica e como os recursos naturais sustentam toda a cadeia econômica global.">
+
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+    <link rel="stylesheet" href="../assets/css/commodities.css">
+</head>
+<body>
+    <section id="invlab-carousel-container"></section>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+            </div>
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Início</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">📚 Primeiros<br>Passos</button>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-fixa'">📊 Renda<br>Fixa <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="poupanca.html">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-variavel'">📈 Renda<br>Variável <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='etfs.html'" style="cursor:pointer;">
+                                <span class="category-name">💵 ETFs</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='fiis.html'" style="cursor:pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='acoes.html'" style="cursor:pointer;">
+                                <span class="category-name">📈 Ações</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <button class="tab-btn" onclick="window.location.href='cripto.html'">🌐 Economia<br>Digital</button>
+                <button class="tab-btn active" onclick="window.location.href='instrumentos-avancados.html'">🧬 Instrumentos<br>Avançados</button>
+                <button class="tab-btn" onclick="window.location.href='defesa-investidor.html'">🛡 Defesa do<br>Investidor</button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <main style="margin-top: 110px; padding-top: 44px;">
+        <!-- BREADCRUMB FIXO -->
+        <div style="position: fixed; top: 110px; left: 0; right: 0; z-index: 999; background: #0D0D0D; width: 100%; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <nav style="max-width: min(calc(100% - 64px), 1160px); margin: 0 auto; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.35);">
+                <span onclick="window.location.href='instrumentos-avancados.html'" style="cursor:pointer; color: rgba(34,211,238,0.65); font-weight:600;">🧬 Instrumentos Avançados</span>
+                <span>›</span>
+                <span onclick="window.location.href='instrumentos-avancados.html#alternativos'" style="cursor:pointer; color: rgba(107,143,62,0.60); font-weight:600;">🚀 Investimentos Alternativos</span>
+                <span>›</span>
+                <span style="color: rgba(107,143,62,0.85); font-weight:600;">Commodities</span>
+            </nav>
+        </div>
+
+        <div class="invlab-lab-container">
+
+            <!-- HOOK / HERO -->
+            <div class="commod-hook">
+                <div class="commod-hook-badge">🌍 Laboratório · Investimentos Alternativos</div>
+                <h1 class="commod-hook-titulo">Commodities</h1>
+                <p class="commod-hook-subtitulo">A Origem da Economia Real</p>
+
+                <div class="commod-hook-texto">
+                    Antes da Bolsa existir... existia trigo.<br><br>
+                    Antes das ações... existia cobre.<br>
+                    Antes dos bancos... existia ouro.<br>
+                    Antes dos ETFs... existia petróleo.<br><br>
+                    Toda empresa começa em uma commodity.<br>
+                    Uma montadora começa no minério. Uma companhia aérea começa no petróleo.<br>
+                    Uma padaria começa no trigo. Uma empresa de tecnologia começa no cobre, no silício e nas terras raras.<br><br>
+                    Até o smartphone que você segura nas mãos nasceu em uma mina.
+                </div>
+
+                <p class="commod-hook-tese">
+                    Toda riqueza financeira nasce primeiro da economia física.<br>
+                    E toda economia física começa nas commodities.
+                </p>
+            </div>
+
+            <!-- SEÇÃO 1: A ORIGEM DA ECONOMIA -->
+            <div class="commod-section">
+                <span class="commod-section-tag">Seção 1 · Contexto Histórico</span>
+                <h2 class="commod-section-title">A Origem da Economia</h2>
+                <p class="commod-text">
+                    O mercado financeiro é uma construção humana extraordinariamente sofisticada. Mas ele está assentado sobre uma base muito mais antiga e fundamental — a economia física, que começou quando o primeiro ser humano extraiu algo da natureza e o transformou em algo útil.
+                </p>
+                <p class="commod-text">
+                    A cadeia é sempre a mesma, em qualquer época e em qualquer lugar do mundo:
+                </p>
+
+                <div class="commod-origem">
+                    <div class="commod-origem-node natureza">🌍 Natureza — a origem de tudo</div>
+                    <div class="commod-origem-connector">↓</div>
+                    <div class="commod-origem-node">⛏️ Extração — minério, petróleo, colheita</div>
+                    <div class="commod-origem-connector">↓</div>
+                    <div class="commod-origem-node">🔄 Transformação — refino, beneficiamento</div>
+                    <div class="commod-origem-connector">↓</div>
+                    <div class="commod-origem-node">🏭 Indústria — fabricação e produção</div>
+                    <div class="commod-origem-connector">↓</div>
+                    <div class="commod-origem-node">🛒 Comércio — distribuição e venda</div>
+                    <div class="commod-origem-connector">↓</div>
+                    <div class="commod-origem-node">💼 Serviços — valor sobre valor</div>
+                    <div class="commod-origem-connector">↓</div>
+                    <div class="commod-origem-node financeiro">📊 Mercado Financeiro — organiza capital</div>
+                    <div class="commod-origem-connector">↓</div>
+                    <div class="commod-origem-node financeiro">💰 Investimentos — participação no resultado</div>
+
+                    <div class="commod-origem-mensagem">
+                        <div class="commod-origem-msg">
+                            <strong style="color: rgba(107,143,62,0.85);">A natureza produz riqueza.</strong><br>
+                            O mercado financeiro organiza e distribui o capital gerado por essa riqueza.
+                        </div>
+                        <div class="commod-origem-msg">
+                            <strong style="color: rgba(107,143,62,0.85);">O mercado financeiro não produz um único grão de soja.</strong><br>
+                            Não extrai um quilo de cobre. Não refina um barril de petróleo.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commod-frase-invlab">
+                    Toda empresa listada em bolsa, todo fundo de investimentos, toda carteira de ações — tudo existe porque, em algum ponto da cadeia, alguém extraiu um recurso da natureza e o transformou em algo com valor econômico.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 2: AS QUATRO FAMÍLIAS -->
+            <div class="commod-section">
+                <span class="commod-section-tag">Seção 2 · Taxonomia</span>
+                <h2 class="commod-section-title">As Quatro Famílias das Commodities</h2>
+                <p class="commod-text">
+                    Cada família de commodities resolveu um problema diferente da civilização. Compreender esse papel é mais importante do que conhecer o preço de cada produto.
+                </p>
+
+                <div class="commod-familias-grid">
+                    <div class="commod-familia-card agro">
+                        <span class="commod-familia-icon">🌾</span>
+                        <h3 class="commod-familia-nome">Agrícolas</h3>
+                        <p class="commod-familia-papel">Resolveram o problema mais fundamental da humanidade: a alimentação. Sem elas, não existe civilização. O preço do trigo impacta bilhões de pessoas que nunca negociaram uma tonelada sequer.</p>
+                        <div class="commod-familia-tags">
+                            <span class="commod-familia-tag">Soja</span>
+                            <span class="commod-familia-tag">Milho</span>
+                            <span class="commod-familia-tag">Trigo</span>
+                            <span class="commod-familia-tag">Café</span>
+                            <span class="commod-familia-tag">Algodão</span>
+                            <span class="commod-familia-tag">Açúcar</span>
+                            <span class="commod-familia-tag">Proteína Animal</span>
+                        </div>
+                    </div>
+
+                    <div class="commod-familia-card metal">
+                        <span class="commod-familia-icon">⛏️</span>
+                        <h3 class="commod-familia-nome">Metálicas</h3>
+                        <p class="commod-familia-papel">Resolveram infraestrutura e tecnologia. Toda cidade, toda ponte, todo circuito eletrônico, todo cabo submarino começa em uma mina. O cobre está em cada fio de energia elétrica do planeta.</p>
+                        <div class="commod-familia-tags">
+                            <span class="commod-familia-tag">Minério de Ferro</span>
+                            <span class="commod-familia-tag">Cobre</span>
+                            <span class="commod-familia-tag">Alumínio</span>
+                            <span class="commod-familia-tag">Níquel</span>
+                            <span class="commod-familia-tag">Lítio</span>
+                            <span class="commod-familia-tag">Terras Raras</span>
+                        </div>
+                    </div>
+
+                    <div class="commod-familia-card energia">
+                        <span class="commod-familia-icon">⚡</span>
+                        <h3 class="commod-familia-nome">Energéticas</h3>
+                        <p class="commod-familia-papel">Resolveram o movimento e a produção. Movimento é energia. Energia é o que permite que tudo funcione — de uma geladeira a uma refinaria, de um avião a uma fábrica. A economia global ainda depende profundamente delas.</p>
+                        <div class="commod-familia-tags">
+                            <span class="commod-familia-tag">Petróleo</span>
+                            <span class="commod-familia-tag">Gás Natural</span>
+                            <span class="commod-familia-tag">Carvão</span>
+                            <span class="commod-familia-tag">Etanol</span>
+                            <span class="commod-familia-tag">Energia Elétrica</span>
+                        </div>
+                    </div>
+
+                    <div class="commod-familia-card preciosa">
+                        <span class="commod-familia-icon">🥇</span>
+                        <h3 class="commod-familia-nome">Preciosas</h3>
+                        <p class="commod-familia-papel">Resolveram preservação de riqueza. Durante milênios, metais preciosos foram dinheiro. Ainda hoje, em momentos de crise sistêmica, eles funcionam como âncora — quando a confiança nos sistemas financeiros oscila, o ouro resiste.</p>
+                        <div class="commod-familia-tags">
+                            <span class="commod-familia-tag">Ouro</span>
+                            <span class="commod-familia-tag">Prata</span>
+                            <span class="commod-familia-tag">Platina</span>
+                            <span class="commod-familia-tag">Paládio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 3: O PLANETA IMPÕE LIMITES -->
+            <div class="commod-section">
+                <span class="commod-section-tag">Seção 3 · Escassez</span>
+                <h2 class="commod-section-title">O planeta impõe limites</h2>
+                <p class="commod-text">
+                    Esta é a característica que torna as commodities fundamentalmente diferentes de praticamente todos os demais ativos financeiros. Existe um teto físico que nenhuma política monetária consegue ultrapassar.
+                </p>
+
+                <div class="commod-limite-grid">
+                    <div class="commod-limite-col commod-limite-infinito">
+                        <div class="commod-limite-header">♾️ Pode ser replicado</div>
+                        <ul class="commod-limite-lista">
+                            <li>💻 Software pode ser copiado infinitamente, ao custo marginal zero</li>
+                            <li>💵 Dinheiro pode ser impresso — com consequências, mas pode</li>
+                            <li>📊 Ações podem ser emitidas em grandes volumes</li>
+                            <li>📄 Títulos de dívida podem ser criados conforme a demanda</li>
+                        </ul>
+                    </div>
+
+                    <div class="commod-limite-col commod-limite-finito">
+                        <div class="commod-limite-header">⛔ Não pode ser replicado</div>
+                        <ul class="commod-limite-lista">
+                            <li>⛏️ Uma mina leva milhões de anos para existir — e não se faz outra</li>
+                            <li>🌱 Uma safra depende do clima que ninguém controla</li>
+                            <li>🌳 Uma floresta leva décadas para crescer</li>
+                            <li>🛢️ Uma jazida de petróleo é um patrimônio geológico não renovável</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="commod-frase-invlab">
+                    É exatamente essa limitação física que cria a escassez — e é a escassez que gera valor econômico. Em um mundo onde quase tudo pode ser duplicado digitalmente, a raridade das commodities as torna economicamente insubstituíveis.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 4: OFERTA E DEMANDA -->
+            <div class="commod-section">
+                <span class="commod-section-tag">Seção 4 · Dinâmica de Mercado</span>
+                <h2 class="commod-section-title">Oferta demora. Demanda muda rapidamente.</h2>
+                <p class="commod-text">
+                    Esta assimetria de tempo é uma das leis mais importantes de todo o mercado de commodities — e a raiz de praticamente todos os grandes movimentos de preço que a humanidade já vivenciou.
+                </p>
+
+                <div class="commod-tempo-grid">
+                    <div class="commod-tempo-col commod-oferta-col">
+                        <div class="commod-tempo-header">🏗️ Oferta — quanto tempo demora</div>
+                        <div class="commod-tempo-item">
+                            <span>Descobrir e abrir uma nova mina</span>
+                            <span class="commod-tempo-valor">7–15 anos</span>
+                        </div>
+                        <div class="commod-tempo-item">
+                            <span>Construir uma refinaria de petróleo</span>
+                            <span class="commod-tempo-valor">10–18 anos</span>
+                        </div>
+                        <div class="commod-tempo-item">
+                            <span>Construir uma hidrelétrica</span>
+                            <span class="commod-tempo-valor">15–25 anos</span>
+                        </div>
+                        <div class="commod-tempo-item">
+                            <span>Cultivar um cafezal produtivo</span>
+                            <span class="commod-tempo-valor">3–5 anos</span>
+                        </div>
+                        <div class="commod-tempo-item">
+                            <span>Ampliar capacidade de minério</span>
+                            <span class="commod-tempo-valor">5–10 anos</span>
+                        </div>
+                    </div>
+
+                    <div class="commod-tempo-col commod-demanda-col">
+                        <div class="commod-tempo-header">⚡ Demanda — quanto tempo muda</div>
+                        <div class="commod-tempo-item">
+                            <span>Uma guerra interrompe rotas de suprimento</span>
+                            <span class="commod-tempo-valor">Dias</span>
+                        </div>
+                        <div class="commod-tempo-item">
+                            <span>Uma seca destrói parte da safra</span>
+                            <span class="commod-tempo-valor">Semanas</span>
+                        </div>
+                        <div class="commod-tempo-item">
+                            <span>Uma decisão política altera exportações</span>
+                            <span class="commod-tempo-valor">Horas</span>
+                        </div>
+                        <div class="commod-tempo-item">
+                            <span>El Niño redefine produção agrícola</span>
+                            <span class="commod-tempo-valor">Meses</span>
+                        </div>
+                        <div class="commod-tempo-item">
+                            <span>Crescimento econômico da China</span>
+                            <span class="commod-tempo-valor">Décadas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="commod-text">
+                    Esse desequilíbrio estrutural entre a velocidade da oferta e a velocidade da demanda é a raiz dos chamados <strong style="color: rgba(107,143,62,0.90);">superciclos de commodities</strong> — períodos de décadas em que os preços permanecem historicamente elevados porque a oferta simplesmente não consegue acompanhar o crescimento econômico global.
+                </p>
+
+                <div class="commod-ciclo-nota">
+                    O resultado desse desequilíbrio crônico entre oferta lenta e demanda volátil:
+                </div>
+                <div class="commod-ciclo-tags">
+                    <span class="commod-ciclo-tag">Superciclos de preços</span>
+                    <span class="commod-ciclo-tag">Escassez localizada</span>
+                    <span class="commod-ciclo-tag">Choques de oferta</span>
+                    <span class="commod-ciclo-tag">Inflação estrutural</span>
+                    <span class="commod-ciclo-tag">Corrida por reservas estratégicas</span>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 5: GEOPOLÍTICA -->
+            <div class="commod-section">
+                <span class="commod-section-tag">Seção 5 · Geopolítica</span>
+                <h2 class="commod-section-title">A Geopolítica das Commodities</h2>
+                <p class="commod-text">
+                    Commodities são ativos globais. Seu preço não é determinado por um único país, empresa ou governo — ele emerge da interação de forças geográficas, climáticas, políticas e econômicas que atuam simultaneamente no mundo inteiro.
+                </p>
+
+                <div class="commod-geo-grid">
+                    <div class="commod-geo-col commod-geo-paises-col">
+                        <div class="commod-geo-header">🌐 Protagonistas globais</div>
+                        <ul class="commod-geo-lista">
+                            <li>🇨🇳 <strong>China</strong> — maior consumidor mundial de minério, cobre e energia</li>
+                            <li>🇺🇸 <strong>Estados Unidos</strong> — maior produtor de petróleo e gás do planeta</li>
+                            <li>🇸🇦 <strong>Arábia Saudita / OPEP</strong> — regula oferta de petróleo globalmente</li>
+                            <li>🇷🇺 <strong>Rússia</strong> — maior exportador de gás natural e trigo da Europa</li>
+                            <li>🇧🇷 <strong>Brasil</strong> — exportador global em soja, minério de ferro, petróleo e proteína animal</li>
+                            <li>🇦🇺 <strong>Austrália</strong> — maior exportador de minério de ferro e carvão</li>
+                        </ul>
+                    </div>
+
+                    <div class="commod-geo-col commod-geo-eventos-col">
+                        <div class="commod-geo-header">⚠️ O que altera os preços</div>
+                        <ul class="commod-geo-lista">
+                            <li>🔫 Guerras e conflitos armados em regiões produtoras</li>
+                            <li>🚫 Embargos e sanções econômicas internacionais</li>
+                            <li>🌩️ Secas, inundações e eventos climáticos extremos</li>
+                            <li>🌊 El Niño e La Niña — fenômenos que afetam colheitas globais</li>
+                            <li>🚢 Bloqueios em rotas marítimas críticas</li>
+                            <li>⛽ Decisões da OPEP sobre cotas de produção</li>
+                            <li>📜 Políticas de exportação e subsídios agrícolas</li>
+                        </ul>
+                        <div class="commod-geo-recursos">
+                            <span class="commod-geo-recurso">Petróleo</span>
+                            <span class="commod-geo-recurso">Cobre</span>
+                            <span class="commod-geo-recurso">Lítio</span>
+                            <span class="commod-geo-recurso">Fertilizantes</span>
+                            <span class="commod-geo-recurso">Gás Natural</span>
+                            <span class="commod-geo-recurso">Terras Raras</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commod-frase-invlab">
+                    O Brasil ocupa uma posição geopolítica rara no mundo: é um dos poucos países com capacidade exportadora relevante em múltiplas categorias de commodities simultaneamente — agrícolas, energéticas e metálicas. Isso representa uma vantagem estrutural, mas também cria dependência de ciclos globais que o país não controla.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 6: INFLAÇÃO -->
+            <div class="commod-section">
+                <span class="commod-section-tag">Seção 6 · Inflação</span>
+                <h2 class="commod-section-title">Toda inflação começa muito antes do supermercado</h2>
+                <p class="commod-text">
+                    Quando o preço de uma commodity sobe, a cadeia de impactos percorre toda a economia. O que o consumidor sente no caixa do supermercado é o resultado final de uma cadeia que começa em um poço de petróleo, uma mina ou uma lavoura.
+                </p>
+
+                <div class="commod-infla-flow">
+                    <div class="commod-infla-node energia">🛢️ Petróleo sobe — insumo de tudo</div>
+                    <div class="commod-infla-arrow">↓</div>
+                    <div class="commod-infla-node frete">🚚 Frete sobe — transporte mais caro</div>
+                    <div class="commod-infla-arrow">↓</div>
+                    <div class="commod-infla-node producao">🏭 Custo de produção sobe — energia + logística</div>
+                    <div class="commod-infla-arrow">↓</div>
+                    <div class="commod-infla-node alimentos">🛒 Preços no varejo sobem — o consumidor absorve</div>
+                    <div class="commod-infla-arrow">↓</div>
+                    <div class="commod-infla-node inflacao">📈 Inflação sobe — no índice e no dia a dia</div>
+                    <div class="commod-infla-arrow">↓</div>
+                    <div class="commod-infla-node juros">🏦 Banco Central aumenta juros — para conter a inflação</div>
+                    <div class="commod-infla-arrow">↓</div>
+                    <div class="commod-infla-node bolsa">📊 Bolsa reage — crédito mais caro, margens menores</div>
+                    <div class="commod-infla-arrow">↓</div>
+                    <div class="commod-infla-node economia">📉 Economia desacelera — o ciclo se fecha</div>
+                </div>
+
+                <p class="commod-text">
+                    Essa cadeia pode ser iniciada por qualquer commodity — não apenas o petróleo. Uma seca que destrói a safra de trigo produz o mesmo efeito cascata. Um embargo de fertilizantes afeta a produtividade agrícola global. Uma interrupção na mineração de cobre encarece toda a eletricidade.
+                </p>
+
+                <div class="commod-frase-invlab">
+                    Compreender o papel das commodities na inflação é essencial para entender por que bancos centrais monitoram o preço do petróleo, do trigo e do minério com tanta atenção quanto monitoram o próprio IPCA.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 7: COMO O INVESTIDOR PARTICIPA -->
+            <div class="commod-section">
+                <span class="commod-section-tag">Seção 7 · Participação</span>
+                <h2 class="commod-section-title">Como o pequeno investidor participa desse mercado</h2>
+                <p class="commod-text">
+                    Hoje ninguém precisa comprar um barril de petróleo, uma tonelada de soja ou uma barra de cobre para ter exposição ao mercado de commodities. O mercado financeiro criou instrumentos que permitem ao investidor participar dessa dinâmica sem precisar operar o mercado físico.
+                </p>
+                <p class="commod-text">
+                    Abaixo, um panorama das principais formas de acesso — cada uma com suas próprias características de risco, liquidez e complexidade:
+                </p>
+
+                <div class="commod-instrumentos-grid">
+                    <div class="commod-instrumento-item">
+                        <span class="commod-instrumento-icon">💵</span>
+                        <div class="commod-instrumento-nome">ETFs de Commodities</div>
+                        <div class="commod-instrumento-desc">Fundos negociados em bolsa que replicam índices de commodities</div>
+                    </div>
+                    <div class="commod-instrumento-item">
+                        <span class="commod-instrumento-icon">💼</span>
+                        <div class="commod-instrumento-nome">Fundos Especializados</div>
+                        <div class="commod-instrumento-desc">Fundos com gestão ativa focados em commodities ou setores específicos</div>
+                    </div>
+                    <div class="commod-instrumento-item">
+                        <span class="commod-instrumento-icon">📈</span>
+                        <div class="commod-instrumento-nome">Ações de Produtoras</div>
+                        <div class="commod-instrumento-desc">Empresas mineradoras, petrolíferas e agroindustriais listadas em bolsa</div>
+                    </div>
+                    <div class="commod-instrumento-item">
+                        <span class="commod-instrumento-icon">🌍</span>
+                        <div class="commod-instrumento-nome">BDRs Internacionais</div>
+                        <div class="commod-instrumento-desc">Acesso a grandes produtores globais via mercado brasileiro</div>
+                    </div>
+                    <div class="commod-instrumento-item">
+                        <span class="commod-instrumento-icon">🌾</span>
+                        <div class="commod-instrumento-nome">CRA</div>
+                        <div class="commod-instrumento-desc">Certificado de Recebíveis do Agronegócio — renda fixa vinculada ao setor</div>
+                    </div>
+                    <div class="commod-instrumento-item">
+                        <span class="commod-instrumento-icon">🏦</span>
+                        <div class="commod-instrumento-nome">LCA</div>
+                        <div class="commod-instrumento-desc">Letra de Crédito do Agronegócio — renda fixa com isenção de IR para pessoa física</div>
+                    </div>
+                </div>
+
+                <p class="commod-text">
+                    O foco deste laboratório não é ensinar a operar cada um desses instrumentos. É mostrar que a exposição ao mundo físico das commodities é possível por múltiplos caminhos, cada um com perfil de risco, prazo e liquidez distintos.
+                </p>
+            </div>
+
+            <!-- SEÇÃO 8: COMMODITIES PRODUZEM RENDA? -->
+            <div class="commod-section">
+                <span class="commod-section-tag">Seção 8 · Características</span>
+                <h2 class="commod-section-title">Commodities produzem renda?</h2>
+                <p class="commod-text">
+                    Esta é uma das perguntas mais importantes antes de qualquer alocação, e a resposta merece clareza.
+                </p>
+                <p class="commod-text">
+                    Diferente de ações, fundos imobiliários ou títulos de renda fixa, <strong style="color: rgba(107,143,62,0.85);">commodities em si não distribuem dividendos</strong>. Uma tonelada de soja não reinveste lucros. Um barril de petróleo não paga cupons. Uma barra de ouro não envia rendimentos mensais.
+                </p>
+
+                <ul class="commod-renda-lista">
+                    <li>❌ Não distribuem dividendos</li>
+                    <li>❌ Não reinvestem lucros</li>
+                    <li>❌ Não inovam nem crescem organicamente</li>
+                    <li>❌ Não têm fluxo de caixa próprio</li>
+                </ul>
+
+                <p class="commod-text">
+                    O preço de uma commodity depende fundamentalmente de:
+                </p>
+
+                <div class="commod-fatores-grid">
+                    <div class="commod-fator-item">⚖️ Oferta e demanda global</div>
+                    <div class="commod-fator-item">🌍 Geopolítica internacional</div>
+                    <div class="commod-fator-item">🌦️ Clima e safras</div>
+                    <div class="commod-fator-item">📈 Crescimento econômico</div>
+                    <div class="commod-fator-item">💱 Variação cambial</div>
+                    <div class="commod-fator-item">🏭 Nível de estoques globais</div>
+                </div>
+
+                <div class="commod-renda-nuance">
+                    <strong style="color: rgba(212,175,55,0.85);">Uma distinção essencial:</strong> a commodity em si não gera fluxo de caixa — mas a empresa que a produz pode gerar dividendos. Uma mineradora distribui parte do seu lucro. Uma petrolífera pode pagar proventos. Essa é a diferença entre investir em uma commodity e investir em uma empresa que a extrai ou processa. São exposições relacionadas, mas com perfis de risco e retorno fundamentalmente diferentes.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 9: QUANDO FAZ SENTIDO -->
+            <div class="commod-section">
+                <span class="commod-section-tag">Seção 9 · Análise</span>
+                <h2 class="commod-section-title">Quando faz sentido considerar commodities</h2>
+                <p class="commod-text">
+                    Commodities não são instrumentos universais. Elas têm características específicas que as tornam adequadas para determinados objetivos e inadequadas para outros.
+                </p>
+
+                <div class="commod-faz-grid">
+                    <div class="commod-faz-col commod-sim-col">
+                        <div class="commod-faz-header">✔ Pode fazer sentido quando...</div>
+                        <ul class="commod-faz-lista">
+                            <li><span>✔</span> Busca proteção contra inflação estrutural de longo prazo</li>
+                            <li><span>✔</span> Quer diversificar com ativos descorrelacionados de bolsas e renda fixa</li>
+                            <li><span>✔</span> Busca exposição à economia global física, não apenas financeira</li>
+                            <li><span>✔</span> Está construindo reserva de valor em horizonte de longo prazo</li>
+                            <li><span>✔</span> Entende que a alocação representa uma fração pequena do patrimônio</li>
+                        </ul>
+                    </div>
+
+                    <div class="commod-faz-col commod-nao-col">
+                        <div class="commod-faz-header">✖ Talvez não faça sentido quando...</div>
+                        <ul class="commod-faz-lista">
+                            <li><span>✖</span> O objetivo é renda mensal — commodities não distribuem proventos</li>
+                            <li><span>✖</span> O horizonte é curto prazo — volatilidade pode ser alta</li>
+                            <li><span>✖</span> A intenção é especular em movimentos de preço diários</li>
+                            <li><span>✖</span> O investidor não compreende os fatores geopolíticos e climáticos envolvidos</li>
+                            <li><span>✖</span> O capital alocado é a reserva de emergência ou poupança principal</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 10: O GRANDE MAPA DA ECONOMIA -->
+            <div class="commod-section">
+                <span class="commod-section-tag">Seção 10 · Visão Sistêmica</span>
+                <h2 class="commod-section-title">O Grande Mapa da Economia</h2>
+                <p class="commod-text">
+                    Esta é a síntese de tudo que este laboratório — e todo o INVLAB — procura ensinar. A cadeia completa, do recurso natural ao patrimônio acumulado, passando por cada estágio da civilização econômica.
+                </p>
+
+                <div class="commod-mapa">
+                    <div class="commod-mapa-node nivel-solo">
+                        <span class="commod-mapa-icon">🌍</span>
+                        <div class="commod-mapa-content">
+                            <span class="commod-mapa-label">Solo</span>
+                            <span class="commod-mapa-desc">A natureza produz — solo, subsolo, clima, água</span>
+                        </div>
+                    </div>
+                    <div class="commod-mapa-connector">↓</div>
+
+                    <div class="commod-mapa-node nivel-commodities">
+                        <span class="commod-mapa-icon">🪨</span>
+                        <div class="commod-mapa-content">
+                            <span class="commod-mapa-label">Commodities</span>
+                            <span class="commod-mapa-desc">A origem de toda riqueza econômica — o alicerce</span>
+                        </div>
+                    </div>
+                    <div class="commod-mapa-connector">↓</div>
+
+                    <div class="commod-mapa-node nivel-industria">
+                        <span class="commod-mapa-icon">🏭</span>
+                        <div class="commod-mapa-content">
+                            <span class="commod-mapa-label">Indústria</span>
+                            <span class="commod-mapa-desc">Transforma recursos físicos em produtos</span>
+                        </div>
+                    </div>
+                    <div class="commod-mapa-connector">↓</div>
+
+                    <div class="commod-mapa-node nivel-industria">
+                        <span class="commod-mapa-icon">🏢</span>
+                        <div class="commod-mapa-content">
+                            <span class="commod-mapa-label">Empresas</span>
+                            <span class="commod-mapa-desc">Organizam produção, trabalho e distribuição</span>
+                        </div>
+                    </div>
+                    <div class="commod-mapa-connector">↓</div>
+
+                    <div class="commod-mapa-node nivel-financeiro">
+                        <span class="commod-mapa-icon">💰</span>
+                        <div class="commod-mapa-content">
+                            <span class="commod-mapa-label">Lucros</span>
+                            <span class="commod-mapa-desc">Retorno gerado pela atividade econômica</span>
+                        </div>
+                    </div>
+                    <div class="commod-mapa-connector">↓</div>
+
+                    <div class="commod-mapa-node nivel-financeiro">
+                        <span class="commod-mapa-icon">📈</span>
+                        <div class="commod-mapa-content">
+                            <span class="commod-mapa-label">Ações</span>
+                            <span class="commod-mapa-desc">Participação nos lucros das empresas produtivas</span>
+                        </div>
+                    </div>
+                    <div class="commod-mapa-connector">↓</div>
+
+                    <div class="commod-mapa-node nivel-poupanca">
+                        <span class="commod-mapa-icon">💼</span>
+                        <div class="commod-mapa-content">
+                            <span class="commod-mapa-label">Fundos</span>
+                            <span class="commod-mapa-desc">Diversificação organizada do capital investido</span>
+                        </div>
+                    </div>
+                    <div class="commod-mapa-connector">↓</div>
+
+                    <div class="commod-mapa-node nivel-poupanca">
+                        <span class="commod-mapa-icon">🎯</span>
+                        <div class="commod-mapa-content">
+                            <span class="commod-mapa-label">Previdência</span>
+                            <span class="commod-mapa-desc">Acumulação estruturada de longo prazo</span>
+                        </div>
+                    </div>
+                    <div class="commod-mapa-connector">↓</div>
+
+                    <div class="commod-mapa-node nivel-patrimonio">
+                        <span class="commod-mapa-icon">🏛️</span>
+                        <div class="commod-mapa-content">
+                            <span class="commod-mapa-label">Patrimônio</span>
+                            <span class="commod-mapa-desc">Riqueza preservada e transmitida entre gerações</span>
+                        </div>
+                    </div>
+
+                    <div class="commod-mapa-nota">
+                        Em algum ponto dessa cadeia — seja no início ou no meio — existe sempre uma commodity.<br>
+                        Esse é o fato mais permanente de toda a economia.
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHECKLIST INVLAB -->
+            <div class="commod-checklist">
+                <p class="commod-checklist-titulo">📋 Checklist INVLAB — Antes de investir em Commodities</p>
+                <div class="commod-check-lista">
+                    <div class="commod-check-item">
+                        <span class="commod-check-num">1</span>
+                        <span>Entendo que estou obtendo exposição à economia física — e não a um ativo financeiro que distribui rendimentos periódicos?</span>
+                    </div>
+                    <div class="commod-check-item">
+                        <span class="commod-check-num">2</span>
+                        <span>Sei diferenciar commodities agrícolas, metálicas, energéticas e preciosas — e entendo o papel econômico distinto de cada família?</span>
+                    </div>
+                    <div class="commod-check-item">
+                        <span class="commod-check-num">3</span>
+                        <span>Compreendo que geopolítica, clima, moedas e ciclos econômicos globais influenciam diretamente os preços — fatores que nenhum modelo financeiro consegue prever com precisão?</span>
+                    </div>
+                    <div class="commod-check-item">
+                        <span class="commod-check-num">4</span>
+                        <span>Estou buscando diversificação e proteção patrimonial — e não especulação ou renda mensal?</span>
+                    </div>
+                    <div class="commod-check-item">
+                        <span class="commod-check-num">5</span>
+                        <span>Sei qual instrumento estou utilizando — ETF, fundo, ação de empresa produtora, BDR, CRA ou LCA — e entendo as características de cada um?</span>
+                    </div>
+                    <div class="commod-check-item">
+                        <span class="commod-check-num">6</span>
+                        <span>A parcela do patrimônio alocada em commodities é complementar — e não substitui a base estrutural em renda fixa e diversificação principal?</span>
+                    </div>
+                </div>
+                <p class="commod-checklist-nota">Commodities representam a base da economia real. Compreender esse papel é o primeiro passo — antes de qualquer decisão de alocação.</p>
+            </div>
+
+            <!-- AVISO EDITORIAL -->
+            <div class="commod-aviso">
+                ⚠️ Este laboratório é de natureza exclusivamente educacional. Preços de commodities variam conforme oferta, demanda, geopolítica, câmbio, clima e ciclos econômicos. O INVLAB não recomenda produtos, não possui vínculos comerciais com operadores do setor e não recebe qualquer remuneração relacionada ao mercado de commodities. O objetivo é explicar como esse mercado funciona — não orientar decisões de investimento específicas.
+            </div>
+
+            <!-- A SEMENTE -->
+            <div class="commod-semente">
+                <span class="commod-semente-icon">🌱</span>
+                <p class="commod-semente-title">A Semente</p>
+                <p class="commod-semente-text">
+                    Antes de existir riqueza financeira, existia riqueza física.<br>
+                    Antes de existir bancos, existia produção.<br>
+                    Antes de existir bolsas, existia trabalho.<br><br>
+                    Toda empresa. Toda tecnologia. Toda cidade. Toda economia.<br>
+                    Começa em algum recurso produzido pela natureza.<br><br>
+                    O mercado financeiro pode multiplicar capital.<br>
+                    Pode organizar, distribuir e preservar riqueza.<br>
+                    Mas nunca poderá substituir aquilo que sustenta a própria civilização.
+                </p>
+                <p class="commod-semente-destaque">
+                    No fim de toda cadeia econômica existe sempre uma commodity.<br>
+                    Compreender isso talvez seja a forma mais profunda<br>
+                    de entender como o mundo realmente funciona.
+                </p>
+            </div>
+
+        </div><!-- /invlab-lab-container -->
+    </main>
+
+    <footer style="background: rgba(13, 13, 13, 0.97); border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+    <div class="content-wrapper-wide">
+        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
+                <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">🧭 Guia do INVLAB →</a>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                    <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Ações</a></li>
+                    <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💵 ETFs</a></li>
+                    <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 FIIs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Economia Digital</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌐 Economia Digital</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Instrumentos Avançados</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="fundos-investimento.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💼 Fundos de Investimentos</a></li>
+                    <li><a href="bdrs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌍 BDRs</a></li>
+                    <li><a href="fi-infra.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏗️ FI-Infra</a></li>
+                    <li><a href="ouro.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🥇 Ouro</a></li>
+                    <li><a href="derivativos.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">⚡ Derivativos</a></li>
+                    <li><a href="venture-capital.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚀 Venture Capital</a></li>
+                    <li><a href="private-equity.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏭 Private Equity</a></li>
+                    <li><a href="peer-to-peer.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🤝 P2P Lending</a></li>
+                    <li><a href="commodities.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌍 Commodities</a></li>
+                    <li><a href="commodities.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌍 Commodities</a></li>
+                    <li><a href="instrumentos-avancados.html#ativos-reais" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏠 Ativos Reais</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Defesa do Investidor</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
+                    <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                    <li><a href="credito-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔥 Crédito</a></li>
+                    <li><a href="produtos-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔍 Produtos</a></li>
+                    <li><a href="sinais-de-alerta.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚨 Sinais de alerta</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
+            <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
+            </p>
+            <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
+            </p>
+        </div>
+    </div>
+    </footer>
+
+    <div id="backToTop">↑</div>
+
+    <script src="../assets/js/script.js"></script>
+    <script defer src="../assets/js/bcb-api.js"></script>
+    <script defer src="../assets/js/invlab-carrossel-renda-variavel.js"></script>
+    <script>
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+                setTimeout(() => backToTopButton.style.opacity = '1', 10);
+            } else {
+                backToTopButton.style.opacity = '0';
+                setTimeout(() => backToTopButton.style.display = 'none', 300);
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
