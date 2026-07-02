@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundos de Infraestrutura — Como o Capital Privado Constrói um País | INVLAB</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="description" content="Entenda como os Fundos de Infraestrutura conectam investidores aos projetos que desenvolvem um país. Rodovias, energia, saneamento, ferrovias — educação financeira com cidadania. INVLAB.">
+
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+    <link rel="stylesheet" href="../assets/css/fi-infra.css">
+</head>
+<body>
+    <section id="invlab-carousel-container"></section>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+            </div>
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Início</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">📚 Primeiros<br>Passos</button>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-fixa'">📊 Renda<br>Fixa <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="poupanca.html">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-variavel'">📈 Renda<br>Variável <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='etfs.html'" style="cursor:pointer;">
+                                <span class="category-name">💵 ETFs</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-etfs">
+                                <li><a href="#">📊 Simulador de Indexação</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='fiis.html'" style="cursor:pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-fiis">
+                                <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='acoes.html'" style="cursor:pointer;">
+                                <span class="category-name">📈 Ações</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-acoes">
+                                <li><a href="#">📊 Simulador de Dividendos</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <button class="tab-btn" onclick="window.location.href='cripto.html'">🌐 Economia<br>Digital</button>
+                <button class="tab-btn active" onclick="window.location.href='instrumentos-avancados.html'">🧬 Instrumentos<br>Avançados</button>
+                <button class="tab-btn" onclick="window.location.href='defesa-investidor.html'">🛡 Defesa do<br>Investidor</button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <main style="margin-top: 110px;">
+        <!-- BREADCRUMB STICKY -->
+        <div style="position: sticky; top: 110px; z-index: 999; background: #0D0D0D; width: 100%; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <nav style="max-width: min(calc(100% - 64px), 1160px); margin: 0 auto; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.35);">
+                <span onclick="window.location.href='instrumentos-avancados.html'" style="cursor:pointer; color: rgba(34,211,238,0.65); font-weight:600;">🧬 Instrumentos Avançados</span>
+                <span>›</span>
+                <span style="color: rgba(245,158,11,0.80); font-weight:600;">🏗️ Fundos de Infraestrutura</span>
+            </nav>
+        </div>
+
+        <div class="invlab-lab-container">
+
+            <!-- TÍTULO -->
+            <div style="padding-top: 40px; padding-bottom: 8px; text-align: center;">
+                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; font-weight: 800; color: #D4AF37; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em; line-height: 1.2;">🏗️ Fundos de Infraestrutura</h2>
+                <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(245,158,11,0.65); text-align: center; line-height: 1.8; margin-bottom: 14px; max-width: 860px; margin-left: auto; margin-right: auto;">Investindo nas estruturas que movem um país.</p>
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: rgba(255,255,255,0.38); text-align: center; line-height: 1.8; margin-bottom: 0; max-width: 860px; margin-left: auto; margin-right: auto;">Todos os dias utilizamos estradas, aeroportos, portos, energia elétrica, saneamento e telecomunicações. Poucas pessoas imaginam que também podem participar financeiramente da construção e expansão desses projetos. Este laboratório mostra como — e o que você precisa compreender antes de decidir.</p>
+            </div>
+
+            <!-- HOOK -->
+            <div class="infra-hook" style="margin-top: 36px;">
+                <div class="infra-hook-badge">🏗️ Laboratório — Capital Privado e Desenvolvimento</div>
+                <div class="infra-hook-title">
+                    Um FI-Infra não é apenas um fundo.<br>
+                    É uma forma de participar financeiramente da construção de um país.
+                </div>
+                <p style="font-size: 0.97rem; color: rgba(255,255,255,0.50); max-width: 620px; margin: 0 auto 22px; line-height: 1.78;">
+                    Rodovias, ferrovias, linhas de transmissão, portos, energia renovável e saneamento — grandes projetos que sustentam a economia precisam de capital para existir.
+                    Os Fundos de Infraestrutura foram criados para conectar esse capital aos empreendimentos que ajudam a desenvolver o país.
+                </p>
+                <div class="infra-hook-frase">
+                    "A pergunta certa não é: 'esse fundo rende bem?' A pergunta certa é: 'eu entendo de onde vêm os rendimentos que receberei — e quais riscos acompanham essa renda?'"
+                </div>
+            </div>
+
+            <!-- SEÇÃO 1 — Por que infraestrutura importa? -->
+            <div class="infra-section">
+                <div class="infra-section-tag">Seção 1 — A Base de Tudo</div>
+                <h3 class="infra-section-title">Por que infraestrutura importa?</h3>
+                <p class="infra-text">Antes de qualquer conceito financeiro, uma pergunta simples: por que infraestrutura é tão importante para uma economia?</p>
+                <p class="infra-text">A resposta é direta. Nenhuma economia cresce de forma sustentável sem energia confiável, transporte eficiente, logística integrada, comunicação de qualidade, saneamento básico e conectividade digital. Infraestrutura não é apenas concreto e aço — é a base que permite que empresas produzam, pessoas trabalhem e cidades se desenvolvam.</p>
+                <div class="infra-frase-invlab">
+                    Países com boa infraestrutura atraem mais investimentos, geram mais empregos e crescem com mais consistência. Países com deficiência em infraestrutura carregam um custo econômico permanente — o chamado "Custo Brasil" tem uma parcela significativa originada exatamente aí.
+                </div>
+                <div class="infra-pilares-grid">
+                    <div class="infra-pilar">
+                        <span class="infra-pilar-icon">⚡</span>
+                        <div class="infra-pilar-nome">Energia</div>
+                        <div class="infra-pilar-desc">Usinas, linhas de transmissão, energia renovável — sem energia, nada funciona.</div>
+                    </div>
+                    <div class="infra-pilar">
+                        <span class="infra-pilar-icon">🛣️</span>
+                        <div class="infra-pilar-nome">Transporte</div>
+                        <div class="infra-pilar-desc">Rodovias, ferrovias e hidrovias movem a produção de um extremo ao outro do país.</div>
+                    </div>
+                    <div class="infra-pilar">
+                        <span class="infra-pilar-icon">⚓</span>
+                        <div class="infra-pilar-nome">Logística</div>
+                        <div class="infra-pilar-desc">Portos e aeroportos de carga conectam o Brasil ao comércio internacional.</div>
+                    </div>
+                    <div class="infra-pilar">
+                        <span class="infra-pilar-icon">📡</span>
+                        <div class="infra-pilar-nome">Comunicação</div>
+                        <div class="infra-pilar-desc">Redes de fibra, telecomunicações e conectividade digital são infraestrutura do século XXI.</div>
+                    </div>
+                    <div class="infra-pilar">
+                        <span class="infra-pilar-icon">🚰</span>
+                        <div class="infra-pilar-nome">Saneamento</div>
+                        <div class="infra-pilar-desc">Água tratada e esgoto coletado são direitos — e também infraestrutura econômica essencial.</div>
+                    </div>
+                    <div class="infra-pilar">
+                        <span class="infra-pilar-icon">🏙️</span>
+                        <div class="infra-pilar-nome">Mobilidade</div>
+                        <div class="infra-pilar-desc">Metrôs, VLTs e sistemas de transporte urbano determinam a produtividade de uma cidade.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 2 — Como nasce um grande projeto? -->
+            <div class="infra-section">
+                <div class="infra-section-tag">Seção 2 — A Origem da Renda</div>
+                <h3 class="infra-section-title">Como nasce um grande projeto de infraestrutura?</h3>
+                <p class="infra-text">Uma empresa vence a concessão para construir uma rodovia. O projeto custa bilhões. O governo não financia. Os bancos participam, mas o mercado de capitais também tem um papel central. De onde vem o dinheiro?</p>
+                <p class="infra-text">Entender esse caminho é entender <strong style="color: #E2E8F0;">de onde vem a renda que você receberia</strong> ao investir em um Fundo de Infraestrutura. Este fluxo é o coração de toda a lógica do produto.</p>
+
+                <div class="infra-flow">
+                    <div class="infra-flow-node origem">🏢 Empresa vence uma concessão</div>
+                    <div class="infra-flow-arrow-block">
+                        <div class="infra-flow-arrow-line"></div>
+                        <div class="infra-flow-label">precisa de capital</div>
+                        <div class="infra-flow-arrow-line"></div>
+                        <div class="infra-flow-arrow-head"></div>
+                    </div>
+                    <div class="infra-flow-node">📄 Emite Debêntures Incentivadas</div>
+                    <div class="infra-flow-arrow-block">
+                        <div class="infra-flow-arrow-line"></div>
+                        <div class="infra-flow-label">captação no mercado</div>
+                        <div class="infra-flow-arrow-line"></div>
+                        <div class="infra-flow-arrow-head"></div>
+                    </div>
+                    <div class="infra-flow-node destaque">🏗️ FI-Infra compra essas debêntures</div>
+                    <div class="infra-flow-arrow-block">
+                        <div class="infra-flow-arrow-line"></div>
+                        <div class="infra-flow-label">investidores entram via cotas</div>
+                        <div class="infra-flow-arrow-line"></div>
+                        <div class="infra-flow-arrow-head"></div>
+                    </div>
+                    <div class="infra-flow-node">👥 Investidores compram cotas do fundo</div>
+                    <div class="infra-flow-arrow-block">
+                        <div class="infra-flow-arrow-line"></div>
+                        <div class="infra-flow-label">projeto é viabilizado</div>
+                        <div class="infra-flow-arrow-line"></div>
+                        <div class="infra-flow-arrow-head"></div>
+                    </div>
+                    <div class="infra-flow-node">🏗️ Rodovia, usina ou ferrovia é construída</div>
+                    <div class="infra-flow-arrow-block">
+                        <div class="infra-flow-arrow-line"></div>
+                        <div class="infra-flow-label">operação começa</div>
+                        <div class="infra-flow-arrow-line"></div>
+                        <div class="infra-flow-arrow-head"></div>
+                    </div>
+                    <div class="infra-flow-node">💰 Empresa gera receitas operacionais</div>
+                    <div class="infra-flow-arrow-block">
+                        <div class="infra-flow-arrow-line"></div>
+                        <div class="infra-flow-label">honra o compromisso</div>
+                        <div class="infra-flow-arrow-line"></div>
+                        <div class="infra-flow-arrow-head"></div>
+                    </div>
+                    <div class="infra-flow-node">📤 Empresa paga juros ao fundo</div>
+                    <div class="infra-flow-arrow-block">
+                        <div class="infra-flow-arrow-line"></div>
+                        <div class="infra-flow-label">fundo distribui</div>
+                        <div class="infra-flow-arrow-line"></div>
+                        <div class="infra-flow-arrow-head"></div>
+                    </div>
+                    <div class="infra-flow-node resultado">✅ Investidor recebe renda periódica</div>
+                </div>
+
+                <div class="infra-destaque-box">
+                    <div class="infra-destaque-box-title">⚠️ O ponto que poucos percebem</div>
+                    <p style="font-size: 0.88rem; color: #94A3B8; line-height: 1.7; margin: 0;">A renda que você recebe não vem do fundo. Vem da empresa. O fundo é o intermediário que compra os títulos emitidos pela empresa e repassa os rendimentos aos cotistas. Compreender essa cadeia é fundamental para avaliar o risco real do investimento.</p>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 3 — O que é um FI-Infra? -->
+            <div class="infra-section">
+                <div class="infra-section-tag">Seção 3 — O Instrumento</div>
+                <h3 class="infra-section-title">O que é, afinal, um FI-Infra?</h3>
+                <p class="infra-text">Somente agora, depois de entender a lógica econômica por trás, faz sentido definir o instrumento.</p>
+                <p class="infra-text">Um <strong style="color: #F59E0B;">Fundo de Investimento em Infraestrutura (FI-Infra)</strong> é um fundo especializado em adquirir títulos de dívida emitidos por empresas que desenvolvem projetos de infraestrutura — principalmente Debêntures Incentivadas, criadas pela Lei 12.431/2011.</p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-top: 24px;">
+                    <div class="infra-destaque-box" style="margin: 0;">
+                        <div class="infra-destaque-box-title">📄 O que o fundo compra?</div>
+                        <p style="font-size: 0.85rem; color: #94A3B8; line-height: 1.6; margin: 0;">Debêntures incentivadas e outros títulos de crédito privado emitidos por empresas do setor.</p>
+                    </div>
+                    <div class="infra-destaque-box" style="margin: 0;">
+                        <div class="infra-destaque-box-title">💰 Como o fundo ganha?</div>
+                        <p style="font-size: 0.85rem; color: #94A3B8; line-height: 1.6; margin: 0;">Recebe os juros pagos pelas empresas emissoras ao longo do prazo dos títulos.</p>
+                    </div>
+                    <div class="infra-destaque-box" style="margin: 0;">
+                        <div class="infra-destaque-box-title">👥 Como o investidor entra?</div>
+                        <p style="font-size: 0.85rem; color: #94A3B8; line-height: 1.6; margin: 0;">Comprando cotas do fundo, geralmente negociadas em bolsa, como uma ação ou um FII.</p>
+                    </div>
+                    <div class="infra-destaque-box" style="margin: 0;">
+                        <div class="infra-destaque-box-title">📅 Como recebe?</div>
+                        <p style="font-size: 0.85rem; color: #94A3B8; line-height: 1.6; margin: 0;">O fundo distribui os rendimentos periodicamente aos cotistas, em geral mensalmente.</p>
+                    </div>
+                </div>
+
+                <div class="infra-frase-invlab" style="margin-top: 24px;">
+                    Em vez de construir diretamente uma rodovia, o investidor participa do financiamento de quem a constrói — e recebe parte dos juros que essa empresa paga pela captação realizada.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 4 — Por que existe isenção fiscal? -->
+            <div class="infra-section">
+                <div class="infra-section-tag">Seção 4 — A Lógica do Incentivo</div>
+                <h3 class="infra-section-title">Por que existe isenção fiscal para quem investe em infraestrutura?</h3>
+                <p class="infra-text">Esta é uma das perguntas mais importantes desta página — porque a resposta ensina economia, não apenas tributação.</p>
+                <p class="infra-text">Grandes projetos de infraestrutura envolvem riscos elevados: obras longas, retorno demorado, dependência de aprovações regulatórias, riscos de construção e operação. Num cenário de taxa de juros historicamente alta como o do Brasil, o capital privado naturalmente prefere ativos mais seguros e com liquidez maior.</p>
+
+                <div class="infra-destaque-box">
+                    <div class="infra-destaque-box-title">🏛️ O raciocínio do incentivo</div>
+                    <p style="font-size: 0.88rem; color: #94A3B8; line-height: 1.72; margin: 0;">
+                        O governo enfrenta uma limitação de recursos para financiar toda a infraestrutura que o país precisa. A alternativa é atrair capital privado.
+                        Para compensar o risco e tornar o investimento competitivo, o governo concede <strong style="color: #E2E8F0;">isenção de Imposto de Renda sobre os rendimentos</strong> recebidos por pessoas físicas.
+                        Essa isenção não é um presente — é um instrumento de política econômica para direcionar capital privado para obras de interesse público.
+                        Sem ela, muitos projetos simplesmente não seriam viáveis com financiamento privado.
+                    </p>
+                </div>
+
+                <p class="infra-text" style="margin-top: 18px;">A isenção é vantajosa para o investidor. Mas atenção: ela não elimina os riscos. Um rendimento isento de IR proveniente de uma empresa com dificuldades financeiras ainda pode ser afetado. A qualidade do crédito das empresas emissoras é sempre mais importante do que o benefício fiscal.</p>
+                <div class="infra-frase-invlab">
+                    Isenção fiscal não muda a qualidade do crédito. Uma debênture com isenção de IR emitida por uma empresa frágil continua sendo uma debênture de empresa frágil.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 5 — Onde seu dinheiro pode estar trabalhando? -->
+            <div class="infra-section">
+                <div class="infra-section-tag">Seção 5 — Onde o Capital Vai</div>
+                <h3 class="infra-section-title">Onde seu dinheiro pode estar trabalhando?</h3>
+                <p class="infra-text">Infraestrutura vai muito além de estradas. Um FI-Infra pode alocar recursos em projetos de setores muito diferentes entre si, cada um com características, prazos e riscos próprios.</p>
+
+                <div class="infra-setores-grid">
+                    <div class="infra-setor-item">
+                        <span class="infra-setor-icon">🛣️</span>
+                        <div class="infra-setor-nome">Rodovias</div>
+                        <div class="infra-setor-desc">Concessões de estradas com pedágio. Receita previsível e indexada, prazos longos de concessão.</div>
+                    </div>
+                    <div class="infra-setor-item">
+                        <span class="infra-setor-icon">🚄</span>
+                        <div class="infra-setor-nome">Ferrovias</div>
+                        <div class="infra-setor-desc">Transporte de cargas a granel — minério, grãos, celulose. Alta escala, dependência do volume exportado.</div>
+                    </div>
+                    <div class="infra-setor-item">
+                        <span class="infra-setor-icon">⚡</span>
+                        <div class="infra-setor-nome">Energia Elétrica</div>
+                        <div class="infra-setor-desc">Geradoras e transmissoras com contratos de longo prazo (PPAs). Receita bastante estável.</div>
+                    </div>
+                    <div class="infra-setor-item">
+                        <span class="infra-setor-icon">☀️</span>
+                        <div class="infra-setor-nome">Energia Solar</div>
+                        <div class="infra-setor-desc">Usinas fotovoltaicas em expansão acelerada no Brasil. Custos em queda, eficiência crescente.</div>
+                    </div>
+                    <div class="infra-setor-item">
+                        <span class="infra-setor-icon">🌬️</span>
+                        <div class="infra-setor-nome">Energia Eólica</div>
+                        <div class="infra-setor-desc">Parques eólicos concentrados no Nordeste. Brasil é um dos maiores produtores mundiais.</div>
+                    </div>
+                    <div class="infra-setor-item">
+                        <span class="infra-setor-icon">🚰</span>
+                        <div class="infra-setor-nome">Saneamento</div>
+                        <div class="infra-setor-desc">Concessões de água e esgoto. Marco do Saneamento (2020) abriu o setor ao capital privado.</div>
+                    </div>
+                    <div class="infra-setor-item">
+                        <span class="infra-setor-icon">✈️</span>
+                        <div class="infra-setor-nome">Aeroportos</div>
+                        <div class="infra-setor-desc">Concessões aeroportuárias com receita tarifária. Sensível ao tráfego de passageiros e cargas.</div>
+                    </div>
+                    <div class="infra-setor-item">
+                        <span class="infra-setor-icon">⚓</span>
+                        <div class="infra-setor-nome">Portos</div>
+                        <div class="infra-setor-desc">Terminais portuários com contratos de movimentação. Ligados diretamente ao comércio exterior.</div>
+                    </div>
+                    <div class="infra-setor-item">
+                        <span class="infra-setor-icon">📡</span>
+                        <div class="infra-setor-nome">Telecomunicações</div>
+                        <div class="infra-setor-desc">Redes de fibra óptica e infraestrutura digital. Demanda crescente e capilaridade nacional.</div>
+                    </div>
+                </div>
+
+                <p class="infra-text" style="margin-top: 20px;">Cada carteira de FI-Infra tem uma composição diferente. Alguns são mais concentrados em energia, outros em logística ou saneamento. Conhecer os setores presentes na carteira é parte fundamental da análise antes de investir.</p>
+            </div>
+
+            <!-- SEÇÃO 6 — FI-Infra x FIIs -->
+            <div class="infra-section">
+                <div class="infra-section-tag">Seção 6 — Comparação Essencial</div>
+                <h3 class="infra-section-title">FI-Infra × FIIs — produtos parecidos por fora, diferentes por dentro</h3>
+                <p class="infra-text">Ambos negociam cotas em bolsa. Ambos distribuem renda periodicamente. Ambos têm isenção de IR para pessoas físicas sobre os rendimentos. Mas a natureza do que gera essa renda é completamente diferente — e isso muda tudo na análise de risco.</p>
+
+                <div class="infra-comparar-wrap">
+                    <div class="infra-comparar-row header">
+                        <div class="infra-comparar-cell label col-head" style="text-align:left; color:#64748B;">Aspecto</div>
+                        <div class="infra-comparar-cell col-head col-fiis">🏢 FIIs</div>
+                        <div class="infra-comparar-cell col-head col-infra">🏗️ FI-Infra</div>
+                    </div>
+                    <div class="infra-comparar-row">
+                        <div class="infra-comparar-cell label">Tipo de ativo</div>
+                        <div class="infra-comparar-cell destaque-fiis">Imóveis / CRIs</div>
+                        <div class="infra-comparar-cell destaque-infra">Debêntures Incentivadas</div>
+                    </div>
+                    <div class="infra-comparar-row">
+                        <div class="infra-comparar-cell label">Renda vem de</div>
+                        <div class="infra-comparar-cell center" style="color:#94A3B8;">Aluguéis dos imóveis</div>
+                        <div class="infra-comparar-cell center" style="color:#94A3B8;">Juros pagos pelas empresas</div>
+                    </div>
+                    <div class="infra-comparar-row">
+                        <div class="infra-comparar-cell label">Lastro físico</div>
+                        <div class="infra-comparar-cell center" style="color:#94A3B8;">Prédios, shoppings, galpões</div>
+                        <div class="infra-comparar-cell center" style="color:#94A3B8;">Projetos de infraestrutura</div>
+                    </div>
+                    <div class="infra-comparar-row">
+                        <div class="infra-comparar-cell label">Risco principal</div>
+                        <div class="infra-comparar-cell center" style="color:#94A3B8;">Vacância e desvalorização</div>
+                        <div class="infra-comparar-cell center" style="color:#94A3B8;">Crédito das empresas</div>
+                    </div>
+                    <div class="infra-comparar-row">
+                        <div class="infra-comparar-cell label">Indexador típico</div>
+                        <div class="infra-comparar-cell center" style="color:#94A3B8;">IGPM / IPCA</div>
+                        <div class="infra-comparar-cell center" style="color:#94A3B8;">IPCA + taxa ou CDI</div>
+                    </div>
+                    <div class="infra-comparar-row">
+                        <div class="infra-comparar-cell label">Sensível a juros?</div>
+                        <div class="infra-comparar-cell center" style="color:#94A3B8;">Sim — afeta valor das cotas</div>
+                        <div class="infra-comparar-cell center" style="color:#94A3B8;">Sim — afeta valor das cotas</div>
+                    </div>
+                    <div class="infra-comparar-row">
+                        <div class="infra-comparar-cell label">Isenção IR (PF)</div>
+                        <div class="infra-comparar-cell destaque-fiis">Sim (rendimentos)</div>
+                        <div class="infra-comparar-cell destaque-infra">Sim (rendimentos)</div>
+                    </div>
+                    <div class="infra-comparar-row">
+                        <div class="infra-comparar-cell label">Negociado em bolsa?</div>
+                        <div class="infra-comparar-cell destaque-fiis">Sim (B3)</div>
+                        <div class="infra-comparar-cell destaque-infra">Sim (B3)</div>
+                    </div>
+                </div>
+
+                <div class="infra-frase-invlab" style="margin-top: 24px;">
+                    A semelhança superficial entre FIIs e FI-Infra pode enganar. O que muda radicalmente é a origem da renda e o tipo de risco que você está assumindo. Um FII depende de inquilinos pagando aluguel. Um FI-Infra depende de empresas pagando juros. São lógicas diferentes.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 7 — Como um FI-Infra gera renda? -->
+            <div class="infra-section">
+                <div class="infra-section-tag">Seção 7 — O Mecanismo da Renda</div>
+                <h3 class="infra-section-title">Como um FI-Infra gera e distribui renda?</h3>
+                <p class="infra-text">A renda de um FI-Infra não é gerada pelo fundo. O fundo é apenas o intermediário. Quem gera a renda são as empresas cujos títulos estão na carteira. Entender isso é entender o risco real do produto.</p>
+
+                <div class="infra-flow" style="max-width: 380px;">
+                    <div class="infra-flow-node origem">🏢 Empresa de infraestrutura</div>
+                    <div class="infra-flow-arrow-block">
+                        <div class="infra-flow-arrow-line"></div>
+                        <div class="infra-flow-label">honra a debênture</div>
+                        <div class="infra-flow-arrow-line"></div>
+                        <div class="infra-flow-arrow-head"></div>
+                    </div>
+                    <div class="infra-flow-node">💳 Paga juros ao fundo</div>
+                    <div class="infra-flow-arrow-block">
+                        <div class="infra-flow-arrow-line"></div>
+                        <div class="infra-flow-label">fundo repassa</div>
+                        <div class="infra-flow-arrow-line"></div>
+                        <div class="infra-flow-arrow-head"></div>
+                    </div>
+                    <div class="infra-flow-node destaque">🏗️ Fundo distribui aos cotistas</div>
+                    <div class="infra-flow-arrow-block">
+                        <div class="infra-flow-arrow-line"></div>
+                        <div class="infra-flow-label">isento de IR para PF</div>
+                        <div class="infra-flow-arrow-line"></div>
+                        <div class="infra-flow-arrow-head"></div>
+                    </div>
+                    <div class="infra-flow-node resultado">✅ Investidor recebe rendimento</div>
+                </div>
+
+                <p class="infra-text" style="margin-top: 8px;">Os indexadores mais comuns são <strong style="color: #E2E8F0;">IPCA + taxa prefixada</strong> ou <strong style="color: #E2E8F0;">CDI + spread</strong>. Isso significa que, em cenários de inflação elevada, os rendimentos tendem a crescer — mas o comportamento da taxa de juros também afeta o valor das cotas no mercado secundário.</p>
+            </div>
+
+            <!-- SEÇÃO 8 — O que pode fazer perder valor? -->
+            <div class="infra-section">
+                <div class="infra-section-tag">Seção 8 — Os Riscos Reais</div>
+                <h3 class="infra-section-title">O que pode fazer um FI-Infra perder valor?</h3>
+                <p class="infra-text">Todo investimento tem risco. A questão não é se o risco existe, mas se você o compreende antes de investir. No caso dos FI-Infra, os principais riscos vêm de situações concretas — não de conceitos abstratos.</p>
+
+                <div class="infra-riscos-list">
+                    <div class="infra-risco-item">
+                        <div class="infra-risco-trigger">⚠️ A empresa enfrenta dificuldades financeiras</div>
+                        <div class="infra-risco-seta">↓ efeito</div>
+                        <div class="infra-risco-efeito">O risco mais direto. Se a empresa emissora da debênture não consegue honrar seus pagamentos, os juros podem ser atrasados, renegociados ou não pagos. Qualidade de crédito não é detalhe — é o centro da análise.</div>
+                    </div>
+                    <div class="infra-risco-item">
+                        <div class="infra-risco-trigger">⚠️ Os juros de mercado sobem significativamente</div>
+                        <div class="infra-risco-seta">↓ efeito</div>
+                        <div class="infra-risco-efeito">Quando a taxa básica de juros sobe, títulos de renda fixa mais antigos (com taxas menores) ficam menos atrativos. O valor das cotas do fundo no mercado secundário tende a cair — mesmo que os rendimentos continuem sendo pagos normalmente pelas empresas.</div>
+                    </div>
+                    <div class="infra-risco-item">
+                        <div class="infra-risco-trigger">⚠️ O projeto atrasa ou enfrenta problemas operacionais</div>
+                        <div class="infra-risco-seta">↓ efeito</div>
+                        <div class="infra-risco-efeito">Obras grandes têm atrasos, imprevistos de engenharia, questões ambientais, problemas fundiários. Se a operação do projeto demora a começar, a capacidade de geração de caixa da empresa é afetada — e, por consequência, a capacidade de pagamento dos juros.</div>
+                    </div>
+                    <div class="infra-risco-item">
+                        <div class="infra-risco-trigger">⚠️ Mudanças no ambiente regulatório ou nos incentivos fiscais</div>
+                        <div class="infra-risco-seta">↓ efeito</div>
+                        <div class="infra-risco-efeito">Concessões dependem de contratos com o poder público. Mudanças nas regras de concessão, tarifas, revisões contratuais ou alterações na legislação fiscal podem impactar tanto a receita das empresas quanto o tratamento tributário do investimento.</div>
+                    </div>
+                    <div class="infra-risco-item">
+                        <div class="infra-risco-trigger">⚠️ Liquidez limitada no mercado secundário</div>
+                        <div class="infra-risco-seta">↓ efeito</div>
+                        <div class="infra-risco-efeito">Nem todos os FI-Infra têm alto volume de negociações na bolsa. Em momentos de estresse, pode ser difícil vender cotas ao preço desejado. Para quem pode precisar do dinheiro no curto prazo, isso é um risco relevante.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 9 — Quando faz sentido? -->
+            <div class="infra-section">
+                <div class="infra-section-tag">Seção 9 — Avaliação de Adequação</div>
+                <h3 class="infra-section-title">Quando um FI-Infra costuma fazer sentido?</h3>
+                <p class="infra-text">Não existe investimento ideal para todos. O que existe são instrumentos que se encaixam — ou não — em objetivos, horizontes e perfis específicos.</p>
+
+                <div class="infra-quando-grid">
+                    <div class="infra-quando-col sim">
+                        <div class="infra-quando-col-title">✅ Pode fazer mais sentido quando você...</div>
+                        <div class="infra-quando-item">
+                            <span class="ico">✅</span>
+                            <span>Busca renda periódica com isenção de IR sobre os rendimentos</span>
+                        </div>
+                        <div class="infra-quando-item">
+                            <span class="ico">✅</span>
+                            <span>Tem horizonte de longo prazo e consegue suportar oscilações de cota no curto prazo</span>
+                        </div>
+                        <div class="infra-quando-item">
+                            <span class="ico">✅</span>
+                            <span>Deseja proteção parcial contra inflação (indexadores IPCA+)</span>
+                        </div>
+                        <div class="infra-quando-item">
+                            <span class="ico">✅</span>
+                            <span>Quer diversificar em renda fixa além de CDBs e Tesouro Direto</span>
+                        </div>
+                        <div class="infra-quando-item">
+                            <span class="ico">✅</span>
+                            <span>Compreende e aceita risco de crédito privado (diferente de risco de banco)</span>
+                        </div>
+                        <div class="infra-quando-item">
+                            <span class="ico">✅</span>
+                            <span>Tem interesse em entender como o capital privado financia o desenvolvimento</span>
+                        </div>
+                    </div>
+                    <div class="infra-quando-col nao">
+                        <div class="infra-quando-col-title">⛔ Pode não fazer sentido quando você...</div>
+                        <div class="infra-quando-item">
+                            <span class="ico">⛔</span>
+                            <span>Precisa de liquidez imediata ou tem horizonte de investimento curto</span>
+                        </div>
+                        <div class="infra-quando-item">
+                            <span class="ico">⛔</span>
+                            <span>Não está disposto a ver o valor das cotas oscilar enquanto a renda continua sendo distribuída</span>
+                        </div>
+                        <div class="infra-quando-item">
+                            <span class="ico">⛔</span>
+                            <span>Busca valorização acelerada de capital — FI-Infra é essencialmente um gerador de renda</span>
+                        </div>
+                        <div class="infra-quando-item">
+                            <span class="ico">⛔</span>
+                            <span>Não tem familiaridade com risco de crédito privado e as implicações de inadimplência de uma empresa</span>
+                        </div>
+                        <div class="infra-quando-item">
+                            <span class="ico">⛔</span>
+                            <span>Está investindo exclusivamente pelo benefício fiscal, sem analisar a qualidade dos projetos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 10 — Como escolher? -->
+            <div class="infra-section">
+                <div class="infra-section-tag">Seção 10 — Critérios de Análise</div>
+                <h3 class="infra-section-title">Como avaliar um FI-Infra antes de investir?</h3>
+                <p class="infra-text">Olhar apenas o rendimento distribuído no último mês é a forma mais comum — e mais perigosa — de analisar um FI-Infra. O que realmente importa está muito antes disso.</p>
+
+                <div class="infra-escolher-grid">
+                    <div class="infra-escolher-item">
+                        <div class="infra-escolher-num">1</div>
+                        <div class="infra-escolher-text"><strong>Qualidade das empresas emissoras</strong> — quem emitiu as debêntures que estão na carteira? Qual o histórico financeiro dessas empresas?</div>
+                    </div>
+                    <div class="infra-escolher-item">
+                        <div class="infra-escolher-num">2</div>
+                        <div class="infra-escolher-text"><strong>Qualidade dos projetos</strong> — os projetos já estão em operação ou ainda em fase de construção? Estágio de maturidade importa muito.</div>
+                    </div>
+                    <div class="infra-escolher-item">
+                        <div class="infra-escolher-num">3</div>
+                        <div class="infra-escolher-text"><strong>Rating de crédito</strong> — as debêntures têm classificação de risco de agências independentes? Qual o rating médio da carteira?</div>
+                    </div>
+                    <div class="infra-escolher-item">
+                        <div class="infra-escolher-num">4</div>
+                        <div class="infra-escolher-text"><strong>Gestor e track record</strong> — quem gerencia o fundo? Qual a experiência em crédito de infraestrutura? Há histórico de inadimplência gerenciada?</div>
+                    </div>
+                    <div class="infra-escolher-item">
+                        <div class="infra-escolher-num">5</div>
+                        <div class="infra-escolher-text"><strong>Prazo médio da carteira</strong> — fundos com duration longa são mais sensíveis às variações de juros. Quanto mais longo, maior a oscilação de cota.</div>
+                    </div>
+                    <div class="infra-escolher-item">
+                        <div class="infra-escolher-num">6</div>
+                        <div class="infra-escolher-text"><strong>Concentração da carteira</strong> — poucos emissores concentrados aumentam o risco específico. Diversificação entre setores reduz o impacto de um problema pontual.</div>
+                    </div>
+                    <div class="infra-escolher-item">
+                        <div class="infra-escolher-num">7</div>
+                        <div class="infra-escolher-text"><strong>Indexadores utilizados</strong> — IPCA+ protege contra inflação. CDI+ é mais previsível no curto prazo. Prefixado tem mais risco de taxa. Entenda como o fundo se comporta em cada cenário.</div>
+                    </div>
+                    <div class="infra-escolher-item">
+                        <div class="infra-escolher-num">8</div>
+                        <div class="infra-escolher-text"><strong>Liquidez das cotas</strong> — qual o volume médio negociado por dia? Em momentos de estresse, fundos com baixa liquidez podem ser difíceis de desfazer.</div>
+                    </div>
+                    <div class="infra-escolher-item">
+                        <div class="infra-escolher-num">9</div>
+                        <div class="infra-escolher-text"><strong>Rentabilidade no contexto certo</strong> — depois de analisar tudo acima, compare o rendimento com alternativas similares de mesmo risco. Nunca compare com Tesouro Selic — são produtos de risco completamente diferente.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REFLEXÃO -->
+            <div class="infra-reflexao">
+                <div class="infra-reflexao-pergunta">"Quem pagará os rendimentos que receberei?"</div>
+                <p class="infra-reflexao-text">
+                    Essa única pergunta conduz naturalmente à compreensão de todo o funcionamento de um FI-Infra.
+                    A resposta nunca é "o fundo". A resposta é sempre "a empresa" — e por isso a qualidade dessas empresas é o fator mais importante da análise.
+                </p>
+                <p class="infra-reflexao-text" style="margin-top: 0;">
+                    Para ilustrar como o retorno se forma, considere um exemplo educativo com indexador típico:
+                </p>
+                <div class="infra-formula">Retorno estimado = IPCA + taxa prefixada</div>
+                <p style="font-size: 0.8rem; color: #475569; margin-bottom: 16px; font-style: italic;">Os cenários abaixo são ilustrativos e hipotéticos — apenas para fins educacionais. Não representam rentabilidade passada, presente ou futura de nenhum produto específico.</p>
+                <div class="infra-cenarios-grid">
+                    <div class="infra-cenario">
+                        <div class="infra-cenario-label">Cenário A — Inflação controlada, empresa saudável</div>
+                        <div class="infra-cenario-val pos">Resultado: rendimento conforme o previsto</div>
+                        <div class="infra-cenario-desc">IPCA estável + empresa paga normalmente. O investidor recebe a renda periódica acordada.</div>
+                    </div>
+                    <div class="infra-cenario">
+                        <div class="infra-cenario-label">Cenário B — Inflação sobe, empresa saudável</div>
+                        <div class="infra-cenario-val pos">Resultado: rendimento aumenta com a inflação</div>
+                        <div class="infra-cenario-desc">IPCA alto eleva o componente variável. O investidor se beneficia da proteção inflacionária.</div>
+                    </div>
+                    <div class="infra-cenario">
+                        <div class="infra-cenario-label">Cenário C — Juros sobem no mercado</div>
+                        <div class="infra-cenario-val neut">Resultado: renda mantida, cota pode cair</div>
+                        <div class="infra-cenario-desc">A empresa continua pagando, mas no mercado secundário a cota perde valor por conta da marcação a mercado.</div>
+                    </div>
+                    <div class="infra-cenario">
+                        <div class="infra-cenario-label">Cenário D — Empresa enfrenta dificuldades</div>
+                        <div class="infra-cenario-val neg">Resultado: renda pode ser afetada</div>
+                        <div class="infra-cenario-desc">Se a empresa não consegue honrar os juros, o fundo pode deixar de distribuir normalmente. Risco de crédito materializado.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHECKLIST -->
+            <div class="infra-section">
+                <div class="infra-section-tag">Checklist INVLAB</div>
+                <h3 class="infra-section-title">Antes de investir em um FI-Infra, pergunte:</h3>
+                <div class="infra-checklist">
+                    <div class="infra-check-item">
+                        <div class="infra-check-num">✓</div>
+                        <div class="infra-check-text">Entendo quais projetos e setores de infraestrutura estão sendo financiados na carteira deste fundo?</div>
+                    </div>
+                    <div class="infra-check-item">
+                        <div class="infra-check-num">✓</div>
+                        <div class="infra-check-text">Conheço a qualidade financeira das empresas emissoras das debêntures — e não apenas o rendimento distribuído no último período?</div>
+                    </div>
+                    <div class="infra-check-item">
+                        <div class="infra-check-num">✓</div>
+                        <div class="infra-check-text">Compreendo o risco de crédito privado e sei que ele é diferente do risco de um CDB ou do Tesouro Direto?</div>
+                    </div>
+                    <div class="infra-check-item">
+                        <div class="infra-check-num">✓</div>
+                        <div class="infra-check-text">Estou investindo pela isenção fiscal sem analisar a qualidade do crédito por trás — e percebo que esse é um erro grave?</div>
+                    </div>
+                    <div class="infra-check-item">
+                        <div class="infra-check-num">✓</div>
+                        <div class="infra-check-text">Meu horizonte de investimento é compatível com a natureza de longo prazo deste instrumento — e não precisarei do dinheiro no curto prazo?</div>
+                    </div>
+                    <div class="infra-check-item">
+                        <div class="infra-check-num">✓</div>
+                        <div class="infra-check-text">Este investimento está alinhado com meus objetivos reais — e não estou me deixando guiar apenas pela narrativa atrativa de "investir na construção do país"?</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AVISO EDITORIAL -->
+            <div class="infra-aviso">
+                ⚠️ <strong>Observação editorial INVLAB:</strong> Os exemplos de rentabilidade, indexadores, tributação e incentivos fiscais apresentados nesta página têm finalidade exclusivamente educacional. As regras tributárias e regulatórias podem ser alteradas ao longo do tempo. O objetivo deste laboratório é ensinar princípios permanentes de financiamento de infraestrutura — não recomendar investimentos específicos. Sempre consulte um profissional habilitado antes de tomar decisões de investimento.
+            </div>
+
+            <!-- A SEMENTE -->
+            <div class="infra-semente">
+                <div class="infra-semente-icon">🌱</div>
+                <div class="infra-semente-title">A Semente</div>
+                <p class="infra-semente-text">
+                    Grandes países não são construídos apenas por governos.
+                    São construídos também por empresas, investidores e pessoas que acreditam em projetos de longo prazo.
+                </p>
+                <p class="infra-semente-text">
+                    Cada rodovia, porto, ferrovia, linha de transmissão ou sistema de saneamento representa muito mais do que concreto e aço. Representa desenvolvimento. Representa a decisão de construir algo que vai durar décadas — e servir a milhões de pessoas.
+                </p>
+                <p class="infra-semente-destaque">
+                    🌱 Quando você investe em infraestrutura, não está apenas buscando renda.<br>
+                    Está participando da construção das bases que sustentam a economia de uma sociedade.
+                </p>
+            </div>
+
+        </div><!-- /invlab-lab-container -->
+    </main>
+
+    <footer style="background: rgba(13, 13, 13, 0.97); border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+    <div class="content-wrapper-wide">
+        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
+                <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">🧭 Guia do INVLAB →</a>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                    <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Ações</a></li>
+                    <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💵 ETFs</a></li>
+                    <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 FIIs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Economia Digital</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌐 Economia Digital</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Instrumentos Avançados</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="fundos-investimento.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💼 Fundos de Investimentos</a></li>
+                    <li><a href="bdrs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌍 BDRs</a></li>
+                    <li><a href="fi-infra.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏗️ FI-Infra</a></li>
+                    <li><a href="instrumentos-avancados.html#ouro" style="color: rgba(16,185,129,0.85); text-decoration: none;">🥇 Ouro</a></li>
+                    <li><a href="instrumentos-avancados.html#derivativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">⚡ Derivativos e Opções</a></li>
+                    <li><a href="instrumentos-avancados.html#alternativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚀 Invest. Alternativos</a></li>
+                    <li><a href="instrumentos-avancados.html#ativos-reais" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏠 Ativos Reais</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Defesa do Investidor</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
+                    <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                    <li><a href="credito-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔥 Crédito</a></li>
+                    <li><a href="produtos-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔍 Produtos</a></li>
+                    <li><a href="sinais-de-alerta.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚨 Sinais de alerta</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
+            <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
+            </p>
+            <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
+            </p>
+        </div>
+    </div>
+    </footer>
+
+    <div id="backToTop">↑</div>
+
+    <script src="../assets/js/script.js"></script>
+    <script defer src="../assets/js/bcb-api.js"></script>
+    <script defer src="../assets/js/invlab-carrossel-renda-variavel.js"></script>
+    <script>
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+                setTimeout(() => backToTopButton.style.opacity = '1', 10);
+            } else {
+                backToTopButton.style.opacity = '0';
+                setTimeout(() => backToTopButton.style.display = 'none', 300);
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
