@@ -1,0 +1,571 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peer-to-Peer Lending — Quando o Banco Deixa de Ser o Intermediário | INVLAB</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="description" content="Quando o banco deixa de ser o intermediário, o risco não desaparece — apenas muda de lugar. Um laboratório INVLAB sobre desintermediação financeira, crédito direto e o verdadeiro papel dos bancos no mercado.">
+
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+    <link rel="stylesheet" href="../assets/css/peer-to-peer.css">
+</head>
+<body>
+    <section id="invlab-carousel-container"></section>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+            </div>
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Início</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">📚 Primeiros<br>Passos</button>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-fixa'">📊 Renda<br>Fixa <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="poupanca.html">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-variavel'">📈 Renda<br>Variável <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='etfs.html'" style="cursor:pointer;">
+                                <span class="category-name">💵 ETFs</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='fiis.html'" style="cursor:pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='acoes.html'" style="cursor:pointer;">
+                                <span class="category-name">📈 Ações</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <button class="tab-btn" onclick="window.location.href='cripto.html'">🌐 Economia<br>Digital</button>
+                <button class="tab-btn active" onclick="window.location.href='instrumentos-avancados.html'">🧬 Instrumentos<br>Avançados</button>
+                <button class="tab-btn" onclick="window.location.href='defesa-investidor.html'">🛡 Defesa do<br>Investidor</button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <main style="margin-top: 110px; padding-top: 44px;">
+        <!-- BREADCRUMB FIXO -->
+        <div style="position: fixed; top: 110px; left: 0; right: 0; z-index: 999; background: #0D0D0D; width: 100%; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <nav style="max-width: min(calc(100% - 64px), 1160px); margin: 0 auto; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.35);">
+                <span onclick="window.location.href='instrumentos-avancados.html'" style="cursor:pointer; color: rgba(34,211,238,0.65); font-weight:600;">🧬 Instrumentos Avançados</span>
+                <span>›</span>
+                <span onclick="window.location.href='instrumentos-avancados.html#alternativos'" style="cursor:pointer; color: rgba(245,158,11,0.55); font-weight:600;">🚀 Investimentos Alternativos</span>
+                <span>›</span>
+                <span style="color: rgba(245,158,11,0.85); font-weight:600;">P2P Lending</span>
+            </nav>
+        </div>
+
+        <div class="invlab-lab-container">
+
+            <!-- HOOK / HERO -->
+            <div class="p2p-hook">
+                <div class="p2p-hook-badge">🤝 Laboratório · Investimentos Alternativos</div>
+                <h1 class="p2p-hook-titulo">Peer-to-Peer Lending</h1>
+                <p class="p2p-hook-subtitulo">Quando o banco deixa de ser o intermediário</p>
+                <div class="p2p-hook-texto">
+                    Durante décadas aprendemos que, para emprestar dinheiro, era preciso de um banco.<br><br>
+                    Hoje isso mudou.<br><br>
+                    Plataformas digitais conseguem conectar diretamente quem possui capital com quem precisa de crédito.
+                    Menos intermediários. Mais eficiência. Maior retorno potencial.
+                </div>
+
+                <p style="font-size: 0.88rem; color: rgba(255,255,255,0.38); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.10em; font-weight: 600;">Mas o banco nunca foi apenas um intermediário. Ele fazia muito mais:</p>
+
+                <div class="p2p-banco-responsabilidades">
+                    <span class="p2p-banco-item">Análise de crédito</span>
+                    <span class="p2p-banco-item">Cobertura de inadimplência</span>
+                    <span class="p2p-banco-item">Diversificação de operações</span>
+                    <span class="p2p-banco-item">Execução de garantias</span>
+                    <span class="p2p-banco-item">Cobrança judicial</span>
+                    <span class="p2p-banco-item">Manutenção de reservas</span>
+                    <span class="p2p-banco-item">Conformidade regulatória</span>
+                    <span class="p2p-banco-item">Gestão de risco sistêmico</span>
+                </div>
+
+                <p class="p2p-hook-revelacao">
+                    Quando o banco é removido da equação,<br>
+                    todas essas responsabilidades continuam existindo.<br>
+                    A diferença é que agora parte delas passa para você.
+                </p>
+
+                <p class="p2p-hook-pergunta">
+                    Se o banco saiu da operação... quem ficou com o risco?<br>
+                    <span style="font-size: 0.88rem; font-weight: 400; color: rgba(255,255,255,0.42);">É exatamente essa pergunta que este laboratório responde.</span>
+                </p>
+            </div>
+
+            <!-- SEÇÃO 1: HISTÓRIA DO CRÉDITO -->
+            <div class="p2p-section">
+                <span class="p2p-section-tag">Seção 1 · Contexto Histórico</span>
+                <h2 class="p2p-section-title">O crédito sempre existiu — antes mesmo dos bancos</h2>
+                <p class="p2p-text">
+                    Muito antes das instituições financeiras modernas, o crédito já existia. Mercadores emprestavam capital para expedições comerciais. Fazendeiros financiavam outros produtores entre safras. Famílias emprestavam entre si. Artesãos financiavam matéria-prima uns para os outros.
+                </p>
+                <p class="p2p-text">
+                    Os bancos surgiram porque perceberam algo que transforma toda a lógica do crédito: <strong style="color: rgba(245,158,11,0.90);">avaliar crédito com consistência exige conhecimento, estrutura e escala.</strong>
+                </p>
+                <p class="p2p-text">
+                    Para ter consistência numa operação de crédito, você precisa analisar centenas de tomadores simultaneamente. Entender padrões de inadimplência. Diversificar o risco entre muitas operações. Manter reservas para absorver perdas. Executar garantias quando necessário. Cobrar judicialmente quando inevitável.
+                </p>
+                <p class="p2p-text">
+                    Os bancos reuniram milhares de poupadores e distribuíram empréstimos entre milhares de tomadores — nasceu assim o sistema bancário moderno, que resolveu de forma institucional um problema que antes era tratado caso a caso.
+                </p>
+                <div class="p2p-frase-invlab">
+                    O Peer-to-Peer Lending representa, de certa forma, um retorno tecnológico às origens: o crédito volta a ocorrer diretamente entre partes. Mas agora mediado por plataformas digitais que tentam replicar — ao menos parcialmente — o que os bancos constroem ao longo de décadas de estrutura institucional.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 2: DESINTERMEDIAÇÃO -->
+            <div class="p2p-section">
+                <span class="p2p-section-tag">Seção 2 · Mecânica</span>
+                <h2 class="p2p-section-title">Como funciona a desintermediação financeira</h2>
+                <p class="p2p-text">
+                    A diferença entre os dois modelos não está apenas em quem fica no meio. Está em quem absorve cada tipo de risco — e o que acontece quando uma operação não sai como esperado.
+                </p>
+
+                <div class="p2p-modelo-grid">
+                    <div class="p2p-modelo-col p2p-modelo-tradicional">
+                        <div class="p2p-modelo-header">🏦 Modelo Tradicional</div>
+                        <div class="p2p-chain">
+                            <div class="p2p-chain-node">💰 Investidor / Poupador</div>
+                            <div class="p2p-chain-arrow">↓</div>
+                            <div class="p2p-chain-node destaque">🏦 Banco<br><span style="font-size:0.72rem; font-weight:400; opacity:0.65;">analisa · cobre · cobra · reserva</span></div>
+                            <div class="p2p-chain-arrow">↓</div>
+                            <div class="p2p-chain-node">🏭 Empresa / Pessoa Física</div>
+                            <div class="p2p-chain-arrow">↓</div>
+                            <div class="p2p-chain-node">💵 Juros pagos ao banco</div>
+                        </div>
+                        <p class="p2p-modelo-nota">O banco intermedia, assume o risco de crédito e remunera o poupador a uma taxa menor do que cobra do tomador. A diferença é o spread bancário.</p>
+                    </div>
+
+                    <div class="p2p-modelo-col p2p-modelo-p2p">
+                        <div class="p2p-modelo-header">🤝 Modelo Peer-to-Peer</div>
+                        <div class="p2p-chain">
+                            <div class="p2p-chain-node">💰 Investidor / Credor</div>
+                            <div class="p2p-chain-arrow">↓</div>
+                            <div class="p2p-chain-node destaque">⚙️ Plataforma Digital<br><span style="font-size:0.72rem; font-weight:400; opacity:0.75;">conecta · organiza · administra</span></div>
+                            <div class="p2p-chain-arrow">↓</div>
+                            <div class="p2p-chain-node">🏭 Empresa / Pessoa Física</div>
+                            <div class="p2p-chain-arrow">↓</div>
+                            <div class="p2p-chain-node">💵 Juros pagos ao investidor</div>
+                        </div>
+                        <p class="p2p-modelo-nota">A plataforma não empresta. Quem empresta é o próprio investidor. A plataforma organiza contratos, auxilia na análise e administra a operação — mas o risco de inadimplência é de quem emprestou.</p>
+                    </div>
+                </div>
+
+                <div class="p2p-frase-invlab">
+                    No modelo P2P, o investidor recebe mais porque assume mais. A eficiência operacional da plataforma pode reduzir custos — mas não elimina o risco de crédito. Ele apenas muda de endereço.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 3: SPREAD BANCÁRIO -->
+            <div class="p2p-section">
+                <span class="p2p-section-tag">Seção 3 · Economia do Crédito</span>
+                <h2 class="p2p-section-title">Por que o spread bancário existe</h2>
+                <p class="p2p-text">
+                    Todo mundo reclama dos juros cobrados pelos bancos. Mas poucos entendem o que eles precisam remunerar. O spread bancário não é apenas lucro — ele cobre uma série de custos estruturais inerentes à operação de crédito:
+                </p>
+
+                <div class="p2p-spread-grid">
+                    <div class="p2p-spread-item">📉 Inadimplência histórica</div>
+                    <div class="p2p-spread-item">🔍 Análise de crédito</div>
+                    <div class="p2p-spread-item">👥 Equipe operacional</div>
+                    <div class="p2p-spread-item">💻 Infraestrutura tecnológica</div>
+                    <div class="p2p-spread-item">🏛️ Requerimentos regulatórios</div>
+                    <div class="p2p-spread-item">🏦 Reservas obrigatórias</div>
+                    <div class="p2p-spread-item">⚖️ Cobrança e recuperação</div>
+                    <div class="p2p-spread-item">🔒 Conformidade e auditoria</div>
+                    <div class="p2p-spread-item">📋 Execução de garantias</div>
+                    <div class="p2p-spread-item">📊 Lucro institucional</div>
+                </div>
+
+                <div class="p2p-spread-conclusao">
+                    Quando o banco deixa de existir na operação,<br>
+                    parte desse custo desaparece — mas o <strong style="color: rgba(245,158,11,0.90);">risco continua existindo.</strong><br>
+                    E agora ele passa diretamente para o investidor.
+                </div>
+
+                <p class="p2p-text">
+                    O P2P reduz custos operacionais ao digitalizar processos que bancos fazem de forma mais cara. Isso pode aumentar o retorno líquido para o investidor. Mas o risco de inadimplência — aquele que o banco utilizaria as reservas para absorver — permanece integralmente com quem emprestou o capital.
+                </p>
+            </div>
+
+            <!-- SEÇÃO 4: LEI DA DIVERSIFICAÇÃO -->
+            <div class="p2p-section">
+                <span class="p2p-section-tag">Seção 4 · Gestão de Risco</span>
+                <h2 class="p2p-section-title">A Lei da Diversificação no crédito direto</h2>
+                <p class="p2p-text">
+                    Talvez esta seja a lição mais importante de todo o laboratório. No P2P, diversificação não é opcional — ela é o principal mecanismo de proteção do investidor. A diferença entre uma estratégia e uma aposta está aqui:
+                </p>
+
+                <div class="p2p-carteira-grid">
+                    <div class="p2p-carteira-col p2p-concentrada">
+                        <div class="p2p-carteira-header">⚠️ Carteira Concentrada</div>
+                        <div class="p2p-carteira-valor">R$ 100.000</div>
+                        <div class="p2p-carteira-arrow">↓</div>
+                        <div class="p2p-carteira-step">2 empréstimos<br>R$ 50.000 cada</div>
+                        <div class="p2p-carteira-arrow">↓</div>
+                        <div class="p2p-carteira-step">1 tomador deixa de pagar</div>
+                        <div class="p2p-carteira-arrow">↓</div>
+                        <div class="p2p-carteira-resultado">50% do patrimônio em risco imediato</div>
+                        <p class="p2p-carteira-mensagem">Um único evento adverso pode comprometer metade do capital investido.</p>
+                    </div>
+
+                    <div class="p2p-carteira-col p2p-pulverizada">
+                        <div class="p2p-carteira-header">✅ Carteira Pulverizada</div>
+                        <div class="p2p-carteira-valor">R$ 100.000</div>
+                        <div class="p2p-carteira-arrow">↓</div>
+                        <div class="p2p-carteira-step">100 empréstimos<br>R$ 1.000 cada</div>
+                        <div class="p2p-carteira-arrow">↓</div>
+                        <div class="p2p-carteira-step">5 tomadores deixam de pagar</div>
+                        <div class="p2p-carteira-arrow">↓</div>
+                        <div class="p2p-carteira-resultado">95 operações continuam pagando</div>
+                        <p class="p2p-carteira-mensagem">A carteira absorve as perdas sem comprometer o resultado global.</p>
+                    </div>
+                </div>
+
+                <div class="p2p-diversificacao-nota">
+                    <strong style="color: rgba(245,158,11,0.90);">Diversificação não aumenta retorno.</strong><br>
+                    Ela impede que um único evento destrua todo o patrimônio.<br>
+                    É a diferença entre uma estratégia de crédito e uma aposta concentrada.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 5: TRABALHO DO BANCO -->
+            <div class="p2p-section">
+                <span class="p2p-section-tag">Seção 5 · Reflexão</span>
+                <h2 class="p2p-section-title">Você está disposto a fazer o trabalho de um banco?</h2>
+                <p class="p2p-text">
+                    Antes de emprestar dinheiro diretamente, é honesto perguntar: você tem condições de avaliar o que um banco avalia todos os dias? Não como exercício teórico — mas como responsabilidade real sobre capital próprio.
+                </p>
+
+                <div class="p2p-trabalho-lista">
+                    <div class="p2p-trabalho-item">
+                        <span class="p2p-trabalho-check">?</span>
+                        <span class="p2p-trabalho-texto">Sei analisar balanços e fluxo de caixa de uma empresa?</span>
+                    </div>
+                    <div class="p2p-trabalho-item">
+                        <span class="p2p-trabalho-check">?</span>
+                        <span class="p2p-trabalho-texto">Entendo o que é risco de crédito e como mensurá-lo objetivamente?</span>
+                    </div>
+                    <div class="p2p-trabalho-item">
+                        <span class="p2p-trabalho-check">?</span>
+                        <span class="p2p-trabalho-texto">Sei avaliar a qualidade real das garantias oferecidas?</span>
+                    </div>
+                    <div class="p2p-trabalho-item">
+                        <span class="p2p-trabalho-check">?</span>
+                        <span class="p2p-trabalho-texto">Consigo executar uma garantia em caso de inadimplência?</span>
+                    </div>
+                    <div class="p2p-trabalho-item">
+                        <span class="p2p-trabalho-check">?</span>
+                        <span class="p2p-trabalho-texto">Sei calcular probabilidade de inadimplência por setor econômico?</span>
+                    </div>
+                    <div class="p2p-trabalho-item">
+                        <span class="p2p-trabalho-check">?</span>
+                        <span class="p2p-trabalho-texto">Tenho estrutura para uma cobrança judicial se necessário?</span>
+                    </div>
+                </div>
+
+                <div class="p2p-frase-invlab">
+                    Essas são atividades que bancos realizam com equipes especializadas, sistemas dedicados e décadas de dados históricos. No P2P, parte dessa responsabilidade migra para o investidor. A plataforma tenta preencher essa lacuna — mas com limitações que precisam ser compreendidas antes de qualquer alocação.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 6: COMO AVALIAR UMA PLATAFORMA -->
+            <div class="p2p-section">
+                <span class="p2p-section-tag">Seção 6 · Critérios de Análise</span>
+                <h2 class="p2p-section-title">Como avaliar uma plataforma de crédito direto</h2>
+                <p class="p2p-text">
+                    A taxa prometida é o critério menos relevante na avaliação de uma plataforma de P2P. Uma taxa elevada em uma plataforma com baixa qualidade de análise de crédito pode significar retorno líquido negativo após a inadimplência real ser contabilizada.
+                </p>
+                <p class="p2p-text">
+                    Os critérios que realmente importam na avaliação:
+                </p>
+
+                <div class="p2p-criterios-grid">
+                    <div class="p2p-criterio-item">
+                        <span class="p2p-criterio-check">✔</span>
+                        <span class="p2p-criterio-texto"><strong>Histórico de inadimplência</strong> — dados públicos e auditáveis, não apenas projeções de marketing</span>
+                    </div>
+                    <div class="p2p-criterio-item">
+                        <span class="p2p-criterio-check">✔</span>
+                        <span class="p2p-criterio-texto"><strong>Critérios de análise</strong> — como e por quem os tomadores são avaliados antes da aprovação</span>
+                    </div>
+                    <div class="p2p-criterio-item">
+                        <span class="p2p-criterio-check">✔</span>
+                        <span class="p2p-criterio-texto"><strong>Governança</strong> — estrutura societária clara e responsabilidades bem definidas</span>
+                    </div>
+                    <div class="p2p-criterio-item">
+                        <span class="p2p-criterio-check">✔</span>
+                        <span class="p2p-criterio-texto"><strong>Transparência</strong> — informações detalhadas acessíveis sobre cada operação disponível</span>
+                    </div>
+                    <div class="p2p-criterio-item">
+                        <span class="p2p-criterio-check">✔</span>
+                        <span class="p2p-criterio-texto"><strong>Processo de recuperação</strong> — o que acontece concretamente quando um tomador não paga</span>
+                    </div>
+                    <div class="p2p-criterio-item">
+                        <span class="p2p-criterio-check">✔</span>
+                        <span class="p2p-criterio-texto"><strong>Alinhamento de interesses</strong> — a plataforma investe capital próprio junto com o investidor?</span>
+                    </div>
+                    <div class="p2p-criterio-item">
+                        <span class="p2p-criterio-check">✔</span>
+                        <span class="p2p-criterio-texto"><strong>Tempo de operação</strong> — o histórico abrange ciclos econômicos adversos, não apenas períodos favoráveis?</span>
+                    </div>
+                    <div class="p2p-criterio-item">
+                        <span class="p2p-criterio-check">✔</span>
+                        <span class="p2p-criterio-texto"><strong>Regularidade regulatória</strong> — habilitação junto ao Banco Central ou CVM devidamente comprovada</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 7: RISCO INVISÍVEL -->
+            <div class="p2p-section">
+                <span class="p2p-section-tag">Seção 7 · Risco de Contraparte</span>
+                <h2 class="p2p-section-title">O risco que ninguém menciona: a própria plataforma</h2>
+                <p class="p2p-text">
+                    Existe um risco que raramente aparece nos materiais de divulgação de P2P, mas que merece atenção cuidadosa: o risco operacional da própria plataforma.
+                </p>
+                <p class="p2p-text">
+                    Diferente dos bancos — regulados, capitalizados e sujeitos a planos formais de resolução — uma plataforma de crédito direto pode encerrar atividades. E quando isso acontece, surgem perguntas críticas que precisam ter respostas antes do investimento:
+                </p>
+
+                <div class="p2p-risco-box">
+                    <p class="p2p-risco-titulo">⚠️ Perguntas que uma plataforma séria deve conseguir responder</p>
+                    <div class="p2p-risco-perguntas">
+                        <div class="p2p-risco-pergunta">Quem administra os contratos em caso de encerramento das atividades da plataforma?</div>
+                        <div class="p2p-risco-pergunta">Quem realiza os repasses de pagamento se a equipe operacional for desmobilizada?</div>
+                        <div class="p2p-risco-pergunta">Existe um plano de continuidade operacional formalmente documentado e verificável?</div>
+                        <div class="p2p-risco-pergunta">Os contratos estão protegidos em estrutura jurídica independente da plataforma?</div>
+                        <div class="p2p-risco-pergunta">Como funciona o processo de cobrança se a plataforma deixar de operar?</div>
+                    </div>
+                </div>
+
+                <p class="p2p-text">
+                    Uma plataforma bem estruturada deve conseguir responder a todas essas perguntas com clareza e documentação disponível ao investidor. A ausência dessas respostas é, em si, um sinal de alerta relevante que não deve ser ignorado.
+                </p>
+
+                <div class="p2p-frase-invlab">
+                    No crédito direto, o investidor assume simultaneamente o risco de inadimplência dos tomadores e o risco operacional da plataforma que administra as operações. São dois vetores de risco distintos que precisam ser avaliados de forma independente.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 8: QUEM UTILIZA P2P -->
+            <div class="p2p-section">
+                <span class="p2p-section-tag">Seção 8 · Economia Real</span>
+                <h2 class="p2p-section-title">Quem realmente utiliza o crédito direto</h2>
+                <p class="p2p-text">
+                    O P2P Lending não é apenas um instrumento financeiro para investidores. É, pelo outro lado, uma alternativa de acesso a crédito para quem encontra dificuldades nas condições impostas pelo sistema bancário tradicional.
+                </p>
+
+                <div class="p2p-setores-grid">
+                    <div class="p2p-setor-item">
+                        <span class="p2p-setor-icon">🏭</span>
+                        <span class="p2p-setor-nome">Pequenas e médias empresas</span>
+                    </div>
+                    <div class="p2p-setor-item">
+                        <span class="p2p-setor-icon">🌱</span>
+                        <span class="p2p-setor-nome">Agronegócio e pequenos produtores</span>
+                    </div>
+                    <div class="p2p-setor-item">
+                        <span class="p2p-setor-icon">🚚</span>
+                        <span class="p2p-setor-nome">Capital de giro para varejo</span>
+                    </div>
+                    <div class="p2p-setor-item">
+                        <span class="p2p-setor-icon">☀️</span>
+                        <span class="p2p-setor-nome">Projetos de energia renovável</span>
+                    </div>
+                    <div class="p2p-setor-item">
+                        <span class="p2p-setor-icon">🛒</span>
+                        <span class="p2p-setor-nome">Marketplaces e e-commerce</span>
+                    </div>
+                    <div class="p2p-setor-item">
+                        <span class="p2p-setor-icon">👨‍⚕️</span>
+                        <span class="p2p-setor-nome">Profissionais liberais autônomos</span>
+                    </div>
+                    <div class="p2p-setor-item">
+                        <span class="p2p-setor-icon">🏢</span>
+                        <span class="p2p-setor-nome">Empresas em expansão regional</span>
+                    </div>
+                    <div class="p2p-setor-item">
+                        <span class="p2p-setor-icon">🎓</span>
+                        <span class="p2p-setor-nome">Crédito educacional privado</span>
+                    </div>
+                </div>
+
+                <p class="p2p-text">
+                    Ao financiar essas operações, o investidor de P2P participa diretamente da economia produtiva — não em ativos de segunda mão, mas no capital de trabalho real de negócios e pessoas. Isso cria uma relação mais direta entre capital e impacto econômico do que a maioria dos instrumentos financeiros tradicionais.
+                </p>
+            </div>
+
+            <!-- CHECKLIST INVLAB -->
+            <div class="p2p-checklist">
+                <p class="p2p-checklist-titulo">📋 Checklist INVLAB — Antes de investir em P2P Lending</p>
+                <div class="p2p-check-lista">
+                    <div class="p2p-check-item">
+                        <span class="p2p-check-num">1</span>
+                        <span>Estou confortável em assumir diretamente o risco de crédito, sem o respaldo de uma instituição financeira regulada?</span>
+                    </div>
+                    <div class="p2p-check-item">
+                        <span class="p2p-check-num">2</span>
+                        <span>Entendo que operações de P2P <strong>não possuem proteção do FGC</strong> (Fundo Garantidor de Créditos)?</span>
+                    </div>
+                    <div class="p2p-check-item">
+                        <span class="p2p-check-num">3</span>
+                        <span>Estou distribuindo o capital entre muitos tomadores, e não concentrando em poucos empréstimos de alto valor?</span>
+                    </div>
+                    <div class="p2p-check-item">
+                        <span class="p2p-check-num">4</span>
+                        <span>Avaliei a qualidade da plataforma além da taxa prometida: histórico real, governança, inadimplência documentada e processo de recuperação?</span>
+                    </div>
+                    <div class="p2p-check-item">
+                        <span class="p2p-check-num">5</span>
+                        <span>Comparei o retorno líquido — já descontada a inadimplência histórica — com alternativas tradicionais de renda fixa de risco equivalente?</span>
+                    </div>
+                    <div class="p2p-check-item">
+                        <span class="p2p-check-num">6</span>
+                        <span>O valor que estou alocando em P2P representa uma parcela pequena do meu patrimônio total — não minha reserva de emergência nem minha poupança principal?</span>
+                    </div>
+                </div>
+                <p class="p2p-checklist-nota">Se qualquer resposta for "não", talvez ainda não seja o momento adequado para essa classe de ativo.</p>
+            </div>
+
+            <!-- AVISO EDITORIAL -->
+            <div class="p2p-aviso">
+                ⚠️ Este laboratório é de natureza exclusivamente educacional. O INVLAB não recomenda plataformas, não possui vínculos comerciais com operadores de crédito e não recebe qualquer remuneração de empresas do setor. O objetivo é explicar como o mercado de crédito direto funciona — não orientar decisões de investimento específicas.
+            </div>
+
+            <!-- A SEMENTE -->
+            <div class="p2p-semente">
+                <span class="p2p-semente-icon">🌱</span>
+                <p class="p2p-semente-title">A Semente</p>
+                <p class="p2p-semente-text">
+                    Durante séculos, o crédito sempre existiu porque alguém acreditou no trabalho de outra pessoa.<br>
+                    Os bancos não criaram esse vínculo — eles o profissionalizaram.<br><br>
+                    O Peer-to-Peer Lending devolve parte desse papel ao investidor.<br>
+                    Isso pode aumentar retornos. Mas também devolve responsabilidades.<br><br>
+                    Quanto maior o retorno prometido, maior tende a ser o risco assumido.<br>
+                    Essa não é uma regra do P2P. É uma lei da economia.
+                </p>
+                <p class="p2p-semente-destaque">
+                    A verdadeira inovação do Peer-to-Peer não é eliminar os bancos.<br>
+                    É mostrar quanto vale o trabalho que eles fazem todos os dias.
+                </p>
+            </div>
+
+        </div><!-- /invlab-lab-container -->
+    </main>
+
+    <footer style="background: rgba(13, 13, 13, 0.97); border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+    <div class="content-wrapper-wide">
+        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
+                <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">🧭 Guia do INVLAB →</a>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                    <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Ações</a></li>
+                    <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💵 ETFs</a></li>
+                    <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 FIIs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Economia Digital</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌐 Economia Digital</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Instrumentos Avançados</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="fundos-investimento.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💼 Fundos de Investimentos</a></li>
+                    <li><a href="bdrs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌍 BDRs</a></li>
+                    <li><a href="fi-infra.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏗️ FI-Infra</a></li>
+                    <li><a href="ouro.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🥇 Ouro</a></li>
+                    <li><a href="derivativos.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">⚡ Derivativos</a></li>
+                    <li><a href="venture-capital.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚀 Venture Capital</a></li>
+                    <li><a href="private-equity.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏭 Private Equity</a></li>
+                    <li><a href="peer-to-peer.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🤝 P2P Lending</a></li>
+                    <li><a href="peer-to-peer.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🤝 P2P Lending</a></li>
+                    <li><a href="instrumentos-avancados.html#ativos-reais" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏠 Ativos Reais</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Defesa do Investidor</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
+                    <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                    <li><a href="credito-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔥 Crédito</a></li>
+                    <li><a href="produtos-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔍 Produtos</a></li>
+                    <li><a href="sinais-de-alerta.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚨 Sinais de alerta</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
+            <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
+            </p>
+            <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
+            </p>
+        </div>
+    </div>
+    </footer>
+
+    <div id="backToTop">↑</div>
+
+    <script src="../assets/js/script.js"></script>
+    <script defer src="../assets/js/bcb-api.js"></script>
+    <script defer src="../assets/js/invlab-carrossel-renda-variavel.js"></script>
+    <script>
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+                setTimeout(() => backToTopButton.style.opacity = '1', 10);
+            } else {
+                backToTopButton.style.opacity = '0';
+                setTimeout(() => backToTopButton.style.display = 'none', 300);
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
