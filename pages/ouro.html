@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ouro — A Reserva Global da Confiança | História do Dinheiro e Patrimônio | INVLAB</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="description" content="Por que o ouro continua sendo reserva de valor depois de milhares de anos? Um laboratório sobre a história do dinheiro, o sistema monetário moderno, geopolítica e preservação patrimonial. INVLAB.">
+
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+    <link rel="stylesheet" href="../assets/css/ouro.css">
+</head>
+<body>
+    <section id="invlab-carousel-container"></section>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+            </div>
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Início</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">📚 Primeiros<br>Passos</button>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-fixa'">📊 Renda<br>Fixa <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="poupanca.html">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-variavel'">📈 Renda<br>Variável <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='etfs.html'" style="cursor:pointer;">
+                                <span class="category-name">💵 ETFs</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-etfs">
+                                <li><a href="#">📊 Simulador de Indexação</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='fiis.html'" style="cursor:pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-fiis">
+                                <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='acoes.html'" style="cursor:pointer;">
+                                <span class="category-name">📈 Ações</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-acoes">
+                                <li><a href="#">📊 Simulador de Dividendos</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <button class="tab-btn" onclick="window.location.href='cripto.html'">🌐 Economia<br>Digital</button>
+                <button class="tab-btn active" onclick="window.location.href='instrumentos-avancados.html'">🧬 Instrumentos<br>Avançados</button>
+                <button class="tab-btn" onclick="window.location.href='defesa-investidor.html'">🛡 Defesa do<br>Investidor</button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <main style="margin-top: 110px;">
+        <!-- BREADCRUMB STICKY -->
+        <div style="position: sticky; top: 110px; z-index: 999; background: #0D0D0D; width: 100%; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <nav style="max-width: min(calc(100% - 64px), 1160px); margin: 0 auto; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.35);">
+                <span onclick="window.location.href='instrumentos-avancados.html'" style="cursor:pointer; color: rgba(34,211,238,0.65); font-weight:600;">🧬 Instrumentos Avançados</span>
+                <span>›</span>
+                <span style="color: rgba(212,175,55,0.82); font-weight:600;">🥇 Ouro — A Reserva Global da Confiança</span>
+            </nav>
+        </div>
+
+        <div class="invlab-lab-container">
+
+            <!-- TÍTULO -->
+            <div style="padding-top: 40px; padding-bottom: 8px; text-align: center;">
+                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; font-weight: 800; color: #D4AF37; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em; line-height: 1.2;">🥇 Ouro — A Reserva Global da Confiança</h2>
+                <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(212,175,55,0.65); text-align: center; line-height: 1.8; margin-bottom: 14px; max-width: 860px; margin-left: auto; margin-right: auto;">O ativo que atravessou civilizações, impérios e sistemas monetários.</p>
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: rgba(255,255,255,0.38); text-align: center; line-height: 1.8; margin-bottom: 0; max-width: 860px; margin-left: auto; margin-right: auto;">Durante milênios, diferentes povos reconheceram no ouro uma forma de preservar riqueza que independe da promessa de qualquer emissor. Este laboratório não é sobre investir em ouro. É sobre entender por que esse reconhecimento persiste — e o que isso revela sobre dinheiro, confiança e patrimônio.</p>
+            </div>
+
+            <!-- HOOK -->
+            <div class="ouro-hook" style="margin-top: 36px;">
+                <div class="ouro-hook-badge">🥇 Laboratório — História, Macroeconomia e Patrimônio</div>
+                <div class="ouro-hook-title">
+                    Impérios surgiram e desapareceram.<br>
+                    Moedas nasceram e deixaram de existir.<br>
+                    Guerras redefiniram fronteiras.<br>
+                    O ouro permaneceu.
+                </div>
+                <p style="font-size: 0.97rem; color: rgba(255,255,255,0.48); max-width: 640px; margin: 0 auto 22px; line-height: 1.80;">
+                    Não porque produz renda. Não porque gera dividendos. Não porque cresce como uma empresa.
+                    Mas porque historicamente foi reconhecido como um ativo cuja existência não depende da promessa de pagamento de nenhum emissor específico.
+                </p>
+                <div class="ouro-hook-frase">
+                    "A verdadeira questão não é se o ouro vai subir ou cair. A verdadeira questão é: o que ele revela sobre a relação entre dinheiro, confiança e tempo?"
+                </div>
+            </div>
+
+            <!-- SEÇÃO 1 — A História do Dinheiro -->
+            <div class="ouro-section">
+                <div class="ouro-section-tag">Seção 1 — A Origem</div>
+                <h3 class="ouro-section-title">📜 A história do dinheiro — e por que o ouro se tornou referência</h3>
+                <p class="ouro-text">Para entender o ouro, primeiro é preciso entender o dinheiro. Não o dinheiro como nota ou moeda, mas o conceito: o que faz com que algo seja aceito como meio de troca e reserva de valor ao longo do tempo?</p>
+                <p class="ouro-text">Historicamente, diferentes sociedades utilizaram diferentes mercadorias como moeda — sal, conchas, gado, tecidos. Mas ao longo de séculos, em diversas culturas e geografias independentes entre si, o ouro emergiu como a escolha predominante. Não por acidente. Por características físicas e econômicas que nenhuma outra mercadoria reunia de forma tão completa.</p>
+                <div class="ouro-pilares-grid">
+                    <div class="ouro-pilar">
+                        <span class="ouro-pilar-icon">💎</span>
+                        <div class="ouro-pilar-nome">Escassez</div>
+                        <div class="ouro-pilar-desc">Não pode ser fabricado. A oferta cresce lentamente — estimativas sugerem que todo o ouro já extraído caberia em poucos cubos de 20m.</div>
+                    </div>
+                    <div class="ouro-pilar">
+                        <span class="ouro-pilar-icon">♾️</span>
+                        <div class="ouro-pilar-nome">Durabilidade</div>
+                        <div class="ouro-pilar-desc">Não enferruja, não se decompõe. Moedas de ouro cunhadas há dois mil anos ainda preservam sua composição original.</div>
+                    </div>
+                    <div class="ouro-pilar">
+                        <span class="ouro-pilar-icon">⚖️</span>
+                        <div class="ouro-pilar-nome">Divisibilidade</div>
+                        <div class="ouro-pilar-desc">Pode ser dividido em frações sem perder suas propriedades. Uma barra pode virar moedas; moedas podem virar gramas.</div>
+                    </div>
+                    <div class="ouro-pilar">
+                        <span class="ouro-pilar-icon">🚚</span>
+                        <div class="ouro-pilar-nome">Transportabilidade</div>
+                        <div class="ouro-pilar-desc">Alto valor em volume pequeno. Historicamente, facilitou o comércio de longa distância e a transferência de riqueza entre regiões.</div>
+                    </div>
+                    <div class="ouro-pilar">
+                        <span class="ouro-pilar-icon">🌍</span>
+                        <div class="ouro-pilar-nome">Aceitação Universal</div>
+                        <div class="ouro-pilar-desc">Reconhecido em culturas e períodos distintos, independentemente de fronteiras políticas ou línguas diferentes.</div>
+                    </div>
+                </div>
+                <div class="ouro-frase-invlab">
+                    O ouro não foi escolhido por decreto. Foi selecionado ao longo do tempo por diferentes civilizações que chegaram à mesma conclusão de forma independente — o que por si só já é um dado histórico relevante sobre suas propriedades como reserva de valor.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 2 — Sistema Monetário Moderno -->
+            <div class="ouro-section">
+                <div class="ouro-section-tag">Seção 2 — A Transformação</div>
+                <h3 class="ouro-section-title">O sistema monetário moderno — de Bretton Woods ao dinheiro fiduciário</h3>
+                <p class="ouro-text">Durante séculos, as principais moedas do mundo mantiveram alguma relação com o ouro — seja diretamente ou por mecanismos de conversibilidade. Essa relação foi progressivamente modificada ao longo do século XX, culminando em uma mudança estrutural que define o sistema monetário atual.</p>
+                <p class="ouro-text">Entender essa transformação é fundamental para compreender o papel que o ouro ainda ocupa hoje nos sistemas de reserva de diferentes países e estratégias patrimoniais.</p>
+
+                <div class="ouro-timeline">
+                    <div class="ouro-timeline-item">
+                        <div class="ouro-timeline-dot" style="font-size:0.68rem;">XIX<br>–<br>1944</div>
+                        <div class="ouro-timeline-content">
+                            <div class="ouro-timeline-titulo">Padrão-ouro clássico</div>
+                            <div class="ouro-timeline-desc">Em diversos períodos do século XIX e início do XX, as principais economias operaram sob sistemas nos quais suas moedas eram lastreadas em ouro a taxas fixas de conversão. Um portador de cédulas podia, em teoria, convertê-las em ouro físico junto ao banco emissor. Esse sistema impunha disciplina fiscal e estabilidade cambial, mas limitava a capacidade dos governos de expandir a oferta monetária.</div>
+                        </div>
+                    </div>
+                    <div class="ouro-timeline-item">
+                        <div class="ouro-timeline-dot">1944</div>
+                        <div class="ouro-timeline-content">
+                            <div class="ouro-timeline-titulo">Bretton Woods — o novo padrão</div>
+                            <div class="ouro-timeline-desc">Ao término da Segunda Guerra Mundial, representantes de 44 países se reuniram em Bretton Woods, New Hampshire, para redesenhar o sistema monetário internacional. O acordo estabeleceu o dólar americano como moeda de referência global, com os Estados Unidos comprometendo-se a converter dólares em ouro à taxa de US$ 35 por onça troy. As demais moedas ficaram atreladas ao dólar. O sistema durou até o início dos anos 1970.</div>
+                        </div>
+                    </div>
+                    <div class="ouro-timeline-item">
+                        <div class="ouro-timeline-dot destaque">1971</div>
+                        <div class="ouro-timeline-content">
+                            <div class="ouro-timeline-titulo">O fim da conversibilidade — Nixon Shock</div>
+                            <div class="ouro-timeline-desc">Em agosto de 1971, o presidente Richard Nixon anunciou unilateralmente o fim da conversibilidade do dólar em ouro. A medida, que ficou conhecida como "Nixon Shock", encerrou o sistema de Bretton Woods. A decisão foi motivada por pressões econômicas internas — em especial, a necessidade de financiar gastos públicos crescentes sem estar restrito à quantidade de ouro nas reservas americanas.</div>
+                        </div>
+                    </div>
+                    <div class="ouro-timeline-item">
+                        <div class="ouro-timeline-dot" style="font-size:0.65rem;">1971<br>–<br>hoje</div>
+                        <div class="ouro-timeline-content">
+                            <div class="ouro-timeline-titulo">Sistema fiduciário moderno</div>
+                            <div class="ouro-timeline-desc">Desde 1971, as principais moedas do mundo são moedas fiduciárias — seu valor não é lastreado em nenhum ativo físico, mas sim na confiança nas instituições que as emitem: bancos centrais, governos e sistemas jurídicos. O dólar americano, o euro, o iene e o real brasileiro são exemplos de moedas fiduciárias. Sua estabilidade depende da credibilidade das instituições emissoras e das políticas monetárias adotadas.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ouro-destaque-box">
+                    <div class="ouro-destaque-title">💡 O que mudou — e o que isso significa</div>
+                    <p style="font-size: 0.88rem; color: #94A3B8; line-height: 1.72; margin: 0;">
+                        Antes de 1971, as moedas tinham uma âncora física — uma quantidade de ouro que, em teoria, as respaldava.
+                        Após 1971, as moedas passaram a ser respaldadas exclusivamente pela confiança nas instituições emissoras.
+                        Isso não significa que o sistema seja ruim ou insustentável — a maioria dos economistas reconhece as vantagens de flexibilidade do sistema fiduciário.
+                        Mas significa que o risco de contraparte — a dependência de que a instituição emissora mantenha sua credibilidade — passou a ser estrutural em todas as reservas denominadas em moedas nacionais.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 3 — Por que Bancos Centrais continuam comprando ouro? -->
+            <div class="ouro-section">
+                <div class="ouro-section-tag">Seção 3 — A Lógica das Reservas</div>
+                <h3 class="ouro-section-title">🌍 Por que muitos Bancos Centrais continuam acumulando ouro?</h3>
+                <p class="ouro-text">Esta é uma das perguntas mais reveladoras deste laboratório. O ouro não paga juros. Não gera dividendos. Custa para armazenar. E, ainda assim, muitos bancos centrais ao redor do mundo continuam mantendo — e em alguns períodos recentes, aumentando — suas reservas em ouro. Por quê?</p>
+                <p class="ouro-text">A resposta não está em qualquer narrativa específica. Está em fundamentos econômicos que diferentes instituições, de diferentes países e orientações políticas distintas, reconhecem como válidos de acordo com suas estratégias de gestão de reservas internacionais.</p>
+                <div class="ouro-bc-grid">
+                    <div class="ouro-bc-item">
+                        <span class="ouro-bc-icon">⚖️</span>
+                        <div class="ouro-bc-title">Diversificação das reservas</div>
+                        <div class="ouro-bc-desc">Reservas internacionais concentradas em uma única moeda criam dependência de um único emissor. Historicamente, muitos bancos centrais utilizam o ouro como elemento de diversificação que não está correlacionado com nenhuma moeda específica.</div>
+                    </div>
+                    <div class="ouro-bc-item">
+                        <span class="ouro-bc-icon">🔒</span>
+                        <div class="ouro-bc-title">Zero risco de contraparte</div>
+                        <div class="ouro-bc-desc">Um dólar nas reservas é um crédito contra o governo americano. Um euro é um crédito contra a zona do euro. O ouro físico custodiado domesticamente é um ativo sem contraparte — não depende de nenhum governo honrar uma promessa de pagamento.</div>
+                    </div>
+                    <div class="ouro-bc-item">
+                        <span class="ouro-bc-icon">🛡️</span>
+                        <div class="ouro-bc-title">Proteção em períodos de incerteza</div>
+                        <div class="ouro-bc-desc">Em diversos períodos históricos de crise financeira elevada, instabilidade geopolítica ou perda de confiança institucional, o ouro tendeu a preservar poder de compra em contextos onde outras reservas sofriam perdas significativas.</div>
+                    </div>
+                    <div class="ouro-bc-item">
+                        <span class="ouro-bc-icon">📊</span>
+                        <div class="ouro-bc-title">Credibilidade monetária</div>
+                        <div class="ouro-bc-desc">Em alguns países, especialmente economias emergentes, reservas em ouro podem ser percebidas como um elemento adicional de credibilidade do sistema monetário nacional perante mercados e parceiros comerciais.</div>
+                    </div>
+                    <div class="ouro-bc-item">
+                        <span class="ouro-bc-icon">⏳</span>
+                        <div class="ouro-bc-title">Preservação intergeracional</div>
+                        <div class="ouro-bc-desc">Reservas de ouro não têm prazo de vencimento, não podem ser sancionadas por terceiros por meio de simples instrução eletrônica e não sofrem o risco de erosão por inflação de uma moeda específica ao longo do tempo.</div>
+                    </div>
+                    <div class="ouro-bc-item">
+                        <span class="ouro-bc-icon">🌐</span>
+                        <div class="ouro-bc-title">Aceitação internacional</div>
+                        <div class="ouro-bc-desc">O ouro é reconhecido como reserva de valor em praticamente todos os mercados financeiros do mundo, independentemente das relações diplomáticas entre países, o que lhe confere uma utilidade específica em situações de tensão internacional.</div>
+                    </div>
+                </div>
+                <div class="ouro-frase-invlab">
+                    É significativo notar que países com orientações políticas e econômicas muito diferentes entre si — de economias desenvolvidas a emergentes, de regimes liberais a mais intervencionistas — mantêm reservas em ouro de acordo com suas estratégias de gestão de riscos. Isso sugere que a lógica por trás do ouro não é ideológica, mas estrutural.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 4 — Ouro e Geopolítica -->
+            <div class="ouro-section">
+                <div class="ouro-section-tag">Seção 4 — Contexto Global</div>
+                <h3 class="ouro-section-title">O ouro e a geopolítica — um tema que merece análise equilibrada</h3>
+                <p class="ouro-text">Nas últimas décadas, em especial após a Crise Financeira Global de 2008 e eventos geopolíticos subsequentes, observou-se em diversos períodos um aumento nas compras de ouro por parte de bancos centrais de diferentes países. Entender esse fenômeno requer análise econômica — não posicionamentos políticos.</p>
+
+                <div class="ouro-destaque-box">
+                    <div class="ouro-destaque-title">🌐 Sanções e risco de reservas</div>
+                    <p style="font-size: 0.87rem; color: #94A3B8; line-height: 1.72; margin: 0;">
+                        Reservas internacionais mantidas na forma de títulos do governo de um país terceiro — como Treasuries americanos ou Bunds alemães — estão sujeitas ao risco de congelamento ou restrição de acesso em caso de sanções econômicas internacionais.
+                        Esse risco, que por muito tempo foi considerado puramente teórico, tornou-se concretamente observado em diferentes episódios ao longo das últimas décadas, em diferentes países e contextos geopolíticos.
+                        O ouro físico custodiado no território do próprio país emissor não está sujeito a esse mecanismo específico de restrição.
+                    </p>
+                </div>
+
+                <div class="ouro-destaque-box" style="margin-top: 14px;">
+                    <div class="ouro-destaque-title">💱 Diversificação monetária e reservas globais</div>
+                    <p style="font-size: 0.87rem; color: #94A3B8; line-height: 1.72; margin: 0;">
+                        O dólar americano historicamente representou a maior parcela das reservas internacionais globais — um fenômeno conhecido como "privilégio exorbitante" do dólar.
+                        Em diferentes períodos recentes, de acordo com dados de instituições como o FMI e o World Gold Council, observou-se uma tendência de alguns bancos centrais de países emergentes a reduzirem gradualmente sua participação em dólares e aumentarem suas posições em ouro como parte de suas estratégias de diversificação.
+                        Essa movimentação tem motivações diversas e não representa necessariamente uma "fuga do dólar", mas sim uma gestão ativa de riscos de concentração em uma única moeda de reserva.
+                    </p>
+                </div>
+
+                <p class="ouro-text" style="margin-top: 16px;">O INVLAB não adota posição sobre qual estratégia de reservas é superior. Apresentamos esses fenômenos como dados econômicos observáveis que ajudam a explicar por que o ouro continua sendo relevante no debate sobre a estrutura do sistema monetário internacional.</p>
+            </div>
+
+            <!-- SEÇÃO 5 — Grandes Fortunas -->
+            <div class="ouro-section">
+                <div class="ouro-section-tag">Seção 5 — Lógica Patrimonial</div>
+                <h3 class="ouro-section-title">🔒 O papel do ouro nas grandes fortunas — uma lógica diferente</h3>
+                <p class="ouro-text">Family offices e gestores de grandes patrimônios operam com uma lógica frequentemente diferente da maioria dos investidores individuais. Enquanto muitos buscam maximizar o retorno, a gestão de patrimônios elevados coloca a <strong style="color: #E2E8F0;">preservação como objetivo central</strong> — e o ouro ocupa um lugar específico dentro dessa lógica.</p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 22px;">
+                    <div class="ouro-destaque-box" style="margin: 0;">
+                        <div class="ouro-destaque-title">📉 Descorrelação</div>
+                        <p style="font-size: 0.84rem; color: #94A3B8; line-height: 1.65; margin: 0;">Historicamente, em diversos períodos de estresse de mercado, o ouro tendeu a se comportar de forma distinta de ações e títulos — o que o torna um potencial elemento de descorrelação em carteiras diversificadas.</p>
+                    </div>
+                    <div class="ouro-destaque-box" style="margin: 0;">
+                        <div class="ouro-destaque-title">🛡️ Preservação de poder de compra</div>
+                        <p style="font-size: 0.84rem; color: #94A3B8; line-height: 1.65; margin: 0;">Em diferentes períodos históricos marcados por inflação elevada, o ouro tendeu a preservar poder de compra melhor do que ativos denominados em moeda local. Isso não é garantia, mas é um padrão observado com frequência suficiente para ser considerado na gestão patrimonial.</p>
+                    </div>
+                    <div class="ouro-destaque-box" style="margin: 0;">
+                        <div class="ouro-destaque-title">⚡ Proteção em eventos extremos</div>
+                        <p style="font-size: 0.84rem; color: #94A3B8; line-height: 1.65; margin: 0;">Crises sistêmicas profundas, colapsos bancários, hiperinflação e instabilidades geopolíticas severas são eventos raros — mas ocorrem. O ouro é frequentemente citado como um dos poucos ativos com histórico de comportamento razoavelmente estável nessas condições extremas.</p>
+                    </div>
+                    <div class="ouro-destaque-box" style="margin: 0;">
+                        <div class="ouro-destaque-title">⏳ Horizonte intergeracional</div>
+                        <p style="font-size: 0.84rem; color: #94A3B8; line-height: 1.65; margin: 0;">Grandes fortunas frequentemente pensam em décadas ou gerações, não em meses. Para horizontes muito longos, a capacidade do ouro de preservar valor independentemente de qual moeda ou sistema esteja vigente é uma característica específica que outros ativos não possuem da mesma forma.</p>
+                    </div>
+                </div>
+
+                <div class="ouro-frase-invlab">
+                    A pergunta que os gestores de grandes patrimônios geralmente fazem sobre ouro não é "quanto vai subir?", mas sim "em um portfólio com horizonte de 30 anos, qual ativo me protege contra riscos que hoje não consigo nem nomear?"
+                </div>
+            </div>
+
+            <!-- SEÇÃO 6 — Ouro não é como os outros -->
+            <div class="ouro-section">
+                <div class="ouro-section-tag">Seção 6 — A Natureza Real do Ouro</div>
+                <h3 class="ouro-section-title">Ouro não é um investimento como os outros — entenda a diferença</h3>
+                <p class="ouro-text">Esta distinção é fundamental e frequentemente mal compreendida. Antes de qualquer decisão sobre ouro, é preciso entender o que ele é — e o que ele definitivamente não é. A comparação abaixo é direta e essencial.</p>
+
+                <div class="ouro-comparar-grid">
+                    <div class="ouro-comparar-item">
+                        <span class="ouro-comparar-icon">📈</span>
+                        <div class="ouro-comparar-nome">Empresa</div>
+                        <div class="ouro-comparar-arrow">↓</div>
+                        <div class="ouro-comparar-gera verde">Gera lucros</div>
+                        <div class="ouro-comparar-detalhe">Cresce em valor quando expande operações, conquista mercado e aumenta sua lucratividade. Pode pagar dividendos.</div>
+                    </div>
+                    <div class="ouro-comparar-item">
+                        <span class="ouro-comparar-icon">📄</span>
+                        <div class="ouro-comparar-nome">Título de Renda Fixa</div>
+                        <div class="ouro-comparar-arrow">↓</div>
+                        <div class="ouro-comparar-gera azul">Gera juros</div>
+                        <div class="ouro-comparar-detalhe">Remunera o capital emprestado com uma taxa de juros. Retorna o principal ao final do prazo. Há risco de crédito do emissor.</div>
+                    </div>
+                    <div class="ouro-comparar-item">
+                        <span class="ouro-comparar-icon">🏢</span>
+                        <div class="ouro-comparar-nome">Imóvel</div>
+                        <div class="ouro-comparar-arrow">↓</div>
+                        <div class="ouro-comparar-gera roxo">Gera aluguel</div>
+                        <div class="ouro-comparar-detalhe">Produz renda pela cessão do uso. Pode se valorizar com o tempo. Depende de inquilinos, localização e mercado imobiliário.</div>
+                    </div>
+                    <div class="ouro-comparar-item destaque">
+                        <span class="ouro-comparar-icon">🥇</span>
+                        <div class="ouro-comparar-nome">Ouro</div>
+                        <div class="ouro-comparar-arrow">↓</div>
+                        <div class="ouro-comparar-gera ouro">Não gera fluxo</div>
+                        <div class="ouro-comparar-detalhe" style="color: rgba(212,175,55,0.7);">Não paga dividendos, juros ou aluguel. Não produz riqueza. Seu papel é outro: preservar valor ao longo do tempo, independentemente do emissor de uma moeda.</div>
+                    </div>
+                </div>
+
+                <div class="ouro-frase-invlab" style="margin-top: 24px;">
+                    Comparar a rentabilidade do ouro com a de ações ou renda fixa durante um período específico não faz sentido analítico — porque eles têm papéis estruturalmente diferentes em uma carteira. É como comparar o desempenho de um seguro com o de um investimento em crescimento.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 7 — Como investir? -->
+            <div class="ouro-section">
+                <div class="ouro-section-tag">Seção 7 — Os Instrumentos</div>
+                <h3 class="ouro-section-title">Como pequenos investidores podem acessar o ouro?</h3>
+                <p class="ouro-text">Somente agora — depois de entender o que é o ouro, o que ele não é e qual papel pode ocupar — faz sentido falar sobre como acessá-lo. Existem diferentes modalidades, cada uma com características, custos, vantagens e limitações específicas.</p>
+
+                <div class="ouro-modalidades-grid">
+                    <div class="ouro-modalidade-card">
+                        <span class="ouro-modalidade-icon">📊</span>
+                        <div class="ouro-modalidade-info">
+                            <div class="ouro-modalidade-nome">ETF de Ouro (ex.: GOLD11)</div>
+                            <div class="ouro-modalidade-desc">Fundos negociados em bolsa que replicam o preço do ouro. O investidor compra cotas como se fossem ações, sem precisar lidar com custódia física. O ouro real fica custodiado por uma instituição responsável pelo fundo. Alta liquidez, baixo custo de entrada, sem necessidade de entrega física. Tributação pela tabela regressiva de renda variável.</div>
+                        </div>
+                        <div class="ouro-modalidade-badges">
+                            <span class="ouro-badge baixa">Liquidez Alta</span>
+                            <span class="ouro-badge baixa">Custo Baixo</span>
+                            <span class="ouro-badge neutro">Sem físico</span>
+                        </div>
+                    </div>
+                    <div class="ouro-modalidade-card">
+                        <span class="ouro-modalidade-icon">🏦</span>
+                        <div class="ouro-modalidade-info">
+                            <div class="ouro-modalidade-nome">Fundos de Ouro</div>
+                            <div class="ouro-modalidade-desc">Fundos de investimento que alocam em ouro — diretamente ou via ETFs internacionais. Acessíveis via corretora ou banco. Gestão profissional. Tributação semestral pelo come-cotas (diferente dos ETFs). Pode haver taxas de administração que reduzem a eficiência da exposição ao ativo.</div>
+                        </div>
+                        <div class="ouro-modalidade-badges">
+                            <span class="ouro-badge media">Liquidez Média</span>
+                            <span class="ouro-badge media">Custo Médio</span>
+                            <span class="ouro-badge neutro">Sem físico</span>
+                        </div>
+                    </div>
+                    <div class="ouro-modalidade-card">
+                        <span class="ouro-modalidade-icon">📱</span>
+                        <div class="ouro-modalidade-info">
+                            <div class="ouro-modalidade-nome">Ouro Escritural</div>
+                            <div class="ouro-modalidade-desc">Negociação de ouro em gramas via corretoras credenciadas na B3. O investidor tem uma posição escritural — não recebe o metal fisicamente a menos que solicite a entrega, o que envolve custos adicionais. Boa alternativa para quem quer exposição ao preço do ouro com possibilidade de conversão física eventual.</div>
+                        </div>
+                        <div class="ouro-modalidade-badges">
+                            <span class="ouro-badge baixa">Liquidez Alta</span>
+                            <span class="ouro-badge media">Custo Médio</span>
+                            <span class="ouro-badge neutro">Físico opcional</span>
+                        </div>
+                    </div>
+                    <div class="ouro-modalidade-card">
+                        <span class="ouro-modalidade-icon">📜</span>
+                        <div class="ouro-modalidade-info">
+                            <div class="ouro-modalidade-nome">Contratos Futuros (B3)</div>
+                            <div class="ouro-modalidade-desc">Instrumentos derivativos que permitem especular ou fazer hedge na variação do preço do ouro. Exigem margem de garantia, conhecimento avançado de mercados futuros e acompanhamento constante. Não são adequados para a maioria dos investidores que busca preservação patrimonial com ouro. Alto risco de alavancagem involuntária.</div>
+                        </div>
+                        <div class="ouro-modalidade-badges">
+                            <span class="ouro-badge baixa">Liquidez Alta</span>
+                            <span class="ouro-badge alta">Risco Alto</span>
+                            <span class="ouro-badge alta">Complexo</span>
+                        </div>
+                    </div>
+                    <div class="ouro-modalidade-card">
+                        <span class="ouro-modalidade-icon">🪙</span>
+                        <div class="ouro-modalidade-info">
+                            <div class="ouro-modalidade-nome">Ouro Físico (barras e moedas)</div>
+                            <div class="ouro-modalidade-desc">A forma mais tangível e historicamente mais reconhecida. Barras e moedas podem ser adquiridas de distribuidores certificados. Exige custódia segura, envolve custos de armazenamento e a questão da autenticidade na compra e venda. Liquidez menor do que as modalidades financeiras, mas o investidor detém o ativo sem dependência de terceiros intermediários.</div>
+                        </div>
+                        <div class="ouro-modalidade-badges">
+                            <span class="ouro-badge alta">Liquidez Menor</span>
+                            <span class="ouro-badge alta">Custo Custódia</span>
+                            <span class="ouro-badge baixa">Físico Real</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 8 — Quem guarda o ouro? -->
+            <div class="ouro-section">
+                <div class="ouro-section-tag">Seção 8 — Custódia</div>
+                <h3 class="ouro-section-title">Quem guarda o ouro? — o tema que poucos investidores discutem</h3>
+                <p class="ouro-text">A questão da custódia é um dos aspectos menos discutidos — e mais importantes — do investimento em ouro. Dependendo da modalidade escolhida, quem detém fisicamente o metal, quais os custos envolvidos e qual o grau de liquidez disponível variam significativamente.</p>
+
+                <div class="ouro-custodia-wrap">
+                    <div class="ouro-custodia-row header">
+                        <div class="ouro-custodia-cell label">Critério</div>
+                        <div class="ouro-custodia-cell col-head">ETF</div>
+                        <div class="ouro-custodia-cell col-head">Escritural</div>
+                        <div class="ouro-custodia-cell col-head">Cofre Bancário</div>
+                        <div class="ouro-custodia-cell col-head">Cofre Privado</div>
+                    </div>
+                    <div class="ouro-custodia-row">
+                        <div class="ouro-custodia-cell label">Responsável pela custódia</div>
+                        <div class="ouro-custodia-cell center" style="color:#94A3B8;">Custodiante do fundo (banco)</div>
+                        <div class="ouro-custodia-cell center" style="color:#94A3B8;">Corretora / B3</div>
+                        <div class="ouro-custodia-cell center" style="color:#94A3B8;">Banco</div>
+                        <div class="ouro-custodia-cell center" style="color:#94A3B8;">Você mesmo</div>
+                    </div>
+                    <div class="ouro-custodia-row">
+                        <div class="ouro-custodia-cell label">Acesso ao metal físico</div>
+                        <div class="ouro-custodia-cell neg">Não</div>
+                        <div class="ouro-custodia-cell med">Eventual (c/ custo)</div>
+                        <div class="ouro-custodia-cell pos">Sim</div>
+                        <div class="ouro-custodia-cell pos">Sim</div>
+                    </div>
+                    <div class="ouro-custodia-row">
+                        <div class="ouro-custodia-cell label">Custo de custódia</div>
+                        <div class="ouro-custodia-cell med">Taxa do fundo</div>
+                        <div class="ouro-custodia-cell med">Taxa da corretora</div>
+                        <div class="ouro-custodia-cell med">Taxa do banco</div>
+                        <div class="ouro-custodia-cell pos">Custo próprio</div>
+                    </div>
+                    <div class="ouro-custodia-row">
+                        <div class="ouro-custodia-cell label">Liquidez</div>
+                        <div class="ouro-custodia-cell pos">Alta (bolsa)</div>
+                        <div class="ouro-custodia-cell pos">Alta (bolsa)</div>
+                        <div class="ouro-custodia-cell med">Média</div>
+                        <div class="ouro-custodia-cell neg">Mais limitada</div>
+                    </div>
+                    <div class="ouro-custodia-row">
+                        <div class="ouro-custodia-cell label">Risco de contraparte</div>
+                        <div class="ouro-custodia-cell med">Baixo (regulado)</div>
+                        <div class="ouro-custodia-cell med">Baixo (regulado)</div>
+                        <div class="ouro-custodia-cell med">Risco banco</div>
+                        <div class="ouro-custodia-cell pos">Zero</div>
+                    </div>
+                    <div class="ouro-custodia-row">
+                        <div class="ouro-custodia-cell label">Seguro / proteção</div>
+                        <div class="ouro-custodia-cell pos">Incluído no fundo</div>
+                        <div class="ouro-custodia-cell pos">Regulação B3</div>
+                        <div class="ouro-custodia-cell med">Parcial</div>
+                        <div class="ouro-custodia-cell neg">Responsabilidade própria</div>
+                    </div>
+                </div>
+
+                <p class="ouro-text" style="margin-top: 18px;">Não existe modalidade de custódia superior em todos os critérios. A escolha depende do perfil do investidor, do volume envolvido e da finalidade do investimento — proteção pura, liquidez ou tangibilidade.</p>
+            </div>
+
+            <!-- SEÇÃO 9 — Certificação -->
+            <div class="ouro-section">
+                <div class="ouro-section-tag">Seção 9 — Autenticidade</div>
+                <h3 class="ouro-section-title">Certificação e autenticidade — o que poucos investidores perguntam antes de comprar</h3>
+                <p class="ouro-text">Para quem investe em ouro físico, a questão da autenticidade e certificação é tão importante quanto o preço pago. Um ouro não certificado adequadamente pode ter sua venda dificultada — o que compromete exatamente a característica de liquidez que muitos buscam no metal.</p>
+
+                <div class="ouro-cert-grid">
+                    <div class="ouro-cert-item">
+                        <span class="ouro-cert-icon">🏆</span>
+                        <div class="ouro-cert-title">Pureza — 24 quilates e 99,99%</div>
+                        <div class="ouro-cert-desc">O padrão mais elevado de pureza do ouro é denominado "999.9" — equivalente a 99,99% de ouro puro. Barras de boa entrega internacional devem atender a esse padrão. O sistema de quilates (24k = ouro puro) é utilizado principalmente para joias e moedas — barras de investimento usam o sistema de pureza decimal.</div>
+                    </div>
+                    <div class="ouro-cert-item">
+                        <span class="ouro-cert-icon">🌐</span>
+                        <div class="ouro-cert-title">LBMA — o padrão global</div>
+                        <div class="ouro-cert-desc">A London Bullion Market Association (LBMA) é o organismo internacional que define os padrões de boa entrega ("Good Delivery") para ouro e prata. Barras certificadas pela LBMA são aceitas nos principais mercados do mundo sem necessidade de re-certificação — o que garante liquidez internacional.</div>
+                    </div>
+                    <div class="ouro-cert-item">
+                        <span class="ouro-cert-icon">🔢</span>
+                        <div class="ouro-cert-title">Numeração e rastreabilidade</div>
+                        <div class="ouro-cert-desc">Barras de boa entrega possuem número de série único, nome da refinaria, peso e pureza gravados. Essa numeração permite rastrear a origem do metal, verificar sua autenticidade e confirmar que não está vinculado a denúncias de conflito ou extração ilegal — critérios cada vez mais relevantes para compradores institucionais.</div>
+                    </div>
+                    <div class="ouro-cert-item">
+                        <span class="ouro-cert-icon">🏭</span>
+                        <div class="ouro-cert-title">Refinarias credenciadas</div>
+                        <div class="ouro-cert-desc">Apenas refinarias credenciadas pela LBMA podem produzir barras de boa entrega. A lista de refinarias aprovadas é pública e atualizada periodicamente. Comprar ouro de refinarias fora dessa lista pode dificultar a revenda nos mercados internacionais mais líquidos.</div>
+                    </div>
+                    <div class="ouro-cert-item">
+                        <span class="ouro-cert-icon">🔬</span>
+                        <div class="ouro-cert-title">Re-certificação na venda</div>
+                        <div class="ouro-cert-desc">Ouro físico que ficou fora da cadeia de custódia certificada — por exemplo, armazenado em um cofre doméstico por muitos anos — pode precisar de re-certificação antes de ser aceito novamente nos mercados. Esse processo tem custo e prazo. É um fator que deve ser considerado antes de optar por custódia própria.</div>
+                    </div>
+                    <div class="ouro-cert-item">
+                        <span class="ouro-cert-icon">✅</span>
+                        <div class="ouro-cert-title">A regra prática</div>
+                        <div class="ouro-cert-desc">Na prática: ouro comprado e vendido dentro de circuitos certificados e reconhecidos — seja via B3, ETFs ou dealers credenciados — mantém sua rastreabilidade e aceitação. Ouro de origem incerta, mesmo que fisicamente legítimo, pode enfrentar resistência na revenda e deságio no preço.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 10 — O que o ouro NÃO faz -->
+            <div class="ouro-section">
+                <div class="ouro-section-tag">Seção 10 — Limites e Credibilidade</div>
+                <h3 class="ouro-section-title">O que o ouro definitivamente não faz — e por que isso importa</h3>
+                <p class="ouro-text">Uma das seções mais importantes deste laboratório. A credibilidade do INVLAB está em mostrar tanto o que um instrumento oferece quanto o que ele não oferece. O ouro tem um papel real e histórico — mas também tem limitações igualmente reais que precisam ser compreendidas antes de qualquer decisão.</p>
+
+                <div class="ouro-nao-grid">
+                    <div class="ouro-nao-item">
+                        <div class="ouro-nao-x">✗</div>
+                        <div class="ouro-nao-text">Não paga dividendos, juros ou qualquer forma de renda periódica</div>
+                    </div>
+                    <div class="ouro-nao-item">
+                        <div class="ouro-nao-x">✗</div>
+                        <div class="ouro-nao-text">Não gera caixa nem produz riqueza nova — é um ativo que preserva, não que multiplica</div>
+                    </div>
+                    <div class="ouro-nao-item">
+                        <div class="ouro-nao-x">✗</div>
+                        <div class="ouro-nao-text">Não cresce como uma empresa — não tem capacidade de expandir operações, contratar pessoas ou conquistar mercados</div>
+                    </div>
+                    <div class="ouro-nao-item">
+                        <div class="ouro-nao-x">✗</div>
+                        <div class="ouro-nao-text">Não substitui diversificação — concentração em ouro também é concentração de risco</div>
+                    </div>
+                    <div class="ouro-nao-item">
+                        <div class="ouro-nao-x">✗</div>
+                        <div class="ouro-nao-text">Não elimina o risco de perda de valor no curto prazo — o preço do ouro oscila significativamente em períodos específicos</div>
+                    </div>
+                    <div class="ouro-nao-item">
+                        <div class="ouro-nao-x">✗</div>
+                        <div class="ouro-nao-text">Não é uma proteção automática contra qualquer tipo de crise — há cenários em que outras reservas performaram melhor</div>
+                    </div>
+                    <div class="ouro-nao-item">
+                        <div class="ouro-nao-x">✗</div>
+                        <div class="ouro-nao-text">Não tem parâmetro claro de "valor justo" — ao contrário de uma ação ou título, não existe fluxo de caixa para descontar</div>
+                    </div>
+                    <div class="ouro-nao-item">
+                        <div class="ouro-nao-x">✗</div>
+                        <div class="ouro-nao-text">Não é adequado como único ativo de uma carteira — é um componente, não uma estratégia completa</div>
+                    </div>
+                </div>
+
+                <div class="ouro-papel-box">
+                    <p style="font-size: 0.94rem; font-weight: 600; color: #D4AF37; margin-bottom: 10px;">✦ Então, qual é o papel real do ouro?</p>
+                    <p style="font-size: 0.90rem; color: #94A3B8; line-height: 1.75; margin: 0;">Preservar patrimônio ao longo do tempo em contextos onde moedas perdem valor, sistemas financeiros enfrentam estresse severo ou eventos imprevisíveis alteram as regras do jogo econômico. Não é um ativo de retorno — é um ativo de proteção. E essa distinção define tudo sobre como e quando ele faz sentido em uma estratégia patrimonial.</p>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 11 — Quando faz sentido? -->
+            <div class="ouro-section">
+                <div class="ouro-section-tag">Seção 11 — Adequação</div>
+                <h3 class="ouro-section-title">Quando o ouro costuma fazer sentido — e quando não faz</h3>
+                <p class="ouro-text">A pergunta sobre quando o ouro faz sentido só pode ser respondida depois de compreender o que ele é e o que ele não é. As colunas abaixo não são regras absolutas — são orientações para reflexão sobre adequação ao contexto e objetivos de cada investidor.</p>
+
+                <div class="ouro-quando-grid">
+                    <div class="ouro-quando-col sim">
+                        <div class="ouro-quando-col-title">✅ Pode fazer mais sentido quando você...</div>
+                        <div class="ouro-quando-item">
+                            <span class="ico">✅</span>
+                            <span>Busca <strong style="color:#E2E8F0;">preservação patrimonial</strong> de longo prazo — não retorno acelerado de curto prazo</span>
+                        </div>
+                        <div class="ouro-quando-item">
+                            <span class="ico">✅</span>
+                            <span>Quer <strong style="color:#E2E8F0;">diversificar</strong> uma carteira que já tem ações, renda fixa e imóveis — o ouro é complemento, não substituto</span>
+                        </div>
+                        <div class="ouro-quando-item">
+                            <span class="ico">✅</span>
+                            <span>Tem horizonte de investimento <strong style="color:#E2E8F0;">longo</strong> — a função de preservação do ouro se evidencia mais claramente em décadas do que em meses</span>
+                        </div>
+                        <div class="ouro-quando-item">
+                            <span class="ico">✅</span>
+                            <span>Deseja <strong style="color:#E2E8F0;">reduzir exposição</strong> ao sistema financeiro convencional como parte de uma estratégia patrimonial consciente</span>
+                        </div>
+                        <div class="ouro-quando-item">
+                            <span class="ico">✅</span>
+                            <span>Compreende que <strong style="color:#E2E8F0;">não receberá renda periódica</strong> e está confortável com essa característica do ativo</span>
+                        </div>
+                        <div class="ouro-quando-item">
+                            <span class="ico">✅</span>
+                            <span>Entende os <strong style="color:#E2E8F0;">custos de custódia</strong> envolvidos e os considera razoáveis para a função que o ouro ocupa na carteira</span>
+                        </div>
+                    </div>
+                    <div class="ouro-quando-col nao">
+                        <div class="ouro-quando-col-title">⛔ Pode não fazer sentido quando você...</div>
+                        <div class="ouro-quando-item">
+                            <span class="ico">⛔</span>
+                            <span>Busca <strong style="color:#CBD5E1;">renda periódica</strong> — o ouro não distribui nenhum tipo de rendimento</span>
+                        </div>
+                        <div class="ouro-quando-item">
+                            <span class="ico">⛔</span>
+                            <span>Quer <strong style="color:#CBD5E1;">crescimento acelerado</strong> de patrimônio — ações, fundos de crédito e imóveis têm mais potencial de retorno com horizontes semelhantes</span>
+                        </div>
+                        <div class="ouro-quando-item">
+                            <span class="ico">⛔</span>
+                            <span>Tem horizonte de investimento <strong style="color:#CBD5E1;">curto</strong> — volatilidade do preço do ouro pode gerar perdas em janelas temporais menores</span>
+                        </div>
+                        <div class="ouro-quando-item">
+                            <span class="ico">⛔</span>
+                            <span>Está motivado apenas pelo <strong style="color:#CBD5E1;">momento de alta do preço</strong> — comprar ouro por especulação de curto prazo é incoerente com sua natureza de ativo de preservação</span>
+                        </div>
+                        <div class="ouro-quando-item">
+                            <span class="ico">⛔</span>
+                            <span>Não tem ainda uma <strong style="color:#CBD5E1;">carteira diversificada</strong> em ativos produtivos — o ouro faz mais sentido como complemento do que como ponto de partida</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REFLEXÃO -->
+            <div class="ouro-reflexao">
+                <div class="ouro-reflexao-pergunta">
+                    "Se o ouro não produz renda, por que governos, Bancos Centrais e grandes patrimônios ao redor do mundo continuam mantendo reservas em ouro?"
+                </div>
+                <p class="ouro-reflexao-text">
+                    Essa pergunta não tem uma resposta simples — e é exatamente por isso que ela é a mais importante deste laboratório.
+                    Ela obriga o investidor a pensar não apenas sobre retorno, mas sobre confiança, tempo, sistemas e preservação.
+                </p>
+                <p class="ouro-reflexao-text">
+                    Se bancos centrais de economias desenvolvidas e emergentes, de orientações políticas as mais diferentes entre si, de acordo com estratégias de reserva adotadas de forma independente, continuam mantendo ouro em suas reservas internacionais — é porque identificaram nele uma característica que outros ativos não oferecem da mesma forma: a independência de qualquer emissor específico.
+                </p>
+                <p class="ouro-reflexao-text">
+                    O investidor individual que compreende essa lógica estará em condições muito melhores para decidir, conscientemente, se o ouro faz ou não sentido na sua estratégia — e em que proporção, com que objetivo e com qual horizonte de tempo.
+                </p>
+            </div>
+
+            <!-- CHECKLIST -->
+            <div class="ouro-section">
+                <div class="ouro-section-tag">Checklist INVLAB</div>
+                <h3 class="ouro-section-title">Antes de investir em ouro, pergunte:</h3>
+                <div class="ouro-checklist">
+                    <div class="ouro-check-item">
+                        <div class="ouro-check-num">✓</div>
+                        <div class="ouro-check-text">Estou buscando <strong>preservação</strong> de longo prazo — ou confundindo o ouro com um ativo de crescimento ou geração de renda?</div>
+                    </div>
+                    <div class="ouro-check-item">
+                        <div class="ouro-check-num">✓</div>
+                        <div class="ouro-check-text">Compreendo que o ouro <strong>não gera renda</strong> — e estou confortável com o fato de que qualquer retorno depende exclusivamente da variação de preço?</div>
+                    </div>
+                    <div class="ouro-check-item">
+                        <div class="ouro-check-num">✓</div>
+                        <div class="ouro-check-text">Minha carteira já está <strong>suficientemente diversificada</strong> em ativos produtivos antes de destinar uma parcela ao ouro?</div>
+                    </div>
+                    <div class="ouro-check-item">
+                        <div class="ouro-check-num">✓</div>
+                        <div class="ouro-check-text">Estou confortável com <strong>oscilações de preço</strong> no curto prazo — e tenho horizonte suficientemente longo para que a função de preservação do ouro se manifeste?</div>
+                    </div>
+                    <div class="ouro-check-item">
+                        <div class="ouro-check-num">✓</div>
+                        <div class="ouro-check-text">Conheço a <strong>modalidade de custódia</strong> que faz sentido para o meu perfil — e entendo os custos, a liquidez e as responsabilidades envolvidas em cada opção?</div>
+                    </div>
+                    <div class="ouro-check-item">
+                        <div class="ouro-check-num">✓</div>
+                        <div class="ouro-check-text">Se optar por ouro físico, sei como verificar <strong>autenticidade e certificação</strong> — e como garantir que poderei vendê-lo no futuro sem deságio por problemas de rastreabilidade?</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AVISO EDITORIAL -->
+            <div class="ouro-aviso">
+                ⚠️ <strong>Observação editorial INVLAB:</strong> Os fatos históricos, contextos econômicos e referências geopolíticas apresentados nesta página têm finalidade exclusivamente educacional. Expressões como "historicamente", "em diversos períodos" e "de acordo com estratégias adotadas por diferentes países" são utilizadas intencionalmente para refletir a natureza probabilística e contextual das afirmações — não generalizações absolutas. As regras tributárias, a disponibilidade de instrumentos e o cenário de reservas internacionais podem mudar ao longo do tempo. O objetivo deste laboratório é ensinar princípios econômicos permanentes sobre o papel do ouro, sem constituir recomendação de investimento.
+            </div>
+
+            <!-- A SEMENTE -->
+            <div class="ouro-semente">
+                <div class="ouro-semente-icon">🌱</div>
+                <div class="ouro-semente-title">A Semente</div>
+                <p class="ouro-semente-text">
+                    Civilizações mudaram. Impérios desapareceram. Moedas nasceram e deixaram de existir. Sistemas financeiros foram criados, testados e alguns, em diferentes períodos históricos, colapsaram.
+                </p>
+                <p class="ouro-semente-text">
+                    O ouro permaneceu — não porque seja perfeito, não porque seja o melhor ativo em todos os cenários, mas porque diferentes sociedades ao longo de milênios continuaram reconhecendo nele uma forma de preservar valor quando a confiança era colocada à prova.
+                </p>
+                <p class="ouro-semente-destaque">
+                    🌱 O ouro talvez não seja o ativo do futuro. É um dos poucos ativos que atravessou praticamente toda a história econômica da humanidade e continua ocupando um lugar nas reservas dos países e das grandes fortunas.<br><br>
+                    Seu maior valor talvez não esteja no metal em si, mas na confiança construída ao longo de milhares de anos — e no que essa permanência revela sobre a natureza do dinheiro, da confiança e do tempo.
+                </p>
+            </div>
+
+        </div><!-- /invlab-lab-container -->
+    </main>
+
+    <footer style="background: rgba(13, 13, 13, 0.97); border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+    <div class="content-wrapper-wide">
+        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
+                <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">🧭 Guia do INVLAB →</a>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                    <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Ações</a></li>
+                    <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💵 ETFs</a></li>
+                    <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 FIIs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Economia Digital</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌐 Economia Digital</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Instrumentos Avançados</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="fundos-investimento.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💼 Fundos de Investimentos</a></li>
+                    <li><a href="bdrs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌍 BDRs</a></li>
+                    <li><a href="fi-infra.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏗️ FI-Infra</a></li>
+                    <li><a href="ouro.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🥇 Ouro</a></li>
+                    <li><a href="instrumentos-avancados.html#derivativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">⚡ Derivativos e Opções</a></li>
+                    <li><a href="instrumentos-avancados.html#alternativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚀 Invest. Alternativos</a></li>
+                    <li><a href="instrumentos-avancados.html#ativos-reais" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏠 Ativos Reais</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Defesa do Investidor</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
+                    <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                    <li><a href="credito-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔥 Crédito</a></li>
+                    <li><a href="produtos-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔍 Produtos</a></li>
+                    <li><a href="sinais-de-alerta.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚨 Sinais de alerta</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
+            <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
+            </p>
+            <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
+            </p>
+        </div>
+    </div>
+    </footer>
+
+    <div id="backToTop">↑</div>
+
+    <script src="../assets/js/script.js"></script>
+    <script defer src="../assets/js/bcb-api.js"></script>
+    <script defer src="../assets/js/invlab-carrossel-renda-variavel.js"></script>
+    <script>
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+                setTimeout(() => backToTopButton.style.opacity = '1', 10);
+            } else {
+                backToTopButton.style.opacity = '0';
+                setTimeout(() => backToTopButton.style.display = 'none', 300);
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
