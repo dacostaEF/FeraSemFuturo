@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Equity — O Capital que Reconstrói Empresas | INVLAB</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="description" content="Como a sociedade recupera empresas que ainda têm valor, mas perderam eficiência? Um laboratório INVLAB sobre Private Equity, reestruturação empresarial e o papel do capital de risco maduro na economia.">
+
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+    <link rel="stylesheet" href="../assets/css/private-equity.css">
+</head>
+<body>
+    <section id="invlab-carousel-container"></section>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+            </div>
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Início</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">📚 Primeiros<br>Passos</button>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-fixa'">📊 Renda<br>Fixa <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="poupanca.html">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-variavel'">📈 Renda<br>Variável <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='etfs.html'" style="cursor:pointer;">
+                                <span class="category-name">💵 ETFs</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='fiis.html'" style="cursor:pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='acoes.html'" style="cursor:pointer;">
+                                <span class="category-name">📈 Ações</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <button class="tab-btn" onclick="window.location.href='cripto.html'">🌐 Economia<br>Digital</button>
+                <button class="tab-btn active" onclick="window.location.href='instrumentos-avancados.html'">🧬 Instrumentos<br>Avançados</button>
+                <button class="tab-btn" onclick="window.location.href='defesa-investidor.html'">🛡 Defesa do<br>Investidor</button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <main style="margin-top: 110px;">
+        <!-- BREADCRUMB STICKY -->
+        <div style="position: sticky; top: 110px; z-index: 999; background: #0D0D0D; width: 100%; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <nav style="max-width: min(calc(100% - 64px), 1160px); margin: 0 auto; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.35);">
+                <span onclick="window.location.href='instrumentos-avancados.html'" style="cursor:pointer; color: rgba(34,211,238,0.65); font-weight:600;">🧬 Instrumentos Avançados</span>
+                <span>›</span>
+                <span onclick="window.location.href='instrumentos-avancados.html#alternativos'" style="cursor:pointer; color: rgba(59,130,246,0.55); font-weight:600;">🚀 Investimentos Alternativos</span>
+                <span>›</span>
+                <span style="color: rgba(59,130,246,0.82); font-weight:600;">Private Equity</span>
+            </nav>
+        </div>
+
+        <div class="invlab-lab-container">
+
+            <!-- TÍTULO -->
+            <div style="padding-top: 40px; padding-bottom: 8px; text-align: center;">
+                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.4rem; font-weight: 800; color: #3B82F6; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em; line-height: 1.2;">🏭 Private Equity</h2>
+                <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(59,130,246,0.65); text-align: center; margin-bottom: 10px; max-width: 720px; margin-left: auto; margin-right: auto;">O Capital que Reconstrói Empresas</p>
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.92rem; color: rgba(255,255,255,0.32); text-align: center; margin-bottom: 0; max-width: 680px; margin-left: auto; margin-right: auto;">Como a sociedade recupera empresas que ainda têm valor, mas perderam eficiência?</p>
+            </div>
+
+            <!-- HOOK -->
+            <div class="pe-hook">
+                <div class="pe-hook-badge">🏭 Laboratório — Private Equity e Investimentos Alternativos</div>
+                <div class="pe-hook-manifesto">
+                    Nem toda empresa precisa nascer.<br><br>
+                    Algumas já possuem clientes, fábricas, marcas,<br>
+                    funcionários e décadas de história.<br><br>
+                    O problema é que, muitas vezes,<br>
+                    <em>elas deixam de crescer.</em><br>
+                    <em>Perdem eficiência.</em><br>
+                    <em>Perdem velocidade.</em><br>
+                    <em>Perdem competitividade.</em>
+                </div>
+
+                <p style="font-size: 0.95rem; color: rgba(255,255,255,0.42); margin: 0 auto 22px; max-width: 580px; line-height: 1.72;">É exatamente nesse momento que surge o Private Equity.<br>Ele não compra empresas para esperar. Compra empresas para transformá-las.</p>
+
+                <div class="pe-hook-acoes">
+                    <span class="pe-hook-acao">Troca executivos</span>
+                    <span class="pe-hook-acao">Revê processos</span>
+                    <span class="pe-hook-acao">Fecha unidades ineficientes</span>
+                    <span class="pe-hook-acao">Compra concorrentes</span>
+                    <span class="pe-hook-acao">Digitaliza operações</span>
+                    <span class="pe-hook-acao">Renegocia dívidas</span>
+                    <span class="pe-hook-acao">Profissionaliza a gestão</span>
+                    <span class="pe-hook-acao">Reestrutura a governança</span>
+                </div>
+
+                <div class="pe-hook-tese">
+                    "Depois de anos de trabalho intenso — vende uma empresa muito melhor do que encontrou.<br>
+                    Isso não é especulação. É engenharia empresarial."<br>
+                    <span style="font-size: 0.80rem; color: rgba(147,197,253,0.45); font-style: normal; font-weight: 600; margin-top: 10px; display: block;">— A pergunta central deste laboratório: como a sociedade recupera empresas que ainda têm valor?</span>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 1 — POR QUE EXISTE -->
+            <div class="pe-section">
+                <div class="pe-section-tag">Seção 1 — A Origem</div>
+                <h3 class="pe-section-title">📋 Por que o Private Equity existe?</h3>
+                <p class="pe-text">Por que empresas gigantes deixam de crescer? A resposta raramente está no produto. Está na organização.</p>
+                <p class="pe-text">Empresas também envelhecem. Com o tempo, as estruturas tornam-se rígidas, a burocracia se expande, a inovação desacelera. Sucessões familiares criam conflitos de governança. Fundadores brillhantes em inovação podem ser gestores mediocres de escala. Concorrentes mais ágeis surgem. Tecnologias que um dia foram vantagem tornam-se legado.</p>
+                <p class="pe-text">O resultado é uma empresa que possui ativos valiosos — marca, base de clientes, capacidade produtiva, relacionamentos comerciais — mas que opera muito abaixo do seu potencial. Ela não precisa desaparecer. Precisa ser reconstruída.</p>
+                <p class="pe-text">É exatamente esse espaço que o Private Equity ocupa. Ele existe para investir onde os mercados públicos não alcançam — em empresas que precisam de transformação profunda, não apenas de capital.</p>
+
+                <div class="pe-insight-box">
+                    <div class="pe-insight-title">Empresas também envelhecem — assim como pessoas.</div>
+                    <p style="font-size: 0.88rem; color: #94A3B8; margin-bottom: 14px; line-height: 1.65;">Uma empresa pode possuir:</p>
+                    <ul class="pe-insight-lista">
+                        <li><span>✔</span> Marca reconhecida e estabelecida no mercado</li>
+                        <li><span>✔</span> Clientes consolidados e relacionamentos de longo prazo</li>
+                        <li><span>✔</span> Produtos comprovados e demanda real</li>
+                        <li><span>✔</span> Infraestrutura física e capacidade instalada</li>
+                    </ul>
+                    <p class="pe-insight-mas">E mesmo assim ter uma gestão extremamente ineficiente, processos obsoletos, custos fora de controle e uma estrutura que impede qualquer crescimento real.</p>
+                    <div class="pe-insight-conclusao">Private Equity não compra ativos. Compra potencial escondido.</div>
+                </div>
+
+                <div class="pe-frase-invlab">
+                    O capitalismo também precisa de engenheiros. Não apenas de construtores — que criam empresas do zero — mas de reformadores: aqueles que entram em estruturas existentes e as tornam melhores, mais eficientes e mais competitivas. Esse é o papel econômico do Private Equity.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 2 — VC vs PE -->
+            <div class="pe-section">
+                <div class="pe-section-tag">Seção 2 — O Mapa da Economia</div>
+                <h3 class="pe-section-title">🔄 Venture Capital e Private Equity — instrumentos diferentes, momentos diferentes</h3>
+                <p class="pe-text">Uma das confusões mais comuns é tratar Venture Capital e Private Equity como variações do mesmo investimento. São instrumentos fundamentalmente distintos — não apenas em estratégia, mas no problema econômico que cada um resolve.</p>
+
+                <div class="pe-vc-pe-grid">
+                    <div class="pe-vc-col">
+                        <div class="pe-col-header">🚀 Venture Capital — financia o futuro</div>
+                        <ul class="pe-col-lista">
+                            <li><span>💡</span>Investe antes da empresa existir plenamente</li>
+                            <li><span>🌱</span>Financia ideias, protótipos e primeiros clientes</li>
+                            <li><span>📈</span>Busca crescimento exponencial — escala massiva</li>
+                            <li><span>⚡</span>Aceita risco máximo — a maioria das startups não retorna o capital</li>
+                            <li><span>🔮</span>Aposta na Lei de Potência: um acerto compensa todos os erros</li>
+                            <li><span>🏗️</span>Constrói estruturas que ainda não existem</li>
+                        </ul>
+                    </div>
+                    <div class="pe-pe-col">
+                        <div class="pe-col-header">🏭 Private Equity — reconstrói o presente</div>
+                        <ul class="pe-col-lista">
+                            <li><span>🏢</span>Investe em empresas que já existem — geralmente por anos</li>
+                            <li><span>🔑</span>Adquire controle total ou participação relevante</li>
+                            <li><span>⚙️</span>Busca crescimento operacional — eficiência, não apenas escala</li>
+                            <li><span>📊</span>Trabalha com ativos reais: clientes, contratos, receita, infraestrutura</li>
+                            <li><span>🛠️</span>Cria valor reestruturando, profissionalizando e expandindo</li>
+                            <li><span>🔧</span>Reforma estruturas que existem, mas estão deterioradas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p class="pe-text">No Laboratório de Venture Capital do INVLAB, exploramos como o capital financia ideias que ainda não existem. Aqui, o ponto de partida é onde o VC termina: na empresa madura que precisa de uma segunda vida.</p>
+
+                <p class="pe-text">O fluxo abaixo mostra como os dois instrumentos se encaixam no ciclo econômico completo — da ideia à empresa consolidada:</p>
+
+                <div class="pe-flow">
+                    <div class="pe-flow-item">
+                        <div class="pe-flow-left">
+                            <div class="pe-flow-dot">💡</div>
+                            <div class="pe-flow-connector"></div>
+                        </div>
+                        <div class="pe-flow-content">
+                            <div class="pe-flow-titulo">Ideia — o ponto de partida</div>
+                            <div class="pe-flow-desc">Uma hipótese sobre como resolver um problema. Ainda sem clientes, sem receita, sem garantias. Capital vem dos próprios fundadores, família, amigos.</div>
+                        </div>
+                    </div>
+                    <div class="pe-flow-item">
+                        <div class="pe-flow-left">
+                            <div class="pe-flow-dot">🌱</div>
+                            <div class="pe-flow-connector"></div>
+                        </div>
+                        <div class="pe-flow-content">
+                            <div class="pe-flow-titulo">Startup — primeiros clientes e validação</div>
+                            <div class="pe-flow-desc">A ideia sobreviveu ao teste inicial. Existem os primeiros clientes reais. O modelo de negócio começa a ser validado, ainda que em escala muito pequena.</div>
+                        </div>
+                    </div>
+                    <div class="pe-flow-item">
+                        <div class="pe-flow-left">
+                            <div class="pe-flow-dot vc-node">🚀</div>
+                            <div class="pe-flow-connector"></div>
+                        </div>
+                        <div class="pe-flow-content">
+                            <div class="pe-flow-titulo vc-node">Venture Capital — o combustível da escala</div>
+                            <div class="pe-flow-desc">O VC entra para financiar o crescimento acelerado. Investe capital em troca de participação, assumindo o risco de que a expansão se materialize. Pode durar múltiplas rodadas ao longo de anos.</div>
+                        </div>
+                    </div>
+                    <div class="pe-flow-item">
+                        <div class="pe-flow-left">
+                            <div class="pe-flow-dot">📈</div>
+                            <div class="pe-flow-connector"></div>
+                        </div>
+                        <div class="pe-flow-content">
+                            <div class="pe-flow-titulo">Empresa em crescimento — consolidação inicial</div>
+                            <div class="pe-flow-desc">A empresa encontrou seu mercado. Cresce com consistência. A receita é recorrente. A equipe está estruturada. O risco de extinção por falta de mercado praticamente desaparece.</div>
+                        </div>
+                    </div>
+                    <div class="pe-flow-item">
+                        <div class="pe-flow-left">
+                            <div class="pe-flow-dot">🏭</div>
+                            <div class="pe-flow-connector"></div>
+                        </div>
+                        <div class="pe-flow-content">
+                            <div class="pe-flow-titulo">Empresa madura — potencial escondido</div>
+                            <div class="pe-flow-desc">A empresa existe há décadas. Tem marca, clientes e infraestrutura. Mas a gestão envelheceu. A burocracia cresceu. A inovação desacelerou. O potencial está lá — mas soterrado por ineficiência estrutural.</div>
+                        </div>
+                    </div>
+                    <div class="pe-flow-item">
+                        <div class="pe-flow-left">
+                            <div class="pe-flow-dot destaque">💙</div>
+                            <div class="pe-flow-connector"></div>
+                        </div>
+                        <div class="pe-flow-content">
+                            <div class="pe-flow-titulo destaque">Private Equity — a engenharia empresarial</div>
+                            <div class="pe-flow-desc">O PE adquire o controle da empresa. Não para esperar valorização passiva — para reconstruir ativamente. Troca gestão, reestrutura processos, digitaliza operações, expande mercado, adquire concorrentes. Anos de trabalho operacional intenso.</div>
+                        </div>
+                    </div>
+                    <div class="pe-flow-item">
+                        <div class="pe-flow-left">
+                            <div class="pe-flow-dot">⚡</div>
+                            <div class="pe-flow-connector"></div>
+                        </div>
+                        <div class="pe-flow-content">
+                            <div class="pe-flow-titulo">Empresa eficiente — transformação completa</div>
+                            <div class="pe-flow-desc">A empresa reconstruída opera com governança profissional, custos controlados, tecnologia atualizada e posição competitiva defensável. Está pronta para o próximo estágio.</div>
+                        </div>
+                    </div>
+                    <div class="pe-flow-item">
+                        <div class="pe-flow-left">
+                            <div class="pe-flow-dot economia">🌍</div>
+                        </div>
+                        <div class="pe-flow-content">
+                            <div class="pe-flow-titulo economia">IPO, venda estratégica e impacto na economia</div>
+                            <div class="pe-flow-desc">O fundo realiza o lucro — vendendo para um grupo maior, abrindo capital na bolsa ou transferindo para outro fundo. A empresa reconstruída gera empregos, paga impostos e cria valor econômico concreto muito além do retorno do investidor.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pe-frase-invlab">
+                    Venture Capital e Private Equity não competem entre si — são instrumentos complementares que atuam em momentos diferentes do ciclo de vida de uma empresa. Juntos, cobrem o espectro completo: da ideia à empresa estabelecida, do potencial ao valor realizado.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 3 — JORNADA DA TRANSFORMAÇÃO -->
+            <div class="pe-section">
+                <div class="pe-section-tag">Seção 3 — A Operação</div>
+                <h3 class="pe-section-title">🛠️ A Jornada da Transformação — o que acontece depois da compra</h3>
+                <p class="pe-text">A compra é apenas o começo. O que diferencia um fundo de Private Equity de um investidor passivo é o que acontece nos anos seguintes à aquisição. Cada etapa abaixo representa uma decisão ativa — não uma aposta, mas um projeto de engenharia empresarial.</p>
+
+                <div class="pe-flow">
+                    <div class="pe-flow-item">
+                        <div class="pe-flow-left">
+                            <div class="pe-flow-dot">🏭</div>
+                            <div class="pe-flow-connector"></div>
+                        </div>
+                        <div class="pe-flow-content">
+                            <div class="pe-flow-titulo">Empresa madura com potencial escondido</div>
+                            <div class="pe-flow-desc">O fundo identifica uma empresa com ativos reais valiosos — marca, clientes, infraestrutura — mas com gestão ineficiente, processos obsoletos e oportunidades claras de melhoria que a gestão atual não consegue ou não quer capturar.</div>
+                        </div>
+                    </div>
+                    <div class="pe-flow-item">
+                        <div class="pe-flow-left">
+                            <div class="pe-flow-dot">🔍</div>
+                            <div class="pe-flow-connector"></div>
+                        </div>
+                        <div class="pe-flow-content">
+                            <div class="pe-flow-titulo">Diagnóstico e Due Diligence</div>
+                            <div class="pe-flow-desc">Antes de comprar, o fundo realiza uma análise profunda: auditoria financeira, jurídica, tributária e operacional. Identifica riscos ocultos, mapeia oportunidades de melhoria e define a tese de criação de valor que guiará toda a operação.</div>
+                        </div>
+                    </div>
+                    <div class="pe-flow-item">
+                        <div class="pe-flow-left">
+                            <div class="pe-flow-dot destaque">💙</div>
+                            <div class="pe-flow-connector"></div>
+                        </div>
+                        <div class="pe-flow-content">
+                            <div class="pe-flow-titulo destaque">Aquisição do controle</div>
+                            <div class="pe-flow-desc">O fundo adquire controle majoritário ou participação suficiente para implementar mudanças estruturais. A aquisição pode ser totalmente financiada por capital do fundo ou parcialmente por dívida (Leveraged Buyout — LBO), com os fluxos de caixa da própria empresa amortizando o endividamento ao longo do tempo.</div>
+                        </div>
+                    </div>
+                    <div class="pe-flow-item">
+                        <div class="pe-flow-left">
+                            <div class="pe-flow-dot">👔</div>
+                            <div class="pe-flow-connector"></div>
+                        </div>
+                        <div class="pe-flow-content">
+                            <div class="pe-flow-titulo">Nova governança — a mudança mais importante</div>
+                            <div class="pe-flow-desc">O conselho de administração é reformulado. Executivos especializados são contratados para cada função-chave. Políticas de compliance, transparência e prestação de contas são implementadas. A empresa começa a operar como uma organização profissional — não mais como um negócio familiar ou uma estrutura histórica.</div>
+                        </div>
+                    </div>
+                    <div class="pe-flow-item">
+                        <div class="pe-flow-left">
+                            <div class="pe-flow-dot">✂️</div>
+                            <div class="pe-flow-connector"></div>
+                        </div>
+                        <div class="pe-flow-content">
+                            <div class="pe-flow-titulo">Redução de custos e eficiência operacional</div>
+                            <div class="pe-flow-desc">Unidades não rentáveis são fechadas. Processos redundantes são eliminados. Contratos de fornecedores são renegociados. A estrutura de custos é redesenhada para sustentar o crescimento sem comprometer a margem operacional.</div>
+                        </div>
+                    </div>
+                    <div class="pe-flow-item">
+                        <div class="pe-flow-left">
+                            <div class="pe-flow-dot">💻</div>
+                            <div class="pe-flow-connector"></div>
+                        </div>
+                        <div class="pe-flow-content">
+                            <div class="pe-flow-titulo">Digitalização e modernização</div>
+                            <div class="pe-flow-desc">Sistemas legados são substituídos. Processos manuais são automatizados. A empresa adquire capacidade analítica — pode tomar decisões baseadas em dados em tempo real. Isso reduz erro humano, acelera operações e cria vantagem competitiva em relação a concorrentes que ainda operam no modelo antigo.</div>
+                        </div>
+                    </div>
+                    <div class="pe-flow-item">
+                        <div class="pe-flow-left">
+                            <div class="pe-flow-dot">🗺️</div>
+                            <div class="pe-flow-connector"></div>
+                        </div>
+                        <div class="pe-flow-content">
+                            <div class="pe-flow-titulo">Expansão de mercado</div>
+                            <div class="pe-flow-desc">Com a estrutura interna saneada, a empresa pode crescer. Entra em novas regiões geográficas, novos segmentos de clientes ou novos canais de distribuição. O crescimento agora tem base operacional para sustentá-lo — ao contrário do crescimento desestruturado que muitas empresas tentam antes da reestruturação.</div>
+                        </div>
+                    </div>
+                    <div class="pe-flow-item">
+                        <div class="pe-flow-left">
+                            <div class="pe-flow-dot">🔗</div>
+                            <div class="pe-flow-connector"></div>
+                        </div>
+                        <div class="pe-flow-content">
+                            <div class="pe-flow-titulo">Aquisição de concorrentes — a estratégia de consolidação</div>
+                            <div class="pe-flow-desc">Uma das ferramentas mais poderosas do PE: comprar concorrentes menores e integrá-los. Isso aumenta a participação de mercado, elimina competição, ganha escala e frequentemente desbloqueie sinergias operacionais significativas que nenhuma das empresas poderia capturar sozinha.</div>
+                        </div>
+                    </div>
+                    <div class="pe-flow-item">
+                        <div class="pe-flow-left">
+                            <div class="pe-flow-dot">⚡</div>
+                            <div class="pe-flow-connector"></div>
+                        </div>
+                        <div class="pe-flow-content">
+                            <div class="pe-flow-titulo">Empresa radicalmente mais eficiente</div>
+                            <div class="pe-flow-desc">Ao final do processo — que pode durar entre 5 e 10 anos — a empresa é estruturalmente diferente daquela que o fundo comprou. Governança profissional, processos modernos, market share maior, margens maiores, posição competitiva sólida.</div>
+                        </div>
+                    </div>
+                    <div class="pe-flow-item">
+                        <div class="pe-flow-left">
+                            <div class="pe-flow-dot economia">💰</div>
+                        </div>
+                        <div class="pe-flow-content">
+                            <div class="pe-flow-titulo economia">Venda ou IPO — o evento de liquidez</div>
+                            <div class="pe-flow-desc">O fundo realiza o retorno: vende para um grupo estratégico maior, para outro fundo de PE, ou prepara a empresa para abrir capital na bolsa (IPO). É neste momento que a diferença de valor entre o preço de compra e o preço de venda se torna o retorno do investidor.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 4 — ANTES vs DEPOIS -->
+            <div class="pe-section">
+                <div class="pe-section-tag">Seção 4 — A Transformação</div>
+                <h3 class="pe-section-title">📊 O que realmente muda quando um fundo assume o controle</h3>
+                <p class="pe-text">A tabela abaixo representa uma transformação típica em empresas que passaram por processos de Private Equity. Os cenários reais variam conforme o setor, o tamanho da empresa, o gestor e as condições de mercado — mas a direção do processo é consistente.</p>
+
+                <div class="pe-antes-depois">
+                    <div class="pe-antes-col">
+                        <div class="pe-antes-header">❌ Antes — a empresa que o fundo encontra</div>
+                        <ul class="pe-antes-lista">
+                            <li><span>⚠️</span>Gestão familiar sem profissionalização formal</li>
+                            <li><span>⚠️</span>Diretores escolhidos por parentesco ou lealdade histórica</li>
+                            <li><span>⚠️</span>Processos operacionais desatualizados</li>
+                            <li><span>⚠️</span>Custos elevados e estrutura inchada</li>
+                            <li><span>⚠️</span>Baixo uso de tecnologia e automação</li>
+                            <li><span>⚠️</span>Presença regional limitada</li>
+                            <li><span>⚠️</span>Baixa produtividade por colaborador</li>
+                            <li><span>⚠️</span>Ausência de governança e compliance estruturado</li>
+                            <li><span>⚠️</span>Decisões baseadas em intuição, não em dados</li>
+                        </ul>
+                    </div>
+                    <div class="pe-depois-col">
+                        <div class="pe-depois-header">✅ Depois — a empresa que o fundo vende</div>
+                        <ul class="pe-depois-lista">
+                            <li><span>✅</span>Governança profissional com conselho estruturado</li>
+                            <li><span>✅</span>Executivos especializados em cada função-chave</li>
+                            <li><span>✅</span>Processos automatizados e padronizados</li>
+                            <li><span>✅</span>Estrutura de custos enxuta e controlada</li>
+                            <li><span>✅</span>Digitalização e sistemas integrados de gestão</li>
+                            <li><span>✅</span>Expansão nacional ou internacional</li>
+                            <li><span>✅</span>Maior produtividade e eficiência operacional</li>
+                            <li><span>✅</span>Compliance, ESG e auditoria regulares</li>
+                            <li><span>✅</span>Decisões orientadas por dados e métricas precisas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="pe-antes-depois-nota">
+                    O fundo não ganha dinheiro porque comprou barato.<br>
+                    Ganha dinheiro porque tornou a empresa substancialmente melhor — e mais valiosa — do que encontrou.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 5 — FONTES DE VALOR -->
+            <div class="pe-section">
+                <div class="pe-section-tag">Seção 5 — As Estratégias</div>
+                <h3 class="pe-section-title">⚡ As duas grandes fontes de geração de valor</h3>
+                <p class="pe-text">Não existe uma única forma de Private Equity. Os fundos operam com teses de investimento distintas — e compreender a diferença entre as principais estratégias é fundamental para avaliar qualquer fundo desta classe.</p>
+
+                <div class="pe-valor-grid">
+                    <div class="pe-valor-card consolidacao">
+                        <span class="pe-valor-icon">🔗</span>
+                        <div class="pe-valor-titulo">Consolidação (Buy-and-Build)</div>
+                        <div class="pe-valor-desc">O fundo compra uma empresa de porte médio como plataforma — e depois adquire sistematicamente concorrentes menores para uni-los em uma única organização maior e mais competitiva.</div>
+                        <ul class="pe-valor-passos">
+                            <li><span>➊</span>Compra uma empresa-plataforma no setor</li>
+                            <li><span>➋</span>Identifica competidores menores e fragmentados</li>
+                            <li><span>➌</span>Adquire e integra esses concorrentes progressivamente</li>
+                            <li><span>➍</span>Unifica operações e ganha escala real</li>
+                            <li><span>➎</span>Reduz custos por volume e elimina redundâncias</li>
+                            <li><span>➏</span>Vende um grupo consolidado valendo muito mais</li>
+                        </ul>
+                    </div>
+                    <div class="pe-valor-card turnaround">
+                        <span class="pe-valor-icon">🔄</span>
+                        <div class="pe-valor-titulo">Turnaround — Recuperação</div>
+                        <div class="pe-valor-desc">O fundo compra empresas em dificuldade operacional ou financeira — pagando um prêmio de desconto pelo risco — e as recupera por meio de reestruturação profunda e troca de gestão.</div>
+                        <ul class="pe-valor-passos">
+                            <li><span>➊</span>Identifica empresa com ativos reais, mas gestão falida</li>
+                            <li><span>➋</span>Compra com desconto, refletindo o risco de execução</li>
+                            <li><span>➌</span>Troca toda a liderança executiva</li>
+                            <li><span>➍</span>Renegocia dívidas e reestabelece capital de giro</li>
+                            <li><span>➎</span>Corta custos e reestrutura operações</li>
+                            <li><span>➏</span>Vende uma empresa recuperada e rentável</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="pe-frase-invlab">
+                    São estratégias completamente diferentes — com perfis de risco, prazo e exigência operacional distintos. Um fundo de consolidação opera como um construtor de grupos empresariais. Um fundo de turnaround opera como uma UTI corporativa. Ao analisar um fundo de PE, a primeira pergunta é sempre: qual é a sua tese?
+                </div>
+            </div>
+
+            <!-- SEÇÃO 6 — QUEM INVESTE -->
+            <div class="pe-section">
+                <div class="pe-section-tag">Seção 6 — Os Participantes</div>
+                <h3 class="pe-section-title">🏛️ Quem realmente investe em Private Equity?</h3>
+                <p class="pe-text">O Private Equity é, por natureza, uma classe de ativos institucional. Os horizontes de investimento — frequentemente entre 7 e 12 anos — e os tíquetes mínimos envolvidos tornam a participação individual direta praticamente inviável fora de estruturas de gestão profissional.</p>
+                <p class="pe-text">O investidor pessoa física, quando acessa essa classe, normalmente o faz por meio de fundos especializados — geralmente regulados e com requisitos mínimos de patrimônio ou perfil definidos pela regulamentação vigente.</p>
+
+                <div class="pe-quem-grid">
+                    <div class="pe-quem-item">
+                        <span class="pe-quem-icon">👨‍👩‍👧</span>
+                        <div class="pe-quem-nome">Family Offices</div>
+                    </div>
+                    <div class="pe-quem-item">
+                        <span class="pe-quem-icon">🏛️</span>
+                        <div class="pe-quem-nome">Fundos de Pensão</div>
+                    </div>
+                    <div class="pe-quem-item">
+                        <span class="pe-quem-icon">🎓</span>
+                        <div class="pe-quem-nome">Universidades (Endowments)</div>
+                    </div>
+                    <div class="pe-quem-item">
+                        <span class="pe-quem-icon">🌍</span>
+                        <div class="pe-quem-nome">Fundos Soberanos</div>
+                    </div>
+                    <div class="pe-quem-item">
+                        <span class="pe-quem-icon">🏦</span>
+                        <div class="pe-quem-nome">Seguradoras</div>
+                    </div>
+                    <div class="pe-quem-item">
+                        <span class="pe-quem-icon">🏢</span>
+                        <div class="pe-quem-nome">Fundos de Fundos</div>
+                    </div>
+                    <div class="pe-quem-item">
+                        <span class="pe-quem-icon">💼</span>
+                        <div class="pe-quem-nome">Inst. Financeiras</div>
+                    </div>
+                    <div class="pe-quem-item">
+                        <span class="pe-quem-icon">👤</span>
+                        <div class="pe-quem-nome">Inv. Qualificados via Fundos</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 7 — CUSTOS -->
+            <div class="pe-section">
+                <div class="pe-section-tag">Seção 7 — A Estrutura</div>
+                <h3 class="pe-section-title">💸 O preço da transformação — por que as taxas são maiores</h3>
+                <p class="pe-text">Quando um fundo de PE gerencia uma empresa, não há um gestor olhando gráficos em uma tela. Há uma equipe multidisciplinar inteira trabalhando dentro da empresa por anos. Isso tem um custo — e esse custo precisa ser compreendido antes de qualquer comparação com outras classes de ativos.</p>
+
+                <div class="pe-equipe-grid">
+                    <div class="pe-equipe-item">👨‍⚖️ Advogados</div>
+                    <div class="pe-equipe-item">🔎 Auditores</div>
+                    <div class="pe-equipe-item">📋 Espec. Tributários</div>
+                    <div class="pe-equipe-item">🧩 Consultores</div>
+                    <div class="pe-equipe-item">⚙️ Engenheiros</div>
+                    <div class="pe-equipe-item">👔 Executivos-Chave</div>
+                    <div class="pe-equipe-item">👥 Espec. em RH</div>
+                    <div class="pe-equipe-item">🤝 Espec. em M&A</div>
+                    <div class="pe-equipe-item">🏛️ Governança</div>
+                    <div class="pe-equipe-item">📜 Compliance</div>
+                    <div class="pe-equipe-item">💻 Tecnologia</div>
+                    <div class="pe-equipe-item">🌿 ESG</div>
+                </div>
+
+                <p class="pe-text" style="margin-top: 20px;">Toda essa estrutura é refletida nas taxas do fundo. A estrutura mais comum é a seguinte — embora os percentuais e condições variem significativamente conforme o gestor, o tamanho do fundo e o perfil de estratégia:</p>
+
+                <div class="pe-taxas-grid">
+                    <div class="pe-taxa-card">
+                        <div class="pe-taxa-titulo">Taxa de Administração</div>
+                        <div class="pe-taxa-valor">~1,5% a 2,5% a.a.</div>
+                        <div class="pe-taxa-desc">Incide sobre o capital comprometido durante o período de investimento — independentemente do desempenho das empresas. Cobre os custos operacionais do fundo e das equipes de gestão. Pode variar conforme o tamanho do fundo e o estágio.</div>
+                    </div>
+                    <div class="pe-taxa-card">
+                        <div class="pe-taxa-titulo">Hurdle Rate</div>
+                        <div class="pe-taxa-valor">Retorno mínimo pré-definido</div>
+                        <div class="pe-taxa-desc">O fundo precisa superar um retorno mínimo acordado antes de cobrar a taxa de performance. Funciona como um mecanismo de alinhamento: o gestor só ganha expressivamente se entregar retorno superior ao mínimo contratado.</div>
+                    </div>
+                    <div class="pe-taxa-card">
+                        <div class="pe-taxa-titulo">Carried Interest</div>
+                        <div class="pe-taxa-valor">~20% do lucro acima do hurdle</div>
+                        <div class="pe-taxa-desc">O gestor retém uma parcela do lucro excedente após superar o hurdle rate — frequentemente em torno de 20%, embora os percentuais variem. O objetivo é alinhar o interesse do gestor ao do investidor: ambos só ganham bem se a transformação empresarial funcionar.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 8 — RISCOS -->
+            <div class="pe-section">
+                <div class="pe-section-tag">Seção 8 — Os Riscos</div>
+                <h3 class="pe-section-title">⚠️ Os riscos — entender antes de decidir</h3>
+                <p class="pe-text">Private Equity envolve riscos reais que precisam ser compreendidos com clareza. Não são riscos que justifiquem evitar a classe — são riscos que justificam entrar apenas quando há perfil, horizonte e estrutura compatíveis com eles.</p>
+
+                <div class="pe-riscos-grid">
+                    <div class="pe-risco-card">
+                        <span class="pe-risco-icon">⏳</span>
+                        <div class="pe-risco-titulo">Iliquidez prolongada</div>
+                        <div class="pe-risco-desc">O capital comprometido fica inacessível por muitos anos — tipicamente entre 7 e 12 anos, podendo ser estendido. Não existe mercado secundário amplo para venda antecipada de cotas. Quem precisar de liquidez antes do prazo enfrentará dificuldades sérias.</div>
+                    </div>
+                    <div class="pe-risco-card">
+                        <span class="pe-risco-icon">📊</span>
+                        <div class="pe-risco-titulo">Alavancagem (LBO)</div>
+                        <div class="pe-risco-desc">Muitas aquisições de PE são financiadas parcialmente por dívida — uma estrutura chamada LBO (Leveraged Buyout). Os fluxos de caixa da empresa adquirida amortizam essa dívida. Se a reestruturação não gerar os fluxos previstos, o endividamento pode comprometer seriamente a empresa — ou o investimento inteiro.</div>
+                    </div>
+                    <div class="pe-risco-card">
+                        <span class="pe-risco-icon">🔧</span>
+                        <div class="pe-risco-titulo">Risco de execução</div>
+                        <div class="pe-risco-desc">Nem toda reestruturação funciona. A transformação empresarial é um projeto de alta complexidade — depende de pessoas, processos, mercado e timing. Algumas empresas simplesmente não conseguem se recuperar, mesmo com capital e intenção. A qualidade da equipe gestora é o fator mais determinante.</div>
+                    </div>
+                    <div class="pe-risco-card">
+                        <span class="pe-risco-icon">🌐</span>
+                        <div class="pe-risco-titulo">Risco macroeconômico</div>
+                        <div class="pe-risco-desc">Juros elevados encarecem a dívida e reduzem os múltiplos de avaliação. Recessões comprimem as margens das empresas investidas. Mudanças regulatórias podem alterar radicalmente a viabilidade de setores inteiros. O ambiente macroeconômico influencia profundamente o resultado de um fundo — mesmo quando a execução é exemplar.</div>
+                    </div>
+                </div>
+
+                <div class="pe-alerta">
+                    <div class="pe-alerta-title">⚠️ O risco de perda total existe — ainda que menos frequente que em VC</div>
+                    Em Private Equity, o risco de perda total de uma posição específica é real, especialmente em estratégias de turnaround com alavancagem elevada. A diversificação dentro do portfólio do fundo é o principal mecanismo de mitigação — mas não elimina o risco de um retorno abaixo do esperado para o fundo como um todo. Isso faz parte da estrutura desta classe de ativos.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 9 — QUANDO FAZ SENTIDO -->
+            <div class="pe-section">
+                <div class="pe-section-tag">Seção 9 — O Momento Certo</div>
+                <h3 class="pe-section-title">🎯 Quando Private Equity faz sentido — e quando não faz</h3>
+                <p class="pe-text">Private Equity não é para qualquer perfil, nem para qualquer momento. A clareza sobre quando faz sentido é tão importante quanto compreender o mecanismo.</p>
+
+                <div class="pe-faz-grid">
+                    <div class="pe-sim-col">
+                        <div class="pe-faz-header">✔ Faz sentido quando</div>
+                        <ul class="pe-faz-lista">
+                            <li><span>✔</span>Horizonte de investimento longo — 7 a 12 anos ou mais</li>
+                            <li><span>✔</span>Carteira já diversificada e consolidada em outras classes</li>
+                            <li><span>✔</span>Compreensão real do risco de iliquidez</li>
+                            <li><span>✔</span>Interesse em exposição à economia real e reestruturação empresarial</li>
+                            <li><span>✔</span>Acesso a gestores com histórico verificável e tese clara</li>
+                            <li><span>✔</span>Capacidade de suportar ausência de retorno durante o período de construção</li>
+                        </ul>
+                    </div>
+                    <div class="pe-nao-col">
+                        <div class="pe-faz-header">✘ Não faz sentido quando</div>
+                        <ul class="pe-faz-lista">
+                            <li><span>✘</span>Precisa de liquidez no curto ou médio prazo</li>
+                            <li><span>✘</span>Busca geração de renda mensal ou trimestral</li>
+                            <li><span>✘</span>Não suporta oscilações no valor patrimonial do investimento</li>
+                            <li><span>✘</span>Procura ganhos rápidos ou saída a qualquer momento</li>
+                            <li><span>✘</span>Não tem capital suficiente para diversificar dentro desta classe</li>
+                            <li><span>✘</span>Não consegue avaliar criticamente a qualidade do gestor</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHECKLIST -->
+            <div class="pe-section">
+                <div class="pe-section-tag">Checklist INVLAB</div>
+                <h3 class="pe-section-title">Antes de qualquer alocação em Private Equity, responda com honestidade:</h3>
+
+                <div class="pe-checklist">
+                    <div class="pe-check-item">
+                        <div class="pe-check-num">✓</div>
+                        <div class="pe-check-text"><strong style="color:#E2E8F0;">Estou investindo por meio de uma gestora experiente, com histórico verificável?</strong> A qualidade do gestor é o fator mais determinante em PE. Não existe tabela de preços: a competência da equipe que vai reconstruir as empresas é o que separa fundos que criam valor dos que destroem.</div>
+                    </div>
+                    <div class="pe-check-item">
+                        <div class="pe-check-num">✓</div>
+                        <div class="pe-check-text"><strong style="color:#E2E8F0;">Compreendo que o prazo pode ultrapassar dez anos — sem possibilidade de resgate antecipado?</strong> Ao comprometer capital em um fundo de PE, você não está comprando um ativo líquido. Não há botão de resgate. O dinheiro retorna quando as empresas do portfólio são vendidas ou fazem IPO — um processo que o investidor não controla.</div>
+                    </div>
+                    <div class="pe-check-item">
+                        <div class="pe-check-num">✓</div>
+                        <div class="pe-check-text"><strong style="color:#E2E8F0;">Entendo que esse investimento depende da melhoria operacional das empresas — não da valorização de um ativo de mercado?</strong> O retorno em PE não vem de oscilações de bolsa. Vem de trabalho: reestruturação, profissionalização, expansão. Se essa tese não se materializar, o retorno não virá — independentemente do que os mercados públicos façam.</div>
+                    </div>
+                    <div class="pe-check-item">
+                        <div class="pe-check-num">✓</div>
+                        <div class="pe-check-text"><strong style="color:#E2E8F0;">Minha carteira suporta ficar sem acesso a esse capital por muitos anos?</strong> A regra fundamental: nunca alocar em PE capital que você pode precisar antes do prazo do fundo. A iliquidez não é um risco teórico — é uma característica estrutural e permanente desta classe.</div>
+                    </div>
+                    <div class="pe-check-item">
+                        <div class="pe-check-num">✓</div>
+                        <div class="pe-check-text"><strong style="color:#E2E8F0;">Estou pagando taxas compatíveis com a estratégia e com o histórico do gestor?</strong> Taxas elevadas fazem sentido quando o gestor entrega retorno superior ao mercado ao longo de múltiplos ciclos. Sem esse histórico, taxas altas reduzem o retorno líquido sem justificativa. Você calculou qual retorno bruto o fundo precisaria gerar para que seu retorno líquido fosse satisfatório?</div>
+                    </div>
+                    <div class="pe-check-item">
+                        <div class="pe-check-num">✓</div>
+                        <div class="pe-check-text"><strong style="color:#E2E8F0;">Sei exatamente como o gestor pretende criar valor — e que tipo de empresas ele compra?</strong> Consolidação ou turnaround? Setor específico ou diversificado? Com alavancagem ou equity puro? Cada resposta implica um perfil de risco diferente. "O fundo investe em empresas de PE" não é uma resposta — é o equivalente a dizer "o fundo investe em ações".</div>
+                    </div>
+                    <div class="pe-check-item">
+                        <div class="pe-check-num">✓</div>
+                        <div class="pe-check-text"><strong style="color:#E2E8F0;">Entendo que estou investindo em transformação empresarial — não em valorização diária de mercado?</strong> Este é o ponto mais fundamental. Private Equity é um investimento em engenharia empresarial de longo prazo. Não há cotação diária, não há gráfico para acompanhar. O valor é construído dentro das empresas — silenciosamente, ao longo de anos.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CURIOSIDADE INVLAB -->
+            <div class="pe-curiosidade">
+                <div class="pe-curiosidade-titulo">💡 Curiosidade INVLAB — o alcance silencioso do Private Equity</div>
+                <p style="font-size: 0.88rem; color: #94A3B8; line-height: 1.75; margin-bottom: 16px;">Historicamente, fundos de Private Equity atuaram em praticamente todos os setores da economia real. Muitas das empresas que hoje são líderes em seus mercados passaram por processos profundos de reestruturação, profissionalização e consolidação liderados por fundos de PE — antes de abrir capital em bolsa ou serem adquiridas por grupos maiores.</p>
+                <p style="font-size: 0.88rem; color: #94A3B8; line-height: 1.75; margin-bottom: 14px;">Setores que historicamente receberam capital de Private Equity em diferentes momentos:</p>
+                <div class="pe-setores-grid">
+                    <div class="pe-setor-item">🏥 Saúde e Hospitais</div>
+                    <div class="pe-setor-item">🎓 Educação Privada</div>
+                    <div class="pe-setor-item">🏪 Redes de Varejo</div>
+                    <div class="pe-setor-item">🏗️ Grupos Industriais</div>
+                    <div class="pe-setor-item">💻 Tecnologia</div>
+                    <div class="pe-setor-item">🌾 Agronegócio</div>
+                    <div class="pe-setor-item">🏨 Hotelaria</div>
+                    <div class="pe-setor-item">🚚 Logística</div>
+                    <div class="pe-setor-item">🔌 Energia</div>
+                    <div class="pe-setor-item">🤝 Franquias</div>
+                </div>
+                <p style="font-size: 0.82rem; color: #475569; margin-top: 16px; line-height: 1.65;">O INVLAB não menciona nomes específicos porque não é esse o ponto. O ponto é compreender o mecanismo — e reconhecer que o Private Equity opera silenciosamente no interior da economia real, muito além da visibilidade dos mercados públicos.</p>
+            </div>
+
+            <!-- AVISO EDITORIAL -->
+            <div class="pe-aviso">
+                ⚠️ <strong>Observação editorial INVLAB:</strong> Esta página tem finalidade exclusivamente educacional. Todos os percentuais, prazos e estruturas apresentados representam referências históricas do setor — e podem variar significativamente conforme o gestor, o fundo, o mercado e o ciclo econômico. Private Equity envolve risco de iliquidez prolongada, risco de execução e, em estratégias com alavancagem, risco de perda parcial ou total do capital. Não constitui recomendação de investimento nem indicação de gestores ou fundos. Consulte sempre um profissional certificado antes de qualquer decisão de alocação.
+            </div>
+
+            <!-- A SEMENTE -->
+            <div class="pe-semente">
+                <div class="pe-semente-icon">🌱</div>
+                <div class="pe-semente-title">A Semente</div>
+
+                <p class="pe-semente-text">
+                    O Venture Capital acredita no futuro.<br>
+                    O Private Equity acredita no potencial escondido do presente.
+                </p>
+
+                <p class="pe-semente-text">
+                    Um financia ideias.<br>
+                    O outro reconstrói empresas.<br>
+                    Ambos movimentam a economia.<br>
+                    Mas por caminhos completamente diferentes.
+                </p>
+
+                <p class="pe-semente-text">
+                    O Venture Capital encontra terreno vazio e planta.<br>
+                    O Private Equity encontra um jardim negligenciado<br>
+                    e faz crescer o que sempre esteve lá — apenas esperando.
+                </p>
+
+                <div class="pe-semente-destaque">
+                    O verdadeiro valor nunca esteve na compra.<br><br>
+                    Sempre esteve na capacidade de transformar<br>
+                    aquilo que já existe em algo melhor.
+                </div>
+            </div>
+
+        </div><!-- /invlab-lab-container -->
+    </main>
+
+    <footer style="background: rgba(13, 13, 13, 0.97); border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+    <div class="content-wrapper-wide">
+        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
+                <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">🧭 Guia do INVLAB →</a>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                    <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Ações</a></li>
+                    <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💵 ETFs</a></li>
+                    <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 FIIs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Economia Digital</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌐 Economia Digital</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Instrumentos Avançados</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="fundos-investimento.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💼 Fundos de Investimentos</a></li>
+                    <li><a href="bdrs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌍 BDRs</a></li>
+                    <li><a href="fi-infra.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏗️ FI-Infra</a></li>
+                    <li><a href="ouro.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🥇 Ouro</a></li>
+                    <li><a href="derivativos.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">⚡ Derivativos</a></li>
+                    <li><a href="venture-capital.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚀 Venture Capital</a></li>
+                    <li><a href="private-equity.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏭 Private Equity</a></li>
+                    <li><a href="instrumentos-avancados.html#ativos-reais" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏠 Ativos Reais</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Defesa do Investidor</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
+                    <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                    <li><a href="credito-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔥 Crédito</a></li>
+                    <li><a href="produtos-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔍 Produtos</a></li>
+                    <li><a href="sinais-de-alerta.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚨 Sinais de alerta</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
+            <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
+            </p>
+            <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
+            </p>
+        </div>
+    </div>
+    </footer>
+
+    <div id="backToTop">↑</div>
+
+    <script src="../assets/js/script.js"></script>
+    <script defer src="../assets/js/bcb-api.js"></script>
+    <script defer src="../assets/js/invlab-carrossel-renda-variavel.js"></script>
+    <script>
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+                setTimeout(() => backToTopButton.style.opacity = '1', 10);
+            } else {
+                backToTopButton.style.opacity = '0';
+                setTimeout(() => backToTopButton.style.display = 'none', 300);
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

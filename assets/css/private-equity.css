@@ -1,0 +1,821 @@
+/* ================================================
+   PRIVATE EQUITY — O Capital que Reconstrói Empresas
+   Paleta: Azul #3B82F6 / Ouro #D4AF37
+   Prefixo: .pe-
+   ================================================ */
+
+/* --- HOOK / HERO --- */
+.pe-hook {
+    background: linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(212,175,55,0.04) 100%);
+    border: 1px solid rgba(59,130,246,0.20);
+    border-radius: 20px;
+    padding: 52px 44px;
+    margin: 36px 0 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.pe-hook::before {
+    content: '';
+    position: absolute;
+    top: -60%;
+    left: -40%;
+    width: 180%;
+    height: 180%;
+    background: radial-gradient(ellipse at center, rgba(59,130,246,0.04) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.pe-hook-badge {
+    display: inline-block;
+    background: rgba(59,130,246,0.10);
+    border: 1px solid rgba(59,130,246,0.25);
+    color: #93C5FD;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+}
+
+.pe-hook-manifesto {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.15rem, 2.5vw, 1.55rem);
+    font-weight: 700;
+    color: #E2E8F0;
+    line-height: 1.80;
+    margin-bottom: 24px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pe-hook-manifesto em {
+    color: #93C5FD;
+    font-style: normal;
+}
+
+.pe-hook-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 22px 0 26px;
+}
+
+.pe-hook-acao {
+    display: inline-block;
+    background: rgba(59,130,246,0.08);
+    border: 1px solid rgba(59,130,246,0.22);
+    border-radius: 8px;
+    padding: 7px 16px;
+    font-size: 0.86rem;
+    color: rgba(147,197,253,0.80);
+    font-weight: 500;
+}
+
+.pe-hook-tese {
+    display: inline-block;
+    font-size: 1.02rem;
+    color: #93C5FD;
+    font-style: italic;
+    line-height: 1.75;
+    padding: 20px 30px;
+    border: 1px solid rgba(59,130,246,0.22);
+    border-radius: 12px;
+    background: rgba(59,130,246,0.06);
+    max-width: 680px;
+    margin-top: 10px;
+}
+
+/* --- SECTION BASE --- */
+.pe-section {
+    margin: 52px 0;
+    padding: 38px 0;
+    border-top: 1px solid rgba(59,130,246,0.09);
+}
+
+.pe-section-tag {
+    display: inline-block;
+    font-size: 0.70rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: rgba(147,197,253,0.55);
+    margin-bottom: 12px;
+}
+
+.pe-section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.72rem;
+    font-weight: 700;
+    color: #D4AF37;
+    margin-bottom: 18px;
+    line-height: 1.35;
+}
+
+.pe-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: #94A3B8;
+    line-height: 1.82;
+    margin-bottom: 16px;
+    max-width: 800px;
+}
+
+.pe-frase-invlab {
+    background: rgba(59,130,246,0.06);
+    border-left: 3px solid rgba(59,130,246,0.45);
+    padding: 20px 26px;
+    border-radius: 0 10px 10px 0;
+    font-size: 0.95rem;
+    color: #93C5FD;
+    line-height: 1.78;
+    margin: 26px 0;
+    font-style: italic;
+}
+
+/* --- INSIGHT BOX "Empresas também envelhecem" --- */
+.pe-insight-box {
+    background: rgba(212,175,55,0.05);
+    border: 1px solid rgba(212,175,55,0.18);
+    border-radius: 16px;
+    padding: 32px 30px;
+    margin: 28px 0;
+    text-align: center;
+}
+
+.pe-insight-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #D4AF37;
+    margin-bottom: 20px;
+}
+
+.pe-insight-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto 16px;
+    max-width: 420px;
+    text-align: left;
+}
+
+.pe-insight-lista li {
+    font-size: 0.90rem;
+    color: rgba(255,255,255,0.60);
+    padding: 6px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pe-insight-lista li span {
+    color: #10B981;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.pe-insight-mas {
+    font-size: 0.90rem;
+    color: rgba(252,165,165,0.65);
+    margin-bottom: 18px;
+    line-height: 1.60;
+}
+
+.pe-insight-conclusao {
+    font-size: 1rem;
+    color: #D4AF37;
+    font-style: italic;
+    font-weight: 600;
+    margin-top: 4px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(212,175,55,0.15);
+}
+
+/* --- VC vs PE COMPARISON --- */
+.pe-vc-pe-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 28px 0;
+}
+
+.pe-vc-col {
+    background: rgba(139,92,246,0.05);
+    border: 1px solid rgba(139,92,246,0.18);
+    border-radius: 16px;
+    padding: 28px 24px;
+}
+
+.pe-pe-col {
+    background: rgba(59,130,246,0.06);
+    border: 1px solid rgba(59,130,246,0.20);
+    border-radius: 16px;
+    padding: 28px 24px;
+}
+
+.pe-col-header {
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.pe-vc-col .pe-col-header { color: #A78BFA; }
+.pe-pe-col .pe-col-header { color: #93C5FD; }
+
+.pe-col-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pe-col-lista li {
+    font-size: 0.90rem;
+    color: rgba(255,255,255,0.55);
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.50;
+}
+
+.pe-col-lista li:last-child { border-bottom: none; }
+
+/* --- FLOWCHARTS --- */
+.pe-flow {
+    display: flex;
+    flex-direction: column;
+    margin: 32px 0;
+}
+
+.pe-flow-item {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 0 20px;
+}
+
+.pe-flow-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pe-flow-dot {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    border: 2px solid rgba(59,130,246,0.28);
+    background: rgba(59,130,246,0.07);
+    position: relative;
+    z-index: 1;
+}
+
+.pe-flow-dot.vc-node {
+    border-color: rgba(139,92,246,0.50);
+    background: rgba(139,92,246,0.09);
+}
+
+.pe-flow-dot.destaque {
+    width: 58px;
+    height: 58px;
+    border-color: #3B82F6;
+    background: rgba(59,130,246,0.15);
+    box-shadow: 0 0 20px rgba(59,130,246,0.28);
+    margin-left: -3px;
+}
+
+.pe-flow-dot.economia {
+    border-color: rgba(212,175,55,0.50);
+    background: rgba(212,175,55,0.08);
+}
+
+.pe-flow-connector {
+    width: 2px;
+    flex: 1;
+    background: rgba(59,130,246,0.14);
+    min-height: 22px;
+}
+
+.pe-flow-content {
+    padding: 10px 0 26px;
+}
+
+.pe-flow-titulo {
+    font-size: 0.94rem;
+    font-weight: 700;
+    color: #E2E8F0;
+    margin-bottom: 4px;
+}
+
+.pe-flow-titulo.vc-node { color: #A78BFA; }
+.pe-flow-titulo.destaque { color: #93C5FD; }
+.pe-flow-titulo.economia { color: #D4AF37; }
+
+.pe-flow-desc {
+    font-size: 0.83rem;
+    color: #64748B;
+    line-height: 1.62;
+}
+
+/* --- ANTES vs DEPOIS --- */
+.pe-antes-depois {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 28px 0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+.pe-antes-col {
+    background: rgba(239,68,68,0.04);
+    padding: 28px 24px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+}
+
+.pe-depois-col {
+    background: rgba(59,130,246,0.05);
+    padding: 28px 24px;
+}
+
+.pe-antes-header {
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(252,165,165,0.80);
+    margin-bottom: 16px;
+}
+
+.pe-depois-header {
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(147,197,253,0.80);
+    margin-bottom: 16px;
+}
+
+.pe-antes-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pe-antes-lista li {
+    font-size: 0.88rem;
+    color: rgba(252,165,165,0.55);
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(239,68,68,0.06);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.45;
+}
+
+.pe-antes-lista li:last-child { border-bottom: none; }
+
+.pe-depois-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pe-depois-lista li {
+    font-size: 0.88rem;
+    color: rgba(147,197,253,0.70);
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(59,130,246,0.06);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.45;
+}
+
+.pe-depois-lista li:last-child { border-bottom: none; }
+
+.pe-antes-depois-nota {
+    margin-top: 16px;
+    padding: 16px 22px;
+    background: rgba(212,175,55,0.05);
+    border: 1px solid rgba(212,175,55,0.15);
+    border-radius: 10px;
+    font-size: 0.88rem;
+    color: #D4AF37;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.65;
+}
+
+/* --- SEÇÃO 5 — VALOR: CONSOLIDAÇÃO + TURNAROUND --- */
+.pe-valor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 26px 0;
+}
+
+.pe-valor-card {
+    border-radius: 16px;
+    padding: 28px 24px;
+}
+
+.pe-valor-card.consolidacao {
+    background: rgba(59,130,246,0.06);
+    border: 1px solid rgba(59,130,246,0.18);
+}
+
+.pe-valor-card.turnaround {
+    background: rgba(212,175,55,0.05);
+    border: 1px solid rgba(212,175,55,0.16);
+}
+
+.pe-valor-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.pe-valor-titulo {
+    font-size: 1.08rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.pe-valor-card.consolidacao .pe-valor-titulo { color: #93C5FD; }
+.pe-valor-card.turnaround .pe-valor-titulo { color: #D4AF37; }
+
+.pe-valor-desc {
+    font-size: 0.87rem;
+    color: #94A3B8;
+    line-height: 1.70;
+    margin-bottom: 14px;
+}
+
+.pe-valor-passos {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.pe-valor-passos li {
+    font-size: 0.84rem;
+    color: rgba(255,255,255,0.42);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* --- SEÇÃO 6 — QUEM INVESTE --- */
+.pe-quem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.pe-quem-item {
+    background: rgba(59,130,246,0.05);
+    border: 1px solid rgba(59,130,246,0.12);
+    border-radius: 12px;
+    padding: 18px 14px;
+    text-align: center;
+}
+
+.pe-quem-icon {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.pe-quem-nome {
+    font-size: 0.83rem;
+    font-weight: 600;
+    color: #E2E8F0;
+}
+
+/* --- SEÇÃO 7 — EQUIPE E TAXAS --- */
+.pe-equipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px;
+    margin: 20px 0;
+}
+
+.pe-equipe-item {
+    background: rgba(59,130,246,0.04);
+    border: 1px solid rgba(59,130,246,0.10);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.48);
+    text-align: center;
+}
+
+.pe-taxas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin: 22px 0;
+}
+
+.pe-taxa-card {
+    background: rgba(212,175,55,0.04);
+    border: 1px solid rgba(212,175,55,0.14);
+    border-radius: 14px;
+    padding: 22px 18px;
+}
+
+.pe-taxa-titulo {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: rgba(212,175,55,0.70);
+    margin-bottom: 6px;
+}
+
+.pe-taxa-valor {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #D4AF37;
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+.pe-taxa-desc {
+    font-size: 0.82rem;
+    color: #64748B;
+    line-height: 1.60;
+}
+
+/* --- SEÇÃO 8 — RISCOS --- */
+.pe-riscos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+}
+
+.pe-risco-card {
+    background: rgba(239,68,68,0.04);
+    border: 1px solid rgba(239,68,68,0.13);
+    border-radius: 12px;
+    padding: 20px 18px;
+}
+
+.pe-risco-icon {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.pe-risco-titulo {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: rgba(252,165,165,0.85);
+    margin-bottom: 6px;
+}
+
+.pe-risco-desc {
+    font-size: 0.84rem;
+    color: #64748B;
+    line-height: 1.60;
+}
+
+/* --- SEÇÃO 9 — QUANDO FAZ SENTIDO --- */
+.pe-faz-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 24px 0;
+}
+
+.pe-sim-col {
+    background: rgba(16,185,129,0.05);
+    border: 1px solid rgba(16,185,129,0.16);
+    border-radius: 14px;
+    padding: 24px 22px;
+}
+
+.pe-nao-col {
+    background: rgba(239,68,68,0.05);
+    border: 1px solid rgba(239,68,68,0.16);
+    border-radius: 14px;
+    padding: 24px 22px;
+}
+
+.pe-faz-header {
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+.pe-sim-col .pe-faz-header { color: rgba(52,211,153,0.75); }
+.pe-nao-col .pe-faz-header { color: rgba(252,165,165,0.75); }
+
+.pe-faz-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pe-faz-lista li {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.52);
+    line-height: 1.55;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+/* --- CHECKLIST --- */
+.pe-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 26px;
+}
+
+.pe-check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: rgba(59,130,246,0.04);
+    border: 1px solid rgba(59,130,246,0.12);
+    border-radius: 10px;
+    padding: 16px 20px;
+}
+
+.pe-check-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    background: rgba(59,130,246,0.10);
+    border: 1px solid rgba(59,130,246,0.24);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.80rem;
+    font-weight: 700;
+    color: #93C5FD;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.pe-check-text {
+    font-size: 0.90rem;
+    color: #94A3B8;
+    line-height: 1.65;
+}
+
+/* --- CURIOSIDADE INVLAB --- */
+.pe-curiosidade {
+    background: rgba(59,130,246,0.04);
+    border: 1px solid rgba(59,130,246,0.13);
+    border-radius: 16px;
+    padding: 30px 28px;
+    margin: 32px 0;
+}
+
+.pe-curiosidade-titulo {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: rgba(147,197,253,0.60);
+    margin-bottom: 14px;
+}
+
+.pe-setores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.pe-setor-item {
+    background: rgba(59,130,246,0.05);
+    border: 1px solid rgba(59,130,246,0.10);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.42);
+    text-align: center;
+}
+
+/* --- AVISO EDITORIAL --- */
+.pe-aviso {
+    background: rgba(0,0,0,0.28);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 10px;
+    padding: 20px 24px;
+    font-size: 0.80rem;
+    color: #475569;
+    line-height: 1.72;
+    margin: 44px 0;
+}
+
+/* --- A SEMENTE --- */
+.pe-semente {
+    background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(212,175,55,0.05));
+    border: 1px solid rgba(59,130,246,0.18);
+    border-radius: 22px;
+    padding: 56px 48px;
+    text-align: center;
+    margin: 50px 0 20px;
+}
+
+.pe-semente-icon {
+    font-size: 3rem;
+    margin-bottom: 22px;
+}
+
+.pe-semente-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: #93C5FD;
+    margin-bottom: 28px;
+}
+
+.pe-semente-text {
+    font-size: 0.96rem;
+    color: #94A3B8;
+    line-height: 1.88;
+    max-width: 680px;
+    margin: 0 auto 14px;
+}
+
+.pe-semente-destaque {
+    font-size: 0.97rem;
+    color: #D4AF37;
+    line-height: 1.88;
+    max-width: 680px;
+    margin: 26px auto 0;
+    font-style: italic;
+    padding: 28px 32px;
+    background: rgba(212,175,55,0.05);
+    border-radius: 14px;
+    border: 1px solid rgba(212,175,55,0.14);
+}
+
+/* --- ALERTA GENÉRICO --- */
+.pe-alerta {
+    background: rgba(239,68,68,0.05);
+    border: 1px solid rgba(239,68,68,0.15);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    font-size: 0.88rem;
+    color: #94A3B8;
+    line-height: 1.75;
+}
+
+.pe-alerta-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(252,165,165,0.75);
+    margin-bottom: 8px;
+}
+
+/* --- RESPONSIVO --- */
+@media (max-width: 680px) {
+    .pe-vc-pe-grid { grid-template-columns: 1fr; }
+    .pe-antes-depois { grid-template-columns: 1fr; }
+    .pe-valor-grid { grid-template-columns: 1fr; }
+    .pe-faz-grid { grid-template-columns: 1fr; }
+    .pe-hook { padding: 36px 22px; }
+    .pe-semente { padding: 36px 24px; }
+    .pe-flow-dot { width: 42px; height: 42px; font-size: 1rem; }
+    .pe-flow-dot.destaque { width: 46px; height: 46px; }
+}
+
+/* backToTop — azul para PE */
+#backToTop {
+    background: #3B82F6;
+    color: #EFF6FF;
+}
