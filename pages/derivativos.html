@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Derivativos — Engenharia Financeira e Gestão de Riscos | INVLAB</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="description" content="Derivativos não são investimentos — são instrumentos de Engenharia Financeira. Por que existem, quem os usa, como funcionam e quando fazem sentido. Um laboratório INVLAB sobre gestão e transferência de riscos.">
+
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+    <link rel="stylesheet" href="../assets/css/derivativos.css">
+</head>
+<body>
+    <section id="invlab-carousel-container"></section>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+            </div>
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Início</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">📚 Primeiros<br>Passos</button>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-fixa'">📊 Renda<br>Fixa <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="poupanca.html">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-variavel'">📈 Renda<br>Variável <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='etfs.html'" style="cursor:pointer;">
+                                <span class="category-name">💵 ETFs</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='fiis.html'" style="cursor:pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='acoes.html'" style="cursor:pointer;">
+                                <span class="category-name">📈 Ações</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <button class="tab-btn" onclick="window.location.href='cripto.html'">🌐 Economia<br>Digital</button>
+                <button class="tab-btn active" onclick="window.location.href='instrumentos-avancados.html'">🧬 Instrumentos<br>Avançados</button>
+                <button class="tab-btn" onclick="window.location.href='defesa-investidor.html'">🛡 Defesa do<br>Investidor</button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <main style="margin-top: 110px;">
+        <!-- BREADCRUMB STICKY -->
+        <div style="position: sticky; top: 110px; z-index: 999; background: #0D0D0D; width: 100%; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <nav style="max-width: min(calc(100% - 64px), 1160px); margin: 0 auto; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.35);">
+                <span onclick="window.location.href='instrumentos-avancados.html'" style="cursor:pointer; color: rgba(34,211,238,0.65); font-weight:600;">🧬 Instrumentos Avançados</span>
+                <span>›</span>
+                <span style="color: rgba(124,58,237,0.82); font-weight:600;">⚡ Derivativos — Engenharia Financeira</span>
+            </nav>
+        </div>
+
+        <div class="invlab-lab-container">
+
+            <!-- TÍTULO -->
+            <div style="padding-top: 40px; padding-bottom: 8px; text-align: center;">
+                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; font-weight: 800; color: #A78BFA; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em; line-height: 1.2;">⚡ Derivativos</h2>
+                <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(167,139,250,0.65); text-align: center; margin-bottom: 0; max-width: 720px; margin-left: auto; margin-right: auto;">Instrumentos de Engenharia Financeira para Gestão e Transferência de Riscos</p>
+            </div>
+
+            <!-- HOOK -->
+            <div class="deriv-hook">
+                <div class="deriv-hook-badge">⚡ Laboratório — Engenharia Financeira e Gestão de Riscos</div>
+                <div class="deriv-hook-manifesto">
+                    Durante décadas, os derivativos foram apresentados como instrumentos sofisticados
+                    capazes de <span>multiplicar ganhos</span>.<br>
+                    Essa visão é <span>incompleta</span>.
+                </div>
+                <p style="font-size: 0.95rem; color: rgba(255,255,255,0.38); max-width: 640px; margin: 0 auto 22px; line-height: 1.80;">
+                    Empresas não conseguem prever o preço do petróleo.
+                    Produtores rurais não sabem o preço da safra.
+                    Exportadores não conhecem o dólar de amanhã.
+                    Investidores não sabem quanto suas carteiras podem perder em uma crise.
+                    Os derivativos foram criados para resolver exatamente esses problemas.
+                </p>
+                <div class="deriv-hook-tese">
+                    "Derivativos não são investimentos. São instrumentos de Engenharia Financeira criados para administrar e transferir riscos entre agentes econômicos."<br>
+                    <span style="font-size: 0.82rem; color: rgba(167,139,250,0.55); font-style: normal; font-weight: 600; margin-top: 10px; display: block;">— A tese central deste laboratório</span>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 1 — POR QUE EXISTEM -->
+            <div class="deriv-section">
+                <div class="deriv-section-tag">Seção 1 — A Origem</div>
+                <h3 class="deriv-section-title">🌎 Por que os Derivativos Existem?</h3>
+                <p class="deriv-text">Esta é talvez a seção mais importante de todo o laboratório — porque a maioria das pessoas aprende derivativos pelo lado errado. Começa pela mecânica das opções, pelas estratégias de trade, pelas telas de pregão. Deveria começar aqui: pelo problema real que esses contratos foram criados para resolver.</p>
+                <p class="deriv-text">Quatro histórias. Quatro problemas reais. Quatro agentes econômicos que precisavam de uma solução que o mercado tradicional não oferecia.</p>
+
+                <div class="deriv-historias-grid">
+                    <!-- Agricultor -->
+                    <div class="deriv-historia-card">
+                        <span class="deriv-historia-icon">🌾</span>
+                        <div class="deriv-historia-agente">Produtor Rural</div>
+                        <div class="deriv-historia-problema">O problema da incerteza antes da colheita</div>
+                        <div class="deriv-historia-narrativa">
+                            Um produtor rural do Centro-Oeste planta soja em outubro. A colheita acontece em março — seis meses depois. Hoje, o preço está em um nível que torna a operação rentável. Mas daqui a seis meses, quando o grão estiver pronto para venda, o preço pode ser completamente diferente.
+                            Uma supersafra em outra região do mundo, uma mudança nas políticas de importação de um grande comprador, uma oscilação cambial — qualquer um desses eventos pode derrubar o preço antes da colheita chegar ao mercado. O produtor investiu meses de trabalho, sementes, fertilizantes, maquinário. Não quer especular. Quer plantar, colher e receber um preço previsível pelo trabalho realizado.
+                        </div>
+                        <div class="deriv-historia-solucao">⚡ Solução: contratos futuros permitem que o produtor trave hoje o preço que receberá pela safra no futuro — transferindo o risco de variação de preço para outro agente disposto a assumi-lo.</div>
+                    </div>
+
+                    <!-- Companhia Aérea -->
+                    <div class="deriv-historia-card">
+                        <span class="deriv-historia-icon">✈️</span>
+                        <div class="deriv-historia-agente">Companhia Aérea</div>
+                        <div class="deriv-historia-problema">O problema do combustível imprevisível</div>
+                        <div class="deriv-historia-narrativa">
+                            Uma companhia aérea vende passagens com meses de antecedência — muitas vezes a preços fixos divulgados ao público. Para cada voo, o combustível representa uma parcela significativa do custo operacional. Se o preço do querosene de aviação subir drasticamente entre o momento da venda do bilhete e a data do voo, a empresa pode operar no prejuízo sem nenhuma possibilidade de repassar esse custo ao passageiro. A companhia não tem como prever o preço do petróleo daqui a seis meses. Mas pode estruturar contratos que protejam sua operação contra oscilações severas — garantindo que o custo do combustível futuro fique dentro de uma faixa previsível, compatível com o preço que já cobrou do passageiro.
+                        </div>
+                        <div class="deriv-historia-solucao">⚡ Solução: contratos de hedge de commodities permitem travar o custo do combustível, transformando um custo variável e imprevisível em um custo gerenciável.</div>
+                    </div>
+
+                    <!-- Exportador -->
+                    <div class="deriv-historia-card">
+                        <span class="deriv-historia-icon">🏭</span>
+                        <div class="deriv-historia-agente">Exportador / Importador</div>
+                        <div class="deriv-historia-problema">O problema do câmbio entre a venda e o recebimento</div>
+                        <div class="deriv-historia-narrativa">
+                            Uma empresa que exporta produtos industrializados fecha contratos em dólar com compradores internacionais. Receberá em dólar daqui a 90 dias. Mas seus custos são todos em reais — salários, insumos, aluguel, energia elétrica. Se o dólar cair significativamente nos próximos 90 dias, a receita em reais vai encolher — mesmo que as vendas tenham sido um sucesso comercial. A empresa não quer apostar na direção do câmbio. Quer apenas garantir que o dólar negociado hoje seja equivalente ao dólar que receberá amanhã. Do lado contrário, um importador que pagará em dólar tem o risco inverso: uma alta do câmbio encarece sua compra. Ambos querem eliminar a incerteza cambial — não especular sobre ela.
+                        </div>
+                        <div class="deriv-historia-solucao">⚡ Solução: contratos de câmbio a termo ou swaps cambiais permitem travar a taxa de conversão, eliminando o risco de oscilação do câmbio no período entre a negociação e o pagamento.</div>
+                    </div>
+
+                    <!-- Fundo de Pensão -->
+                    <div class="deriv-historia-card">
+                        <span class="deriv-historia-icon">🏦</span>
+                        <div class="deriv-historia-agente">Fundo de Pensão / Banco</div>
+                        <div class="deriv-historia-problema">O problema de proteger o que não pode ser perdido</div>
+                        <div class="deriv-historia-narrativa">
+                            Um fundo de pensão administra as reservas de aposentadoria de milhares de trabalhadores. Tem obrigações de pagamento fixas ao longo de décadas. Uma queda severa no mercado de ações pode comprometer sua capacidade de honrar esses pagamentos futuros. O fundo não pode simplesmente vender todos os ativos e sair do mercado — isso prejudicaria outros beneficiários e violaria sua política de investimento. Mas pode comprar proteção: contratos que se valorizam quando o mercado cai, compensando parcialmente as perdas da carteira principal. O objetivo não é ganhar com a crise — é sobreviver a ela sem comprometer os benefícios prometidos aos aposentados.
+                        </div>
+                        <div class="deriv-historia-solucao">⚡ Solução: opções de venda (puts) sobre índices de ações funcionam como um seguro de carteira — custam um prêmio, mas limitam a perda máxima em cenários de queda severa do mercado.</div>
+                    </div>
+                </div>
+
+                <div class="deriv-frase-invlab">
+                    Os derivativos não nasceram nos pregões de Wall Street. Nasceram nos campos agrícolas do Japão medieval, onde produtores de arroz precisavam garantir o preço antes da colheita. Nasceram da necessidade humana mais básica: reduzir a incerteza sobre o futuro.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 2 — ENGENHARIA FINANCEIRA -->
+            <div class="deriv-section">
+                <div class="deriv-section-tag">Seção 2 — O Conceito Central</div>
+                <h3 class="deriv-section-title">🧬 Engenharia Financeira — o que isso significa de verdade</h3>
+                <p class="deriv-text">A palavra "engenharia" é deliberada — e revela tudo sobre como o INVLAB entende derivativos.</p>
+                <p class="deriv-text">Um engenheiro civil não cria concreto. Ele utiliza concreto para resolver problemas de estrutura e resistência. Um engenheiro elétrico não cria energia. Ele controla o fluxo de energia para que chegue onde é necessário, com a voltagem certa, sem sobrecargas. Da mesma forma, a <strong style="color:#E2E8F0;">Engenharia Financeira</strong> utiliza contratos para administrar riscos econômicos. Os derivativos são uma dessas ferramentas — instrumentos que não criam riqueza por si mesmos, mas transferem o risco de quem não pode suportá-lo para quem está disposto a assumi-lo em troca de uma remuneração.</p>
+
+                <!-- INFOGRÁFICO -->
+                <div class="deriv-engenharia-grid">
+                    <div class="deriv-eng-bloco investimentos">
+                        <div class="deriv-eng-label">Investimentos</div>
+                        <div class="deriv-eng-titulo">Constroem patrimônio</div>
+                        <div class="deriv-eng-subtitulo">Geram retorno e acumulam riqueza ao longo do tempo</div>
+                        <span class="deriv-eng-arrow">↓</span>
+                        <ul class="deriv-eng-lista">
+                            <li><span>🏢</span> Empresas (ações, participações)</li>
+                            <li><span>🏠</span> Imóveis (propriedades, FIIs)</li>
+                            <li><span>🏗️</span> Infraestrutura (FI-Infra, concessões)</li>
+                            <li><span>📄</span> Títulos de crédito (renda fixa)</li>
+                            <li><span>🥇</span> Ouro (preservação de valor)</li>
+                        </ul>
+                    </div>
+                    <div class="deriv-eng-separador">
+                        <div class="deriv-eng-vs">≠</div>
+                    </div>
+                    <div class="deriv-eng-bloco engenharia">
+                        <div class="deriv-eng-label">Engenharia Financeira</div>
+                        <div class="deriv-eng-titulo">Protege patrimônio</div>
+                        <div class="deriv-eng-subtitulo">Administra e transfere riscos entre agentes econômicos</div>
+                        <span class="deriv-eng-arrow">↓</span>
+                        <ul class="deriv-eng-lista">
+                            <li><span>🛡️</span> Hedge (proteção de posições)</li>
+                            <li><span>📋</span> Opções (direito de compra/venda)</li>
+                            <li><span>📅</span> Futuros (preço futuro travado)</li>
+                            <li><span>🔄</span> Swaps (troca de fluxos)</li>
+                            <li><span>📆</span> Termo (contrato a prazo)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="deriv-destaque-box">
+                    <div class="deriv-destaque-title">💡 A distinção que tudo muda</div>
+                    <p style="font-size: 0.88rem; color: #94A3B8; line-height: 1.75; margin: 0;">
+                        Quando você compra uma ação, está adquirindo uma participação em um negócio que gera valor. Quando você compra um contrato derivativo, está contratando uma proteção — ou assumindo um risco que pertencia a outra pessoa. Um acrescenta riqueza ao seu portfólio. O outro reorganiza os riscos do portfólio que você já tem. Confundir essas duas coisas é o erro mais comum — e mais caro — no mercado de derivativos.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 3 — QUEM USA -->
+            <div class="deriv-section">
+                <div class="deriv-section-tag">Seção 3 — Os Usuários Reais</div>
+                <h3 class="deriv-section-title">🏛️ Quem de fato usa derivativos?</h3>
+                <p class="deriv-text">Antes de qualquer explicação técnica, esta pergunta precisa ser respondida. Porque a resposta revela algo fundamental sobre a natureza desses instrumentos — e desfaz uma ilusão muito comum.</p>
+
+                <div class="deriv-quem-grid">
+                    <div class="deriv-quem-item">
+                        <span class="deriv-quem-icon">🌾</span>
+                        <div class="deriv-quem-nome">Produtores Rurais</div>
+                        <div class="deriv-quem-desc">Travam o preço de commodities antes da colheita para proteger a receita da safra</div>
+                    </div>
+                    <div class="deriv-quem-item">
+                        <span class="deriv-quem-icon">✈️</span>
+                        <div class="deriv-quem-nome">Companhias Aéreas</div>
+                        <div class="deriv-quem-desc">Protegem o custo do combustível contra oscilações do petróleo</div>
+                    </div>
+                    <div class="deriv-quem-item">
+                        <span class="deriv-quem-icon">🏭</span>
+                        <div class="deriv-quem-nome">Exportadores</div>
+                        <div class="deriv-quem-desc">Travam a taxa de câmbio entre a data da venda e o recebimento efetivo</div>
+                    </div>
+                    <div class="deriv-quem-item">
+                        <span class="deriv-quem-icon">🚢</span>
+                        <div class="deriv-quem-nome">Importadores</div>
+                        <div class="deriv-quem-desc">Protegem contra alta do câmbio no intervalo entre pedido e pagamento</div>
+                    </div>
+                    <div class="deriv-quem-item">
+                        <span class="deriv-quem-icon">🏦</span>
+                        <div class="deriv-quem-nome">Bancos</div>
+                        <div class="deriv-quem-desc">Gerenciam exposições a taxas de juros, câmbio e risco de crédito em suas carteiras</div>
+                    </div>
+                    <div class="deriv-quem-item">
+                        <span class="deriv-quem-icon">🏛️</span>
+                        <div class="deriv-quem-nome">Fundos de Pensão</div>
+                        <div class="deriv-quem-desc">Protegem carteiras contra quedas severas de mercado para honrar obrigações com aposentados</div>
+                    </div>
+                    <div class="deriv-quem-item">
+                        <span class="deriv-quem-icon">🛡️</span>
+                        <div class="deriv-quem-nome">Seguradoras</div>
+                        <div class="deriv-quem-desc">Gerenciam riscos de suas carteiras de investimento e protegem passivos de longo prazo</div>
+                    </div>
+                    <div class="deriv-quem-item">
+                        <span class="deriv-quem-icon">🏗️</span>
+                        <div class="deriv-quem-nome">Grandes Empresas</div>
+                        <div class="deriv-quem-desc">Protegem custos de insumos, receitas de exportação e dívidas em moeda estrangeira</div>
+                    </div>
+                </div>
+
+                <div class="deriv-quem-alerta">
+                    <div class="deriv-quem-alerta-title">⚠️ O investidor pessoa física — uma perspectiva necessária</div>
+                    <p style="font-size: 0.87rem; color: #94A3B8; line-height: 1.75; margin: 0;">
+                        O investidor individual que compra opções na tentativa de multiplicar capital rapidamente representa apenas uma fração do mercado de derivativos — e historicamente a fração com resultados mais desfavoráveis. O mercado de derivativos foi construído, regulado e estruturado para os agentes acima: produtores, empresas, bancos e fundos que precisam gerenciar riscos reais de operações reais.
+                        <br><br>
+                        Quando um investidor pessoa física especula com opções sem possuir o ativo subjacente e sem ter uma operação real a proteger, não está fazendo engenharia financeira. Está participando de um jogo de soma zero com agentes institucionais que conhecem esses instrumentos muito melhor do que ele.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 4 — HEDGE -->
+            <div class="deriv-section">
+                <div class="deriv-section-tag">Seção 4 — O Uso Legítimo</div>
+                <h3 class="deriv-section-title">🛡️ Hedge — o seguro financeiro que precede qualquer operação</h3>
+                <p class="deriv-text">Antes de qualquer discussão sobre estratégias, alavancagem ou rentabilidade em derivativos, é necessário entender o conceito de hedge. Porque hedge é a razão de existência dos derivativos — todo o resto é consequência (frequentemente indesejada) de seus usos secundários.</p>
+
+                <!-- Analogia do seguro -->
+                <div class="deriv-seguro-analogia">
+                    <div class="deriv-seguro-lado">
+                        <span class="deriv-seguro-icon">🚗</span>
+                        <div class="deriv-seguro-label">Seguro de Automóvel</div>
+                        <div class="deriv-seguro-desc">Você possui um carro. Paga um prêmio mensalmente. Se houver um acidente, a seguradora cobre o prejuízo. Você não "ganhou" nada — apenas se protegeu de uma perda potencial.</div>
+                    </div>
+                    <div class="deriv-seguro-igual">=</div>
+                    <div class="deriv-seguro-lado">
+                        <span class="deriv-seguro-icon">📋</span>
+                        <div class="deriv-seguro-label">Hedge com Derivativos</div>
+                        <div class="deriv-seguro-desc">Você possui um ativo (ações, soja, dólar a receber). Paga um prêmio pelo contrato. Se o ativo se desvalorizar, o derivativo compensa parte da perda. Você não "ganhou" — protegeu o que já tinha.</div>
+                    </div>
+                </div>
+
+                <p class="deriv-text">Essa analogia é precisa. Hedge, como seguro, tem um custo — o prêmio. E, como seguro, seu valor se manifesta não nos momentos tranquilos, mas nos momentos em que algo inesperado acontece.</p>
+
+                <div class="deriv-hedge-grid">
+                    <div class="deriv-hedge-card">
+                        <span class="deriv-hedge-icon">📉</span>
+                        <div class="deriv-hedge-title">PUT protegendo ações</div>
+                        <div class="deriv-hedge-desc">Um investidor que detém uma carteira de ações pode comprar opções de venda (puts) sobre o índice ou sobre posições específicas. Se o mercado cair, as puts se valorizam — compensando parte das perdas da carteira. O investidor pagou um prêmio por essa proteção, como um seguro contra quedas.</div>
+                    </div>
+                    <div class="deriv-hedge-card">
+                        <span class="deriv-hedge-icon">🌾</span>
+                        <div class="deriv-hedge-title">Futuro protegendo a safra</div>
+                        <div class="deriv-hedge-desc">O produtor rural que plantou soja em outubro pode vender contratos futuros de soja pelo preço atual — garantindo que, mesmo que o preço caia até março, receberá o valor travado hoje. Se o preço subir, ele "perdeu" o ganho extra — mas protegeu a viabilidade do negócio.</div>
+                    </div>
+                    <div class="deriv-hedge-card">
+                        <span class="deriv-hedge-icon">💵</span>
+                        <div class="deriv-hedge-title">Proteção cambial</div>
+                        <div class="deriv-hedge-desc">Um exportador que receberá dólares em 90 dias pode contratar um swap cambial ou um contrato a termo que trava a taxa de conversão. Se o dólar cair, o hedge compensa a diferença. O exportador abriu mão do ganho eventual com a alta do câmbio em troca de previsibilidade.</div>
+                    </div>
+                    <div class="deriv-hedge-card">
+                        <span class="deriv-hedge-icon">📊</span>
+                        <div class="deriv-hedge-title">Proteção de taxa de juros</div>
+                        <div class="deriv-hedge-desc">Uma empresa com dívida indexada a taxas de juros variáveis pode contratar um swap que converte sua obrigação para taxa fixa. Se os juros subirem, o swap compensa o custo adicional. A empresa trocou incerteza por previsibilidade — permitindo planejar seu caixa com mais segurança.</div>
+                    </div>
+                </div>
+
+                <!-- Dois caminhos -->
+                <div class="deriv-dois-caminhos">
+                    <div class="deriv-caminho-card hedge">
+                        <div class="deriv-caminho-title">🛡️ Hedge — uso legítimo</div>
+                        <ul class="deriv-caminho-lista">
+                            <li><span>✅</span>Você possui o ativo que está protegendo</li>
+                            <li><span>✅</span>O objetivo é reduzir incerteza, não maximizar ganho</li>
+                            <li><span>✅</span>O prêmio é o custo de uma proteção consciente</li>
+                            <li><span>✅</span>Se o hedge "não funcionar", é porque o mercado foi favorável — o que é uma boa notícia</li>
+                            <li><span>✅</span>A posição faz sentido mesmo que gere custo</li>
+                        </ul>
+                    </div>
+                    <div class="deriv-caminho-card especulacao">
+                        <div class="deriv-caminho-title">⚠️ Especulação — dinâmica diferente</div>
+                        <ul class="deriv-caminho-lista">
+                            <li><span>⚠️</span>Você não possui o ativo subjacente</li>
+                            <li><span>⚠️</span>O objetivo é ganhar com a variação de preço</li>
+                            <li><span>⚠️</span>O prêmio é um custo de entrada em uma aposta</li>
+                            <li><span>⚠️</span>Se o mercado não se mover na direção esperada, o prêmio pode ser inteiramente perdido</li>
+                            <li><span>⚠️</span>Em alguns casos, as perdas podem superar o capital investido</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="deriv-regra-box">
+                    <div class="deriv-regra-label">A Regra do INVLAB sobre Hedge</div>
+                    <div class="deriv-regra-frase">
+                        "Se você não possui o ativo que está supostamente 'protegendo',<br>
+                        provavelmente não está fazendo hedge.<br>
+                        Está especulando."
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 5 — VOCABULÁRIO -->
+            <div class="deriv-section">
+                <div class="deriv-section-tag">Seção 5 — Os Conceitos Fundamentais</div>
+                <h3 class="deriv-section-title">📖 Vocabulário Essencial — ancorado nos exemplos reais</h3>
+                <p class="deriv-text">Todo vocabulário técnico faz mais sentido quando está ancorado em situações reais. Os termos abaixo são os fundamentos de qualquer discussão sobre derivativos — explicados através das histórias que você já conhece desta página.</p>
+
+                <div class="deriv-vocab-grid">
+                    <div class="deriv-vocab-item">
+                        <div class="deriv-vocab-termo">Ativo-Objeto</div>
+                        <div class="deriv-vocab-def">O ativo real que está na base do contrato derivativo — o "objeto" sobre o qual o contrato foi construído</div>
+                        <div class="deriv-vocab-exemplos">
+                            <div class="deriv-vocab-ex"><strong>Agricultor:</strong> a soja é o ativo-objeto do contrato futuro</div>
+                            <div class="deriv-vocab-ex"><strong>Aérea:</strong> o querosene de aviação é o ativo-objeto do hedge de combustível</div>
+                            <div class="deriv-vocab-ex"><strong>Exportador:</strong> o dólar é o ativo-objeto do contrato de câmbio</div>
+                        </div>
+                    </div>
+
+                    <div class="deriv-vocab-item">
+                        <div class="deriv-vocab-termo">Vencimento</div>
+                        <div class="deriv-vocab-def">A data futura em que o contrato derivativo expira e a liquidação (financeira ou física) acontece</div>
+                        <div class="deriv-vocab-exemplos">
+                            <div class="deriv-vocab-ex"><strong>Agricultor:</strong> o vencimento coincide com o período da colheita — março, no caso da soja</div>
+                            <div class="deriv-vocab-ex"><strong>Exportador:</strong> o vencimento é a data prevista do recebimento em dólar</div>
+                            <div class="deriv-vocab-ex"><strong>Fundo de pensão:</strong> a put pode ter vencimento em 3, 6 ou 12 meses — conforme o horizonte de proteção desejado</div>
+                        </div>
+                    </div>
+
+                    <div class="deriv-vocab-item">
+                        <div class="deriv-vocab-termo">Preço de Exercício</div>
+                        <div class="deriv-vocab-def">O preço pré-acordado no contrato ao qual o ativo-objeto será comprado ou vendido na data de vencimento (ou antes, em opções americanas)</div>
+                        <div class="deriv-vocab-exemplos">
+                            <div class="deriv-vocab-ex"><strong>Agricultor:</strong> é o preço por saca que ele garantiu hoje — o preço que tornará sua safra viável</div>
+                            <div class="deriv-vocab-ex"><strong>Fundo de pensão:</strong> é o nível do índice abaixo do qual a put começa a pagar — o "gatilho" do seguro de carteira</div>
+                        </div>
+                    </div>
+
+                    <div class="deriv-vocab-item">
+                        <div class="deriv-vocab-termo">Prêmio</div>
+                        <div class="deriv-vocab-def">O custo do contrato derivativo — o valor pago por quem compra a proteção (ou a exposição) para quem a vende</div>
+                        <div class="deriv-vocab-exemplos">
+                            <div class="deriv-vocab-ex"><strong>Fundo de pensão:</strong> o prêmio é o custo anual do "seguro de carteira" via puts — como o prêmio de um seguro de automóvel</div>
+                            <div class="deriv-vocab-ex"><strong>Regra fundamental:</strong> quem compra um derivativo paga o prêmio. Quem vende, recebe o prêmio — mas assume a obrigação</div>
+                        </div>
+                    </div>
+
+                    <div class="deriv-vocab-item">
+                        <div class="deriv-vocab-termo">Titular e Lançador</div>
+                        <div class="deriv-vocab-def">Os dois lados de qualquer contrato de opções — o titular compra o direito, o lançador vende a obrigação correspondente</div>
+                        <div class="deriv-vocab-exemplos">
+                            <div class="deriv-vocab-ex"><strong>Titular:</strong> o agricultor que compra a proteção de preço — paga o prêmio, tem o direito de vender pelo preço acordado</div>
+                            <div class="deriv-vocab-ex"><strong>Lançador:</strong> o especulador ou formador de mercado que vende a proteção — recebe o prêmio, assume a obrigação de cumprir o contrato</div>
+                        </div>
+                    </div>
+
+                    <div class="deriv-vocab-item">
+                        <div class="deriv-vocab-termo">Contraparte</div>
+                        <div class="deriv-vocab-def">O outro lado de qualquer contrato derivativo — todo derivativo exige dois agentes com interesses opostos ou complementares</div>
+                        <div class="deriv-vocab-exemplos">
+                            <div class="deriv-vocab-ex"><strong>Exportador:</strong> a contraparte do seu hedge cambial é o importador (ou o banco) que precisa do câmbio na direção contrária</div>
+                            <div class="deriv-vocab-ex"><strong>Regra fundamental:</strong> derivativos são instrumentos de soma zero entre as partes — o que um ganha com a variação do ativo-objeto, o outro perde</div>
+                        </div>
+                    </div>
+
+                    <div class="deriv-vocab-item">
+                        <div class="deriv-vocab-termo">Margem de Garantia</div>
+                        <div class="deriv-vocab-def">Valor depositado como garantia para cobrir perdas potenciais em contratos que exigem esse colateral — principalmente contratos futuros e vendas a descoberto</div>
+                        <div class="deriv-vocab-exemplos">
+                            <div class="deriv-vocab-ex"><strong>Contratos futuros:</strong> a bolsa exige que ambas as partes depositem margem para garantir que cumprirão a obrigação no vencimento</div>
+                            <div class="deriv-vocab-ex"><strong>Risco:</strong> se a posição se mover contra o investidor, ele pode receber uma "chamada de margem" — obrigação de depositar mais recursos imediatamente</div>
+                        </div>
+                    </div>
+
+                    <div class="deriv-vocab-item">
+                        <div class="deriv-vocab-termo">Alavancagem</div>
+                        <div class="deriv-vocab-def">A capacidade de controlar uma posição financeiramente maior do que o capital efetivamente investido ou depositado como garantia</div>
+                        <div class="deriv-vocab-exemplos">
+                            <div class="deriv-vocab-ex"><strong>Exemplo:</strong> um contrato futuro de índice pode controlar uma posição de R$ 100.000 exigindo apenas R$ 10.000 de margem — alavancagem de 10x</div>
+                            <div class="deriv-vocab-ex"><strong>Efeito duplo:</strong> amplifica tanto os ganhos quanto as perdas na mesma proporção — é o conceito mais importante do lado sombrio dos derivativos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 6 — OS 4 MERCADOS -->
+            <div class="deriv-section">
+                <div class="deriv-section-tag">Seção 6 — Os Instrumentos</div>
+                <h3 class="deriv-section-title">Os Quatro Grandes Mercados de Derivativos</h3>
+                <p class="deriv-text">O mercado de derivativos organiza-se em quatro grandes categorias de contratos, cada uma com mecânica, finalidade e perfil de risco específicos. O objetivo aqui não é detalhar estratégias de cada instrumento — mas entender sua função econômica e quando cada tipo costuma ser utilizado.</p>
+
+                <div class="deriv-mercados-grid">
+                    <div class="deriv-mercado-card">
+                        <span class="deriv-mercado-icon">📆</span>
+                        <div class="deriv-mercado-nome">Contratos a Termo</div>
+                        <div class="deriv-mercado-subtitulo">Acordo bilateral privado</div>
+                        <div class="deriv-mercado-desc">
+                            O mais simples dos derivativos: duas partes combinam comprar e vender um ativo em uma data futura, a um preço definido hoje. Não é negociado em bolsa — é um contrato privado entre as partes, personalizado para suas necessidades específicas. Câmbio, commodities e taxas de juros são os principais ativos-objeto. A principal desvantagem é o risco de contraparte: se uma das partes não honrar o contrato, não há garantia de câmara de compensação.
+                        </div>
+                        <span class="deriv-badge-breve">🔜 Laboratório em desenvolvimento</span>
+                    </div>
+
+                    <div class="deriv-mercado-card">
+                        <span class="deriv-mercado-icon">📊</span>
+                        <div class="deriv-mercado-nome">Contratos Futuros</div>
+                        <div class="deriv-mercado-subtitulo">Padronizado e negociado em bolsa</div>
+                        <div class="deriv-mercado-desc">
+                            A evolução padronizada do contrato a termo. É negociado em bolsa (B3, no Brasil), com contratos padronizados de tamanho, vencimento e ativo-objeto. A câmara de compensação da bolsa garante o cumprimento — eliminando o risco de contraparte. Exige depósito de margem. Os contratos mais negociados no Brasil envolvem índice Bovespa, dólar, DI (taxa de juros) e commodities agrícolas. É o instrumento mais utilizado por empresas para hedge de commodities e câmbio.
+                        </div>
+                        <span class="deriv-badge-breve">🔜 Laboratório em desenvolvimento</span>
+                    </div>
+
+                    <div class="deriv-mercado-card">
+                        <span class="deriv-mercado-icon">📋</span>
+                        <div class="deriv-mercado-nome">Opções</div>
+                        <div class="deriv-mercado-subtitulo">Direito, não obrigação</div>
+                        <div class="deriv-mercado-desc">
+                            A principal distinção das opções: conferem ao comprador (titular) o <strong style="color:#E2E8F0;">direito</strong> — não a obrigação — de comprar (call) ou vender (put) um ativo a um preço pré-determinado até uma data de vencimento. O titular paga um prêmio por esse direito. O lançador recebe o prêmio, mas assume a obrigação correspondente. É o instrumento mais versátil — pode ser usado tanto para proteção de carteira quanto para estratégias especulativas. A perda do titular é limitada ao prêmio pago. A perda do lançador descoberto pode ser ilimitada.
+                        </div>
+                        <span class="deriv-badge-breve">🔜 Laboratório em desenvolvimento</span>
+                    </div>
+
+                    <div class="deriv-mercado-card">
+                        <span class="deriv-mercado-icon">🔄</span>
+                        <div class="deriv-mercado-nome">Swaps</div>
+                        <div class="deriv-mercado-subtitulo">Troca de fluxos financeiros</div>
+                        <div class="deriv-mercado-desc">
+                            Contratos que permitem que dois agentes troquem fluxos financeiros por um período determinado. O exemplo mais claro: uma empresa com dívida em taxa variável (CDI) pode fazer um swap com um banco, pagando taxa fixa e recebendo CDI — efetivamente convertendo sua dívida variável em fixa. Swaps cambiais, de taxa de juros e de crédito são amplamente utilizados por bancos, empresas e fundos de pensão para ajustar sua exposição a diferentes riscos sem precisar alterar as posições originais.
+                        </div>
+                        <span class="deriv-badge-breve">🔜 Laboratório em desenvolvimento</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 7 — O LADO SOMBRIO -->
+            <div class="deriv-section">
+                <div class="deriv-section-tag">Seção 7 — Os Riscos Reais</div>
+                <h3 class="deriv-section-title">⚠️ O lado sombrio — o que pode dar profundamente errado</h3>
+                <p class="deriv-text">Esta seção não existe para assustar. Existe porque a credibilidade do INVLAB está em ensinar o que outros materiais educacionais omitem. Os derivativos têm características que, quando mal compreendidas, podem transformar uma ferramenta de proteção em uma fonte de perdas que superam em muito o capital investido.</p>
+
+                <div class="deriv-sombrio-grid">
+                    <div class="deriv-sombrio-item">
+                        <div class="deriv-sombrio-titulo">⚡ Alavancagem</div>
+                        <div class="deriv-sombrio-desc">Derivativos permitem controlar posições muito maiores que o capital investido. Isso amplifica tanto ganhos quanto perdas na mesma proporção. Uma posição alavancada 10x pode transformar um movimento de 5% no ativo-objeto em uma perda de 50% do capital depositado como margem — ou em um ganho da mesma magnitude.</div>
+                    </div>
+                    <div class="deriv-sombrio-item">
+                        <div class="deriv-sombrio-titulo">📞 Chamada de Margem</div>
+                        <div class="deriv-sombrio-desc">Quando uma posição em contratos futuros se move contra o investidor, a bolsa pode exigir depósito imediato de recursos adicionais para manter a posição. Se o investidor não tiver os recursos ou não conseguir depositá-los a tempo, a posição é encerrada compulsoriamente — frequentemente no pior momento possível, com prejuízo já realizado.</div>
+                    </div>
+                    <div class="deriv-sombrio-item">
+                        <div class="deriv-sombrio-titulo">📉 Opções que Viram Pó</div>
+                        <div class="deriv-sombrio-desc">Opções têm vencimento. Se o ativo não se mover na direção esperada até o vencimento, a opção expira sem valor — o investidor perde 100% do prêmio pago. Essa característica transforma a especulação com opções em uma atividade com alta frequência de perdas totais, mesmo quando a direção geral do mercado estava correta, mas o timing estava errado.</div>
+                    </div>
+                    <div class="deriv-sombrio-item">
+                        <div class="deriv-sombrio-titulo">🎯 Venda Descoberta</div>
+                        <div class="deriv-sombrio-desc">Vender uma opção sem possuir o ativo subjacente (descoberto) pode parecer atraente — o vendedor recebe o prêmio imediatamente. Mas também assume uma obrigação potencialmente ilimitada. Se o mercado se mover contra a posição, as perdas não têm teto definido — o vendedor descoberto pode ser obrigado a comprar o ativo a qualquer preço para cumprir sua obrigação.</div>
+                    </div>
+                    <div class="deriv-sombrio-item">
+                        <div class="deriv-sombrio-titulo">🃏 Ganhos Pequenos, Riscos Grandes</div>
+                        <div class="deriv-sombrio-desc">Existe uma estratégia conhecida como "colher centavos na frente de um rolo compressor": vender opções fora do dinheiro e embolsar prêmios pequenos com frequência. Funciona durante longos períodos — até que um evento extremo desfaz meses de lucros acumulados em um único dia. A assimetria é estrutural: ganhos frequentes e pequenos, perdas raras e devastadoras.</div>
+                    </div>
+                    <div class="deriv-sombrio-item">
+                        <div class="deriv-sombrio-titulo">🎲 Jogo de Soma Zero</div>
+                        <div class="deriv-sombrio-desc">No mercado de ações, todos os participantes podem ganhar se a economia crescer e as empresas prosperarem. No mercado de derivativos especulativos, o ganho de um participante é matematicamente equivalente à perda de outro. Do lado oposto de um investidor pessoa física muitas vezes está uma mesa de derivativos de um banco com décadas de experiência, modelos de precificação sofisticados e acesso a informações muito mais abrangentes.</div>
+                    </div>
+                </div>
+
+                <!-- TABELA COMPARATIVA -->
+                <h4 style="font-size: 1.05rem; font-weight: 700; color: #E2E8F0; margin: 32px 0 6px;">Perfis de risco por tipo de operação</h4>
+                <p class="deriv-text" style="margin-bottom: 0;">A tabela abaixo tem finalidade exclusivamente educacional — para que o investidor entenda as implicações de cada tipo de operação antes de avaliá-la.</p>
+
+                <div class="deriv-tabela-wrap">
+                    <table class="deriv-tabela">
+                        <thead>
+                            <tr>
+                                <th>Operação</th>
+                                <th>Objetivo Típico</th>
+                                <th>Perfil</th>
+                                <th>Ganho Máximo</th>
+                                <th>Perda Máxima</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="td-op">Compra de Call</td>
+                                <td>Exposição à alta do ativo sem comprá-lo diretamente</td>
+                                <td>Especulador / Hedge avançado</td>
+                                <td style="color: rgba(74,222,128,0.8); font-weight:600;">Ilimitado (ativo sobe)</td>
+                                <td class="td-perda-ok">Limitado ao prêmio pago</td>
+                            </tr>
+                            <tr>
+                                <td class="td-op">Compra de Put</td>
+                                <td>Proteção de carteira ou exposição à queda do ativo</td>
+                                <td>Hedge / Especulador</td>
+                                <td style="color: rgba(74,222,128,0.8); font-weight:600;">Limitado (ativo vai a zero)</td>
+                                <td class="td-perda-ok">Limitado ao prêmio pago</td>
+                            </tr>
+                            <tr>
+                                <td class="td-op">Venda Coberta</td>
+                                <td>Gerar receita adicional sobre posição já existente no ativo</td>
+                                <td>Investidor avançado com posição</td>
+                                <td style="color: rgba(251,191,36,0.85); font-weight:600;">Limitado ao prêmio recebido</td>
+                                <td class="td-perda-cuidado">Redução do ganho potencial da posição original</td>
+                            </tr>
+                            <tr>
+                                <td class="td-op">Venda Descoberta</td>
+                                <td>Capturar prêmio apostando na estabilidade ou queda do ativo</td>
+                                <td>Especulador de alto risco</td>
+                                <td style="color: rgba(251,191,36,0.85); font-weight:600;">Limitado ao prêmio recebido</td>
+                                <td class="td-perda-extremo">Potencialmente ilimitada ⚠️</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="deriv-frase-invlab" style="margin-top: 28px;">
+                    Repare na assimetria da tabela: quem compra opções tem perda limitada, mas paga por isso com prêmio e com a alta frequência de opções que expiram sem valor. Quem vende opções recebe o prêmio, mas em determinadas configurações assume perdas potencialmente ilimitadas. Não existe almoço grátis em derivativos.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 8 — BUFFETT -->
+            <div class="deriv-section">
+                <div class="deriv-section-tag">Seção 8 — Uma Perspectiva Necessária</div>
+                <h3 class="deriv-section-title">Uma frase famosa — e o contexto que raramente é citado</h3>
+
+                <div class="deriv-buffett-box">
+                    <div class="deriv-buffett-quote">
+                        "Derivativos são armas financeiras de destruição em massa."
+                    </div>
+                    <div class="deriv-buffett-autor">— Warren Buffett, carta aos acionistas da Berkshire Hathaway, 2002</div>
+                    <div class="deriv-buffett-contexto">
+                        <p style="margin-bottom: 12px;">Esta é provavelmente a frase mais citada sobre derivativos no mundo dos investimentos. Ela foi escrita em 2002, no contexto de preocupações com o crescimento do mercado de derivativos de crédito e os riscos sistêmicos que poderiam criar para o sistema financeiro global — preocupações que se materializaram, em parte, na crise financeira de 2008.</p>
+                        <p style="margin-bottom: 12px;">O que raramente é mencionado junto com essa citação:</p>
+                        <p style="margin-bottom: 12px;">Praticamente todas as grandes companhias do mundo — incluindo companhias aéreas, empresas de energia, exportadores, importadores, bancos e fundos de pensão — utilizam derivativos diariamente como parte de sua gestão de risco operacional. Essa prática é considerada prudente e necessária por reguladores, auditores e analistas de crédito.</p>
+                        <p style="margin: 0;">A crítica de Buffett nunca foi aos derivativos como ferramenta de gestão de risco. Foi ao uso especulativo e alavancado de derivativos em escala sistêmica — especialmente aqueles construídos sobre ativos de difícil avaliação e sem transparência adequada. A ferramenta não é o problema. O problema é seu uso sem conhecimento, sem controle e sem propósito legítimo de proteção.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 9 — PAPEL ECONÔMICO -->
+            <div class="deriv-section">
+                <div class="deriv-section-tag">Seção 9 — Por que Importam para a Economia</div>
+                <h3 class="deriv-section-title">🌐 O papel econômico dos derivativos — o que muda quando eles existem</h3>
+                <p class="deriv-text">Derivativos são frequentemente discutidos apenas pelos riscos que carregam. Mas quando utilizados adequadamente por agentes econômicos com necessidade real de proteção, eles desempenham funções econômicas importantes que afetam, indiretamente, o dia a dia de todos.</p>
+
+                <div class="deriv-papel-grid">
+                    <div class="deriv-papel-item">
+                        <span class="deriv-papel-icon">✈️</span>
+                        <div>
+                            <div class="deriv-papel-titulo">Passagens aéreas mais previsíveis</div>
+                            <div class="deriv-papel-desc">Sem hedge de combustível, companhias aéreas precisariam incorporar margens de segurança muito maiores nos preços — ou enfrentar prejuízos severos em períodos de alta do petróleo. O hedge permite preços mais estáveis para o consumidor.</div>
+                        </div>
+                    </div>
+                    <div class="deriv-papel-item">
+                        <span class="deriv-papel-icon">🌾</span>
+                        <div>
+                            <div class="deriv-papel-titulo">Agricultura mais estável</div>
+                            <div class="deriv-papel-desc">Produtores que conseguem travar preços antes da colheita planejam melhor suas operações, obtêm crédito com mais facilidade e mantêm a produção mesmo em anos de queda de preços. Isso contribui para a estabilidade do abastecimento alimentar.</div>
+                        </div>
+                    </div>
+                    <div class="deriv-papel-item">
+                        <span class="deriv-papel-icon">🏭</span>
+                        <div>
+                            <div class="deriv-papel-titulo">Exportações mais competitivas</div>
+                            <div class="deriv-papel-desc">Exportadores que conseguem proteger sua receita contra oscilações cambiais conseguem oferecer preços mais competitivos no mercado internacional, sem precisar embutir o custo da incerteza cambial nos valores cobrados.</div>
+                        </div>
+                    </div>
+                    <div class="deriv-papel-item">
+                        <span class="deriv-papel-icon">📊</span>
+                        <div>
+                            <div class="deriv-papel-titulo">Planejamento empresarial de longo prazo</div>
+                            <div class="deriv-papel-desc">Empresas que conseguem proteger seus custos de insumos e receitas de vendas por períodos definidos conseguem planejar investimentos, contratações e expansões com mais segurança — o que contribui para a atividade econômica.</div>
+                        </div>
+                    </div>
+                    <div class="deriv-papel-item">
+                        <span class="deriv-papel-icon">🏛️</span>
+                        <div>
+                            <div class="deriv-papel-titulo">Segurança nas aposentadorias</div>
+                            <div class="deriv-papel-desc">Fundos de pensão que utilizam derivativos para proteger carteiras contra quedas severas conseguem honrar suas obrigações com beneficiários mesmo em crises de mercado — protegendo indiretamente os futuros aposentados.</div>
+                        </div>
+                    </div>
+                    <div class="deriv-papel-item">
+                        <span class="deriv-papel-icon">💧</span>
+                        <div>
+                            <div class="deriv-papel-titulo">Descoberta de preços</div>
+                            <div class="deriv-papel-desc">Os mercados futuros cumprem uma função de descoberta de preços: os preços negociados hoje para entrega futura incorporam as expectativas coletivas dos participantes sobre oferta, demanda e cenário econômico — informação valiosa para toda a cadeia produtiva.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="deriv-frase-invlab">
+                    A função econômica dos derivativos é invisível no dia a dia — mas seria muito sentida em sua ausência. Um mundo sem derivativos seria um mundo onde cada agente econômico precisaria absorver individualmente toda a incerteza de preços, câmbio e taxas de juros de suas operações. O custo dessa incerteza seria repassado integralmente ao consumidor final.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 10 — CHECKLIST -->
+            <div class="deriv-section">
+                <div class="deriv-section-tag">Seção 10 — Checklist INVLAB</div>
+                <h3 class="deriv-section-title">Antes de qualquer operação com derivativos, pergunte:</h3>
+                <p class="deriv-text">Estas perguntas não são direcionadas ao produtor rural ou ao gestor de fundo de pensão — que operam dentro de um contexto profissional claro. São perguntas para o investidor pessoa física que está considerando operar derivativos pela primeira vez.</p>
+
+                <div class="deriv-checklist">
+                    <div class="deriv-check-item">
+                        <div class="deriv-check-num">✓</div>
+                        <div class="deriv-check-text"><strong style="color:#E2E8F0;">Estou fazendo hedge ou especulação?</strong> Eu possuo o ativo que estou "protegendo"? Se não, estou especulando — e é importante reconhecer isso com clareza antes de prosseguir.</div>
+                    </div>
+                    <div class="deriv-check-item">
+                        <div class="deriv-check-num">✓</div>
+                        <div class="deriv-check-text"><strong style="color:#E2E8F0;">Entendo completamente o contrato?</strong> Conheço o ativo-objeto, o vencimento, o preço de exercício, o prêmio e todas as obrigações que estou assumindo — não apenas os possíveis ganhos?</div>
+                    </div>
+                    <div class="deriv-check-item">
+                        <div class="deriv-check-num">✓</div>
+                        <div class="deriv-check-text"><strong style="color:#E2E8F0;">Aceito perder integralmente o prêmio?</strong> Se eu comprar uma opção, estou confortável com o cenário em que ela expira sem valor e perco 100% do valor investido nesse contrato?</div>
+                    </div>
+                    <div class="deriv-check-item">
+                        <div class="deriv-check-num">✓</div>
+                        <div class="deriv-check-text"><strong style="color:#E2E8F0;">Conheço a margem exigida e o que acontece se ela for chamada?</strong> Tenho os recursos disponíveis para aportar margem adicional se a posição se mover contra mim? O que acontece com minha posição se eu não conseguir aportar?</div>
+                    </div>
+                    <div class="deriv-check-item">
+                        <div class="deriv-check-num">✓</div>
+                        <div class="deriv-check-text"><strong style="color:#E2E8F0;">Entendo a alavancagem que estou assumindo?</strong> Qual é o tamanho real da posição que estou controlando em relação ao meu capital? Quantos por cento do ativo-objeto precisa se mover contra mim para que eu perca todo o capital alocado nessa operação?</div>
+                    </div>
+                    <div class="deriv-check-item">
+                        <div class="deriv-check-num">✓</div>
+                        <div class="deriv-check-text"><strong style="color:#E2E8F0;">Estou usando derivativos como engenharia financeira ou tentando adivinhar o mercado?</strong> Se a resposta honesta for "estou tentando adivinhar a direção do mercado a curto prazo", é importante reconhecer que isso é especulação — e que do outro lado da operação geralmente há um participante muito mais experiente nesse tipo de análise.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AVISO EDITORIAL -->
+            <div class="deriv-aviso">
+                ⚠️ <strong>Observação editorial INVLAB:</strong> Todos os exemplos, analogias e mecanismos apresentados nesta página têm finalidade exclusivamente educacional. Não constituem recomendação de investimento, incentivo à negociação de derivativos ou orientação operacional para qualquer tipo de estratégia. O mercado de derivativos envolve riscos significativos, incluindo a possibilidade de perda total do capital investido e, em operações a descoberto, perdas superiores ao capital alocado. Regras da B3, regulamentações da CVM e condições de mercado podem sofrer alterações. Consulte sempre um profissional certificado antes de qualquer decisão de investimento.
+            </div>
+
+            <!-- A SEMENTE -->
+            <div class="deriv-semente">
+                <div class="deriv-semente-icon">🌱</div>
+                <div class="deriv-semente-title">A Semente</div>
+
+                <p class="deriv-semente-text">
+                    Os derivativos não foram criados para enriquecer traders.<br>
+                    Foram criados para proteger agricultores das secas.<br>
+                    Companhias aéreas da volatilidade do petróleo.<br>
+                    Exportadores da oscilação do câmbio.<br>
+                    Fundos de pensão de colapsos de mercado.
+                </p>
+
+                <p class="deriv-semente-text">
+                    Como toda ferramenta poderosa, podem construir ou destruir.
+                </p>
+
+                <p class="deriv-semente-text">
+                    Um bisturi salva vidas em mãos treinadas.<br>
+                    A mesma lâmina pode causar um acidente grave nas mãos erradas.<br>
+                    A diferença nunca esteve na ferramenta.<br>
+                    Sempre esteve nas mãos de quem a utiliza — e no propósito com que é utilizada.
+                </p>
+
+                <p class="deriv-semente-text">
+                    Na engenharia financeira acontece exatamente o mesmo.
+                </p>
+
+                <div class="deriv-semente-destaque">
+                    Investimentos constroem patrimônio.<br>
+                    A Engenharia Financeira protege patrimônio.<br><br>
+                    A maturidade de um investidor começa quando ele entende a diferença entre essas duas coisas — e percebe que são complementares, não concorrentes.<br><br>
+                    Se, ao final desta leitura, você decidir não operar derivativos mas compreender perfeitamente por que eles existem e qual problema econômico resolvem, este laboratório cumpriu seu objetivo.
+                </div>
+            </div>
+
+        </div><!-- /invlab-lab-container -->
+    </main>
+
+    <footer style="background: rgba(13, 13, 13, 0.97); border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+    <div class="content-wrapper-wide">
+        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
+                <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">🧭 Guia do INVLAB →</a>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                    <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Ações</a></li>
+                    <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💵 ETFs</a></li>
+                    <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 FIIs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Economia Digital</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌐 Economia Digital</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Instrumentos Avançados</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="fundos-investimento.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💼 Fundos de Investimentos</a></li>
+                    <li><a href="bdrs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌍 BDRs</a></li>
+                    <li><a href="fi-infra.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏗️ FI-Infra</a></li>
+                    <li><a href="ouro.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🥇 Ouro</a></li>
+                    <li><a href="derivativos.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">⚡ Derivativos</a></li>
+                    <li><a href="instrumentos-avancados.html#alternativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚀 Invest. Alternativos</a></li>
+                    <li><a href="instrumentos-avancados.html#ativos-reais" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏠 Ativos Reais</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Defesa do Investidor</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
+                    <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                    <li><a href="credito-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔥 Crédito</a></li>
+                    <li><a href="produtos-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔍 Produtos</a></li>
+                    <li><a href="sinais-de-alerta.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚨 Sinais de alerta</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
+            <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
+            </p>
+            <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
+            </p>
+        </div>
+    </div>
+    </footer>
+
+    <div id="backToTop">↑</div>
+
+    <script src="../assets/js/script.js"></script>
+    <script defer src="../assets/js/bcb-api.js"></script>
+    <script defer src="../assets/js/invlab-carrossel-renda-variavel.js"></script>
+    <script>
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+                setTimeout(() => backToTopButton.style.opacity = '1', 10);
+            } else {
+                backToTopButton.style.opacity = '0';
+                setTimeout(() => backToTopButton.style.display = 'none', 300);
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
