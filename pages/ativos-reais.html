@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ativos Reais — O Patrimônio que Você Pode Tocar | INVLAB</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="description" content="Imóveis, terrenos e colecionáveis — o que significa possuir patrimônio real? Laboratório INVLAB sobre ativos físicos, liquidez, custos e construção patrimonial de longo prazo.">
+
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+    <link rel="stylesheet" href="../assets/css/ativos-reais.css">
+</head>
+<body>
+    <section id="invlab-carousel-container"></section>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+            </div>
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Início</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">📚 Primeiros<br>Passos</button>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-fixa'">📊 Renda<br>Fixa <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="poupanca.html">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-variavel'">📈 Renda<br>Variável <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='etfs.html'" style="cursor:pointer;">
+                                <span class="category-name">💵 ETFs</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-etfs">
+                                <li><a href="#">📊 Simulador de Indexação</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='fiis.html'" style="cursor:pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-fiis">
+                                <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='acoes.html'" style="cursor:pointer;">
+                                <span class="category-name">📈 Ações</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-acoes">
+                                <li><a href="#">📊 Simulador de Dividendos</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <button class="tab-btn" onclick="window.location.href='cripto.html'">🌐 Economia<br>Digital</button>
+                <button class="tab-btn active" onclick="window.location.href='instrumentos-avancados.html'">🧬 Instrumentos<br>Avançados</button>
+                <button class="tab-btn" onclick="window.location.href='defesa-investidor.html'">🛡 Defesa do<br>Investidor</button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <main style="margin-top: 110px; padding-top: 44px;">
+        <!-- BREADCRUMB FIXO -->
+        <div style="position: fixed; top: 110px; left: 0; right: 0; z-index: 999; background: #0D0D0D; width: 100%; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <nav style="max-width: min(calc(100% - 64px), 1160px); margin: 0 auto; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.35);">
+                <span onclick="window.location.href='instrumentos-avancados.html'" style="cursor:pointer; color: rgba(6,182,212,0.65); font-weight:600;">🧬 Instrumentos Avançados</span>
+                <span>›</span>
+                <span style="color: rgba(160,120,80,0.82); font-weight:600;">🏠 Ativos Reais</span>
+            </nav>
+        </div>
+
+        <div class="invlab-lab-container">
+
+            <!-- HERO / HOOK -->
+            <div class="ar-hook">
+                <div class="ar-hook-badge">🏠 Laboratório · Ativos Reais</div>
+                <h1 class="ar-hook-titulo">O patrimônio que você pode tocar.</h1>
+                <p class="ar-hook-subtitulo">Antes do mercado financeiro. Antes das corretoras. Antes do Tesouro.</p>
+                <p class="ar-hook-texto">
+                    Durante milhares de anos...<br>
+                    riqueza significava possuir terra.<br>
+                    Depois vieram as cidades.<br>
+                    Os imóveis.<br>
+                    As empresas.<br>
+                    Os mercados financeiros.<br><br>
+                    Hoje convivemos com ETFs, derivativos, criptomoedas e investimentos internacionais.<br>
+                    Mas existe uma característica que atravessou toda a história da humanidade:<br><br>
+                    alguns patrimônios continuam existindo mesmo quando sistemas financeiros mudam.
+                </p>
+                <p class="ar-hook-tese">
+                    Eles possuem presença física.<br>
+                    Existem independentemente da bolsa.<br>
+                    Independentemente da moeda.<br>
+                    Independentemente do banco.<br>
+                    São outra categoria de patrimônio.
+                </p>
+            </div>
+
+            <!-- HOOK HISTÓRICO -->
+            <div class="ar-historia">
+                <p class="ar-historia-intro">Antes do Mercado Financeiro existir...</p>
+                <p class="ar-historia-sub">Antes da Bolsa. Antes dos Bancos Centrais. Antes do Tesouro Direto.</p>
+                <div class="ar-historia-itens">
+                    <span class="ar-historia-item">🏡 Terras</span>
+                    <span class="ar-historia-item">🏠 Casas</span>
+                    <span class="ar-historia-item">🌾 Fazendas</span>
+                    <span class="ar-historia-item">🥇 Ouro</span>
+                    <span class="ar-historia-item">🎨 Arte</span>
+                    <span class="ar-historia-item">🍷 Objetos raros</span>
+                </div>
+                <p class="ar-historia-conclusao">
+                    Os ativos reais não nasceram para competir com investimentos financeiros.<br>
+                    Eles existiam antes do próprio conceito moderno de investimento.
+                </p>
+                <p class="ar-historia-destaque">
+                    Essa perspectiva muda completamente a forma de enxergar patrimônio.
+                </p>
+            </div>
+
+            <!-- ===================================================
+                 SEÇÃO 1 — DOIS MUNDOS DIFERENTES
+                 =================================================== -->
+            <div class="ar-section">
+                <span class="ar-section-tag">Seção 1 · Estrutura</span>
+                <h2 class="ar-section-title">Dois mundos diferentes</h2>
+                <p class="ar-text">
+                    O mercado financeiro e os ativos físicos não são rivais. São dimensões complementares do patrimônio — cada uma cumprindo funções que a outra não consegue substituir.
+                </p>
+
+                <div class="ar-mundos-grid">
+                    <div class="ar-mundo-col ar-mundo-financeiro">
+                        <div class="ar-mundo-header">Patrimônio Financeiro</div>
+                        <ul class="ar-mundo-lista">
+                            <li>🇧🇷 Tesouro Direto</li>
+                            <li>🏦 CDB</li>
+                            <li>💵 ETFs</li>
+                            <li>📈 Ações</li>
+                            <li>💼 Fundos</li>
+                        </ul>
+                        <div class="ar-mundo-footer">
+                            depende do funcionamento<br>do sistema financeiro
+                        </div>
+                    </div>
+                    <div class="ar-mundo-col ar-mundo-real">
+                        <div class="ar-mundo-header">Patrimônio Real</div>
+                        <ul class="ar-mundo-lista">
+                            <li>🏠 Imóveis</li>
+                            <li>🌳 Terrenos</li>
+                            <li>🥇 Ouro físico</li>
+                            <li>🎨 Arte</li>
+                            <li>🍷 Colecionáveis</li>
+                        </ul>
+                        <div class="ar-mundo-footer">
+                            existe fisicamente<br>mesmo sem mercado funcionando
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ar-mundos-mensagem">
+                    <strong>Os dois mundos são importantes.</strong> Nenhum substitui o outro.<br>
+                    Eles cumprem funções completamente diferentes dentro da construção patrimonial.
+                </div>
+            </div>
+
+            <!-- ===================================================
+                 SEÇÃO 2 — IMÓVEIS
+                 =================================================== -->
+            <div class="ar-section">
+                <span class="ar-section-tag">Seção 2 · Imóveis</span>
+                <h2 class="ar-section-title">🏢 Imóveis — A infraestrutura invisível da economia</h2>
+
+                <p class="ar-text-ritmo">
+                    Um imóvel não produz riqueza porque seu preço sobe.<br>
+                    Ele produz riqueza porque permite que pessoas morem.<br>
+                    Empresas operem.<br>
+                    Comércio exista.<br>
+                    Serviços funcionem.<br><br>
+                    Toda cidade é construída sobre imóveis.<br>
+                    Quando você adquire um imóvel, não compra apenas paredes.<br>
+                    Compra localização.<br>
+                    Infraestrutura.<br>
+                    Fluxo econômico.<br>
+                    Tempo.
+                </p>
+
+                <div class="ar-atributos-grid">
+                    <div class="ar-atributo-col ar-oferece-col">
+                        <div class="ar-atributo-header">O imóvel oferece</div>
+                        <ul class="ar-atributo-lista">
+                            <li>Proteção histórica contra inflação</li>
+                            <li>Geração de renda por aluguel</li>
+                            <li>Controle direto sobre o ativo</li>
+                            <li>Valor tangível e concreto</li>
+                            <li>Ativo que atravessa gerações</li>
+                        </ul>
+                    </div>
+                    <div class="ar-atributo-col ar-cobra-col">
+                        <div class="ar-atributo-header">O imóvel cobra</div>
+                        <ul class="ar-atributo-lista">
+                            <li>ITBI + registro + escritura</li>
+                            <li>Manutenção permanente</li>
+                            <li>Condomínio e IPTU contínuos</li>
+                            <li>Risco de vacância</li>
+                            <li>Risco de inadimplência do inquilino</li>
+                            <li>Liquidez lenta — meses ou anos para vender</li>
+                            <li>IR na venda (ganho de capital)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 style="font-size:1.05rem; font-weight:700; color:rgba(255,255,255,0.75); margin: 32px 0 12px;">Comparativo INVLAB — Imóvel Direto vs FII</h3>
+                <div class="ar-comp-grid">
+                    <div class="ar-comp-col ar-comp-direto">
+                        <div class="ar-comp-header">Imóvel Direto</div>
+                        <ul class="ar-comp-lista">
+                            <li>↑ Controle total sobre o ativo</li>
+                            <li>↑ Possibilidade de uso próprio</li>
+                            <li>↓ Capital imobilizado por anos</li>
+                            <li>↓ Gestão operacional por sua conta</li>
+                            <li>↓ Liquidez muito baixa</li>
+                            <li>↓ Entrada exige capital alto</li>
+                        </ul>
+                    </div>
+                    <div class="ar-comp-col ar-comp-fii">
+                        <div class="ar-comp-header">FII (Fundo Imobiliário)</div>
+                        <ul class="ar-comp-lista">
+                            <li>↑ Liquidez diária via B3</li>
+                            <li>↑ Gestão profissional incluída</li>
+                            <li>↑ Diversificação com pequeno capital</li>
+                            <li>↑ Renda mensal distribuída</li>
+                            <li>↓ Sem controle sobre o ativo</li>
+                            <li>↓ Exposição à oscilação de mercado</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="ar-tutor-box">
+                    <span class="ar-tutor-label">🎯 Tutor INVLAB</span>
+                    Antes de comprar um imóvel, compare sempre o retorno líquido anual com o de um bom Fundo Imobiliário. O objetivo não é descobrir quem rende mais. É entender qual exige mais trabalho para entregar o mesmo resultado — e se esse trabalho faz sentido para o seu momento de vida.
+                </div>
+            </div>
+
+            <!-- ===================================================
+                 SEÇÃO 3 — TERRENOS
+                 =================================================== -->
+            <div class="ar-section">
+                <span class="ar-section-tag olive">Seção 3 · Terrenos</span>
+                <h2 class="ar-section-title olive">🌳 Terrenos — O investimento no futuro de uma região</h2>
+
+                <p class="ar-text">
+                    Terrenos produzem uma das maiores ilusões do mercado imobiliário.
+                </p>
+                <p class="ar-frase-invlab olive">
+                    O terreno nunca muda. Quem muda é tudo ao redor dele.
+                </p>
+                <p class="ar-text">
+                    Estradas. Energia. Saneamento. Comércio. População. Empregos. O valor está no desenvolvimento urbano — não na terra em si. Quem investe em terrenos está apostando no crescimento estrutural daquela região ao longo do tempo.
+                </p>
+
+                <div class="ar-terreno-faz-grid">
+                    <div class="ar-terreno-faz-col ar-terreno-faz-sim">
+                        <span class="ar-terreno-faz-label">✔ Faz sentido quando</span>
+                        <p>Você acredita no crescimento estrutural daquela região e tem capital que pode ficar imobilizado por muitos anos sem prejudicar sua estratégia financeira.</p>
+                    </div>
+                    <div class="ar-terreno-faz-col ar-terreno-faz-nao">
+                        <span class="ar-terreno-faz-label">✖ Não faz sentido quando</span>
+                        <p>Você espera renda mensal ou precisa de retorno no curto prazo. Terrenos não produzem fluxo de caixa. Produzem expectativa — e custam tempo.</p>
+                    </div>
+                </div>
+
+                <div class="ar-tutor-box">
+                    <span class="ar-tutor-label">🎯 Tutor INVLAB</span>
+                    Terrenos exigem duas virtudes raras: paciência e capacidade de esperar muitos anos sem retorno financeiro visível. Sem essas duas qualidades, o terreno vira uma fonte de frustração — não de patrimônio.
+                </div>
+            </div>
+
+            <!-- ===================================================
+                 SEÇÃO 4 — COLECIONÁVEIS
+                 =================================================== -->
+            <div class="ar-section">
+                <span class="ar-section-tag colec">Seção 4 · Colecionáveis</span>
+                <h2 class="ar-section-title colec">🎨 Colecionáveis — Quando escassez vale mais que produtividade</h2>
+
+                <div class="ar-colec-tags">
+                    <span class="ar-colec-tag">🎨 Obras de Arte</span>
+                    <span class="ar-colec-tag">⌚ Relógios</span>
+                    <span class="ar-colec-tag">🚗 Carros Clássicos</span>
+                    <span class="ar-colec-tag">🍷 Vinhos</span>
+                    <span class="ar-colec-tag">🪙 Moedas Raras</span>
+                    <span class="ar-colec-tag">📜 Objetos Históricos</span>
+                </div>
+
+                <p class="ar-text">
+                    Colecionáveis não geram caixa. Não pagam dividendos. Não distribuem juros. Seu valor nasce de outro lugar: <strong style="color: rgba(255,255,255,0.85);">escassez</strong>.
+                </p>
+                <p class="ar-text">
+                    Quanto menor a oferta, maior pode ser seu valor. Mas quanto menor a oferta... menor costuma ser também a liquidez. Não há mercado organizado. Não há preço de referência público. Não há comprador garantido.
+                </p>
+
+                <div class="ar-risco-box">
+                    <span class="ar-risco-box-label">O verdadeiro risco</span>
+                    <p>Não é a queda do preço. É encontrar alguém disposto a pagar o preço que você imagina que o ativo vale — no momento em que você precisa vender.</p>
+                </div>
+
+                <div class="ar-tutor-box">
+                    <span class="ar-tutor-label">🎯 Tutor INVLAB</span>
+                    Colecionáveis devem nascer da paixão — nunca da necessidade de rentabilidade. Se valorizarem: excelente. Se não valorizarem: ainda restará um patrimônio que faz sentido para você. Quem entra por retorno financeiro costuma sair frustrado. Quem entra por conhecimento e paixão está em um território muito mais sólido.
+                </div>
+            </div>
+
+            <!-- ===================================================
+                 SEÇÃO 5 — O VERDADEIRO CUSTO
+                 =================================================== -->
+            <div class="ar-section">
+                <span class="ar-section-tag">Seção 5 · Custos</span>
+                <h2 class="ar-section-title">O verdadeiro custo dos ativos reais</h2>
+                <p class="ar-text">
+                    Pouca gente calcula isso com honestidade. Todo ativo físico cobra um pedágio — visível ou não. Ignorar esses custos é a diferença entre uma boa decisão patrimonial e uma armadilha disfarçada de investimento.
+                </p>
+
+                <div class="ar-custos-grid">
+                    <div class="ar-custo-card">
+                        <span class="ar-custo-icon">🏠</span>
+                        <div class="ar-custo-tipo">Imóveis</div>
+                        <div class="ar-custo-pedagio">Manutenção + IPTU + condomínio + vacância + IR na venda</div>
+                    </div>
+                    <div class="ar-custo-card">
+                        <span class="ar-custo-icon">🌳</span>
+                        <div class="ar-custo-tipo">Terrenos</div>
+                        <div class="ar-custo-pedagio">Tempo sem retorno + IPTU + incerteza sobre o desenvolvimento urbano</div>
+                    </div>
+                    <div class="ar-custo-card">
+                        <span class="ar-custo-icon">🎨</span>
+                        <div class="ar-custo-tipo">Colecionáveis</div>
+                        <div class="ar-custo-pedagio">Autenticidade + conservação + custo de encontrar o comprador certo</div>
+                    </div>
+                    <div class="ar-custo-card">
+                        <span class="ar-custo-icon">🥇</span>
+                        <div class="ar-custo-tipo">Ouro Físico</div>
+                        <div class="ar-custo-pedagio">Custódia segura + seguro + spread de compra e venda</div>
+                    </div>
+                </div>
+
+                <p class="ar-frase-invlab">
+                    Comparar o "rendimento" de um ativo real com a rentabilidade de um título financeiro sem incluir os custos operacionais é comparar coisas incomparáveis.
+                </p>
+            </div>
+
+            <!-- ===================================================
+                 SEÇÃO 6 — LIQUIDEZ
+                 =================================================== -->
+            <div class="ar-section">
+                <span class="ar-section-tag">Seção 6 · Liquidez</span>
+                <h2 class="ar-section-title">Liquidez — O preço da tranquilidade</h2>
+
+                <p class="ar-text">
+                    Liquidez é a capacidade de converter um ativo em dinheiro rapidamente — sem grande perda de valor. É um dos recursos mais valiosos e menos valorizados na construção patrimonial.
+                </p>
+                <p class="ar-text">
+                    Um ETF pode ser vendido em segundos. Um Tesouro pode ser resgatado rapidamente. Um imóvel pode levar meses. Uma obra de arte... anos. Quanto mais exclusivo o ativo, maior costuma ser o tempo necessário para transformá-lo novamente em dinheiro.
+                </p>
+
+                <div class="ar-liquidez-escala">
+                    <span class="ar-escala-label-top">▲ Maior Liquidez</span>
+
+                    <div class="ar-escala-node ar-escala-n1">
+                        <span class="ar-escala-nome">Tesouro Direto</span>
+                        <span class="ar-escala-tempo">D+1</span>
+                    </div>
+                    <div class="ar-escala-arrow">↓</div>
+                    <div class="ar-escala-node ar-escala-n2">
+                        <span class="ar-escala-nome">ETFs e Ações</span>
+                        <span class="ar-escala-tempo">D+2</span>
+                    </div>
+                    <div class="ar-escala-arrow">↓</div>
+                    <div class="ar-escala-node ar-escala-n3">
+                        <span class="ar-escala-nome">Fundos Imobiliários (FIIs)</span>
+                        <span class="ar-escala-tempo">D+2</span>
+                    </div>
+                    <div class="ar-escala-arrow">↓</div>
+                    <div class="ar-escala-node ar-escala-n4">
+                        <span class="ar-escala-nome">Imóveis</span>
+                        <span class="ar-escala-tempo">Meses a anos</span>
+                    </div>
+                    <div class="ar-escala-arrow">↓</div>
+                    <div class="ar-escala-node ar-escala-n5">
+                        <span class="ar-escala-nome">Terrenos</span>
+                        <span class="ar-escala-tempo">Anos</span>
+                    </div>
+                    <div class="ar-escala-arrow">↓</div>
+                    <div class="ar-escala-node ar-escala-n6">
+                        <span class="ar-escala-nome">Colecionáveis raros</span>
+                        <span class="ar-escala-tempo">Indeterminado</span>
+                    </div>
+
+                    <span class="ar-escala-label-bottom">▼ Menor Liquidez</span>
+                    <p class="ar-liquidez-nota">A liquidez não define a qualidade do ativo — define a sua disponibilidade. Patrimonios sólidos combinam ativos de diferentes liquidez de forma consciente.</p>
+                </div>
+            </div>
+
+            <!-- ===================================================
+                 SEÇÃO 7 — QUANDO FAZ SENTIDO
+                 =================================================== -->
+            <div class="ar-section">
+                <span class="ar-section-tag">Seção 7 · Análise</span>
+                <h2 class="ar-section-title">Quando ativos reais fazem sentido?</h2>
+
+                <div class="ar-faz-grid">
+                    <div class="ar-faz-col ar-faz-sim-col">
+                        <div class="ar-faz-header">✔ Fazem sentido quando</div>
+                        <ul class="ar-faz-lista">
+                            <li><span>✔</span> O objetivo é preservar patrimônio no longo prazo</li>
+                            <li><span>✔</span> Você busca diversificação além do sistema financeiro</li>
+                            <li><span>✔</span> Quer reduzir dependência de um único tipo de ativo</li>
+                            <li><span>✔</span> Pensa em décadas — não em anos</li>
+                            <li><span>✔</span> Você tem reserva de emergência consolidada</li>
+                        </ul>
+                    </div>
+                    <div class="ar-faz-col ar-faz-nao-col">
+                        <div class="ar-faz-header">✖ Não fazem sentido quando</div>
+                        <ul class="ar-faz-lista">
+                            <li><span>✖</span> Você precisa de liquidez no curto prazo</li>
+                            <li><span>✖</span> O objetivo é ganho rápido ou especulação</li>
+                            <li><span>✖</span> Não há capital para suportar os custos de manutenção</li>
+                            <li><span>✖</span> A decisão é baseada em moda ou pressão social</li>
+                            <li><span>✖</span> Sua reserva de emergência ainda não existe</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHECKLIST -->
+            <div class="ar-checklist">
+                <div class="ar-checklist-titulo">☑ Checklist INVLAB — Antes de adquirir qualquer ativo real</div>
+                <div class="ar-check-lista">
+                    <div class="ar-check-item">
+                        <span class="ar-check-num">1</span>
+                        <span>Estou comprando patrimônio ou apenas seguindo uma tendência de mercado?</span>
+                    </div>
+                    <div class="ar-check-item">
+                        <span class="ar-check-num">2</span>
+                        <span>Consigo manter esse ativo por muitos anos sem comprometer minha estratégia financeira?</span>
+                    </div>
+                    <div class="ar-check-item">
+                        <span class="ar-check-num">3</span>
+                        <span>Conheço todos os custos ocultos — manutenção, impostos, seguros, custódia?</span>
+                    </div>
+                    <div class="ar-check-item">
+                        <span class="ar-check-num">4</span>
+                        <span>Sei quanto tempo posso esperar para vender sem pressão financeira?</span>
+                    </div>
+                    <div class="ar-check-item">
+                        <span class="ar-check-num">5</span>
+                        <span>Estou buscando renda, valorização ou apenas preservação? Esse ativo entrega o que procuro?</span>
+                    </div>
+                    <div class="ar-check-item">
+                        <span class="ar-check-num">6</span>
+                        <span>Esse ativo melhora a diversificação da minha estratégia — ou cria concentração?</span>
+                    </div>
+                    <div class="ar-check-item">
+                        <span class="ar-check-num">7</span>
+                        <span>Ele faz sentido dentro da minha visão patrimonial de longo prazo — ou é uma decisão emocional?</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AVISO EDITORIAL -->
+            <div class="ar-aviso">
+                ⚠️ Este laboratório não recomenda nem desaconselha nenhum ativo real de forma genérica. O que faz sentido depende inteiramente do seu perfil, do seu capital, do seu horizonte de tempo e da sua situação patrimonial atual. Consulte um profissional certificado para decisões concretas.
+            </div>
+
+            <!-- ===================================================
+                 A SEMENTE — EPÍLOGO DO INVLAB
+                 =================================================== -->
+            <div class="ar-semente">
+                <span class="ar-semente-icon">🌱</span>
+                <div class="ar-semente-title">A Semente · O Grande Fechamento</div>
+
+                <p class="ar-semente-text">
+                    Durante séculos...<br>
+                    famílias atravessaram guerras...<br>
+                    inflações...<br>
+                    mudanças de moeda...<br>
+                    crises bancárias...<br>
+                    revoluções políticas...<br><br>
+                    sem nunca possuir uma única ação.<br>
+                    Nem um ETF.<br>
+                    Nem um Tesouro.<br>
+                    Nem um CDB.<br><br>
+                    Seu patrimônio estava em terras.<br>
+                    Casas.<br>
+                    Fazendas.<br>
+                    Obras de arte.<br>
+                    Ouro.
+                </p>
+
+                <p class="ar-semente-destaque">
+                    Ativos reais nunca existiram para vencer o mercado.<br>
+                    Eles existem para atravessar gerações.
+                </p>
+
+                <div class="ar-semente-frase-final">
+                    Mercados mudam.<br>
+                    Tecnologias evoluem.<br>
+                    Moedas desaparecem.<br><br>
+                    Mas o verdadeiro patrimônio sempre encontra<br>
+                    uma forma de permanecer.
+                </div>
+
+                <div class="ar-semente-assinatura">🌱</div>
+            </div>
+
+        </div><!-- /invlab-lab-container -->
+    </main>
+
+    <!-- FOOTER -->
+    <footer style="background: rgba(13, 13, 13, 0.97); border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+    <div class="content-wrapper-wide">
+        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
+                <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">🧭 Guia do INVLAB →</a>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                    <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Ações</a></li>
+                    <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💵 ETFs</a></li>
+                    <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 FIIs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Economia Digital</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌐 Economia Digital</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Instrumentos Avançados</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="fundos-investimento.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💼 Fundos de Investimentos</a></li>
+                    <li><a href="bdrs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌍 BDRs</a></li>
+                    <li><a href="ouro.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🥇 Ouro</a></li>
+                    <li><a href="derivativos.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">⚡ Derivativos</a></li>
+                    <li><a href="fi-infra.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏗️ FI-Infra</a></li>
+                    <li><a href="venture-capital.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚀 Venture Capital</a></li>
+                    <li><a href="private-equity.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏭 Private Equity</a></li>
+                    <li><a href="peer-to-peer.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🤝 P2P Lending</a></li>
+                    <li><a href="commodities.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌍 Commodities</a></li>
+                    <li><a href="ativos-reais.html" style="color: rgba(160,120,80,0.90); text-decoration: none; font-weight: 600;">🏠 Ativos Reais</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Defesa do Investidor</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
+                    <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                    <li><a href="credito-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔥 Crédito</a></li>
+                    <li><a href="produtos-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔍 Produtos</a></li>
+                    <li><a href="sinais-de-alerta.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚨 Sinais de alerta</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
+            <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
+            </p>
+            <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
+            </p>
+        </div>
+    </div>
+    </footer>
+
+    <div id="backToTop">↑</div>
+
+    <script src="../assets/js/script.js"></script>
+    <script defer src="../assets/js/bcb-api.js"></script>
+    <script defer src="../assets/js/invlab-carrossel-renda-variavel.js"></script>
+    <script>
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+                setTimeout(() => backToTopButton.style.opacity = '1', 10);
+            } else {
+                backToTopButton.style.opacity = '0';
+                setTimeout(() => backToTopButton.style.display = 'none', 300);
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
