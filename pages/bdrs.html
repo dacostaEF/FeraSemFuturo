@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BDRs — Investindo no Mundo pela B3 | Internacionalização do Patrimônio | INVLAB</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="description" content="Entenda o que são BDRs, como funcionam os dois motores (empresa e câmbio) e quando a internacionalização do patrimônio faz sentido para você. INVLAB.">
+
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+    <link rel="stylesheet" href="../assets/css/bdrs.css">
+</head>
+<body>
+    <section id="invlab-carousel-container"></section>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+            </div>
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Início</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">📚 Primeiros<br>Passos</button>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-fixa'">📊 Renda<br>Fixa <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="poupanca.html">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-variavel'">📈 Renda<br>Variável <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='etfs.html'" style="cursor:pointer;">
+                                <span class="category-name">💵 ETFs</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-etfs">
+                                <li><a href="#">📊 Simulador de Indexação</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='fiis.html'" style="cursor:pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-fiis">
+                                <li><a href="#">📊 Simulador de Renda Passiva</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='acoes.html'" style="cursor:pointer;">
+                                <span class="category-name">📈 Ações</span><span class="category-arrow">▶</span>
+                            </div>
+                            <ul class="category-submenu" id="submenu-acoes">
+                                <li><a href="#">📊 Simulador de Dividendos</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <button class="tab-btn" onclick="window.location.href='cripto.html'">🌐 Economia<br>Digital</button>
+                <button class="tab-btn active" onclick="window.location.href='instrumentos-avancados.html'">🧬 Instrumentos<br>Avançados</button>
+                <button class="tab-btn" onclick="window.location.href='defesa-investidor.html'">🛡 Defesa do<br>Investidor</button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <main style="margin-top: 110px;">
+        <!-- BREADCRUMB STICKY -->
+        <div style="position: sticky; top: 110px; z-index: 999; background: #0D0D0D; width: 100%; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <nav style="max-width: min(calc(100% - 64px), 1160px); margin: 0 auto; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.35);">
+                <span onclick="window.location.href='instrumentos-avancados.html'" style="cursor:pointer; color: rgba(34,211,238,0.65); font-weight:600;">🧬 Instrumentos Avançados</span>
+                <span>›</span>
+                <span style="color: rgba(56,189,248,0.75); font-weight:600;">BDRs — Acesso Internacional</span>
+            </nav>
+        </div>
+        <div class="invlab-lab-container">
+
+            <!-- TÍTULO -->
+            <div style="padding-top: 40px; padding-bottom: 8px; text-align: center;">
+                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; font-weight: 800; color: #D4AF37; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em; line-height: 1.2;">🌍 BDRs — Investindo no Mundo pela B3</h2>
+                <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(56,189,248,0.65); text-align: center; line-height: 1.8; margin-bottom: 14px; max-width: 860px; margin-left: auto; margin-right: auto;">Internacionalizar seu patrimônio sem sair do Brasil.</p>
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: rgba(255,255,255,0.38); text-align: center; line-height: 1.8; margin-bottom: 0; max-width: 860px; margin-left: auto; margin-right: auto;">Utilizando sua corretora brasileira, em reais e através da B3, é possível acessar empresas de diferentes economias ao redor do mundo. Este laboratório explica como — e o que você precisa entender antes de decidir.</p>
+            </div>
+
+            <!-- HOOK -->
+            <div class="bdr-hook">
+                <div class="bdr-hook-badge">🌍 Laboratório — Internacionalização do Patrimônio</div>
+                <h2 style="font-size: clamp(1.4rem,3.5vw,2.1rem); font-weight: 700; color: #fff; line-height: 1.5; margin-bottom: 18px;">Investir internacionalmente não significa acreditar menos no Brasil.<br>Significa depender menos de uma única economia.</h2>
+                <p style="font-size:1rem; color:rgba(255,255,255,0.50); max-width:600px; margin:0 auto 20px; line-height:1.78;">
+                    Ao investir em um BDR, você não acompanha apenas o desempenho de uma empresa.
+                    Você também acompanha o comportamento da moeda em que aquele ativo é negociado.
+                    Compreender essa relação é o objetivo central deste laboratório.
+                </p>
+                <div class="bdr-hook-frase">
+                    "A pergunta certa não é: 'devo investir no exterior?' A pergunta certa é: 'estou concentrando todo o meu patrimônio em uma única economia?'"
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 1 — POR QUE INVESTIR FORA DO BRASIL?
+                 ====================================================== -->
+            <div class="bdr-section">
+                <div class="bdr-section-tag">Seção 01 — O ponto de partida</div>
+                <h3 class="bdr-section-title">Por que considerar investimentos internacionais?</h3>
+                <p class="bdr-text">
+                    Antes de qualquer conceito técnico, vale responder uma pergunta mais fundamental: por que alguém desejaria alocar parte do patrimônio fora do Brasil?
+                </p>
+                <p class="bdr-text">
+                    A resposta está num princípio simples: <strong>nenhuma economia cresce de forma linear e contínua</strong>. Toda economia passa por ciclos — de expansão, estabilidade e contração. Esses ciclos nem sempre acontecem ao mesmo tempo em países diferentes.
+                </p>
+                <p class="bdr-text">
+                    Quando uma economia enfrenta um período difícil — por razões políticas, fiscais, externas ou estruturais —, um investidor com patrimônio concentrado integralmente naquele mercado sente os efeitos de forma mais intensa. Um investidor com diversificação geográfica, por outro lado, pode ter parte do seu patrimônio em regiões com dinâmicas diferentes.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 24px 0;">
+                    <div style="background: rgba(14,165,233,0.05); border: 1px solid rgba(14,165,233,0.18); border-radius: 12px; padding: 20px;">
+                        <div style="font-size: 1.4rem; margin-bottom: 8px;">🌐</div>
+                        <div style="font-size: 0.88rem; font-weight: 700; color: rgba(56,189,248,0.80); margin-bottom: 6px;">Ciclos econômicos distintos</div>
+                        <div style="font-size: 0.80rem; color: rgba(255,255,255,0.45); line-height: 1.55;">Países diferentes enfrentam expansão e contração em momentos diferentes</div>
+                    </div>
+                    <div style="background: rgba(14,165,233,0.05); border: 1px solid rgba(14,165,233,0.18); border-radius: 12px; padding: 20px;">
+                        <div style="font-size: 1.4rem; margin-bottom: 8px;">🏭</div>
+                        <div style="font-size: 0.88rem; font-weight: 700; color: rgba(56,189,248,0.80); margin-bottom: 6px;">Empresas líderes fora do Brasil</div>
+                        <div style="font-size: 0.80rem; color: rgba(255,255,255,0.45); line-height: 1.55;">Muitas das maiores empresas do planeta não têm ações listadas na B3</div>
+                    </div>
+                    <div style="background: rgba(14,165,233,0.05); border: 1px solid rgba(14,165,233,0.18); border-radius: 12px; padding: 20px;">
+                        <div style="font-size: 1.4rem; margin-bottom: 8px;">💵</div>
+                        <div style="font-size: 0.88rem; font-weight: 700; color: rgba(56,189,248,0.80); margin-bottom: 6px;">Diversificação cambial</div>
+                        <div style="font-size: 0.80rem; color: rgba(255,255,255,0.45); line-height: 1.55;">Ativos em moeda estrangeira podem proteger parte do patrimônio em períodos de desvalorização do real</div>
+                    </div>
+                    <div style="background: rgba(14,165,233,0.05); border: 1px solid rgba(14,165,233,0.18); border-radius: 12px; padding: 20px;">
+                        <div style="font-size: 1.4rem; margin-bottom: 8px;">📊</div>
+                        <div style="font-size: 0.88rem; font-weight: 700; color: rgba(56,189,248,0.80); margin-bottom: 6px;">Redução de concentração</div>
+                        <div style="font-size: 0.80rem; color: rgba(255,255,255,0.45); line-height: 1.55;">Patrimônio distribuído entre diferentes economias reduz a dependência de um único mercado</div>
+                    </div>
+                </div>
+
+                <div class="bdr-frase-invlab">
+                    Investir internacionalmente não é uma aposta contra o Brasil. É uma estratégia de diversificação — da mesma forma que diversificar entre setores dentro da própria B3 reduz o risco de concentração.
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 2 — O QUE É UM BDR?
+                 ====================================================== -->
+            <div class="bdr-section">
+                <div class="bdr-section-tag">Seção 02 — O conceito</div>
+                <h3 class="bdr-section-title">O que é um BDR?</h3>
+                <p class="bdr-text">
+                    BDR significa <strong>Brazilian Depositary Receipt</strong> — em português, Certificado de Depósito de Valores Mobiliários. Mas definições jurídicas raramente explicam como algo funciona de verdade. Veja pela lógica:
+                </p>
+                <p class="bdr-text">
+                    Uma instituição financeira autorizada — chamada de <strong>instituição depositária</strong> — mantém ações originais de empresas estrangeiras custodiadas no exterior. Em contrapartida, ela emite certificados negociados aqui mesmo, na B3, em reais. Esses certificados são os BDRs.
+                </p>
+                <p class="bdr-text">
+                    O investidor brasileiro compra esses certificados utilizando sua corretora habitual, da mesma forma que compraria qualquer ação brasileira. Não há necessidade de conta no exterior, câmbio manual ou plataformas estrangeiras.
+                </p>
+
+                <div class="bdr-flow">
+                    <div class="bdr-flow-node">
+                        <div class="bdr-flow-node-title">🇧🇷 Investidor Brasileiro</div>
+                        <div class="bdr-flow-node-desc">Opera pela sua corretora habitual, em reais</div>
+                    </div>
+                    <div class="bdr-flow-arrow-block">
+                        <div class="bdr-flow-arrow-label">compra</div>
+                        <div class="bdr-flow-arrow-line"></div>
+                        <div class="bdr-flow-arrow-head"></div>
+                    </div>
+                    <div class="bdr-flow-node">
+                        <div class="bdr-flow-node-title">📜 BDR — Certificado</div>
+                        <div class="bdr-flow-node-desc">Negociado na B3, em reais, como qualquer ativo brasileiro</div>
+                    </div>
+                    <div class="bdr-flow-arrow-block">
+                        <div class="bdr-flow-arrow-label">emitido por</div>
+                        <div class="bdr-flow-arrow-line"></div>
+                        <div class="bdr-flow-arrow-head"></div>
+                    </div>
+                    <div class="bdr-flow-node">
+                        <div class="bdr-flow-node-title">🏦 Instituição Depositária</div>
+                        <div class="bdr-flow-node-desc">Custodia as ações originais e emite os certificados no Brasil</div>
+                    </div>
+                    <div class="bdr-flow-arrow-block">
+                        <div class="bdr-flow-arrow-label">lastreado em</div>
+                        <div class="bdr-flow-arrow-line"></div>
+                        <div class="bdr-flow-arrow-head"></div>
+                    </div>
+                    <div class="bdr-flow-node">
+                        <div class="bdr-flow-node-title">📈 Ação Original</div>
+                        <div class="bdr-flow-node-desc">Ativo real custodiado no mercado de origem</div>
+                    </div>
+                    <div class="bdr-flow-arrow-block">
+                        <div class="bdr-flow-arrow-label">pertence a</div>
+                        <div class="bdr-flow-arrow-line"></div>
+                        <div class="bdr-flow-arrow-head"></div>
+                    </div>
+                    <div class="bdr-flow-node" style="background: rgba(16,185,129,0.06); border-color: rgba(16,185,129,0.22);">
+                        <div class="bdr-flow-node-title" style="color: rgba(16,185,129,0.85);">🌍 Empresa Internacional</div>
+                        <div class="bdr-flow-node-desc">Negociada no mercado de origem — NYSE, Nasdaq, LSE, etc.</div>
+                    </div>
+                </div>
+
+                <p class="bdr-text" style="margin-top: 24px;">
+                    O BDR acompanha o desempenho da ação original — mas com um elemento adicional: a variação do câmbio entre o real e a moeda em que o ativo é negociado no exterior. Essa é a diferença estrutural mais importante a compreender.
+                </p>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 3 — OS DOIS MOTORES
+                 ====================================================== -->
+            <div class="bdr-section">
+                <div class="bdr-section-tag">Seção 03 — O conceito central</div>
+                <h3 class="bdr-section-title">Os dois motores do seu investimento</h3>
+                <p class="bdr-text">
+                    Esta é a seção mais importante deste laboratório. Ao investir em um BDR, o resultado em reais depende de <strong>dois fatores trabalhando simultaneamente</strong> — e de forma independente um do outro.
+                </p>
+
+                <div class="bdr-motores">
+                    <div class="bdr-motor empresa">
+                        <div class="bdr-motor-icon">🚀</div>
+                        <div class="bdr-motor-num">Motor 01</div>
+                        <div class="bdr-motor-titulo">A Empresa</div>
+                        <div class="bdr-motor-desc">O desempenho operacional da companhia — seus lucros, crescimento, posição competitiva, distribuição de dividendos e perspectivas de longo prazo. Se a empresa cria valor, esse movimento tende a beneficiar o investimento.</div>
+                    </div>
+                    <div class="bdr-motor cambio">
+                        <div class="bdr-motor-icon">💵</div>
+                        <div class="bdr-motor-num">Motor 02</div>
+                        <div class="bdr-motor-titulo">O Câmbio</div>
+                        <div class="bdr-motor-desc">A variação entre o real e a moeda em que o ativo original é negociado. Como o BDR é convertido para reais, toda valorização ou desvalorização cambial impacta diretamente o seu resultado — independentemente do desempenho da empresa.</div>
+                    </div>
+                </div>
+
+                <p class="bdr-text">Os dois motores funcionam ao mesmo tempo — e podem andar em direções opostas. Veja os quatro cenários possíveis:</p>
+
+                <div class="bdr-cenarios-grid">
+                    <div class="bdr-cenario muito-positivo">
+                        <div class="bdr-cenario-indicadores">
+                            <span class="bdr-cenario-pill sobe">Empresa ↑</span>
+                            <span style="color:rgba(255,255,255,0.30); font-size:0.80rem;">+</span>
+                            <span class="bdr-cenario-pill sobe">Câmbio ↑</span>
+                        </div>
+                        <div class="bdr-cenario-resultado" style="color: rgba(16,185,129,0.90);">Resultado amplificado</div>
+                        <div class="bdr-cenario-desc">A empresa cresce e o dólar também sobe em relação ao real. Os dois motores empurram na mesma direção — o resultado em reais é potencializado.</div>
+                    </div>
+                    <div class="bdr-cenario parcial-pos">
+                        <div class="bdr-cenario-indicadores">
+                            <span class="bdr-cenario-pill sobe">Empresa ↑</span>
+                            <span style="color:rgba(255,255,255,0.30); font-size:0.80rem;">+</span>
+                            <span class="bdr-cenario-pill cai">Câmbio ↓</span>
+                        </div>
+                        <div class="bdr-cenario-resultado" style="color: rgba(56,189,248,0.80);">Resultado parcialmente compensado</div>
+                        <div class="bdr-cenario-desc">A empresa sobe, mas o dólar cai frente ao real. O ganho da empresa é parcialmente ou totalmente compensado pela desvalorização cambial.</div>
+                    </div>
+                    <div class="bdr-cenario parcial-neg">
+                        <div class="bdr-cenario-indicadores">
+                            <span class="bdr-cenario-pill cai">Empresa ↓</span>
+                            <span style="color:rgba(255,255,255,0.30); font-size:0.80rem;">+</span>
+                            <span class="bdr-cenario-pill sobe">Câmbio ↑</span>
+                        </div>
+                        <div class="bdr-cenario-resultado" style="color: rgba(245,158,11,0.80);">Resultado parcialmente protegido</div>
+                        <div class="bdr-cenario-desc">A empresa cai, mas o dólar sobe. A perda da empresa é parcialmente amortecida pela valorização cambial — o resultado pode ser neutro ou levemente positivo.</div>
+                    </div>
+                    <div class="bdr-cenario negativo">
+                        <div class="bdr-cenario-indicadores">
+                            <span class="bdr-cenario-pill cai">Empresa ↓</span>
+                            <span style="color:rgba(255,255,255,0.30); font-size:0.80rem;">+</span>
+                            <span class="bdr-cenario-pill cai">Câmbio ↓</span>
+                        </div>
+                        <div class="bdr-cenario-resultado" style="color: rgba(239,68,68,0.80);">Resultado duplamente negativo</div>
+                        <div class="bdr-cenario-desc">A empresa cai e o dólar também se desvaloriza. Os dois motores puxam na mesma direção negativa — o resultado em reais é amplificado para baixo.</div>
+                    </div>
+                </div>
+
+                <div class="bdr-frase-invlab">
+                    Quem investe em BDR sem compreender o motor cambial frequentemente se surpreende com resultados inesperados — tanto positivos quanto negativos. Entender os dois motores é o mínimo necessário antes de qualquer decisão.
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 4 — COMO FUNCIONA NA PRÁTICA?
+                 ====================================================== -->
+            <div class="bdr-section">
+                <div class="bdr-section-tag">Seção 04 — O mecanismo</div>
+                <h3 class="bdr-section-title">Como um BDR funciona na prática?</h3>
+                <p class="bdr-text">
+                    Do ponto de vista operacional, o BDR é negociado como qualquer outro ativo na B3. Mas há aspectos estruturais importantes a compreender:
+                </p>
+
+                <div class="bdr-definicoes">
+                    <div class="bdr-definicao-item">
+                        <div class="bdr-definicao-termo">📌 Lastro</div>
+                        <div class="bdr-definicao-desc">Cada BDR representa uma fração de uma ou mais ações originais mantidas pela instituição depositária no exterior. A proporção varia por BDR — alguns representam 1 ação, outros representam frações menores. Essa proporção está sempre descrita no regulamento do ativo.</div>
+                    </div>
+                    <div class="bdr-definicao-item">
+                        <div class="bdr-definicao-termo">🔄 Negociação</div>
+                        <div class="bdr-definicao-desc">O BDR é negociado diretamente pela B3, durante o horário normal de funcionamento do mercado brasileiro. O preço reflete em tempo real a cotação da ação no mercado de origem — <strong>convertida para reais pela taxa de câmbio do momento</strong>.</div>
+                    </div>
+                    <div class="bdr-definicao-item">
+                        <div class="bdr-definicao-termo">💰 Dividendos</div>
+                        <div class="bdr-definicao-desc">Quando a empresa distribui dividendos, o valor é recebido pelo cotista do BDR em reais — após conversão cambial e retenção de imposto (quando aplicável). O processo é automático e acontece pela própria corretora.</div>
+                    </div>
+                    <div class="bdr-definicao-item">
+                        <div class="bdr-definicao-termo">🏦 Liquidação</div>
+                        <div class="bdr-definicao-desc">A liquidação financeira ocorre em reais, dentro do sistema brasileiro, no prazo padrão da B3. Não é necessário converter moeda, abrir conta no exterior ou entender a legislação de outros países.</div>
+                    </div>
+                    <div class="bdr-definicao-item">
+                        <div class="bdr-definicao-termo">📋 Tributação</div>
+                        <div class="bdr-definicao-desc">O Imposto de Renda sobre ganhos em BDRs segue a legislação brasileira — com alíquota de <strong>15%</strong> sobre os ganhos líquidos. A apuração é mensal e o recolhimento é responsabilidade do investidor via DARF. Consulte sempre um contador para sua situação específica.</div>
+                    </div>
+                    <div class="bdr-definicao-item">
+                        <div class="bdr-definicao-termo">📊 Acesso</div>
+                        <div class="bdr-definicao-desc">Desde 2020, os BDRs estão acessíveis a qualquer investidor pessoa física com conta em corretora habilitada — não apenas a investidores qualificados, como era antes. A operação é feita pela mesma plataforma usada para ações brasileiras.</div>
+                    </div>
+                </div>
+
+                <div class="bdr-aviso">
+                    ⚠️ As regras tributárias e regulatórias descritas nesta página têm caráter exclusivamente educacional e podem ser alteradas por decisões da CVM, Receita Federal ou outras autoridades competentes. Consulte sempre um profissional habilitado para sua situação específica.
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 5 — PRINCIPAIS VANTAGENS
+                 ====================================================== -->
+            <div class="bdr-section">
+                <div class="bdr-section-tag">Seção 05 — O que facilita</div>
+                <h3 class="bdr-section-title">Principais vantagens dos BDRs</h3>
+                <p class="bdr-text">
+                    O BDR resolve um problema real: como acessar mercados internacionais de forma simples, dentro do sistema financeiro brasileiro. Estas são as vantagens estruturais do instrumento:
+                </p>
+
+                <div class="bdr-lista-grid">
+                    <div class="bdr-lista-item vantagem">
+                        <span class="bdr-lista-icon">✓</span>
+                        <div><strong>Acesso simplificado ao mercado internacional.</strong> Mesma corretora, mesmo sistema, mesma conta. Sem burocracia adicional para operar ativos de outros países.</div>
+                    </div>
+                    <div class="bdr-lista-item vantagem">
+                        <span class="bdr-lista-icon">✓</span>
+                        <div><strong>Diversificação geográfica.</strong> Permite distribuir o patrimônio entre diferentes economias, reduzindo a concentração em um único mercado nacional.</div>
+                    </div>
+                    <div class="bdr-lista-item vantagem">
+                        <span class="bdr-lista-icon">✓</span>
+                        <div><strong>Exposição ao câmbio.</strong> Para quem deseja manter parte do patrimônio em moeda estrangeira sem movimentar recursos para fora do país, o BDR oferece essa exposição de forma regulada.</div>
+                    </div>
+                    <div class="bdr-lista-item vantagem">
+                        <span class="bdr-lista-icon">✓</span>
+                        <div><strong>Acesso a setores e empresas não disponíveis na B3.</strong> Muitos líderes globais de tecnologia, saúde, energia e outros setores não têm equivalente no mercado brasileiro.</div>
+                    </div>
+                    <div class="bdr-lista-item vantagem">
+                        <span class="bdr-lista-icon">✓</span>
+                        <div><strong>Recebimento de dividendos.</strong> Empresas que distribuem proventos regularmente podem gerar renda em moeda estrangeira — convertida e creditada em reais pela corretora.</div>
+                    </div>
+                    <div class="bdr-lista-item vantagem">
+                        <span class="bdr-lista-icon">✓</span>
+                        <div><strong>Liquidez dentro do horário da B3.</strong> A negociação ocorre durante o pregão brasileiro, com liquidez e transparência do mercado regulado nacional.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 6 — PRINCIPAIS RISCOS
+                 ====================================================== -->
+            <div class="bdr-section">
+                <div class="bdr-section-tag">Seção 06 — O que exige atenção</div>
+                <h3 class="bdr-section-title">Riscos que todo investidor em BDR precisa conhecer</h3>
+                <p class="bdr-text">
+                    Todo investimento tem riscos. No caso dos BDRs, alguns são compartilhados com outros instrumentos e outros são específicos da estrutura internacional. Conhecê-los não é razão para evitar — é condição para decidir com consciência.
+                </p>
+
+                <div class="bdr-lista-grid">
+                    <div class="bdr-lista-item risco">
+                        <span class="bdr-lista-icon">◆</span>
+                        <div><strong>Risco da empresa.</strong> Se a companhia tiver desempenho ruim — queda de lucros, problemas operacionais, mudanças de mercado — o valor do BDR tende a cair, independentemente do câmbio.</div>
+                    </div>
+                    <div class="bdr-lista-item risco">
+                        <span class="bdr-lista-icon">◆</span>
+                        <div><strong>Risco cambial.</strong> A variação entre o real e a moeda original impacta diretamente o resultado. Uma empresa pode crescer no exterior e o retorno em reais ser menor — ou até negativo — por conta do câmbio.</div>
+                    </div>
+                    <div class="bdr-lista-item risco">
+                        <span class="bdr-lista-icon">◆</span>
+                        <div><strong>Risco de liquidez.</strong> Alguns BDRs têm volume de negociação baixo na B3. Em momentos de maior urgência de resgate, pode ser necessário aceitar preços menos favoráveis para encontrar compradores.</div>
+                    </div>
+                    <div class="bdr-lista-item risco">
+                        <span class="bdr-lista-icon">◆</span>
+                        <div><strong>Risco do mercado internacional.</strong> Crises econômicas, decisões de bancos centrais estrangeiros, tensões geopolíticas e mudanças regulatórias em outros países afetam os ativos — independentemente do que acontece no Brasil.</div>
+                    </div>
+                    <div class="bdr-lista-item risco">
+                        <span class="bdr-lista-icon">◆</span>
+                        <div><strong>Risco tributário e regulatório.</strong> As regras de tributação podem mudar. A legislação sobre BDRs no Brasil tem histórico de alterações. Manter-se atualizado é responsabilidade do investidor.</div>
+                    </div>
+                    <div class="bdr-lista-item risco">
+                        <span class="bdr-lista-icon">◆</span>
+                        <div><strong>Risco de informação assimétrica.</strong> Empresas estrangeiras divulgam resultados em outros idiomas, fusos e padrões contábeis. Acompanhar essas empresas exige mais esforço do que acompanhar companhias brasileiras.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 7 — BDR NÃO É APENAS TECNOLOGIA
+                 ====================================================== -->
+            <div class="bdr-section">
+                <div class="bdr-section-tag">Seção 07 — Amplitude do mercado</div>
+                <h3 class="bdr-section-title">BDR não é apenas tecnologia</h3>
+                <p class="bdr-text">
+                    É comum associar BDRs exclusivamente a grandes empresas do setor de tecnologia — aquelas cujos nomes circulam com frequência na mídia. Mas o universo de BDRs disponíveis na B3 é muito mais amplo. Diferentes setores da economia global estão representados, oferecendo opções para diferentes perfis e objetivos.
+                </p>
+
+                <div class="bdr-setores-grid">
+                    <div class="bdr-setor-item">
+                        <div class="bdr-setor-icon">💻</div>
+                        <div class="bdr-setor-nome">Tecnologia</div>
+                        <div class="bdr-setor-desc">Software, plataformas digitais, computação em nuvem</div>
+                    </div>
+                    <div class="bdr-setor-item">
+                        <div class="bdr-setor-icon">🏥</div>
+                        <div class="bdr-setor-nome">Saúde</div>
+                        <div class="bdr-setor-desc">Hospitais, planos, equipamentos médicos, biotech</div>
+                    </div>
+                    <div class="bdr-setor-item">
+                        <div class="bdr-setor-icon">🏦</div>
+                        <div class="bdr-setor-nome">Financeiro</div>
+                        <div class="bdr-setor-desc">Bancos, gestoras, fintechs e seguradoras globais</div>
+                    </div>
+                    <div class="bdr-setor-item">
+                        <div class="bdr-setor-icon">⚡</div>
+                        <div class="bdr-setor-nome">Energia</div>
+                        <div class="bdr-setor-desc">Petróleo, gás, renováveis e utilidades globais</div>
+                    </div>
+                    <div class="bdr-setor-item">
+                        <div class="bdr-setor-icon">🛒</div>
+                        <div class="bdr-setor-nome">Consumo</div>
+                        <div class="bdr-setor-desc">Varejo, bens de consumo, marcas globais</div>
+                    </div>
+                    <div class="bdr-setor-item">
+                        <div class="bdr-setor-icon">🏗️</div>
+                        <div class="bdr-setor-nome">Infraestrutura</div>
+                        <div class="bdr-setor-desc">Logística, transportes, construção e utilities</div>
+                    </div>
+                    <div class="bdr-setor-item">
+                        <div class="bdr-setor-icon">💊</div>
+                        <div class="bdr-setor-nome">Farmacêutico</div>
+                        <div class="bdr-setor-desc">Grandes laboratórios, pesquisa e desenvolvimento</div>
+                    </div>
+                    <div class="bdr-setor-item">
+                        <div class="bdr-setor-icon">🤖</div>
+                        <div class="bdr-setor-nome">Inteligência Artificial</div>
+                        <div class="bdr-setor-desc">Infraestrutura de IA, modelos e aplicações</div>
+                    </div>
+                    <div class="bdr-setor-item">
+                        <div class="bdr-setor-icon">🔬</div>
+                        <div class="bdr-setor-nome">Semicondutores</div>
+                        <div class="bdr-setor-desc">Chips, processadores e componentes eletrônicos</div>
+                    </div>
+                </div>
+
+                <div class="bdr-frase-invlab">
+                    A amplitude setorial dos BDRs disponíveis permite que o investidor construa uma estratégia de diversificação internacional alinhada ao seu perfil — sem se limitar apenas aos setores mais comentados nos noticiários.
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 8 — QUANDO FAZ / NÃO FAZ SENTIDO
+                 ====================================================== -->
+            <div class="bdr-section">
+                <div class="bdr-section-tag">Seção 08 — A decisão consciente</div>
+                <h3 class="bdr-section-title">Quando um BDR costuma fazer sentido?</h3>
+                <p class="bdr-text">
+                    Como todo instrumento financeiro, o BDR não é certo nem errado por si só. O resultado depende de para quem é indicado, em que momento e com qual objetivo.
+                </p>
+
+                <div class="bdr-quando-grid">
+                    <div class="bdr-quando-item sim">
+                        <span style="color: rgba(56,189,248,0.80); font-size:1rem;">✓</span>
+                        <div><strong>Desejo de diversificação internacional.</strong> Quando o investidor reconhece que seu patrimônio está concentrado no Brasil e quer reduzir essa dependência de forma gradual e consciente.</div>
+                    </div>
+                    <div class="bdr-quando-item sim">
+                        <span style="color: rgba(56,189,248,0.80); font-size:1rem;">✓</span>
+                        <div><strong>Exposição ao câmbio de forma regulada.</strong> Para quem deseja manter parte do patrimônio em moeda estrangeira sem a complexidade de abrir conta no exterior.</div>
+                    </div>
+                    <div class="bdr-quando-item sim">
+                        <span style="color: rgba(56,189,248,0.80); font-size:1rem;">✓</span>
+                        <div><strong>Interesse em setores não representados na B3.</strong> Quando o investidor quer exposição a indústrias ou modelos de negócio que não existem ou são pouco desenvolvidos no mercado brasileiro.</div>
+                    </div>
+                    <div class="bdr-quando-item sim">
+                        <span style="color: rgba(56,189,248,0.80); font-size:1rem;">✓</span>
+                        <div><strong>Horizonte de longo prazo.</strong> A volatilidade cambial de curto prazo tende a ser menos determinante quanto maior for o horizonte de investimento.</div>
+                    </div>
+                    <div class="bdr-quando-item sim">
+                        <span style="color: rgba(56,189,248,0.80); font-size:1rem;">✓</span>
+                        <div><strong>Patrimônio com concentração excessiva no Brasil.</strong> Quando uma parcela significativa dos investimentos já está em ativos brasileiros e o objetivo é ampliar a diversificação geográfica.</div>
+                    </div>
+                </div>
+
+                <h3 class="bdr-section-title" style="margin-top: 36px;">Quando outras alternativas podem ser melhores?</h3>
+
+                <div class="bdr-quando-grid">
+                    <div class="bdr-quando-item neutro">
+                        <span style="color: rgba(245,158,11,0.80); font-size:1rem;">◆</span>
+                        <div><strong>Necessidade de liquidez imediata.</strong> Alguns BDRs têm volume de negociação mais baixo, o que pode dificultar a saída rápida em condições favoráveis de preço.</div>
+                    </div>
+                    <div class="bdr-quando-item neutro">
+                        <span style="color: rgba(245,158,11,0.80); font-size:1rem;">◆</span>
+                        <div><strong>Busca por renda previsível em reais.</strong> A variação cambial torna os proventos em reais imprevisíveis, mesmo quando a empresa distribui dividendos regulares em moeda estrangeira.</div>
+                    </div>
+                    <div class="bdr-quando-item neutro">
+                        <span style="color: rgba(245,158,11,0.80); font-size:1rem;">◆</span>
+                        <div><strong>Desconforto com o risco cambial.</strong> Quem não está preparado para ver o resultado em reais variar independentemente do desempenho da empresa pode se surpreender negativamente.</div>
+                    </div>
+                    <div class="bdr-quando-item neutro">
+                        <span style="color: rgba(245,158,11,0.80); font-size:1rem;">◆</span>
+                        <div><strong>Compra motivada apenas pela fama da empresa.</strong> Popularidade não é indicador de qualidade do investimento. Uma empresa muito conhecida pode estar cara — e uma empresa menos conhecida pode oferecer melhor relação risco-retorno.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 9 — COMO ESCOLHER UM BDR?
+                 ====================================================== -->
+            <div class="bdr-section">
+                <div class="bdr-section-tag">Seção 09 — O foco certo</div>
+                <h3 class="bdr-section-title">Como avaliar um BDR? O foco é a empresa.</h3>
+                <p class="bdr-text">
+                    O certificado em si — o BDR — é apenas o mecanismo de acesso. O que realmente determina a qualidade do investimento é a empresa por trás desse certificado. Antes de qualquer decisão, o investidor deve ser capaz de responder estas perguntas:
+                </p>
+
+                <div class="bdr-escolher-grid">
+                    <div class="bdr-escolher-item">
+                        <div class="bdr-escolher-num">1</div>
+                        <div>
+                            <div class="bdr-escolher-pergunta">Quem é essa empresa?</div>
+                            <div class="bdr-escolher-desc">Qual é o negócio central? Como ela gera receita? Há quantos anos existe? Em quais países opera?</div>
+                        </div>
+                    </div>
+                    <div class="bdr-escolher-item">
+                        <div class="bdr-escolher-num">2</div>
+                        <div>
+                            <div class="bdr-escolher-pergunta">Ela cresce de forma consistente?</div>
+                            <div class="bdr-escolher-desc">A receita tem crescido ao longo dos últimos anos? Esse crescimento é sustentável ou está baseado em fatores temporários?</div>
+                        </div>
+                    </div>
+                    <div class="bdr-escolher-item">
+                        <div class="bdr-escolher-num">3</div>
+                        <div>
+                            <div class="bdr-escolher-pergunta">Ela é lucrativa?</div>
+                            <div class="bdr-escolher-desc">Empresas com crescimento de receita mas sem lucro consistente exigem análise mais cuidadosa sobre sustentabilidade do modelo de negócio.</div>
+                        </div>
+                    </div>
+                    <div class="bdr-escolher-item">
+                        <div class="bdr-escolher-num">4</div>
+                        <div>
+                            <div class="bdr-escolher-pergunta">Em qual setor atua?</div>
+                            <div class="bdr-escolher-desc">O setor tem boas perspectivas de longo prazo? Está em expansão ou em contração? Qual é a sensibilidade desse setor a ciclos econômicos?</div>
+                        </div>
+                    </div>
+                    <div class="bdr-escolher-item">
+                        <div class="bdr-escolher-num">5</div>
+                        <div>
+                            <div class="bdr-escolher-pergunta">Quem são seus concorrentes?</div>
+                            <div class="bdr-escolher-desc">A empresa tem vantagem competitiva clara? Ela é líder no seu mercado ou enfrenta pressão crescente de concorrentes maiores ou mais eficientes?</div>
+                        </div>
+                    </div>
+                    <div class="bdr-escolher-item">
+                        <div class="bdr-escolher-num">6</div>
+                        <div>
+                            <div class="bdr-escolher-pergunta">Distribui dividendos?</div>
+                            <div class="bdr-escolher-desc">Se o objetivo é renda, verifique o histórico de distribuição e a política de dividendos. Lembre-se: os valores são recebidos em reais, após conversão cambial e tributação.</div>
+                        </div>
+                    </div>
+                    <div class="bdr-escolher-item">
+                        <div class="bdr-escolher-num">7</div>
+                        <div>
+                            <div class="bdr-escolher-pergunta">Faz sentido para meus objetivos?</div>
+                            <div class="bdr-escolher-desc">O perfil dessa empresa — setor, liquidez, volatilidade, dividendos — se alinha ao que você está buscando? Ou o interesse é apenas pela marca?</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bdr-frase-invlab">
+                    O BDR é o meio de acesso. A empresa é o investimento real. Quem decide baseado na fama do certificado raramente toma uma decisão melhor do que quem decide baseado na qualidade da empresa.
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 SEÇÃO 10 — FAÇA ESTA CONTA
+                 ====================================================== -->
+            <div class="bdr-section">
+                <div class="bdr-section-tag">Seção 10 — A conta que importa</div>
+                <h3 class="bdr-section-title">Faça esta conta antes de investir</h3>
+                <p class="bdr-text">
+                    O retorno final de um BDR em reais não depende apenas de um número. Ele é o resultado da combinação dos dois motores — empresa e câmbio — agindo ao mesmo tempo. Entender esse mecanismo antes de investir evita surpresas.
+                </p>
+
+                <div class="bdr-formula">
+                    <div class="bdr-formula-equacao">
+                        Retorno em reais ≈ <span class="fator">Empresa</span> <span class="sinal">×</span> <span class="fator">Câmbio</span>
+                    </div>
+                    <div class="bdr-formula-sub">Os dois fatores se multiplicam — não se somam. Nenhum anula o outro; ambos sempre influenciam o resultado final.</div>
+
+                    <div class="bdr-formula-cenarios">
+                        <div class="bdr-formula-cenario">
+                            <div class="bdr-formula-cenario-titulo">Cenário A</div>
+                            <div class="bdr-formula-linha">
+                                <span class="bdr-formula-label">Empresa</span>
+                                <span class="bdr-formula-valor pos">+20%</span>
+                            </div>
+                            <div class="bdr-formula-linha">
+                                <span class="bdr-formula-label">Câmbio</span>
+                                <span class="bdr-formula-valor pos">+15%</span>
+                            </div>
+                            <div class="bdr-formula-total">
+                                <span class="bdr-formula-total-label">Resultado aprox.</span>
+                                <span class="bdr-formula-valor pos">+38%</span>
+                            </div>
+                        </div>
+                        <div class="bdr-formula-cenario">
+                            <div class="bdr-formula-cenario-titulo">Cenário B</div>
+                            <div class="bdr-formula-linha">
+                                <span class="bdr-formula-label">Empresa</span>
+                                <span class="bdr-formula-valor pos">+20%</span>
+                            </div>
+                            <div class="bdr-formula-linha">
+                                <span class="bdr-formula-label">Câmbio</span>
+                                <span class="bdr-formula-valor neg">−15%</span>
+                            </div>
+                            <div class="bdr-formula-total">
+                                <span class="bdr-formula-total-label">Resultado aprox.</span>
+                                <span class="bdr-formula-valor neut">+2%</span>
+                            </div>
+                        </div>
+                        <div class="bdr-formula-cenario">
+                            <div class="bdr-formula-cenario-titulo">Cenário C</div>
+                            <div class="bdr-formula-linha">
+                                <span class="bdr-formula-label">Empresa</span>
+                                <span class="bdr-formula-valor neg">−10%</span>
+                            </div>
+                            <div class="bdr-formula-linha">
+                                <span class="bdr-formula-label">Câmbio</span>
+                                <span class="bdr-formula-valor pos">+20%</span>
+                            </div>
+                            <div class="bdr-formula-total">
+                                <span class="bdr-formula-total-label">Resultado aprox.</span>
+                                <span class="bdr-formula-valor pos">+8%</span>
+                            </div>
+                        </div>
+                        <div class="bdr-formula-cenario">
+                            <div class="bdr-formula-cenario-titulo">Cenário D</div>
+                            <div class="bdr-formula-linha">
+                                <span class="bdr-formula-label">Empresa</span>
+                                <span class="bdr-formula-valor neg">−15%</span>
+                            </div>
+                            <div class="bdr-formula-linha">
+                                <span class="bdr-formula-label">Câmbio</span>
+                                <span class="bdr-formula-valor neg">−10%</span>
+                            </div>
+                            <div class="bdr-formula-total">
+                                <span class="bdr-formula-total-label">Resultado aprox.</span>
+                                <span class="bdr-formula-valor neg">−24%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="bdr-text">
+                    Os números acima são <strong>ilustrativos e hipotéticos</strong> — servem apenas para mostrar como os dois fatores interagem. O ponto central: o resultado final nunca é explicado por apenas um dos motores. Sempre pelos dois.
+                </p>
+            </div>
+
+            <!-- ======================================================
+                 CHECKLIST INVLAB
+                 ====================================================== -->
+            <div class="bdr-section">
+                <div class="bdr-section-tag">Checklist — Antes de comprar</div>
+                <h3 class="bdr-section-title">Antes de comprar qualquer BDR, pergunte:</h3>
+                <p class="bdr-text">
+                    Se você não conseguir responder a maioria dessas perguntas com conforto, pesquise antes de decidir.
+                </p>
+
+                <div class="bdr-checklist">
+                    <div class="bdr-check-item">
+                        <div class="bdr-check-num">1</div>
+                        <div><strong>Conheço essa empresa?</strong> Sei o que ela faz, como ganha dinheiro e quais são seus principais riscos de negócio?</div>
+                    </div>
+                    <div class="bdr-check-item">
+                        <div class="bdr-check-num">2</div>
+                        <div><strong>Entendo o setor em que ela atua?</strong> O setor tem perspectiva de longo prazo favorável ou está sujeito a rupturas tecnológicas ou regulatórias relevantes?</div>
+                    </div>
+                    <div class="bdr-check-item">
+                        <div class="bdr-check-num">3</div>
+                        <div><strong>Quero de fato exposição internacional?</strong> A decisão é fruto de uma estratégia de diversificação consciente — não de uma moda ou de um conselho visto nas redes sociais?</div>
+                    </div>
+                    <div class="bdr-check-item">
+                        <div class="bdr-check-num">4</div>
+                        <div><strong>Estou confortável com a variação cambial?</strong> Entendo que o resultado em reais pode ser diferente do resultado da empresa — e aceito conviver com essa variável?</div>
+                    </div>
+                    <div class="bdr-check-item">
+                        <div class="bdr-check-num">5</div>
+                        <div><strong>Estou diversificando ou seguindo uma tendência?</strong> O BDR entra na carteira porque complementa minha estratégia — ou porque o ativo está em alta e aparece em todo lugar?</div>
+                    </div>
+                    <div class="bdr-check-item">
+                        <div class="bdr-check-num">6</div>
+                        <div><strong>Esse investimento faz sentido para meu planejamento?</strong> O prazo, a liquidez, o perfil de risco e o objetivo desse BDR específico estão alinhados com o meu momento financeiro atual?</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======================================================
+                 A SEMENTE
+                 ====================================================== -->
+            <div class="bdr-semente">
+                <div style="font-size: 1.6rem; margin-bottom: 28px;">🌱</div>
+                <h3 class="bdr-semente-titulo">A Semente deste Laboratório</h3>
+
+                <p class="bdr-semente-linha">Investir no exterior não significa acreditar menos no Brasil.</p>
+                <p class="bdr-semente-linha">Significa compreender que o mundo oferece <strong>oportunidades distribuídas</strong></p>
+                <p class="bdr-semente-linha">entre diferentes economias, empresas e moedas.</p>
+
+                <br>
+
+                <p class="bdr-semente-linha">Diversificar internacionalmente não é abandonar o seu país.</p>
+                <p class="bdr-semente-linha">É construir um patrimônio <strong>menos dependente de um único mercado.</strong></p>
+
+                <br>
+
+                <p class="bdr-semente-linha">O investidor que conhece diferentes economias</p>
+                <p class="bdr-semente-linha">amplia não apenas sua carteira.</p>
+                <p class="bdr-semente-linha"><strong>Amplia também sua forma de enxergar o mundo.</strong></p>
+
+                <br>
+
+                <div style="margin: 8px auto; max-width: 560px; padding: 28px 32px; background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.20); border-radius: 16px;">
+                    <p style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1rem, 2vw, 1.15rem); color: rgba(255,255,255,0.68); line-height: 1.78; margin: 0 0 10px; font-style: italic;">O BDR é o veículo. A verdadeira competência desenvolvida aqui</p>
+                    <p style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1rem, 2vw, 1.15rem); color: rgba(16,185,129,0.90); line-height: 1.78; margin: 0; font-weight: 700;">é aprender a olhar além das fronteiras do próprio país.</p>
+                </div>
+
+                <div style="font-size: 1.35rem; margin-top: 32px; color: rgba(14,165,233,0.80); font-weight: 700;">🌱</div>
+            </div>
+
+        </div><!-- /invlab-lab-container -->
+    </main>
+
+    <!-- FOOTER -->
+    <footer style="background: rgba(0,0,0,0.50); border-top: 1px solid rgba(212,175,55,0.1); padding: 48px 32px 32px; margin-top: 60px;">
+        <div style="max-width: 1160px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px; margin-bottom: 32px;">
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Primeiros Passos</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="../index.html#primeiros-passos" style="color: rgba(16,185,129,0.85); text-decoration: none;">📚 Aprenda a Investir</a></li>
+                    <li><a href="guia_invlab.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🧭 Guia do INVLAB</a></li>
+                    <li><a href="metodologia.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔬 Nossa Metodologia</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="poupanca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💰 Poupança</a></li>
+                    <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                    <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Ações</a></li>
+                    <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💵 ETFs</a></li>
+                    <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 FIIs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Economia Digital</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌐 Economia Digital</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Instrumentos Avançados</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="fundos-investimento.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💼 Fundos de Investimentos</a></li>
+                    <li><a href="bdrs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌍 BDRs</a></li>
+                    <li><a href="instrumentos-avancados.html#ouro" style="color: rgba(16,185,129,0.85); text-decoration: none;">🥇 Ouro</a></li>
+                    <li><a href="instrumentos-avancados.html#derivativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">⚡ Derivativos e Opções</a></li>
+                    <li><a href="instrumentos-avancados.html#alternativos" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚀 Invest. Alternativos</a></li>
+                    <li><a href="instrumentos-avancados.html#ativos-reais" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏠 Ativos Reais</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Defesa do Investidor</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
+                    <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                    <li><a href="credito-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔥 Crédito</a></li>
+                    <li><a href="produtos-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔍 Produtos</a></li>
+                    <li><a href="sinais-de-alerta.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚨 Sinais de alerta</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
+            <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
+            </p>
+            <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
+            </p>
+        </div>
+        </div>
+    </footer>
+
+    <div id="backToTop">↑</div>
+
+    <script src="../assets/js/script.js"></script>
+    <script defer src="../assets/js/bcb-api.js"></script>
+    <script defer src="../assets/js/invlab-carrossel-renda-variavel.js"></script>
+    <script>
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+                setTimeout(() => backToTopButton.style.opacity = '1', 10);
+            } else {
+                backToTopButton.style.opacity = '0';
+                setTimeout(() => backToTopButton.style.display = 'none', 300);
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

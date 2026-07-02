@@ -1,0 +1,358 @@
+/* ================================================================
+   BDRs — ESTILOS EXCLUSIVOS
+   Paleta: sky blue (#0EA5E9 / #38BDF8)
+   Filosofia: internacionalização do patrimônio
+   ================================================================ */
+
+/* HOOK */
+.bdr-hook {
+    background: linear-gradient(135deg, rgba(14,165,233,0.07) 0%, rgba(56,189,248,0.04) 100%);
+    border: 1px solid rgba(14,165,233,0.22);
+    border-radius: 20px; padding: 52px 40px;
+    text-align: center; margin: 48px 0 36px;
+    position: relative; overflow: hidden;
+}
+.bdr-hook::before {
+    content: ''; position: absolute; top: -60%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(ellipse at center, rgba(14,165,233,0.05) 0%, transparent 60%);
+    pointer-events: none;
+}
+.bdr-hook-badge {
+    display: inline-block;
+    background: rgba(14,165,233,0.10); border: 1px solid rgba(14,165,233,0.30);
+    color: #38BDF8; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    padding: 6px 18px; border-radius: 20px; margin-bottom: 28px;
+}
+.bdr-hook-frase {
+    background: rgba(14,165,233,0.07); border-left: 3px solid #0EA5E9;
+    border-radius: 0 12px 12px 0; padding: 18px 24px;
+    margin: 24px auto; max-width: 660px;
+    font-size: 1.02rem; color: rgba(56,189,248,0.85); font-style: italic;
+    font-weight: 600; line-height: 1.7; text-align: left;
+}
+
+/* SEÇÕES */
+.bdr-section {
+    background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px; padding: 44px 40px; margin-bottom: 28px;
+}
+.bdr-section-tag {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; color: rgba(14,165,233,0.60); margin-bottom: 10px;
+}
+.bdr-section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.4rem; font-weight: 700; color: #D4AF37;
+    margin-bottom: 16px; line-height: 1.3;
+}
+.bdr-text {
+    font-size: 0.95rem; color: rgba(255,255,255,0.62); line-height: 1.88; margin-bottom: 22px;
+}
+.bdr-text strong { color: rgba(255,255,255,0.88); }
+.bdr-frase-invlab {
+    background: rgba(16,185,129,0.06); border-left: 3px solid rgba(16,185,129,0.50);
+    border-radius: 0 10px 10px 0; padding: 16px 22px; margin: 20px 0;
+    font-size: 0.93rem; color: rgba(16,185,129,0.85); font-style: italic;
+    font-weight: 500; line-height: 1.7;
+}
+.bdr-frase-invlab::before { content: '💬 INVLAB — '; font-style: normal; font-weight: 700; }
+
+/* FLUXOGRAMA — COMO FUNCIONA (Seção 2) */
+.bdr-flow {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 0;
+    margin: 32px auto; max-width: 480px;
+}
+.bdr-flow-node {
+    background: rgba(14,165,233,0.08); border: 1px solid rgba(14,165,233,0.25);
+    border-radius: 14px; padding: 18px 28px;
+    text-align: center; width: 100%;
+}
+.bdr-flow-node-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem; font-weight: 700; color: #38BDF8; margin-bottom: 4px;
+}
+.bdr-flow-node-desc {
+    font-size: 0.80rem; color: rgba(255,255,255,0.45); line-height: 1.5;
+}
+.bdr-flow-arrow-block {
+    display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 0;
+}
+.bdr-flow-arrow-line { width: 2px; height: 18px; background: rgba(14,165,233,0.35); }
+.bdr-flow-arrow-head {
+    width: 0; height: 0;
+    border-left: 6px solid transparent; border-right: 6px solid transparent;
+    border-top: 8px solid rgba(14,165,233,0.40);
+}
+.bdr-flow-arrow-label {
+    font-size: 0.68rem; color: rgba(56,189,248,0.50); font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; text-align: center; margin-bottom: 2px;
+}
+
+/* OS DOIS MOTORES (Seção 3) */
+.bdr-motores {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 20px; margin: 28px 0;
+}
+.bdr-motor {
+    border-radius: 18px; padding: 32px 28px; text-align: center;
+}
+.bdr-motor.empresa {
+    background: rgba(14,165,233,0.06); border: 1px solid rgba(14,165,233,0.22);
+}
+.bdr-motor.cambio {
+    background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.22);
+}
+.bdr-motor-icon { font-size: 2.2rem; margin-bottom: 12px; }
+.bdr-motor-num {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 8px;
+}
+.bdr-motor.empresa .bdr-motor-num { color: rgba(56,189,248,0.65); }
+.bdr-motor.cambio  .bdr-motor-num { color: rgba(245,158,11,0.65); }
+.bdr-motor-titulo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 10px;
+}
+.bdr-motor-desc {
+    font-size: 0.86rem; color: rgba(255,255,255,0.52); line-height: 1.68;
+}
+
+/* GRID DE CENÁRIOS 2×2 */
+.bdr-cenarios-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 14px; margin: 28px 0;
+}
+.bdr-cenario {
+    border-radius: 14px; padding: 22px 20px;
+    display: flex; flex-direction: column; gap: 10px;
+}
+.bdr-cenario.muito-positivo { background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.22); }
+.bdr-cenario.parcial-pos    { background: rgba(14,165,233,0.05); border: 1px solid rgba(14,165,233,0.18); }
+.bdr-cenario.parcial-neg    { background: rgba(245,158,11,0.05); border: 1px solid rgba(245,158,11,0.18); }
+.bdr-cenario.negativo       { background: rgba(239,68,68,0.05);  border: 1px solid rgba(239,68,68,0.18); }
+.bdr-cenario-indicadores {
+    display: flex; gap: 10px; align-items: center;
+}
+.bdr-cenario-pill {
+    font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 20px;
+}
+.bdr-cenario-pill.sobe { background: rgba(16,185,129,0.15); color: rgba(16,185,129,0.90); }
+.bdr-cenario-pill.cai  { background: rgba(239,68,68,0.12);  color: rgba(239,68,68,0.85);  }
+.bdr-cenario-resultado {
+    font-size: 0.90rem; font-weight: 700; color: rgba(255,255,255,0.75);
+}
+.bdr-cenario-desc {
+    font-size: 0.82rem; color: rgba(255,255,255,0.48); line-height: 1.6;
+}
+
+/* COMO FUNCIONA — DEFINIÇÕES (Seção 4) */
+.bdr-definicoes { margin: 24px 0; }
+.bdr-definicao-item {
+    display: grid; grid-template-columns: 150px 1fr;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.88rem; line-height: 1.65;
+}
+.bdr-definicao-item:last-child { border-bottom: none; }
+.bdr-definicao-termo {
+    padding: 14px 14px 14px 0;
+    font-weight: 700; font-size: 0.80rem;
+    color: rgba(56,189,248,0.80);
+}
+.bdr-definicao-desc {
+    padding: 14px 0; color: rgba(255,255,255,0.60);
+}
+.bdr-definicao-desc strong { color: rgba(255,255,255,0.85); }
+
+/* VANTAGENS E RISCOS (Seções 5 e 6) */
+.bdr-lista-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 12px; margin: 24px 0;
+}
+.bdr-lista-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 16px 18px; border-radius: 12px;
+    font-size: 0.88rem; line-height: 1.68; color: rgba(255,255,255,0.62);
+}
+.bdr-lista-item.vantagem { background: rgba(16,185,129,0.04); border: 1px solid rgba(16,185,129,0.18); }
+.bdr-lista-item.risco    { background: rgba(245,158,11,0.04); border: 1px solid rgba(245,158,11,0.16); }
+.bdr-lista-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+.bdr-lista-item strong { color: rgba(255,255,255,0.88); }
+
+/* SETORES (Seção 7) */
+.bdr-setores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px; margin: 24px 0;
+}
+.bdr-setor-item {
+    background: rgba(14,165,233,0.05); border: 1px solid rgba(14,165,233,0.18);
+    border-radius: 12px; padding: 20px 16px; text-align: center;
+    transition: border-color 0.3s, transform 0.3s;
+}
+.bdr-setor-item:hover { border-color: rgba(56,189,248,0.38); transform: translateY(-2px); }
+.bdr-setor-icon { font-size: 1.8rem; margin-bottom: 8px; }
+.bdr-setor-nome { font-size: 0.85rem; font-weight: 700; color: rgba(56,189,248,0.80); margin-bottom: 4px; }
+.bdr-setor-desc { font-size: 0.75rem; color: rgba(255,255,255,0.38); line-height: 1.45; }
+
+/* QUANDO FAZ / NÃO FAZ SENTIDO (Seção 8) */
+.bdr-quando-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 12px; margin: 24px 0;
+}
+.bdr-quando-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 16px 18px; border-radius: 12px;
+    font-size: 0.88rem; line-height: 1.68; color: rgba(255,255,255,0.62);
+}
+.bdr-quando-item.sim    { background: rgba(14,165,233,0.04); border: 1px solid rgba(14,165,233,0.18); }
+.bdr-quando-item.neutro { background: rgba(245,158,11,0.04); border: 1px solid rgba(245,158,11,0.16); }
+.bdr-quando-item strong { color: rgba(255,255,255,0.88); }
+
+/* COMO ESCOLHER (Seção 9) */
+.bdr-escolher-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px; margin: 24px 0;
+}
+.bdr-escolher-item {
+    background: rgba(14,165,233,0.05); border: 1px solid rgba(14,165,233,0.18);
+    border-radius: 14px; padding: 22px 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+}
+.bdr-escolher-num {
+    width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.80rem; font-weight: 800;
+    background: rgba(14,165,233,0.12); color: rgba(56,189,248,0.85);
+    border: 1px solid rgba(14,165,233,0.25);
+}
+.bdr-escolher-pergunta {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 5px;
+}
+.bdr-escolher-desc { font-size: 0.83rem; color: rgba(255,255,255,0.50); line-height: 1.62; }
+
+/* A CONTA — RETORNO (Seção 10) */
+.bdr-formula {
+    background: rgba(14,165,233,0.06); border: 1px solid rgba(14,165,233,0.22);
+    border-radius: 18px; padding: 36px 32px; text-align: center; margin: 24px 0;
+}
+.bdr-formula-equacao {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 800;
+    color: #fff; margin-bottom: 8px; letter-spacing: -0.01em;
+}
+.bdr-formula-equacao span.fator { color: #38BDF8; }
+.bdr-formula-equacao span.sinal { color: rgba(255,255,255,0.30); margin: 0 12px; }
+.bdr-formula-sub {
+    font-size: 0.82rem; color: rgba(255,255,255,0.40); margin-top: 4px;
+}
+.bdr-formula-cenarios {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px; margin-top: 28px;
+}
+.bdr-formula-cenario {
+    background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px; padding: 18px 16px; text-align: left;
+}
+.bdr-formula-cenario-titulo {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 10px; color: rgba(255,255,255,0.35);
+}
+.bdr-formula-linha {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.84rem; padding: 4px 0;
+}
+.bdr-formula-label { color: rgba(255,255,255,0.50); }
+.bdr-formula-valor { font-weight: 700; }
+.bdr-formula-valor.pos  { color: rgba(16,185,129,0.85); }
+.bdr-formula-valor.neg  { color: rgba(239,68,68,0.80); }
+.bdr-formula-valor.neut { color: rgba(245,158,11,0.80); }
+.bdr-formula-total {
+    margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.90rem; font-weight: 700;
+}
+.bdr-formula-total-label { color: rgba(255,255,255,0.70); }
+
+/* CHECKLIST */
+.bdr-checklist { margin: 24px 0; }
+.bdr-check-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.90rem; color: rgba(255,255,255,0.65); line-height: 1.65;
+}
+.bdr-check-item:last-child { border-bottom: none; }
+.bdr-check-num {
+    width: 28px; height: 28px; border: 2px solid rgba(14,165,233,0.35);
+    border-radius: 7px; flex-shrink: 0; display: flex; align-items: center;
+    justify-content: center; font-size: 0.72rem; font-weight: 700;
+    color: rgba(56,189,248,0.75); margin-top: 1px;
+}
+.bdr-check-item strong { color: rgba(255,255,255,0.88); }
+
+/* A SEMENTE */
+.bdr-semente {
+    background: linear-gradient(135deg, rgba(14,165,233,0.06) 0%, rgba(16,185,129,0.05) 100%);
+    border: 1px solid rgba(14,165,233,0.20); border-radius: 24px;
+    padding: 56px 44px; margin: 12px 0 48px; text-align: center;
+    position: relative; overflow: hidden;
+}
+.bdr-semente::before {
+    content: ''; position: absolute; top: -40%; left: -20%;
+    width: 140%; height: 180%;
+    background: radial-gradient(ellipse at center, rgba(14,165,233,0.04) 0%, transparent 60%);
+    pointer-events: none;
+}
+.bdr-semente-titulo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.4rem, 2.8vw, 2rem); font-weight: 800; color: #D4AF37;
+    margin-bottom: 24px; line-height: 1.3;
+}
+.bdr-semente-linha {
+    font-size: 1rem; color: rgba(255,255,255,0.55); line-height: 2.2; margin-bottom: 4px;
+}
+.bdr-semente-linha strong { color: rgba(255,255,255,0.85); }
+
+/* AVISO EDITORIAL */
+.bdr-aviso {
+    background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px; padding: 22px 26px; margin: 24px 0;
+    font-size: 0.86rem; color: rgba(255,255,255,0.48); line-height: 1.75; text-align: center;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    .bdr-hook { padding: 36px 22px; }
+    .bdr-section { padding: 32px 22px; }
+    .bdr-semente { padding: 40px 24px; }
+    .bdr-motores { grid-template-columns: 1fr; }
+    .bdr-cenarios-grid { grid-template-columns: 1fr; }
+    .bdr-definicao-item { grid-template-columns: 1fr; }
+    .bdr-definicao-termo { padding: 12px 0 4px; }
+    .bdr-definicao-desc { padding: 4px 0 12px; }
+    .bdr-setores-grid { grid-template-columns: repeat(3, 1fr); }
+    .bdr-flow { max-width: 100%; }
+}
+
+/* BACK TO TOP */
+#backToTop {
+    display: none; position: fixed; bottom: 40px; right: 40px; z-index: 9999;
+    width: 56px; height: 56px;
+    background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+    color: #0D0D0D; border: 2px solid rgba(16,185,129,0.3); border-radius: 50%;
+    font-size: 28px; font-weight: 700; text-align: center; line-height: 52px;
+    cursor: pointer; box-shadow: 0 4px 16px rgba(212,175,55,0.4);
+    transition: all 0.3s ease-in-out; opacity: 0;
+}
+#backToTop:hover {
+    background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 24px rgba(212,175,55,0.6);
+    border-color: rgba(16,185,129,0.6);
+}
+@media (max-width: 768px) {
+    #backToTop { width: 48px; height: 48px; font-size: 24px; line-height: 44px; bottom: 24px; right: 24px; }
+}
