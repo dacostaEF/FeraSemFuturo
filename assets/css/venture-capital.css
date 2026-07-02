@@ -1,0 +1,707 @@
+/* ================================================
+   VENTURE CAPITAL — Capital de Risco
+   Paleta: Violeta #8B5CF6 / #A78BFA / Pink #EC4899
+   Prefixo: .vc-
+   ================================================ */
+
+/* --- HOOK / HERO --- */
+.vc-hook {
+    background: linear-gradient(135deg, rgba(139,92,246,0.09) 0%, rgba(236,72,153,0.04) 100%);
+    border: 1px solid rgba(139,92,246,0.22);
+    border-radius: 20px;
+    padding: 52px 44px;
+    margin: 36px 0 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.vc-hook::before {
+    content: '';
+    position: absolute;
+    top: -60%;
+    left: -40%;
+    width: 180%;
+    height: 180%;
+    background: radial-gradient(ellipse at center, rgba(139,92,246,0.05) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.vc-hook-badge {
+    display: inline-block;
+    background: rgba(139,92,246,0.12);
+    border: 1px solid rgba(139,92,246,0.28);
+    color: #A78BFA;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+}
+
+.vc-hook-manifesto {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.15rem, 2.5vw, 1.55rem);
+    font-weight: 700;
+    color: #E2E8F0;
+    line-height: 1.75;
+    margin-bottom: 24px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.vc-hook-manifesto em {
+    color: #A78BFA;
+    font-style: normal;
+}
+
+.vc-hook-tese {
+    display: inline-block;
+    font-size: 1.02rem;
+    color: #A78BFA;
+    font-style: italic;
+    line-height: 1.75;
+    padding: 20px 30px;
+    border: 1px solid rgba(139,92,246,0.22);
+    border-radius: 12px;
+    background: rgba(139,92,246,0.06);
+    max-width: 680px;
+    margin-top: 10px;
+}
+
+/* --- SECTION BASE --- */
+.vc-section {
+    margin: 52px 0;
+    padding: 38px 0;
+    border-top: 1px solid rgba(139,92,246,0.09);
+}
+
+.vc-section-tag {
+    display: inline-block;
+    font-size: 0.70rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: rgba(167,139,250,0.55);
+    margin-bottom: 12px;
+}
+
+.vc-section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.72rem;
+    font-weight: 700;
+    color: #E2E8F0;
+    margin-bottom: 18px;
+    line-height: 1.35;
+}
+
+.vc-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: #94A3B8;
+    line-height: 1.82;
+    margin-bottom: 16px;
+    max-width: 800px;
+}
+
+.vc-frase-invlab {
+    background: rgba(139,92,246,0.07);
+    border-left: 3px solid rgba(139,92,246,0.45);
+    padding: 20px 26px;
+    border-radius: 0 10px 10px 0;
+    font-size: 0.95rem;
+    color: #A78BFA;
+    line-height: 1.78;
+    margin: 26px 0;
+    font-style: italic;
+}
+
+.vc-destaque-box {
+    background: rgba(139,92,246,0.06);
+    border: 1px solid rgba(139,92,246,0.18);
+    border-radius: 12px;
+    padding: 22px 26px;
+    margin: 18px 0;
+}
+
+.vc-destaque-title {
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: #A78BFA;
+    margin-bottom: 10px;
+}
+
+/* --- SEÇÃO 1 — BINÁRIO TEM / NÃO TEM --- */
+.vc-binario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 28px 0;
+}
+
+.vc-binario-col {
+    border-radius: 16px;
+    padding: 28px 24px;
+}
+
+.vc-binario-col.tem {
+    background: rgba(139,92,246,0.06);
+    border: 1px solid rgba(139,92,246,0.18);
+}
+
+.vc-binario-col.nao-tem {
+    background: rgba(239,68,68,0.05);
+    border: 1px solid rgba(239,68,68,0.15);
+}
+
+.vc-binario-header {
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.vc-binario-col.tem .vc-binario-header { color: #A78BFA; }
+.vc-binario-col.nao-tem .vc-binario-header { color: rgba(252,165,165,0.80); }
+
+.vc-binario-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.vc-binario-lista li {
+    font-size: 0.90rem;
+    color: rgba(255,255,255,0.55);
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    line-height: 1.50;
+}
+
+.vc-binario-lista li:last-child { border-bottom: none; }
+
+/* --- SEÇÃO 2 — SETORES --- */
+.vc-setores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.vc-setor-item {
+    background: rgba(139,92,246,0.05);
+    border: 1px solid rgba(139,92,246,0.13);
+    border-radius: 12px;
+    padding: 18px 14px;
+    text-align: center;
+}
+
+.vc-setor-icon {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.vc-setor-nome {
+    font-size: 0.83rem;
+    font-weight: 600;
+    color: #E2E8F0;
+}
+
+/* --- SEÇÃO 3 — FLOWCHART CICLO DA INOVAÇÃO --- */
+.vc-flow {
+    display: flex;
+    flex-direction: column;
+    margin: 32px 0;
+}
+
+.vc-flow-item {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 0 20px;
+}
+
+.vc-flow-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.vc-flow-dot {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    border: 2px solid rgba(139,92,246,0.28);
+    background: rgba(139,92,246,0.07);
+    position: relative;
+    z-index: 1;
+}
+
+.vc-flow-dot.destaque {
+    width: 58px;
+    height: 58px;
+    border-color: #8B5CF6;
+    background: rgba(139,92,246,0.18);
+    box-shadow: 0 0 20px rgba(139,92,246,0.25);
+    margin-left: -3px;
+}
+
+.vc-flow-dot.economia {
+    border-color: rgba(236,72,153,0.50);
+    background: rgba(236,72,153,0.09);
+}
+
+.vc-flow-connector {
+    width: 2px;
+    flex: 1;
+    background: rgba(139,92,246,0.14);
+    min-height: 22px;
+}
+
+.vc-flow-content {
+    padding: 10px 0 26px;
+}
+
+.vc-flow-titulo {
+    font-size: 0.94rem;
+    font-weight: 700;
+    color: #E2E8F0;
+    margin-bottom: 4px;
+}
+
+.vc-flow-titulo.destaque { color: #A78BFA; }
+.vc-flow-titulo.economia { color: #EC4899; }
+
+.vc-flow-desc {
+    font-size: 0.83rem;
+    color: #64748B;
+    line-height: 1.62;
+}
+
+/* --- SEÇÃO 4 — O GESTOR CONSTRÓI --- */
+.vc-gestor-narrativa {
+    background: rgba(139,92,246,0.06);
+    border: 1px solid rgba(139,92,246,0.18);
+    border-radius: 14px;
+    padding: 28px 30px;
+    margin: 24px 0;
+    font-size: 0.93rem;
+    color: #94A3B8;
+    line-height: 1.82;
+    font-style: italic;
+}
+
+.vc-gestor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin-top: 22px;
+}
+
+.vc-gestor-item {
+    background: rgba(139,92,246,0.04);
+    border: 1px solid rgba(139,92,246,0.12);
+    border-radius: 10px;
+    padding: 16px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.vc-gestor-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.vc-gestor-texto {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.55;
+}
+
+.vc-gestor-texto strong {
+    color: rgba(255,255,255,0.80);
+    display: block;
+    margin-bottom: 2px;
+    font-size: 0.82rem;
+}
+
+/* --- SEÇÃO 5 — MATEMÁTICA / LEI DE POTÊNCIA --- */
+.vc-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 26px 0;
+}
+
+.vc-stat-card {
+    border-radius: 14px;
+    padding: 24px 20px;
+    text-align: center;
+}
+
+.vc-stat-card.mortalidade {
+    background: rgba(239,68,68,0.06);
+    border: 1px solid rgba(239,68,68,0.18);
+}
+
+.vc-stat-card.sobrevive {
+    background: rgba(245,158,11,0.05);
+    border: 1px solid rgba(245,158,11,0.18);
+}
+
+.vc-stat-card.potencia {
+    background: rgba(236,72,153,0.06);
+    border: 1px solid rgba(236,72,153,0.20);
+}
+
+.vc-stat-card.assimetria {
+    background: rgba(139,92,246,0.07);
+    border: 1px solid rgba(139,92,246,0.22);
+}
+
+.vc-stat-numero {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 6px;
+}
+
+.vc-stat-card.mortalidade .vc-stat-numero { color: #EF4444; }
+.vc-stat-card.sobrevive .vc-stat-numero { color: #F59E0B; }
+.vc-stat-card.potencia .vc-stat-numero { color: #EC4899; }
+.vc-stat-card.assimetria .vc-stat-numero { color: #A78BFA; }
+
+.vc-stat-label {
+    font-size: 0.80rem;
+    color: rgba(255,255,255,0.42);
+    line-height: 1.55;
+}
+
+.vc-lei-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 22px 0;
+}
+
+.vc-lei-card {
+    border-radius: 14px;
+    padding: 26px 22px;
+}
+
+.vc-lei-card.mortalidade {
+    background: rgba(239,68,68,0.05);
+    border: 1px solid rgba(239,68,68,0.16);
+}
+
+.vc-lei-card.potencia {
+    background: rgba(236,72,153,0.05);
+    border: 1px solid rgba(236,72,153,0.18);
+}
+
+.vc-lei-titulo {
+    font-size: 0.88rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.vc-lei-card.mortalidade .vc-lei-titulo { color: rgba(252,165,165,0.85); }
+.vc-lei-card.potencia .vc-lei-titulo { color: #EC4899; }
+
+.vc-lei-texto {
+    font-size: 0.87rem;
+    color: #94A3B8;
+    line-height: 1.72;
+}
+
+/* --- SEÇÃO 6 — QUEM INVESTE --- */
+.vc-quem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin-top: 26px;
+}
+
+.vc-quem-item {
+    background: rgba(139,92,246,0.05);
+    border: 1px solid rgba(139,92,246,0.13);
+    border-radius: 12px;
+    padding: 18px 14px;
+    text-align: center;
+}
+
+.vc-quem-icon {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.vc-quem-nome {
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: #E2E8F0;
+    margin-bottom: 4px;
+}
+
+.vc-quem-desc {
+    font-size: 0.76rem;
+    color: #64748B;
+    line-height: 1.50;
+}
+
+.vc-quem-alerta {
+    background: rgba(245,158,11,0.05);
+    border: 1px solid rgba(245,158,11,0.18);
+    border-radius: 14px;
+    padding: 26px 28px;
+    margin-top: 24px;
+}
+
+.vc-quem-alerta-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: rgba(251,191,36,0.85);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.vc-quem-alerta-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.vc-quem-alerta-lista li {
+    font-size: 0.86rem;
+    color: #94A3B8;
+    line-height: 1.65;
+    display: flex;
+    gap: 10px;
+}
+
+/* --- SEÇÃO 7 — RODADAS --- */
+.vc-rodada-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin: 26px 0;
+}
+
+.vc-rodada-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 22px 18px;
+    text-align: center;
+}
+
+.vc-rodada-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.vc-rodada-nome {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #E2E8F0;
+    margin-bottom: 8px;
+}
+
+.vc-rodada-desc {
+    font-size: 0.80rem;
+    color: #64748B;
+    line-height: 1.60;
+}
+
+/* --- SEÇÃO 8 — CUSTOS E ILIQUIDEZ --- */
+.vc-custo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin: 26px 0;
+}
+
+.vc-custo-card {
+    background: rgba(245,158,11,0.04);
+    border: 1px solid rgba(245,158,11,0.14);
+    border-radius: 14px;
+    padding: 24px 20px;
+}
+
+.vc-custo-nome {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: rgba(251,191,36,0.70);
+    margin-bottom: 8px;
+}
+
+.vc-custo-valor {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #E2E8F0;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.vc-custo-desc {
+    font-size: 0.83rem;
+    color: #64748B;
+    line-height: 1.65;
+}
+
+/* --- ALERTAS GENÉRICOS --- */
+.vc-alerta {
+    background: rgba(239,68,68,0.05);
+    border: 1px solid rgba(239,68,68,0.15);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    font-size: 0.88rem;
+    color: #94A3B8;
+    line-height: 1.75;
+}
+
+.vc-alerta-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(252,165,165,0.75);
+    margin-bottom: 8px;
+}
+
+/* --- CHECKLIST --- */
+.vc-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 26px;
+}
+
+.vc-check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: rgba(139,92,246,0.04);
+    border: 1px solid rgba(139,92,246,0.12);
+    border-radius: 10px;
+    padding: 16px 20px;
+}
+
+.vc-check-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    background: rgba(139,92,246,0.12);
+    border: 1px solid rgba(139,92,246,0.26);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.80rem;
+    font-weight: 700;
+    color: #A78BFA;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.vc-check-text {
+    font-size: 0.90rem;
+    color: #94A3B8;
+    line-height: 1.65;
+}
+
+/* --- AVISO EDITORIAL --- */
+.vc-aviso {
+    background: rgba(0,0,0,0.28);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 10px;
+    padding: 20px 24px;
+    font-size: 0.80rem;
+    color: #475569;
+    line-height: 1.72;
+    margin: 44px 0;
+}
+
+/* --- A SEMENTE --- */
+.vc-semente {
+    background: linear-gradient(135deg, rgba(139,92,246,0.09), rgba(236,72,153,0.04));
+    border: 1px solid rgba(139,92,246,0.20);
+    border-radius: 22px;
+    padding: 56px 48px;
+    text-align: center;
+    margin: 50px 0 20px;
+}
+
+.vc-semente-icon {
+    font-size: 3rem;
+    margin-bottom: 22px;
+}
+
+.vc-semente-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: #C4B5FD;
+    margin-bottom: 28px;
+}
+
+.vc-semente-text {
+    font-size: 0.96rem;
+    color: #94A3B8;
+    line-height: 1.88;
+    max-width: 680px;
+    margin: 0 auto 14px;
+}
+
+.vc-semente-destaque {
+    font-size: 0.97rem;
+    color: #C4B5FD;
+    line-height: 1.88;
+    max-width: 680px;
+    margin: 26px auto 0;
+    font-style: italic;
+    padding: 28px 32px;
+    background: rgba(139,92,246,0.07);
+    border-radius: 14px;
+    border: 1px solid rgba(139,92,246,0.15);
+}
+
+/* --- RESPONSIVO --- */
+@media (max-width: 680px) {
+    .vc-binario { grid-template-columns: 1fr; }
+    .vc-lei-grid { grid-template-columns: 1fr; }
+    .vc-hook { padding: 36px 22px; }
+    .vc-semente { padding: 36px 24px; }
+    .vc-flow-dot { width: 42px; height: 42px; font-size: 1rem; }
+    .vc-flow-dot.destaque { width: 46px; height: 46px; }
+}
+
+/* backToTop — violeta para VC */
+#backToTop {
+    background: #8B5CF6;
+    color: #F5F3FF;
+}

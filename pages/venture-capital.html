@@ -1,0 +1,688 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venture Capital — Como a Sociedade Financia a Inovação | INVLAB</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/Favicon_TutorFinanceiro.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/Favicon_TutorFinanceiro.png">
+
+    <meta name="theme-color" content="#0D0D0D">
+    <meta name="description" content="Como a sociedade financia ideias que ainda não existem? Um laboratório INVLAB sobre Venture Capital, a Lei de Potência, iliquidez e o papel econômico do capital de risco na inovação.">
+
+    <link rel="stylesheet" href="../assets/css/inv-design-system.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-theme.css">
+    <link rel="stylesheet" href="../assets/css/artigo-styles.css">
+    <link rel="stylesheet" href="../assets/css/invlab-carrossel.css">
+    <link rel="stylesheet" href="../assets/css/venture-capital.css">
+</head>
+<body>
+    <section id="invlab-carousel-container"></section>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                <img src="../assets/images/Logo_tutorfinanceiro.png" alt="INVLAB - Laboratório de Investimentos">
+            </div>
+            <div class="tabs-nav-wrapper">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn" onclick="window.location.href='../index.html'">🏠 Início</button>
+                <button class="tab-btn" onclick="window.location.href='../index.html#primeiros-passos'">📚 Primeiros<br>Passos</button>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-fixa'">📊 Renda<br>Fixa <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="poupanca.html">💰 Poupança</a></li>
+                        <li><a href="simulador-cdbs.html">🏦 CDBs</a></li>
+                        <li><a href="simulador-tesouro-direto.html">🇧🇷 Tesouro Direto</a></li>
+                        <li><a href="simulador-lci-lca.html">🏛️ LCI/LCA</a></li>
+                    </ul>
+                </div>
+                <div class="tab-with-dropdown">
+                    <button class="tab-btn dropdown-toggle" onclick="window.location.href='../index.html#renda-variavel'">📈 Renda<br>Variável <span class="arrow">▼</span></button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='etfs.html'" style="cursor:pointer;">
+                                <span class="category-name">💵 ETFs</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='fiis.html'" style="cursor:pointer;">
+                                <span class="category-name">🏢 Fundos Imobiliários (FIIs)</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                        <li class="dropdown-category">
+                            <div class="category-header" onclick="window.location.href='acoes.html'" style="cursor:pointer;">
+                                <span class="category-name">📈 Ações</span><span class="category-arrow">▶</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <button class="tab-btn" onclick="window.location.href='cripto.html'">🌐 Economia<br>Digital</button>
+                <button class="tab-btn active" onclick="window.location.href='instrumentos-avancados.html'">🧬 Instrumentos<br>Avançados</button>
+                <button class="tab-btn" onclick="window.location.href='defesa-investidor.html'">🛡 Defesa do<br>Investidor</button>
+            </nav>
+            </div>
+        </div>
+    </header>
+
+    <main style="margin-top: 110px;">
+        <!-- BREADCRUMB STICKY -->
+        <div style="position: sticky; top: 110px; z-index: 999; background: #0D0D0D; width: 100%; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <nav style="max-width: min(calc(100% - 64px), 1160px); margin: 0 auto; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.35);">
+                <span onclick="window.location.href='instrumentos-avancados.html'" style="cursor:pointer; color: rgba(34,211,238,0.65); font-weight:600;">🧬 Instrumentos Avançados</span>
+                <span>›</span>
+                <span onclick="window.location.href='venture-capital.html'" style="cursor:pointer; color: rgba(139,92,246,0.55); font-weight:600;">🚀 Investimentos Alternativos</span>
+                <span>›</span>
+                <span style="color: rgba(139,92,246,0.82); font-weight:600;">Venture Capital</span>
+            </nav>
+        </div>
+
+        <div class="invlab-lab-container">
+
+            <!-- TÍTULO -->
+            <div style="padding-top: 40px; padding-bottom: 8px; text-align: center;">
+                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.4rem; font-weight: 800; color: #8B5CF6; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em; line-height: 1.2;">🚀 Venture Capital</h2>
+                <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(139,92,246,0.65); text-align: center; margin-bottom: 10px; max-width: 720px; margin-left: auto; margin-right: auto;">Capital de Risco, Lei de Potência e a Iliquidez do Futuro</p>
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.92rem; color: rgba(255,255,255,0.32); text-align: center; margin-bottom: 0; max-width: 680px; margin-left: auto; margin-right: auto;">Investir em Venture Capital não é sobre acompanhar gráficos. É sobre aceitar o caos da criação — e a matemática fria da assimetria estatística.</p>
+            </div>
+
+            <!-- HOOK -->
+            <div class="vc-hook">
+                <div class="vc-hook-badge">🚀 Laboratório — Venture Capital e Investimentos Alternativos</div>
+                <div class="vc-hook-manifesto">
+                    Toda grande empresa já foi apenas uma ideia.<br>
+                    Sem clientes. Sem patrimônio.<br>
+                    Sem fluxo de caixa. Sem garantias. Sem histórico.<br><br>
+                    <em>Nenhum banco empresta dinheiro para uma ideia.</em><br><br>
+                    Mas sem capital, ela jamais se transformaria em empresa.<br>
+                    Foi exatamente para resolver esse problema que surgiu o Venture Capital.
+                </div>
+                <div class="vc-hook-tese">
+                    "Não é um investimento comum. É uma das engrenagens que permitem que inovação se transforme em economia real."<br>
+                    <span style="font-size: 0.80rem; color: rgba(167,139,250,0.50); font-style: normal; font-weight: 600; margin-top: 10px; display: block;">— A pergunta central deste laboratório: como a sociedade financia ideias que ainda não existem?</span>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 1 — O PROBLEMA DOS BANCOS -->
+            <div class="vc-section">
+                <div class="vc-section-tag">Seção 1 — A Origem</div>
+                <h3 class="vc-section-title">📋 O problema que os bancos nunca conseguiram resolver</h3>
+                <p class="vc-text">Antes de explicar o Venture Capital, é necessário entender por que ele precisou existir. O ponto de partida não é o instrumento financeiro — é uma falha estrutural no sistema de crédito tradicional.</p>
+                <p class="vc-text">Bancos trabalham com previsibilidade. Emprestam dinheiro para quem consegue demonstrar capacidade de pagamento — por meio de histórico financeiro, patrimônio como garantia, fluxo de caixa recorrente, ou uma combinação desses elementos.</p>
+                <p class="vc-text">Startups, por natureza, frequentemente não possuem nenhum desses elementos. E é exatamente aí que nasce o paradoxo.</p>
+
+                <div class="vc-binario">
+                    <div class="vc-binario-col tem">
+                        <div class="vc-binario-header">✅ O que uma startup normalmente tem</div>
+                        <ul class="vc-binario-lista">
+                            <li><span>💡</span>Uma ideia com potencial de escala</li>
+                            <li><span>🧠</span>Tecnologia ou conhecimento proprietário</li>
+                            <li><span>🔬</span>Pesquisa e propriedade intelectual</li>
+                            <li><span>👥</span>Uma equipe talentosa e dedicada</li>
+                            <li><span>📈</span>Um mercado identificado — ainda a conquistar</li>
+                        </ul>
+                    </div>
+                    <div class="vc-binario-col nao-tem">
+                        <div class="vc-binario-header">❌ O que um banco exige — e a startup não tem</div>
+                        <ul class="vc-binario-lista">
+                            <li><span>🏠</span>Patrimônio físico para oferecer como garantia</li>
+                            <li><span>📊</span>Histórico financeiro comprovado</li>
+                            <li><span>💰</span>Fluxo de caixa recorrente e previsível</li>
+                            <li><span>📄</span>Balanços auditados de exercícios anteriores</li>
+                            <li><span>🔒</span>Risco de crédito mensurável pelos critérios tradicionais</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p class="vc-text">A inovação nasce justamente onde o crédito tradicional não consegue atuar. O Venture Capital surgiu para preencher esse vazio — trocando dinheiro não por garantia, mas por participação. O investidor não empresta: ele se torna sócio, assumindo junto com o empreendedor o risco de que a ideia pode nunca se tornar um negócio viável.</p>
+
+                <div class="vc-frase-invlab">
+                    O Venture Capital não é uma invenção do mercado financeiro. É uma resposta econômica a um problema real: como financiar a criação de algo que ainda não existe — e que, portanto, não pode oferecer nenhuma das garantias que o sistema de crédito convencional exige.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 2 — VC FINANCIA POSSIBILIDADES -->
+            <div class="vc-section">
+                <div class="vc-section-tag">Seção 2 — O Papel Macroeconômico</div>
+                <h3 class="vc-section-title">🌐 Venture Capital não financia empresas. Financia possibilidades.</h3>
+                <p class="vc-text">Quando um fundo de Venture Capital investe em uma startup, não está comprando uma empresa com balanço estabelecido. Está apostando em uma hipótese: que aquela tecnologia, aquele modelo de negócio, aquela equipe — será capaz de criar valor em escala suficiente para compensar os riscos assumidos.</p>
+                <p class="vc-text">Historicamente, os setores que mais receberam capital de risco são justamente aqueles que exigem anos de pesquisa e desenvolvimento antes de gerar qualquer receita — e que, quando funcionam, têm potencial de remodelar setores inteiros da economia.</p>
+
+                <div class="vc-setores-grid">
+                    <div class="vc-setor-item">
+                        <span class="vc-setor-icon">🤖</span>
+                        <div class="vc-setor-nome">Inteligência Artificial</div>
+                    </div>
+                    <div class="vc-setor-item">
+                        <span class="vc-setor-icon">🧬</span>
+                        <div class="vc-setor-nome">Biotecnologia</div>
+                    </div>
+                    <div class="vc-setor-item">
+                        <span class="vc-setor-icon">⚡</span>
+                        <div class="vc-setor-nome">Energia e Clima</div>
+                    </div>
+                    <div class="vc-setor-item">
+                        <span class="vc-setor-icon">🤝</span>
+                        <div class="vc-setor-nome">Robótica</div>
+                    </div>
+                    <div class="vc-setor-item">
+                        <span class="vc-setor-icon">💊</span>
+                        <div class="vc-setor-nome">Saúde Digital</div>
+                    </div>
+                    <div class="vc-setor-item">
+                        <span class="vc-setor-icon">💻</span>
+                        <div class="vc-setor-nome">Computação</div>
+                    </div>
+                    <div class="vc-setor-item">
+                        <span class="vc-setor-icon">🌾</span>
+                        <div class="vc-setor-nome">AgriTech</div>
+                    </div>
+                    <div class="vc-setor-item">
+                        <span class="vc-setor-icon">🛡️</span>
+                        <div class="vc-setor-nome">Defesa e Segurança</div>
+                    </div>
+                    <div class="vc-setor-item">
+                        <span class="vc-setor-icon">🏦</span>
+                        <div class="vc-setor-nome">FinTech</div>
+                    </div>
+                    <div class="vc-setor-item">
+                        <span class="vc-setor-icon">🔮</span>
+                        <div class="vc-setor-nome">Novos Materiais</div>
+                    </div>
+                </div>
+
+                <div class="vc-frase-invlab">
+                    "O Venture Capital é o mecanismo que permite que uma ideia atravesse o enorme vazio entre um laboratório e uma empresa. O investidor não compra o presente. Ele financia a infraestrutura técnica do futuro — e assume o risco de que esse futuro nunca chegue."
+                </div>
+            </div>
+
+            <!-- SEÇÃO 3 — CICLO DA INOVAÇÃO -->
+            <div class="vc-section">
+                <div class="vc-section-tag">Seção 3 — O Ecossistema</div>
+                <h3 class="vc-section-title">🔄 O Ciclo da Inovação — o Venture Capital como uma etapa</h3>
+                <p class="vc-text">Uma das compreensões mais importantes sobre o Venture Capital é que ele não existe isoladamente. Faz parte de um ecossistema mais amplo — uma cadeia que começa no conhecimento e termina na economia real. Entender esse ciclo ajuda a dimensionar corretamente o papel e o timing do capital de risco.</p>
+
+                <div class="vc-flow">
+                    <div class="vc-flow-item">
+                        <div class="vc-flow-left">
+                            <div class="vc-flow-dot">🎓</div>
+                            <div class="vc-flow-connector"></div>
+                        </div>
+                        <div class="vc-flow-content">
+                            <div class="vc-flow-titulo">Universidade e Centros de Pesquisa</div>
+                            <div class="vc-flow-desc">O conhecimento fundamental é desenvolvido em instituições acadêmicas — frequentemente sem orientação comercial imediata. Pesquisas em física, biologia, computação e engenharia criam a base intelectual de onde emergem inovações.</div>
+                        </div>
+                    </div>
+                    <div class="vc-flow-item">
+                        <div class="vc-flow-left">
+                            <div class="vc-flow-dot">🔬</div>
+                            <div class="vc-flow-connector"></div>
+                        </div>
+                        <div class="vc-flow-content">
+                            <div class="vc-flow-titulo">Pesquisa Aplicada</div>
+                            <div class="vc-flow-desc">O conhecimento teórico começa a ser direcionado para aplicações específicas. Surgem as primeiras hipóteses sobre como determinada tecnologia pode resolver um problema real. Nesta etapa, o capital ainda vem principalmente de grants e fundos públicos de pesquisa.</div>
+                        </div>
+                    </div>
+                    <div class="vc-flow-item">
+                        <div class="vc-flow-left">
+                            <div class="vc-flow-dot">🛠️</div>
+                            <div class="vc-flow-connector"></div>
+                        </div>
+                        <div class="vc-flow-content">
+                            <div class="vc-flow-titulo">Protótipo e Prova de Conceito</div>
+                            <div class="vc-flow-desc">A hipótese se transforma em algo tangível — um MVP (produto mínimo viável) ou uma prova de conceito técnica. Aqui surgem os primeiros investidores-anjo e o capital inicial de fundadores. O risco é máximo. A maioria das ideias não sobrevive a esta fase.</div>
+                        </div>
+                    </div>
+                    <div class="vc-flow-item">
+                        <div class="vc-flow-left">
+                            <div class="vc-flow-dot">🌱</div>
+                            <div class="vc-flow-connector"></div>
+                        </div>
+                        <div class="vc-flow-content">
+                            <div class="vc-flow-titulo">Startup — primeiros clientes e validação</div>
+                            <div class="vc-flow-desc">A ideia sobreviveu à prova técnica e encontrou os primeiros clientes reais. O modelo de negócio começa a ser validado. A empresa ainda é pequena, o mercado ainda é limitado — mas há evidência de que a solução resolve um problema que as pessoas pagam para ter resolvido.</div>
+                        </div>
+                    </div>
+                    <div class="vc-flow-item">
+                        <div class="vc-flow-left">
+                            <div class="vc-flow-dot destaque">💜</div>
+                            <div class="vc-flow-connector"></div>
+                        </div>
+                        <div class="vc-flow-content">
+                            <div class="vc-flow-titulo destaque">Venture Capital — o combustível da escala</div>
+                            <div class="vc-flow-desc">Este é o momento em que o Venture Capital entra. A startup provou que existe mercado — mas precisa de capital para crescer muito mais rápido do que o caixa operacional permitiria. O fundo investe capital significativo em troca de participação, assumindo o risco de que o crescimento se materialize.</div>
+                        </div>
+                    </div>
+                    <div class="vc-flow-item">
+                        <div class="vc-flow-left">
+                            <div class="vc-flow-dot">📈</div>
+                            <div class="vc-flow-connector"></div>
+                        </div>
+                        <div class="vc-flow-content">
+                            <div class="vc-flow-titulo">Escala — expansão acelerada</div>
+                            <div class="vc-flow-desc">Com o capital disponível, a empresa contrata, expande geograficamente, investe em marketing e tecnologia. O objetivo é crescer o suficientemente rápido para criar barreiras de entrada e capturar o mercado antes de competidores. Múltiplas rodadas de investimento podem acontecer nesta fase.</div>
+                        </div>
+                    </div>
+                    <div class="vc-flow-item">
+                        <div class="vc-flow-left">
+                            <div class="vc-flow-dot">🏢</div>
+                            <div class="vc-flow-connector"></div>
+                        </div>
+                        <div class="vc-flow-content">
+                            <div class="vc-flow-titulo">Grande Empresa consolidada</div>
+                            <div class="vc-flow-desc">A startup bem-sucedida torna-se uma empresa estabelecida, com receita recorrente, equipe estruturada e posição competitiva defensável. Neste ponto, o risco de falência por falta de mercado praticamente desaparece — e a empresa pode se financiar com meios convencionais.</div>
+                        </div>
+                    </div>
+                    <div class="vc-flow-item">
+                        <div class="vc-flow-left">
+                            <div class="vc-flow-dot">💰</div>
+                            <div class="vc-flow-connector"></div>
+                        </div>
+                        <div class="vc-flow-content">
+                            <div class="vc-flow-titulo">IPO ou Aquisição — o evento de liquidez</div>
+                            <div class="vc-flow-desc">A empresa abre capital na bolsa (IPO) ou é adquirida por um competidor maior (M&A). Este é o momento em que o fundo de VC realiza o lucro — vendendo sua participação com valorização. Para o investidor, é o fim de um ciclo que pode ter durado uma década.</div>
+                        </div>
+                    </div>
+                    <div class="vc-flow-item">
+                        <div class="vc-flow-left">
+                            <div class="vc-flow-dot economia">🌍</div>
+                        </div>
+                        <div class="vc-flow-content">
+                            <div class="vc-flow-titulo economia">Impacto na Economia real</div>
+                            <div class="vc-flow-desc">A empresa que começou como uma ideia de laboratório agora gera empregos, paga impostos, forma um ecossistema de fornecedores e parceiros, e frequentemente cria novos setores da economia. O capital de risco investido no passado se materializou em valor econômico concreto.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vc-destaque-box">
+                    <div class="vc-destaque-title">💡 O que este ciclo revela</div>
+                    <p style="font-size: 0.88rem; color: #94A3B8; line-height: 1.75; margin: 0;">O Venture Capital não é o início nem o fim da inovação — é uma etapa específica, que começa quando a validação inicial aconteceu e termina quando a empresa se consolida o suficiente para acessar capital por outros meios. Compreender esse posicionamento no ciclo é fundamental para avaliar o risco real desse tipo de investimento.</p>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 4 — O GESTOR CONSTRÓI -->
+            <div class="vc-section">
+                <div class="vc-section-tag">Seção 4 — O Papel do Gestor</div>
+                <h3 class="vc-section-title">🤝 O gestor de VC não compra empresas. Constrói empresas.</h3>
+                <p class="vc-text">Esta é uma das distinções mais importantes — e menos compreendidas — sobre o Venture Capital. Comprar ações de uma empresa na bolsa é uma transação passiva: você compra, aguarda, vende. Investir via fundo de VC é fundamentalmente diferente.</p>
+
+                <div class="vc-gestor-narrativa">
+                    Imagine uma startup de saúde com quatro pessoas em uma sala. O fundo investe e torna-se sócio. A partir desse momento, o gestor senta no conselho de administração, ajuda a contratar o CFO que a empresa ainda não tem, conecta os fundadores com hospitais parceiros para os primeiros contratos relevantes, orienta a estruturação da governança corporativa, e prepara a empresa para a próxima rodada de captação — que precisará de um pitch muito mais robusto. Isso dura anos. Não é só dinheiro. É uma parceria operacional de longo prazo.
+                </div>
+
+                <p class="vc-text">O gestor de Venture Capital atua como sócio estratégico ativo. O capital é importante — mas frequentemente é o menor dos recursos que ele traz para a empresa investida.</p>
+
+                <div class="vc-gestor-grid">
+                    <div class="vc-gestor-item">
+                        <span class="vc-gestor-icon">🏛️</span>
+                        <div class="vc-gestor-texto"><strong>Governança</strong>Estrutura o conselho, define políticas internas e cria as bases para que a empresa possa crescer sem perder o controle</div>
+                    </div>
+                    <div class="vc-gestor-item">
+                        <span class="vc-gestor-icon">🗺️</span>
+                        <div class="vc-gestor-texto"><strong>Estratégia</strong>Participa das decisões mais relevantes sobre produto, mercado, precificação e posicionamento competitivo</div>
+                    </div>
+                    <div class="vc-gestor-item">
+                        <span class="vc-gestor-icon">💸</span>
+                        <div class="vc-gestor-texto"><strong>Próximas captações</strong>Conecta a empresa com outros fundos para as rodadas seguintes — um processo que exige relacionamento e reputação construídos ao longo de anos</div>
+                    </div>
+                    <div class="vc-gestor-item">
+                        <span class="vc-gestor-icon">👔</span>
+                        <div class="vc-gestor-texto"><strong>Executivos-chave</strong>Ajuda a contratar CFOs, CTOs, heads comerciais — profissionais que a startup ainda não tem condições de atrair por conta própria</div>
+                    </div>
+                    <div class="vc-gestor-item">
+                        <span class="vc-gestor-icon">🌐</span>
+                        <div class="vc-gestor-texto"><strong>Internacionalização</strong>Abre portas em outros mercados por meio de sua rede de relacionamentos com fundos e empresas internacionais</div>
+                    </div>
+                    <div class="vc-gestor-item">
+                        <span class="vc-gestor-icon">🤝</span>
+                        <div class="vc-gestor-texto"><strong>M&A e parcerias</strong>Facilita fusões, aquisições e parcerias estratégicas que podem acelerar o crescimento ou preparar o caminho para o exit</div>
+                    </div>
+                    <div class="vc-gestor-item">
+                        <span class="vc-gestor-icon">🔗</span>
+                        <div class="vc-gestor-texto"><strong>Networking</strong>O portfólio do fundo cria uma rede de empresas que podem comprar umas das outras, indicar profissionais e compartilhar aprendizados</div>
+                    </div>
+                    <div class="vc-gestor-item">
+                        <span class="vc-gestor-icon">📋</span>
+                        <div class="vc-gestor-texto"><strong>Preparação para o exit</strong>Prepara a empresa para o IPO ou processo de venda, estruturando o histórico financeiro, os contratos e a narrativa que atrairá compradores ou o mercado público</div>
+                    </div>
+                </div>
+
+                <div class="vc-frase-invlab">
+                    Ao avaliar um fundo de Venture Capital, uma das perguntas mais importantes é: além do capital, o que este gestor traz para as empresas do portfólio? Fundos que apenas investem dinheiro e aguardam resultados são estruturalmente diferentes de fundos que constroem ativamente as empresas em que investem.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 5 — A MATEMÁTICA -->
+            <div class="vc-section">
+                <div class="vc-section-tag">Seção 5 — A Matemática do Risco</div>
+                <h3 class="vc-section-title">📊 A Matemática do Venture Capital — a Lei de Potência</h3>
+                <p class="vc-text">O investidor de varejo costuma ver apenas as histórias das startups que funcionaram. O INVLAB joga luz sobre a distribuição completa — porque compreender a estatística do fracasso é tão importante quanto compreender a estatística do sucesso.</p>
+                <p class="vc-text">De acordo com estudos do setor e análises de portfólios históricos de fundos profissionais, a distribuição de resultados em Venture Capital tende a seguir um padrão que difere radicalmente de outras classes de ativos. Os números abaixo representam tendências históricas observadas — e podem variar significativamente conforme o mercado, o período, o tamanho do fundo e a qualidade do gestor.</p>
+
+                <div class="vc-stat-grid">
+                    <div class="vc-stat-card mortalidade">
+                        <div class="vc-stat-numero">~60–80%</div>
+                        <div class="vc-stat-label">das startups investidas, historicamente, não retornam o capital investido ou fecham antes do exit — em muitos portfólios profissionais</div>
+                    </div>
+                    <div class="vc-stat-card sobrevive">
+                        <div class="vc-stat-numero">~15–25%</div>
+                        <div class="vc-stat-label">geram retorno próximo ao investimento original — sobrevivem, mas não criam retorno expressivo para o fundo</div>
+                    </div>
+                    <div class="vc-stat-card potencia">
+                        <div class="vc-stat-numero">~5–10%</div>
+                        <div class="vc-stat-label">geram retornos que, de acordo com estudos do setor, podem compensar todo o portfólio — incluindo todas as perdas anteriores</div>
+                    </div>
+                    <div class="vc-stat-card assimetria">
+                        <div class="vc-stat-numero">10x–100x+</div>
+                        <div class="vc-stat-label">faixa de retorno assimétrico observada historicamente nas empresas de maior sucesso — pode variar amplamente conforme o caso</div>
+                    </div>
+                </div>
+
+                <div class="vc-lei-grid">
+                    <div class="vc-lei-card mortalidade">
+                        <div class="vc-lei-titulo">📉 A realidade da mortalidade</div>
+                        <div class="vc-lei-texto">Em muitos portfólios profissionais de VC, historicamente a maior parte das startups investidas não retorna o capital investido. Isso não é um sinal de má gestão — é a natureza estrutural do capital de risco. O risco de perda total é real e precisa ser aceito antes de qualquer decisão de alocação.</div>
+                    </div>
+                    <div class="vc-lei-card potencia">
+                        <div class="vc-lei-titulo">⚡ A Lei de Potência (Power Law)</div>
+                        <div class="vc-lei-texto">O Venture Capital não procura acertar todas. Procura encontrar a empresa que compensará todas as outras. O retorno de um fundo não é distribuído uniformemente — historicamente, ele se concentra em um número pequeno de empresas que cresceram de forma exponencial. Essa é a lógica que sustenta o modelo: aceitar muitas perdas em troca de poucos acertos de magnitude extraordinária.</div>
+                    </div>
+                </div>
+
+                <div class="vc-alerta">
+                    <div class="vc-alerta-title">⚠️ Se você não aceita o risco de perda total, não entre</div>
+                    Alocar capital em uma única startup — fora de um portfólio diversificado gerido por profissionais — é o equivalente matemático a apostar em uma empresa que tem alta probabilidade de não entregar retorno. A diversificação em portfólio não é uma dica de gestão — é uma condição estrutural para que o modelo de VC funcione. Um fundo profissional investe em dezenas de empresas exatamente por isso.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 6 — QUEM INVESTE -->
+            <div class="vc-section">
+                <div class="vc-section-tag">Seção 6 — Os Participantes Reais</div>
+                <h3 class="vc-section-title">🏛️ Quem realmente investe em Venture Capital?</h3>
+                <p class="vc-text">O investidor comum frequentemente imagina que o Venture Capital é território exclusivo de bilionários e pessoas físicas com acesso privilegiado. A realidade é mais complexa — e mais institucional do que a narrativa popular sugere.</p>
+                <p class="vc-text">A maior parte do capital que alimenta os fundos de VC ao redor do mundo vem de investidores institucionais que têm, em comum, a capacidade de suportar iliquidez prolongada e a estrutura para gerenciar o risco de perda parcial ou total de posições.</p>
+
+                <div class="vc-quem-grid">
+                    <div class="vc-quem-item">
+                        <span class="vc-quem-icon">👨‍👩‍👧</span>
+                        <div class="vc-quem-nome">Family Offices</div>
+                        <div class="vc-quem-desc">Estruturas de gestão patrimonial de grandes fortunas familiares, com horizonte de longo prazo e diversificação em ativos alternativos</div>
+                    </div>
+                    <div class="vc-quem-item">
+                        <span class="vc-quem-icon">🏛️</span>
+                        <div class="vc-quem-nome">Fundos de Pensão</div>
+                        <div class="vc-quem-desc">Fundos de previdência que destinam pequenas parcelas de seus portfólios para ativos alternativos de alto potencial, com horizonte de décadas</div>
+                    </div>
+                    <div class="vc-quem-item">
+                        <span class="vc-quem-icon">🎓</span>
+                        <div class="vc-quem-nome">Universidades (Endowments)</div>
+                        <div class="vc-quem-desc">Grandes universidades americanas e internacionais alocam parte de seus fundos patrimoniais em VC — modelo pioneiro em instituições como Yale e Harvard</div>
+                    </div>
+                    <div class="vc-quem-item">
+                        <span class="vc-quem-icon">🌍</span>
+                        <div class="vc-quem-nome">Fundos Soberanos</div>
+                        <div class="vc-quem-desc">Fundos criados por governos para gerenciar reservas nacionais, com capacidade de assumir investimentos de altíssimo risco em nome do desenvolvimento econômico</div>
+                    </div>
+                    <div class="vc-quem-item">
+                        <span class="vc-quem-icon">🏢</span>
+                        <div class="vc-quem-nome">Corporate Ventures</div>
+                        <div class="vc-quem-desc">Grandes empresas que investem em startups do seu setor para acesso antecipado a tecnologias que podem impactar seu negócio principal</div>
+                    </div>
+                    <div class="vc-quem-item">
+                        <span class="vc-quem-icon">💼</span>
+                        <div class="vc-quem-nome">Fundos de Fundos</div>
+                        <div class="vc-quem-desc">Fundos que investem em múltiplos fundos de VC, oferecendo exposição diversificada ao ecossistema de capital de risco com menor concentração</div>
+                    </div>
+                    <div class="vc-quem-item">
+                        <span class="vc-quem-icon">👼</span>
+                        <div class="vc-quem-nome">Investidores-Anjo</div>
+                        <div class="vc-quem-desc">Pessoas físicas de alto patrimônio que investem individualmente em estágios muito iniciais — frequentemente ex-empreendedores ou executivos com experiência no setor</div>
+                    </div>
+                    <div class="vc-quem-item">
+                        <span class="vc-quem-icon">🌐</span>
+                        <div class="vc-quem-nome">Plataformas de Equity</div>
+                        <div class="vc-quem-desc">Plataformas de equity crowdfunding que permitem acesso a investidores individuais — com características específicas de risco que merecem atenção</div>
+                    </div>
+                </div>
+
+                <!-- ALERTA EQUITY CROWDFUNDING -->
+                <div class="vc-quem-alerta">
+                    <div class="vc-quem-alerta-title">⚠️ Atenção específica: plataformas de equity crowdfunding</div>
+                    <p style="font-size: 0.86rem; color: #94A3B8; line-height: 1.75; margin-bottom: 14px;">As plataformas de equity crowdfunding representam a principal forma de acesso do investidor pessoa física ao universo de VC — mas carregam características específicas que precisam ser compreendidas antes de qualquer decisão:</p>
+                    <ul class="vc-quem-alerta-lista">
+                        <li><span>⏳</span><strong style="color:#CBD5E1;">Iliquidez ainda mais severa:</strong> ao contrário de cotas de fundo com prazo definido, investimentos diretos em startups via plataforma frequentemente não têm horizonte claro de saída — e o mercado secundário para revenda é extremamente limitado.</li>
+                        <li><span>💥</span><strong style="color:#CBD5E1;">Risco de perda total:</strong> o investidor entra com plena consciência de que a startup pode fechar — e o capital aportado pode ser integralmente perdido, sem qualquer mecanismo de proteção equivalente ao FGC da renda fixa.</li>
+                        <li><span>🔍</span><strong style="color:#CBD5E1;">Qualidade da plataforma:</strong> diferentes plataformas têm critérios de curadoria, rigor de due diligence e estrutura de governança muito distintos. A qualidade da análise feita antes de listar a startup é um fator crítico.</li>
+                        <li><span>📊</span><strong style="color:#CBD5E1;">Valuation das startups:</strong> a avaliação do valor de uma startup em estágio inicial é inerentemente subjetiva. Valuations inflados podem criar a ilusão de upside sem correspondência com a realidade do negócio.</li>
+                        <li><span>📋</span><strong style="color:#CBD5E1;">Governança minoritária:</strong> o investidor individual tipicamente entra com participação muito pequena, sem poder de voto relevante e com acesso limitado a informações sobre a gestão da empresa.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 7 — RODADAS -->
+            <div class="vc-section">
+                <div class="vc-section-tag">Seção 7 — A Jornada do Capital</div>
+                <h3 class="vc-section-title">📅 A Dinâmica das Rodadas de Investimento</h3>
+                <p class="vc-text">Uma startup não capta recursos uma única vez. Ela passa por sucessivas rodadas de investimento, cada uma correspondendo a um momento diferente de maturidade do negócio — e a um nível diferente de risco e valorização.</p>
+
+                <div class="vc-rodada-grid">
+                    <div class="vc-rodada-card">
+                        <span class="vc-rodada-icon">🌱</span>
+                        <div class="vc-rodada-nome">Anjo / Pré-Seed</div>
+                        <div class="vc-rodada-desc">O estágio mais embrionário. O capital vem geralmente dos próprios fundadores, de amigos e família, ou de investidores-anjo individuais. Serve para construir o primeiro protótipo e testar a hipótese inicial. O risco é máximo, a valorização é mínima — e a maioria das ideias não sobrevive a esta fase.</div>
+                    </div>
+                    <div class="vc-rodada-card">
+                        <span class="vc-rodada-icon">🌿</span>
+                        <div class="vc-rodada-nome">Seed (Semente)</div>
+                        <div class="vc-rodada-desc">O produto existe e tem os primeiros clientes reais — ainda em número pequeno, mas suficiente para validar que alguém paga pelo que a empresa oferece. O capital da rodada Seed financia a estruturação da equipe principal e a validação do modelo de receita. Fundos de VC especializados em early-stage e aceleradoras participam frequentemente.</div>
+                    </div>
+                    <div class="vc-rodada-card">
+                        <span class="vc-rodada-icon">📈</span>
+                        <div class="vc-rodada-nome">Séries A, B, C...</div>
+                        <div class="vc-rodada-desc">A empresa provou que o modelo funciona e precisa de tração massiva. Cada rodada seguinte pressupõe que a empresa cumpriu as metas da rodada anterior e que o mercado endereçável justifica mais capital. O tamanho das rodadas cresce, a valorização aumenta — e o risco individual de falência diminui, mas o risco de retorno abaixo do esperado permanece.</div>
+                    </div>
+                    <div class="vc-rodada-card">
+                        <span class="vc-rodada-icon">💰</span>
+                        <div class="vc-rodada-nome">Exit — o evento de liquidez</div>
+                        <div class="vc-rodada-desc">A "linha de chegada" do ciclo de VC. A startup é adquirida por uma empresa maior (M&A) ou abre capital na bolsa (IPO). É neste momento que o fundo realiza o retorno do investimento — vendendo sua participação com a valorização acumulada ao longo de anos. Do pré-seed ao exit, o ciclo pode durar, em muitos casos, entre 7 e 12 anos — às vezes mais.</div>
+                    </div>
+                </div>
+
+                <div class="vc-alerta">
+                    <div class="vc-alerta-title">⚠️ O caminho é longo e sem retorno antecipado</div>
+                    Ao investir em um fundo de Venture Capital, o capital fica comprometido até que o fundo realize os exits de seu portfólio. Não existe um botão de "resgate" disponível no home broker. O dinheiro retorna à medida que as empresas são vendidas — um processo que pode levar muitos anos e que depende de condições de mercado que ninguém controla.
+                </div>
+            </div>
+
+            <!-- SEÇÃO 8 — CUSTOS E ILIQUIDEZ -->
+            <div class="vc-section">
+                <div class="vc-section-tag">Seção 8 — Estrutura e Custos</div>
+                <h3 class="vc-section-title">💸 Estrutura financeira — o custo de trancar seu capital por uma década</h3>
+                <p class="vc-text">Entender a estrutura financeira de um fundo de Venture Capital é fundamental para avaliar se o retorno potencial compensa os custos e a iliquidez assumidos. Os três elementos abaixo são comuns na estrutura de fundos profissionais — embora possam variar conforme o fundo, o gestor e as condições de captação.</p>
+
+                <div class="vc-custo-grid">
+                    <div class="vc-custo-card">
+                        <div class="vc-custo-nome">⏳ Iliquidez — o custo principal</div>
+                        <div class="vc-custo-valor">7 a 12 anos</div>
+                        <div class="vc-custo-desc">Ao comprar cotas de um fundo de Venture Capital, o capital fica comprometido por um prazo longo — tipicamente entre 7 e 12 anos, podendo ser estendido dependendo do portfólio. Não existe mercado secundário amplo para venda antecipada de cotas. Esta é a característica mais significativa da estrutura de VC — e precisa ser avaliada em relação às necessidades de liquidez do investidor.</div>
+                    </div>
+                    <div class="vc-custo-card">
+                        <div class="vc-custo-nome">💸 Taxa de Administração</div>
+                        <div class="vc-custo-valor">Tipicamente ~1,5% a 2,5% a.a.</div>
+                        <div class="vc-custo-desc">Devido à complexidade operacional de selecionar, monitorar e apoiar dezenas de startups, fundos de VC frequentemente cobram taxas de administração significativamente maiores do que fundos de renda fixa ou ações. Essa taxa incide sobre o capital comprometido — independentemente do desempenho das empresas investidas. Pode variar conforme o gestor, o tamanho do fundo e o estágio de investimento.</div>
+                    </div>
+                    <div class="vc-custo-card">
+                        <div class="vc-custo-nome">📈 Carried Interest (Performance)</div>
+                        <div class="vc-custo-valor">Tipicamente ~20% do lucro acima do hurdle</div>
+                        <div class="vc-custo-desc">O modelo de alinhamento de interesses mais característico do VC. Após o fundo superar um retorno mínimo pré-definido (hurdle rate), o gestor retém uma parcela significativa do lucro excedente — frequentemente em torno de 20%, embora os percentuais variem. O objetivo é alinhar o interesse do gestor ao do investidor: ambos só ganham expressivamente se o fundo performar bem.</div>
+                    </div>
+                </div>
+
+                <div class="vc-frase-invlab">
+                    Você não está comprando liquidez. Você está comprando a possibilidade de um retorno assimétrico — trancado em um comprometimento de longo prazo, com custos significativos de gestão, em troca da chance de estar em um portfólio que inclua a próxima grande empresa de um setor em transformação.
+                </div>
+            </div>
+
+            <!-- CHECKLIST -->
+            <div class="vc-section">
+                <div class="vc-section-tag">Checklist INVLAB</div>
+                <h3 class="vc-section-title">Antes de qualquer alocação em Venture Capital, responda com honestidade:</h3>
+
+                <div class="vc-checklist">
+                    <div class="vc-check-item">
+                        <div class="vc-check-num">✓</div>
+                        <div class="vc-check-text"><strong style="color:#E2E8F0;">Estou ciente de que o capital ficará inacessível por muitos anos?</strong> Não existe botão de resgate. O dinheiro retorna apenas à medida que as empresas do portfólio forem vendidas ou fizerem IPO — um processo que pode levar uma década ou mais.</div>
+                    </div>
+                    <div class="vc-check-item">
+                        <div class="vc-check-num">✓</div>
+                        <div class="vc-check-text"><strong style="color:#E2E8F0;">Aceito a possibilidade real de perda total do capital alocado?</strong> Historicamente, em muitos portfólios profissionais de VC, a maior parte das startups não retorna o capital investido. Esse risco não é teórico — é estrutural no modelo.</div>
+                    </div>
+                    <div class="vc-check-item">
+                        <div class="vc-check-num">✓</div>
+                        <div class="vc-check-text"><strong style="color:#E2E8F0;">Esta alocação representa uma parcela adequada do meu patrimônio total?</strong> Venture Capital deve ser parte de uma carteira já diversificada, não seu eixo principal. Especialistas geralmente sugerem que ativos alternativos de alto risco correspondam a uma fração pequena e bem definida do patrimônio total — proporcional à tolerância real a perdas.</div>
+                    </div>
+                    <div class="vc-check-item">
+                        <div class="vc-check-num">✓</div>
+                        <div class="vc-check-text"><strong style="color:#E2E8F0;">Avaliei o histórico e a estratégia do gestor?</strong> A qualidade da gestão é o fator mais determinante no resultado de um fundo de VC. Você analisou o histórico de investimentos anteriores, a tese de investimento, o processo de seleção de empresas e a capacidade de agregar valor operacional além do capital?</div>
+                    </div>
+                    <div class="vc-check-item">
+                        <div class="vc-check-num">✓</div>
+                        <div class="vc-check-text"><strong style="color:#E2E8F0;">Compreendo a estrutura de taxas e seu impacto no retorno real?</strong> Taxa de administração sobre o capital comprometido e carried interest sobre o lucro reduzem o retorno líquido do investidor. Você calculou qual retorno bruto o fundo precisaria gerar para que o retorno líquido para o investidor fosse satisfatório?</div>
+                    </div>
+                    <div class="vc-check-item">
+                        <div class="vc-check-num">✓</div>
+                        <div class="vc-check-text"><strong style="color:#E2E8F0;">Estou acessando VC por meio de um fundo profissional diversificado — ou apostando uma parte relevante do patrimônio em uma startup isolada?</strong> A Lei de Potência pressupõe portfólios com dezenas de empresas. Investir em uma única startup equivale a apostar em um número específico da roleta do risco — sem a diversificação que o modelo exige para funcionar como projetado.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AVISO EDITORIAL -->
+            <div class="vc-aviso">
+                ⚠️ <strong>Observação editorial INVLAB:</strong> Todos os números, estimativas e distribuições de retorno apresentados nesta página têm finalidade exclusivamente educacional e representam tendências históricas observadas em diferentes estudos do setor. Os resultados reais de qualquer fundo de Venture Capital podem diferir significativamente dessas referências, conforme o mercado, o período, a qualidade do gestor, o estágio de investimento e as condições macroeconômicas vigentes. Venture Capital envolve risco de perda total do capital. Não constitui recomendação de investimento. Consulte sempre um profissional certificado antes de qualquer decisão de alocação.
+            </div>
+
+            <!-- A SEMENTE -->
+            <div class="vc-semente">
+                <div class="vc-semente-icon">🌱</div>
+                <div class="vc-semente-title">A Semente</div>
+
+                <p class="vc-semente-text">
+                    Investir em Venture Capital não é comprar ações de empresas famosas.<br>
+                    É apostar que uma pequena equipe de pessoas será capaz de resolver<br>
+                    um problema grande o suficiente para mudar um mercado inteiro.
+                </p>
+
+                <p class="vc-semente-text">
+                    A maioria não conseguirá.<br>
+                    Algumas sobreviverão.<br>
+                    Pouquíssimas transformarão setores inteiros da economia.
+                </p>
+
+                <p class="vc-semente-text">
+                    É exatamente essa assimetria que sustenta todo o modelo.
+                </p>
+
+                <div class="vc-semente-destaque">
+                    O Venture Capital não compra certezas.<br>
+                    Compra possibilidades.<br><br>
+                    Quem busca liquidez e conforto deve permanecer na renda fixa.<br>
+                    Quem busca participar da construção de novas fronteiras econômicas<br>
+                    aceita que o preço da inovação é caminhar lado a lado com o risco de perda total.<br><br>
+                    E algumas dessas possibilidades,<br>
+                    contra todas as probabilidades,<br>
+                    acabam mudando o mundo.
+                </div>
+            </div>
+
+        </div><!-- /invlab-lab-container -->
+    </main>
+
+    <footer style="background: rgba(13, 13, 13, 0.97); border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 60px; padding: 40px 20px 20px;">
+    <div class="content-wrapper-wide">
+        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 25px; margin-bottom: 30px;">
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">INVLAB</h4>
+                <p style="font-size: 0.85rem; line-height: 1.6; color: #94A3B8; margin-bottom: 12px;">Laboratório educacional de investimentos. Sem venda de produtos, sem comissões, sem viés comercial.</p>
+                <a href="guia_invlab.html" style="color: #D4AF37; font-size: 0.85rem; font-weight: 600; text-decoration: none;">🧭 Guia do INVLAB →</a>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Fixa</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="simulador-cdbs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏦 CDBs</a></li>
+                    <li><a href="simulador-tesouro-direto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🇧🇷 Tesouro Direto</a></li>
+                    <li><a href="simulador-lci-lca.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏛️ LCI/LCA</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Renda Variável</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="acoes.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">📈 Ações</a></li>
+                    <li><a href="etfs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💵 ETFs</a></li>
+                    <li><a href="fiis.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏢 FIIs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Economia Digital</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="cripto.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌐 Economia Digital</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Instrumentos Avançados</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="fundos-investimento.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">💼 Fundos de Investimentos</a></li>
+                    <li><a href="bdrs.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🌍 BDRs</a></li>
+                    <li><a href="fi-infra.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏗️ FI-Infra</a></li>
+                    <li><a href="ouro.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🥇 Ouro</a></li>
+                    <li><a href="derivativos.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">⚡ Derivativos</a></li>
+                    <li><a href="venture-capital.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚀 Venture Capital</a></li>
+                    <li><a href="instrumentos-avancados.html#ativos-reais" style="color: rgba(16,185,129,0.85); text-decoration: none;">🏠 Ativos Reais</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">Defesa do Investidor</h4>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; line-height: 2;">
+                    <li><a href="defesa-investidor.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🛡 Laboratório</a></li>
+                    <li><a href="previdencia-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🎯 Previdência</a></li>
+                    <li><a href="credito-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔥 Crédito</a></li>
+                    <li><a href="produtos-sem-armadilhas.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🔍 Produtos</a></li>
+                    <li><a href="sinais-de-alerta.html" style="color: rgba(16,185,129,0.85); text-decoration: none;">🚨 Sinais de alerta</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px; margin-top: 20px;">
+            <p style="font-size: 0.8rem; color: #64748B; text-align: center; line-height: 1.6; margin-bottom: 12px;">
+                ⚠️ Conteúdo 100% educacional e autoral. Não somos corretora, não vendemos produtos, não recebemos comissões. Todo o conteúdo textual e metodológico é de autoria exclusiva do INVLAB e protegido por direitos autorais.
+            </p>
+            <p style="font-size: 0.75rem; color: #475569; text-align: center;">
+                © 2025 INVLAB — Laboratório de Investimentos. Todos os direitos reservados. Reprodução proibida sem autorização expressa.
+            </p>
+        </div>
+    </div>
+    </footer>
+
+    <div id="backToTop">↑</div>
+
+    <script src="../assets/js/script.js"></script>
+    <script defer src="../assets/js/bcb-api.js"></script>
+    <script defer src="../assets/js/invlab-carrossel-renda-variavel.js"></script>
+    <script>
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+                setTimeout(() => backToTopButton.style.opacity = '1', 10);
+            } else {
+                backToTopButton.style.opacity = '0';
+                setTimeout(() => backToTopButton.style.display = 'none', 300);
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
