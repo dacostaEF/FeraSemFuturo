@@ -363,10 +363,18 @@
         .btn-simulador-invlab:hover {
             border-color: #D4AF37;
             transform: translateY(-4px);
-            box-shadow: 
+            box-shadow:
                 0 8px 24px rgba(53, 94, 59, 0.3),
                 0 4px 12px rgba(204, 170, 102, 0.2);
             color: #FFFFFF;
+        }
+        .simuladores-divider {
+            text-align: center;
+            margin: 12px 0;
+            font-family: 'Inter', sans-serif;
+            font-size: .88rem;
+            color: rgba(255,255,255,.42);
+            letter-spacing: .4px;
         }
         
         .btn-simulador-invlab:active {
@@ -1445,34 +1453,41 @@
                         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 1000px; margin: 0 auto;">
                             
                             <!-- Card Simulador Wizard -->
-                            <div class="aposentadoria-card" style="background: rgba(26, 26, 26, 0.6); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 16px; padding: 32px; text-align: center; transition: all 0.3s ease;">
+                            <div class="aposentadoria-card" style="background: rgba(26, 26, 26, 0.6); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 16px; padding: 32px; text-align: center; transition: all 0.3s ease; display: flex; flex-direction: column;">
+                                <div style="margin-bottom: 14px;">
+                                    <span style="display: inline-block; font-size: 0.72rem; font-family: 'Inter', sans-serif; color: rgba(16,185,129,0.85); background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); border-radius: 20px; padding: 3px 10px; letter-spacing: 0.3px;">🟢 Recomendado para iniciar</span>
+                                </div>
                                 <div style="font-size: 48px; margin-bottom: 16px; transition: all 0.3s ease;">🧙‍♂️</div>
                                 <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #E4E4E4; margin-bottom: 12px;">
                                     Simulador Guiado (Wizard)
                                 </h3>
                                 <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #9CA3AF; line-height: 1.6; margin-bottom: 24px;">
-                                    Ideal para quem quer começar. Em poucos passos, você descobre quanto precisa investir para construir uma renda complementar no futuro.
+                                    Ideal para quem está iniciando sua jornada patrimonial. Em apenas quatro etapas, descubra quanto patrimônio precisará construir, quanto investir por mês e como pequenas decisões tomadas hoje podem transformar seu futuro — sem precisar dominar conceitos financeiros complexos.
                                 </p>
-                                <button class="btn-simulador-invlab" onclick="window.location.href='pages/simulador-wizard.html'">
+                                <button class="btn-simulador-invlab" style="margin-top: auto;" onclick="window.location.href='pages/simulador-wizard.html'">
                                     Iniciar Planejamento Guiado →
                                 </button>
                             </div>
 
                             <!-- Card Simulador Completo -->
-                            <div class="aposentadoria-card" style="background: rgba(26, 26, 26, 0.6); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 16px; padding: 32px; text-align: center; transition: all 0.3s ease;">
+                            <div class="aposentadoria-card" style="background: rgba(26, 26, 26, 0.6); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 16px; padding: 32px; text-align: center; transition: all 0.3s ease; display: flex; flex-direction: column;">
+                                <div style="margin-bottom: 14px;">
+                                    <span style="display: inline-block; font-size: 0.72rem; font-family: 'Inter', sans-serif; color: rgba(99,179,237,0.85); background: rgba(99,179,237,0.08); border: 1px solid rgba(99,179,237,0.2); border-radius: 20px; padding: 3px 10px; letter-spacing: 0.3px;">🔵 Análise avançada</span>
+                                </div>
                                 <div style="font-size: 48px; margin-bottom: 16px; transition: all 0.3s ease;">📊</div>
                                 <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #E4E4E4; margin-bottom: 12px;">
                                     Simulador Completo (PRO)
                                 </h3>
                                 <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #9CA3AF; line-height: 1.6; margin-bottom: 24px;">
-                                    Para quem deseja aprofundar. Inclui cenários com INSS, renda vitalícia, preservação de capital, impostos e comparações avançadas.
+                                    Para quem deseja uma análise mais completa e estratégica. Explore cenários com INSS, renda vitalícia, preservação de capital, tributação e compare diferentes estratégias de acumulação patrimonial, incluindo investimentos próprios e previdência privada.
                                 </p>
-                                <button class="btn-simulador-invlab" onclick="window.location.href='pages/simulador-aposentadoria.html'">
+                                <button class="btn-simulador-invlab" style="margin-top: auto;" onclick="window.location.href='pages/simulador-aposentadoria.html'">
                                     Abrir Simulador Avançado →
                                 </button>
                             </div>
 
                         </div>
+                        <p class="simuladores-divider">Dois caminhos. O mesmo objetivo: construir seu patrimônio com consciência.</p>
                     </div>
                 </section>
 
