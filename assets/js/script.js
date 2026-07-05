@@ -45,11 +45,9 @@ function switchTab(tabId) {
         activeContent.classList.add('active');
 
         // Mostra widget de vídeo somente na aba Início
-        var videoWidget = document.getElementById('guiaVideoWidget');
-        var videoFab    = document.getElementById('guiaVideoFab');
-        var isInicio    = tabId === 'inicio';
+        var videoWidget  = document.getElementById('guiaVideoWidget');
+        var isInicio     = tabId === 'inicio';
         if (videoWidget) videoWidget.style.display = isInicio ? '' : 'none';
-        if (videoFab)    videoFab.style.display    = isInicio ? '' : 'none';
 
         // Reinicializa os tab links (para botões dentro das abas)
         setTimeout(() => {

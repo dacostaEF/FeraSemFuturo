@@ -1258,7 +1258,8 @@
         /* Responsivo */
         @media (max-width: 768px) {
             .guia-video-widget { display: none !important; }
-            .guia-video-fab { display: flex; }
+            .guia-video-fab { display: none !important; } /* substituído por botão inline */
+            .guia-mobile-fab-wrap { display: flex; }
             .guia-video-modal-overlay {
                 padding: 0;
                 width: 100vw;
@@ -1303,6 +1304,23 @@
             color: #D4AF37;
             background: rgba(212, 175, 55, 0.06);
         }
+
+        /* Guia INVLAB mobile: emoji inline no topo do Início (substitui FAB fixo) */
+        .guia-mobile-fab-wrap {
+            display: none;
+            justify-content: center;
+            padding: 10px 0 4px;
+        }
+        #guiaVideoFabInline {
+            background: transparent;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: transform 0.2s ease;
+        }
+        #guiaVideoFabInline:hover { transform: scale(1.1); }
 
         /* Simuladores: desktop mostra botão, mobile mostra emoji */
         .sim-video-fab-wrap {
@@ -1468,6 +1486,10 @@
         <!-- ABA: INÍCIO -->
         <div class="tab-content active" id="inicio">
             <div class="content-wrapper">
+                <!-- Mobile: emoji Boas-vindas inline (só visível em celular) -->
+                <div class="guia-mobile-fab-wrap">
+                    <button id="guiaVideoFabInline" title="Assistir boas-vindas">🎥</button>
+                </div>
                 <!-- HERO PRINCIPAL -->
                 <section id="hero-principal" style="padding: 64px 0 48px; text-align: center; border-bottom: 1px solid rgba(212,175,55,0.12);">
                     <div class="content-wrapper">
@@ -3168,10 +3190,10 @@
     </script>
 
     <script>
-        // GUIA INVLAB — Boas-vindas (botão desktop + FAB mobile → modal)
+        // GUIA INVLAB — Boas-vindas (botão desktop + emoji inline mobile → modal)
         (function() {
             var btn        = document.getElementById('guiaVideoWidget');
-            var fab        = document.getElementById('guiaVideoFab');
+            var fabInline  = document.getElementById('guiaVideoFabInline');
             var modal      = document.getElementById('guiaVideoModal');
             var modalClose = document.getElementById('guiaModalClose');
             var modalVideo = document.getElementById('guiaModalVideoEl');
@@ -3186,8 +3208,8 @@
                 modal.classList.remove('guia-active');
             }
 
-            if (btn)        btn.addEventListener('click', abrirGuiaModal);
-            if (fab)        fab.addEventListener('click', abrirGuiaModal);
+            if (btn)       btn.addEventListener('click', abrirGuiaModal);
+            if (fabInline) fabInline.addEventListener('click', abrirGuiaModal);
             if (modalClose) modalClose.addEventListener('click', fecharGuiaModal);
             modal.addEventListener('click', function(e) {
                 if (e.target === modal) fecharGuiaModal();
