@@ -1278,6 +1278,53 @@
                 box-sizing: border-box;
             }
         }
+
+        /* =========================================
+           BOTÕES MÍNIMOS DE VÍDEO
+           ========================================= */
+        .invlab-video-btn-minimal {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            padding: 6px 14px;
+            color: rgba(212, 175, 55, 0.8);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+        .invlab-video-btn-minimal:hover {
+            border-color: rgba(212, 175, 55, 0.7);
+            color: #D4AF37;
+            background: rgba(212, 175, 55, 0.06);
+        }
+
+        /* Simuladores: desktop mostra botão, mobile mostra emoji */
+        .sim-video-fab-wrap {
+            display: none;
+            justify-content: center;
+            padding: 12px 0;
+        }
+        #simVideoFabInline {
+            background: transparent;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: transform 0.2s ease;
+        }
+        #simVideoFabInline:hover { transform: scale(1.1); }
+
+        @media (max-width: 768px) {
+            .sim-video-desktop-btn { display: none !important; }
+            .sim-video-fab-wrap { display: flex; }
+        }
     </style>
 </head>
 <body>
@@ -1448,6 +1495,16 @@
                         <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(16, 185, 129, 0.65); text-align: center; margin-bottom: 40px; line-height: 1.6; max-width: 900px; margin-left: auto; margin-right: auto;">
                             Os simuladores do INVLAB transformam objetivos de vida em números concretos. Comece pelo Wizard se quiser uma experiência simples e guiada, ou use o PRO para uma análise completa.
                         </p>
+
+                        <!-- Vídeo: Apresentação dos Simuladores -->
+                        <div style="max-width: 1000px; margin: 0 auto 28px;">
+                            <!-- Desktop: botão minimal -->
+                            <button class="invlab-video-btn-minimal sim-video-desktop-btn" id="simVideoDesktopBtn">🎥 Simuladores</button>
+                            <!-- Mobile: câmera inline centralizada -->
+                            <div class="sim-video-fab-wrap">
+                                <button id="simVideoFabInline" title="Ver apresentação dos simuladores">🎥</button>
+                            </div>
+                        </div>
 
                         <!-- Grid 2 Simuladores -->
                         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 1000px; margin: 0 auto;">
@@ -3001,28 +3058,8 @@
     <!-- GUIA INVLAB — FAB MOBILE -->
     <button class="guia-video-fab" id="guiaVideoFab" title="Assistir boas-vindas">🎥</button>
 
-    <!-- GUIA INVLAB — VIDEO WIDGET -->
-    <div class="guia-video-widget" id="guiaVideoWidget">
-        <div class="guia-video-card">
-            <div class="guia-video-header">
-                <div>
-                    <div class="guia-video-title">🎥 Guia INVLAB</div>
-                    <div class="guia-video-subtitle">Entenda como usar o laboratório.</div>
-                </div>
-                <button class="guia-video-close" id="guiaVideoClose" title="Recolher">×</button>
-            </div>
-            <div class="guia-video-player-wrap" id="guiaVideoPlayerWrap">
-                <video id="guiaVideoEl" preload="none" playsinline>
-                    <source src="Midia/Boas-vindas_ao_INVLAB_with_captions.mp4" type="video/mp4">
-                </video>
-                <div class="guia-video-controls">
-                    <button class="guia-video-ctrl-btn" id="guiaMuteBtn" title="Mudo/Som">🔊</button>
-                    <button class="guia-video-ctrl-btn" id="guiaExpandBtn" title="Ampliar">⛶</button>
-                </div>
-            </div>
-            <button class="guia-video-btn-play" id="guiaBtnPlay">▶ Assistir boas-vindas</button>
-        </div>
-    </div>
+    <!-- GUIA INVLAB — WIDGET DESKTOP (botão minimal) -->
+    <button class="guia-video-widget invlab-video-btn-minimal" id="guiaVideoWidget">🎥 Boas-vindas</button>
 
     <!-- Modal ampliado do Guia INVLAB -->
     <div class="guia-video-modal-overlay" id="guiaVideoModal">
@@ -3033,6 +3070,19 @@
             </div>
             <video id="guiaModalVideoEl" controls preload="none" playsinline>
                 <source src="Midia/Boas-vindas_ao_INVLAB_with_captions.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <!-- Modal do vídeo Simuladores de Aposentadoria -->
+    <div class="guia-video-modal-overlay" id="simVideoModal">
+        <div class="guia-video-modal-box">
+            <div class="guia-video-modal-header">
+                <span class="guia-video-modal-title">🎥 Como funcionam os Simuladores</span>
+                <button class="guia-video-modal-close" id="simModalClose">×</button>
+            </div>
+            <video id="simModalVideoEl" controls preload="none" playsinline>
+                <source src="Midia/SimuladoresAposentadoria.mp4" type="video/mp4">
             </video>
         </div>
     </div>
@@ -3118,89 +3168,66 @@
     </script>
 
     <script>
-        // CTA "Conheça o INVLAB" — aciona play no widget existente sem modal
+        // GUIA INVLAB — Boas-vindas (botão desktop + FAB mobile → modal)
+        (function() {
+            var btn        = document.getElementById('guiaVideoWidget');
+            var fab        = document.getElementById('guiaVideoFab');
+            var modal      = document.getElementById('guiaVideoModal');
+            var modalClose = document.getElementById('guiaModalClose');
+            var modalVideo = document.getElementById('guiaModalVideoEl');
+
+            function abrirGuiaModal() {
+                modal.classList.add('guia-active');
+                modalVideo.currentTime = 0;
+                modalVideo.play();
+            }
+            function fecharGuiaModal() {
+                modalVideo.pause();
+                modal.classList.remove('guia-active');
+            }
+
+            if (btn)        btn.addEventListener('click', abrirGuiaModal);
+            if (fab)        fab.addEventListener('click', abrirGuiaModal);
+            if (modalClose) modalClose.addEventListener('click', fecharGuiaModal);
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) fecharGuiaModal();
+            });
+        })();
+
         function conhecaInvlab() {
-            var widget    = document.getElementById('guiaVideoWidget');
-            var btnPlay   = document.getElementById('guiaBtnPlay');
-            var playerWrap= document.getElementById('guiaVideoPlayerWrap');
-            var videoEl   = document.getElementById('guiaVideoEl');
-            if (!widget) return;
-            widget.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            setTimeout(function() {
-                if (btnPlay && btnPlay.style.display !== 'none') {
-                    btnPlay.style.display = 'none';
-                    playerWrap.classList.add('guia-active');
-                    widget.classList.add('guia-expanded');
-                    videoEl.play();
-                }
-            }, 600);
+            var modal      = document.getElementById('guiaVideoModal');
+            var modalVideo = document.getElementById('guiaModalVideoEl');
+            if (!modal) return;
+            modal.classList.add('guia-active');
+            modalVideo.currentTime = 0;
+            modalVideo.play();
         }
     </script>
 
     <script>
-        // GUIA INVLAB — VIDEO WIDGET
+        // SIMULADORES — Vídeo (botão desktop + emoji mobile → modal)
         (function() {
-            const widget    = document.getElementById('guiaVideoWidget');
-            const fab       = document.getElementById('guiaVideoFab');
-            const btnPlay   = document.getElementById('guiaBtnPlay');
-            const playerWrap= document.getElementById('guiaVideoPlayerWrap');
-            const videoEl   = document.getElementById('guiaVideoEl');
-            const muteBtn   = document.getElementById('guiaMuteBtn');
-            const expandBtn = document.getElementById('guiaExpandBtn');
-            const closeBtn  = document.getElementById('guiaVideoClose');
-            const modal     = document.getElementById('guiaVideoModal');
-            const modalClose= document.getElementById('guiaModalClose');
-            const modalVideo= document.getElementById('guiaModalVideoEl');
+            var btn        = document.getElementById('simVideoDesktopBtn');
+            var fabInline  = document.getElementById('simVideoFabInline');
+            var modal      = document.getElementById('simVideoModal');
+            var modalClose = document.getElementById('simModalClose');
+            var modalVideo = document.getElementById('simModalVideoEl');
 
-            // Abrir player inline
-            btnPlay.addEventListener('click', function() {
-                btnPlay.style.display = 'none';
-                playerWrap.classList.add('guia-active');
-                widget.classList.add('guia-expanded');
-                videoEl.play();
-            });
-
-            // Mute / Unmute
-            muteBtn.addEventListener('click', function() {
-                videoEl.muted = !videoEl.muted;
-                muteBtn.textContent = videoEl.muted ? '🔇' : '🔊';
-            });
-
-            // Ampliar → modal
-            expandBtn.addEventListener('click', function() {
-                videoEl.pause();
+            function abrirSimModal() {
                 modal.classList.add('guia-active');
-                modalVideo.currentTime = videoEl.currentTime;
+                modalVideo.currentTime = 0;
                 modalVideo.play();
-            });
-
-            // Fechar modal → retorna ao player inline
-            function fecharModal() {
+            }
+            function fecharSimModal() {
                 modalVideo.pause();
                 modal.classList.remove('guia-active');
-                videoEl.currentTime = modalVideo.currentTime;
-                videoEl.play();
             }
-            modalClose.addEventListener('click', fecharModal);
+
+            if (btn)        btn.addEventListener('click', abrirSimModal);
+            if (fabInline)  fabInline.addEventListener('click', abrirSimModal);
+            if (modalClose) modalClose.addEventListener('click', fecharSimModal);
             modal.addEventListener('click', function(e) {
-                if (e.target === modal) fecharModal();
-            });
-
-            // FAB mobile → abre modal direto
-            if (fab) {
-                fab.addEventListener('click', function() {
-                    modal.classList.add('guia-active');
-                    modalVideo.currentTime = 0;
-                    modalVideo.play();
-                });
-            }
-
-            // Recolher widget
-            closeBtn.addEventListener('click', function() {
-                videoEl.pause();
-                playerWrap.classList.remove('guia-active');
-                widget.classList.remove('guia-expanded');
-                btnPlay.style.display = 'block';
+                if (e.target === modal) fecharSimModal();
             });
         })();
     </script>
