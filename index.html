@@ -1077,7 +1077,7 @@
            ========================================= */
         .guia-video-widget {
             position: absolute;
-            top: 118px;
+            top: 148px;
             left: max(32px, calc((100vw - 1200px) / 2 + 32px));
             z-index: 900;
             width: 260px;
@@ -1259,7 +1259,7 @@
         @media (max-width: 768px) {
             .guia-video-widget { display: none !important; }
             .guia-video-fab { display: none !important; } /* substituído por botão inline */
-            .guia-mobile-fab-wrap { display: flex; }
+            .guia-mobile-fab-wrap { display: flex !important; }
             .guia-video-modal-overlay {
                 padding: 0;
                 width: 100vw;
@@ -1486,20 +1486,20 @@
         <!-- ABA: INÍCIO -->
         <div class="tab-content active" id="inicio">
             <div class="content-wrapper">
-                <!-- Mobile: emoji Boas-vindas inline (só visível em celular) -->
-                <div class="guia-mobile-fab-wrap">
-                    <button id="guiaVideoFabInline" title="Assistir boas-vindas">🎥</button>
-                </div>
                 <!-- HERO PRINCIPAL -->
                 <section id="hero-principal" style="padding: 64px 0 48px; text-align: center; border-bottom: 1px solid rgba(212,175,55,0.12);">
                     <div class="content-wrapper">
+                        <!-- Mobile: emoji Boas-vindas inline — acima do título -->
+                        <div class="guia-mobile-fab-wrap">
+                            <button id="guiaVideoFabInline" title="Assistir boas-vindas">🎥</button>
+                        </div>
                         <h1 style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; color: #D4AF37; margin-bottom: 24px; letter-spacing: -0.02em; line-height: 1.25;">
                             Construa hoje o patrimônio que<br>cuidará de você amanhã.
                         </h1>
                         <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: rgba(255,255,255,0.85); max-width: 680px; margin: 0 auto 16px; line-height: 1.75;">
                             O INVLAB é um laboratório independente de educação financeira criado para ajudar você a planejar, construir e proteger seu patrimônio ao longo da vida.
                         </p>
-                        <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: rgba(16,185,129,0.8); max-width: 600px; margin: 0 auto 44px; line-height: 1.75;">
+                        <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: rgba(16,185,129,0.8); max-width: 600px; margin: 0 auto 24px; line-height: 1.75;">
                             Sem corretora. Sem venda de produtos. Sem comissões. Sem recomendações patrocinadas.<br>Aqui, o conhecimento vem antes da decisão.
                         </p>
                     </div>
