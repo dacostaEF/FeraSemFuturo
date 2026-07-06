@@ -1535,7 +1535,10 @@
                                 <div style="margin-bottom: 14px;">
                                     <span style="display: inline-block; font-size: 0.72rem; font-family: 'Inter', sans-serif; color: rgba(16,185,129,0.85); background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); border-radius: 20px; padding: 3px 10px; letter-spacing: 0.3px;">🟢 Recomendado para iniciar</span>
                                 </div>
-                                <div style="font-size: 48px; margin-bottom: 16px; transition: all 0.3s ease;">🧙‍♂️</div>
+                                <div style="display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 16px;">
+                                    <span style="font-size: 48px; transition: all 0.3s ease;">🧙‍♂️</span>
+                                    <button id="wizardVideoBtn" title="Ver vídeo do Simulador Guiado" style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; padding: 4px; line-height: 1; opacity: 0.75; transition: opacity 0.2s ease;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.75">🎥</button>
+                                </div>
                                 <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #E4E4E4; margin-bottom: 12px;">
                                     Simulador Guiado (Wizard)
                                 </h3>
@@ -3095,6 +3098,19 @@
         </div>
     </div>
 
+    <!-- Modal do vídeo Simulador Guiado (Wizard) -->
+    <div class="guia-video-modal-overlay" id="wizardVideoModal">
+        <div class="guia-video-modal-box">
+            <div class="guia-video-modal-header">
+                <span class="guia-video-modal-title">🎥 Simulador Guiado (Wizard)</span>
+                <button class="guia-video-modal-close" id="wizardModalClose">×</button>
+            </div>
+            <video id="wizardModalVideoEl" controls preload="none" playsinline>
+                <source src="Midia/Simulador_Guiado.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
     <!-- Modal do vídeo Simuladores de Aposentadoria -->
     <div class="guia-video-modal-overlay" id="simVideoModal">
         <div class="guia-video-modal-box">
@@ -3223,6 +3239,22 @@
             modalVideo.currentTime = 0;
             modalVideo.play();
         }
+    </script>
+
+    <script>
+        // WIZARD — Vídeo (emoji dentro do card → modal)
+        (function() {
+            var btn        = document.getElementById('wizardVideoBtn');
+            var modal      = document.getElementById('wizardVideoModal');
+            var modalClose = document.getElementById('wizardModalClose');
+            var modalVideo = document.getElementById('wizardModalVideoEl');
+            if (!btn) return;
+            function abrirModal() { modal.classList.add('guia-active'); modalVideo.currentTime = 0; modalVideo.play(); }
+            function fecharModal() { modalVideo.pause(); modal.classList.remove('guia-active'); }
+            btn.addEventListener('click', abrirModal);
+            modalClose.addEventListener('click', fecharModal);
+            modal.addEventListener('click', function(e) { if (e.target === modal) fecharModal(); });
+        })();
     </script>
 
     <script>
