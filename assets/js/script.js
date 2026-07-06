@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initScrollArrow();
 });
 
+// Troca de aba ao clicar em links de hash (ex: menu hambúrguer mobile)
+window.addEventListener('hashchange', checkURLHash);
+
 // Inicializa o sistema de abas
 function initTabs() {
     const tabButtons = document.querySelectorAll('.tab-btn');

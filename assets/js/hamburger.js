@@ -50,20 +50,29 @@
     var drawer = document.createElement('nav');
     drawer.className = 'mobile-drawer';
     drawer.id = 'mobileDrawer';
+    /* No root (index.html) usa #hash puro para disparar hashchange sem recarregar.
+       Em /pages/ usa ../index.html#hash para forçar navegação completa. */
+    var inicio       = inPages ? r + 'index.html'                   : '#inicio';
+    var primPassos   = inPages ? r + 'index.html#primeiros-passos'  : '#primeiros-passos';
+    var rendaFixa    = inPages ? r + 'index.html#renda-fixa'        : '#renda-fixa';
+    var rendaVar     = inPages ? r + 'index.html#renda-variavel'    : '#renda-variavel';
+    var sobre        = inPages ? r + 'index.html#sobre'             : '#sobre';
+    var avisoLegal   = inPages ? r + 'index.html#aviso-legal'       : '#aviso-legal';
+
     drawer.innerHTML =
         '<button class="mobile-drawer-close" id="mobileDrawerClose">×</button>' +
         '<ul class="mobile-menu-list">' +
-        '<li><a href="' + r + 'index.html">🏠 Início</a></li>' +
-        '<li><a href="' + r + 'index.html#primeiros-passos">📚 Primeiros Passos</a></li>' +
-        '<li><a href="' + r + 'index.html#renda-fixa">💰 Renda Fixa</a></li>' +
-        '<li><a href="' + r + 'index.html#renda-variavel">📈 Renda Variável</a></li>' +
+        '<li><a href="' + inicio     + '">🏠 Início</a></li>' +
+        '<li><a href="' + primPassos + '">📚 Primeiros Passos</a></li>' +
+        '<li><a href="' + rendaFixa  + '">💰 Renda Fixa</a></li>' +
+        '<li><a href="' + rendaVar   + '">📈 Renda Variável</a></li>' +
         '<li><a href="' + p + 'cripto.html">🌐 Economia Digital</a></li>' +
         '<li><a href="' + p + 'instrumentos-avancados.html">🧬 Instrumentos Avançados</a></li>' +
         '<li><a href="' + p + 'defesa-investidor.html">🛡 Defesa do Investidor</a></li>' +
         '<div class="mobile-menu-separator"></div>' +
-        '<li><a href="' + r + 'index.html#sobre">ℹ️ Sobre o INVLAB</a></li>' +
+        '<li><a href="' + sobre      + '">ℹ️ Sobre o INVLAB</a></li>' +
         '<li><a href="' + p + 'metodologia.html">🔬 Metodologia</a></li>' +
-        '<li><a href="' + r + 'index.html#aviso-legal">⚠️ Aviso Legal</a></li>' +
+        '<li><a href="' + avisoLegal + '">⚠️ Aviso Legal</a></li>' +
         '</ul>';
 
     /* Injeta antes de qualquer outro filho do body */
