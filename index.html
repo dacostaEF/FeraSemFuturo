@@ -1555,7 +1555,10 @@
                                 <div style="margin-bottom: 14px;">
                                     <span style="display: inline-block; font-size: 0.72rem; font-family: 'Inter', sans-serif; color: rgba(99,179,237,0.85); background: rgba(99,179,237,0.08); border: 1px solid rgba(99,179,237,0.2); border-radius: 20px; padding: 3px 10px; letter-spacing: 0.3px;">🔵 Análise avançada</span>
                                 </div>
-                                <div style="font-size: 48px; margin-bottom: 16px; transition: all 0.3s ease;">📊</div>
+                                <div style="display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 16px;">
+                                    <span style="font-size: 48px; transition: all 0.3s ease;">📊</span>
+                                    <button id="proVideoBtn" title="Ver vídeo do Simulador PRO" style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; padding: 4px; line-height: 1; opacity: 0.75; transition: opacity 0.2s ease;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.75">🎥</button>
+                                </div>
                                 <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #E4E4E4; margin-bottom: 12px;">
                                     Simulador Completo (PRO)
                                 </h3>
@@ -3124,6 +3127,19 @@
         </div>
     </div>
 
+    <!-- Modal do vídeo Simulador PRO -->
+    <div class="guia-video-modal-overlay" id="proVideoModal">
+        <div class="guia-video-modal-box">
+            <div class="guia-video-modal-header">
+                <span class="guia-video-modal-title">🎥 Simulador Completo (PRO)</span>
+                <button class="guia-video-modal-close" id="proModalClose">×</button>
+            </div>
+            <video id="proModalVideoEl" controls preload="none" playsinline>
+                <source src="Midia/Simulador_PRO.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
     <!-- Botão Back to Top - INVLAB Premium -->
     <button id="backToTop" aria-label="Voltar ao topo">
         <i class="ph-bold ph-arrow-up"></i>
@@ -3248,6 +3264,22 @@
             var modal      = document.getElementById('wizardVideoModal');
             var modalClose = document.getElementById('wizardModalClose');
             var modalVideo = document.getElementById('wizardModalVideoEl');
+            if (!btn) return;
+            function abrirModal() { modal.classList.add('guia-active'); modalVideo.currentTime = 0; modalVideo.play(); }
+            function fecharModal() { modalVideo.pause(); modal.classList.remove('guia-active'); }
+            btn.addEventListener('click', abrirModal);
+            modalClose.addEventListener('click', fecharModal);
+            modal.addEventListener('click', function(e) { if (e.target === modal) fecharModal(); });
+        })();
+    </script>
+
+    <script>
+        // PRO — Vídeo (emoji dentro do card → modal)
+        (function() {
+            var btn        = document.getElementById('proVideoBtn');
+            var modal      = document.getElementById('proVideoModal');
+            var modalClose = document.getElementById('proModalClose');
+            var modalVideo = document.getElementById('proModalVideoEl');
             if (!btn) return;
             function abrirModal() { modal.classList.add('guia-active'); modalVideo.currentTime = 0; modalVideo.play(); }
             function fecharModal() { modalVideo.pause(); modal.classList.remove('guia-active'); }
