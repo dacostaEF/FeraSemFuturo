@@ -432,33 +432,10 @@
     </style>
 </head>
 <body>
-    <!-- Menu Mobile Drawer (Hambúrguer) -->
-    <div class="mobile-drawer" id="mobileDrawer">
-        <button class="drawer-close-btn" onclick="closeDrawer()">✕</button>
-        <nav class="drawer-nav">
-            <a href="../index.html">🏠 INÍCIO</a>
-            <a href="../index.html#primeiros-passos">🚀 Primeiros Passos</a>
-            <div class="separator"></div>
-            <a href="../index.html#renda-fixa">💰 Renda Fixa</a>
-            <a href="../index.html#renda-variavel">📈 Renda Variável</a>
-            <a href="cripto.html">🌐 Economia Digital</a>
-            <a href="../index.html#outros-investimentos">💎 Outros Investimentos</a>
-            <a href="../index.html#ferramentas">🛠️ Ferramentas</a>
-            <div class="separator"></div>
-            <a href="guia_invlab.html">ℹ️ Sobre o INVLAB</a>
-            <a href="metodologia.html">🔬 Metodologia</a>
-            <a href="../index.html#aviso-legal">⚠️ Aviso Legal</a>
-        </nav>
-    </div>
-    <div class="drawer-backdrop" id="drawerBackdrop" onclick="closeDrawer()"></div>
 
     <!-- Header Fixo -->
     <header class="main-header">
         <div class="header-container">
-            <!-- Botão Hambúrguer Mobile -->
-            <button class="hamburger-icon" onclick="openDrawer()" aria-label="Menu">
-                ☰
-            </button>
             
             <!-- Logo -->
             <div class="header-logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
@@ -757,21 +734,7 @@
 
     <!-- Scripts -->
     <script src="../assets/js/script.js"></script>
-    
-    <!-- Script Menu Mobile Drawer -->
-    <script>
-        function openDrawer() {
-            document.getElementById('mobileDrawer').classList.add('active');
-            document.getElementById('drawerBackdrop').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeDrawer() {
-            document.getElementById('mobileDrawer').classList.remove('active');
-            document.getElementById('drawerBackdrop').classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    </script>
+    <script src="../assets/js/hamburger.js"></script>
     <script src="../assets/js/footer.js"></script>
 </body>
 </html>

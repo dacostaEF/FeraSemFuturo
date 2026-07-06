@@ -1906,33 +1906,6 @@
     </style></head>
 <body>
 
-    <!-- Botão Menu Mobile Hambúrguer -->
-    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
-        ☰
-    </button>
-    
-    <!-- Backdrop (Fundo escurecido) -->
-    <div class="mobile-backdrop" id="mobileBackdrop"></div>
-    
-    <!-- Drawer Lateral Mobile -->
-    <nav class="mobile-drawer" id="mobileDrawer">
-        <button class="mobile-drawer-close" id="mobileDrawerClose">×</button>
-        
-        <ul class="mobile-menu-list">
-            <li><a href="../index.html#inicio">🏠 Início</a></li>
-            <li><a href="../index.html#primeiros-passos">📚 Primeiros Passos</a></li>
-            <li><a href="../index.html#renda-fixa">📊 Renda Fixa</a></li>
-            <li><a href="../index.html#renda-variavel">📈 Renda Variável</a></li>
-            <li><a href="cripto.html">🌐 Economia Digital</a></li>
-            <li><span>🛠️ Ferramentas</span></li>
-            <li><a href="../index.html#outros-investimentos">💎 Outros Investimentos</a></li>
-            <li><a href="defesa-investidor.html">🛡 Defesa do Investidor</a></li>
-            <div class="mobile-menu-separator"></div>
-            <li><a href="simulador-wizard.html">🧙 Simulador Wizard</a></li>
-            <li><a href="simulador-aposentadoria.html">🏖️ Simulador Aposentadoria</a></li>
-        </ul>
-    </nav>
-
     <!-- CARROSSEL: Indicadores Renda Fixa -->
     <section id="invlab-carousel-container"></section>
 
@@ -2403,52 +2376,6 @@
         window.addEventListener('resize', ajustarTooltips);
     </script>
 
-    <!-- JavaScript do Menu Mobile Hambúrguer -->
-    <script>
-        // Controle do Menu Mobile
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileDrawer = document.getElementById('mobileDrawer');
-        const mobileBackdrop = document.getElementById('mobileBackdrop');
-        const mobileDrawerClose = document.getElementById('mobileDrawerClose');
-        
-        // Abrir drawer
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', function() {
-                mobileDrawer.classList.add('active');
-                mobileBackdrop.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-        }
-        
-        // Fechar drawer (botão X)
-        if (mobileDrawerClose) {
-            mobileDrawerClose.addEventListener('click', function() {
-                mobileDrawer.classList.remove('active');
-                mobileBackdrop.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        }
-        
-        // Fechar drawer (backdrop)
-        if (mobileBackdrop) {
-            mobileBackdrop.addEventListener('click', function() {
-                mobileDrawer.classList.remove('active');
-                mobileBackdrop.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        }
-        
-        // Fechar drawer ao clicar em link
-        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-list a');
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                mobileDrawer.classList.remove('active');
-                mobileBackdrop.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
-    </script>
-
     <div id="invlab-footer"></div>
 
     <!-- Modal Explicativo - Renda Vitalícia vs Usar Capital -->
@@ -2565,7 +2492,8 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         })();
-    </script>    <script src="../assets/js/footer.js"></script>
+    </script>    <script src="../assets/js/hamburger.js"></script>
+    <script src="../assets/js/footer.js"></script>
 </body>
 </html>
 
