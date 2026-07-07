@@ -613,10 +613,17 @@ function executarSimulacaoWizard(dadosWizard) {
         inssReal = calcularINSS(rendaDesejada);
     }
 
-    // 8. Renda final prevista = INSS + investimentos
-    const rendaTotalPrevista = rendaRealPossivel + inssReal;
+    // 8. Converter renda dos investimentos para poder de compra de hoje
+    // patrimonioTotalProjetado acumula com taxa nominal → rendaRealPossivel é valor nominal futuro
+    // (patrimônio_nominal × taxaReal = renda nominal do primeiro mês na aposentadoria)
+    // Para comparar com rendaDesejada (hoje), descontamos a inflação acumulada
+    const fatorInflacao = Math.pow(1 + INFLACAO_MEDIA, anosAteAposentadoria);
+    const rendaInvestimentosHoje = rendaRealPossivel / fatorInflacao;
 
-    // 9. Quanto falta para atingir a meta?
+    // 9. Renda total prevista em poder de compra de hoje
+    const rendaTotalPrevista = rendaInvestimentosHoje + inssReal;
+
+    // 10. Quanto falta para atingir a meta? (tudo em poder de compra de hoje)
     const deficitOuSobra = rendaTotalPrevista - rendaDesejada;
 
     // 10. Aporte necessário para atingir 100% da meta
@@ -628,37 +635,37 @@ function executarSimulacaoWizard(dadosWizard) {
     if (deficitOuSobra < 0) {
         const meses = anosAteAposentadoria * 12;
         const jurosNominalMensal = taxaMensal(taxaAnualEscolhida);
-        const rendaFaltante = Math.abs(deficitOuSobra);
-        
+
+        // Renda que os investimentos precisam gerar totalmente (hoje):
+        // = meta total − contribuição do INSS
+        const rendaNecessariaHoje = rendaDesejada - inssReal;
+
+        // Equivalente nominal no ano da aposentadoria (para operar na mesma moeda
+        // que patrimonioTotalProjetado, que é nominal)
+        const rendaNecessariaHojeNominal = rendaNecessariaHoje * fatorInflacao;
+
         let patrimonioNecessario;
-        
+
         // Caso 1: Vitalícia Perpétua (capital preservado)
         if (tipoRenda === "vitalicia" && estrategia === "perpetua") {
-            // Fórmula: renda = patrimonio * taxaMensalReal
-            // Portanto: patrimonio = renda / taxaMensalReal
-            patrimonioNecessario = rendaFaltante / taxaMensalReal;
+            // patrimônio_nominal × taxaMensalReal = renda_nominal → inversão direta
+            patrimonioNecessario = rendaNecessariaHojeNominal / taxaMensalReal;
         }
-        // Caso 2: Período + Perpetua (sem idadeFinal) - também vitalícia
+        // Caso 2: Período + Perpetua (sem idadeFinal) — comportamento vitalício
         else if (tipoRenda === "periodo" && estrategia === "perpetua" && !idadeFinal) {
-            // Mesma fórmula de vitalícia (capital preservado)
-            patrimonioNecessario = rendaFaltante / taxaMensalReal;
+            patrimonioNecessario = rendaNecessariaHojeNominal / taxaMensalReal;
         }
-        // Caso 3: Preservar 20% (tem FV = 20% do PV)
+        // Caso 3: Preservar 20% (FV = 20% do PV)
         else if (estrategia === "preservar20") {
             const idadeAlvo = idadeFinal || 95;
             const n = (idadeAlvo - idadeAposent) * 12;
             const i = taxaMensalReal;
-            const FV_ratio = 0.20; // 20% preservado
-            
-            // Fórmula: PMT = (i * (PV - FV/(1+i)^n)) / (1 - 1/(1+i)^n)
-            // Rearranjando para encontrar PV dado PMT:
-            // PV = PMT * (1 - (1+i)^-n) / i / (1 - FV_ratio / (1+i)^n)
+            const FV_ratio = 0.20;
             const fator_n = Math.pow(1 + i, n);
-            patrimonioNecessario = rendaFaltante * (1 - 1/fator_n) / i / (1 - FV_ratio / fator_n);
+            patrimonioNecessario = rendaNecessariaHojeNominal * (1 - 1/fator_n) / i / (1 - FV_ratio / fator_n);
         }
-        // Caso 4: Esgotável (consome todo capital) ou Período com idadeFinal
+        // Caso 4: Esgotável ou Período com idadeFinal
         else {
-            // Esgotável: periodo + esgotavel, vitalicia + esgotavel, ou periodo + idadeFinal (sem perpetua)
             let n;
             if (idadeFinal && idadeFinal > idadeAposent) {
                 n = (idadeFinal - idadeAposent) * 12;
@@ -667,21 +674,18 @@ function executarSimulacaoWizard(dadosWizard) {
             } else {
                 n = anosDuracao * 12;
             }
-            
             const i = taxaMensalReal;
-            // Fórmula de anuidade: PV = PMT * (1 - (1+i)^-n) / i
-            patrimonioNecessario = rendaFaltante * (1 - Math.pow(1 + i, -n)) / i;
+            patrimonioNecessario = rendaNecessariaHojeNominal * (1 - Math.pow(1 + i, -n)) / i;
         }
-        
-        // Diferença entre o patrimônio necessário e o projetado
+
+        // Quanto falta acumular (ambos nominais): pode ser positivo (falta) ou negativo (sobra)
         const faltaAcumular = patrimonioNecessario - patrimonioTotalProjetado;
-        
+
         if (faltaAcumular > 0) {
-            // Fórmula PMT: juros compostos mensais
-            aporteNecessario = (faltaAcumular * jurosNominalMensal) / 
+            aporteNecessario = (faltaAcumular * jurosNominalMensal) /
                                (Math.pow(1 + jurosNominalMensal, meses) - 1);
         } else {
-            aporteNecessario = 0;  // já atingiu
+            aporteNecessario = 0;
         }
     }
 
@@ -894,7 +898,9 @@ function executarSimulacaoWizard(dadosWizard) {
     return {
         anosAteAposentadoria,
         patrimonioTotalProjetado,
-        rendaRealPossivel,
+        rendaRealPossivel,         // valor nominal futuro (primeiro mês na aposentadoria)
+        rendaInvestimentosHoje,    // poder de compra de hoje (= rendaRealPossivel / fatorInflacao)
+        fatorInflacao,             // (1 + INFLACAO_MEDIA)^anos — conversão nominal→hoje
         rendaTotalPrevista,
         rendaDesejada,
         rendaAtual,
