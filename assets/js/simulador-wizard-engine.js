@@ -557,16 +557,7 @@ function executarSimulacaoWizard(dadosWizard) {
             taxaMensalReal,
             meses
         );
-
-        projecaoPosAposentadoria = projetarCurvaEsgotavel(
-            patrimonioTotalProjetado,
-            rendaRealPossivel,
-            taxaMensalReal,
-            meses
-        );
-
-        // ✅ CORREÇÃO: Herança = 0 para esgotável (capital será consumido)
-        heranca = 0;
+        // projeção e herança tratadas no bloco de projeção pós-aposentadoria abaixo
     }
 
     // ============================================================
