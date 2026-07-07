@@ -10,7 +10,7 @@
  * - Somente 1 idade final será usada: 95 anos.
  * - Todas as estratégias seguem essa idade final.
  * - Curvas extras foram removidas.
- * - PMT da estratégia esgotável usa taxa NOMINAL mensal.
+ * - PMT da estratégia esgotável usa taxa REAL mensal (renda em poder de compra constante).
  * - O gráfico deverá mostrar apenas:
  *     - acumulação até aposentadoria
  *     - curva esgotável até 95 anos
@@ -71,7 +71,7 @@ function calcularINSS(rendaDesejada) {
 
 // Renda vitalícia baseada no patrimônio acumulado
 function rendaVitalicia(patrimonio, taxaAnual, expectativaAnos) {
-    const taxaMensalReal = taxaMensal(taxaAnual - INFLACAO_MEDIA);
+    const taxaMensalReal = taxaMensal((1 + taxaAnual) / (1 + INFLACAO_MEDIA) - 1);
     const meses = expectativaAnos * 12;
 
     if (taxaMensalReal <= 0) {
@@ -388,11 +388,8 @@ function executarSimulacaoWizard(dadosWizard) {
     }
     
     // 5. Calcular taxa real e taxa mensal
-    const taxaAnualReal = taxaAnualEscolhida - INFLACAO_MEDIA;
+    const taxaAnualReal = (1 + taxaAnualEscolhida) / (1 + INFLACAO_MEDIA) - 1;
     const taxaMensalReal = Math.pow(1 + taxaAnualReal, 1/12) - 1;
-    
-    // Taxa nominal (correta para calcular PMT esgotável)
-    const taxaNominalMensal = Math.pow(1 + taxaAnualEscolhida, 1/12) - 1;
     
     // 6. Validar taxaMensalReal (verifica se Math.pow não retornou NaN/Infinity)
     if (!isFinite(taxaMensalReal)) {
@@ -439,7 +436,6 @@ function executarSimulacaoWizard(dadosWizard) {
         taxaAnualEscolhida: taxaAnualEscolhida,
         taxaAnualReal: taxaAnualReal,
         taxaMensalReal: taxaMensalReal,
-        taxaNominalMensal: taxaNominalMensal,
         patrimonioTotalProjetado: patrimonioTotalProjetado
     });
     
@@ -527,18 +523,16 @@ function executarSimulacaoWizard(dadosWizard) {
             meses = anosPeriodo * 12;
         }
         
-        // PMT usando **taxa nominal** – CORRETO
         rendaRealPossivel = calcularPMTEsgotavel(
             patrimonioTotalProjetado,
-            taxaNominalMensal,
+            taxaMensalReal,
             meses
         );
-        
-        // Curva esgotável usando taxa nominal
+
         projecaoPosAposentadoria = projetarCurvaEsgotavel(
             patrimonioTotalProjetado,
             rendaRealPossivel,
-            taxaNominalMensal,
+            taxaMensalReal,
             meses
         );
     }
@@ -558,21 +552,19 @@ function executarSimulacaoWizard(dadosWizard) {
             meses = anosDuracao * 12;
         }
         
-        // PMT usando **taxa nominal** – CORRETO
         rendaRealPossivel = calcularPMTEsgotavel(
             patrimonioTotalProjetado,
-            taxaNominalMensal,
+            taxaMensalReal,
             meses
         );
-        
-        // Curva esgotável usando taxa nominal
+
         projecaoPosAposentadoria = projetarCurvaEsgotavel(
             patrimonioTotalProjetado,
             rendaRealPossivel,
-            taxaNominalMensal,
+            taxaMensalReal,
             meses
         );
-        
+
         // ✅ CORREÇÃO: Herança = 0 para esgotável (capital será consumido)
         heranca = 0;
     }
@@ -805,17 +797,16 @@ function executarSimulacaoWizard(dadosWizard) {
         } else {
             meses = anosPeriodo * 12;
         }
-        // Curva esgotável usando taxa nominal
         projecaoPosAposentadoria = projetarCurvaEsgotavel(
             patrimonioTotalProjetado,
             rendaRealPossivel,
-            taxaNominalMensal,
+            taxaMensalReal,
             meses
         );
-        
+
         // ✅ CORREÇÃO: Herança = 0 para esgotável (capital será consumido)
         heranca = 0;
-        
+
     }
     // ============================================================
     // ESTRATÉGIA 5: PRESERVAR 20% DO PATRIMÔNIO
@@ -855,26 +846,24 @@ function executarSimulacaoWizard(dadosWizard) {
             meses = anosDuracao * 12;
         }
         
-        // PMT usando **taxa nominal** – CORRETO
         rendaRealPossivel = calcularPMTEsgotavel(
             patrimonioTotalProjetado,
-            taxaNominalMensal,
+            taxaMensalReal,
             meses
         );
-        
-        // Curva esgotável usando taxa nominal
+
         projecaoPosAposentadoria = projetarCurvaEsgotavel(
             patrimonioTotalProjetado,
             rendaRealPossivel,
-            taxaNominalMensal,
+            taxaMensalReal,
             meses
         );
-        
+
         // ✅ CORREÇÃO: Herança = 0 para esgotável (capital será consumido)
         heranca = 0;
-        
+
     }
-    
+
     // =======================
     // Cálculo correto da herança
     // =======================

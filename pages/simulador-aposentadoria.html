@@ -2968,30 +2968,30 @@
                         <!-- CASO 1: VITALÍCIA PERPÉTUA -->
                         <div style="background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
                             <h4 style="color: #10b981; margin-bottom: 10px; font-size: 1rem;">💚 Caso 1: Renda Vitalícia Perpétua (Preservar Capital)</h4>
-                            <p style="color: #E4E4E4; line-height: 1.7; margin: 0;"><strong>Taxa utilizada:</strong> <strong>Taxa Real</strong> (Taxa Nominal - Inflação)</p>
+                            <p style="color: #E4E4E4; line-height: 1.7; margin: 0;"><strong>Taxa utilizada:</strong> <strong>Taxa Real</strong> — fórmula de Fisher: (1 + nominal) ÷ (1 + inflação) − 1</p>
                             <p style="color: #E4E4E4; line-height: 1.7; margin: 8px 0 0 0;">
-                                Você recebe apenas os juros do patrimônio, preservando o capital integralmente. 
-                                A renda é calculada usando a taxa real (ex: 8% - 4,5% = 3,5% a.a.), garantindo que seu poder de compra seja mantido ao longo do tempo.
+                                Você recebe apenas os juros do patrimônio, preservando o capital integralmente.
+                                A renda é calculada pela taxa real de Fisher (ex: 1,08 ÷ 1,045 − 1 ≈ 3,35% a.a.), garantindo que seu poder de compra seja mantido ao longo do tempo.
                             </p>
                         </div>
                         
                         <!-- CASO 2: PRESERVAR 20% -->
                         <div style="background: rgba(250, 204, 21, 0.1); border-left: 4px solid #FACC15; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
                             <h4 style="color: #FACC15; margin-bottom: 10px; font-size: 1rem;">🟡 Caso 2: Renda por Período Determinado (Preservar 20% do Capital)</h4>
-                            <p style="color: #E4E4E4; line-height: 1.7; margin: 0;"><strong>Taxa utilizada:</strong> <strong>Taxa Real</strong> (Taxa Nominal - Inflação)</p>
+                            <p style="color: #E4E4E4; line-height: 1.7; margin: 0;"><strong>Taxa utilizada:</strong> <strong>Taxa Real</strong> — fórmula de Fisher: (1 + nominal) ÷ (1 + inflação) − 1</p>
                             <p style="color: #E4E4E4; line-height: 1.7; margin: 8px 0 0 0;">
-                                Você recebe uma renda mensal que consome gradualmente o patrimônio até chegar a 20% do valor inicial aos 95 anos. 
-                                A renda é calculada usando a taxa real, garantindo que seu poder de compra seja mantido. Os 20% restantes são preservados como herança.
+                                Você recebe uma renda mensal que consome gradualmente o patrimônio até chegar a 20% do valor inicial aos 95 anos.
+                                A renda é calculada pela taxa real de Fisher, garantindo que seu poder de compra seja mantido. Os 20% restantes são preservados como herança.
                             </p>
                         </div>
                         
                         <!-- CASO 3: ESGOTÁVEL -->
                         <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
                             <h4 style="color: #ef4444; margin-bottom: 10px; font-size: 1rem;">🔴 Caso 3: Renda por Período Determinado (Esgotável - Usar Capital Gradualmente)</h4>
-                            <p style="color: #E4E4E4; line-height: 1.7; margin: 0;"><strong>Taxa utilizada:</strong> <strong>Taxa Nominal</strong> (sem descontar inflação)</p>
+                            <p style="color: #E4E4E4; line-height: 1.7; margin: 0;"><strong>Taxa utilizada:</strong> <strong>Taxa Real</strong> — fórmula de Fisher: (1 + nominal) ÷ (1 + inflação) − 1</p>
                             <p style="color: #E4E4E4; line-height: 1.7; margin: 8px 0 0 0;">
-                                Você recebe uma renda mensal que consome completamente o patrimônio até os 95 anos. 
-                                A renda é calculada usando a taxa nominal (ex: 8% a.a.), o que significa que seu poder de compra diminuirá ao longo do tempo conforme a inflação.
+                                Você recebe uma renda mensal que consome completamente o patrimônio até os 95 anos.
+                                A renda é calculada pela taxa real de Fisher, garantindo que seu poder de compra seja mantido constante ao longo do tempo — mesmo consumindo o capital.
                             </p>
                         </div>
                         
@@ -2999,12 +2999,8 @@
                         <div style="background: rgba(138, 204, 166, 0.1); border-left: 4px solid #8acc9e; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
                             <h4 style="color: #8acc9e; margin-bottom: 10px; font-size: 1rem;">💰 Compensação de Inflação</h4>
                             <p style="color: #E4E4E4; line-height: 1.7; margin: 0;">
-                                <strong>Casos 1 e 2 (Taxa Real):</strong> A renda mensal é ajustada automaticamente para compensar a inflação, 
-                                mantendo seu poder de compra constante ao longo do tempo.
-                            </p>
-                            <p style="color: #E4E4E4; line-height: 1.7; margin: 8px 0 0 0;">
-                                <strong>Caso 3 (Taxa Nominal):</strong> A renda mensal não é ajustada para inflação, 
-                                então seu poder de compra diminuirá gradualmente ao longo dos anos.
+                                <strong>Todos os cenários usam Taxa Real (Fisher):</strong> A renda mensal é calculada com base na taxa real de juros — pela fórmula (1 + nominal) ÷ (1 + inflação) − 1 —
+                                o que preserva o poder de compra nos três cenários ao longo do tempo.
                             </p>
                         </div>
                         

@@ -304,18 +304,17 @@ window.simuladorProEngine.executarSimulacaoCompleta = function (params) {
     // ============================================================
     // TAXAS: NOMINAL para acumulação, REAL para renda
     // ============================================================
-    // Taxa NOMINAL mensal (para acumulação) - igual ao Wizard
-    const taxaMensalNominal = taxaMensalEfetiva(retornoAnual);
-    
-    // Taxa REAL mensal (para cálculo de renda) - igual ao Wizard
-    const taxaAnualReal = retornoAnual - INFLACAO_MEDIA; // INFLACAO_MEDIA já é decimal (0.045)
+    // Taxa NOMINAL mensal líquida (para acumulação) — desconta taxaAdmAnual antes de converter
+    const taxaMensalNominal = taxaMensalEfetiva(retornoAnual - taxaAdmAnual);
+
+    // Taxa REAL mensal (para cálculo de renda) — fórmula exata de Fisher (igual ao Wizard)
+    const taxaAnualReal = (1 + retornoAnual) / (1 + INFLACAO_MEDIA) - 1;
     const taxaMensalReal = taxaMensalEfetiva(taxaAnualReal);
 
     // ============================================================
     // 1. ACUMULAÇÃO ATÉ A APOSENTADORIA (usa taxa NOMINAL)
     // ============================================================
-    // ✅ NOVO: Converter taxa administrativa anual para mensal
-    const taxaAdmMensal = taxaMensalEfetiva(taxaAdmAnual);
+    const taxaAdmMensal = 0; // taxaAdmAnual já descontada em taxaMensalNominal
     
     const acumulacao = projetarAcumulacaoMensal(
         idadeAtual,
@@ -600,8 +599,7 @@ function acumulacaoPrevidencia(aporteMensal, anos, retornoAnual, patrimonioInici
  * @returns {number} Renda mensal vitalícia
  */
 function rendaVitaliciaComparacao(patrimonio, retornoAnual, tipo) {
-    // Taxa mensal nominal (aproximada)
-    const taxaMensal = retornoAnual / 12;
+    const taxaMensal = taxaMensalEfetiva(retornoAnual);
     
     // Fatores: simples = 1.20 (renda maior, consome capital), reversivel = 0.80 (renda menor, preserva mais)
     const fator = tipo === "simples" ? 1.20 : 0.80;
