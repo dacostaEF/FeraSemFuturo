@@ -1007,7 +1007,7 @@ function finalizarWizard() {
                     <p><strong>Taxa Nominal Anual:</strong> ${(resultados.taxaAnualEscolhida * 100).toFixed(1)}% a.a.</p>
                     <p><strong>Taxa Equivalente Mensal:</strong> ${((Math.pow(1 + resultados.taxaAnualEscolhida, 1/12) - 1) * 100).toFixed(4)}% a.m.</p>
                     <p><strong>Inflação Presumida:</strong> 4,5% a.a. (IPCA médio histórico)</p>
-                    <p><strong>Taxa Real:</strong> ${((resultados.taxaAnualEscolhida - 0.045) * 100).toFixed(2)}% a.a. (${((Math.pow(1 + (resultados.taxaAnualEscolhida - 0.045), 1/12) - 1) * 100).toFixed(4)}% a.m.)</p>
+                    <p><strong>Taxa Real (Fisher):</strong> ${(((1 + resultados.taxaAnualEscolhida) / (1 + 0.045) - 1) * 100).toFixed(2)}% a.a. (${((Math.pow((1 + resultados.taxaAnualEscolhida) / (1 + 0.045), 1/12) - 1) * 100).toFixed(4)}% a.m.)</p>
                     
                     <h4 style="color: #D4AF37; margin-top: 20px;">📐 Fórmulas Utilizadas</h4>
                     <p><strong>1️⃣ Acumulação com Juros Compostos:</strong></p>
@@ -1055,15 +1055,15 @@ function finalizarWizard() {
                     <div style="background: rgba(16, 185, 129, 0.1); border: 2px solid #10b981; border-radius: 12px; padding: 20px; margin: 20px 0;">
                         <h4 style="color: #10b981; margin-top: 0; margin-bottom: 15px; font-size: 1.15rem;">💚 Caso 1: Renda Vitalícia Perpétua (Preservar Capital)</h4>
                         <p style="margin-bottom: 12px;">
-                            <strong style="color: #10b981;">Taxa utilizada:</strong> <strong>Taxa Real</strong> (Taxa Nominal - Inflação)
+                            <strong style="color: #10b981;">Taxa utilizada:</strong> <strong>Taxa Real</strong> — fórmula de Fisher: (1 + nominal) ÷ (1 + inflação) − 1
                         </p>
                         <p style="margin-bottom: 12px;">
                             <strong style="color: #D4AF37;">Como funciona:</strong>
                         </p>
                         <ul style="margin-left: 20px; margin-bottom: 12px;">
                             <li>Usamos apenas os <strong>juros reais</strong> do patrimônio acumulado</li>
-                            <li><strong>Taxa Real = Taxa Nominal (6%, 8% ou 10%) - Inflação (4,5%)</strong></li>
-                            <li>Exemplo: Perfil Moderado (8% a.a.) → Taxa Real = 8% - 4,5% = <strong>3,5% a.a. real</strong></li>
+                            <li><strong>Taxa Real = (1 + nominal) ÷ (1 + inflação) − 1 — fórmula de Fisher</strong></li>
+                            <li>Exemplo: Perfil Moderado (8% a.a.) → (1,08 ÷ 1,045) − 1 = <strong>≈ 3,35% a.a. real</strong></li>
                             <li><strong>Renda Mensal = Patrimônio × Taxa Mensal Real</strong></li>
                         </ul>
                         <p style="margin-bottom: 12px;">
@@ -1078,7 +1078,7 @@ function finalizarWizard() {
                     <div style="background: rgba(243, 156, 18, 0.1); border: 2px solid #F39C12; border-radius: 12px; padding: 20px; margin: 20px 0;">
                         <h4 style="color: #F39C12; margin-top: 0; margin-bottom: 15px; font-size: 1.15rem;">🟡 Caso 2: Renda por Período Determinado (Preservar 20% do Capital)</h4>
                         <p style="margin-bottom: 12px;">
-                            <strong style="color: #F39C12;">Taxa utilizada:</strong> <strong>Taxa Real</strong> (Taxa Nominal - Inflação)
+                            <strong style="color: #F39C12;">Taxa utilizada:</strong> <strong>Taxa Real</strong> — fórmula de Fisher: (1 + nominal) ÷ (1 + inflação) − 1
                         </p>
                         <p style="margin-bottom: 12px;">
                             <strong style="color: #D4AF37;">Como funciona:</strong>
@@ -1102,34 +1102,34 @@ function finalizarWizard() {
                     <div style="background: rgba(231, 76, 60, 0.1); border: 2px solid #e74c3c; border-radius: 12px; padding: 20px; margin: 20px 0;">
                         <h4 style="color: #e74c3c; margin-top: 0; margin-bottom: 15px; font-size: 1.15rem;">🔴 Caso 3: Renda por Período Determinado (Esgotável - Usar Capital Gradualmente)</h4>
                         <p style="margin-bottom: 12px;">
-                            <strong style="color: #e74c3c;">Taxa utilizada:</strong> <strong>Taxa Nominal</strong> (sem descontar inflação)
+                            <strong style="color: #e74c3c;">Taxa utilizada:</strong> <strong>Taxa Real</strong> — fórmula de Fisher: (1 + nominal) ÷ (1 + inflação) − 1
                         </p>
                         <p style="margin-bottom: 12px;">
                             <strong style="color: #D4AF37;">Como funciona:</strong>
                         </p>
                         <ul style="margin-left: 20px; margin-bottom: 12px;">
                             <li>Calculamos a <strong>renda máxima possível</strong> que consome todo o patrimônio até 95 anos</li>
-                            <li>Usamos <strong>Taxa Nominal</strong> (6%, 8% ou 10% a.a., conforme perfil) <strong>SEM descontar inflação</strong></li>
+                            <li>Usamos <strong>Taxa Real (Fisher)</strong> para garantir que a renda mantenha o poder de compra ao longo do tempo</li>
                             <li>Fórmula: <strong>PMT = PV × (i × (1+i)^n) / ((1+i)^n - 1)</strong></li>
-                            <li>Onde: PV = Patrimônio inicial, i = Taxa Nominal mensal, n = meses até 95 anos</li>
+                            <li>Onde: PV = Patrimônio inicial, i = Taxa Real mensal (Fisher), n = meses até 95 anos</li>
                             <li>A renda é calculada para que o patrimônio <strong>zere exatamente aos 95 anos</strong></li>
                         </ul>
                         <p style="margin-bottom: 12px;">
-                            <strong style="color: #D4AF37;">Juros de saque:</strong> A cada mês, aplicamos juros nominais sobre o saldo e subtraímos a renda. O patrimônio <strong>desce continuamente</strong> até zerar aos 95 anos.
+                            <strong style="color: #D4AF37;">Juros de saque:</strong> A cada mês, aplicamos juros reais sobre o saldo e subtraímos a renda. O patrimônio <strong>desce continuamente</strong> até zerar aos 95 anos.
                         </p>
                         <p style="margin: 0; padding: 12px; background: rgba(231, 76, 60, 0.1); border-radius: 6px;">
-                            <strong>⚠️ Atenção:</strong> Esta renda é a maior possível, mas consome todo o capital. Se você viver além de 95 anos, poderá ficar sem recursos. A renda não mantém o poder de compra ao longo do tempo (não está descontada da inflação).
+                            <strong>⚠️ Atenção:</strong> Esta renda consome todo o capital até os 95 anos. Se você viver além disso, poderá ficar sem recursos. A renda mantém o poder de compra ao longo do tempo (calculada com taxa real de Fisher).
                         </p>
                     </div>
 
                     <!-- EXPLICAÇÃO SOBRE TAXAS -->
                     <div style="background: rgba(77, 166, 255, 0.1); border: 2px solid rgba(77, 166, 255, 0.4); border-radius: 12px; padding: 20px; margin: 25px 0;">
-                        <h4 style="color: #4da6ff; margin-top: 0; margin-bottom: 15px; font-size: 1.15rem;">📈 Entendendo Taxa Real vs Taxa Nominal</h4>
+                        <h4 style="color: #4da6ff; margin-top: 0; margin-bottom: 15px; font-size: 1.15rem;">📈 Entendendo a Taxa Real (Fórmula de Fisher)</h4>
                         <p style="margin-bottom: 12px;">
                             <strong style="color: #4da6ff;">Taxa Nominal:</strong> É a taxa bruta de retorno dos investimentos (6%, 8% ou 10% a.a., conforme seu perfil).
                         </p>
                         <p style="margin-bottom: 12px;">
-                            <strong style="color: #4da6ff;">Taxa Real:</strong> É a taxa nominal <strong>descontada da inflação</strong> (estimada em 4,5% a.a.).
+                            <strong style="color: #4da6ff;">Taxa Real (Fisher):</strong> É a taxa nominal ajustada pela inflação usando a fórmula exata de Fisher: <strong>(1 + nominal) ÷ (1 + inflação) − 1</strong>. Mais precisa do que a simples subtração.
                         </p>
                         <p style="margin-bottom: 12px;">
                             <strong style="color: #D4AF37;">Exemplo prático:</strong>
@@ -1137,11 +1137,11 @@ function finalizarWizard() {
                         <ul style="margin-left: 20px; margin-bottom: 12px;">
                             <li>Perfil Moderado: Taxa Nominal = <strong>8% a.a.</strong></li>
                             <li>Inflação estimada = <strong>4,5% a.a.</strong></li>
-                            <li>Taxa Real = 8% - 4,5% = <strong>3,5% a.a. real</strong></li>
-                            <li>Taxa Real Mensal = <strong>≈ 0,287% ao mês</strong></li>
+                            <li>Taxa Real (Fisher) = (1,08 ÷ 1,045) − 1 = <strong>≈ 3,35% a.a. real</strong></li>
+                            <li>Taxa Real Mensal = <strong>≈ 0,275% ao mês</strong></li>
                         </ul>
                         <p style="margin: 0;">
-                            <strong>💡 Por que usar Taxa Real nos Casos 1 e 2?</strong> Para garantir que a renda mantenha o poder de compra ao longo do tempo. A renda calculada com taxa real já está "descontada da inflação", então você pode comprar a mesma quantidade de bens e serviços no futuro.
+                            <strong>💡 Por que todos os cenários usam Taxa Real (Fisher)?</strong> Para garantir que a renda mantenha o poder de compra ao longo do tempo em qualquer estratégia escolhida — seja preservando capital, preservando 20% ou consumindo o patrimônio.
                         </p>
                     </div>
 
@@ -1149,22 +1149,13 @@ function finalizarWizard() {
                     <div style="background: rgba(212, 175, 55, 0.1); border: 2px solid rgba(212, 175, 55, 0.4); border-radius: 12px; padding: 20px; margin: 25px 0;">
                         <h4 style="color: #D4AF37; margin-top: 0; margin-bottom: 15px; font-size: 1.15rem;">💰 Compensação de Inflação</h4>
                         <p style="margin-bottom: 12px;">
-                            <strong style="color: #D4AF37;">Casos 1 e 2 (Taxa Real):</strong>
+                            <strong style="color: #D4AF37;">Todos os cenários (Taxa Real — Fisher):</strong>
                         </p>
                         <ul style="margin-left: 20px; margin-bottom: 12px;">
-                            <li>A inflação já está <strong>descontada</strong> no cálculo da renda</li>
-                            <li>A renda mensal mantém o <strong>poder de compra</strong> ao longo do tempo</li>
+                            <li>A inflação já está <strong>descontada</strong> no cálculo da renda nos três casos</li>
+                            <li>A renda mensal mantém o <strong>poder de compra</strong> ao longo do tempo em qualquer estratégia</li>
+                            <li>A taxa real é calculada pela fórmula exata de Fisher: (1 + nominal) ÷ (1 + inflação) − 1</li>
                             <li>Você pode comprar a mesma quantidade de bens e serviços no futuro</li>
-                            <li>O patrimônio cresce com a inflação, compensando o aumento de preços</li>
-                        </ul>
-                        <p style="margin-bottom: 12px;">
-                            <strong style="color: #e74c3c;">Caso 3 (Taxa Nominal):</strong>
-                        </p>
-                        <ul style="margin-left: 20px; margin-bottom: 0;">
-                            <li>A inflação <strong>NÃO está descontada</strong> no cálculo</li>
-                            <li>A renda mensal <strong>perde poder de compra</strong> ao longo do tempo</li>
-                            <li>Com o passar dos anos, você poderá comprar menos bens e serviços com a mesma renda</li>
-                            <li>O patrimônio é consumido mais rapidamente porque não há compensação pela inflação</li>
                         </ul>
                     </div>
 
