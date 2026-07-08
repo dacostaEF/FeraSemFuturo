@@ -4405,17 +4405,31 @@
                 }
             }
             
-            // ✅ NOVO: Atualizar header de status
+            // Atualizar header de status — usa deficitOuSobra do engine (poder de compra de hoje)
             const dashboardHeader = document.getElementById("dashboardHeaderPro");
             if (dashboardHeader) {
-                const rendaTotal = rendaMensalPrevista + beneficioINSS;
-                const atingiuMeta = rendaTotal >= metaMensal;
+                const atingiuMeta = resultado.deficitOuSobra >= 0;
                 const iconeStatus = atingiuMeta ? '✅' : '⚠️';
-                const textoStatus = atingiuMeta 
-                    ? 'Parabéns! Você atingirá sua meta de aposentadoria!' 
+                const textoStatus = atingiuMeta
+                    ? 'Parabéns! Você atingirá sua meta de aposentadoria!'
                     : 'Atenção: ajustes necessários para atingir sua meta.';
                 dashboardHeader.innerHTML = `${iconeStatus} ${textoStatus}`;
                 dashboardHeader.style.display = "block";
+            }
+
+            // Card: Aporte Adicional Necessário
+            const cardAporte = document.getElementById("card-aporte-necessario");
+            const aporteTexto = document.getElementById("aporte-necessario-texto");
+            if (cardAporte && aporteTexto) {
+                if (resultado.deficitOuSobra < 0 && resultado.aporteNecessario > 0) {
+                    const formatBRL = v => v.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    aporteTexto.innerHTML = `Para atingir a meta de <strong>R$ ${formatBRL(metaMensal)}/mês</strong> ` +
+                        `(em poder de compra de hoje), você precisaria aportar mais ` +
+                        `<strong>R$ ${formatBRL(resultado.aporteNecessario)}/mês</strong>.`;
+                    cardAporte.style.display = "block";
+                } else {
+                    cardAporte.style.display = "none";
+                }
             }
             
             // Manter compatibilidade: Elementos existentes (Comparação de Cenários)
@@ -4953,62 +4967,6 @@
         // 🔥 MÓDULO 5 – CARDS FINAIS
         // ===================================================
 
-        function exibirCardsFinais(patrimonio, rendaSimples, rendaReversivel, inss, rendaDesejada) {
-            // ✅ FUNÇÃO DESABILITADA: Conteúdo removido junto com acordeão "Diagnóstico Financeiro"
-            // Esta função não renderiza mais nada para evitar conteúdo indesejado na página
-            return;
-
-            // ===================================================
-            // CALCULAR E EXIBIR APORTE NECESSÁRIO (SE HOUVER GAP)
-            // ===================================================
-            if (gap > 0) {
-                // Calcular aporte necessário com fórmula PMT correta
-                const idadeAtual = parseInt(document.getElementById("currentAge").value);
-                const idadeApos = parseInt(document.getElementById("retirementAge").value);
-                const aporteAtual = parseFloat(document.getElementById("monthlyInvestment").value);
-                const tipoRenda = document.querySelector("input[name='tipoRendaOficial']:checked")?.value || "vitalicia";
-                
-                const anosAteAposent = idadeApos - idadeAtual;
-                const meses = anosAteAposent * 12;
-                
-                // Taxa nominal para acumulação (8% para moderado, por exemplo)
-                const taxaNominal = 0.08; // Buscar do perfil selecionado
-                const taxaNominalMensal = Math.pow(1 + taxaNominal, 1/12) - 1;
-                
-                // Taxa real para renda vitalícia
-                const taxaReal = taxaNominal - 0.045; // 8% - 4.5% inflação = 3.5%
-                const taxaRealMensal = Math.pow(1 + taxaReal, 1/12) - 1;
-                
-                // Patrimônio extra necessário para cobrir o gap
-                let patrimonioExtra = 0;
-                if (tipoRenda === "vitalicia") {
-                    patrimonioExtra = gap / taxaRealMensal;
-                } else {
-                    // ✅ SIMPLIFICAÇÃO: Sempre usar 95 anos como idade final (igual ao Wizard)
-                    const idadeFinalPeriodo = 95;
-                    const anosPeriodo = idadeFinalPeriodo - idadeApos;
-                    const mesesPeriodo = anosPeriodo * 12;
-                    patrimonioExtra = (gap * (1 - Math.pow(1 + taxaRealMensal, -mesesPeriodo))) / taxaRealMensal;
-                }
-                
-                // Aporte necessário com PMT
-                const aporteNecessario = (patrimonioExtra * taxaNominalMensal) / 
-                                        (Math.pow(1 + taxaNominalMensal, meses) - 1);
-                
-                // Exibir card se aporte for razoável
-                if (aporteNecessario > 0 && aporteNecessario < 100000) {
-                    const cardAporte = document.getElementById("card-aporte-necessario");
-                    const textoAporte = document.getElementById("aporte-necessario-texto");
-                    
-                    cardAporte.style.display = "block";
-                    textoAporte.innerHTML = `
-                        Para atingir sua meta de <strong>R$ ${rendaDesejada.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong>, 
-                        você precisaria investir aproximadamente 
-                        <strong>R$ ${aporteNecessario.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong>.
-                    `;
-                }
-            }
-        }
 
         function calcularSimulacao_UI_Upgrade_final() {
 

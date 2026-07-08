@@ -526,29 +526,88 @@ window.simuladorProEngine.executarSimulacaoCompleta = function (params) {
     );
 
     // ============================================================
-    // 7. OBJETO FINAL
+    // 8. COMPARADOR DE DÉFICIT / SUPERÁVIT (Financial Core 1.0)
+    // Regra: todos os valores comparados em poder de compra de hoje.
+    // rendaRealPossivel é nominal futuro; divide por fatorInflacao para trazer a hoje.
+    // ============================================================
+    const anosAteAposentadoria = idadeApos - idadeAtual;
+    const fatorInflacao = Math.pow(1 + INFLACAO_MEDIA, anosAteAposentadoria);
+
+    const rendaInvestimentosHoje = rendaRealPossivel / fatorInflacao;
+    const inssReal = valorINSS;
+
+    const rendaTotalPrevista = rendaInvestimentosHoje + inssReal;
+    const deficitOuSobra = rendaTotalPrevista - rendaDesejada;
+
+    let aporteNecessario = null;
+
+    if (deficitOuSobra < 0) {
+        const mesesAcum = anosAteAposentadoria * 12;
+        const jurosNominalMensal = taxaMensalNominal;
+
+        const rendaNecessariaHoje = rendaDesejada - inssReal;
+        const rendaNecessariaHojeNominal = rendaNecessariaHoje * fatorInflacao;
+
+        let patrimonioNecessario;
+
+        if (tipoRenda === "vitalicia" && estrategiaFinal === "perpetua") {
+            patrimonioNecessario = rendaNecessariaHojeNominal / taxaMensalReal;
+        }
+        else if (tipoRenda === "periodo" && estrategiaFinal === "perpetua" && idadeFinalUsada > idadeApos) {
+            const n = (idadeFinalUsada - idadeApos) * 12;
+            const i = taxaMensalReal;
+            const FV_ratio = 0.20;
+            const fator_n = Math.pow(1 + i, n);
+            patrimonioNecessario = rendaNecessariaHojeNominal * (1 - 1 / fator_n) / i / (1 - FV_ratio / fator_n);
+        }
+        else if (tipoRenda === "periodo" && estrategiaFinal === "perpetua") {
+            patrimonioNecessario = rendaNecessariaHojeNominal / taxaMensalReal;
+        }
+        else {
+            const n = (idadeFinalUsada - idadeApos) * 12;
+            const i = taxaMensalReal;
+            patrimonioNecessario = rendaNecessariaHojeNominal * (1 - Math.pow(1 + i, -n)) / i;
+        }
+
+        const faltaAcumular = patrimonioNecessario - patrimonioFinal;
+
+        if (faltaAcumular > 0) {
+            aporteNecessario = (faltaAcumular * jurosNominalMensal) /
+                               (Math.pow(1 + jurosNominalMensal, mesesAcum) - 1);
+        } else {
+            aporteNecessario = 0;
+        }
+    }
+
+    // ============================================================
+    // 9. OBJETO FINAL
     // ============================================================
     return {
         patrimonioFinal,
         rendaVital,  // Mantido para compatibilidade
         rendaPeriodoMensal,  // Mantido para compatibilidade
-        rendaRealPossivel,  // ✅ NOVO: renda calculada baseada na estratégia (igual ao Wizard)
-        rendaMensalFinal,  // ✅ CORREÇÃO CRÍTICA: Variável única para exibição no card (sempre igual a rendaRealPossivel)
+        rendaRealPossivel,  // renda nominal futura (para gráficos)
+        rendaMensalFinal,  // sempre igual a rendaRealPossivel (para cards)
         valorINSS,
         acumulacaoMensal: acumulacao.historico,
         curvaVitalicia,  // Mantido para compatibilidade
         curvaConsumo,  // Mantido para compatibilidade
-        projecaoPosAposentadoria,  // ✅ NOVO: projeção pós-aposentadoria (formato igual ao Wizard)
+        projecaoPosAposentadoria,
         anosPeriodo,
-        idadeFinal: idadeFinalUsada,  // ✅ PADRONIZADO: sempre 95
-        rendaTotalVital: rendaRealPossivel + valorINSS,  // ✅ CORREÇÃO: usar rendaRealPossivel
-        rendaTotalPeriodo: rendaRealPossivel + valorINSS,  // ✅ CORREÇÃO: usar rendaRealPossivel
+        idadeFinal: idadeFinalUsada,
+        rendaTotalVital: rendaRealPossivel + valorINSS,
+        rendaTotalPeriodo: rendaRealPossivel + valorINSS,
         heranca,
-        rendaMensalDetalhada,  // ✅ NOVO: renda mensal detalhada para gráficos
-        taxaMensalReal,  // ✅ CORREÇÃO: taxa mensal REAL (para cálculos de renda)
-        taxaMensalNominal,  // ✅ NOVO: taxa mensal NOMINAL (para acumulação e esgotável)
-        tipoRenda,  // ✅ NOVO: tipo de renda selecionado
-        estrategia: estrategiaFinal  // ✅ CORREÇÃO: estratégia final determinada
+        rendaMensalDetalhada,
+        taxaMensalReal,
+        taxaMensalNominal,
+        tipoRenda,
+        estrategia: estrategiaFinal,
+        fatorInflacao,
+        rendaInvestimentosHoje,
+        rendaTotalPrevista,
+        deficitOuSobra,
+        aporteNecessario
     };
 };
 
