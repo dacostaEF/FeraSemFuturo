@@ -2331,13 +2331,8 @@
                             ✅ Parabéns! Você atingirá sua meta de aposentadoria!
                         </div>
 
-                        <!-- CARDS PRINCIPAIS (2x2 grid, igual ao Wizard) -->
+                        <!-- CARDS PRINCIPAIS (2x2 grid) — EDU-01: ordem renda → meta → patrimônio → herança -->
                         <div class="dashboard-cards" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 25px;">
-                            <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
-                                <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">💰 Patrimônio Projetado</h3>
-                                <p class="valor" id="cardPatrimonioProjetado" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #10b981; margin: 6px 0 0 0;">—</p>
-                            </div>
-
                             <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
                                 <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">
                                     📈 Renda Mensal Prevista
@@ -2353,10 +2348,25 @@
                             </div>
 
                             <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
+                                <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">💰 Patrimônio Projetado</h3>
+                                <p class="valor" id="cardPatrimonioProjetado" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #10b981; margin: 6px 0 0 0;">—</p>
+                            </div>
+
+                            <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
                                 <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">💎 Herança Projetada</h3>
                                 <p class="valor" id="cardHerancaProjetada" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #10b981; margin: 6px 0 0 0;">—</p>
                                 <p id="cardHerancaSubtitle" style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px; margin: 8px 0 0 0;">Patrimônio preservado para herança</p>
                             </div>
+                        </div>
+
+                        <!-- Card de aporte necessário — HTML restaurado (EDU-01) -->
+                        <!-- CSS e JS existiam; apenas o elemento HTML estava ausente -->
+                        <div id="card-aporte-necessario" style="display: none;">
+                            <div class="card-header">
+                                <span class="emoji">💡</span>
+                                <span class="titulo">Aporte Adicional Necessário</span>
+                            </div>
+                            <p id="aporte-necessario-texto" class="aporte-texto">—</p>
                         </div>
 
                         <!-- Texto informativo entre cards e gráfico -->
