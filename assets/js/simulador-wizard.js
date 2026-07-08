@@ -751,9 +751,9 @@ function finalizarWizard() {
     const deficitOuSobraValido = isNaN(resultados.deficitOuSobra) ? -1 : resultados.deficitOuSobra;
     const atingiuMeta = deficitOuSobraValido >= 0;
     const iconeStatus = atingiuMeta ? '✅' : '⚠️';
-    const textoStatus = atingiuMeta 
-        ? 'Parabéns! Você atingirá sua meta de aposentadoria!' 
-        : 'Atenção: ajustes necessários para atingir sua meta.';
+    const textoStatus = atingiuMeta
+        ? 'Você está no caminho certo.<br>Seu planejamento atual é suficiente para atingir a renda que você definiu.'
+        : 'Ainda falta um pequeno ajuste.<br>Logo abaixo mostramos quanto investir a mais para alcançar sua meta.';
 
     // =============================================
     // REMOVER CSS DINÂMICO ANTIGO (se existir)
@@ -771,41 +771,45 @@ function finalizarWizard() {
         <div class="dashboard-cards">
             
             <div class="card">
-                <h3>💰 Patrimônio Projetado</h3>
+                <h3>💰 Patrimônio estimado</h3>
                 <p class="valor" style="color: #10b981;">${formatarValorMonetario(resultados.patrimonioTotalProjetado, 0)}</p>
+                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px;">Saldo previsto no início da aposentadoria.</p>
             </div>
 
             <div class="card">
                 <h3>
-                    📈 Renda Mensal Prevista
+                    📈 Sua renda na aposentadoria
                     <span class="info-icon-modal" onclick="abrirModalPremissasRenda()" style="cursor: pointer;" title="Clique para ver premissas técnicas">i</span>
                 </h3>
                 <p class="valor" style="color: #D4AF37;">${formatarValorMonetario(resultados.rendaTotalPrevista)}</p>
                 <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px;">
                     ${resultados.tipoRenda === 'vitalicia' && resultados.estrategia === 'perpetua'
-                        ? '💚 Renda vitalícia (capital preservado)'
+                        ? '💚 Para a vida toda — sem usar o capital.<br>Em valores de hoje.'
+                        : resultados.tipoRenda === 'periodo' && resultados.estrategia === 'perpetua'
+                            ? '⏱️ Por um período — preservando parte do capital.<br>Em valores de hoje.'
                         : resultados.tipoRenda === 'periodo'
-                            ? `⏱️ Renda por ${resultados.anosPeriodo || 30} anos (capital consumido)`
-                            : '📊 Renda com uso gradual do capital'}
+                            ? '⏱️ Por um período — usando o capital aos poucos.<br>Em valores de hoje.'
+                            : '📊 Por um período — usando o capital aos poucos.<br>Em valores de hoje.'}
                 </p>
             </div>
 
             <div class="card">
-                <h3>🎯 Meta Mensal</h3>
+                <h3>🎯 Sua meta de renda</h3>
                 <p class="valor" style="color: #E4E4E4;">${formatarValorMonetario(resultados.rendaDesejada)}</p>
+                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px;">Valor informado por você.</p>
             </div>
 
             <div class="card">
-                <h3>💎 Herança Projetada</h3>
+                <h3>💎 O que você vai deixar</h3>
                 <p class="valor" style="color: ${resultados.heranca > 0 ? '#10b981' : '#ef4444'};">
-                    ${resultados.heranca > 0 
+                    ${resultados.heranca > 0
                         ? formatarValorMonetario(resultados.heranca, 0)
-                        : 'R$ 0 (capital consumido)'}
+                        : 'R$ 0 — capital totalmente utilizado'}
                 </p>
                 <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px;">
-                    ${resultados.heranca > 0 
-                        ? 'Patrimônio preservado para herança'
-                        : 'Capital será consumido ao final do período'}
+                    ${resultados.heranca > 0
+                        ? 'Estimativa para seus herdeiros.'
+                        : ''}
                 </p>
             </div>
 
@@ -855,7 +859,7 @@ function finalizarWizard() {
                 Baseada no salário de <strong>R$ ${wizardData.rendaAtual?.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) || 'N/A'}</strong> e aposentadoria prevista aos <strong>${wizardData.idadeAposentadoria} anos</strong>:
             </p>
             <p style="color: #4da6ff; font-size: 1.1rem; font-weight: 600; margin: 10px 0;">
-                🧮 Benefício estimado: <strong>R$ ${resultados.inssReal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> (em valores reais)
+                🧮 Benefício estimado: <strong>R$ ${resultados.inssReal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> (em valores de hoje)
             </p>
             <p style="color: #9ca3af; font-size: 0.85rem; margin-top: 15px; line-height: 1.5; border-top: 1px solid rgba(77, 166, 255, 0.3); padding-top: 15px;">
                 💡 <strong>Observação:</strong> Este valor do INSS é uma estimativa baseada nos seus dados. Para um cálculo oficial e detalhado, consulte o portal <a href="https://meu.inss.gov.br" target="_blank" style="color: #4da6ff; text-decoration: underline;">Meu INSS</a>.
@@ -888,8 +892,8 @@ function finalizarWizard() {
                 <div class="card-body">
                     <p class="aporte-texto">
                         Para atingir sua meta de <strong>R$ ${resultados.rendaDesejada.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong>, 
-                        você precisaria investir aproximadamente 
-                        <strong>R$ ${resultados.aporteNecessario.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês A MAIS</strong> 
+                        você precisará investir
+                        <strong>R$ ${resultados.aporteNecessario.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês a mais</strong> 
                         (totalizando <strong>R$ ${(Number(wizardData.aporteMensal) + resultados.aporteNecessario).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong>).
                     </p>
                 </div>
