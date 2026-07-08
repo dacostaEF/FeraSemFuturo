@@ -2328,7 +2328,7 @@
                     <section class="invlab-results">
                         <!-- HEADER DE STATUS -->
                         <div class="dashboard-header" id="dashboardHeaderPro" style="color: #D4AF37; display: none;">
-                            ✅ Você está no caminho certo. Sua meta de renda está coberta.
+                            ✅ Você está no caminho certo.
                         </div>
 
                         <!-- CARDS PRINCIPAIS (2x2 grid) — EDU-01: ordem renda → meta → patrimônio → herança -->
@@ -2350,6 +2350,7 @@
                             <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
                                 <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">💰 Patrimônio estimado</h3>
                                 <p class="valor" id="cardPatrimonioProjetado" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #10b981; margin: 6px 0 0 0;">—</p>
+                                <p style="font-size: 0.85rem; color: #9ca3af; margin: 8px 0 0 0;">É esse patrimônio que permitirá gerar sua renda.</p>
                             </div>
 
                             <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
@@ -2366,6 +2367,7 @@
                                 <span class="emoji">💡</span>
                                 <span class="titulo">Quanto investir a mais</span>
                             </div>
+                            <p style="font-size: 0.85rem; color: #9ca3af; margin: 0 0 10px 0;">Para alcançar sua meta.</p>
                             <p id="aporte-necessario-texto" class="aporte-texto">—</p>
                         </div>
 
@@ -4372,14 +4374,15 @@
                 const isCaso2 = tipoRenda === 'periodo' && estrategia === 'perpetua' && idadeFinalNum > idadeAposNum;
                 const isCaso3 = estrategia === 'esgotavel' || (tipoRenda === 'periodo' && estrategia !== 'perpetua' && !isCaso2);
                 
+                const sufixo = "<br>Em valores de hoje.";
                 if (isCaso1) {
-                    cardRendaSubtitle.textContent = "💚 Para a vida toda — sem usar o capital";
+                    cardRendaSubtitle.innerHTML = "💚 Para a vida toda — sem usar o capital" + sufixo;
                 } else if (isCaso2) {
-                    cardRendaSubtitle.textContent = "🟡 Por um período — preservando parte do capital";
+                    cardRendaSubtitle.innerHTML = "🟡 Por um período — preservando parte do capital" + sufixo;
                 } else if (isCaso3) {
-                    cardRendaSubtitle.textContent = "🔴 Por um período — usando o capital aos poucos";
+                    cardRendaSubtitle.innerHTML = "🔴 Por um período — usando o capital aos poucos" + sufixo;
                 } else {
-                    cardRendaSubtitle.textContent = "📊 Estimativa de renda mensal";
+                    cardRendaSubtitle.innerHTML = "📊 Estimativa de renda mensal" + sufixo;
                 }
             }
             
@@ -4410,8 +4413,8 @@
                 const atingiuMeta = resultado.deficitOuSobra >= 0;
                 const iconeStatus = atingiuMeta ? '✅' : '⚠️';
                 const textoStatus = atingiuMeta
-                    ? 'Você está no caminho certo. Sua meta de renda está coberta.'
-                    : 'Ainda falta um pouco. Veja quanto investir a mais abaixo.';
+                    ? 'Você está no caminho certo.<br>Seu planejamento atual é suficiente para atingir a renda que você definiu.'
+                    : 'Ainda falta um pequeno ajuste.<br>Logo abaixo mostramos quanto investir a mais para alcançar sua meta.';
                 dashboardHeader.innerHTML = `${iconeStatus} ${textoStatus}`;
                 dashboardHeader.style.display = "block";
             }
@@ -4422,8 +4425,8 @@
             if (cardAporte && aporteTexto) {
                 if (resultado.deficitOuSobra < 0 && resultado.aporteNecessario > 0) {
                     const formatBRL = v => v.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                    aporteTexto.innerHTML = `Para chegar à sua meta de <strong>R$ ${formatBRL(metaMensal)}/mês</strong>, ` +
-                        `você precisaria investir mais ` +
+                    aporteTexto.innerHTML = `Para alcançar sua meta de <strong>R$ ${formatBRL(metaMensal)}/mês</strong>, ` +
+                        `você precisará investir mais ` +
                         `<strong>R$ ${formatBRL(resultado.aporteNecessario)}/mês</strong>.`;
                     cardAporte.style.display = "block";
                 } else {
