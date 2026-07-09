@@ -305,16 +305,16 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
     const corConsumo = '#e74c3c';     // Vermelho para consumo
     const corVitalicia = '#2ecc71';   // Verde claro para vitalícia preservada
 
-    // ── DATASETS: [0] Capital Investido, [1] Patrimônio Total ──
+    // ── DATASETS: [0] Capital Investido, [1] Patrimônio Total, [2] legenda fill ──
     const datasets = [
         {
             label: 'Capital Investido por Você',
             data: capitalInvestidoValores,
             borderColor: 'rgba(212, 175, 55, 0.70)',
-            backgroundColor: 'rgba(212, 175, 55, 0.08)',
+            backgroundColor: 'rgba(212, 175, 55, 0.15)',
             borderWidth: 1.2,
             borderDash: [4, 3],
-            fill: false,
+            fill: 'origin',
             tension: 0.3,
             pointRadius: 0,
             pointHoverRadius: 3,
@@ -326,13 +326,23 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
             borderColor: corAcumulacao,
             backgroundColor: 'rgba(16, 185, 129, 0.12)',
             borderWidth: 1.5,
-            fill: 'origin',
+            fill: '-1',
             tension: 0.4,
             pointBackgroundColor: corAcumulacao,
             pointBorderColor: '#0D0D0D',
             pointBorderWidth: 1,
             pointRadius: 2,
             pointHoverRadius: 4
+        },
+        {
+            label: 'Gerado pelos Juros Compostos',
+            data: [],
+            borderColor: 'rgba(16, 185, 129, 0.60)',
+            backgroundColor: 'rgba(16, 185, 129, 0.60)',
+            borderWidth: 1.5,
+            fill: false,
+            pointRadius: 0,
+            pointHoverRadius: 0
         }
     ];
 
@@ -579,20 +589,36 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
             if (!chartArea) return;
             const retirementIndex = labelsFinais.findIndex(l => parseInt(l, 10) >= idadeAposentadoriaNum);
             if (retirementIndex === -1) return;
-            const x = scales.x.getPixelForIndex(retirementIndex);
+            const x = scales.x.getPixelForValue(retirementIndex);
             c.save();
             c.beginPath();
             c.moveTo(x, chartArea.top);
             c.lineTo(x, chartArea.bottom);
-            c.lineWidth = 1;
-            c.strokeStyle = 'rgba(212, 175, 55, 0.40)';
-            c.setLineDash([5, 4]);
+            c.lineWidth = 1.5;
+            c.strokeStyle = 'rgba(212, 175, 55, 0.60)';
+            c.setLineDash([6, 4]);
             c.stroke();
             c.setLineDash([]);
-            c.fillStyle = 'rgba(212, 175, 55, 0.80)';
-            c.font = '600 9px Inter, sans-serif';
+            c.fillStyle = 'rgba(212, 175, 55, 0.85)';
+            c.font = '600 11px Inter, sans-serif';
             c.textAlign = 'center';
-            c.fillText('🏁 Início da aposentadoria', x, chartArea.top + 12);
+            c.fillText('Aposentadoria', x, chartArea.top + 14);
+            c.restore();
+        }
+    };
+
+    // Plugin: fundo dourado sutil na fase de colheita (pós-aposentadoria)
+    const backgroundAposPlugin = {
+        id: 'backgroundApos',
+        beforeDraw(chart) {
+            const { ctx: c, chartArea, scales } = chart;
+            if (!chartArea) return;
+            const retirementIndex = labelsFinais.findIndex(l => parseInt(l, 10) >= idadeAposentadoriaNum);
+            if (retirementIndex === -1) return;
+            const x = scales.x.getPixelForValue(retirementIndex);
+            c.save();
+            c.fillStyle = 'rgba(212, 175, 55, 0.04)';
+            c.fillRect(x, chartArea.top, chartArea.right - x, chartArea.bottom - chartArea.top);
             c.restore();
         }
     };
@@ -602,7 +628,7 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
     window.chartEvolucao = new Chart(ctx, {
         type: 'line',
         data: { labels: labelsFinais, datasets: datasets },
-        plugins: [verticalAposentadoriaPlugin],
+        plugins: [backgroundAposPlugin, verticalAposentadoriaPlugin],
         options: {
             responsive: true,
             maintainAspectRatio: true,
@@ -622,7 +648,8 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
                         boxHeight: 0,
                         filter: (item) =>
                             item.text === 'Capital Investido por Você' ||
-                            item.text === 'Patrimônio Total Projetado'
+                            item.text === 'Patrimônio Total Projetado' ||
+                            item.text === 'Gerado pelos Juros Compostos'
                     }
                 },
                 tooltip: {
