@@ -771,36 +771,31 @@ function finalizarWizard() {
         <div class="dashboard-cards">
             
             <div class="card">
-                <h3>💰 Patrimônio estimado</h3>
+                <h3>💰 Capital necessário</h3>
                 <p class="valor" style="color: #10b981;">${formatarValorMonetario(resultados.patrimonioTotalProjetado, 0)}</p>
-                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px;">Saldo previsto no início da aposentadoria.</p>
+                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 4px;">Em valores de hoje</p>
+                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 4px;">Capital estimado para sustentar o padrão de vida escolhido na aposentadoria.</p>
             </div>
 
             <div class="card">
                 <h3>
-                    📈 Sua renda na aposentadoria
+                    📈 Seu padrão de vida
                     <span class="info-icon-modal" onclick="abrirModalPremissasRenda()" style="cursor: pointer;" title="Clique para ver premissas técnicas">i</span>
                 </h3>
                 <p class="valor" style="color: #D4AF37;">${formatarValorMonetario(resultados.rendaTotalPrevista)}</p>
-                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px;">
-                    ${resultados.tipoRenda === 'vitalicia' && resultados.estrategia === 'perpetua'
-                        ? '💚 Para a vida toda — sem usar o capital.<br>Em valores de hoje.'
-                        : resultados.tipoRenda === 'periodo' && resultados.estrategia === 'perpetua'
-                            ? '⏱️ Por um período — preservando parte do capital.<br>Em valores de hoje.'
-                        : resultados.tipoRenda === 'periodo'
-                            ? '⏱️ Por um período — usando o capital aos poucos.<br>Em valores de hoje.'
-                            : '📊 Por um período — usando o capital aos poucos.<br>Em valores de hoje.'}
-                </p>
+                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 4px;">Em valores de hoje</p>
+                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 4px;">Renda equivalente ao padrão de vida que este patrimônio poderá sustentar.</p>
             </div>
 
             <div class="card">
-                <h3>🎯 Sua meta de renda</h3>
+                <h3>🎯 Objetivo informado</h3>
                 <p class="valor" style="color: #E4E4E4;">${formatarValorMonetario(resultados.rendaDesejada)}</p>
-                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px;">Valor informado por você.</p>
+                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 4px;">Em valores de hoje</p>
+                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 4px;">Padrão de vida que você deseja manter na aposentadoria.</p>
             </div>
 
             <div class="card">
-                <h3>💎 O que você vai deixar</h3>
+                <h3>💎 Patrimônio preservado</h3>
                 <p class="valor" style="color: ${resultados.heranca > 0 ? '#10b981' : '#ef4444'};">
                     ${resultados.heranca > 0
                         ? formatarValorMonetario(resultados.heranca, 0)
@@ -808,7 +803,7 @@ function finalizarWizard() {
                 </p>
                 <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px;">
                     ${resultados.heranca > 0
-                        ? 'Estimativa para seus herdeiros.'
+                        ? 'Estimativa do capital que permanecerá para sua família ou herdeiros.'
                         : ''}
                 </p>
             </div>
