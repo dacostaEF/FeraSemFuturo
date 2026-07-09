@@ -887,10 +887,10 @@ function finalizarWizard() {
         ? Math.round((resultados.rendaTotalPrevista / resultados.rendaDesejada) * 100)
         : 100;
     const textoStatus = atingiuMeta
-        ? `✅ <strong>Seu planejamento está no caminho certo.</strong><br><span style="font-size: 0.9rem; font-weight: normal; opacity: 0.9;">Com as premissas adotadas, o padrão de vida definido poderá ser sustentado integralmente durante a aposentadoria.</span>`
+        ? `✅ <strong>Você está no caminho certo.</strong><br><span style="font-size: 0.9rem; font-weight: normal; opacity: 0.9;">Com as premissas adotadas, o padrão de vida definido poderá ser sustentado integralmente durante a aposentadoria.</span>`
         : shortfallPct <= 0.20
-            ? `🟡 <strong>Seu objetivo está muito próximo de ser alcançado.</strong><br><span style="font-size: 0.9rem; font-weight: normal; opacity: 0.9;">Pequenos ajustes nos aportes mensais ou no prazo serão suficientes para atingir o padrão de vida desejado.</span>`
-            : `🟠 <strong>Seu plano atual cobre ${pctAlcancado}% do objetivo definido.</strong><br><span style="font-size: 0.9rem; font-weight: normal; opacity: 0.9;">Aumentar os aportes mensais ou revisar o prazo de acumulação são os caminhos para ampliar esse resultado.</span>`;
+            ? `🟡 <strong>Ainda falta um pequeno ajuste.</strong><br><span style="font-size: 0.9rem; font-weight: normal; opacity: 0.9;">Pequenos ajustes nos aportes mensais ou no prazo serão suficientes para atingir o padrão de vida desejado.</span>`
+            : `🟠 <strong>Ainda falta um ajuste no plano.</strong><br><span style="font-size: 0.9rem; font-weight: normal; opacity: 0.9;">Seu planejamento atual cobre ${pctAlcancado}% da meta desejada. Aumentar os aportes mensais ou revisar o prazo são os caminhos para ampliar esse resultado.</span>`;
 
     // =============================================
     // REMOVER CSS DINÂMICO ANTIGO (se existir)
@@ -921,38 +921,35 @@ function finalizarWizard() {
         <div class="dashboard-cards">
 
             <div class="card">
-                <h3>🎯 Objetivo de Renda</h3>
+                <h3>🎯 Sua meta de renda</h3>
                 <p class="valor" style="color: #E4E4E4;">${formatarValorMonetario(resultados.rendaDesejada)}</p>
-                <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">Em valores de hoje</p>
-                <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">Padrão de vida que você deseja manter durante a aposentadoria.</p>
+                <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">Valor informado por você.</p>
             </div>
 
             <div class="card">
-                <h3>💰 Capital Necessário</h3>
+                <h3>💰 Patrimônio estimado</h3>
                 <p class="valor" style="color: #10b981;">${formatarValorMonetario(resultados.patrimonioTotalProjetado, 0)}</p>
-                <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">Estimado para o início da aposentadoria</p>
+                <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">Saldo previsto no início da aposentadoria.</p>
                 <p style="font-size: 0.75rem; color: rgba(255,255,255,0.40); margin-top: 3px;">Valor nominal em ${new Date().getFullYear() + resultados.anosAteAposentadoria} · Equivale a aproximadamente ${formatarValorMonetario(resultados.patrimonioTotalProjetado / resultados.fatorInflacao, 0)} em poder de compra de hoje</p>
-                <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">Patrimônio estimado que deverá ser acumulado para sustentar o padrão de vida escolhido.</p>
             </div>
 
             <div class="card">
                 <h3>
-                    ❤️ Seu Padrão de Vida
+                    ❤️ Sua renda na aposentadoria
                     <span class="info-icon-modal" onclick="abrirModalPremissasRenda()" style="cursor: pointer;" title="Clique para ver premissas técnicas">i</span>
                 </h3>
                 <p class="valor" style="color: #D4AF37;">${formatarValorMonetario(resultados.rendaTotalPrevista)}</p>
-                <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">Renda mensal já corrigida pela inflação — comparável com seu salário atual</p>
-                <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">Poder de compra estimado que seu patrimônio poderá proporcionar durante a aposentadoria.</p>
+                <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">Em valores de hoje.</p>
             </div>
 
             <div class="card">
-                <h3>👨‍👩‍👧 Patrimônio Preservado</h3>
+                <h3>👨‍👩‍👧 O que você vai deixar</h3>
                 <p class="valor" style="color: ${resultados.heranca > 0 ? '#10b981' : '#9ca3af'};">
                     ${resultados.heranca > 0
                         ? formatarValorMonetario(resultados.heranca, 0)
                         : 'R$ 0'}
                 </p>
-                <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">Estimado ao final da estratégia escolhida</p>
+                <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">Estimativa para seus herdeiros.</p>
                 <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">
                     ${resultados.heranca > 0
                         ? 'Capital estimado que poderá permanecer para sua família ou herdeiros.'
