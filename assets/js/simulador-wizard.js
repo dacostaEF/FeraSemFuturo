@@ -750,10 +750,17 @@ function finalizarWizard() {
     // ✅ CORREÇÃO DOSE 6: Proteger contra NaN antes de calcular atingiuMeta
     const deficitOuSobraValido = isNaN(resultados.deficitOuSobra) ? -1 : resultados.deficitOuSobra;
     const atingiuMeta = deficitOuSobraValido >= 0;
-    const iconeStatus = atingiuMeta ? '✅' : '⚠️';
+    const shortfallPct = (!atingiuMeta && resultados.rendaDesejada > 0)
+        ? Math.abs(resultados.deficitOuSobra) / resultados.rendaDesejada
+        : 0;
+    const pctAlcancado = (!atingiuMeta && resultados.rendaDesejada > 0)
+        ? Math.round((resultados.rendaTotalPrevista / resultados.rendaDesejada) * 100)
+        : 100;
     const textoStatus = atingiuMeta
-        ? 'Você está no caminho certo.<br>Seu planejamento atual é suficiente para atingir a renda que você definiu.'
-        : 'Ainda falta um pequeno ajuste.<br>Logo abaixo mostramos quanto investir a mais para alcançar sua meta.';
+        ? `✅ <strong>Seu planejamento está no caminho certo.</strong><br><span style="font-size: 0.9rem; font-weight: normal; opacity: 0.9;">Com as premissas adotadas, o padrão de vida definido poderá ser sustentado integralmente durante a aposentadoria.</span>`
+        : shortfallPct <= 0.20
+            ? `🟡 <strong>Seu objetivo está muito próximo de ser alcançado.</strong><br><span style="font-size: 0.9rem; font-weight: normal; opacity: 0.9;">Pequenos ajustes nos aportes mensais ou no prazo serão suficientes para atingir o padrão de vida desejado.</span>`
+            : `🟠 <strong>Seu plano atual cobre ${pctAlcancado}% do objetivo definido.</strong><br><span style="font-size: 0.9rem; font-weight: normal; opacity: 0.9;">Aumentar os aportes mensais ou revisar o prazo de acumulação são os caminhos para ampliar esse resultado.</span>`;
 
     // =============================================
     // REMOVER CSS DINÂMICO ANTIGO (se existir)
@@ -761,106 +768,136 @@ function finalizarWizard() {
     const cssAntigo = document.getElementById("wizard-dynamic-style");
     if (cssAntigo) cssAntigo.remove();
 
+    // Estratégia em linguagem institucional (Language System 1.0)
+    const estrategiaNome = resultados.tipoRenda === 'vitalicia' && resultados.estrategia === 'perpetua'
+        ? '💚 Para a vida toda — sem usar o capital'
+        : resultados.tipoRenda === 'periodo' && resultados.estrategia === 'perpetua'
+            ? '⏱️ Por um período — preservando parte do capital'
+            : '⏱️ Por um período — usando o capital aos poucos';
+
     dash.innerHTML = `
-        <!-- HEADER DE STATUS -->
-        <div class="dashboard-header" style="color: #D4AF37;">
-            ${iconeStatus} ${textoStatus}
+        <!-- TÍTULO DA SEÇÃO -->
+        <div style="text-align: center; padding: 8px 0 4px;">
+            <h2 style="color: #D4AF37; font-size: 1.3rem; font-weight: 700; margin-bottom: 4px;">Seu Plano de Aposentadoria</h2>
+            <p style="color: #9ca3af; font-size: 0.8rem;">Estimativa baseada nas informações fornecidas e nas premissas adotadas pelo simulador.</p>
         </div>
 
-        <!-- CARDS PRINCIPAIS -->
+        <!-- BANNER DE STATUS -->
+        <div class="dashboard-header" style="color: #D4AF37;">
+            ${textoStatus}
+        </div>
+
+        <!-- CARDS PRINCIPAIS — sequência narrativa: quer → precisa → terá → deixará -->
         <div class="dashboard-cards">
-            
+
             <div class="card">
-                <h3>💰 Capital necessário</h3>
+                <h3>🎯 Objetivo de Renda</h3>
+                <p class="valor" style="color: #E4E4E4;">${formatarValorMonetario(resultados.rendaDesejada)}</p>
+                <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">Em valores de hoje</p>
+                <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">Padrão de vida que você deseja manter durante a aposentadoria.</p>
+            </div>
+
+            <div class="card">
+                <h3>💰 Capital Necessário</h3>
                 <p class="valor" style="color: #10b981;">${formatarValorMonetario(resultados.patrimonioTotalProjetado, 0)}</p>
-                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 4px;">Em valores de hoje</p>
-                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 4px;">Capital estimado para sustentar o padrão de vida escolhido na aposentadoria.</p>
+                <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">Estimado para o início da aposentadoria</p>
+                <p style="font-size: 0.75rem; color: rgba(255,255,255,0.40); margin-top: 3px;">Valor nominal em ${new Date().getFullYear() + resultados.anosAteAposentadoria} · Equivale a aproximadamente ${formatarValorMonetario(resultados.patrimonioTotalProjetado / resultados.fatorInflacao, 0)} em poder de compra de hoje</p>
+                <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">Patrimônio estimado que deverá ser acumulado para sustentar o padrão de vida escolhido.</p>
             </div>
 
             <div class="card">
                 <h3>
-                    📈 Seu padrão de vida
+                    ❤️ Seu Padrão de Vida
                     <span class="info-icon-modal" onclick="abrirModalPremissasRenda()" style="cursor: pointer;" title="Clique para ver premissas técnicas">i</span>
                 </h3>
                 <p class="valor" style="color: #D4AF37;">${formatarValorMonetario(resultados.rendaTotalPrevista)}</p>
-                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 4px;">Em valores de hoje</p>
-                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 4px;">Renda equivalente ao padrão de vida que este patrimônio poderá sustentar.</p>
+                <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">Renda mensal já corrigida pela inflação — comparável com seu salário atual</p>
+                <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">Poder de compra estimado que seu patrimônio poderá proporcionar durante a aposentadoria.</p>
             </div>
 
             <div class="card">
-                <h3>🎯 Objetivo informado</h3>
-                <p class="valor" style="color: #E4E4E4;">${formatarValorMonetario(resultados.rendaDesejada)}</p>
-                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 4px;">Em valores de hoje</p>
-                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 4px;">Padrão de vida que você deseja manter na aposentadoria.</p>
-            </div>
-
-            <div class="card">
-                <h3>💎 Patrimônio preservado</h3>
-                <p class="valor" style="color: ${resultados.heranca > 0 ? '#10b981' : '#ef4444'};">
+                <h3>👨‍👩‍👧 Patrimônio Preservado</h3>
+                <p class="valor" style="color: ${resultados.heranca > 0 ? '#10b981' : '#9ca3af'};">
                     ${resultados.heranca > 0
                         ? formatarValorMonetario(resultados.heranca, 0)
-                        : 'R$ 0 — capital totalmente utilizado'}
+                        : 'R$ 0'}
                 </p>
-                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px;">
+                <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">Estimado ao final da estratégia escolhida</p>
+                <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">
                     ${resultados.heranca > 0
-                        ? 'Estimativa do capital que permanecerá para sua família ou herdeiros.'
-                        : ''}
+                        ? 'Capital estimado que poderá permanecer para sua família ou herdeiros.'
+                        : resultados.estrategia === 'esgotavel'
+                            ? 'Você escolheu usar o capital gradualmente. Ao final do período, o patrimônio é integralmente convertido em renda — não há herança prevista nesta estratégia.'
+                            : 'O capital será integralmente utilizado durante o período de aposentadoria.'}
                 </p>
             </div>
 
         </div>
 
-        <!-- INFO EXTRA -->
+        <p style="font-size: 0.80rem; color: rgba(255,255,255,0.35); text-align: center; margin-top: 8px;">⚙️ O capital projetado está em valores nominais futuros. As rendas mensais estão convertidas para poder de compra de hoje para facilitar a comparação com sua renda atual.</p>
+
+        <!-- COMPOSIÇÃO DA RENDA -->
         <div class="dashboard-info-extra">
-            <p class="dashboard-section-title" style="margin-bottom: 8px;">📌 Origem da Renda:</p>
-            <ul style="margin-left: 20px; margin-top: 8px;">
-                ${resultados.inssReal === 0 
-                    ? '<li><strong>100% dos investimentos</strong> (INSS não considerado)</li>'
-                    : `<li><strong>Renda do Patrimônio:</strong> ${formatarValorMonetario(resultados.rendaRealPossivel)}/mês</li>
-                       <li><strong>Renda do INSS:</strong> ${formatarValorMonetario(resultados.inssReal)}/mês</li>
-                       <li><strong>Renda Total:</strong> ${formatarValorMonetario(resultados.rendaTotalPrevista)}/mês</li>`
-                }
-                <li><strong>Estratégia:</strong> ${
-                    resultados.tipoRenda === 'vitalicia' && resultados.estrategia === 'perpetua'
-                        ? '💚 Renda Vitalícia Perpétua (capital preservado indefinidamente)'
-                        : resultados.tipoRenda === 'periodo' && resultados.estrategia === 'perpetua'
-                            ? `⏱️ Renda por Período Determinado (até ${resultados.idadeFinal || 95} anos) - Perpétua (preservar capital)<br>
-                               <span style="font-size: 0.85rem; color: #9ca3af;">Sua renda será calculada usando apenas os juros reais. O patrimônio permanece constante ao longo da aposentadoria, e uma herança integral é preservada.</span>`
-                        : resultados.tipoRenda === 'periodo' && resultados.estrategia === 'esgotavel'
-                            ? `⏱️ Renda por Período Determinado (até ${resultados.idadeFinal || 95} anos) - Esgotável<br>
-                               <span style="font-size: 0.85rem; color: #9ca3af;">Sua renda será calculada para consumir todo o patrimônio até a idade selecionada. Se você viver além dessa idade, poderá ficar sem recursos.</span>`
-                        : resultados.estrategia === 'esgotavel'
-                            ? `📊 Usar Capital Gradualmente (até ${resultados.idadeFinal || 95} anos)<br>
-                               <span style="font-size: 0.85rem; color: #9ca3af;">Sua renda será calculada para consumir todo o patrimônio até a idade selecionada. Se você viver além dessa idade, poderá ficar sem recursos.</span>`
-                            : `📊 Renda com uso gradual do capital`
-                }</li>
-                <li><strong>Herança:</strong> ${
-                    resultados.heranca > 0
-                        ? `${formatarValorMonetario(resultados.heranca, 0)} (patrimônio preservado)`
-                        : 'R$ 0 (capital será consumido)'
-                }</li>
-            </ul>
-            <p style="margin-top: 15px;">⏱️ <strong>Prazo:</strong> ${resultados.anosAteAposentadoria} anos até aposentadoria</p>
-            <p>📊 <strong>Perfil:</strong> ${resultados.perfil && resultados.perfil.charAt ? resultados.perfil.charAt(0).toUpperCase() + resultados.perfil.slice(1) : 'N/A'} (${resultados.taxaAnualEscolhida ? (resultados.taxaAnualEscolhida * 100).toFixed(1) : 'N/A'}% a.a.)</p>
+            <p class="dashboard-section-title" style="margin-bottom: 16px;">📊 Como sua renda será composta</p>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: rgba(212,175,55,0.06); border-radius: 8px; border-left: 3px solid rgba(212,175,55,0.4);">
+                    <div>
+                        <p style="color: #E4E4E4; font-weight: 600; font-size: 0.9rem; margin-bottom: 2px;">❤️ Renda proveniente do patrimônio</p>
+                        <p style="color: #9ca3af; font-size: 0.75rem;">Em valores de hoje</p>
+                    </div>
+                    <p style="color: #D4AF37; font-weight: 700; font-size: 1rem; white-space: nowrap; margin-left: 12px;">${formatarValorMonetario(resultados.rendaInvestimentosHoje)}/mês</p>
+                </div>
+                ${resultados.inssReal > 0 ? `
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: rgba(77,166,255,0.06); border-radius: 8px; border-left: 3px solid rgba(77,166,255,0.4);">
+                    <div>
+                        <p style="color: #E4E4E4; font-weight: 600; font-size: 0.9rem; margin-bottom: 2px;">🏛️ Benefício estimado do INSS</p>
+                        <p style="color: #9ca3af; font-size: 0.75rem;">Em valores de hoje &nbsp;·&nbsp; <a href="https://meu.inss.gov.br" target="_blank" style="color: #4da6ff; text-decoration: underline;">Consultar Meu INSS</a></p>
+                    </div>
+                    <p style="color: #4da6ff; font-weight: 700; font-size: 1rem; white-space: nowrap; margin-left: 12px;">${formatarValorMonetario(resultados.inssReal)}/mês</p>
+                </div>
+                ` : ''}
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: rgba(16,185,129,0.06); border-radius: 8px; border-left: 3px solid rgba(16,185,129,0.5);">
+                    <div>
+                        <p style="color: #E4E4E4; font-weight: 700; font-size: 0.9rem; margin-bottom: 2px;">🎯 Renda total estimada</p>
+                        <p style="color: #9ca3af; font-size: 0.75rem;">Em valores de hoje</p>
+                    </div>
+                    <p style="color: #10b981; font-weight: 700; font-size: 1.05rem; white-space: nowrap; margin-left: 12px;">${formatarValorMonetario(resultados.rendaTotalPrevista)}/mês</p>
+                </div>
+            </div>
+
+            <!-- PREMISSAS DA SIMULAÇÃO -->
+            <div style="margin-top: 20px; padding: 14px 16px; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+                <p style="color: #9ca3af; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px;">⚙️ Premissas da simulação</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.82rem;">
+                    <p><span style="color: #9ca3af;">Estratégia:</span> <span style="color: #E4E4E4;">${estrategiaNome}</span></p>
+                    <p><span style="color: #9ca3af;">Perfil:</span> <span style="color: #E4E4E4;">${resultados.perfil && resultados.perfil.charAt ? resultados.perfil.charAt(0).toUpperCase() + resultados.perfil.slice(1) : 'N/A'} (${resultados.taxaAnualEscolhida ? (resultados.taxaAnualEscolhida * 100).toFixed(1) : 'N/A'}% a.a.)</span></p>
+                    <p><span style="color: #9ca3af;">Prazo:</span> <span style="color: #E4E4E4;">${resultados.anosAteAposentadoria} anos</span></p>
+                    <p><span style="color: #9ca3af;">Aposentadoria:</span> <span style="color: #E4E4E4;">aos ${resultados.idadeAposentadoria} anos</span></p>
+                </div>
+            </div>
         </div>
 
-        ${resultados.inssReal > 0 ? `
-        <!-- CAIXA DESTACADA: ESTIMATIVA DE INSS -->
-        <div style="border: 2px solid #4da6ff; background: rgba(77, 166, 255, 0.1); border-radius: 12px; padding: 20px; margin: 25px 0;">
-            <h4 style="color: #4da6ff; margin-top: 0; margin-bottom: 15px; font-size: 1.1rem;">
-                📘 Estimativa de INSS
-            </h4>
-            <p style="color: #E4E4E4; line-height: 1.6; margin-bottom: 10px;">
-                Baseada no salário de <strong>R$ ${wizardData.rendaAtual?.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) || 'N/A'}</strong> e aposentadoria prevista aos <strong>${wizardData.idadeAposentadoria} anos</strong>:
+        <!-- BLOCO EDUCATIVO -->
+        <div style="background: rgba(212,175,55,0.04); border: 1px solid rgba(212,175,55,0.15); border-radius: 10px; padding: 18px 20px; margin: 20px 0;">
+            <p style="color: #D4AF37; font-weight: 700; font-size: 0.85rem; margin-bottom: 10px;">📖 Como interpretar estes resultados</p>
+            <div style="color: #9ca3af; font-size: 0.82rem; line-height: 1.65; display: flex; flex-direction: column; gap: 6px;">
+                <p>Os resultados apresentados são estimativas obtidas a partir das informações fornecidas e das premissas adotadas nesta simulação.</p>
+                <p>• A renda mensal é apresentada em poder de compra equivalente aos valores de hoje.</p>
+                <p>• O capital necessário representa o patrimônio estimado que deverá ser acumulado até a data da aposentadoria para sustentar esse padrão de vida.</p>
+                <p>• Os resultados não constituem promessa de rentabilidade, mas um instrumento de planejamento financeiro de longo prazo.</p>
+            </div>
+        </div>
+
+        <!-- RESUMO EXECUTIVO -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 18px 20px; margin: 0 0 20px;">
+            <p style="color: #E4E4E4; font-weight: 700; font-size: 0.85rem; margin-bottom: 10px;">📋 Resumo do seu planejamento</p>
+            <p style="color: #9ca3af; font-size: 0.85rem; line-height: 1.7;">
+                Mantendo disciplina nos aportes e as premissas adotadas nesta simulação, você poderá construir o patrimônio necessário para sustentar o padrão de vida definido para sua aposentadoria.
             </p>
-            <p style="color: #4da6ff; font-size: 1.1rem; font-weight: 600; margin: 10px 0;">
-                🧮 Benefício estimado: <strong>R$ ${resultados.inssReal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mês</strong> (em valores de hoje)
-            </p>
-            <p style="color: #9ca3af; font-size: 0.85rem; margin-top: 15px; line-height: 1.5; border-top: 1px solid rgba(77, 166, 255, 0.3); padding-top: 15px;">
-                💡 <strong>Observação:</strong> Este valor do INSS é uma estimativa baseada nos seus dados. Para um cálculo oficial e detalhado, consulte o portal <a href="https://meu.inss.gov.br" target="_blank" style="color: #4da6ff; text-decoration: underline;">Meu INSS</a>.
+            <p style="color: #9ca3af; font-size: 0.82rem; line-height: 1.6; margin-top: 8px;">
+                Este planejamento deve ser revisado periodicamente, acompanhando sua evolução patrimonial, mudanças de renda e novos objetivos de vida.
             </p>
         </div>
-        ` : ''}
 
         <!-- GRÁFICO CHART.JS -->
         <div class="dashboard-section" style="padding:30px 20px; background:#0f0f0f; border-radius:10px;">
