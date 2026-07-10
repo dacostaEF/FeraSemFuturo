@@ -250,8 +250,8 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
     const aporteMensalExtra     = Number(dadosExtras.aporteMensal     || 0);
     const aporteExtraAnualExtra = Number(dadosExtras.aporteExtraAnual || 0);
     const patrimonioMeta        = Number(dadosExtras.patrimonioMeta   || 0);
-    const rendaMensalDetalhada  = Array.isArray(dadosExtras.rendaMensalDetalhada) ? dadosExtras.rendaMensalDetalhada : [];
-    const fatorInflacaoExtra    = Number(dadosExtras.fatorInflacao) || 1;
+    // Mapa pré-computado: idade (int) → renda em poder de compra de hoje
+    const rendaHojeMap          = dadosExtras.rendaHojeMap || {};
 
     // Preparar dados (converter meses em anos)
     const labels = [];
@@ -281,7 +281,6 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
     // Representa o período de uso/consumo do patrimônio após a aposentadoria
     let valoresPosAposentadoria = [];
     let labelsPosAposentadoria = [];
-    let valoresRendaHoje = [];
 
     if (projecaoPosAposentadoria && projecaoPosAposentadoria.length > 0) {
         const mesesAteAposentadoria = anosAteAposentadoria * 12; // Meses desde idadeAtual até idadeAposentadoria
@@ -298,12 +297,6 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
 
                 // Usar valor exato do motor, sem ajustes artificiais
                 valoresPosAposentadoria.push(item.saldo);
-
-                // Renda em poder de compra de hoje (mesmo índice de mês)
-                const rendaVal = rendaMensalDetalhada[index] != null
-                    ? rendaMensalDetalhada[index] / fatorInflacaoExtra
-                    : null;
-                valoresRendaHoje.push(rendaVal);
             }
         });
     }
@@ -509,22 +502,6 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
         }
     }
 
-    // ✅ Dataset de Renda Mensal (poder de compra de hoje) — eixo Y direito
-    if (valoresRendaHoje.length > 0 && rendaMensalDetalhada.length > 0) {
-        datasets.push({
-            label: 'Renda Mensal (hoje)',
-            data: new Array(labels.length).fill(null).concat(valoresRendaHoje),
-            borderColor: 'rgba(77, 166, 255, 0.90)',
-            backgroundColor: 'rgba(77, 166, 255, 0.08)',
-            borderWidth: 2,
-            fill: false,
-            tension: 0.15,
-            pointRadius: 0,
-            pointHoverRadius: 4,
-            yAxisID: 'y1'
-        });
-    }
-
     // ✅ SIMPLIFICAÇÃO: Curvas extras removidas - sempre usar apenas 95 anos
 
     // ✅ Labels finais: ajustar para refletir exatamente o tamanho da curva projetada
@@ -598,16 +575,24 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
         linhaHeranca.data = labelsFinais.map((_, idx) => idx >= indiceAposentadoria ? piso : null);
     }
     
-    // Remapear dataset de renda para labelsFinais expandidos até 116 anos
-    const dsRenda = datasets.find(d => d.label === 'Renda Mensal (hoje)');
-    if (dsRenda && valoresRendaHoje.length > 0 && labelsCompletos && labelsFinais.length > labelsCompletos.length) {
-        const mapaRenda = new Map();
-        labelsPosAposentadoria.forEach((label, idx) => {
-            mapaRenda.set(parseInt(label, 10), valoresRendaHoje[idx]);
-        });
-        dsRenda.data = labelsFinais.map(label => {
+    // Dataset de Renda Mensal (poder de compra de hoje) — eixo Y direito
+    // Construído após labelsFinais para garantir alinhamento correto com o eixo X
+    if (Object.keys(rendaHojeMap).length > 0) {
+        const rendaData = labelsFinais.map(label => {
             const idade = parseInt(label, 10);
-            return mapaRenda.has(idade) ? mapaRenda.get(idade) : null;
+            return rendaHojeMap.hasOwnProperty(idade) ? rendaHojeMap[idade] : null;
+        });
+        datasets.push({
+            label: 'Renda Mensal (hoje)',
+            data: rendaData,
+            borderColor: 'rgba(77, 166, 255, 0.90)',
+            backgroundColor: 'rgba(77, 166, 255, 0.08)',
+            borderWidth: 2,
+            fill: false,
+            tension: 0.15,
+            pointRadius: 0,
+            pointHoverRadius: 4,
+            yAxisID: 'y1'
         });
     }
 
@@ -1498,6 +1483,23 @@ function finalizarWizard() {
     setTimeout(() => {
         // Gráfico isolado em try-catch: erro aqui não pode impedir os handlers dos botões
         try {
+            // Pré-computar mapa de renda (idade → renda em poder de compra de hoje)
+            // Renda só aparece onde há patrimônio (saldo > 0) para parar corretamente no esgotável
+            const fatorInflacaoWiz = resultados.fatorInflacao || 1;
+            const rendaMensalDet   = resultados.rendaMensalDetalhada || [];
+            const posAposRef       = resultados.projecaoPosAposentadoria || [];
+            const idadeAposInt     = Number(wizardData.idadeAposentadoria);
+            const rendaHojeMap     = {};
+            posAposRef.forEach((item) => {
+                if (item.mes % 12 === 0 && item.saldo > 0) {
+                    const idade = idadeAposInt + Math.floor(item.mes / 12);
+                    const renda = rendaMensalDet[item.mes];
+                    if (typeof renda === 'number' && renda > 0) {
+                        rendaHojeMap[idade] = renda / fatorInflacaoWiz;
+                    }
+                }
+            });
+
             renderizarGraficoEvolucao(
                 resultados.dadosMensais,
                 wizardData.idadeAtual,
@@ -1507,12 +1509,11 @@ function finalizarWizard() {
                 resultados.estrategia,
                 resultados.idadeFinal || 95,
                 {
-                    patrimonioAtual:      Number(wizardData.patrimonioAtual  || 0),
-                    aporteMensal:         Number(wizardData.aporteMensal     || 0),
-                    aporteExtraAnual:     Number(wizardData.aporteExtraAnual || 0),
-                    patrimonioMeta:       resultados.patrimonioTotalProjetado,
-                    rendaMensalDetalhada: resultados.rendaMensalDetalhada || [],
-                    fatorInflacao:        resultados.fatorInflacao || 1
+                    patrimonioAtual:  Number(wizardData.patrimonioAtual  || 0),
+                    aporteMensal:     Number(wizardData.aporteMensal     || 0),
+                    aporteExtraAnual: Number(wizardData.aporteExtraAnual || 0),
+                    patrimonioMeta:   resultados.patrimonioTotalProjetado,
+                    rendaHojeMap
                 }
             );
         } catch (e) {
