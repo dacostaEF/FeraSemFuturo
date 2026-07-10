@@ -4094,31 +4094,31 @@
                             label: 'Renda Mensal (Investimentos)',
                             data: valoresRendaMensal,
                             borderColor: '#a855f7',
-                            backgroundColor: 'rgba(168, 85, 247, 0.05)',  // ✅ AJUSTE: Transparência reduzida
-                            borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
+                            backgroundColor: 'rgba(168, 85, 247, 0.05)',
+                            borderWidth: 1.5,
                             tension: 0.25,
                             fill: false,
                             yAxisID: 'y1',
-                            pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
+                            pointRadius: 1.5,
                             pointHoverRadius: 4
                         },
-                        {
-                            // 3. INSS (Azul Ciano) - Eixo Y direito
+                        // 3. INSS (Azul Ciano) — só aparece quando INSS > 0
+                        ...(valorINSS > 0 ? [{
                             label: 'Renda do INSS',
                             data: valoresINSS,
                             borderColor: '#4da6ff',
-                            backgroundColor: 'rgba(77, 166, 255, 0.05)',  // ✅ AJUSTE: Transparência reduzida
-                            borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
+                            backgroundColor: 'rgba(77, 166, 255, 0.05)',
+                            borderWidth: 1.5,
                             borderDash: [6, 4],
                             tension: 0,
                             fill: false,
                             yAxisID: 'y1',
                             pointRadius: 1,
                             pointHoverRadius: 4
-                        },
+                        }] : []),
                         {
-                            // 4. RENDA TOTAL (Dourado) - Eixo Y direito
-                            label: 'Renda Total (Patrimônio + INSS)',
+                            // 4. RENDA TOTAL (Dourado) - label dinâmico conforme INSS
+                            label: valorINSS > 0 ? 'Renda Total (Investimentos + INSS)' : 'Sua renda mensal',
                             data: valoresTotal,
                             borderColor: '#ffcc00',
                             backgroundColor: 'rgba(255, 204, 0, 0.1)',
@@ -4551,7 +4551,7 @@
             // 6. EXIBIR DETALHES E INTERPRETAÇÃO (mantendo funções existentes)
             // ================================
             exibirDetalhesOficial(anos, retornoAnual, beneficioINSS, rendaInvestProprio);
-            exibirInterpretacaoOficial(rendaInvestProprio + beneficioINSS, rendaDesejada, resultado.patrimonioFinal);
+            exibirInterpretacaoOficial(rendaInvestProprio, rendaDesejada, resultado.patrimonioFinal);
             // prepararModaisOficial removido - informações já disponíveis no Wizard
 
             // ================================

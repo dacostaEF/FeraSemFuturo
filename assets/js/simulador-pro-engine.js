@@ -82,20 +82,22 @@ const INSS_TETO = 7786;
 // Estimativa do INSS (40% da renda desejada, limitado ao teto legal)
 // Lógica: "" (vazio) = auto (40%), "0" ou 0 = ignorar, número > 0 = usar
 function estimarINSS(rendaDesejada, inssInformado) {
-    // Se for string vazia ou null/undefined → estimar automaticamente
-    if (!inssInformado || inssInformado === "" || inssInformado === null) {
+    // Normalizar para string independente do tipo recebido (string, number, null, undefined)
+    // String(null??'') = '', String(undefined??'') = '', String(0??'') = '0', String('0'??'') = '0'
+    const valor = String(inssInformado ?? "").trim();
+
+    // Campo vazio → estimar automaticamente (40% da renda, com teto legal)
+    if (valor === "") {
         return Math.min(rendaDesejada * 0.40, INSS_TETO);
     }
-    
-    // Converter para número
-    const valorNumerico = parseFloat(inssInformado);
-    
-    // Se for NaN ou <= 0 → ignorar INSS (retornar 0)
+
+    const valorNumerico = parseFloat(valor);
+
+    // Zero, negativo, ou inválido → ignorar INSS
     if (isNaN(valorNumerico) || valorNumerico <= 0) {
         return 0;
     }
-    
-    // Se for número válido > 0 → usar o valor informado
+
     return valorNumerico;
 }
 
