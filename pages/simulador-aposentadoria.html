@@ -2361,6 +2361,11 @@
                             </div>
                         </div>
 
+                        <!-- Aviso INSS estimado automaticamente -->
+                        <div id="aviso-inss-estimado" style="display: none; margin-bottom: 16px; padding: 12px 16px; background: rgba(77, 166, 255, 0.07); border-left: 3px solid rgba(77, 166, 255, 0.5); border-radius: 8px;">
+                            <p id="aviso-inss-texto" style="font-size: 0.82rem; color: #9ca3af; margin: 0; line-height: 1.6;"></p>
+                        </div>
+
                         <!-- Card de aporte necessário — HTML restaurado (EDU-01) -->
                         <!-- CSS e JS existiam; apenas o elemento HTML estava ausente -->
                         <div id="card-aporte-necessario" style="display: none;">
@@ -4406,6 +4411,21 @@
                 }
             }
             
+            // Aviso: INSS estimado automaticamente (campo vazio → auto 40%)
+            const avisoInss = document.getElementById("aviso-inss-estimado");
+            const avisoInssTexto = document.getElementById("aviso-inss-texto");
+            const inssInputVal = document.getElementById("inssManual")?.value?.trim();
+            const inssAutoEstimado = (!inssInputVal || inssInputVal === "") && resultado.valorINSS > 0;
+            if (avisoInss && avisoInssTexto) {
+                if (inssAutoEstimado) {
+                    const inssFormatado = resultado.valorINSS.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    avisoInssTexto.innerHTML = `📘 <strong style="color:#4da6ff;">Inclui estimativa de INSS: R$ ${inssFormatado}/mês</strong> (40% da renda desejada, estimado automaticamente). A renda total acima já soma investimentos + INSS. Para desconsiderar o INSS, informe <strong>0</strong> no campo de INSS.`;
+                    avisoInss.style.display = "block";
+                } else {
+                    avisoInss.style.display = "none";
+                }
+            }
+
             // Atualizar header de status — usa deficitOuSobra do engine (poder de compra de hoje)
             const dashboardHeader = document.getElementById("dashboardHeaderPro");
             if (dashboardHeader) {
