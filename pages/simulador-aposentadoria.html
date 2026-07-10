@@ -3853,6 +3853,7 @@
             const valorINSS = resultado.valorINSS || 0;
             const rendaMensalDetalhada = resultado.rendaMensalDetalhada || [];
             const projecaoPosAposentadoria = resultado.projecaoPosAposentadoria || [];
+            const fatorInflacaoPRO = resultado.fatorInflacao || 1;
 
             // ✅ CORREÇÃO: Detectar os 3 casos (igual ao Wizard)
             const idadeFinalNum = Number(idadeFinal) || 95;
@@ -4045,12 +4046,13 @@
             const valoresTotal = [];
 
             // Criar mapa de idade -> renda mensal para alinhamento correto
+            // Valores convertidos para poder de compra de hoje (nominal / fatorInflacao)
             const mapaRendaPorIdade = {};
             if (rendaMensalDetalhada.length > 0) {
                 rendaMensalDetalhada.forEach((renda, index) => {
                     if (index % 12 === 0 || index === rendaMensalDetalhada.length - 1) {
                         const idade = idadeApos + Math.floor(index / 12);
-                        mapaRendaPorIdade[idade] = renda;
+                        mapaRendaPorIdade[idade] = renda / fatorInflacaoPRO;
                     }
                 });
             }

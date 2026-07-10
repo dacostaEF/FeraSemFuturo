@@ -250,6 +250,8 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
     const aporteMensalExtra     = Number(dadosExtras.aporteMensal     || 0);
     const aporteExtraAnualExtra = Number(dadosExtras.aporteExtraAnual || 0);
     const patrimonioMeta        = Number(dadosExtras.patrimonioMeta   || 0);
+    const rendaMensalDetalhada  = Array.isArray(dadosExtras.rendaMensalDetalhada) ? dadosExtras.rendaMensalDetalhada : [];
+    const fatorInflacaoExtra    = Number(dadosExtras.fatorInflacao) || 1;
 
     // Preparar dados (converter meses em anos)
     const labels = [];
@@ -279,10 +281,11 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
     // Representa o período de uso/consumo do patrimônio após a aposentadoria
     let valoresPosAposentadoria = [];
     let labelsPosAposentadoria = [];
-    
+    let valoresRendaHoje = [];
+
     if (projecaoPosAposentadoria && projecaoPosAposentadoria.length > 0) {
         const mesesAteAposentadoria = anosAteAposentadoria * 12; // Meses desde idadeAtual até idadeAposentadoria
-        
+
         // ✅ CORREÇÃO: projecaoPosAposentadoria tem item.mes começando em 0
         projecaoPosAposentadoria.forEach((item, index) => {
             // A cada 12 meses ou pontos importantes
@@ -292,9 +295,15 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
                 const mesesTotais = mesesAteAposentadoria + item.mes;
                 const idadeReal = ajustarIdade(mesesTotais); // Idade real baseada em idadeAtual
                 labelsPosAposentadoria.push(idadeReal.toString());
-                
+
                 // Usar valor exato do motor, sem ajustes artificiais
                 valoresPosAposentadoria.push(item.saldo);
+
+                // Renda em poder de compra de hoje (mesmo índice de mês)
+                const rendaVal = rendaMensalDetalhada[index] != null
+                    ? rendaMensalDetalhada[index] / fatorInflacaoExtra
+                    : null;
+                valoresRendaHoje.push(rendaVal);
             }
         });
     }
@@ -500,6 +509,22 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
         }
     }
 
+    // ✅ Dataset de Renda Mensal (poder de compra de hoje) — eixo Y direito
+    if (valoresRendaHoje.length > 0 && rendaMensalDetalhada.length > 0) {
+        datasets.push({
+            label: 'Renda Mensal (hoje)',
+            data: new Array(labels.length).fill(null).concat(valoresRendaHoje),
+            borderColor: 'rgba(77, 166, 255, 0.90)',
+            backgroundColor: 'rgba(77, 166, 255, 0.08)',
+            borderWidth: 2,
+            fill: false,
+            tension: 0.15,
+            pointRadius: 0,
+            pointHoverRadius: 4,
+            yAxisID: 'y1'
+        });
+    }
+
     // ✅ SIMPLIFICAÇÃO: Curvas extras removidas - sempre usar apenas 95 anos
 
     // ✅ Labels finais: ajustar para refletir exatamente o tamanho da curva projetada
@@ -573,6 +598,19 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
         linhaHeranca.data = labelsFinais.map((_, idx) => idx >= indiceAposentadoria ? piso : null);
     }
     
+    // Remapear dataset de renda para labelsFinais expandidos até 116 anos
+    const dsRenda = datasets.find(d => d.label === 'Renda Mensal (hoje)');
+    if (dsRenda && valoresRendaHoje.length > 0 && labelsCompletos && labelsFinais.length > labelsCompletos.length) {
+        const mapaRenda = new Map();
+        labelsPosAposentadoria.forEach((label, idx) => {
+            mapaRenda.set(parseInt(label, 10), valoresRendaHoje[idx]);
+        });
+        dsRenda.data = labelsFinais.map(label => {
+            const idade = parseInt(label, 10);
+            return mapaRenda.has(idade) ? mapaRenda.get(idade) : null;
+        });
+    }
+
     // Números para o resumo educativo (calculados antes do chart)
     const capitalFinal     = capitalInvestidoValores.length > 0 ? capitalInvestidoValores[capitalInvestidoValores.length - 1] : 0;
     const patrimonioFinal  = valores.length > 0 ? valores[valores.length - 1] : 0;
@@ -649,7 +687,8 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
                         filter: (item) =>
                             item.text === 'Capital Investido por Você' ||
                             item.text === 'Patrimônio Total Projetado' ||
-                            item.text === 'Gerado pelos Juros Compostos'
+                            item.text === 'Gerado pelos Juros Compostos' ||
+                            item.text === 'Renda Mensal (hoje)'
                     }
                 },
                 tooltip: {
@@ -684,11 +723,14 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
                             const cresc = (pVal != null && cVal != null) ? Math.max(0, pVal - cVal) : null;
                             const pct   = (patrimonioMeta > 0 && pVal != null) ? Math.round(pVal / patrimonioMeta * 100) : null;
                             const fmt = v => v != null ? 'R$ ' + Number(v).toLocaleString('pt-BR', { maximumFractionDigits: 0 }) : '—';
+                            const dsRt = chart.data.datasets.find(d => d.label === 'Renda Mensal (hoje)');
+                            const rVal = dsRt?.data[idx];
                             const lines = [];
                             if (cVal  != null) lines.push(`💰 Capital investido: ${fmt(cVal)}`);
                             if (pVal  != null) lines.push(`📈 Patrimônio total: ${fmt(pVal)}`);
                             if (cresc != null) lines.push(`✨ Crescimento pelos investimentos: ${fmt(cresc)}`);
                             if (pct   != null) lines.push(`🎯 Progresso para a meta: ${pct}%`);
+                            if (rVal  != null) lines.push(`💸 Renda mensal (em valores de hoje): ${fmt(rVal)}/mês`);
                             return lines;
                         }
                     }
@@ -715,6 +757,12 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
                 },
                 y: {
                     min: 0,
+                    title: {
+                        display: true,
+                        text: 'Patrimônio Acumulado (R$)',
+                        color: '#10b981',
+                        font: { size: 12, weight: 'bold' }
+                    },
                     grid: { color: 'rgba(138, 204, 166, 0.1)', drawBorder: false },
                     ticks: {
                         color: '#9CA3AF',
@@ -722,6 +770,27 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
                         callback: function(value) {
                             if (value >= 1000000) return 'R$ ' + (value / 1000000).toFixed(1).replace('.0', '') + 'M';
                             if (value >= 1000) return 'R$ ' + (value / 1000).toFixed(0) + 'k';
+                            return 'R$ ' + value;
+                        }
+                    }
+                },
+                y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    min: 0,
+                    title: {
+                        display: true,
+                        text: 'Renda Mensal (R$)',
+                        color: '#4da6ff',
+                        font: { size: 12, weight: 'bold' }
+                    },
+                    grid: { drawOnChartArea: false },
+                    ticks: {
+                        color: '#4da6ff',
+                        font: { size: 11 },
+                        callback: function(value) {
+                            if (value >= 1000) return 'R$ ' + (value / 1000).toFixed(1).replace('.0', '') + 'k';
                             return 'R$ ' + value;
                         }
                     }
@@ -1438,10 +1507,12 @@ function finalizarWizard() {
                 resultados.estrategia,
                 resultados.idadeFinal || 95,
                 {
-                    patrimonioAtual:  Number(wizardData.patrimonioAtual  || 0),
-                    aporteMensal:     Number(wizardData.aporteMensal     || 0),
-                    aporteExtraAnual: Number(wizardData.aporteExtraAnual || 0),
-                    patrimonioMeta:   resultados.patrimonioTotalProjetado
+                    patrimonioAtual:      Number(wizardData.patrimonioAtual  || 0),
+                    aporteMensal:         Number(wizardData.aporteMensal     || 0),
+                    aporteExtraAnual:     Number(wizardData.aporteExtraAnual || 0),
+                    patrimonioMeta:       resultados.patrimonioTotalProjetado,
+                    rendaMensalDetalhada: resultados.rendaMensalDetalhada || [],
+                    fatorInflacao:        resultados.fatorInflacao || 1
                 }
             );
         } catch (e) {
