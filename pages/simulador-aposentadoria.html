@@ -6850,29 +6850,25 @@
                     icon:'💡', color:'#10b981',
                     label:'Maior aderência: Investimento Próprio',
                     desc:'Suas respostas indicam maior valorização de autonomia, liquidez e controle de custos, com menor aproveitamento dos principais benefícios fiscais da previdência.',
-                    checklist:['Tesouro Direto','CDBs e renda fixa','ETFs diversificados','Carteira adequada ao seu prazo e perfil de risco'],
-                    cta:'Aprender a construir meu patrimônio'
+                    checklist:['Tesouro Direto','CDBs e renda fixa','ETFs diversificados','Carteira adequada ao seu prazo e perfil de risco']
                 },
                 previdencia: {
                     icon:'🏛️', color:'#D4AF37',
                     label:'Maior aderência: Previdência como Estratégia Principal',
                     desc:'Suas respostas indicam horizonte de longo prazo, potencial aproveitamento tributário, interesse sucessório e preferência por delegar parte da gestão — tornando uma previdência de baixo custo mais compatível com seu perfil.',
-                    checklist:['Compare as taxas totais do plano','Verifique o regime tributário (PGBL ou VGBL)','Avalie os fundos disponíveis dentro do plano','Confirme as regras de portabilidade e resgate'],
-                    cta:'Entender custos e tributação da previdência'
+                    checklist:['Compare as taxas totais do plano','Verifique o regime tributário (PGBL ou VGBL)','Avalie os fundos disponíveis dentro do plano','Confirme as regras de portabilidade e resgate']
                 },
                 combinado: {
                     icon:'🔀', color:'#4da6ff',
                     label:'Maior aderência: Estratégia Combinada',
                     desc:'Suas respostas mostram vantagens nas duas abordagens. Parte dos recursos pode atender a objetivos tributários ou sucessórios, enquanto outra parte permanece sob sua gestão direta.',
-                    checklist:['Use cada instrumento para uma finalidade clara','Evite concentração em um único produto','Compare custos e tributação de cada alternativa','Preserve liquidez para objetivos de curto prazo'],
-                    cta:'Explorar estratégias de diversificação'
+                    checklist:['Use cada instrumento para uma finalidade clara','Evite concentração em um único produto','Compare custos e tributação de cada alternativa','Preserve liquidez para objetivos de curto prazo']
                 },
                 equilibrado: {
                     icon:'⚖️', color:'#9ca3af',
                     label:'Seu perfil precisa de uma análise adicional',
                     desc:'Não identificamos uma vantagem clara de uma única estratégia. Reavalie os custos do plano, seu horizonte, a possibilidade de resgate antecipado e o real aproveitamento do benefício tributário.',
-                    checklist:[],
-                    cta:''
+                    checklist:[]
                 }
             }[diagnosis];
 
@@ -6967,9 +6963,7 @@
             </div>` : '';
 
             // CTA
-            const ctaHtml = diagnosis === 'equilibrado'
-                ? `<button onclick="resetQuiz()" style="width:100%;padding:13px;margin-top:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#E4E4E4;font-size:0.9rem;cursor:pointer;font-family:'Inter',sans-serif;">Revisar minhas respostas</button>`
-                : `<a href="../pages/educacao-financeira.html" style="display:block;text-align:center;padding:13px;margin-top:14px;background:rgba(255,255,255,0.03);border:1px solid ${cfg.color}55;border-radius:8px;color:${cfg.color};font-size:0.88rem;font-weight:600;text-decoration:none;">${cfg.cta} →</a>`;
+            const ctaHtml = `<button onclick="resetQuiz()" style="width:100%;padding:13px;margin-top:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#E4E4E4;font-size:0.9rem;cursor:pointer;font-family:'Inter',sans-serif;">Refazer o diagnóstico</button>`;
 
             box.style.display = 'block';
             box.classList.add('show');
