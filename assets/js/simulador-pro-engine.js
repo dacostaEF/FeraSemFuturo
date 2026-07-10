@@ -76,12 +76,15 @@ function projetarPatrimonioPreservado(patrimonio, idadeAtual, idadeApos, idadeFi
     return historico;
 }
 
-// Estimativa do INSS (40% da renda desejada por padrão)
+// Teto do benefício INSS (referência 2025 — atualizar anualmente)
+const INSS_TETO = 7786;
+
+// Estimativa do INSS (40% da renda desejada, limitado ao teto legal)
 // Lógica: "" (vazio) = auto (40%), "0" ou 0 = ignorar, número > 0 = usar
 function estimarINSS(rendaDesejada, inssInformado) {
     // Se for string vazia ou null/undefined → estimar automaticamente
     if (!inssInformado || inssInformado === "" || inssInformado === null) {
-        return rendaDesejada * 0.40;
+        return Math.min(rendaDesejada * 0.40, INSS_TETO);
     }
     
     // Converter para número

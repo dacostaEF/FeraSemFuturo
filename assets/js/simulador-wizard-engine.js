@@ -34,8 +34,8 @@ const INFLACAO_MEDIA = 0.045;
 // Previdência privada: taxa real menor (custos)
 const TAXA_PREVIDENCIA_PRIVADA = 0.02; // 2%
 
-// Teto INSS
-const TETO_INSS = 7750;
+// Teto do benefício INSS (referência 2025 — atualizar anualmente)
+const TETO_INSS = 7786;
 
 // ===============================================================
 // FUNÇÕES AUXILIARES
