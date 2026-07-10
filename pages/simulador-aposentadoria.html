@@ -4065,14 +4065,24 @@
                     valoresINSS.push(null);
                     valoresTotal.push(null);
                 } else {
-                    // Após aposentadoria: usar renda do mapa ou última disponível
-                    const renda = mapaRendaPorIdade[idade] || valoresRendaMensal[valoresRendaMensal.length - 1] || 0;
-                    const rendaValida = renda > 0 ? renda : null;
+                    // Após aposentadoria: usar renda do mapa se existir
+                    const rendaDoMapa = mapaRendaPorIdade[idade];
+                    let rendaValida = null;
+                    if (rendaDoMapa != null && rendaDoMapa > 0) {
+                        // Temos dado real para essa idade
+                        rendaValida = rendaDoMapa;
+                    } else if (!isCaso3 && valoresRendaMensal.length > 0) {
+                        // Estratégia perpétua: capital preservado, renda continua
+                        const ultimo = valoresRendaMensal[valoresRendaMensal.length - 1];
+                        rendaValida = (ultimo != null && ultimo > 0) ? ultimo : null;
+                    }
+                    // isCaso3 (esgotável): sem fallback — renda para quando o capital acaba
+
                     const inssValido = valorINSS > 0 ? valorINSS : null;
-                    
+
                     valoresRendaMensal.push(rendaValida);
                     valoresINSS.push(inssValido);
-                    
+
                     // Total = renda + INSS (se ambos válidos) ou apenas renda (se INSS = 0)
                     if (rendaValida !== null) {
                         valoresTotal.push(rendaValida + (inssValido || 0));
