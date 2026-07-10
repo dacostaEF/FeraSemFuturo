@@ -2457,19 +2457,34 @@
 
             <div class="pro-bloco" data-bloco="2">
                 <div class="pro-bloco-header">
-                    <span>⚙️ Configurações e Ajustes Avançados</span>
+                    <span>🧪 Laboratório de Cenários</span>
                     <span class="pro-bloco-arrow">▼</span>
                 </div>
                 <div class="pro-bloco-content">
+
+                    <!-- Tagline da seção -->
+                    <p style="
+                        font-size: 0.92rem;
+                        color: rgba(255,255,255,0.70);
+                        line-height: 1.7;
+                        font-style: italic;
+                        text-align: center;
+                        padding: 18px 20px 4px;
+                        border-bottom: 1px solid rgba(255,255,255,0.06);
+                        margin-bottom: 20px;
+                    ">
+                        Experimente diferentes hipóteses e descubra como pequenas mudanças nas premissas podem influenciar o patrimônio que você construirá ao longo da vida.
+                    </p>
+
                     <div class="acordeon-content-inner">
                         <!-- Rentabilidade -->
                         <div class="acordeon-input">
-                            <label>Rentabilidade Personalizada (% a.a.)</label>
+                            <label>Rentabilidade esperada (% a.a.)</label>
                             <input type="number" id="rentabilidadeCustom" value="" placeholder="Ex: 7.5" step="0.1">
                         </div>
                         <!-- Inflação -->
                         <div class="acordeon-input">
-                            <label>Inflação Estimada (% a.a.)</label>
+                            <label>Inflação esperada (% a.a.)</label>
                             <input type="number" id="inflacaoCustom" value="" placeholder="Ex: 4.5" step="0.1">
                         </div>
                         <!-- Taxa administrativa - DESTAQUE VERMELHO -->
@@ -2491,9 +2506,9 @@
                     </div>
                     <div class="acordeon-divider"></div>
                     <div style="margin-bottom: 20px;">
-                        <p style="font-size: 0.82rem; color: #D4AF37; font-weight: 700; margin-bottom: 10px;">📊 Como usar esta seção</p>
+                        <p style="font-size: 0.82rem; color: #D4AF37; font-weight: 700; margin-bottom: 10px;">📊 O que você pode descobrir aqui?</p>
                         <p style="font-size: 0.83rem; color: #9ca3af; line-height: 1.65; margin-bottom: 8px;">
-                            Os valores acima refletem exatamente os parâmetros usados na sua simulação atual. Altere qualquer um deles e clique em <strong style="color: #E4E4E4;">Aplicar</strong> para ver o impacto no seu patrimônio e na sua renda.
+                            Experimente alterar apenas uma variável por vez e observe como ela influencia o seu patrimônio e a sua renda futura, estimados na simulação acima.
                         </p>
                         <p style="font-size: 0.83rem; color: #9ca3af; line-height: 1.65; margin-bottom: 12px;">Use esta seção para responder perguntas como:</p>
                         <div style="display: flex; flex-direction: column; gap: 6px; padding-left: 4px;">
@@ -2507,32 +2522,61 @@
                         </p>
                     </div>
                     
-                    <!-- Botão para aplicar ajustes avançados -->
-                    <div style="text-align: center; margin-top: 24px;">
-                        <button id="btn-aplicar-ajustes" class="btn-primary" style="background: rgba(212, 175, 55, 0.2); border: 1px solid rgba(212, 175, 55, 0.4); color: #D4AF37;">
-                            ✔️ Aplicar Ajustes Avançados
+                    <!-- Cards de impacto — sempre visíveis, atualizam em tempo real -->
+                    <div id="resultado-ajustes-avancados" style="margin-top: 20px;">
+                        <p style="font-size: 0.75rem; color: #9ca3af; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px;">Impacto no seu plano</p>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-bottom: 20px;">
+
+                            <!-- Card Patrimônio -->
+                            <div style="padding: 14px 16px; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid rgba(255,255,255,0.07);">
+                                <p style="color: #9ca3af; font-size: 0.75rem; margin-bottom: 10px;">Patrimônio estimado</p>
+                                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 7px;">
+                                    <span style="font-size: 0.68rem; color: rgba(255,255,255,0.28);">Com ajuste</span>
+                                    <p id="adv-baseline-patrimonio" style="color: #10b981; font-size: 1rem; font-weight: 700; font-variant-numeric: tabular-nums;">—</p>
+                                </div>
+                                <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 7px; display: flex; justify-content: space-between; align-items: baseline;">
+                                    <span style="font-size: 0.68rem; color: rgba(255,255,255,0.28);">Novo Cenário</span>
+                                    <p id="adv-adjusted-patrimonio" style="font-size: 1rem; font-weight: 700; color: #9ca3af; font-variant-numeric: tabular-nums;">—</p>
+                                </div>
+                            </div>
+
+                            <!-- Card Renda -->
+                            <div style="padding: 14px 16px; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid rgba(255,255,255,0.07);">
+                                <p style="color: #9ca3af; font-size: 0.75rem; margin-bottom: 10px;">Renda na aposentadoria</p>
+                                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 7px;">
+                                    <span style="font-size: 0.68rem; color: rgba(255,255,255,0.28);">Com ajuste</span>
+                                    <p id="adv-baseline-renda" style="color: #10b981; font-size: 1rem; font-weight: 700; font-variant-numeric: tabular-nums;">—</p>
+                                </div>
+                                <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 7px; display: flex; justify-content: space-between; align-items: baseline;">
+                                    <span style="font-size: 0.68rem; color: rgba(255,255,255,0.28);">Novo Cenário</span>
+                                    <p id="adv-adjusted-renda" style="font-size: 1rem; font-weight: 700; color: #9ca3af; font-variant-numeric: tabular-nums;">—</p>
+                                </div>
+                            </div>
+
+                            <!-- Card Diferença -->
+                            <div style="padding: 14px 16px; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid rgba(255,255,255,0.07); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                                <p style="color: #9ca3af; font-size: 0.75rem; margin-bottom: 10px;">Diferença no patrimônio</p>
+                                <p id="adv-diff-valor" style="font-size: 1.15rem; font-weight: 700; color: #9ca3af; font-variant-numeric: tabular-nums;">—</p>
+                                <p id="adv-diff-pct" style="font-size: 0.78rem; color: #9ca3af; margin-top: 5px;">—</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botão resetar -->
+                    <div style="text-align: center; margin-top: 4px; margin-bottom: 8px;">
+                        <button id="btn-aplicar-ajustes" class="btn-primary" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); color: #9ca3af; font-size: 0.85rem;">
+                            ↺ Resetar para valores originais
                         </button>
                     </div>
 
-                    <!-- Container para resultados avançados (reorganizado: aparece logo após o botão) -->
-                    <div id="resultado-ajustes-avancados" style="display:none; margin-top: 24px; padding: 24px; background: rgba(255, 255, 255, 0.03); border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.2);">
-                        <h3 style="color: #D4AF37; margin-bottom: 20px; font-size: 1.2rem;">📊 Impacto das Taxas no seu Patrimônio</h3>
-                        
-                        <!-- Cards de comparação -->
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px;">
-                            <div style="padding: 16px; background: rgba(255, 255, 255, 0.05); border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3);">
-                                <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 8px;">Patrimônio estimado</p>
-                                <p id="resultado-avancado-patrimonio" style="color: #D4AF37; font-size: 1.5rem; font-weight: bold;">—</p>
-                            </div>
-                            <div style="padding: 16px; background: rgba(255, 255, 255, 0.05); border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3);">
-                                <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 8px;">Renda na aposentadoria</p>
-                                <p id="resultado-avancado-renda" style="color: #D4AF37; font-size: 1.5rem; font-weight: bold;">—</p>
-                            </div>
-                            <div style="padding: 16px; background: rgba(255, 255, 255, 0.05); border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3);">
-                                <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 8px;">Diferença vs. Cenário Base</p>
-                                <p id="resultado-avancado-diferenca" style="color: #ef4444; font-size: 1.2rem; font-weight: bold;">—</p>
-                            </div>
-                        </div>
+                    <!-- Container legado (mantido para não quebrar referências JS) -->
+                    <div style="display:none;">
+                        <p id="resultado-avancado-patrimonio"></p>
+                        <p id="resultado-avancado-renda"></p>
+                        <p id="resultado-avancado-diferenca"></p>
+                    </div>
+
+                    <div style="margin-bottom: 0;">
 
                         <!-- Botão para abrir modal explicativo -->
                         <div style="text-align: center; margin-top: 24px;">
@@ -2542,60 +2586,32 @@
                         </div>
 
                         <!-- ===================================================== -->
-                        <!-- ⚠️ CARD DE LIÇÃO APRENDIDA - ACORDEON 2 -->
+                        <!-- 💡 CARD REFLEXIVO - ACORDEON 2 -->
                         <!-- ===================================================== -->
-                        <div class="licao-aprendida-card" style="
+                        <div style="
                             margin-top: 32px;
-                            padding: 24px;
-                            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(239, 68, 68, 0.05) 100%);
-                            border: 2px solid #ef4444;
-                            border-radius: 12px;
-                            box-shadow: 0 8px 24px rgba(239, 68, 68, 0.2), 0 0 0 1px rgba(239, 68, 68, 0.1) inset;
-                            position: relative;
-                            overflow: hidden;
+                            padding: 22px 24px;
+                            background: linear-gradient(135deg, rgba(212, 175, 55, 0.10) 0%, rgba(212, 175, 55, 0.03) 100%);
+                            border: 1px solid rgba(212, 175, 55, 0.35);
+                            border-radius: 10px;
                         ">
-                            <!-- Efeito de brilho sutil -->
-                            <div style="
-                                position: absolute;
-                                top: -50%;
-                                right: -50%;
-                                width: 200%;
-                                height: 200%;
-                                background: radial-gradient(circle, rgba(239, 68, 68, 0.1) 0%, transparent 70%);
-                                pointer-events: none;
-                            "></div>
-                            
-                            <div style="position: relative; z-index: 1;">
-                                <div style="
-                                    display: flex;
-                                    align-items: center;
-                                    gap: 12px;
-                                    margin-bottom: 16px;
-                                ">
-                                    <span style="
-                                        font-size: 2rem;
-                                        line-height: 1;
-                                    ">⚠️</span>
-                                    <h3 style="
-                                        font-family: 'Playfair Display', serif;
-                                        font-size: 1.4rem;
-                                        color: #ef4444;
-                                        font-weight: 700;
-                                        margin: 0;
-                                        text-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
-                                    ">O custo de delegar: primeira camada</h3>
-                                </div>
-                                
-                                <p style="
-                                    color: #E4E4E4;
-                                    line-height: 1.8;
-                                    font-size: 1.05rem;
-                                    margin: 0;
-                                    padding-left: 44px;
-                                ">
-                                    Ao delegar a administração do seu patrimônio, surge a taxa administrativa. Mesmo parecendo pequena (0,5% a 1%), ela corrói seu patrimônio ano após ano. Compare com o Cenário 1 e veja o quanto você perde.
-                                </p>
-                            </div>
+                            <p style="
+                                font-family: 'Playfair Display', serif;
+                                font-size: 1rem;
+                                color: #D4AF37;
+                                font-weight: 700;
+                                margin-bottom: 14px;
+                            ">O que esta simulação mostrou?</p>
+
+                            <p style="color: rgba(255,255,255,0.55); font-size: 0.82rem; line-height: 1.65; margin-bottom: 10px;">
+                                Nesta simulação você alterou apenas a taxa administrativa.
+                            </p>
+                            <p style="color: rgba(255,255,255,0.55); font-size: 0.82rem; line-height: 1.65; margin-bottom: 10px;">
+                                Embora pareça pequena, essa cobrança reduz continuamente o crescimento do patrimônio ao longo das décadas.
+                            </p>
+                            <p style="color: rgba(255,255,255,0.55); font-size: 0.82rem; line-height: 1.65; margin: 0;">
+                                Quanto maior o prazo de investimento, maior tende a ser o impacto acumulado dessas taxas.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -5047,14 +5063,11 @@
         // Botão principal
         document.querySelector(".btn-primary").addEventListener("click", calcularSimulacao_UI_Upgrade_final);
         
-        // Botão aplicar ajustes avançados
+        // Botão resetar ajustes avançados
         const btnAplicarAjustes = document.getElementById("btn-aplicar-ajustes");
         if (btnAplicarAjustes) {
             btnAplicarAjustes.addEventListener("click", function() {
-                // Chamar o motor principal de simulação com os valores atualizados
-                aplicarAjustesAvancados();
-                
-                // Mensagem explicativa removida - agora temos apenas o botão que abre o modal
+                resetarAjustesAvancados();
             });
         }
 
@@ -5875,6 +5888,9 @@
                     aporteExtra.value = valorOficial;
                 }
             }
+
+            // Inicializar cards de comparação com valores do cenário base
+            inicializarCardsComparacao(resultadoBase);
         }
 
         // =====================================================
@@ -6065,6 +6081,150 @@
                     btnAplicar.style.color = "#D4AF37";
                 }, 3000);
             }
+        }
+
+        // =====================================================
+        // 🟡 CARDS DE COMPARAÇÃO — ATUALIZAÇÃO LIVE
+        // =====================================================
+
+        let _advDebounceTimer = null;
+
+        function _fmtAdv(valor) {
+            if (valor == null || isNaN(valor)) return '—';
+            return 'R$ ' + Math.round(valor).toLocaleString('pt-BR');
+        }
+
+        function _fmtRenda(valor) {
+            if (valor == null || isNaN(valor)) return '—';
+            return 'R$ ' + valor.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function _corAjusteAvancado(ajustado, baseline) {
+            if (!baseline || baseline === 0) return '#9ca3af';
+            const ratio = ajustado / baseline;
+            if (ratio >= 1.01)  return '#10b981'; // melhorou ≥1%
+            if (ratio >= 0.99)  return '#9ca3af'; // neutro <1%
+            if (ratio >= 0.85)  return '#D4AF37'; // piorou 1–15%
+            return '#ef4444';                      // piorou >15%
+        }
+
+        function inicializarCardsComparacao(resultadoBase) {
+            if (!resultadoBase) return;
+
+            const patrimonioBase = resultadoBase.patrimonioFinal || 0;
+            const rendaBase      = resultadoBase.rendaInvestimentosHoje || resultadoBase.rendaTotalPrevista || 0;
+
+            window._advBasePatrimonio = patrimonioBase;
+            window._advBaseRenda      = rendaBase;
+
+            // Linha baseline — sempre verde, fixa
+            const elBaseP = document.getElementById('adv-baseline-patrimonio');
+            const elBaseR = document.getElementById('adv-baseline-renda');
+            if (elBaseP) elBaseP.textContent = _fmtAdv(patrimonioBase);
+            if (elBaseR) elBaseR.textContent = _fmtRenda(rendaBase);
+
+            // Linha ajustada — começa igual ao baseline, cor neutra
+            const elAdjP = document.getElementById('adv-adjusted-patrimonio');
+            const elAdjR = document.getElementById('adv-adjusted-renda');
+            if (elAdjP) { elAdjP.textContent = _fmtAdv(patrimonioBase);  elAdjP.style.color = '#9ca3af'; }
+            if (elAdjR) { elAdjR.textContent = _fmtRenda(rendaBase);     elAdjR.style.color = '#9ca3af'; }
+
+            // Card diferença — zerado
+            const elDiffV = document.getElementById('adv-diff-valor');
+            const elDiffP = document.getElementById('adv-diff-pct');
+            if (elDiffV) { elDiffV.textContent = 'R$ 0';  elDiffV.style.color = '#9ca3af'; }
+            if (elDiffP) { elDiffP.textContent = '0,0%';  elDiffP.style.color = '#9ca3af'; }
+
+            // Registrar listeners nos inputs visíveis (debounce)
+            ['rentabilidadeCustom', 'inflacaoCustom', 'taxaAdmCustom', 'aporteExtra'].forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.removeEventListener('input', atualizarCardsAvancadosLive);
+                el.addEventListener('input', atualizarCardsAvancadosLive);
+            });
+        }
+
+        function atualizarCardsAvancadosLive() {
+            clearTimeout(_advDebounceTimer);
+            _advDebounceTimer = setTimeout(_executarAtualizacaoAvancada, 400);
+        }
+
+        function _executarAtualizacaoAvancada() {
+            const resultadoBase = window.resultadoBase;
+            if (!resultadoBase) return;
+
+            const patrimonioBase = window._advBasePatrimonio || resultadoBase.patrimonioFinal || 0;
+            const rendaBase      = window._advBaseRenda      || resultadoBase.rendaInvestimentosHoje || resultadoBase.rendaTotalPrevista || 0;
+
+            const paramsAvancados = obterParametrosAvancados();
+
+            const idadeAtual        = parseInt(document.getElementById('currentAge').value);
+            const idadeApos         = parseInt(document.getElementById('retirementAge').value);
+            const aporteMensal      = parseFloat(document.getElementById('monthlyInvestment').value);
+            const rendaDesejada     = parseFloat(document.getElementById('desiredIncome').value);
+            const inssManual        = document.getElementById('inssManual').value;
+            const patrimonioInicial = parseFloat(document.getElementById('patrimonioAtualOficial').value) || 0;
+
+            if (!idadeAtual || !idadeApos || !aporteMensal || !rendaDesejada) return;
+
+            let aporteAnual = parseFloat(document.getElementById('aporteExtraAnualOficial').value) || 0;
+            if (paramsAvancados.aporteExtra && paramsAvancados.aporteExtra > 0) aporteAnual = paramsAvancados.aporteExtra;
+
+            const tipoRenda   = document.querySelector('input[name="tipoRendaOficial"]:checked')?.value || 'vitalicia';
+            const estrategia  = document.querySelector('input[name="estrategiaOficial"]:checked')?.value || 'perpetua';
+            const idadeFinal  = 95;
+            const anosPeriodo = tipoRenda === 'periodo' ? (idadeFinal - idadeApos) : 0;
+
+            const currentScenario = window.currentScenario || 'moderado';
+            const rentabilidadesLocal = { conservador: 0.06, moderado: 0.08, arrojado: 0.10 };
+            let retornoAnual = rentabilidadesLocal[currentScenario] || 0.08;
+            if (paramsAvancados.rentabilidade && paramsAvancados.rentabilidade > 0) retornoAnual = paramsAvancados.rentabilidade;
+
+            const taxaAdmAnual = paramsAvancados.taxaAdm || 0;
+
+            let resultadoAdj;
+            try {
+                resultadoAdj = window.simuladorProEngine.executarSimulacaoCompleta({
+                    idadeAtual, idadeApos, idadeFinal,
+                    aporteMensal, aporteAnual, patrimonioInicial,
+                    retornoAnual, tipoRenda, estrategia, anosPeriodo,
+                    rendaDesejada, inssInformado: inssManual, taxaAdmAnual
+                });
+            } catch (e) { return; }
+
+            if (!resultadoAdj) return;
+
+            const patrimonioAdj = resultadoAdj.patrimonioFinal || 0;
+            const rendaAdj      = resultadoAdj.rendaInvestimentosHoje || resultadoAdj.rendaTotalPrevista || 0;
+
+            // Linha ajustada com cores dinâmicas
+            const elAdjP = document.getElementById('adv-adjusted-patrimonio');
+            const elAdjR = document.getElementById('adv-adjusted-renda');
+            if (elAdjP) { elAdjP.textContent = _fmtAdv(patrimonioAdj);  elAdjP.style.color = _corAjusteAvancado(patrimonioAdj, patrimonioBase); }
+            if (elAdjR) { elAdjR.textContent = _fmtRenda(rendaAdj);     elAdjR.style.color = _corAjusteAvancado(rendaAdj, rendaBase); }
+
+            // Card de diferença
+            const elDiffV = document.getElementById('adv-diff-valor');
+            const elDiffP = document.getElementById('adv-diff-pct');
+            if (elDiffV && elDiffP) {
+                const diff    = patrimonioAdj - patrimonioBase;
+                const pctDiff = patrimonioBase > 0 ? (diff / patrimonioBase) * 100 : 0;
+                const cor     = _corAjusteAvancado(patrimonioAdj, patrimonioBase);
+                const prefixo = diff >= 0 ? '+' : '-';
+                elDiffV.textContent = prefixo + _fmtAdv(Math.abs(diff));
+                elDiffV.style.color = cor;
+                elDiffP.textContent = (diff >= 0 ? '+' : '') + pctDiff.toFixed(1).replace('.', ',') + '%';
+                elDiffP.style.color = cor;
+            }
+        }
+
+        function resetarAjustesAvancados() {
+            // Limpar campos para forçar repopulação com valores do cenário base
+            ['rentabilidadeCustom', 'inflacaoCustom', 'taxaRealDesejada', 'taxaAdmCustom', 'aporteExtra'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+            preencherAjustesComValoresDoCenarioBase(window.resultadoBase);
         }
 
         // Hook para o cálculo principal (módulo 4/5)
