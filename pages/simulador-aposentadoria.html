@@ -2299,7 +2299,7 @@
                                 border: 1px solid rgba(250, 204, 21, 0.3);
                                 border-radius: 8px;
                                 padding: 10px;
-                            ">💡 <strong>Recomendamos Renda Vitalícia + Preservar Capital</strong> para máxima segurança e tranquilidade.</p>
+                            ">💡 <strong>Recomendamos Para a vida toda — sem usar o capital</strong> para máxima segurança e tranquilidade.</p>
                         </div>
                     </div>
                 </div>
@@ -2345,18 +2345,19 @@
                             <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
                                 <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">🎯 Sua meta de renda</h3>
                                 <p class="valor" id="cardMetaMensal" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #E4E4E4; margin: 6px 0 0 0;">—</p>
+                                <p style="font-size: 0.85rem; color: #9ca3af; margin: 8px 0 0 0;">Valor informado por você.</p>
                             </div>
 
                             <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
                                 <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">💰 Patrimônio estimado</h3>
                                 <p class="valor" id="cardPatrimonioProjetado" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #10b981; margin: 6px 0 0 0;">—</p>
-                                <p style="font-size: 0.85rem; color: #9ca3af; margin: 8px 0 0 0;">É esse patrimônio que permitirá gerar sua renda.</p>
+                                <p style="font-size: 0.85rem; color: #9ca3af; margin: 8px 0 0 0;">Saldo previsto no início da aposentadoria.</p>
                             </div>
 
                             <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
                                 <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">💎 O que você vai deixar</h3>
                                 <p class="valor" id="cardHerancaProjetada" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #10b981; margin: 6px 0 0 0;">—</p>
-                                <p id="cardHerancaSubtitle" style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px; margin: 8px 0 0 0;">Estimativa para seus herdeiros</p>
+                                <p id="cardHerancaSubtitle" style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px; margin: 8px 0 0 0;">Estimativa para seus herdeiros.</p>
                             </div>
                         </div>
 
@@ -2467,7 +2468,7 @@
                         </div>
                         <!-- Taxa Real Desejada -->
                         <div class="acordeon-input">
-                            <label>Taxa Real Desejada na Aposentadoria (% a.m.)</label>
+                            <label>Retorno real desejado na aposentadoria (% a.m.)</label>
                             <input type="number" id="taxaRealDesejada" value="" placeholder="Ex: 0.55" step="0.01">
                         </div>
                         <!-- Taxa administrativa - COM DESTAQUE -->
@@ -2514,11 +2515,11 @@
                         <!-- Cards de comparação -->
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px;">
                             <div style="padding: 16px; background: rgba(255, 255, 255, 0.05); border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3);">
-                                <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 8px;">Patrimônio Projetado</p>
+                                <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 8px;">Patrimônio estimado</p>
                                 <p id="resultado-avancado-patrimonio" style="color: #D4AF37; font-size: 1.5rem; font-weight: bold;">—</p>
                             </div>
                             <div style="padding: 16px; background: rgba(255, 255, 255, 0.05); border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3);">
-                                <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 8px;">Renda Mensal Prevista</p>
+                                <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 8px;">Renda na aposentadoria</p>
                                 <p id="resultado-avancado-renda" style="color: #D4AF37; font-size: 1.5rem; font-weight: bold;">—</p>
                             </div>
                             <div style="padding: 16px; background: rgba(255, 255, 255, 0.05); border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3);">
@@ -2626,11 +2627,11 @@
                             ">📌 Cenário Base (Investimento Próprio)</h3>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
                                 <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
-                                    <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">💰 Patrimônio Projetado</h3>
+                                    <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">💰 Patrimônio estimado</h3>
                                     <p class="valor" id="pp-base-patrimonio" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #10b981; margin: 6px 0 0 0;">—</p>
                                 </div>
                                 <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
-                                    <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">📈 Renda Mensal Prevista</h3>
+                                    <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">📈 Renda na aposentadoria</h3>
                                     <p class="valor" id="pp-base-renda" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #D4AF37; margin: 6px 0 0 0;">—</p>
                                 </div>
                             </div>
@@ -2970,48 +2971,48 @@
                     </div>
                     <div class="modal-body">
                         <p style="color: #E4E4E4; line-height: 1.7; margin-bottom: 20px;">
-                            Sua <strong style="color: #D4AF37;">Renda Mensal Prevista</strong> é uma projeção baseada no modelo matemático de juros compostos e inflação. 
-                            O cálculo considera três cenários diferentes, cada um com suas próprias características.
+                            Sua <strong style="color: #D4AF37;">renda na aposentadoria</strong> é uma projeção baseada no modelo matemático de juros compostos e inflação.
+                            O cálculo considera três estratégias diferentes, cada uma com suas próprias características.
                         </p>
-                        
-                        <h3 style="color: #D4AF37; margin-top: 30px; margin-bottom: 15px; font-size: 1.2rem;">📊 Os 3 Cenários de Cálculo de Renda</h3>
-                        
-                        <!-- CASO 1: VITALÍCIA PERPÉTUA -->
+
+                        <h3 style="color: #D4AF37; margin-top: 30px; margin-bottom: 15px; font-size: 1.2rem;">📊 As 3 Estratégias de Renda</h3>
+
+                        <!-- CASO 1 -->
                         <div style="background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
-                            <h4 style="color: #10b981; margin-bottom: 10px; font-size: 1rem;">💚 Caso 1: Renda Vitalícia Perpétua (Preservar Capital)</h4>
-                            <p style="color: #E4E4E4; line-height: 1.7; margin: 0;"><strong>Taxa utilizada:</strong> <strong>Taxa Real</strong> — fórmula de Fisher: (1 + nominal) ÷ (1 + inflação) − 1</p>
+                            <h4 style="color: #10b981; margin-bottom: 10px; font-size: 1rem;">💚 Caso 1: Para a vida toda — sem usar o capital</h4>
+                            <p style="color: #E4E4E4; line-height: 1.7; margin: 0;"><strong>Retorno utilizado:</strong> retorno real após inflação (ex: 8% nominal − 4,5% inflação ≈ 3,35% a.a.)</p>
                             <p style="color: #E4E4E4; line-height: 1.7; margin: 8px 0 0 0;">
                                 Você recebe apenas os juros do patrimônio, preservando o capital integralmente.
-                                A renda é calculada pela taxa real de Fisher (ex: 1,08 ÷ 1,045 − 1 ≈ 3,35% a.a.), garantindo que seu poder de compra seja mantido ao longo do tempo.
+                                A renda mantém seu poder de compra ao longo do tempo e o patrimônio fica disponível para seus herdeiros.
                             </p>
                         </div>
-                        
-                        <!-- CASO 2: PRESERVAR 20% -->
+
+                        <!-- CASO 2 -->
                         <div style="background: rgba(250, 204, 21, 0.1); border-left: 4px solid #FACC15; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
-                            <h4 style="color: #FACC15; margin-bottom: 10px; font-size: 1rem;">🟡 Caso 2: Renda por Período Determinado (Preservar 20% do Capital)</h4>
-                            <p style="color: #E4E4E4; line-height: 1.7; margin: 0;"><strong>Taxa utilizada:</strong> <strong>Taxa Real</strong> — fórmula de Fisher: (1 + nominal) ÷ (1 + inflação) − 1</p>
+                            <h4 style="color: #FACC15; margin-bottom: 10px; font-size: 1rem;">🟡 Caso 2: Por um período — preservando parte do capital</h4>
+                            <p style="color: #E4E4E4; line-height: 1.7; margin: 0;"><strong>Retorno utilizado:</strong> retorno real após inflação</p>
                             <p style="color: #E4E4E4; line-height: 1.7; margin: 8px 0 0 0;">
-                                Você recebe uma renda mensal que consome gradualmente o patrimônio até chegar a 20% do valor inicial aos 95 anos.
-                                A renda é calculada pela taxa real de Fisher, garantindo que seu poder de compra seja mantido. Os 20% restantes são preservados como herança.
+                                Você recebe uma renda mensal maior que no Caso 1, consumindo gradualmente o patrimônio até chegar a 20% do valor inicial.
+                                Os 20% restantes são preservados como herança.
                             </p>
                         </div>
-                        
-                        <!-- CASO 3: ESGOTÁVEL -->
+
+                        <!-- CASO 3 -->
                         <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
-                            <h4 style="color: #ef4444; margin-bottom: 10px; font-size: 1rem;">🔴 Caso 3: Renda por Período Determinado (Esgotável - Usar Capital Gradualmente)</h4>
-                            <p style="color: #E4E4E4; line-height: 1.7; margin: 0;"><strong>Taxa utilizada:</strong> <strong>Taxa Real</strong> — fórmula de Fisher: (1 + nominal) ÷ (1 + inflação) − 1</p>
+                            <h4 style="color: #ef4444; margin-bottom: 10px; font-size: 1rem;">🔴 Caso 3: Por um período — usando o capital aos poucos</h4>
+                            <p style="color: #E4E4E4; line-height: 1.7; margin: 0;"><strong>Retorno utilizado:</strong> retorno real após inflação</p>
                             <p style="color: #E4E4E4; line-height: 1.7; margin: 8px 0 0 0;">
-                                Você recebe uma renda mensal que consome completamente o patrimônio até os 95 anos.
-                                A renda é calculada pela taxa real de Fisher, garantindo que seu poder de compra seja mantido constante ao longo do tempo — mesmo consumindo o capital.
+                                Você recebe a maior renda possível, consumindo o patrimônio completamente ao longo do período escolhido.
+                                A renda mantém seu poder de compra constante — mesmo usando o capital gradualmente.
                             </p>
                         </div>
-                        
-                        <!-- COMPENSAÇÃO DE INFLAÇÃO -->
+
+                        <!-- PODER DE COMPRA -->
                         <div style="background: rgba(138, 204, 166, 0.1); border-left: 4px solid #8acc9e; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
-                            <h4 style="color: #8acc9e; margin-bottom: 10px; font-size: 1rem;">💰 Compensação de Inflação</h4>
+                            <h4 style="color: #8acc9e; margin-bottom: 10px; font-size: 1rem;">💰 Poder de compra preservado</h4>
                             <p style="color: #E4E4E4; line-height: 1.7; margin: 0;">
-                                <strong>Todos os cenários usam Taxa Real (Fisher):</strong> A renda mensal é calculada com base na taxa real de juros — pela fórmula (1 + nominal) ÷ (1 + inflação) − 1 —
-                                o que preserva o poder de compra nos três cenários ao longo do tempo.
+                                <strong>Todos os cenários preservam o poder de compra:</strong> a renda é calculada com base no retorno real — o rendimento que sobra depois de descontar a inflação —
+                                garantindo que R$ 5.000/mês hoje valha o mesmo no futuro.
                             </p>
                         </div>
                         
@@ -3390,7 +3391,7 @@
                         
                         <p><strong style="font-weight:700;">Impacto Financeiro:</strong> Risco de falência financeira na velhice avançada (se viver muito) ou perda parcial de patrimônio (se a família precisar da renda por mais tempo).</p>
                         
-                        <p><strong style="font-weight:700;">Como Evitar:</strong> Use a estratégia Preservar Capital (Renda Perpétua) (patrimônio não se esgota, mas a renda é menor) ou Renda Vitalícia Reversível (para garantir renda vitalícia ao cônjuge).</p>
+                        <p><strong style="font-weight:700;">Como Evitar:</strong> Use a estratégia "Para a vida toda — sem usar o capital" (patrimônio não se esgota, mas a renda é menor) ou adicione um cônjuge como beneficiário para garantir renda vitalícia.</p>
                     </div>
                 </div>
             </div>
@@ -4311,10 +4312,8 @@
             // ================================
             const anos = idadeApos - idadeAtual;
             
-            // ✅ CORREÇÃO CRÍTICA: Usar sempre rendaMensalFinal (variável única do engine)
-            // Esta variável garante que todos os casos (1, 2 e 3) usem a mesma fonte
-            // NUNCA usar taxa nominal diretamente para calcular renda exibida
-            const rendaInvestProprio = resultado.rendaMensalFinal || resultado.rendaRealPossivel || 0;
+            // Usar rendaTotalPrevista: hoje's PP (investment + INSS), mesma unidade dos cards do Wizard
+            const rendaInvestProprio = resultado.rendaTotalPrevista || resultado.rendaInvestimentosHoje || 0;
             const beneficioINSS = resultado.valorINSS;
             
             // ✅ MIGRADO: Usar função do engine para calcular comparações do Acordeão 3
@@ -4411,11 +4410,18 @@
             const dashboardHeader = document.getElementById("dashboardHeaderPro");
             if (dashboardHeader) {
                 const atingiuMeta = resultado.deficitOuSobra >= 0;
-                const iconeStatus = atingiuMeta ? '✅' : '⚠️';
+                const shortfallPct = (!atingiuMeta && rendaDesejada > 0)
+                    ? Math.abs(resultado.deficitOuSobra) / rendaDesejada
+                    : 0;
+                const pctAlcancado = (!atingiuMeta && rendaDesejada > 0)
+                    ? Math.round((rendaInvestProprio / rendaDesejada) * 100)
+                    : 100;
                 const textoStatus = atingiuMeta
-                    ? 'Você está no caminho certo.<br>Seu planejamento atual é suficiente para atingir a renda que você definiu.'
-                    : 'Ainda falta um pequeno ajuste.<br>Logo abaixo mostramos quanto investir a mais para alcançar sua meta.';
-                dashboardHeader.innerHTML = `${iconeStatus} ${textoStatus}`;
+                    ? '✅ <strong>Você está no caminho certo.</strong><br><span style="font-size:0.9rem;font-weight:normal;opacity:0.9;">Com as premissas adotadas, o padrão de vida definido poderá ser sustentado integralmente durante a aposentadoria.</span>'
+                    : shortfallPct <= 0.20
+                        ? '🟡 <strong>Ainda falta um pequeno ajuste.</strong><br><span style="font-size:0.9rem;font-weight:normal;opacity:0.9;">Pequenos ajustes nos aportes mensais ou no prazo serão suficientes para atingir o padrão de vida desejado.</span>'
+                        : `🟠 <strong>Ainda falta um ajuste no plano.</strong><br><span style="font-size:0.9rem;font-weight:normal;opacity:0.9;">Seu planejamento atual cobre ${pctAlcancado}% da meta desejada. Aumentar os aportes mensais ou revisar o prazo são os caminhos para ampliar esse resultado.</span>`;
+                dashboardHeader.innerHTML = textoStatus;
                 dashboardHeader.style.display = "block";
             }
 
@@ -4741,7 +4747,7 @@
                            <li><strong>Investimentos:</strong> R$ ${rendaInvest.toLocaleString('pt-BR', {minimumFractionDigits: 2})} (${((rendaInvest / rendaTotal) * 100).toFixed(0)}%)</li>
                            <li><strong>Total:</strong> R$ ${rendaTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</li>`
                     }
-                    <li><strong>Estratégia:</strong> Renda Vitalícia com Capital Preservado</li>
+                    <li><strong>Estratégia:</strong> Para a vida toda — sem usar o capital</li>
                 </ul>
             `;
 
@@ -5948,7 +5954,7 @@
             if (containerResultado) {
                 containerResultado.style.display = "block";
                 
-                const rendaAvancada = resultadoAvancado.rendaMensalFinal || resultadoAvancado.rendaRealPossivel || 0;
+                const rendaAvancada = resultadoAvancado.rendaTotalPrevista || resultadoAvancado.rendaInvestimentosHoje || 0;
                 const patrimonioAvancado = resultadoAvancado.patrimonioFinal || 0;
                 
                 // Atualizar cards do resultado avançado
