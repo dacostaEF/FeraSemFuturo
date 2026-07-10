@@ -1337,15 +1337,73 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
+
+        /* Quiz: botão neutro */
+        .btn-neutral {
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: 2px solid rgba(156,163,175,0.3);
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.25s ease;
+            font-family: 'Inter', sans-serif;
+            background: rgba(156,163,175,0.06);
+            color: #9ca3af;
+            white-space: nowrap;
+        }
+        .btn-neutral:hover  { background: rgba(156,163,175,0.14); border-color: rgba(156,163,175,0.5); }
+        .btn-neutral.selected { background: rgba(156,163,175,0.22); border-color: #9ca3af; color: #E4E4E4; }
+
+        /* Quiz: 3-opções lado a lado */
+        .quiz-buttons-triple { display: flex; gap: 8px; flex-shrink: 0; align-items: center; flex-wrap: wrap; }
+        @media (max-width: 768px) {
+            .quiz-buttons-triple { width: 100%; justify-content: stretch; }
+            .quiz-buttons-triple .btn-yes,
+            .quiz-buttons-triple .btn-no,
+            .quiz-buttons-triple .btn-neutral { flex: 1; min-width: 0; font-size: 0.82rem; }
+        }
+
+        /* Quiz: multi-opções empilhadas (Q8, Q9) */
+        .quiz-question-multi { flex-direction: column; align-items: stretch; }
+        .quiz-options-col { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+        .btn-option {
+            padding: 11px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(204,170,102,0.2);
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.88rem;
+            transition: all 0.22s ease;
+            font-family: 'Inter', sans-serif;
+            background: rgba(255,255,255,0.02);
+            color: rgba(255,255,255,0.6);
+            text-align: left;
+        }
+        .btn-option:hover   { background: rgba(204,170,102,0.08); border-color: rgba(204,170,102,0.4); color: #E4E4E4; }
+        .btn-option.selected { background: rgba(204,170,102,0.15); border-color: rgba(204,170,102,0.65); color: #CCAA66; font-weight: 600; }
+
+        /* Quiz: header da pergunta + ícone tooltip */
+        .quiz-q-header { display: flex; align-items: flex-start; gap: 8px; flex: 1; }
+        .quiz-q-header p { flex: 1; }
+        .quiz-tip {
+            flex-shrink: 0;
+            background: none;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            width: 18px; height: 18px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: help;
+            font-size: 0.65rem;
+            color: #9ca3af;
+            padding: 0;
+            margin-top: 3px;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .quiz-tip:hover { border-color: #D4AF37; color: #D4AF37; }
 
         /* ========================================= */
         /* BOTÃO EDUCAÇÃO FINANCEIRA (Padrão INVLA) */
@@ -2862,105 +2920,143 @@
                     <!-- 🧭 QUIZ INVLAB - ESTRATÉGIA DE PREVIDÊNCIA -->
                     <!-- ===================================================== -->
                     <div id="inv-quiz-container">
-                        <h2 class="quiz-title">🎯 Qual é a Melhor Estratégia de Previdência Para Você?</h2>
-                        <p class="quiz-subtitle">Responda SIM ou NÃO. No final, o InvLab recomenda sua rota ideal.</p>
+                        <h2 class="quiz-title">🎯 Qual estratégia é mais adequada para você?</h2>
+                        <p class="quiz-subtitle">Responda com honestidade. Não existe resposta certa ou errada — o diagnóstico reflete <em>suas</em> prioridades.</p>
 
                         <!-- Barra de Progresso -->
                         <div id="quiz-progress-wrapper">
-                            <div id="quiz-progress-bar">
-                                <div id="quiz-progress-fill"></div>
-                            </div>
+                            <div id="quiz-progress-bar"><div id="quiz-progress-fill"></div></div>
                             <p id="quiz-progress-text">Você respondeu <span id="quiz-answered-count">0</span> de 9 perguntas</p>
                         </div>
 
                         <form id="inv-quiz">
-                            <!-- ========================== -->
-                            <!-- PARTE 1: PERFIL TRIBUTÁRIO -->
-                            <!-- ========================== -->
+
+                            <!-- BLOCO 1: Perfil Tributário -->
                             <div class="quiz-section">
-                                <h3>1) Seu Perfil Tributário</h3>
+                                <h3>1) Perfil Tributário</h3>
+
                                 <div class="quiz-question" data-q="Q1">
-                                    <p>Você faz Declaração COMPLETA do IR e costuma ter imposto a pagar?</p>
+                                    <div class="quiz-q-header">
+                                        <p>Você faz a declaração completa do Imposto de Renda?</p>
+                                        <button type="button" class="quiz-tip" title="O benefício fiscal do PGBL só pode ser utilizado por quem faz a declaração completa e possui renda tributável.">ℹ</button>
+                                    </div>
                                     <div class="quiz-buttons">
                                         <button type="button" class="btn-yes" onclick="setAnswer('Q1','SIM')">SIM</button>
                                         <button type="button" class="btn-no" onclick="setAnswer('Q1','NÃO')">NÃO</button>
                                     </div>
                                 </div>
+
                                 <div class="quiz-question" data-q="Q2">
-                                    <p>Você realmente consegue aproveitar a dedução de até 12% do PGBL?</p>
-                                    <div class="quiz-buttons">
+                                    <div class="quiz-q-header">
+                                        <p>Você consegue aproveitar a dedução de até 12% da sua renda tributável ao contribuir para um PGBL?</p>
+                                        <button type="button" class="quiz-tip" title="Exemplo: quem tem renda tributável de R$ 100 mil pode contribuir com até R$ 12 mil para um PGBL e usar esse valor como dedução, respeitadas as regras aplicáveis.">ℹ</button>
+                                    </div>
+                                    <div class="quiz-buttons quiz-buttons-triple">
                                         <button type="button" class="btn-yes" onclick="setAnswer('Q2','SIM')">SIM</button>
                                         <button type="button" class="btn-no" onclick="setAnswer('Q2','NÃO')">NÃO</button>
+                                        <button type="button" class="btn-neutral" onclick="setAnswer('Q2','INCERTO')">Não tenho certeza</button>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- ========================== -->
-                            <!-- PARTE 2: HORIZONTE -->
-                            <!-- ========================== -->
+                            <!-- BLOCO 2: Horizonte de Tempo -->
                             <div class="quiz-section">
                                 <h3>2) Horizonte de Tempo</h3>
+
                                 <div class="quiz-question" data-q="Q3">
-                                    <p>Você só pretende usar esse dinheiro após 10 anos?</p>
-                                    <div class="quiz-buttons">
+                                    <div class="quiz-q-header">
+                                        <p>Você pretende manter esse investimento por mais de 10 anos?</p>
+                                        <button type="button" class="quiz-tip" title="Prazos longos favorecem estratégias previdenciárias e permitem maior aproveitamento da tabela regressiva, quando aplicável.">ℹ</button>
+                                    </div>
+                                    <div class="quiz-buttons quiz-buttons-triple">
                                         <button type="button" class="btn-yes" onclick="setAnswer('Q3','SIM')">SIM</button>
                                         <button type="button" class="btn-no" onclick="setAnswer('Q3','NÃO')">NÃO</button>
+                                        <button type="button" class="btn-neutral" onclick="setAnswer('Q3','INDEFINIDO')">Ainda não sei</button>
                                     </div>
                                 </div>
+
                                 <div class="quiz-question" data-q="Q4">
-                                    <p>Você pode precisar do dinheiro nos próximos 5 anos?</p>
-                                    <div class="quiz-buttons">
+                                    <div class="quiz-q-header">
+                                        <p>Existe alguma possibilidade de você precisar resgatar esse dinheiro nos próximos 5 anos?</p>
+                                        <button type="button" class="quiz-tip" title="A necessidade de liquidez no curto prazo pode tornar investimentos mais flexíveis mais adequados para parte dos recursos.">ℹ</button>
+                                    </div>
+                                    <div class="quiz-buttons quiz-buttons-triple">
                                         <button type="button" class="btn-yes" onclick="setAnswer('Q4','SIM')">SIM</button>
                                         <button type="button" class="btn-no" onclick="setAnswer('Q4','NÃO')">NÃO</button>
+                                        <button type="button" class="btn-neutral" onclick="setAnswer('Q4','TALVEZ')">Talvez</button>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- ========================== -->
-                            <!-- PARTE 3: SUCESSÃO -->
-                            <!-- ========================== -->
+                            <!-- BLOCO 3: Proteção Familiar e Sucessão -->
                             <div class="quiz-section">
                                 <h3>3) Proteção Familiar e Sucessão</h3>
+
                                 <div class="quiz-question" data-q="Q5">
-                                    <p>É importante que esse dinheiro não passe por inventário?</p>
-                                    <div class="quiz-buttons">
+                                    <div class="quiz-q-header">
+                                        <p>É importante para você que esse patrimônio possa ser transferido aos beneficiários com menor dependência do inventário?</p>
+                                        <button type="button" class="quiz-tip" title="Em determinadas condições, planos de previdência podem facilitar a indicação de beneficiários e agilizar a transferência dos recursos. O tratamento jurídico e tributário pode variar.">ℹ</button>
+                                    </div>
+                                    <div class="quiz-buttons quiz-buttons-triple">
                                         <button type="button" class="btn-yes" onclick="setAnswer('Q5','SIM')">SIM</button>
                                         <button type="button" class="btn-no" onclick="setAnswer('Q5','NÃO')">NÃO</button>
+                                        <button type="button" class="btn-neutral" onclick="setAnswer('Q5','PRIORIDADE_NAO')">Não é prioridade</button>
                                     </div>
                                 </div>
+
                                 <div class="quiz-question" data-q="Q6">
-                                    <p>Você quer garantir rapidez e simplicidade para os beneficiários?</p>
-                                    <div class="quiz-buttons">
+                                    <div class="quiz-q-header">
+                                        <p>É importante que seus beneficiários tenham acesso rápido a recursos em caso de falecimento?</p>
+                                        <button type="button" class="quiz-tip" title="A rapidez no acesso pode ser relevante para despesas imediatas da família, mas também pode ser atendida por outros instrumentos de planejamento patrimonial.">ℹ</button>
+                                    </div>
+                                    <div class="quiz-buttons quiz-buttons-triple">
                                         <button type="button" class="btn-yes" onclick="setAnswer('Q6','SIM')">SIM</button>
                                         <button type="button" class="btn-no" onclick="setAnswer('Q6','NÃO')">NÃO</button>
+                                        <button type="button" class="btn-neutral" onclick="setAnswer('Q6','SEM_BENEFICIARIOS')">Sem beneficiários definidos</button>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- ========================== -->
-                            <!-- PARTE 4: CUSTO E AUTONOMIA -->
-                            <!-- ========================== -->
+                            <!-- BLOCO 4: Custos e Autonomia -->
                             <div class="quiz-section">
                                 <h3>4) Custos e Autonomia</h3>
+
                                 <div class="quiz-question" data-q="Q7">
-                                    <p>Você se sente confortável em investir sozinho (Tesouro, CDBs, ETFs)?</p>
-                                    <div class="quiz-buttons">
+                                    <div class="quiz-q-header">
+                                        <p>Você se sente confortável em investir diretamente em produtos como Tesouro Direto, CDBs, ETFs ou fundos de baixo custo?</p>
+                                        <button type="button" class="quiz-tip" title="Investir diretamente exige organização, disciplina, rebalanceamento e compreensão básica dos produtos utilizados.">ℹ</button>
+                                    </div>
+                                    <div class="quiz-buttons quiz-buttons-triple">
                                         <button type="button" class="btn-yes" onclick="setAnswer('Q7','SIM')">SIM</button>
                                         <button type="button" class="btn-no" onclick="setAnswer('Q7','NÃO')">NÃO</button>
+                                        <button type="button" class="btn-neutral" onclick="setAnswer('Q7','ORIENTACAO')">Com alguma orientação</button>
                                     </div>
                                 </div>
-                                <div class="quiz-question" data-q="Q8">
-                                    <p>Você encontrou um plano com taxa TOTAL abaixo de 1% a.a.?</p>
-                                    <div class="quiz-buttons">
-                                        <button type="button" class="btn-yes" onclick="setAnswer('Q8','SIM')">SIM</button>
-                                        <button type="button" class="btn-no" onclick="setAnswer('Q8','NÃO')">NÃO</button>
+
+                                <!-- Q8: multi-opção -->
+                                <div class="quiz-question quiz-question-multi" data-q="Q8">
+                                    <div class="quiz-q-header">
+                                        <p>Qual é o custo total do plano de previdência que você está avaliando?</p>
+                                        <button type="button" class="quiz-tip" title="Avalie o conjunto de custos: taxa de administração, gestão, carregamento e eventuais custos dos fundos disponíveis no plano.">ℹ</button>
+                                    </div>
+                                    <div class="quiz-options-col">
+                                        <button type="button" class="btn-option" onclick="setAnswer('Q8','ABAIXO_1')">Abaixo de 1% ao ano</button>
+                                        <button type="button" class="btn-option" onclick="setAnswer('Q8','ENTRE_1_2')">Entre 1% e 2% ao ano</button>
+                                        <button type="button" class="btn-option" onclick="setAnswer('Q8','ACIMA_2')">Acima de 2% ao ano</button>
+                                        <button type="button" class="btn-option" onclick="setAnswer('Q8','NAO_SABE')">Não sei avaliar</button>
                                     </div>
                                 </div>
-                                <div class="quiz-question" data-q="Q9">
-                                    <p>Você aceitaria perder parte do patrimônio em troca de conveniência?</p>
-                                    <div class="quiz-buttons">
-                                        <button type="button" class="btn-yes" onclick="setAnswer('Q9','SIM')">SIM</button>
-                                        <button type="button" class="btn-no" onclick="setAnswer('Q9','NÃO')">NÃO</button>
+
+                                <!-- Q9: multi-opção -->
+                                <div class="quiz-question quiz-question-multi" data-q="Q9">
+                                    <div class="quiz-q-header">
+                                        <p>O que pesa mais para você na escolha da estratégia?</p>
+                                        <button type="button" class="quiz-tip" title="Delegar pode trazer conveniência, enquanto investir diretamente pode ampliar o controle. A melhor escolha depende do custo, da qualidade do plano e do seu perfil.">ℹ</button>
+                                    </div>
+                                    <div class="quiz-options-col">
+                                        <button type="button" class="btn-option" onclick="setAnswer('Q9','DELEGACAO')">Ter praticidade e delegar parte da gestão</button>
+                                        <button type="button" class="btn-option" onclick="setAnswer('Q9','CONTROLE')">Ter maior controle e buscar menores custos</button>
+                                        <button type="button" class="btn-option" onclick="setAnswer('Q9','EQUILIBRIO')">Equilibrar praticidade e controle</button>
                                     </div>
                                 </div>
                             </div>
@@ -4647,6 +4743,7 @@
                             resultado.patrimonioFinal,
                             rendaInvestProprio
                         );
+                        window._quizModelosCache = modelos;
 
                         // Base - Usar mesmo formato dos cards do Acordeão 1
                         const ppBasePatrimonio = document.getElementById("pp-base-patrimonio");
@@ -6604,180 +6701,323 @@
     <!-- QUIZ INVLAB - JAVASCRIPT -->
     <!-- ========================================= -->
     <script>
+        // =====================================================
+        // QUIZ INTELIGENTE — Motor de diagnóstico explicável
+        // =====================================================
         let quizAnswers = {};
 
         function setAnswer(question, answer) {
             quizAnswers[question] = answer;
-            
-            // Atualizar visual dos botões
-            const questionEl = document.querySelector(`[data-q="${question}"]`);
-            if (questionEl) {
-                const buttons = questionEl.querySelectorAll('.btn-yes, .btn-no');
-                buttons.forEach(btn => {
+            const el = document.querySelector(`[data-q="${question}"]`);
+            if (el) {
+                el.querySelectorAll('button:not(.quiz-tip)').forEach(btn => {
                     btn.classList.remove('selected');
-                    if ((answer === 'SIM' && btn.classList.contains('btn-yes')) ||
-                        (answer === 'NÃO' && btn.classList.contains('btn-no'))) {
-                        btn.classList.add('selected');
-                    }
+                    const oc = btn.getAttribute('onclick') || '';
+                    if (oc.includes(`'${answer}'`)) btn.classList.add('selected');
                 });
-                
-                // Marcar pergunta como respondida
-                questionEl.classList.add('answered');
+                el.classList.add('answered');
             }
-            
-            // Atualizar barra de progresso
             updateQuizProgress();
         }
 
         function updateQuizProgress() {
-            const totalQuestions = 9;
-            const answeredCount = Object.keys(quizAnswers).length;
-            const progress = (answeredCount / totalQuestions) * 100;
-            
-            const progressFill = document.getElementById('quiz-progress-fill');
-            const answeredCountEl = document.getElementById('quiz-answered-count');
-            
-            if (progressFill) {
-                progressFill.style.width = progress + '%';
+            const total = 9;
+            const count = Object.keys(quizAnswers).length;
+            const fill = document.getElementById('quiz-progress-fill');
+            const span = document.getElementById('quiz-answered-count');
+            if (fill) fill.style.width = (count / total * 100) + '%';
+            if (span) span.textContent = count;
+        }
+
+        // ─── Motor de pontuação ───────────────────────────────
+        function calculateQuizScores(a) {
+            let sp = 0, so = 0, sc = 0;
+            const factors = { tributario:[], horizonte:[], sucessao:[], autonomia:[], custos:[] };
+
+            // Q1
+            if (a.Q1==='SIM')  { sp+=8;  sc+=5;  factors.tributario.push({side:'prev', text:'Você faz a declaração completa do IR.'}); }
+            else               { so+=12; factors.tributario.push({side:'prop', text:'Sem declaração completa, o benefício fiscal do PGBL não se aplica.'}); }
+
+            // Q2
+            if (a.Q2==='SIM')       { sp+=22; sc+=15; factors.tributario.push({side:'prev', text:'Você aproveita a dedução de até 12% da renda tributável no PGBL.'}); }
+            else if (a.Q2==='NÃO')  { so+=18; factors.tributario.push({side:'prop', text:'Sem aproveitamento da dedução, o diferencial fiscal da previdência se reduz significativamente.'}); }
+            else                    { sp+=4; so+=4; sc+=6; factors.tributario.push({side:'neutro', text:'O aproveitamento do benefício fiscal não está claro — vale verificar com um contador.'}); }
+
+            // Q3
+            if (a.Q3==='SIM')           { sp+=12; sc+=8; so+=4; factors.horizonte.push({side:'prev', text:'Seu horizonte de mais de 10 anos favorece estratégias de longo prazo.'}); }
+            else if (a.Q3==='NÃO')      { so+=10; factors.horizonte.push({side:'prop', text:'Um horizonte mais curto favorece investimentos com maior liquidez.'}); }
+            else                        { sc+=5; so+=3; sp+=3; factors.horizonte.push({side:'neutro', text:'Com prazo indefinido, preservar liquidez tende a ser uma prioridade.'}); }
+
+            // Q4
+            if (a.Q4==='SIM')           { so+=10; factors.horizonte.push({side:'prop', text:'Existe possibilidade de precisar dos recursos antes de 5 anos.'}); }
+            else if (a.Q4==='NÃO')      { sp+=8; sc+=5; factors.horizonte.push({side:'prev', text:'Sem necessidade de resgate antecipado, estratégias menos líquidas tornam-se viáveis.'}); }
+            else                        { so+=5; sc+=4; factors.horizonte.push({side:'neutro', text:'A possibilidade de resgate antecipado favorece maior flexibilidade.'}); }
+
+            // Q5
+            if (a.Q5==='SIM')               { sp+=12; sc+=9; factors.sucessao.push({side:'prev', text:'Facilitar a transferência patrimonial sem inventário é uma prioridade.'}); }
+            else if (a.Q5==='NÃO')          { so+=5; factors.sucessao.push({side:'prop', text:'A simplificação sucessória não é um critério decisivo.'}); }
+            else                            { so+=3; factors.sucessao.push({side:'neutro', text:'A questão sucessória não é uma prioridade no momento.'}); }
+
+            // Q6
+            if (a.Q6==='SIM')               { sp+=8; sc+=7; factors.sucessao.push({side:'prev', text:'Acesso rápido dos beneficiários aos recursos é importante.'}); }
+            else if (a.Q6==='NÃO')          { so+=3; factors.sucessao.push({side:'prop', text:'A rapidez no acesso pelos beneficiários não é uma preocupação central.'}); }
+            // SEM_BENEFICIARIOS = neutro, sem pontuação
+
+            // Q7
+            if (a.Q7==='SIM')               { so+=15; sc+=5; factors.autonomia.push({side:'prop', text:'Você se sente confortável investindo diretamente em Tesouro, CDBs ou ETFs.'}); }
+            else if (a.Q7==='NÃO')          { sp+=10; factors.autonomia.push({side:'prev', text:'Sem experiência em investimento direto, delegar a gestão pode fazer sentido.'}); }
+            else                            { sc+=10; so+=5; sp+=4; factors.autonomia.push({side:'comb', text:'Com alguma orientação, você pode investir diretamente em parte dos recursos.'}); }
+
+            // Q8
+            if (a.Q8==='ABAIXO_1')          { sp+=10; sc+=8; factors.custos.push({side:'prev', text:'Custos abaixo de 1% ao ano tornam o plano competitivo.'}); }
+            else if (a.Q8==='ENTRE_1_2')    { sp+=4; sc+=6; so+=4; factors.custos.push({side:'neutro', text:'Custos entre 1% e 2% ao ano têm impacto relevante no longo prazo.'}); }
+            else if (a.Q8==='ACIMA_2')      { so+=12; factors.custos.push({side:'prop', text:'Custos acima de 2% ao ano tendem a reduzir significativamente o retorno líquido.'}); }
+            else                            { sc+=5; so+=3; sp+=3; factors.custos.push({side:'neutro', text:'Avaliar o custo total do plano é essencial antes de qualquer decisão.'}); }
+
+            // Q9
+            if (a.Q9==='DELEGACAO')         { sp+=10; sc+=5; factors.autonomia.push({side:'prev', text:'Você valoriza praticidade e prefere delegar parte da gestão.'}); }
+            else if (a.Q9==='CONTROLE')     { so+=10; factors.autonomia.push({side:'prop', text:'Você valoriza controle e busca menores custos.'}); }
+            else                            { sc+=12; sp+=3; so+=3; factors.autonomia.push({side:'comb', text:'Você busca equilíbrio entre praticidade e controle.'}); }
+
+            return { scorePrevidencia:sp, scoreProprio:so, scoreCombinado:sc, factors };
+        }
+
+        function normalizeQuizScores(s) {
+            const total = s.scorePrevidencia + s.scoreProprio + s.scoreCombinado;
+            if (!total) return { compatPrevidencia:33, compatProprio:33, compatCombinado:34 };
+            return {
+                compatPrevidencia: Math.round(s.scorePrevidencia / total * 100),
+                compatProprio:     Math.round(s.scoreProprio     / total * 100),
+                compatCombinado:   Math.round(s.scoreCombinado   / total * 100)
+            };
+        }
+
+        function determineQuizDiagnosis(s, a) {
+            const { scorePrevidencia:sp, scoreProprio:so, scoreCombinado:sc } = s;
+            const MARGIN = 6;
+            const neutrals = ['INCERTO','INDEFINIDO','TALVEZ','PRIORIDADE_NAO','SEM_BENEFICIARIOS','NAO_SABE'];
+            const neutralCount = Object.values(a).filter(v => neutrals.includes(v)).length;
+            const maxS = Math.max(sp, so, sc);
+            const minS = Math.min(sp, so, sc);
+            if ((maxS - minS <= 4 && neutralCount >= 2) || neutralCount >= 4) return 'equilibrado';
+            if (so >= sp + MARGIN && so >= sc + MARGIN) return 'proprio';
+            if (sp >= so + MARGIN && sp >= sc + MARGIN) return 'previdencia';
+            return 'combinado';
+        }
+
+        function buildQuizReasons(a, diagnosis, factors) {
+            const all = Object.values(factors).flat();
+            const reasons = [], conflicts = [];
+            const sideMap = { proprio:'prop', previdencia:'prev', combinado:'comb' };
+            const mySide = sideMap[diagnosis];
+
+            all.forEach(f => {
+                if (f.side === mySide || f.side === 'neutro') reasons.push(f.text);
+                else if (f.side !== 'neutro') conflicts.push(f.text);
+            });
+
+            const hasSuccession = diagnosis === 'proprio' && (a.Q5 === 'SIM' || a.Q6 === 'SIM');
+            return { reasons: reasons.slice(0,5), conflicts: conflicts.slice(0,2), hasSuccession };
+        }
+
+        function getSimulationComparisonData() {
+            const base = window.resultadoBase;
+            if (!base) return null;
+            const patrimonioBase = base.patrimonioFinal;
+            const rendaBase = base.rendaInvestimentosHoje || base.rendaTotalPrevista;
+            if (!Number.isFinite(patrimonioBase)) return null;
+            return { patrimonioBase, rendaBase: rendaBase || 0, modelos: window._quizModelosCache || null };
+        }
+
+        function _quizBar(label, pct, color) {
+            return `<div style="margin-bottom:10px;">
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                    <span style="font-size:0.8rem;color:rgba(255,255,255,0.55);">${label}</span>
+                    <span style="font-size:0.8rem;color:${color};font-weight:700;">${pct}%</span>
+                </div>
+                <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;">
+                    <div style="height:100%;width:${pct}%;background:${color};border-radius:3px;transition:width 0.6s ease;"></div>
+                </div>
+            </div>`;
+        }
+
+        function renderQuizResult(diagnosis, compat, reasons, simData) {
+            const box = document.getElementById('quiz-result');
+            if (!box) return;
+
+            const cfg = {
+                proprio: {
+                    icon:'💡', color:'#10b981',
+                    label:'Maior aderência: Investimento Próprio',
+                    desc:'Suas respostas indicam maior valorização de autonomia, liquidez e controle de custos, com menor aproveitamento dos principais benefícios fiscais da previdência.',
+                    checklist:['Tesouro Direto','CDBs e renda fixa','ETFs diversificados','Carteira adequada ao seu prazo e perfil de risco'],
+                    cta:'Aprender a construir meu patrimônio'
+                },
+                previdencia: {
+                    icon:'🏛️', color:'#D4AF37',
+                    label:'Maior aderência: Previdência como Estratégia Principal',
+                    desc:'Suas respostas indicam horizonte de longo prazo, potencial aproveitamento tributário, interesse sucessório e preferência por delegar parte da gestão — tornando uma previdência de baixo custo mais compatível com seu perfil.',
+                    checklist:['Compare as taxas totais do plano','Verifique o regime tributário (PGBL ou VGBL)','Avalie os fundos disponíveis dentro do plano','Confirme as regras de portabilidade e resgate'],
+                    cta:'Entender custos e tributação da previdência'
+                },
+                combinado: {
+                    icon:'🔀', color:'#4da6ff',
+                    label:'Maior aderência: Estratégia Combinada',
+                    desc:'Suas respostas mostram vantagens nas duas abordagens. Parte dos recursos pode atender a objetivos tributários ou sucessórios, enquanto outra parte permanece sob sua gestão direta.',
+                    checklist:['Use cada instrumento para uma finalidade clara','Evite concentração em um único produto','Compare custos e tributação de cada alternativa','Preserve liquidez para objetivos de curto prazo'],
+                    cta:'Explorar estratégias de diversificação'
+                },
+                equilibrado: {
+                    icon:'⚖️', color:'#9ca3af',
+                    label:'Seu perfil precisa de uma análise adicional',
+                    desc:'Não identificamos uma vantagem clara de uma única estratégia. Reavalie os custos do plano, seu horizonte, a possibilidade de resgate antecipado e o real aproveitamento do benefício tributário.',
+                    checklist:[],
+                    cta:''
+                }
+            }[diagnosis];
+
+            const fmtM = v => Number.isFinite(v) ? 'R$ ' + Math.round(v).toLocaleString('pt-BR') : '—';
+            const fmtR = v => Number.isFinite(v) ? 'R$ ' + v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}) : '—';
+
+            // Bloco dados da simulação
+            let simHtml = '';
+            if (simData && Number.isFinite(simData.patrimonioBase)) {
+                let modelHtml = '';
+                const m = simData.modelos;
+                if (m) {
+                    const mRef = (diagnosis === 'previdencia' || diagnosis === 'combinado') ? m.m2 : m.m1;
+                    const mLabel = (diagnosis === 'previdencia' || diagnosis === 'combinado')
+                        ? 'Previdência — Tipo 2 (menor custo)' : 'Previdência — Tipo 1 (custo típico)';
+                    if (mRef && Number.isFinite(mRef.patrimonio)) {
+                        const diff = simData.patrimonioBase - mRef.patrimonio;
+                        const pct  = simData.patrimonioBase > 0 ? Math.abs(Math.round(diff / simData.patrimonioBase * 100)) : 0;
+                        const cor  = diff > 0 ? '#ef4444' : '#10b981';
+                        modelHtml = `<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);">
+                            <p style="font-size:0.72rem;color:#9ca3af;margin-bottom:6px;">Comparação com ${mLabel}</p>
+                            <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                                <span style="font-size:0.79rem;color:rgba(255,255,255,0.45);">Patrimônio estimado no modelo</span>
+                                <span style="font-size:0.85rem;font-weight:700;color:#f59e0b;">${fmtM(mRef.patrimonio)}</span>
+                            </div>
+                            <div style="display:flex;justify-content:space-between;">
+                                <span style="font-size:0.79rem;color:rgba(255,255,255,0.45);">Diferença estimada</span>
+                                <span style="font-size:0.85rem;font-weight:700;color:${cor};">${diff>0?'-':'+'}${fmtM(Math.abs(diff))} (${pct}%)</span>
+                            </div>
+                        </div>`;
+                    }
+                }
+                simHtml = `<div style="margin:18px 0;padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:8px;">
+                    <p style="font-size:0.72rem;color:#9ca3af;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:10px;">Na sua simulação</p>
+                    <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+                        <span style="font-size:0.79rem;color:rgba(255,255,255,0.45);">Patrimônio estimado (investimento próprio)</span>
+                        <span style="font-size:0.88rem;font-weight:700;color:#10b981;">${fmtM(simData.patrimonioBase)}</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;">
+                        <span style="font-size:0.79rem;color:rgba(255,255,255,0.45);">Renda mensal estimada (em valores de hoje)</span>
+                        <span style="font-size:0.88rem;font-weight:700;color:#D4AF37;">${fmtR(simData.rendaBase)}</span>
+                    </div>
+                    ${modelHtml}
+                    <p style="font-size:0.7rem;color:rgba(255,255,255,0.25);margin-top:8px;line-height:1.5;">Esta comparação foi calculada com base nos valores, taxas, prazo e rentabilidades informados nesta simulação.</p>
+                </div>`;
             }
-            
-            if (answeredCountEl) {
-                answeredCountEl.textContent = answeredCount;
+
+            // Barras de aderência
+            const barsHtml = `<div style="margin:18px 0;">
+                <p style="font-size:0.72rem;color:#9ca3af;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:10px;">Aderência às estratégias</p>
+                ${_quizBar('Investimento Próprio',   compat.compatProprio,     '#10b981')}
+                ${_quizBar('Estratégia Combinada',   compat.compatCombinado,   '#4da6ff')}
+                ${_quizBar('Previdência Privada',    compat.compatPrevidencia, '#D4AF37')}
+                <p style="font-size:0.7rem;color:rgba(255,255,255,0.25);margin-top:8px;line-height:1.5;">Os índices mostram o alinhamento das suas respostas a cada estratégia. Não substituem uma análise financeira individual.</p>
+            </div>`;
+
+            // Motivos
+            let reasonsHtml = '';
+            if (reasons.reasons.length) {
+                const items = reasons.reasons.map(t =>
+                    `<div style="display:flex;gap:10px;align-items:flex-start;">
+                        <span style="color:${cfg.color};flex-shrink:0;margin-top:1px;">✓</span>
+                        <span style="font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.55;">${t}</span>
+                    </div>`).join('');
+                const conflicts = reasons.conflicts.map(t =>
+                    `<div style="display:flex;gap:10px;align-items:flex-start;padding-top:8px;border-top:1px solid rgba(255,255,255,0.05);">
+                        <span style="color:#9ca3af;flex-shrink:0;margin-top:1px;">⚖</span>
+                        <div>
+                            <span style="font-size:0.82rem;color:rgba(255,255,255,0.4);line-height:1.55;">${t}</span>
+                            <p style="font-size:0.75rem;color:rgba(255,255,255,0.25);margin-top:3px;">Este fator foi considerado, mas os demais elementos tiveram maior peso no diagnóstico.</p>
+                        </div>
+                    </div>`).join('');
+                reasonsHtml = `<div style="margin:18px 0;">
+                    <p style="font-size:0.72rem;color:#9ca3af;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:10px;">Por que chegamos a essa conclusão?</p>
+                    <div style="display:flex;flex-direction:column;gap:8px;">${items}${conflicts}</div>
+                </div>`;
             }
+
+            // Checklist
+            const checklistHtml = cfg.checklist.length ? `<div style="margin:14px 0;display:flex;flex-direction:column;gap:6px;">
+                ${cfg.checklist.map(t => `<div style="display:flex;gap:10px;align-items:flex-start;">
+                    <span style="color:${cfg.color};flex-shrink:0;">✓</span>
+                    <span style="font-size:0.82rem;color:rgba(255,255,255,0.6);">${t}</span>
+                </div>`).join('')}
+            </div>` : '';
+
+            // Alerta sucessão
+            const successionHtml = reasons.hasSuccession ? `<div style="margin:14px 0;padding:13px 15px;background:rgba(212,175,55,0.07);border:1px solid rgba(212,175,55,0.28);border-radius:8px;">
+                <p style="font-size:0.82rem;color:#D4AF37;font-weight:700;margin-bottom:6px;">Atenção à sucessão patrimonial</p>
+                <p style="font-size:0.79rem;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:5px;">Você indicou que facilitar a transferência aos beneficiários é importante. Embora o investimento próprio tenha apresentado maior aderência ao conjunto das suas respostas, considere complementar sua estratégia com planejamento sucessório adequado.</p>
+                <p style="font-size:0.79rem;color:rgba(255,255,255,0.35);line-height:1.6;">Dependendo da situação, podem ser avaliados instrumentos como seguro de vida, testamento, doação planejada ou outras soluções de planejamento patrimonial.</p>
+            </div>` : '';
+
+            // CTA
+            const ctaHtml = diagnosis === 'equilibrado'
+                ? `<button onclick="resetQuiz()" style="width:100%;padding:13px;margin-top:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#E4E4E4;font-size:0.9rem;cursor:pointer;font-family:'Inter',sans-serif;">Revisar minhas respostas</button>`
+                : `<a href="../pages/educacao-financeira.html" style="display:block;text-align:center;padding:13px;margin-top:14px;background:rgba(255,255,255,0.03);border:1px solid ${cfg.color}55;border-radius:8px;color:${cfg.color};font-size:0.88rem;font-weight:600;text-decoration:none;">${cfg.cta} →</a>`;
+
+            box.style.display = 'block';
+            box.classList.add('show');
+            box.innerHTML = `<div style="padding:22px 24px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:12px;">
+                <p style="font-size:0.72rem;color:#9ca3af;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px;">Seu diagnóstico</p>
+                <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:${cfg.color};margin:0 0 10px 0;">${cfg.icon} ${cfg.label}</h3>
+                <p style="font-size:0.84rem;color:rgba(255,255,255,0.55);line-height:1.65;margin:0 0 4px 0;">${cfg.desc}</p>
+                ${checklistHtml}
+                ${successionHtml}
+                ${simHtml}
+                ${barsHtml}
+                ${reasonsHtml}
+                ${ctaHtml}
+                <p style="font-size:0.7rem;color:rgba(255,255,255,0.25);line-height:1.6;margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.05);">Este diagnóstico tem finalidade exclusivamente educacional e foi elaborado com base nas respostas e premissas informadas no simulador. Ele não constitui recomendação individual de investimento, orientação tributária ou planejamento jurídico.</p>
+            </div>`;
+        }
+
+        function resetQuiz() {
+            quizAnswers = {};
+            updateQuizProgress();
+            document.querySelectorAll('.quiz-question').forEach(q => {
+                q.classList.remove('answered');
+                q.querySelectorAll('button:not(.quiz-tip)').forEach(b => b.classList.remove('selected'));
+            });
+            const box = document.getElementById('quiz-result');
+            if (box) { box.style.display='none'; box.classList.remove('show'); box.innerHTML=''; }
+            document.getElementById('inv-quiz-container')?.scrollIntoView({behavior:'smooth',block:'start'});
         }
 
         function processQuiz() {
-            const r = quizAnswers;
-            
-            // Verificar se todas as perguntas foram respondidas
-            const allQuestions = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8', 'Q9'];
-            const answered = allQuestions.filter(q => r[q]);
-            
-            if (answered.length < allQuestions.length) {
-                alert('Por favor, responda todas as perguntas antes de ver sua estratégia.');
+            const all = ['Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8','Q9'];
+            if (all.some(q => !quizAnswers[q])) {
+                alert('Por favor, responda todas as perguntas antes de ver seu diagnóstico.');
                 return;
             }
-
-            let strategy = "";
-
-            // ⚠️ REGRA CRÍTICA – Taxas ruins eliminam previdência (proteção ética)
-            if (r.Q8 === "NÃO" || r.Q9 === "NÃO") {
-                strategy = "investimentoProprio";
-            } else {
-                let score = {
-                    investimentoProprio: 0,
-                    pgbl: 0,
-                    vgbl: 0,
-                    hibrida: 0
-                };
-
-                // Perfil tributário → PGBL
-                if (r.Q1 === "SIM" && r.Q2 === "SIM") {
-                    score.pgbl += 3;
-                    score.hibrida += 1;
-                }
-
-                // Horizonte longo
-                if (r.Q3 === "SIM") {
-                    score.pgbl += 2;
-                    score.vgbl += 2;
-                }
-
-                // Sucessão
-                if (r.Q5 === "SIM" && r.Q6 === "SIM") {
-                    score.vgbl += 3;
-                    score.hibrida += 2;
-                }
-
-                // Autonomia
-                if (r.Q7 === "SIM") {
-                    score.investimentoProprio += 3;
-                }
-
-                // Seleciona o maior score
-                strategy = Object.entries(score).sort((a,b)=>b[1]-a[1])[0][0];
-            }
-
-            showStrategy(strategy);
-            
-            // Scroll suave para o resultado
-            const resultEl = document.getElementById('quiz-result');
-            if (resultEl) {
-                resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }
+            const scores     = calculateQuizScores(quizAnswers);
+            const compat     = normalizeQuizScores(scores);
+            const diagnosis  = determineQuizDiagnosis(scores, quizAnswers);
+            const reasons    = buildQuizReasons(quizAnswers, diagnosis, scores.factors);
+            const simData    = getSimulationComparisonData();
+            renderQuizResult(diagnosis, compat, reasons, simData);
+            setTimeout(() => {
+                document.getElementById('quiz-result')?.scrollIntoView({behavior:'smooth',block:'nearest'});
+            }, 100);
         }
 
-        // =========================
-        // TEXTOS DE RECOMENDAÇÃO
-        // =========================
-        function showStrategy(type) {
-            const box = document.getElementById("quiz-result");
-            if (!box) return;
-            
-            box.style.display = "block";
-            box.classList.add('show');
-            
-            let html = "";
-
-            if (type === "investimentoProprio") {
-                html = `
-                    <h3>💡 Estratégia Recomendada: Investimento Próprio</h3>
-                    <p>Você mantém total controle e evita taxas que podem consumir 20%–40% do patrimônio ao longo do tempo.</p>
-                    <p><strong>Opções recomendadas:</strong></p>
-                    <ul>
-                        <li>✔️ Tesouro Direto</li>
-                        <li>✔️ CDBs de baixo custo</li>
-                        <li>✔️ ETFs com taxa mínima</li>
-                    </ul>
-                    <div class="alert-box">
-                        <p><strong>⚠️ Atenção:</strong> Para sucessão, considere testamento ou seguro de vida para garantir transmissão rápida aos beneficiários.</p>
-                    </div>
-                `;
-            }
-
-            if (type === "pgbl") {
-                html = `
-                    <h3>📘 Estratégia Recomendada: PGBL com Benefício Fiscal</h3>
-                    <p>Você se enquadra no perfil ideal para aproveitar a dedução de até 12% da renda e a tabela regressiva do IR.</p>
-                    <div class="alert-box">
-                        <p><strong>⚠️ IMPORTANTE:</strong> Isso só vale a pena se a taxa TOTAL (administração + carregamento + custos internos) for menor que 1% a.a. Taxas acima disso podem anular o benefício fiscal.</p>
-                    </div>
-                `;
-            }
-
-            if (type === "vgbl") {
-                html = `
-                    <h3>🏛️ Estratégia Recomendada: VGBL para Sucessão</h3>
-                    <p>Boa alternativa para quem deseja transmissão rápida aos beneficiários e simplicidade sucessória, sem passar por inventário.</p>
-                    <div class="alert-box">
-                        <p><strong>⚠️ Exige taxa total muito baixa:</strong> Só compensa com taxa total menor que 1% a.a. Caso contrário, o investimento próprio com testamento pode ser mais eficiente.</p>
-                    </div>
-                `;
-            }
-
-            if (type === "hibrida") {
-                html = `
-                    <h3>🔀 Estratégia Recomendada: Estratégia Híbrida Inteligente</h3>
-                    <p>Você combina benefícios fiscais, controle patrimonial e proteção sucessória de forma equilibrada.</p>
-                    <p><strong>Distribuição sugerida:</strong></p>
-                    <ul>
-                        <li>✔️ 70–80% em investimentos próprios (Tesouro, CDBs, ETFs)</li>
-                        <li>✔️ 20–30% em previdência privada (apenas se taxa total &lt; 1% a.a.)</li>
-                    </ul>
-                    <div class="alert-box">
-                        <p><strong>⚠️ Lembre-se:</strong> A parte em previdência só faz sentido se encontrar um plano com taxa total muito baixa. Caso contrário, concentre tudo em investimento próprio.</p>
-                    </div>
-                `;
-            }
-
-            box.innerHTML = html;
-        }
-
-        // Inicializar barra de progresso ao carregar a página
-        document.addEventListener('DOMContentLoaded', function() {
-            if (document.getElementById('quiz-progress-fill')) {
-                updateQuizProgress();
-            }
+        document.addEventListener('DOMContentLoaded', () => {
+            if (document.getElementById('quiz-progress-fill')) updateQuizProgress();
         });
     </script>
 
