@@ -2650,11 +2650,14 @@
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
                                 <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
                                     <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">💰 Patrimônio estimado</h3>
-                                    <p class="valor" id="pp-base-patrimonio" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #10b981; margin: 6px 0 0 0;">—</p>
+                                    <p class="valor" id="pp-base-patrimonio" style="font-size: 22px; font-weight: bold; color: #10b981; margin: 6px 0 4px 0;">—</p>
+                                    <p style="font-size: 11px; color: #9ca3af; margin: 0;">Saldo previsto no início da aposentadoria.</p>
                                 </div>
                                 <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
                                     <h3 style="font-size: 14px; color: #bbb; margin: 0 0 6px 0;">📈 Renda na aposentadoria</h3>
-                                    <p class="valor" id="pp-base-renda" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #D4AF37; margin: 6px 0 0 0;">—</p>
+                                    <p class="valor" id="pp-base-renda" style="font-size: 22px; font-weight: bold; color: #D4AF37; margin: 6px 0 4px 0;">—</p>
+                                    <p id="pp-base-renda-subtitle" style="font-size: 11px; color: #9ca3af; line-height: 1.5; margin: 0 0 4px 0;"></p>
+                                    <p id="pp-base-renda-nominal" style="font-size: 10px; color: rgba(255,255,255,0.28); line-height: 1.4; margin: 0; display: none;"></p>
                                 </div>
                             </div>
                         </div>
@@ -2747,9 +2750,15 @@
                                 <thead>
                                     <tr style="background: rgba(138, 204, 166, 0.1);">
                                         <th style="padding: 12px; text-align: center; color: #D4AF37; font-weight: 600; border-bottom: 2px solid rgba(138, 204, 166, 0.2);">Cenário</th>
-                                        <th style="padding: 12px; text-align: center; color: #D4AF37; font-weight: 600; border-bottom: 2px solid rgba(138, 204, 166, 0.2);">Patrimônio Final</th>
+                                        <th style="padding: 12px; text-align: center; color: #D4AF37; font-weight: 600; border-bottom: 2px solid rgba(138, 204, 166, 0.2);">
+                                            Patrimônio Final
+                                            <div style="font-size: 0.72rem; color: #9ca3af; font-weight: 400; margin-top: 3px;">Saldo previsto no início da aposentadoria.</div>
+                                        </th>
                                         <th style="padding: 12px; text-align: center; color: #D4AF37; font-weight: 600; border-bottom: 2px solid rgba(138, 204, 166, 0.2);">Perda vs. Cenário Base</th>
-                                        <th style="padding: 12px; text-align: center; color: #D4AF37; font-weight: 600; border-bottom: 2px solid rgba(138, 204, 166, 0.2);">Renda Estimada</th>
+                                        <th style="padding: 12px; text-align: center; color: #D4AF37; font-weight: 600; border-bottom: 2px solid rgba(138, 204, 166, 0.2);">
+                                            Renda Estimada
+                                            <div style="font-size: 0.72rem; color: #9ca3af; font-weight: 400; margin-top: 3px;">Em valores de hoje — poder de compra atual.</div>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -4650,6 +4659,34 @@
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2
                             });
+                        }
+
+                        // Subtitle: label de estratégia (mesmo padrão do card principal)
+                        const ppBaseRendaSubtitle = document.getElementById("pp-base-renda-subtitle");
+                        if (ppBaseRendaSubtitle) {
+                            const trBase = resultado.tipoRenda || "vitalicia";
+                            const estBase = resultado.estrategia || "perpetua";
+                            const ifBase  = Number(resultado.idadeFinal || 95);
+                            const iaBase  = Number(idadeApos);
+                            const c1 = trBase === 'vitalicia' && estBase === 'perpetua';
+                            const c2 = trBase === 'periodo'   && estBase === 'perpetua' && ifBase > iaBase;
+                            const c3 = estBase === 'esgotavel' || (trBase === 'periodo' && !c2);
+                            const sufixo = "<br>Em valores de hoje.";
+                            if (c1)      ppBaseRendaSubtitle.innerHTML = "💚 Para a vida toda — sem usar o capital" + sufixo;
+                            else if (c2) ppBaseRendaSubtitle.innerHTML = "🟡 Por um período — preservando parte do capital" + sufixo;
+                            else if (c3) ppBaseRendaSubtitle.innerHTML = "🔴 Por um período — usando o capital aos poucos" + sufixo;
+                            else         ppBaseRendaSubtitle.innerHTML = "📊 Estimativa de renda mensal" + sufixo;
+                        }
+
+                        // Hint nominal (mesmo padrão do card principal)
+                        const ppBaseRendaNominal = document.getElementById("pp-base-renda-nominal");
+                        if (ppBaseRendaNominal && resultado.fatorInflacao && resultado.rendaTotalPrevista) {
+                            const anoApos = new Date().getFullYear() + (Number(idadeApos) - Number(idadeAtual));
+                            const rendaNominal = resultado.rendaTotalPrevista * resultado.fatorInflacao;
+                            ppBaseRendaNominal.textContent = "Poder de compra de hoje · Equivale a R$ " +
+                                rendaNominal.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) +
+                                " nominais em " + anoApos;
+                            ppBaseRendaNominal.style.display = "block";
                         }
 
                         // Tabela Comparativa - Preencher valores

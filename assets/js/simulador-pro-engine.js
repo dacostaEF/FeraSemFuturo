@@ -773,7 +773,7 @@ function calcularModelosPrevidencia(paramsBase, patrimonioBase, rendaBase) {
     });
     
     const patrimonioM1 = resultadoM1.patrimonioFinal;
-    const rendaM1 = resultadoM1.rendaMensalFinal || resultadoM1.rendaRealPossivel || 0;
+    const rendaM1 = resultadoM1.rendaInvestimentosHoje || resultadoM1.rendaTotalPrevista || 0;
     const perdaAbsolutaM1 = patrimonioM1 - patrimonioBase;
     const perdaPercentualM1 = patrimonioBase > 0 ? (perdaAbsolutaM1 / patrimonioBase) * 100 : 0;
     
@@ -810,7 +810,7 @@ function calcularModelosPrevidencia(paramsBase, patrimonioBase, rendaBase) {
     });
     
     const patrimonioM2 = resultadoM2.patrimonioFinal;
-    const rendaM2 = resultadoM2.rendaMensalFinal || resultadoM2.rendaRealPossivel || 0;
+    const rendaM2 = resultadoM2.rendaInvestimentosHoje || resultadoM2.rendaTotalPrevista || 0;
     const perdaAbsolutaM2 = patrimonioM2 - patrimonioBase;
     const perdaPercentualM2 = patrimonioBase > 0 ? (perdaAbsolutaM2 / patrimonioBase) * 100 : 0;
     
