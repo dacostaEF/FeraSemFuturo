@@ -940,6 +940,7 @@ function finalizarWizard() {
                 </h3>
                 <p class="valor" style="color: #D4AF37;">${formatarValorMonetario(resultados.rendaTotalPrevista)}</p>
                 <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 4px;">Em valores de hoje.</p>
+                <p style="font-size: 0.75rem; color: rgba(255,255,255,0.40); margin-top: 3px;">Poder de compra de hoje · Equivale a ${formatarValorMonetario(resultados.rendaTotalPrevista * resultados.fatorInflacao)} nominais em ${new Date().getFullYear() + resultados.anosAteAposentadoria}</p>
             </div>
 
             <div class="card">

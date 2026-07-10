@@ -2340,6 +2340,7 @@
                                 </h3>
                                 <p class="valor" id="cardRendaMensalPrevista" style="font-size: 22px; font-weight: bold; margin-top: 6px; color: #D4AF37; margin: 6px 0 0 0;">—</p>
                                 <p id="cardRendaMensalSubtitle" style="font-size: 0.85rem; color: #9ca3af; margin-top: 8px; margin: 8px 0 0 0;">—</p>
+                                <p id="cardRendaNominalHint" style="font-size: 0.75rem; color: rgba(255,255,255,0.40); margin-top: 3px; display: none;"></p>
                             </div>
 
                             <div class="card" style="background: #0f0f0f; border: 1px solid rgba(138,204,166,0.25); border-radius: 12px; padding: 14px;">
@@ -4390,6 +4391,15 @@
                 }
             }
             
+            // Card: Renda — hint com valor nominal futuro (mesmo padrão do card Patrimônio)
+            const cardRendaNominalHint = document.getElementById("cardRendaNominalHint");
+            if (cardRendaNominalHint && resultado.fatorInflacao && resultado.rendaTotalPrevista) {
+                const anoApos = new Date().getFullYear() + (idadeApos - idadeAtual);
+                const rendaNominal = resultado.rendaTotalPrevista * resultado.fatorInflacao;
+                cardRendaNominalHint.textContent = `Poder de compra de hoje · Equivale a R$ ${rendaNominal.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} nominais em ${anoApos}`;
+                cardRendaNominalHint.style.display = "block";
+            }
+
             // Card: Meta Mensal
             const cardMeta = document.getElementById("cardMetaMensal");
             if (cardMeta) {
