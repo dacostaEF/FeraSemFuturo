@@ -657,8 +657,9 @@
             z-index: 10000;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             padding: 20px;
+            overflow-y: auto;
             animation: fadeIn 0.3s ease;
         }
 
@@ -666,7 +667,6 @@
         .modal-overlay[style*="flex"],
         .modal-overlay[style*="display: flex"] {
             display: flex !important;
-            justify-content: center !important;
             align-items: center !important;
         }
 
@@ -2145,6 +2145,29 @@
                 padding: 12px 6px !important;
             }
 
+            /* MOBILE-07: modal de taxas — scroll correto, sem conteúdo acima do viewport */
+            .modal-overlay {
+                padding: 12px 10px !important;
+            }
+
+            .modal-content {
+                width: 100% !important;
+                max-height: none !important;
+            }
+
+            .modal-title {
+                font-size: 1.2rem !important;
+            }
+
+            .modal-header {
+                padding: 16px 16px 14px !important;
+            }
+
+            .modal-body {
+                padding: 20px 16px !important;
+                max-height: none !important;
+            }
+
             /* Valor principal dos cards: reduzir de 22px para não quebrar linha */
             .pro-bloco-content .card p.valor {
                 font-size: 18px !important;
@@ -3032,7 +3055,7 @@
                                 💡 Entenda por que as taxas mudam tudo
                             </button>
                             <button id="btnPegadinhas" class="btn-ver-pegadinhas">
-                                ⚠️ Ver Pegadinhas da Previdência Privada
+                                🔍 O que observar ao contratar um plano de previdência privada
                             </button>
                         </div>
                     </div>
@@ -3497,162 +3520,181 @@
                     ⚠️ Previdência Privada: Conheça os Cuidados antes de Contratar
                 </h2>
                 <p style="color:rgba(255, 255, 255, 0.7); margin:8px 0 0 0; font-size:0.95rem;">
-                    Este guia explica, de forma clara e sem enrolação, os pontos que os bancos evitam te contar.
+                    Este guia apresenta os principais aspectos que merecem atenção antes da contratação de um plano de previdência privada. Conhecer esses pontos ajuda a comparar alternativas e tomar decisões mais conscientes.
                 </p>
             </div>
 
-            <!-- PEGADINHA 1 -->
+            <!-- Bloco introdutório -->
+            <div style="margin-bottom:20px; padding:16px 18px; background:rgba(212, 175, 55, 0.06); border-left:3px solid rgba(212, 175, 55, 0.35); border-radius:8px;">
+                <p style="color:rgba(255,255,255,0.85); margin:0; line-height:1.75; font-size:0.92rem;">
+                    <strong style="color:#D4AF37; display:block; margin-bottom:8px;">Antes de começar</strong>
+                    A previdência privada pode ser uma excelente ferramenta para alguns perfis e uma escolha inadequada para outros.<br><br>
+                    O objetivo deste guia não é recomendar nem desestimular sua contratação, mas apresentar aspectos que muitas vezes passam despercebidos durante a escolha de um plano.<br><br>
+                    Quanto melhor você compreender esses fatores, mais consciente será sua decisão.
+                </p>
+            </div>
+
+            <!-- ITEM 1 -->
             <div class="pegadinha-acordeon" style="margin-bottom:15px; background:rgba(9, 32, 21, 0.75); border:1px solid rgba(138, 204, 166, 0.10); border-radius:12px; overflow:hidden;">
                 <div class="pegadinha-header" onclick="togglePegadinha(1)" style="padding:15px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
-                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">1. Vitalícia Simples – A Armadilha Mortal</h3>
+                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">1. Vitalícia Simples — Aspectos Importantes antes da Escolha</h3>
                     <span id="icon-1" style="color:#D4AF37; font-size:1.2rem; transition:0.3s;">▼</span>
                 </div>
                 <div id="content-1" class="pegadinha-content" style="max-height:0; overflow:hidden; transition:max-height 0.3s ease;">
                     <div style="padding:0 15px 15px 15px; color:rgba(255, 255, 255, 0.85); line-height:1.7;">
-                        <p><strong style="font-weight:700;">O que é:</strong> Quando você converte seu plano em renda vitalícia simples, recebe mensalmente até morrer. SE MORRER, o dinheiro FICA COM O FUNDO. Seus herdeiros NÃO RECEBEM NADA.</p>
-                        
-                        <p><strong style="font-weight:700;">Exemplo prático:</strong> Você acumulou R$ 500.000 durante 30 anos. Converteu em renda vitalícia simples de R$ 3.000/mês. Se morrer no 1º ano após a aposentadoria, seus filhos não recebem os R$ 464.000 restantes. A seguradora fica com tudo!</p>
-                        
-                        <p><strong style="font-weight:700;">Impacto financeiro:</strong> Perda total do patrimônio para os herdeiros. Todo o esforço de 30 anos pode desaparecer em 1 ano.</p>
-                        
-                        <p><strong style="font-weight:700;">Como evitar:</strong> Escolha renda vitalícia REVERSÍVEL (cônjuge/dependente continua recebendo) ou invista por conta própria (100% vai para os herdeiros).</p>
+                        <p><strong style="font-weight:700;">O que é:</strong> Quando você converte seu plano em renda vitalícia simples, recebe mensalmente até o fim da vida. Ao falecer, o saldo remanescente não é transferido aos herdeiros — o valor é incorporado ao fundo da seguradora.</p>
+
+                        <p><strong style="font-weight:700;">Exemplo prático:</strong> Você acumulou R$ 500.000 durante 30 anos e converteu em renda vitalícia simples de R$ 3.000/mês. Caso o falecimento ocorra no primeiro ano após a aposentadoria, os beneficiários não receberão os R$ 464.000 remanescentes.</p>
+
+                        <p><strong style="font-weight:700;">Implicação para o planejamento:</strong> O patrimônio acumulado não é transferido aos herdeiros nessa modalidade. Esse aspecto torna a renda vitalícia simples mais adequada a quem não tem dependentes ou prioriza a renda mensal máxima.</p>
+
+                        <p><strong style="font-weight:700;">Alternativas:</strong> Renda vitalícia reversível (cônjuge ou dependente continua recebendo após o falecimento) ou estratégia de investimento próprio, onde o saldo remanescente integra o patrimônio do espólio.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- PEGADINHA 2 -->
+            <!-- ITEM 2 -->
             <div class="pegadinha-acordeon" style="margin-bottom:15px; background:rgba(9, 32, 21, 0.75); border:1px solid rgba(138, 204, 166, 0.10); border-radius:12px; overflow:hidden;">
                 <div class="pegadinha-header" onclick="togglePegadinha(2)" style="padding:15px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
-                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">2. Taxas de Administração Altíssimas</h3>
+                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">2. Impacto das Taxas de Administração</h3>
                     <span id="icon-2" style="color:#D4AF37; font-size:1.2rem; transition:0.3s;">▼</span>
                 </div>
                 <div id="content-2" class="pegadinha-content" style="max-height:0; overflow:hidden; transition:max-height 0.3s ease;">
                     <div style="padding:0 15px 15px 15px; color:rgba(255, 255, 255, 0.85); line-height:1.7;">
-                        <p><strong style="font-weight:700;">O que é:</strong> Fundos de previdência cobram 2%, 3%, até 4% ao ano de taxa de administração + taxa de carregamento (até 5% de CADA APORTE).</p>
-                        
-                        <p><strong style="font-weight:700;">Exemplo prático:</strong> Aporte de R$ 1.000/mês com taxa de carregamento de 3% = só entra R$ 970. Mais 2% a.a. de taxa de administração. Em 30 anos, essas taxas podem custar R$ 200.000 a R$ 300.000!</p>
-                        
-                        <p><strong style="font-weight:700;">Impacto financeiro:</strong> Pode destruir até 40% do seu patrimônio ao longo de 30 anos. É como ter rentabilidade NEGATIVA todo mês.</p>
-                        
-                        <p><strong style="font-weight:700;">Como evitar:</strong> Escolha planos com taxa MENOR que 1% a.a. e SEM taxa de carregamento. Ou invista direto em Tesouro IPCA+, CDBs (taxas muito menores).</p>
+                        <p><strong style="font-weight:700;">O que é:</strong> Fundos de previdência cobram taxa de administração (comumente entre 1% e 3% ao ano) e, em alguns planos, taxa de carregamento sobre cada aporte (até 5%).</p>
+
+                        <p><strong style="font-weight:700;">Exemplo prático:</strong> Aporte de R$ 1.000/mês com taxa de carregamento de 3%: apenas R$ 970 são efetivamente investidos. Somada à taxa de administração de 2% ao ano, em 30 anos essas cobranças podem representar entre R$ 200.000 e R$ 300.000.</p>
+
+                        <p><strong style="font-weight:700;">Efeito no longo prazo:</strong> O custo acumulado das taxas pode reduzir o patrimônio final em 30% a 40% ao longo de três décadas. Por isso, comparar taxas entre planos é um passo essencial antes de qualquer decisão.</p>
+
+                        <p><strong style="font-weight:700;">O que observar:</strong> Prefira planos com taxa de administração menor que 1% ao ano e sem taxa de carregamento. Há opções com estrutura de custo mais competitiva, como planos vinculados a ETFs e fundos de índice.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- PEGADINHA 3 -->
+            <!-- ITEM 3 -->
             <div class="pegadinha-acordeon" style="margin-bottom:15px; background:rgba(9, 32, 21, 0.75); border:1px solid rgba(138, 204, 166, 0.10); border-radius:12px; overflow:hidden;">
                 <div class="pegadinha-header" onclick="togglePegadinha(3)" style="padding:15px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
-                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">3. Sem FGC – Você Pode Perder Tudo</h3>
+                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">3. Ausência de Cobertura do FGC</h3>
                     <span id="icon-3" style="color:#D4AF37; font-size:1.2rem; transition:0.3s;">▼</span>
                 </div>
                 <div id="content-3" class="pegadinha-content" style="max-height:0; overflow:hidden; transition:max-height 0.3s ease;">
                     <div style="padding:0 15px 15px 15px; color:rgba(255, 255, 255, 0.85); line-height:1.7;">
-                        <p><strong style="font-weight:700;">O que é:</strong> Diferente da poupança e CDBs (protegidos pelo FGC até R$ 250.000), a previdência privada NÃO tem essa garantia. Se a seguradora quebrar, você pode perder tudo.</p>
-                        
-                        <p><strong style="font-weight:700;">Exemplo prático:</strong> Você tem R$ 400.000 em um PGBL. A seguradora entra em falência. Teoricamente existe "garantia", mas na prática pode demorar anos e você pode não receber o valor total.</p>
-                        
-                        <p><strong style="font-weight:700;">Impacto financeiro:</strong> Risco de perda total ou parcial do patrimônio. Processo de recuperação pode levar 5-10 anos.</p>
-                        
-                        <p><strong style="font-weight:700;">Como evitar:</strong> Diversifique! Não coloque tudo em previdência. CDBs de bancos grandes têm FGC. Tesouro Direto é garantido pelo governo.</p>
+                        <p><strong style="font-weight:700;">O que é:</strong> Diferentemente de produtos como poupança e CDBs (cobertos pelo FGC até R$ 250.000 por CPF por instituição), planos de previdência privada não contam com essa garantia. Em caso de intervenção ou liquidação da seguradora, os ativos podem ser parcialmente comprometidos.</p>
+
+                        <p><strong style="font-weight:700;">Exemplo prático:</strong> Você tem R$ 400.000 em um PGBL. Se a seguradora passar por processo de liquidação, o prazo e o percentual de recuperação dependerão do processo administrativo conduzido pela SUSEP.</p>
+
+                        <p><strong style="font-weight:700;">Fator de risco:</strong> O processo de recuperação pode ser demorado e o valor efetivamente recebido pode diferir do saldo original.</p>
+
+                        <p><strong style="font-weight:700;">Critério de avaliação:</strong> Considere a solidez e o histórico da seguradora ao escolher um plano. A diversificação entre diferentes classes de ativos e instituições reduz a exposição a esse tipo de risco.</p>
+
+                        <p style="font-size:0.88rem; color:rgba(255,255,255,0.55); margin-top:12px; border-top:1px solid rgba(255,255,255,0.07); padding-top:12px;">Esse aspecto não significa que a previdência privada seja inadequada como ferramenta de acumulação. A análise da solidez da instituição e a diversificação da carteira são práticas recomendadas para qualquer perfil de investidor.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- PEGADINHA 4 -->
+            <!-- ITEM 4 -->
             <div class="pegadinha-acordeon" style="margin-bottom:15px; background:rgba(9, 32, 21, 0.75); border:1px solid rgba(138, 204, 166, 0.10); border-radius:12px; overflow:hidden;">
                 <div class="pegadinha-header" onclick="togglePegadinha(4)" style="padding:15px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
-                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">4. Tributação Confusa – Progressiva x Regressiva</h3>
+                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">4. Tributação — Progressiva x Regressiva</h3>
                     <span id="icon-4" style="color:#D4AF37; font-size:1.2rem; transition:0.3s;">▼</span>
                 </div>
                 <div id="content-4" class="pegadinha-content" style="max-height:0; overflow:hidden; transition:max-height 0.3s ease;">
                     <div style="padding:0 15px 15px 15px; color:rgba(255, 255, 255, 0.85); line-height:1.7;">
-                        <p><strong style="font-weight:700;">O que é:</strong> Você precisa escolher entre tabela PROGRESSIVA (como salário: 0% a 27,5%) ou REGRESSIVA (cai com o tempo: 35% a 10%). Escolha errada pode custar 15-20% a mais de imposto!</p>
-                        
-                        <p><strong style="font-weight:700;">Exemplo prático:</strong> Resgate de R$ 500.000 após 10 anos. Tabela progressiva: 27,5% = R$ 137.500 de IR. Tabela regressiva: 10% = R$ 50.000. Diferença: R$ 87.500!</p>
-                        
-                        <p><strong style="font-weight:700;">Impacto financeiro:</strong> Escolha errada pode custar R$ 50.000 a R$ 100.000 em impostos desnecessários.</p>
-                        
-                        <p><strong style="font-weight:700;">Como evitar:</strong> Regressiva é melhor para quem fica mais de 10 anos. Progressiva para quem resgata antes. MAS: depois de 10 anos, NÃO DÁ PARA TROCAR!</p>
+                        <p><strong style="font-weight:700;">O que é:</strong> Você precisa escolher entre a tabela progressiva (alíquotas de 0% a 27,5%, como o imposto de renda sobre salários) ou regressiva (alíquota cai conforme o tempo de aplicação, de 35% para 10%). A escolha influencia diretamente o imposto no momento do resgate.</p>
+
+                        <p><strong style="font-weight:700;">Exemplo prático:</strong> Resgate de R$ 500.000 após 10 anos. Tabela progressiva: 27,5% = R$ 137.500 de IR. Tabela regressiva: 10% = R$ 50.000. Diferença: R$ 87.500.</p>
+
+                        <p><strong style="font-weight:700;">Impacto financeiro:</strong> A escolha inadequada da tabela pode representar um custo tributário significativamente maior no momento do resgate.</p>
+
+                        <p><strong style="font-weight:700;">Critério de decisão:</strong> A tabela regressiva tende a ser vantajosa para prazos superiores a 10 anos. A progressiva pode ser mais adequada para resgates antecipados ou valores menores. Após determinado prazo, a troca entre tabelas não é mais permitida.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- PEGADINHA 5 -->
+            <!-- ITEM 5 -->
             <div class="pegadinha-acordeon" style="margin-bottom:15px; background:rgba(9, 32, 21, 0.75); border:1px solid rgba(138, 204, 166, 0.10); border-radius:12px; overflow:hidden;">
                 <div class="pegadinha-header" onclick="togglePegadinha(5)" style="padding:15px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
-                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">5. Rentabilidade Fictícia</h3>
+                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">5. Como Interpretar a Rentabilidade</h3>
                     <span id="icon-5" style="color:#D4AF37; font-size:1.2rem; transition:0.3s;">▼</span>
                 </div>
                 <div id="content-5" class="pegadinha-content" style="max-height:0; overflow:hidden; transition:max-height 0.3s ease;">
                     <div style="padding:0 15px 15px 15px; color:rgba(255, 255, 255, 0.85); line-height:1.7;">
-                        <p><strong style="font-weight:700;">O que é:</strong> A maioria das simulações usa rentabilidades irreais (10%, 12% a.a.) para te convencer a contratar. Na realidade, fundos de previdência rendem 5-7% a.a. (ANTES das taxas!).</p>
-                        
-                        <p><strong style="font-weight:700;">Exemplo prático:</strong> Simulador mostra: "R$ 1.000/mês por 30 anos = R$ 1,5 milhão!". Realidade com taxas: R$ 800.000. Diferença: R$ 700.000 que NÃO EXISTE!</p>
-                        
-                        <p><strong style="font-weight:700;">Impacto financeiro:</strong> Frustração total. Você planejou R$ 1,5 milhão, mas tem apenas R$ 800.000. Aposentadoria comprometida.</p>
-                        
-                        <p><strong style="font-weight:700;">Como evitar:</strong> Use simuladores REALISTAS (como o INVLAB!) que mostram taxas reais, inflação e rentabilidades conservadoras. Desconfie de números "otimistas demais".</p>
+                        <p><strong style="font-weight:700;">O que é:</strong> Simulações de previdência frequentemente utilizam taxas de rentabilidade elevadas como referência de projeção (10%, 12% a.a.). Na prática, fundos de previdência têm rentado entre 5% e 7% ao ano antes da dedução das taxas de administração.</p>
+
+                        <p><strong style="font-weight:700;">Exemplo prático:</strong> Uma projeção com R$ 1.000/mês por 30 anos pode indicar R$ 1,5 milhão. Considerando as taxas aplicadas, o resultado real pode ficar próximo de R$ 800.000 — uma diferença relevante para o planejamento.</p>
+
+                        <p><strong style="font-weight:700;">Efeito no planejamento:</strong> Projeções baseadas em premissas otimistas podem levar a metas de renda superestimadas, comprometendo a qualidade do planejamento financeiro de longo prazo.</p>
+
+                        <p><strong style="font-weight:700;">Como avaliar:</strong> Analise com atenção as premissas utilizadas em qualquer projeção — taxa bruta, taxa líquida de taxas e rentabilidade real descontada a inflação. Simuladores que apresentam esses três cenários permitem uma visão mais completa do resultado esperado.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- PEGADINHA 6 -->
+            <!-- ITEM 6 -->
             <div class="pegadinha-acordeon" style="margin-bottom:15px; background:rgba(9, 32, 21, 0.75); border:1px solid rgba(138, 204, 166, 0.10); border-radius:12px; overflow:hidden;">
                 <div class="pegadinha-header" onclick="togglePegadinha(6)" style="padding:15px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
-                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">6. Conversão Obrigatória em Renda (Foco na Falta de Saque)</h3>
+                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">6. Conversão em Renda — O que Muda nessa Etapa</h3>
                     <span id="icon-6" style="color:#D4AF37; font-size:1.2rem; transition:0.3s;">▼</span>
                 </div>
                 <div id="content-6" class="pegadinha-content" style="max-height:0; overflow:hidden; transition:max-height 0.3s ease;">
                     <div style="padding:0 15px 15px 15px; color:rgba(255, 255, 255, 0.85); line-height:1.7;">
-                        <p><strong style="font-weight:700;">O que é:</strong> Depois de acumular por 20-30 anos, você é OBRIGADO a converter em renda (vitalícia ou temporária).</p>
-                        
-                        <p><strong style="font-weight:700;">Exemplo Prático:</strong> Você acumulou R$ 600.000. Dois anos depois, sua família tem uma emergência médica.</p>
-                        
-                        <p><strong style="font-weight:700;">Impacto Financeiro:</strong> Perda de flexibilidade TOTAL. Não pode resgatar o capital para cirurgia, viagem ou emergência. Você só recebe a renda mensal.</p>
-                        
-                        <p><strong style="font-weight:700;">Como Evitar:</strong> Investimento próprio (Tesouro, CDBs, FIIs) = TOTAL FLEXIBILIDADE. Pode resgatar quanto quiser, quando quiser. Você controla 100%.</p>
+                        <p><strong style="font-weight:700;">O que é:</strong> Ao final da fase de acumulação, muitos planos preveem a conversão do saldo em renda mensal (vitalícia ou temporária). Nessa fase, o acesso direto ao capital acumulado passa a ser gerenciado pela seguradora.</p>
+
+                        <p><strong style="font-weight:700;">Exemplo Prático:</strong> Você acumulou R$ 600.000. Após a conversão em renda, caso sua família enfrente uma necessidade financeira relevante, o acesso imediato ao capital não estará disponível — apenas a renda mensal contratada.</p>
+
+                        <p><strong style="font-weight:700;">Implicação prática:</strong> A liquidez é significativamente reduzida após a conversão. Esse fator deve ser considerado no planejamento, especialmente para quem pode ter necessidades financeiras variáveis na aposentadoria.</p>
+
+                        <p><strong style="font-weight:700;">O que observar:</strong> Estratégias de investimento próprio mantêm liquidez total, permitindo resgates conforme a necessidade. Avaliar o equilíbrio entre previsibilidade de renda e flexibilidade de acesso é parte essencial do planejamento financeiro.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- PEGADINHA 7 -->
+            <!-- ITEM 7 -->
             <div class="pegadinha-acordeon" style="margin-bottom:15px; background:rgba(9, 32, 21, 0.75); border:1px solid rgba(138, 204, 166, 0.10); border-radius:12px; overflow:hidden;">
                 <div class="pegadinha-header" onclick="togglePegadinha(7)" style="padding:15px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
-                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">7. Conversão Irreversível: Não Dá Mais Para Mudar</h3>
+                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">7. Conversão em Renda — Decisão de Longo Prazo</h3>
                     <span id="icon-7" style="color:#D4AF37; font-size:1.2rem; transition:0.3s;">▼</span>
                 </div>
                 <div id="content-7" class="pegadinha-content" style="max-height:0; overflow:hidden; transition:max-height 0.3s ease;">
                     <div style="padding:0 15px 15px 15px; color:rgba(255, 255, 255, 0.85); line-height:1.7;">
-                        <p><strong style="font-weight:700;">O que é:</strong> Uma vez que você escolhe o tipo de renda (Simples, Reversível ou Prazo Certo), NÃO DÁ PARA VOLTAR ATRÁS! Não pode mudar a tabela de IR, o tipo de plano (VGBL/PGBL) ou o tipo de renda.</p>
-                        
-                        <p><strong style="font-weight:700;">Exemplo Prático:</strong> Você converteu em renda vitalícia simples. Um ano depois, descobre que a reversível protegeria sua esposa. AZAR! Sua escolha é fixa para sempre.</p>
-                        
-                        <p><strong style="font-weight:700;">Impacto Financeiro:</strong> A escolha errada na fase de renda (ex: Vitalícia Simples) pode anular todo o seu planejamento de sucessão.</p>
-                        
-                        <p><strong style="font-weight:700;">Como Evitar:</strong> Estudar e responder ao Quiz do INVLAB antes de tomar a decisão de contratação.</p>
+                        <p><strong style="font-weight:700;">O que é:</strong> Uma vez definida a modalidade de renda (simples, reversível ou prazo certo), essa decisão passa a ser definitiva. Da mesma forma, a tabela de IR e o tipo de plano (VGBL/PGBL) não podem ser alterados após determinado prazo.</p>
+
+                        <p><strong style="font-weight:700;">Exemplo Prático:</strong> Você optou pela renda vitalícia simples. Posteriormente, ao revisar seu planejamento sucessório, percebe que a modalidade reversível seria mais adequada para a sua situação. A modalidade escolhida passa a ser definitiva.</p>
+
+                        <p><strong style="font-weight:700;">Impacto no Planejamento:</strong> A escolha inadequada da modalidade de renda pode impactar o planejamento sucessório e a proteção dos dependentes.</p>
+
+                        <p><strong style="font-weight:700;">Como se preparar:</strong> Avalie com antecedência as diferentes modalidades e seus efeitos no planejamento familiar antes de tomar a decisão de conversão.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- PEGADINHA 8 -->
+            <!-- ITEM 8 -->
             <div class="pegadinha-acordeon" style="margin-bottom:15px; background:rgba(9, 32, 21, 0.75); border:1px solid rgba(138, 204, 166, 0.10); border-radius:12px; overflow:hidden;">
                 <div class="pegadinha-header" onclick="togglePegadinha(8)" style="padding:15px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
-                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">8. Conversão em Renda por Prazo: O Risco de Viver Demais</h3>
+                    <h3 style="color:#8ACC66; margin:0; font-size:1.1rem; font-weight:700;">8. Conversão por Prazo — Planejamento da Longevidade</h3>
                     <span id="icon-8" style="color:#D4AF37; font-size:1.2rem; transition:0.3s;">▼</span>
                 </div>
                 <div id="content-8" class="pegadinha-content" style="max-height:0; overflow:hidden; transition:max-height 0.3s ease;">
                     <div style="padding:0 15px 15px 15px; color:rgba(255, 255, 255, 0.85); line-height:1.7;">
-                        <p><strong style="font-weight:700;">O que é:</strong> Você define um prazo para o seu dinheiro acabar (ex: 20 anos ou até 95 anos de idade). A renda mensal é calculada para durar exatamente esse período.</p>
-                        
-                        <p><strong style="font-weight:700;">Exemplo Prático (Viver Demais):</strong> Você fez o plano para durar até os 95 anos, mas viveu até os 98. A renda cessa aos 95 anos, e você passa 3 anos sem o complemento do plano.</p>
-                        
-                        <p><strong style="font-weight:700;">Exemplo Prático (Morte no Prazo):</strong> Você fez para durar 20 anos. Se morrer no 15º ano, o beneficiário continua recebendo a renda apenas pelos 5 anos restantes. Depois, cessa o pagamento.</p>
-                        
-                        <p><strong style="font-weight:700;">Impacto Financeiro:</strong> Risco de falência financeira na velhice avançada (se viver muito) ou perda parcial de patrimônio (se a família precisar da renda por mais tempo).</p>
-                        
-                        <p><strong style="font-weight:700;">Como Evitar:</strong> Use a estratégia "Para a vida toda — sem usar o capital" (patrimônio não se esgota, mas a renda é menor) ou adicione um cônjuge como beneficiário para garantir renda vitalícia.</p>
+                        <p><strong style="font-weight:700;">O que é:</strong> Nessa modalidade, você define um prazo para a renda mensal (ex: até os 95 anos de idade). O valor mensal é calculado para durar exatamente esse período.</p>
+
+                        <p><strong style="font-weight:700;">Exemplo Prático (longevidade além do prazo):</strong> Você planejou a renda até os 95 anos, mas a expectativa de vida se estende além disso. A renda cessa ao fim do prazo contratado, exigindo outras fontes de renda para o período adicional.</p>
+
+                        <p><strong style="font-weight:700;">Exemplo Prático (falecimento dentro do prazo):</strong> Se o falecimento ocorrer antes do fim do prazo, os beneficiários continuam recebendo a renda pelos anos remanescentes. Após esse período, os pagamentos cessam.</p>
+
+                        <p><strong style="font-weight:700;">Fator de planejamento:</strong> A definição do prazo exige uma análise cuidadosa da expectativa de vida e das necessidades dos dependentes. Estratégias complementares de reserva financeira reduzem a exposição ao risco de longevidade.</p>
                     </div>
                 </div>
+            </div>
+
+            <!-- Mensagem institucional InvLab -->
+            <div style="margin-top:28px; padding:18px 20px; background:rgba(16, 185, 129, 0.05); border:1px solid rgba(16, 185, 129, 0.15); border-radius:10px;">
+                <p style="color:#10b981; font-weight:600; margin:0 0 8px 0; font-size:0.95rem;">O papel do InvLab</p>
+                <p style="color:rgba(255,255,255,0.7); margin:0; line-height:1.75; font-size:0.88rem;">
+                    Nosso objetivo não é dizer qual produto contratar.<br>
+                    É fornecer informações claras para que você compreenda vantagens, limitações e custos de cada estratégia, tomando decisões financeiras mais conscientes e alinhadas aos seus objetivos.
+                </p>
             </div>
 
             <button id="closeModalPeg" style="
