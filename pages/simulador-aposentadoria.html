@@ -2113,6 +2113,32 @@
                 font-size: 22px !important;
                 line-height: 40px !important;
             }
+
+            /* MOBILE-05: Camada 3 (.invlab-results) transparente — conteúdo ocupa largura do .pro-bloco */
+            .invlab-results {
+                background: transparent !important;
+                border: none !important;
+                border-radius: 0 !important;
+                padding: 0 !important;
+                margin-bottom: 20px !important;
+                box-shadow: none !important;
+                backdrop-filter: none !important;
+            }
+
+            /* Margens negativas eram compensação do padding do .invlab-results — não mais necessário */
+            .evolucao-grafico-section {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+
+            /* Status header: moldura própria agora que o container pai é transparente */
+            #dashboardHeaderPro {
+                background: rgba(20, 24, 33, 0.7) !important;
+                border: 1px solid rgba(255, 255, 255, 0.08) !important;
+                border-radius: 10px !important;
+                padding: 14px 16px !important;
+                margin-bottom: 14px !important;
+            }
         }
 
         /* Desktop: esconde label mobile, mostra label desktop */
