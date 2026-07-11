@@ -227,6 +227,10 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
     const canvas = document.getElementById('graficoEvolucao');
     if (!canvas) return;
 
+    const _isMobile = window.matchMedia('(max-width: 767px)').matches;
+    const _chartW   = canvas.parentElement ? canvas.parentElement.clientWidth : 500;
+    const _isSmall  = _chartW < 480;
+
     // Destruir gráfico anterior se existir
     if (window.chartEvolucao) {
         window.chartEvolucao.destroy();
@@ -333,8 +337,9 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
             pointBackgroundColor: corAcumulacao,
             pointBorderColor: '#0D0D0D',
             pointBorderWidth: 1,
-            pointRadius: 2,
-            pointHoverRadius: 4
+            pointRadius: _isMobile ? 1 : 2,
+            pointHoverRadius: 4,
+            pointHitRadius: _isMobile ? 10 : 6
         },
         {
             label: 'Gerado pelos Juros Compostos',
@@ -430,15 +435,16 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
                 data: new Array(valores.length).fill(null).concat(valoresAjustados),
                 borderColor: "#F39C12",
                 backgroundColor: 'rgba(243, 156, 18, 0.05)',
-                borderWidth: 1.8,
+                borderWidth: _isMobile ? 2 : 1.8,
                 tension: 0.4,
                 borderDash: [5, 3],
                 fill: false,
                 pointBackgroundColor: "#F39C12",
                 pointBorderColor: '#0D0D0D',
                 pointBorderWidth: 1,
-                pointRadius: 2,
-                pointHoverRadius: 4
+                pointRadius: _isMobile ? 1 : 2,
+                pointHoverRadius: 4,
+                pointHitRadius: _isMobile ? 10 : 6
             });
             
             // =============================
@@ -473,15 +479,16 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
                 data: new Array(valores.length).fill(null).concat(valoresPosAposentadoria),
                 borderColor: corConsumo,
                 backgroundColor: 'rgba(231, 76, 60, 0.05)',
-                borderWidth: 1.5,
+                borderWidth: _isMobile ? 2 : 1.5,
                 borderDash: [5, 5],
                 fill: false,
                 tension: 0.4,
                 pointBackgroundColor: corConsumo,
                 pointBorderColor: '#0D0D0D',
                 pointBorderWidth: 1,
-                pointRadius: 2,
-                pointHoverRadius: 4
+                pointRadius: _isMobile ? 1 : 2,
+                pointHoverRadius: 4,
+                pointHitRadius: _isMobile ? 10 : 6
             });
         } else {
             // Se for vitalícia, linha horizontal preservada
@@ -496,8 +503,9 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
                 pointBackgroundColor: corVitalicia,
                 pointBorderColor: '#0D0D0D',
                 pointBorderWidth: 1,
-                pointRadius: 2,
-                pointHoverRadius: 4
+                pointRadius: _isMobile ? 1 : 2,
+                pointHoverRadius: 4,
+                pointHitRadius: _isMobile ? 10 : 6
             });
         }
     }
@@ -648,6 +656,13 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
 
     // Configuração do gráfico INVLAB Premium
     const ctx = canvas.getContext('2d');
+    const _mobileLabelsMap = {
+        'Capital Investido por Você':    'Capital investido',
+        'Patrimônio Total Projetado':    'Patrimônio',
+        'Gerado pelos Juros Compostos':  'Juros compostos',
+        'Renda Mensal (hoje)':           'Renda mensal'
+    };
+
     window.chartEvolucao = new Chart(ctx, {
         type: 'line',
         data: { labels: labelsFinais, datasets: datasets },
@@ -655,7 +670,7 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
         options: {
             responsive: true,
             maintainAspectRatio: true,
-            aspectRatio: 2,
+            aspectRatio: _isSmall ? 1.2 : 2,
             plugins: {
                 legend: {
                     display: true,
@@ -663,17 +678,24 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
                     align: 'center',
                     labels: {
                         color: '#E4E4E4',
-                        font: { size: 10, family: "'Inter', sans-serif" },
-                        padding: 10,
+                        font: { size: _isMobile ? 9 : 10, family: "'Inter', sans-serif" },
+                        padding: _isMobile ? 6 : 10,
                         usePointStyle: true,
                         pointStyle: 'line',
-                        boxWidth: 0,
+                        boxWidth: _isMobile ? 16 : 0,
                         boxHeight: 0,
                         filter: (item) =>
                             item.text === 'Capital Investido por Você' ||
                             item.text === 'Patrimônio Total Projetado' ||
                             item.text === 'Gerado pelos Juros Compostos' ||
-                            item.text === 'Renda Mensal (hoje)'
+                            item.text === 'Renda Mensal (hoje)',
+                        generateLabels: _isMobile ? (chart) => {
+                            const base = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                            return base.map(item => ({
+                                ...item,
+                                text: _mobileLabelsMap[item.text] || item.text
+                            }));
+                        } : undefined
                     }
                 },
                 tooltip: {
@@ -723,17 +745,12 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
             },
             scales: {
                 x: {
-                    title: {
-                        display: true,
-                        text: 'Idade (anos)',
-                        color: '#D4AF37',
-                        font: { size: 12, weight: 'bold' }
-                    },
+                    title: { display: false },
                     grid: { color: 'rgba(138, 204, 166, 0.1)', drawBorder: false },
                     ticks: {
                         color: '#9CA3AF',
-                        font: { size: 11 },
-                        maxTicksLimit: 30,
+                        font: { size: _isMobile ? 9 : 11 },
+                        maxTicksLimit: _isMobile ? 6 : 30,
                         autoSkip: true,
                         maxRotation: 0,
                         minRotation: 0,
@@ -742,20 +759,15 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
                 },
                 y: {
                     min: 0,
-                    title: {
-                        display: true,
-                        text: 'Patrimônio Acumulado (R$)',
-                        color: '#10b981',
-                        font: { size: 12, weight: 'bold' }
-                    },
+                    title: { display: false },
                     grid: { color: 'rgba(138, 204, 166, 0.1)', drawBorder: false },
                     ticks: {
                         color: '#9CA3AF',
-                        font: { size: 11 },
+                        font: { size: _isMobile ? 9 : 11 },
                         callback: function(value) {
-                            if (value >= 1000000) return 'R$ ' + (value / 1000000).toFixed(1).replace('.0', '') + 'M';
-                            if (value >= 1000) return 'R$ ' + (value / 1000).toFixed(0) + 'k';
-                            return 'R$ ' + value;
+                            if (value >= 1000000) return (value / 1000000).toFixed(1).replace('.0', '') + 'M';
+                            if (value >= 1000)    return (value / 1000).toFixed(0) + 'k';
+                            return value;
                         }
                     }
                 },
@@ -764,19 +776,15 @@ function renderizarGraficoEvolucao(dadosMensais, idadeAtual, idadeAposentadoria,
                     display: true,
                     position: 'right',
                     min: 0,
-                    title: {
-                        display: true,
-                        text: 'Renda Mensal (R$)',
-                        color: '#4da6ff',
-                        font: { size: 12, weight: 'bold' }
-                    },
+                    title: { display: false },
                     grid: { drawOnChartArea: false },
                     ticks: {
                         color: '#4da6ff',
-                        font: { size: 11 },
+                        font: { size: _isMobile ? 9 : 11 },
+                        maxTicksLimit: _isMobile ? 4 : undefined,
                         callback: function(value) {
-                            if (value >= 1000) return 'R$ ' + (value / 1000).toFixed(1).replace('.0', '') + 'k';
-                            return 'R$ ' + value;
+                            if (value >= 1000) return (value / 1000).toFixed(1).replace('.0', '') + 'k';
+                            return value;
                         }
                     }
                 }
