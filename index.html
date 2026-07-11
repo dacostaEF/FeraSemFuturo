@@ -1342,6 +1342,63 @@
             .sim-video-desktop-btn { display: none !important; }
             .sim-video-fab-wrap { display: flex; padding: 0 !important; margin-bottom: -14px; }
         }
+
+        /* ═══════════════════════════════════════════════════════════
+           DOSE RESPONSIVA — Primeiros Passos
+           Escopo exclusivo: #primeiros-passos
+           Apenas tablet (≤900px) e mobile (≤600px)
+           Desktop: inalterado
+           ═══════════════════════════════════════════════════════════ */
+
+        @media (max-width: 900px) {
+            #primeiros-passos .section-title {
+                font-size: 1.5rem !important;
+                line-height: 1.2;
+                margin-bottom: 14px;
+            }
+            #primeiros-passos .inv-category-title {
+                font-size: 1.5rem !important;
+                line-height: 1.2;
+                margin-top: 28px;
+                margin-bottom: 14px;
+            }
+            #primeiros-passos .learning-card h3 {
+                font-size: 1.1rem;
+                line-height: 1.25;
+            }
+            #primeiros-passos .inv-card-title {
+                font-size: 1.1rem;
+                line-height: 1.25;
+            }
+        }
+
+        @media (max-width: 600px) {
+            #primeiros-passos .section-title {
+                font-size: clamp(1.5rem, 6vw, 1.7rem) !important;
+                line-height: 1.15;
+                margin-bottom: 14px;
+                overflow-wrap: break-word;
+                word-break: normal;
+                hyphens: auto;
+            }
+            #primeiros-passos .inv-category-title {
+                font-size: clamp(1.15rem, 5vw, 1.3rem) !important;
+                line-height: 1.22;
+                margin-top: 22px;
+                margin-bottom: 10px;
+                overflow-wrap: break-word;
+                word-break: normal;
+                hyphens: auto;
+            }
+            #primeiros-passos .learning-card h3 {
+                font-size: 1rem;
+                line-height: 1.25;
+            }
+            #primeiros-passos .inv-card-title {
+                font-size: 1rem;
+                line-height: 1.25;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1507,7 +1564,7 @@
                 <!-- SEÇÃO 1: Planeje Sua Aposentadoria -->
                 <section id="simuladores" class="section" style="margin-top: 0; padding: 15px 0 30px 0;">
                     <div class="content-wrapper">
-                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.2rem; font-weight: 800; color: #D4AF37; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em;">
+                        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 800; color: #D4AF37; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em;">
                             🧩 Planeje Sua Aposentadoria
                         </h2>
                         <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(16, 185, 129, 0.65); text-align: center; margin-bottom: 16px; line-height: 1.6; max-width: 900px; margin-left: auto; margin-right: auto;">
@@ -1736,12 +1793,12 @@
         <div class="tab-content" id="primeiros-passos">
             <div class="content-wrapper">
                 <section class="section">
-                    <h2 class="section-title" style="font-family: 'Playfair Display', Georgia, serif; font-size: 2.5rem; font-weight: 800; color: #D4AF37; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em; line-height: 1.2;">🌱 Primeiros Passos</h2>
+                    <h2 class="section-title" style="font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 800; color: #D4AF37; text-align: center; margin-bottom: 16px; letter-spacing: -0.02em; line-height: 1.2;">🌱 Primeiros Passos</h2>
                     <p class="section-subtitle" style="font-family: 'Inter', sans-serif; font-size: 1.05rem; color: rgba(16, 185, 129, 0.65); text-align: center; line-height: 1.8; margin-bottom: 48px; max-width: 900px; margin-left: auto; margin-right: auto;">Para quem nunca investiu - Fundamentos da Educação Financeira</p>
                     
                     <!-- SEÇÃO 1: Comece por aqui -->
                     <div class="inv-category">
-                        <h3 class="inv-category-title" style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 40px; margin-bottom: 16px; letter-spacing: -0.01em;">🔹 Comece por aqui: 3 passos obrigatórios</h3>
+                        <h3 class="inv-category-title" style="font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 40px; margin-bottom: 16px; letter-spacing: -0.01em;">🔹 Comece por aqui: 3 passos obrigatórios</h3>
                         <p class="inv-category-subtitle" style="font-family: 'Inter', sans-serif; font-size: 1rem; color: rgba(16, 185, 129, 0.65); text-align: center; line-height: 1.8; margin-bottom: 32px; max-width: 800px; margin-left: auto; margin-right: auto;">Leia estes 3 artigos primeiro. Eles mudam sua forma de enxergar bancos, poupança e segurança.</p>
                         
                     <div class="learning-grid">
@@ -1782,7 +1839,7 @@
 
                     <!-- SEÇÃO NOVA: Perfil de Investidor -->
                     <div class="inv-category">
-                        <h3 class="inv-category-title">⚖️ A Verdade Sobre "Perfil de Investidor"</h3>
+                        <h3 class="inv-category-title" style="font-size: 2rem;">⚖️ A Verdade Sobre "Perfil de Investidor"</h3>
                         <p class="inv-category-subtitle">O que o questionário da corretora não consegue capturar — e por que isso pode custar caro.</p>
                         
                         <div class="learning-grid">
@@ -1838,7 +1895,7 @@
 
                     <!-- SEÇÃO 1.2: FGC - O Seguro do Seu Dinheiro -->
                     <div class="inv-category">
-                        <h3 class="inv-category-title">🛡️ Fundo Garantidor de Créditos (FGC): O Seguro GRATUITO do Seu Dinheiro</h3>
+                        <h3 class="inv-category-title" style="font-size: 2rem;">🛡️ Fundo Garantidor de Créditos (FGC): O Seguro GRATUITO do Seu Dinheiro</h3>
                         <p class="inv-category-subtitle">Proteção que poucos conhecem, mas que já salvou milhões de investidores quando bancos quebraram no Brasil</p>
                         
                         <div class="learning-grid">
@@ -1882,7 +1939,7 @@
 
                     <!-- SEÇÃO 1.5: Ganhos Invisíveis -->
                     <div class="inv-category" id="ganhos-invisiveis">
-                        <h3 class="inv-category-title">👉 Ganhos invisíveis: quando evitar perdas é seu melhor investimento</h3>
+                        <h3 class="inv-category-title" style="font-size: 2rem;">👉 Ganhos invisíveis: quando evitar perdas é seu melhor investimento</h3>
                         <p class="inv-category-subtitle">Antes de buscar o "investimento da moda", entenda quanto você pode ganhar só evitando impostos e taxas que comem seu rendimento.</p>
 
                         <div class="inv-grid">
@@ -1918,7 +1975,7 @@
 
                     <!-- SEÇÃO 2: Fundamentos Absolutos -->
                     <div class="inv-category">
-                        <h3 class="inv-category-title" style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 56px; margin-bottom: 16px; letter-spacing: -0.01em;">📘 Fundamentos que ninguém te contou</h3>
+                        <h3 class="inv-category-title" style="font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 56px; margin-bottom: 16px; letter-spacing: -0.01em;">📘 Fundamentos que ninguém te contou</h3>
                         <p class="inv-category-subtitle" style="font-family: 'Inter', sans-serif; font-size: 1rem; color: rgba(16, 185, 129, 0.65); text-align: center; line-height: 1.8; margin-bottom: 32px; max-width: 800px; margin-left: auto; margin-right: auto;">Os conceitos básicos que todo investidor precisa dominar antes de começar</p>
                         
                         <div class="inv-grid">
@@ -1968,7 +2025,7 @@
 
                     <!-- SEÇÃO 3: Estratégia na Prática -->
                     <div class="inv-category">
-                        <h3 class="inv-category-title" style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 56px; margin-bottom: 16px; letter-spacing: -0.01em;">🎯 Estratégia na Prática</h3>
+                        <h3 class="inv-category-title" style="font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; font-weight: 700; color: #D4AF37; text-align: center; margin-top: 56px; margin-bottom: 16px; letter-spacing: -0.01em;">🎯 Estratégia na Prática</h3>
                         <p class="inv-category-subtitle" style="font-family: 'Inter', sans-serif; font-size: 1rem; color: rgba(16, 185, 129, 0.65); text-align: center; line-height: 1.8; margin-bottom: 32px; max-width: 800px; margin-left: auto; margin-right: auto;">Estratégias práticas para maximizar seus investimentos com inteligência</p>
                         
                         <div class="inv-grid">
