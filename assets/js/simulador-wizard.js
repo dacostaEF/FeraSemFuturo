@@ -2605,6 +2605,7 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0, rendasMen
         }
         
         console.log("✅ Canvas encontrado, dimensões:", canvas.width, "x", canvas.height);
+        const _isMobile = window.matchMedia('(max-width: 767px)').matches;
         const ctx = canvas.getContext("2d");
         if (!ctx) {
             console.error("❌ Não foi possível obter contexto 2D do canvas!");
@@ -2675,12 +2676,13 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0, rendasMen
             label: "Renda do Patrimônio",
             data: rendas,
             borderColor: "#00ff88",
-            backgroundColor: "rgba(0, 255, 136, 0.05)",  // ✅ AJUSTE: Transparência reduzida
-            borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
+            backgroundColor: "rgba(0, 255, 136, 0.05)",
+            borderWidth: 1.5,
             tension: 0.25,
             fill: true,
-            pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
-            pointHoverRadius: 4
+            pointRadius: _isMobile ? 1 : 1.5,
+            pointHoverRadius: 4,
+            pointHitRadius: _isMobile ? 10 : 6
         };
 
         // INSS (valor constante após aposentadoria)
@@ -2688,13 +2690,14 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0, rendasMen
             label: "Renda do INSS",
             data: rendas.map(() => inssValor),
             borderColor: "#4da6ff",
-            backgroundColor: "rgba(77, 166, 255, 0.05)",  // ✅ AJUSTE: Transparência reduzida
-            borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
+            backgroundColor: "rgba(77, 166, 255, 0.05)",
+            borderWidth: 1.5,
             borderDash: [6, 4],
             tension: 0.15,
             fill: false,
-            pointRadius: 1,  // Mantido pequeno para INSS
-            pointHoverRadius: 3
+            pointRadius: 1,
+            pointHoverRadius: 3,
+            pointHitRadius: _isMobile ? 10 : 6
         };
 
         // Soma total
@@ -2702,12 +2705,13 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0, rendasMen
             label: "Renda Total (Patrimônio + INSS)",
             data: rendas.map((v) => v + inssValor),
             borderColor: "#ffcc00",
-            backgroundColor: "rgba(255, 204, 0, 0.05)",  // ✅ AJUSTE: Transparência reduzida
-            borderWidth: 1.5,  // ✅ AJUSTE: Linha mais fina
+            backgroundColor: "rgba(255, 204, 0, 0.05)",
+            borderWidth: 1.5,
             tension: 0.25,
             fill: true,
-            pointRadius: 1.5,  // ✅ AJUSTE: Pontos menores
-            pointHoverRadius: 4
+            pointRadius: _isMobile ? 1 : 1.5,
+            pointHoverRadius: 4,
+            pointHitRadius: _isMobile ? 10 : 6
         };
         
         // ✅ SIMPLIFICAÇÃO: Curvas extras de renda removidas - sempre usar apenas 95 anos
@@ -2734,18 +2738,21 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0, rendasMen
                             align: 'center',
                             labels: {
                                 color: '#E4E4E4',
-                                usePointStyle: true,  // ✅ AJUSTE: Usar estilo de linha em vez de caixa
-                                pointStyle: 'line',  // ✅ AJUSTE: Linha na legenda
-                                boxWidth: 30,  // ✅ AJUSTE: Aumentar comprimento das linhas na legenda
-                                boxHeight: 2,  // ✅ AJUSTE 2: Restaurar altura para mostrar elementos visuais
-                                padding: 12,  // ✅ AJUSTE 1: Adicionar padding para espaçamento
-                                font: {
-                                    size: 11
-                                }
-                            },
-                            padding: {
-                                top: 10,  // ✅ AJUSTE 1: Espaçamento superior entre labels e gráfico
-                                bottom: 5
+                                usePointStyle: true,
+                                pointStyle: 'line',
+                                boxWidth: _isMobile ? 16 : 30,
+                                boxHeight: 2,
+                                padding: _isMobile ? 6 : 12,
+                                font: { size: _isMobile ? 9 : 11 },
+                                generateLabels: _isMobile ? (chart) => {
+                                    const base = ChartLib.defaults.plugins.legend.labels.generateLabels(chart);
+                                    const map = {
+                                        'Renda do Patrimônio':           'Patrimônio',
+                                        'Renda do INSS':                  'INSS',
+                                        'Renda Total (Patrimônio + INSS)': 'Total'
+                                    };
+                                    return base.map(item => ({ ...item, text: map[item.text] || item.text }));
+                                } : undefined
                             }
                         },
                         tooltip: {
@@ -2762,27 +2769,25 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0, rendasMen
                     scales: {
                         y: {
                             beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: "Renda mensal — em valores de hoje (R$)",
-                                color: "#ffcc00"
-                            },
+                            title: { display: false },
                             ticks: {
                                 color: '#9ca3af',
+                                font: { size: _isMobile ? 9 : 11 },
                                 callback: function(value) {
+                                    if (_isMobile) {
+                                        if (value >= 1000) return (value / 1000).toFixed(1) + 'k';
+                                        return value.toFixed(0);
+                                    }
                                     return 'R$ ' + value.toLocaleString('pt-BR', {maximumFractionDigits: 0});
                                 }
                             }
                         },
                         x: {
-                            title: {
-                                display: true,
-                                text: "Idade",
-                                color: "#ffcc00"
-                            },
+                            title: { display: false },
                             ticks: {
                                 color: '#9ca3af',
-                                maxTicksLimit: 20
+                                font: { size: _isMobile ? 9 : 11 },
+                                maxTicksLimit: _isMobile ? 6 : 20
                             }
                         }
                     }
