@@ -597,3 +597,35 @@
     }
 }
 
+/* ── LOTE 3 — Responsivo: seções de artigo e títulos de categoria ── */
+@media (max-width: 900px) {
+    .article-content h2 {
+        font-size: 1.5rem !important;
+        line-height: 1.2;
+        margin-top: 36px !important;
+        margin-bottom: 16px !important;
+    }
+    .inv-category-title {
+        font-size: 1.5rem;
+        line-height: 1.2;
+        margin-top: 28px;
+        margin-bottom: 12px;
+    }
+}
+@media (max-width: 600px) {
+    .article-content h2 {
+        font-size: clamp(1.15rem, 5vw, 1.4rem) !important;
+        line-height: 1.2;
+        margin-top: 28px !important;
+        margin-bottom: 12px !important;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+    .inv-category-title {
+        font-size: clamp(1.15rem, 5vw, 1.3rem);
+        line-height: 1.22;
+        margin-top: 22px;
+        margin-bottom: 10px;
+    }
+}
+
