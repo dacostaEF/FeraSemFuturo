@@ -132,6 +132,26 @@
             color: #D4AF37 !important;
             text-align: center !important;
         }
+
+        /* ── LOTE 1 — Responsivo: seções do artigo ── */
+        @media (max-width: 900px) {
+            .article-content h2 {
+                font-size: 1.5rem !important;
+                line-height: 1.2;
+                margin-top: 36px !important;
+                margin-bottom: 16px !important;
+            }
+        }
+        @media (max-width: 600px) {
+            .article-content h2 {
+                font-size: clamp(1.15rem, 5vw, 1.4rem) !important;
+                line-height: 1.2;
+                margin-top: 28px !important;
+                margin-bottom: 12px !important;
+                overflow-wrap: break-word;
+                hyphens: auto;
+            }
+        }
         
         .article-section p,
         .article-section li,
