@@ -216,6 +216,26 @@
         .success-box strong {
             color: #6ee7b7;
         }
+
+        /* ── LOTE 4 — Responsivo: seções do artigo ── */
+        @media (max-width: 900px) {
+            .section h2 {
+                font-size: 1.5rem !important;
+                line-height: 1.2;
+                margin-top: 36px !important;
+                margin-bottom: 16px !important;
+            }
+        }
+        @media (max-width: 600px) {
+            .section h2 {
+                font-size: clamp(1.15rem, 5vw, 1.4rem) !important;
+                line-height: 1.2;
+                margin-top: 28px !important;
+                margin-bottom: 12px !important;
+                overflow-wrap: break-word;
+                hyphens: auto;
+            }
+        }
     </style>
 </head>
 
