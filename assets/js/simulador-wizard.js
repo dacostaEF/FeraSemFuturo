@@ -2676,7 +2676,7 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0, rendasMen
             label: "Renda do Patrimônio",
             data: rendas,
             borderColor: "#00ff88",
-            backgroundColor: "rgba(0, 255, 136, 0.05)",
+            backgroundColor: _isMobile ? "rgba(0, 255, 136, 0.03)" : "rgba(0, 255, 136, 0.05)",
             borderWidth: 1.5,
             tension: 0.25,
             fill: true,
@@ -2730,7 +2730,8 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0, rendasMen
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,
+                    maintainAspectRatio: _isMobile,
+                    aspectRatio: _isMobile ? 1.4 : undefined,
                     plugins: {
                         legend: {
                             display: true,
@@ -2787,7 +2788,13 @@ function abrirGraficoRendaMensal(listaRenda, idadeApos, inssValor = 0, rendasMen
                             ticks: {
                                 color: '#9ca3af',
                                 font: { size: _isMobile ? 9 : 11 },
-                                maxTicksLimit: _isMobile ? 6 : 20
+                                maxTicksLimit: _isMobile ? 6 : 20,
+                                maxRotation: 0,
+                                minRotation: 0,
+                                callback: function(value, index) {
+                                    const label = labels[index] || '';
+                                    return _isMobile ? label.replace(' anos', '') : label;
+                                }
                             }
                         }
                     }

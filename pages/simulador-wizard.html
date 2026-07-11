@@ -1883,6 +1883,33 @@
                 gap: 6px !important;
             }
         }
+
+        /* ============================================================
+           MODAL RENDA MENSAL — MOBILE
+           Alinha com a elegância do gráfico de patrimônio
+           ============================================================ */
+        @media (max-width: 767px) {
+            .renda-modal-body {
+                padding: 8px 6px 12px !important;
+            }
+
+            .renda-chart-container {
+                height: auto !important;
+            }
+
+            #graficoRendaMensal {
+                height: auto !important;
+            }
+
+            /* Modal title menor no mobile */
+            #modalRendaMensal .modal-title {
+                font-size: 1.1rem !important;
+            }
+
+            #modalRendaMensal .modal-header {
+                padding: 14px 36px 10px 14px !important;
+            }
+        }
     </style>
     <style>
     #backToTop {
@@ -2452,8 +2479,8 @@
                 <h3 class="modal-title" style="color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin: 0 auto; text-align: center; display: block; width: 100%;">📊 Renda Mensal ao Longo da Aposentadoria</h3>
                 <p style="color: #9ca3af; font-size: 0.9rem; margin-top: 8px; font-style: italic; text-align: center; margin-bottom: 0; display: block; width: 100%;">Visualize sua renda mensal projetada ao longo dos anos</p>
             </div>
-            <div class="modal-body" style="padding: 20px;">
-                <div style="position: relative; width: 100%; height: 400px;">
+            <div class="modal-body renda-modal-body" style="padding: 20px;">
+                <div class="renda-chart-container" style="position: relative; width: 100%; height: 400px;">
                     <canvas id="graficoRendaMensal" style="width: 100% !important; height: 100% !important;"></canvas>
                     <div id="graficoLoading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #D4AF37; font-size: 1.1rem;">
                         Carregando gráfico...
