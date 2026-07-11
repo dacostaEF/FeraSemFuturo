@@ -1859,6 +1859,9 @@ main > *::before,
         font-size: 16px;
     }
 
+    /* Esconde navegação desktop no mobile — hamburger.js já cobre */
+    .tabs-nav-wrapper { display: none !important; }
+
     /* TABS - Horizontal Scroll Mobile */
     .tabs-nav {
         gap: 6px;
