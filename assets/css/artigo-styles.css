@@ -597,6 +597,11 @@
     }
 }
 
+/* ── Gap fix: main margin-top redundante no mobile (body padding-top já cobre o header) ── */
+@media (max-width: 768px) {
+    main { margin-top: 0 !important; }
+}
+
 /* ── LOTE 3 — Responsivo: seções de artigo e títulos de categoria ── */
 @media (max-width: 900px) {
     .article-content h2 {

@@ -2095,6 +2095,7 @@ main > *::before,
         position: static;
         transform: none;
         margin-bottom: 0;
+        justify-content: flex-end; /* logo alinhada à direita, fora do hamburger */
     }
 
     .header-logo img {
