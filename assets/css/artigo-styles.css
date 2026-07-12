@@ -600,30 +600,30 @@
 /* ── LOTE 3 — Responsivo: seções de artigo e títulos de categoria ── */
 @media (max-width: 900px) {
     .article-content h2 {
-        font-size: 1.5rem !important;
-        line-height: 1.2;
+        font-size: var(--inv-rfs-900-heading) !important; /* 1.5rem */
+        line-height: var(--inv-lh-title);
         margin-top: 36px !important;
         margin-bottom: 16px !important;
     }
     .inv-category-title {
-        font-size: 1.5rem;
-        line-height: 1.2;
+        font-size: var(--inv-rfs-900-heading); /* 1.5rem */
+        line-height: var(--inv-lh-title);
         margin-top: 28px;
         margin-bottom: 12px;
     }
 }
 @media (max-width: 600px) {
     .article-content h2 {
-        font-size: clamp(1.15rem, 5vw, 1.4rem) !important;
-        line-height: 1.2;
+        font-size: var(--inv-rfs-600-article-h2) !important; /* clamp(1.15rem,5vw,1.4rem) */
+        line-height: var(--inv-lh-title);
         margin-top: 28px !important;
         margin-bottom: 12px !important;
         overflow-wrap: break-word;
         hyphens: auto;
     }
     .inv-category-title {
-        font-size: clamp(1.15rem, 5vw, 1.3rem);
-        line-height: 1.22;
+        font-size: var(--inv-rfs-600-category); /* clamp(1.15rem,5vw,1.3rem) */
+        line-height: 1.22;                       /* C — ajuste fino, sem token */
         margin-top: 22px;
         margin-bottom: 10px;
     }
@@ -632,15 +632,15 @@
 /* ── LOTE 4 — Responsivo: hero h2 de páginas auxiliares (2.4rem inline) ── */
 @media (max-width: 900px) {
     .invlab-lab-container h2[style*="2.4rem"] {
-        font-size: 1.8rem !important;
-        line-height: 1.2;
+        font-size: var(--inv-rfs-900-hero-h2) !important; /* 1.8rem */
+        line-height: var(--inv-lh-title);
         margin-bottom: 14px;
     }
 }
 @media (max-width: 600px) {
     .invlab-lab-container h2[style*="2.4rem"] {
-        font-size: clamp(1.5rem, 6vw, 1.9rem) !important;
-        line-height: 1.15;
+        font-size: var(--inv-rfs-600-h1) !important; /* clamp(1.5rem,6vw,1.9rem) */
+        line-height: var(--inv-lh-title-sm);
         overflow-wrap: break-word;
         hyphens: auto;
     }

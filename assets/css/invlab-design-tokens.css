@@ -1,0 +1,257 @@
+/* ================================================================
+   INVLAB DESIGN TOKENS v1.1
+   Fonte da verdade: index.html (Home) — padrão ouro visual
+   Extraído em DS-01 — 2026-07
+
+   REGRA: Nenhuma mudança visual no desktop.
+   Tokens encapsulam valores reais já usados na Home.
+
+   ORDEM DE CASCADE:
+   invlab-design-tokens.css  ← este arquivo (define variáveis)
+   inv-design-system.css     ← consume variáveis, define classes de card
+   styles.css                ← define .section-title, layout global
+   invlab-theme.css          ← variáveis legadas de cor
+   artigo-styles.css         ← classes de artigo, .inv-category-title responsivo
+   [page-specific.css]       ← CSS da página
+   [inline <style>]          ← regras inline da página
+   ================================================================ */
+
+:root {
+
+    /* ──────────────────────────────────────────
+       CORES — Ouro (marca primária)
+    ────────────────────────────────────────── */
+    --inv-gold:               #D4AF37;
+    --inv-gold-alt:           #CCAA66;
+    --inv-gold-border:        rgba(212, 175, 55, 0.3);
+    --inv-gold-border-subtle: rgba(212, 175, 55, 0.12);
+    --inv-gold-bg:            rgba(212, 175, 55, 0.06);
+    --inv-gold-hover:         rgba(212, 175, 55, 0.7);
+
+    /* ──────────────────────────────────────────
+       CORES — Verde (dados positivos, educação)
+    ────────────────────────────────────────── */
+    --inv-green:              #10b981;
+    --inv-green-text:         rgba(16, 185, 129, 0.65);
+    --inv-green-text-strong:  rgba(16, 185, 129, 0.85);
+    --inv-green-bg:           rgba(16, 185, 129, 0.03);
+    --inv-green-border:       rgba(16, 185, 129, 0.1);
+
+    /* ──────────────────────────────────────────
+       CORES — Azul (ação, links)
+    ────────────────────────────────────────── */
+    --inv-blue:               #2A7FFF;
+    --inv-blue-hover:         #1E5FCC;
+
+    /* ──────────────────────────────────────────
+       CORES — Textos
+    ────────────────────────────────────────── */
+    --inv-text-white:         #FFFFFF;
+    --inv-text-primary:       #E4E4E4;   /* branco suave — títulos de cards */
+    --inv-text-secondary:     #9CA3AF;   /* cinza suave — descrições de cards */
+    --inv-text-muted:         rgba(255, 255, 255, 0.75); /* parágrafos de seção */
+    --inv-text-faint:         rgba(255, 255, 255, 0.85); /* hero paragraph */
+
+    /* ──────────────────────────────────────────
+       CORES — Fundos
+    ────────────────────────────────────────── */
+    --inv-bg:                 #0D0D0D;
+    --inv-bg-card:            #1A1A1A;
+    --inv-bg-card-alpha:      rgba(26, 26, 26, 0.6);
+    --inv-bg-card-alpha-dark: rgba(26, 26, 26, 0.7);
+
+    /* ──────────────────────────────────────────
+       CORES — Semânticas (componentes auxiliares)
+    ────────────────────────────────────────── */
+    --inv-orange:             #F59E0B;
+    --inv-red:                #ef4444;
+    --inv-purple:             #a855f7;
+    --inv-cyan:               #22d3ee;
+    --inv-yellow:             #eab308;
+    --inv-teal:               #14b8a6;
+    --inv-gray-coming:        #6b7280;
+
+    /* ──────────────────────────────────────────
+       TIPOGRAFIA — Famílias
+    ────────────────────────────────────────── */
+    --inv-font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --inv-font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    /* ──────────────────────────────────────────
+       TIPOGRAFIA — Escala Desktop (fonte da verdade)
+
+       NOTA sobre .inv-category-title:
+         CSS padrão (inv-design-system.css) = 1.75rem
+         index.html Primeiros Passos = 2rem via inline style
+         → O 2rem é uma exceção local da Home (inline override),
+           NÃO o padrão da classe. O token captura o padrão da classe.
+    ────────────────────────────────────────── */
+    --inv-fs-hero:          clamp(1.8rem, 4vw, 3rem);  /* H1 hero da Home */
+    --inv-fs-section:       2rem;                       /* H2 inline de seções */
+    --inv-fs-section-title: 2.25rem;                    /* .section-title do styles.css */
+    --inv-fs-category:      1.75rem;                    /* .inv-category-title (padrão CSS) */
+    --inv-fs-card-lg:       1.5rem;                     /* H3 simuladores (Wizard/PRO) */
+    --inv-fs-card-title:    1.125rem;                   /* .inv-card-title */
+    --inv-fs-card-method:   1.2rem;                     /* H3 método 1234 */
+
+    /* ──────────────────────────────────────────
+       TIPOGRAFIA — Escala de Corpo (Desktop)
+    ────────────────────────────────────────── */
+    --inv-fs-body-xl:   1.1rem;    /* parágrafo hero */
+    --inv-fs-body-lg:   1.05rem;   /* descrições de seção, .inv-category-subtitle */
+    --inv-fs-body:      1rem;      /* subtítulo, texto de suporte */
+    --inv-fs-body-sm:   0.95rem;   /* card text, hero verde */
+    --inv-fs-caption:   0.9rem;    /* listas, cards pequenos */
+    --inv-fs-micro:     0.85rem;   /* jornada, menu mobile */
+
+    /* ──────────────────────────────────────────
+       TIPOGRAFIA — Escala Responsiva Tablet (≤900px)
+
+       Prefixo --inv-rfs-900: valores para max-width: 900px
+    ────────────────────────────────────────── */
+    --inv-rfs-900-heading:   1.5rem;   /* .section-title, .inv-category-title */
+    --inv-rfs-900-card-h3:   1.1rem;   /* .learning-card h3, .inv-card-title */
+    --inv-rfs-900-h1:        2rem;     /* H1 das abas Renda Fixa/Variável */
+    --inv-rfs-900-hero-h2:   1.8rem;  /* H2 hero 2.4rem inline → redução tablet */
+
+    /* ──────────────────────────────────────────
+       TIPOGRAFIA — Escala Responsiva Mobile (≤600px)
+
+       Prefixo --inv-rfs-600: valores para max-width: 600px
+    ────────────────────────────────────────── */
+    --inv-rfs-600-section:   clamp(1.5rem, 6vw, 1.7rem);    /* .section-title (Primeiros Passos) */
+    --inv-rfs-600-category:  clamp(1.15rem, 5vw, 1.3rem);   /* .inv-category-title */
+    --inv-rfs-600-inicio-h2: clamp(1.25rem, 5.5vw, 1.5rem); /* seções do #inicio */
+    --inv-rfs-600-h1:        clamp(1.5rem, 6vw, 1.9rem);    /* H1 Renda Fixa/Variável */
+    --inv-rfs-600-h2-renda:  clamp(1.15rem, 5vw, 1.4rem);   /* H2 Renda Fixa/Variável */
+    --inv-rfs-600-article-h2: clamp(1.15rem, 5vw, 1.4rem);  /* .article-content h2 */
+    --inv-rfs-600-card-h3:   1rem;                           /* card headings */
+
+    /* ──────────────────────────────────────────
+       TIPOGRAFIA — Line Heights
+    ────────────────────────────────────────── */
+    --inv-lh-title:      1.2;    /* H2/H3 desktop */
+    --inv-lh-title-sm:   1.15;   /* H2 mobile, H1 hero */
+    --inv-lh-card-title: 1.25;   /* card headings (learning-card h3, inv-card-title) */
+    --inv-lh-body:       1.75;   /* parágrafos hero e de seção */
+    --inv-lh-content:    1.6;    /* textos de cards, descrições */
+    --inv-lh-list:       2.0;    /* listas de conhecimento */
+    --inv-lh-category:   1.8;    /* subtítulos de categoria */
+
+    /* ──────────────────────────────────────────
+       TIPOGRAFIA — Letter Spacing
+    ────────────────────────────────────────── */
+    --inv-ls-title:   -0.02em;  /* H1/H2 principais */
+    --inv-ls-heading: -0.01em;  /* headings em geral */
+
+    /* ──────────────────────────────────────────
+       ESPAÇAMENTO — Seções
+    ────────────────────────────────────────── */
+    --inv-section-padding:         64px 0;
+    --inv-section-padding-sm:      60px 0;
+    --inv-section-padding-compact: 35px 0;
+
+    /* ──────────────────────────────────────────
+       ESPAÇAMENTO — Cards
+    ────────────────────────────────────────── */
+    --inv-card-padding-lg: 32px;
+    --inv-card-padding:    28px 24px;
+    --inv-card-padding-sm: 20px;
+
+    /* ──────────────────────────────────────────
+       BORDAS — Raios
+    ────────────────────────────────────────── */
+    --inv-radius-card: 16px;
+    --inv-radius-md:   12px;
+    --inv-radius-sm:   8px;
+    --inv-radius-pill: 20px;
+
+    /* ──────────────────────────────────────────
+       SOMBRAS
+    ────────────────────────────────────────── */
+    --inv-shadow-sm:    0 2px 8px rgba(0, 0, 0, 0.3);
+    --inv-shadow-md:    0 4px 16px rgba(0, 0, 0, 0.4);
+    --inv-shadow-lg:    0 8px 32px rgba(0, 0, 0, 0.5);
+    --inv-shadow-xl:    0 12px 48px rgba(0, 0, 0, 0.6);
+    --inv-shadow-gold:  0 8px 24px rgba(212, 175, 55, 0.2);
+    --inv-shadow-green: 0 4px 12px rgba(16, 185, 129, 0.1);
+
+    /* ──────────────────────────────────────────
+       GRADIENTES
+    ────────────────────────────────────────── */
+    --inv-gradient-gold:    linear-gradient(135deg, #355E3B 0%, #CCAA66 100%);
+    --inv-gradient-dark:    linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 100%);
+    --inv-gradient-success: linear-gradient(135deg, #00D924 0%, #00B894 100%);
+
+    /* ──────────────────────────────────────────
+       TRANSIÇÕES
+    ────────────────────────────────────────── */
+    --inv-transition:      all 0.3s ease;
+    --inv-transition-fast: all 0.2s ease;
+}
+
+
+/* ================================================================
+   CLASSES SEMÂNTICAS — Tipografia
+
+   Uso: aplicar em novas páginas/seções para padronizar.
+   CUIDADO: verificar conflito com classes existentes antes de usar:
+     - .section-title  → definida em styles.css (2.25rem + border-bottom)
+     - .inv-category-title → definida em inv-design-system.css (1.75rem)
+     - .inv-category-subtitle → definida em inv-design-system.css (1.05rem)
+   ================================================================ */
+
+/* ─────────────────────────────────────────
+   .inv-section-title
+   H2 principal de seção — visual equivalente aos h2 inline da Home
+   (sem border-bottom — diferente do .section-title do styles.css)
+   Uso: novas seções onde se quer o padrão dourado sem borda inferior
+   ───────────────────────────────────────── */
+.inv-section-title {
+    font-family: var(--inv-font-display);
+    font-size: var(--inv-fs-section);
+    font-weight: 800;
+    color: var(--inv-gold);
+    text-align: center;
+    line-height: var(--inv-lh-title);
+    letter-spacing: var(--inv-ls-title);
+    margin-bottom: 16px;
+}
+
+/* ─────────────────────────────────────────
+   .inv-body-lead
+   Parágrafo em destaque — acima da dobra, hero e abertura de seção
+   ───────────────────────────────────────── */
+.inv-body-lead {
+    font-family: var(--inv-font-body);
+    font-size: var(--inv-fs-body-xl);
+    color: var(--inv-text-faint);
+    line-height: var(--inv-lh-body);
+    max-width: 680px;
+    margin: 0 auto 16px;
+}
+
+/* ─────────────────────────────────────────
+   .inv-body-text
+   Parágrafo padrão de seção — texto de suporte centralizado
+   ───────────────────────────────────────── */
+.inv-body-text {
+    font-family: var(--inv-font-body);
+    font-size: var(--inv-fs-body);
+    color: var(--inv-text-muted);
+    line-height: var(--inv-lh-body);
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 48px;
+}
+
+/* ─────────────────────────────────────────
+   .inv-body-caption
+   Texto de suporte pequeno — descrições de cards, listas secundárias
+   ───────────────────────────────────────── */
+.inv-body-caption {
+    font-family: var(--inv-font-body);
+    font-size: var(--inv-fs-caption);
+    color: var(--inv-text-secondary);
+    line-height: var(--inv-lh-content);
+}

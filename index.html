@@ -27,6 +27,8 @@
     <!-- Phosphor Icons - INVLAB Premium Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     
+    <!-- INVLAB Design Tokens (DS-01) — carregado primeiro: define variáveis globais -->
+    <link rel="stylesheet" href="assets/css/invlab-design-tokens.css">
     <!-- INVLAB Design System (Universal Cards) -->
     <link rel="stylesheet" href="assets/css/inv-design-system.css">
     <link rel="stylesheet" href="assets/css/styles.css">
@@ -1344,45 +1346,51 @@
         }
 
         /* ═══════════════════════════════════════════════════════════
-           DOSE RESPONSIVA — Primeiros Passos
+           DS-01 PILOTO — Primeiros Passos (responsivo)
            Escopo exclusivo: #primeiros-passos
            Apenas tablet (≤900px) e mobile (≤600px)
            Desktop: inalterado
+           Tokens: invlab-design-tokens.css (--inv-rfs-*)
            ═══════════════════════════════════════════════════════════ */
 
         @media (max-width: 900px) {
+            /* Respiro do header fixo — evita título coberto ao navegar por anchor */
+            #primeiros-passos {
+                scroll-margin-top: 80px;
+            }
             #primeiros-passos .section-title {
-                font-size: 1.5rem !important;
-                line-height: 1.2;
+                font-size: var(--inv-rfs-900-heading) !important; /* 1.5rem */
+                line-height: var(--inv-lh-title);                 /* 1.2   */
+                margin-top: 20px;
                 margin-bottom: 14px;
             }
             #primeiros-passos .inv-category-title {
-                font-size: 1.5rem !important;
-                line-height: 1.2;
+                font-size: var(--inv-rfs-900-heading) !important; /* 1.5rem */
+                line-height: var(--inv-lh-title);                 /* 1.2   */
                 margin-top: 28px;
                 margin-bottom: 14px;
             }
             #primeiros-passos .learning-card h3 {
-                font-size: 1.1rem;
-                line-height: 1.25;
+                font-size: var(--inv-rfs-900-card-h3);   /* 1.1rem */
+                line-height: var(--inv-lh-card-title);   /* 1.25   */
             }
             #primeiros-passos .inv-card-title {
-                font-size: 1.1rem;
-                line-height: 1.25;
+                font-size: var(--inv-rfs-900-card-h3);   /* 1.1rem */
+                line-height: var(--inv-lh-card-title);   /* 1.25   */
             }
         }
 
         @media (max-width: 600px) {
             #primeiros-passos .section-title {
-                font-size: clamp(1.5rem, 6vw, 1.7rem) !important;
-                line-height: 1.15;
+                font-size: var(--inv-rfs-600-section) !important; /* clamp(1.5rem,6vw,1.7rem) */
+                line-height: var(--inv-lh-title-sm);              /* 1.15 */
                 margin-bottom: 14px;
                 overflow-wrap: break-word;
                 word-break: normal;
                 hyphens: auto;
             }
             #primeiros-passos .inv-category-title {
-                font-size: clamp(1.15rem, 5vw, 1.3rem) !important;
+                font-size: var(--inv-rfs-600-category) !important; /* clamp(1.15rem,5vw,1.3rem) */
                 line-height: 1.22;
                 margin-top: 22px;
                 margin-bottom: 10px;
@@ -1391,69 +1399,69 @@
                 hyphens: auto;
             }
             #primeiros-passos .learning-card h3 {
-                font-size: 1rem;
-                line-height: 1.25;
+                font-size: var(--inv-rfs-600-card-h3); /* 1rem */
+                line-height: var(--inv-lh-card-title); /* 1.25 */
             }
             #primeiros-passos .inv-card-title {
-                font-size: 1rem;
-                line-height: 1.25;
+                font-size: var(--inv-rfs-600-card-h3); /* 1rem */
+                line-height: var(--inv-lh-card-title); /* 1.25 */
             }
         }
 
         /* ── LOTE 1 — Responsivo: seções Home + tabs Renda Fixa/Variável ── */
         @media (max-width: 900px) {
             #inicio > .content-wrapper > section > .content-wrapper > h2 {
-                font-size: 1.5rem !important;
-                line-height: 1.2;
+                font-size: var(--inv-rfs-900-heading) !important; /* 1.5rem */
+                line-height: var(--inv-lh-title);                 /* 1.2 */
                 margin-bottom: 14px;
             }
             #renda-fixa h1 {
-                font-size: 2rem !important;
-                line-height: 1.15;
+                font-size: var(--inv-rfs-900-h1) !important;  /* 2rem */
+                line-height: var(--inv-lh-title-sm);           /* 1.15 */
                 margin-bottom: 18px;
             }
             #renda-fixa h2 {
-                font-size: 1.5rem !important;
-                line-height: 1.2;
+                font-size: var(--inv-rfs-900-heading) !important; /* 1.5rem */
+                line-height: var(--inv-lh-title);                 /* 1.2 */
                 margin-top: 40px !important;
                 margin-bottom: 20px !important;
             }
             #renda-variavel h1 {
-                font-size: 2rem !important;
-                line-height: 1.15;
+                font-size: var(--inv-rfs-900-h1) !important;  /* 2rem */
+                line-height: var(--inv-lh-title-sm);           /* 1.15 */
                 margin-bottom: 18px;
             }
             #renda-variavel h2 {
-                font-size: 1.5rem !important;
-                line-height: 1.2;
+                font-size: var(--inv-rfs-900-heading) !important; /* 1.5rem */
+                line-height: var(--inv-lh-title);                 /* 1.2 */
                 margin-top: 40px !important;
                 margin-bottom: 20px !important;
             }
         }
         @media (max-width: 600px) {
             #inicio > .content-wrapper > section > .content-wrapper > h2 {
-                font-size: clamp(1.25rem, 5.5vw, 1.5rem) !important;
-                line-height: 1.15;
+                font-size: var(--inv-rfs-600-inicio-h2) !important; /* clamp(1.25rem,5.5vw,1.5rem) */
+                line-height: var(--inv-lh-title-sm);                /* 1.15 */
                 overflow-wrap: break-word;
                 hyphens: auto;
             }
             #renda-fixa h1 {
-                font-size: clamp(1.5rem, 6vw, 1.9rem) !important;
-                line-height: 1.15;
+                font-size: var(--inv-rfs-600-h1) !important;  /* clamp(1.5rem,6vw,1.9rem) */
+                line-height: var(--inv-lh-title-sm);           /* 1.15 */
             }
             #renda-fixa h2 {
-                font-size: clamp(1.15rem, 5vw, 1.4rem) !important;
-                line-height: 1.2;
+                font-size: var(--inv-rfs-600-h2-renda) !important; /* clamp(1.15rem,5vw,1.4rem) */
+                line-height: var(--inv-lh-title);                   /* 1.2 */
                 margin-top: 28px !important;
                 margin-bottom: 14px !important;
             }
             #renda-variavel h1 {
-                font-size: clamp(1.5rem, 6vw, 1.9rem) !important;
-                line-height: 1.15;
+                font-size: var(--inv-rfs-600-h1) !important;  /* clamp(1.5rem,6vw,1.9rem) */
+                line-height: var(--inv-lh-title-sm);           /* 1.15 */
             }
             #renda-variavel h2 {
-                font-size: clamp(1.15rem, 5vw, 1.4rem) !important;
-                line-height: 1.2;
+                font-size: var(--inv-rfs-600-h2-renda) !important; /* clamp(1.15rem,5vw,1.4rem) */
+                line-height: var(--inv-lh-title);                   /* 1.2 */
                 margin-top: 28px !important;
                 margin-bottom: 14px !important;
             }

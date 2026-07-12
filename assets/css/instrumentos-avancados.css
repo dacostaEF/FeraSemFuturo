@@ -135,16 +135,16 @@
 /* ── LOTE 2 — Responsivo: títulos de seção ── */
 @media (max-width: 900px) {
     .inv-category-title {
-        font-size: 1.5rem;
-        line-height: 1.2;
+        font-size: var(--inv-rfs-900-heading); /* 1.5rem */
+        line-height: var(--inv-lh-title);       /* 1.2 */
         margin-top: 28px;
         margin-bottom: 12px;
     }
 }
 @media (max-width: 600px) {
     .inv-category-title {
-        font-size: clamp(1.15rem, 5vw, 1.3rem);
-        line-height: 1.22;
+        font-size: var(--inv-rfs-600-category); /* clamp(1.15rem,5vw,1.3rem) */
+        line-height: 1.22;                       /* C — ajuste fino, sem token */
         margin-top: 22px;
         margin-bottom: 10px;
     }
