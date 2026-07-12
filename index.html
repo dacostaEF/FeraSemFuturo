@@ -162,6 +162,9 @@
         
         /* Media Query - Mostrar apenas em mobile */
         @media (max-width: 768px) {
+            /* Previne overflow horizontal (etf-popup absolute causa scroll lateral) */
+            html { overflow-x: hidden; }
+
             .mobile-menu-btn {
                 display: flex;
                 align-items: center;
