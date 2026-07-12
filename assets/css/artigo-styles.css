@@ -629,17 +629,18 @@
     }
 }
 
-/* ── LOTE 4 — Responsivo: hero h2 de páginas auxiliares (2.4rem inline) ── */
+/* ── LOTE 4 — Responsivo: hero h2 de páginas auxiliares (clamp inline) ── */
 @media (max-width: 900px) {
-    .invlab-lab-container h2[style*="2.4rem"] {
+    .invlab-lab-container h2[style*="clamp(1.8rem"] {
         font-size: var(--inv-rfs-900-hero-h2) !important; /* 1.8rem */
         line-height: var(--inv-lh-title);
+        margin-top: 20px;
         margin-bottom: 14px;
     }
 }
 @media (max-width: 600px) {
-    .invlab-lab-container h2[style*="2.4rem"] {
-        font-size: var(--inv-rfs-600-h1) !important; /* clamp(1.5rem,6vw,1.9rem) */
+    .invlab-lab-container h2[style*="clamp(1.8rem"] {
+        font-size: var(--inv-rfs-600-section) !important; /* clamp(1.5rem,6vw,1.7rem) — iguala Primeiros Passos */
         line-height: var(--inv-lh-title-sm);
         overflow-wrap: break-word;
         hyphens: auto;

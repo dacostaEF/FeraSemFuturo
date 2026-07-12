@@ -1479,6 +1479,31 @@
                 margin-bottom: 14px !important;
             }
         }
+
+        /* ── LOTE 5 — Responsivo: tabs restantes (Ferramentas, Criptomoedas, Outros) ── */
+        @media (max-width: 900px) {
+            #ferramentas { scroll-margin-top: 80px; }
+            #criptomoedas { scroll-margin-top: 80px; }
+            #outros-investimentos { scroll-margin-top: 80px; }
+            #ferramentas .section-title,
+            #criptomoedas .section-title,
+            #outros-investimentos .section-title {
+                font-size: var(--inv-rfs-900-heading) !important; /* 1.5rem */
+                line-height: var(--inv-lh-title);
+                margin-top: 20px;
+                margin-bottom: 14px;
+            }
+        }
+        @media (max-width: 600px) {
+            #ferramentas .section-title,
+            #criptomoedas .section-title,
+            #outros-investimentos .section-title {
+                font-size: var(--inv-rfs-600-section) !important; /* clamp(1.5rem,6vw,1.7rem) */
+                line-height: var(--inv-lh-title-sm);
+                overflow-wrap: break-word;
+                hyphens: auto;
+            }
+        }
     </style>
 </head>
 <body>
