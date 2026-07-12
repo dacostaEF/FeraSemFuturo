@@ -597,9 +597,12 @@
     }
 }
 
-/* ── Gap fix: main margin-top redundante no mobile (body padding-top já cobre o header) ── */
+/* ── Gap fix: main margin-top reduzido no mobile (body 55px + 55px = 110px = fundo do header) ── */
 @media (max-width: 768px) {
-    main { margin-top: 0 !important; }
+    main { margin-top: 55px !important; }
+}
+@media (max-width: 480px) {
+    main { margin-top: 20px !important; } /* body 100px + 20px = 120px, ~4px após o header */
 }
 
 /* ── LOTE 3 — Responsivo: seções de artigo e títulos de categoria ── */
